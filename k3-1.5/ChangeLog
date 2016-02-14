@@ -1,0 +1,18 @@
+2001-07-09  Russell Marks  <russell.marks@ntlworld.com>
+
+	* Version 1.5.
+
+	* k3.c: changed layout so displayed RAM/swap can get to just under
+	96 gigs without messing it up. :-)
+	(readmeminfo_new): now reads info using the `new' fields, so it
+	should correctly cope with >=2GB of RAM or swap on a 32-bit
+	machine. It resorts to the old method if those fields can't be
+	read.
+
+1999-07-04  Russell Marks  <rus@cartman>
+
+	* Version 1.4.
+
+	* Now copes with `new' format /proc/meminfo, with separate
+	`cached' listing. Before this change it would almost always have
+	looked like memory was full.

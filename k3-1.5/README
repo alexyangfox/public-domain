@@ -1,0 +1,43 @@
+k3 - displays memory free as percentage and bar chart
+
+Public domain by Russell Marks.
+
+
+Description
+-----------
+
+`k3' displays the memory available as a percentage, the K free, and a
+simple bar chart. Buffers/cache are included in the total, but are
+shown separately as these are reduced when physical memory is scarce.
+(The `-r' option can be used to count them as unavailable memory
+instead.) Kernel memory is not represented, just user memory.
+
+k3 essentially just paints a prettier picture of the information given when
+you do a `cat /proc/meminfo' or use the `free' program.
+
+
+Installation
+------------
+
+If you want the executable or man page somewhere other than
+under /usr/local, change PREFIX in the Makefile. Once you're happy
+with that, do `make' then (as root) `make install'.
+
+
+History
+-------
+
+k3 is incredibly ancient (dating back to 1993, when dinosaurs ruled
+the earth :-)) and not earth-shatteringly important - but I since I do
+still use the thing after all these years, I still maintain it.
+
+
+Contacting me
+-------------
+
+You can email me at rus@svgalib.org.
+
+
+Share and enjoy! 
+
+-Rus.

@@ -1,0 +1,19 @@
+* Changes between versions   -*- mode:indented-text; mode:outline-minor -*-
+
+This file (NEWS) documents the significant changes between all
+versions of k3 since 1.4, with the newest changes first.
+
+
+* Changes in k3 1.5
+
+Should now cope with more than 2GB of RAM or swap (which it wouldn't
+have done previously on 32-bit machines).
+
+The output layout should now be ok up to just under 96GB.
+
+
+* Changes in k3 1.4
+
+Now copes with `new' format /proc/meminfo, with separate `cached'
+listing. Before this change it would almost always have looked like
+memory was full.

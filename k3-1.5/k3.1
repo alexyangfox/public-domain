@@ -1,0 +1,51 @@
+.\" -*- nroff -*-
+.\"
+.\" man page for k3
+.\" public domain by Russell Marks
+.\"
+.\"
+.TH K3 1 "9th July, 2001" "Version 1.5" "General Utilities"
+.SH NAME
+k3 \- display amount of memory available as simple bar chart
+.\"
+.\"------------------------------------------------------------------
+.\"
+.SH SYNOPSIS
+.B k3
+.RB [ -r ]
+.\"
+.\"------------------------------------------------------------------
+.\"
+.SH OPTIONS
+.TP
+.B -r
+don't show buffers/cache as `free' memory (in numeric totals).
+.\"
+.\"------------------------------------------------------------------
+.\"
+.SH DESCRIPTION
+k3 displays the amount of physical memory (and swap space if you have
+it) available as a simple bar chart and also as K free, and as a
+percentage. Buffers/cache are included in the `free' memory as they
+are reduced when memory is short. (You can have them counted as
+unavailable memory (in the numeric totals) by using `-r'.)
+.PP
+In the bar, `#' is used memory, `%' is RAM currently used for
+buffers/cache, and `:' shows available memory.
+.\"
+.\"------------------------------------------------------------------
+.\"
+.SH BUGS
+May not work correctly when running incredibly ancient kernels. But it
+does seem to work as far back as 1.2.x, at least.
+.\"
+.\"------------------------------------------------------------------
+.\"
+.SH SEE ALSO
+.IR free "(1),"
+.IR proc "(5)"
+.\"
+.\"------------------------------------------------------------------
+.\"
+.SH AUTHOR
+Russell Marks (rus@svgalib.org).
