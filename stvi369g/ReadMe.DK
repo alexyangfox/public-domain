@@ -1,0 +1,65 @@
+From ames!sun-barr!cs.utexas.edu!tut.cis.ohio-state.edu!ucbvax!WSMR-SIMTEL20.ARMY.MIL!w8sdz Tue Apr 24 21:13:29 PDT 1990
+Article 8142 of comp.binaries.ibm.pc.d:
+Path: amelia!ames!sun-barr!cs.utexas.edu!tut.cis.ohio-state.edu!ucbvax!WSMR-SIMTEL20.ARMY.MIL!w8sdz
+>From: w8sdz@WSMR-SIMTEL20.ARMY.MIL (Keith Petersen)
+Newsgroups: comp.binaries.ibm.pc.d
+Subject: STEVIE v3.69b Vi-compatible editor (DOS executables, docs)
+Message-ID: <KPETERSEN.12584402182.BABYL@WSMR-SIMTEL20.ARMY.MIL>
+Date: 24 Apr 90 16:25:00 GMT
+Sender: daemon@ucbvax.BERKELEY.EDU
+Lines: 52
+
+[--forwarded message--]
+>From: David Kirschbaum <kirsch@usasoc.soc.mil>
+
+deng@shire.cs.psu.edu (Mingqi Deng) writes:
+>I recently posted a request for a good DOS VI editor and was recommended
+>Stevie 3.69a. It is very close to true vi:
+>	o	escape to DOS
+>	o	file size limited only by memory
+>	o	alternate files
+>	o	tags
+>	o	yank to register and print registers.
+>	o 	set
+>	o	autoindent
+>and lots of stuff, even with a built-in help.
+
+>Its source in C was posted to comp.sources.misc. I got a copy from 
+>uunet.uu.net (direcotry:  comp.sources.misc/volume11/stevie3.69a,
+>anonymos ftp). 
+
+>But I can not get the binary right. It was developed with MicroSoft 
+>C 5.1 with compact memory library and Turbo C while I have access only
+>to MCS C 5.0 with small memory library. [deleted]
+>
+>Simtel20 has stevie 3.10's binary. It does not have DOS escape and
+>file size is limited to 64k. Would you find somebody who will be
+>interested in uploading 3.69a's EXE to simtel?
+
+Done!
+
+pd1:<msdos.editor>
+STEVI69X.ZIP	STEVIE v3.69b vi clone MSDOS Executables, docs
+
+Ain't exactly 3.69a tho .. had to do minor tweaks to reduce/remove
+Turbo C v2.0 error and warning messages.  Also enabled BIOS (instead of
+NANSI) screen I/O and HELP (for ":help" inline help .. nice!).
+
+Seems to run just fine on my PC-DOS v3.1 XT clone system, editing
+nice BIG files (several hundred KB), etc.
+
+David Kirschbaum <kirsch@usasoc.soc.mil>
+Toad Hall
+
+[--end forwarded message--]
+
+Thanks, David!
+
+Keith
+--
+Keith Petersen
+Maintainer of SIMTEL20's MSDOS, MISC & CP/M archives [IP address 26.2.0.74]
+Internet: w8sdz@WSMR-SIMTEL20.Army.Mil, w8sdz@brl.mil  BITNET: w8sdz@NDSUVM1
+Uucp: {ames,decwrl,harvard,rutgers,ucbvax,uunet}!wsmr-simtel20.army.mil!w8sdz
+
+

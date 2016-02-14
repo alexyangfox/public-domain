@@ -1,0 +1,672 @@
+diff -cs ./os2.c c:\stevie/os2.c
+*** ./os2.c	Tue May 01 22:47:44 1990
+--- c:/stevie/os2.c	Tue Oct 08 21:01:06 1991
+***************
+*** 39,46 ****
+  				return K_LARROW;
+  			case 0x4d:
+  				return K_RARROW;
+- 			case 0x52:
+- 				return K_INSERT;
+  			case 0x47:		/* Home key */
+  				stuffin("1G");
+  				return -1;
+--- 39,44 ----
+***************
+*** 186,194 ****
+  void
+  beep()
+  {
+! 	in ( P(P_VB) )
+  		vbeep();
+  	else
+  		outone('\007');
+  }
+  
+--- 184,194 ----
+  void
+  beep()
+  {
+! #ifdef VBEEP	/* doesn't seem to work, so just use bell ordinarily */
+! 	if ( P(P_VB) )
+  		vbeep();
+  	else
++ #endif
+  		outone('\007');
+  }
+  
+***************
+*** 295,332 ****
+  		if (f[i] == '/')
+  			f[i] = '\\';
+  
+! 	/*
+! 	 * Split the name into directory, base, extension.
+! 	 */
+! 	if ((p = strrchr(f, '\\')) != NULL) {
+! 		strcpy(base, p+1);
+! 		p[1] = '\0';
+! 	} else {
+! 		strcpy(base, f);
+! 		f[0] = '\0';
+! 	}
+! 
+! 	if ((p = strchr(base, '.')) != NULL) {
+! 		strcpy(ext, p+1);
+! 		*p = '\0';
+! 	} else
+! 		ext[0] = '\0';
+! 
+! 	/*
+! 	 * Trim the base name if necessary.
+! 	 */
+! 	if (strlen(base) > 8)
+! 		base[8] = '\0';
+  	
+! 	if (strlen(ext) > 3)
+! 		ext[3] = '\0';
+! 
+! 	/*
+! 	 * Paste it all back together
+! 	 */
+! 	strcat(f, base);
+! 	strcat(f, ".");
+! 	strcat(f, ext);
+  
+  	return f;
+  }
+--- 295,334 ----
+  		if (f[i] == '/')
+  			f[i] = '\\';
+  
+! 	if (IsFileSystemFAT(f)) {
+! 		/*
+! 		 * Split the name into directory, base, extension.
+! 		 */
+! 		if ((p = strrchr(f, '\\')) != NULL) {
+! 			strcpy(base, p+1);
+! 			p[1] = '\0';
+! 		} else {
+! 			strcpy(base, f);
+! 			f[0] = '\0';
+! 		}
+  	
+! 		if ((p = strchr(base, '.')) != NULL) {
+! 			strcpy(ext, p+1);
+! 			*p = '\0';
+! 		} else
+! 			ext[0] = '\0';
+! 	
+! 		/*
+! 		 * Trim the base name if necessary.
+! 		 */
+! 		if (strlen(base) > 8)
+! 			base[8] = '\0';
+! 		
+! 		if (strlen(ext) > 3)
+! 			ext[3] = '\0';
+! 	
+! 		/*
+! 		 * Paste it all back together
+! 		 */
+! 		strcat(f, base);
+! 		strcat(f, ".");
+! 		strcat(f, ext);
+! 	}
+  
+  	return f;
+  }
+***************
+*** 362,368 ****
+   * windinit(), before you do any setcolor() commands, and
+   * do a setcolor() back to the original as part of windexit().
+   */
+!   int c:
+  {
+  }
+  
+--- 364,370 ----
+   * windinit(), before you do any setcolor() commands, and
+   * do a setcolor() back to the original as part of windexit().
+   */
+!   int c;
+  {
+  }
+  
+***************
+*** 415,418 ****
+  
+  
+  /********** End of do-it-yourself kit **********************/
+- 
+--- 417,419 ----
+diff -cs ./ascii.h c:\stevie/ascii.h
+*** ./ascii.h	Wed May 02 00:19:42 1990
+--- c:/stevie/ascii.h	Sat Oct 27 00:27:32 1990
+***************
+*** 13,17 ****
+  
+  #define	CTRL(x)	((x) & 0x1f)
+  
+! #define MK_FP (seg,ofs)  ((void far *) \
+  			    (((unsigned long)(seg) << 16) | (unsigned)(ofs)))
+--- 13,17 ----
+  
+  #define	CTRL(x)	((x) & 0x1f)
+  
+! #define MK_FP(seg,ofs)  ((void far *) \
+  			    (((unsigned long)(seg) << 16) | (unsigned)(ofs)))
+diff -cs ./env.h c:\stevie/env.h
+*** ./env.h	Tue May 01 22:26:50 1990
+--- c:/stevie/env.h	Tue Oct 08 16:43:30 1991
+***************
+*** 11,24 ****
+   */
+  
+  /* #define	ATARI			/* For the Atari ST */
+! #define	UNIX			/* System V or BSD */
+  /* #define	OS2			/* Microsoft OS/2 1.1 */
+  /* #define	DOS			/* MSDOS 3.3 (on AT) */
+  /*
+   * If DOS is defined, then a number of other defines are possible:
+   */
+  #ifdef	DOS
+! #define	TURBOC		/* Use Borland Turbo C.  Otherwise, the code
+  			 * uses Microsoft C.
+  			 */
+  /* #define	BIOS	/* Display uses the BIOS routines, rather than
+--- 11,25 ----
+   */
+  
+  /* #define	ATARI			/* For the Atari ST */
+! /* #define	UNIX			/* System V or BSD */
+  /* #define	OS2			/* Microsoft OS/2 1.1 */
+  /* #define	DOS			/* MSDOS 3.3 (on AT) */
++ 
+  /*
+   * If DOS is defined, then a number of other defines are possible:
+   */
+  #ifdef	DOS
+! /* #define	TURBOC	/* Use Borland Turbo C.  Otherwise, the code
+  			 * uses Microsoft C.
+  			 */
+  /* #define	BIOS	/* Display uses the BIOS routines, rather than
+***************
+*** 47,53 ****
+   * The yank buffer is still static, but its size can be specified
+   * here to override the default of 4K.
+   */
+! /* #define	YBSIZE	8192		/* yank buffer size */
+  
+  /*
+   * STRCSPN should be defined if the target system doesn't have the
+--- 48,54 ----
+   * The yank buffer is still static, but its size can be specified
+   * here to override the default of 4K.
+   */
+! #define	YBSIZE	8192		/* yank buffer size */
+  
+  /*
+   * STRCSPN should be defined if the target system doesn't have the
+***************
+*** 54,65 ****
+   * routine strcspn() available. See regexp.c for details.
+   */
+  
+! #ifdef	ATARI
+! 
+! #ifdef	MINIX
+! #define	STRCSPN
+! #endif
+! 
+  #endif
+  
+  /*
+--- 55,64 ----
+   * routine strcspn() available. See regexp.c for details.
+   */
+  
+! #ifdef ATARI
+! #  ifdef MINIX
+! #    define STRCSPN
+! #  endif
+  #endif
+  
+  /*
+***************
+*** 74,80 ****
+   *	then enabled at runtime with the "tildeop" parameter.
+   *
+   * HELP
+!  *	If defined, a series of help screens may be views with the ":help"
+   *	command. This eats a fair amount of data space.
+   *
+   * TERMCAP
+--- 73,79 ----
+   *	then enabled at runtime with the "tildeop" parameter.
+   *
+   * HELP
+!  *	If defined, a series of help screens may be viewed with the ":help"
+   *	command. This eats a fair amount of data space.
+   *
+   * TERMCAP
+***************
+*** 96,100 ****
+   */
+  #define	TILDEOP		/* enable tilde to be an operator */
+  #define	HELP		/* enable help command */
+! #define	TERMCAP		/* enable termcap support */
+  #define	TAGSTACK	/* enable stacking calls to tags */
+--- 95,99 ----
+   */
+  #define	TILDEOP		/* enable tilde to be an operator */
+  #define	HELP		/* enable help command */
+! /* #define	TERMCAP		/* enable termcap support */
+  #define	TAGSTACK	/* enable stacking calls to tags */
+diff -cs ./stevie.h c:\stevie/stevie.h
+*** ./stevie.h	Tue May 01 22:22:48 1990
+--- c:/stevie/stevie.h	Tue Oct 08 16:20:58 1991
+***************
+*** 9,34 ****
+  #include <stdio.h>
+  #include <ctype.h>
+  
+! #ifdef	BSD
+! 
+! #include <strings.h>
+! #define strchr index
+! 
+! #else
+! 
+! #ifdef	MINIX
+! 
+! extern	char	*strchr();
+! extern	char	*strrchr();
+! extern	char	*strcpy();
+! extern	char	*strcat();
+! extern	int	strlen();
+! 
+! #else
+! #include <string.h>
+! #endif
+! 
+! #endif
+  
+  #include "ascii.h"
+  #include "keymap.h"
+--- 9,28 ----
+  #include <stdio.h>
+  #include <ctype.h>
+  
+! #ifdef BSD
+! #  include <strings.h>
+! #  define strchr index
+! #else /* !BSD */
+! #  ifdef MINIX
+!      extern	char	*strchr();
+!      extern	char	*strrchr();
+!      extern	char	*strcpy();
+!      extern	char	*strcat();
+!      extern	int	strlen();
+! #  else /* !MINIX */
+! #    include <string.h>
+! #  endif /* ?MINIX */
+! #endif /* ?BSD */
+  
+  #include "ascii.h"
+  #include "keymap.h"
+diff -cs ./term.h c:\stevie/term.h
+*** ./term.h	Tue May 01 22:22:56 1990
+--- c:/stevie/term.h	Tue Oct 08 16:38:10 1991
+***************
+*** 3,23 ****
+   * System-dependent escape sequence definitions.
+   */
+  
+! #ifdef	TERMCAP
+  
+! extern char *T_EL;		/* erase the entire current line */
+! extern char *T_IL;		/* insert one line */
+! extern char *T_DL;		/* delete one line */
+! extern char *T_SC;		/* save the cursor position */
+! extern char *T_ED;		/* erase display (may optionally home cursor) */
+! extern char *T_RC;		/* restore the cursor position */
+! extern char *T_CI;		/* invisible cursor (very optional) */
+! extern char *T_CV;		/* visible cursor (very optional) */
+! 
+! extern char *T_CM;		/* cursor motion string */
+! 
+! #else
+! 
+  /*
+   * This file contains the machine dependent escape sequences that
+   * the editor needs to perform various operations. Some of the sequences
+--- 3,20 ----
+   * System-dependent escape sequence definitions.
+   */
+  
+! #ifdef TERMCAP
+!    extern char *T_EL;		/* erase the entire current line */
+!    extern char *T_IL;		/* insert one line */
+!    extern char *T_DL;		/* delete one line */
+!    extern char *T_SC;		/* save the cursor position */
+!    extern char *T_ED;		/* erase display (may optionally home cursor) */
+!    extern char *T_RC;		/* restore the cursor position */
+!    extern char *T_CI;		/* invisible cursor (very optional) */
+!    extern char *T_CV;		/* visible cursor (very optional) */
+!    extern char *T_CM;		/* cursor motion string */
+  
+! #else /* !TERMCAP */
+  /*
+   * This file contains the machine dependent escape sequences that
+   * the editor needs to perform various operations. Some of the sequences
+***************
+*** 30,36 ****
+   * There are lots of terminals that have 'index' and 'reverse index'
+   * capabilities, but no line insert/delete. For this reason, the editor
+   * routines s_ins() and s_del() should be modified to use 'index'
+!  * sequences when the line to be inserted or deleted line zero.
+   */
+  
+  /*
+--- 27,33 ----
+   * There are lots of terminals that have 'index' and 'reverse index'
+   * capabilities, but no line insert/delete. For this reason, the editor
+   * routines s_ins() and s_del() should be modified to use 'index'
+!  * sequences when the line to be inserted or deleted is line zero.
+   */
+  
+  /*
+***************
+*** 37,84 ****
+   * The macro names here correspond (more or less) to the actual ANSI names
+   */
+  
+! #ifdef	ATARI
+! #ifdef	MINIX
+! 
+! #define	T_EL	"\033[2K"	/* erase the entire current line */
+! #define	T_IL	"\033[L"	/* insert one line */
+! #define	T_DL	"\033[M"	/* delete one line */
+! #define	T_SC	"\0337"		/* save the cursor position */
+! #define	T_ED	"\033[2J"	/* erase display (may optionally home cursor) */
+! #define	T_RC	"\0338"		/* restore the cursor position */
+! #define	T_CI	""		/* invisible cursor (very optional) */
+! #define	T_CV	""		/* visible cursor (very optional) */
+! 
+! #else
+! 
+! #define	T_EL	"\033l"		/* erase the entire current line */
+! #define	T_IL	"\033L"		/* insert one line */
+! #define	T_DL	"\033M"		/* delete one line */
+! #define	T_SC	"\033j"		/* save the cursor position */
+! #define	T_ED	"\033E"		/* erase display (may optionally home cursor) */
+! #define	T_RC	"\033k"		/* restore the cursor position */
+! #define	T_CI	"\033f"		/* invisible cursor (very optional) */
+! #define	T_CV	"\033e"		/* visible cursor (very optional) */
+  
+! #endif
+! #endif
+! 
+! #ifdef	UNIX
+  /*
+   * The following sequences are hard-wired for ansi-like terminals. To get
+   * termcap support, define TERMCAP in env.h and these sequences go away.
+   */
+! #define	T_EL	"\033[2K"	/* erase the entire current line */
+! #define	T_IL	"\033[L"	/* insert one line */
+! #define	T_DL	"\033[M"	/* delete one line */
+! #define	T_ED	"\033[2J"	/* erase display (may optionally home cursor) */
+! #define	T_SC	"\0337"		/* save the cursor position */
+! #define	T_RC	"\0338"		/* restore the cursor position */
+! #define	T_CI	""		/* invisible cursor (very optional) */
+! #define	T_CV	""		/* visible cursor (very optional) */
+! #endif
+  
+! #ifdef	OS2
+  /*
+   * The OS/2 ansi console driver is pretty deficient. No insert or delete line
+   * sequences. The erase line sequence only erases from the cursor to the end
+--- 34,78 ----
+   * The macro names here correspond (more or less) to the actual ANSI names
+   */
+  
+! #  ifdef ATARI
+! #    ifdef MINIX
+! #      define	T_EL	"\033[2K"	/* erase the entire current line */
+! #      define	T_IL	"\033[L"	/* insert one line */
+! #      define	T_DL	"\033[M"	/* delete one line */
+! #      define	T_SC	"\0337"		/* save the cursor position */
+! #      define	T_ED	"\033[2J"     /* erase display (option:  home cursor) */
+! #      define	T_RC	"\0338"		/* restore the cursor position */
+! #      define	T_CI	""		/* invisible cursor (very optional) */
+! #      define	T_CV	""		/* visible cursor (very optional) */
+! #    else /* !MINIX */
+! #      define	T_EL	"\033l"		/* erase the entire current line */
+! #      define	T_IL	"\033L"		/* insert one line */
+! #      define	T_DL	"\033M"		/* delete one line */
+! #      define	T_SC	"\033j"		/* save the cursor position */
+! #      define	T_ED	"\033E" /* erase display (may optionally home cursor) */
+! #      define	T_RC	"\033k"		/* restore the cursor position */
+! #      define	T_CI	"\033f"		/* invisible cursor (very optional) */
+! #      define	T_CV	"\033e"		/* visible cursor (very optional) */
+! #    endif /* ?MINIX */
+! #  endif /* ATARI */
+  
+! #  ifdef UNIX
+  /*
+   * The following sequences are hard-wired for ansi-like terminals. To get
+   * termcap support, define TERMCAP in env.h and these sequences go away.
+   */
+! #    define	T_EL	"\033[2K"	/* erase the entire current line */
+! #    define	T_IL	"\033[L"	/* insert one line */
+! #    define	T_DL	"\033[M"	/* delete one line */
+! #    define	T_ED	"\033[2J"	/* erase display (may home cursor) */
+! #    define	T_SC	"\0337"		/* save the cursor position */
+! #    define	T_RC	"\0338"		/* restore the cursor position */
+! #    define	T_CI	""		/* invisible cursor (very optional) */
+! #    define	T_CV	""		/* visible cursor (very optional) */
+! #  endif /* UNIX */
+! 
+  
+! #  ifdef OS2
+  /*
+   * The OS/2 ansi console driver is pretty deficient. No insert or delete line
+   * sequences. The erase line sequence only erases from the cursor to the end
+***************
+*** 90,107 ****
+   * available for the rest of the editor via appropriate escape sequences
+   * passed to outstr().
+   */
+! #define	T_EL	"\033[K"	/* erase the entire current line */
+! #define	T_IL	"\033[L"	/* insert one line - fake (see os2.c) */
+! #define	T_DL	"\033[M"	/* delete one line - fake (see os2.c) */
+! #define	T_ED	"\033[2J"	/* erase display (may optionally home cursor) */
+! #define	T_SC	"\033[s"	/* save the cursor position */
+! #define	T_RC	"\033[u"	/* restore the cursor position */
+! #define	T_CI	""		/* invisible cursor (very optional) */
+! #define	T_CV	""		/* visible cursor (very optional) */
+! #endif
+  
+  
+! #ifdef	DOS
+  /*
+   * DOS sequences
+   *
+--- 84,101 ----
+   * available for the rest of the editor via appropriate escape sequences
+   * passed to outstr().
+   */
+! #    define	T_EL	"\033[K"	/* erase the entire current line */
+! #    define	T_IL	"\033[L"	/* insert one line - fake (see os2.c) */
+! #    define	T_DL	"\033[M"	/* delete one line - fake (see os2.c) */
+! #    define	T_ED	"\033[2J"	/* erase display (may home cursor) */
+! #    define	T_SC	"\033[s"	/* save the cursor position */
+! #    define	T_RC	"\033[u"	/* restore the cursor position */
+! #    define	T_CI	""		/* invisible cursor (very optional) */
+! #    define	T_CV	""		/* visible cursor (very optional) */
+! #  endif /* OS2 */
+  
+  
+! #  ifdef DOS
+  /*
+   * DOS sequences
+   *
+***************
+*** 109,131 ****
+   * console driver. The standard "ansi.sys" driver doesn't support
+   * sequences for insert/delete line.
+   */
+! #define	T_EL	"\033[K"	/* erase the entire current line */
+! #define	T_IL	"\033[L"	/* insert line (requires nansi.sys driver) */
+! #define	T_DL	"\033[M"	/* delete line (requires nansi.sys driver) */
+! #define	T_ED	"\033[2J"	/* erase display (may optionally home cursor) */
+! #define	T_SC	"\033[s"	/* save the cursor position */
+! #define	T_RC	"\033[u"	/* restore the cursor position */
+! #define	T_CI	""		/* invisible cursor (very optional) */
+! #define	T_CV	""		/* visible cursor (very optional) */
+! #endif
+  
+! #endif
+  
+  /*
+   * Machine-variant screen handling definitions.
+   *
+   * Define some macros which for invoking screen functions, whether by
+!  * callling a bios function or outputting an escape sequence to be
+   * interpreted by a PC console driver or terminal.
+   *
+   * At this writing, not all of Stevie has been converted to use these
+--- 103,125 ----
+   * console driver. The standard "ansi.sys" driver doesn't support
+   * sequences for insert/delete line.
+   */
+! #    define	T_EL	"\033[K"	/* erase the entire current line */
+! #    define	T_IL	"\033[L"	/* insert line (requires nansi.sys) */
+! #    define	T_DL	"\033[M"	/* delete line (requires nansi.sys) */
+! #    define	T_ED	"\033[2J"	/* erase display (may home cursor) */
+! #    define	T_SC	"\033[s"	/* save the cursor position */
+! #    define	T_RC	"\033[u"	/* restore the cursor position */
+! #    define	T_CI	""		/* invisible cursor (very optional) */
+! #    define	T_CV	""		/* visible cursor (very optional) */
+! #  endif /* DOS */
+  
+! #endif /* ?TERMCAP */
+  
+  /*
+   * Machine-variant screen handling definitions.
+   *
+   * Define some macros which for invoking screen functions, whether by
+!  * calling a bios function or outputting an escape sequence to be
+   * interpreted by a PC console driver or terminal.
+   *
+   * At this writing, not all of Stevie has been converted to use these
+***************
+*** 137,177 ****
+   */
+  
+  #ifdef BIOS
+! 
+! #define	CANDL		TRUE		/* Can delete lines */
+! #define	CANIL		TRUE		/* Can insert lines */
+! #define	CLEOL		bios_t_el()	/* Erase to end-of-line */
+! #define	CLS		bios_t_ed()	/* Erase entire display */
+! #define	CRTDL(r,l)	bios_t_dl(r,l)	/* Delete lines from display */
+! #define	CRTIL(r,l)	bios_t_il(r,l)	/* Insert lines in display */
+! #define	CUROFF		bios_t_ci()	/* Make cursor invisible */
+! #define	CURON		bios_t_cv()	/* Make cursor visible */
+! #define	RESCUR		bios_t_rc()	/* Restore saved cursor position */
+! #define	SAVCUR		bios_t_sc()	/* Save cursor position */
+! 
+! #else		/* Not BIOS */
+! 
+! #define	CANDL		(T_DL[0]!='\0')	/* Determine if can delete lines */
+! #define	CANIL		(T_IL[0]!='\0')	/* Determine if can insert lines */
+! #define	CLEOL		outstr(T_EL)	/* Erase to end-of-line */
+! #define	CLS		outstr(T_ED)	/* Erase entire display */
+! #define	CRTDL(r,l)	DO_DL(r,l)	/* Delete lines from display */
+! #define	CRTIL(r,l)	DO_IL(r,l)	/* Insert lines in display */
+! #define	CUROFF		outstr(T_CI)	/* Make cursor invisible */
+! #define	CURON		outstr(T_CV)	/* Make cursor visible */
+! #define	RESCUR		outstr(T_RC)	/* Restore saved cursor position */
+! #define	SAVCUR		outstr(T_SC)	/* Save cursor position */
+! 
+! #define	DO_DL(r,l) {\
+! 	int __xx_knt = l;\
+! 	while (__xx_knt-- > 0) {outstr(T_DL);}\
+! }
+! 
+! #define	DO_IL(r,l) {\
+! 	int __xx_knt = l;\
+! 	while (__xx_knt-- > 0) {outstr(T_IL);}\
+! }
+! 
+! #endif		/* Not BIOS */
+  
+  
+--- 131,159 ----
+   */
+  
+  #ifdef BIOS
+! #  define	CANDL		TRUE		/* Can delete lines */
+! #  define	CANIL		TRUE		/* Can insert lines */
+! #  define	CLEOL		bios_t_el()	/* Erase to end-of-line */
+! #  define	CLS		bios_t_ed()	/* Erase entire display */
+! #  define	CRTDL(r,l)	bios_t_dl(r,l)	/* Delete lines from display */
+! #  define	CRTIL(r,l)	bios_t_il(r,l)	/* Insert lines in display */
+! #  define	CUROFF		bios_t_ci()	/* Make cursor invisible */
+! #  define	CURON		bios_t_cv()	/* Make cursor visible */
+! #  define	RESCUR		bios_t_rc()	/* Restore saved cursor pos. */
+! #  define	SAVCUR		bios_t_sc()	/* Save cursor position */
+! #else /* !BIOS */
+! #  define	CANDL		(T_DL[0]!='\0')	/* see if can delete lines */
+! #  define	CANIL		(T_IL[0]!='\0')	/* see if can insert lines */
+! #  define	CLEOL		outstr(T_EL)	/* Erase to end-of-line */
+! #  define	CLS		outstr(T_ED)	/* Erase entire display */
+! #  define	CRTDL(r,l)	DO_DL(r,l)	/* Delete lines from display */
+! #  define	CRTIL(r,l)	DO_IL(r,l)	/* Insert lines in display */
+! #  define	CUROFF		outstr(T_CI)	/* Make cursor invisible */
+! #  define	CURON		outstr(T_CV)	/* Make cursor visible */
+! #  define	RESCUR		outstr(T_RC)	/* Restore saved cursor pos. */
+! #  define	SAVCUR		outstr(T_SC)	/* Save cursor position */
+! #  define	DO_DL(r,l)	{int __xx_knt = l; while (__xx_knt-- > 0) {outstr(T_DL);} }
+! #  define	DO_IL(r,l)	{int __xx_knt = l; while (__xx_knt-- > 0) {outstr(T_IL);} }
+! #endif /* ?BIOS */
+  
+  
+diff -cs ./version.c c:\stevie/version.c
+*** ./version.c	Tue May 01 22:45:38 1990
+--- c:/stevie/version.c	Tue Oct 08 20:59:32 1991
+***************
+*** 6,11 ****
+--- 6,24 ----
+   *
+   * $Log:	version.c,v $
+   *
++  * Revision 3.69grr  91/10/08          Greg Roelofs
++  *   -  Fixed several errors (typos) in os2.c.
++  *   -  Created new OS/2 makefile for use with MSC's NMAKE; fixed
++  *      some errors (notably, lack of regexp and regsub).
++  *   -  Added a module definition file and incorporated Kai Uwe Rommel's 
++  *      IsFileSystemFAT() code into os2.c to allow for HPFS long filenames.
++  *   -  ifdef'd out the vbeep code, since it doesn't seem to do anything
++  *      under OS/2's ANSI driver (OS/2 1.30.1).
++  *
++  * Revision 3.69b  90/?/?              David Kirschbaum
++  * (May have done something prior to compiling under Turbo C and
++  * uploading to Simtel archives.  May not have, too. :-)  -GRR)
++  *
+   * Revision 3.69a  90/02/04            dave
+   * A couple of minor bugfixes, and a whole load of enhancements:
+   *   -	Added tag-stacking.
+***************
+*** 302,305 ****
+   * 
+   */
+  
+! char	*Version = "STEVIE - Version 3.69a";
+--- 315,318 ----
+   * 
+   */
+  
+! char	*Version = "STEVIE - Version 3.69grr";

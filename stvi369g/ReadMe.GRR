@@ -1,0 +1,32 @@
+This is the Stevie vi clone version 3.69 (the most up-to-date version
+of which I'm aware).  The only other OS/2 version I've found is the 
+one on novell.com and latrobe (I think), which is 3.10 or so.  That
+version has some significant failings, among them the lack of the "R"
+(replace) and "u" (undo) commands; the inability to do shell escapes;
+and an apparent limitation of about 15K(??) on the size of edited files.
+
+All of those shortcomings are fixed in this version, and in addition 
+I've added HPFS long-name support (including the use of Kai Uwe Rommel's 
+IsFileSystemFAT() code to determine whether or not to truncate the 
+filename).  I also fixed several bugs (all typos) in the os2.c module,
+and I indented a bunch of the #defines to help with debugging and to 
+make the header files more readable.  I've been using this version fairly 
+heavily for the last couple weeks with no problems, so I figured I'd make 
+it available.
+
+Note that Stevie is described as "an aspiring vi clone"; it's still 
+missing a lot of the ex commands, for instance.  The inability to grok
+commands of the form ":.,$d" is the major drawback for me, but the DOS
+version of Stevie shares this problem.  There are also a number of in-
+consistencies in the cursor positioning, but they're relatively minor.
+I found more problems with the Elvis clone when it was released, so I've 
+stuck with Stevie ever since.
+
+I've called this version 3.69grr since there are 3.69a and 3.69b ver-
+sions out already, and for all I know there may be any number of others.
+Mine should be uniquely identified, at least. :-)  Both source and an
+OS/2 (16-bit, protected-mode-only) executable are included.  The source
+for 3.69a was also posted to comp.sources.misc, volume 11, in March 1990.
+
+Greg Roelofs
+23 Oct 1991
