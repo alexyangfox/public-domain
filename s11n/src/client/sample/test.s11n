@@ -1,0 +1,409 @@
+#SerialTree 1
+s11n_node class=Cl1
+{
+	i 5
+	test ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
+	lst class=set
+	{
+		s11n_node class=int
+		{
+			v 0
+		}
+		s11n_node class=int
+		{
+			v 1
+		}
+		s11n_node class=int
+		{
+			v 2
+		}
+		s11n_node class=int
+		{
+			v 3
+		}
+		s11n_node class=int
+		{
+			v 4
+		}
+		s11n_node class=int
+		{
+			v 5
+		}
+		s11n_node class=int
+		{
+			v 6
+		}
+		s11n_node class=int
+		{
+			v 7
+		}
+		s11n_node class=int
+		{
+			v 8
+		}
+		s11n_node class=int
+		{
+			v 9
+		}
+		s11n_node class=int
+		{
+			v 10
+		}
+		s11n_node class=int
+		{
+			v 11
+		}
+		s11n_node class=int
+		{
+			v 12
+		}
+		s11n_node class=int
+		{
+			v 13
+		}
+		s11n_node class=int
+		{
+			v 14
+		}
+		s11n_node class=int
+		{
+			v 15
+		}
+		s11n_node class=int
+		{
+			v 16
+		}
+		s11n_node class=int
+		{
+			v 17
+		}
+		s11n_node class=int
+		{
+			v 18
+		}
+		s11n_node class=int
+		{
+			v 19
+		}
+		s11n_node class=int
+		{
+			v 20
+		}
+		s11n_node class=int
+		{
+			v 21
+		}
+		s11n_node class=int
+		{
+			v 22
+		}
+		s11n_node class=int
+		{
+			v 23
+		}
+		s11n_node class=int
+		{
+			v 24
+		}
+		s11n_node class=int
+		{
+			v 25
+		}
+		s11n_node class=int
+		{
+			v 26
+		}
+		s11n_node class=int
+		{
+			v 27
+		}
+		s11n_node class=int
+		{
+			v 28
+		}
+		s11n_node class=int
+		{
+			v 29
+		}
+		s11n_node class=int
+		{
+			v 30
+		}
+		s11n_node class=int
+		{
+			v 31
+		}
+		s11n_node class=int
+		{
+			v 32
+		}
+		s11n_node class=int
+		{
+			v 33
+		}
+		s11n_node class=int
+		{
+			v 34
+		}
+		s11n_node class=int
+		{
+			v 35
+		}
+		s11n_node class=int
+		{
+			v 36
+		}
+		s11n_node class=int
+		{
+			v 37
+		}
+		s11n_node class=int
+		{
+			v 38
+		}
+		s11n_node class=int
+		{
+			v 39
+		}
+		s11n_node class=int
+		{
+			v 40
+		}
+		s11n_node class=int
+		{
+			v 41
+		}
+		s11n_node class=int
+		{
+			v 42
+		}
+		s11n_node class=int
+		{
+			v 43
+		}
+		s11n_node class=int
+		{
+			v 44
+		}
+		s11n_node class=int
+		{
+			v 45
+		}
+		s11n_node class=int
+		{
+			v 46
+		}
+		s11n_node class=int
+		{
+			v 47
+		}
+		s11n_node class=int
+		{
+			v 48
+		}
+		s11n_node class=int
+		{
+			v 49
+		}
+		s11n_node class=int
+		{
+			v 50
+		}
+		s11n_node class=int
+		{
+			v 51
+		}
+		s11n_node class=int
+		{
+			v 52
+		}
+		s11n_node class=int
+		{
+			v 53
+		}
+		s11n_node class=int
+		{
+			v 54
+		}
+		s11n_node class=int
+		{
+			v 55
+		}
+		s11n_node class=int
+		{
+			v 56
+		}
+		s11n_node class=int
+		{
+			v 57
+		}
+		s11n_node class=int
+		{
+			v 58
+		}
+		s11n_node class=int
+		{
+			v 59
+		}
+		s11n_node class=int
+		{
+			v 60
+		}
+		s11n_node class=int
+		{
+			v 61
+		}
+		s11n_node class=int
+		{
+			v 62
+		}
+		s11n_node class=int
+		{
+			v 63
+		}
+		s11n_node class=int
+		{
+			v 64
+		}
+		s11n_node class=int
+		{
+			v 65
+		}
+		s11n_node class=int
+		{
+			v 66
+		}
+		s11n_node class=int
+		{
+			v 67
+		}
+		s11n_node class=int
+		{
+			v 68
+		}
+		s11n_node class=int
+		{
+			v 69
+		}
+		s11n_node class=int
+		{
+			v 70
+		}
+		s11n_node class=int
+		{
+			v 71
+		}
+		s11n_node class=int
+		{
+			v 72
+		}
+		s11n_node class=int
+		{
+			v 73
+		}
+		s11n_node class=int
+		{
+			v 74
+		}
+		s11n_node class=int
+		{
+			v 75
+		}
+		s11n_node class=int
+		{
+			v 76
+		}
+		s11n_node class=int
+		{
+			v 77
+		}
+		s11n_node class=int
+		{
+			v 78
+		}
+		s11n_node class=int
+		{
+			v 79
+		}
+		s11n_node class=int
+		{
+			v 80
+		}
+		s11n_node class=int
+		{
+			v 81
+		}
+		s11n_node class=int
+		{
+			v 82
+		}
+		s11n_node class=int
+		{
+			v 83
+		}
+		s11n_node class=int
+		{
+			v 84
+		}
+		s11n_node class=int
+		{
+			v 85
+		}
+		s11n_node class=int
+		{
+			v 86
+		}
+		s11n_node class=int
+		{
+			v 87
+		}
+		s11n_node class=int
+		{
+			v 88
+		}
+		s11n_node class=int
+		{
+			v 89
+		}
+		s11n_node class=int
+		{
+			v 90
+		}
+		s11n_node class=int
+		{
+			v 91
+		}
+		s11n_node class=int
+		{
+			v 92
+		}
+		s11n_node class=int
+		{
+			v 93
+		}
+		s11n_node class=int
+		{
+			v 94
+		}
+		s11n_node class=int
+		{
+			v 95
+		}
+		s11n_node class=int
+		{
+			v 96
+		}
+		s11n_node class=int
+		{
+			v 97
+		}
+		s11n_node class=int
+		{
+			v 98
+		}
+		s11n_node class=int
+		{
+			v 99
+		}
+	}
+}

@@ -1,0 +1,55 @@
+#!/do/not/bash
+# intended for sourcing by toc2
+
+########################################################################
+# helpful notes
+cat <<EOF
+
+Here are a few things you might find helpful along your way:
+
+*) When using s11n client applications, make sure your LD_LIBRARY_PATH
+   (or equivalent) contains the path to libs11n.so.
+   Pre-install, this is:
+      ${PWD}/src
+   Post-installation this will be:
+      ${prefix}/lib
+
+*) Use the libs11n-config script to get information needed for compiling
+   and linking client applications against libs11n. Right now it lives
+   at ./, and it will be installed to ${prefix}/bin.
+
+*) See the README.* and INSTALL files for further information, including
+   hints on starting points for working with s11n and info on  building
+   the API documentation.
+
+Thanks for taking the time to try out s11n! Feel free to send any
+and all feedback, fixes, etc., so we can keep making s11n better:
+
+	http://s11n.net
+	stephan@s11n.net
+        (Please DO NOT use the s11n-devel@lists.sourceforge.net
+         list - it was overrun by spammers years ago!)
+
+EOF
+# /helpful notes
+########################################################################
+
+toc2_boldcat <<EOF
+************************************************************************
+!!!!!!!    ACHTUNG: THIS IS A DEVELOPMENT VERSION OF LIBS11N     !!!!!!!
+
+As per long-standing conventions, libs11n versions with an ODD MINOR
+VERSION ('3' in this case, from 1.3.x) are development versions,
+subject to radical changes between releases.  If you need a stable
+library, please use version 1.2.x!!!
+************************************************************************
+EOF
+
+if [[ x1 = x${LIBS11N_HAS_CPP0X} ]]; then
+    cat <<EOF
+Beware: the C++0x stuff has been activated. If you get weird build errors
+try passing --disable-cpp0x to configure.
+EOF
+fi
+
+return 0

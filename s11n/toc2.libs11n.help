@@ -1,0 +1,42 @@
+--enable-ccdv
+	Enables "pretty" compiler output. Pretty useless, but looks
+	nice on color terminals.
+
+--with-flex=/path/to/flex
+	Currently the lexers in the build tree are only known to work
+	with GNU flex 2.5.4. If that flex is not found the tree will
+	use pre-built lexers. If you want to specify a path to a
+	known-working flex version, use this option. If you do, the
+	flex version check is bypassed. This may or may not result
+	in compilable lexers.
+
+--without-zfstream
+	Disables the check for the libs11n_zfstream helper library,
+	which means your s11n will not support zlib/bzip2 de/compression.
+
+--disable-plugins
+	Disables the build of the optional plugins layer. This means that
+	loading Serializables, Serializers, and whatnot, from DLLs WILL
+	NOT WORK. It requires libdl or libltdl, and plugins are disabled
+	if neither of those are found.
+
+--with-pthreads
+	Enables the check for the pthreads library. If it is found then
+	it is used to supply the mutex support internal to libs11n.
+
+--with-gnupth
+	Enables the check for the GNU Pth threading library. If it is
+	found then it is used to supply the mutex support internal to
+	libs11n. THIS CODE DOES NOT YET WORK!
+
+--pure-iso
+	Disables all optional features (those requiring platforms-specific
+	features or 3rd-party libraries). This includes plugins and gz/bzip2
+	support.
+
+--debian-package
+	Tries to configure the tree in a way which can be used to build
+	a precompiled package for Debian-based systems, namely Ubuntu and
+	friends. Note that this hard-codes --prefix=/usr, overriding
+	any --prefix you specify.
+

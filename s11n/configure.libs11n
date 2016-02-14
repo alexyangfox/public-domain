@@ -1,0 +1,305 @@
+#!/do/not/bash
+#^^^ this helps emacs out, so it'll start in shell-script-mode.
+# This is the main configure script code for the s11n source tree.
+# This file will be sourced by the configure script, and is not
+# intended to be run directly.
+
+toc2_add_config PACKAGE_RELEASE_CODENAME="Approved by Me"
+toc2_export PACKAGE_VERSION_HEX="$PACKAGE_VERSION_HEX"
+
+toc2_export PACKAGE_DESCRIPTION="C++ library for generic object serialization"
+
+toc2_export s11n_CONFIG_PURE_ISO=${pure_iso-0}
+
+#if [[ x0 != ${s11n_CONFIG_PURE_ISO} ]]; then
+#    toc2_source_test user_is_stephan_beal
+    # ^^^ don't ask. Must come before gnu_cpp_tools test.
+#fi
+
+toc2_test_require gnu_cpp_tools
+
+if [[ x0 = "x${s11n_CONFIG_PURE_ISO}" ]]; then
+    configure_enable_plugins=${configure_enable_plugins-1}
+    if test x0 != "x${configure_enable_plugins-1}"; then
+	toc2_test libdl || toc2_test libltdl # 2007.04.30: prefer libdl over libltdl
+	if test x = "x${LDADD_DL}"; then
+	    toc2_boldecho "Plugins support is being disabled. No DLL loader found."
+	    toc2_export s11n_CONFIG_ENABLE_PLUGINS=0
+	else
+	    toc2_export s11n_CONFIG_ENABLE_PLUGINS=1
+	    toc2_boldecho "Plugins support enabled. Disable with --disable-plugins."
+	fi
+    else
+	toc2_boldecho "Plugins support explicitely disabled."
+	toc2_export s11n_CONFIG_ENABLE_PLUGINS=0
+    fi
+else
+    echo "Disabling plugins support."
+    toc2_export s11n_CONFIG_ENABLE_PLUGINS=0
+fi
+
+toc2_export s11n_CONFIG_HAVE_LIBLTDL=${HAVE_LIBLTDL-0}
+toc2_export s11n_CONFIG_HAVE_LIBDL=${HAVE_LIBDL-0}
+
+############################################################
+# accumulate -I and -L/-l entries here:
+includes_path=
+ldadd="${LDADD_DL}" # LDADD_DL is exported by the ltdl/dl tests
+############################################################
+
+toc2_export s11n_CONFIG_DLL_EXTENSION=".so:.dynlib" # .dynlib is for Darwin systems.
+
+############################################################
+# supplemental libs
+if [[ x0 = "x${s11n_CONFIG_PURE_ISO}" ]]; then
+    toc2_boldecho "Enable zlib/bzip2 file stream support?"
+    if [[ x${configure_with_zfstream-1} != x0 ]]; then
+	if toc2_test find_appconfig libs11n_zfstream; then
+	    toc2_export HAVE_ZFSTREAM=1
+	    confbin=${TOC2_FIND_RESULT}
+	    eval $($confbin --toc-config | sed -e 's/$/; /' -e 's/toc_/toc2_/g')
+	    toc2_boldecho "Using libs11n_zfstream version ${LIBZFSTREAM_LIBRARY_VERSION}."
+	    echo "To explicitely disable zfstream, pass --without-zfstream to the configure script."
+	else
+	    toc2_export HAVE_ZFSTREAM=0
+	    echo "zlib/bz2lib support disabled."
+	fi
+    else
+	echo "zfstream support has been explicitely disabled."
+	toc2_export HAVE_ZFSTREAM=0
+    fi
+else
+    echo "Disabling zfstreams check."
+    toc2_export HAVE_ZFSTREAM=0
+fi
+
+if [[ x0 = "x${s11n_CONFIG_PURE_ISO}" && x0 != "x${configure_with_libexpat-1}" ]]; then
+    toc2_test libexpat && ldadd="$ldadd -lexpat"
+else
+    echo "Disabling libexpat check."
+    toc2_export HAVE_LIBEXPAT=0
+fi
+
+# end supplemental libs check
+############################################################
+
+toc2_test doxygen
+
+
+############################################################
+# The following is a kludge to allow me (the maintainer)
+# to work with my local flex version, while distributing
+# pre-flexed lexers with the dist tarball.
+# i hate this, but there are too many flex releases out
+# there which generate non-compilable code!!!
+# Use --with-flex=/path/to/flex to specify a specific flex
+# binary.
+    use_local_flex=0
+    FLEX_BIN=
+    echo -n "Which lexers should we use? ... "
+    toc2_find_in_path ${configure_with_flex-flex} "$prefix/bin:$PATH" && \
+        toc2_export FLEX_BIN=${TOC2_FIND_RESULT}
+    if [ "x" != "x${FLEX_BIN}" ] ; then
+        # Check if FLEX_BIN is a known-working version...
+        ${FLEX_BIN} --version | grep '2.5.4' &>/dev/null && use_local_flex=1
+    fi
+    if [ "x" != "x${configure_with_flex}" -a "x" != "x${FLEX_BIN}" ]; then
+        # If user specifies a flex binary, force the tree to use it.
+        use_local_flex=1
+    fi
+    if [ 0 = $use_local_flex ] ; then
+        toc2_boldecho " Using pre-flexed lexers."
+    else
+        toc2_boldecho " Using $FLEX_BIN. Let's hope it works!"
+    fi
+    toc2_export SERIALIZERS_USE_LOCAL_FLEX=${use_local_flex}
+    unset use_local_flex
+# end flex tests
+########################################################################
+
+
+########################################################################
+# check whether we should enable optional addons...
+
+if toc2_find_in_path ssh "$prefix/bin:$PATH"; then
+    toc2_export s11n_CONFIG_HAVE_SSH=1
+else
+    toc2_export s11n_CONFIG_HAVE_SSH=0
+fi
+
+if toc2_find_in_path wget "$prefix/bin:$PATH"; then
+    toc2_export s11n_CONFIG_HAVE_WGET=1
+else
+    toc2_export s11n_CONFIG_HAVE_WGET=0
+fi
+
+if toc2_find_in_path curl "$prefix/bin:$PATH"; then
+    toc2_export s11n_CONFIG_HAVE_CURL=1
+else
+    toc2_export s11n_CONFIG_HAVE_CURL=0
+fi
+
+if [[ 1 = ${configure_enable_plugins-0} ]]; then
+    if [[ 1 = ${s11n_CONFIG_HAVE_WGET} || 1 = ${s11n_CONFIG_HAVE_SSH} ]]; then
+	toc2_export s11n_CONFIG_ADDON_PSTREAMS_ENABLE=1
+	echo "Enabling pstreams add-on."
+	else
+	toc2_export s11n_CONFIG_ADDON_PSTREAMS_ENABLE=0
+	echo "Disabling pstreams add-on."
+    fi
+else
+    toc2_export s11n_CONFIG_ADDON_PSTREAMS_ENABLE=0
+    echo "Plugins not enabled: disabling pstreams add-on"
+fi
+
+
+########################################################################
+# pthreads...
+if false && [[ x0 = "x${s11n_CONFIG_PURE_ISO}" ]]; then
+    have_pthreads=${configure_with_pthreads-0}
+    if [[ x1 = "x${have_pthreads}" ]]; then
+        echo "Checking for optional pthreads support..."
+        if toc2_test gcc_build_and_run ${TOC2_HOME}/tests/c/check_for_pthread.c -lpthread; then
+	    have_phreads=1
+	    ldadd="${ldadd} -lpthread"
+	else
+	    toc2_boldcat<<EOF
+	Your requested --with-pthreads but a simple test for pthreads
+	failed to compile. If you want to build without pthreads, either
+	pass --without-pthreads or do NOT specify --with-pthreads.
+EOF
+	    toc2_die 127
+	fi
+    else
+	have_pthreads=0
+    fi
+    toc2_export s11n_CONFIG_HAVE_PTHREADS=${have_pthreads}
+    if [[ x1 = "x${s11n_CONFIG_HAVE_PTHREADS}" ]]; then
+	toc2_boldecho "Enabling pthreads support. Use --without-pthreads to disable it."
+    else
+	toc2_boldecho "Disabling pthreads support. Use --with-pthreads to enable it."
+    fi
+else
+    echo "Disabling pthreads check."
+    toc2_export s11n_CONFIG_HAVE_PTHREADS=0
+fi
+# end pthreads
+########################################################################
+
+########################################################################
+# pth threads...
+if false && [[ x0 = "x${s11n_CONFIG_PURE_ISO}" ]]; then
+    have_gnupth=${configure_with_gnupth-0}
+    if [[ x1 = "x${have_gnupth}" ]]; then
+        echo "Checking for optional GNU Pth threads support..."
+        if toc2_test find_appconfig pth; then
+	    have_gnupth=1
+	    includes_path="${includes_path} $(${pth_config} --cflags)"
+	    ldadd="${ldadd} $(${pth_config} --ldflags --libs)"
+	else
+	    toc2_boldcat<<EOF
+	Your requested --with-gnupth but pth-config was not found
+	in your PATH. If you want to build without pthreads, either
+	pass --without-gnupth or do NOT specify --with-gnupth.
+EOF
+	    toc2_die 127
+	fi
+    else
+	have_gnupth=0
+    fi
+    toc2_export s11n_CONFIG_HAVE_GNUPTH_THREADS=${have_gnupth}
+    if [[ x1 = "x${s11n_CONFIG_HAVE_GNUPTH_THREADS}" ]]; then
+	toc2_boldecho "Enabling GNU Pth threads support. Use --without-gnupth to disable it."
+    else
+	toc2_boldecho "Disabling GNU Pth threads support. Use --with-gnupth to enable it."
+    fi
+else
+    echo "Disabling GNU Pth threads check."
+    toc2_export s11n_CONFIG_HAVE_GNUPTH_THREADS=0
+fi
+# end pth threads
+########################################################################
+
+
+########################################################################
+# s11n_CONFIG_PURE_ISO kludgery...
+# if [[ x1 = "x${s11n_CONFIG_PURE_ISO}" ]]; then
+#     echo "Pure-ISO mode is enabled. Disabling any platform-specific stuff."
+#     # undo all of that work...
+#     ldadd="-L${prefix}/lib"
+#     includes_path="-I${prefix}/include"
+#     toc2_export s11n_CONFIG_HAVE_LIBEXPAT=0
+#     toc2_export s11n_CONFIG_HAVE_ZFSTREAM=0
+#     toc2_export s11n_CONFIG_HAVE_WIN32_THREADS=0
+#     toc2_export s11n_CONFIG_HAVE_PTHREADS=0
+#     toc2_export s11n_CONFIG_HAVE_GNUPTH_THREADS=0
+#     toc2_export s11n_CONFIG_ENABLE_PLUGINS=0
+#     toc2_export s11n_CONFIG_SINGLE_THREADED=1
+# fi
+#
+########################################################################
+
+########################################################################
+{ # generate PACKAGE_NAME-config:
+    removeDupes=${TOC2_HOME}/bin/removeDupeArgs
+    export ldadd
+    export includes_path
+    ldadd="$(${removeDupes} ${ldadd} ${LIBZFSTREAM_CLIENT_LDADD})"
+    includes_path="$(${removeDupes} ${includes_path} -I${prefix}/include ${LIBZFSTREAM_CLIENT_INCLUDES})"
+    toc2_export INCLUDES="${INCLUDES} ${includes_path}"
+    toc2_export LIBS11N_LDADD="${ldadd}"
+    toc2_test_require PACKAGE_NAME-config \
+        PACKAGE_PREFIX=LIBS11N_ \
+        CLIENT_LDADD="$(${removeDupes} -ls11n -L${prefix}/lib)" \
+        CLIENT_INCLUDES="$(${removeDupes} ${includes_path})"
+
+    # import the PACKAGE_NAME-config info to ease life for code under ./src/client/*
+    eval $(./${PACKAGE_NAME}-config --toc2-eval) || {
+	# older toc versions didn't have the --toc-eval feature, or output lines without closing semicolons.
+	echo "Error calling './${PACKAGE_NAME}-config --toc2-eval'. You probably have an out-of-date toc2 tree."
+	toc2_die 1 "Try a newer toc: CVS or http://toc.sf.net"
+    }
+    unset includes_path
+    unset ldadd
+}
+
+
+##### create ${PACKAGE_NAME}.pc pkginfo file:
+test x1 = "x${HAVE_ZFSTREAM}" && PACKAGE_REQUIRES="libs11n_zfstream"
+PACKAGE_CFLAGS="${LIBS11N_CLIENT_INCLUDES}" \
+    PACKAGE_LDADD="${LIBS11N_CLIENT_LDADD}" \
+    toc2_test_require create_pkg-config_data
+
+
+
+########################################################################
+# Let's try some gcc 4.3+ C++0x stuff...
+if [[ x0 !=  x${configure_enable_cpp0x-1} ]]; then
+    if gcc --version | grep ' 4\.[34]' &>/dev/null; then
+	toc2_boldecho "It looks like you're using gcc 4.3+! Great! We'll enable some extra C++0x stuff..."
+	toc2_export LIBS11N_HAS_CPP0X=1
+    else
+	toc2_export LIBS11N_HAS_CPP0X=0
+    fi
+else
+toc2_export LIBS11N_HAS_CPP0X=0
+fi
+# end C++0x stufff
+########################################################################
+
+
+###### stuff:
+toc2_export BUILD_USER="$USER"
+toc2_export BUILD_HOST=`hostname`
+toc2_export PACKAGE_EMAIL_ADDRESS=stephan@s11n.net
+toc2_export PACKAGE_URL="http://s11n.net/"
+toc2_export PACKAGE_LICENSE="Public Domain"
+
+##### close the config-filtered files:
+toc2_test_require atfilter_file src/s11n/s11n_config.hpp.at src/s11n/s11n_config.hpp
+toc2_test_require atfilter_file src/plugin/plugin_config.hpp.at src/plugin/plugin_config.hpp
+toc2_test_require toc2_project_makefile
+
+return 0
+# Now toc.make will be generated by the top-level configure process.
+

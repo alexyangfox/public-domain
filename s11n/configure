@@ -1,0 +1,13 @@
+#!/bin/bash
+# ^^^^ toc needs a Genuine Bash, not some cheap work-alike!!!
+
+. ./find_toc2.sh || exit
+
+export PACKAGE_NAME=libs11n
+export PACKAGE_VERSION=1.3.2
+export PACKAGE_VERSION_HEX="0x010302"
+# kick off the core toc process, which eventually calls
+# configure.${PACKAGE_NAME}. Do all of your package-specific checks in
+# configure.${PACKAGE_NAME}.
+. ${TOC2_HOME}/sbin/toc2_bootstrap.sh "$@"
+# post-configure processing can be done in postconfig.${PACKAGE_NAME}

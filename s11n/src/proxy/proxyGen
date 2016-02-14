@@ -1,0 +1,99 @@
+#!/usr/bin/perl
+
+# Quick hack to generate some boilerplate code. Don't rely on it.
+
+# Bug: only properly handles one class per invokation
+
+# file format:
+#  CLASSNAME:
+# define a property:
+#   = KEY GETTERFUNC SETTERFUNC
+# define a child:
+#   + KEY GETTERFUNC SETTERFUNC
+
+
+
+@sout = ();
+@dout = ();
+$classname = 'MyClass';
+$SNS = "::s11n";
+
+while(<>) {
+	chomp;
+	$orig = $_;
+	$line = $_;
+	next unless $line =~ m|\w|; # empty line
+	next if( $line =~ m|^\s*#| ); # comment line
+
+	if( $line =~ m|^\s*(\S+)\:\s*$| ) { # CLASSNAME:
+		$classname = $1;
+		$pname = $classname.'_s11n';
+		next;
+	}
+
+	$line =~ s|\s+| |g;
+	$line =~ s|^\s*||;
+
+	($op,$key,$get,$set) = split( /\s+/, $line );
+
+	if( ! $set || !$get ) {
+		die "Syntax error. Line:\n$orig\n";
+	}
+
+	if( '=' eq $op ) { # property
+#	        print "Adding property '$key'\n";
+		push( @sout, "TR::set( dest, \"$key\", src.$get\(\) );" );
+		push( @gout, "dest.$set\( TR::get( src, \"$key\", dest.$get\(\) ) );" );
+		next;
+	}
+
+	if( '+' eq $op ) {
+#	        print "Adding child '$key'\n";
+		push( @sout, "if( ! $SNS\::serialize_subnode(  dest, \"$key\", src.$get\(\) ) ) return false;" );
+		push( @gout, "if( ! $SNS\::deserialize_subnode( TR::get( src, \"$key\", dest.$get\(\) ) ) return false;" );
+		next;
+	}
+
+	die "Unhandled input line:\n$line\n";
+}
+
+$dser = "\t".join( "\n\t", @gout );
+
+$sep = "\n\t\t";
+print  <<EOF
+struct $pname
+{
+	// serialize
+	template <typename NodeType>
+	bool operator()( NodeType & dest, const $classname & src ) const
+	{
+		typedef $SNS\::node_traits<NodeType> TR;
+		TR::class_name( dest, "$classname" );
+EOF
+;
+
+print "\t\t";
+print join( $sep, @sout );
+print "\n";
+print <<EOF
+		return true;
+	}
+
+	// deserialize
+	template <typename NodeType>
+	bool operator()( const NodeType & src, $classname & dest ) const
+	{
+		typedef $SNS\::node_traits<NodeType> TR;
+EOF
+;
+print "\t\t";
+print join( $sep, @gout );
+print "\n";
+print <<EOF
+		return true;
+	}
+
+}; // $pname
+EOF
+;
+

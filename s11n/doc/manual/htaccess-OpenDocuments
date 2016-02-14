@@ -1,0 +1,18 @@
+AddType application/vnd.sun.xml.writer .sxw
+
+AddType application/vnd.oasis.opendocument.text .odt
+AddType application/vnd.oasis.opendocument.text-template .ott
+AddType application/vnd.oasis.opendocument.graphics .odg
+AddType application/vnd.oasis.opendocument.graphics-template .otg
+AddType application/vnd.oasis.opendocument.presentation .odp
+AddType application/vnd.oasis.opendocument.presentation-template .otp
+AddType application/vnd.oasis.opendocument.spreadsheet .ods
+AddType application/vnd.oasis.opendocument.spreadsheet-template .ots
+AddType application/vnd.oasis.opendocument.chart .odc
+AddType application/vnd.oasis.opendocument.chart-template .otc
+AddType application/vnd.oasis.opendocument.image .odi
+AddType application/vnd.oasis.opendocument.image-template .oti
+AddType application/vnd.oasis.opendocument.formula .odf
+AddType application/vnd.oasis.opendocument.formula-template .otf
+AddType application/vnd.oasis.opendocument.text-master .odm
+AddType application/vnd.oasis.opendocument.text-web .oth

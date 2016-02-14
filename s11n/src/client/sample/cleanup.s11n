@@ -1,0 +1,17 @@
+<!DOCTYPE s11n::simplexml>
+<s11n_node s11n_class="map">
+	<pair s11n_class="pair">
+		<first s11n_class="int" v="0" />
+		<second s11n_class="list">
+			<s11n_node s11n_class="Type1" number="12" />
+			<s11n_node s11n_class="Type1" number="13" />
+			<s11n_node s11n_class="Type2" number="14" />
+			<s11n_node s11n_class="Type1" number="15" />
+			<s11n_node s11n_class="Type1" number="16" />
+			<s11n_node s11n_class="Type2" number="17" />
+			<s11n_node s11n_class="Type1" number="18" />
+			<s11n_node s11n_class="Type1" number="19" />
+			<s11n_node s11n_class="Type2" number="20" />
+		</second>
+	</pair>
+</s11n_node>

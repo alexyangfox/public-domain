@@ -1,0 +1,24 @@
+If you are working from a CVS copy of s11n, please read this,
+otherwise it will not interest you.
+
+You can pull the latest source code for s11n from Subversion
+(pre-1.3.x releases are in CVS) by simply following the instructions
+on this page:
+
+    http://sourceforge.net/svn/?group_id=104450
+
+After checking it out, it's ready to build. The build tree "should"
+compile as-is on most Unix-like systems hosting GNU versions of the
+common system tools (make, gcc, tar, and optionally flex 2.5.4 to
+rebuild the serializers).
+
+Simply:
+
+  ./configure --prefix=$HOME
+  make
+  make install
+
+If you're looking to compile client code against the s11n without
+having to install s11n first (e.g. testing out the library), simply
+add the src/ dir to your LD_LIBRARY_PATH and the include/ dir to your
+INCLUDES. See src/client/sample/Makefile for examples of this.

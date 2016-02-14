@@ -1,0 +1,131 @@
+LIB=		s11n
+CXXFLAGS+=	-Wall -O2 -fPIC -I../include
+SHLIB_MAJOR=	1
+SHLIB_MINOR=	2
+SRCS=	exception.cpp \
+	s11n.cpp \
+	s11n_node.cpp \
+	path_finder.cpp \
+	plugin.cpp \
+	compact.flex.cpp \
+	compact_serializer.cpp \
+	data_node_io.cpp \
+	funtxt.flex.cpp \
+	funtxt_serializer.cpp \
+	funxml.flex.cpp \
+	funxml_serializer.cpp \
+	parens.flex.cpp \
+	parens_serializer.cpp \
+	s11nlite.cpp \
+	simplexml.flex.cpp \
+	simplexml_serializer.cpp \
+	strtool.cpp \
+	url.cpp \
+	wesnoth.flex.cpp \
+	wesnoth_serializer.cpp
+
+INCSGROUPS=	ROOTINC IOINC NODEINC PLUGINC \
+		PROXYINC PODINC STDINC
+INCLUDEBASE=	${PREFIX}/include/s11n.net/s11n
+
+LOCAL_INC_BASE=	./include/s11n.net/s11n
+ROOTINCDIR=	${INCLUDEBASE}
+ROOTINC=	${LOCAL_INC_BASE}/abstract_creator.hpp \
+${LOCAL_INC_BASE}/algo.hpp \
+${LOCAL_INC_BASE}/algo.tpp \
+${LOCAL_INC_BASE}/classload.hpp \
+${LOCAL_INC_BASE}/classload.tpp \
+${LOCAL_INC_BASE}/client_api.hpp \
+${LOCAL_INC_BASE}/exception.hpp \
+${LOCAL_INC_BASE}/export.hpp \
+${LOCAL_INC_BASE}/factory.hpp \
+${LOCAL_INC_BASE}/factory_reg.hpp \
+${LOCAL_INC_BASE}/functional.hpp \
+${LOCAL_INC_BASE}/micro_api.hpp \
+${LOCAL_INC_BASE}/phoenix.hpp \
+${LOCAL_INC_BASE}/reg_s11n_traits.hpp \
+${LOCAL_INC_BASE}/s11n.hpp \
+${LOCAL_INC_BASE}/s11n_config.hpp \
+${LOCAL_INC_BASE}/s11n_debuggering_macros.hpp \
+${LOCAL_INC_BASE}/s11n_node.hpp \
+${LOCAL_INC_BASE}/s11nlite.hpp \
+${LOCAL_INC_BASE}/serialize.hpp \
+${LOCAL_INC_BASE}/serialize.tpp \
+${LOCAL_INC_BASE}/simple_config.hpp \
+${LOCAL_INC_BASE}/tags.hpp \
+${LOCAL_INC_BASE}/traits.hpp \
+${LOCAL_INC_BASE}/type_traits.hpp \
+${LOCAL_INC_BASE}/variant.hpp
+
+IOINCDIR=	${INCLUDEBASE}/io
+IOINC=	${LOCAL_INC_BASE}/io/FlexLexer.hpp \
+${LOCAL_INC_BASE}/io/compact_data_nodeFlexLexer.hpp \
+${LOCAL_INC_BASE}/io/compact_serializer.hpp \
+${LOCAL_INC_BASE}/io/data_node_format.hpp \
+${LOCAL_INC_BASE}/io/data_node_io.hpp \
+${LOCAL_INC_BASE}/io/expat_serializer.hpp \
+${LOCAL_INC_BASE}/io/funtxt_data_nodeFlexLexer.hpp \
+${LOCAL_INC_BASE}/io/funtxt_serializer.hpp \
+${LOCAL_INC_BASE}/io/funxml_data_nodeFlexLexer.hpp \
+${LOCAL_INC_BASE}/io/funxml_serializer.hpp \
+${LOCAL_INC_BASE}/io/parens_data_nodeFlexLexer.hpp \
+${LOCAL_INC_BASE}/io/parens_serializer.hpp \
+${LOCAL_INC_BASE}/io/reg_serializer.hpp \
+${LOCAL_INC_BASE}/io/serializers.hpp \
+${LOCAL_INC_BASE}/io/simplexml_data_nodeFlexLexer.hpp \
+${LOCAL_INC_BASE}/io/simplexml_serializer.hpp \
+${LOCAL_INC_BASE}/io/strtool.hpp \
+${LOCAL_INC_BASE}/io/url.hpp \
+${LOCAL_INC_BASE}/io/wesnoth_data_nodeFlexLexer.hpp \
+${LOCAL_INC_BASE}/io/wesnoth_serializer.hpp
+
+NODEINCDIR=	${INCLUDEBASE}/nodeutil
+NODEINC=	${LOCAL_INC_BASE}/nodeutil/node_tree.hpp
+
+PLUGINCDIR=	${INCLUDEBASE}/plugin
+PLUGINC=	${LOCAL_INC_BASE}/plugin/path_finder.hpp \
+${LOCAL_INC_BASE}/plugin/plugin.hpp \
+${LOCAL_INC_BASE}/plugin/plugin_config.hpp
+
+PROXYINCDIR=	${INCLUDEBASE}/proxy
+PROXYINC=	${LOCAL_INC_BASE}/proxy/listish.hpp \
+${LOCAL_INC_BASE}/proxy/listish.tpp \
+${LOCAL_INC_BASE}/proxy/mapish.hpp \
+${LOCAL_INC_BASE}/proxy/mapish.tpp \
+${LOCAL_INC_BASE}/proxy/path_finder_s11n.hpp \
+${LOCAL_INC_BASE}/proxy/reg_list_specializations.hpp \
+${LOCAL_INC_BASE}/proxy/reg_map_specializations.hpp \
+${LOCAL_INC_BASE}/proxy/reg_node_type.hpp \
+${LOCAL_INC_BASE}/proxy/reg_s11n_traits_template1.hpp \
+${LOCAL_INC_BASE}/proxy/reg_s11n_traits_template2.hpp \
+${LOCAL_INC_BASE}/proxy/reg_s11n_traits_template3.hpp \
+${LOCAL_INC_BASE}/proxy/reg_s11n_traits_template4.hpp
+
+PODINCDIR=	${PROXYINCDIR}/pod
+PODINC=	${LOCAL_INC_BASE}/proxy/pod/bool.hpp \
+${LOCAL_INC_BASE}/proxy/pod/char.hpp \
+${LOCAL_INC_BASE}/proxy/pod/double.hpp \
+${LOCAL_INC_BASE}/proxy/pod/float.hpp \
+${LOCAL_INC_BASE}/proxy/pod/int.hpp \
+${LOCAL_INC_BASE}/proxy/pod/long.hpp \
+${LOCAL_INC_BASE}/proxy/pod/long_double.hpp \
+${LOCAL_INC_BASE}/proxy/pod/size_t.hpp \
+${LOCAL_INC_BASE}/proxy/pod/string.hpp \
+${LOCAL_INC_BASE}/proxy/pod/uint.hpp \
+${LOCAL_INC_BASE}/proxy/pod/ulong.hpp
+
+STDINCDIR=	${PROXYINCDIR}/std
+STDINC=	${LOCAL_INC_BASE}/proxy/std/deque.hpp \
+${LOCAL_INC_BASE}/proxy/std/list.hpp \
+${LOCAL_INC_BASE}/proxy/std/map.hpp \
+${LOCAL_INC_BASE}/proxy/std/multimap.hpp \
+${LOCAL_INC_BASE}/proxy/std/multiset.hpp \
+${LOCAL_INC_BASE}/proxy/std/pair.hpp \
+${LOCAL_INC_BASE}/proxy/std/set.hpp \
+${LOCAL_INC_BASE}/proxy/std/valarray.hpp \
+${LOCAL_INC_BASE}/proxy/std/vector.hpp
+
+LIBDIR=		${PREFIX}/lib
+
+.include <bsd.lib.mk>
+

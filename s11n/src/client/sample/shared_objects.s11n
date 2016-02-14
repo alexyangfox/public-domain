@@ -1,0 +1,5 @@
+(s11n::parens)
+s11n_node=(SharedData
+	map=(s11n::s11n_node (barre yet another property) (foo bar))
+	list=(unknown (x0 hi) (x1 world))
+)

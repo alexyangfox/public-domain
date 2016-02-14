@@ -1,0 +1,19 @@
+(s11n::parens)
+s11n_node=(map
+	pair=(pair
+		first=(coord (x -12) (y -17))
+		second=(some_obj (name Betty) (role The best friend's lovely wife.))
+	)
+	pair=(pair
+		first=(coord (x -10) (y -13))
+		second=(some_obj (name Wilma) (role The lovely wife.))
+	)
+	pair=(pair
+		first=(coord (x 1) (y 4))
+		second=(some_obj (name Fred) (role Husband of Wilma))
+	)
+	pair=(pair
+		first=(coord (x 20) (y 7))
+		second=(some_obj (name Barney) (role Fred's best friend.))
+	)
+)

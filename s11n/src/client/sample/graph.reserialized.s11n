@@ -1,0 +1,110 @@
+#SerialTree 1
+s11n_node class=graph_node
+{
+	nodes class=s11n::s11n_node
+	{
+		node class=s11n::s11n_node
+		{
+			id 1
+			data class=double
+			{
+				v 0
+			}
+		}
+		node class=s11n::s11n_node
+		{
+			id 2
+			data class=double
+			{
+				v 2
+			}
+		}
+		node class=s11n::s11n_node
+		{
+			id 3
+			data class=double
+			{
+				v 4
+			}
+		}
+		node class=s11n::s11n_node
+		{
+			id 4
+			data class=double
+			{
+				v 6
+			}
+		}
+		node class=s11n::s11n_node
+		{
+			id 5
+			data class=double
+			{
+				v 8
+			}
+		}
+	}
+	relations class=map
+	{
+		pair class=pair
+		{
+			first class=size_t
+			{
+				v 1
+			}
+			second class=id_pair
+			{
+				first 0
+				second 2
+			}
+		}
+		pair class=pair
+		{
+			first class=size_t
+			{
+				v 2
+			}
+			second class=id_pair
+			{
+				first 1
+				second 3
+			}
+		}
+		pair class=pair
+		{
+			first class=size_t
+			{
+				v 3
+			}
+			second class=id_pair
+			{
+				first 2
+				second 4
+			}
+		}
+		pair class=pair
+		{
+			first class=size_t
+			{
+				v 4
+			}
+			second class=id_pair
+			{
+				first 3
+				second 5
+			}
+		}
+		pair class=pair
+		{
+			first class=size_t
+			{
+				v 5
+			}
+			second class=id_pair
+			{
+				first 4
+				second 1
+			}
+		}
+	}
+}

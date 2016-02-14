@@ -1,0 +1,16 @@
+#
+# format:
+# START CLASS:
+#  CLASSNAME:
+# PROPERTIES:
+#   = KEY GETTERFUNC SETTERFUNC
+# CHILDREN:
+#   + KEY GETTERFUNC SETTERFUNC
+
+MyTestType:
+	= name getName setName
+	+ license getLicenseText setLicenseText
+	+ authors getAuthors setAuthors
+	+ about getAboutText setAboutText
+
+

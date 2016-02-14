@@ -1,0 +1,33 @@
+#!/do/not/make
+#^^^ only to help emacs out.
+
+package.clean_files += $(wildcard *.o *~)
+
+# Debian policy requires that DLLs be built with -fPIC:
+CXXFLAGS += -fPIC
+CFLAGS += -fPIC
+ifeq (1,$(LIBS11N_HAS_CPP0X))
+#CXXFLAGS += -std=gnu++0x
+endif
+
+package.install.package_headers.dest := $(prefix)/include/s11n.net/s11n
+package.install.headers.dest = $(package.install.package_headers.dest)
+package.install.package_dlls.dest := $(prefix)/lib/s11n
+
+############################################################
+# we fudge the linker args for clients which live in this source tree,
+# so that we link against the in-tree libs11n insead of a previously
+# installed copy somewhere else.
+LIBS11N_CLIENT_INTREE_LDADD = -L$(toc2.top_srcdir)/src \
+				$(LIBS11N_CLIENT_LDADD)
+############################################################
+
+INCLUDES := -I. -I$(toc2.top_srcdir)/include $(INCLUDES)
+
+
+# WTF is S11N_PLAIN_SOURCES_ROOT for???
+# S11N_PLAIN_SOURCES_ROOT := $(toc2.top_srcdir)/plain
+
+ifneq (,$(wildcard *.cpp *.hpp *.flex))
+  include $(toc2.dirs.makefiles)/toc2-c.make
+endif
