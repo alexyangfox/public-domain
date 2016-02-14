@@ -1,0 +1,6 @@
+/var/qmail
+
+This is the qmail home directory.
+
+The fastforward programs will be installed in the bin subdirectory; they
+also need to know where qmail is so that they can forward mail properly.

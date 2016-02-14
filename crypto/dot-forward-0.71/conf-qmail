@@ -1,0 +1,7 @@
+/var/qmail
+
+This is the qmail home directory.
+
+The dot-forward program will be installed in the bin subdirectory; it
+also needs to know where qmail is so that it can handle unqualified host
+names and forward mail properly.

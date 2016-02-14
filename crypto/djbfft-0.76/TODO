@@ -1,0 +1,31 @@
+provide more accurate root tables
+publish error bounds
+
+review UltraSPARC profiles
+do properly scheduled UltraSPARC asm
+avoid partial-register stalls for single precision
+consider prefetching for large transforms
+
+review Pentium profiles
+do properly scheduled Pentium/PMMX asm
+pass parameters in registers
+organize asm to fall through function entry when possible
+organize asm to reduce i-cache pressure
+
+investigate PPro/PII/PIII in more detail
+speed up real transforms on PPro/PII/PIII
+do properly scheduled PPro/PII/PIII asm
+
+investigate other chips
+
+support larger sizes
+analyze L1 cache boundary more carefully
+analyze organization of root tables
+analyze L2 access patterns
+analyze L2 cache boundary more carefully
+analyze DRAM access patterns
+measure effects of single-pass transposes
+measure effects of multiple-pass transposes
+consider other data structures
+
+consider inline macros in .h files for small sizes

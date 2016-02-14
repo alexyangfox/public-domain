@@ -1,0 +1,23 @@
+Like any other piece of software (and information generally),
+dot-forward comes with NO WARRANTY.
+
+
+Things you have to decide before starting:
+
+* The location of the qmail home directory, normally /var/qmail. (To
+change this directory, edit conf-qmail now.)
+
+
+How to install:
+
+ 1. Create and install the programs and man pages:
+       # make setup check
+
+ 2. With qmail 1.02 and above: To set up .forward handling for all
+    users, install a /var/qmail/rc script that invokes dot-forward.
+    Several scripts are supplied in /var/qmail/boot/*+df.
+
+
+That's it! To report success:
+       % ( echo 'First M. Last'; cat `cat SYSDEPS` ) | mail djb-qst@cr.yp.to
+Replace First M. Last with your name.

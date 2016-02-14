@@ -1,0 +1,1 @@
+/* sysdep: -gethrtime */

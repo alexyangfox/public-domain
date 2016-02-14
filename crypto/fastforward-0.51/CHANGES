@@ -1,0 +1,15 @@
+19980519 version: fastforward 0.51, alpha.
+19980519 code: added preline variant in fastforward; updated setforward,
+         printforward, newaliases accordingly.
+19980519 doc: added virtual-domains section to ALIASES.
+19980519 doc: used -d in ALIASES.
+19980519 code: added fastforward -d.
+19980519 doc: put version and home page into fastforward.1.
+19980519 doc: simplified INSTALL.
+19980519 doc: added ALIASES.
+19980519 doc: expanded explanation in conf-qmail.
+19980519 code: switched to new install.
+19980420 portability problem: IRIX doesn't have vfork(). impact:
+         couldn't compile under IRIX. fix: include fork.h in
+	 fastforward.c. tnx JB.
+19980420 fastforward 0.50, alpha.

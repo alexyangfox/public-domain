@@ -1,0 +1,17 @@
+19980519 version: dot-forward 0.71, beta.
+19980519 doc: simplified INSTALL.
+19980519 doc: documented -n in dot-forward.1.
+19980519 code: eliminated home+df.
+19980519 doc: put version and home page into dot-forward.1.
+19980519 code: switched to new install.
+19980421 dot-forward 0.70, beta.
+19980421 code: recognized $USER@$HOST the same way as $USER.
+19980421 doc: reorganized compatibility warnings in dot-forward.0.
+19980421 doc: eliminated *.3.
+19980421 doc: added note about file deferrals to BLURB.
+19980421 code: added home+df.sh; updated INSTALL accordingly.
+19980421 code: moved installation from /usr/local to /var/qmail.
+19971001 doc: eliminated hassgprm.h from SYSDEPS. tnx JB.
+19971001 dot-forward 0.51, alpha.
+19971001 doc: changed ./forward to .forward in man page and INSTALL.
+19970930 dot-forward 0.50, alpha.

@@ -1,0 +1,21 @@
+Like any other piece of software (and information generally),
+fastforward comes with NO WARRANTY.
+
+
+Things you have to decide before starting:
+
+* Where qmail is installed, normally /var/qmail. (To change this
+directory, edit conf-qmail now.)
+
+
+How to install:
+
+ 1. Create and install the programs and man pages:
+       # make setup check
+
+ 2. To configure qmail to use /etc/aliases, see ALIASES.
+
+
+That's it! To report success:
+       % ( echo 'First M. Last'; cat `cat SYSDEPS` ) | mail djb-qst@cr.yp.to
+Replace First M. Last with your name.

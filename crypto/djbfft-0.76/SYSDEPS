@@ -1,0 +1,8 @@
+VERSION
+systype
+auto_opt
+compile
+load
+hasgethr.h
+hasrdtsc.h
+speed.out

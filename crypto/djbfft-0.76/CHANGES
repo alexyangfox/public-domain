@@ -1,0 +1,15 @@
+19971116
+	version: djbfft 0.50, alpha.
+19971218
+	version: djbfft 0.55, alpha.
+19971226
+	version: djbfft 0.60, alpha.
+19980923
+	version: djbfft 0.70, beta.
+19990914
+	version: djbfft 0.75, beta.
+19990929
+	opt: added opt=ppro, lightly tuned for the Pentium Pro.
+	internal: added x86cpuid to reliably distinguish P from PPro.
+19990930
+	version: djbfft 0.76, beta.

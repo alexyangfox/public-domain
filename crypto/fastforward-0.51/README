@@ -1,0 +1,23 @@
+fastforward 0.51, alpha.
+19980519
+Copyright 1998
+D. J. Bernstein, djb@pobox.com
+
+fastforward handles qmail forwarding according to a cdb database. It can
+create forwarding databases from a sendmail-style /etc/aliases or from
+user-oriented virtual-domain tables. See BLURB for a more detailed
+advertisement.
+
+INSTALL says how to set up fastforward.
+
+You may distribute unmodified copies of the fastforward package.
+
+The rest of this file is a list of systypes where various versions of
+fastforward have been reported to work.
+
+0.50: bsd.os-2.0.1-:i386-:-:pentium-:-
+0.50: irix-5.3-11091811-:-:-:ip19-:- (tnx JB)
+0.50: linux-2.0.7-:i386-:-:i486-:- (tnx TLM)
+0.50: linux-2.0.33-:i386-:-:i486-:- (tnx TB)
+0.50: osf1-v4.0-878-:-:-:alpha-:- (tnx BJM)
+0.50: sunos-5.6-generic-:sparc-:sun4-:sun4m-:sun4m- (tnx TWH)

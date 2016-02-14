@@ -1,0 +1,100 @@
+--- Setting up /etc/aliases
+
+Create /etc/aliases if it does not already exist. You should include
+forwarding instructions for mailer-daemon, postmaster, and root:
+
+        root: alias
+        postmaster: alias
+        mailer-daemon: alias
+
+Note that qmail never delivers mail to root. The instructions shown here
+will deliver messages to the mailbox of the ``alias'' user.
+
+For further details on the format of /etc/aliases, and a list of
+sendmail compatibility warnings, see the newaliases man page.
+
+
+--- Compiling /etc/aliases
+
+Once /etc/aliases is ready, run newaliases to compile /etc/aliases into
+/etc/aliases.cdb:
+
+   # newaliases
+
+Review /etc/aliases.cdb to make sure it has the instructions you want:
+
+   % printforward < /etc/aliases.cdb | more
+
+For the format of printforward's output, see the setforward man page.
+
+If you change /etc/aliases you will have to run newaliases again. You
+may want to add a comment at the top of /etc/aliases as a reminder.
+
+
+--- Compiling :include: files
+
+If you have an :include: file, say /etc/staff-list, compile it into
+/etc/staff-list.bin:
+
+   # newinclude /etc/staff-list
+
+See the newinclude man page for a list of sendmail compatibility
+warnings. Review /etc/staff-list.bin:
+
+   % printmaillist < /etc/staff-list.bin | more
+
+For the format of printmaillist's output, see the setmaillist man page.
+
+If you change /etc/staff-list you will have to run newinclude again. You
+may want to add a comment at the top of /etc/staff-list as a reminder.
+
+
+--- Configuring qmail to use /etc/aliases
+
+To activate /etc/aliases, put this line into ~alias/.qmail-default:
+
+        | fastforward -d /etc/aliases.cdb
+
+If qmail is already running, make sure to chmod +t ~alias before you
+edit .qmail files in ~alias, and chmod -t ~alias after.
+
+
+--- Testing aliases
+
+To check the expansion of postmaster@your.host without sending any mail:
+
+   % env DEFAULT=postmaster HOST=your.host fastforward -nd /etc/aliases.cdb
+
+Replace your.host with your fully qualified domain name. Make sure to
+include the -nd.
+
+Next, try sending a message to postmaster@your.host. Watch the qmail log
+and the final mailbox to make sure the alias works the way you want.
+
+You can check other aliases the same way.
+
+
+--- Using /etc/aliases for virtual domains
+
+To put all addresses at virt.dom under control of /etc/aliases, add
+
+        virt.dom:alias
+
+to /var/qmail/control/virtualdomains, and give qmail-send a HUP signal.
+Also add
+
+        virt.dom
+
+to /var/qmail/control/rcpthosts so that qmail accepts mail for virt.dom
+from remote hosts. Now you can handle virt.dom in /etc/aliases:
+
+        billing@virt.dom: joe, fred
+        (this line catches all other addresses)@virt.dom: joe
+
+Note that postmaster@virt.dom will go to joe; the @virt.dom instruction
+overrides the postmaster instruction. Note, however, that other .qmail
+files in ~alias override ~alias/.qmail-default, so you can set up
+~alias/.qmail-postmaster to handle postmaster@everything.
+
+Beware that sendmail does not support domain-specific instructions in
+/etc/aliases; they are a fastforward feature.

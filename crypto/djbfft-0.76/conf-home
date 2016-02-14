@@ -1,0 +1,4 @@
+/usr/local/djbfft
+
+The djbfft include files and library will be stored under this
+directory.

@@ -1,0 +1,23 @@
+dot-forward 0.71, beta.
+19980519
+Copyright 1998
+D. J. Bernstein, djb@pobox.com
+
+dot-forward reads sendmail's .forward files under qmail. See BLURB for a
+more detailed advertisement.
+
+INSTALL says how to set up dot-forward.
+
+You may distribute unmodified copies of the dot-forward package.
+
+The rest of this file is a list of systypes where various versions of
+dot-forward have been reported to work.
+
+0.70: bsd.os-2.0.1-:i386-:-:pentium-:-
+0.51: freebsd-2.2.2-release-:i386-:-:i486-dx-:- (tnx MM)
+0.51: freebsd-3.0-current-:i386-:-:pentium-:- (tnx KB)
+0.70: irix-5.3-11091811-:-:-:ip19-:- (tnx JB)
+0.51: linux-2.0.30-:i386-:-:pentium-:- (tnx MAP)
+0.51: linux-2.0.30-:i386-:-:ppro-:- (tnx LN)
+0.51: netbsd-1.2g-:i386-:-:intel.pentium.(p54c).(586-class)-:- (tnx GW)
+0.51: sunos-5.5.1-generic_103640-08-:sparc-:sun4-:sun4m-:sun4m- (tnx ESM)
