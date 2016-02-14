@@ -1,0 +1,6 @@
+thu jan 14 1999  ozan s. yigit  <oz@cs.yorku.ca>
+    * convert function/procedure definitions from K&R style to ANSI style.
+    * remove all occurrences of "register"
+    * add protos for all pieces to global.h. this can be cleaned up some more.
+    * pretty-print almost all of the code, so it is consistent.
+      uses 4-space indents. [as with new K&R.]

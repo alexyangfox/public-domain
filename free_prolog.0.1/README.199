@@ -1,0 +1,31 @@
+Full BinProlog 1.99 sources (my C and Prolog code as back in 1992-93) are
+now in the public domain and available at
+
+ http://clement.info.umoncton.ca/BinProlog/free_bp199.tar.gz
+
+Although this is an integer-only, very small (about 3500 lines
+of C and 3700 lines of Prolog) engine known to compile with gcc
+(37K executable on Solaris!), it is quite fast (within 30% of
+emulated SICStus) and reliable.
+
+The compiler is able to compile its Prolog sources to BinWAM code (a
+compact and efficient continuation passing Prolog abstract machine)
+in a few seconds on today's PCs and Unix workstations.
+
+Although unsupported, I hope that the released code will be usable
+for educational purposes, in C/C++ applications requiring an
+embedded logic engine or as a starting point for something like a
+new Java-based Prolog system counting on extensive JIT acceleration.
+
+Enjoy,
+
+Paul Tarau
+
+P.S. For pricing information on industrial and academic source and binary
+licensing of BinProlog 5.75, an Internet ready and Java connected
+Prolog system with ability to generate fast standalone applications
+through compilation to C on Windows 95/NT and Unix platforms, see:
+
+   http://clement.info.umoncton.ca/BinProlog/PRICING .
+
+BinProlog 5.75 licenses come with 1 year of free updates and support.

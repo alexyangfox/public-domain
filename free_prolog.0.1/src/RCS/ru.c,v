@@ -1,0 +1,312 @@
+head	1.1;
+access;
+symbols;
+locks
+	oz:1.1; strict;
+comment	@ * @;
+
+
+1.1
+date	99.01.18.19.51.23;	author oz;	state Exp;
+branches;
+next	;
+
+
+desc
+@binprolog main + toplevel
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@/*
+ * mainline - toplevel
+ */
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+/*#define PROF*/
+/*#define DEBUG */
+/*#define TRACE */
+
+#define RUSAGE
+/* #define CLOCK */
+
+#include "defs.h"
+#include "global.h"
+
+struct limit max =
+{
+    120000,
+    5000,
+    8000,
+    32000,
+    16000,
+    1024
+};
+
+/* HASHING RELATED STAMPS */
+
+byte timestamp;
+
+/* GLOBAL DATA AREAS */
+
+struct stack wam[MaxStk];
+string sbuf, stop;			/* character buffer */
+
+
+/* ERROR HANDELRS */
+
+void
+warnmes(string mes)
+{
+    fprintf(stderr, "warning: *** %s ***\n", mes);
+}
+
+void
+fatal_error(string mes)
+{
+    fprintf(stderr, "fatal error: *** %s ***\n", mes);
+    exit(1);
+}
+
+struct specsyms g;
+
+cell compare_vals[3];
+
+void
+make_constants(void)
+{
+    g.NIL = new_func("[]", 0);
+    g.DOT = new_func(".", 2);
+    g.DIF = new_func("-", 2);
+    g.empty = new_func("$empty", 0);
+
+    compare_vals[0] = new_func("<", 0);
+    compare_vals[1] = new_func("=", 0);
+    compare_vals[2] = new_func(">", 0);
+
+    g.true = new_func("true", 0);
+    g.prolog_main = new_func("main", 2);
+    g.predmark = new_func("predmark", 0);
+    g.seemark = new_func("seemark", 0);
+    g.tellmark = new_func("tellmark", 0);
+    g.seefunc = g.tellfunc = g.user = new_func("user", 0);
+    g.seefile = stdin;
+    g.tellfile = stdout;
+    g.closed_file = new_func("closed_file", 0);
+    hdef(g.seemark, g.user, stdin);
+    hdef(g.tellmark, g.user, stdout);
+}
+
+/* MAKE & INIT data objects */
+
+#if defined CLOCK
+#include <sys/time.h>
+long
+cputime()
+{
+    return clock() / 1000;
+}
+
+#endif
+#if !defined CLOCK && defined RUSAGE
+#include <sys/time.h>
+#include <sys/resource.h>
+long
+cputime(void)
+{
+    struct rusage myrusage;
+    getrusage(RUSAGE_SELF, &myrusage);
+    return 1000L * myrusage.ru_utime.tv_sec + myrusage.ru_utime.tv_usec / 1000;
+}
+
+#endif
+
+#if !defined RUSAGE && !defined CLOCK
+long
+cputime()
+{
+    return time(NULL) * 1000;
+}
+
+#endif
+
+no
+make_stack(stack s, int n, int check, string name)
+{
+    s->size = n;
+    s->base = (term *) malloc(n * sizeof(term));
+    s->end = s->base + n - (sizeof(term) * check);
+    s->top = s->base;
+    s->oldtop = s->base;
+    s->margin = s->end;
+    s->maxused = 0;
+    s->name = name;
+    return !!s->base;
+}
+
+void
+init(void)
+{
+    no errctr = 0;
+    no seed = (no) cputime();
+    if (!seed)
+	seed = 1;
+    srand(5);				/* $$$ */
+    timestamp = LOADTIME;
+
+    init_instr_len();
+
+    stop = sbuf = (string) calloc(1, max.SBUF * sizeof(char));
+    errctr += !sbuf;
+
+    errctr += !hinit();
+    errctr += !make_symtable();
+
+    make_constants();
+
+    errctr += !make_stack(&wam[CodeStk], max.CODE, 1, "code");
+    errctr += !make_stack(&wam[TrailStk], max.TRAIL, 2, "trail");
+    errctr += !make_stack(&wam[BoardStk], max.BOARD, 1000, "board");
+    errctr += !make_stack(&wam[HeapStk], max.HEAP, 1000, "heap");
+    errctr += !make_stack(&wam[ChoiceStk], max.CHOICE, MAXARITY + 3, "choice");
+
+    if (errctr)
+	fatal_error("not enough memory");
+    else
+	return;
+}
+
+/* TOPLEVEL */
+
+int
+toplevel(char *fname)
+{
+    long int t = cputime();
+    fprintf(stderr, "begin loading %s...\n", fname);
+    if (init_code() && load(fname))
+	fprintf(stderr, "...finished loading\n");
+    else
+	ERREXIT("unable to load file")
+#ifdef PROF
+	    profiler(0, cbase, wam[ChoiceStk].base, (term) wam[HeapStk].base);
+#endif
+
+#ifdef DEBUG
+/*  show_atoms();
+  show_code(cbase,cbase+200);
+  hshow(); */
+    fprintf(stderr, "BEGIN EXECUTION\n\n");
+#endif
+
+    if (interp( /* wam */ )) {
+	t = cputime() - t;
+	fprintf(stderr,
+	"Prolog execution halted. CPU time = %ld.%lds\n", t / 1000, t % 1000);
+    }
+
+#ifdef DEBUG
+    show_regions(wam[ChoiceStk].base, (term) wam[HeapStk].base);
+#endif
+
+#ifdef PROF
+    profiler(2, cbase, wam[ChoiceStk].base, (term) wam[HeapStk].base);
+ /*
+  * mallocmap(); show_atoms();
+  */
+#endif
+    return 0;
+}
+
+extern char *optarg;
+extern int optind;
+
+char *
+get_cmd_line_options(int argc, char *argv[])
+{
+    extern char *optarg;
+    extern int optind;
+    int errflag = 0;
+    char option, *fname;
+    int h, s, t, c, b, i;
+
+
+    while ((option = getopt(argc, argv, "h:s:t:c:b:i:")) != -1)
+	switch (option) {
+	case 'h':
+	    if (sscanf(optarg, "%u", &h))
+		max.HEAP = h * 1024 / sizeof(*(term) wam[HeapStk].base);
+	    else
+		errflag++;
+	    break;
+
+	case 's':
+	    if (sscanf(optarg, "%u", &s))
+		max.CHOICE = s * 1024 / sizeof(*wam[ChoiceStk].base);
+	    else
+		errflag++;
+	    break;
+
+	case 't':
+	    if (sscanf(optarg, "%u", &t))
+		max.TRAIL = t * 1024 / sizeof(*wam[TrailStk].base);
+	    else
+		errflag++;
+	    break;
+
+	case 'c':
+	    if (sscanf(optarg, "%u", &c))
+		max.CODE = c * 1024 / sizeof(cell);
+	    else
+		errflag++;
+	    break;
+
+	case 'b':
+	    if (sscanf(optarg, "%u", &b))
+		max.BOARD = b * 1024 / sizeof(*(term) wam[BoardStk].base);
+	    else
+		errflag++;
+	    break;
+
+	case 'i':
+	    if (sscanf(optarg, "%u", &i))
+		max.SBUF = i * 1024;
+	    else
+		errflag++;
+	    break;
+
+	default:
+	    errflag++;
+	}
+
+    if (errflag) {
+	(void) fprintf(stderr,
+		       "usage: [-h heap] [-s stack] [-t trail] [-c code] [-b blackboard] [-i string-IObuffer] wamfile, (Kbts)\n");
+	exit(1);
+    }
+
+    if (optind < argc)
+	fname = argv[optind];
+    else
+	fname = "wam.bp";
+
+    init();
+
+    return fname;
+}
+
+int
+main(int argc, char *argv[])
+{
+    fprintf(stderr,
+	    "Free BinProlog 1.99, written by Paul Tarau, 1992-93\n");
+    fprintf(stderr,
+    "ftp: clement.info.umoncton.ca, e-mail: binprolog@@info.umoncton.ca\n\n");
+    return toplevel(get_cmd_line_options(argc, argv));
+}
+@

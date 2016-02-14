@@ -1,0 +1,139 @@
+ALNUM	read.c	/^#define ALNUM()  IF(isalnum(*cursor) || '_'==*curs/
+BIND	engine.c	/^#define BIND(Var,Ref,Val) \\$/
+COMPRESS	load.c	/^#define COMPRESS(Simple,Double,First,Triple) \\$/
+COMPUTE	engine.c	/^#define COMPUTE(Op) \\$/
+CONT	engine.c	/^#define CONT(Cont) regs[1]=regs[Cont]; P++; contin/
+COPY_CELLS	engine.c	/^#define COPY_CELLS(to,from,Arity) \\$/
+COUT	write.c	/^#define COUT(Char) (*stop++ = (Char))$/
+CUT_AND_CHECK_HEAP	engine.c	/^#define CUT_AND_CHECK_HEAP() cutB=(cell)A; CHECK(H/
+DIGIT	read.c	/^#define DIGIT() IF(isdigit(*cursor))$/
+EXEC	engine.c	/^#define EXEC() P=GETLABEL(P); CUT_AND_CHECK_HEAP()/
+FAILURE	engine.c	/^#define FAILURE() {P=SAVED_P; continue;}$/
+FLOW	engine.c	/^#define FLOW(Isize) {P+=Isize; GETFIELDS(0);}$/
+GETARG	engine.c	/^#define GETARG() S$/
+GETFIELDS	engine.c	/^#define GETFIELDS(Step) (fields=((term)P)[Step])$/
+GET_BYTE	load.c	/^#define GET_BYTE(a_byte) if(EOF==(a_byte=getc(f)))/
+GET_INSTR	load.c	/^#define GET_INSTR() \\$/
+GSTR	engine.c	/^#define GSTR(Advance,Rm1,Rm2,Wm1,Wm2,Steps) \\$/
+HEAP_MIDDLE	engine.c	/^#define HEAP_MIDDLE() (*HEAP_BASE+(((term)wam[Heap/
+HFOUND	dict.c	/^#define HFOUND() (htable[i].pred==pred && htable[i/
+HKEY	dict.c	/^#define HKEY(pred,fun) MOD((pred+fun),HMAX)$/
+HNEXT	dict.c	/^#define HNEXT() i=MOD((i+1),HMAX)$/
+HNOTFULL	dict.c	/^#define HNOTFULL() (i!=last)$/
+HUSED	dict.c	/^#define HUSED() (htable[i].val)$/
+IF	read.c	/^#define IF(Test) (Test)? ++cursor : 0$/
+INTS	engine.c	/^#define INTS() \\$/
+IOUT	write.c	/^#define IOUT(Obj) sprintf(ibuf,"%d",(Obj)); SOUT(i/
+LOWER	read.c	/^#define LOWER() IF(islower(*cursor) || '$'== *curs/
+MAKE_CHOICE_POINT	engine.c	/^#define MAKE_CHOICE_POINT(bp,Arity) \\$/
+MUST_BE	engine.c	/^#define MUST_BE(Relop) \\$/
+Mru	ru.c	/^main(int argc, char *argv[])$/
+NEWVAR	engine.c	/^#define NEWVAR(R) SETREF(H,H); (R)=(cell)(H++)$/
+NEWVAR2	engine.c	/^#define NEWVAR2(R1,R2) SETREF(H,H); (R1)=(R2)=(cel/
+NEXT	engine.c	/^#define NEXT(Isize) P+=Isize; continue$/
+NEXTARG	engine.c	/^#define NEXTARG() S+=sizeof(cell)$/
+NOTEMPTY	engine.c	/^#define NOTEMPTY(top,base) ((top)>(term)(base))$/
+OCOMPRESS	load.c	/^#define OCOMPRESS(Simple,Double,First,Triple) \\$/
+OUT	engine.c	/^#define OUT(Expr) \\$/
+POP	engine.c	/^#define POP(top) (*(top)--)$/
+POP_HEAP_MARKS	engine.c	/^#define POP_HEAP_MARKS() HEAP_MARK+=2$/
+PSTR	engine.c	/^#define PSTR(Action) \\$/
+PUNCT	read.c	/^#define PUNCT() IF(ispunct(*cursor)&& '$'!= *curso/
+PUSH	engine.c	/^#define PUSH(top,a) (*++(top)=(cell)(a))$/
+PUSH_HEAP_MARKS	engine.c	/^#define PUSH_HEAP_MARKS() HEAP_MARK-=2$/
+PUT_ARG	engine.c	/^#define PUT_ARG(I,Val) UNIFAIL(Val,regs[I])$/
+PUT_INT_ARG	engine.c	/^#define PUT_INT_ARG(I,Val) PUT_ARG((I),INPUT_INT(V/
+READARG	engine.c	/^#define READARG(R) (R)=GETARG();NEXTARG()$/
+READVAL	engine.c	/^#define READVAL(R) UNIFAIL((R),GETARG()); NEXTARG(/
+RESTORE_STATE	engine.c	/^#define RESTORE_STATE(Arity)    \\$/
+SAME_STRING	sym.c	/^#define SAME_STRING(s,t) (0==strcmp(s,t))$/
+SFOUND	sym.c	/^#define SFOUND() (atomtable[i] && SAME_STRING(s,at/
+SKIPBAD	load.c	/^#define SKIPBAD() if(badcode) return FALSE$/
+SKIP_SPACE	read.c	/^#define SKIP_SPACE() while(isspace(*cursor)) ++cur/
+SNEXT	sym.c	/^#define SNEXT() i=MOD((i+1),MAXATOM)$/
+SOUT	write.c	/^#define SOUT(Obj) {string s0=(Obj); while(*stop++ /
+START_INTERP	engine.c	/^#define START_INTERP() \\$/
+STAT	engine.c	/^#define STAT(Top,StackNo) \\$/
+SUSED	sym.c	/^#define SUSED() (atomtable[i])$/
+UNIFAIL	engine.c	/^#define UNIFAIL(Term1,Term2) if(!unify((Term1),(Te/
+UNITEST	engine.c	/^#define UNITEST(T1,T2) if(!unify(T1,T2,wam,A)) ret/
+UPPER	read.c	/^#define UPPER() IF(isupper(*cursor) || '_' == *cur/
+WARFUN	engine.c	/^#define WARFUN(Sym,Msg) {local_error(Sym,Msg); FAI/
+WARNING	engine.c	/^#define WARNING(errname) {warnmes(errname); FAILUR/
+add_instr	builtins.c	/^add_instr(term regs)$/
+answer	builtins.c	/^answer(term * A)$/
+atombak	sym.c	/^atombak(int stamp)$/
+atomno	sym.c	/^atomno(string s)$/
+compare	builtins.c	/^compare(term l, term r)$/
+cons	read.c	/^cons(term hd, term tl)$/
+copy_term	builtins.c	/^copy_term(term h, term t, term * A)$/
+cputime	ru.c	/^cputime()$/
+det_append	builtins.c	/^det_append(term H, term regs)$/
+fatal_error	ru.c	/^fatal_error(string mes)$/
+fout	write.c	/^fout(int xval, int A)$/
+fun_name	load.c	/^fun_name(string name, no arity)$/
+functor	engine.c	/^functor(term H, term t, term f, term n, stack wam,/
+get_cmd_line_options	ru.c	/^get_cmd_line_options(int argc, char *argv[])$/
+get_one_int	load.c	/^get_one_int(char *name, int *ip)$/
+hash_args2	dict.c	/^hash_args2(term regs)$/
+hash_args3	dict.c	/^hash_args3(term regs)$/
+hash_op	dict.c	/^hash_op(cell(*f) (no, no, no), term regs) {$/
+hbak	dict.c	/^hbak(int stamp)$/
+hdef	dict.c	/^hdef(no pred, no fun, no val)$/
+hget	dict.c	/^hget(no pred, no fun)$/
+hinit	dict.c	/^hinit(void)$/
+hlist	dict.c	/^hlist(term H, int stamp)$/
+hset	dict.c	/^hset(no pred, no fun, no val)$/
+init	ru.c	/^init(void)$/
+init_code	load.c	/^init_code(void)$/
+init_instr_len	load.c	/^init_instr_len(void)$/
+input_fun	load.c	/^input_fun(string name, no arity)$/
+insert_lex	sym.c	/^insert_lex(string from)$/
+insert_op	load.c	/^insert_op(no opcode, no reg, string name, no arity/
+interp	engine.c	/^interp (void) \/*wam)$/
+link_code	load.c	/^link_code(instr p)$/
+link_switch	load.c	/^link_switch(instr p, no doit)$/
+list2buf	builtins.c	/^list2buf(term l, cell vl)$/
+load	load.c	/^load(string fname)$/
+local_error	builtins.c	/^local_error(cell Sym, string Msg)$/
+make_constants	ru.c	/^make_constants(void)$/
+make_funcell	read.c	/^make_funcell(string from, string to, int arity)$/
+make_stack	ru.c	/^make_stack(stack s, int n, int check, string name)/
+make_symtable	sym.c	/^make_symtable(void)$/
+make_term	read.c	/^make_term(string from, string to, int arity)$/
+match_args	read.c	/^match_args(int *pctr, term argvect[])$/
+match_char	read.c	/^match_char(int c)$/
+match_int	read.c	/^match_int(string * from, string * to)$/
+match_list_elements	read.c	/^match_list_elements(term t)$/
+match_sym	read.c	/^match_sym(string * from, string * to)$/
+match_term	read.c	/^match_term(term t)$/
+match_var	read.c	/^match_var(string * from, string * to)$/
+name2buf	builtins.c	/^name2buf(cell vt)$/
+name2list	engine.c	/^name2list(term H, term t, term l, stack wam, term /
+new_func	sym.c	/^new_func(string name, no argctr)$/
+ocompare	builtins.c	/^ocompare(cell vl, cell vr)$/
+out	write.c	/^out(cell xval, term * A)$/
+pp	builtins.c	/^pp(term p, term * A)$/
+recursive_copy_term	builtins.c	/^term recursive_copy_term(h,t,ct,A, hb)$/
+recursive_save_term	builtins.c	/^recursive_save_term(term h, term t, term ct, term /
+restart_orig	engine.c	/^restart_orig(void)$/
+save_orig	engine.c	/^save_orig(void)$/
+save_term	builtins.c	/^save_term(term b, term t, term * A)$/
+see	builtins.c	/^see(cell xval)$/
+seen	builtins.c	/^seen(void)$/
+shell_1	builtins.c	/^shell_1(term regs)$/
+skey	sym.c	/^skey(string s)$/
+skip_header	load.c	/^skip_header(FILE *f)$/
+sout	write.c	/^sout(term xref, int A)$/
+sread	read.c	/^sread (term H, cell xval)$/
+start_point	engine.c	/^start_point(void)$/
+stat_left	builtins.c	/^stat_left(term * top, int s)$/
+stat_used	builtins.c	/^stat_used(term * top, int s)$/
+symcat	builtins.c	/^symcat(cell x1, cell x2)$/
+tell_to	builtins.c	/^tell_to(cell xval)$/
+tidy_trail	engine.c	/^tidy_trail(term * from, term * to, term hb)$/
+told	builtins.c	/^told(void)$/
+toplevel	ru.c	/^toplevel(char *fname)$/
+unify	engine.c	/^unify(cell v1, cell v2, stack wam, term * A)$/
+unwind_trail	engine.c	/^unwind_trail(term * new, term * old)$/
+warnmes	ru.c	/^warnmes(string mes)$/

@@ -1,0 +1,18 @@
+
+allperms.pl: permutation benchmarks with findall
+bbq8.pl:     8 queens using the blackboard
+bfmeta.pl:   breadth-first metainterpreter
+chat.pl:     CHAT parser
+cnrev.pl:    nrev with ^/2 as a constructor instead of ./2
+cube.pl			 E. Tick's benchmark program
+fibo.pl:     fibonacci
+knight.pl:   knight tour to cover a chess-board (uses the bboard)
+lknight.pl:  knight tour to cover a chess-board (uses the lists)
+ltak.pl:     tak program with lemmas
+lfibo.pl:    fibo program with lemmas
+nrev.pl:     naive reverse
+or.pl:       or-parallel simulator for binary programs (VT100)
+puzzle.pl:   king-prince-queen puzzle
+qvroy.pl:    P. Van Roy's N-queens
+subset.pl:   findall+subset
+tetris.pl:   tetris player (VT100)

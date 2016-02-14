@@ -1,0 +1,1 @@
+echo 'compile(nrev). go. compile(cnrev). go. compile(chat). go. compile(fibo). go. compile(qvroy). go. compile(puzzle). go. compile(lknight). go. compile(allperms). go. compile(bfmeta). go. boot. compile(cal). go. compile(differen). go. compile(choice). go. ' | ru -h19000 -s6000
