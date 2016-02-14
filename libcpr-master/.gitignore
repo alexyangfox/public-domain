@@ -1,0 +1,18 @@
+.DS_Store
+.tmp/
+pkg/
+tmp/
+*~
+README.html
+
+# GNU Autotools
+etc/aclocal/
+Makefile
+Makefile.in
+aclocal.m4
+autom4te.cache/
+config.log
+config.status
+configure
+libtool
+stamp-h1
