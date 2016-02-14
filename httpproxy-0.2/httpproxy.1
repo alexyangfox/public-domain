@@ -1,0 +1,63 @@
+.TH HTTPPROXY 1 "2000 October 17"
+.SH NAME
+httpproxy \- general TCP/IP client
+.SH SYNOPSIS
+.B httpproxy
+.RB [ -irsv ]
+\fR[\fB\-l \fIlocaladdr\fR]
+.I host:port
+.I program
+[\fIargv0 argv1\fR ...]
+.SH DESCRIPTION
+.B httpproxy
+starts \fIprogram\fP with standard input and standard output connected
+through a pipe, then attempts to set up a proxy tunnel to
+.IR host
+on port
+.IR port
+using the HTTP CONNECT command through that \fIprogram\fP.
+When that is set successfully set up, it reads standard input and
+sends to \fIprogram\fP, and data received from \fIprogram\fP is
+printed to standard output. When end-of-file is reached on both
+standard input and the connection to \fIprogram\fP,
+.B httpproxy
+terminates.
+.SH OPTIONS
+.TP
+.B \-i
+Terminate at end-of-file on standard input; don't wait for the
+server to close the connection.
+.TP
+.B \-r
+Terminate when the remote server closes the connection; don't
+wait for end-of-file on standard input.
+.TP
+.B \-s
+Set up communication with \fIprogram\fP through a socket pair
+instead of a pipe, for those programs that expect it (for example
+some program that usually run as inetd programs, such as stunnel).
+.TP
+.B \-v
+Verbose mode.
+Prints a message to standard error when the connection has been
+established.
+.TP
+.B \-l \fIaddr\fB:\fIport
+Bind the local end-point of the connection to IP address
+.IR addr ,
+TCP port
+.IR port .
+Either the IP address or the port, but not both, may be left out,
+meaning that the operating system gets to choose that part by
+itself.
+.SH SEE ALSO
+.PD
+.BR tcplisten (1),
+.BR tcpbug (1),
+.BR stunnel (1).
+.SH BUGS
+The names of the options are not yet finalized, and may change
+at a future release.
+.SH HISTORY
+httpproxy was briefly called tcpproxy because of it's relasion to
+tcputils.

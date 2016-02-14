@@ -1,0 +1,16 @@
+# List file for EPM <http://www.easysw.com/epm/>
+
+%product	HTTP Proxy
+%copyright	Public domain
+%vendor		Richard Levitte <richard@levitte.org>
+%description	HTTP Proxy is a program that will connect to a specified host
+%description	and port and use it as a tunnel with help of the HTTP CONNECT
+%description	command, and finally run a program with stdin and stdout
+%description	directed through that tunnel.
+%version	0.2
+%provides	httpproxy
+%license	LICENSE
+%readme		README
+
+f 555 root bin /usr/bin/httpproxy httpproxy
+f 555 root bin /usr/man/man1/httpproxy.1 httpproxy.1

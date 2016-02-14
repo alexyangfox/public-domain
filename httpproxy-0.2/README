@@ -1,0 +1,31 @@
+		-*- text -*-
+
+
+WHAT IS THIS?
+
+This is version 0.2 of httpproxy, a program that, together
+with other programs like tcpconnect (from tcputils) or stunnel,
+can facilitate TCP programming through firewalls in shell-
+scripts.
+
+Much of the source was borrowed from tcputils version 0.6.2,
+courtesy of the author Thomas Bellman, and this pakage therefore
+carries the same copyright and license (see the LICENSE file).
+
+The latest released version can be found by anonymous FTP to:
+
+	ftp://ftp.stacken.kth.se/pub/httpproxy/
+
+I can be reached by email to levitte@stacken.kth.se.
+
+
+
+BUILDING AND INSTALLING
+
+Read the file INSTALL for instructions.
+
+
+
+Local variables:
+fill-column: 65
+End:

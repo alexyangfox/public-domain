@@ -1,0 +1,22 @@
+REQUIREMENTS
+
+You need an ANSI C compiler.  Gcc is a nice one that exists for
+most platforms.
+
+You need GNU make in order to compile.  I think it's too much
+work to handle all other make variants with their limitations and
+idiosyncrasies.  GNU make compiles on almost any Unix machine.
+If it doesn't compile on your machine, then my programs probably
+won't compile either anyway...
+
+
+
+TO COMPILE
+
+Edit Makefile as needed.  Type "make" and wait a minute or two.
+
+
+
+TO INSTALL
+
+Type "make install".
