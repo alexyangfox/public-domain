@@ -1,0 +1,24 @@
+May 5th, 2004
+v0.04 - Fixed a bug in pb_monic() which for zero valued inputs could cause a segfault
+      - Daniel Richards (kyhwana@kyhwana.org) found several typos in the manual.
+      - Fixed bug in pb_shrink() that would leak memory 
+
+Jan 25th, 2004
+v0.03 - Added pb_rawsize(), pb_readraw(), pb_toraw()
+      - Fixed bug in pb_monic() where it would only check the first [not leading] coefficient for one
+
+Jan 3rd, 2004
+v0.02 - Update pb_div() to shift r(x) after multplying it wit b(x) to save a bit of time
+      - improved pb_gcd() to handle inputs which are zero
+      - Added pb_shrink()
+      - fixed pb_invmod()
+      - added pb_exteuclid() [back ported that code into LTM... hehehe]
+      - added pb_exptmod()   [this led me to find a bug in LTM!!!]
+      - added pb_monic()
+      - added pb_isirreduc()
+      - Some minor additions to test/documentation
+
+Dec 31st, 2003
+v0.01 ++ thanks goes to Martin Marcel, Greg Rose and Colin Percival for providing some missing knowledge and
+         helping me get this release going
+      -  Initial release.
