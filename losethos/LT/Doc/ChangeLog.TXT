@@ -1,0 +1,361 @@
+$WW,1$$FG,2$Use $LK,"R","MN:R"$() to rename if I change a label.$FG$
+
+$IV,1$----06/05/12 10:37:26----$IV,0$
+
+$IV,1$----05/28/12 05:53:39----$IV,0$
+* Got rid of $FG,4$TaskKeyDev$FG$ code.
+
+$IV,1$----05/05/12 21:43:47----$IV,0$
+* Added find & replace color in $FG,2$<CTRL-R>$FG$ editor.
+* Added $LK,"LtfBottom","MN:LtfBottom"$() call into $LK,"LtfClear","MN:LtfClear"$().
+* Added $LK,"gr_dc_cache","MN:gr_dc_cache"$
+
+$IV,1$----05/04/12 16:45:33----$IV,0$
+* Got rid of $FG,2$Fs->update_win$FG$ and added $LK,"WIF_LTF","MN:WIF_LTF"$.
+* Changed dft for $LK,"WordStat","MN:WordStat"$();
+* Added $LK,"LtfScroll","MN:LtfScroll"$();
+
+$IV,1$----05/03/12 22:27:03----$IV,0$
+* $BK,1$V8.03 Released$BK,0$
+* $BK,1$$FG,4$Warning$BK,0$$FG$: Run $LK,"::/LT/Misc/Cvt803.CPZ","FI:::/LT/Misc/Cvt803.CPZ"$ to convert bitmaps in $LK,"GrSprite","MN:GrSprite"$s stored in your text files.  Run it to convert $FG,2$*.LG?$FG$ files, too.
+* $BK,1$$FG,4$Warning$BK,0$$FG$: $LK,"gr_dc2","MN:gr_dc2"$ with $LK,"ROP_XOR","MN:ROP_XOR"$ is different.
+* Added $LK,"GrDCFill","MN:GrDCFill"$().
+* $BK,1$$FG,4$Warning$BK,0$$FG$: Replace $LK,"GrDCClear","MN:GrDCClear"$() with $LK,"GrDCFill","MN:GrDCFill"$($LK,"gr_dc2","MN:gr_dc2"$,$LK,"COLOR_TRANSPARENT","MN:COLOR_TRANSPARENT"$);
+* Merged $FG,4$GRST_BITMAP4_TRANSPARENT$FG$ into $LK,"GRST_BITMAP8","MN:GRST_BITMAP8"$.
+* Made $LK,"DCT_COLOR8","MN:DCT_COLOR8"$ to replace $FG,4$DCT_COLOR4$FG$.
+* Got rid of $FG,4$DCF_DIRTY$FG$.
+* Changed how $LK,"GrDC","MN:GrDC"$.bkcolor works for $LK,"ROP_COLLISION","MN:ROP_COLLISION"$.
+* Got rid of $FG,4$DCT_MONO$FG$.  Use $LK,"DCT_COLOR8","MN:DCT_COLOR8"$ filled-in with $LK,"COLOR_MONO","MN:COLOR_MONO"$.  Then, $LK,"GrDCBlot","MN:GrDCBlot"$() with $LK,"ROP_MONO","MN:ROP_MONO"$.  See $LK,"::/LT/Demo/MultiCore/Clouds.CPZ","FI:::/LT/Demo/MultiCore/Clouds.CPZ"$ and $LK,"::/LT/Demo/Graphics/Blot.CPZ","FI:::/LT/Demo/Graphics/Blot.CPZ"$.
+* $LK,"COLOR_TRANSPARENT","MN:COLOR_TRANSPARENT"$ replaces $FG,4$ROP_TRANSPARENT$FG$.
+* Got rid of $LK,"GrDC","MN:GrDC"$.mask, $FG,4$ROP_CLEAR_MASK_EQU$FG$, $FG,4$ROPB_CLEAR_MASK_TRANSPARENT$FG$.
+* Added $LK,"DCF_NO_TRANSPARENTS","MN:DCF_NO_TRANSPARENTS"$, as an optimization.
+
+$IV,1$----04/26/12 22:50:40----$IV,0$
+* Added $LK,"Drv2BlkDevFwded","MN:Drv2BlkDevFwded"$().
+* $LK,"R","MN:R"$("Forward","Fwd");
+* Fixed bug in $LK,"Ltf","MN:Ltf"$ code and cleaned-up.
+* Made compiler handle $FG,2$&$FG$ more compatibly.
+
+$IV,1$----04/22/12 06:12:59----$IV,0$
+* Fixed rare compiler bug.  See $LK,"#000027","FF:::/LT/Doc/Bugs.TXZ,#000027"$.
+
+$IV,1$----04/20/12 23:35:15----$IV,0$
+* Added $LK,"HashVal","MN:HashVal"$() and $LK,"HashTypeNum","MN:HashTypeNum"$().
+* Changed HTT_... to HTF_... for flags.
+
+$IV,1$----04/20/12 16:53:32----$IV,0$
+* $BK,1$V8.02 Released$BK,0$
+* Made $FG,2$Fs->scroll_speed$FG$ into $FG,2$LTF_SCROLL_SPEED$FG$.
+* Changed indent from $FG,2$<CTRL-N>$FG$ to $FG,2$<CTRL-I>$FG$.
+* Changed postfix typecast from "$FG,2$><(type)$FG$" to just "$FG,2$(type)$FG$".
+* Got rid of STD C.  It was incomplete, so worthless.
+* Got rid of file partitions.  $BK,1$$FG,4$Warning$BK,0$$FG$: $LK,"Mount","MN:Mount"$() partition type numbering changed for NON-LT Types, if you have those in OSMain cfg scripts.
+* Got rid of $FG,2$STRUC$FG$/$FG,2$ENDS$FG$.
+* Added $LK,"ZorNotZ","MN:ZorNotZ"$().
+* Got rid of LTFT_PROJECT.Added $LK,"DirFile","MN:DirFile"$().
+* Made $FG,2$<CTRL-O>$FG$ recompile work for $FG,2$Load.CPZ$FG$ projects.
+
+$IV,1$----04/16/12 20:46:29----$IV,0$
+* Added songs.
+
+$IV,1$----04/09/12 16:47:57----$IV,0$
+* Renamed files
+* Added $LK,"EdChSC","MN:EdChSC"$().
+* Made $FG,2$/LT/Adam/Dsk$FG$
+* Moved Boot Loaders from .SPZ to .APZ.
+* Fixed bug in $LK,"::/LT/Demo/MultiCore/Primes.CPZ","FI:::/LT/Demo/MultiCore/Primes.CPZ"$.
+
+$IV,1$----04/06/12 18:12:42----$IV,0$
+* Fixed-up $LK,"HeapLog","MN:HeapLog"$() code.
+* Added $LK,"SysDeterministic","MN:SysDeterministic"$() with $FG,2$Deterministic$FG$ OSMain config option to help debug.
+
+$IV,1$----04/06/12 11:46:07----$IV,0$
+* Cleaned-up $LK,"ClassStruct","MN:ClassStruct"$ and $LK,"FunStruct","MN:FunStruct"$.
+
+$IV,1$----04/04/12 15:57:15----$IV,0$
+* $BK,1$V8.01 Released$BK,0$
+* Added Struct.member syntax to assembler in place of "offset(Struct.member)"
+
+$IV,1$----04/04/12 01:19:09----$IV,0$
+* Added scoring to $LK,"::/LT/Demo/GameStarters/Bomber.CPZ","FI:::/LT/Demo/GameStarters/Bomber.CPZ"$.
+
+$IV,1$----03/28/12 04:26:17----$IV,0$
+* Added $LK,"GrAddTranslation","MN:GrAddTranslation"$() and changed $LK,"GrSpritePlotRotMat3b","MN:GrSpritePlotRotMat3b"$().
+* Added song.
+
+$IV,1$----03/27/12 00:47:17----$IV,0$
+* Fixed rare compiler bug.  See $LK,"#000026","FF:::/LT/Doc/Bugs.TXZ,#000026"$.
+* Completed conversion from CarriageReturn/NewLine to just NewLine.
+* Got rid of $FG,2$EXPORT$FG$ asm keyword.
+* Allows redefinition of ASM labels.
+* Got rid of OSAsmDef.
+* Made OSAsmDef labels global exports
+
+$IV,1$----03/24/12 18:33:54----$IV,0$
+* Added songs.
+
+$IV,1$----03/21/12 11:53:50----$IV,0$
+* Made $LK,"Rand2","MN:Rand2"$() have a seed per task.
+* Added a song.
+* Added $LK,"::/LT/Demo/Ltf/Menu2.CPZ","FI:::/LT/Demo/Ltf/Menu2.CPZ"$.
+* Added ties to MusicOrgan.
+* Added $LK,"::/LT/Demo/Graphics/Circuit.CPZ","FI:::/LT/Demo/Graphics/Circuit.CPZ"$.
+
+$IV,1$$IV,1$----03/07/12 08:00:39----$IV,0$
+* Made $LK,"PrintF","MN:PrintF"$() handle multi-char values with $FG,2$%c$FG$.
+* Added more songs.
+
+$IV,1$----03/04/12 06:27:01----$IV,0$
+* Added $LK,"::/LT/Demo/Graphics/Circuit.CPZ","FI:::/LT/Demo/Graphics/Circuit.CPZ"$.
+
+$IV,1$----02/28/12 13:32:53----$IV,0$
+* Added $LK,"RiskyCopy","MN:RiskyCopy"$().
+
+$IV,1$----02/08/12 16:29:13----$IV,0$
+* Added anonymous fun args.
+
+$IV,1$----02/07/12 18:34:50----$IV,0$
+* Fixed bugs in $LK,"::/LT/Apps/MusicOrgan/Organ.CPZ","FI:::/LT/Apps/MusicOrgan/Organ.CPZ"$.
+
+$IV,1$----01/30/12 17:54:05----$IV,0$
+* Added $LK,"::/LT/Demo/GameStarters/Bomber.CPZ","FI:::/LT/Demo/GameStarters/Bomber.CPZ"$.
+
+$IV,1$----01/09/12 04:12:24----$IV,0$
+* Changed from both "\r\n" to "\n".
+* $LK,"R","MN:R"$("LINE_FEED","NEW_LINE");
+
+$IV,1$----01/03/12 20:13:18----$IV,0$
+* $BK,1$V8.00 Released$BK,0$
+* Added artillery to $LK,"::/LT/Apps/Tanks/Tanks.CPZ","FI:::/LT/Apps/Tanks/Tanks.CPZ"$.
+
+$IV,1$----12/21/11 09:57:44----$IV,0$
+* Fixed compiler bug, again -- floats as array indexes.See $LK,"#000025","FF:::/LT/Doc/Bugs.TXZ,#000025"$.
+* Improved assembler.
+* Fixed-up $LK,"::/LT/Demo/Snd/MorseCode.CPZ","FI:::/LT/Demo/Snd/MorseCode.CPZ"$.
+* Fixed bug in $LK,"::/LT/Demo/Graphics/CaptureScreen.CPZ","FI:::/LT/Demo/Graphics/CaptureScreen.CPZ"$.
+* Improved $LK,"::/LT/Misc/LTTestSuite.CPZ","FI:::/LT/Misc/LTTestSuite.CPZ"$, added it to tour.
+
+$IV,1$----12/17/11 20:10:50----$IV,0$
+* Reduced required RAM to 256 Meg.
+* Added $LK,"Scale2Mem","MN:Scale2Mem"$() for use in OSMain CFG expressions.
+* Made disk cache and ram drives $LK,"Scale2Mem","MN:Scale2Mem"$. 
+* Changed to overtly Christian theme.
+* Changed progress bars.
+* Fixed $LK,"MAlloc","MN:MAlloc"$() bug.  (Speeds things up, too.)See $LK,"#000024","FF:::/LT/Doc/Bugs.TXZ,#000024"$.
+
+$IV,1$----12/14/11 22:52:18----$IV,0$
+* $LK,"R","MN:R"$("LtfEdFile","LtfFileEd");
+* $LK,"R","MN:R"$("LtfDelEntry","LtfEntryDel");
+* $LK,"R","MN:R"$("LtfDelBin","LtfBinDel");
+* $LK,"R","MN:R"$("LtfFmtData","LtfDataFmt");
+* $LK,"R","MN:R"$("LtfGetData","LtfDataGet");
+* $LK,"R","MN:R"$("LtfDrawBorderList","LtfBorderListDraw");
+* $LK,"R","MN:R"$("LtfSizeEntry","LtfEntrySize");
+* $LK,"R","MN:R"$("LtfSafeInsert","LtfInsertSafe");
+* $LK,"R","MN:R"$("LtfGoToLineNum","LtfLineNumGoTo");
+* $LK,"R","MN:R"$("LtfDelUndo","LtfUndoDel");
+* $LK,"R","MN:R"$("LtfRestoreUndo","LtfUndoRestore");
+* $LK,"R","MN:R"$("LtfSetUndoCnt","LtfUndoCntSet");
+* $LK,"R","MN:R"$("LtfCopyEntry","LtfEntryCopy");
+* $LK,"R","MN:R"$("LtfDelRemainingSettings","LtfSettingsRemainingDel");
+* $LK,"R","MN:R"$("LtfIdenticalSettings","LtfSettingsIdentical");
+* $LK,"R","MN:R"$("LtfLastSettings","LtfSettingsLast");
+* $LK,"R","MN:R"$("LtfNextSettings","LtfSettingsNext");
+* $LK,"R","MN:R"$("LtfFindAnchor","LtfAnchorFind");
+* $LK,"R","MN:R"$("LtfFindBin","LtfBinFind");
+* $LK,"R","MN:R"$("LtfFindTree","LtfTreeFind");
+* $LK,"R","MN:R"$("LtfExeTreeBranch","LtfTreeBranchExe");
+* $LK,"R","MN:R"$("LtfMakeTree","LtfTreeMake");
+* $LK,"R","MN:R"$("LtfToggleFlags","LtfFlagsToggle");
+* Fixed Unasm bug.
+
+$IV,1$----12/12/11 23:36:56----$IV,0$
+* Made so compiler sends isolated chars to $LK,"PutChar","MN:PutChar"$().
+* You can now specify an address for $LK,"Load","MN:Load"$().
+* Moved start addr of OSMain from 0x10000 to 0x7C00.
+* Merged OSMain2 into OSMain.
+* Added null string for variable fmt_str option -- PutS/PrintF.
+
+$IV,1$----12/10/11 18:51:08----$IV,0$
+* $BK,1$V7.10 Released$BK,0$
+* Fixed compiler bug -- floats as array indexes.See $LK,"#000023","FF:::/LT/Doc/Bugs.TXZ,#000023"$.
+* Added redundant clipboard keys  $FG,2$<CTRL-X>$FG$, $FG,2$<CTRL-C>$FG$, $FG,2$<CTRL-V>$FG$ to be in addition to $FG,2$<SHIFT-INSERT>$FG$, etc.
+* Moved $FG,2$<CTRL-C>$FG$ (managed code) to $FG,2$<CTRL-O>$FG$.
+
+$IV,1$----12/09/11 02:42:45----$IV,0$
+* Fixed bugs in $LK,"Spaces2Tabs","MN:Spaces2Tabs"$().
+* Got rid of $FG,4$ListFile.APZ$FG$.
+* Made so $LK,"Pow","MN:Pow"$() operator is not in-line.
+* Made so compiler sends strings all alone to $LK,"PutS","MN:PutS"$() or $LK,"PrintF","MN:PrintF"$().
+
+$IV,1$----12/04/11 22:40:18----$IV,0$
+* $BK,1$$FG,4$Warning$BK,0$$FG$: Got rid of size arg in $LK,"PutSprite","MN:PutSprite"$() and $LK,"LtfPutSprite","MN:LtfPutSprite"$(). 
+* Added $LK,"tM","MN:tM"$().
+* Added $LK,"::/LT/Apps/MusicOrgan/Examples/dialogue.CPZ","FI:::/LT/Apps/MusicOrgan/Examples/dialogue.CPZ"$
+
+$IV,1$----12/02/11 14:56:31----$IV,0$
+* $LK,"R","MN:R"$("sys_cur_focus_task","sys_focus_task");
+* Improved $LK,"MemRep","MN:MemRep"$().
+* $LK,"R","MN:R"$("PutGrSprite","PutSprite");
+* $LK,"R","MN:R"$("GrBlot","GrDCBlot");
+
+$IV,1$----11/27/11 04:24:42----$IV,0$
+* $BK,1$V7.09 Released$BK,0$
+* Cleaned-up $LK,"::/LT/Apps/Logic/Logic.CPZ","FI:::/LT/Apps/Logic/Logic.CPZ"$.
+* Got rid of $FG,2$Cvt603$FG$.
+
+$IV,1$----11/25/11 15:52:23----$IV,0$
+* Added $LK,"::/LT/ReadMe.TXT","FI:::/LT/ReadMe.TXT"$.
+
+$IV,1$----11/25/11 02:04:42----$IV,0$
+* Added Ltf "More".
+* Got rid of recovery CD maker.
+* Cleaned-up $LK,"InstallBoot","MN:InstallBoot"$().
+* $LK,"R","MN:R"$("BootImageCreate","MakeAll");
+* Got rid of $FG,2$CfgMgr$FG$.
+
+$IV,1$----11/21/11 07:41:45----$IV,0$
+* Added $LK,"Cosh","MN:Cosh"$() and $LK,"Sinh","MN:Sinh"$().
+* Got rid of $FG,2$task->acct$FG$.
+* $BK,1$$FG,4$Warning$BK,0$$FG$: Removed arg from $LK,"Spawn","MN:Spawn"$().
+ 
+$IV,1$----11/19/11 15:47:16----$IV,0$
+* $LK,"R","MN:R"$("BMF_","DCF_");
+* $LK,"R","MN:R"$("BMT_","DCT_");
+
+$IV,1$----11/14/11 09:27:37----$IV,0$
+* Got rid of $FG,2$FastMP$FG$ (was not justified).
+
+$IV,1$----11/13/11 08:39:07----$IV,0$
+* Added $LK,"D:/LT/Apps/MusicOrgan/Examples/fog.CPZ","FI:D:/LT/Apps/MusicOrgan/Examples/fog.CPZ"$.
+* Added $LK,"D:/LT/Apps/MusicOrgan/Examples/free.CPZ","FI:D:/LT/Apps/MusicOrgan/Examples/free.CPZ"$.
+
+$IV,1$----11/11/11 11:43:38----$IV,0$
+* $BK,1$V7.08 Released$BK,0$
+* $LK,"R","MN:R"$("gr_refreshed_dc","gr_dc");
+* $LK,"R","MN:R"$("gr_persistent_dc","gr_dc2");
+* $LK,"R","MN:R"$("base","dc");
+* $LK,"R","MN:R"$("GrElem","GrSprite");
+* $LK,"R","MN:R"$("GrBitMap","GrDC");
+* $LK,"R","MN:R"$("GrAlias","GrDCAlias");
+* $LK,"R","MN:R"$("GrRst","GrDCRst");
+* $LK,"R","MN:R"$("GrNew","GrDCNew");
+* $LK,"R","MN:R"$("GrDel","GrDCDel");
+* $LK,"R","MN:R"$("GrLoad","GrDCLoad");
+* $LK,"R","MN:R"$("GrSave","GrDCSave");
+
+$IV,1$----11/07/11 14:59:11----$IV,0$
+* Improved $LK,"::/LT/Demo/GameStarters/Chess.CPZ","FI:::/LT/Demo/GameStarters/Chess.CPZ"$ A.I.
+
+$IV,1$----10/29/11 07:57:53----$IV,0$
+* Fixed compiler bug with local var arrays.See $LK,"#000022","FF:::/LT/Doc/Bugs.TXZ,#000022"$.
+
+$IV,1$----10/27/11 15:31:13----$IV,0$
+* Added graphics to $LK,"::/LT/Apps/MusicOrgan/Examples/doing.CPZ","FI:::/LT/Apps/MusicOrgan/Examples/doing.CPZ"$.
+* Separated 2nd stage kbd and mouse packet fifos.
+
+$IV,1$----10/24/11 20:15:54----$IV,0$
+* Added $LK,"::/LT/Apps/MusicOrgan/Examples/twins.CPZ","FI:::/LT/Apps/MusicOrgan/Examples/twins.CPZ"$.
+* Added graphics to $LK,"::/LT/Apps/MusicOrgan/Examples/elijah.CPZ","FI:::/LT/Apps/MusicOrgan/Examples/elijah.CPZ"$.
+* Added sheep to $LK,"::/LT/Apps/AfterEgypt/Horeb.CPZ","FI:::/LT/Apps/AfterEgypt/Horeb.CPZ"$ and made movement smoother.
+
+$IV,1$----10/23/11 00:59:28----$IV,0$
+* Added graphics to $LK,"::/LT/Apps/MusicOrgan/Examples/awake.CPZ","FI:::/LT/Apps/MusicOrgan/Examples/awake.CPZ"$.
+* Added managed code to $FG,2$<CTRL-C>$FG$ menu -- Slider.
+* $LK,"R","MN:R"$("Mixer","Slider");
+* Updated $LK,"::/LT/Demo/Graphics/SliderCtrl.CPZ","FI:::/LT/Demo/Graphics/SliderCtrl.CPZ"$.
+* Moved IDE code and ReFmtFun code.
+ 
+$IV,1$----10/16/11 12:16:17----$IV,0$
+* Converted $LK,"StreamPrintF","MN:StreamPrintF"$()'s to $LK,"DefinePrintF","MN:DefinePrintF"$()'s.
+* Improved $LK,"::/LT/Apps/Tanks/Tanks.CPZ","FI:::/LT/Apps/Tanks/Tanks.CPZ"$.
+* Deleted ::/LT/Demo/GameStarters/Pac.CPZ (Redundant)
+* Deleted ::/LT/Demo/GameStarters/Kings.CPZ (Redundant)
+
+$IV,1$----10/16/11 02:32:36----$IV,0$
+* Improved PSectCache.
+
+$IV,1$----10/12/11 17:10:59----$IV,0$
+* Improved ::/LT/Demo/GameStarters/Kings.CPZ
+
+$IV,1$----10/11/11 16:06:08----$IV,0$
+* Overhauled $LK,"::/LT/Demo/GameStarters/Rocks.CPZ","FI:::/LT/Demo/GameStarters/Rocks.CPZ"$.
+ 
+$IV,1$----10/11/11 12:02:33----$IV,0$
+* $BK,1$V7.07 Released$BK,0$
+* Added graphics to $LK,"::/LT/Apps/MusicOrgan/Examples/purpose.CPZ","FI:::/LT/Apps/MusicOrgan/Examples/purpose.CPZ"$.
+* Fixed bug with $FG,4$dc->brush$FG$ in graphics routines.See $LK,"#000021","FF:::/LT/Doc/Bugs.TXZ,#000021"$.
+* Added graphics to $LK,"::/LT/Apps/MusicOrgan/Examples/exiled.CPZ","FI:::/LT/Apps/MusicOrgan/Examples/exiled.CPZ"$.
+
+$IV,1$----10/09/11 07:51:39----$IV,0$
+* Fixed bug in $FG,2$<CTRL-R>$FG$ menus.See $LK,"#000020","FF:::/LT/Doc/Bugs.TXZ,#000020"$.
+* Added $FG,2$Debugging$FG$ to tour.
+* Added $LK,"AFView","MN:AFView"$().
+* Moved the $FG,2$Tour$FG$ account into the $FG,2$/LT/Misc$FG$ dir.
+* Added ::/LT/Demo/GameStarters/Kings.CPZ
+* Moved $FG,2$/LT/Opt$FG$ dir to $FG,2$/LT/Adam$FG$.
+* Moved $FG,2$/LT/Text$FG$ and $FG,2$/LT/OptUtils$FG$ dirs to $FG,2$/LT/Misc$FG$.
+* $LK,"R","MN:R"$("theta","é");
+* $LK,"R","MN:R"$("phi","è");
+* $LK,"R","MN:R"$("zeta","ê"); (symbol doesn't exist)
+* Added rand function family without timestamp -- $LK,"Rand2I16","MN:Rand2I16"$() ... $LK,"Rand2","MN:Rand2"$().
+* Added $LK,"Randomize","MN:Randomize"$()
+
+$IV,1$----10/02/11 04:52:00----$IV,0$
+* Added documentation $LK,"::/LT/OSMain/Hash1a.CPZ","FL:::/LT/OSMain/Hash1a.CPZ,1"$.
+
+$IV,1$----09/22/11 19:08:03----$IV,0$
+* Added ì char support.
+
+$IV,1$----09/21/11 05:58:02----$IV,0$
+* $BK,1$V7.06 Released$BK,0$
+* Changed $FG,2$CTRL-ALT-V$FG$ volume to +/- instead of pop-up.
+
+$IV,1$----09/20/11 02:23:29----$IV,0$
+* Added more err reporting to compiler.
+
+$IV,1$----09/10/11 08:04:21----$IV,0$
+* Improved $LK,"::/LT/Demo/GameStarters/ZoneOut.CPZ","FI:::/LT/Demo/GameStarters/ZoneOut.CPZ"$.
+
+$IV,1$----09/08/11 13:56:29----$IV,0$
+* $BK,1$$FG,4$Warning$BK,0$$FG$: Changed args to $LK,"CDFileCreate","MN:CDFileCreate"$().Src is now a file mask, not drive letter and there is a file find flag arg.
+* Fixed bug in $LK,"::/LT/Adam/ToHtml.APZ","FI:::/LT/Adam/ToHtml.APZ"$ and $LK,"::/LT/Adam/ToTXT.APZ","FI:::/LT/Adam/ToTXT.APZ"$.See $LK,"#000019","FF:::/LT/Doc/Bugs.TXZ,#000019"$.
+
+$IV,1$----09/04/11 05:30:00----$IV,0$
+* Put key names in $FG,2$<...>$FG$ and tidied-up.
+
+$IV,1$----09/01/11 06:20:20----$IV,0$
+* Added $LK,"::/LT/Apps/AfterEgypt/WaterRock.CPZ","FI:::/LT/Apps/AfterEgypt/WaterRock.CPZ"$.
+
+$IV,1$----08/22/11 02:12:02----$IV,0$
+* Changed default $LK,"Fmt","MN:Fmt"$() type from native to $FG,2$FAT32$FG$.
+
+$IV,1$----08/20/11 10:55:56----$IV,0$
+* $BK,1$V7.05 Released$BK,0$
+
+$IV,1$----08/14/11 03:22:18----$IV,0$
+* Fixed compiler bug where it was not using 64-bit arithmetic.See $LK,"#000018","FF:::/LT/Doc/Bugs.TXZ,#000018"$.
+* Fixed compiler bug on signed modulo of power of two.See $LK,"#000017","FF:::/LT/Doc/Bugs.TXZ,#000017"$.
+* Added $LK,"::/LT/Adam/ToTXT.APZ","FI:::/LT/Adam/ToTXT.APZ"$.
+
+$IV,1$----08/13/11 19:17:43----$IV,0$
+* Added $LK,"::/LT/Demo/GameStarters/ZoneOut.CPZ","FI:::/LT/Demo/GameStarters/ZoneOut.CPZ"$.
+* Added a few songs to JukeBox.
+* Made $FG,2$<SHIFT-ESC>$FG$ ASCII 28 and changed $FG,2$<CTRL-Q>$FG$ to $FG,2$<SHIFT-ESC>$FG$.
+
+$IV,1$----08/06/11 02:18:51----$IV,0$
+* Improved $LK,"::/LT/Demo/GameStarters/Wenceslas.CPZ","FI:::/LT/Demo/GameStarters/Wenceslas.CPZ"$.
+
+$IV,1$----08/01/11 23:50:43----$IV,0$
+* Added compiler optimization on $LK,"Bt","MN:Bt"$() family.
+* Added a compiler optimization on absolute addresses.
+* Added a compiler optimization on $FG,2$Fs->$FG$ and $FG,2$Gs->$FG$.
+
+$IV,1$----07/16/11 14:58:53----$IV,0$
+* Added $FG,2$FastMP$FG$ option to $FG,2$OSMain$FG$ cfg.
+
+$IV,1$----07/06/11 00:03:13----$IV,0$
+* Added $FG,2$<CTRL-ALT-A>$FG$ for entering extended ASCII.
+* Filled-in extended ASCII screen codes.
+* $LK,"R","MN:R"$("pi","ã");  ALT 227
+* Improved $LK,"::/LT/Apps/MusicOrgan/MakeSong.CPZ","FI:::/LT/Apps/MusicOrgan/MakeSong.CPZ"$.

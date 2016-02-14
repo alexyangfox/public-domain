@@ -1,0 +1,2 @@
+$WW,1$To create a LoseThos ctrl, you define call-back functions and insert a $LK,"Ctrl","MN:Ctrl"$ structure in the $LK,"TaskStruct","MN:TaskStruct"$ queue.  See $LK,"::/LT/Demo/Graphics/SliderCtrl.CPZ","FI:::/LT/Demo/Graphics/SliderCtrl.CPZ"$, $LK,"::/LT/Demo/Graphics/ScrollBars.CPZ","FI:::/LT/Demo/Graphics/ScrollBars.CPZ"$ and $LK,"TermButtonNew","FF:::/LT/Adam/WallPaper.APZ,TermButtonNew"$.
+

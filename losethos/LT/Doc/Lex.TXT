@@ -1,0 +1,4 @@
+$WW,1$The compiler's lexical analyzer can be used in your programs to simplify parsing.See $LK,"Ltf Parsing","FF:::/LT/Adam/Ltf/LtfPlain.APZ,LexNew"$ or $LK,"Parse Opcode File","FF:::/LT/Compiler/CmpInit.CPZ,Opcodes.TXZ"$.
+
+See $LK,"Tokens","MN:TK_IDENT"$.
+

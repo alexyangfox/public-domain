@@ -1,0 +1,8 @@
+$WW,1$A $FG,4$GrSprite$FG$, is one of the $LK,"following","MN:GRST_END"$ elements, created with $FG,2$<CTRL-R>$FG$$FG$.Several sprite elements are clustered together by $FG,2$<CTRL-R>$FG$.Normally, they are packed together in a list and the addr of the first is passed to routines.
+
+See $LK,"::/LT/Demo/Graphics/GrSprite1.CPZ","FI:::/LT/Demo/Graphics/GrSprite1.CPZ"$, $LK,"::/LT/Demo/Graphics/GrSprite2.CPZ","FI:::/LT/Demo/Graphics/GrSprite2.CPZ"$ and $LK,"::/LT/Demo/Graphics/GrSprite3.CPZ","FI:::/LT/Demo/Graphics/GrSprite3.CPZ"$ and $LK,"GrSpriteMesh","MN:GrSpriteMesh"$().
+
+Be aware that copying $FG,2$PI$FG$, $FG,2$IB$FG$, or $FG,2$IS$FG$ entries with the clipboard results in duplicate entries with different nums.You can manually remove dups by editing with $FG,2$<CTRL-T>$FG$ and setting to the original num.
+
+See $LK,"::/LT/Adam/Gr/GrSpritePlot.APZ","FL:::/LT/Adam/Gr/GrSpritePlot.APZ,1"$ for how GrSprite are stored.$FG$
+

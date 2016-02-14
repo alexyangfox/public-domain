@@ -1,0 +1,17 @@
+$WW,1$$FG,5$$TX+CX,"Registered LoseThos Version"$$FG$
+
+The registered version is free.It includes the $LK,"LTZ","FI:::/LT/Doc/LTZ.TXZ"$ $FG,2$Windows$FG$ and $LK,"LTZ","FI:::/LT/Doc/LTZ.TXZ"$ $FG,2$Linux$FG$ programs.They are utilities to assist transferring files and uncompressing them.They are not needed in normal operation.The registered version also includes a dictionary file which LoseThos utilizes in $FG,4$WordStat$FG$ and various programs.
+
+To obtain the registered version, send an email to $FG,2$$TX+HTML,"tdavis@losethos.com","mailto:tdavis@losethos.com"$$FG$ and provide the following survey answers.
+
+1) What hardware does your system have?What works and doesn't work from LoseThos?
+
+2) Did you sucessfully install it on your hard drive?
+
+One reason for a registered version is to keep the bloat down in the unregistered distribution file.The dictionary and the $FG,2$Windows$FG$ $LK,"LTZ","FI:::/LT/Doc/LTZ.TXZ"$ program's DLL files are sizable.
+
+
+$FG,8$
+* "Windows" is a trademark of MicroSoft Corp.
+* "Linux" is probably a trademark owned by Linus Torvalds.
+ 

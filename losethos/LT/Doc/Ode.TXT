@@ -1,0 +1,7 @@
+$WW,1$LoseThos has an advanced algorithm for integrating ordinary differential equations suitable for use in video games.(Not scientific work.)It also has some support for systems of masses and springs, to save you some work.
+
+See $LK,"Ode","MN:Ode"$ and $LK,"OdesUpdate","MN:OdesUpdate"$ for an overview.
+See $LK,"OdeCallDerivative","MN:OdeCallDerivative"$ to see what support there is for masses and springs.
+
+See $LK,"::/LT/Demo/GameStarters/Whap.CPZ","FI:::/LT/Demo/GameStarters/Whap.CPZ"$, $LK,"::/LT/Demo/GameStarters/Rocket.CPZ","FI:::/LT/Demo/GameStarters/Rocket.CPZ"$, $LK,"::/LT/Demo/GameStarters/MassSpring.CPZ","FI:::/LT/Demo/GameStarters/MassSpring.CPZ"$, $LK,"::/LT/Apps/Span/SpanMain.CPZ","FI:::/LT/Apps/Span/SpanMain.CPZ"$ or $LK,"::/LT/Apps/X-Caliber/X-Caliber.CPZ","FI:::/LT/Apps/X-Caliber/X-Caliber.CPZ"$ for a masses and springs examples, or $LK,"::/LT/Demo/WinMgr2.APZ","FI:::/LT/Demo/WinMgr2.APZ"$, or $LK,"::/LT/Demo/GameStarters/Rocks.CPZ","FI:::/LT/Demo/GameStarters/Rocks.CPZ"$.
+

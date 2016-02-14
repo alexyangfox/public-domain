@@ -1,0 +1,53 @@
+$LK,"Help Main","FI:::/LT/Doc/HelpMain.TXZ"$
+$LK,"Demo Index","FI:::/LT/Doc/DemoIndex.TXZ"$
+$MA+A-X+PU,"Take Tour","SpawnUser(\"Cd(\\\"::/LT/Misc/Tour\\\");;AutoFile(\\\"Tour\\\");\n\");"$
+$MA+A-X+PU,"Key Map","KeyMap;View;\n"$
+
+Function Categories
+
+$LK,"AutoFile","HI:AutoFile"$
+$LK,"Bit","HI:Bit"$
+$LK,"Boot","HI:Boot"$
+$LK,"Call","HI:Call"$
+$LK,"Char","HI:Char"$
+$LK,"Circular Queue","HI:Circular Queue"$
+$LK,"Cmd Line (Typically)","HI:Cmd Line (Typically)"$
+$LK,"Compiler","HI:Compiler"$
+$LK,"Compression","HI:Compression"$
+$LK,"Ctrls","HI:Ctrls"$
+$LK,"Debugging","HI:Debugging"$
+$LK,"Device","HI:Device"$
+$LK,"Exceptions","HI:Exceptions"$
+$LK,"Fifo","HI:Fifo"$
+$LK,"File","HI:File"$
+$LK,"Graphics Overview","FI:::/LT/Doc/Graphics.TXZ"$
+$LK,"Graphic Routines","HI:Graphics"$
+$LK,"Hash","HI:Hash"$
+$LK,"Help System","HI:Help System"$
+$LK,"Info","HI:Info"$
+$LK,"Input Pointer","HI:Input Pointer"$
+$LK,"Install","HI:Install"$
+$LK,"I/O","HI:I/O"$
+$LK,"Ltf","HI:Ltf"$
+$LK,"LTZ","FI:::/LT/Doc/LTZ.TXZ"$
+$LK,"Math","HI:Math"$
+$LK,"Memory","HI:Memory"$
+$LK,"Menus","HI:Menus"$
+$LK,"Messages","HI:Messages"$
+$LK,"Misc","HI:Misc"$
+$LK,"MultiCore","HI:MultiCore"$
+$LK,"Named Frames","HI:Hash/Named Frame"$
+$LK,"Ode","HI:Ode"$
+$LK,"OpCodes","FI:::/LT/Compiler/OpCodes.TXZ"$
+$LK,"Operator Precedences","FF:::/LT/Doc/Differences.TXZ,operator precedence"$
+$LK,"PrintF Extended Codes","FA:::/LT/Doc/Differences.TXZ,PrintF_Codes"$
+$LK,"Processor","HI:Processor"$
+$LK,"Profiler","HI:Profiler"$
+$LK,"PCI","HI:PCI"$
+$LK,"Sound","HI:Snd"$
+$LK,"Task","HI:Task"$
+$LK,"Time","HI:Time"$
+$LK,"Training","HI:Training"$
+$LK,"Windows","HI:Windows"$
+$LK,"WordStat","HI:WordStat"$
+$LK,"Utils","HI:Utils"$

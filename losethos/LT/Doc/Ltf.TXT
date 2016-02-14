@@ -1,0 +1,8 @@
+$WW,1$Linked Text Files are a $LK,"Circular Queue","HI:Circular Queue"$ of document cmds and graphics.This is the data structure for LoseThos documents.See $LK,"LtfEntry","MN:LtfEntry"$ for the entry structure.See $LK,"TipOfDay","MN:TipOfDay"$() for a nice example.
+
+There is one document format for the editor/ viewer/ browser/ cmd line.
+
+Each task has an $LK,"Ltf","MN:Ltf"$ queue.There is one $LK,"Ltf","MN:Ltf"$ for the border, called "auxiliary" and one for the main window.The aux is at $FG,4$Fs->next_ltf$FG$ and the main at $FG,4$Fs->last_ltf$FG$.When dbl buffering, there are two main's.See $LK,"::/LT/Demo/Spy.CPZ","FI:::/LT/Demo/Spy.CPZ"$.It is possible to define multiple aux's.To insert a additional aux, use $LK,"LtfInsQueRev","MN:LtfInsQueRev"$(l,Fs->next_ltf).
+
+See$LK,"::/LT/Demo/Ltf/CallBack.CPZ","FI:::/LT/Demo/Ltf/CallBack.CPZ"$ and $LK,"::/LT/Demo/Ltf/CallBack2.CPZ","FI:::/LT/Demo/Ltf/CallBack2.CPZ"$.
+

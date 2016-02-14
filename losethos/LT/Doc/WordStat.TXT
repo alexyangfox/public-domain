@@ -1,0 +1,8 @@
+$FG,2$$WW,1$WordStat$FG$ collects statistics from all text files in subdirectories when you call $LK,"WsInit","MN:WsInit"$().It counts which words follow which other words with what frequency in a big sparse matrix.
+
+It provides auto-complete typing and jump-to-code or jump-to-dictionary_definition functionality.
+
+Tip: If you use consistent var names for items of different classes, you'll usually be able to autocomplete the member vars.I always use $FG,2$lx$FG$ for $LK,"LexStruct","MN:LexStruct"$ ptrs; $FG,2$l$FG$ for $LK,"Ltf","MN:Ltf"$ ptrs; $FG,2$ll$FG$ or $FG,2$cl$FG$ for $LK,"LtfEntry","MN:LtfEntry"$ ptrs, etc.
+
+If you have the raw Project Gutenberg dictionary file, you can generate the LoseThos processed dictionary files with the stand-alone program $LK,"::/LT/Adam/WordStat/WsDictGen.CPZ","FI:::/LT/Adam/WordStat/WsDictGen.CPZ"$.
+
