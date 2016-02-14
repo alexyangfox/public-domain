@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg">
+  <svg id="IOB" width="1000" height="1000" viewBox="0 0 1000 1000">
+    <rect x="100" y="100" width="800" height="800" style="fill:white;"/>
+    <text x="200" y="200">hi</text>
+  </svg>
+</svg>

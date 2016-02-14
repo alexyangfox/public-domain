@@ -1,0 +1,22 @@
+rect.background
+{
+  fill: black;
+}
+text
+{
+  stroke: yellow;
+  font-family: sans-serif;
+}
+text.small
+{
+  font-size: 10pt;
+  text-anchor: end;
+}
+path
+{
+  stroke: yellow;
+}
+circle
+{
+  stroke: yellow;
+}

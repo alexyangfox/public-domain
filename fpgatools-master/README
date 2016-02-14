@@ -1,0 +1,116 @@
+Introduction
+ fpgatools is a toolchain to program field-programmable gate arrays
+ (FPGAs). The only supported chip at this time is the xc6slx9, a
+ 7 USD 45nm-generation fpga with 5720 6-input LUTs, block ram and
+ multiply-accumulate devices.
+
+ *) maximize chip performance
+ *) fast development cycles
+ *) independent toolchain that only depends on other free software
+ *) reconfigure on-chip
+ *) include get-started tools such as jtag, debugging, parts data
+    and designs for prototyping hardware
+ *) design flow that includes asic manufacturing
+ *) lightweight C implementation without GUI
+ *) supported platform: Linux
+ *) license: public domain
+
+FAQ
+ todo
+
+Libraries
+
+- libfpga-cores      reusable cores
+- libfpga-stdlib     standard design elements on top of libfpga-control
+- libfpga-control    programmatic access to libfpga-model
+- libfpga-model      memory-only representation of an FPGA
+- libfpga-floorplan  reads and writes .fp floorplan files
+- libfpga-bit        reads and writes .bit bitstream files
+
+Design Utilities
+
+- hello_world        outputs an AND gate floorplan to stdout
+- blinking_led       outputs blinking led design to stdout
+- new_fp             creates empty .fp floorplan file
+- fp2bit             converts .fp floorplan into .bit bitstream
+- bit2fp             converts .bit bitstream into .fp floorplan
+- draw_svg_tiles     draws a simple .svg showing tile types
+
+fpgatools Development Utilities
+
+- autotest           test suite
+- sort_seq           sorts line-based text file by sequence numbers in strings
+- merge_seq          merges a pre-sorted text file into wire sequences
+- pair2net           reads the first two words per line and builds nets
+- hstrrep            high-speed hashed array based search and replace util
+
+Profiling
+
+~# time ./hello_world
+~# perf record ./hello_world
+~# perf annotate
+~# perf report
+
+Design Principles
+
+- small independent command line utilities, no GUI
+- plain C, no C++
+- simple Makefiles
+- text-based file formats
+- automatic test suite
+- public domain software
+
+TODO (as of January, 2013)
+
+short-term (1 month):
+* example: counter (including clock, jtag)
+* support xc6slx9-ftg256
+
+mid-term (6 months):
+* example: j1 soc
+* llvm backend
+* maybe fp2bit should natively write ieee1532 and separate tools convert
+  from ieee1532 to .bit and other formats
+* configuration of bram and macc blocks, bram initialization data
+* more cases in logic block configuration
+* autotest: fix bugs in lut_encoding, logic_cfg, routing_sw, io_sw tests
+* autotest: protect stderr of diff executable in autotest log
+* 3 Debian packages: libfpga, libfpga-doc, fpgatools
+* support chips other than xc6slx9, maybe an ftg256 or fgg484-packaged
+  xc6 or the xc7a100
+* write standard design elements for libfpga-stdlib library
+* several places might benefit from a bison parser:
+  - switchbox description into bit parser/generator (bit_frames.c)
+  - inter-tile wire connections (model_conns.c)
+  - configure devices and route wires
+
+cleanup (whenever convenient):
+* use tile flags instead of tile names
+* model connections and switches together rather than separately
+* describe more wire names/meanings with integers instead of strings
+* move all part-specific static data into xc_info()
+
+long-term (>6 months):
+* auto-crc calculation in .bit file
+* MCB switches and connections
+* support lm32 or openrisc core, either via libfpga or iverilog backend
+* ipv6 or vnc in hardware?
+* iverilog fpga backend
+* design fpga core that uses high-speed icap/reconfig to process data
+
+ChangeLog
+
+2012-12-20
+* Second design verified: blinking_led is a clocked design where the clock
+  increments a counter and the highest bit of the counter drives a LED.
+
+2012-09-24
+* First design verified: hello_world is an unclocked AND gate design
+  which was verified in a xc6slx9.
+
+2012-08-20
+* Beginning of full fidelity circle with model, floorplan, conversion
+  between floorplan and binary configuration formats.
+
+2012-06-03
+* Project started.

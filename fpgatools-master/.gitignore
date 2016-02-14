@@ -1,0 +1,42 @@
+#
+# common ignore files
+#
+.*
+*.d
+*.o
+*.o.*
+*.so
+*.so.*
+
+/tags
+/TAGS
+
+#
+# git files that we don't want to ignore even it they are dot-files
+#
+!.gitignore
+
+#
+# binaries
+#
+draw_svg_tiles
+new_fp
+hstrrep
+sort_seq
+merge_seq
+pair2net
+autotest
+fp2bit
+bit2fp
+printf_swbits
+hello_world
+blinking_led
+jtag_counter
+j1_blinking
+
+#
+# folders
+#
+test.gold/
+test.out/
+build-libs/
