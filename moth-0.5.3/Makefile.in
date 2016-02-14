@@ -1,0 +1,64 @@
+#
+# $Id: Makefile.in,v 1.10 2003/04/21 00:38:17 drewfish Exp $
+#
+# Placed in the public domain by Drew Folta, 2002.  Share and enjoy!
+#
+
+LIBDIR = @MYSQL_LIBS@ @FT_LIBS@ @ART_LIBS@
+CFLAGS = @MYSQL_CFLAGS@ @RRD_CFLAGS@ @FT_CFLAGS@ @ART_CFLAGS@
+PARTS=axes.o colors.o columns.o data.o file.o formats.o image.o layers.o moth.o options.o parser.o pixmap.o sources.o
+
+CC = gcc -I@srcdir@ -Wall $(CFLAGS) @CFLAGS@ -c
+LD = gcc 
+
+
+moth: $(PARTS)
+	$(LD) -o moth $(PARTS) \
+	$(LIBDIR) @LIBS@ @LDFLAGS@
+
+clean: 
+	rm -f *.o moth examples/*.png examples/*.jpeg examples/*.jpg
+
+dist-clean: clean
+	rm -rf autom4te*/ config.h config.status config.log Makefile
+
+axes.o: axes.c
+	$(CC) axes.c
+
+colors.o: colors.c rgb.c
+	$(CC) colors.c
+
+columns.o: columns.c
+	$(CC) columns.c
+
+data.o: data.c
+	$(CC) data.c
+
+file.o: file.c
+	$(CC) file.c
+
+formats.o: formats.c formats/*.c
+	$(CC) formats.c
+
+image.o: image.c
+	$(CC) image.c
+
+layers.o: layers.c
+	$(CC) layers.c
+
+moth.o: moth.c
+	$(CC) moth.c
+
+options.o: options.c
+	$(CC) options.c
+
+pixmap.o: pixmap.c
+	$(CC) pixmap.c
+
+parser.o: parser.c
+	$(CC) parser.c
+
+sources.o: sources.c sources/*.c
+	$(CC) sources.c
+
+

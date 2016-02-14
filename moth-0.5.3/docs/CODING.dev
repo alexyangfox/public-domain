@@ -1,0 +1,15 @@
+
+
+The coding style for Moth is roughly based on the coding style documented for
+perl6, defined here:
+
+  http://dev.perl.org/perl6/pdd/pdd07_codingstd.html.
+
+Note especially the ".dev" files, which accompany ".c" files and describe
+the programming concepts and approaches used.
+
+
+'configure.in' contains the rules used to build the 'configure' script (by
+autoconf).
+
+

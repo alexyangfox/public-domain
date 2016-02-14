@@ -1,0 +1,87 @@
+
+
+VERSION:  $Id: image.dev,v 1.4 2003/06/06 15:54:56 drewfish Exp $
+
+
+
+
+AXES
+
+  Image currently only have 4 axes, which we create for every image.
+
+
+
+LAYOUT
+
+  Layout areas are:
+
+  +--------------------------------------------------------------------------+
+  |                                  title                                   |
+  |                                top axis                                  |
+  |       +----------------------------------------------------------+       |
+  |  left |                                                          | right |
+  |  axis |                         canvas                           | axis  |
+  |       +----------------------------------------------------------+       |
+  |                               bottom axis                                |
+  |                                 legend                                   |
+  +--------------------------------------------------------------------------+
+
+  The image is layed out using the cartesian coordinates (left-bottom is
+  origin) in unsigned integers.
+
+  The tricky thing about the layout is it that the size of the various
+  components of the layout depends on the "size-type" attribute:
+    - we need to know the "size-type" to determine the canvas width
+    - we need to know the canvas width to know the legend height (because of
+      text wrapping)
+    - we need to know the legend height and "size-type" to find the canvas
+      height
+
+  We also will include a spacer between elements, but only if they're both
+  drawn.
+
+  Each layout element has an optional string, which also has a width and
+  height.
+
+
+
+LEGEND
+
+  The legend is made of the color swatches and titles of the drawing layers.
+  We reuse the _layout_element_s structure since it has all the info we need.
+
+  We use an array to manage the legend swatches since we don't layout the image
+  until we're ready to draw it, at which point it's too late to add more
+  layers.
+  
+
+
+COLORS
+
+  An image also implements a bit of the "color store" interface, since each
+  image should have it's own set of colors.  This interface is implemented in
+  terms of an actual color store, so it's actually more like direct
+  inheritance.
+
+
+
+COORDINATE SYSTEMS
+
+  The image has two different types of coordinate systems.  It's default
+  coordinate system is similar to the "cartesian" coordinate system.  The
+  origin is located at the bottom left of the image, the X axis runs positive
+  to the right, and the Y axis runs positive up.  This coordinate system can
+  be thought of as the "pixel" coordinate system, since pixels are drawn one
+  unit away from each other.  Whole values in this system specify the -center-
+  of the pixel.
+
+  A "virtual" coordinate system can be set using the viewport functions.  This
+  is the coordinate system used to draw values to the canvas.  The <image>
+  object uses the default coordinate system to draw the title and legend, for
+  example, and then sets up the viewport for the canvas before the layer code
+  creates the datastructures to be drawn.  The layer code uses the 
+  _get_viewport_value() function to translate it's values from the virtual
+  coordinate system to the pixel coordinate system.
+
+
+

@@ -1,0 +1,16 @@
+
+VERSION:  $Id: file.dev,v 1.1 2003/04/21 01:02:29 drewfish Exp $
+
+
+The moth_file object contains the C data structures that represent the XML in
+the file.  It uses a moth_parser object to parse the XML.  It stores the images
+and data sources, as well as the column store.
+
+There is one moth_file object created for each file.  This is done in moth.c.
+
+There is one function defined that is not associated with the moth_file
+objects.  It is used to interpret file names based on the "xml-relative"
+option.
+
+
+

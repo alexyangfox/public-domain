@@ -1,0 +1,100 @@
+IDEAS (good and bad) for future releases
+
+
+  - install using 'make install'
+
+  - make it so that XML can occur inside sources
+
+  - <image font> attribute:  font to use for all text elements (unless changed)
+
+  - maybe change <image width height size-type> attributes to 
+    <image canvas-width canvas-height> xor <image width height>
+
+  - "title-color", "title-font", and "title-size" attributes where there is a "title"
+    attribute  (<image>, <axis>, and layers)
+
+  - refactor <image> layout to use screen coordinates
+    justification:  universal (used by all output formats), just as arbitrary,
+    and will simplify code
+
+  - include a (nice) compiled-in font or fonts ?
+
+  - <axis> can run in either direction
+
+  - "auto" scaling in <axis>
+
+  - multiple <axis> on each side
+
+  - "auto" <label> that chooses intelligent tick intervals/templates
+
+  - <label ticks="off"> to show text but not ticks
+
+  - shortcuts  (basically predefined macros for common tasks)
+
+  - argument --dump-xml prints back interpretted XML (for XML default/shortcut debugging)
+
+  - argument --dump-columns prints values in columns (for data debugging)  [sources]
+
+  - argument --profile to print times required to run the sources  [sources]
+
+  - argument --xml-relative  to cause filenames to be calculated relative to
+    the location of the XML file  (as opposed to the current working directory)
+
+  - documentation:  man page, HTML docs, --help argument
+
+  - "auto" <grid>
+
+  - dashes in <grid>  (much code already there)
+
+  - dashes in <line>
+
+  - draw <line> continuously, instead of series of line segments
+
+  - draw <area> continuously, instead of series of areas
+
+  - auto-select distinct colors for layers (layers.c)
+
+  - invent logarithmic datetime scale
+
+  - in <rpn>, maybe some way of obtaining the min and max of a column
+    (and sum, and average, and standard deviation)
+
+  - in <rpn>, maybe some way of obtaining the min and max of an <axis>
+
+  - in <rpn>, maybe some way of obtaining canvas width and height, and
+    maybe units/pixel
+
+  ? allow <rpn> to change configuration values, such as colors
+
+  - variables in <rpn> (that persist across rows)
+
+  - RPN columns
+
+  - some kinda cascading style sheets
+    (use sablotron?)
+
+  - <binaryfile> source
+
+  - some kinda source for reading standard map file formats
+
+  - support more output formats, such as dvi, eps, pdf, svg, swf
+
+  - refactor drawing algorithm to support future funky output
+    (abstracts:  create image, start data, draw line/grid/&c, stop data, &c)
+
+  - funky dynamic/interactive svg/swf output algorithm
+
+  - maybe redefine formats to use XML tags, so that format-specific attributes
+    can be used
+
+  - better recovery when die()ing
+    - during <moth> skips to the next <moth>
+    - during a source skips to the next <moth>
+    - during an output format skips to the next format
+    - inside an <image> skips to the next <image>
+    (If we had exceptions, this would be very easy.)
+
+  - warn() and die() use stack space, for better error handling in low memory conditions
+
+
+

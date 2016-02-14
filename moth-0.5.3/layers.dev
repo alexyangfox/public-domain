@@ -1,0 +1,26 @@
+
+VERSION:  $Id: layers.dev,v 1.1 2002/12/09 05:56:16 drewfish Exp $
+
+
+A layer is a set of marks on the canvas.  They are drawn in the order defined
+in the XML file.  In this sense, then can be thought of as "layering" on top of
+each other, and thus the name :)
+
+When drawing a layer, all columns are iterated over row-by-row, taking one
+value from each column.  Lines and points iterate over two columns (for the
+point along the x and y axes), areas and segments iterate over four columns
+(for a lower and upper value of both x and y axes), and a grid does no iterate
+over any columns.  It draws vertical and horizontal lines at regular intervals
+along the specified axes.
+
+A swatch for a layer occurs in the legend only if the layer has a title.
+
+The layers are managed as a linked list, where the first layer acts as a handle
+to the entire list.
+
+When it comes time to draw the layer, the viewport of the pixmap has already
+been set, so the values from the columns can be used directly, and will be
+translated by the pixmap into the correct location.
+
+
+

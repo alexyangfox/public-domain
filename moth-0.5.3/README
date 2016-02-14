@@ -1,0 +1,65 @@
+
+
+Moth is an application to create 2 dimensional graphs from various data
+sources.  The first version can read data from textfiles, rrd files, and mysql
+databases.  Graph definitions are given in XML.  It is also intended to be a
+framework for programmers to experiement with data presentation ideas.
+
+
+
+GOALS
+
+  - graph description in XML
+  - 2-dimensional
+  - axes can run in either direction  (not first release)
+  - x/y axis labels
+  - many different data sources
+  - new data sources can be made using calculations on other data sources
+  - generate many different image formats
+  - made out of a bunch of different layers, drawn in order defined
+    - lines
+    - areas
+    - points
+    - x/y grid lines
+  - scaling
+    - linear
+    - logarithmic
+    - automatic  (not first release)
+  - colors
+  - handy shortcuts for easy common graph generation
+
+  - written in C w/portability in mind
+  - decent speed  (not highest goal, but important)
+  - well documented code to encourage hacking
+
+
+
+DEPENDENCIES
+
+  core
+    expat
+    libart       >= 2.0   (on RedHat 7.2, part of gnome-libs-devel)
+    freetype     >= 2.0
+
+  optional modules
+    mysql
+    rrdtool
+    libpng
+    libjpeg
+
+
+
+INSTALLATION
+
+  see the 'INSTALL' file for more information
+
+
+
+DOCUMENTATION
+
+  see the files located in the 'docs' directory
+
+  for notes on coding approaches and issues see the various ".dev" files
+
+
+

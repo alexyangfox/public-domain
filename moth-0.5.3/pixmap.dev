@@ -1,0 +1,21 @@
+
+
+VERSION:  $Id: pixmap.dev,v 1.2 2003/06/05 20:33:06 drewfish Exp $
+
+
+
+A pixmap contains all the pixels for a pixmap format, and has functions to draw
+strutures given in the vector API into the pixels.  It uses the libart_lgpl
+library for drawing shapes, and the freetype2 library for drawing text.
+
+The pixmap is given formating structures that use the "pixel" (or "cartesian")
+coordinate system described in image.dev.  Libart_lgpl, though, uses a slightly
+different system.  The y axis is flipped, with the origin at the top left.
+(This is a common coordinate system used for drawing to computer screens, for
+example.)
+
+A moth_pixmap_string represents the geometry of a string in the default
+coordinate system of the pixmap.
+
+
+

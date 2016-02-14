@@ -1,0 +1,49 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE moth SYSTEM "../moth.dtd" >
+
+<moth xml-relative="on" >
+
+  <textfile columns="x,temp_c" filename="sfo.data" delimiter="***" skip="1" />
+  <!--
+  <rrd columns="x,temp_c" filename="sfo.rrd" cf="AVERAGE" start="1024344000" end="1024444800" resolution="3600">
+    temp_c
+  </rrd>
+  -->
+  <!--
+  <mysql columns="x,temp_c" database="weather">
+    SELECT cycle, temperature
+    FROM sfo
+    ORDER BY cycle DESC
+    LIMIT 30
+  </mysql>
+  -->
+
+  <rpn columns="temp_f">temp_c 5 / 9 * 32 +</rpn>
+  <rpn columns="avg_temp">
+<!-- previous row --> ( 1 avg_temp PREV ) ( temp_f )          ( ISFIRST ) IF
+<!-- this row -->     ( temp_f )          ( 1 avg_temp PREV ) ( temp_f ISNAN ) IF
+<!-- next row -->     ( -1 temp_f PREV )  ( 1 avg_temp PREV ) ( -1 temp_f PREV ISNAN ) IF
+<!-- average -->      + + 3 /
+  </rpn>
+
+  <image filename="sfo.png" height="200" width="600" title="temperature at SFO" >
+
+    <axis location="left" title="degrees farenheit">
+      <label modulus="10" offset="5" color="grey50">%#</label>
+      <label modulus="10">%#</label>
+    </axis>
+    <axis location="bottom">
+      <label modulus="12dH" offset="6dH" color="grey50">%dHh</label>
+      <label modulus="12dH">%dHh</label>
+    </axis>
+
+    <grid color="grey80" x-modulus="12dH" y-modulus="10" />
+    <line color="blue" y="avg_temp" title="average" width="0.7" />
+    <area color="green#88" y0="avg_temp" y1="temp_f" />
+    <!--
+    <segments color="blue" y0="avg_temp" y1="temp_f" width="1.0" />
+    -->
+    <points color="red" y="temp_f" title="temperature" radius="3" />
+
+  </image>
+</moth>

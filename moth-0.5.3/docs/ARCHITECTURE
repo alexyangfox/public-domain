@@ -1,0 +1,39 @@
+
+
+COMPONENTS
+
+  moth.c
+    start of the whole program.  it creates a parser
+
+  data.h
+    base datastructures on which everything is built.  the most important is
+    moth_column, which contains a column of data.
+
+  file.h
+    contains state structure for the file.  this includes the list of sources
+    and images in the file.  passes XML parsing off to parser.h.
+
+  parser.h
+    parses the XML and builds C structures out of it.
+
+  sources.h
+    data source object.  different types of sources are supported.  each
+    source creates one or more columns of data.
+
+  image.h
+    image object.  knows how to layout graphical parts of the image.  calls
+    pixmap to do drawing.  calls formats.h to save to files.
+
+  pixmap.h
+    image buffer object, and functions to draw into the buffer.
+
+  axes.h
+    axis and label objects
+
+  layers.h
+    data presentation (area, grid, line, and points) objects
+
+  formats.h
+    file format objects
+
+

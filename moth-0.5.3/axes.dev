@@ -1,0 +1,55 @@
+
+
+VERSION:  $Id: axes.dev,v 1.1 2002/12/09 05:56:16 drewfish Exp $
+
+
+Axes is the plural of axis.
+
+
+
+AXES
+
+  The <axis> object contains a list of columns with which it is associated
+  (through the use of the drawing layers).  These columns are used to calculate
+  the minimum and maximum values of the range that the <axis> represents.
+
+  Line and text color for <axis> default to "black".
+
+
+
+LABELS
+
+  The <label>s attached to an <axis> are managed through a linked list.  The
+  linked list is created in the order that the <label>s are encountered.  This
+  means that we add each <label> to the end of the linked list.
+
+  A <label> presents a series of ticks at certain values along the <axis>.
+
+  A <label> contains a template, which describes how the value is drawn,
+  similar to printf().
+
+  When processing each <label>, we tokenize the elements of the template, so
+  that we know which parts to replace and how.
+
+  The state machine used to tokenize the template (in
+  moth_label_tokens_create()) is a little hairy.  For some types of tokens, we
+  don't know that the token is complete until we come across the first
+  character of the next token.  Many things complicate the state machine:
+
+    - the token length is unknown because of width and precision specifiers
+    - the token length is unknown because of the optional 'b' and 'd' modifiers
+    - the acceptable units depends on the modifier (or lack of one)
+    - the 'd' modifier is also a normal decimal unit
+    - '%' specifies a replaceable token, but '%%' is a constant token
+      '%%%' is an error
+
+
+
+LABEL TICKS
+
+  A tick is the string that occurs at a particular point along the <axis>.
+
+  They are managed as linked lists inside each <axis>.
+
+
+

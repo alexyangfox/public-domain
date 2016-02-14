@@ -1,0 +1,54 @@
+
+Options are either command-line arguments or XML attributes.
+
+This is the first draft of options.  (This may be entirely replaced by some
+other approach.)
+
+
+
+GOALS
+
+  unify processing of option sources
+
+  almost all command-line arguments can be specified as attributes
+
+  find the appropriate value amoung many (using precedence)
+
+  store values as a dictionary of option(string)/value(int) pairs
+
+  FOR THIS VERSION
+
+  only handle boolean types
+
+  only handle <moth> options
+
+
+
+PRECEDENCE      (highest to lowest)
+
+  - command-line arguments
+  - stack of XML attributes  (last values given are first values used)
+  - default values
+
+  The rational behind giving arguments the highest precedence is that they are
+  a more temporary choice for the values.  The XML should be written so that
+  the values specified there encapsulate the most correct way of creating the
+  graphs.  Command-line arguments can then be used to temporarily override
+  the values specified by the author of the XML for testing or other purposes.
+
+
+
+
+IMPLEMENTATION
+
+  Each option, at each level of precedence, actually has three values:  true,
+  false, and undefined.  For booleans, we use an int with 1 as true, 0 as
+  false, and -1 as undefined.
+
+  We keep the options in a linked list (and reuse the configuration structure).
+  This means that, to look up an option, we have to walk this list.  Though
+  this isn't particularly ideal, it's not such a bad compromise since we don't
+  expect to have a huge number of options.
+  
+
+

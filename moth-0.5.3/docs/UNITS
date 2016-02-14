@@ -1,0 +1,86 @@
+
+
+GOALS
+
+  everything in doubles
+  not-a-number (NAN) supported
+  addition and subtraction supported  (FUTURE)
+  datetime supported as a unixtime (seconds since epoch) or SQL format
+  "now" (this second) supported
+
+
+
+PLACES
+
+  <axis> clip-min, clip-max, and snap-to attributes
+  <grid> x-modulus, y-modulus, x-offset, and y-offset attributes
+  <label> modulus, offset, and template attributes
+  <mysql> data returned from database   (datetime especially useful)
+  <rpn> calculations
+  <textfile> data in file
+
+
+
+DECIMAL POWERS
+
+  Y   yotta       1e24       Greek or Latin octo, "eight"
+  Z   zetta       1e21       Latin septem, "seven"
+  E   exa         1e18       Greek hex, "six"
+  P   peta        1e15       Greek pente, "five"
+  T   tera        1e12       Greek teras, "monster"
+  G   giga        1e9        Greek gigas, "giant"
+  M   mega        1e6        Greek megas, "large"
+  k   kilo        1e3        Greek chilioi, "thousand"
+  h   hecto       1e2        Greek hekaton, "hundred"
+  D   deca        1e1        Greek deka, "ten"
+
+  #   just the number (most useful with <label> templates)
+
+  d   deci        1e-1       Latin decimus, "tenth"
+  c   centi       1e-2       Latin centum, "hundred"
+  m   milli       1e-3       Latin mille, "thousand"
+  u   micro       1e-6       Latin micro or Greek mikros, "small"
+  n   nano        1e-9       Latin nanus or Greek nanos, "dwarf"
+  p   pico        1e-12      Spanish pico, "a bit"
+  f   femto       1e-15      Danish-Norwegian femten, "fifteen"
+  a   atto        1e-18      Danish-Norwegian atten, "eighteen"
+  z   zepto       1e-21      Latin septem, "seven"
+  y   yocto       1e-24      Greek or Latin octo, "eight"
+
+
+
+BINARY POWERS
+
+  modifier:  b
+
+  bY  yottabytes  1024^8
+  bZ  zettabytes  1024^7
+  bE  exabytes    1024^6
+  bP  petabytes   1024^5
+  bT  terabytes   1024^4
+  bG  gigabytes   1024^3
+  bM  megabytes   1024^2
+  bk  kilobytes   1024
+
+
+
+DATETIME POWERS
+
+  modifier:  d
+
+  (these reflect common unix character-names for the date parts (see strftime))
+
+  dY   Year
+  dM   Month
+  dO   mOnth    (prints abbreviated month name in <label> templates)
+  dW   Week     (prints abbreviated day of week in <label> templates)
+  dD   Day
+  dH   Hour
+  dI   mInute
+  dS   Second
+
+  dN   now
+
+
+
+

@@ -1,0 +1,180 @@
+
+
+REVERSE POLISH NOTATION
+
+  whitespaces separate tokens
+
+  all calculations are done in doubles
+  they can including all unit specifiers
+
+  function names are all UPPERCASE
+
+  tokens that aren't comprised of letters or numbers,
+  and not specified below, are reserved for future use
+
+  anything else is interpreted as column names
+
+  commenting can be done using the XML comment
+  delimiters, <!-- and -->
+
+  functions pop all of their arguments, and don't push
+  them back onto the stack unless indicated
+
+
+
+IGNORED TOKENS
+
+  you may use these however you choose
+  they DO NOT specify subexpressions
+
+  (
+  )
+
+
+
+CONSTANT TOKENS
+
+  any valid number
+  E
+  PI
+  SQRT2
+  NAN
+  INF         positive infinity
+  NEGINF      negative infinity
+
+
+
+OPERATOR TOKENS
+
+  x y +       x + y
+  x y -       x - y
+  x y *       x * y
+  x y /       x / y
+  x y ^       x^y
+  x y \       divisor of x / y
+  x y %       remainder of x / y  (i.e., x modulus y)
+              x = y * (x\y) + x%y
+
+
+
+TEST TOKENS
+  
+  these push 1.0 for true and 0.0 for false
+
+  x ISNAN         x is not a number (or undefined, or NULL from a database)
+  x ISINF         positive or negative
+  x y <           x < y
+  x y >           x > y
+  x y ==          x equals y
+  x y ~=          x closely equals y (within about 0.0000001)
+  x y !=          x does not equal y
+  x y <=          x <= y
+  x y >=          x >= y
+  x y GT          x > y
+  x y GE          x >= y
+  x y LT          x < y     ('<' is a special symbol in XML)
+  x y LE          x <= y    ('<' is a special symbol in XML)
+  ISFIRST         true if first row
+  ISLAST          true if last row
+  x y z BETWEEN   true if y <= x <= z
+
+
+
+LOGIC TOKENS
+
+  z y x IF    pushes 'y' if 'x' is true, else pushes 'z'
+              (mnemonic:  like C language x?y:z, reversed)
+  x y AND
+  x y OR
+  x NOT
+  ABORT       stop everything
+
+
+
+COLUMN MANIPULATION TOKENS
+
+  x y PREV      pushes the x-th previous value of column y
+  ROW           pushes current row number
+  x ROWS        pushes number of rows in column x
+  SKIP          interpretation of the RPN is stopped for this row, and none of
+                the values on the stack are saved into the columns
+
+  x COLUMN_ROWS pushes the number of rows in column x  (synonym for ROWS)
+  x COLUMN_MIN  pushes the minimum value of column x
+  x COLUMN_MAX  pushes the maximum value of column x
+  x COLUMN_SUM  pushes the sum of all values of column x
+  x COLUMN_AVG  pushes the average of all values of column x
+  x COLUMN_STD  pushes the standard deviation of all values of column x
+
+
+
+STACK MANIPULATION TOKENS
+
+  x COPY        pushes two copies of x
+  x POP         throws away x
+  x y SWAP      pushes y then x
+
+
+
+MATH FUNCTION TOKENS
+
+  x ABS         pushes absolute value
+  x CEIL        pushes nearest integer less than x
+  x FLOOR       pushes nearest integer greater than x
+  x TRUNC       pushes nearest integer closest to zero
+
+  x ROUND       pushes x rounded  (see 'man 3 round')
+  x ROUNDEVEN   pushes x rounded to nearest even number  (see 'man 3 rint')
+  x MOD         pushes the integer part of x, then pushes the fractional
+                part of x (both with same sign as x)
+  x EXP         pushes e^x
+  x LOG         pushes natural log of x
+  x LOG2        pushes base-2 log of x
+  x LOG10       pushes base-10 log of x
+  x SQRT        pushes square-root of x
+  x CBRT        pushes cube-root of x
+  x y HYPOT     pushes the square-root of x^2 + y^2 (i.e., the distance
+                between the point (x,y) and the origin)
+  x SIGN        pushes -1.0 if x<0, 0.0 if x is zero, otherwise 1.0
+  x y COPYSIGN  pushes back y with the same sign as x
+  x y MAX       pushes maximum of x and y
+  x y MIN       pushes minimum of x and y
+
+  x RANDOM      pushes a random number >= 0 and < x
+
+  x DEGREES     pushes x converted from radians to degrees
+  x RADIANS     pushes x converted from degrees to radians
+  x SIN         pushes the sine of x
+  x COS         pushes the cosine of x
+  x TAN         pushes the tangent of x
+  x ASIN        pushes the arc sine of x
+  x ACOS        pushes the arc cosine of x
+  x ATAN        pushes the arc tangent of x
+  x y ATAN2     pushes atan(x/y), taking the sign of both x and y into
+                consideration when determining the quadrant
+  x SINH        pushes the hyperbolic sine of x
+  x COSH        pushes the hyperbolic cosine of x
+  x TANH        pushes the hyperbolic tangent of x
+  x ASINH       pushes the inverse hyperbolic sine of x
+  x ACOSH       pushes the inverse hyperbolic cosine of x
+  x ATANH       pushes the inverse hyperbolic tangent of x
+
+
+
+DATE MANIPULATION TOKENS
+
+  x SECOND          pushes the second component of x
+  x MINUTE          pushes the minute component of x
+  x HOUR            pushes the hour component of x
+  x DAY             pushes the day of month component of x
+  x MONTH           pushes the month component of x
+  x YEAR            pushes the year component of x
+  x DAYOFWEEK       pushes weekday index of x (1=Sunday, 2=Monday, ...)
+  x DAYOFYEAR       pushes the day of the year of x
+  x y ADDMONTHS     pushes y months added to x, maintaining the day of the
+                    month  (use a negative number for y for subtraction)
+  x y ADDYEARS      pushes y years added to x, taking into consideration
+                    leap seconds and days
+
+
+

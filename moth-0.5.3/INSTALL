@@ -1,0 +1,39 @@
+
+Installation is only somewhat automated at this time.
+
+
+step 1)
+
+  Type 'sh configure'
+
+  This should find all required and optional libraries used by moth.
+  Configure may have trouble finding the libart_lgpl library, which is
+  required.  (On RedHat 7.x systems, it's installed as part of the
+  gnome-libs-devel rpm, but can be installed separately if you choose.)
+
+  You can specify the location of a few optional libraries.  Type
+  'sh configure --help=short' for details.
+
+
+step 2)
+
+  Edit the top of pixmap.c to point to a font that exists on your system.
+
+
+step 3)
+
+  Type 'make'
+
+
+step 4)
+  
+  Copy the binary to wherever you like.  It is dynamically linked, so copying
+  it to a different system may or may not work, depending if that system as
+  the same libraries configured correctly or not.
+
+
+If you run into trouble, sent me the details.  I -might- be able to help,
+though if you're system is much different than mine I might be just as
+lost as you :) :(   - Drew
+
+

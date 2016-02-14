@@ -1,0 +1,64 @@
+
+VERSION:  $Id: columns.dev,v 1.1 2002/12/09 05:56:16 drewfish Exp $
+
+
+
+COLUMN
+
+  A column is a list of doubles.  It is the primary piece of data and is filled
+  by the various data sources.  Columns are created by the column store, since
+  the store is also responsible for managing the memory of the columns.
+
+  Attributes that take a column can also take a constant.  In this case a
+  special column is created that returns that constant for every row.
+
+  Data in the column is managed in chunks.  This is so that it can both grow
+  dynamically and have relatively quick access.  A pointer to the last chunk
+  (tail) is managed for fast adds.
+
+
+
+COLUMN LIST
+
+  A column list is a list of columns.  Each list maintains an internal iterator
+  to facilicate working with the columns in the list.  To access each column,
+  do something like this:
+
+    moth_column_list_reset (list);
+    while (( column = moth_column_list_next(list) )) {
+      ... do something with the column ...
+    }
+
+  A column list is managed as a linked list.  Since a column can belong to any
+  of several lists, we have to create a separate structure to build the list of
+  columns.  (It's common, when creating a linked list of elements that will
+  belong to only one list, to put the linked list data members (i.e. next) in
+  the item structure itself.  We do that in almost all other cases of linked
+  lists in Moth.)
+
+
+
+COLUMN STORE
+
+  A column store creates columns and manages their memory.  Destroying a store
+  destroys all columns in the store, so references to the columns (including
+  those in a column list) are no longer valid.
+
+  Column stores are implemented as a binary tree.  The keys of the tree are the
+  column names.
+  
+  We use recursion to do a lot of the work, but that also means that we have a
+  lot of utility functions, since most public functions need a version that
+  recurses over the entries, instead of taking the store object.
+
+  We also rotate the tree on a deletion -- this is were we try to 'balance' the
+  tree.  If columns are added in a sorted order, either forward or reverse
+  alphabetically, the tree will be unbalanced (a long line down one side).
+  This shouldn't happen that much in practice, and so shouldn't be too much of
+  an issue.  As well, we don't expect there to be a huge number of columns:  10
+  or so for basic graphs, less than 100 for fairly complicated graphs, and less
+  than 1000 for even the most complicated file.  Of course, some folks will go
+  crazy :)
+
+
+

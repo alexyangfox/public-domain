@@ -1,0 +1,391 @@
+
+2004-03-16    Drew Folta  <drew@folta.net>    HEAD (alpha)
+
+  * much, much better support for datetime axes
+
+
+2003-09-14    Drew Folta  <drew@folta.net>    HEAD (alpha)
+
+  * lazy evaluated values can no longer be COPYed in <rpn>s
+  * version 0.5.2a released
+
+
+2003-06-25    Drew Folta  <drew@folta.net>    HEAD (alpha)
+
+  * removed unnecessary library header include
+  * added a 'break' for each switch default, to silence some compiler warnings
+    (Thanks to Ian Holsman.)
+
+
+2003-06-22    Drew Folta  <drew@folta.net>    HEAD (alpha)
+
+  * draw <area> continuously, instead of series of areas
+
+
+2003-06-17    Drew Folta  <drew@folta.net>    HEAD (alpha)
+
+  * draw <line> continuously, instead of series of line segments
+
+
+2003-06-16    Drew Folta  <drew@folta.net>    HEAD (alpha)
+
+  * replaced gmtime() with localtime(), since that's easier for folks to read
+  * only one of <grid x-modulus y-modulus> required
+  * option "xml-relative" is the default
+
+
+2003-06-14    Drew Folta  <drew@folta.net>    HEAD (alpha)
+
+  * fixed bug when reading rrd files where columns that weren't requisted get
+    intermixed with the timestamps.
+
+
+2003-06-12    Drew Folta  <drew@folta.net>    HEAD (alpha)
+
+  * version 0.5.1a released
+  * fixed bug #753368:  can't read exponent values correctly
+  * fixed bug where moth would segfault when scaling=auto and a column was
+    comprised entirely of NaNs
+
+
+2003-06-12    Drew Folta  <drew@folta.net>    RELEASE_0_4_BRANCH (beta)
+
+  * version 0.4.3 released
+  * fixed bug #753368:  can't read exponent values correctly
+
+
+2003-06-10    Drew Folta  <drew@folta.net>    HEAD (alpha)
+
+  * draw last (left- and top-most) grid lines
+
+
+2003-06-06    Drew Folta  <drew@folta.net>    HEAD (alpha)
+
+  * renamed occurances of "render" to "draw", just for consistancy
+  * unified all defaults and some constants (into data.h)
+  * replace use of '%lf' with '%g' in *printf, where applicable
+  * show ticks for labels even if they don't have any text
+
+
+2003-06-05    Drew Folta  <drew@folta.net>    HEAD (alpha)
+
+  * refactor drawing algorithm into phases
+  * removed "draw-nan" option
+  * moved viewporting from pixmap to image
+  * fixed small logic bug in axes.c that only showed up when compiling with -O0
+
+
+2003-05-08    Drew Folta  <drew@folta.net>    HEAD (alpha)
+
+  * version 0.5.0a released
+  * cleaned up documentation for "quiet" option
+
+
+2003-04-30    Drew Folta  <drew@folta.net>    HEAD (alpha)
+
+  * argument --dump-xml
+
+
+2003-04-20    Drew Folta  <drew@folta.net>    HEAD (alpha)
+
+  * separate execution into three stages:  turn XML into data structures,
+    execute data sources, and draw images
+
+
+2003-03-15    Drew Folta  <drew@folta.net>    HEAD (alpha)
+
+  * <axis scaling="auto">
+
+
+2003-02-01    Drew Folta  <drew@folta.net>    HEAD (alpha)
+
+  * reorganized data.c,h slightly
+
+
+2003-01-29    Drew Folta  <drew@folta.net>    HEAD (alpha)
+
+  * refactored layout algorithm, again, and made it cleaner
+  * fixed bug #670931:  negative signs in right tick values eaten by juxtaposition
+
+
+2003-01-26    Drew Folta  <drew@folta.net>    HEAD (alpha)
+
+  * encorporated 0.4.1 changes into alpha branch
+  * encorporated 0.4.2 changes into alpha branch
+  * moved the color store into the image, since each image should really have
+    its own set of colors
+  * fixed bug where <moth> attributes were too sticky when using many XML files
+  * supports grouping of shortcut arguments
+  * argument --version
+  * argument --quiet to not show warnings
+  * better default for <points> radius attribute
+  * art_vpath_perturb() no longer needed
+
+
+2003-01-25    Drew Folta  <drew@folta.net>    RELEASE_0_4_BRANCH (beta)
+
+  * version 0.4.2 released
+
+
+2003-01-24    Drew Folta  <drew@folta.net>    RELEASE_0_4_BRANCH (beta)
+
+  * fixed bug #674426:  the color "gold" is misspelled
+
+
+2003-01-24    Drew Folta  <drew@folta.net>    HEAD (alpha)
+
+  * refactored API for using "xml-relative" option, and <rrd> now uses it also
+  * fixed bug:  moth_options_get_option() should always return true or false,
+    and default to false
+
+
+2003-01-23    Drew Folta  <drew@folta.net>    RELEASE_0_4_BRANCH (beta)
+
+  * fixed bug #670921:  constant columns in drawing layers should work
+  * fixed bug #670939:  error message when column is missing isn't very descriptive
+
+
+2003-01-21    Drew Folta  <drew@folta.net>    RELEASE_0_4_BRANCH (beta)
+
+  * fixed bug #672118:  really long first line of legend too low
+
+
+2003-01-21    Drew Folta  <drew@folta.net>    RELEASE_0_4_BRANCH (beta)
+
+  * fixed bug #670928:  <rpn> MONTH and YEAR should have their ranges adjusted
+  * fixed bug #670924:  can't understand unit 'E' (exa, 1e18)
+  * fixed bug #670940:  watermark is clipped when neither bottom axis nor legend
+  * fixed bug #670919:  watermark location is wrong when using a large border-size
+
+
+2003-01-20    Drew Folta  <drew@folta.net>    RELEASE_0_4_BRANCH (beta)
+
+  * fixed bug #670934:  <textfile> reads data wrong at buffer boundary
+  * fixed bug #670930:  <rpn> MOD integer part is wrong
+  * fixed bug #670929:  <rpn> logic OPs should consider NaN to be false
+  * fixed bug #670926:  <rpn> datetime OPs should return NaN for NaN input
+
+
+2003-01-09    Drew Folta  <drew@folta.net>    RELEASE_0_4_BRANCH (beta)
+
+  * fix for bug #660220:  size-type="image" didn't work
+
+
+2002-12-26    Drew Folta  <drew@folta.net>    RELEASE_0_4_BRANCH (beta)
+
+  * version 0.4.1 released
+
+
+2002-12-26    Drew Folta  <drew@folta.net>    HEAD (alpha)
+
+  * cheap placeholder <moth> options handling
+
+
+2002-12-22    Drew Folta  <drew@folta.net>    HEAD (alpha)
+
+  * argument --xml-relative to cause filenames to be calculated relative to
+    the location of the XML file  (as opposed to the current working directory)
+
+
+2002-12-20    Drew Folta  <drew@folta.net>    HEAD (alpha)
+
+  * argument --dump-columns prints values in columns (for data debugging)
+  * fixed <mysql> bug where query wasn't null-terminated
+  * argument --profile to print times required to process the sources
+  * added missing safety-net test for nested <image>s
+
+
+2002-12-18    Drew Folta  <drew@folta.net>    HEAD (alpha)
+
+  * in <rpn>, added new functions to obtain the min, max, sum, average, and
+    standard deviation of a column
+  * created color store, which resolves all requests for colors
+  * auto-select distinct colors for layers
+
+
+2002-12-14    Drew Folta  <drew@folta.net>    RELEASE_0_4_BRANCH (beta)
+
+  * fixed small bug when using the --with-rrd argument of configure
+
+
+2002-12-12    Drew Folta  <drew@folta.net>
+
+  * version 0.4 released
+
+
+2002-12-11    Drew Folta  <drew@folta.net>
+
+  * wrote DTD
+
+
+2002-12-09    Drew Folta  <drew@folta.net>
+
+  * decommissioned unused function moth_format_add()
+  * created moth_image_add_layer() and moved image struct out of header
+
+
+2002-12-08    Drew Folta  <drew@folta.net>
+
+  * applied 'break' at end of default clause of switches
+    patch provided by Ian Holsman <lists@holsman.net>
+  * new configure.in and Makefile.in by Ian Holsman <lists@holsman.net>
+  * image now uses macro defined by configure for version watermark
+  * added .dev file for each major .c file, describing coding approaches
+    and issues  (idea borrowed from the perl6 .dev files)
+  * made an ernest attempt to keep line lengths below 80 characters
+
+
+2002-11-30    Drew Folta  <drew@folta.net>
+
+  * removed unused 'format_size' in axes.c
+
+
+2002-11-22    Drew Folta  <drew@folta.net>
+
+  * fixed small memory leak when drawing areas
+  * rewrote <label> template tokenizer
+
+
+2002-11-20    Drew Folta  <drew@folta.net>
+
+  * <rpn> tokens are handled as a linked list, with performance benefits
+
+
+2002-11-19    Drew Folta  <drew@folta.net>
+
+  * bunch of code cleanups and clarifications in sources/*.c
+  * layers and sources now use the runtime column store
+
+
+2002-11-17    Drew Folta  <drew@folta.net>
+
+  * swatch drawing code refactored into layers.c,h
+  * <points> swatch drawn filled if applicable
+
+
+2002-11-16    Drew Folta  <drew@folta.net>
+
+  * captures runtime environment in a struct
+    (implemented with a global [yeach...])
+  * changed parser to use new runtime environment
+  * fixed memory leak in <textfile>
+  * all arguments can be specified as attributes to the <moth> tag
+  * --no-draw argument, <moth draw="off"> implemented
+  * --draw-nan argument, <moth draw-nan="on"> implemented
+
+
+2002-11-10    Drew Folta  <drew@folta.net>
+
+  * factor out columns into columns.c,h
+
+
+2002-11-03    Drew Folta  <drew@folta.net>
+
+  * refactor columns so that named and constant columns are handled similarly
+  * all applicable attributes use new unified column type
+  * <rpn> always evaluates at least once
+  * <rpn> can create constant columns
+
+
+2002-11-02    Drew Folta  <drew@folta.net>
+
+  * cleaned up and unified axis and tick drawing
+
+
+2002-10-30    Drew Folta  <drew@folta.net>
+
+  * no need to specify null axes
+  * move axis/column association into moth_axis code
+  * libart_lgpl version >= 2.3.6 now required
+
+
+2002-10-14    Drew Folta  <drew@folta.net>
+
+  * version 0.3 released
+
+
+2002-10-02    Drew Folta  <drew@folta.net>
+
+  * now 'sh configure' before make
+
+
+2002-09-27    Drew Folta  <drew@folta.net>
+
+  * boolean attributes also accept "true"
+  * fixed bug 598085
+
+
+2002-09-01    Drew Folta  <drew@folta.net>
+
+  * don't draw <points> with invalid radii
+
+
+2002-08-22    Drew Folta  <drew@folta.net>
+
+  * layer attributes that use columns can also use constants
+  * refactored how data is pulled out of a column
+  * fixed a bug where not all units where supported
+  * <points> attribute "fill" to draw filled
+
+
+2002-08-21    Drew Folta  <drew@folta.net>
+
+  * made it so that an axis that only displays one value (min==max)
+    auto-adjusts so that the value appears in the center of the axis
+  * more functions for <rpn>
+  * more code cleanup and commenting
+
+
+2002-08-20    Drew Folta  <drew@folta.net>
+
+  * fixed bug where it would segfault with an empty <label> template
+  * numeric layer attributes can also take column names
+    (<line width>  <points radius>  <segments width>)
+
+
+2002-08-13    Drew Folta  <drew@folta.net>
+
+  * four new <image> attributes controlling background and border
+  * string width modifier now supported in more cases of <label> templates
+  * safety code in calculating <label> ticks if more ticks than pixels
+  * <area> and <segments> attributes "x0" and "x1" secondarily default to "x"
+  * <area> and <segments> attributes "y0" and "y1" secondarily default to "y"
+  * optimized memory usage a little
+
+
+2002-08-10    Drew Folta  <drew@folta.net>
+
+  * version 0.2 released
+
+
+2002-08-10    Drew Folta  <drew@folta.net>
+
+  * preliminary argument support
+  * argument --help
+  * argument --list-colors to show list of predefined colors
+  * process all xml files given on the command line
+  * filename shown when parser warns or dies
+  * more code cleanup, commenting, and refactoring
+
+
+2002-08-09    Drew Folta  <drew@folta.net>
+
+  * <axis>es can now have titles
+  * more code cleanup and refactoring
+
+
+2002-08-03    Drew Folta  <drew@folta.net>
+
+  * width modifier in <label> templates specify minimum width
+  * abbreviated month names in <label> templates
+  * <segments> draws line segments between two points
+  * legend swatchs drawn in same format as layer
+  * <rpn> SKIP, which causes no data for this row to be saved to columns
+  * more code cleanup and refactoring
+
+
+2002-07-31    Drew Folta  <drew@folta.net>
+
+  * version 0.1 released
+
+

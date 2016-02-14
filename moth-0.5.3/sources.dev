@@ -1,0 +1,18 @@
+
+
+VERSION:  $Id: sources.dev,v 1.1 2002/12/09 05:56:16 drewfish Exp $
+
+
+A source fills each of the columns in a column list with data.
+
+The code for each type of source is in the 'sources' directory.  Each of those
+files is included in sources.c and the whole thing is treated as one
+compilation unit.  That is perhaps not the most easily extensible approach, but
+it should be fairly portable and was pretty easy to implement :)
+
+Each source object manages a column list and a buffer of the source definition.
+The buffer needn't be used by all source types (and indeed isn't for
+textfiles).
+
+
+

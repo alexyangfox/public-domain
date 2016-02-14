@@ -1,0 +1,160 @@
+<!--  moth-0-5-3.dtd  -->
+<!--  $Id: moth.dtd,v 1.10 2004/03/17 04:24:08 drewfish Exp $  -->
+<!--  Placed in the public domain by Drew Folta, 2002.  Share and enjoy!  -->
+
+
+
+<!ELEMENT moth (mysql | rpn | rrd | textfile | image)* >
+<!ATTLIST moth
+    draw          (on | 1 | off | 0)  "on"
+    dump-columns  (on | 1 | off | 0)  "off"
+    draw-nan      (on | 1 | off | 0)  "off"
+    profile       (on | 1 | off | 0)  "off"
+    quiet         (on | 1 | off | 0)  "off"
+    xml-relative  (on | 1 | off | 0)  "off"
+    dump-xml      (on | 1 | off | 0)  "off"
+>
+
+
+
+<!-- ==================== DATA SOURCES ==================== -->
+<!ELEMENT mysql (#PCDATA) >
+<!ATTLIST mysql
+    columns       CDATA       #REQUIRED
+    host          CDATA       #IMPLIED
+    database      CDATA       #REQUIRED
+    username      CDATA       #IMPLIED
+    password      CDATA       #IMPLIED
+>
+
+
+<!ELEMENT rpn (#PCDATA) >
+<!ATTLIST rpn
+    columns       CDATA       #REQUIRED
+>
+
+
+<!ELEMENT rrd (#PCDATA) >
+<!ATTLIST rrd
+    columns       CDATA       #REQUIRED
+    filename      CDATA       #REQUIRED
+    cf            (AVG | MIN | MAX | LAST)  #REQUIRED
+    resolution    CDATA       #IMPLIED
+    start         CDATA       #IMPLIED
+    end           CDATA       #IMPLIED
+>
+
+
+<!ELEMENT textfile (EMPTY) >
+<!ATTLIST textfile
+    columns       CDATA   #REQUIRED
+    filename      CDATA   #REQUIRED
+    skip          CDATA   #IMPLIED
+    delimiter     CDATA   #IMPLIED
+>
+
+
+
+<!-- ==================== IMAGE ELEMENTS ==================== -->
+<!ELEMENT image (axis | area | grid | line | points | segments)* >
+<!ATTLIST image
+    filename      CDATA   #REQUIRED
+    fileformat    CDATA   #IMPLIED
+    width         CDATA   #REQUIRED
+    height        CDATA   #REQUIRED
+    size-type     (image | canvas)  "canvas"
+    title         CDATA   #IMPLIED
+    background    CDATA   #IMPLIED
+    canvas        CDATA   #IMPLIED
+    border-color  CDATA   #IMPLIED
+    border-size   CDATA   #IMPLIED
+>
+
+
+<!ELEMENT axis (label)* >
+<!ATTLIST axis
+    location      (left | top | right | bottom)   #REQUIRED
+    scaling       (linear | log2 | loge | log10 | auto)  "linear"
+    clip-min      CDATA   #IMPLIED
+    clip-max      CDATA   #IMPLIED
+    clip-force    (on | 1 | off | 0)  "off"
+    snap-to       CDATA   #IMPLIED
+    title         CDATA   #IMPLIED
+    color         CDATA   #IMPLIED
+>
+
+
+<!ELEMENT label (#PCDATA) >
+<!ATTLIST label
+    color         CDATA   #IMPLIED
+    modulus       CDATA   #REQUIRED
+    offset        CDATA   #IMPLIED
+>
+
+
+
+<!-- ==================== DRAWING LAYERS ==================== -->
+<!ELEMENT area (EMPTY) >
+<!ATTLIST area
+    title         CDATA   #IMPLIED
+    color         CDATA   #IMPLIED
+    x0            CDATA   #IMPLIED
+    y0            CDATA   #IMPLIED
+    x1            CDATA   #IMPLIED
+    y1            CDATA   #IMPLIED
+    x-axis        CDATA   #IMPLIED
+    y-axis        CDATA   #IMPLIED
+>
+
+
+<!ELEMENT grid (EMPTY) >
+<!ATTLIST grid
+    color         CDATA   #IMPLIED
+    x-modulus     CDATA   #REQUIRED
+    y-modulus     CDATA   #REQUIRED
+    x-offset      CDATA   #IMPLIED
+    y-offset      CDATA   #IMPLIED
+    x-axis        CDATA   #IMPLIED
+    y-axis        CDATA   #IMPLIED
+>
+
+
+<!ELEMENT line (EMPTY) >
+<!ATTLIST line
+    title         CDATA   #IMPLIED
+    color         CDATA   #IMPLIED
+    x             CDATA   #IMPLIED
+    y             CDATA   #IMPLIED
+    x-axis        CDATA   #IMPLIED
+    y-axis        CDATA   #IMPLIED
+    width         CDATA   #IMPLIED
+>
+
+
+<!ELEMENT points (EMPTY) >
+<!ATTLIST points
+    title         CDATA   #IMPLIED
+    color         CDATA   #IMPLIED
+    x             CDATA   #IMPLIED
+    y             CDATA   #IMPLIED
+    x-axis        CDATA   #IMPLIED
+    y-axis        CDATA   #IMPLIED
+    radius        CDATA   #IMPLIED
+    filled        (on | 1 | off | 0)  "off"
+>
+
+
+<!ELEMENT segments (EMPTY) >
+<!ATTLIST segments
+    title         CDATA   #IMPLIED
+    color         CDATA   #IMPLIED
+    x0            CDATA   #IMPLIED
+    y0            CDATA   #IMPLIED
+    x1            CDATA   #IMPLIED
+    y1            CDATA   #IMPLIED
+    x-axis        CDATA   #IMPLIED
+    y-axis        CDATA   #IMPLIED
+    width         CDATA   #IMPLIED
+>
+
+

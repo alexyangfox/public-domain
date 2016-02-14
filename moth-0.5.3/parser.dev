@@ -1,0 +1,18 @@
+
+VERSION:  $Id: parser.dev,v 1.2 2003/04/21 01:02:29 drewfish Exp $
+
+
+The parser object reads the contents of a file, processes the XML and creates
+the corresponding C data structures.
+
+When a source or image is completed (the closing tag is reached) the data
+structure is added to the moth_file object.  (Actions are no longer performed
+on the closing tags.)
+
+It uses the expat library for the interpretting the XML.  Many callbacks are
+registered with the expat library.  One limitation of the expat library is that
+it can only handle one top-level tag per file.  (Hmm... this may be part of the
+XML specification.)
+
+
+

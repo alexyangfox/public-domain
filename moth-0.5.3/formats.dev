@@ -1,0 +1,65 @@
+
+
+VERSION:  $Id: formats.dev,v 1.2 2003/06/05 20:33:05 drewfish Exp $
+
+
+
+Formats are image formats that we know how to write.  They are identified by
+filename extension.
+
+Code to handle each format type is stored in the 'formats' directory.  Each
+format needs code added to formats.c to be available, as well as support for
+detecting and linking in any external libraries in the 'configure' script.
+
+As a special case 'jpg' and 'jpeg' are treated the same.
+
+The list of formats (in an <image>) is managed as a linked list, with the first
+format in the list presenting itself as the interface to the entire list.
+
+
+
+VECTOR VERSUS PIXMAP FORMATS
+
+  There are actually two types of formats:  those that just store an image
+  pixmap in a file, and those that can do vector graphics.
+
+  For the formats that store an image pixmap, we create a global pixmap object
+  (pixmap.h), and then use that to write the pixmap to the file.
+
+  For formats that can do vector graphics, we have several data structures and
+  function calls that we use to define and draw the various elements.
+
+
+
+PHASES
+
+  create image
+  draw canvas
+  draw watermark
+  draw title
+  draw axes
+  draw data layers
+  close image
+
+  For each phase, we create datastructures and pass them off to the format
+  code.
+
+
+
+FONTS AND FORMATS
+
+  Each format could have it's own way of specifying fonts.  This is especially
+  true for the vector formats.  (But less so for pixmap formats, which use the
+  single global pixmap to draw strings.)  The implications of this is that
+  there should be an API for each format to report on the width and length of a
+  particular string.  In addition, since each format could have a different
+  geometry for the same string, it implies that each format should be laid out
+  separately.
+
+  As an architectural simplification, we use the global pixmap to calculate
+  string geometries.  This has two repercussions a) we always need to create a
+  global pixmap b) string geometries for the vector formats will always be an
+  approximation.
+
+
+

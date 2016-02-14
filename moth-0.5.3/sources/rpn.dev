@@ -1,0 +1,30 @@
+
+
+VERSION:  $Id: rpn.dev,v 1.1 2002/12/09 05:56:33 drewfish Exp $
+
+
+An RPN is a Reverse Polish Notation calculator.  It works by applying the
+calculation for each row of the columns specified in the calculation.
+
+It always executes at least one row, so that RPNs that aren't based upon a
+calculation can still set the destination columns to a value.  In this case,
+the destination columns are set as constant.
+
+The buffer is tokenized based on space characters defined by the POSIX function
+isspace().  Each token is interpretted given the context of a stack, with a
+fresh stack for each row calculated.  Values leftover on the stack after the
+tokens have been interpretted are then added to the destination columns.  The
+value at the bottom of the stack goes to the first column, and the value at the
+top of the stack goes to the last column.
+
+Since we're implementing an RPN language, we can build a strictly linear parse
+tree (which is very easy to do).
+
+We do "lazy evaluation" by treating value on the stack in two different ways.
+When we care about the actual value of the item on the stack, we fetch it,
+possibly triggering the special conditions.  Otherwise, we manipulate the stack
+entries themselves, without looking at there actual values -- defering that
+interpretation until later.
+
+
+

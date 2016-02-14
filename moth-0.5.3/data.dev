@@ -1,0 +1,50 @@
+
+VERSION:  $Id: data.dev,v 1.1 2002/12/09 05:56:16 drewfish Exp $
+
+
+This library presents general data handling functions and objects, as well as
+defines types and structures used by many other parts of Moth.
+
+
+
+RUNTIME   (struct moth_runtime_s)
+
+  Represents the runtime environment, and is accessible to everyone through the
+  global 'runtime'.
+
+  This object is actually created in moth.c.
+
+
+
+WARN / DIE
+
+  Error reporting functions, of two different degrees :)
+
+
+
+SCALE_VALUE / UNSCALE_VALUE / CONVERT_VALUE / READ_VALUE
+
+  For manipulating doubles.
+
+
+
+BUFFERS
+
+  A buffer is a chunk of binary data.  Most frequently, it's used to store
+  strings.
+
+  Buffers are implemented in chunks, where each _add() adds a chunk.  Both
+  _data() and _strdup() smoosh the chunks down into one single chunk.
+
+
+
+COLORS
+
+  A color can be specified with red/green/blue values, or by name.  The named
+  colors are defined in rgb.c.  Alpha levels are also supported.
+
+  rgb.c is compiled in as C code since we don't care to keep the named colors
+  in any special kind of datastructure -- a list is fine.
+
+
+
