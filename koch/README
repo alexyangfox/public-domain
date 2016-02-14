@@ -1,0 +1,5 @@
+This program draws Koch Snowflake using OpenGL.
+Check the contents of Makefile before compiling.
+This program is distributed as a public domain software.
+usage: koch [LOOP_COUNT(=4)]
+-- TOMARI Hisanobu<davy14008500@users.sourceforge.net>
