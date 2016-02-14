@@ -1,0 +1,9 @@
+from http://www.codeproject.com/KB/cpp/FastDelegate.aspx :
+
+License
+
+The source code attached to this article is released into the public domain. 
+You may use it for any purpose. 
+Frankly, writing the article was about ten times as much work as writing the code. 
+Of course, if you create great software using the code, I would be interested to hear about it. 
+And submissions are always welcome.
