@@ -1,0 +1,52 @@
+void QuickSort(void *base, int count, int size,
+  int (*compare)(const void *, const void *, void *), void *pointer);
+
+static void
+InternalQuickSort(char *left, char *right, int size,
+  int (*compare)(const void *, const void *, void *), void *pointer)
+{
+  char *p = left;
+  char *q = right;
+  char *t = left;
+  while (1)
+  {
+    while ((*compare)(p, t, pointer) < 0)
+      p += size;
+    while ((*compare)(q, t, pointer) > 0)
+      q -= size;
+    if (p > q)
+      break;
+    if (p < q)
+    {
+      int i;
+      for (i = 0; i < size; i++)
+      {
+        char x = p[i];
+        p[i] = q[i];
+        q[i] = x;
+      }
+      if (t == p)
+        t = q;
+      else if (t == q)
+        t = p;
+    }
+    p += size;
+    q -= size;
+  }
+  if (left < q)
+    InternalQuickSort(left, q, size, compare, pointer);
+  if (p < right)
+    InternalQuickSort(p, right, size, compare, pointer);
+}
+
+void
+QuickSort(void *base, int count, int size,
+  int (*compare)(const void *, const void *, void *), void *pointer)
+{
+  if (count > 1)
+  {
+    InternalQuickSort((char *) base, (char *) base + (count-1)*size, size,
+      compare, pointer);
+  }
+}
+

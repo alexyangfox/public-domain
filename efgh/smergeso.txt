@@ -1,0 +1,89 @@
+/* Stable Merge Sort
+   by Philip J. Erdelsky
+   pje@efgh.com
+   http://www.alumni.caltech.edu/~pje/
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+extern int merge_sort(FILE *, FILE *,
+  int (*)(FILE *, void *, void *),
+  int (*)(FILE *, void *, void *),
+  int (*)(void *, void *, void *), void *,
+  unsigned, unsigned long, unsigned long *);
+
+struct read_write_compare
+{
+  FILE *unsorted_file;
+  FILE *sorted_file;
+  int (*read)(FILE *, void *, void *);
+  int (*write)(FILE *, void *, void *);
+  int (*compare)(void *, void *, void *);
+  void *pointer;
+  unsigned long record_number;
+};
+
+struct numbered_record
+{
+  unsigned long number;
+  char record[1];
+};
+
+#define point ((struct read_write_compare *) pointer)
+#define buf   ((struct numbered_record *) buffer)
+
+static int read_record(FILE *f, void *buffer, void *pointer)
+{
+  int n;
+  if (f == point->unsorted_file)
+    buf->number = point->record_number++;
+  else
+    fread(&buf->number, sizeof(unsigned long), 1, f);
+  n = (*point->read)(f, buf->record, point->pointer);
+  if (n != 0)
+    n += sizeof(unsigned long);
+  return n;
+}
+
+static int write_record(FILE *f, void *buffer, void *pointer)
+{
+  if (f != point->sorted_file &&
+    fwrite(&buf->number, sizeof(unsigned long), 1, f) == 0)
+  {
+    return 0;
+  }
+  return (*point->write)(f, buf->record, point->pointer);
+}
+
+static int compare_records(void *p, void *q, void *pointer)
+{
+  #define pp ((struct numbered_record *) p)
+  #define qq ((struct numbered_record *) q)
+  int n = (*point->compare)(pp->record, qq->record, point->pointer);
+  if (n == 0)
+    n = pp->number < qq->number ? -1 : 1;
+  return n;
+}
+
+int stable_merge_sort(FILE *unsorted_file, FILE *sorted_file,
+  int (*read)(FILE *, void *, void *),
+  int (*write)(FILE *, void *, void *),
+  int (*compare)(void *, void *, void *), void *pointer,
+  unsigned max_record_size, unsigned long block_size,
+  unsigned long *record_count)
+{
+  struct read_write_compare rwc;
+  rwc.unsorted_file = unsorted_file;
+  rwc.sorted_file = sorted_file;
+  rwc.read = read;
+  rwc.write = write;
+  rwc.compare = compare;
+  rwc.pointer = pointer;
+  rwc.record_number = 0L;
+  return merge_sort(unsorted_file, sorted_file, read_record, write_record,
+    compare_records, &rwc, sizeof(unsigned long) + max_record_size,
+    block_size, record_count);
+}
+

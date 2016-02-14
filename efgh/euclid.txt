@@ -1,0 +1,81 @@
+// Rename this file euclid.cpp
+// Supply a definition of the type UITYPE
+
+/*----------------------------------------------------------------------------
+This function uses the Euclidean algorithm to find the greatest common divisor
+g of the positive integers x and y and also two integers a and b such that
+ax - by = g, 1 <= a <= y and 0 <= b < x.
+
+Here UITYPE is an unsigned integer type. All calculations use unsigned
+arithmetic, and none produces any result larger than the maximum of x and y.
+Numbers of type UITYPE are accessed by reference because in some applications
+(such as cryptography) they may be very large.
+
+This function will fail in undefined ways if either x or y is zero.
+----------------------------------------------------------------------------*/
+
+void EuclideanAlgorithm(const UITYPE &x, const UITYPE &y, UITYPE &a,
+  UITYPE &b, UITYPE &g)
+{
+  if (x <= y)
+  {
+    /* These two statements may be replaced by more efficient code which */
+    /* computes the quotient and remainder simultaneously.              */
+    UITYPE q = y / x;
+    UITYPE r = y % x;
+    if (r == 0)
+    {
+      a = 1;
+      b = 0;
+      g = x;
+    }
+    else
+    {
+      UITYPE ap;
+      EuclideanAlgorithm(x, r, ap, b, g);
+      // a = ap + b * q;
+      a = b;
+      a *= q;
+      a += ap;
+    }
+  }
+  else
+  {
+    UITYPE ap, bp;
+    EuclideanAlgorithm(y, x, bp, ap, g);
+    // a = y - ap;
+    a = y;
+    a -= ap;
+    // b = x - bp;
+    b = x;
+    b -= bp;
+  }
+}
+
+/*----------------------------------------------------------------------------
+This function uses the Euclidean algorithm to find the greatest common divisor
+g of the positive integers x and y.
+
+Here UITYPE is an unsigned integer type. All calculations use unsigned
+arithmetic, and none produces any result larger than the maximum of x and y.
+Numbers of type UITYPE are accessed by reference because in some applications
+(such as cryptography) they may be very large.
+
+This function will fail in undefined ways if either x or y is zero.
+----------------------------------------------------------------------------*/
+
+void GreatestCommonDivisor(const UITYPE &x, const UITYPE &y, UITYPE &g)
+{
+  if (x <= y)
+  {
+    UITYPE r = y;
+    r %= x;
+    if (r == 0)
+      g = x;
+    else
+      GreatestCommonDivisor(x, r, g);
+  }
+  else
+    GreatestCommonDivisor(y, x, g);
+}
+

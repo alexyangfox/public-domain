@@ -1,0 +1,146 @@
+=============================== unix2dos.cpp ===============================
+
+// converts Unix text files to DOS format by replacing \n with \r\n
+
+#include <stdio.h>
+#include <dir.h>
+#include "readahead.h"
+
+void main(int argc, char **argv)
+{
+  for (int i = 1; i < argc; i++)
+  {
+    readahead *f = new readahead(argv[i], 3);
+    printf("%s:\n", argv[i]);
+    if (!f->open())
+    {
+      fputs("Can't open file\n", stderr);
+      continue;
+    }
+    FILE *t = tmpfile();
+    while ((*f)[0] != EOF)
+    {
+      if ((*f)[0] == '\r' && (*f)[1] == '\n')
+      {
+        fputc('\n', t);
+        f->advance(2);
+      }
+      else if ((*f)[0] == '\n')
+      {
+        fputc('\n', t);
+        f->advance(1);
+      }
+      else
+      {
+        fputc((*f)[0], t);
+        f->advance(1);
+      }
+    }
+    delete f;
+    rewind(t);
+    FILE *ff = fopen(argv[i], "w");
+    if (ff == NULL)
+    {
+      fputs("Can't modify file\n", stderr);
+      continue;
+    }
+    int c;
+    while ((c = fgetc(t)) != EOF)
+      fputc(c, ff);
+    fclose(t);
+    fclose(ff);
+  }
+}
+
+=============================== readahead.cpp ===============================
+
+// File reading package with read-ahead
+
+#include "readahead.h"
+
+readahead::readahead(const char *filespecs, unsigned size, bool binary)
+{
+  psize = size;
+  buffer = new int[psize];
+  fp = fopen(filespecs, binary ? "rb" : "r");
+  eof = fp == NULL;
+  unsigned i;
+  for (i = 0; i < psize; i++)
+    buffer[i] = get();
+}
+
+readahead::~readahead()
+{
+  if (open())
+  {
+    delete [] buffer;
+    fclose(fp);
+    fp = NULL;
+  }
+}
+
+void readahead::advance(unsigned count)
+{
+  while (count > 0)
+  {
+    unsigned i;
+    for (i = 0; i < psize-1; i++)
+      buffer[i] = buffer[i+1];
+    buffer[i] = get();
+    count--;
+  }
+}
+
+int readahead::get(void)
+{
+  int c;
+  if (eof)
+    c = EOF;
+  else
+  {
+    c = fgetc(fp);
+    if (c == EOF)
+      eof = true;
+  }
+  return c;
+}
+
+bool readahead::match(const char *s) const
+{
+  int i;
+  for (i = 0; s[i] != 0; i++)
+  {
+    if (s[i] != (char) buffer[i])
+      return false;
+  }
+  return true;
+}
+
+=============================== readahead.h   ===============================
+
+#ifndef H__READAHEAD
+#define H__READAHEAD
+
+#include <stdio.h>
+
+class readahead
+{
+  public:
+    readahead(const char *filespecs, unsigned size, bool binary = false);
+    ~readahead();
+    bool open() const {return fp != NULL;}
+    int operator [](int i) const {return buffer[i];}
+    void advance(unsigned count = 1);
+    bool match(const char *s) const;
+  private:
+    int *buffer;
+    unsigned psize;
+    FILE *fp;
+    bool eof;
+    int get(void);
+};
+
+
+
+#endif
+

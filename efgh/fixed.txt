@@ -1,0 +1,500 @@
+
+=============================== ADD.CPP      ===============================
+
+#include "fixed.h"
+
+fixed operator + (fixed x, fixed y)
+{
+  x.equalize_precision(y);
+  x.value = x.value + y.value;
+  return x;
+}
+
+=============================== ADDFI.CPP    ===============================
+
+#include "fixed.h"
+
+fixed operator + (fixed x, int y)
+{
+  return x + fixed(y,0);
+}
+
+
+=============================== ASSIGN.CPP   ===============================
+
+#include "fixed.h"
+
+fixed fixed::operator = (fixed x)
+{
+  value =
+    precision > x.precision ?
+      x.value * SCALE.x[precision - x.precision] :
+    precision < x.precision ?
+      x.value / SCALE.x[x.precision - precision] :
+    x.value;
+  return *this;
+}
+
+=============================== ASSIGNFI.CPP ===============================
+
+#include "fixed.h"
+
+fixed fixed::operator = (int x)
+{
+  value = x;
+  precision = 0;
+  return *this;
+}
+
+=============================== DIVIDE.CPP   ===============================
+
+#include "fixed.h"
+
+fixed operator / (fixed x, fixed y)
+{
+  x.value = (x.value * fixed::SCALE.x[y.precision]) / y.value;
+  return x;
+}
+
+=============================== DIVIDEFI.CPP ===============================
+
+#include "fixed.h"
+
+fixed operator / (fixed x, int y)
+{
+  return x / fixed(y,0);
+}
+
+
+=============================== DIVIDEIF.CPP ===============================
+
+#include "fixed.h"
+
+fixed operator / (int x, fixed y)
+{
+  return fixed(x,0) / y;
+}
+
+
+=============================== EDIT.CPP     ===============================
+
+#include "fixed.h"
+
+const char *fixed::edit(int options) const
+{
+  fixed_numerator x = value;
+  bool negative;
+  if (x < 0)
+  {
+    x = -x;
+    // prevent buffer overflow if result is still negative
+    if (x < 0)
+      x = x - 1;
+    negative = true;
+  }
+  else
+    negative = false;
+  int n = 0;
+  int units;
+  static char buffer[MAX_FIXED_LENGTH + MAX_FIXED_PRECISION];
+  do
+  {
+    if (n == precision)
+    {
+      if (n > 0 || options & DECIMAL)
+        buffer[sizeof(buffer) - ++n] = '.';
+      units = n;
+    }
+    else if (options & COMMAS && n > precision && (n - units) % 4 == 3)
+      buffer[sizeof(buffer) - ++n] = ',';
+    fixed_numerator y;
+    y = x / 10;
+    buffer[sizeof(buffer) - ++n] = integer(x - y*10) + '0';
+    x = y;
+  } while (n <= precision || x != 0);
+  if (negative)
+    buffer[sizeof(buffer) - ++n] = '-';
+  if (options & ALIGN)
+  {
+    while (n - units < MAX_FIXED_LENGTH-2)
+      buffer[sizeof(buffer) - ++n] = ' ';
+  }
+  return (const char *) buffer + sizeof(buffer) - n;
+  return ""; //inserted to get around linker bug!
+}
+
+
+=============================== EQL.CPP      ===============================
+
+#include "fixed.h"
+
+bool operator == (fixed x, fixed y)
+{
+  x.equalize_precision(y);
+  return x.value == y.value;
+}
+
+=============================== EQLFI.CPP    ===============================
+
+#include "fixed.h"
+
+bool operator == (fixed x, int y)
+{
+  return x == fixed(y,0);
+}
+
+
+=============================== EQLIF.CPP    ===============================
+
+#include "fixed.h"
+
+bool operator == (int x, fixed y)
+{
+  return fixed(x,0) == y;
+}
+
+
+=============================== EQUALIZE.CPP ===============================
+
+#include "fixed.h"
+
+void fixed::equalize_precision(fixed &x)
+{
+  if (precision < x.precision)
+  {
+    value = value * SCALE.x[x.precision - precision];
+    precision = x.precision;
+  }
+  else if (x.precision < precision)
+  {
+    x.value = x.value * SCALE.x[precision - x.precision];
+    x.precision = precision;
+  }
+}
+
+=============================== FIXED.H      ===============================
+
+#ifndef H__FIXED
+#define H__FIXED 1
+
+const int MAX_FIXED_PRECISION = 15;
+const int MAX_FIXED_LENGTH = 28;
+typedef __int64 fixed_numerator;
+
+inline int integer(fixed_numerator x) {return (int) x;}
+
+class fixed
+{
+  private:
+  public:
+    fixed_numerator value;
+    unsigned char precision;
+    void equalize_precision(fixed &);
+    class scale
+    {
+      public:
+        fixed_numerator x[MAX_FIXED_PRECISION+1];
+        scale();
+    };
+    static scale SCALE;
+  public:
+    fixed(int x, int p) {value = x; precision = p;}
+    fixed(const char *);
+    fixed operator [] (int) const;
+    fixed operator = (fixed);
+    fixed operator = (int);
+    friend fixed operator + (fixed, fixed);
+    friend fixed operator - (fixed, fixed);
+    friend fixed operator * (fixed, fixed);
+    friend fixed operator / (fixed, fixed);
+    friend fixed operator - (fixed);
+    friend bool operator == (fixed, fixed);
+    friend bool operator < (fixed, fixed);
+    friend fixed operator - (int, fixed);
+    friend fixed operator / (int, fixed);
+    friend bool operator == (int, fixed);
+    friend bool operator < (int, fixed);
+    friend fixed operator + (fixed, int);
+    friend fixed operator - (fixed, int);
+    friend fixed operator * (fixed, int);
+    friend fixed operator / (fixed, int);
+    friend bool operator == (fixed, int);
+    friend bool operator < (fixed, int);
+    enum {ALIGN=1, COMMAS=2, DECIMAL=4};
+    const char *edit(int = COMMAS) const;
+    int whole(void) const;
+};
+
+inline bool operator != (fixed x, fixed y) {return !(x == y);}
+inline bool operator != (fixed x, int y) {return !(x == y);}
+inline bool operator != (int x, fixed y) {return !(x == y);}
+inline bool operator >= (fixed x, fixed y) {return !(x < y);}
+inline bool operator >= (fixed x, int y) {return !(x < y);}
+inline bool operator >= (int x, fixed y) {return !(x < y);}
+inline bool operator > (fixed x, fixed y) {return y < x;}
+inline bool operator > (fixed x, int y) {return y < x;}
+inline bool operator > (int x, fixed y) {return y < x;}
+inline bool operator <= (fixed x, fixed y) {return !(y < x);}
+inline bool operator <= (fixed x, int y) {return !(y < x);}
+inline bool operator <= (int x, fixed y) {return !(y < x);}
+
+fixed operator + (int x, fixed y) {return y + x;}
+fixed operator * (int x, fixed y) {return y * x;}
+
+#endif
+
+=============================== FIXEDS.CPP   ===============================
+
+#include "fixed.h"
+
+fixed::fixed(const char *s)
+{
+  value = 0;
+  precision = 0;
+  int c;
+  while ((c = *s++) == ' ' || c == '\t');
+  bool negative;
+  if (c == '-')
+  {
+    negative = true;
+    c = *s++;
+  }
+  else
+    negative = false;
+  bool decimal = false;
+  while (precision < MAX_FIXED_PRECISION)
+  {
+    if ('0' <= c && c <= '9')
+    {
+      value = value * 10 + (c - '0');
+      if (decimal)
+        precision++;
+    }
+    else if (c == '.')
+    {
+      if (decimal)
+        break;
+      decimal = true;
+    }
+    else if (c != ',')
+      break;
+    c = *s++;
+  }
+  if (negative)
+    value = - value;
+}
+
+=============================== LSS.CPP      ===============================
+
+#include "fixed.h"
+
+bool operator < (fixed x, fixed y)
+{
+  x.equalize_precision(y);
+  return x.value < y.value;
+}
+
+=============================== LSSFI.CPP    ===============================
+
+#include "fixed.h"
+
+bool operator < (fixed x, int y)
+{
+  return x < fixed(y,0);
+}
+
+
+=============================== LSSIF.CPP    ===============================
+
+#include "fixed.h"
+
+bool operator < (int x, fixed y)
+{
+  return fixed(x,0) < y;
+}
+
+
+=============================== MAKEFILE     ===============================
+
+all : test.exe
+
+fixed.lib : add.obj assign.obj assignfi.obj divide.obj edit.obj eql.obj \
+  equalize.obj scale.obj fixeds.obj lss.obj \
+  minus.obj multiply.obj precisio.obj subtract.obj \
+  addfi.obj subtrafi.obj subtraif.obj multipfi.obj \
+  dividefi.obj divideif.obj eqlfi.obj eqlif.obj \
+  lssfi.obj lssif.obj whole.obj
+  TLIB fixed /C /0 @objects, fixed
+
+test.exe : test.obj fixed.lib
+  TLINK32 -c -m -s C0X32 test, test, test, fixed IMPORT32 CW32MT
+
+.cpp.obj:
+  BCC32 -DWIN32 -j5 -c -x- -RT- $<
+
+
+=============================== MINUS.CPP    ===============================
+
+#include "fixed.h"
+
+fixed operator - (fixed x)
+{
+  x.value = -x.value;
+  return x;
+}
+
+=============================== MULTIPFI.CPP ===============================
+
+#include "fixed.h"
+
+fixed operator * (fixed x, int y)
+{
+  return x * fixed(y,0);
+}
+
+
+=============================== MULTIPLY.CPP ===============================
+
+#include "fixed.h"
+
+fixed operator * (fixed x, fixed y)
+{
+  x.value = x.value * y.value;
+  x.precision = x.precision + y.precision;
+  return x;
+}
+
+=============================== OBJECTS      ===============================
+
++&
+ADD+&
+ADDFI+&
+ASSIGN+&
+ASSIGNFI+&
+DIVIDE+&
+DIVIDEFI+&
+DIVIDEIF+&
+EDIT+&
+EQL+&
+EQLFI+&
+EQLIF+&
+EQUALIZE+&
+FIXEDS+&
+LSS+&
+LSSFI+&
+LSSIF+&
+MINUS+&
+MULTIPFI+&
+MULTIPLY+&
+PRECISIO+&
+SCALE+&
+SUBTRACT+&
+SUBTRAFI+&
+SUBTRAIF+&
+WHOLE
+
+
+=============================== PRECISIO.CPP ===============================
+
+#include "fixed.h"
+
+fixed fixed::operator [] (int p) const
+{
+  fixed x(0, p);
+  x.value =
+    p < precision ?
+      value / SCALE.x[precision - p] :
+    p > precision ?
+      value * SCALE.x[p - precision] :
+    value;
+  return x;
+}
+
+=============================== SCALE.CPP    ===============================
+
+#include "fixed.h"
+
+fixed::scale fixed::SCALE;
+
+fixed::scale::scale(void)
+{
+  int i;
+  fixed_numerator n;
+  n = 1;
+  for (i = 0; i <= MAX_FIXED_PRECISION; i++)
+  {
+    x[i] = n;
+    n = 10 * n;
+  }
+}
+
+
+=============================== SUBTRACT.CPP ===============================
+
+#include "fixed.h"
+
+fixed operator - (fixed x, fixed y)
+{
+  x.equalize_precision(y);
+  x.value = x.value - y.value;
+  return x;
+}
+
+=============================== SUBTRAFI.CPP ===============================
+
+#include "fixed.h"
+
+fixed operator - (fixed x, int y)
+{
+  return x - fixed(y,0);
+}
+
+
+=============================== SUBTRAIF.CPP ===============================
+
+#include "fixed.h"
+
+fixed operator - (int x, fixed y)
+{
+  return fixed(x,0) - y;
+}
+
+
+=============================== TEST.CPP     ===============================
+
+#include <stdio.h>
+#include "fixed.h"
+
+void main(int argc, char **argv)
+{
+  int i;
+  fixed a(argv[1]);
+  fixed b(argv[2]);
+  printf("a = %s\n", a.edit());
+  printf("b = %s\n", b.edit());
+  printf("a+b = %s\n", (a+b).edit());
+  printf("a-b = %s\n", (a-b).edit());
+  printf("a*b = %s\n", (a*b).edit());
+  printf("-a = %s\n", (-a).edit());
+  printf("a[4] = %s\n", a[4].edit());
+  if (b != 0)
+    printf("a/b = %s\n", (a/b).edit());
+  printf("a.whole() = %d\n", a.whole());
+  printf("is a == b? %s\n", a == b ? "yes" : "no");
+  printf("is a != b? %s\n", a != b ? "yes" : "no");
+  printf("is a <  b? %s\n", a <  b ? "yes" : "no");
+  printf("is a <= b? %s\n", a <= b ? "yes" : "no");
+  printf("is a >  b? %s\n", a >  b ? "yes" : "no");
+  printf("is a >= b? %s\n", a >= b ? "yes" : "no");
+}
+
+
+=============================== WHOLE.CPP    ===============================
+
+#include "fixed.h"
+
+int fixed::whole(void) const
+{
+  return integer(value / SCALE.x[precision]);
+}
+
