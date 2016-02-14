@@ -1,0 +1,29 @@
+.TH GETPEERNAME 1 "1997 April 13"
+.SH NAME
+getpeername \- get name of connected TCP/IP peer
+.SH SYNOPSIS
+.B getpeername
+.RB [ -n ]
+\fR[\fB\-p \fIprotocol\fR]
+.SH DESCRIPTION
+.B getpeername
+prints the IP address and service name (port number) of the
+remote peer connected to standard input.
+The IP address and the service name are printed on the same line,
+separated by one space.
+.SH OPTIONS
+.TP
+.B \-n
+Don't translate IP addresses and port numbers to names.
+.TP
+.B \-p \fIprotocol\fP
+Force getpeername to use \fIprotocol\fP as the protocol when
+translating port numbers to service names.
+\fIProtocol\fP can be \fBtcp\fP and \fBudp\fP.
+Normally, getpeername automatically determines what type of
+socket it is connected to.
+.SH SEE ALSO
+.PD
+.BR getpeername (3).
+.SH BUGS
+Only works on IP sockets.

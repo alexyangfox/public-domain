@@ -1,0 +1,49 @@
+.TH TCPCONNECT 1 "1997 April 13"
+.SH NAME
+tcplisten \- general TCP/IP server
+.SH SYNOPSIS
+.B tcplisten
+.RB [ -irv ]
+.RI [ localaddr ]
+.I port
+.SH DESCRIPTION
+.B tcplisten
+waits for a TCP/IP connection on
+.IR port .
+If a
+.I localaddr
+parameter is given,
+.B tcplisten
+will bind to that IP address.  Otherwise
+.B tcplisten
+will accept connections to any of the local machines IP
+addresses.
+Data received from the client is printed on standard output, and
+data read from standard input is sent to the client.
+When end-of-file is reached on both standard input and the TCP/IP
+connection,
+.B tcplisten
+terminates.
+.SH OPTIONS
+.TP
+.B \-i
+Terminate at end-of-file on standard input; don't wait for the
+client to close the connection.
+.TP
+.B \-r
+Terminate when the remote client closes the connection; don't
+wait for end-of-file on standard input.
+.TP
+.B \-v
+Verbose mode.
+Prints a message to standard error about the origins (host and
+port) of the client.
+.SH SEE ALSO
+.PD
+.BR tcpconnect (1),
+.BR telnet (1),
+.BR mini-inetd (1),
+.BR tcpbug (1).
+.SH BUGS
+The names of the options are not yet finalized, and may change
+at a future release.

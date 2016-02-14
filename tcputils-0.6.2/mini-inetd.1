@@ -1,0 +1,34 @@
+.TH MINI-INETD 1 "1997 April 13"
+.SH NAME
+mini-inetd \- small TCP/IP connection dispatcher
+.SH SYNOPSIS
+.B mini-inetd
+.RB [ -d ]
+\fR[\fB-m \fImaxconnections\fR]
+.I \fR[\fPlocaladdr\fB:\fP\fR]\fPport
+.I program
+[\fIargv0 argv1\fR ...]
+.SH DESCRIPTION
+.B mini-inetd
+listens for TCP/IP connections on \fIport\fP.
+For each connection, \fIprogram\fP is started
+with standard input and standard output connected to the socket.
+If \fIlocaladdr\fP is given, mini-inetd only listens for
+connections on the interface specified by that hostname or IP
+address,
+otherwise, it listens to all IP interfaces on the machine.
+.SH OPTIONS
+.TP
+.B \-d
+Debug...
+.TP
+.B \-m \fImaxconnections\fP
+Exit after \fImaxconnections\fP connections has been handled.
+.SH SEE ALSO
+.PD
+.BR tcpconnect (1),
+.BR tcplisten (1),
+.BR inetd (1m).
+.SH BUGS
+The names of the options are not yet finalized, and may change
+at a future release.

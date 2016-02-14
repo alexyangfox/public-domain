@@ -1,0 +1,61 @@
+.TH TCPBUG 1 "1997 April 13"
+.SH NAME
+tcpbug \- TCP/IP connection bugging device
+.SH SYNOPSIS
+.B tcpbug
+.RB [ -cx ]
+.RB [ -btT ]
+.I local-port
+.I remote-host
+.I remote-port
+.SH DESCRIPTION
+.B tcpbug
+forwards a TCP/IP connection to port \fIlocal-port\fP on the
+local machine to the port \fIremote-port\fP on \fIremote-host\fP
+while spying on the connection and writing all data passing
+through to standard output.
+All data coming from the client is printed with a greater than
+sign (\fB>\fP) first on each line,
+and all data coming from the server is printed with a less than
+sign (\fB<\fP) first on each line.
+Any byte offsets and time-stamps are printed before the greater
+than or less than sign,
+and are separated from each other by a colon (\fB:\fP).
+.SH OPTIONS
+.TP
+.B \-b
+Print the offset of the first byte in the stream for each line.
+.TP
+.B \-c
+Display bytes as individual characters.
+Printable characters are displayed directly,
+some control characters appear as C-language escapes
+.RB ( \en ", " \er ", " \et " et.c),"
+while others appear as 3-digit octal numbers.
+This should be similar to the -c switch of
+.BR od (1).
+.TP
+.B \-t
+Print the time at which the data was received for each line.
+The time is the number of seconds and microseconds,
+separated by a decimal point
+.RB ( . ),
+since 00:00 UTC, January 1, 1970, as reported by gettimeofday().
+.TP
+.B \-T
+Print the time at which the data was received for each line.
+The time is the number of seconds and microseconds,
+separated by a decimal point
+.RB ( . ),
+since the connections were established.
+.TP
+.B \-x
+Display each byte as a two digit hexadecimal number.
+.SH SEE ALSO
+.PD
+.BR tcpconnect (1),
+.BR tcplisten (1),
+.BR od (1).
+.SH BUGS
+The names of the options are not yet finalized, and may change
+at a future release.

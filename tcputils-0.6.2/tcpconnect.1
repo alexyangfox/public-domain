@@ -1,0 +1,52 @@
+.TH TCPCONNECT 1 "1997 April 13"
+.SH NAME
+tcpconnect \- general TCP/IP client
+.SH SYNOPSIS
+.B tcpconnect
+.RB [ -irv ]
+\fR[\fB\-l \fIlocaladdr\fR]
+.I host
+.I port
+.SH DESCRIPTION
+.B tcpconnect
+creates a TCP/IP connection to a server running on the machine
+.IR host ,
+listening to port
+.IR port .
+It then reads standard input and sends to the remote server, and
+data received from the server is printed to standard output.
+When end-of-file is reached on both standard input and the TCP/IP
+connection,
+.B tcpconnect
+terminates.
+.SH OPTIONS
+.TP
+.B \-i
+Terminate at end-of-file on standard input; don't wait for the
+server to close the connection.
+.TP
+.B \-r
+Terminate when the remote server closes the connection; don't
+wait for end-of-file on standard input.
+.TP
+.B \-v
+Verbose mode.
+Prints a message to standard error when the connection has been
+established.
+.TP
+.B \-l \fIaddr\fB:\fIport
+Bind the local end-point of the connection to IP address
+.IR addr ,
+TCP port
+.IR port .
+Either the IP address or the port, but not both, may be left out,
+meaning that the operating system gets to choose that part by
+itself.
+.SH SEE ALSO
+.PD
+.BR tcplisten (1),
+.BR telnet (1),
+.BR tcpbug (1).
+.SH BUGS
+The names of the options are not yet finalized, and may change
+at a future release.

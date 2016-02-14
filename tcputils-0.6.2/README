@@ -1,0 +1,54 @@
+		-*- text -*-
+
+
+WHAT IS THIS?
+
+This is version 0.6 of tcputils, a collection of programs to
+facilitate TCP programming in shell-scripts.  There is also a
+small library which makes it somewhat easier to create TCP/IP
+sockets.
+
+The latest released version can be found by anonymous FTP to
+	ftp.lysator.liu.se:pub/unix/tcputils/
+(or at URL:ftp://ftp.lysator.liu.se/pub/unix/tcputils/ if you
+like that syntax better).
+I myself can be reached by email to bellman@lysator.liu.se.
+
+
+The programs included in this release are:
+
+    mini-inetd	- small TCP/IP connection dispatcher
+    tcpbug	- TCP/IP connection bugging device
+    tcpconnect	- general TCP/IP client
+    tcplisten	- general TCP/IP server
+    getpeername	- get name of connected TCP/IP peer
+
+
+
+BUILDING AND INSTALLING
+
+Read the file INSTALL for instructions.
+
+
+
+COPYRIGHT
+
+These programs are released into the public domain.  You may do
+anything you like with them, including modifying them and selling
+the binaries without source for ridiculous amounts of money without
+saying who made them originally.
+
+However, I would be happy if you release your works with complete
+source for free use.
+
+
+
+WARRANTY
+
+You're kidding?  You use it, you take the responsibility.
+
+
+
+Local variables:
+fill-column: 65
+End:
