@@ -1,0 +1,130 @@
+# translations of various troff macros
+# flag letters after a colon:
+#	p	needs a new paragraph
+#	a	always puts out paragraph text
+
+BEGIN	{\rtf1\pc
+{\info{\title Translated from troff}{\author jrl}}
+\deff0{\fonttbl{\f0\fmodern pica;}{\f1\fmodern Courier;}
+{\f2\fmodern elite;}{\f3\fmodern prestige;}{\f4\fmodern lettergothic;}
+{\f5\fmodern gothicPS;}{\f6\fmodern cubicPS;}
+{\f7\fmodern lineprinter;}{\f8\fswiss Helvetica;}
+{\f9\fmodern avantegarde;}{\f10\fmodern spartan;}{\f11\fmodern metro;}
+{\f12\fmodern presentation;}{\f13\fmodern APL;}{\f14\fmodern OCRA;}
+{\f15\fmodern OCRB;}{\f16\froman boldPS;}{\f17\froman emperorPS;}
+{\f18\froman madaleine;}{\f19\froman zapf humanist;}
+{\f20\froman classic;}{\f21\froman roman f;}{\f22\froman roman g;}
+{\f23\froman roman h;}{\f24\froman timesroman;}{\f25\froman century;}
+{\f26\froman palantino;}{\f27\froman souvenir;}{\f28\froman garamond;}
+{\f29\froman caledonia;}{\f30\froman bodini;}{\f31\froman university;}
+{\f32\fscript script;}{\f33\fscript scriptPS;}{\f34\fscript script c;}
+{\f35\fscript script d;}{\f36\fscript commercial script;}
+{\f37\fscript park avenue;}{\f38\fscript coronet;}
+{\f39\fscript script h;}{\f40\fscript greek;}{\f41\froman kana;}
+{\f42\froman hebrew;}{\f43\froman roman s;}{\f44\froman russian;}
+{\f45\froman roman u;}{\f46\froman roman v;}{\f47\froman roman w;}
+{\f48\fdecor narrator;}{\f49\fdecor emphasis;}
+{\f50\fdecor zapf chancery;}{\f51\fdecor decor d;}
+{\f52\fdecor old english;}{\f53\fdecor decor f;}{\f54\fdecor decor g;}
+{\f55\fdecor cooper black;}{\f56\ftech Symbol;}{\f57\ftech linedraw;}
+{\f58\ftech math7;}{\f59\ftech math8;}{\f60\ftech bar3of9;}
+{\f61\ftech EAN;}{\f62\ftech pcline;}{\f63\ftech tech h;}}
+{\stylesheet {\*\s30\sl-240\sa240 \f24 Normal;}{\*\s88
+\qc\keepn\sl-240\sb240\sa480 \brdrb\brdrs \b\caps\f24\fs28 heading 1;}
+{\*\s89
+\keepn\sl-240\sb720\sa480\pvmrg\phcol\dxfrtext0\posx0\posyil\absw0 
+\b\caps\f24 heading 2;}{\*\s90
+\keepn\sl-240\sb480\sa240\pvmrg\phmrg\dxfrtext0\posx0\posyil\absw0 
+\b\f24 heading 3;}{\*\s103\sl0\tqc\tx4896\tqr\tx9720 \f24 header;}
+{\*\ds105\pgnx1800\pgny14760\linex576\headery864\footery0\endnhere 
+standard division;}}
+\margl2160\margr1440\margt2160\margb2160\ftnbj\ftnrestart\widowctrl 
+\sectd 
+\ds105\pgnx1800\pgny14760\linex576\headery864\footery0\endnhere }
+
+# new paragraph
+PARA	{\par
+}
+
+# new line
+LINE	{\line
+}
+
+# three levels of header paragraphs
+.H1:pa	{\pard\s88\qc\keepn\sl-240\sb240\sa480 \brdrb\brdrs 
+\b\caps\f24\fs28 $1}
+.H2:pa	{\pard\s89\keepn\sl-240\sb720\sa480\pvmrg\phcol\dxfrtext0\posx0
+\posyil\absw0 \b\caps\f24 $1}
+.H3:pa	{\pard\s90\keepn\sl-240\sb480\sa240\pvmrg\phmrg\dxfrtext0\posx0
+\posyil\absw0 \b\f24 $1}
+
+# regular paragraphs, with and without 
+.P:p	{\plain \pard \s30\sl-240\sa240 \f24 }
+.H0:pa	{\plain \pard \s30\sl-240\sa240 \f24\cs1\b\f24 $1 \plain \f24 }
+
+# new line macro
+.N	{\line
+}
+
+# displays
+.DS:pl	{\plain \pard \s30\sl-240\sa240 \f24 }
+.DE:p	{}
+
+# font funniness
+.B	{\b $1 \plain $2}
+.I	{\i $1 \plain $2}
+.T	{\f1 }
+
+# tables
+.TS	BEGINTABLE
+.TE	ENDTABLE
+# ignored, at this point
+.TH	{}
+
+# paragraph for tables
+TPARA:p	{\plain \pard \s30\keep\sl-240\sa240 \f24 }
+
+TLINE	{\line
+}
+TPEND:p	{\par
+\plain \pard
+}
+
+# code for underline
+THORZ:p	{\brdrb\brdrs }
+TDHORZ:p	{\brdrb\brdrdb }
+
+# code for tab stops, with plug for location
+TLEFT	{\tx%d}
+TRIGHT	{\tqr\tx%d}
+TDEC	{\tqdec\tx%d}
+TBAR	{\tb%d}
+
+# random junk characters
+\-	{--}
+\c	JOIN
+\(bu	{þ}
+\&	{}
+\e	{\\}
+\nt	NUMBER
+\n+t	NUMBER
+# nonbreaking space
+\ 	{\~}
+# used for all tabs
+\t	{\tab }
+\f3	{\b }
+\fB	{\b }
+\f2	{\i }
+\fI	{\i }
+\fP	{\plain }
+\f1	{\plain }
+
+# superscripts
+\u	{\up12}
+\d	{\plain }
+
+
+
+# blank lines
+.	{}
+.br	{\line }
