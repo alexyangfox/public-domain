@@ -1,0 +1,28 @@
+Drive 0x80: 254 heads, 63 sectors/track
+Primary partitions:
+       -------- start ------- -------- end --------
+# type LBA       CHS          LBA       CHS
+- ---- --------- ------------ --------- ------------
+0 0x06     16065    1:  0:  1   4209029  261:254: 63
+1 0x06   4209030  262:  0:  1   8401994  522:254: 63
+2 0x06   8401995  523:  0:  1  12594959  783:254: 63
+3 0x05  12594960  784:  0:  1  16434494 1022:254: 63
+
+Left/right arrow keys increment/decrement by sector
+Up/down    arrow keys increment/decrement by head
+PgUp/PgDn        keys increment/decrement by cylinder
+Esc quits
+
+Cylinder=1, Head=0, Sector=1
+EB 3E 90 4D 53 57 49 4E 34 2E 30 00 02 40 01 00         _>…MSWIN4.0..@..
+02 00 02 00 00 F8 00 01 3F 00 FF 00 C1 3E 00 00         .....∞..?._.->..
+C5 FA 3F 00 80 00 29 E7 19 24 28 20 20 20 20 20         +∑?.«.)_.$(
+20 20 20 20 20 20 46 41 54 31 36 20 20 20 F1 7D               FAT16   ±}
+FA 33 C9 8E D1 BC FC 7B 16 07 BD 78 00 C5 76 00         ∑3+ƒ-+n{..+x.+v.
+1E 56 16 55 BF 22 05 89 7E 00 89 4E 02 B1 0B FC         .V.U+".Î~.ÎN._.n
+F3 A4 06 1F BD 00 7C C6 45 FE 0F 8B 46 18 88 45         _Ò..+.|¶E_.ÔF.ÍE
+F9 FB 38 66 24 7C 04 CD 13 72 3C 8A 46 10 98 F7         ï_8f$|.-.r<ËF.ˇ_
+66 16 03 46 1C 13 56 1E 03 46 0E 13 D1 50 52 89         f..F..V..F..-PRÎ
+46 FC 89 56 FE B8 20 00 8B 76 11 F7 E6 8B 5E 0B         FnÎV_+ .Ôv._µÔ^.
+03 C3 48 F7 F3 01 46 FC 11 4E FE 5A 58 BB 00 07         .+H__.Fn.N_ZX+..
+8B FB B1 01 E8 94 00 72 47 38 2D 74 19 B1 0B 56         Ô__._ˆ.rG8-t._.V

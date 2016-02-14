@@ -1,0 +1,401 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<TITLE>OSD: Filesystems</TITLE>
+
+<A HREF="../index.htm">OSD Home</A>
+
+<!--
+This is _much_ better than my paltry table:
+http://en.wikipedia.org/wiki/Comparison_of_file_systems
+
+"Practical File System Design with the Be File System",
+by Dominic Giampaolo
+http://www.nobius.org/~dbg/
+
+UDF (DVD filesystem):
+- filename len = 255 bytes max
+- path len = 1023 bytes max
+- UCS-2 or UCS-1 ("compressed") Unicode
+-->
+
+<UL>
+<LI><A HREF="index.htm#fat"># - FAT filesystem</A>
+ <UL>
+ <LI><A HREF="index.htm#fat-layout"># - Layout of a FAT volume</A>
+ <LI><A HREF="index.htm#fat-boot"># - FAT bootsector and BPB</A>
+ <LI><A HREF="index.htm#fat-dirent"># - FAT directory entries</A>
+ <LI><A HREF="index.htm#fat-fat"># - The FAT</A>
+ </UL>
+<LI><A HREF="index.htm#ext2"># - ext2 filesystem</A>
+<LI><A HREF="index.htm#iso"># - ISO-9660 (CD-ROM) filesystem</A>
+<LI><A HREF="index.htm#overview"># - Overview of common filesystems</A>
+<LI><A HREF="index.htm#snippets"># - Filesystem code snippets</A>
+<LI><A HREF="index.htm#links"># - Links</A>
+<LI><A HREF="../index.htm#contact"><B>REPORT BUGS OR ERRORS IN THIS DOCUMENT</B></A>
+</UL>
+
+<A NAME="fat"></A>
+<H2>FAT filesystem</H2>
+
+FAT stands for <I>File Allocation Table</I>, the main feature of this
+ filesystem. The FAT filesystem is associated with DOS and some versions
+ of Windows. <B><I>VFAT</I></B> (virtual FAT) is FAT with
+ <B>long filenames</B>.
+<P>
+Newly-purchased floppy disks advertised as 'formatted' usually contain
+ a FAT12 filesystem.
+
+<A NAME="fat-layout"></A>
+<H3>Layout of a FAT volume</H3>
+
+<A HREF="fat.gif">A FAT volume contains</A>:
+<UL>
+<LI>boot sector (more than one for FAT32)
+<LI>one or more copies of the FAT (almost always 2 copies)
+<LI>root directory (not present for FAT32)
+<LI>the data area, where files and subdirectories are stored. For FAT32,
+ the root directory is also stored here.
+</UL>
+
+<A NAME="fat-boot"></A>
+<H3>FAT bootsector and BPB</H3>
+
+The FAT boot sector contains:
+<UL>
+<LI>Code to load and run the DOS kernel
+<LI>The poorly-named <I><B>BIOS Parameter Block</B></I> (BPB), with disk
+ geometry and filesystem info. The BPB corresponds to the <I>superblock</I>
+ of UNIX filesystems.
+<LI>Magic values: 55h at offset 510, 0AAh at offset 511.
+</UL>
+
+Layout of FAT12/FAT16 bootsector with <B>minimal BPB</B>:
+
+<PRE>typedef unsigned char	uint8_t;	/* or #include &lt;stdint.h&gt; */
+typedef unsigned short	uint16_t;	/* Note: multi-byte values are little-endian */
+typedef unsigned long	uint32_t;
+struct fat_bootsector			/* Warning: this struct must be packed */
+{
+        uint8_t  jump[3];               /* 16-bit JMP to boot code, or 8-bit JMP + NOP */
+        uint8_t  oem_id[8];             /* e.g. 'MSWIN4.0' */
+	uint16_t bytes_per_sector;	/* usu. =512 */
+        uint8_t  sectors_per_cluster;
+	uint16_t num_boot_sectors;	/* usu. =1 */
+        uint8_t  num_fats;              /* usu. =2 */
+	uint16_t num_root_dir_ents;
+        uint16_t total_sectors;         /* 16-bit; 0 if num sectors &gt; 65535 */
+        uint8_t  media_ID_byte;         /* usu. =0F0h */
+	uint16_t sectors_per_fat;
+	uint16_t sectors_per_track;
+	uint16_t heads;
+	uint32_t hidden_sectors;	/* =LBA partition start */
+        uint32_t total_sectors_large;   /* 32-bit; 0 if num sectors &lt; 65536 */
+        uint8_t  boot_code[474];
+        uint8_t  magic[2];              /* 55h, 0AAh */
+};                              /* 512 bytes total */</PRE>
+
+There are additional fields which are required by FAT32, but are
+ optional for FAT12 and FAT16 (xxx - todo).
+
+<A NAME="fat-dirent"></A>
+<H3>FAT directory entries</H3>
+
+FAT directory entries are 32 bytes long:
+
+<PRE>typedef unsigned char	uint8_t;	/* or #include &lt;stdint.h&gt; */
+typedef unsigned short	uint16_t;	/* Note: multi-byte values are little-endian */
+typedef unsigned long	uint32_t;
+struct fat_dirent               	/* Warning: this struct must be packed */
+{
+        uint8_t  name[8];               /* ALL-CAPS, pad right with spaces */
+        uint8_t  ext[3];                /* ALL-CAPS, pad right with spaces */
+        uint8_t  attrib;                /* attribute byte */
+        uint8_t  reserved;              /* =0 */
+        uint8_t  ctime_ms;              /* file creation time, 10ms units */
+	uint16_t ctime;              	/* file creation time, in DOS format */
+	uint16_t cdate;              	/* file creation date, in DOS format */
+	uint16_t adate;              	/* DOS date of last file access */
+	uint16_t st_clust_msw;       	/* high 16 bits of starting cluster (FAT32) */
+	uint16_t mtime;              	/* DOS time of last file modification */
+	uint16_t mdate;              	/* DOS date of last file modification */
+	uint16_t st_clust;           	/* starting cluster */
+	uint32_t file_size;          	/* in bytes */
+};                              /* 32 bytes total */</PRE>
+
+DOS times and dates are stored in these formats:
+<PRE>struct dos_time                 /* Warning: this struct must be packed */
+{
+	unsigned two_secs : 5;  /* low 5 bits: 2-second increments */
+	unsigned minutes : 6;   /* middle 6 bits: minutes */
+	unsigned hours : 5;     /* high 5 bits: hours (0-23) */
+};                              /* 2 bytes total */
+
+struct dos_date                 /* Warning: this struct must be packed */
+{
+	unsigned date : 5;      /* low 5 bits: date (1-31) */
+	unsigned month : 4;     /* middle 4 bits: month (1-12) */
+	unsigned year : 7;      /* high 7 bits: year - 1980 */
+};                              /* 2 bytes total */</PRE>
+
+The Attribute byte is similar to the file 'mode' under UNIX filesystems:
+
+<PRE>struct attrib                   /* Warning: this struct must be packed */
+{
+	int read_only : 1;      /* b0 */
+	int hidden : 1;
+	int system : 1;
+	int volume_label : 1;
+	int directory : 1;
+	int archive : 1;
+	int reserved : 2;       /* b6, b7 */
+};                              /* 1 byte total */</PRE>
+
+FAT directory entries contain all <I>metadata</I> for a particular file.
+ This is different from UNIX filesystems, which store metadata separately
+ from the directory entries (in <I>inodes</I>). FAT directory entries are
+ also used for disk volume labels and VFAT long filenames (xxx - todo).
+
+<A NAME="fat-fat"></A>
+<H3>The FAT</H3>
+
+Entries in the FAT can be 12 bits wide (FAT12), 16 bits wide (FAT16), or
+ 32 bits wide (FAT32). FAT entries do not necessarily refer to disk
+ sectors, but to <B><I>clusters</I></B>, which are <B>groups of contiguous
+ sectors</B>. The number of sectors per cluster is always a power of 2.
+ The FAT format used is determined solely by the number of clusters in the
+ volume:
+<UL>
+<LI>FAT12: 1...4084 (0FF4h) clusters
+<LI>FAT16: 4085...65524 (0FFF4h) clusters
+<LI>FAT32: 65525... clusters
+</UL>
+
+Used FAT entries form <B>singly linked lists</B>, indicating which clusters
+ are used by each file or subdirectory. Some FAT entry values are special:
+
+<TABLE WIDTH="100%" BORDER><TR>
+ <TH>Meaning  of FAT entry value</TH>             <TH>FAT12</TH>
+	<TH>FAT16</TH>                  <TH>FAT32</TH>
+</TR><TR>
+ <TD>Free cluster</TD>                  <TD>0</TD>
+	<TD>0</TD>                      <TD>0</TD>
+</TR><TR>
+ <TD>Used cluster; pointer to next</TD> <TD>2-0FF5h</TD>
+	<TD>2-0FFF5h</TD>               <TD>2-0FFFFFF5h <B>(28-bit)</B></TD>
+</TR><TR>
+ <TD>Reserved</TD>                   <TD>0FF6h</TD>  <TD>0FFF6h</TD>
+	<TD>0FFFFFF6h <B>(28-bit)</B></TD>
+</TR><TR>
+ <TD>Bad cluster</TD>                   <TD>0FF7h</TD>  <TD>0FFF7h</TD>
+	<TD>0FFFFFF7h <B>(28-bit)</B></TD>
+</TR><TR>
+ <TD>Reserved</TD>                   <TD>0FF8h-0FFEh</TD>  <TD>0FFF8h-0FFFEh</TD>
+	<TD>0FFFFFF8h-0FFFFFFEh<B>(28-bit)</B></TD>
+</TR><TR>
+ <TD>Used cluster; last in chain</TD>   <TD>0FFFh</TD>  <TD>0FFFFh</TD>
+	<TD>0FFFFFFFh <B>(28-bit)</B></TD>
+</TR></TABLE>
+
+<A NAME="ext2"></A>
+<H2>ext2 filesystem</H2>
+
+xxx - to do
+
+<A NAME="iso"></A>
+<H2>ISO-9660 (CD-ROM) filesystem</H2>
+
+<A HREF="http://www.alumni.caltech.edu/~pje/iso9660.html">
+ http://www.alumni.caltech.edu/~pje/iso9660.html</A>
+
+<A NAME="overview"></A>
+<H2>Overview of common filesystems</H2>
+
+<!-- Minix? Rock Ridge? -->
+
+Thanks to Peter Montagner, Michael Cook, Grzegorz Niemirowski,
+ and Mike Garnsey for helping with this table.
+
+<TABLE BORDER WIDTH="100%"><TR>
+ <TH></TH>
+ <TH>FAT12/16 (DOS)</TH>
+ <TH>VFAT (Win95), FAT32 (Win98)</TH>
+ <TH>NTFS</TH>
+ <TH>ext2 (Linux)</TH>
+</TR><TR>
+ <TD>Filename length</TD>
+ <TD>8.3</TD>
+ <TD>255</TD>
+ <TD>255</TD>
+ <TD>255</TD>
+</TR><TR>
+ <TD>Path length</TD>
+ <TD>80</TD>
+ <TD>260</TD>
+ <TD>32767</TD>
+ <TD></TD>
+</TR><TR>
+ <TD><A HREF="nametest.c">Illegal characters in filenames</A></TD>
+ <TD><TT>(nul) &#34; * + , . / : ; &#60; = &#62; ? [ \ ] |</TT>
+ <TD><TT>(nul) &#34; * / : &#60; &#62; ? \ |</TT>
+ <TD><TT>(chars 0x01-0x1F) &quot; / \ * ? &lt; &gt; | :</TT></TD>
+ <TD><TT>(nul)</TT></TD>
+</TR><TR>
+ <TD>Legal characters in filenames</TD>
+ <TD><TT>(space) ! # $ % &amp; ' ( ) -  0-9 @ A-Z ^ _ ` a-z { } ~</TT>
+        <P>
+        Leading . or space is illegal<BR>
+        Trailing . or space ignored.</TD>
+ <TD><TT>(space) ! # $ % &amp; ' ( ) + , - .  0-9 ; = @ A-Z [ ]
+        ^ _ ` a-z { } ~</TT>
+	<P>
+        Leading space ignored<BR>
+        Single . or space is illegal<BR>
+        Trailing . or space ignored.</TD>
+ <TD><TT>(space) ! # $ % & ' ( ) + , - . 0-9 ; = @ A-Z [ ] ^ _ ` a-z { } ~</TT>
+	<P>
+	Some filenames are reserved</TD>
+ <TD>everything but <TT>(nul)</TT></TD>
+</TR><TR>
+ <TD>Limit to number of root directory entries</TD>
+ <TD>YES</TD>
+ <TD>VFAT12/16: YES<BR>
+        FAT32: no</TD>
+ <TD>no</TD>
+ <TD>no</TD>
+</TR><TR>
+ <TD>Maximum subdirectory depth</TD>
+ <TD>no</TD>
+ <TD>no</TD>
+ <TD>no</TD>
+ <TD>no</TD>
+</TR><TR>
+ <TD>Directories sorted by name</TD>
+ <TD>no</TD>
+ <TD>no</TD>
+ <TD>yes; stored in B-trees</TD>
+ <TD>no</TD>
+</TR><TR>
+ <TD>Character set</TD>
+ <TD></TD>
+ <TD>UCS-2 Unicode</TD>
+ <TD>UCS-2 Unicode</TD>
+ <TD>ISO-Latin-1</TD>
+</TR><TR>
+ <TD>Endian</TD>
+ <TD>little</TD>
+ <TD>little</TD>
+ <TD>?</TD>
+ <TD>little</TD>
+</TR></TABLE>
+<P>
+
+<TABLE BORDER WIDTH="100%"><TR>
+ <TH></TH>
+ <TH>ISO9660 (CD-ROM)</TH>
+ <TH>Joliet</TH>
+ <TH>Mac HFS+</TH>
+</TR><TR>
+ <TD>Filename length</TD>
+ <TD>Level 1: 8.3 files, 8 for subdirectories<BR>
+      Level 2/3: 31</TD>
+ <TD>64</TD>
+ <TD>255</TD>
+</TR><TR>
+ <TD>Path length</TD>
+ <TD></TD>
+ <TD></TD>
+ <TD></TD>
+</TR><TR>
+ <TD>Illegal characters in filenames</TD>
+ <TD><TT>(nul) (space) ! &#34; # $ % &#38; ' ( ) * + , - . / : ;
+        < = > ? @ [ \ ] ^ ` { | } ~</TT>
+        <P>
+        Extension with directory name is not allowed</TD>
+ <TD></TD>
+ <TD><TT>(nul) :</TT></TD>
+</TR><TR>
+ <TD>Legal characters in filenames</TD>
+ <TD><TT>0-9 A-Z _</TT></TD>
+ <TD></TD>
+ <TD>everything but<BR> <TT>(nul) :</TT></TD>
+</TR><TR>
+ <TD>Limit to number of root directory entries</TD>
+ <TD>no ?</TD>
+ <TD>no</TD>
+ <TD>no</TD>
+</TR><TR>
+ <TD>Maximum subdirectory depth</TD>
+ <TD>8</TD>
+ <TD>no</TD>
+ <TD></TD>
+</TR><TR>
+ <TD>Directories sorted by name</TD>
+ <TD>yes</TD>
+ <TD>yes</TD>
+ <TD></TD>
+</TR><TR>
+ <TD>Character set</TD>
+ <TD>ASCII</TD>
+ <TD>UCS-2 Unicode</TD>
+ <TD>UCS-2 Unicode</TD>
+</TR><TR>
+ <TD>Endian</TD>
+ <TD>big AND little (committee invention :)</TD>
+ <TD></TD>
+ <TD>big</TD>
+</TR></TABLE>
+
+<A NAME="snippets"></A>
+<H2>Filesystem code snippets</H2>
+
+<A HREF="fat_info.c">Check disk for FAT filesystem, display info</A>
+<P>
+<A HREF="e2_info.c">Check disk for ext2 filesystem, display info</A>
+
+<A NAME="links"></A>
+<H2>Links</H2>
+
+Lotsa filesystem info:
+<A HREF="http://www.nondot.org/sabre/os/articles/FileSystems/">
+ http://www.nondot.org/sabre/os/articles/FileSystems/</A>
+<P>
+Information on FAT12/FAT16 (DOS) filesystems:
+<UL>
+<LI><A HREF="http://home.no.net/tkos/info/fat.html">
+ http://home.no.net/tkos/info/fat.html</A>
+<LI>Official MS docs for FAT:
+ <A HREF="http://www.microsoft.com/hwdev/hardware/fatgendown.asp">
+ http://www.microsoft.com/hwdev/hardware/fatgendown.asp</A>
+</UL>
+
+Information on ext2fs (Linux filesystem):
+<UL>
+<LI><A HREF="http://www.freesoftware.fsf.org/ext2-doc/">
+ http://www.freesoftware.fsf.org/ext2-doc/</A>
+<LI><A HREF="http://uranus.it.swin.edu.au/~jn/explore2fs/es2fs.htm">
+  http://uranus.it.swin.edu.au/~jn/explore2fs/es2fs.htm</A>
+</UL>
+
+NTFS info: <A HREF="http://my.fit.edu/~mtaylor/ntfs_nutshell.html">
+ http://my.fit.edu/~mtaylor/ntfs_nutshell.html</A>
+<P>
+LTOOLS; an ext2 analog of MTOOLS (lets DOS access ext2 partitions):
+ <A HREF="http://www.it.fht-esslingen.de/~zimmerma/software/ltools.html">
+ http://www.it.fht-esslingen.de/~zimmerma/software/ltools.html</A>
+<P>
+Reentrant DOS-Compatible File System, by Philip J. Erdelsky:
+ <A HREF="http://www.alumni.caltech.edu/~pje/software.html">
+ http://www.alumni.caltech.edu/~pje/software.html</A><BR>
+ Public domain. Includes disk cache.
+
+<A NAME="todo"></A>
+<H2>TO DO</H2>
+
+<PRE>
+- tree for used sectors, bitmap for free (UNIX family)
+- subdirectories
+- advanced: journalling, striping
+- sorted directories let you perform a fast binary search
+</PRE>
+
+<A NAME="errors"></A>
+<H2><A HREF="../index.htm#contact"><B>REPORT BUGS OR ERRORS IN THIS DOCUMENT</B></A></H2>

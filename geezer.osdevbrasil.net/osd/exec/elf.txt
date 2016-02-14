@@ -1,0 +1,334 @@
+xxx - this document does not yet cover dynamic linking and relocation
+
+ELF files
+For i386, all multi-byte values are little-endian.
+
+================================================================
+File header
+================================================================
+file
+offset
+     -----------------------------------------------
+ 0  |                 ELF file magic                |
+     -----------------------------------------------
+ 4  |  bitness  |   endian  |  ELF ver  | reserved  |
+     -----------------------------------------------
+ 8  |                    reserved                   |
+     -----------------------------------------------
+0Ch |                    reserved                   |
+     -----------------------------------------------
+10h |       file type       |       machine         |
+     -----------------------------------------------
+14h |                    ELF ver                    |
+     -----------------------------------------------
+18h |                  entry  point                 |
+     -----------------------------------------------
+1Ch |   file offset of Program Header (PH) table    |
+     -----------------------------------------------
+20h |   file offset of Section Header (SH) table    |
+     -----------------------------------------------
+24h |                     flags                     |
+     -----------------------------------------------
+28h |  size of this header  |  PH table entry size  |
+     -----------------------------------------------
+2Ch |  entries in PH table  |  SH table entry size  |
+     -----------------------------------------------
+30h |  entries in SH table  |.shstrtab section index|
+     -----------------------------------------------
+34h
+
+ELF file magic:
+	"\x7F""ELF"
+	0x464C457F on little endian machine
+	0x7F454C46 on big endian machine
+bitness:
+	0=invalid       1=32-bit                2=64-bit
+
+endian:
+	0=invalid       1=little endian         2=big endian
+
+ELF ver:
+	0=invalid       1=ELF version 1
+
+reserved:
+	ignore when reading, set to 0 when writing
+
+file type:
+	0=none (?)      1=relocatable object (.o file)
+	2=executable    3=shared library (DLL)
+	4=core file
+
+machine:
+	0=none (?)      2=SPARC                 3=80386
+	4=68000         8=MIPS RS3000
+
+entry point:
+	initial EIP/PC
+
+flags:
+	not used for 80386
+
+size of this header:
+	usually 52 bytes
+
+num entries in SH table:
+	this equals the number of sections in the ELF file
+
+.shstrtab section index:
+	which entry in SH table corresponds to
+		the Section Header String Table
+
+================================================================
+ELF section header
+================================================================
+record
+offset
+     -----------------------------------------------
+ 0  |   section name (byte offset into .shstrtab)   |
+     -----------------------------------------------
+ 4  |                  section type                 |
+     -----------------------------------------------
+ 8  |                 section flags                 |
+     -----------------------------------------------
+0Ch |               section load address            |
+     -----------------------------------------------
+10h |              file offset of section           |
+     -----------------------------------------------
+14h |                  section size                 |
+     -----------------------------------------------
+18h |                     link                      |
+     -----------------------------------------------
+1Ch |                     info                      |
+     -----------------------------------------------
+20h |required memory alignment of section, in bytes |
+     -----------------------------------------------
+24h | size of entries in this section (0=variable)  |
+     -----------------------------------------------
+28h
+
+section type:
+    0=NULL      The null section (required)
+
+    1=PROGBITS  Program-defined (.text, .data, .bss, etc.)
+
+    2=SYMTAB    Symbol table. Only 1 per ELF file.
+		link = section index of appropriate string table
+		info = index of last local symbol + 1
+
+    3=STRTAB    String table.
+
+    4=RELA      Relocations with explicit addends.
+		link = section index of appropriate symbol table
+		info = section index of relocated section
+
+    5=HASH      Hash table.
+		link = section index of hashed symbol table
+		info = 0
+
+    6=DYNAMIC   For dynamic linking. Only 1 per ELF file.
+		link = section index of appropriate string table
+		info = 0
+
+    7=NOTE	OS-defined
+
+    8=NOBITS    Like PROGBITS but occupies no file space
+		(e.g. BSS).
+
+    9=REL       Relocations without explicit addends.
+		link = section index of appropriate symbol table
+		info = section index of relocated section
+
+    10=SHLIB    Reserved. DO NOT USE.
+
+    11=DYNSYM   Minimal symbol table for dynamic linking.
+		Only one per ELF file.
+		link = section index of appropriate string table
+		info = index of last local symbol + 1
+section flags:
+	b2 = e(X)ecutable
+	b1 = (A)lloc (section takes up memory when loaded)
+	b0 = (W)ritable
+
+link, info:
+	use of these fields depends on section type (see above).
+	Where not specified, link = 0 (undefined section) and
+	info = 0.
+
+================================================================
+ELF program header
+================================================================
+Note: 'segment' means an entry in the program header table,
+not necessarily x86 memory segment.
+
+record
+offset
+     -----------------------------------------------
+ 0  |                segment type                   |
+     -----------------------------------------------
+ 4  |              file offset of segment           |
+     -----------------------------------------------
+ 8  |           virtual address of segment          |
+     -----------------------------------------------
+0Ch |          physical address of segment          |
+     -----------------------------------------------
+10h |             size of segment in file           |
+     -----------------------------------------------
+14h |            size of segment in memory          |
+     -----------------------------------------------
+18h |                segment flags                  |
+     -----------------------------------------------
+1Ch |               segment alignment               |
+     -----------------------------------------------
+20h
+
+segment type:
+    0=NULL	Null segment (optional)
+
+    1=LOAD	Loadable segment (code, data, bss, etc.)
+
+    2=DYNAMIC	Dynamic linking information
+
+    3=INTERP	Path to dynamic linker, e.g. /lib/ld.so
+
+    4=NOTE	OS-defined
+
+    5=SHLIB	Reserved. DO NOT USE.
+
+    6=PHDR	The program header table itself
+
+segment sizes:
+		Note that file size != mem size if the segment
+		contains the BSS. If mem size > file size, the
+		difference must be zero-filled when the segment
+		is loaded.
+
+segment flags:
+        b2 = (R)eadable
+        b1 = (W)riteable
+        b0 = e(X)ecutable
+
+================================================================
+ELF relocations
+================================================================
+record
+offset
+     -----------------------------------------------
+ 0  |                    offset                     |
+     -----------------------------------------------
+ 4  |       symbol table index          |   type    |
+     -----------------------------------------------
+ 8  |         explicit addend (.rela only)          |
+     -----------------------------------------------
+0Ch
+
+type (x86 CPU only):
+	0=NONE		none
+	1=32		S + A
+	2=PC32		S + A - P
+	3=GOT32		G + A - P
+	4=PLT32		L + A - P
+	5=COPY		none
+	6=GLOB_DAT	S
+	7=JMP_SLOT	S
+	8=RELATIVE	B + A
+	9=GOTOFF	S + A - GOT
+	10=GOTPC	GOT + A - P
+
+explicit addend:
+	these are present only for relocations in .rela sections
+	relocations in .rel sections are only 8 bytes each
+
+================================================================
+ELF symbol table entries
+================================================================
+record
+offset
+     -----------------------------------------------
+ 0  |    symbol name (byte offset into .strtab)     |
+     -----------------------------------------------
+ 4  |                     value                     |
+     -----------------------------------------------
+ 8  |                     size                      |
+     -----------------------------------------------
+0Ch |    info   |     0     |    SH table index     |
+     -----------------------------------------------
+10h
+
+value:
+	(.o file) offset relative to start of section
+	(.so [DLL] file) offset relative to start of file
+
+size:
+	0=unknown size or no size
+
+info:
+	b7:b4=binding
+		0=local
+		1=global
+		2=weak
+	b3:b0=type
+		0=none
+		1=object
+		2=function
+		3=section
+		4=file
+
+SH table index:
+	index of section in which this symbol is defined
+
+================================================================
+ELF sections I've seen
+================================================================
+
+Sections common to all files
+----------------------------
+(no name)       null
+.text           code
+.rodata         read-only initialized data (large literals,
+		maybe C 'const' variables too?)
+.data           read/write initialized data (global and static
+		local variables)
+.bss            uninitialized globals and static locals
+.comment        "version control information"
+.note           more version info?
+.shstrtab       section header name string table (".comment",
+                ".note", ".bss", etc).
+
+???
+------------------
+.rel.bss        Relocations for .bss
+.rel.text       Relocations for .text
+__libc_subinit  Initializes statically-linked GNU libc code?
+
+Startup and exit code
+(added by crt*.s)
+---------------------
+.init           Code called before main().
+.fini           Code called after main() exits.
+
+C++
+---
+.ctors          C++ constructors for globals/static locals,
+                called before main().
+.dtors          C++ constructors for globals/static locals,
+                called after main() exits.
+
+Dynamic linking
+---------------
+.plt            procedure Linkage Table
+.rel.plt        relocations for .plt
+.interp         path to dynamic linker (e.g. "/lib/ld-linux.so")
+.dynsym         dynamic linking (minimal) symbol table
+.dynstr         dynamic linking string table
+.dynamic        dynamic linking info
+.hash           hash table
+.got            global Offset Table
+.rel.got        relocations for .got
+
+Debug info
+----------
+.symtab         symbol table
+.strtab         string table
+.stabstr        STAB debug info string table
+.stab           STAB debug info
+.rel.stab       relocations for .stab

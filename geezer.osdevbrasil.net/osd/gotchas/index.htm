@@ -1,0 +1,739 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<TITLE>OSD: Gotchas</TITLE>
+
+<A HREF="../index.htm">OSD Home</A>
+
+<!--
+On this guy's video board, VESA mode 0x101 is not 640x480x256,
+but some weird text mode:
+news:<g1res1$stm$1@newsreader2.utanet.at>
+
+If you omit "SECTION .text" at the start of a NASM file,
+this may cause problems (xxx - details?)
+
+<P ALIGN="CENTER"><IMG SRC="gun_foot.gif" WIDTH="143" HEIGHT="152"></P>
+
+For return to real mode, be sure to reprogram the 8259 chips.
+
+- for binary kernel, asm startup code must BE FIRST on the linker command line!
+- After I stripped support for dynamic tasks from a kernel and made
+  tasks (e.g. Tetris) into kernel threads, they started scribbling in
+  each other's virtual consoles. Cause: all tasks shared a single
+  instance of the C library, including the stdout output buffer.
+  One task would printf() into this buffer, another would fflush() it.
+  Solution: make all tasks but one do setbuf(stdout, NULL);
+-->
+
+<A NAME="bugs"></A>
+<H3>Bugs in software development tools</H3>
+
+<OL>
+<LI><B>NASM version 0.98 makes broken ELF files</B> if you add user-defined
+ sections to the ELF file (anything other than .text, .data, or .bss).
+ This bug is fixed in newer versions such as NASM 0.98.08
+<LI><A HREF="../../embed/bugs.htm#mingbug"><B>MinGW32 based on GCC 2.95.2
+ stores the BSS size incorrectly</B> in the BSS section header</A>.
+ Because of this bug, this compiler will not interoperate with NASM or
+ Microsoft compilers.
+<LI>The <B>CygWin and MinGW32 linkers crash when asked to make a binary
+ kernel</B>. You can get around this to some extent by linking to PE
+ format with identical memory alignment and file alignment:
+
+<PRE>        ld --oformat pei-i386 --file-alignment 0x1000 --section-alignment 0x1000 ...</PRE>
+
+Now you have a 'binary' kernel with a 4096-byte PE header at the beginning,
+ which the bootloader can skip over (thanks to Tim Robinson for this idea).
+ Note that this may still fail if you have user-defined sections that
+ come after the BSS.
+<LI>With a linker script like this:
+<PRE>        .bss: {
+            *(.bss)
+            *(.common)
+            end  = . ; _end = . ;
+        }</PRE>
+<B>some buggy versions of ld may put 'end' between common and bss</B>.
+Use this instead:
+<PRE>            ...
+            *(.common)
+            }
+        end = .; _end = . ;</PRE>
+(thanks to Jarek Pelczar for finding this bug)
+<LI>The <B>ELF binutils for DJGPP are somewhat buggy</B>. Using objcopy
+ to convert between ELF and COFF will fail with relocatable (.o) files,
+ and with executable files that contain user-defined sections (anything
+ other than .text, .data, and .bss).
+<LI>ld version 2.6 doesn't set the LMAs properly in ELF files,
+ even if you use AT() in a linker script. This bug may cause GRUB
+ to choke on your ELF kernel.
+</OL>
+
+<A NAME="boot"></A>
+<H3>Bootloader 'foo' doesn't work with kernel 'bar'</H3>
+
+According to the Multiboot standard (used by the GRUB bootloader),
+  a pmode kernel must not rely on the GDT layout, segment descriptors,
+  or selectors defined by the bootloader. This turns out to be good
+  advice for other bootloaders as well. The initial code of your
+  kernel (pmode or real mode) should be written in a very
+  'defensive' manner that makes few or no assumptions about the
+  bootloader. This will probably require the use of <A HREF="boot.asm">
+  assembly language and relative addressing</A>.
+
+<A NAME="freemem"></A>
+<H3><A HREF="../ram/index.htm#layout">Use only free RAM</A></H3>
+
+DOS 7+ loads HIMEM.SYS silently and automatically, then loads itself
+ high (into the HMA). An easy way to deal with this is to avoid the
+ HMA when you load or copy the kernel into extended memory. A better
+ (safer) way is to use XMS to find and allocate free extended memory.
+ This will prevent you from stepping on any XMS 'clients' such as
+ SMARTDRV.
+<P>
+Watch out for the case where HIMEM.SYS is loaded and SMARTDRV is also
+ loaded in such a way that the free XMS memory block straddles a
+ 4 meg line. If your kernel is loaded into this memory, and it uses
+ paging, the kernel will need two pages tables to map the kernel memory.
+ The kernel could be copied to 1 meg after it's been loaded. This will
+ probably trash DOS, so do it just before entering pmode.
+
+<A NAME="link1"></A>
+<H3>Kernel code and data are not linked to proper addresses</H3>
+
+<UL>
+<LI>Use a linker script to get control of this (see 'More linker
+ gotchas', below).
+<LI>If you are linking to binary format, link to a non-binary format
+ instead (COFF, ELF, PE, etc.), then dump the symbols and disassemble
+ the kernel, THEN convert to binary:
+<PRE>        ld -g -Tcoffkrnl.ld -o krnl.cof $(OBJS) lib/libc.a
+	objdump --line-numbers --source krnl.cof >krnl.lst
+        nm -n krnl.cof >krnl.sym
+	objcopy -O binary krnl.cof krnl.bin</PRE>
+
+Examine files <TT>krnl.lst</TT> and <TT>krnl.sym</TT> to see if
+ everything is properly located.
+<LI>For x86, the kernel data segment is more sensitive to link/locate
+ errors because much of the code uses EIP-relative addressing. Your
+ kernel startup code can test if the kernel data segment has been properly
+ linked, located, and loaded:
+
+<PRE>DS_MAGIC	equ	3544DA2Ah
+
+SECTION .text
+BITS 32
+GLOBAL entry
+entry:
+	call where_am_i         ; where did the loader put us?
+where_am_i:
+	pop esi			; ESI=physical adr (where we are)
+	sub esi,where_am_i	; subtract virtual adr (where we want to be)
+				; now ESI=virt-to-phys
+	cmp dword [esi + ds_magic],DS_MAGIC
+	je ds_ok
+	mov word [0B8000h],9F44h ; display blinking white-on-blue 'D'
+	jmp short $             ; freeze
+ds_ok:
+	...
+
+SECTION .data
+ds_magic:
+	dd DS_MAGIC
+	...</PRE>
+</UL>
+
+<A NAME="link2"></A>
+<H3>More linker gotchas</H3>
+
+<UL>
+<LI><TT>ld -Ttext=NNN ...</TT> will locate code at address NNN, but ld
+  will fall back to using the default linker script to locate .data
+  and .bss. Instead of using -Ttext, write your own linker script.
+<LI>Neither of these will put a zeroed BSS in the binary kernel:
+
+<PRE>        objcopy -O binary krnl.cof krnl.bin
+	ld --oformat binary -o krnl.bin $(OBJS)</PRE>
+
+If you attach a file to the binary kernel,
+
+<PRE>        copy /b krnl.bin + ramdisk.bin boot.bin</PRE>
+
+and the kernel attempts to access that attached file at address
+  'end', it won't work. The start of the attached file (<TT>ramdisk.bin</TT>
+  in this example) overlaps the kernel BSS. When the kernel startup
+  code or bootloader zeroes the kernel BSS, the attached file
+  will get wiped.
+</UL>
+
+<A NAME="entry"></A>
+<H3>Entry point of binary kernel compiled from C</H3>
+
+The entry point of a binary kernel compiled from C is not
+  necessarily the first function in the C file. Try this:
+
+<PRE>        copy con hello.c                        (cat >hello.c for Linux)
+	#include &lt;stdio.h>
+	int main(void) { printf("hello"); return 0; }
+        ^Z                                      (^D for Linux)
+	gcc -c -O2 -g hello.c
+	objdump --disassemble hello.o
+		00000000 &lt;.text&gt;:
+	hello	   0:   68 65 6c 6c 6f          push   $0x6f6c6c65
+	\0	   5:   00 89 f6 55 89 e5       add    %cl,0xe58955f6(%ecx)
+                00000008 &lt;_main&gt;:</PRE>
+
+The first thing in the .text section is not <TT>main()</TT>, but the
+  string 'hello'. You could put main() in a file all by itself:
+
+<PRE>        int main(void) { return real_main_in_another_file(); }</PRE>
+
+or put a dummy <TT>main()</TT> with no local variables and no literals
+  at the beginning of the file:
+
+<PRE>        int real_main(int arg_c, char *arg_v[]);
+        int main(int arg_c, char *arg_v[])
+        {       return real_main(arg_c, arg_v); }
+        /* ... */
+        int real_main(int arg_c, char *arg_v[])
+        {       /* ... */  }</PRE>
+
+or compile with -fwritable-strings:
+
+<PRE>        gcc -fwritable-strings ...</PRE>
+
+<TT>-fwritable-strings</TT> is deprecated in GCC 3.4
+<P>
+A related problem: COFF relocatable (.o) files do not have an a.out header,
+  so the entry point can not be specified. You can assume the entry point
+  is the start of the .text section, but observe the precautions shown here
+  if the .o file is built only from C code.
+
+<A NAME="linear"></A>
+<H3>LGDT and LIDT require LINEAR addresses</H3>
+
+Normal segment-based address translation does not apply to the GDT
+ address in the 'pseudo-descriptor' loaded by the LGDT instruction
+ (same for IDT and LIDT). You must perform the equivalent address
+ translation yourself:
+
+<PRE>        ...
+                            ; now in real mode
+	xor ebx,ebx
+	mov bx,ds
+        shl ebx,4           ; DS * 16
+
+        lea eax,[gdt + ebx] ; "fixup"
+        mov [gdt_ptr + 2],eax
+
+        lgdt [gdt_ptr]
+		...
+	gdt:
+            ; ...your GDT here...
+	gdt_end:
+	gdt_ptr:
+		dw gdt_end - gdt - 1
+                dd gdt      ; this must be LINEAR GDT address</PRE>
+
+<A NAME="video"></A>
+<H3>Video output doesn't work</H3>
+
+Perhaps you are accessing video memory like this:
+
+<PRE>        *(unsigned char *)0xB8000 = 'A';</PRE>
+
+This works only if the base address of the kernel data segment is 0.
+  If your OS does not meet this requirement, you can define a
+  separate protected-mode segment descriptor with base address 0,
+  then use far pointer functions to access video memory. Assuming
+  LINEAR_SEL is the selector for the zero-base segment, then:
+
+<PRE>        /* _farpokeb() is completely defined (prototype AND body) in DJGPP sys/farptr.h */
+        #include &lt;sys/farptr.h&gt;
+                ...
+        _farpokeb(LINEAR_SEL, 0xB8000, 'A');</PRE>
+
+Or, you can use near pointers if you subtract the base address
+  of the kernel data segment (virt_to_phys):
+
+<PRE>        *(unsigned char *)(0xB8000 - virt_to_phys) = 'A';</PRE>
+
+For near pointers to work, the kernel data segment must have no limit
+(i.e. limit = 4 Gig - 1 = 0xFFFFFFFF).
+
+<A NAME="memsize"></A>
+<H3>Use the BIOS to get an accurate accounting of memory</H3>
+
+CMOS will not report more than 63.999 meg (65535/1024) of extended memory,
+ and it won't report if there are 'holes' in extended memory.
+<P>
+As for direct probing of memory size,
+ <a href="http://groups.google.com/groups?selm=c7apkd%24r3d%244%40newsreader1.utanet.at&oe=ISO-8859-1&output=gplain">
+ it has problems</a>:
+<UL>
+<LI>Address 'aliasing', e.g. addresses above 64 meg 'wrap around'
+  to address 0.
+<LI>Memory mapped hardware that causes the computer to freeze
+ when your memory probe steps on it.
+<LI>PC might have a bizarre and unique method of turning on the
+  A20 gate; a method not supported by your direct probing code.
+<LI>Failure of C code to use <TT>volatile</TT> where necessary,
+  or buggy compiler that produces faulty code even with <TT>volatile</TT>.
+<LI>Bus float may cause the memory probe to succeed even if
+  there is no memory.
+</UL>
+
+<A NAME="a20"></A>
+<H3>Trouble with A20</H3>
+
+There is no single method of controlling A20 that works on all
+  PCs (HIMEM.SYS supports 17 different methods). Therefore:
+<UL>
+<LI><B>USE GRUB</B> to boot your OS
+<LI>Don't turn on A20 if you don't need to (e.g. if your pmode
+  kernel runs in conventional memory).
+<LI>If HIMEM.SYS is loaded, use its XMS services to control A20.
+<LI>If you want to copy something to extended memory, use INT 15h
+  AH=87h. It will control A20 automatically.
+<LI>Try to use INT 15h AH=89h to enter pmode. It will control A20
+  automatically.
+<LI>Before trying to turn on the A20 gate, check if it's already on
+<LI>If you use your own code to enable A20, verify that A20 is on
+  after you enable it.
+<LI>If you use your own code to enable A20, your code should
+  <A HREF="../boot/a20.asm">try several methods of enabling A20</A>.
+</UL>
+
+<A NAME="o1i"></A>
+<H3>Only one interrupt from keyboard</H3>
+
+You won't get more than one interrupt from the hardware devices
+  unless you reset or clear the interrupt at the end of your
+  interrupt service routine (ISR). For all devices, you must
+  clear the interrupt at the 8259 interrupt controller chip.
+  For IRQs 0-7:
+
+<PRE>        outportb(0x20, 0x20);</PRE>
+
+For IRQs 8-15:
+
+<PRE>        outportb(0xA0, 0x20);
+        outportb(0x20, 0x20);</PRE>
+
+You must also clear the interrupt at the device that caused it.
+  This is usually done by reading an I/O register.
+
+<TABLE><TR>
+<TD>Timer:</TD>          <TD>(nothing; you need only clear timer interrupts at the 8259 chip)</TD>
+</TR><TR>
+<TD>Keyboard:</TD>       <TD>read scancode byte from I/O port 0x60</TD>
+</TR><TR>
+<TD>Realtime clock:</TD> <TD><TT>outportb(0x70, 0x0C); (void)inportb(0x71);</TT></TD>
+</TR><TR>
+<TD>IDE disk:</TD>       <TD>read status byte from I/O port 0x1F7</TD>
+</TR></TABLE>
+
+<A NAME="reentrancy"></A>
+<H3>Re-entrancy problems with interrupt handlers</H3>
+
+Don't use printf() in a top-half interrupt handler! printf() and
+  many other functions are not re-entrant. You should probably avoid
+  floating-point math in interrupt handlers, for the same reason.
+
+<A NAME="mixing"></A>
+<H3>Mixing 16- and 32-bit code</H3>
+
+Use aout, .obj (OMF) or other file format that supports this:
+
+<PRE>        nasm -f elf x.asm
+        x.asm:30: ELF format does not support non-32-bit relocations</PRE>
+
+The 16-bit objects must be below 64K (0x10000). Otherwise:
+
+<PRE>        ld -s -oformat binary -Ttext=0x10000 -ox.bin x.o y.o
+        x.o(.text+0x13): relocation truncated to fit: 16 text</PRE>
+
+Lastly, the linker must support the object file format used:
+
+<PRE>	ld-elf -o test test.o
+	test.o: file not recognized: File format not recognized</PRE>
+
+If you can't meet these conditions, then the 16- and
+  32-bit code must go into separate files.
+
+<A NAME="zerobss"></A>
+<H3>Don't forget to zero the kernel BSS</H3>
+
+Global and static local variables that are not assigned an initial
+  value when declared are stored in the uninitialized data segment
+  (BSS). Either the bootloader or the kernel startup code must zero
+  the BSS.
+
+<A NAME="dpmi16"></A>
+<H3>16-bit DPMI problems with Turbo or Borland C for DOS</H3>
+
+Borland C++ for DOS (version 3.1 or newer) and Turbo C++ for DOS
+  (version 3.0 or newer, <B>not the free version 1.0</B>) use
+  16-bit DPMI. This conflicts with DJGPP, which uses 32-bit DPMI.
+  If you mix Borland and DJGPP tools, you get strange error messages:
+<P>
+Using DJGPP MAKE (32-bit DPMI) to invoke Turbo C 3.0 (16-bit DPMI)
+  from plain DOS:
+
+<PRE>c:\tc\bin\tcc.exe -v -mt -w -O2 -d -Z -1 -D__STARTUP_ASM__=1 -c -oboot.obj boot.c
+16-bit DPMI unsupported.
+make.exe: *** [tboot.exe] Error 1</PRE>
+
+Using DJGPP MAKE to invoke Turbo C 3.0 from Windows DOS box<BR>
+(<B>note the absence of error message text</B>):
+
+<PRE>c:\tc\bin\tcc.exe -v -mt -w -O2 -d -Z -1 -D__STARTUP_ASM__=1 -c -oboot.obj boot.c
+make.exe: *** [tboot.exe] Error 234</PRE>
+
+Using Turbo C 3.0 MAKE to invoke DJGPP from plain DOS:
+
+<PRE>        gcc -c boot.c
+Load error: no DPMI - Get csdpmi*b.zip
+
+** error 110 ** deleting all</PRE>
+
+Using Turbo C 3.0 MAKE to invoke DJGPP from Windows DOS box:
+
+<PRE>        gcc -c boot.c
+Load error: can't switch mode
+
+** error 106 ** deleting all</PRE>
+
+<B>Fix your PATH</B>. In a pinch, you can also use Borland MAKER.EXE to
+  invoke DJGPP tools. MAKER.EXE runs in real mode, instead of 16-bit pmode.
+
+<A NAME="langs"></A>
+<H3>Trouble linking C to asm, or C++ to C, or C++ to asm</H3>
+
+This is either caused by <A HREF="../cpp/index.htm#mangle">C++
+ name-mangling</A> or by <A HREF="../libc/index.htm#underscores">
+ leading underscores</A>
+
+<A NAME="labels"></A>
+<H3>Asm labels with the same name as an instruction</H3>
+
+To avoid this problem with NASM, prepend a dollar sign ($) to the
+  label. This does not add $ to the label, it merely tells NASM
+  'this is a label, not a reserved word':
+
+<PRE>        GLOBAL $cli
+        $cli:
+                cli
+                ret</PRE>
+
+(Thanks to Julian Hall for this tip.)
+
+<A NAME="objcopy-binary"></A>
+<H3><TT>objcopy -O binary ...</TT> produces garbage</H3>
+
+Be sure to remove the file sections you don't want:
+
+<PRE>        # -g strips debug sections (.stabs, .stabstr)
+        objcopy -g -O binary -R .note -R .comment krnl.elf krnl.bin</PRE>
+
+Also, MinGW <TT>objcopy</TT> 2.9.4 is known to be buggy. Try a newer version.
+
+<A NAME="rawrite"></A>
+<H3>Trouble installing bootsector with RAWRITE</H3>
+
+RAWRITE for DOS writes anywhere from 3 sectors to one entire track
+ at a time. If you try to use it to install a bootsector on a FAT12
+ floppy, it will overwrite the first FAT. (I don't know if the
+ Windows version of RawWrite works any better.)
+
+<A NAME="big-tc-exe"></A>
+<H3>Turbo C .EXE files are inordinately large</H3>
+
+Compiling (<TT>tcc -v ...</TT>) or linking (<TT>tlink /v ...</TT>) with
+ the debug option apparently implies <TT>TLINK /v /i ...</TT><BR>
+ The /i option puts a zeroed BSS in the .EXE file. Normally, only the
+ BSS size is stored in the .EXE file header, and BSS memory is allocated
+ when the .EXE file is loaded by DOS. Even if TDSTRIPped, the .EXE
+ file will be larger than if you compiled and linked without debug info.
+
+<A NAME="clobber"></A>
+<H3>'fixed or forbidden register ... was spilled'</H3>
+
+<H3>'can't find a register in class `[AREG|BREG|CREG|DREG]' while reloading `asm'</H3>
+
+New versions of the GNU assembler are pickier about the clobber lists used
+  in inline asm. Though it worked fine with older versions of the GNU
+  assembler, the following code is now considered incorrect:
+
+<PRE>static inline void
+memset(void *__dest, unsigned int __fill, unsigned int __size) {
+    __asm__ __volatile__ ("cld
+			   rep
+			   stosb"               :
+			   /* no outputs */     :
+			   "c" (__size),
+			   "a" (__fill),
+                           "D" (__dest)         :
+			   "ecx","eax","edi","memory");
+}</PRE>
+
+because registers ECX, EAX, and EDI are present in both the clobber list
+ and the input constraints. Remove these registers from the clobber list:
+
+<PRE>                           ...
+			   "a" (__fill),
+                           "D" (__dest)         :
+                                             "memory");
+}</PRE>
+
+and the code should assemble without error.
+
+<A NAME="test"></A>
+<H3>Don't name your Linux program 'test'</H3>
+
+<CODE>test</CODE> is a command built-in to the Linux shell (bash).
+ If you compile a small program named <CODE>test</CODE> and try to run it,
+ the built-in <CODE>test</CODE> will run instead, and it will appear to
+ do nothing.
+
+<A NAME="iret-nt"></A>
+<H3>IRET will cause a TSS-based task-switch if EFLAGS.NT is set</H3>
+
+GRUB version 0.90 leaves this bit set. The kernel startup code should
+ probably do something like this:
+
+<PRE>        push 2
+        popf</PRE>
+
+before enabling interrupts, starting multitasking, or otherwise using IRET.
+
+<A NAME="esp0"></A>
+<H3>IRET to Ring 3 doesn't save Ring 0 stack pointer</H3>
+
+If an exception switches the processor from Ring 3 (user privilege) to
+ Ring 0 (kernel privilege), the Ring 0 stack pointer will automatically
+ be loaded from the TSS. However, the reverse is not true: before using
+ IRET to return from Ring 0 to Ring 3, <B>you</B> must save the Ring 0
+ stack pointer in the TSS:
+
+<PRE>
+; None of this code is pre-emptible. I assume that it runs
+; with interrupts disabled (i.e. it's called via interrupt gates)
+
+isr00:                                  ; DIVIDE ERROR
+        ...
+
+isr0D:                                  ; GPF
+        nop                             ; From Ring 3, it pushes 6 dwords:
+        nop                             ; SS, ESP, EFLAGS, CS, IP, error code
+        push byte 0Dh                   ; push exception number (+1 dword)
+	jmp all_ints
+isr0E:                                  ; PAGE FAULT
+        ...
+
+all_ints:
+        push gs                         ; push segment registers (+4 dwords)
+	push fs
+	push es
+	push ds
+        pusha                           ; push GP registers (+8 dwords)
+		mov ax,SYS_DATA_SEL
+		mov ds,eax		; put known-good values in seg regs
+		mov es,eax
+		mov fs,eax
+		mov gs,eax
+
+		push esp		; push pointer to stacked regs_t
+			call fault	; call C language handler
+                pop eax                 ; drop pointer to stacked regs_t
+
+		<B>lea eax,[esp + 76]	; 19 dwords == 76 bytes
+                mov [tss_esp0],eax      ; Ring 0 ESP value after IRET</B>
+
+        popa                            ; pop GP registers (-8 dwords)
+	pop ds                          ; pop segment registers (-4 dwords)
+	pop es
+	pop fs
+	pop gs
+	add esp,8                       ; drop exception number and
+					; error code (-2 dwords)
+	iret                            ; IRET pops IP, CS, EFLAGS, ESP, SS
+					; (-5 dwords)</PRE>
+
+<A NAME="ret_to_real"></A>
+<H3>PC crashes or freezes when returning to real mode</H3>
+
+The procedure to do this given in section 14.5 of 386INTEL.TXT
+ is not complete or accurate. Try this instead:
+<OL>
+<LI>Disable interrupts
+<LI>If paging is enabled:
+  <OL TYPE="a">
+  <LI>Jump to a region of memory that is identity-mapped
+  <LI>Clear the PG bit in register CR0
+  <LI>Write 0 to register CR3 to flush the TLB (page table cache)
+  </OL>
+<LI>Jump to a segment with limit 64K (FFFFh). CS must have this limit
+ before you return to real mode.
+<LI>Load SS with a selector that points to a descriptor that is
+ appropriate for real mode:
+
+<pre>	Limit = 64K (FFFFh)	Byte-granular (G=0)
+	Expand-up (E=0)		Writable (W=1)
+	Present (P=1)		Base address = any value</pre>
+
+ SS must have limit 64K (FFFFh) before you return to real mode. You may
+ leave the other data segment registers with limits &gt;64K if you want
+ 'unreal mode', otherwise load them with a similar selector.
+<LI>Clear the PE bit in register CR0
+<LI>Jump to a 16:16 real-mode far address
+<LI>Load all other segment registers (SS, DS, ES, FS, GS)
+<LI>Use the LIDT instruction to load an IDT appropriate for real mode,
+ with base address = 0 and limit = 3FFh. Use the 32-bit operand size
+ override prefix so all 32 bits of the IDT base are set (otherwise,
+ only the bottom 24 bits will be set).
+
+<PRE>	o32 lidt [real_idt]
+	    ...
+	real_idt:
+		dw 1023
+		dd 0</PRE>
+
+<LI>Zero the high 16 bits of 32-bit registers. If the register value is not
+ important, just zero the entire 32-bit register, otherwise use 'movzx':
+
+<PRE>	xor eax,eax
+	    ...
+	movzx ebp,bp
+	movzx esp,sp</PRE>
+
+<LI>Enable interrupts
+</OL>
+
+Differences between this routine and that given in 386INTEL.TXT:
+<UL>
+<LI>Disabling interrupts should be the FIRST thing you do.
+<LI>Enabling interrupts should be the LAST thing you do.
+<LI>Can leave limit &gt;64K for segment registers other than CS and SS
+   (for 'unreal' mode)
+<LI>Must use o32 prefix with LIDT instruction in 16-bit code segment
+<LI>Top 16 bits of registers must be zeroed before returning to
+   DOS/real mode
+</UL>
+
+<A NAME="build_idt"></A>
+<H3>Build the IDT at run-time</H3>
+
+Look at the layout of a 32-bit interrupt gate:
+<TABLE BORDER>
+  <TR>
+    <TD>Lowest byte<TD>Byte 1<TD>Byte 2<TD>Byte 3<TD>Byte 4<TD>Byte 5
+    <TD>Byte 6<TD>Highest byte
+  <TR>
+    <TD>Offset 7:0<TD>Offset 15:8<TD>Selector 7:0<TD>Selector 15:8
+    <TD>Word Count 4:0<TD>Access<TD>Offset 23:16<TD>Offset 31:24
+</TR>
+</TABLE>
+The 32-bit Offset is split into two 16-bit halves, with the other four
+ bytes of the gate between the two halves. Because of this, it's nearly
+ impossible to create a non-trivial IDT at compile-time (or assemble-time).
+<P>
+Another reason to build the IDT at run-time is to put the first 7 entries
+ in a non-cachable page of memory. This is a work-around for the
+ Pentium F00F bug, devised by Robert Collins.
+
+<A NAME="dpmi_stack"></A>
+<H3>Stack problems using INT 15h AX=1687h (DPMI) to enter pmode</H3>
+
+Suppose you make an .EXE stub meant to convert a 32-bit executable
+ file (DJGPP COFF, Win32 PE COFF, ELF, etc.) into a 32-bit DOS
+ executable. But your 32-bit code crashes when you try to use the
+ stack. Why?
+<P>
+If the .EXE stub starts out with SP=0, this will be equal to ESP=0
+ after entering 32-bit pmode. The first PUSH will decrement this to
+ ESP=0FFFFFFFCh. It's unlikely that such a large address is valid in a
+ DPMI environment. Certainly, the stack is no longer where you expect
+ it to be.
+<P>
+The .EXE stub should set SP=0FFFCh. The switch to pmode will zero-extend
+ this to ESP=0000FFFCh. Either that, or allocate a completely new stack
+ for the 32-bit code, instead of re-using the 16-bit DOS stack.
+
+<A NAME="mixed_lib"></A>
+<H3>Don't put DJGPP COFF and a.out files in the same archive (.a) file</H3>
+
+From a message on <A HREF="http://www.osdev.org/osfaq2/">
+ the OS message board</A>:
+<BLOCKQUOTE>
+The problem, which the DOCs for Djgpp failed to mention, is that AOUT AND
+COFF files should NOT be in the
+same library file!!! LD can't Handle such a library file ...
+</BLOCKQUOTE>
+
+<A NAME="ld_script_symbols"></A>
+<H3>Declare linker script symbols as external char arrays</H3>
+
+If you define symbols in a linker script (e.g. <TT>g_code, _edata</TT>),
+ these should be prototyped in C as an external character array:
+
+<PRE>        extern char g_code[], _edata[];</PRE>
+
+You can also use <TT>unsigned char</TT> if you want. Because the following
+ may not do what you want, they should be avoided:
+
+<PRE>        extern char *g_code;    /* doesn't work */
+        extern int g_code[];    /* sizeof(int) != 1 */</PRE>
+
+<A NAME="beos_gcc"></A>
+<H3>GCC for BeOS makes position-independent code by default</H3>
+
+Without command-line options to the contrary, GCC for BeOS runs as though
+ you typed <TT>gcc -fPIC ...</TT><BR>
+ If you are building a kernel, turn off
+ position-independent code with <TT>gcc -fno-PIC ...</TT>
+
+<A NAME="ld_N"></A>
+<H3>'ld: krnl.x: Not enough room for program headers, try linking with -N'</H3>
+
+If you're linking an ELF kernel with different physical and virtual addresses
+ (e.g. 0x100000 physical, 0xC0000000 virtual), this error may occur if
+ you don't use AT() in the linker script, or if the linker script is buggy.
+
+<A NAME="ilink32_multiboot"></A>
+<H3>Can't make Multiboot kernel with ILINK32</H3>
+
+ILINK32 is the linker that comes with Borland C++ 5.5. It is impossible
+ (literally) to make a Multiboot-compatible kernel with this linker.
+ Explanation:
+<OL>
+<LI>ILINK32 can't make an ELF file, so you must use the aout kludge
+<LI>For the aout kludge to work properly, the memory alignment and file
+ alignment must be equal
+<LI>If memory alignment = file alignment, the only value that ILINK32
+ will accept is 4096, i.e.
+
+<PRE>        ilink32 -Ao:0x1000 -Af:0x1000 ...</PRE>
+
+<LI>With these alignment settings, .text starts at file offset 8192.
+ However, the Multiboot header must be within the first 8192 bytes
+ of the executable file.
+</OL>
+
+<A NAME="a20_reboot"></A>
+<H3>A20 must be enabled to reboot using the keyboard controller</H3>
+
+When the RESET signal is asserted on a 32-bit x86 CPU, the CPU begins
+ execution at address 0xFFFFFFF0. This address is within the motherboard
+ ROM BIOS, which is at 0xFFFF0000 (and at 0xF0000). If the A20 gate is
+ disabled, address 0xFFFFFFF0 becomes 0xFFeFFFF0, and the CPU fetches
+ code from non-existent memory after reset.
+<P>
+A20 is normally enabled in protected-mode operating systems, but keep
+ this in mind if you write a real-mode OS.
+
+<!--
+<A NAME="nasm_no_text"></A>
+<H3>Don't forget <TT>SECTION .text</TT> in NASM source file</H3>
+-->
+
+<A NAME="errors"></A>
+<H2><A HREF="../index.htm#contact"><B>REPORT BUGS OR ERRORS IN THIS DOCUMENT</B></A></H2>

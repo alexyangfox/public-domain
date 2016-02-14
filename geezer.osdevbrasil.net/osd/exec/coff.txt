@@ -1,0 +1,229 @@
+DJGPP COFF files
+All multi-byte values are LITTLE ENDIAN
+
+================================================================
+COFF FILE HEADER (20 BYTES)
+================================================================
+file
+offset
+       -------------------------------------------------------
+   0  |      COFF file magic      |    number of sections     |
+       -------------------------------------------------------
+   4  |                    time/date stamp                    |
+       -------------------------------------------------------
+   8  |              file offset of symbol table              |
+       -------------------------------------------------------
+  0Ch |              number of symbol table entries           |
+       -------------------------------------------------------
+  10h |      aout header size     |     COFF file flags       |
+       -------------------------------------------------------
+  14h
+
+
+COFF file magic
+        =014Ch
+number of sections
+        (self-explanatory)
+time/date stamp
+	=time/date of file creation in time_t format
+	(number of seconds since Jan 1, 1970, 12:00 AM)
+file offset of symbol table
+        (self-explanatory)
+number of symbol table entries
+        (self-explanatory)
+aout header size
+	=001Ch for DJGPP COFF executable, 0 for relocatable
+COFF file flags
+        01h=relocation info stripped from file
+        02h=executable file (no unresolved externals)
+        04h=line numbers stripped from file
+        08h=local symbols stripped from file
+
+================================================================
+DJGPP COFF A.OUT FILE HEADER (28 BYTES)
+================================================================
+The a.out header is not present for relocatable files.
+
+file
+offset
+       -------------------------------------------------------
+  14h |         aout magic        |       aout version        |
+       -------------------------------------------------------
+  18h |                       code size                       |
+       -------------------------------------------------------
+  1Ch |                       data size                       |
+       -------------------------------------------------------
+  20h |                        bss size                       |
+       -------------------------------------------------------
+  24h |               entry point (initial EIP)               |
+       -------------------------------------------------------
+  28h |             file offset of .text section              |
+       -------------------------------------------------------
+  2Ch |             file offset of .data section              |
+       -------------------------------------------------------
+  30h
+
+aout magic
+        =010Bh
+aout version
+        =xxx - ?
+code size
+	=combined and rounded-up size of all code sections
+data size
+	=combined and rounded-up size of all data sections
+bss size
+	=combined and rounded-up size of all bss sections
+entry point (initial EIP)
+        (self-explanatory)
+file offset of .text section
+        (self-explanatory)
+file offset of .data section
+        (self-explanatory)
+
+================================================================
+DJGPP COFF SECTION HEADER (40 BYTES)
+================================================================
+file offset
+for first
+section header
+       -------------------------------------------------------
+  30h |                        section                        |
+      |                         name                          |
+      |                                                       |
+       -------------------------------------------------------
+  38h |            physical address of section (LMA)          |
+       -------------------------------------------------------
+  3Ch |            virtual address of section (VMA)           |
+       -------------------------------------------------------
+  40h |                     size of section                   |
+       -------------------------------------------------------
+  44h |                 file offset of section                |
+       -------------------------------------------------------
+  48h |                file offset of relocations             |
+       -------------------------------------------------------
+  4Ch |             file offset of line number info           |
+       -------------------------------------------------------
+  50h |      num. relocations     |     num. line numbers     |
+       -------------------------------------------------------
+  54h |                      section flags                    |
+       -------------------------------------------------------
+  58h
+
+
+section name
+	=.text  .data   .bss    .stab   .stabstr
+        or user-defined section name.
+
+        New versions of DJGPP use a peculiar scheme for long
+        section names: if the first character of the section
+        name is '/' (slash), and the remaining characters are
+        digits, the digits are a decimal ASCII value repre-
+        senting an offset into the string table. The name
+        at this offset is the long section name. (This is
+        peculiar because a separate scheme for supporting long
+        SYMBOL names already exists in DJGPP COFF -- see below.)
+
+physical address of section (LMA)
+	"load" address; set by 'AT' in linker script
+virtual address of section (VMA)
+	for .text section, this is the ORG value
+size of section
+	(self-explanatory)
+file offset of section
+	(self-explanatory)
+file offset of relocations
+	(self-explanatory)
+file offset of line number info
+	(self-explanatory)
+number of relocations
+	(self-explanatory)
+number of line number entries
+	(self-explanatory)
+section flags
+        20h=.text (code) section
+        40h=.data section
+        80h=.bss section
+
+xxx - CONTENTS, ALLOC, LOAD, CODE, DATA, DEBUGGING
+
+section output of DJGPP
+flags	objdump -h
+------- ---------------
+0020	CONTENTS, ALLOC, LOAD, CODE
+0040	CONTENTS, ALLOC, LOAD, DATA
+0080	ALLOC
+0200	CONTENTS, DEBUGGING
+
+================================================================
+COFF LINE NUMBER RECORDS (6 BYTES)
+================================================================
+record
+offset
+       -------------------------------------------------------
+   0  |          physical address or symbol table index       |
+       -------------------------------------------------------
+   4  |         line number       |
+       ---------------------------
+   6
+
+physical address or symbol table index
+	=(line number != 0) physical address of line, or
+	 (line number == 0) symbol table index of line label
+
+================================================================
+COFF RELOCATION RECORDS (10 BYTES)
+================================================================
+record
+offset
+       -------------------------------------------------------
+   0  |                    virtual address                    |
+       -------------------------------------------------------
+   4  |                   symbol table index                  |
+       -------------------------------------------------------
+   8  |       relocation type     |
+       ---------------------------
+  0Ah
+
+relocation type
+	=0006h  for 32-bit absolute address
+	=0014h  for 32-bit EIP-relative address
+
+Demo code for performing DJGPP COFF relocations:
+http://my.execpc.com/~geezer/osd/exec/runreloc.zip
+
+================================================================
+COFF SYMBOL TABLE RECORDS (18 BYTES)
+================================================================
+record
+offset
+       -------------------------------------------------------
+   0  |                  8-char symbol name                   |
+      |          or 32-bit zeroes followed by 32-bit          |
+      |                 index into string table               |
+       -------------------------------------------------------
+   8  |                     symbol value                      |
+       -------------------------------------------------------
+  0Ch |       section number      |         symbol type       |
+       -------------------------------------------------------
+  10h |  sym class  |   num aux   |
+       ---------------------------
+  12h
+
+xxx - finish
+
+================================================================
+COFF STRING TABLE
+================================================================
+If end of symbol table < end of COFF file, the remainder of the
+COFF file is the string table. This table is used to store
+symbol names that are too long (9 characters or more) to fit
+into the symbol table entries.
+
+The first 4 bytes of the string table are the size of the string
+table itself. These 4 bytes should be zeroed after the size
+value has been read. Offsets into the string table are from the
+start of these 4 bytes. An offset of 0 is legal, and will result
+in a NULL string because of these 4 zeroes.
+
+Strings in the string table are normal, C-style (0-terminated)
+strings.

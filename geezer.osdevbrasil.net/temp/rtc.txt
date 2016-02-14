@@ -1,0 +1,157 @@
+			MC146818 REAL-TIME CLOCK PLUS RAM
+
+================================================================
+registers
+================================================================
+I/O port 70h:	selects one of the 64 registers of the 146818
+                read-only?
+I/O port 71h:	the selected register can be accessed via this port
+
+Note: b7 of I/O port 70h disables NMI.
+
+146818 registers
+0	seconds		(0-59)
+1	seconds alarm	(0-59)
+2	minutes		(0-59)
+3	minutes alarm	(0-59)
+4	hour		(1-12 or 0-23)
+5	hour alarm	(1-12 or 0-23)
+6	day-of-week	(1-7)
+7	date		(1-31)
+8	month		(1-12)
+9	year		(0-99)
+10	register A
+11	register B
+12	register C
+13	register D
+14-63	50 bytes battery-backed CMOS RAM; used by the BIOS
+
+In 12-hour mode, bit b7 of registers 4 and 5 indicates PM.
+
+If any alarm register contains a value greater than or equal to
+0xC0, the register is a "don't-care" value. This can be used to
+trigger an alarm interrupt every second, minute, or hour; instead
+of just once a day.
+
+================================================================
+register A
+================================================================
+UIP DV2 DV1 DV0 RS3 RS2 RS1 RS0
+
+	UIP	Update In Progress. When this bit =1, the time/date
+		registers are being updated, and return bad values.
+		Update can last 1984 microseconds with 32.768 Khz xtal.
+		This bit is read-only.
+
+	DVn	These bits select the crystal frequency.
+		000=4.194304 MHz xtal, 22-stage binary divider
+		001=1.048576 MHz xtal, 20-stage divider
+		010=32.768 KHz xtal, 15-stage divider
+		011=factory test
+		10x=factory test
+		11x=reset the divider chain
+
+Note: The first update cycle will begin 0.5 seconds after the
+divider chain is released from reset.
+
+	RSn	These bits set the frequency of the square wave
+		output and/or periodic interrupt.
+
+			4.194304
+			or 1.048576	32.768
+		value	MHz crystal	KHz crystal
+		-----	-----------	-----------
+		0000	none		none
+		0001	32768 Hz	 256 Hz
+		0010	16384 Hz	 128 Hz
+		0011	 8192 Hz	8192 Hz
+		0100	 4096 Hz	4096 Hz
+		0101	 2048 Hz	2048 Hz
+		0110	 1024 Hz	1024 Hz
+		0111	  512 Hz	 512 Hz
+		1000	  256 Hz	 256 Hz
+		1001	  128 Hz	 128 Hz
+		1010	   64 Hz	  64 Hz
+		1011	   32 Hz	  32 Hz
+		1100	   16 Hz	  16 Hz
+		1101	    8 Hz	   8 Hz
+		1110	    4 Hz	   4 Hz
+		1111	    2 Hz	   2 Hz
+
+================================================================
+register B
+================================================================
+SET PIE AIE UIE SQWE DM 24/12 DSE
+
+	SET	When set, this bit aborts any update cycle in progress
+		and prevents a new update cycle from starting. After
+		setting this bit, software may write the current time
+		and date into the registers, set the DM bit, then clear
+		this bit to start the clock.
+
+	PIE	Enable periodic interrupt.
+
+	AIE	Enable alarm interrupt.
+
+	UIE	Enable interrupt on end of update cycle.
+
+	SQWE	Enable square-wave output.
+
+	DM	Data mode: 0=BCD, 1=binary.
+		Changes to this bit will not be honored unless you
+		also rewrite all 10 time and date registers.
+
+	24/12	Hours mode: 0=1-12, 1=0-23
+		Changes to this bit will not be honored unless you
+		also rewrite the hour and hour alarm registers.
+
+	DSE	Daylight Savings Time enable. Increments time from
+		1:59:59 AM to 3:00:00 AM on the last Sunday in April,
+		and decrements time from 1:59:59 AM to 1:00:00 AM
+		on the last Sunday in October.
+
+================================================================
+register C (read-only)
+================================================================
+IRQF PF AF UF 0 0 0 0
+
+	IRQF	This bit is set when the RTC is signalling any interrupt.
+
+	PF	This bit is set when the RTC is signalling a
+		periodic interrupt.
+
+	AF	Alarm interrupt flag.
+
+	UF	Update-ended interrupt flag.
+
+Note: all four interrupt flag bits are cleared when this
+register is read.
+
+================================================================
+register D (read-only)
+================================================================
+VRT 0 0 0 0 0 0 0 0
+
+	VRT	Valid RAM and Time. This bit is cleared by external
+		hardware if the contents of the clock and RAM can
+		not be guaranteed (e.g. because of a low battery).
+		Apparently, this bit is set by READING register D.
+
+================================================================
+Notes
+================================================================
+To set the time and date:
+1. Calculate time and date in either binary or BCD format
+2. Set b7 of register B (SET)
+3. Write the time and date into the first 10 registers of the chip.
+4. Program bits b2 (DM), b1 (24/12), and b0 (DSE) in register B.
+5. Clear b7 of register B (SET).
+
+For proper operation, the time and date must be set 2 or more
+seconds before the end of the month, or before a Daylight
+Savings Time transition.
+
+You can NOT change from BCD to binary or vice versa simply by
+changing the DM bit. Instead, you must read the current time
+and date, convert to the other format, then write it back into
+the registers.

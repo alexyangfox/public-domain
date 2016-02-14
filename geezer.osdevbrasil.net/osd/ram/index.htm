@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<TITLE>OSD: Physical memory (RAM)</TITLE>
+
+<!--
+"Pool allocation is a memory allocation scheme that is very fast,
+but limited in its usage." ...
+http://www.boost.org/libs/pool/doc/index.html
+-->
+
+<A HREF="../index.htm">OSD Home</A>
+
+<UL>
+<LI><A HREF="index.htm#layout"># - Physical memory layout of the PC</A>
+<LI><A HREF="index.htm#size"># - Determining RAM sizes</A>
+<LI><A HREF="index.htm#palloc"># - Allocating RAM</A>
+<LI><A HREF="index.htm#dma"># - DMA restrictions on physical memory</A>
+<LI><A HREF="index.htm#snippets"># - Code snippets</A>
+<LI><A HREF="index.htm#links"># - Links</A>
+<LI><A HREF="../index.htm#contact"><B>REPORT BUGS OR ERRORS IN THIS DOCUMENT</B></A>
+</UL>
+
+<A NAME="layout"></A>
+<H2>Physical memory layout of the PC</H2>
+
+<TABLE BORDER="1"><TR>
+<TH>linear address range<TH>real-mode address range<TH>memory type<TH>use
+</TR><TR>
+<TD>      0-    3FF     <TD>0000:0000-0000:03FF <TD ROWSPAN="4">RAM<TD>real-mode interrupt vector table (IVT)
+</TR><TR>
+<TD>     400-   4FF     <TD>0040:0000-0040:00FF                 <TD>BIOS data area (BDA)
+</TR><TR>
+<TD>     500- 9FBFF     <TD>0050:0000-9000:FBFF                 <TD>free <I>conventional memory</I> (below 1 meg)
+</TR><TR>
+<TD>   9FC00- 9FFFF     <TD>9000:FC00-9000:FFFF                 <TD>extended BIOS data area (EBDA)
+</TR><TR>
+<TD>   A0000- BFFFF     <TD>A000:0000-B000:FFFF <TD>video RAM   <TD>VGA framebuffers
+</TR><TR>
+<TD>   C0000- C7FFF     <TD>C000:0000-C000:7FFF <TD>ROM         <TD>video BIOS (32K is typical size)
+</TR><TR>
+<TD>   C8000- EFFFF     <TD>C800:0000-E000:FFFF <TD>NOTHING     <TD>
+</TR><TR>
+<TD>   F0000- FFFFF     <TD>F000:0000-F000:FFFF <TD>ROM         <TD>motherboard BIOS (64K is typical size)
+</TR><TR>
+<TD>  100000- FEBFFFFF  <TD>                    <TD>RAM         <TD>free <I>extended memory</I> (1 meg and above)
+</TR><TR>
+<TD>FEC00000- FFFFFFFF  <TD>                    <TD>various     <TD>motherboard BIOS, PnP NVRAM, ACPI, etc.
+</TR></TABLE>
+
+<P>
+The IVT and BDA contain information that is useful even to pmode OSes. For
+ information on the contents of these structures, see Ralf Brown's Interrupt
+ List:
+ <A HREF="http://www.cs.cmu.edu/afs/cs/user/ralf/pub/WWW/files.html">
+ http://www.cs.cmu.edu/afs/cs/user/ralf/pub/WWW/files.html</A>
+<P>
+Bootsectors and MBRs are loaded at addresses 7C00h - 7DFFh. Depending on
+ how it's written, this code may use additional memory outside this range.
+ The <A HREF="../boot/dosmbr.txt">DOS 7 MBR copies itself to 600h - 7FFh</A>,
+ leaving 7C00h - 7DFFh free for successive MBRs or bootsectors.
+<P>
+The EBDA shown here is 1K. Some computers don't have an EBDA, others have
+ an EBDA larger than 1K.
+
+<A NAME="size"></A>
+<H2>Determining RAM sizes</H2>
+
+The top of conventional memory may contain an <I>extended BIOS data area</I>
+ (EBDA). Use INT 12h (or read the 16-bit value at linear address 0413h)
+ to get the top of conventional memory, and don't use conventional memory
+ above this limit. When DOS is running, it's possible to have more than
+ 640K of conventional memory if EMM386 is loaded like this:
+
+<PRE>        DEVICE=C:\DOS\EMM386.EXE I=A000-AFFF</PRE>
+
+Real-mode code may be able to take advantage of the extra 64K, but
+ switching to protected mode in this situation will probably cause
+ the extra memory to 'disappear'. If INT 12h returns a value greater
+ than 0x280 (640), limit this value to 0x280.
+<P>
+<B>Determining extended memory size is surprisingly difficult</B>:
+<UL>
+<LI>Use BIOS calls:
+  <OL>
+  <LI>INT 15h AX=E820h (32-bit CPU only). If this fails...
+  <LI>...use INT 15h AX=E801h. If this fails...
+  <LI>...use INT 15h AH=88h.
+  </OL>
+<LI>Read the extended memory size from CMOS only if all of the BIOS
+ calls listed above fail.
+<LI>These BIOS calls are buggy on some computers -- see Ralf Brown's list
+ and <A HREF="http://marc.theaimsgroup.com/?l=linux-kernel&m=99322719013363&w=2">
+ http://marc.theaimsgroup.com/?l=linux-kernel&m=99322719013363&w=2</A>
+<LI>You should not attempt to 'probe' memory size. It's difficult to
+ write robust code that will do this correctly and safely on all PCs.
+
+<!--
+news:<ari531$7dg$1@austar-news.austar.net.au>
+  Direct memory probe to find the amount of RAM is very buggy
+  (esp when on SMA based chipsets). On SMA (Shared Memory Area
+  - used on integrated video chipsets) motherboards, normally
+  leads to an NMI, and reboot/hard crash...
+-->
+
+<LI><B>The GRUB bootloader will determine memory size and layout for you</B>.
+ Use GRUB and you don't have to worry about probing, 16-bit BIOS calls,
+ or BIOS bugs.
+</UL>
+
+<A NAME="palloc"></A>
+<H2>Allocating RAM</H2>
+
+<PRE>xxx
+Physical memory allocation:
+- Heap algorithms to use if paging is not used, or on top of paging:
+	BogoMalloc, first-fit, dlmalloc (bins), object-based (slab), other?
+- Algorithms for allocating pages: bitmap, stack, buddy, trees?
+  Page coloring (x86 CPU uses associative L1 cache, so page coloring
+  is more for other CPUs with direct-mapped cache -- right?)
+- Zone memory: low RAM for ISA DMA, slow NUMA or uncached memory for
+  page tables (since they're cached in the TLB)</PRE>
+
+<A NAME="dma"></A>
+<H2>DMA restrictions on physical memory</H2>
+
+Memory used by ISA (8- and 16-bit) DMA must be below 16 meg. <B>This type
+ of DMA is used by the floppy drive</B> and by ISA sound boards. Memory
+ used by 8-bit DMA (DMA channels 0-3) can not cross a 64K boundary;
+ memory used by 16-bit DMA (channels 4-7) can not cross a 128K boundary.
+<P>
+PCI (32-bit) DMA; also known as <I>bus-mastering</I>, does not have
+ these restrictions.
+
+<A NAME="snippets"></A>
+<H2>Code snippets</H2>
+
+Get memory size with BIOS calls or from CMOS:
+ see <A HREF="../boot/index.htm#snippets">bootstrap code snippets</A>
+<P>
+<A HREF="malloc.c">Simple <TT>malloc()</TT></A>: first-fit, <TT>free()</TT>
+  coalesces adjacent free blocks, fixed- or variable-sized heap, no
+  <TT>mmap()</TT>
+<P>
+ROMs can be detected with INT 15h AX=E820h (look for type 2 memory),
+or by <A HREF="rom.c">scanning for 16-bit BIOS ROM extensions</A>
+
+<A NAME="links"></A>
+<H2>Links</H2>
+
+Doug Lea's <TT>malloc()</TT>:
+ <A HREF="http://g.oswego.edu/dl/html/malloc.html">
+ http://g.oswego.edu/dl/html/malloc.html</A>. Public domain,
+ portable, good performance. Can use <TT>sbrk()</TT> or <TT>mmap()</TT>
+ or both to enlarge the heap.
+<P>
+John Walker's BGET: <A HREF="http://www.fourmilab.ch/bget/">
+ http://www.fourmilab.ch/bget/</A>. Reasonably portable. Public-domain.
+<P>
+<PRE>  http://www.cs.colorado.edu/~zorn/Malloc.html
+  http://nondot.org/sabre/os/articles/MemoryManagement/
+</PRE>
+
+<A NAME="todo"></A>
+<H2>TO DO</H2>
+
+<A NAME="errors"></A>
+<H2><A HREF="../index.htm#contact"><B>REPORT BUGS OR ERRORS IN THIS DOCUMENT</B></A></H2>

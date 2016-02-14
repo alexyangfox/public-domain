@@ -1,0 +1,296 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<TITLE>OSD: Executable and relocatable file formats</TITLE>
+
+<!--
+Info about STABS; a debugging format used with COFF:
+http://sources.redhat.com/gdb/onlinedocs/stabs_toc.html
+
+"For example, the notion of thread local variables, as in
+	declspec(thread) int i;
+ drove me crazy until I saw how it was implemented with
+ elegant simplicity in the executable file."
+(it puts the variable not in the .data or .bss section, but in
+the .tls [thread local storage] section)
+
+.idata = import table, filled with instructions like this:
+        JMP DWORD PTR [nnnnnnnn]
+(Borland only; MS compilers put imports in .text)
+
+-->
+
+<A HREF="../index.htm">OSD Home</A>
+
+<UL>
+<LI><A HREF="index.htm#sections"># - Executable file sections</A>
+<LI><A HREF="index.htm#binary"># - Binary files</A>
+<LI><A HREF="index.htm#djgpp"># - DJGPP COFF file format</A>
+<LI><A HREF="index.htm#coff"># - Other COFF variants</A>
+<LI><A HREF="index.htm#elf"># - ELF file format</A>
+<LI><A HREF="index.htm#pe"># - Win32 PE COFF file format</A>
+<LI><A HREF="index.htm#aout"># - a.out file formats</A>
+<LI><A HREF="index.htm#snippets"># - Code snippets</A>
+<LI><A HREF="index.htm#links"># - Links</A>
+</UL>
+
+<A NAME="sections"></A>
+<H2><A HREF="execfile.gif">Executable file sections</A></H2>
+
+Executable files typically contain a file header at or near the start of
+ the file. This header contains 'magic numbers' that identify the file
+ type. Beyond this header, executable files are typically divided into
+ sections. Each section is characterized by name, permissions (RWX),
+ size, file offset, and virtual address (VMA).
+
+<TABLE WIDTH="100%" BORDER><TR>
+ <TH>Section in executable file <TH>Read/Write/eXecute<TH>C storage class
+</TR><TR>
+ <TD>.text or _TEXT             <TD>R-X                 <TD>code,
+							<TT>const</TT> globals,
+                                                        'large' literals
+</TR><TR>
+ <TD>.rodata                    <TD>R--                 <TD><TT>const</TT> globals,
+                                                        large literals
+</TR><TR>
+ <TD>.data or _DATA             <TD>RW-                 <TD>initialized globals,
+                                                        initialized static locals
+</TR><TR>
+ <TD>.bss or _BSS               <TD>RW-                 <TD>uninitialized globals,
+                                                        uninitialized static locals
+</TR></TABLE>
+
+<P>
+Non-static C locals, whether initialized or not, are stored on the stack.
+ Space for these variables is allocated at run-time. Memory for C++ objects
+ usually comes from the <I>heap</I>, an area of memory just beyond
+ the BSS. Heap memory is also allocated at run-time.
+<P>
+The ELF file format has one or more .rodata sections for read-only (const)
+ data. Older file formats such as COFF put such data into .text
+<P>
+'Large' literals are constant values too large to be handled conveniently
+ with immediate addressing, such as string literals and constant structures.
+ GNU C will put literal strings in .data instead of .text or .rodata if you
+ use the <TT>-fwritable-strings</TT> command-line option.
+ (<TT>-fwritable-strings</TT> is deprecated in GCC 3.4)
+<P>
+The C language requires that the BSS be zeroed before main() is
+ called. Because every variable in the BSS has the same initial value (zero),
+ <B>only the BSS size is stored in the executable file</B>.
+
+<A NAME="binary"></A>
+<H2>Binary files</H2>
+
+There are many problems with binary files. Most of these are due
+ to the lack of file headers:
+<UL>
+<LI>No 'magic values' in header that let you verify the executable file format
+<LI>No entry point in header. Entry point must be start of file.
+<LI>No section addresses in header. The binary file must have an ORG value
+ that agrees with the code that loads it.
+<LI>No BSS size in header. The bootloader has no way of knowing how big
+ the kernel actually is, so it can't load anything after the kernel
+ (e.g. modules).
+<LI>Can't <tt>objdump</TT> the kernel to see if it's linked properly
+<LI>The MinGW version of <tt>ld</tt> crashes or complains (&quot;PE
+ operations on non PE file.&quot;) when asked to make a binary kernel.
+</UL>
+
+<A NAME="djgpp"></A>
+<H2>DJGPP COFF file format</H2>
+
+Authoritative docs:
+<A HREF="http://www.delorie.com/djgpp/doc/coff">
+http://www.delorie.com/djgpp/doc/coff</A>
+<P>
+<A HREF="coff.txt">Concise summary of DJGPP COFF file format</A>
+<P>
+A loader for DJGPP COFF executables should find and load the
+ .text, .data, and .bss sections:
+
+<PRE>C:\tmp&gt;objdump --headers coff-os.x
+
+coff-os.x:     file format coff-go32
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00003000  00100000  00100000  00000100  2**4
+                  CONTENTS, ALLOC, LOAD, CODE
+  1 .data         00001000  00103000  00103000  00003100  2**4
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00003000  00104000  00104000  00000000  2**2
+                  ALLOC
+  3 .stab         00006a50  00107000  00107000  00004100  2**2
+                  CONTENTS, DEBUGGING
+  4 .stabstr      000025b7  0010da50  0010da50  0000ab50  2**0
+                  CONTENTS, DEBUGGING</PRE>
+
+<A NAME="coff"></A>
+<H2>Other COFF variants</H2>
+
+<UL>
+<LI><A HREF="ftp://ftp.lysator.liu.se/pub/msdos/gnu/gcc-dos-m68k/">
+        <TT>coff-m68k</TT> (Motorola 680x0 CPU)</A>:
+ <UL>
+ <LI>All multi-byte values are BIG ENDIAN instead of little
+ <LI>COFF file magic value is 0x150 instead of 0x14C
+ <LI>Relocatable files contain only type 17 relocations, instead of
+  type 6 or type 20
+ </UL>
+<LI><TT>sh-coff</TT> (Hitachi SuperH CPU):
+ <UL>
+ <LI>All multi-byte values are BIG ENDIAN instead of little
+ <LI>COFF file magic value is 0x500 instead of 0x14C
+ <LI>Relocatable files contain only type 0 relocations, instead of
+  type 6 or type 20
+ <LI>Relocation records are 16 bytes instead of 10
+ </UL>
+</UL>
+
+<A NAME="elf"></A>
+<H2>ELF file format</H2>
+
+Authoritative docs:
+<A HREF="http://www.acm.uiuc.edu/sigops/rsrc/pfmt11.pdf">
+http://www.acm.uiuc.edu/sigops/rsrc/pfmt11.pdf</A> <!-- <BR>
+Text version:
+<A HREF="http://www.geocities.com/SiliconValley/Ridge/2544/asm/ELF.txt">
+http://www.geocities.com/SiliconValley/Ridge/2544/asm/ELF.txt</A> -->
+<P>
+<A HREF="elf.txt">Concise summary of ELF file format</A> (incomplete)
+<P>
+A loader for ELF executables should <B>find and load the <I>program
+ headers</I></B> (also called <I>segments</I>), <B>not the sections</B>.
+ Each program header has two different size values: size-on-disk (file size)
+ and size-in-memory (memory size). If the memory size is greater than the
+ file size, the program header contains the BSS, and the extra memory
+ should be zeroed:
+
+<PRE>C:\tmp&gt;objdump-elf --private-headers elf-os.x
+
+elf-os.x:     file format elf32-i386
+
+Program Header:
+    LOAD off    0x00001000 vaddr 0x00100000 paddr 0x00100000 align 2**12
+         filesz 0x0001e440 memsz 0x0001e440 flags r-x
+    LOAD off    0x0001f440 vaddr 0x0011f440 paddr 0x0011f440 align 2**12
+         filesz 0x000031f4 memsz 0x00007940 flags rw-</PRE>
+
+The <B><TT>readelf</TT></B> utility, which is now part of GNU binutils
+ (including DJGPP binutils) <B>can examine ELF files in great detail</B>.
+ <TT>readelf --segments ...</TT> will display the program headers and the
+ corresponding sections:
+
+<PRE>C:\tmp&gt;readelf --segments elf-os.x
+
+Elf file type is EXEC (Executable file)
+Entry point 0x100000
+There are 2 program headers, starting at offset 52
+
+Program Headers:
+  Type           Offset   VirtAddr   PhysAddr   FileSiz MemSiz  Flg Align
+  LOAD           0x001000 0x00100000 0x00100000 0x1e440 0x1e440 R E 0x1000
+  LOAD           0x01f440 0x0011f440 0x0011f440 0x031f4 0x07940 RW  0x1000
+
+ Section to Segment mapping:
+  Segment Sections...
+   00     .text .rodata
+   01     .data .bss</PRE>
+
+<A NAME="pe"></A>
+<H2>Win32 PE COFF file format</H2>
+
+Authoritative docs:
+<A HREF="http://www.microsoft.com/whdc/system/platform/firmware/PECOFF.mspx">
+ http://www.microsoft.com/whdc/system/platform/firmware/PECOFF.mspx</A>
+<P>
+<A HREF="pe.txt">Concise summary of Win32 PE COFF file format</A>
+<P>
+A loader for Win32 PE COFF executables should find and load the .text and
+ .data sections from the file. As with ELF program headers, the sections
+ of Win32 PE COFF executables have separate size-on-disk (<I>raw data
+ size</I>) and size-in-memory (<I>virtual size</I>) values. For PE files
+ built with commercial compilers such as Borland C 5.5, the BSS size is
+ encoded into the difference between the two size values for the .data
+ section. For PE files built <B>with CygWin or MinGW, there is a
+ separate .bss section</B>:
+
+<PRE>C:\tmp&gt;objdump --headers pe-os.x
+
+pe-os.x:     file format pei-i386
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00004000  c0000000  00004000  00002000  2**2
+                  CONTENTS, ALLOC, LOAD, CODE
+  1 .data         00001000  c0004000  0000c000  00006000  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .edata        00001000  c0010000  00001000  00007000  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  3 .rsrc         00001000  c0011000  00001000  00008000  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  4 .reloc        00001000  c0012000  00001000  00009000  2**2
+                  CONTENTS, ALLOC, LOAD, DATA</PRE>
+
+The 'LMA' value shown here is actually the section virtual size.
+<P>
+MinGW based on GCC 2.95.2
+<A HREF="http://my.execpc.com/~geezer/embed/bugs.htm#mingbug">
+ stores the BSS size in the wrong field of the section headers</A>.
+ Because of this bug, <B>you can't link old MinGW object files with
+ object files generated by other tool chains (including NASM).</B>
+ This bug has been fixed in the newest versions of MinGW, available from
+ SourceForge. This bug may also be present in older versions of CygWin.
+
+<A NAME="aout"></A>
+<H2>a.out file formats</H2>
+
+DJGPP a.out (a.out-i386) and Linux a.out (a.out-i386-linux) are
+ different file formats.
+<P>
+This file format is useful if you want to mix 16- and 32-bit code,
+ but is otherwise obsolete.
+
+<A NAME="snippets"></A>
+<H2>Code snippets</H2>
+
+<!--
+http://gcc.gnu.org/cgi-bin/gnatsweb.pl?cmd=view%20audit-trail&database=gcc&pr=6697
+"Not a bug..." - yes, it IS a bug
+-->
+<A HREF="runreloc.zip">Load and run DJGPP COFF, Win32 PE COFF, or ELF
+ .o file</A> (demo relocation code).
+<P>
+<A HREF="djcoff.c">Create task from DJGPP COFF executable</A>
+<P>
+<A HREF="pecoff.c">Create task from statically-linked Win32 PE COFF executable</A>
+<P>
+<A HREF="elf.c">Create task from statically-linked ELF executable</A>
+
+<A NAME="links"></A>
+<H2>Links</H2>
+
+<A HREF="http://www.nondot.org/sabre/os/articles/ExecutableFileFormats/">
+ http://www.nondot.org/sabre/os/articles/ExecutableFileFormats/</A><BR>
+File formats: <A HREF="http://www.wotsit.org">http://www.wotsit.org</A><BR>
+Dynamic linking and loading:
+<A HREF="http://www.iecc.com/linker/linker10.html">
+http://www.iecc.com/linker/linker10.html</A><BR>
+Making tiny (45 bytes!) ELF executables with NASM under Linux:
+<A HREF="http://www.muppetlabs.com/~breadbox/software/tiny/teensy.html">
+http://www.muppetlabs.com/~breadbox/software/tiny/teensy.html</A>
+
+<A NAME="todo"></A>
+<H2>TO DO</H2>
+
+<PRE>- finish summaries of file formats
+- add summary of .EXE file format
+- loading, relocating, running 16-bit .EXE file
+- loading a DLL and calling code in it, or letting it call us
+        ELF     Win32 PE COFF
+- loading and running a dynamically-linked executable
+	ELF     Win32 PE COFF
+- dlopen(), dlerror(), dlsym(), dlclose()
+</PRE>
+
+<A NAME="errors"></A>
+<H2><A HREF="../index.htm#contact"><B>REPORT BUGS OR ERRORS IN THIS DOCUMENT</B></A></H2>

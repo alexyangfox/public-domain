@@ -1,0 +1,314 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<TITLE>OSD: Putting text on the screen</TITLE>
+
+<A HREF="../index.htm">OSD Home</A>
+
+<!--
+maybe a snippet to set cursor shape (none, underline, block)
+-->
+
+<UL>
+<LI><A HREF="index.htm#asm"># - Assembly-language text output using the BIOS</A>
+<LI><A HREF="index.htm#cbios"># - C-language text output using the BIOS</A>
+<LI><A HREF="index.htm#nobios"># - Text output without the BIOS</A>
+<LI><A HREF="index.htm#scroll"># - Scrolling</A>
+<LI><A HREF="index.htm#movecsr"># - Moving the cursor</A>
+<LI><A HREF="index.htm#ansi"># - ANSI escape sequences</A>
+<LI><A HREF="index.htm#snippets"># - Code snippets</A>
+<LI><A HREF="index.htm#links"># - Links</A>
+<LI><A HREF="../index.htm#contact"><B>REPORT BUGS OR ERRORS IN THIS DOCUMENT</B></A>
+</UL>
+
+<A NAME="asm"></A>
+<H2>Assembly-language text output using the BIOS</H2>
+
+For information on using BIOS video functions, see INT 10h
+ in Ralf Brown's interrupt list:
+ <A HREF="http://www.cs.cmu.edu/afs/cs/user/ralf/pub/WWW/files.html">
+ http://www.cs.cmu.edu/afs/cs/user/ralf/pub/WWW/files.html</A>
+<P>
+See also <A HREF="index.htm#snippets">the code snippets below</A>.
+
+<A NAME="cbios"></A>
+<H2>C-language text output using the BIOS</H2>
+
+First of all, make sure the function you want to use does not use DOS.
+ This can be done by examining the source code for the C library or
+ tracing into the function with a debugger.
+<P>
+The <TT>putch()</TT> and <TT>cputs()</TT> functions may be good choices
+ for text output in a 16-bit real-mode OS. Both the DJGPP and Turbo C
+ versions use BIOS interrupts but not DOS interrupts.
+<P>
+<A NAME="vmm">
+For the DJGPP version of <TT>putch()</TT> to function, a <I>V86 mode
+ monitor</I> (VMM) is required. The VMM handles BIOS interrupts by
+ switching the processor from 32-bit pmode to virtual 8086 mode,
+ re-issuing the interrupt, and switching back to 32-bit pmode when the
+ BIOS interrupt is done.
+</A>
+<P>
+<B>Which is more difficult: writing a VMM, or writing pmode driver
+ code to replace 16-bit BIOS functions?</B> Opinions vary.
+
+<A NAME="nobios"></A>
+<H2>Text output without the BIOS</H2>
+
+Text displayed on the screen is stored in a <I>framebuffer</I>. The
+ location of the framebuffer in memory depends on whether the VGA board
+ is set for monochrome or color emulation:
+
+<TABLE BORDER="1"><TR>
+ <TH>emulation</TH>
+ <TH>framebuffer linear address</TH>
+ <TH>framebuffer real-mode address</TH>
+ <TH>I/O address of CRTC</TH>
+</TR><TR>
+ <TD>color</TD>
+ <TD>B8000h</TD>
+ <TD>B800h:0000</TD>
+ <TD>3D4h</TD>
+</TR><TR>
+ <TD>monochrome</TD>
+ <TD>B0000h</TD>
+ <TD>B000h:0000</TD>
+ <TD>3B4h</TD>
+</TR></TABLE>
+<P>
+<B>Usually, the board is set for color emulation</B>.
+ The CRTC is a functional unit of the VGA, and is discussed below.
+<P>
+Each character in the framebuffer takes 2 bytes: an ASCII value
+ at address N, and an <I>attribute byte</I> at address N+1:
+
+<TABLE BORDER="1"><TR>
+ <TH>bit in attribute byte</TH>
+ <TH>usage</TH>
+</TR><TR>
+ <TD>b7</TD>
+ <TD><BLINK>blink</BLINK></TD>
+</TR><TR>
+ <TD>b6:b4</TD>
+ <TD>background color (0-7)</TD>
+</TR><TR>
+ <TD>b3:b0</TD>
+ <TD>foreground color (0-15)</TD>
+</TR></TABLE>
+
+<TABLE BORDER="1"><TR>
+ <TH>color value</TH>
+ <TH>color</TH>
+ <TH>color value</TH>
+ <TH>color</TH>
+</TR><TR>
+ <TD>0</TD>
+ <TD BGCOLOR="#000000"><FONT COLOR="#FFFFFF">black</FONT></TD>
+ <TD>8</TD>
+ <TD BGCOLOR="#545454"><FONT COLOR="#FFFFFF">dark gray</FONT></TD>
+</TR><TR>
+ <TD>1</TD>
+ <TD BGCOLOR="#0000A8"><FONT COLOR="#FFFFFF">blue</FONT></TD>
+ <TD>9</TD>
+ <TD BGCOLOR="#5454FF"><FONT COLOR="#000000">bright blue</FONT></TD>
+</TR><TR>
+ <TD>2</TD>
+ <TD BGCOLOR="#00A800"><FONT COLOR="#FFFFFF">green</FONT></TD>
+ <TD>10</TD>
+ <TD BGCOLOR="#54FF54"><FONT COLOR="#000000">bright green</FONT></TD>
+</TR><TR>
+ <TD>3</TD>
+ <TD BGCOLOR="#00A8A8"><FONT COLOR="#FFFFFF">cyan</FONT></TD>
+ <TD>11</TD>
+ <TD BGCOLOR="#54FFFF"><FONT COLOR="#000000">bright cyan</FONT></TD>
+</TR><TR>
+ <TD>4</TD>
+ <TD BGCOLOR="#A80000"><FONT COLOR="#FFFFFF">red</FONT></TD>
+ <TD>12</TD>
+ <TD BGCOLOR="#FF5454"><FONT COLOR="#000000">pink</FONT></TD>
+</TR><TR>
+ <TD>5</TD>
+ <TD BGCOLOR="#A800A8"><FONT COLOR="#FFFFFF">magenta</FONT></TD>
+ <TD>13</TD>
+ <TD BGCOLOR="#FF54FF"><FONT COLOR="#000000">bright magenta</FONT></TD>
+</TR><TR>
+ <TD>6</TD>
+ <TD BGCOLOR="#A8A800"><FONT COLOR="#FFFFFF">brown</FONT></TD>
+ <TD>14</TD>
+ <TD BGCOLOR="#FFFF54"><FONT COLOR="#000000">yellow</FONT></TD>
+</TR><TR>
+ <TD>7</TD>
+ <TD BGCOLOR="#A8A8A8"><FONT COLOR="#000000">white</FONT></TD>
+ <TD>15</TD>
+ <TD BGCOLOR="#FFFFFF"><FONT COLOR="#000000">bright white</FONT></TD>
+</TR></TABLE>
+
+<A NAME="scroll"></A>
+<H2>Scrolling</H2>
+
+xxx - BIOS scrolling functions?
+<P>
+For both DJGPP and Turbo C, <I>software scrolling</I> of the display can
+ be done with the <TT>movedata()</TT> function. This function works like
+ <TT>memcpy()</TT> but uses far pointers for both source and destination.
+<P>
+<TT>movedata()</TT> may not work properly if src &lt; dst, i.e. for
+ making the display <B>scroll down</B>. If you use near pointers,
+ <TT>memmove()</TT> can be used instead of <TT>movedata()</TT> or
+ <TT>memcpy()</TT>. <TT>memmove()</TT> is guaranteed to work properly
+ if src and dst overlap.
+<P>
+For <I>hardware scrolling</I>, you instruct the VGA to use a different
+ memory location for the framebuffer. CRTC registers 12 and 13 contain
+ the MSB and LSB of the framebuffer offset, relative to B0000h, B8000h,
+ or A0000h. Hardware scrolling can not continue indefinitely (eventually
+ the framebuffer will extend beyond the end of video memory).
+<P>
+The framebuffer memory can also be divided into <I>virtual consoles</I>
+ (VCs). 32K of video memory is enough for eight 80x25 VCs. The VCs can
+ be spaced 4000 bytes apart (80x25x2), and the hardware scrolling code
+ snippet below can be used to select which VC is currently displayed.
+ (Linux VCs use a different method.)
+
+<A NAME="movecsr"></A>
+<H2>Moving the cursor</H2>
+
+BIOS call INT 10h AH=02h moves the winking cursor.
+<P>
+If you do not want to use the BIOS: CRTC registers 14 and 15 contain
+ the MSB and LSB of the cursor position, relative to B8000h or B0000h,
+ in units of characters. The cursor can be moved with a code snippet
+ similar to the one for scrolling (see below).
+
+<A NAME="ansi"></A>
+<H2><A HREF="ansi.htm">ANSI escape sequences</A></H2>
+
+These escape sequences are used to change the color of text, move the
+ cursor, clear the screen, etc. They were first supported DEC's VT series
+ of dumb terminals, and are still widely supported today:
+<UL>
+<LI>Most BBSes support ANSI escapes
+<LI>The Linux console emulates a VT102 terminal
+<LI>Most 'terminal' or serial communications software can emulate a VT100
+ terminal
+<LI>The DOS driver ANSI.SYS (and similar TSRs that can be loaded from the
+ command line) makes these escape sequences available to DOS programs
+</UL>
+
+<A NAME="snippets"></A>
+<H2>Code snippets</H2>
+
+<A HREF="bios0e.asm">Demo of INT 10h AH=0Eh 'teletype' output</A>.
+<P>
+<A HREF="bios13.asm">Demo of INT 10h AH=13h</A>.
+<P>
+<A HREF="vga-emu.c">Code to detect monochrome/color emulation</A>.
+<P>
+Turbo C code (16-bit real mode) to put <B>white on blue</B> 'H' in
+ upper left corner of screen:
+
+<PRE>        #include &lt;dos.h&gt; /* pokeb() */
+        pokeb(0xB800, 0, 'H');
+	pokeb(0xB800, 1, 0x1F);</PRE>
+
+NASM code (16-bit real mode) to put <B>white on blue</B> 'H' in
+ upper left corner of screen:
+
+<PRE>        mov bx,0B800h
+        mov es,bx
+        mov byte [es:0],'H'
+        mov byte [es:1],1Fh</PRE>
+
+DJGPP code (32-bit pmode) to put <B>yellow on red</B> '*' in
+ upper right corner of 80x25 screen, using <B>far pointers</B>:
+
+<PRE>        #include &lt;sys/farptr.h&gt; /* _farpokeb() */
+        #include &lt;go32.h&gt; /* _dos_ds */
+	_farpokeb(_dos_ds, 0xB8000 + 79 * 2 + 0, '*');
+	_farpokeb(_dos_ds, 0xB8000 + 79 * 2 + 1, 0x4E);</PRE>
+
+DJGPP code (32-bit pmode) to put <B>yellow on red</B> '*' in
+ upper right corner of 80x25 screen, using <B>near pointers</B>:
+
+<PRE>        #include &lt;sys/nearptr.h&gt;
+        #include &lt;crt0.h&gt;
+	#include &lt;stdio.h&gt;
+
+	unsigned char *fb;
+
+	if(!(_crt0_startup_flags &amp; _CRT0_FLAG_NEARPTR))
+	{       if(!__djgpp_nearptr_enable())
+		{       printf("Could not enable nearptr access\n");
+			return -1; } } /* probably Windows NT DOS box */
+	fb = (unsigned char *)0xB8000 + __djgpp_conventional_base;
+	fb[79 * 2 + 0] = '*';
+	fb[79 * 2 + 1] = 0x4E;</PRE>
+
+Turbo C code to scroll 80x25 display up one line (color emulation):
+
+<PRE>        #include &lt;string.h&gt; /* movedata() */
+        movedata(0xB800, 80 * 2,
+                0xB800, 0,
+                80 * (25 - 1) * 2);</PRE>
+
+DJGPP code to scroll 80x25 display up one line (color emulation):
+
+<PRE>        #include &lt;string.h&gt; /* movedata() */
+	#include &lt;go32.h&gt; /* _dos_ds */
+        movedata(_dos_ds, 0xB8000L + 80 * 2,
+                _dos_ds, 0xB8000L,
+                80 * (25 - 1) * 2);</PRE>
+
+Hardware scrolling by changing the framebuffer base address:
+
+<PRE>        /* scroll up one line */
+	#include &lt;dos.h&gt; /* outportb() */
+        unsigned short crtc_adr = 0x3D4; /* 0x3B4 for monochrome */
+        unsigned short offset = 80;
+
+        /* the CRTC index is at crtc_adr + 0
+        select register 12 */
+        outportb(crtc_adr + 0, 12);
+        /* the selected CRTC register appears at crtc_adr + 1 */
+        outportb(crtc_adr + 1, offset >> 8);
+        outportb(crtc_adr + 0, 13);
+	outportb(crtc_adr + 1, offset &amp; 0xFF);</PRE>
+
+Move hardware cursor using INT 10h AH=02h:
+
+<PRE>        mov ah,2
+        mov bh,0 ; video page
+        mov dh,1 ; row (y; 0 is top)
+        mov dl,10 ; col (x; 0 is left)
+	int 10h</PRE>
+
+Move hardware cursor by changing VGA registers; without using the BIOS:
+
+<PRE>        #include &lt;dos.h&gt; /* outportb() */
+        unsigned short crtc_adr = 0x3D4; /* 0x3B4 for monochrome */
+        unsigned short offset;
+        unsigned short x = 20, y = 3;
+
+	offset = x + y * 80;            /* 80 characters per line */
+	outportb(crtc_adr + 0, 14);     /* MSB of offset to CRTC reg 14 */
+	outportb(crtc_adr + 1, offset >> 8);
+	outportb(crtc_adr + 0, 15);     /* LSB of offset to CRTC reg 15 */
+	outportb(crtc_adr + 1, offset);</PRE>
+
+<A NAME="links"></A>
+<H2>Links</H2>
+
+<A HREF="http://home.worldonline.dk/~finth/">
+http://home.worldonline.dk/~finth/</A>
+<BR>
+<A HREF="http://my.execpc.com/~geezer/os/vga.zip">
+http://my.execpc.com/~geezer/os/vga.zip</A>
+
+<A NAME="todo"></A>
+<H2>TO DO</H2>
+
+<PRE>
+Unicode? UTF-8?
+</PRE>
+
+<A NAME="errors"></A>
+<H2><A HREF="../index.htm#contact"><B>REPORT BUGS OR ERRORS IN THIS DOCUMENT</B></A></H2>
