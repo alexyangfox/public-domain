@@ -1,0 +1,1343 @@
+#if( !@defined( hlabe_hhf ))
+?hlabe_hhf := true;
+
+#includeOnce( "tables.hhf" )
+#includeOnce( "w.hhf" )
+
+
+const
+	// Used to emit some extra data to the code file for debugging purposes:
+	
+	trace_c		:= false;
+	dbgTrace_c	:= false;
+	verbose_c	:= false;
+
+	// Values for symbol_t "flags" field:
+	
+	isExtern_c		:= @{0};
+	isPublic_c		:= @{1};
+	isReferenced_c	:= @{2};
+	isDefined_c		:= @{3};
+	
+	// Brand values for ELF files:
+	
+	brandNone		:= 0;
+	brandLinux		:= 3;
+	brandFreeBSD	:= 9;
+	
+
+
+	tknEBX			:text := "(type tokenStmt_t [ebx])";
+	dispEBX			:text := "(type disp_t [ebx])";
+	rel1EBX			:text := "(type rel_1_Stmt_t [ebx])";
+	rel2EBX			:text := "(type rel_2_Stmt_t [ebx])";
+	rel14EBX		:text := "(type rel_1_4_Stmt_t [ebx])";
+	rel4EBX			:text := "(type rel_4_Stmt_t [ebx])";
+	jmpEBX			:text := "(type jmp_Stmt_t [ebx])";
+	srcEBX			:text := "(type sourceFileList_t [ebx])";
+	dupEBX			:text := "(type dupStmt_t [ebx])";
+	tblEDX			:text := "(type tableNode_t [edx])";
+	tblEAX			:text := "(type tableNode_t [eax])";
+	symEDX			:text := "(type symbol_t [edx])";
+	symEAX			:text := "(type symbol_t [eax])";
+	symECX			:text := "(type symbol_t [ecx])";
+	symEBX			:text := "(type symbol_t [ebx])";
+	relocEBX		:text := "(type relocStmt_t [ebx])";
+	relocESI		:text := "(type w.IMAGE_RELOCATION [ESI])";
+	relocElfESI		:text := "(type Elf32_Rel [ESI])";
+	relocMachoESI	:text := "(type relocation_info [esi])";
+	scRelocMachoESI	:text := "(type scattered_relocation_info [esi])";
+
+	// ELF constants
+	
+	EI_NIDENT	:= 16;
+	ET_NONE		:= 0;
+	ET_REL		:= 1;
+	ET_EXEC		:= 2;
+	ET_DYN		:= 3;
+	ET_CORE		:= 4;
+	ET_LOOS		:= $FE00;
+	ET_HIOS		:= $FEFF;
+	ET_LOPROC	:= $FF00;
+	
+	EF_HIPROC	:= $FFFF;
+	
+	EM_386		:= 3;
+	
+	EV_NONE		:= 0;
+	EV_CURRENT	:= 1;
+	
+	EI_MAG0			:= 0;
+	EI_MAG1			:= 1;
+	EI_MAG2			:= 2;
+	EI_MAG3			:= 3;
+	EI_CLASS		:= 4;
+	EI_DATA			:= 5;
+	EI_VERSION		:= 6;
+	EI_OSABI		:= 7;
+	EI_ABIVESION	:= 8;
+	EI_PAD			:= 9;
+	
+	ELFMAG0			:= $7F;
+	ELFMAG1			:= 'E';
+	ELFMAG2			:= 'L';
+	ELFMAG3			:= 'F';
+	
+	ELFCLASSNONE	:= 0;
+	ELFCLASS32		:= 1;
+	ELFCLASS64		:= 2;
+	
+	ELFDATANONE		:= 0;
+	ELFDATA2LSB		:= 1;		// Little Endian
+	ELFDATA2MSB		:= 2;		// Big Endian
+	
+	ELFOSABI_NONE		:= 0;
+	ELFOSABI_HPUX		:= 1;
+	ELFOSABI_NETBSD		:= 2;
+	ELFOSABI_LINUX		:= 3;
+	ELFOSABI_SOLARIS	:= 6;
+	ELFOSABI_AIX		:= 7;
+	ELFOSABI_IRIX		:= 8;
+	ELFOSABI_FREEBSD	:= 9;		// FreeBSD Brand
+	ELFOSABI_TRU64		:= 10;
+	ELFOSABI_MODESTO	:= 11;
+	ELFOSABI_OPENBSD	:= 12;
+	ELFOSABI_OPENVMS	:= 13;
+	ELFOSABI_NSK		:= 14;
+	ELFOSABI_AROS		:= 15;
+	
+	SHN_UNDEF			:= 0;
+	SHN_LORESERVE		:= $FF00;
+	SHN_LOPROC			:= $FF00;
+	SHN_HIPROC			:= $FF1F;
+	SHN_LOOS			:= $FF20;
+	SHN_HIOS			:= $FF3F;
+	SHN_ABS				:= $FFF1;
+	SHN_COMMON			:= $FFF2;
+	SHN_XINDEX			:= $FFFF;
+	SHN_HIRESERVE		:= $FFFF;
+	
+	SHT_NULL			:= 0;
+	SHT_PROGBITS		:= 1;
+	SHT_SYMTAB			:= 2;
+	SHT_STRTAB			:= 3;
+	SHT_RELA			:= 4;
+	SHT_HASH			:= 5;
+	SHT_DYNAMIC			:= 6;
+	SHT_NOTE			:= 7;
+	SHT_NOBITS			:= 8;
+	SHT_REL				:= 9;
+	SHT_SHLIB			:= 10;
+	SHT_DYNSYM			:= 11;
+	SHT_INIT_ARRAY		:= 14;
+	SHT_FINI_ARRAY		:= 15;
+	SHT_PREINIT_ARRAY	:= 16;
+	SHT_GROUP			:= 17;
+	SHT_SYMTAB_SHNDX	:= 18;
+	SHT_LOOS			:= $6000_0000;
+	SHT_HIOS			:= $6fff_ffff;
+	SHT_LOPROC			:= $7000_0000;
+	SHT_HIPROC			:= $7fff_ffff;
+	SHT_LOUSER			:= $8000_0000;
+	SHT_HIUSER			:= $ffff_ffff;
+	
+	SHF_WRITE				:= 1;
+	SHF_ALLOC				:= 2;
+	SHF_EXECINSTR			:= 4;
+	SHF_MERGE				:= $10;
+	SHF_STRINGS				:= $20;
+	SHF_INFO_LINK			:= $40;
+	SHF_LINK_ORDER			:= $80;
+	SHF_OS_NONCONFORMING	:= $100;
+	SHF_GROUP				:= $200;
+	SHF_TLS					:= $400;
+	SHF_MASKOS				:= $FF0_0000;
+	SHF_MASKPROC			:= $F000_0000;
+	
+	GRP_COMDAT			:= 1;
+	GRP_MASKOS			:= $FF0_0000;
+	GRP_MASKPROC		:= $F000_0000;
+	
+	STB_LOCAL			:= 0;
+	STB_GLOBAL			:= 1;
+	STB_WEAK			:= 2;
+	STB_LOOS			:= 10;
+	STB_HIOS			:= 12;
+	STB_LOPROC			:= 13;
+	STB_HIPROC			:= 15;
+	
+	STT_NOTYPE			:= 0;
+	STT_OBJECT			:= 1;
+	STT_FUNC			:= 2;
+	STT_SECTION			:= 3;
+	STT_FILE			:= 4;
+	STT_COMMON			:= 5;
+	STT_TLS				:= 6;
+	STT_LOOS			:= 10;
+	STT_HIOS			:= 12;
+	STT_LOPROC			:= 13;
+	STT_HIPROC			:= 15;
+	
+	STV_DEFAULT			:= 0;
+	STV_INTERNAL		:= 1;
+	STV_HIDDEN			:= 2;
+	STV_PROTECTED		:= 3;
+	
+	R_386_NONE			:= 0;
+	R_386_32			:= 1;
+	R_386_PC32			:= 2;
+	
+	
+	
+type
+	// ELF types:
+	
+	Elf32_Addr	:dword;
+	Elf32_Off	:dword;
+	Elf32_Half	:word;
+	Elf32_Word	:uns32;
+	Elf32_Sword	:int32;
+	
+	Elf32_Ehdr:
+		record
+		
+			e_ident		:char[ EI_NIDENT ];
+			e_type		:Elf32_Half;
+			e_machine	:Elf32_Half;
+			e_version	:Elf32_Word;
+			e_entry		:Elf32_Addr;
+			e_phoff		:Elf32_Off;
+			e_shoff		:Elf32_Off;
+			e_flags		:Elf32_Word;
+			e_ehsize	:Elf32_Half;
+			e_phentsize	:Elf32_Half;
+			e_phnum		:Elf32_Half;
+			e_shentsize	:Elf32_Half;
+			e_shnum		:Elf32_Half;
+			e_shstrndx	:Elf32_Half;
+			
+		endrecord;
+		
+	Elf32_Shdr:
+		record
+		
+			sh_name			:Elf32_Word;
+			sh_type			:Elf32_Word;
+			sh_flags		:Elf32_Word;
+			sh_addr			:Elf32_Addr;
+			sh_offset		:Elf32_Off;
+			sh_size			:Elf32_Word;
+			sh_link			:Elf32_Word;
+			sh_info			:Elf32_Word;
+			sh_addralign	:Elf32_Word;
+			sh_entsize		:Elf32_Word;
+			
+		endrecord;
+		
+	Elf32_Sym:
+		record
+		
+			st_name		:Elf32_Word;
+			st_value	:Elf32_Addr;
+			st_size		:Elf32_Word;
+			st_info		:byte;
+			st_other	:byte;
+			st_shndx	:Elf32_Half;
+			
+		endrecord;
+		
+	Elf32_Rel:
+		record
+		
+			r_offset	:Elf32_Addr;
+			r_info		:Elf32_Word;
+			
+		endrecord;
+		
+	Elf32_Rela:
+		record
+		
+			r_offset	:Elf32_Addr;
+			r_info		:Elf32_Word;
+			r_addend	:Elf32_Sword;
+			
+		endrecord;
+			
+			
+	
+// Mach-o Declarations
+	
+type
+
+/*
+ * The 32-bit mach header appears at the very beginning of the object file for
+ * 32-bit architectures.
+ */
+	mach_header:
+		record
+		
+			magic		:dword;		/* mach magic number identifier */
+			cputype		:dword;		/* cpu specifier */
+			cpusubtype	:dword;		/* machine specifier */
+			filetype	:uns32;		/* type of file */
+			ncmds		:uns32;		/* number of load commands */
+			sizeofcmds	:uns32;		/* the size of all the load commands */
+			flags		:dword;		/* flags */
+
+		endrecord;
+/*
+ * The load commands directly follow the mach_header.  The total size of all
+ * of the commands is given by the sizeofcmds field in the mach_header.  All
+ * load commands must have as their first two fields cmd and cmdsize.  The cmd
+ * field is filled in with a constant for that command type.  Each command type
+ * has a structure specifically for it.  The cmdsize field is the size in bytes
+ * of the particular load command structure plus anything that follows it that
+ * is a part of the load command (i.e. section structures, strings, etc.).  To
+ * advance to the next load command the cmdsize can be added to the offset or
+ * pointer of the current load command.  The cmdsize for 32-bit architectures
+ * MUST be a multiple of 4 bytes and for 64-bit architectures MUST be a multiple
+ * of 8 bytes (these are forever the maximum alignment of any load commands).
+ * The padded bytes must be zero.  All tables in the object file must also
+ * follow these rules so the file can be memory mapped.  Otherwise the pointers
+ * to these tables will not work well or at all on some machines.  With all
+ * padding zeroed like objects will compare byte for byte.
+ */
+	load_command:
+		record
+		
+			cmd		:dword;		/* type of load command */
+			cmdsize	:uns32;		/* total size of command in bytes */
+		
+		endrecord;
+		
+/*
+ * The segment load command indicates that a part of this file is to be
+ * mapped into the task's address space.  The size of this segment in memory,
+ * vmsize, maybe equal to or larger than the amount to map from this file,
+ * filesize.  The file is mapped starting at fileoff to the beginning of
+ * the segment in memory, vmaddr.  The rest of the memory of the segment,
+ * if any, is allocated zero fill on demand.  The segment's maximum virtual
+ * memory protection and initial virtual memory protection are specified
+ * by the maxprot and initprot fields.  If the segment has sections then the
+ * section structures directly follow the segment command and their size is
+ * reflected in cmdsize.
+ */
+	segment_command: /* for 32-bit architectures */
+		record
+			cmd			:dword;		/* LC_SEGMENT */
+			cmdsize		:uns32;		/* includes sizeof section structs */
+			segname		:char[16];	/* segment name */
+			vmaddr		:dword;		/* memory address of this segment */
+			vmsize		:dword;		/* memory size of this segment */
+			fileoff		:dword;		/* file offset of this segment */
+			filesize	:uns32;		/* amount to map from the file */
+			maxprot		:dword;		/* maximum VM protection */
+			initprot	:dword;		/* initial VM protection */
+			nsects		:uns32;		/* number of sections in segment */
+			flags		:dword;		/* flags */
+			
+		endrecord;
+
+/*
+ * A segment is made up of zero or more sections.  Non-MH_OBJECT files have
+ * all of their segments with the proper sections in each, and padded to the
+ * specified segment alignment when produced by the link editor.  The first
+ * segment of a MH_EXECUTE and MH_FVMLIB format file contains the mach_header
+ * and load commands of the object file before its first section.  The zero
+ * fill sections are always last in their segment (in all formats).  This
+ * allows the zeroed segment padding to be mapped into memory where zero fill
+ * sections might be. The gigabyte zero fill sections, those with the section
+ * type S_GB_ZEROFILL, can only be in a segment with sections of this type.
+ * These segments are then placed after all other segments.
+ *
+ * The MH_OBJECT format has all of its sections in one segment for
+ * compactness.  There is no padding to a specified segment boundary and the
+ * mach_header and load commands are not part of the segment.
+ *
+ * Sections with the same section name, sectname, going into the same segment,
+ * segname, are combined by the link editor.  The resulting section is aligned
+ * to the maximum alignment of the combined sections and is the new section's
+ * alignment.  The combined sections are aligned to their original alignment in
+ * the combined section.  Any padded bytes to get the specified alignment are
+ * zeroed.
+ *
+ * The format of the relocation entries referenced by the reloff and nreloc
+ * fields of the section structure for mach object files is described in the
+ * header file <reloc.h>.
+ */
+	section: /* for 32-bit architectures */
+		record
+			sectname	:char[16];	/* name of this section */
+			segname		:char[16];	/* segment this section goes in */
+			addr		:dword;		/* memory address of this section */
+			size		:uns32;		/* size in bytes of this section */
+			offset		:dword;		/* file offset of this section */
+			_align		:uns32;		/* section alignment (power of 2) */
+			reloff		:dword;		/* file offset of relocation entries */
+			nreloc		:uns32;		/* number of relocation entries */
+			flags		:dword;		/* flags (section type and attributes)*/
+			reserved1	:dword;		/* reserved (for offset or index) */
+			reserved2	:dword;		/* reserved (for count or sizeof) */
+		endrecord;
+/*
+ * The symtab_command contains the offsets and sizes of the link-edit 4.3BSD
+ * "stab" style symbol table information .
+ */
+ 
+	symtab_command:
+		record
+			cmd			:dword;		/* LC_SYMTAB */
+			cmdsize		:uns32;		/* sizeof(struct symtab_command) */
+			symoff		:dword;		/* symbol table offset */
+			nsyms		:uns32;		/* number of symbol table entries */
+			stroff		:dword;		/* string table offset */
+			strsize		:uns32;	/* string table size in bytes */
+		endrecord;
+
+
+
+
+/*
+ * This is the second set of the symbolic information which is used to support
+ * the data structures for the dynamically link editor.
+ *
+ * The original set of symbolic information in the symtab_command which contains
+ * the symbol and string tables must also be present when this load command is
+ * present.  When this load command is present the symbol table is organized
+ * into three groups of symbols:
+ *	local symbols (static and debugging symbols) - grouped by module
+ *	defined external symbols - grouped by module (sorted by name if not lib)
+ *	undefined external symbols (sorted by name if MH_BINDATLOAD is not set,
+ *	     			    and in order the were seen by the static
+ *				    linker if MH_BINDATLOAD is set)
+ * In this load command there are offsets and counts to each of the three groups
+ * of symbols.
+ *
+ * This load command contains a the offsets and sizes of the following new
+ * symbolic information tables:
+ *	table of contents
+ *	module table
+ *	reference symbol table
+ *	indirect symbol table
+ * The first three tables above (the table of contents, module table and
+ * reference symbol table) are only present if the file is a dynamically linked
+ * shared library.  For executable and object modules, which are files
+ * containing only one module, the information that would be in these three
+ * tables is determined as follows:
+ * 	table of contents - the defined external symbols are sorted by name
+ *	module table - the file contains only one module so everything in the
+ *		       file is part of the module.
+ *	reference symbol table - is the defined and undefined external symbols
+ *
+ * For dynamically linked shared library files this load command also contains
+ * offsets and sizes to the pool of relocation entries for all sections
+ * separated into two groups:
+ *	external relocation entries
+ *	local relocation entries
+ * For executable and object modules the relocation entries continue to hang
+ * off the section structures.
+ */
+	dysymtab_command:
+		record
+		
+			cmd			:dword;	/* LC_DYSYMTAB */
+			cmdsize		:uns32;	/* sizeof(struct dysymtab_command) */
+		
+			/*
+			 * The symbols indicated by symoff and nsyms of the LC_SYMTAB load command
+			 * are grouped into the following three groups:
+			 *    local symbols (further grouped by the module they are from)
+			 *    defined external symbols (further grouped by the module they are from)
+			 *    undefined symbols
+			 *
+			 * The local symbols are used only for debugging.  The dynamic binding
+			 * process may have to use them to indicate to the debugger the local
+			 * symbols for a module that is being bound.
+			 *
+			 * The last two groups are used by the dynamic binding process to do the
+			 * binding (indirectly through the module table and the reference symbol
+			 * table when this is a dynamically linked shared library file).
+			 */
+			ilocalsym		:dword;	/* index to local symbols */
+			nlocalsym		:uns32;	/* number of local symbols */
+		
+			iextdefsym		:dword;	/* index to externally defined symbols */
+			nextdefsym		:uns32;	/* number of externally defined symbols */
+		
+			iundefsym		:dword;	/* index to undefined symbols */
+			nundefsym		:uns32;	/* number of undefined symbols */
+		
+			/*
+			 * For the for the dynamic binding process to find which module a symbol
+			 * is defined in the table of contents is used (analogous to the ranlib
+			 * structure in an archive) which maps defined external symbols to modules
+			 * they are defined in.  This exists only in a dynamically linked shared
+			 * library file.  For executable and object modules the defined external
+			 * symbols are sorted by name and is use as the table of contents.
+			 */
+			tocoff			:dword;	/* file offset to table of contents */
+			ntoc			:uns32;	/* number of entries in table of contents */
+		
+			/*
+			 * To support dynamic binding of "modules" (whole object files) the symbol
+			 * table must reflect the modules that the file was created from.  This is
+			 * done by having a module table that has indexes and counts into the merged
+			 * tables for each module.  The module structure that these two entries
+			 * refer to is described below.  This exists only in a dynamically linked
+			 * shared library file.  For executable and object modules the file only
+			 * contains one module so everything in the file belongs to the module.
+			 */
+			modtaboff		:dword;	/* file offset to module table */
+			nmodtab			:uns32;	/* number of module table entries */
+		
+			/*
+			 * To support dynamic module binding the module structure for each module
+			 * indicates the external references (defined and undefined) each module
+			 * makes.  For each module there is an offset and a count into the
+			 * reference symbol table for the symbols that the module references.
+			 * This exists only in a dynamically linked shared library file.  For
+			 * executable and object modules the defined external symbols and the
+			 * undefined external symbols indicates the external references.
+			 */
+			extrefsymoff	:dword;	/* offset to referenced symbol table */
+			nextrefsyms		:uns32;	/* number of referenced symbol table entries */
+		
+			/*
+			 * The sections that contain "symbol pointers" and "routine stubs" have
+			 * indexes and (implied counts based on the size of the section and fixed
+			 * size of the entry) into the "indirect symbol" table for each pointer
+			 * and stub.  For every section of these two types the index into the
+			 * indirect symbol table is stored in the section header in the field
+			 * reserved1.  An indirect symbol table entry is simply a 32bit index into
+			 * the symbol table to the symbol that the pointer or stub is referring to.
+			 * The indirect symbol table is ordered to match the entries in the section.
+			 */
+			indirectsymoff	:dword; /* file offset to the indirect symbol table */
+			nindirectsyms	:uns32;	/* number of indirect symbol table entries */
+		
+			/*
+			 * To support relocating an individual module in a library file quickly the
+			 * external relocation entries for each module in the library need to be
+			 * accessed efficiently.  Since the relocation entries can't be accessed
+			 * through the section headers for a library file they are separated into
+			 * groups of local and external entries further grouped by module.  In this
+			 * case the presents of this load command who's extreloff, nextrel,
+			 * locreloff and nlocrel fields are non-zero indicates that the relocation
+			 * entries of non-merged sections are not referenced through the section
+			 * structures (and the reloff and nreloc fields in the section headers are
+			 * set to zero).
+			 *
+			 * Since the relocation entries are not accessed through the section headers
+			 * this requires the r_address field to be something other than a section
+			 * offset to identify the item to be relocated.  In this case r_address is
+			 * set to the offset from the vmaddr of the first LC_SEGMENT command.
+			 * For MH_SPLIT_SEGS images r_address is set to the the offset from the
+			 * vmaddr of the first read-write LC_SEGMENT command.
+			 *
+			 * The relocation entries are grouped by module and the module table
+			 * entries have indexes and counts into them for the group of external
+			 * relocation entries for that the module.
+			 *
+			 * For sections that are merged across modules there must not be any
+			 * remaining external relocation entries for them (for merged sections
+			 * remaining relocation entries must be local).
+			 */
+			extreloff		:dword;	/* offset to external relocation entries */
+			nextrel			:uns32;	/* number of external relocation entries */
+		
+			/*
+			 * All the local relocation entries are grouped together (they are not
+			 * grouped by their module since they are only used if the object is moved
+			 * from it staticly link edited address).
+			 */
+			locreloff		:dword;	/* offset to local relocation entries */
+			nlocrel			:uns32;	/* number of local relocation entries */
+
+		endrecord;	
+
+
+/*
+ * Format of a relocation entry of a Mach-O file.  Modified from the 4.3BSD
+ * format.  The modifications from the original format were changing the value
+ * of the r_symbolnum field for "local" (r_extern == 0) relocation entries.
+ * This modification is required to support symbols in an arbitrary number of
+ * sections not just the three sections (text, data and bss) in a 4.3BSD file.
+ * Also the last 4 bits have had the r_type tag added to them.
+ **
+ * The r_address is not really the address as it's name indicates but an offset.
+ * In 4.3BSD a.out objects this offset is from the start of the "segment" for
+ * which relocation entry is for (text or data).  For Mach-O object files it is
+ * also an offset but from the start of the "section" for which the relocation
+ * entry is for.  See comments in <mach-o/loader.h> about the r_address feild
+ * in images for used with the dynamic linker.
+ * 
+ * In 4.3BSD a.out objects if r_extern is zero then r_symbolnum is an ordinal
+ * for the segment the symbol being relocated is in.  These ordinals are the
+ * symbol types N_TEXT, N_DATA, N_BSS or N_ABS.  In Mach-O object files these
+ * ordinals refer to the sections in the object file in the order their section
+ * structures appear in the headers of the object file they are in.  The first
+ * section has the ordinal 1, the second 2, and so on.  This means that the
+ * same ordinal in two different object files could refer to two different
+ * sections.  And further could have still different ordinals when combined
+ * by the link-editor.  The value R_ABS is used for relocation entries for
+ * absolute symbols which need no further relocation.
+ */
+
+	relocation_info:
+		record
+   			r_address	:dword;	/* offset in the section to what is being
+				   					relocated */
+   			r_symbolnum	:dword;	/* symbol index if r_extern == 1 or section
+				   					ordinal if r_extern == 0 */
+			//r_pcrel:1, bit 24	/* was relocated pc relative already */
+			//r_length:2,		/* 0=byte, 1=word, 2=long, 3=quad */
+			//r_extern:1,		/* does not include value of sym referenced */
+			//r_type:4;			/* if not 0, machine specific relocation type */
+		
+		endrecord;
+		
+		
+	scattered_relocation_info:
+		record
+
+   			r_address	:dword;	/* offset in the section to what is being
+				   					relocated */
+			// r_type:4,	/* if not 0, machine specific relocation type */
+			// r_length:2,	/* 0=byte, 1=word, 2=long, 3=quad */
+			// r_pcrel:1, 	/* was relocated pc relative already */
+			// r_scattered:1;	/* 1=scattered, 0=non-scattered (see above) */
+			
+			r_value		:int32;	/* the value the item to be relocated is
+				   					refering to (without any offset added) */
+		endrecord;
+
+		
+const
+		r_pcrel		:= @{24};
+		r_length_b	:= @{};
+		r_length_w	:= @{25};
+		r_length_d	:= @{26};
+		r_length_q	:= @{25,26};
+		r_extern	:= @{27};
+		
+		r_scattered	:= @{31, 29};	// Also dword length.
+		
+
+type		
+	reloc_type_generic:
+		enum
+		{
+			GENERIC_RELOC_VANILLA,		/* generic relocation as discribed above */
+			GENERIC_RELOC_PAIR,			/* Only follows a GENERIC_RELOC_SECTDIFF */
+			GENERIC_RELOC_SECTDIFF,
+			GENERIC_RELOC_PB_LA_PTR,	/* prebound lazy pointer */
+			GENERIC_RELOC_LOCAL_SECTDIFF
+		};
+
+
+
+/*
+ * Format of a symbol table entry of a Mach-O file for 32-bit architectures.
+ * Modified from the BSD format.  The modifications from the original format
+ * were changing n_other (an unused field) to n_sect and the addition of the
+ * N_SECT type.  These modifications are required to support symbols in a larger
+ * number of sections not just the three sections (text, data and bss) in a BSD
+ * file.
+ */
+	nlist:
+		record
+			n_strx	:dword;		/* index into the string table */
+			n_type	:byte;		/* type flag, see below */
+			n_sect	:uns8;		/* section number or NO_SECT */
+			n_desc	:word;		/* see <mach-o/stab.h> */
+			n_value	:dword;		/* value of this symbol (or stab offset) */
+		endrecord;
+
+
+		
+const
+		MH_MAGIC		:dword := $feedface;
+		MH_OBJECT		:dword := $1;
+		
+		i386cpu			:= 7;
+		i386sub			:= 3;
+		
+		/* Constants for the cmd field of all load commands, the type */
+		
+		LC_SEGMENT			:= $1;	/* segment of this file to be mapped */
+		LC_SYMTAB			:= $2;	/* link-edit stab symbol table info */
+		LC_SYMSEG			:= $3;	/* link-edit gdb symbol table info (obsolete) */
+		LC_THREAD			:= $4;	/* thread */
+		LC_UNIXTHREAD		:= $5;	/* unix thread (includes a stack) */
+		LC_LOADFVMLIB		:= $6;	/* load a specified fixed VM shared library */
+		LC_IDFVMLIB			:= $7;	/* fixed VM shared library identification */
+		LC_IDENT			:= $8;	/* object identification info (obsolete) */
+		LC_FVMFILE			:= $9;	/* fixed VM file inclusion (internal use) */
+		LC_PREPAGE      	:= $a;  /* prepage command (internal use) */
+		LC_DYSYMTAB			:= $b;	/* dynamic link-edit symbol table info */
+		LC_LOAD_DYLIB		:= $c;	/* load a dynamically linked shared library */
+		LC_ID_DYLIB			:= $d;	/* dynamically linked shared lib ident */
+		LC_LOAD_DYLINKER 	:= $e;	/* load a dynamic linker */
+		LC_ID_DYLINKER		:= $f;	/* dynamic linker identification */
+		LC_PREBOUND_DYLIB 	:= $10;	/* modules prebound for a dynamically */
+									/*  linked shared library */
+		LC_ROUTINES			:= $11;	/* image routines */
+		LC_SUB_FRAMEWORK 	:= $12;	/* sub framework */
+		LC_SUB_UMBRELLA 	:= $13;	/* sub umbrella */
+		LC_SUB_CLIENT		:= $14;	/* sub client */
+		LC_SUB_LIBRARY  	:= $15;	/* sub library */
+		LC_TWOLEVEL_HINTS 	:= $16;	/* two-level namespace lookup hints */
+		LC_PREBIND_CKSUM  	:= $17;	/* prebind checksum */
+
+	
+	/*
+	 * The flags field of a section structure is separated into two parts a section
+	 * type and section attributes.  The section types are mutually exclusive (it
+	 * can only have one type) but the section attributes are not (it may have more
+	 * than one attribute).
+	 **
+	 * The flags field of a section structure is separated into two parts a section
+	 * type and section attributes.  The section types are mutually exclusive (it
+	 * can only have one type) but the section attributes are not (it may have more
+	 * than one attribute).
+	 */
+	 
+		SECTION_TYPE		:= $000000ff;	/* 256 section types */
+		SECTION_ATTRIBUTES	:= $ffffff00;	/*  24 section attributes */
+
+	/* Constants for the type of a section */
+	
+		S_REGULAR			:= $0;	/* regular section */
+		S_ZEROFILL			:= $1;	/* zero fill on demand section */
+		S_CSTRING_LITERALS	:= $2;	/* section with only literal C strings*/
+		S_4BYTE_LITERALS	:= $3;	/* section with only 4 byte literals */
+		S_8BYTE_LITERALS	:= $4;	/* section with only 8 byte literals */
+		S_LITERAL_POINTERS	:= $5;	/* section with only pointers to */
+									/*  literals */
+
+	
+	/*
+	 * The following are used to encode rebasing information
+	 */
+		REBASE_TYPE_POINTER				:= 1;
+		REBASE_TYPE_TEXT_ABSOLUTE32		:= 2;
+		REBASE_TYPE_TEXT_PCREL32		:= 3;
+
+		R_ABS							:= 0;		/* absolute relocation type for Mach-O files */
+
+
+	
+	 
+	
+								/*  literals */
+	/*
+	 * For the two types of symbol pointers sections and the symbol stubs section
+	 * they have indirect symbol table entries.  For each of the entries in the
+	 * section the indirect symbol table entries, in corresponding order in the
+	 * indirect symbol table, start at the index stored in the reserved1 field
+	 * of the section structure.  Since the indirect symbol table entries
+	 * correspond to the entries in the section the number of indirect symbol table
+	 * entries is inferred from the size of the section divided by the size of the
+	 * entries in the section.  For symbol pointers sections the size of the entries
+	 * in the section is 4 bytes and for symbol stubs sections the byte size of the
+	 * stubs is stored in the reserved2 field of the section structure.
+	 */
+	 
+	S_NON_LAZY_SYMBOL_POINTERS	:= $6;	/* section with only non-lazy
+							   				symbol pointers */
+	S_LAZY_SYMBOL_POINTERS		:= $7;	/* section with only lazy symbol
+							  				 pointers */
+	S_SYMBOL_STUBS				:= $8;	/* section with only symbol
+							   				stubs, byte size of stub in
+							   				the reserved2 field */
+	S_MOD_INIT_FUNC_POINTERS	:= $9;	/* section with only function
+							   				pointers for initialization*/
+	S_MOD_TERM_FUNC_POINTERS	:= $a;	/* section with only function
+							   				pointers for termination */
+	S_COALESCED					:= $b;	/* section contains symbols that
+							   				are to be coalesced */
+	S_GB_ZEROFILL				:= $c;	/* zero fill on demand section
+							   				(that can be larger than 4
+							   				gigabytes) */
+	S_INTERPOSING				:= $d;	/* section with only pairs of
+							   				function pointers for
+							   				interposing */
+	S_16BYTE_LITERALS			:= $e;	/* section with only 16 byte
+							   				literals */
+	S_DTRACE_DOF				:= $f;	/* section contains 
+							   				DTrace Object Format */
+	S_LAZY_DYLIB_SYMBOL_POINTERS:= $10;	/* section with only lazy
+							   				symbol pointers to lazy
+							   				loaded dylibs */
+	/*
+	 * Constants for the section attributes part of the flags field of a section
+	 * structure.
+	 */
+	 
+	SECTION_ATTRIBUTES_USR	 	:= $ff000000;	/* User setable attributes */
+	
+	S_ATTR_PURE_INSTRUCTIONS 	:= $80000000;	/* section contains only true
+							   						machine instructions */
+													
+	S_ATTR_NO_TOC 		 		:= $40000000;	/* section contains coalesced
+							   						symbols that are not to be
+							   						in a ranlib table of
+							   						contents */
+													
+	S_ATTR_STRIP_STATIC_SYMS 	:= $20000000;	/* ok to strip static symbols
+							   						in this section in files
+							   						with the MH_DYLDLINK flag */
+	S_ATTR_NO_DEAD_STRIP	 	:= $10000000;	/* no dead stripping */
+	S_ATTR_LIVE_SUPPORT	 		:= $08000000;	/* blocks are live if they
+							   						reference live blocks */
+	S_ATTR_SELF_MODIFYING_CODE 	:= $04000000;	/* Used with i386 code stubs
+							   						written on by dyld */
+	/*
+	 * If a segment contains any sections marked with S_ATTR_DEBUG then all
+	 * sections in that segment must have this attribute.  No section other than
+	 * a section marked with this attribute may reference the contents of this
+	 * section.  A section with this attribute may contain no symbols and must have
+	 * a section type S_REGULAR.  The static linker will not copy section contents
+	 * from sections with this attribute into its output file.  These sections
+	 * generally contain DWARF debugging info.
+	 */ 
+	 
+	S_ATTR_DEBUG		 		:= $02000000;	/* a debug section */
+	SECTION_ATTRIBUTES_SYS	 	:= $00ffff00;	/* system setable attributes */
+	S_ATTR_SOME_INSTRUCTIONS 	:= $00000400;	/* section contains some
+							   						machine instructions */
+	S_ATTR_EXT_RELOC	 		:= $00000200;	/* section has external
+							   						relocation entries */
+	S_ATTR_LOC_RELOC	 		:= $00000100;	/* section has local
+							   						relocation entries */
+							   
+						   
+						   
+	/*
+	 * The n_type field really contains four fields:
+	 *	unsigned char N_STAB:3,
+	 *		      N_PEXT:1,
+	 *		      N_TYPE:3,
+	 *		      N_EXT:1;
+	 * which are used via the following masks.
+	 */
+	 
+	N_STAB	:= $e0;  /* if any of these bits set, a symbolic debugging entry */
+	N_PEXT	:= $10;  /* private external symbol bit */
+	N_TYPE	:= $0e;  /* mask for the type bits */
+	N_EXT	:= $01;  /* external symbol bit, set for external symbols */
+	
+	/*
+	 * Only symbolic debugging entries have some of the N_STAB bits set and if any
+	 * of these bits are set then it is a symbolic debugging entry (a stab).  In
+	 * which case then the values of the n_type field (the entire field) are given
+	 * in <mach-o/stab.h>
+	 */
+	
+	/*
+	 * Values for N_TYPE bits of the n_type field.
+	 */
+	N_UNDF	:= $0;		/* undefined, n_sect == NO_SECT */
+	N_ABS	:= $2;		/* absolute, n_sect == NO_SECT */
+	N_SECT	:= $e;		/* defined in section number n_sect */
+	N_PBUD	:= $c;		/* prebound undefined (defined in a dylib) */
+	N_INDR	:= $a;		/* indirect */
+	
+	/* 
+	 * If the type is N_INDR then the symbol is defined to be the same as another
+	 * symbol.  In this case the n_value field is an index into the string table
+	 * of the other symbol's name.  When the other symbol is defined then they both
+	 * take on the defined type and value.
+	 */
+	
+	/*
+	 * If the type is N_SECT then the n_sect field contains an ordinal of the
+	 * section the symbol is defined in.  The sections are numbered from 1 and 
+	 * refer to sections in order they appear in the load commands for the file
+	 * they are in.  This means the same ordinal may very well refer to different
+	 * sections in different files.
+	 *
+	 * The n_value field for all symbol table entries (including N_STAB's) gets
+	 * updated by the link editor based on the value of it's n_sect field and where
+	 * the section n_sect references gets relocated.  If the value of the n_sect 
+	 * field is NO_SECT then it's n_value field is not changed by the link editor.
+	 */
+	NO_SECT		:= 0;	/* symbol is not in any section */
+	MAX_SECT	:= 255;	/* 1 thru 255 inclusive */
+	
+	
+	/*
+	 * To support the lazy binding of undefined symbols in the dynamic link-editor,
+	 * the undefined symbols in the symbol table (the nlist structures) are marked
+	 * with the indication if the undefined reference is a lazy reference or
+	 * non-lazy reference.  If both a non-lazy reference and a lazy reference is
+	 * made to the same symbol the non-lazy reference takes precedence.  A reference
+	 * is lazy only when all references to that symbol are made through a symbol
+	 * pointer in a lazy symbol pointer section.
+	 *
+	 * The implementation of marking nlist structures in the symbol table for
+	 * undefined symbols will be to use some of the bits of the n_desc field as a
+	 * reference type.  The mask REFERENCE_TYPE will be applied to the n_desc field
+	 * of an nlist structure for an undefined symbol to determine the type of
+	 * undefined reference (lazy or non-lazy).
+	 *
+	 * The constants for the REFERENCE FLAGS are propagated to the reference table
+	 * in a shared library file.  In that case the constant for a defined symbol,
+	 * REFERENCE_FLAG_DEFINED, is also used.
+	 */
+	/* Reference type bits of the n_desc field of undefined symbols */
+	
+	REFERENCE_TYPE	:= $7;
+	
+	/* types of references */
+	
+	REFERENCE_FLAG_UNDEFINED_NON_LAZY			:= 0;
+	REFERENCE_FLAG_UNDEFINED_LAZY				:= 1;
+	REFERENCE_FLAG_DEFINED						:= 2;
+	REFERENCE_FLAG_PRIVATE_DEFINED				:= 3;
+	REFERENCE_FLAG_PRIVATE_UNDEFINED_NON_LAZY	:= 4;
+	REFERENCE_FLAG_PRIVATE_UNDEFINED_LAZY		:= 5;
+	
+	/*
+	 * To simplify stripping of objects that use are used with the dynamic link
+	 * editor, the static link editor marks the symbols defined an object that are
+	 * referenced by a dynamicly bound object (dynamic shared libraries, bundles).
+	 * With this marking strip knows not to strip these symbols.
+	 */
+	REFERENCED_DYNAMICALLY	:= $0010;
+						   
+						   
+						   
+////////////////////////////////////////////////////////////////////////////////////////////						   
+
+	// HLABE supports a three-section object file model (like a.out),
+	// a text/code section, a static/data section, and a BSS section:
+type
+	section_t	:enum
+	{
+		undefinedSection_c,
+		code_c,		// Must be in this order!
+		data_c,
+		bss_c
+	};
+	
+	// Supported object file formats:
+	// These must be kept in sync with the C code!!!
+	
+	obj_t		:enum
+	{
+		pecoff_c,
+		elfLinux_c,
+		// Insert addition ELF formats here!!!!
+		elfFreeBSD_c,
+		macho_c
+	};
+	?minElf_c := elfLinux_c;
+	?maxElf_c := elfFreeBSD_c;
+	
+	
+	// Data type for a symbol table entry:
+	
+	symbol_t	:record
+	
+		next		:pointer to symbol_t;
+		id			:string;
+		symIndex	:uns32;				// index to object file symbol table entry
+		offset		:dword;
+		size		:uns32;
+		section		:section_t;
+		flags		:byte;
+		isFunc		:boolean;
+		align(4);
+			
+	endrecord;
+	
+	
+	tokens_t	:enum
+	{
+		start_tkn,				// Start-of-token-list token.
+		align_tkn,				// .a	<x>
+		bytes_tkn,				// Any absolute data
+		
+		label_tkn,				// :label definition
+		endfunc_tkn,			// .f label
+		
+		reloc_tkn,				// Relocatable expression
+		
+		reserve_tkn,			// Reserve storage
+		dupByte_tkn,			// Duplicate byte data
+		dupWord_tkn,			// Duplicate word data
+		dupDword_tkn,			// Duplicate dword data
+				
+		code_tkn,				// .c
+		readonly_tkn,			// .y
+		data_tkn,				// .s
+		bss_tkn,				// .v
+		
+		rel1_tkn,				// loopX, jecxz, etc., that have 1-byte disp
+		rel2_tkn,				// jcxz with 2-byte opcode and 1-byte disp
+		rel1_4_tkn,				// Jmp instrs that have 1 or 4-byte disp
+		rel4_tkn,				// Instrs (e.g., 'call') that have 4-byte disp
+		jmp_tkn,				// Jmp disp instructions that have 1 or 4-byte disp
+		
+		public_tkn,				// .p
+		extern_tkn,				// .x
+		
+		dummy_tkn				// Dummy record emitted at the end of a section.
+	};
+	
+	tokenStmt_t	:record
+	
+		prev		:pointer to tokenStmt_t;
+		next		:pointer to tokenStmt_t;
+		token		:tokens_t;
+		instrOffset	:dword;
+		
+	endrecord;
+	
+	// ":lbldef" creates this record:
+	
+	labelStmt_t	:record inherits( tokenStmt_t );
+	
+		symTabEntry	:tableNodePtr_t;
+		
+	endrecord;
+	
+	
+	// ".f label" creates this record:
+	
+	endFuncStmt_t	:record inherits( tokenStmt_t );
+	
+		symTabEntry	:tableNodePtr_t;
+		
+	endrecord;
+	
+	
+	
+	// ".a <n>" creates this record:
+	
+	alignStmt_t	:record inherits( tokenStmt_t );
+	
+		alignExpr	:dword;
+		
+	endrecord;
+	
+	
+	// Data structure used by data declaration statements:
+	
+	varLen_t	:record inherits( tokenStmt_t );
+	
+		numBytes	:dword;
+		
+	endrecord;
+	
+	
+	// ".b <n>" creates this record (and any other statement
+	// that emits absolute data):
+	
+	byteStmt_t	:record inherits( varLen_t );
+	
+		byteData	:byte[1];	// Variable length
+		
+	endrecord;
+	
+	
+	
+	
+	// ".d <reloc expr>" creates this record:
+	
+	relocStmt_t	:record inherits( tokenStmt_t );
+	
+		symbol		:tableNodePtr_t;
+		offset		:dword;
+		
+	endrecord;
+	
+	
+	// All the jump and call instructions have the following fields in common:
+	
+	sflPtr			:pointer to sourceFileList_t;
+	sourceFileList_t	:record
+	
+		next		:sflPtr;
+		filename	:string;
+		lineNumber	:uns32;
+		
+	endrecord;
+	
+	disp_t	:record inherits( tokenStmt_t );
+	
+		disp		:int32;
+		symbol		:tableNodePtr_t;
+		offset		:dword;
+		line		:sflPtr;
+		
+	endrecord;
+	
+	
+	// Two-byte (only) conditional jumps emit this record:
+	
+	rel_1_Stmt_t	:record inherits( disp_t );
+	
+		opcode		:byte;
+		
+	endrecord;
+	
+	// rel_2_Stmt_t - used by jcxz.
+	
+	rel_2_Stmt_t	:record inherits( disp_t );
+	
+		opcode		:word;
+		
+	endrecord;
+	
+	
+	// Four-byte (only) control-transfer instructions emit this record:
+	
+	rel_4_Stmt_t	:record inherits( disp_t );
+	
+		opcode		:byte;
+		
+	endrecord;
+	
+	
+	// Variable-length Jcc instructions emit this record:
+	
+	rel_1_4_Stmt_t	:record inherits( disp_t );
+	
+		opcode1		:byte;
+		opcode2		:word;
+		curOfsSize	:byte;
+		
+	endrecord;
+	
+	
+	// Jmp disp instructions emit this record:
+	
+	jmp_Stmt_t	:record inherits( disp_t );
+	
+		opcode1		:byte;
+		opcode2		:byte;
+		curOfsSize	:byte;
+		
+	endrecord;
+	
+	
+	// ".ub <n>,<m>", ".uw <n>,<m>", and ".ud <n>,<m>" create these records:
+	
+	dupStmt_t	:record inherits( tokenStmt_t );
+	
+		size		:dword;
+		count		:dword;
+		data		:dword;
+		
+	endrecord;
+	
+	
+	
+	
+	// ".r <n>" creates this record:
+	
+	reserveStmt_t	:record inherits( tokenStmt_t );
+	
+		sizeExpr	:dword;
+		
+	endrecord;
+	
+	
+	
+	
+	
+	
+	tokenList_t	:pointer to tokenStmt_t;
+	
+	
+	
+	
+static
+	codeSize		:dword;					@external;
+	numCodeRelocs	:dword;					@external;
+	dataSize		:dword;					@external;
+	numDataRelocs	:dword;					@external;
+	bssSize			:dword;					@external;
+
+    symbolTable     :table_t;				@external;
+    equatesTable    :table_t;				@external;
+	
+	currentSection  :section_t;				@external;
+	verbose			:boolean;				@external;
+
+
+
+	#macro _proc( string procname ):dummy,dummy2;
+
+		?dummy := procname + @string(dummy2);		
+		#if( trace_c )
+		
+			procedure @text( dummy ); @noframe;
+			begin @text( dummy );
+			jmp lbl;
+			byte procname,0;
+			lbl:
+			nop;
+			nop;
+			nop;
+			align(4);
+			end @text( dummy );
+			
+		#endif
+		procedure @text( procname )
+		
+	#endmacro
+
+	#macro _begin( string procname ):dummy,dummy2;
+
+		?dummy := procname + @string(dummy2);		
+		#if( trace_c )
+		
+			procedure @text( dummy ); @noframe;
+			begin @text( dummy );
+			byte "begin ", procname,0;
+			nop;
+			nop;
+			nop;
+			end @text( dummy );
+			
+		#endif
+		begin @text( procname )
+		
+			#if( dbgTrace_c ) 
+			
+				;stdout.put( procname + nl )
+				
+			#endif 
+		
+	#endmacro
+
+	#macro _end( string procname ):dummy,dummy2;
+
+		end @text( procname );
+		?dummy := procname + @string(dummy2);		
+		#if( trace_c )
+		
+			procedure @text( dummy ); @noframe;
+			begin @text( dummy );
+			jmp lbl;
+			byte " end ", procname,0;
+			lbl:
+			nop;
+			nop;
+			nop;
+			end @text( dummy )
+			
+		#endif
+		
+		
+	#endmacro
+
+	// Print the file name/line numbers associated with a branch stmt:
+	
+	procedure printLineNumberChain( var dispRec:disp_t in ebx ); @external;
+	
+	
+	// HLABE lexical analyzer:
+	
+	procedure lexer
+	( 
+				start_source	:dword; 
+				end_src 		:dword; 
+		result	codeListHead	:tokenList_t;
+		result	dataListHead	:tokenList_t;
+		result	bssListHead		:tokenList_t
+	);	@external;
+	
+	
+	
+	// Optimize the branch displacements
+	
+	procedure optimizeDisps
+	( 
+		codeList	:tokenList_t;
+		dataList	:tokenList_t;
+		bssList	    :tokenList_t;
+		verbose		:boolean;
+		objType		:obj_t
+	);	@external;
+	
+	
+	// Generate COFF file from compiled code:
+	
+	procedure compileCOFF
+	( 
+			inputFilename	:string;
+			outputFilename	:string; 
+			start_source	:dword; 
+			end_source		:dword;
+			verbose			:boolean; 
+		var	codeListPtr		:tokenList_t;
+		var	dataListPtr		:tokenList_t;
+		var	bssListPtr	    :tokenList_t
+	);	@external;
+	
+	
+	
+	// Generate ELF file from compiled code:
+	
+	procedure compileELF
+	( 
+			inputFilename	:string;
+			outputFilename	:string; 
+			start_source	:dword; 
+			end_source		:dword;
+			brand			:obj_t;
+			verbose			:boolean; 
+		var	codeListPtr		:tokenList_t;
+		var	dataListPtr		:tokenList_t;
+		var	bssListPtr	    :tokenList_t
+	);	@external;
+	
+	
+	// Generate Mach-O file from compiled code:
+	
+	procedure compileMACHO
+	( 
+			inputFilename	:string;
+			outputFilename	:string; 
+			start_source	:dword; 
+			end_source		:dword;
+			verbose			:boolean; 
+		var	codeListPtr		:tokenList_t;
+		var	dataListPtr		:tokenList_t;
+		var	bssListPtr	    :tokenList_t
+	);	@external;
+	
+	
+	// C-callable function to compile an HLABE source file:
+	// Two names for the same function because of naming
+	// convention differences between various OSes.
+	
+	
+	procedure hlabe_compile
+	(
+			inputFilename	:zstring;
+			outputFilename	:zstring; 
+			start_source	:dword; 
+			end_source		:dword;
+			objType			:obj_t;
+			verbose			:boolean 
+	);	@cdecl;
+		@external( "hlabe_compile" );
+
+	procedure _hlabe_compile
+	(
+			inputFilename	:zstring;
+			outputFilename	:zstring; 
+			start_source	:dword; 
+			end_source		:dword;
+			objType			:obj_t;
+			verbose			:boolean 
+	);	@cdecl;
+		@external( "_hlabe_compile" );
+
+	
+#endif
