@@ -1,0 +1,30 @@
+#!/bin/sh
+
+PrintUsage()
+{
+ echo "this is (obviously) not gnu configure. Please read README.TXT"
+ echo "usage: configure <debug> <release>"
+}
+
+if [ $# -ne 1 ]
+then
+ PrintUsage
+ exit 1
+fi
+
+if [ $1 = "debug" ]
+then
+ echo "configure: got debug"
+ cp cfg-files/Make-debug.cfg Make.cfg
+ exit 0
+fi
+
+if [ $1 = "release" ]
+then
+ echo "configure: got release"
+ cp cfg-files/Make-release.cfg Make.cfg
+ exit 0
+fi
+
+PrintUsage
+exit 1

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ -z $1 ]
+then
+echo "usage: configure <path to libCb include directory>"
+exit 1
+fi
+
+echo LIBCB_INCLUDE_DIR=$1 > ./Make.cfg
+cat cfg-files/Make-debug.cfg  >> ./Make.cfg

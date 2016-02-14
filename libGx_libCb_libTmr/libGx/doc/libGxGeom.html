@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html;charset=ISO-8859-1" http-equiv="Content-Type">
+  <title>LibGx Geometry Management</title>
+</head>
+<body>
+<meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+<title></title>
+<h1 class="western">Overview</h1>
+<p style="margin-bottom: 0in;">Most of libGx's owner widgets can
+have multiple children. The order in which the children are
+constructed is important, as child widgets are placed in the same order
+as
+they are constructed.</p>
+<p style="margin-bottom: 0in;">LibGx has a variety of special purpose
+geometry control classes that override the default algorithm like GxRow
+GxColumn, GxTable, etc.<br>
+</p>
+<h1>Default Placement Algorithm<br>
+</h1>
+<p style="margin-bottom: 0in;">The default placement algorithm for
+each parent works by starting with four integers initialized as
+follows:</p>
+<pre>int lX = 0;        /* left X */<br>int rX = width;    /* right X */<br>int tY = 0;        /* top Y */<br>int bY = height;   /* bottom Y */</pre>
+<p style="margin-bottom: 0in;">These integers represent the area
+available for placement within the parent window (Parent's Available
+Area). The parent then traverses its list of children, passing
+references to these four integers into each of its children's Place()
+functions. The children (may) then pass these four integers into a
+pluggable GxGeomControl module that place the child within the
+parent's available area. The children then (can) update the four
+integers to guide subsequent children's placement in the reduced
+parent's area.</p>
+<p style="margin-bottom: 0in;">If a child was not given a
+GxGeomControl module, its default action is to size and place itself
+to consume the full parent's available area . This of course leaves
+no area to place other children in the parents children list.&nbsp;
+This
+is ok much of the time as the default behavior can be exploited.</p>
+<p style="margin-bottom: 0in;">Two important GxGeomControl modules
+that implement the default placing behavior are the GxBasic and the
+GxSIBasic classes. Both modules work similarly, except the GxSIBasic
+module can specify an additional 'whitespace' border to be defined
+around the
+child it is plugged into.</p>
+<p style="margin-bottom: 0in;">The GxBasic's constructor is as
+follows.</p>
+<pre>GxBasic::GxBasic(GX_WD_STAT tPWidth, GX_HT_STAT tPHeight, GX_H_PLACEMENT tHPlace, GX_V_PLACEMENT tVPlace,<br>                 bool tHReset = false, bool tVReset = false);</pre>
+<p style="margin-bottom: 0in;">where the enums used as parameters are
+defined as:</p>
+<pre>enum GX_WD_STAT{GX_WD_FIXED, GX_WD_FILL, GX_WD_INT};<br>enum GX_HT_STAT{GX_HT_FIXED, GX_HT_FILL, GX_HT_INT};<br>enum GX_H_PLACEMENT{GX_H_FIXED, GX_H_CENTERED, GX_FLOW_LEFT, GX_FLOW_RIGHT};<br>enum GX_V_PLACEMENT{GX_V_FIXED, GX_V_CENTERED, GX_FLOW_UP, GX_FLOW_DOWN};</pre>
+<p style="margin-bottom: 0in;">The child's width is established by the
+tPWidth variable which may have one of the following values:</p>
+<table border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td>
+      <pre>GX_WD_FIXED </pre>
+      </td>
+      <td> The Width() of the
+child is not modified</td>
+    </tr>
+    <tr>
+      <td>
+      <pre>GX_WD_FILL </pre>
+      </td>
+      <td>The child is expanded in
+width until it fills the area of the parent</td>
+    </tr>
+    <tr>
+      <td>
+      <pre>GX_WD_INT </pre>
+      </td>
+      <td>The child's width is set
+to the value returned by pChild-&gt;GetDesiredWidth()</td>
+    </tr>
+  </tbody>
+</table>
+<p style="margin-bottom: 0in;"></p>
+<p style="margin-bottom: 0in;">The child is placed in X (after it has
+been sized for width) based on the value of tHPlace which may have
+one of the following (self explanatory) values: GX_FLOW_LEFT,
+GX_FLOW_RIGHT, GX_H_CENTERED.
+</p>
+<p style="margin-bottom: 0in;">When an child is placed so that it
+flows to the left, it is moved to the minimum x value in the parents
+specified area ie. pChild-&gt;X(lX). When a child is placed so that
+it flows to the right it is moved so that its right edge is aligned
+with the right edge in the parents available area I.e. pChild-&gt;X(
+rX &#8211; pChild-&gt;Width();</p>
+<p style="margin-bottom: 0in;">The child's height is established by
+the tPHeight variable which may have one of the following values: <br>
+</p>
+<table border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td>
+      <pre>GX_HT_FIXED </pre>
+      </td>
+      <td>The Height() of the
+child is not modified</td>
+    </tr>
+    <tr>
+      <td>
+      <pre>GX_HT_INT </pre>
+      </td>
+      <td>The Height() of the child
+is set to the value returned by pChild-&gt;GetDesiredHeight();</td>
+    </tr>
+    <tr>
+      <td>
+      <pre>GX_HT_FILL </pre>
+      </td>
+      <td>The child's height is
+expanded until it fills the area of the parent.</td>
+    </tr>
+  </tbody>
+</table>
+<p style="margin-bottom: 0in;"></p>
+<p style="margin-bottom: 0in;">The child is placed in Y (after it has
+been sized for width) based on the value of tVPlace which may have
+one of the following (self explanatory) values: GX_FLOW_TOP,
+GX_FLOW_BOTTOM,
+GX_V_CENTERED.</p>
+<p style="margin-bottom: 0in;">When a child is placed so that it flows
+up, it is moved to the minimum y value in the parents specified area,
+i.e. pChild-&gt;Y(tY). When a child is placed so that it flows down,
+it is moved so that its bottom edge is aligned with the bottom edge
+in the parents available area, i.e. pChild-&gt;Y(bY &#8211;
+pChild-&gt;Height() );</p>
+<p style="margin-bottom: 0in;">If a child flows up or down (or left or
+right) it can reset its parent's available area (remember through the
+lX, rX, tY, bY). The GxBasic and GxSIBasic plugins will do so by
+default <u style="color: rgb(255, 0, 0); font-style: italic;">if</u>
+they know the child will span the width or height
+of the parent's available area by looking for GX_WD_FILL and/or
+GX_HT_FILL. There are two boolean parameters that can force the
+reset of the parent's available area that can be useful in the cases
+where the child is sized as GX_WD_INT or GX_HT_INT. </p>
+<p style="margin-bottom: 0in;">The GxSIBasic geometry control module
+enhances the GxBasic module by adding the ability to add a spacing
+border around the child. The child is placed identically to the
+GxBasic case, but it is considered to be larger than its actual size
+by the widths of the defined border. The spacing increment is not in
+pixels, but is in a theoretically 'display independent' variable
+based on the height of the default font. (It is actually a dumb
+constant at the moment)</p>
+<h1>Example<br>
+</h1>
+<p style="margin-bottom: 0in;">As an example we'll create a dialog
+box.</p>
+<p style="margin-bottom: 0in;"></p>
+<pre>class MyDialog : public GxPopupWin<br>{<br>public:<br>     MyDialog(GxTopLevelWin *pOwner);<br>     virtual ~MyDialog(void);<br><br>     bool DoDialog(void);<br><br>protected:<br>     void Ok(void);<br>     void Cancel(void);<br>     bool retStatus;<br><br>     /* the <u>order</u> of construction matters here, the placement algorithm depends on it */<br>     GxRow buttonRow; //the ok/cancel button row<br><br>     GxButton ok, cancel; //could be constructed any point after the button row, but makes sense here <br><br>     GxHLine hLine;<br><br>     GxLabel textLabel;<br>     GxTextWin textWin;<br>};</pre>
+<p style="margin-bottom: 0in;">The constructor for MyDialog finishes
+up specifying widget placement</p>
+<pre>MyDialog::MyDialog(GxTopLevelWin *pOwner) :<br>    GxPopupWin(pOwner),<br>    buttonRow(this), ok(&amp;buttonRow,"Ok"), cancel(&amp;buttonRow, "Cancel"),<br>    hLine(this),<br>&nbsp;   textLabel(this, "Text is here:"),<br>&nbsp;   textWin(this)<br>{<br>&nbsp;//set a default size for the top level window (it will be resize-able by the window manager)<br>&nbsp;width = 500;<br>&nbsp;height = 400;<br><br> //adding this just means the top window will not try to shrink down to the size of its children<br> //i.e. it will respect the above values (but again the Window Manager is free to override)<br> SetGeomControl( GxFixed() );<br><br>&nbsp;//set the widths and heights of the button row's children to be identical.<br>&nbsp;buttonRow.SetWidthIdentical(true);<br>&nbsp;buttonRow.SetHeightIdentical(true);<br><br>&nbsp;//the hline widget has a little border on its top and bottom, so we<br> //don't need to add one to the button row.<br> buttonRow.SetGeomControl( GxSIBasic(GX_WD_FILL, GX_HT_INT, GX_FLOW_LEFT, GX_FLOW_DOWN, 1,1,0,1) );<br><br> //the hline has only one vertical size, so it can have GX_HT_FIXED (or GX_HT_INT)<br> hLine.SetGeomControl( GxSIBasic(GX_WD_FILL, GX_HT_FIXED, GX_FLOW_LEFT, GX_FLOW_DOWN, 1,1,0,0) );<br><br>&nbsp;//let the text label flow to the top left of the window<br>&nbsp;//the final false, true forces the remaining parent area to not be changed in X, but to be reset in Y to include<br>&nbsp;//the height of this widget. If the desired width specifier would be set to GX_WD_FILL instead of GX_WD_INT, the<br>&nbsp;//final true false could be excluded because the placement action that would occur would<br> //be the same as what we are forcing to happen</pre>
+<pre> textLabel.SetGeomControl( GxSIBasic(GX_WD_INT, GX_HT_INT, GX_FLOW_LEFT, GX_FLOW_UP, 1,1,1,1, false, true) );<br><br>&nbsp;//the text window does not need a geom control as it will fill the available area left in the window.<br>&nbsp;//textWin.SetGeomControl();<br><br>&nbsp;//we can set some callbacks<br>&nbsp;ok.cb.Assign( CbVoidMember&lt;MyDialog&gt;(this, &amp;MyDialog::Ok) );<br>&nbsp;cancel.cb.Assign( CbVoidMember&lt;MyDialog&gt;(this, &amp;MyDialog::Cancel) );<br><br> Place(); //compute sizes and positions of x11 windows<br> Create(); //create all x11 windows (and necessary gc, colors, etc)<br>};<br><br>MyDialog::~MyDialog(void)<br>{}<br><br>bool MyDialog::DoDialog(void)<br>{<br>&nbsp;Display(); //recursively map the dialog's window tree<br>&nbsp;EventLoop();<br>&nbsp;return retStatus;<br>}<br><br>void MyDialog::Ok(void)<br>{<br> retStatus = true;<br>&nbsp;processEvents = false;<br>}<br><br>void MyDialog::Cancel(void)<br>{<br>&nbsp;retStatus = false;<br>&nbsp;processEvents = false;<br>};</pre>
+<p style="margin-bottom: 0in;">Note:</p>
+<p style="margin-bottom: 0in;">If the c++ force is strong with you,
+you have noticed that the compiler knows the variable sizes of all
+widgets, and that to
+create the dialog class itself requires only a single new call (or
+even just a simple push to the stack). The libGx design is not
+perfectly optimal in this respect as specifying the geom control
+plugins and the
+function callbacks still need to use new() internally (This happens
+when they are Clone()'ed by the SetGeomControl() or Assign()
+functions). This compromise was felt to be necessary in order to
+keep the libGx API simple.</p>
+<p style="margin-bottom: 0in;"><br>
+</p>
+</body>
+</html>

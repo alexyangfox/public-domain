@@ -1,0 +1,54 @@
+/* left as an example of what was
+void GxMenuBar::MenuEventLoop(void)
+{
+  buttonHeld = true;
+
+  //grab the server
+  //we will handle all events from here untill the user is done with the menu
+  XGrabPointer(dInfo.display, xWin, true, ButtonReleaseMask,
+	       GrabModeAsync, GrabModeAsync, None, None, CurrentTime);
+
+  XEvent event;
+  while(inEventLoop)
+    {
+      XNextEvent(dInfo.display, &event);
+      if( !SendXEventLocally(event) )
+	{
+	  //pass Expose events to rest of application while we
+	  //are in the local event loop. Because we use save_under
+	  //this should rarely happen
+	  //hack; perhaps we sould send other kinds of events up too.
+	  switch(event.type)
+	    {
+	    case Expose:
+	      SendXEventUp(event);
+	      break;
+
+	    case ButtonRelease:
+	      //this only happens if the button was released outside the
+	      //application or in a window not in the menu heiarchy
+	      inEventLoop = false;
+	      if(pActiveMenu)
+		pActiveMenu->DeSelect();
+	      XUngrabPointer(dInfo.display, CurrentTime);
+	      XSync(dInfo.display, false);
+	      break;
+
+	    default:
+	      break;
+	    };
+	};
+
+      while( !postCBList.empty() )
+	{
+	  CbVoidBase *pCB = postCBList.front();
+	  pCB->DoCallback();
+	  delete pCB;
+	  pCB = 0;
+	  postCBList.pop_front();
+	};
+    };
+  //by this point all of the menus should be unmapped,
+  //and the server un-grabbed
+}
+*/

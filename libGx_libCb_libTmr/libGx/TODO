@@ -1,0 +1,107 @@
+fix slight display tearing when docking / undocking button bars.
+
+Sometimes windows are not sized() to correct size when resizing them under xfce. Not sure where the trouble is.
+
+Add text highlight/cut/paste to GxTextWin.
+Make GxTextWin be able to render to a grey background for info text.
+Add entry of tab into GxTextWin with adjustable rendering width.
+Make GxTextWin::SetCursorPixPos only search for the cursor in
+currently displayed text.
+
+Beautify default dialogs (warning/error, etc) with big simple icons
+and grey background with larger text.
+
+clean up keyboard traversal (make it work)
+
+?Use doxygen to document libGx api for web browsing?
+
+Fix up x selection usage with cut buffers for cut&paste in GxEditWin and GxTextWin
+To add clearing selected (highlighted) text when another app makes a selection.
+
+tie in XRefreshKeyboardMapping() ?
+tie in whatever xfce-mcs-manager calls to refresh all apps on display when strings/defaults change?
+      (probably yes, cannot remember name right now...)
+
+allow widget reparenting as a first step to implementing capability of
+generic dockable widget hierarchy?
+
+fix MASSIVE HACK in GxTopLevelWin -> problem may be in blackbox.
+
+?hot keys for menu items?
+
+make scrolllbars work in gxpmedit (hook up callbacks).
+
+ask to save unsaved changes on exit in gxte
+
+have GxPulldownMenu use a next generation list for the GxPulldownPane.
+
+add ability to have right click activated menu on the tab widget.
+
+add flyout toolbars ?fix toolgroups and add a test?
+
+Implement a better GxList -> GxNewList or GxListShell(skeleton)
+GxList(implementation) rough implement list tree (make share code with
+GxList) I'm beginning to think that the list should hold ListItem
+objects (not object pointers).  the data structure for the list should
+be the stl list.  This would only mean one allocation per list item
+(rather than two -> one for item and one for list node).  It would
+probably be overhead in some ops than the existing mechanism, because
+the stl implementation would involve a copy for every item insertion,
+but this would be very low for any realistic list (i.e. of a useful
+length).
+
+the label's for all widgets perhaps should be implemented with an
+object rather than a text string.  This object would implement the
+Draw() function.  I'd like this to have an overloaded label that could
+draw single line strings as different colors (in lists/buttons/etc..)
+without adding overhead in the common case of drawing text as black.
+
+?should text strings in all objects be moved to string objects?
+  My original design goal was high performance and string objects would
+  add a large new/delete burden when compared to the almost non-existent burden now
+  This is still a valid reason, so I see no reason to do it.
+
+in lists of texts having each item drawn with an alternating background color seems to radically improve readability. (eyecandy)
+
+have sliders that are not active draw a _light_ checkerboard pattern in their background (eyecandy)
+
+add a command line arguments
+ -libGxAllowPrivateColormap
+and
+-libGxVerboseDisplayInitialize
+
+create the different versions of the library debug and final.  the
+debug versions of the library will have the ability to print out
+specific messages if cut on via the command line like
+--generage_toolbar_messages.  the non-debug version of the library
+will just print out a warning that a debug message was cut on with a
+non-debug version of the library.
+
+
+done:
+have GxCentralColors not be passed in as pointers to the GxDisplay
+decide upon all string lengths for objects and replace all strcpy's with memcpys
+make GxText track cursor movements so typing/pasting text never makes cursor disappear.
+?new prog level class beyond GxDisplay?
+strip libGx command line arguments
+libGx needs an application level standard output stream and functions
+      to handle it.  should be a single application level class through
+      which all error/diagnostic messages pass. GxMainInterface::SinkError
+Convert widgets that use XNextEvent in internal loops to event entry
+	via GxMainInterface
+add save/saveAs to gxte demo
+quick inspect/cleanup all *.cc file includes
+Fix up toolbars and toolbar docking
+remove XQueryPointer calls from GxSlideGrip.cc
+Continue consolidation of event entry to GxMainInterface by removing all
+	 XMaskEvent() calls
+add autorepeat to scrollbars (left/right/up/down).
+Implement all editing behaviours mentioned in GxEditWin
+add support for WM Close operation on top level windows
+    (for floating toolbar docks at the very least)
+remove final XNextEvent from all widgets (is in GxPopupWin.cc) to
+   centralize _all_ event fetching into GxMainInterface where it belongs.
+   this is important to allow timers to continue to function when popup windows exist.
+add vertical and horizonal scrolling by scrollbar buttons in GxList
+make up arrow on number box look somewhat better
+fix spacing around current color widget in gxpmedit (stupid bug in GxFrame)

@@ -1,0 +1,93 @@
+This is not a structured document.
+
+The programs in tests/ are not good examples of libGx usage. They
+were/are used to develop and test individual widgets. See
+demos/gxpmedit for a much more realistic/better example.
+
+The build system has been re-organized using ideas and suggestions in
+Peter Miller's "Recursive Make Considered Harmful" paper.  The last
+unfixed bit is that I would like make clean to remove dependency
+information.  If I do this, then make rebuilds the dependency
+information on subsequent make cleans.  For this reason dependency
+information is only removed on make real_clean.  This is a bit tacky.
+The most direct solution would be to only include dependency
+information (makefiles) if the current target does not contain the
+sub-string "clean" but make does not seem to allow this sort of
+thing. ?by design?
+
+I have tried to make child GxWinAreas be independent (or relocatable)
+with respect to their parents.  Unfortunately this means every function
+must check to see if the base state (visual info, display info) is
+valid before doing anything.  This is _incredibly_ cumbersome,
+particularly for the widget to be useful, it must be valid.  We really
+should pass references into the constructors of all libGx objects
+because this would imply to the programmer that an owner must be valid
+(which is true)( we cannot because the compiler interprets our
+constructor as a copy constructor). we should also make the additional
+constraint that we cannot create an object and then delete its owner.
+It would be nice to have toolkit elements that are largely independent
+from their owners, but this is just not realistic now.
+
+Could dInfo be made a const static * in the WinArea class?
+Probably not. would allow program only to connect to a single x
+display. to open multiple displays we would need a member variable to
+identify which dInfo we refer to.  no space savings and adds an
+indirection.
+
+**** hack. flesh this out *** libGx has been modified to remove all
+calls to XNextEvent and XCheckTypedEvent() from widget's internal
+event loops.  Now the sole entry for events into libGx is through
+GxMainInt.  In the case of widgets that have blocking usage functions
+like GxFileSelector's OpenFile, etc.  these funcions use the
+GxMainInterface's alsdjf;lsdf.  For the case where _absolutly_ nothing
+can block, there are non-blocking interfaces to all utility dialogs
+
+libGx does not use floating point internally. Only a few user
+convience functions use or return floats.
+
+It is good that we implement separate clip windows for
+GxScrolledWindows because the user may need go create a clip window
+that uses a different visual from the rest of the widget hierarchy.
+
+GxRealOwner GxWin and GxOwnerWin all exist for the same
+reason. without these classes it would be possible to add elements
+like buttons and frames directly to the display.  This obviously
+incorrect, and adding these classes to the class hierarchy makes the
+compiler refuse to do silly things.
+
+Events are only handled for windows, not ghosts. Events are passed
+only to objects which posses windows IDs by a linked list of hash
+tables.
+
+It is perfectly o.k. to make pointer casts as long as the pointer-type
+should not have to be checked.  Error conditions which result in
+pointers being cast to the incorrect type should be ignored in libGx
+because with correct usage this should never happen.  If a
+non-graceful failure occurs due to this condition, it is a bug in user
+code (or possibly an over-sight in the library or its documentation).
+For example Menu's cast their pOwner pointer to that of a GxMenuBar.
+Because of a Menu's constructor only allows a menu to belong to a
+GxMenuBar this should always be a safe cast and should not be checked.
+If an object is documented that it should only be added to a specific
+type of object, it should only be added to that type of object because
+it may make casts internally.
+
+HACKS:
+
+Throughout I request ButtonPress events and ButtonRelease Events in
+subclasses for GxWin's for the implicit server grabs. It would might
+be better if I did not request ButtonRelease events and did an
+explicit grab in the window event handler to keep unintended
+ButtonRelease Events off of the wire.
+?what exactly was I thinking in writing this note?
+
+Memory allocation musings.
+Failures can occur to both local and server-side resource problems.
+perhaps Create() should return success/failure depending on whether
+server-side resources are available. (i.e. whether or not the windows
+were created. if this were done it would be simple to make this
+success/failure a int with actual errors checked with ?flags? then it
+would be trivial to check for allocation errors in the constructors of
+sub-objects and not add much overhead to the existing blind usage
+scheme.
+
