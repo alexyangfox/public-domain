@@ -1,0 +1,1272 @@
+<html>
+<head><title>ATADRVR User Guide</title></head>
+<body>
+<font face="arial">
+<h1 align="center">ATADRVR</h1>
+<h1 align="center">ATA/ATAPI Low Level Driver</h1>
+<h1 align="center">User Guide</h1>
+<h1 align="center">Version 16N</h1>
+<h2><a name="toc">TABLE OF CONTENTS</a></h2>
+<p><ul>
+<li><a href="#INTRODUCTION">INTRODUCTION</a>
+</li>
+<li><a href="#USING_ATADRVR">USING ATADRVR</a>
+</li>
+<li><a href="#FILE_ORGANIZATI">FILE ORGANIZATION</a>
+</li>
+<li><a href="#ATADRVR_BASICS">ATADRVR BASICS</a>
+</li>
+<li><a href="#48_BIT_LBA_PIO">48-BIT LBA PIO DATA TRANSFERS</a>
+</li>
+<li><a href="#REG_CMD_INFO_Da">REG_CMD_INFO Data Structure</a>
+</li>
+<li><a href="#ATADRVR_REFEREN">ATADRVR REFERENCE</a>
+</li>
+<li>&nbsp&nbsp&nbsp<a href="#ATAIOINT_C_Func">ATAIOINT.C Functions And Data</a>
+</li>
+<li>&nbsp&nbsp&nbsp<a href="#ATAIOISA_C_Func">ATAIOISA.C Functions And Data</a>
+</li>
+<li>&nbsp&nbsp&nbsp<a href="#ATAIOPCI_C_Func">ATAIOPCI.C Functions And Data</a>
+</li>
+<li>&nbsp&nbsp&nbsp<a href="#ATAIOPIO_C_Func">ATAIOPIO.C Functions And Data</a>
+</li>
+<li>&nbsp&nbsp&nbsp<a href="#ATAIOREG_C_Func">ATAIOREG.C Functions And Data</a>
+</li>
+<li>&nbsp&nbsp&nbsp<a href="#ATAIOTMR_C_Func">ATAIOTMR.C Functions And Data</a>
+</li>
+<li>&nbsp&nbsp&nbsp<a href="#ATAIOTRC_C_Func">ATAIOTRC.C Functions And Data</a>
+</li>
+<li><a href="#QUESTIONS_OR_PR">QUESTIONS OR PROBLEMS?</a>
+</li>
+</ul></p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="INTRODUCTION">INTRODUCTION</a></h2>
+<p>ATADRVR is Hale Landis' C code that shows the low level
+programming required to configure and execute commands on ATA and
+ATAPI devices.  Over the years this code has been updated to
+support all of the ATA and now ATA/ATAPI standards.  This C code
+has been placed into the public domain by Hale Landis.  This C
+code has no copyright or other restrictions on how it is used.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="USING_ATADRVR">USING ATADRVR</a></h2>
+<p>Before using ATADRVR in your project you should read the
+PIO.UG, DMA.UG and SATA.UG documentation files.
+</p>
+<p>ATADRVR and the EXAMPLE1 and EXAMPLE2 programs are DOS "real
+mode" programs.  This software will not execute in a Windows DOS
+session (a virtual x86 session).  You must use a compiler and
+linker that are able to create DOS real mode programs.  Hale uses
+Borland C/C++ 4.5.  Note that the free (or low cost) Borland C++
+5.x compiler will not compile this code -- you need the full
+Borland C++ 5.x compiler.
+</p>
+<p>The best way to see how this code can be used is shown in the C
+program files EXAMPLE1.C and EXAMPLE2.C.  ATADRVR provides all of
+the funcitons and facilities needed to perform the low level I/O
+port activities on an x86 computer so that ATA and ATAPI commands
+can be executed.
+</p>
+<p>ATADRVR also includes detailed low level and command history
+tracing funcitons.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="FILE_ORGANIZATI">FILE ORGANIZATION</a></h2>
+<p>ATADRVR source code is organized into two H files and several C
+files.
+</p>
+<p>The H files are:
+</p>
+<p><pre><font face="courier">
+   ATAIO.H
+</font></pre></p>
+<p>The file ATAIO.H defines all of the "public" functions and data
+for ATADRVR.  This file should be included into any program using
+the ATADRVR functions.
+</p>
+<p>The C files are:
+</p>
+<p><pre><font face="courier">
+   ATAIOINT.C
+   ATAIOISA.C
+   ATAIOPCI.C
+   ATAIOPIO.C
+   ATAIOREG.C
+   ATAIOSUB.C
+   ATAIOTMR.C
+   ATAIOTRC.C
+   EXAMPLE1.C
+   EXAMPLE2.C
+</font></pre></p>
+<p>The file ATAIOINT.C contains the x86 interrupt setup and handling
+data and functions.  The public symbols in this file begin with
+the characters "int_".
+</p>
+<p>The file ATAIOISA.C contains the x86 ISA bus DMA functions.  The
+public symbols in this file begin with characters "dma_isa_".
+</p>
+<p>The file ATAIOPCI.C contains the x86 PCI Bus Mastering DMA
+functions.  The public symbols in this file begin with characters
+"dma_pci_".
+</p>
+<p>The file ATAIOPIO.C contains the lowest level I/O port access
+functions.  The public symbols in this file begin with characters
+"pio_".
+</p>
+<p>The file ATAIOREG.C contains ATA and ATAPI functions to perform
+ATA Soft Reset, Non-Data, PIO Data IN, PIO Data Out and ATAPI
+Packet command protocols.  The public symbols in this file begin
+with characters "reg_".
+</p>
+<p>The file ATAIOSUB.C contains severals "private" functions used by
+ATADRVR.
+</p>
+<p>The file ATAIOTMR.C contains the timer reading and command
+timeout functions.  The public symbols in this file begin with
+characters "tmr_".
+</p>
+<p>The file ATAIOTRC.C contains the low level and command history
+trace functions.  The public symbols in this file begin with
+characters "trc_".
+</p>
+<p>The file EXAMPLE1.C is an example of using ATADRVR to configure
+an ATA device and execute a few commands.
+</p>
+<p>The file EXAMPLE2.C is an example of using ATADRVR to configure
+an ATAPI CD-ROM device and execute a few commands.
+</p>
+<p><b>NOTE:</b>If you use ATADRVR in a program you should use only the public
+symbols.  This will allow you too upgrade to newer versions of
+ATADRVR (assuming there will be new versions in the future)
+with minimum effort.  The private data and functions are
+subject to change in future versions of ATADRVR.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="ATADRVR_BASICS">ATADRVR BASICS</a></h2>
+<p>Before using the ATADRVR code in your program, please review the
+EXAMPLE1.C, EXAMPLE1.MAK, EXAMPLE2.C and EXAMPLE2.MAK files.
+These files will provide a basic overview of how this driver code
+can be used.
+</p>
+<p>The basics of using ATADRVR, as shown in EXAMPLE1.C or
+EXAMPLE2.C, are these:
+</p>
+<p>1) #include "ataio.h" in your program.
+</p>
+<p>2) Call pio_set_iobase_addr() or pio_set_memory_addr() to set the
+base I/O or memory address used by the ATA host adapter.
+</p>
+<p>3) Call reg_config() so that ATADRVR can determine what devices
+are attached to the ATA host adapter.
+</p>
+<p>4) Call reg_reset() or any of the other "reg" functions to issue
+ATA or ATAPI commands in PIO data transfer mode.
+</p>
+<p>ATADRVR has been developed using Borland C and can be compiled in
+any x86 real mode memory mode.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="48_BIT_LBA_PIO">48-BIT LBA PIO DATA TRANSFERS</a></h2>
+<p>One of the dumber things T13 did was to allow the 48-bit LBA
+commands to transfer huge amounts of data, up to 65536 sectors
+(33Mbytes) in a single command.  ATADRVR is able to support these
+huge transfers even if the data buffer is not that big.  The I/O
+buffer must be at least the size of the largest DRQ block that
+will be transferred by a PIO data transfer command.  For
+READ/WRITE SECTORS that is a single sector buffer.  For
+READ/WRITE MULTIPLE that is a buffer that holds the current
+multiple block count number of sectors. For PACKET commands
+the size of a DRQ data block can not exceed the buffer size
+and (according to all ATA/ATAPI protocol rules) can not exceed
+the PACKET command's Byte Count Limit (BCL).
+</p>
+<p>This mode of PIO data transfer is enabled when the
+reg_drq_block_call_back function pointer is not NULL.  Note that
+this facility of ATADRVR can be used with any PIO Data In/Out
+command and/or any PIO PACKET command.
+</p>
+<p>ATADRVR supports these transfers by calling back to a user
+supplied function at these times:
+</p>
+<p>* For ATA or PACKET PIO Data In commands, after each DRQ block
+has been read from the device.  The call back function should
+use this call to access the data buffer.
+</p>
+<p>* For ATA or PACKET PIO Data Out commands, before each DRQ block
+is written to the device.  The call back function should use
+this call to fill the data buffer.
+</p>
+<p>The call back function receives a pointer to a REG_CMD_INFO
+structure.  It must use the data in this structure to determine
+what is happening.  The call back function has no return value.
+</p>
+<p>The reg_drq_block_call_back function pointer is set to NULL
+before the ATA or PACKET PIO Data In/Out functions return.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="REG_CMD_INFO_Da">REG_CMD_INFO Data Structure</a></h2>
+<p><pre><font face="courier" color="blue"><b>
+struct REG_CMD_INFO
+{
+   unsigned char flg;         // see TRC_FLAG_xxx in ATAIO.H
+   unsigned char ct;          // see TRC_TYPE_xxx in ATAIO.H
+   unsigned char cmd;         // command code
+   unsigned char fr1;         // feature reg before
+      // ... See ATAIO.H ...
+   unsigned char dc1;         // device control before
+   unsigned char ec;          // ATADRVR error code
+   unsigned char to;          // not zero if time out error
+   unsigned char st2;         // status reg after
+      // ... See ATAIO.H ...
+   unsigned char dh2;         // device head after
+   long totalBytesXfer;       // total bytes transferred
+   unsigned int failbits;     // failure bits (protocol violation bits)
+   long drqPackets;           // number of PIO DRQ data packets
+   long drqPacketSize;        // number of bytes in current DRQ block
+} ;
+struct REG_CMD_INFO reg_cmd_info;
+</b></font></pre></p>
+<p>This data structure contains all the "before" and "after"
+information for the last command or reset executed.
+</p>
+<p>When the PIO data transfer call back function is called
+drqPackets is the DRQ block number (1, 2, 3, ...) and
+drqPacketSize is the number of bytes in the current DRQ block
+See reg_drq_block_call_back.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="ATADRVR_REFEREN">ATADRVR REFERENCE</a></h2>
+<p>Each of the public functions and symbols of ATADRVR are described
+below in alphabetical order.
+</p>
+<a name="ATAIOINT_C_Func"> </a>
+<h3>ATAIOINT.C Functions And Data</h3>
+<p>These functions setup interrupt handling for the ATA host
+adapter.  Interrupts are not required in order to execute nost
+ATA or ATAPI commands but are usually used.  Interrupts are
+required in order to execute DMA data transfer commands.  If
+int_enable_irq() is called, then int_disable_irq() MUST be called
+before your program exits (otherwise your system may hang).  The
+functions int_enable_irq() and int_disable_irq() may be called
+multiple times in order to switch between polling and interrupt
+mode on a command by command basis.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+void int_disable_irq( void );
+</b></font></pre></p>
+<p>Disable interrupt use.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int int_enable_irq( int shared, int irqNum,
+                    unsigned int bmAddr, unsigned int ataAddr );
+</b></font></pre></p>
+<p>Enable interrupt use. shared is 0 or not 0. shared is not 0
+to use the IRQ in shared mode. irqNum is 1 to 15. bmAddr is
+the I/O port address for the BMIDE Status regiser.  This
+value is found in BAR 4 (offset 20H) of the ATA controllers
+PCI configuration space data. bmAddr is that value +2 for the
+primary side of the controller and +10 for the secondary side
+of the controller. ataAddr is the I/O port address for the
+ATA Status register (not the Alternate Status register!).
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int int_use_intr_flag;
+</b></font></pre></p>
+<p>This value is READONLY -- DO NOT ALTER.
+</p>
+<p>The value is not zero if an IRQ is currently configured.
+</p>
+<a name="ATAIOISA_C_Func"> </a>
+<h3>ATAIOISA.C Functions And Data</h3>
+<p>These functions setup ISA bus DMA (ATA Multiword DMA) and perform
+ATA and ATAPI commands using DMA.  The function dma_isa_config()
+MUST be called with no error before any of the other functions
+will attempt to execute a command.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int dma_isa_chs( int dev,                // device (0 or 1)
+                 int cmd,                    // command register
+                 int fr,                     // feature register
+                 int sc,                     // sector count
+                 unsigned int cyl,           // CHS cylinder high/low
+                 int head,                   // CHS head
+                 int sect,                   // CHS sector
+                 unsigned seg,               // buffer address
+                 unsigned off );             // buffer address
+</b></font></pre></p>
+<p>Execute an ATA Read DMA (C8H) or ATA Write DMA (CAH) command
+using CHS sector addressing.
+</p>
+<p>Returns 0 if no error or 1 if there is an error.  See the
+contents of reg_cmd_info.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int dma_isa_lba28( int dev,                // device (0 or 1)
+                   int cmd,                // command register
+                   int fr,                 // feature register
+                   int sc,                 // sector count
+                   long lba,               // LBA
+                   unsigned seg,           // buffer address
+                   unsigned off );         // buffer address
+</b></font></pre></p>
+<p>Execute an ATA Read DMA (C8H) or ATA Write DMA (CAH) command
+using LBA sector addressing.
+</p>
+<p>Returns 0 if no error or 1 if there is an error.  See the
+contents of reg_cmd_info.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int dma_isa_lba48( int dev,                // device (0 or 1)
+                   int cmd,                // command register
+                   int fr,                 // feature register
+                   int sc,                 // sector count
+                   long lbahi,             // LBA upper 16-bits
+                   long lbalo,             // LBA lower 32 bits
+                   unsigned seg,           // buffer address
+                   unsigned off );         // buffer address
+</b></font></pre></p>
+<p>Execute an ATA Read DMA (C8H) or ATA Write DMA (CAH) command
+using LBA sector addressing.
+</p>
+<p>Returns 0 if no error or 1 if there is an error.  See the
+contents of reg_cmd_info.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int dma_isa_config( int chan );
+</b></font></pre></p>
+<p>Configure ATADRVR to use ISA bus DMA (ATA Multiword DMA) on
+ISA DMA Channel 5, 6 or 7.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int dma_isa_packet( int dev,                 // device (0 or 1)
+                    unsigned int cpbc,       // command packet size
+                    unsigned int cpseg,      // command packet buffer
+                    unsigned int cpoff,      // command packet buffer
+                    int dir,                 // 0 for no data or read, 1 for write
+                    unsigned int dpbc,       // max data packet size
+                    unsigned int dpseg,      // data packet buffer
+                    unsigned int dpoff );    // data packet buffer
+</b></font></pre></p>
+<p>Execute an ATAPI Packet (A0H) command in DMA mode.  Note that
+the first byte of the Commmand Packet buffer is the command
+code of the "SCSI CDB" that is to be executed by the device.
+</p>
+<p>Returns 0 if no error or 1 if there is an error.  See the
+contents of reg_cmd_info.
+</p>
+<a name="ATAIOPCI_C_Func"> </a>
+<h3>ATAIOPCI.C Functions And Data</h3>
+<p>These functions setup PCI bus DMA (ATA Multiword or Ultra DMA)
+and perform ATA and ATAPI commands using DMA.  The function
+dma_pci_config() MUST be called with no error before any of the
+other functions will attempt to execute a command.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int dma_pci_chs( int dev,                    // device (0 or 1)
+                 int cmd,                    // command register
+                 int fr,                     // feature register
+                 int sc,                     // sector count
+                 unsigned int cyl,           // CHS cylinder high/low
+                 int head,                   // CHS head
+                 int sect,                   // CHS sector
+                 unsigned seg,               // buffer address
+                 unsigned off );             // buffer address
+</b></font></pre></p>
+<p>Execute an ATA Read DMA (C8H) or ATA Write DMA (CAH) command
+using CHS sector addressing.
+</p>
+<p>Returns 0 if no error or 1 if there is an error.  See the
+contents of reg_cmd_info.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int dma_pci_lba28( int dev,                // device (0 or 1)
+                   int cmd,                // command register
+                   int fr,                 // feature register
+                   int sc,                 // sector count
+                   long lba,               // LBA
+                   unsigned seg,           // buffer address
+                   unsigned off );         // buffer address
+</b></font></pre></p>
+<p>Execute an ATA Read DMA (C8H) or ATA Write DMA (CAH) command
+using LBA sector addressing.
+</p>
+<p>Returns 0 if no error or 1 if there is an error.  See the
+contents of reg_cmd_info.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int dma_pci_lba48( int dev,                // device (0 or 1)
+                   int cmd,                // command register
+                   int fr,                 // feature register
+                   int sc,                 // sector count
+                   long lbahi,             // LBA upper 16-bits
+                   long lbalo,             // LBA lower 32 bits
+                   unsigned seg,           // buffer address
+                   unsigned off );         // buffer address
+</b></font></pre></p>
+<p>Execute an ATA Read DMA (C8H) or ATA Write DMA (CAH) command
+using LBA sector addressing.
+</p>
+<p>Returns 0 if no error or 1 if there is an error.  See the
+contents of reg_cmd_info.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int dma_pci_config( unsigned int regAddr );
+</b></font></pre></p>
+<p>Configure ATADRVR to use PCI bus DMA (ATA Multiword or Ultra
+DMA) on a PCI Bus Mastering ATA controller.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int dma_pci_packet( int dev,                 // device (0 or 1)
+                    unsigned int cpbc,       // command packet size
+                    unsigned int cpseg,      // command packet buffer
+                    unsigned int cpoff,      // command packet buffer
+                    int dir,                 // 0 for no data or read, 1 for write
+                    unsigned int dpbc,       // max data packet size
+                    unsigned int dpseg,      // data packet buffer
+                    unsigned int dpoff );    // data packet buffer
+</b></font></pre></p>
+<p>Execute an ATAPI Packet (A0H) command in DMA mode.  Note that
+the first byte of the Commmand Packet buffer is the command
+code of the "SCSI CDB" that is to be executed by the device.
+</p>
+<p>Returns 0 if no error or 1 if there is an error.  See the
+contents of reg_cmd_info.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+void dma_pci_set_max_xfer( unsigned int seg, unsigned int off,
+                           long bufSize );
+</b></font></pre></p>
+<p>This function uses the caller's I/O buffer description
+(seg;off and size) to compute if LARGE PRD lists can be
+supported.  See the variables:  dma_pci_prd_type,
+dma_pci_largeMaxB, dma_pci_largeMaxS, dma_pci_largePrdBufPtr
+and dma_pci_largeIoBufPtr.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+unsigned int dma_pci_bmide_reg_addr;   // BMIDE reg base i/o address
+</b></font></pre></p>
+<p>This value is READONLY -- DO NOT ALTER.
+</p>
+<p>This value is the base I/O address of the BMIDE I/O
+registers.  The value is set by dma_pci_config().
+</p>
+<p>Note that in order to use PCI DMA the calling program must
+determine the current base I/O address of the BMIDE registers.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int dma_pci_prd_type;
+</b></font></pre></p>
+<p>This variable determines the type of PRD list that will be
+used.  Choices are SIMPLE, COMPLEX and LARGE.  SIMPLE are the
+most common type.  COMPLEX lists are the same as SIMPLE but
+with more PRD entries that break the transfers into smaller
+memory areas.  LARGE PRD lists are built in the caller's I/O
+buffer and a 64K chunk of the same I/O buffer is used over and
+over for the data transfer.  LARGE PRD lists enable READ/WRITE
+DMA EXT transfers up to 65356 sectors.  Use the function
+dma_pci_set_max_xfer() to determine if LARGE PRD lists can be
+supported.
+</p>
+<p>Note that COMPLEX PRD lists may cause data corruption and/or
+system hang problems on some ATA host controllers.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+unsigned long * dma_pci_prd_ptr;       // current BMIDE PRD buffer address
+</b></font></pre></p>
+<p>This value is READONLY -- DO NOT ALTER.
+</p>
+<p>This value is the segment address of the BMIDE PRD buffer.
+This value is determined by dma_pci_config().
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int dma_pci_num_prd;                   // current number of PRD entries
+</b></font></pre></p>
+<p>This value is READONLY -- DO NOT ALTER.
+</p>
+<p>This value is the number of PRD entries used for the last DMA
+command.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+long dma_pci_largeMaxB;   // max LARGE dma transfer size in bytes
+long dma_pci_largeMaxS;   // max LARGE dma transfer size in sectors
+unsigned long far * dma_pci_largePrdBufPtr;  // LARGE PRD buffer ptr
+unsigned char far * dma_pci_largeIoBufPtr;   // LARGE PRD I/O address
+</b></font></pre></p>
+<p>These values are READONLY -- DO NOT ALTER.
+</p>
+<p>These values are set by calling the function
+dma_pci_set_max_xfer().  If dma_pci_set_max_xfer() sets these
+values to non-zero and non-NULL values then LARGE PRD lists
+can be supported.
+</p>
+<a name="ATAIOPIO_C_Func"> </a>
+<h3>ATAIOPIO.C Functions And Data</h3>
+<p>These functions setup the ATA host adapter I/O port address (or
+in PCMCIA PC Card ATA Memory mode, the host adapter memory
+address).  The function pio_set_iobase_addr() (or
+pio_set_memory_addr()) MUST be the first function called in order
+to initialize ATADRVR.  However, normal usage of ATADRVR does NOT
+require calling any of the other pio functions.  But if you
+needed to create you own unique command protocol, these functions
+can be used directly.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+unsigned int pio_base_addr1;
+</b></font></pre></p>
+<p>This value is READONLY -- DO NOT ALTER.
+</p>
+<p>This is the base I/O address of the ATA Command Block
+registers.  This value is set by pio_set_iobase_addr().
+</p>
+<p><pre><font face="courier" color="blue"><b>
+unsigned int pio_base_addr2;
+</b></font></pre></p>
+<p>This value is READONLY -- DO NOT ALTER.
+</p>
+<p>This is the base I/O address of the ATA Control Block
+registers.  This value is set by pio_set_iobase_addr().
+</p>
+<p><pre><font face="courier" color="blue"><b>
+void pio_drq_block_in( unsigned int addrDataReg,
+                       unsigned int bufSeg, unsigned int bufOff,
+                       long wordCnt );
+</b></font></pre></p>
+<p>This function calls one of the reg_rep_in*() functions
+based on the value of reg_xfer_width.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+void pio_drq_block_out( unsigned int addrDataReg,
+                        unsigned int bufSeg, unsigned int bufOff,
+                        long wordCnt )
+</b></font></pre></p>
+<p>This function calls one of the reg_rep_out*() functions
+based on the value of reg_xfer_width.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+unsigned char pio_inbyte( unsigned int addr );
+</b></font></pre></p>
+<p>Read one ATA command or control block register. addr MUST be
+one of the following values (as defined in ATAIO.H):  CB_DATA,
+CB_ERR, CB_FR, CB_SC, CB_SN, CB_CL, CB_CH, CB_DH, CB_STAT,
+CB_CMD, CB_ASTA, CB_DC, CB_DA.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+unsigned int pio_inword( unsigned int addr );
+</b></font></pre></p>
+<p>Read two ATA command or control block registers. addr MUST be
+one of the following values (as defined in ATAIO.H):  CB_DATA,
+CB_ERR, CB_FR, CB_SC, CB_SN, CB_CL, CB_CH, CB_DH, CB_STAT,
+CB_CMD, CB_ASTA, CB_DC, CB_DA.
+</p>
+<p>Note: ATADRVR does not use this function.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+unsigned char pio_last_read[10];
+</b></font></pre></p>
+<p>This value is READONLY -- DO NOT ALTER.
+</p>
+<p>This array contains the last data read from each of the ATA
+command or control block registers.  Index into this array
+using the values (as defined in ATAIO.H):  CB_DATA, CB_ERR,
+CB_FR, CB_SC, CB_SN, CB_CL, CB_CH, CB_DH, CB_STAT, CB_CMD,
+CB_ASTA, CB_DC, CB_DA.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+unsigned char pio_last_write[10];
+</b></font></pre></p>
+<p>This value is READONLY -- DO NOT ALTER.
+</p>
+<p>This array contains the last data written to each of the ATA
+command or control block registers.  Index into this array
+using the values (as defined in ATAIO.H):  CB_DATA, CB_ERR,
+CB_FR, CB_SC, CB_SN, CB_CL, CB_CH, CB_DH, CB_STAT, CB_CMD,
+CB_ASTA, CB_DC, CB_DA.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+unsigned int pio_memory_seg;
+</b></font></pre></p>
+<p>This value is READONLY -- DO NOT ALTER.
+</p>
+<p>This is the base memory address of the ATA Command and Control
+Block registers in PCMCIA PC Card ATA Memory mode.  This value
+is set by pio_set_memory_addr().
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int pio_memory_dt_opt;
+</b></font></pre></p>
+<p>This value is used only in PCMCIA PC Card ATA Memory mode.
+The value controls how ATADRVR reads/write the ATA Data
+register.  It can be set to the following values (see
+ATAIO.H):
+</p>
+<p>PIO_MEMORY_DT_OPT0  -  use Data reg at offset 0H
+PIO_MEMORY_DT_OPT8  -  use Data reg at offset 8H
+PIO_MEMORY_DT_OPTB  -  use Data reg at offsets 400-7ffH
+PIO_MEMORY_DT_OPTR  -  randomly select these options
+</p>
+<p>The default is PIO_MEMORY_DT_OPT0.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+void pio_outbyte( unsigned int addr,
+                  unsigned char data );
+</b></font></pre></p>
+<p>Write one ATA command or control block register. addr MUST be
+one of the following values (as defined in ATAIO.H):  CB_DATA,
+CB_ERR, CB_FR, CB_SC, CB_SN, CB_CL, CB_CH, CB_DH, CB_STAT,
+CB_CMD, CB_ASTA, CB_DC, CB_DA.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+void pio_outword( unsigned int addr,
+                  unsigned int data );
+</b></font></pre></p>
+<p>Write two ATA command or control block registers. addr MUST be
+one of the following values (as defined in ATAIO.H):  CB_DATA,
+CB_ERR, CB_FR, CB_SC, CB_SN, CB_CL, CB_CH, CB_DH, CB_STAT,
+CB_CMD, CB_ASTA, CB_DC, CB_DA.
+</p>
+<p>Note: ATADRVR does not use this function.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+unsigned int pio_reg_addrs[10];
+</b></font></pre></p>
+<p>This value is READONLY -- DO NOT ALTER.
+</p>
+<p>This array provides the actually I/O addresses for the ATA
+Command and Control Block registers.  This array is not
+useful in PCMCIA PC Card ATA Memory mode.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+void pio_rep_inbyte( unsigned int addrDataReg,     // register address
+                     unsigned int bufSeg,          // buffer address
+                     unsigned int bufOff,          // buffer address
+                     unsigned int byteCnt );       // byte count
+</b></font></pre></p>
+<p>NOTE: Normally this function is not called directly but
+is called by the pio_drq_block_in() function!
+</p>
+<p>Use the REP INS instruction to read the ATA Data Register
+during PIO data transfer.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+void pio_rep_indword( unsigned int addrDataReg,    // register address
+                      unsigned int bufSeg,         // buffer address
+                      unsigned int bufOff,         // buffer address
+                      unsigned int dwordCnt );     // dword count
+</b></font></pre></p>
+<p>NOTE: Normally this function is not called directly but
+is called by the pio_drq_block_in() function!
+</p>
+<p>Use the REP INSD instruction to read the ATA Data Register
+during PIO data transfer.  Note that this function is called
+by pio_drq_block_in() but only if:  1) pio_xfer_width is 32
+and 2) the number of bytes to be read is a multiple of 4.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+void pio_rep_inword( unsigned int addrDataReg,     // register address
+                     unsigned int bufSeg,          // buffer address
+                     unsigned int bufOff,          // buffer address
+                     unsigned int wordCnt );       // word count
+</b></font></pre></p>
+<p>NOTE: Normally this function is not called directly but
+is called by the pio_drq_block_in() function!
+</p>
+<p>Use the REP INSW instruction to read the ATA Data Register
+during PIO data transfer.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+void pio_rep_outbyte( unsigned int addrDataReg,   // register address
+                      unsigned int bufSeg,        // buffer address
+                      unsigned int bufOff,        // buffer address
+                      unsigned int bytedCnt );    // byte count
+</b></font></pre></p>
+<p>NOTE: Normally this function is not called directly but
+is called by the pio_drq_block_out() function!
+</p>
+<p>Use the REP OUTS instruction to write the ATA Data Register
+during PIO data transfer.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+void pio_rep_outdword( unsigned int addrDataReg,   // register address
+                       unsigned int bufSeg,        // buffer address
+                       unsigned int bufOff,        // buffer address
+                       unsigned int dwordCnt );    // dword count
+</b></font></pre></p>
+<p>NOTE: Normally this function is not called directly but
+is called by the pio_drq_block_out() function!
+</p>
+<p>Use the REP OUTSD instruction to write the ATA Data Register
+during PIO data transfer.  Note that this function is called
+by pio_drq_block_out() but only if:  1) pio_xfer_width is 32
+and 2) the number of bytes to be written is a multiple of 4.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+void pio_rep_outword( unsigned int addrDataReg,    // register address
+                      unsigned int bufSeg,         // buffer address
+                      unsigned int bufOff,         // buffer address
+                      unsigned int wordCnt );      // word count
+</b></font></pre></p>
+<p>NOTE: Normally this function is not called directly but
+is called by the pio_drq_block_out() function!
+</p>
+<p>Use the REP OUTSW instruction to write the ATA Data Register
+during PIO data transfer.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+void pio_set_iobase_addr( unsigned int base1,
+                          unsigned int base2 );
+</b></font></pre></p>
+<p>Either pio_set_iobase_addr() or pio_set_memory_addr() must be
+called before any other ATADRVR functions can be used!
+</p>
+<p>Configure the ATA host adapter's I/O port addresses.  Normal
+calls to this function are:
+</p>
+<p><pre><font face="courier">
+      pio_set_iobase_addr( 0x1f0, 0x3f0 ) // primary
+      pio_set_iobase_addr( 0x170, 0x370 ) // secondary
+</font></pre></p>
+<p>For PCMCIA PC Card ATA Contiguous I/O mode use:
+</p>
+<p><pre><font face="courier">
+      pio_set_iobase_addr( addr, addr+8 )
+</font></pre></p>
+<p>where the least significant 4 bits of addr are zero.  Note
+that the calling program must find a contiguous set of 16 I/O
+port addresses that are not in use in order to use this PCMCIA
+I/O mode.  See the documentation file PCC.UG!
+</p>
+<p><pre><font face="courier" color="blue"><b>
+void pio_set_memory_addr( unsigned int seg );
+</b></font></pre></p>
+<p>Either pio_set_iobase_addr() or pio_set_memory_addr() must be
+called before any other ATADRVR functions can be used!
+</p>
+<p>Configure the ATA host adapter's memory address in PCMCIA PC
+Card ATA Memory mode.  Note that the calling program must find
+a 4K block of memory that is not in use in order to use this
+PCMCIA mode.  See the documentation file PCC.UG!
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int pio_use_dword;
+</b></font></pre></p>
+<p>NOTE: pio_use_dword has been replaced by pio_xfer_width !
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int pio_xfer_width;
+</b></font></pre></p>
+<p>This variable controls the width of PIO data transfers.
+This variable can have the following values:
+</p>
+<p>8 = 8-bits. PIO transfers will use REP INS and REP OUTS
+or 8-bit memory write/read in PCMCIA Memory mode.
+</p>
+<p>16 = 16-bits. PIO transfers will use REP INSW and REP OUTSW
+or 16-bit memory write/read in PCMCIA Memory mode.
+</p>
+<p>32 = 32-bits. PIO transfers will use REP INSD and REP OUTSD.
+</p>
+<p>Any other value is treated the same as 16.
+</p>
+<p>The default value is 16.
+</p>
+<p>See the pio_rep_*() functions above.
+</p>
+<p>Use this ATADRVR feature with great care and read the
+documentation file PIO.UG!
+</p>
+<a name="ATAIOREG_C_Func"> </a>
+<h3>ATAIOREG.C Functions And Data</h3>
+<p>These functions provide the basic ATA and ATAPI command protocol
+functions.  The function reg_config() MUST be called after
+calling pio_set_iobase_addr() (or pio_set_memory_addr()).
+Failure to call reg_config() will cause ATADRVR to operate
+incorrectly.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+unsigned char reg_atapi_cp_data[16];
+int reg_atapi_cp_size;
+</b></font></pre></p>
+<p>These values are READONLY -- DO NOT ALTER.
+</p>
+<p>reg_atapi_cp_size is the size of the most recent ATAPI command
+packet size (normally 12 or 16). reg_atapi_cp_data[16] is the
+most recent ATAPI command packet (SCSI CDB) data.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int reg_atapi_delay_flag;
+</b></font></pre></p>
+<p>Many ATAPI devices are very poorly designed and do not follow
+the ATA or ATAPI protocols as defined by the ATA/ATAPI-4
+standard.  Setting this word to a non-zero value causes
+ATADRVR to insert an approximately 100ms delay into the ATA
+and/or ATAPI command protocols.  This delay seems to allow
+enough time for these non-conforming devices to operate
+correctly.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+unsigned char reg_atapi_reg_fr;  // 0x01 OR'ed in for DMA
+unsigned char reg_atapi_reg_sc;
+unsigned char reg_atapi_reg_sn;
+unsigned char reg_atapi_reg_dh;  // only bits 3,2,1,0 are used
+</b></font></pre></p>
+<p>These values are placed into the Feature, Sector Count, Sector
+Number and Device/Head register by the reg_packet(),
+dma_isa_packet() and dma_pci_packet() functions before the A0H
+command is started.  These values are then set to zero before
+reg_packet() returns.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+long reg_buffer_size;
+</b></font></pre></p>
+<p>This must be set to the size in bytes of the data buffer
+provided by the caller.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int reg_config( void );
+</b></font></pre></p>
+<p>This function MUST be called so that ATADRVR can correctly
+configure itself. reg_config() sets the values into
+reg_config_info[2].
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int reg_config_info[2];
+</b></font></pre></p>
+<p>This array is set by calling reg_config(). reg_config_info[0]
+describes device 0 and reg_config_info[1] describes device 1.
+The possible values in these words are (see ATAIO.H):
+REG_CONFIG_TYPE_NONE, REG_CONFIG_TYPE_UNKN,
+REG_CONFIG_TYPE_ATA, REG_CONFIG_TYPE_ATAPI.
+</p>
+<p>Note that ATADRVR is not able to determine the type of some
+devices.  However, after issuing some commands the calling
+program may be able to determine the exact type of a device.
+The calling program may change the values in this array but
+this must be done very carefully:
+</p>
+<p>a) DO NOT CHANGE the value REG_CONFIG_TYPE_NONE.
+b) DO NOT CHANGE a value to REG_CONFIG_TYPE_NONE.
+c) The value REG_CONFIG_TYPE_UNKN can be changed to either
+REG_CONFIG_TYPE_ATA or REG_CONFIG_TYPE_ATAPI.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+void ( * reg_drq_block_call_back ) ( struct REG_CMD_INFO * )
+</b></font></pre></p>
+<p>When this value is not NULL the PIO Data In/Out functions
+place the data for each DRQ block at the beginning of the data
+buffer.  This function is called after each DRQ data block is
+read from the device or before each DRQ data block is written
+to the device.  The call back function receives a pointer to a
+REG_CMD_INFO structure.  Do not assume this pointer contains
+the address of the static structure reg_cmd_info.  To
+determine what is happening the call back function should use
+these variables in the structure:  flg, ct, cmd, drqPackets
+and drqPacketSize.  The call back function must not modify the
+contents of the REG_CMD_INFO structure.
+</p>
+<p>This value is set back to NULL before the PIO Data In/Out
+functions return.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int reg_non_data_chs( int dev,                   // device (0 or 1)
+                      int cmd,                   // command register
+                      int fr,                    // feature register
+                      int sc,                    // sector count
+                      unsigned int cyl,          // CHS cylinder high/low
+                      int head,                  // CHS head
+                      int sect );                // CHS sector
+</b></font></pre></p>
+<p>Execute an ATA Non-Data command using CHS sector addressing.
+</p>
+<p>Returns 0 if no error or 1 if there is an error.  See the
+contents of reg_cmd_info.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int reg_non_data_lba28( int dev,               // device (0 or 1)
+                        int cmd,               // command register
+                        int fr,                // feature register
+                        int sc,                // sector count
+                        long lba );            // LBA
+</b></font></pre></p>
+<p>Execute an ATA Non-Data command using LBA sector addressing.
+</p>
+<p>Returns 0 if no error or 1 if there is an error.  See the
+contents of reg_cmd_info.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int reg_non_data_lba48( int dev,               // device (0 or 1)
+                        int cmd,               // command register
+                        int fr,                // feature register
+                        int sc,                // sector count
+                        long lbahi,            // LBA upper 16-bits
+                        long lbalo );          // LBA lower 32 bits
+</b></font></pre></p>
+<p>Execute an ATA Non-Data command using LBA sector addressing.
+</p>
+<p>Returns 0 if no error or 1 if there is an error.  See the
+contents of reg_cmd_info.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int reg_packet( int dev,                     // device (0 or 1)
+                unsigned int cpbc,           // command packet size
+                unsigned int cpseg,          // command packet buffer
+                unsigned int cpoff,          // command packet buffer
+                int dir,                     // 0 for no data or read, 1 for write
+                unsigned int dpbc,           // max data packet size
+                unsigned int dpseg,          // data packet buffer
+                unsigned int dpoff );        // data packet buffer
+</b></font></pre></p>
+<p>Execute an ATAPI Packet (A0H) command in PIO mode.  Note that
+the first byte of the Commmand Packet buffer is the command
+code of the "SCSI CDB" that is to be executed by the device.
+</p>
+<p>Returns 0 if no error or 1 if there is an error.  See the
+contents of reg_cmd_info.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int reg_pio_data_in_chs( int dev,                // device (0 or 1)
+                         int cmd,                // command register
+                         int fr,                 // feature register
+                         int sc,                 // sector count
+                         unsigned int cyl,       // CHS cylinder high/low
+                         int head,               // CHS head
+                         int sect,               // CHS sector
+                         unsigned seg,           // buffer address
+                         unsigned off,           // buffer address
+                         int numSect,            // number of sectors to transfer
+                         int multiCnt );         // current multiple count
+</b></font></pre></p>
+<p>Execute an ATA PIO Data In command in CHS sector addressing
+mode.
+</p>
+<p>numSect is the actual number of sectors to be transferred.
+This value may be different than the sc value.
+</p>
+<p>If cmd is C4H (Read Multiple) then multiCnt MUST be set to the
+current sectors per block.
+</p>
+<p>Returns 0 if no error or 1 if there is an error.  See the
+contents of reg_cmd_info.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int reg_pio_data_in_lba28( int dev,            // device (0 or 1)
+                           int cmd,            // command register
+                           int fr,             // feature register
+                           int sc,             // sector count
+                           long lba,           // LBA
+                           unsigned seg,       // buffer address
+                           unsigned off,       // buffer address
+                           int numSect,        // number of sectors to transfer
+                           int multiCnt );     // current multiple count
+</b></font></pre></p>
+<p>Execute an ATA PIO Data In command in LBA sector addressing
+mode.
+</p>
+<p>numSect is the actual number of sectors to be transferred.
+This value may be different than the sc value.
+</p>
+<p>If cmd is C4H (Read Multiple) then multiCnt MUST be set to the
+current sectors per block.
+</p>
+<p>Returns 0 if no error or 1 if there is an error.  See the
+contents of reg_cmd_info.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int reg_pio_data_in_lba48( int dev,            // device (0 or 1)
+                           int cmd,            // command register
+                           int fr,             // feature register
+                           int sc,             // sector count
+                           long lbahi,         // LBA upper 16-bits
+                           long lbalo,         // LBA lower 32 bits
+                           unsigned seg,       // buffer address
+                           unsigned off,       // buffer address
+                           int numSect,        // number of sectors to transfer
+                           int multiCnt );     // current multiple count
+</b></font></pre></p>
+<p>Execute an ATA PIO Data In command in LBA sector addressing
+mode.
+</p>
+<p>numSect is the actual number of sectors to be transferred.
+This value may be different than the sc value.
+</p>
+<p>If cmd is C4H (Read Multiple) then multiCnt MUST be set to the
+current sectors per block.
+</p>
+<p>Returns 0 if no error or 1 if there is an error.  See the
+contents of reg_cmd_info.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int reg_pio_data_out_chs( int dev,               // device (0 or 1)
+                          int cmd,               // command register
+                          int fr,                // feature register
+                          int sc,                // sector count
+                          unsigned int cyl,      // CHS cylinder high/low
+                          int head,              // CHS head
+                          int sect,              // CHS sector
+                          unsigned seg,          // buffer address
+                          unsigned off,          // buffer address
+                          int numSect,           // number of sectors to transfer
+                          int multiCnt );        // current multiple count
+</b></font></pre></p>
+<p>Execute an ATA PIO Data Out command in CHS sector addressing
+mode.
+</p>
+<p>numSect is the actual number of sectors to be transferred.
+This value may be different than the sc value.
+</p>
+<p>If cmd is C5H (Write Multiple) then multiCnt MUST be set to
+the current sectors per block.
+</p>
+<p>Returns 0 if no error or 1 if there is an error.  See the
+contents of reg_cmd_info.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int reg_pio_data_out_lba28( int dev,           // device (0 or 1)
+                            int cmd,           // command register
+                            int fr,            // feature register
+                            int sc,            // sector count
+                            long lba,          // LBA
+                            unsigned seg,      // buffer address
+                            unsigned off,      // buffer address
+                            int numSect,       // number of sectors to transfer
+                            int multiCnt );    // current multiple count
+</b></font></pre></p>
+<p>Execute an ATA PIO Data Out command in LBA sector addressing
+mode.
+</p>
+<p>numSect is the actual number of sectors to be transferred.
+This value may be different than the sc value.
+</p>
+<p>If cmd is C5H (Write Multiple) then multiCnt MUST be set to
+the current sectors per block.
+</p>
+<p>Returns 0 if no error or 1 if there is an error.  See the
+contents of reg_cmd_info.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int reg_pio_data_out_lba48( int dev,           // device (0 or 1)
+                            int cmd,           // command register
+                            int fr,            // feature register
+                            int sc,            // sector count
+                            long lbahi,        // LBA upper 16-bits
+                            long lbalo,        // LBA lower 32 bits
+                            unsigned seg,      // buffer address
+                            unsigned off,      // buffer address
+                            int numSect,       // number of sectors to transfer
+                            int multiCnt );    // current multiple count
+</b></font></pre></p>
+<p>Execute an ATA PIO Data Out command in LBA sector addressing
+mode.
+</p>
+<p>numSect is the actual number of sectors to be transferred.
+This value may be different than the sc value.
+</p>
+<p>If cmd is C5H (Write Multiple) then multiCnt MUST be set to
+the current sectors per block.
+</p>
+<p>Returns 0 if no error or 1 if there is an error.  See the
+contents of reg_cmd_info.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int reg_reset( int skipFlag,                 // skip flag
+               int devRtrn );                // device's data returned
+</b></font></pre></p>
+<p>Execute an ATA Soft Reset.  Set skipFlag to a non-zero value
+to bypass the setting of the SRST bit to 0 and then to 1 (used
+in some diagnostic programs).  Set devRtrn to 0 or 1 to
+determine which device's register contents are returned in
+reg_cmd_info.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int reg_slow_xfer_flag;
+</b></font></pre></p>
+<p>Set this word to a non-zero value to cause ATADRVR to insert a
+0 to 55ms delay into ATA and ATAPI commands in PIO mode.  This
+simulates a very slow host system and is know to cause various
+problems for devices (such as buffer overruns and or
+underruns, firmware hangs, etc).
+</p>
+<p>For ATA PIO commands, if the value is zero or greater than
+numSect, no delay is inserted, else the delay is inserted when
+the number of sector remaining to be transferred is less than
+this value.
+</p>
+<p>For ATAPI PIO commands, if the value is zero or greater than
+the number of DRQ blocks transferred by the device, no delay
+is inserted, else the delay is inserted prior to the DRQ block
+number specified by this value.
+</p>
+<a name="ATAIOTMR_C_Func"> </a>
+<h3>ATAIOTMR.C Functions And Data</h3>
+<p>These functions provide the command timeout functions used by
+ATADRVR.  Normally these functions are called only by ATADRVR.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+int tmr_chk_timeout( void );
+</b></font></pre></p>
+<p>Used by ATADRVR to check if a command or reset has timed out.
+The function tmr_set_timeout() MUST be called before using
+this function to time a command or reset.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+void tmr_delay_1ms( long count );
+</b></font></pre></p>
+<p>Delays for count milliseconds.
+</p>
+<p>tmr_get_delay_counts() must be called before using this
+function - tmr_get_delay_counts() is called by reg_config().
+</p>
+<p><pre><font face="courier" color="blue"><b>
+void tmr_delay_1us( long count );
+</b></font></pre></p>
+<p>Delays for count microseconds.
+</p>
+<p>tmr_get_delay_counts() must be called before using this
+function - tmr_get_delay_counts() is called by reg_config().
+</p>
+<p><pre><font face="courier" color="blue"><b>
+void tmr_delay_ata( void );
+</b></font></pre></p>
+<p>Delays for ~500 nanoseconds.
+</p>
+<p>tmr_get_delay_counts() must be called before using this
+function - tmr_get_delay_counts() is called by reg_config().
+</p>
+<p><pre><font face="courier" color="blue"><b>
+void tmr_delay_atapi( int dev );
+</b></font></pre></p>
+<p>Delays for ~80 milliseconds.
+</p>
+<p>tmr_get_delay_counts() must be called before using this
+function - tmr_get_delay_counts() is called by reg_config().
+</p>
+<p><pre><font face="courier" color="blue"><b>
+void tmr_delay_xfer( void );
+</b></font></pre></p>
+<p>Delays a random time from 0 to 55 milliseconds.
+</p>
+<p>tmr_get_delay_counts() must be called before using this
+function - tmr_get_delay_counts() is called by reg_config().
+</p>
+<p><pre><font face="courier" color="blue"><b>
+void tmr_get_delay_counts( void );
+</b></font></pre></p>
+<p>tmr_get_delay_counts() must be called before using any of the
+tmr_delay_*() functions - tmr_get_delay_counts() is called by
+reg_config().
+</p>
+<p><pre><font face="courier" color="blue"><b>
+long tmr_read_bios_timer( void );
+</b></font></pre></p>
+<p>Used by ATADRVR to read the current contents of the BIOS
+timer.  Normally this value increments every 55ms and is reset
+to zero at midnight.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+void tmr_set_timeout( void );
+</b></font></pre></p>
+<p>Used by ATADRVR to start the timeout timer for a command or
+reset.  The value tmr_time_out is added to the current time
+and this becomes the time that is checked whenever
+tmr_chk_timeout() is called.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+long tmr_time_out;
+</b></font></pre></p>
+<p>This value is the command timeout value in seconds.  ATADRVR
+assumes a device is hung if a command or reset requires more
+than this number of seconds to complete.  The default is 20
+(20 seconds).  Note that some ATA commands (such as power
+management may require this value be set larger (perhaps to
+40).
+</p>
+<a name="ATAIOTRC_C_Func"> </a>
+<h3>ATAIOTRC.C Functions And Data</h3>
+<p>These functions are the public interface to the command history
+and low level trace facility or ATADRVR.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+unsigned char * trc_get_cmd_name( unsigned char flg,
+                                  unsigned char cc );
+</b></font></pre></p>
+<p>Return a pointer to a character string that is the name of an
+ATA command. flg MUST be one of the following values (as
+defined in ATAIO.H):  TRC_FLAG_SRST or TRC_FLAG_ATA or
+TRC_FLAG_ATAPI. cc is the ATA command code (the value is
+ignored if flg is TRC_FLAG_SRST).
+</p>
+<p><pre><font face="courier" color="blue"><b>
+unsigned char * trc_get_er_bit_name( unsigned char er );
+</b></font></pre></p>
+<p>Return a pointer to a character string that is the list of
+error bits that are 1 in the ATA Error register. er is assumed
+to be a value read from the ATA Error register.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+unsigned char * trc_get_err_name( int ec );
+</b></font></pre></p>
+<p>Return a pointer to a character string that describes the
+ATADRVR error code (ec).
+</p>
+<p><pre><font face="courier" color="blue"><b>
+unsigned char * trc_get_st_bit_name( unsigned char st );
+</b></font></pre></p>
+<p>Return a pointer to a character string that is the list of
+status bits that are 1 in the ATA Error register. st is
+assumed to be a value read from the ATA Status or Alternate
+Status register.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+void trc_err_dump1( void );
+unsigned char * trc_err_dump2( void );
+</b></font></pre></p>
+<p>Use these funcitons to return a set of character strings that
+describe the results of the last command executed.  See
+EXAMPLE1.C or EXAMPLE2.C for details on how to call these
+functions.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+void trc_cht_dump0( void );
+void trc_cht_dump1( void );
+unsigned char * trc_cht_dump2( void );
+</b></font></pre></p>
+<p>Use these funcitons to return a set of character strings that
+are the current contents of the command history trace buffer.
+See EXAMPLE1.C or EXAMPLE2.C for details on how to call these
+functions.  Note that these strings are formated to make it
+easy to create an ATADEMO script file (convert the comma
+characters to new-line characters).
+</p>
+<p><pre><font face="courier" color="blue"><b>
+void trc_cht_types( int type );
+</b></font></pre></p>
+<p>The types of commands that are traced in the command history
+can be restricted to the types specified in this function
+call. type MUST be one of these values (as defined in
+ATAIO.H):  TRC_TYPE_ALL, TRC_TYPE_NONE, TRC_TYPE_ADMAI,
+TRC_TYPE_ADMAO, TRC_TYPE_AND, TRC_TYPE_APDI, TRC_TYPE_APDO,
+TRC_TYPE_ASR, TRC_TYPE_PDMAI, TRC_TYPE_PDMAO, TRC_TYPE_PND,
+TRC_TYPE_PPDI, TRC_TYPE_PPDO.
+</p>
+<p><pre><font face="courier" color="blue"><b>
+void trc_llt_dump0( void );
+void trc_llt_dump1( void );
+unsigned char * trc_llt_dump2( void );
+</b></font></pre></p>
+<p>Use these funcitons to return a set of character strings that
+are the current contents of the low level trace buffer.  See
+EXAMPLE1.C or EXAMPLE2.C for details on how to call these
+functions.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="QUESTIONS_OR_PR">QUESTIONS OR PROBLEMS?</a></h2>
+<p>Send your question(s) or problem description(s) to:
+</p>
+<p>info@ata-atapi.com
+</p>
+<p>Web site:
+</p>
+<p>http://www.ata-atapi.com
+</p>
+<p><b>-end-</b></p>
+</body>
+</html>

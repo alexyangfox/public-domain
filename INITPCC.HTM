@@ -1,0 +1,196 @@
+<html>
+<head><title>INITPCC</title></head>
+<body>
+<font face="arial">
+<h1 align="center">INITPCC</h1>
+<h1 align="center">PC Card ATA Setup Program</h1>
+<h1 align="center">User Guide</h1>
+<h1 align="center">Version 16x</h1>
+<p><b>Copyright 1997-2008 by Hale Landis -- All rights reserved</b></p>
+<h2><a name="toc">TABLE OF CONTENTS</a></h2>
+<p><ul>
+<li><a href="#INTRODUCTION">INTRODUCTION</a>
+</li>
+<li><a href="#RUNNING_INITPCC">RUNNING INITPCC</a>
+</li>
+<li><a href="#EXAMPLES">EXAMPLES</a>
+</li>
+<li><a href="#QUESTIONS_OR_PR">QUESTIONS OR PROBLEMS?</a>
+</li>
+</ul></p>
+<p><b>NOTE:</b>The INITPCC program is new starting with ATADRVR Version 13A.
+Note that the source code of INITPCC is not available at this
+time.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="INTRODUCTION">INTRODUCTION</a></h2>
+<p>PC Card devices, also know as PCMCIA devices, are frequently used
+with notebook computers.  The INITPCC program is used to set up a
+PC Card Adapter to operated with a PC Card ATA device.  A PC Card
+adapter is usually called a "PCIC chip".  This chip is found in
+most notebook computers and is usually compatible with the
+original Intel PCIC chip.  There are several PCMCIA adapters
+available for desktop systems.  These adapters are usually ISA
+bus cards with a PCIC chip and a PCMCIA socket.
+</p>
+<p>There are several types of PC Card ATA devices:  1.8 inch hard
+disks, flash memory disks and CFA devices.  The 1.8 inch hard
+disks have never been very popular and are not seen very
+frequently.  Flash memory ATA devices are frequently used with
+smaller notebook computers and with Personal Digital Assistant
+(PDA) devices.  CFA (CompactFlash Association) devices are the
+newest type of flash memory ATA devices.  CFA devices are very
+popular with the new digital cameras.
+</p>
+<p>PC Card ATA devices come several sizes known as Type I, Type II
+and Type III.  This type describes the physical size of the card.
+All types use the same electrical and programming interfaces.
+Flash memory devices are usually Type I or Type II while 1.8 inch
+hard disks are usually Type III.  All of these cards use a 68-pin
+PCMCIA connector.  A CFA device is actually a small PCMCIA card
+that uses a 50-pin version of the PCMCIA connector.  Most CFA
+devices come with a 50-pin to 68-pin "adapter card".  This card
+permits a CFA device to be plugged into a standard PCMCIA socket.
+</p>
+<p>Note that this program sets up only PC Card ATA devices and
+should not be used with PC Card modem, network and other types of
+PC Card devices.
+</p>
+<p>INITPCC can be used to configure an Intel compatible PCIC chip at
+I/O port addresses 3E0H-3E1H.  Only socket 0 is configured and
+only PC Card ATA mode is enabled.  All four PC Card ATA modes are
+supported:  Primary ATA, Secondary ATA, Contiguous I/O and
+Memory.  INITPCC does NOT access the CIS information and
+therefore does not know if the card being setup is or is not a PC
+Card ATA device.  INITPCC does NOT check for conflicts with other
+devices in the system.  The ATA host adapter and ATA device that
+is configured by INITPCC could overlay the same I/O port
+addresses and IRQ numbers that are in use by another device.
+</p>
+<p>Note that the equivalent of INITPCC is built into the newest
+versions of ATACT and ATADEMO.  Also note that ATADRVR has
+supported all these PC Card ATA modes but this was not previously
+documented.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="RUNNING_INITPCC">RUNNING INITPCC</a></h2>
+<p>INITPCC can be run by using one of the following commmand lines:
+</p>
+<p><pre><font face="courier">
+   INITPCC PCCMODE=PRImary   [ POLL ]
+   INITPCC PCCMODE=SECondary [ POLL ]
+
+   INITPCC PCCMODE=CONTIG     [ PCCIRQ=n | POLL ]
+   INITPCC PCCMODE=CONTIG=xxx [ PCCIRQ=n | POLL ]
+
+   INITPCC PCCMODE=MEMORY
+</font></pre></p>
+<p>Additional optional command line options are:
+</p>
+<p><pre><font face="courier">
+   DEBUG
+   DUMPCIS
+   DUMPREGS
+   SYSMEM=yyyy
+</font></pre></p>
+<p>Options enclosed within brackets, [ and ], are optional.  The
+vertical bar, |, indicates a choice between the two options
+shown.
+</p>
+<p>Each option is described below.
+</p>
+<p><b>PCCMODE=PRImary</b></p>
+<p>Set up standard ATA Primary I/O at I/O port addresses
+1F0H-1F7H and 3F6H with IRQ number 14.
+</p>
+<p>DO NOT USE THIS OPTION IF THERE IS AN ATA HOST ADAPTER
+IN THE SYSTEM AT THE PRIMARY I/O ADDRESS.
+</p>
+<p><b>PCCMODE=SECondary</b></p>
+<p>Set up standard ATA Secondary I/O at I/O port addresses
+170H-177H and 376H with IRQ number 15.
+</p>
+<p>DO NOT USE THIS OPTION IF THERE IS AN ATA HOST ADAPTER
+IN THE SYSTEM AT THE SECONDARY I/O ADDRESS.
+</p>
+<p><b>PCCMODE=CONTIG</b></p>
+<p><b>PCCMODE=CONTIG=xxx</b></p>
+<p>Set up Contiguous I/O mode at I/O port addresses xx0H to xxFH.
+If xxx is not specified, xxx defaults to 200H.  If xxx is
+specified, xxx must be in the range 100H to 3F0H and the
+rightmost digit of xxx must be a zero.
+</p>
+<p><b>PCCMODE=MEMORY</b></p>
+<p>Set up Memory mode (the ATA I/O ports appear in a block of
+memory addresses and are access as if they are memory locations).
+INITPCC will report the segment:offset that was configured.
+Memory mode forces polling mode.
+</p>
+<p><b>PCCIRQ=n</b></p>
+<p>PCCIRQ is used to specify the IRQ to be used in Contiguous I/O
+mode.  IRQ numbers 9, 10, 11, 12, 14 or 15 are supported.  The
+default is 12.  PCCIRQ is ignored in Primary, Secondary and
+Memory modes.
+</p>
+<p><b>POLL</b></p>
+<p>Set up the PCIC for polling mode.  In polling mode no
+IRQ is configured and the PCCIRQ option is ignored.
+Memory mode forces polling mode.
+</p>
+<p><b>DEBUG</b></p>
+<p>Trace messages will be produced that show all the I/O port
+activity used to set up the PCIC chip.
+</p>
+<p><b>DUMPCIS</b></p>
+<p>The PCMCIA Card Information Structure (CIS) data is dumped.
+This data is in the first 512 bytes of the system/attribute
+memory area.  Note that the card configuration registers start
+at offset 200H in the system/attribute memory area.  Also note
+that this memory area exists in all PCMCIA PC Card ATA modes.
+</p>
+<p><b>DUMPREGS</b></p>
+<p>The PCMCIA Card Configuration register and the ATA
+Command/Control Block registers are dumped.
+</p>
+<p><b>SYSMEM=yyyy</b></p>
+<p>Specify the segment address for the PCMCIA system/attribute
+memory.  Valid values are c800, d000 and d800.  If not
+specified system memory between c800:0000 and d8ff:000f will
+be searched for an unused area.  Note that the PCMCIA Card
+Information Structure (CIS) data and the card configuration
+registers exist in this memory area.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="EXAMPLES">EXAMPLES</a></h2>
+<p><pre><font face="courier">
+INITPCC PCCMODE=PRIMARY
+
+   Sets up ATA primary mode using IRQ 14.
+
+INITPCC PCCMODE=PRIMARY POLL SYSMEM=D000
+
+   Sets up ATA primary mode with no IRQ. The PCMCIA
+   system/attribute memory will be at d000:0000.
+
+INITPCC PCCMODE=CONTIG=280 PCCIRQ=10
+
+   Set up contiguous I/O mode at I/O port addresses
+   280H-28FH using IRQ 10.
+
+INITPCC PCCMODE=MEMORY DUMPCIS
+
+   Set up memory mode and dump the PCMCIA CIS data.
+</font></pre></p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="QUESTIONS_OR_PR">QUESTIONS OR PROBLEMS?</a></h2>
+<p>Send your question(s) or problem description(s) to:
+</p>
+<p>info@ata-atapi.com
+</p>
+<p>Web site:
+</p>
+<p>http://www.ata-atapi.com
+</p>
+<p><b>-end-</b></p>
+</body>
+</html>

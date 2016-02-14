@@ -1,0 +1,271 @@
+<html>
+<head><title>Using Serial ATA (SATA)</title></head>
+<body>
+<font face="arial">
+<h1 align="center">Using Serial ATA (SATA)</h1>
+<h1 align="center">a guide to all the requirements and problems</h1>
+<h1 align="center">by Hale Landis</h1>
+<h1 align="center">Version 16x</h1>
+<p><b>NOTE:</b>Find the most up-to-date SATA information at
+http://www.ata-atapi.com/sata.html
+</p>
+<h2><a name="toc">TABLE OF CONTENTS</a></h2>
+<p><ul>
+<li><a href="#INTRODUCTION">INTRODUCTION</a>
+</li>
+<li><a href="#FIRST__THINGS_T">FIRST, THINGS TO AVOID WHEN USING SATA</a>
+</li>
+<li><a href="#WHAT_IS_SATA">WHAT IS SATA?</a>
+</li>
+<li><a href="#PATA_AND_SATA_C">PATA AND SATA CONFIGURATIONS (TODAY)</a>
+</li>
+<li><a href="#LEGACY_or_NATIV">LEGACY or NATIVE MODE?</a>
+</li>
+<li><a href="#SATA_PROGRAMMIN">SATA PROGRAMMING (TODAY)</a>
+</li>
+<li><a href="#USING_SATA_TODA">USING SATA TODAY (2003)</a>
+</li>
+<li><a href="#SATA_PROGRAMMIN">SATA PROGRAMMING (TOMORROW)</a>
+</li>
+<li><a href="#QUESTIONS_OR_PR">QUESTIONS OR PROBLEMS?</a>
+</li>
+</ul></p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="INTRODUCTION">INTRODUCTION</a></h2>
+<p>Use this guide with ATADRVR version 16x and/or ADVDRVR verion 1x
+and with any of Hale's programs that use ATADRVR version 16x or
+ADVDRVR version 1x (ATACT, ATADEMO and ATAMDT) when using SATA
+host controllers and SATA drives.
+</p>
+<p>If you are testing SATA devies with ATACT or ATADEMO please
+read this entire document!
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="FIRST__THINGS_T">FIRST, THINGS TO AVOID WHEN USING SATA</a></h2>
+<p>If you are setting up a system using SATA here are some things
+you must be aware of:
+</p>
+<p>* DO NOT operate SATA devices outside of a sealed system unit.
+DO NOT operate SATA devices from a power supply that is not
+the system unit's power supply.
+</p>
+<p>* DO NOT tie wrap SATA cables together.  DO NOT put sharp bends
+in SATA cables.  DO NOT route SATA cables near PATA cables.
+Avoid placing SATA devices close to each other such that the
+SATA cable connectors are close to each other.
+</p>
+<p>* DO NOT operate a radio transmitter (such as a cell phone) near
+an exposed SATA cable or device.
+</p>
+<p>Why all these warning?  The basic problem is the SATA cable
+connector is not shielded.  This has to be the number one most
+stupid thing that has been done in the SATA world.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="WHAT_IS_SATA">WHAT IS SATA?</a></h2>
+<p>Serial ATA or SATA is a serial interface version of ATA (or
+Paraellel ATA or PATA).
+</p>
+<p>SATA uses a 7 wire interface.  Three of the wires are ground
+signals.  The other 4 are two pairs of differential signals - one
+pair in each direction.  SATA is using the transceiver technology
+used by Fiber (Fibre) Channel.  Today's hardware runs at 1.5GHz
+and should be at 3GHz soon.  ATA commands, status and data are
+transmitted in packets on this interface.  This is done such that
+the traditional ATA command protocols are basically unchanged
+(more about this below).
+</p>
+<p>How fast is SATA?  Well...  There are claims that it can transfer
+data up to 150Mbytes/second.  Remember this is a burst data rate,
+not an average data rate.  Parallel ATA using UltraDMA mode 6
+(UltraDMA 133) claims it can transfer data up to
+133Mbytes/second.  Again this is a burst data rate and not an
+average data rate.  Average data rates are probably less than 1/2
+of these numbers, perhaps even as low as 1/3.  Yes, SATA is in
+theory "faster" - but not by much.
+</p>
+<p>SATA-1+ and SATA-2 (neither are part of ATA/ATAPI-7 at this time)
+include new data transfer and tagged command queuing schemes.  It
+is unclear if these things will ever appear in future ATA/ATAPI-x
+standards.  They may only appear in the SATA-2/SAS documents.
+</p>
+<p>SATA supports a single device per SATA cable.  A SATA cable can
+be longer than a parallel ATA cable (limited to 1.5 feet),
+perhaps up to 2 or 3 feet long.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="PATA_AND_SATA_C">PATA AND SATA CONFIGURATIONS (TODAY)</a></h2>
+<p>There are four PATA and SATA configurations that are said to be
+compatible and said to operate the same:
+</p>
+<p>1) Traditional Parallel ATA
+</p>
+<p><pre><font face="courier">
+   PCI bus <-> PATA controller
+                 |
+                 +--> Primary
+                 |      |
+                 |      +--> PATA drive
+                 |      |
+                 |      +--> PATA drive
+                 |
+                 +--> Secondary
+                        |
+                        +--> PATA drive
+                        |
+                        +--> PATA drive
+</font></pre></p>
+<p>2) PATA controller with SATA drive(s)
+</p>
+<p>This example shows that two drives are SATA but all could be
+SATA.  The "bridge" is a PATA-to-SATA bridge device.  These
+are usually a "dongle" type device that plus in between the
+PATA cable and the SATA drive.
+</p>
+<p><pre><font face="courier">
+   PCI bus <-> PATA controller
+                 |
+                 +--> Primary
+                 |      |
+                 |      +--> bridge <-> SATA drive
+                 |      |
+                 |      +--> PATA drive
+                 |
+                 +--> Secondary
+                        |
+                        +--> PATA drive
+                        |
+                        +--> bridge <-> SATA drive
+</font></pre></p>
+<p>3) SATA controller with SATA drive(s)
+</p>
+<p>Each SATA drive has a separate cable but the four drives are
+made to look like a traditional PATA controller, as shown in
+#1 above.
+</p>
+<p><pre><font face="courier">
+   PCI bus <-> SATA controller
+                 |  |  |  |
+                 |  |  |  +--> SATA drive (Primary)
+                 |  |  |
+                 |  |  +--> SATA drive (Primary)
+                 |  |
+                 |  +--> SATA drive (Secondary)
+                 |
+                 +--> SATA drive (Secondary)
+</font></pre></p>
+<p>Note that many motherboards have both a PATA controller and a
+SATA controller.  If both controllers are enabled then in theory
+you can have eight ATA/ATAPI devices on your system (four on PATA
+and four on SATA).
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="LEGACY_or_NATIV">LEGACY or NATIVE MODE?</a></h2>
+<p>A PCI bus ATA (PATA or SATA) controller can operate in "legacy"
+or "native" mode.  This is Intel terminology to describe how a
+controller is configured on the PCI bus.  Legacy mode describes a
+controller useing the traditional ATA controller I/O port address
+and IRQ numbers.  Native mode describes a controller not
+operating the Legacy mode.  The basic differences are:
+</p>
+<p>* Legacy uses these I/O port address and IRQ numbers
+</p>
+<p>- primary I/O ports 1F0-1F7 and 3F6 with IRQ 14,
+</p>
+<p>- secondary I/O ports 170-177 and 376 with IRQ 15.
+</p>
+<p>* Native can use any range of I/O port adress as long as there is
+no conflict with another device.  But native uses only one IRQ
+for both the primary and secondary sides.
+</p>
+<p>Note that ATADRVR version 15 supports both moes but supports
+interrupts only in native mode.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="SATA_PROGRAMMIN">SATA PROGRAMMING (TODAY)</a></h2>
+<p>2003...
+</p>
+<p>SATA-1, the SATA version that will be included in ATA/ATAPI-7, is
+designed to emulate traditiional parallel ATA.  Most SATA host
+controllers shipping today look like and are programmed just like
+any other ATA host controller.  These controllers are compatible
+with the Intel ICHx design and compatible with the T13 1510D
+document.  This allows SATA controllers and devices to be used in
+systems without BIOS or OS driver changes.
+</p>
+<p>There are some SATA host controllers that are not ICHx compatible
+and these require proprietary BIOS or OS drivers.  We can only
+hope that the Intel AHCI specification effort is successful in
+bringing us a new and better SATA host controller standard.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="USING_SATA_TODA">USING SATA TODAY (2003)</a></h2>
+<p>The SATA controllers on the market today (that includes the Intel
+ICH5 and the Silicon Image SATA controllers and others) are
+compatible with the programming interface(s) of the Intel ICHx
+traditonal PCI bus ATA controllers.  The only exception is that
+PIO and DMA mode have no meaning for SATA.  So the PIO and DMA
+timing information in the controller's PCI configuration space is
+ignored.
+</p>
+<p>If you are using ATADRVR (or a program like ATACT or ATADEMO that
+uses ATADRVR) on one of today's (2003) SATA controllers you
+should be on the lookout for problems such as:
+</p>
+<p>* Random command failures - commands that normally execute with
+no problem suddenly will fail with ABRT errors.  Retrying the
+command may be successful.
+</p>
+<p>* ATA status of FFH in the middle of a command.  Apparently this
+is caused by a failure in the serial link between the host and
+device.
+</p>
+<p>* Other strange errors that you have never seen on PATA
+controllers and devices.
+</p>
+<p>(As of July 2003) It does not appear that any of these problems
+are due to the way ATADRVR is implemented.  SATA is described as
+being "compatibile" with ATA and not requiring new ATA driver
+software.  Today's SATA controllers claim to be plug compatible
+with today's PATA controllers.  Clearly the problems some people
+are seeing with SATA would indicate something is not correct with
+these statements or that SATA is an unreliable interface.
+</p>
+<p>(As of August 2003) It is now known that SATA is *NOT* plug
+compatible with PATA.  This is because the SATA interface has
+error conditions that never happened on PATA interfaces.  In
+order to recover from these SATA errors, the SATA interface port
+of the SATA device must be "reset".  Starting with ATACT 3B and
+ATADEMO 10B this new reset has been added to these programs.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="SATA_PROGRAMMIN">SATA PROGRAMMING (TOMORROW)</a></h2>
+<p>2004 and beyond...
+</p>
+<p>We don't know what SATA host controllers will look like a year
+from now.  We can only hope that we will finally have controllers
+that will support four to eight or more SATA devices and that all
+devices will be able to transfer data at the same time.
+Basically this finally gives us the kind of I/O we want (and/or
+need), fully independent I/O for each mass storage device, no
+more waiting for one device to finish a command before we can
+start a command on another device.
+</p>
+<p>The problem today is that there is no public standard for how
+future SATA controllers should be designed or programmed.  Intel
+has announced that they something called the AHCI specification.
+But today (June 2003) this specification is under NDA.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="QUESTIONS_OR_PR">QUESTIONS OR PROBLEMS?</a></h2>
+<p>Send your question(s) or problem description(s) to:
+</p>
+<p>info@ata-atapi.com
+</p>
+<p>Web site:
+</p>
+<p>http://www.ata-atapi.com
+</p>
+<p><b>-end-</b></p>
+</body>
+</html>

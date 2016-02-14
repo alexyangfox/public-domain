@@ -1,0 +1,301 @@
+<html>
+<head><title>Using PIO</title></head>
+<body>
+<font face="arial">
+<h1 align="center">Using PIO with ATA or ATAPI</h1>
+<h1 align="center">a guide to all the requirements and problems</h1>
+<h1 align="center">by Hale Landis</h1>
+<h1 align="center">Version 16x</h1>
+<h2><a name="toc">TABLE OF CONTENTS</a></h2>
+<p><ul>
+<li><a href="#INTRODUCTION">INTRODUCTION</a>
+</li>
+<li><a href="#WHAT_IS_PIO">WHAT IS PIO?</a>
+</li>
+<li><a href="#THE_IN_AND_OUT">THE IN AND OUT INSTRUCTIONS</a>
+</li>
+<li><a href="#THE_STRING_VERS">THE STRING VERSIONS OF IN AND OUT</a>
+</li>
+<li><a href="#PIO_AND_ATA_ATA">PIO AND ATA/ATAPI DEVICES</a>
+</li>
+<li><a href="#WHAT_IS_A_PIO_M">WHAT IS A PIO MODE?</a>
+</li>
+<li><a href="#WHEN_CAN_REP_IN">WHEN CAN REP INSD/OUTSD BE USED?</a>
+</li>
+<li><a href="#USING_THE_PIO_B">USING THE PIO=BYTE COMMAND LINE OPTION</a>
+</li>
+<li><a href="#USING_THE_PIO_D">USING THE PIO=DWORD COMMAND LINE OPTION</a>
+</li>
+<li><a href="#LEGACY_or_NATIV">LEGACY or NATIVE MODE?</a>
+</li>
+<li><a href="#QUESTIONS_OR_PR">QUESTIONS OR PROBLEMS?</a>
+</li>
+</ul></p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="INTRODUCTION">INTRODUCTION</a></h2>
+<p>NOTE:  If you are using a Serial ATA controller see the SATA.UG
+documentation file.
+</p>
+<p>Use this guide with ATADRVR version 16 and with any of
+Hale's programs that use ATADRVR version 16:  ATADEMO and
+ATACT. Also see the DMA.UG documentation file.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="WHAT_IS_PIO">WHAT IS PIO?</a></h2>
+<p>PIO (Programmed I/O) is a term used by Intel in the x86
+architechure to describe a way to access I/O devices and perform
+I/O operations.
+</p>
+<p>Big mainframe computers, like the IBM System 390, have "I/O
+subsystems" or "I/O channels".  These I/O subsystems and channels
+are usually "inteligent" and operate completely independent of
+the main processor (or processors) of the system and move huge
+amounts of data in and out of the systems main memory without
+using the main processor(s) to do any of the. actual data
+transfer.
+</p>
+<p>Smaller computers frequently map the I/O device control and
+status ports into memory addresses.  This block of memory read or
+written by the main processor (or processors) just like any other
+locations in main memory.
+</p>
+<p>The Intel x86 uses the (strange?) concept of an I/O address
+space.  This address space contains 65536 addresses.  Unlike main
+memory addresses which address the location of a single 8-bit
+value, each I/O address can be the location of an 8-bit, 16-bit
+or 32-bit data item.  These data items are command and control
+information for the attached I/O devices.
+</p>
+<p>Just like main memory addresses that start at location zero, I/O
+addresses also start at location zero.  But unlike main memory
+addresses that are accessed by the normal "load/store" (MOV)
+instructions (and other instructions), these I/O addresses can be
+read and written only by using some special instructions.  These
+are the IN and OUT instructions (and several variations of both).
+</p>
+<p>These IN and OUT instructions are what Intel calls PIO or
+Programmed I/O because the main processor must execute a program
+containing these instructions in order to perform device I/O
+operations including data transfer to/from the device.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="THE_IN_AND_OUT">THE IN AND OUT INSTRUCTIONS</a></h2>
+<p>The IN and OUT instructions use the x86 AL and DX registers.  The
+I/O address goes into the DX register and the AL register is used
+to move the data to or from the device.
+</p>
+<p>To execute an IN instruction, the I/O address is placed into the
+DX register and then the IN instruction reads that I/O address
+and places the data read into the AL register.
+</p>
+<p>To execute an OUT instruction, the I/O address is placed into the
+DX register and the data to be output to the device is placed
+into the AL register and then the OUT instruction writes that
+data to the I/O address.
+</p>
+<p>Of course, doing all this requires main processor (x86) time and
+takes time away from doing other computations.
+</p>
+<p>There are 8-bit, 16-bit and 32-bit versions of the IN and OUT
+instructions.  The 8-bit IN or OUT instruction (also known as INB
+or OUTB) transfer data using only the AL register.  The 16-bit
+versions, known as INW and OUTW, transfer data using the AX
+register.  And the 32-bit versions, known as IND and OUTD, use
+the EAX register.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="THE_STRING_VERS">THE STRING VERSIONS OF IN AND OUT</a></h2>
+<p>There are also some special versions of the x86 IN and OUT
+instructions to handle the transfer of large blocks of data.
+These are known as the "string" versions of IN and OUT, and are
+called INSB, OUTSB, INSW, OUTSW, INSD and OUTSD.  These
+instructions combine reading (or writing) of an I/O port and
+storing (or fetching) of data in main memory plus updating the
+memory address.
+</p>
+<p>The IN and INS instructions uses the ES:DI registers for the
+memory address.  The OUT and OUTS instructions uses the DS:SI
+registers for the memory address.
+</p>
+<p>When combined with another (very strange!) x86 instruction prefix
+known as REP (repeat) the INS or OUTS instructions can be used to
+move large blocks of data to or from an I/O device.  The REP
+instruction prefix uses the CX register.  REP decrements the CX
+register each time the INS or OUTS is executed.  REP causes the
+INS or OUTS instruction to be repeated until the CX register is
+zero.
+</p>
+<p>For example, the result of each REP INSW is:  1) a word is read
+from an I/O address and placed into the AX register, 2) the data
+in AX is stored in memory at the address ES:DI, 3) DI is
+incrmented (or decremented), 4) CX is decremented and 5) all this
+is repeated if CX is not zero.
+</p>
+<p>See the ATADRVR file ATAIOPIO.C for some examples of how these
+instructions are used.
+</p>
+<p>Of course transfering a large amount of data can take up lots of
+x86 CPU time and can impact the overall performance of a system.
+To solve this problem on ATA and ATAPI devices, something called
+DMA (Direct Memory Access) is starting to be used.  See the
+documenation file DMA.UG.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="PIO_AND_ATA_ATA">PIO AND ATA/ATAPI DEVICES</a></h2>
+<p>ATA and ATAPI devices are based on an old 286 based disk
+controller designed for IBM by Western Digital.  This ISA bus
+controller used a very simple set of I/O addresses for the
+command and status information.  Today these I/O addresses, also
+known as ports or registers, are known as the Command Block and
+the Control Block registers.  There are eight Command Block
+registers and only one Control Block register (in ATA-3 and
+ATA/ATAPI-4).
+</p>
+<p>For ATA host adapters, these address (register blocks) are
+generally at well known I/O addresses.  For the primary ATA host
+adapter the Command Block is at I/O addresses 1F0H to 1F7H and
+the Control Block is at I/O address 03F6H.  For the secondary ATA
+host adapter the Command Block is at I/O addresses 170H to 177H
+and the Control Block is at I/O address 0376H.  Other I/O
+addresses are possible. See Legacy or Native Mode (below).
+</p>
+<p>All of the ATA registers are 8-bits wide except the ATA Data
+register which is 16-bits wide.  Normally the IN and OUT
+instructions are used to access all of the ATA registers except
+the Data register.  In PIO data transfer mode, large amounts of
+data are transferred 16-bits at a time through the ATA Data
+register by using the REP INSW or REP OUTSW.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="WHAT_IS_A_PIO_M">WHAT IS A PIO MODE?</a></h2>
+<p>A PIO read or write bus cycle is started by the x86 processor
+when it executes an IN, INS, OUT or OUTS instruction.  Such a
+cycle involves the use of several ISA bus signals.  The timing
+requirements for these ISA bus signals when used with an ATA or
+ATAPI device must fall into an set of "modes", known as the ATA
+PIO Modes.
+</p>
+<p>The oldest and slowest mode are Modes 0, 1 and 2. The newest and
+fastest modes are Modes 3 and 4.
+</p>
+<p>PIO Mode 0 is the speed of the 8-bit "ISA" bus in the original
+IBM PC and PC/XT.  PIO Mode 1 is the speed of the 16-bit ISA bus
+in the original 6MHz IBM PC/AT.  PIO Mode 2 is the speed of the
+16-bit ISA bus in the 8MHz IBM PC/AT.  Today, the ISA bus found
+in most all computers still runs at 8MHz (as defined by the now
+obsolete EISA bus standard).
+</p>
+<p>For ATA/ATAPI devices the following rules should be followed for
+all I/O bus cycles that access the ATA/ATAPI Command Block
+Control Block and Data registers.
+</p>
+<p>All accesses to the 8-bit Command and Control Block registers
+should be performed at PIO Mode 0, 1 or 2 speeds.  The reads and
+writes of the Command and Control Block registers are normally
+done using the IN (INB) and OUT (OUTB) instructions (so these are
+8-bit reads and writes).
+</p>
+<p>All accesses to the 16-bit Data register can be done at PIO modes
+0 to 4 depending on what the device supports.  The reads and
+writes of the Data register are done using the REP INSW and REP
+OUTSW instructions (so these are 16-bit reads and writes).
+</p>
+<p>The ATA/ATAPI Data register is only 16-bits wide so the REP INSD
+and REP OUTSD instructions can not be used to transfer data.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="WHEN_CAN_REP_IN">WHEN CAN REP INSD/OUTSD BE USED?</a></h2>
+<p>The ATA/ATAPI PIO data transfer path via the ATA/ATAPI Data
+register is only 16-bits wide.  The x86 REP INSD and REP OUTSD
+can not be use directly with an ATA or ATAPI device.  However,
+ATA host adapters are becomming more complex and many of the ATA
+host adapters that are attached to a 32-bit bus, such as a PCI
+bus, now support transfering data in 32-bit chunks.  This
+requires that the ATA host adapter have extra hardware to
+assemble two 16-bit words into a single 32-bit double word and to
+disassemble a 32-bit double word into two 16-bit words.
+</p>
+<p>This hardware is most likely not enabled in the host adapter at
+power up.  The system's BIOS or an OS device driver is normally
+required to enable this hardware.  However, once this hardware is
+enabled, then it should be possible to use the REP INSD and REP
+OUTSD instructions to transfer data.  In this case the ATA host
+adapter must generate two 16-bit INSW or OUTSW I/O cycles to the
+ATA Data register for each 32-bit INSD or OUTSD I/O cycle that
+the x86 executes.
+</p>
+<p>In most systems, the ATA PIO Mode 3 and 4 data transfer rates can
+not be achieved unless the x86 uses the REP INSD or REP OUTSD
+instructions.  If the x86 uses the REP INSW or REP OUTSW
+instructions then only PIO Mode 2 (or slower) is achieved.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="USING_THE_PIO_B">USING THE PIO=BYTE COMMAND LINE OPTION</a></h2>
+<p>This ATACT or ATADEMO command line option causes these programs
+to set the ATADRVR PIO transfer width (pio_xfer_width variable)
+to 8-bit mode.  This means that ATADRVR will use the REP INSB or
+REP OUTSB instructions, or in PCMCIA Memory mode, 8-bit memory
+access instructions are used.
+</p>
+<p>In PC Card ATA mode the SET FEATURES FR=01H command must be used
+to place the device into 8-bit data transfer mode.
+</p>
+<p>In this mode only lower 8-bits of the ATA data bus are used to
+transfer data.
+</p>
+<p>WARNING:  Be careful using PIO=BYTE as some ATA host adapters are
+not properly designed and will corrupt data or hang the system
+when REP INSB or REP OUTSB are used.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="USING_THE_PIO_D">USING THE PIO=DWORD COMMAND LINE OPTION</a></h2>
+<p>This ATACT or ATADEMO command line option causes these programs
+to set the ATADRVR PIO transfer width (pio_xfer_width variable)
+to 32-bit mode.  This means that ATADRVR will use the REP INSD or
+REP OUTSD instructions when the number of bytes to be transferred
+is a mulitple of 4.
+</p>
+<p>In this mode the I/O cycles on the ATA interface use all 16-bits
+of the ATA data bus but two ATA bus cycles are generated by the
+host adapter for each INSD or OUTSD instruction executed by the
+x86.
+</p>
+<p>WARNING:  Be careful using PIO=DWORD as some ATA host adapters
+are not properly designed and will corrupt data or hang the
+system when REP INSD or REP OUTSD are used.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="LEGACY_or_NATIV">LEGACY or NATIVE MODE?</a></h2>
+<p>A PCI bus ATA controller can operate in "legacy" or "native"
+mode.  This is Intel terminology to describe how a controller is
+configured on the PCI bus.  Legacy mode describes a controller
+useing the traditional ATA controller I/O port address and IRQ
+numbers.  Native mode describes a controller not operating the
+Legacy mode.  The basic differences are:
+</p>
+<p>* Legacy uses these I/O port address and IRQ numbers
+</p>
+<p>- primary I/O ports 1F0-1F7 and 3F6 with IRQ 14,
+</p>
+<p>- secondary I/O ports 170-177 and 376 with IRQ 15.
+</p>
+<p>* Native can use any range of I/O port adress as long as there is
+no conflict with another device.  But native uses only one IRQ
+for both the primary and secondary sides.
+</p>
+<p>Note that ATADRVR version 15 supports both moes but supports
+interrupts only in native mode.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="QUESTIONS_OR_PR">QUESTIONS OR PROBLEMS?</a></h2>
+<p>Send your question(s) or problem description(s) to:
+</p>
+<p>info@ata-atapi.com
+</p>
+<p>Web site:
+</p>
+<p>http://www.ata-atapi.com
+</p>
+<p><b>-end-</b></p>
+</body>
+</html>

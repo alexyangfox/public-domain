@@ -1,0 +1,160 @@
+
+                    ------------------------
+                    ATADRVR HISTORY.TXT FILE
+                    ------------------------
+
+Here is a brief list of the new and changed things in the last
+few versions of ATADRVR.
+
+                      -------------------
+                      ATADRVR CHANGE LIST
+                      -------------------
+
+Version 16N
+
+   New timer routines for more accurate timing. See new functions
+   tmr_delay_*().
+
+   New reg_incompat_flag, REG_INCOMPAT_DEVREG, to make obsolete
+   bits of Device register not zero.
+
+   All uses of "BMCR" to describe the Bus Master IDE
+   (BMIDE) registers have been removed/change to "BMIDE".
+
+   Checking of DMA command codes in the DMA functions and the
+   error code 77 has been removed. CMD_WRITE_DMA_FUA_EXT is now
+   recognized as a valid DMA command code.
+
+   Commands
+   CMD_CFA_WRITE_MULTIPLE_WO_ERASE,
+   CMD_READ_MULTIPLE_EXT,
+   CMD_WRITE_MULTIPLE_EXT
+   CMD_WRITE_MULTIPLE_FUA_EXT
+   now recognized as valid PIO command codes.
+
+   Minor changes to the Low Level trace messages.
+
+Version 16M
+
+   The BMIDE Status register Error bit is now checked at the
+   end of every reset or command (PIO and DMA).  Traditionally
+   this bit was used only to report PCI bus error conditions
+   during DMA operations.  Now it seems that some SATA host
+   controllers are using this bit to report SATA packet
+   transmission errors during any SATA interface activity.
+
+   Checking for BSY=0 and DRQ=0 in sub_select() (in ATAIOSUB.C)
+   was fixed to conform to the ATA/ATAPI standards.
+
+Version 16K and 16L
+
+   Skipped these version numbers.
+
+Version 16J
+
+   Major changes were made to interrupt handling in ATAIOINT.C
+   and in the calls to the int_*() functions in ATAIOISA.C,
+   ATAIOPCI.C and ATAIOREG.C.
+
+Version 16I
+
+   Skipped this version number.
+
+Version 16H
+
+   Support for SIMPLE, COMPLEX and LARGE PRD lists added to
+   ATAIOPCI.C.
+
+   See Example1 and Example2 below.
+
+Version 16G
+
+   reg_config() in ATAIOREG.C recognizes the new ATA/ATAPI-7
+   signature values for SATA devices.
+
+Version 16E and 16F
+
+   Version 16F is the same as version 16E.
+
+   Additional checking for buffer overrun was added.
+
+   A bug in the low level trace display was fixed.  This bug
+   caused the "delay" entries in the trace to be displayed as
+   "error" entries.  This was only a trace display problem.
+
+Version 16D
+
+   Incorrect handling of the multiple count for READ MULTIPLE EXT
+   was fixed in ATAIOREG.C.
+
+   Data transfer functions in ATAIOPIO.C where rewritten so that
+   wrapping the offset portion of the I/O buffer address is not
+   possible.
+
+Version 16C
+
+   A restriction that forced the READ/WRITE BUFFER commands
+   to transfer only one sector was removed.
+
+Version 16B
+
+   A bug in ATAIOINT.C was fixed. The DS register was not
+   saved and restored in the native mode interrupt handler.
+
+Version 16A
+
+   ATAIOPCI.C was changed such that interrupts are required in
+   order to execute DMA data transfer commands.
+
+   ATAIOINT.C was changed to support both legacy mode and native
+   mode interrupts from ATA controllers using IRQ 1 to 15.
+
+
+                      -----------------------------
+                      EXAMPLE1/EXAMPLE2 CHANGE LIST
+                      -----------------------------
+
+Here is a brief list of the new and changed things in the last
+few versions of the EXAMPLE1 and EXAMPLE2 programs:
+
+Version 16K-16N
+
+   No changes.
+
+Version 16J
+
+   Changes make to the int_*() function calls.
+
+Version 16I
+
+   Skipped this version number.
+
+Version 16H
+
+   The I/O base addresses for a secondary ATA controller were
+   fetch from the wrong offset in the PCI configuration space.
+   This bug was fixed.
+
+Version 16B-16G
+
+   No changes.
+
+Version 16A
+
+   Significant changes were made to the example programs.  These
+   programs now provide a better example of how to deal with PCI
+   bus ATA host contollers.
+
+
+QUESTIONS OR PROBLEMS?
+----------------------
+
+Send your question(s) or problem description(s) to:
+
+   info@ata-atapi.com
+
+Web site:
+
+   http://www.ata-atapi.com
+
+/end/

@@ -1,0 +1,467 @@
+<html>
+<head><title>Using DMA with ATA or ATAPI</title></head>
+<body>
+<font face="arial">
+<h1 align="center">Using DMA with ATA or ATAPI</h1>
+<h1 align="center">a guide to all the requirements and problems</h1>
+<h1 align="center">by Hale Landis</h1>
+<h1 align="center">Version 16x and higher</h1>
+<h2><a name="toc">TABLE OF CONTENTS</a></h2>
+<p><ul>
+<li><a href="#INTRODUCTION">INTRODUCTION</a>
+</li>
+<li><a href="#WHY_SO_MANY_DMA">WHY SO MANY DMA MODES?</a>
+</li>
+<li><a href="#ISA_SINGLE_WORD">ISA SINGLE WORD MODE (SW)</a>
+</li>
+<li><a href="#ISA_MULTIWORD_M">ISA MULTIWORD MODE (MW)</a>
+</li>
+<li><a href="#ULTRA_DMA__UDMA">ULTRA DMA (UDMA)</a>
+</li>
+<li><a href="#ATA_ATAPI_DMA_S">ATA/ATAPI DMA SUMMARY</a>
+</li>
+<li><a href="#USING_MW_DMA_MO">USING MW DMA MODE 0 ON AN ISA BUS</a>
+</li>
+<li><a href="#USING_MW_DMA_MO">USING MW DMA MODE 0 WITH ATACT AND ATADEMO</a>
+</li>
+<li><a href="#USING_MW_DMA_MO">USING MW DMA MODES 1 OR 2</a>
+</li>
+<li><a href="#USING_ULTRA_DMA">USING ULTRA DMA MODES 0, 1 OR 2</a>
+</li>
+<li><a href="#USING_ULTRA_DMA">USING ULTRA DMA MODES 3 OR 4 OR 5</a>
+</li>
+<li><a href="#PCI_BUS_MASTERI">PCI BUS MASTERING DMA</a>
+</li>
+<li><a href="#SOME_PROBLEMS_W">SOME PROBLEMS WITH PCI BUS MASTERING DMA</a>
+</li>
+<li><a href="#LEGACY_or_NATIV">LEGACY or NATIVE MODE?</a>
+</li>
+<li><a href="#USING_ANY_MW_DM">USING ANY MW DMA MODES WITH ATACT OR ATADEMO</a>
+</li>
+<li><a href="#USING_ANY_ULTRA">USING ANY ULTRA DMA MODES WITH ATACT OR ATADEMO</a>
+</li>
+<li><a href="#ADDITIONAL_INFO">ADDITIONAL INFORMATION ABOUT PCI DMA</a>
+</li>
+<li><a href="#QUESTIONS_OR_PR">QUESTIONS OR PROBLEMS?</a>
+</li>
+</ul></p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="INTRODUCTION">INTRODUCTION</a></h2>
+<p>NOTE:  If you are using a Serial ATA controller see the SATA.UG
+documentation file.
+</p>
+<p>Use this guide with ATADRVR version 16 and with any of
+Hale's programs that use ATADRVR version 16:  ATADEMO and
+ATACT. Also see the PIO.UG documentation file.
+</p>
+<p>Support for ISA Multiword DMA was added in ATADRVR version 13A.
+Using this new feature may require that you modify an ATA host
+adapter since most cheap ATA host adapters don't have the wires
+needed to support this data transfer mode.
+</p>
+<p>Support for PCI Bus Mastering DMA was added in ATADRVR version
+13D.  Using this new feature requires a PCI motherboard with an
+onboard ATA host adapter that is Intel "south bridge" ICHx
+compatible and also conforms to the T13 1510D "Host Adapter
+Standard" document.  A compatible adapter uses a block of I/O
+addresses known as the Bus Master IDE registers (BMIDE).
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="WHY_SO_MANY_DMA">WHY SO MANY DMA MODES?</a></h2>
+<p>In the entire history of ATA (and ATAPI) so far there have been
+three DMA modes defined for ATA (and ATAPI) devices:
+</p>
+<p>- ISA Single Word DMA (SW) with 3 speeds
+- Multiword DMA (MW) with 3 speeds
+- Ultra DMA (UDMA) with 6 speeds
+</p>
+<p>This is the simple part.  The complex part is what is required in
+the host to support these data transfer modes and the various
+speeds.  Each mode and its requirements will be discussed below.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="ISA_SINGLE_WORD">ISA SINGLE WORD MODE (SW)</a></h2>
+<p>This mode, originally defined in ATA-1, was made obsolete in
+ATA-3.  It is really slow and was never really used by any
+devices or hosts.  In this mode, the device and the host toggle
+the DMARQ and DMACK signals for each data word transferred.
+</p>
+<p>However, I strongly recommend that you study this old protocol
+(in ATA-1 or ATA-2) since any Multiword DMA transfer can be made
+to look like a Single Word transfer.
+</p>
+<p>ATADRVR can be made to support this mode by changing one line in
+ATAIOISA.C (search for the text "DMA_MODE_DEMAND" and
+"DMA_MODE_SINGLE").
+</p>
+<p>To use this mode you will need a modified ISA ATA host adapter,
+see below.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="ISA_MULTIWORD_M">ISA MULTIWORD MODE (MW)</a></h2>
+<p>This mode, originally defined in ATA-1, was enhanced in ATA-2 to
+have the same data transfer speeds as PIO Modes 3 and 4. In this
+mode, the device and the host toggle DMARQ and DMACK for each
+"block" of data words transferred.  A typical "block" of words is
+64 to 256 words.
+</p>
+<p>The original definition of this mode in ATA-1 had only one
+transfer speed (cycle time):  Mode 0. Mode 0 is really slow -- it
+is the native speed of an ISA bus DMA controller.  As a result
+this mode was not used very much.  However, I strongly suggest
+testing ATA and ATAPI devices using this mode since it will
+uncover many firmware timing and caching issues.
+</p>
+<p>ATA-2 added MW Modes 1 and 2 with transfer timing equivalent to
+PIO Modes 3 and 4 (up to 16Mbytes/second).  To use MW modes 1 and
+2, you will need a PCI bus ATA host adapter.  While this hardware
+has been available for some time, the host operating system
+device drivers have not be available or have been so buggy that
+this data transfer mode can't be used reliably.
+</p>
+<p>Starting with ATADRVR version 13A, MW mode 0 is supported,
+however, to use this mode you will need a modified ISA ATA host
+adapter, see below.
+</p>
+<p>Starting with ATADRVR version 13D, MW modes 1 and 2 are
+supported, however, to use this mode you will need a PCI ATA host
+adapter, see below.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="ULTRA_DMA__UDMA">ULTRA DMA (UDMA)</a></h2>
+<p>Ultra DMA is the newest DMA transfer mode.  UDMA was added in
+ATA/ATAPI-4 and can transfer data up to 33Mbytes/second using
+modes 0, 1 and 2.  ATA/ATAPI-5 adds UDMA modes 3 and 4 that
+can transfer data up to 66Mbytes/second. ATA/ATAPI-6 adds
+UDMA mode 5 that can transfer data up to 100Mbytes/second.
+</p>
+<p>UDMA requires one the newest PCI ATA host adapters.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="ATA_ATAPI_DMA_S">ATA/ATAPI DMA SUMMARY</a></h2>
+<p>The following table shows the various modes and host adapters
+used.
+</p>
+<p><pre><font face="courier">
+   DMA mode   ATA version   type of host
+              of device     adapter required
+   --------   -----------   ----------------------------------
+
+   SW 0,1,2   ATA-1 or      Standard ISA bus ATA host adapter
+              ATA-2         (a cheap $10US kind) modified as
+                            described below.
+
+   MW 0       any           Standard ISA bus ATA host adapter
+                            (a cheap $10US kind) modified as
+                            described below.
+
+   MW 1,2     ATA-2,        A PCI ATA host adapter with
+              ATA-3 or      ATA MW DMA support, see below.
+              ATA/ATAPI-4
+
+   UDMA       ATA/ATAPI-4   A newer PCI bus ATA host adapter
+   0,1,2                    with UDMA support, see below.
+                            These are known as the Ultra
+                            DMA 33 modes.
+
+   UDMA       ATA/ATAPI-5   Faster UDMA modes known as the
+   3,4                      Ultra DMA 66 modes.  These modes
+                            *require* an 80-conductor cable.
+                            See below.
+
+   UDMA       ATA/ATAPI-6   Even faster UDMA mode known as
+   5                        Ultra DMA 100. This mode also
+                            *requires* an 80-conductor cable.
+                            See below.
+</font></pre></p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="USING_MW_DMA_MO">USING MW DMA MODE 0 ON AN ISA BUS</a></h2>
+<p>Starting with ATADRVR version 13A, ISA bus Multiword DMA mode 0
+is supported.  See the file ataiodma.c.  This DMA mode is not
+fast and has never been popular and this makes using it
+difficult.  All that is required is a simple/cheap ISA bus ATA
+host adapter with the proper wiring.  The problem is that most
+simple/cheap ATA host adapters don't have the required wires
+connected to the DMA Request and DMA Acknowledge signals.  If you
+have some experience with a soldering iron you can add these
+wires in a few minutes.
+</p>
+<p>Here is what I did:
+</p>
+<p>1) Obtain a simple/cheap ATA host adapter (usually about $10 US).
+</p>
+<p>2) Understand how the ISA bus signals are labelled:
+</p>
+<p>If you look down on the card you see something like this:
+</p>
+<p><pre><font face="courier">
+   metal bracket        component side of card
+
+         A1 ... A31        C1 ... C18
+      |
+      |==================================================
+      |
+         B1 ... B31        D1 ... D18
+
+                        solder side of card
+</font></pre></p>
+<p>The ISA bus connections (gold tabs at the edge of the card)
+are labeled A1-A31, B1-B31, etc.
+</p>
+<p>The signals that are not normally connected on these
+simple/cheap cards are:
+</p>
+<p><pre><font face="courier">
+      D10  DMACK5-   DMA Acknowledge for channel 5
+      D11  DMARQ5    DMA Request for channel 5
+      D12  DMACK6-   DMA Acknowledge for channel 6
+      D13  DMARQ6    DMA Request for channel 6
+      D14  DMACK7-   DMA Acknowledge for channel 7
+      D15  DMARQ7    DMA Request for channel 7
+</font></pre></p>
+<p>Verify that nothing is connected to tabs D10-D15.
+</p>
+<p>Locate the ATA connector on the board -- it is a double row of
+pins that the cable plugs into.  Usually pin 1 is marked in
+some way (by the number 1 or by a dot).  The colored stripe on
+the cable marks the pin 1 side of the cable.
+</p>
+<p><pre><font face="courier">
+   pin 2                pin 40
+
+      ::::::::::::::::::::
+
+   pin 1                pin 39
+</font></pre></p>
+<p>The signals that are not normally connected on these
+simple/cheap cards are:
+</p>
+<p>pin 21  DMARQ     ATA device's DMA Request
+pin 29  DMACK-    ATA device's DMA Acknowledge
+</p>
+<p>Verify that nothing is connected to pins 21 and 29.
+</p>
+<p>3) You must connect one wire between the ATA cable connector pin
+21 (DMARQ) and one of the DMARQx signals on the ISA connector
+(ISA tab D11, D13 or D15).  You must connect one wire between
+the ATA cable connector pin 29 (DMACK-) and one of the DMACKx-
+signals on the ISA connector (ISA tab D10, D12 or D14).
+</p>
+<p>If you chose DMARQ5 then you must use DMACK5-, if you chose
+DMARQ6 then you must use DMACK6-, and the same for DMARQ7 and
+DMACK7-.  This determines which 16-bit ISA bus DMA channel
+will be used.
+</p>
+<p>But the big problem is this:  many of the simple/cheap boards
+don't have the gold tab on the ISA connector for these
+signals.  When I modified a card I had to buy an ATA bus
+"prototype" card that had all the gold tabs on the ISA bus
+connector.  Then I ran the wires from the ATA connector on the
+simple/cheap ATA card to the correct tabs on the prototype
+card.  I have these two cards plugged into the ISA bus next to
+each other.
+</p>
+<p>4) And finally, be careful when you do this -- make sure you have
+the correct tabs and pins indentified and make good solder
+connections.  And don't blame Hale Landis if you see smoke
+when you turn your system on!  And GOOD LUCK!
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="USING_MW_DMA_MO">USING MW DMA MODE 0 WITH ATACT AND ATADEMO</a></h2>
+<p>To have ATACT or ATADEMO use ISA MW DM mode 0, use the DMA=ISAn
+option on the ATACT or ATADEMO command line.  Your system will
+require an ISA bus ATA host adapter with the ATA interface DMA
+signals connected.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="USING_MW_DMA_MO">USING MW DMA MODES 1 OR 2</a></h2>
+<p>You need PCI bus ATA host adapter and the proper software to
+program the host adapter hardware.  In ATADRVR, this support is
+known as PCI Bus Mastering DMA support.  See below.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="USING_ULTRA_DMA">USING ULTRA DMA MODES 0, 1 OR 2</a></h2>
+<p>You need a PCI bus ATA host adapter and the proper software to
+program the host adapter hardware.  In ATADRVR, this support is
+known as PCI Bus Mastering DMA support.  See below.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="USING_ULTRA_DMA">USING ULTRA DMA MODES 3 OR 4 OR 5</a></h2>
+<p>You need a PCI bus ATA host adapter and the proper software to
+program the host adapter hardware.  You *must* have an
+80-conductor ATA cable to use these modes.  In ATADRVR, this
+support is known as PCI Bus Mastering DMA support.  See below.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="PCI_BUS_MASTERI">PCI BUS MASTERING DMA</a></h2>
+<p>Most PCI bus motherboards now have two ATA host adapters built
+into the "south bridge" chip of the motherboard chipset.  Most of
+these motherboard chipsets will claim to be "Intel compatible".
+It is difficult to determine how true any of these claims may be
+since there is very little real documentation on how these host
+adapters are setup and operated.
+</p>
+<p>If the host adapter can be a PCI "bus master" then the host
+adapter probably supports either (or both) ATA MW DMA or ATA
+Ultra DMA.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="SOME_PROBLEMS_W">SOME PROBLEMS WITH PCI BUS MASTERING DMA</a></h2>
+<p>You may want to read the T13 1510D document and take note of the
+description of the Interrupt (bit 2) and the BusMasterActive (bit
+0) bits of the BMIDE Status register.  These bits define four
+states for the PCI DMA transfer:
+</p>
+<p>a) DMA transfer in progress,
+b) the device asserted INTRQ and the end of the PRD
+list was reached,
+c) the device asserted INTRQ and the end of the PRD
+list was not reached,
+d) the end of the PRD list was reached and the device
+has not asserted INTRQ.
+</p>
+<p>States b) and c) indicate normal completion of a command.  State
+d) will result in a timeout error when the host software doesn't
+see the device complete the command (because the device is
+waiting to transfer data with DMARQ asserted but the DMA channel
+doesn't respond with DMACK and transfer any data).
+</p>
+<p>When setting up DMA commands to an ATA device, or to an ATAPI
+device when with a fixed sector size will be transferred, there
+is no problem for the host software to program the DMA channel
+for the exact number of bytes that will be transferred.  This
+will result in state b) at the end of the command.
+</p>
+<p>When setting up DMA commands to an ATAPI device for a command
+that transfers an unknown number of bytes the host must program
+the DMA channel to transfer a number of bytes that is more than
+the maximum number of bytes the device is likely to transfer.
+This will result in state c) at the end of the command.  The
+problem with state c) is that there is no way to determine the
+number of bytes the ATAPI device has transferred.  This makes
+using PCI DMA with an ATAPI device highly questionable.
+</p>
+<p>Note that most ATAPI Packet commands, even commands like Request
+Sense or Inquiry, may transfer an different number of bytes each
+time the command is executed.  Even if the "length" fields in the
+data indicate there should be n bytes of data transferred, there
+is no way to confirm that n bytes of data were actually
+transferred.  So if you see data corruption problems with ATAPI
+devices while using PCI DMA then this could be the problem.
+</p>
+<p>It should be noted here that with ISA bus DMA controllers it is
+possible to compute the number of bytes transferred by the
+device.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="LEGACY_or_NATIV">LEGACY or NATIVE MODE?</a></h2>
+<p>A PCI bus ATA controller can operate in "legacy" or "native"
+mode.  This is Intel terminology to describe how a controller is
+configured on the PCI bus.  Legacy mode describes a controller
+useing the traditional ATA controller I/O port address and IRQ
+numbers.  Native mode describes a controller not operating the
+Legacy mode.  The basic differences are:
+</p>
+<p>* Legacy uses these I/O port address and IRQ numbers
+</p>
+<p>- primary I/O ports 1F0-1F7 and 3F6 with IRQ 14,
+</p>
+<p>- secondary I/O ports 170-177 and 376 with IRQ 15.
+</p>
+<p>* Native can use any range of I/O port adress as long as there is
+no conflict with another device.  But native uses only one IRQ
+for both the primary and secondary sides.
+</p>
+<p>Note that ATADRVR version 15 supports both moes but supports
+interrupts only in native mode.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="USING_ANY_MW_DM">USING ANY MW DMA MODES WITH ATACT OR ATADEMO</a></h2>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="USING_ANY_ULTRA">USING ANY ULTRA DMA MODES WITH ATACT OR ATADEMO</a></h2>
+<p>To use any of these ATA DMA modes, your system must have an Intel
+"south bridge" compatible PCI bus ATA host adapter.  Plus that
+ATA host adapter must be Intel "southbridge" ICHx compatible.
+</p>
+<p>To have ATACT or ATADEMO use PCI Bus Mastering DMA specify the
+DMA=PCI option on the ATACT or ATADEMO command line.  This will
+cause ATACT or ATADEMO to attempt PCI DMA configuration.  This
+configuration requires the following:
+</p>
+<p>1) One or more PCI bus mastering ATA host adapters must be
+found.  If the PCIDEV option is not specified and only one
+host adapter is found, PCIDEV will be defaulted to that one.
+If more than one host adapter is found the PCIDEV option must
+be specified to select the one that will be used.
+</p>
+<p>2) The following data must exist in the PCI configuration data:
+</p>
+<p>a) offsets 10-17 or 18-1c may specify the I/O address of the
+primary or secondary ATA Command and Control block addresses.
+If these offsets are zero then it is assumed the host adapter
+is operating in legacy mode using the standard ATA host
+adapter addresses, either 1Fx:3F6 with IRQ 14 or 17x:376 with
+IRQ 15. If these offsets are not zero then the controller
+is operating in native mode.
+</p>
+<p>b) offsets 20-23 must specify an I/O address in the range
+0300H to FFF0H and the least significant 4 bits must be zero.
+This is the I/O address of the Bus Master IDE registers
+(BMIDE).
+</p>
+<p>3) The following data should exist in the BMIDE Command
+register:
+</p>
+<p>a) For testing of device 0 offset 2 bit 6 should be 1.
+</p>
+<p>b) For testing of device 1 offset 2 bit 5 should be 1.
+</p>
+<p>4) The Identify Device data for the devices to be tested will be
+checked.  Identify Device words 63 and 88 must contain valid
+data indicating that the device is operating in a Multiword
+DMA or Ultra DMA mode.
+</p>
+<p>Assuming your system passes all these requirements, then ATACT or
+ATADEMO will be able to use PCI Bus Mastering DMA.
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="ADDITIONAL_INFO">ADDITIONAL INFORMATION ABOUT PCI DMA</a></h2>
+<p>Please note this additional information concerning PCI DMA:
+</p>
+<p>1) At no time is the PCI configuration data for the ATA host
+adapter altered by ATADRVR, ATACT or ATADEMO.  The
+configuration data is where various PCI bus and ATA interface
+modes are configured and it is where the location of the BMIDE
+registers is defined.  I hope you have documentation of this
+data for your host adapter and, if required, I hope you have a
+way to alter this data.  Maybe the system BIOS can affect
+changes to this data or maybe the vendor of your PCI chipset
+has supplied you with a utility program that can alter this
+data.
+</p>
+<p>2) ATADRVR (also ATACT and ATADEMO) do not change the setting of
+bits 6 and 5 in offset 2 of the BMIDE registers.  These bits
+should be set to indicate if DMA is supported on devices 0 and
+1. I hope your system BIOS is setting these bits correctly or,
+if required, you have a way to alter these bits.
+</p>
+<p>3) You may not be able to determine which DMA mode is being used
+by the PCI ATA host adapter without using a logic analyzer to
+look at the ATA interface signals.  It appears that the PCI
+configuration data is unreliable on some host adapters (even
+when this data has Ultra DMA disabled, the host adapter uses
+Ultra DMA!).
+</p>
+<p><a href="#toc">(Go To TOC)</a></p>
+<h2><a name="QUESTIONS_OR_PR">QUESTIONS OR PROBLEMS?</a></h2>
+<p>Send your question(s) or problem description(s) to:
+</p>
+<p>info@ata-atapi.com
+</p>
+<p>Web site:
+</p>
+<p>http://www.ata-atapi.com
+</p>
+<p><b>-end-</b></p>
+</body>
+</html>
