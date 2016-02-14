@@ -1,0 +1,168 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+MENU MENU DISCARDABLE 
+BEGIN
+    MENUITEM "&Exit ",                      ID_EXIT
+    MENUITEM " &Server List ",              ID_SERVERLIST
+    MENUITEM " &Download from Server ",     ID_DOWNLOADFROMSERVER
+    MENUITEM " &Upload to Server ",         ID_UPLOADTOSERVER
+    MENUITEM " &View Selected File ",       ID_READSELECTEDFILE
+    MENUITEM " Delete Selected File ",      ID_DELETESELECTEDFILE
+    MENUITEM " &Help",                      HELP
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+SERVERS DIALOG DISCARDABLE  0, 0, 282, 186
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "FTP Servers"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LISTBOX         IDC_LIST1,10,10,130,165,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT3,185,15,85,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT1,185,40,85,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT2,185,65,85,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT4,185,90,85,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "&New",IDC_BUTTON1,155,140,50,14
+    PUSHBUTTON      "&Remove",IDC_BUTTON2,220,140,50,14
+    DEFPUSHBUTTON   "&Connect",IDOK,155,165,50,14
+    PUSHBUTTON      "&Exit",IDCANCEL,220,165,50,14
+    LTEXT           "Address: ",IDC_STATIC,155,17,30,8
+    LTEXT           "User: ",IDC_STATIC,164,42,20,8
+    LTEXT           "Password: ",IDC_STATIC,149,67,35,8
+    LTEXT           "Initial Dir: ",IDC_STATIC,153,92,32,8
+    PUSHBUTTON      "&Help",IDC_BUTTON3,220,115,50,14
+END
+
+NEW DIALOG DISCARDABLE  0, 0, 147, 90
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "New FTP Server"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,10,70,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,85,70,50,14
+    LTEXT           "Address: ",IDC_STATIC,20,10,30,8
+    LTEXT           "User: ",IDC_STATIC,29,32,20,8
+    LTEXT           "Password: ",IDC_STATIC,14,51,36,8
+    EDITTEXT        IDC_EDIT1,50,10,80,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT2,50,30,80,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT3,50,50,80,12,ES_AUTOHSCROLL
+END
+
+READ DIALOG DISCARDABLE  0, 0, 347, 342
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_EDIT1,7,7,333,328,ES_MULTILINE | ES_READONLY | NOT 
+                    WS_BORDER | WS_VSCROLL | NOT WS_TABSTOP
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+FTP                     ICON    DISCARDABLE     "ftp.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    "NEW", DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 140
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 83
+    END
+
+    "READ", DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 340
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 335
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
