@@ -1,0 +1,45 @@
++--------+
+|GLSFcave|
++--------+
+2008/08/09 TOMARI, Hisanobu<posco(dot)grubb(at)gmail(dot)com>
+
+GLSFcave is a port of SunFlat's SFcave for UNIX/OpenGL.
+SFcave is a game where the player controls a ribbon and
+avoid hitting walls.
+
+You have only one control: when you hold the mouse button,
+the ribbon goes up. Otherwise the ribbon goes down.
+
+** Changes
+(1.0->1.1) added sound support with OpenAL.
+	performance enhancements
+	minor bugfixes
+
+**************
+How to compile
+**************
+You need GLUT to compile and play this game.
+If you want sound support you need ALUT(a component of
+OpenAL).
+
+* On GNU/Linux or *BSD variants, type `make' to compile
+  GLSFcave. If you do not need sound support or do not have
+  ALUT, edit the Makefile to comment out two lines.
+
+* On Apple MacOS X, use `Makefile.macosx' like:
+  make -f Makefile.macosx
+  to get executable `glsfcave'. On this platform sound is not
+  supported. 
+
+I checked this game to work on following environments:
+  Apple MacOS X 10.5.4(PowerPC) ATI Mobility RADEON 9700
+  Ubuntu 8.04(AMD64) Intel GMA X3100
+
+*******
+Options
+*******
+-q, --no-sound	disable sound(press 'S' to toggle during play)
+-v, --version	print version
+-h, --help	show this help
+
+

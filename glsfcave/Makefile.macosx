@@ -1,0 +1,12 @@
+LDFLAGS+=-framework OpenGL -framework GLUT -framework Foundation
+CFLAGS?=-O2
+#CPPFLAGS+=-DGLSFCAVE_SOUND # MacOS X doesn't have ALUT by default
+
+glsfcave: glsfcave.o
+	$(CC) $(CFLAGS) -o glsfcave glsfcave.o $(LDFLAGS) 
+
+glsfcave.o: glsfcave.c
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o glsfcave.o glsfcave.c
+
+clean:
+	rm -f *.o glsfcave

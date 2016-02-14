@@ -1,0 +1,12 @@
+LDFLAGS=-lglut -lGLU -lGL -lXmu -lXi -lXext -lX11 -lgen
+# if you have ALUT comment this out:
+#CPPFLAGS+=-DGLSFCAVE_SOUND
+#LDFLAGS+=-lalut
+glsfcave: main.o
+	$(CC) $(CFLAGS) -o glsfcave main.o $(LDFLAGS) 
+
+main.o: main.c version.h
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o main.o main.c
+
+clean:
+	rm -f *.o glsfcave
