@@ -1,0 +1,28 @@
+.TH MAGMACFLAGS 3 2008-11-29 "libmaglo 0.99" "libmaglo Programmer's Manual"
+.SH NAME
+MAGmacFlags \- returns architecture-dependent flags of MAG image
+.SH SYNOPSIS
+.nf
+.B #include <maglo.h>
+.sp
+.BI "unsigned char MAGmacFlags(MagImage *" mag ");"
+.fi
+.SH DESCRIPTION
+.LP
+The 
+.B MAGmacFlags()
+function returns machine-dependent flags of the MAG file that \fImag\fP 
+is associated to. This flag is not widely used, and usually can be ignored
+when decoding.
+.SH RETURN VALUES
+.LP
+The usage of this flag is not documented on the MAG file format
+specification. Refer to the documents of the targeting MAG encoder
+for additional information.
+.LP
+The MAG spec say the contents of this flag are determined by the return
+value of \fBMAGmacCode()\fP.
+.SH SEE ALSO
+.BR MAGmacCode (3),
+.BR MAGmacType (3),
+.BR libmaglo (7)

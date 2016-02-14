@@ -1,0 +1,26 @@
+.TH MAGUSERNAME 3 2008-11-29 "libmaglo 0.99" "libmaglo Programmer's Manual"
+.SH NAME
+MAGuserName \- returns pointer to artist name field in MAG file
+.SH SYNOPSIS
+.nf
+.B #include <maglo.h>
+.sp
+.BI "char * MAGuserName(MagImage *" mag ");"
+.fi
+.SH DESCRIPTION
+.LP
+The 
+.B MAGuserName()
+function returns pointer to artist name field in the MAG file 
+to which \fImag\fP is associated. The artist name field is exactly 18 bytes in
+length, and is \fBNOT\fP null terminated.
+.LP
+The artist name field may contain Shift-JIS encoded string, which is common on
+documents in that era.
+.SH RETURN VALUES
+.LP
+.B MAGuserName()
+returns pointer to 18-byte data storage. The storage is unique for each
+\fImag\fP, but not for \fBMAGuserName()\fP function call.
+.SH SEE ALSO
+.BR libmaglo (7)

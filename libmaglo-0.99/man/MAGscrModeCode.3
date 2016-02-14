@@ -1,0 +1,42 @@
+.TH MAGSCRMODECODE 3 2008-11-29 "libmaglo 0.99" "libmaglo Programmer's Manual"
+.SH NAME
+MAGscrModeCode \- returns screen mode flags saved in MAG file
+.SH SYNOPSIS
+.nf
+.B #include <maglo.h>
+.sp
+.BI "unsigned char MAGscrModeCode(MagImage *" mag ");"
+.fi
+.SH DESCRIPTION
+.LP
+The 
+.B MAGscrModeCode()
+function returns screen mode flags saved in the MAG file that \fImag\fP 
+is associated to.
+.LP
+For convenience, use \fBMAGscrMode200Lines()\fP, \fBMAGscrModeNumColors()\fP,
+\fBMAGscrModeIsDigital\fP instead of calling this function directly.
+.SH RETURN VALUES
+.LP
+The representation of each bit fields are:
+.TP
+.B Bit 7
+If this bit is set(1), the image is in 256 colors.
+.TP
+.B Bit 6-3
+unused
+.TP
+.B Bit 2
+If this is set(1), the image is in digital mode(Only 1 bit for each R/G/B.)
+The actual color is still saved in the palette.
+.TP
+.B Bit 1
+If this flag is set, the image is in 8 colors.
+.TP
+.B Bit 0
+If this flag is set, the image is saved in 200-line mode.
+.SH SEE ALSO
+.BR MAGscrMode200Lines (3),
+.BR MAGscrModeNumColors (3),
+.BR MAGscrModeIsDigital (3),
+.BR libmaglo (7)

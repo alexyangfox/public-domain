@@ -1,0 +1,28 @@
+.TH MAGPALETTE 3 2008-11-29 "libmaglo 0.99" "libmaglo Programmer's Manual"
+.SH NAME
+MAGpalette \- maps color index in MAG file to actual color
+.SH SYNOPSIS
+.nf
+.B #include <maglo.h>
+.sp
+.BI "int MAGpalette(MagImage *" mag ", int " index ");"
+.fi
+.SH DESCRIPTION
+.LP
+The 
+.B MAGpalette()
+function maps color palette index \fIindex\fP in MAG file to which \fImag\fP is
+associated to actual 24-bit color and returns it as a 32-bit integer.
+.LP
+In MAG format, a color is represented as palette index,
+and palette maps palette index to actual color.
+.LP
+The range of \fIindex\fP is 0 to (the value returned by
+.B MAGscrModeNumColors()
+- 1).
+.SH RETURN VALUES
+.LP
+The return value represents actual 24-bit color in the 0x00RRGGBB format.
+.SH SEE ALSO
+.BR MAGscrModeNumColors (3),
+.BR libmaglo (7)

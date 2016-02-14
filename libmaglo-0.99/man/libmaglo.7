@@ -1,0 +1,154 @@
+.TH LIBMAGLO 7 2008-11-29 "libmaglo 0.99" "libmaglo Programmer's Manual"
+.SH NAME
+libmaglo \- MAKIchan Graphic (MAG) Loader Library
+.SH SYNOPSIS
+.nf
+.B #include <maglo.h>
+.sp
+.BI "int MAGversion(" void ");"
+.sp
+.BI "int MAGopen(MagImage *" mag ", const char *" path ");"
+.sp
+.BI "int MAGclose(MagImage *" mag ");"
+.sp
+.BI "long MAGcommentSize(MagImage *" mag ");"
+.sp
+.BI "char * MAGcomment(MagImage *" mag ");"
+.sp
+.BI "char * MAGmacType(MagImage *" mag ");"
+.sp
+.BI "char * MAGuserName(MagImage *" mag ");"
+.sp
+.BI "unsigned char MAGmacCode(MagImage *" mag ");"
+.sp
+.BI "unsigned char MAGmacFlags(MagImage *" mag ");"
+.sp
+.BI "unsigned char MAGscrModeCode(MagImage *" mag ");"
+.sp
+.BI "int MAGscrMode200Lines(MagImage *" mag ");"
+.sp
+.BI "int MAGscrModeNumColors(MagImage *" mag ");"
+.sp
+.BI "int MAGpixelWidth(MagImage *" mag ");"
+.sp
+.BI "int MAGscrModeIsDigital(MagImage *" mag ");"
+.sp
+.BI "int MAGimageStartX(MagImage *" mag ");"
+.sp
+.BI "int MAGimageStartY(MagImage *" mag ");"
+.sp
+.BI "int MAGimageEndX(MagImage *" mag ");"
+.sp
+.BI "int MAGimageEndY(MagImage *" mag ");"
+.sp
+.BI "int MAGimageWidth(MagImage *" mag ");"
+.sp
+.BI "int MAGimageHeight(MagImage *" mag ");"
+.sp
+.BI "int MAGpalette(MagImage *" mag ", int " index ");"
+.sp
+.BI "int MAGReader(MagImage *" mag ", MagReader *" rd ");"
+.sp
+.BI "int MAGReaderDelete(MagReader *" rd ");"
+.sp
+.BI "int MAGReaderNextPixel(MagReader *" rd ", unsigned char *" buf ");"
+.fi
+.SH DESCRIPTION
+The
+.I libmaglo
+library supports reading of the MAKIchan Graphic (MAG) format image files.
+The format is fairly straightforward, however is documented only in Japanese 
+so there are little implementations available.
+.LP
+The MAG format was used in mid-1980s to mid-1990s to store and distribute 
+screenshots and drawings. The format is suited for pattern-based graphics, and
+supports only 8/16/256-color images.
+.SH LIBMAGLO IN A NUTSHELL
+Call MAGopen with a pointer to an already-allocated storage and the path to the
+MAG file.
+.LP
+Call functions like MAGimageWidth or MAGscrMode200Lines to get information about
+the image.
+.LP
+Call MAGReader with pointer to the MAGimage and a pointer to an already-allocated
+storage.
+.LP
+Loop calling MAGReaderNextPixel to retrieve image data.
+.LP
+When entire image is transferred, call MAGReaderDelete and MAGclose sequentially
+to free memory regions.
+.SH EXAMPLES
+.PP
+The following program converts a MAG file to PPM format.
+.nf
+
+static int magtoppm(const char *from,FILE *to)
+{
+	MagImage m;
+	MagReader rd;
+	unsigned char pixel[4],palette[256][3];
+	unsigned int i,width,height,pxlw,count;
+	int err;
+
+	/* Open MagImage */
+	if((err=MAGopen(&m,from))<0)
+	{
+		fprintf(stderr,"MAGopen error(code=%d)\\n",err);
+		return -1;
+	}
+
+	/* Get info */
+	width=MAGimageWidth(&m);
+	height=MAGimageHeight(&m);
+	pxlw=MAGpixelWidth(&m);
+
+	/* copy palettes */
+	for(i=0; i<MAGscrModeNumColors(&m); i++)
+	{
+		unsigned int pal=MAGpalette(&m,i);
+		palette[i][0]=pal>>16;
+		palette[i][1]=(pal&0x00FF00)>>8;
+		palette[i][2]=(pal&0xFF);
+	}
+
+	/* print ppm header */
+	fprintf(to,"P6\\n%d %d\\n255\\n",width,height);
+
+	/* create MagReader */
+	if((err=MAGReader(&m,&rd))!=MAGERR_NOERROR)
+	{
+		fprintf(stderr,"MAGReader failed(code=%d)\\n",err);
+		MAGclose(&m);
+		return -1;
+	}
+	/* copy dots */
+	count=width;
+	while((err=MAGReaderNextPixel(&rd,pixel))==MAGERR_NOERROR)
+	{
+		unsigned int k,valid_dots;
+		valid_dots=MIN(pxlw,count);
+		for(k=0; k<valid_dots; k++)
+		{
+			fputc(palette[pixel[k]][0],to);
+			fputc(palette[pixel[k]][1],to);
+			fputc(palette[pixel[k]][2],to);
+		}
+		count=count-valid_dots;
+		if(count<=0)
+			count=width;
+	}
+	if(err<0 && err!=MAGERR_DATA_END)
+		fprintf(stderr,"MAGReaderNextPixel returns error %d\\n",err);
+
+	/* cleanup MAGReader */
+	MAGReaderDelete(&rd);
+	/* cleanup MAGImage */
+	MAGclose(&m);
+	return 0;
+}
+.fi
+.SH AUTHOR
+TOMARI Hisanobu
+<posco dot grubb at gmail.com>
+.SH LICENSE
+libmaglo is distributed as a public domain software.

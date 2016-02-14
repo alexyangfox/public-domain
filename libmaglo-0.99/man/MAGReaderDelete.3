@@ -1,0 +1,23 @@
+.TH MAGREADERDELETE 3 2008-11-29 "libmaglo 0.99" "libmaglo Programmer's Manual"
+.SH NAME
+MAGReaderDelete \- purges MAG image reader
+.SH SYNOPSIS
+.nf
+.B #include <maglo.h>
+.sp
+.BI "int MAGReaderDelete(MagReader *" rd ");"
+.fi
+.SH DESCRIPTION
+.LP
+.B MAGReaderDelete()
+frees memory allocations in MagReader \fIrd\fP.
+.LP
+This function should always be called when MagReader is no longer used.
+.SH RETURN VALUES
+.LP
+This function returns
+.BR MAGERR_NOERROR .
+.SH SEE ALSO
+.BR MAGReader (3),
+.BR MAGclose (3),
+.BR libmaglo (7)

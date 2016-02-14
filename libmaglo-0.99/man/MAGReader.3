@@ -1,0 +1,39 @@
+.TH MAGREADER 3 2008-11-29 "libmaglo 0.99" "libmaglo Programmer's Manual"
+.SH NAME
+MAGReader \- initializes MAG image reader
+.SH SYNOPSIS
+.nf
+.B #include <maglo.h>
+.sp
+.BI "int MAGReader(MagImage *" mag ", MagReader *" rd ");"
+.fi
+.SH DESCRIPTION
+.LP
+.B MAGReader()
+initializes MagReader at pre-allocated storage \fIrd\fP against a MAG file
+to which \fImag\fP is associated.
+.LP
+Call
+.B MAGReaderNextPixel
+function with \fIrd\fP initialized with this function to retreive image data.
+.LP
+After reading all the data from a image,
+.B MAGReaderDelete
+should be called to return unused resources to system.
+.SH RETURN VALUES
+.LP
+On successful completion 
+.B MAGReader
+function returns
+.BR MAGERR_NOERROR .
+Otherwise one of following error codes is returned:
+.TP
+.B MAGERR_DATA_PARTIAL
+The image data is truncated.
+.TP
+.B MAGERR_MEM_ERROR
+Out of memory.
+.SH SEE ALSO
+.BR MAGReaderDelete (3),
+.BR MAGReaderNextPixel (3),
+.BR libmaglo (7)

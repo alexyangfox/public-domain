@@ -1,0 +1,41 @@
+.TH MAGMACTYPE 3 2008-11-29 "libmaglo 0.99" "libmaglo Programmer's Manual"
+.SH NAME
+MAGmacType \- returns pointer to human-readable machine type on which the MAG is saved
+.SH SYNOPSIS
+.nf
+.B #include <maglo.h>
+.sp
+.BI "char * MAGmacType(MagImage *" mag ");"
+.fi
+.SH DESCRIPTION
+.LP
+The 
+.B MAGmacType()
+function returns the pointer to 4-byte human-readable machine type string,
+which proviedes rough information about the machine the MAG file 
+to which \fImag\fP is associated is created on.
+.LP
+The 4-byte data is \fBNOT\fP null terminated, unlike standard C strings.
+.SH RETURN VALUES
+.LP
+.B MAGmacType()
+returns the pointer to a 4-byte data storage. The storage is unique for each
+\fImag\fP, but not for \fBMAGmacType()\fP function call.
+.LP
+Examples of machine types are:
+.TP
+.B PC98
+NEC PC-9801
+.TP
+.B X68K
+SHARP X68000
+.TP
+.B MSX2
+MSX-2 machine
+.LP
+Note that the machine type also depends on the utility with which 
+the MAG file is created.
+.SH SEE ALSO
+.BR MAGmacCode (3),
+.BR MAGmacFlags (3),
+.BR libmaglo (7)

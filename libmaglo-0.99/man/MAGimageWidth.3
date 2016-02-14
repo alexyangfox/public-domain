@@ -1,0 +1,61 @@
+.TH MAGIMAGEWIDTH 3 2008-11-29 "libmaglo 0.99" "libmaglo Programmer's Manual"
+.SH NAME
+MAGimageWidth, MAGimageHeight, MAGimageStartX, MAGimageStartY, 
+MAGimageEndX, MAGimageEndY \- query image boundary information
+.SH SYNOPSIS
+.nf
+.B #include <maglo.h>
+.sp
+.BI "int MAGimageWidth(MagImage *" mag ");"
+.sp
+.BI "int MAGimageHeight(MagImage *" mag ");"
+.sp
+.BI "int MAGimageStartX(MagImage *" mag ");"
+.sp
+.BI "int MAGimageStartY(MagImage *" mag ");"
+.sp
+.BI "int MAGimageEndX(MagImage *" mag ");"
+.sp
+.BI "int MAGimageEndY(MagImage *" mag ");"
+.fi
+.SH DESCRIPTION
+.LP
+.BR MAGimageWidth ,
+.BR MAGimageHeight ,
+.BR MAGimageStartX ,
+.BR MAGimageStartY ,
+.BR MAGimageEndX
+and
+.BR MAGimageEndY
+functions return boundary information stored in the MAG file that \fImag\fP is 
+associated to.
+.LP
+.B MAGimageWidth()
+and
+.B MAGimageHeight()
+returns width and height of image respectively.
+.LP
+Some MAG image encoder supported saving a part of framebuffer. The values returned
+by
+.B MAGimageStartX()
+and
+.B MAGimageStartY()
+can be used to determine the start point at which to draw decoded image.
+A MAG decoder can ignore these information.
+.SH RETURN VALUES
+.LP
+The
+.B MAGimageWidth()
+and
+.B MAGimageHeight()
+functions return width and height of \fImag\fP in screen pixels(dots).
+.LP
+The
+.BR MAGimageStartX ,
+.BR MAGimageStartY ,
+.BR MAGimageEndX
+and
+.BR MAGimageEndY
+functions return X or Y coordinate corresponds to each point in screen pixels(dots).
+.SH SEE ALSO
+.BR libmaglo (7)

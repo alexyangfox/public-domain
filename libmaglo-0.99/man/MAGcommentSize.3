@@ -1,0 +1,36 @@
+.TH MAGCOMMENTSIZE 3 2008-11-29 "libmaglo 0.99" "libmaglo Programmer's Manual"
+.SH NAME
+MAGcommentSize \- returns size of MAG comment
+.SH SYNOPSIS
+.nf
+.B #include <maglo.h>
+.sp
+.BI "long MAGcommentSize(MagImage *" mag ");"
+.fi
+.SH DESCRIPTION
+.LP
+The 
+.B MAGcommentSize()
+function returns the length of MAG comment length of MAG file to which
+\fImag\fP is associated, in bytes.
+.LP
+MAG comment is terminated with 0x1A, and the returned length does not include
+the terminating character.
+.LP
+The MAG comment is often stored using Shift-JIS encoding.
+.SH RETURN VALUES
+.LP
+.B MAGcommentSize()
+returns positive comment length.
+.LP
+If the \fImag\fP is invalid, the behavior is undefined.
+.SH SEE ALSO
+.BR MAGcomment (3),
+.BR libmaglo (7)
+.SH BUGS
+.LP
+The MAG specification does not limit the length of comment.
+This is insecure and difficult to handle (since the library may
+fall into infinite loop looking for the comment termination), so
+.B libmaglo
+sets artificial limit of file size to 16MB.

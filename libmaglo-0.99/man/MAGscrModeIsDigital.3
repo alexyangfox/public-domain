@@ -1,0 +1,35 @@
+.TH MAGSCRMODEISDIGITAL 3 2008-11-29 "libmaglo 0.99" "libmaglo Programmer's Manual"
+.SH NAME
+MAGscrModeIsDigital \- returns digital flag of MAG file
+.SH SYNOPSIS
+.nf
+.B #include <maglo.h>
+.sp
+.BI "int MAGscrModeIsDigital(MagImage *" mag ");"
+.fi
+.SH DESCRIPTION
+.LP
+The 
+.B MAGscrModeIsDigital()
+function returns true if the MAG file that \fImag\fP is associated to is 
+saved in digital screen mode.
+.LP
+In digital mode, intensity of each color component(R, G, B) of actual color
+to which each palette index maps is max(255) or minimum(0).
+.LP
+A MAG decoder can safely ignore this flag because all the palettes mappings are
+defined as specified in digital mode too. This flag is used on hardware that have 
+capability to display only 8 or 16 colors to avoid calculating color approximation,
+which is meaningless on digital images.
+.SH RETURN VALUES
+.LP
+.TP
+.B 0
+The image is saved in analog mode.
+.TP
+.B 1
+The image is saved in digital mode.
+.SH SEE ALSO
+.BR MAGpalette (3),
+.BR MAGscrModeCode (3),
+.BR libmaglo (7)

@@ -1,0 +1,39 @@
+.TH MAGSCRMODENUMCOLORS 3 2008-11-29 "libmaglo 0.99" "libmaglo Programmer's Manual"
+.SH NAME
+MAGscrModeNumColors \- returns number of colors in MAG image
+.SH SYNOPSIS
+.nf
+.B #include <maglo.h>
+.sp
+.BI "int MAGscrModeNumColors(MagImage *" mag ");"
+.fi
+.SH DESCRIPTION
+.LP
+The 
+.B MAGscrModeNumColors()
+function returns the number of colors in MAG file that \fImag\fP is
+associated to.
+.LP
+A color is represented as palette index, and palette maps palette index to
+actual color. Actual color for a palette index is obtained through
+.BR MAGpalette (3)
+function. The range for palette index is 0 to (the value returned by
+.B MAGscrModeNumColors()
+)-1.
+.SH RETURN VALUES
+.LP
+One of following values is returned:
+.TP
+.B 8
+The image is in 8 colors. 16 palette mappings are available, but index 8 to 15
+is unused.
+.TP
+.B 16
+The image is in 16 colors. 16 palette mappings are available.
+.TP
+.B 256
+The image is in 256 colors.
+.SH SEE ALSO
+.BR MAGscrModeCode (3),
+.BR MAGpalette (3),
+.BR libmaglo (7)

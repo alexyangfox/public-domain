@@ -1,0 +1,35 @@
+.TH MAGMACCODE 3 2008-11-29 "libmaglo 0.99" "libmaglo Programmer's Manual"
+.SH NAME
+MAGmacCode \- returns type of machine on which the MAG is saved
+.SH SYNOPSIS
+.nf
+.B #include <maglo.h>
+.sp
+.BI "unsigned char MAGmacCode(MagImage *" mag ");"
+.fi
+.SH DESCRIPTION
+.LP
+The 
+.B MAGmacCode()
+function returns type of machine on which the MAG file that \fImag\fP 
+is associated to is saved.
+.SH RETURN VALUES
+.TP
+.B 0x00
+PC-98/X68K/etc
+.TP
+.B 0x03
+MSX (Meron version)
+.TP
+.B 0x88
+PC-88 (Argon version)
+.TP
+.B 0x68
+PST68 (Kenna)
+.TP
+.B 0xFF
+Pseudo kiisu (Hironon)
+.SH SEE ALSO
+.BR MAGmacCode (3),
+.BR MAGmacFlags (3),
+.BR libmaglo (7)

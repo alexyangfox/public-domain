@@ -1,0 +1,28 @@
+.TH MAGSCRMODE200LINES 3 2008-11-29 "libmaglo 0.99" "libmaglo Programmer's Manual"
+.SH NAME
+MAGscrMode200Lines \- returns screen mode flag for 200-line mode
+.SH SYNOPSIS
+.nf
+.B #include <maglo.h>
+.sp
+.BI "int MAGscrMode200Lines(MagImage *" mag ");"
+.fi
+.SH DESCRIPTION
+.LP
+The 
+.B MAGscrMode200Lines()
+function returns true if the MAG file that \fImag\fP is associated to is 
+saved in 200-line screen mode.
+.LP
+In 200-line screen mode, dot aspect is 1:2 \- a dot is long vertically.
+.SH RETURN VALUES
+.LP
+.TP
+.B 0
+The image is saved in 400-line mode, where dot aspect is 1:1.
+.TP
+.B 1
+The image is saved in 200-line mode, where dot aspect is 1:2.
+.SH SEE ALSO
+.BR MAGscrModeCode (3),
+.BR libmaglo (7)

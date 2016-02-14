@@ -1,0 +1,37 @@
+.TH MAGCOMMENT 3 2008-11-29 "libmaglo 0.99" "libmaglo Programmer's Manual"
+.SH NAME
+MAGcomment \- returns pointer to MAG comment
+.SH SYNOPSIS
+.nf
+.B #include <maglo.h>
+.sp
+.BI "char * MAGcomment(MagImage *" mag ");"
+.fi
+.SH DESCRIPTION
+.LP
+The 
+.B MAGcomment()
+function returns the pointer to MAG comment of MAG file to which
+\fImag\fP is associated.
+.LP
+MAG comment is terminated with 0x1A, and \fBdoes not have NULL termination
+like standard C strings.\fP
+.LP
+The MAG comment is often stored using Shift-JIS encoding.
+.SH RETURN VALUES
+.LP
+.B MAGcomment()
+returns the pointer to MAG comment of \fImag\fP. The storage is unique for each
+\fImag\fP, but not for \fBMAGcomment()\fP function call.
+.LP
+If the \fImag\fP is invalid, the behavior is undefined.
+.SH SEE ALSO
+.BR MAGcommentSize (3),
+.BR libmaglo (7)
+.SH BUGS
+.LP
+The MAG specification does not limit the length of comment.
+This is insecure and difficult to handle (since the library may
+fall into infinite loop looking for the comment termination), so
+.B libmaglo
+sets artificial limit of file size to 16MB.

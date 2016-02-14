@@ -1,0 +1,52 @@
+.TH MAGREADERNEXTPIXEL 3 2008-11-29 "libmaglo 0.99" "libmaglo Programmer's Manual"
+.SH NAME
+MAGReaderNextPixel \- initializes MAG image reader
+.SH SYNOPSIS
+.nf
+.B #include <maglo.h>
+.sp
+.BI "int MAGReaderNextPixel(MagReader *" rd ", unsigned char *" buf ");"
+.fi
+.SH DESCRIPTION
+.LP
+The
+.B MAGReaderNextPixel()
+function copies next MAG pixel from MagReader \fIrd\fP to \fIbuf\fP if one is
+available.
+.LP
+A MAG pixel consists of 2 or 4 screen pixels, which can be queried to
+the library with
+.B MAGpixelWidth()
+function. The \fIbuf\fP should be 2 or 4 bytes long depending on the width of 
+MAG pixel of the image.
+.LP
+After successful completion, the \fIbuf\fP contains palette indexes for each
+of two or four screen pixels. The mapping between palette index and actual color
+can be queried through
+.B MAGpalette()
+function.
+.LP
+If the image width is not multiple of 2 or 4, dummy screen pixels are padded at the
+end of each row.
+.SH RETURN VALUES
+.LP
+On successful completion 
+.B MAGReaderNextPixel
+function returns
+.BR MAGERR_NOERROR .
+Otherwise one of following error codes is returned:
+.TP
+.B MAGERR_DATA_END
+All the image data is transferred.
+.TP
+.B MAGERR_DATA_INVALID
+The image data is corrupt.
+.TP
+.B MAGERR_DATA_PARTIAL
+The image data is truncated.
+.SH SEE ALSO
+.BR MAGReader (3),
+.BR MAGpixelWidth (3),
+.BR MAGimageWidth (3),
+.BR MAGpalette (3),
+.BR libmaglo (7)

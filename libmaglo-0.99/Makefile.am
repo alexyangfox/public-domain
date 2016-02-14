@@ -1,0 +1,9 @@
+SUBDIRS=man
+doc_DATA=README
+lib_LTLIBRARIES=libmaglo.la
+include_HEADERS=maglo.h
+libmaglo_la_SOURCES=libmaglo.c maglo.h
+libmaglo_la_LDFLAGS= -version-info 0:0:0
+bin_PROGRAMS=magtoppm
+magtoppm_SOURCES=magtoppm.c
+magtoppm_LDADD=libmaglo.la

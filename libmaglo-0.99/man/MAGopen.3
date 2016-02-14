@@ -1,0 +1,48 @@
+.TH MAGOPEN 3 2008-11-29 "libmaglo 0.99" "libmaglo Programmer's Manual"
+.SH NAME
+MAGopen \- open a MAG image
+.SH SYNOPSIS
+.nf
+.B #include <maglo.h>
+.sp
+.BI "int MAGopen(MagImage *" mag ", const char *" path ");"
+.fi
+.SH DESCRIPTION
+.LP
+The 
+.B MAGopen()
+function opens and checks the header of a MAG image 
+named by \fIpath\fP and associates \fImag\fP with it.
+.LP
+\fImag\fP is a pointer to an already-allocated memory chunk.
+.LP
+.B MAGclose()
+should be called after procedures against \fImag\fP to
+release memory resource associated with \fImag\fP.
+.SH RETURN VALUES
+.LP
+Upon successful completion 
+.B MAGopen()
+returns 
+.BR MAGERR_NOERROR .
+Otherwise \fIerrno\fP is set if eligible and error code is returned.
+.SH ERRORS
+.TP
+.B MAGERR_IO_ERROR
+The file to which the 
+.I path
+points couldn't be read.
+.TP
+.B MAGERR_MAGIC_MISMATCH
+The file named by 
+.I path
+is not a MAG file.
+.TP
+.B MAGERR_DATA_PARTIAL
+Data is truncated.
+.TP
+.B MAGERR_MEM_ERROR
+Out of memory.
+.SH SEE ALSO
+.BR MAGclose (3),
+.BR libmaglo (7)

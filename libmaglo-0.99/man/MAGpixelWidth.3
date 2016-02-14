@@ -1,0 +1,29 @@
+.TH MAGPIXELWIDTH 3 2008-11-29 "libmaglo 0.99" "libmaglo Programmer's Manual"
+.SH NAME
+MAGpixelWidth \- returns width of `pixel' in MAG file
+.SH SYNOPSIS
+.nf
+.B #include <maglo.h>
+.sp
+.BI "int MAGpixelWidth(MagImage *" mag ");"
+.fi
+.SH DESCRIPTION
+.LP
+The 
+.B MAGpixelWidth()
+function returns width of `pixel' in the MAG file that \fImag\fP 
+is associated to.
+.LP
+The term `pixel' represents minimum unit of data transfer
+and data compression in \fIthe MAG format specification\fP.
+In 8- and 16-color images, a `pixel' is 4 horizontally aligned screen pixels.
+In 256-color images, a `pixel' is 2 horizontally aligned screen pixels.
+.SH RETURN VALUES
+.TP
+.B 2
+A pixel is 2x1 in \fImag\fP.
+.TP
+.B 4
+A pixel is 4x1 in \fImag\fP.
+.SH SEE ALSO
+.BR libmaglo (7)

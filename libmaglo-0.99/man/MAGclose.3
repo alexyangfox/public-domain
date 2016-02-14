@@ -1,0 +1,33 @@
+.TH MAGCLOSE 3 2008-11-29 "libmaglo 0.99" "libmaglo Programmer's Manual"
+.SH NAME
+MAGclose \- close a MAG image
+.SH SYNOPSIS
+.nf
+.B #include <maglo.h>
+.sp
+.BI "int MAGclose(MagImage *" mag ");"
+.fi
+.SH DESCRIPTION
+.LP
+The 
+.B MAGclose()
+function dissociates the named \fImag\fP from its underlying file.
+.LP
+.B MAGclose()
+should be called after procedures against \fImag\fP associated to a file
+using
+.B MAGopen()
+to release memory resource associated with \fImag\fP.
+.SH RETURN VALUES
+.LP
+Upon successful completion 
+.B MAGclose()
+returns 
+.BR MAGERR_NOERROR .
+.SH ERRORS
+.TP
+.B MAGERR_MEM_ERROR
+The \fImag\fP is not associated to any file.
+.SH SEE ALSO
+.BR MAGopen (3),
+.BR libmaglo (7)
