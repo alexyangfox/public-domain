@@ -1,0 +1,32 @@
+BALZ v1.15
+
+BALZ is a command-line file compressor with a high compression ratio and fast
+decompression.
+
+USAGE
+To compress "book1" in normal compression mode:
+
+  balz e book1 book1.balz
+
+To decompress:
+
+  balz d book1.balz book1
+
+Additionally, BALZ has a maximum compression mode that provides higher
+compression at the cost of some extra compression time. Note that the
+compression mode does not affect decompression time or memory usage.
+
+To compress "book1" in maximum compression mode:
+
+  balz ex book1 book1.balz 
+
+THANKS
+Special thanks to Matt Mahoney, Eugene Shelwien, Uwe Herklotz, Malcolm Taylor,
+Christian Martelock and Bulat Ziganshin. Also, thanks to LovePimple, Radek
+Liska, Stephan Busch, Werner Bergmans and Christopher Mattern.
+
+AUTHOR
+Ilia Muraviev <ilia_muraviev at users.sourceforge.net>
+
+HOMEPAGE
+http://balz.sourceforge.net/
