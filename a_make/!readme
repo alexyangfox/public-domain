@@ -1,0 +1,44 @@
+--------------------------------------------------------------------
+This archive contains the source code for PAMAKE, for use under DOS,
+OS/2, and VAX VMS.  Please read the documentation and disclaimers in
+PAMAKE.DOC before using these files.  
+--------------------------------------------------------------------
+
+The executable versions of the PAMAKE program are supplied free with 
+Roundhill's PANEL Plus screen manager.  If you have the executable 
+programs, you will be able to use them to rebuild modified versions 
+of themseleves.  If you do not have the executable version, you will 
+simply have to take the provided make files apart and work out what 
+to do.  It is not very hard - you just compile and link together 
+everything you find in this archive.
+
+The files in this archive are as follows:
+
+        CHECK.C      }
+        IFPROC.C     }
+        INPUT.C      }
+        MACRO.C      }
+        MAIN.C       }   Program Source
+        MAKE.C       }
+        READER.C     }
+        RULES.C      }
+        H.H          }
+
+        MAKEFILE         Makefile for DOS and OS/2
+           
+        MAKEFILE.VMS     Makefile for VMS
+
+        MAKEFILE.LC      Makefile for Lattice C family-mode version
+
+        PAMAKE.DOC       Full PAMAKE documentation
+
+        !README          This file.
+
+Please let us know via BIX or CIX if you have any comments, find any bugs, 
+develop new features, or port the program to different environments.
+
+Roundhill Computer Systems Limited
+Orchard House, Ogbourne St. George, Marlborough, Wiltshire SN8 1SU, England
+BIX,CIX: tfrost
+
+9th September 1989

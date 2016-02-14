@@ -1,0 +1,93 @@
+#   PAMAKE makefile by Roundhill Computer Systems Limited   September 1989
+#
+#   This PAMAKE makefile builds the PAMAKE program for DOS and OS/2,
+#   using Lattice C 6.00.  This compiler builds a much more compact 
+#   family mode program than Microsoft C.
+#
+#   For information on the PAMAKE make utility, see PAMAKE.DOC
+#
+#   The directory structure for which this makefile was constructed is
+#   as follows:
+#
+#   \lc6            :  C compiler executables
+#   c:\os2          :  DOSCALLS.LIB
+#   \lc6            :  .H files
+#   \lc6\s          :  compiler small-model library files
+#   \msc51\pamake   :  source for PAMAKE
+#
+#   This makefile is invoked from the \lc6\pamake directory. 
+#
+#   Note: use a renamed version of PAMAKE to rebuild it under OS/2.  
+#         OS/2 will not allow writing to the EXE file while it is 
+#         actually running.
+#
+#   --------------------------------------------------------------------
+
+target: pamake.exe
+	+@echo make complete:  target is up-to-date
+
+#   --------------------------------------------------------------------
+#
+#   The following macro definitions are placed in the DOS environment
+#   during execution of PAMAKE.  Modify them to specify the pathnames
+#   which apply in your system.  Note that the PATH must include all
+#   directories which contain commands to be executed by PAMAKE, since
+#   it overrides your previous path during the execution of the make.
+#
+#   --------------------------------------------------------------------
+
+RAMFLAG=-qh:\              # RAM Disk, delete this line if not available
+
+#if TEST=1
+CD=-d2                     # compiler debug switch for CodePRobe
+LD=/DEBUG                  # linker debug switch for CodePRobe
+#else
+CD=-O                      # use global optimiser
+#endif
+
+M=S                        # small model
+SRC=\msc51\pamake
++PATH=\lc6
++INCLUDE=\lc6;$(SRC)
++LIB=\lc6\$M;c:\os2
++LC=\lc6
+
+#   --------------------------------------------------------------------
+#
+#   PAMAKE has a built-in command of $(CC) $(CFLAGS) $(CFILES) for C 
+#   compilations.  Here we set these macros for the Microsoft compiler.
+#
+#   --------------------------------------------------------------------
+
+CC=lc
+CFLAGS=-m$M$S $(RAMFLAG) -g1 -gv2 -go -v -ct $(CD)
+CFILES=-o$@ $<
+
+.SUFFIXES:                              # clear suffixes list
+.SUFFIXES: .c                           # not .asm and .pnl as built-in
+
+#   --------------------------------------------------------------------
+#
+#   Here are the programs to build
+#
+#   --------------------------------------------------------------------
+
+OBJS= main.obj check.obj input.obj macro.obj make.obj reader.obj \
+      rules.obj ifproc.obj mtime.obj
+
+pamake.exe: $(OBJS)
+	lc -Lro $(LD) -g1 -m$M$S $@ $(OBJS) 
+
+#   --------------------------------------------------------------------
+#
+#   Commands to build objects.
+#
+#   --------------------------------------------------------------------
+
+$(OBJS): $(SRC)\$*.c $(SRC)\h.h
+
+#   --------------------------------------------------------------------
+#
+#   end of makefile
+#
+#   --------------------------------------------------------------------

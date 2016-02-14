@@ -1,0 +1,113 @@
+#   PAMAKE makefile by Roundhill Computer Systems Limited   September 1989
+#
+#   This PAMAKE makefile builds the PAMAKE program for DOS using Borland
+#   Turbo C V 2.01.
+#
+#   For information on the PAMAKE make utility, see PAMAKE.DOC
+#
+#   The directory structure for which this makefile was constructed is
+#   as follows:
+#
+#   \tc2            :  C compiler executables
+#   \tc2\include    :  .H files
+#   \tc2\lib        :  compiler library files
+#   f:\msc51\pamake :  source for PAMAKE
+#
+#   This makefile is invoked from the \tc2\pamake directory. 
+#
+#   --------------------------------------------------------------------
+
+target: pamake.exe
+	+@echo make complete:  target is up-to-date
+
+#   --------------------------------------------------------------------
+#
+#   It is important to use the compact model rather than the small
+#   model.  In the small model, TC puts the stack at the top of a 
+#   64k data segment, so you always lose 64kb plus the code size when
+#   you spawn a program.  In the compact model, the heap is at the top
+#   of the memory map, so the overhead for spawned programs is only
+#   the code size plus fixed data, stack and current heap.  The compact
+#   model therefore gives significantly more space for spawned programs, 
+#   even though the code is slightly bigger.
+#   
+#   --------------------------------------------------------------------
+
+M=c                        # compact model
+SRC=f:\msc51\pamake        # directory for source
+
+#   --------------------------------------------------------------------
+#
+#   The following macro definitions are placed in the DOS environment
+#   during execution of PAMAKE.  Modify them to specify the pathnames
+#   which apply in your system.  Note that the PATH must include all
+#   directories which contain commands to be executed by PAMAKE, since
+#   it overrides your previous path during the execution of the make.
+#
+#   --------------------------------------------------------------------
+
++PATH=\tc2
++LIB=\tc2\lib
+
+#   --------------------------------------------------------------------
+#
+#   PAMAKE has a built-in command of $(CC) $(CFLAGS) $(CFILES) for C 
+#   compilations.  Here we set these macros for the specific compiler.
+#   Most flags are activated by copying them to TURBOC.CFG in the
+#   current directory, which is done in the 'config' step below.
+#
+#   --------------------------------------------------------------------
+
+#if TEST=1
+CCD=-v              # compile for TD
+#endif
+
+CCW=-wrvl -wamb -wamp -wnod -wpro -wstv -wuse -wcln -wsig -w-stu
+CCI=-I$(SRC) -I$(PATH)\include -L$(PATH)\lib
+CCO=-G -O -Z 
+
+CC=tcc
+CFLAGS=-c $(CCD) -m$M
+CFILES=-o$@ $<
+
+.SUFFIXES:                              # clear suffixes list
+.SUFFIXES: .c                           # not .asm and .pnl as built-in
+
+#   --------------------------------------------------------------------
+#
+#   Here are the programs to build
+#
+#   --------------------------------------------------------------------
+
+OBJS= main.obj check.obj input.obj macro.obj make.obj reader.obj rules.obj ifproc.obj mtime.obj
+
+pamake.exe: $(OBJS)
+	tcc -m$M $(CCD) -f- -le -epamake.exe $(OBJS)
+
+#   --------------------------------------------------------------------
+#
+#   Commands to build objects.
+#
+#   --------------------------------------------------------------------
+
+$(OBJS): $(SRC)\$*.c $(SRC)\h.h
+
+#   --------------------------------------------------------------------
+#
+#   The `config' target writes a Turbo C config file to your current
+#   working directory.
+#
+#   --------------------------------------------------------------------
+
+config:
+	+copy $- turboc.cfg
+$(CCW)
+$(CCI)
+$(CCO)
+<
+
+#   --------------------------------------------------------------------
+#
+#   end of makefile
+#
+#   --------------------------------------------------------------------

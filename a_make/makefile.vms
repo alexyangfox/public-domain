@@ -1,0 +1,75 @@
+#   PAMAKE makefile by Roundhill Computer Systems Limited   March 1989
+#
+#   This PAMAKE makefile builds the PAMAKE program for VMS, which is
+#   named PAMAKE.EXE.  It also builds a debug version called PAMAKED.EXE.
+#   The debug verion uses a different technique to invoke LINK, simply
+#   as an illustration.
+#
+#   Of course, you will need one of these programs to run this makefile
+#   to build them.  This phenomenon is known as `self-reference'.
+#
+#   For information on the PAMAKE make utility, see PAMAKE.DOC
+#
+#   This makefile is invoked from the directory which contains the C 
+#   and H files for PAMAKE.
+#
+#   --------------------------------------------------------------------
+
+target: pamake.exe pamaked.exe
+	@write SYS$$OUTPUT "make complete - target is up-to-date"
+
+#   --------------------------------------------------------------------
+#
+#   PAMAKE has a built-in command of $(CC) $(CFLAGS) $(CFILES) for C 
+#   compilations.  Here we set these macros for the VAX C compiler.
+#
+#   --------------------------------------------------------------------
+
+CC=cc
+CFLAGS=/DEBUG
+CFILES=$<
+
+.SUFFIXES:                              # clear suffixes list
+.SUFFIXES: .c                           # not .asm and .pnl as built-in
+
+#   --------------------------------------------------------------------
+#
+#   Here are the programs to build
+#
+#   --------------------------------------------------------------------
+
+OBJS=  main.obj check.obj input.obj macro.obj \
+       make.obj reader.obj rules.obj ifproc.obj mtime.obj
+
+pamake.exe: $(OBJS) 
+	link/exe=$@ $-/opt
+main,macro,make,reader,rules,input,ifproc,check,mtime,sys$$share:vaxcrtl.exe/share
+<
+
+pamaked.exe: $(OBJS)
+	\@$-
+$$link/debug/exe=$@ -
+main,macro,make,reader,rules,input,ifproc,check,mtime
+<
+
+#   --------------------------------------------------------------------
+#
+#   Note the "\@" in the command above.  It is necessary to escape the
+#   "@", which would otherwise be taken as a special command prefix.
+#
+#   --------------------------------------------------------------------
+
+#   --------------------------------------------------------------------
+#
+#   Commands to build objects.
+#
+#   --------------------------------------------------------------------
+
+$(OBJS): h.h
+
+#   --------------------------------------------------------------------
+#
+#   end of makefile
+#
+#   --------------------------------------------------------------------
+
