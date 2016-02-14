@@ -1,0 +1,15 @@
+check-isalnum
+check-isalpha
+check-isascii
+check-isblank
+check-iscntrl
+check-isdigit
+check-isgraph
+check-islower
+check-isprint
+check-ispunct
+check-isspace
+check-isupper
+check-isxdigit
+check-tolower
+check-toupper

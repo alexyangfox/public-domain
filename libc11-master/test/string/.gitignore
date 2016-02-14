@@ -1,0 +1,9 @@
+check-memchr
+check-memcmp
+check-memcpy
+check-memmove
+check-memset
+check-strcmp
+check-strlen
+check-strncmp
+check-strnlen
