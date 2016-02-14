@@ -1,0 +1,100 @@
+BODY { background: #000800;
+       color: #00ff00; }
+
+A:link {
+	color: #c0ff00;
+	text-decoration: none; }
+
+A:visited {
+	color: #a0c000;
+	text-decoration: none; }
+
+A:hover, A:focus {
+	background: #00ff00; color: #000800; }
+
+IMG { float: right; 
+      margin-left: 0.5cm;
+      margin-right: 0;
+      margin-top: 0;
+      margin-bottom: 0.2cm; }
+
+HR { border: 0; border-top: 1px solid #ffff00; clear: both; }
+
+PRE.man { }
+
+PRE.man B { color: #40ff40; }
+PRE.man I { color: #40ff40; }
+PRE.man U { color: #40ff40; }
+
+PRE.scheme { background: #001000;
+             line-height: 130%;
+	     border-style: solid;
+	     border-color: #00ff00;
+	     border-width: 1px;
+             padding: 0.5em; }
+
+PRE.scheme SPAN.o { color: #80c080; } /* comment */
+PRE.scheme SPAN.p { color: #00a000; } /* parenthesis */
+PRE.scheme SPAN.s { color: #00ff00; } /* symbol */
+PRE.scheme SPAN.c { color: #00ffa0; } /* constant */
+PRE.scheme SPAN.r { color: #00c000; } /* r5rs procedure */
+PRE.scheme SPAN.y { color: #40ff40; } /* r5rs syntax */
+PRE.scheme SPAN.x { color: #c0ff60; } /* s9fes procedure */
+PRE.scheme SPAN.z { color: #c0ff60; } /* s9fes syntax */
+
+PRE.ccode { background: #001000;
+             line-height: 130%;
+	     border-style: solid;
+	     border-color: #00ff00;
+	     border-width: 1px;
+             padding: 0.5em; }
+
+PRE.ccode SPAN.co { color: #80c080; } /* comment */
+PRE.ccode SPAN.cp { color: #ffff00; } /* punctuation */
+PRE.ccode SPAN.cs { color: #00ff00; } /* symbol */
+PRE.ccode SPAN.cc { color: #00ffa0; } /* constant */
+PRE.ccode SPAN.cr { color: #00c000; } /* reserved word */
+PRE.ccode SPAN.cl { color: #ff8000; } /* stdlib symbol */
+PRE.ccode SPAN.cx { color: #60ff60; } /* extension */
+
+PRE.scheme-hl { background: #000000;
+                line-height: 110%;
+	        border-style: solid;
+	        border-color: #808080;
+	        border-width: 1px;
+                padding: 0.5em; }
+
+PRE.scheme-hl SPAN.o { color: #80c080; } /* comment */
+PRE.scheme-hl SPAN.p { color: #00a000; } /* parenthesis */
+PRE.scheme-hl SPAN.s { color: #00ff00; } /* symbol */
+PRE.scheme-hl SPAN.c { color: #00ffa0; } /* constant */
+PRE.scheme-hl SPAN.r { color: #00c000; } /* r5rs procedure */
+PRE.scheme-hl SPAN.y { color: #40ff40; } /* r5rs syntax */
+PRE.scheme-hl SPAN.x { color: #c0ff60; } /* s9fes procedure */
+PRE.scheme-hl SPAN.z { color: #c0ff60; } /* s9fes syntax */
+
+PRE.scheme-hl SPAN.n:hover { background: #002000; }
+PRE.scheme-hl SPAN.n SPAN.n:hover { background: #002800; }
+PRE.scheme-hl SPAN.n SPAN.n SPAN.n:hover { background: #003000; }
+PRE.scheme-hl SPAN.n SPAN.n SPAN.n SPAN.n:hover { background: #003800; }
+PRE.scheme-hl SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n:hover { background: #004000; }
+PRE.scheme-hl SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n:hover { background: #004800; }
+PRE.scheme-hl SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n:hover { background: #005000; }
+PRE.scheme-hl SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n:hover
+        { background: #005800; }
+PRE.scheme-hl SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n:hover
+        { background: #006000; }
+PRE.scheme-hl SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n:hover
+        { background: 006800a; }
+PRE.scheme-hl SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n:hover
+        { background: #007000; }
+PRE.scheme-hl SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n:hover
+        { background: #007800; }
+PRE.scheme-hl SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n:hover
+        { background: #008000; color: #000800; }
+PRE.scheme-hl SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n:hover
+        { background: #008800; color: #000800; }
+PRE.scheme-hl SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n:hover
+        { background: #009000; color: #000800; }
+PRE.scheme-hl SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n SPAN.n:hover
+        { background: #009800; color: #000800; }

@@ -1,0 +1,6 @@
+
+	- EDOC: handle white space in block comments properly
+
+        ! LETREC + double CALL/CC Petrofsky test fails
+          (OK, this is to be expected.)
+
