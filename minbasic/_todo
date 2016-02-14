@@ -1,0 +1,81 @@
+
+	- clean up
+	? check low memory conditions
+	? 24-bit version
+
+	Differences to the original BSL version
+
+		- Replaced # (not) operator by NOT.
+		- Replaced  IF A,B  with  IF A AND B.
+		- Added OR operator.
+
+		- Documented string variable subscripts
+		  (already worked before).
+
+		- Made IOCTL a command and its "function"
+		  argument a string instead of a magic integer.
+
+		- Replaced CMPS( (compare strings) function with
+		  relational operators (=,<>,<,etc).
+
+		- Added the POS( (string position) function.
+
+		- Added control commands:
+			WHILE / WEND,
+			IF / THEN / ELSE / ENDIF,
+			REPEAT / UNTIL,
+			ON / GOTO,
+			GOSUB / WITH.
+
+		- Removed CALL command
+
+		- Added CALL( operator (GOSUB variant for use in
+		  expressions).
+
+		- Added local scopes with LOCAL / ENDLOC.
+
+		- Added function definitions (DEF FN(X) = ...).
+
+		- Made LET accept multiple assignments.
+
+		- Added FRE( (free memory) function.
+
+		- Added EOF( (end of file) function.
+
+		- Added ABS( (absolute value) function.
+
+		- Added RND( (pseudo random number) function.
+
+		- Added I/O commands: OPEN, CLOSE, ERASE (open, close,
+		  erase file).
+
+		- Added interactive commands:
+			FILES (list open files),
+			RENUM (renumber programs),
+			INSERT (insert multiple lines),
+			DELETE (delete lines),
+			MOVE (move lines),
+			COPY (copy lines),
+			SEARCH (search comments).
+
+		- Made RUN accept an optional entry point.
+
+		- Added overflow checking to numeric expressions.
+
+		- Made ? a shortcut for PRINT.
+
+		- Added / command (list 20 lines at a given position
+		  and memorize position).
+
+		- Added : command (invoke line editor).
+
+		- Added < and > commands for paging back/forward.
+
+		- Made LIST and friends pretty-print the code.
+
+		- Added LABEL and symbolic destinations to GOTO,
+		  GOSUB, CALL, RESTORE.
+
+		- Made RETURN clean up LOCALs.
+
+		- Addex EXIT (exit from loop) command.

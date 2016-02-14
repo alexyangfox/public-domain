@@ -1,0 +1,326 @@
+/*************************************
+**                                  **
+**         \B\A\S\C\O\M\P \Runtime          **
+**                                  **
+**            \N\M\H, 2011             **
+**                                  **
+**   \Free! \Neither mine nor yours.  **
+**                                  **
+*************************************/
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <time.h>
+
+#define word	long
+#define byte	unsigned char
+
+#define \Nfil	10
+#define \Lstr	16384
+#define \Bufl	125
+
+#define \W	(word)
+#define \B	byte
+#define \N	\N\U\L\L
+#define \S_end	\S\E\E\K_\E\N\D
+#define \S_set	\S\E\E\K_\S\E\T
+#define jump(x)	{ \K = (x); break; }
+#define prng(x)	(rand() % (x))
+
+word	\K = 0, \L = 0;
+word	\A, \R;
+word	\S[1024], \P = 0;
+byte	*\S\V[125], \Str[\Lstr];
+word	\Lm;
+word	\D\P = 0;
+word	\In = 0, \Out = 1;
+word	\Pp = 0;
+\F\I\L\E	*\F[\Nfil];
+
+void error(byte *s) {
+	fprintf(stderr, "**%s %d\\n", s, \L);
+	exit(1);
+}
+
+void printc(word c) {
+	fputc(c, \F[\Out]);
+}
+
+void prints(byte *s) {
+	fputs(s, \F[\Out]);
+}
+
+void printn(word n) {
+	fprintf(\F[\Out], "%d", n);
+}
+
+void io_open(word d, byte *s) {
+	if (d < 0 || d >= \Nfil)
+		error("\D\E\V");
+	if (\F[d])
+		fclose(\F[d]);
+	\F[d] = fopen(s, "r+");
+	if (\F[d] == \N)
+		\F[d] = fopen(s, "w+");
+	if (\F[d] == \N)
+		error("\I\O\X");
+}
+
+void io_close(word d) {
+	if (d < 0 || d >= \Nfil)
+		error("\D\E\V");
+	if (\F[d] == \N)
+		return;
+	fclose(\F[d]);
+	\F[d] = \N;
+	if (d == \Out)
+		\Out = 1;
+	if (d == \In)
+		\In = 0;
+}
+
+void io_erase(byte *s) {
+	if (remove(s))
+		error("\I\O\X");
+}
+
+void io_indev(word d) {
+	static word	od = 0;
+
+	if (d == -1) {
+		\In = od;
+		return;
+	}
+	if (d < 0 || d >= \Nfil || \F[d] == \N)
+		error("\D\E\V");
+	od = \In;
+	\In = d;
+}
+
+void io_outdev(word d) {
+	static word	od = 1;
+
+	if (d == -1) {
+		\Out = od;
+		return;
+	}
+	if (d < 0 || d >= \Nfil || \F[d] == \N)
+		error("\D\E\V");
+	od = \Out;
+	\Out = d;
+}
+
+word io_eof(void) {
+	return feof(\F[\In]);
+}
+
+void io_ioctl(word d, byte *s) {
+	word	rc;
+
+	if (d < 0 || d >= \Nfil)
+		error("\D\E\V");
+	if (\F[d] == \N)
+		error("\I\O\X");
+	switch(*s) {
+		case '\A':	rc = fseek(\F[d], 0L, \S_end);
+				break;
+		case '\R':	rc = fseek(\F[d], 0L, \S_set);
+				break;
+		case '\S':	fflush(\F[d]);
+				break;
+		case '\T':	fflush(\F[d]);
+				rc = ftruncate(fileno(\F[d]),
+					ftell(\F[d]));
+				break;
+		default:	error("\A\R\G");
+	}
+	if (rc < 0)
+		error("\I\O\X");
+}
+
+word io_inputn(void) {
+	byte	buf[\Bufl+1];
+
+	buf[0] = 0;
+	fgets(buf, \Bufl, \F[\In]);
+	return atoi(buf);
+}
+
+byte *io_inputs(void) {
+	static byte	buf[\Bufl+1];
+	word		k, i;
+
+	buf[0] = 0;
+	fgets(buf, \Bufl, \F[\In]);
+	k = strlen(buf);
+	if (k && buf[k-1] == '\\n')
+		buf[k-1] = 0;
+	for (i=0; i<k; i++)
+		buf[i] = toupper(buf[i]);
+	return buf;
+}
+
+byte	*\D[];
+
+word nextn(void) {
+	if (\D[\D\P] == \N)
+		error("\E\O\D");
+	if (*\D[\D\P] != '#')
+		error("\T\Y\P");
+	return atoi(\D[\D\P++]+1);
+}
+
+byte *nexts(void) {
+	if (\D[\D\P] == \N)
+		error("\E\O\D");
+	if (*\D[\D\P] != '$')
+		error("\T\Y\P");
+	return \D[\D\P++]+1;
+}
+
+byte *allocstr(void) {
+	word	p = \Lm;
+
+	while (p < \Lstr) {
+		if (!(\Str[p] & 128)) {
+			\Str[p] |= 128;
+			return &\Str[p] + 1;
+		}
+		p += (\Str[p] & 127);
+	}
+	if ((\Lm -= \Bufl+2) < \Pp)
+		error("\M\E\M");
+	\Str[\Lm] = \Bufl+2 | 128;
+	return &\Str[\Lm] + 1;
+}
+
+void freestr(byte *s) {
+	if (s == \N)
+		return;
+	if (s-1 == &\Str[\Lm]) {
+		\Str[\Lm] &= 127;
+		while ((\Str[\Lm] & 128) == 0 && \Lm < \Lstr) {
+			\Lm += \Bufl+2;
+		}
+	}
+	else {
+		s[-1] &= 127;
+	}
+}
+
+void asg_str(word v, byte *s) {
+	if (!*s) {
+		if (\S\V[v]) {
+			freestr(\S\V[v]);
+			\S\V[v] = 0;
+		}
+	}
+	else {
+		if (\S\V[v] == 0)
+			\S\V[v] = allocstr();
+		memcpy(\S\V[v], s, \Bufl+1);
+	}
+}
+
+word str_comp(byte *s1, byte *s2) {
+	return strcmp(s1, s2);
+}
+
+word str_val(byte *s) {
+	return atoi(s);
+}
+
+word str_pos(byte *s1, byte *s2) {
+	byte	*p;
+
+	p = strstr(s2, s1);
+	if (p == \N)
+		return 0;
+	return p - s2 + 1;
+}
+
+byte *newpad(word n) {
+	byte	*s;
+
+	if (\Pp + n >= \Lm)
+		error("\M\E\M");
+	s = &\Str[\Pp];
+	\Pp += n;
+	return s;
+}
+
+byte *str_chr(word c) {
+	byte	*s = newpad(2);
+
+	s[0] = c;
+	s[1] = 0;
+	return s;
+}
+
+byte *str_str(word n) {
+	byte	*s, buf[20];
+
+	sprintf(buf, "%d", n);
+	s = newpad(strlen(buf)+1);
+	strcpy(s, buf);
+	return s;
+}
+
+byte *str_plus(byte *s1, byte *s2) {
+	word	k1, k2;
+	byte	*s;
+
+	k1 = strlen(s1);
+	k2 = strlen(s2);
+	if (k1 + k2 > \Bufl)
+		error("\S\B\O");
+	s = newpad(k1 + k2 + 1);
+	strcpy(s, s1);
+	strcat(s, s2);
+	return s;
+}
+
+byte *str_mid(byte *s, word p, word n) {
+	word	ks, kn;
+	byte	*m;
+
+	ks = strlen(s);
+	if (--p < 0)
+		p = 0;
+	if (n < 1 || p >= ks)
+		return (\B*)"";
+	if (n > ks - p)
+		n = ks - p;
+	m = newpad(n + 1);
+	memcpy(m, s+p, n);
+	m[n] = 0;
+	return m;
+}
+
+void init(word argc, char **argv) {
+	word	i;
+
+	\F[0] = stdin;
+	\F[1] = stdout;
+	srand(time(\N));
+	for (i=0; i< 125; i++)
+		\S\V[i] = 0;
+	\Lm = \Lstr;
+	for (i=1; i<argc; i++) {
+		\F[i+2] = fopen(argv[i], "r+");
+		if (\F[i+2] == \N)
+			\F[i+2] = fopen(argv[i], "w+");
+		if (\F[i+2] == \N) {
+			fprintf(stderr, "*** could not open: %s\\n",
+				argv[i]);
+			error("\I\O\X");
+		}
+	}
+}
+
+byte *\D[] = {
+
+/***** \compiler output starts here *****/
+

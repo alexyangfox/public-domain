@@ -1,0 +1,8 @@
+  100  INPUT #2
+  110  INPUT A$
+  120  WHILE NOT EOF(0)
+  130    PRINT A$
+  140    INPUT A$
+  150  WEND
+  160  INPUT #0
+  170  END

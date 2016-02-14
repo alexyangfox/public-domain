@@ -1,0 +1,1823 @@
+
+
+	 __  __ _ __  _ ____   __   ____ _  ____ 
+	|  \/  | |  \| |    ) /  \ / ___) |/  __)         BY NILS M HOLM
+	|      | |     | __ \/    \\___ \ |  |__               1991-2011
+	|_|\/|_|_|_|\__|____/__/\__\____/_|\____)         FREE!  NEITHER
+	:::::::: A MINIMAL BASIC DIALECT ::::::::         MINE NOR YOURS
+
+
+	----------------------------------------------------------------
+	::::: USAGE ::::::::::::::::::::::::::::::::::::::::::::::::::::
+	----------------------------------------------------------------
+
+	BASIC [@] [NAME ...] 
+
+
+	----------------------------------------------------------------
+	::::: DESCRIPTION ::::::::::::::::::::::::::::::::::::::::::::::
+	----------------------------------------------------------------
+
+	MINBASIC is a minimal BASIC dialect for systems with little
+	memory. It features a small but powerful command set, a built-in
+	editor, and a simple tracing facility. Programs may either be
+	typed in interactively or loaded from external devices.
+
+	MINBASIC is intended for quick and dirty programming, just for
+	the kicks of it. If you want to do some real work: my deepest
+	sympathy.
+
+
+	----------------------------------------------------------------
+	::::: STARTUP ::::::::::::::::::::::::::::::::::::::::::::::::::
+	----------------------------------------------------------------
+
+	Each parameter passed to MINBASIC will be interpreted as a file
+	name. It will open the file and print its name and the numeric
+	handle assigned to it. When a file cannot be opened, it will
+	print a "!" instead of the handle.
+
+	When the first parameter equals "@", then the interpreter will
+	attempt to load the program specified in the second parameter,
+	run it, and exit. The remaining parameters will be processed as
+	described above, but no banner will print and opened files will
+	not be listed.
+
+
+	----------------------------------------------------------------
+	::::: INTERACTIVE EDITING ::::::::::::::::::::::::::::::::::::::
+	----------------------------------------------------------------
+
+	Commands can be stored in program memory for later execution by
+	prefixing them with a line number. For instance, the command
+
+	10  PRINT 'WHAT''S YOUR NAME? ';
+
+	will insert the PRINT command at line 10 of the program memory.
+	Typing the lines
+
+	30  PRINT 'HELLO, '; A$; '.'
+	20  INPUT A$
+
+	will insert the corresponding lines into program memory. The
+	line numbers determine the positions of the commands, so the
+	INPUT command will be inserted between the two PRINT commands,
+	resulting in the following program:
+
+	10  PRINT 'WHAT''S YOUR NAME? ';
+	20  INPUT A$
+	30  PRINT 'HELLO, '; A$; '.'
+
+	When entering just a line number without any trailing commands,
+	then the given line will be loaded into the line editor (see the
+	ED command for details).
+
+	The DEL command removes individual lines or ranges of lines from
+	memory.
+
+	To list the program in memory, the LIST command can be used.
+	The command accepts an (optional) range, so typing
+
+	LIST 100,200
+
+	will list the lines in the range from 100 to 200.
+
+	A program in program memory can be executed by typing RUN. It
+	can be erased with NEW. See the section on interactive commands
+	for further options.
+
+	/ will list the first 20 lines of the program in program memory.
+	When you specify a different line, it will start listing at that
+	line and remember the line you specified, so when you type / the
+	next time, it will list the same range again. This is useful for
+	having a repeated look at the same section of code while editing
+	a program.
+
+	< will list the 20 lines before the ones currently memorized by
+	the / command.
+
+	> will list the 20 lines following those printed by /.
+
+	The ED command will invoke the interactive program editor and
+	load the specified line into the edit buffer. When no line is
+	specified, the most recently edited line will be re-loaded. The
+	editor will display the buffer as follows:
+
+	> 10 PRINT 'HELLO, WORLD'
+	> 10
+
+	In the space below the program line editing commands may be
+	entered. For example, placing an "X" under a character will
+	delete that character from the line. Placing an "I" under a
+	character will insert the remainder of the editing command at
+	that position. No further commands will be processed after an
+	"I". For instance,
+
+	> 10 PRINT 'HELLO, WORLD'
+	> 10        XXXXXIGOODBYE
+
+	will change the line to
+
+	> 10 PRINT 'GOODBYE, WORLD'
+
+	An empty command (or a "Q" command) will exit from the editor
+	and return to the MINBASIC command line.
+
+
+	----------------------------------------------------------------
+	::::: VARIABLES ::::::::::::::::::::::::::::::::::::::::::::::::
+	----------------------------------------------------------------
+
+	The MINBASIC interpreter has 260 fixed variables which are
+	named A0, A1..., Z9. Each letter provides a small array of 10
+	elements which may be accessed with A(0) through A(9), etc. In
+	fact a subscript (in parentheses) just adds an offset into the
+	variable array, so A(5) is equal to A1(4) or A2(3).
+
+	A(10), finally, overflows to the next letter so it is equal to
+	B(0). A(259) would be Z(9). When omitting a digit from a
+	variable name, it defaults to zero, even when the variable is
+	not used as an array, so A is equal to A0, B is equal to B0,
+	etc.
+
+	The size of the variable array can be expanded with the DIM
+	command. For instance
+
+	DIM Z(1000)
+
+	would add 990 elements to the array [Z(10) through Z(999)].
+	Access to an out-of-range element causes an error (SUB).
+
+	When DIM is applied to a variable other than Z, the DIM
+	statement serves merely as a comment. E.g., the statement
+
+	DIM A(100)
+
+	would remind the programmer that the slots A0 through J9 are
+	used as an array. To the interpreter it would have no effect
+	whatsoever.
+
+
+	----------------------------------------------------------------
+	::::: STRING-VARIABLES :::::::::::::::::::::::::::::::::::::::::
+	----------------------------------------------------------------
+
+	There are 125 predefined string variables. The first 26 of them
+	are named A$ through Z$, the remaining ones can be accessed as
+	Z$(1) trough Z$(99). String variables and numeric variables are
+	disjunct, so assigning a value to A$ will not change A0, nor
+	vice versa.
+
+	String variables may be subscripted, which causes an overflow
+	to the subsequent variables, e.g. assigning a value to A$(2)
+	will change C$.
+
+
+	----------------------------------------------------------------
+	::::: EXPRESSIONS ::::::::::::::::::::::::::::::::::::::::::::::
+	----------------------------------------------------------------
+
+	Numeric literals are sequences of decimal digits. MINBASIC is a
+	16-bit interpreter, so it accepts numbers in the range from
+	-32767 to +32767. "Negative numbers" are composed of the unary
+	minus operator (-) applied to an unsigned numeric literal.
+
+	Numeric expressions can be composed of numeric literals,
+	variables, function applications, and the following keywords
+	and operators:
+
+	+------+---------+-------------------------------------------+
+	| Opr. | Usage   | Description                               |
+	+------+---------+-------------------------------------------+
+	| ( )  | ( X )   | Expression grouping                       |
+	| -    | - X     | Negation                                  |
+	+------+---------+-------------------------------------------+
+	| *    | X * Y   | Multiplication                            |
+	| /    | X / Y   | Integer division                          |
+	+------+---------+-------------------------------------------+
+	| +    | X + Y   | Addition                                  |
+	| -    | X - Y   | Subtraction                               |
+	+------+---------+-------------------------------------------+
+	| =    | X = Y   | Equal to        | These operators return  |
+	| <>   | X <> Y  | Not equal to    | 1 when their conditions |
+	| <    | X < Y   | Less than       | are met and else 0.     |
+	| >    | X > Y   | Greater than    +-------------------------|
+	| <=   | X <= Y  | Less than or equal to                     |
+	| >=   | X >= Y  | Greater than or equal to                  |
+	+------+---------+-------------------------------------------+
+	| NOT  | NOT X   | Logical negation (X <> 0)                 |
+	+------+---------+-------------------------------------------+
+	| AND  | X AND Y | Logical AND (X <> 0 AND Y <> 0)           |
+	+------+---------+-------------------------------------------+
+	| OR   | X OR Y  | Logical OR (X <> 0 OR Y <> 0)             |
+	+------+---------+-------------------------------------------+
+
+	Operators are listed in descending precedence. For instance,
+
+	NOT A = B AND B = C
+
+	means
+
+	(NOT (A = B)) AND (B = C)
+
+	Precedence can be changed by grouping sub-expressions with
+	parentheses.
+
+	NOTE: The comparison operators (=, <>, etc.) can be applied to
+	string expressions as well, so, for example,
+
+	A$ < B$
+
+	would check whether A$ is "lexically less than" B$. A string A
+	is lexically less than a string B if A would be listed before B
+	in a phone book or dictionary.
+
+	ALSO NOTE: When printing string comparisons with PRINT, the
+	expression has to be parenthesized:
+
+	PRINT (A$ < B$)
+
+
+	----------------------------------------------------------------
+	::::: STRING EXPRESSIONS :::::::::::::::::::::::::::::::::::::::
+	----------------------------------------------------------------
+
+	A "string" is a sequence of printable ASCII characters that is
+	enclosed by apostrophes. An apostrophe may be included in a
+	string by duplicating it, e.g.:
+
+	'WHAT''S UP?'
+
+	String expressions may consist of string variables, string
+	literals and the only string operator, the + operator, which
+	concatenates strings:
+
+	LET A$ = 'HELLO' : LET A$ = A$ + ' WORLD!'
+
+	will assign 'HELLO WORLD!' to A$.
+
+
+	----------------------------------------------------------------
+	::::: FUNCTIONS ::::::::::::::::::::::::::::::::::::::::::::::::
+	----------------------------------------------------------------
+
+	Functions whose names contain a dollar sign ($) return strings,
+	all other functions return numbers.
+
+	::::: ABS( expr ) ::::::::::::::::::::::::::::::::::::::::::::::
+
+	Returns the "absolute value" (i.e. the distance from zero) of
+	the given expression.
+
+	::::: ASC( string ) ::::::::::::::::::::::::::::::::::::::::::::
+
+	Returns the ASCII value of the first character of the given
+	string. Inverse function: CHR$(.
+
+	----- EXAMPLE -----
+
+	PRINT ASC('ABC') : REM PRINTS "65"
+
+	::::: CALL( line [ WITH assignments ] ) ::::::::::::::::::::::::
+
+	CALL( is exactly like GOSUB, but is intended for the use in
+	expressions. When the called subprogram exits with a RETURN
+	statement with an expression attached, the value of that
+	expression is the result of the CALL( operation. When the
+	subprogram returns with a simple RETURN, the return value
+	defaults to zero.
+
+	----- EXAMPLE -----
+
+	100  PRINT CALL(200 WITH X=7)
+	110  END
+	200  REM FACTORIAL FUNCTION
+	210  LOCAL R = 1
+	220    FOR I = 1 TO X
+	230      LET R = R * I
+	240    NEXT
+	250  RETURN R
+
+	::::: CHR$( expr ) :::::::::::::::::::::::::::::::::::::::::::::
+
+	Returns a string of one character. This character is the glyph
+	represented by the ASCII code given in the argument. Inverse
+	function: ASC(.
+
+	----- EXAMPLE -----
+
+	PRINT CHR$(65) : REM PRINTS "A"
+
+	::::: EOF( 0 ) :::::::::::::::::::::::::::::::::::::::::::::::::
+
+	Checks whether no more input is available from the current input
+	device (i.e. the "end of file" (EOF) has been reached). The
+	function argument is ignored, but should be 0.
+
+	----- EXAMPLE -----
+
+	IF EOF(0) PRINT 'NO MORE DATA' : STOP
+
+	::::: FRE( 0 ) :::::::::::::::::::::::::::::::::::::::::::::::::
+
+	Returns the number of free bytes in program memory. The function
+	argument is ignored, but should be 0.
+
+	----- EXAMPLE -----
+
+	PRINT FRE(0)
+
+	::::: LEN( string ) ::::::::::::::::::::::::::::::::::::::::::::
+
+	Returns the length of (the number of characters in) the given
+	string.
+
+	----- EXAMPLE -----
+
+	PRINT LEN('HELLO') : REM PRINTS "5"
+
+	::::: MID$( string , expr1 [ , expr2 ] ) :::::::::::::::::::::::
+
+	Extracts a substring from the given string and returns it. The
+	first character of a string is at position 1. When the first
+	expression is larger than the length of the string, an empty
+	string is returned. When only one expression is specified, the
+	remainder of the string starting at the given position is
+	returned.
+
+	When two expressions are given, the second one specifies the
+	length of the substring to extract. When it is larger than the
+	source string, it is ignored and so the complete rest of the
+	source string is returned.
+
+	----- EXAMPLES -----
+
+	PRINT MID$('GEMEINSAM', 4) : REM PRINTS "EINSAM"
+	PRINT MID$('FOOBAR', 2, 3) : REM PRINTS "OOB"
+
+	::::: PEEK( addr ) :::::::::::::::::::::::::::::::::::::::::::::
+
+	Returns the value of the byte at the given address in program
+	memory.
+
+	----- EXAMPLE -----
+
+	PRINT PEEK(0)
+
+	::::: POS( string1 , string1 ) :::::::::::::::::::::::::::::::::
+
+	Returns the positions of the first string in the second one.
+	When the second string does not contain the first one, it
+	returns zero. Positions start at 1.
+
+	----- EXAMPLES -----
+
+	PRINT POS('BA', 'FOOBAR')        : REM PRINTS "4"
+	PRINT POS('PEOPLE', 'DEMOCRACY') : REM PRINTS "0"
+
+	::::: RND( expr ) ::::::::::::::::::::::::::::::::::::::::::::::
+
+	Returns a pseudo-random number in the range from 0 to "expr"-1.
+
+	----- EXAMPLE -----
+
+	REM THROW A DICE
+	FOR I=1 TO 10 : PRINT ' '; RND(6)+1; : NEXT
+
+	::::: STR$( expr ) :::::::::::::::::::::::::::::::::::::::::::::
+
+	Returns a string containing the decimal representation of the
+	given numeric argument. Inverse function: VAL(.
+
+	----- EXAMPLE -----
+
+	LET A$ = STR$(-123) : PRINT A$
+
+	::::: VAL( string ) ::::::::::::::::::::::::::::::::::::::::::::
+
+	Returns the value of the decimal numeric representation
+	contained in the given string. Any blank characters preceding
+	the numeric representation will be ignored. Inverse function:
+	STR$(.
+
+	----- EXAMPLE -----
+
+	LET X = VAL('  -123') : PRINT X
+
+
+	----------------------------------------------------------------
+	::::: COMMANDS :::::::::::::::::::::::::::::::::::::::::::::::::
+	----------------------------------------------------------------
+
+	MINBASIC is an interactive environment. Commands that are
+	typed in will be executed immediately unless they are prefixed
+	with a line number. For instance, the command
+
+	PRINT 'HELLO!'
+
+	will print "HELLO!" and then the result code "OK" to indicate
+	that program execution was successful.
+
+	Multiple commands may be placed in a single line by separating
+	them with colons (:):
+
+	INPUT A$ : PRINT 'HELLO, '; A$
+
+	will wait for the user to enter their name and then print a
+	greeting message.
+
+	Not all commands may be executed interactively. For example, the
+	WHILE/WEND or IF/THEN/ELSE/ENDIF commands span multiple lines,
+	so they cannot be run from the command line.
+
+	Other commands are intended for interactive use only. For
+	instance, it is not possible to run LOAD from within a program.
+
+
+	----------------------------------------------------------------
+	::::: COMMENTS :::::::::::::::::::::::::::::::::::::::::::::::::
+	----------------------------------------------------------------
+
+	::::: REM any text :::::::::::::::::::::::::::::::::::::::::::::
+
+	The REM (remark) command is special because it ignores all text
+	that follows in the same line, including any command separators
+	(:). So the line
+
+	REM this is a comment : PRINT
+
+	is just a comment containing a colon and the word PRINT.
+
+	----- EXAMPLE -----
+
+	REM *********************
+	REM ** EXAMPLE PROGRAM **
+	REM *********************
+
+
+	----------------------------------------------------------------
+	::::: DEFINITIONS ::::::::::::::::::::::::::::::::::::::::::::::
+	----------------------------------------------------------------
+
+	::::: CLEAR ::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+	Clears all array definitions (see DIM) and resets all numeric
+	variables to zero and all string variables to the empty string.
+
+	::::: DATA number or string , ... ::::::::::::::::::::::::::::::
+
+	Provides data objects to be read by READ. DATA statements are
+	read in sequence. Multiple data may be placed in a single line.
+	When DATA is spread across multiple lines, reading will start
+	at the first line and proceed toward the end of the program.
+
+	DATA has no effect when not stored in program memory.
+
+	DATA must be the only statement in the line in which it is
+	contained.
+
+	----- EXAMPLE -----
+
+	1000  DATA 1, 'FIRST LINE'
+	1010  DATA 2, 'SECOND LINE'
+
+	::::: DEF fun-var ( variable ) = expression ::::::::::::::::::::
+
+	Defines a new function. Function names ("fun-var") are single
+	letter names with a percent sign attached, so there are 26
+	predefined function names, "A%" through "Z%". The variable may
+	be any numeric variable.
+
+	When a value is passed to a function in an expression, then that
+	value will be substituted for the "variable" in "expression" and
+	then the value of the "expression" will be returned. E.g., given
+	the definition
+
+	10 DEF C%(X) = X * X * X : REM CUBE
+
+	the function application C%(5) will compute 5*5*5 and return
+	that value.
+
+	Function definitions cannot be entered interactively, but must
+	be stored in program memory.
+
+	----- EXAMPLE -----
+
+	100  DEF D%(N) = N - N/10*10 : REM LAST DIGIT
+	110  PRINT D%(12345) : REM PRINTS "5"
+
+	::::: DIM variable(length) , ... :::::::::::::::::::::::::::::::
+
+	Defines arrays of the given lengths. Only arrays of numeric
+	variables may be defined by DIM. Note that dimensioning an array
+	other than Z0 has no effect on the interpreter due to the way in
+	which variables are organized in MINBASIC. For instance,
+	dimensioning A0 as an array of 100 elements will only serve to
+	document the fact that A0 is being used as an array. The storage
+	allocated to the array will silently overflow to the variables
+	A1 through J9, so A(99) will be the same as J(9). Also, the DIM
+	statement will not stop the program from using larger subscripts
+	with A0, so A(259) will silently access Z(9).
+
+	Only when the Z0 array is dimensioned to a size beyond 10
+	elements, the interpreter will allocate additional memory to
+	the variable array. The space allocated to the array will be
+	subtracted from program memory. When insufficient memory is
+	present, a MEM error will be raised.
+
+	----- EXAMPLE -----
+
+	DIM Z(1000)
+	
+	::::: LET variable = value , ... :::::::::::::::::::::::::::::::
+
+	Assigns each given value to the corresponding variable.
+	Variables may be either numeric or string variables. The
+	expression on the right side of each variable must match its
+	type.
+
+	Assignments will be performed from the left to the right, so
+
+	LET X = 1, Y = X
+
+	is guaranteed to assign one to Y.
+
+	----- EXAMPLE -----
+
+	LET A = 17, A$ = 'FOO'
+
+	::::: LOCAL assignments : body : ENDLOC ::::::::::::::::::::::::
+	::::: LOCAL assignments : body : RETURN [ expr ] :::::::::::::::
+
+	LOCAL creates "local" variables with the given names and assigns
+	values to them, just like the WITH clause of the GOSUB command.
+	The "inner" variables created by LOCAL will have the same values
+	as the "outer" variables with the same names unless an explicit
+	value is assigned to the new variable. E.g.
+
+	100  LET X = 17 : REM OUTER X
+	110  LOCAL X    : REM INNER X
+
+	will create a local variable "X" with the value 17, but
+
+	100  LET X = 17
+	110  LOCAL X = 42
+
+	will assign the value 42 to the local "X".
+
+	Between the LOCAL and ENDLOC (or RETURN) commands the "outer"
+	variables will be invisible and immutable.
+
+	The ENDLOC command deletes the "inner" variables and makes the
+	outer variables visible again.
+
+	LOCAL may not be nested. Multiple subsequent LOCAL statements
+	are considered to be part of the same context, so
+
+	100  LOCAL I
+	110  LOCAL J
+	120  LOCAL K
+	130  ENDLOC
+
+	would be a perfectly valid program with *one* local context
+	containing three local variables.
+
+	A LOCAL block can also be terminated with a RETURN statement in
+	the place of ENDLOC. See RETURN for details.
+
+	----- EXAMPLE -----
+
+	100  REM THIS PROGRAM PRINTS A SQUARE OF STARS; WITHOUT
+	110  REM "LOCAL" IT WOULD ONLY PRINT ONE SINGLE LINE
+	120  FOR I = 1 TO 10
+	130    LOCAL I
+	140      FOR I = 1 TO 10
+	150        PRINT '*';
+	160      NEXT
+	170    ENDLOC
+	180    PRINT
+	190  NEXT
+
+	::::: POKE address , value :::::::::::::::::::::::::::::::::::::
+
+	Changes the value of the byte at the given address to the given
+	value. DON'T DO THIS!
+
+	::::: READ variable , ... ::::::::::::::::::::::::::::::::::::::
+
+	READ reads data objects from DATA statements and stores them in
+	the given variables. The type of each variable must match the
+	type of the next datum to be read from a DATA statement, i.e.
+	only strings can be read into string variables and only numbers
+	into numeric variables.
+
+	When a program starts, the first READ will read the first
+	objects from the first DATA statement in the program. When READ
+	finishes, an internal data pointer will be placed at the first
+	object that has not been read yet. Subsequent READs will
+	continue reading at this pointer. Each variable in a READ
+	statement will advance the pointer by one object.
+
+	When no more objects are available for reading, an "end of data"
+	error (EOD) will be raised. The data pointer can be reset to the
+	beginning of a data set with RESTORE.
+
+	----- EXAMPLE -----
+
+	100  DATA 1, 'FIRST LINE'
+	110  DATA 2, 'SECOND LINE'
+	200  READ X, A$, Y, B$
+
+	::::: RESTORE [ line ] :::::::::::::::::::::::::::::::::::::::::
+
+	Resets the internal data pointer to the first data object in
+	the first DATA statement in program memory. Subsequent READ
+	statements will re-read the data from the beginning.
+
+	When a line number or label is specified, the data pointer will
+	be reset to the specified line.
+
+
+	----------------------------------------------------------------
+	::::: INTERACTIVE COMMANDS :::::::::::::::::::::::::::::::::::::
+	----------------------------------------------------------------
+
+	::::: COPY from , [ to , ] dest ::::::::::::::::::::::::::::::::
+
+	Copies the given range of lines ("from" to "to", including both)
+	to the line "dest" in program memory. "Dest" must not be in the
+	range or a "line number" error (LIN) will be raised. When
+	insufficient memory is available for the operation, a memory
+	error (MEM) will occur. When "to" is omitted, it defaults to
+	"from", i.e. a single line will be copied.
+
+	COPY is exactly like MOVE, but does not delete the source region
+	after copying.
+
+	::::: DEL first [ , last ] :::::::::::::::::::::::::::::::::::::
+
+	Deletes all lines from "first" to "last" (including both) in
+	program memory. When only the first line is specified, just that
+	lines will be deleted. Lines are not renumbered automatically.
+
+	::::: ED [ line ] ::::::::::::::::::::::::::::::::::::::::::::::
+
+	Starts the program editor and loads the specified line into the
+	editing buffer. When no line is specified, it re-loads the most
+	recently edited line. The editor interface consists of two lines:
+
+	> 10 PRINT 'HELLO, WORLD'
+	>          C'FOO'
+
+	The first line is the line to be edited, the second one is used
+	to type commands. Most commands affect the character(s) under
+	which they are typed. E.g., the above "C" command will change the
+	characters from the first "'" to the end of line (to 'FOO').
+
+	No further commands will be accepted after a "A", "C", "I", or
+	"Q" command. The "A", "C", and "I" commands will insert the
+	subsequent text.
+
+	The following ED commands exist:
+
+	A  append rest of command to line
+	C  change rest of line (equals DI)
+	D  delete to end of line
+	I  insert rest of command into line
+	Q  quit (also: empty line)
+	X  delete character above
+
+	::::: FILES ::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+	Lists all open device handles except for the standard input and
+	output handles, #0 and #1, which are always open.
+
+	::::: INS where [ , increment ] ::::::::::::::::::::::::::::::::
+
+	Prompts for multiple input lines with automatic line numbering.
+	Lines entered at the INS prompt will be inserted into program
+	memory at the given position ("where"). Line numbers referenced
+	in GOTO, GOSUB, RESTORE, and CALL( anywhere in the program will
+	be adjusted. When a referenced line number cannot be adjusted,
+	INS will exit and a line number error (LIN) will be raised.
+
+	When an "increment" is specified, line numbers will increment
+	by this value. The default is 10.
+
+	NOTE: no other commands will be accepted after INS in the same
+	line, e.g.
+
+	INS 100 : RUN
+
+	will not run the program in memory, because the RUN command
+	never executes.
+
+	::::: LIST [ from [ , to ] ] :::::::::::::::::::::::::::::::::::
+
+	Lists the given range of lines in program memory. When only one
+	line is given, list all lines starting from that number. When
+	no line is given, list the entire program.
+
+	::::: LOAD # device ::::::::::::::::::::::::::::::::::::::::::::
+
+	Loads a program from the given device (or file). The program
+	must be in source form and is loaded by feeding each line to
+	the interpreter. After loading successfully, an OK status will
+	print.
+
+	LOAD may not be nested, i.e. loaded programs may not LOAD other
+	programs. When they do, a nesting error (NST) will be raised.
+
+	LOAD automatically rewinds the device after loading.
+
+	NOTE: Any commands following LOAD in the command line will be
+	silently discarded.
+
+	::::: MOVE from , [ to , ] dest ::::::::::::::::::::::::::::::::
+
+	Moves the given range of lines ("from" to "to", including both)
+	to the line "dest" in program memory. "Dest" must not be in the
+	range or a "line number" error (LIN) will be raised. When
+	insufficient memory is available for the operation, a memory
+	error (MEM) will occur.  When "to" is omitted, it defaults to
+	"from", i.e. a single line will be moved.
+
+	MOVE renumbers the entire program using the default parameters
+	of RENUM (100,10).
+
+	When MOVE fails, it may leave gaps in the line numbering, but
+	this minor flaw can be remedied with RENUM.
+
+	See also: COPY.
+
+	::::: NEW ::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+	Clears all definitions and erases all lines from program memory,
+	typically starting the development of a new program. Hence its
+	name.
+
+	::::: RENUM [ from [ , incr ] ] ::::::::::::::::::::::::::::::::
+
+	Renumbers all lines in program memory. When no parameters are
+	specified, the lines will start at 10 and increment in steps of
+	10. When one parameter is specified, it is used as both the
+	first line number and the increment. When two parameters are
+	specified, the first one is the start number, and the second
+	one is the increment, e.g.
+
+	RENUM 1000, 10
+
+	will renumber the program in increments of 10, starting with
+	line number 1000.
+
+	All GOTO, GOSUB, and RESTORE statements as well as CALL(
+	operators will automatically be redirected to the new line
+	numbers. When there are any such statements without a
+	corresponding destination line, RENUM will abort and a line
+	number error (LIN) will be raised.
+
+	::::: RUN [ line ] :::::::::::::::::::::::::::::::::::::::::::::
+
+	Starts execution of the program in program memory. When a line
+	number or label is specified, execution starts in the given
+	line.
+
+	NOTE: Any commands following RUN in the command line will be
+	silently discarded.
+
+	::::: SAVE # device ::::::::::::::::::::::::::::::::::::::::::::
+
+	Saves the program in program memory to the given device. Before
+	saving the program, the device will be rewound and truncated,
+	each SAVE will completely replaces the output of any prior SAVE
+	or PRINT commands to the same file. When finished, SAVE leaves
+	the file pointer at the end of the output.
+
+	The output of SAVE is equal to LIST with no parameters.
+
+	::::: SEARCH string [ , from [ , to ] ] ::::::::::::::::::::::::
+
+	Searches the given string in all lines in program memory and
+	lists each matching line. When the "from" expression is given,
+	start searching at the given line. When "to" is also specified,
+	search the given range of lines.
+
+	A "%" sign in the string serves as a wildcard, e.g. searching
+	for 'FOO%BAR' will list all lines containing the string 'FOO'
+	followed by any characters followed by the string 'BAR'. Only
+	one wildcard may be used per search. The substring '%%' will
+	match a literal percent sign.
+
+	The SEARCH keyword may be omitted, so simply entering a string
+	at the command line interface will invoke SEARCH.
+
+	::::: SYSTEM :::::::::::::::::::::::::::::::::::::::::::::::::::
+
+	Exits MINBASIC and return to the operating system.
+
+	::::: TROFF ::::::::::::::::::::::::::::::::::::::::::::::::::::
+	::::: TRON :::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+	Turns tracing on (TRON) or off (TROFF). When tracing is
+	enabled, a line number of the form [line] will print whenever
+	the interpreter goes to a new line number.
+
+
+	----------------------------------------------------------------
+	::::: INPUT/OUTPUT :::::::::::::::::::::::::::::::::::::::::::::
+	----------------------------------------------------------------
+
+	NOTE: all device and file names will be converted to upper case
+	by the MINBASIC interpreter, so
+
+	OPEN #3, 'foo-file'
+
+	will actually attempt to open 'FOO-FILE'.
+
+	::::: CLOSE # device :::::::::::::::::::::::::::::::::::::::::::
+
+	Closes the given device handle. After closing a device, the
+	handle becomes inaccessible immediately. The standard devices
+	#0 and #1 cannot be closed. When the device being closed is the
+	current input or output device, the current input/output device
+	will be reset to the defaults (#0, #1; see PRINT and INPUT).
+	See also: OPEN.
+
+	::::: ERASE string :::::::::::::::::::::::::::::::::::::::::::::
+
+	Erases the file specified in the string argument. When the file
+	cannot be erased for any reason, an I/O error (IOX) is raised.
+
+	::::: INPUT # device :::::::::::::::::::::::::::::::::::::::::::
+	::::: INPUT [ # device , ] variable [ , ... ] ::::::::::::::::::
+
+	Reads input from devices and stores it in variables. One
+	complete line will be read per variable specified. When the
+	variable is a string variable, the characters read will be
+	stored in that variable literally. When the variable is a
+	numeric variable, the input will be converted with VAL( and
+	then stored in the variable.
+
+	When a device handle is specified, INPUT changes the default
+	input device to the given handle. All further input of the
+	MINBASIC system will thereafter be read from the given device.
+	When used interactively, lines read from the device will be fed
+	to the interpreter, so INPUT is similar to LOAD in this case,
+	but does not auto-rewind its source device.
+
+	Use "INPUT #0" to redirect input to the terminal.
+
+	When both a device handle and some variables are included in an
+	INPUT command, it will read input from the given device to those
+	variables (see below), but without altering the input device
+	permanently, e.g.
+
+	INPUT #2, A$
+
+	will read a line from device #2 and store it in A$, but it will
+	leave the default input device unchanged.
+
+	See also: PRINT.
+
+	----- EXAMPLE -----
+
+	100  INPUT #2 : REM MUST BE OPEN
+	110  INPUT A$ : REM READ ONE LINE FROM #2
+	120  INPUT #0 : REM RESTORE TERMINAL INPUT
+	130  PRINT A$
+
+	----- EXAMPLE -----
+
+	INPUT X : PRINT X*X
+	             -5  ( user input )
+	REM WILL PRINT "25"
+
+	::::: IOCTL # device , function ::::::::::::::::::::::::::::::::
+
+	Performs I/O control (IOCTL) operations on then specified
+	device. The function to perform is specified symbolically in
+	a string ("function"). The following functions are available
+	(specifying the first three letters of a function name is
+	sufficient):
+
+	+------------+-----------------------------------------------+
+	| 'APPEND'   | Move the r/w pointer to the end of file       |
+	+------------+-----------------------------------------------+
+	| 'REWIND'   | Move the r/w ptr to the beginning of the file |
+	+------------+-----------------------------------------------+
+	| 'SYNC'     | Make sure that all data is written completely |
+	+------------+-----------------------------------------------+
+	| 'TRUNCATE' | Cut off all data beyond the r/w pointer       |
+	+------------+-----------------------------------------------+
+
+	The "r/w pointer" points to the location where the next read or
+	write operation will take place, i.e. to the next character to
+	be read or overwritten.
+
+	When an invalid function is passed to IOCTL(, an argument error
+	(ARG) will be raised.
+
+	----- EXAMPLE -----
+
+	REM APPEND A LINE TO A FILE
+	IOCTL #2, 'APPEND'
+	PRINT #2, 'LAST LINE'
+
+	::::: OPEN # device , string :::::::::::::::::::::::::::::::::::
+
+	Opens the device (or file) specified in the string and assigns
+	it to the given device handle. When the device cannot be opened,
+	an I/O error (IOX) will be raised. When the device is a file
+	that exists, it will be opened in read/write mode with the
+	read/write pointer at the beginning of the file. When the file
+	does not exist, and empty file will be created in read/write
+	mode. See also: CLOSE. 
+
+	----- EXAMPLE -----
+
+	OPEN #2, 'INPUT-FILE'
+	INPUT #2, A$ : REM READ A LINE FROM 'INPUT-FILE'
+
+	::::: PRINT # device :::::::::::::::::::::::::::::::::::::::::::
+	::::: PRINT [ # device , ] expr [ ,|; [ ... ] ] ::::::::::::::::
+
+	Writes output to devices. When an expression being printed is a
+	string, its characters will simply be written to the device.
+	When an expression is numeric, its result will be converted to a
+	string using STR$( before it is written.
+
+	Multiple expressions can be printed by separating them with
+	comma (,) or semicolon (;) characters. When separated by commas,
+	a horizontal tab (ASCII HT) character will be printed between
+	expressions and when separated by semicolons, the expressions
+	will be concatenated.
+
+	PRINT will emit a newline sequence after printing its output
+	except when the last character in the statement is a separator.
+	In this case no newline will be emitted, but when the separator
+	is a comma, a trailing HT will print.
+
+	On the MINBASIC command line you can use "?" instead of PRINT,
+	so you can type  ?123+456  instead of  PRINT 123+456  to do a
+	quick calculation.
+
+	When a device handle is specified, PRINT changes the output
+	device to the given handle. All further output of the MINBASIC
+	system will thereafter be written to the given device, including
+	output of the interpreter itself. In interactive mode, though,
+	output will be redirected automatically to the user terminal
+	before accepting the next command.
+
+	Use "PRINT #1" to redirect output to the terminal in a program.
+
+	When both a device handle and some expressions are included in a
+	PRINT command, it will print the given expressions to the given
+	device without altering the output device permanently, e.g.
+
+	PRINT #2, 'FOO'
+
+	will print "FOO" to device #2, but leave the default output
+	device unchanged.
+
+	See also: INPUT.
+
+	----- EXAMPLE -----
+
+	PRINT 6*7, 'FOO'; 'BAR' : REM PRINTS "42      FOOBAR"
+
+	----- EXAMPLE -----
+
+	100  PRINT #2 : REM MUST BE OPEN
+	110  PRINT 'HELLO, DEVICE!'
+	120  PRINT #1
+
+
+	----------------------------------------------------------------
+	::::: FLOW OF CONTROL ::::::::::::::::::::::::::::::::::::::::::
+	----------------------------------------------------------------
+
+	::::: END ::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+	Indicates the logical end of a program. When an END statement
+	is reached, program execution ends and the interpreter goes back
+	to interactive mode. See also: STOP.
+
+	::::: EXIT :::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+	Leaves the innermost loop (FOR/NEXT, WHILE/WEND, REPEAT/UNTIL)
+	immediately, i.e. without checking the exit condition.
+
+	----- EXAMPLE -----
+
+	100  REM CONVERT NUMBER IN A$ TO VALUE IN V
+	110  DEF D%(C) = ASC('0') <= C AND C <= ASC('9')
+	120  LET V = 0
+	130  FOR I=1 TO LEN(A$)
+	140    LET C = ASC(MID$(A$, I))
+	150    IF NOT D%(C) EXIT
+	160    LET V = V * 10 + C - ASC('0')
+	170  NEXT
+
+	::::: IF condition body ::::::::::::::::::::::::::::::::::::::::
+
+	Conditional execution. When the condition evaluates to a "true"
+	(i.e. non-zero) value, then the statements in the "body" will
+	be executed. Otherwise execution proceeds in the next line.
+
+	A "body" may consist of multiple statements separated by colons
+	(:). This version of IF also works in interactive mode.
+
+	----- EXAMPLE -----
+
+	IF X / 7 * 7 <> X PRINT 'NOT DIVISIBLE BY 7' : STOP
+
+	::::: IF condition THEN : body : ENDIF :::::::::::::::::::::::::
+	::::: IF condition THEN : body : ELSE : body : ENDIF :::::::::::
+
+	Structured conditional execution. This version of the IF
+	statement is for program memory execution only, because is has
+	to be spread across multiple lines. The statements in the body
+	between THEN and ENDIF (or ELSE) are executed only when the
+	condition is true, and the (optional) statements between ELSE
+	and ENDIF are executed only when the expression is false.
+	IF/THEN may be nested, i.e. each of its bodies may contain
+	further IF/THEN statements.
+
+	NOTE: Although indicated otherwise in the heading, IF/THEN,
+	ELSE, and ENDIF must be placed in different lines and the
+	keywords IF, ELSE, and ENDIF must be the first words in the
+	lines in which they are contained. Violation of any of these
+	rules will result in a syntax error (SYN).
+
+	----- EXAMPLE -----
+
+	110  INPUT X
+	110  IF X / 7 * 7 <> X THEN
+	120    PRINT 'NOT DIVISIBLE BY 7'
+	130    STOP
+	140  ELSE
+	150    PRINT 'X / 7 = '; X / 7
+	160  ENDIF
+
+	::::: FOR var = start TO limit : body : NEXT :::::::::::::::::::
+	::::: FOR var = start TO limit STEP step : body : NEXT :::::::::
+
+	Counting loop. Assigns the first expression ("start") to the
+	given variable and then executes the statements in the body and
+	increments the variable by the value specified in "step". The
+	loop is finished when the value of the variable exceeds the
+	value specified in "limit", i.e. the construct counts from
+	"start" to "limit", assigning each value to "var" subsequently.
+
+	When the STEP part is omitted, the increment value defaults to
+	one. When the STEP value is negative, the loop ends when the
+	variable becomes less than "limit".
+
+	The NEXT command does the actual increment of the counter
+	variable before it transfers control back to the statement after
+	FOR. It also checks the exit condition of the loop, so the loop
+	body is always executed *at least once*, even when the exit
+	condition does not hold initially.
+
+	FOR/NEXT may be nested and neither FOR nor NEXT must occur at
+	the beginning of a line. However, placing both of them in the
+	first command position is considered to be good style.
+
+	FOR/NEXT works fine in interactive mode.
+
+	Leaving or entering a FOR/NEXT statement with a GOTO is an
+	error and will eventually lead to a nesting error (NST). The
+	proper way to leave a counting loop prematurely is to use EXIT
+	or to assign "limit"-"step"+1 to the counter variable.
+
+	See also: WHILE/WEND, REPEAT/UNTIL.
+
+	----- EXAMPLE -----
+
+	REM PRINT THE PRINTABLE ASCII ALPHABET
+	FOR C = 32 TO 126 : PRINT CHR$(C); : NEXT
+
+	::::: GOSUB line [ WITH assignments ] ::::::::::::::::::::::::::
+
+	Transfers control to the given line, memorizing the origin of
+	the transfer, so that control may later be returned to the
+	statement following GOSUB (with RETURN). GOSUB "calls" a
+	"subprogram" that performs some common task before returning
+	control to the "main" program.
+
+	The optional WITH keyword introduces any number of assignments
+	that will be in effect only while the subprogram executes. When
+	the subprogram returns, the assignments will be reversed, so
+	that the variables will be reset to their original values.
+
+	When an assignment consists of just a variable name, then no
+	new value will be assigned to the fresh local variable, e.g.
+
+	GOSUB 1000 WITH X
+
+	would be equal to
+
+	GOSUB 1000 WITH X = X
+
+	Technically speaking, the variables specified after WITH are
+	local to the subprogram being called, so modifications made
+	to the variables by a subprogram do not affect the variables
+	with the same names in the calling ("main") program.
+
+	GOSUB and RETURN may be nested, i.e. subprograms may call other
+	subprograms. Jumping into or out of a subprogram with GOTO is
+	an error and will eventually raise a nesting error (NST).
+
+	----- EXAMPLE -----
+
+	100  LET X = 17, A$ = 'HELLO!'
+	110  PRINT 'BEFORE GOSUB:  X='; X, 'A$='; A$
+	120  GOSUB 200 WITH X = 42, A$ = 'GOODBYE!'
+	130  PRINT 'AFTER GOSUB:   X='; X, 'A$='; A$
+	140  END
+	200  REM *** SUBPROGRAM ***
+	210  PRINT 'IN SUBPROGRAM: X='; X, 'A$='; A$
+	220  LET X = 0, A$ = ''
+	230  RETURN
+
+	::::: GOTO line ::::::::::::::::::::::::::::::::::::::::::::::::
+
+	Transfers control to the given line.
+
+	----- EXAMPLE -----
+
+	100  REM THE DREADED "ENDLESS LOOP"
+	110  PRINT 'HELLO! ';
+	120  GOTO 110
+
+	::::: LABEL &name ::::::::::::::::::::::::::::::::::::::::::::::
+
+	Gives a symbolic name ("name") to the line *below* the LABEL
+	command. The label (consisting of the "&" character and the
+	name) can then be used in the place of a line number in GOTO,
+	ON/GOTO, GOSUB, RESTORE, and RUN commands as well as in the
+	CALL( operator.
+
+	NOTE: commands occurring in the same line after LABEL will be
+	executed, but only when the flow of control passes a LABEL.
+	When transferring control to a label, trailing commands will be
+	ignored, because LABEL marks the line *following* the one
+	containing the LABEL statement.
+
+	LABELs may be referenced before their occurrence. They do not
+	even have to be executed *ever* in order to be recognized (as
+	in the example).
+
+	----- EXAMPLE -----
+
+	100  PRINT CALL(&PAD WITH V = 123, L = 10) : END
+	110  LABEL &PAD : PRINT '*** THIS WILL NEVER PRINT ***'
+	120  LOCAL I, N = LEN(STR$(V))
+	130    IF N >= L RETURN V
+	140    FOR I = 1 TO L - N
+	150      PRINT ' ';
+	160    NEXT
+	170  RETURN V
+
+	::::: ON expr GOTO line , ... ::::::::::::::::::::::::::::::::::
+
+	Transfers control to one of the given lines, depending on the
+	value of the expression following ON. When the expression
+	evaluates to one, control is transfered to the first line,
+	when it is two, to the second line, etc. When the expression
+	results in a value less than one or greater than the number
+	of lines specified, then the ON/GOTO statement has no effect.
+
+	----- EXAMPLE -----
+
+	100  ON X GOTO 120, 130, 140
+	110  PRINT 'X IS UNKNOWN' : STOP
+	120  PRINT 'X IS 1' : END
+	130  PRINT 'X IS 2' : END
+	140  PRINT 'X IS 3' : END
+
+	::::: REPEAT : body : UNTIL condition ::::::::::::::::::::::::::
+
+	Repeats a body of statements until a given condition becomes
+	"true" (non-zero). The condition is checked at the end of the
+	loop, so the statements in the loop body are always executed at
+	least once.
+
+	REPEAT/UNTIL may be nested and neither REPEAT nor UNTIL must
+	occur at the beginning of a line. However, placing both of them
+	in the first command position is considered to be good style.
+
+	Transferring control into or out of a REPEAT body with GOTO is
+	an error and will eventually result in a nesting (NST) error.
+
+	REPEAT/UNTIL works fine in interactive mode.
+
+	See also: WHILE/WEND, FOR/TO/NEXT.
+
+	----- EXAMPLE -----
+
+	100 REPEAT
+	110   PRINT 'Y/N '; : INPUT A$
+	120 UNTIL A$ = 'Y' OR A$ = 'N'
+
+	::::: RETURN [ expr ] ::::::::::::::::::::::::::::::::::::::::::
+
+	Returns from a subprogram that has been invoked by GOSUB.
+	Control will be transferred back to the statement immediately
+	following the invoking GOSUB.
+
+	When an expression is specified after RETURN, this expression
+	will be delivered back to a CALL( operator when the subprogram
+	is invoked by CALL( instead of GOSUB.
+
+	When there is a LOCAL block that has been declared in the called
+	subprogram, RETURN removes that local block before returning,
+	but *after* evaluating its return value (if any). So when RETURN
+	is used to remove a LOCAL block, the value of a *local* variable
+	can be returned (listing to the left):
+
+	100  REM LOCAL RETURN         100  REM ALTERNATIVE VERSION
+	110  LOCAL I, R = 0           110  LOCAL I, R = 0
+	120    FOR I = 1 TO X         120    FOR I = 1 TO X
+	130      LET R = R * I        130      LET R = R * I
+	140    NEXT                   140    NEXT
+	150  RETURN R                 150    LET X = R
+	                              160  ENDLOC
+	                              170  RETURN X
+
+	When calling this program, the value of the local variable "R"
+	would be returned *after* restoring the "outer" value of "R"
+	(see LOCAL). So this program would be equivalent to the
+	alternative version above, but would not require "X" to be
+	global.
+
+	::::: STOP :::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+	Stops program execution with a result code of STO. STOP is
+	normally used to indicate abnormal program termination; use
+	END to end program execution regularly.
+
+	::::: WHILE condition : body : WEND ::::::::::::::::::::::::::::
+
+	Repeats a body of statements as long as a given condition
+	remains "true" (non-zero). When the condition is already false
+	when the WHILE statement is processed for the first time, the
+	entire body will be skipped without executing its statements
+	ever. WEND transfers control back to WHILE. WHILE/WEND may be
+	nested.
+
+	Transferring control into or out of a WHILE body with GOTO is
+	an error and will eventually result in a nesting (NST) error.
+
+	The WHILE and WEND keywords must be the first commands in their
+	lines. Otherwise a syntax error (SYN) is raised. WHILE/WEND does
+	not work in interactive mode.
+
+	See also: REPEAT/UNTIL, FOR/TO/NEXT.
+
+	----- EXAMPLE -----
+
+	100  REM PRINT ALL LINES OF A FILE
+	110  INPUT A$
+	120  WHILE NOT EOF(0)
+	130    PRINT A$
+	140    INPUT A$
+	150  WEND
+
+
+	----------------------------------------------------------------
+	::::: THE BASIC COMPILER :::::::::::::::::::::::::::::::::::::::
+	----------------------------------------------------------------
+
+	BASCOMP is a compiler that compiles a large subset of MINBASIC
+	to C. The resulting C program implements a virtual stack machine
+	running the source program. BASCOMP does not emit very efficient
+	code, but nevertheless it achieves a significant improvement of
+	run times when compared to interpreted code. Its primary purpose,
+	though, is the distribution of programs in binary or obfuscated
+	source form. The following table lists the run times of some
+	sample applications (on a 600MHz 686-class processor).
+
+	+---------------------+------------+-----------+
+	|                     |  MINBASIC  |  BASCOMP  |
+	+---------------------+------------+-----------+
+	| Sieve, 3512 primes  |   15.0s    |    2.0s   |
+	| BASCOMP bootstrap   |    4.7s    |    1.3s   |
+	+---------------------+------------+-----------+
+
+	::::: USAGE ::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+	The BASCOMP program accepts three arguments: the input file
+	(BASIC source code), the output file (C source code), and a
+	library file ("bascomp.rt"). It reads the source file, compiles
+	it to C and writes it to the output file. The BASCC (BASIC
+	compiler controller) command is typically used to control the
+	compilation process, so the command
+
+	bascc program.bas
+
+	will compile "program.bas" and write an executable program.
+
+	::::: LIMITATIONS (SCOPING) ::::::::::::::::::::::::::::::::::::
+
+	The primary limitation of BASCOMP is that its source programs
+	have to comply with much stricter scoping rules than ordinary
+	MINBASIC programs. For instance, the following program is a
+	valid MINBASIC program, but it cannot be compiled successfully
+	with BASCOMP:
+
+	100  PRINT CALL(110 WITH X = 5) : END
+	110  LOCAL Z = X
+	120    GOTO 140 : REM THIS DOES NOT WORK
+	130  RETURN
+	140  LOCAL R = 1, I
+	150    FOR I = 1 TO Z
+	160      LET R = R * I
+	170    NEXT
+	180  RETURN R
+
+	Because of the transfer of control from one LOCAL block to
+	another, the runtime behavior of the object program generated by
+	BASCOMP is undefined, while the same program executes fine when
+	interpreted by the MINBASIC interpreter.
+
+	NOTE: the compiler does not recognize this kind of error, so it
+	will just generate a program with undefined runtime behavior.
+
+	::::: LIMITATIONS (DIM VALUES) :::::::::::::::::::::::::::::::::
+
+	Another limitation regards the specification of DIM values. The
+	size of a dimensioned variable must be known at compile time, so
+
+	100  DIM Z(100)
+
+	or even
+
+	100  LET Y = 100
+	110  LET X = Y * 2
+	120  DIM Z(X)
+
+	would work (because the compiler attempts to track the values of
+	variables at compile time), but the following program would not
+	work:
+
+	100  PRINT "SIZE? "; : INPUT X
+	110  DIM Z(X)
+
+	Re-dimensioning an array later in a program is also prone to
+	failure. In the following program fragment, the size of the
+	array "Z" is set to 100 (not 1000) by the compiler:
+
+	 100 LET N = 100
+	 110 DIM Z(N)
+	     ...
+	1000 LET N = 1000
+	1010 GOTO 110
+
+	::::: LIMITATIONS (UNIMPLEMENTED) ::::::::::::::::::::::::::::::
+
+	The following commands are not implemented in BASCOMP:
+
+	All interactive commands (COPY, DEL, ED, INS, LOAD, MOVE, RENUM,
+	SEARCH) as well as the FILES, LIST, NEW, POKE, SAVE, TRON, and
+	TROFF commands. CLEAR is a null-operation. SYSTEM and END are
+	synonyms. The PEEK( function is also unimplemented.
+
+	::::: BASCOMP ERROR CODES ::::::::::::::::::::::::::::::::::::::
+
+	The error codes emitted by the BASCOMP compiler are equal to
+	those generated by the MINBASIC interpreter. However, there are
+	a few additional codes, which are listed below.
+
+	::::: DBG : debug trap :::::::::::::::::::::::::::::::::::::::::
+	
+	In most cases this will be a stack pointer underflow. Because
+	the compiler is intended to generate code that balances the
+	stack properly, this code indicates a compiler bug.
+
+	::::: EXT : program exit :::::::::::::::::::::::::::::::::::::::
+
+	A jump to an unspecified location happened. This is most likely
+	caused by transferring control between two local scopes. This
+	error is also caused when a program is not terminated by an END
+	command.
+
+	::::: SEQ : sequence error :::::::::::::::::::::::::::::::::::::
+
+	Line numbers of the input program were not in strictly ascending
+	order.
+
+	::::: VAL : value expected :::::::::::::::::::::::::::::::::::::
+
+	The value of an expression could not be computed at compile
+	time. Typically caused by variables with unknown values in the
+	size specifications of DIM statements.
+
+
+	----------------------------------------------------------------
+	::::: SEMI-FORMAL SYNTAX :::::::::::::::::::::::::::::::::::::::
+	----------------------------------------------------------------
+
+	program := number command
+	         | number command <newline> program
+	         ;
+
+	interactive-command :=
+	          COPY expr , expr
+	        | COPY expr , expr , expr
+	        | DEL expr
+	        | DEL expr , expr
+	        | ED
+	        | ED expr
+	        | INS expr
+	        | INS expr , expr
+	        | LOAD # device
+	        | MOVE expr , expr
+	        | MOVE expr , expr , expr
+	        | RENUM expr
+	        | RENUM expr , expr
+	        | RUN
+	        | RUN line-id
+	        | SEARCH str-expr
+	        | SEARCH str-expr , expr
+	        | SEARCH str-expr , expr , expr
+	        | /
+	        | / expr
+	        | <
+	        | >
+	        | expr
+	        | string
+	        ;
+
+	command := CLEAR
+	         | CLOSE # device
+	         | DATA data-list
+	         | DEF fun-var ( var ) = expr
+	         | DIM dimensions
+	         | END
+	         | EXIT
+	         | ERASE str-expr
+	         | FILES
+	         | FOR var = expr TO expr : body : NEXT
+	         | FOR var = expr TO expr STEP expr : body : NEXT
+	         | GOSUB line-id
+	         | GOSUB line-id WITH locals
+	         | GOTO line-id
+	         | IF expr body
+	         | IF expr THEN : body : ENDIF
+	         | IF expr THEN : body : ELSE : body : ENDIF
+	         | IOCTL # device , str-expr
+	         | INPUT var-list
+	         | INPUT # device
+	         | INPUT # device , var-list
+	         | LABEL label
+	         | LET assignments
+	         | LIST
+	         | LIST expr
+	         | LIST expr , expr
+	         | local-defs : body : ENDLOC
+	         | local-defs : body : RETURN
+	         | local-defs : body : RETURN expr
+	         | NEW
+	         | ON expr GOTO num-list
+	         | OPEN # device , str-expr
+	         | POKE expr , expr
+	         | PRINT print-list
+	         | PRINT # device
+	         | PRINT # device , print-list
+	         | READ var-list
+	         | REM characters
+	         | RESTORE
+	         | RESTORE line-id
+	         | REPEAT : body : UNTIL expr
+	         | RETURN
+	         | RETURN expr
+	         | SAVE # device
+	         | STOP
+	         | SYSTEM
+	         | TRON
+	         | TROFF
+	         | WHILE expr : body : WEND
+	         ;
+
+	body := command
+	      | command : body
+	      ;
+
+	assignments := assignment
+	             | assignment , assignments
+	             ;
+
+	local-defs := LOCAL locals
+	            | LOCAL locals : local-defs
+	            ;
+
+	locals := assignment , locals
+	        | var , locals
+	        | str-var , locals
+	        ;
+
+	assignment := var = expr
+	            | str-var = str-expr
+	            ;
+
+	dimensions := variable ( expression )
+	            | variable ( expression ) , dimensions
+	            ;
+
+	var-list := var
+	          | var , var-list
+	          | str-var
+	          | str-var , var-list
+	          ;
+
+	num-list := number
+	          | number , num-list
+	          ;
+
+	data-list := number
+	           | number , data-list
+	           | - number
+	           | - number , data-list
+	           | string
+	           | string , data-list
+	           ;
+
+	print-list := <empty>
+	            | expr
+	            | expr ',' print-list
+	            | expr ';' print-list
+	            | str-expr
+	            | str-expr ',' print-list
+	            | str-expr ';' print-list
+	            ;
+
+	expr := logand
+	      | logand OR expr
+	      ;
+
+	logand := negation
+	        | negation AND logand
+	        ;
+
+	negation := relop
+	          | NOT relop
+	          ;
+
+	relop := sum
+	       | sum = sum
+	       | sum <> sum
+	       | sum < sum
+	       | sum > sum
+	       | sum <= sum
+	       | sum >= sum
+	       | str-expr = str-expr
+	       | str-expr <> str-expr
+	       | str-expr < str-expr
+	       | str-expr > str-expr
+	       | str-expr <= str-expr
+	       | str-expr >= str-expr
+	       ;
+
+	sum := term
+	     | term + sum
+	     | term - sum
+	     ;
+
+	term := factor
+	      | factor * term
+	      | factor / term
+	      ;
+
+	factor := number
+	        | var
+	        | var ( expr )
+	        | fun-var ( expr )
+	        | ( expr )
+	        | - factor
+	        | ABS( expr )
+	        | ASC( str-expr )
+	        | CALL( line-id )
+	        | CALL( line-id WITH assignments )
+	        | EOF( expr )
+	        | FRE( expr )
+	        | LEN( str-expr )
+	        | PEEK( expr )
+	        | POS( str-expr , str-expr )
+	        | RND( expr )
+	        | VAL( str-expr )
+	        ;
+
+	str-factor := str
+	            | str-var
+	            | str-var ( expr )
+	            | CHR$( expr )
+	            | MID$( str-expr , expr )
+	            | MID$( str-expr , expr , expr )
+	            | STR$( expr )
+	            ;
+
+	str-expr := str-factor
+	          | str-expr + str-factor
+	          ;
+
+	str := ''
+	     | ' & characters & '
+	     ;
+
+	characters := <printable-character>
+	            | <printable-character> & characters
+	            ;
+
+	var := letter
+	     | letter & digit
+	     ;
+
+	str-var := letter & $ ;
+
+	fun-var := letter & % ;
+
+	line-id := number
+	         | label
+	         ;
+
+	device := number ;
+
+	number := digit
+	        | digit & number
+	        ;
+
+	label := '&' & label-id ;
+
+	label-id := label-char
+	          | label-char & label-id
+	          ;
+
+	label-char := letter | digit | . ;
+
+	digit := 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 ;
+
+	letter := A | B | C | D | E | F | G | H | I | J | K | L | M |
+	          N | O | P | Q | R | S | T | U | V | W | X | Y | Z ;
+
+
+	----------------------------------------------------------------
+	::::: ERROR CODES ::::::::::::::::::::::::::::::::::::::::::::::
+	----------------------------------------------------------------
+
+	::::: ARG : wrong argument :::::::::::::::::::::::::::::::::::::
+
+	The "function" argument of IOCTL does not specify a valid
+	operation.
+
+	::::: BRK : break ::::::::::::::::::::::::::::::::::::::::::::::
+
+	Program execution interrupted by the user.
+
+	::::: DEV : invalid device handle ::::::::::::::::::::::::::::::
+
+	A device handle (#number) in OPEN, CLOSE, LOAD, etc., is not 
+	valid or does not specify an open file.
+
+	::::: DIV : divide by zero :::::::::::::::::::::::::::::::::::::
+
+	A division by zero has occurred. This happens when either the
+	second operand of "/" is zero or zero has been passed to RND(.
+
+	::::: DUP : duplicate label ::::::::::::::::::::::::::::::::::::
+
+	The same label name occurs in multiple LABEL statements.
+
+	::::: EOD : end of DATA ::::::::::::::::::::::::::::::::::::::::
+
+	A READ has been attempted, but no more DATA is available.
+
+	::::: FUN : undefined function :::::::::::::::::::::::::::::::::
+
+	A function was called without defining it first (see DEF).
+
+	::::: INT : interactive mode only ::::::::::::::::::::::::::::::
+
+	A program contains a command that works in interactive mode
+	only. Such commands include: COPY, DEL, ED, INS, LOAD, MOVE,
+	RENUM, RUN, SEARCH.
+
+	Also raised by the shortcuts "/", "<", and ">" when used in
+	command positions.
+
+	::::: IOX : I/O error ::::::::::::::::::::::::::::::::::::::::::
+
+	An IOCTL, OPEN, or ERASE command failed for any reason, such as
+	lack of access permissions, invalid path, etc.
+
+	::::: LAB : label not defined ::::::::::::::::::::::::::::::::::
+
+	A label referenced by a GOTO, ON/GOTO, GOSUB, RESTORE statement
+	or by an application of CALL( does not exist, i.e. there is no
+	corresponding LABEL statement.
+
+	::::: LIN : invalid line number ::::::::::::::::::::::::::::::::
+
+	A command references a line number that does not exist. This
+	error can also be generated by commands that manipulate program
+	memory, such as MOVE, DEL, RENUM, etc.
+
+	::::: LLO : line too long ::::::::::::::::::::::::::::::::::::::
+
+	A line read by INPUT or by the interpreter itself is too long.
+
+	::::: MEM : out of memory ::::::::::::::::::::::::::::::::::::::
+
+	The interpreter ran out of memory. This can be caused by DIM
+	statements with large sizes, string operations, local variable
+	allocation, too many LABELs, or too many line numbers in RENUM.
+
+	::::: NST : nesting error ::::::::::::::::::::::::::::::::::::::
+
+	A nesting error occurs whenever the interpreter expects a
+	specific kind of scope delimiter, but a different one (or none
+	at all) is found. Here are some examples:
+
+	100  FOR I = 1 TO 10
+	110  WHILE 1
+	120    NEXT : REM ***** "WEND" MUST COME BEFORE "NEXT"
+	130  WEND
+
+	100  REPEAT : REM ***** NO MATCHING "UNTIL" FOUND
+
+	This error is also caused when LOAD is nested, i.e. when a
+	program being loaded attempts to run LOAD.
+
+	::::: NYI : not (yet) implemented ::::::::::::::::::::::::::::::
+
+	This should not happen.
+
+	::::: OPR : invalid operator :::::::::::::::::::::::::::::::::::
+
+	An unknown operator (special character) has been found.
+
+	::::: OVF : numeric overflow :::::::::::::::::::::::::::::::::::
+
+	The value of a product or a sum is too big. Also caused when
+	line numbers overflow in RENUM.
+
+	::::: RNG : parameter count out of range :::::::::::::::::::::::
+
+	Presently there is an arbitrary limit (16) on arguments of
+	ON/GOTO. RNG is raised when this limit is exceeded.
+
+	::::: SBO : string buffer overflow :::::::::::::::::::::::::::::
+
+	A string concatenation ("+") would result in a string that is
+	longer than a string buffer (125 characters).
+
+	::::: STK : stack overflow/underflow :::::::::::::::::::::::::::
+
+	An overflow/underflow (too many/too few objects) of the internal
+	interpreter stack occurred. This happens when a scope delimiter
+	(NEXT, WEND, etc) without a matching loop (FOR, WHILE) is found
+	or when returning from a subprogram that has not been invoked
+	with GOSUB or CALL(.
+
+	An overflow happens when GOSUB or CALL( is nested too deeply.
+	The latter case is typically limited to recursive (self-calling)
+	programs.
+
+	::::: STO : program stopped ::::::::::::::::::::::::::::::::::::
+
+	Program halted by STOP.
+
+	::::: STR : unterminated string ::::::::::::::::::::::::::::::::
+
+	A string literal is missing its closing delimiter "'". Often
+	caused by "'" characters inside of the string that have not
+	been properly escaped ("''").
+
+	::::: SUB : subscript out of range :::::::::::::::::::::::::::::
+
+	A subscript to a variable or string variable is too large (the
+	corresponding element does not exist). See DIM.
+
+	::::: SYN : syntax error :::::::::::::::::::::::::::::::::::::::
+
+	A command does not comply with the language specified in this
+	document.
+
+	::::: TLO : token too long :::::::::::::::::::::::::::::::::::::
+
+	A keyword (command or function name) is too long. This always
+	implies a syntax error (SYN).
+
+	::::: TYP : wrong type in READ/DATA ::::::::::::::::::::::::::::
+
+	Caused by READing a numeric variable when the next DATA element
+	is a string or vice versa.
+
+	::::: XXX : unknown error ::::::::::::::::::::::::::::::::::::::
+
+	An internal error occurred. Time to file a bug report.
+
+	----------------------------------------------------------------
+	::::: THAT'S ALL, FOLKS ::::::::::::::::::::::::::::::::::::::::
+	----------------------------------------------------------------
+
