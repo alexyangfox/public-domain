@@ -1,0 +1,44 @@
+/** @mainpage WanderingHorse.net C libs
+
+This is the main doxygen index for a few different APIs. See the Pages
+links for the specific APIs.
+
+A summary of the libs:
+
+- vappendf is a family of generic printf-like for sending formatted
+output to arbitrary destinations.
+
+- whclob is an API for working with dynamically-resizable character data,
+most useful for creating strings dynamically and managing their memory.
+
+- whhash is a hashtable implementation.
+
+- whgc is a "sort of" garbage collection library based off of whhash.
+
+- whrc is a small reference counting garbage collector based off of
+whhash.
+
+- pegc is an experimental library for creating PEG-style parsers via C
+code.
+
+Some of the driving principals of this code:
+
+- Each API/library is specialized for a single category of operations.
+
+- Dependencies between the APIs is kept to a minimum, to allow easier
+copying of the libs into arbitrary source trees.
+
+- API documentation is fairly stringent. i'm a stickler for good API
+docs.
+
+
+
+@section index_sec_related Links to related materials
+
+- http://wanderinghorse.net/computing/ - links to my various
+computer-related activities.
+
+- http://fossil.wanderinghorse.net - source code repositories for this
+code and more.
+
+*/
