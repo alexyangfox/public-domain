@@ -1,0 +1,28 @@
+/* file "convertable.salm" */
+
+/*
+ *  This file contains functions for generating types of values that can be
+ *  converted to or from other types of values.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+quark et_convertable_unknown;
+
+pure function convertable(target : type !{}, source : type !{},
+        tag : {et_convertable_unknown} := et_convertable_unknown)
+                returns boolean :=
+  nb_dll "convertable.so" : "convertable" pure_safe;
+
+function convertable_to(ageless target : type !{}) returns type !{}
+  (type (type !{} &
+         <<pure function(x) returns boolean
+             ((x in type !{}) && convertable(target, x))>>));
+
+function convertable_from(ageless source : type !{}) returns type !{}
+  (type (type !{} &
+         <<pure function(x) returns boolean
+             ((x in type !{}) && convertable(x, source))>>));

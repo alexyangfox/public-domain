@@ -1,0 +1,1549 @@
+#!/usr/local/bin/salmoneye
+/* file "generate_makefile.salm" */
+
+/*
+ *  This file contains the implementation of code to generate a Makefile for
+ *  the c_foundations library.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+use "build/makefile_generation.salm" : "build/makefile_generation.si";
+use "build/makefile_generation2.salm" : "build/makefile_generation2.si";
+
+
+quark enumeration compilation_feature
+  {
+    CF_FAST,
+    CF_MEMORY_TEST,
+    CF_ASSERT_MALLOCED_SIZES,
+    CF_DISABLE_CHAR8_OPTIMIZATION,
+    CF_CODE_POINTS,
+    CF_MULTI
+  };
+
+immutable compilation_feature_by_number : array[compilation_feature] :=
+  [
+    CF_FAST,
+    CF_MEMORY_TEST,
+    CF_ASSERT_MALLOCED_SIZES,
+    CF_DISABLE_CHAR8_OPTIMIZATION,
+    CF_CODE_POINTS,
+    CF_MULTI
+  ];
+
+function MAKE_BIT(bit_num : compilation_feature)
+  {
+    switch (bit_num)
+    case ({CF_FAST})
+        return (1 << 0);
+    case ({CF_MEMORY_TEST})
+        return (1 << 1);
+    case ({CF_ASSERT_MALLOCED_SIZES})
+        return (1 << 2);
+    case ({CF_DISABLE_CHAR8_OPTIMIZATION})
+        return (1 << 3);
+    case ({CF_CODE_POINTS})
+        return (1 << 4);
+    case ({CF_MULTI})
+        return (1 << 5);;
+    assert(false);
+  };
+
+
+lepton object_file_record
+  [
+    object_file_name : string,
+    flags : string,
+    feature_bits : [0...+oo),
+    dependence_file_name : string,
+    build_dependences : string,
+    next : *.lazy object_file_record
+  ];
+
+lepton c_file_record
+  [
+    c_file_name : string | {null},
+    depends_upon : array[string],
+    object_files : *.object_file_record,
+    next : *.lazy c_file_record
+  ];
+
+lepton makefile_registry
+  [
+    c_file_index : string --> *c_file_record,
+    record_list : *.c_file_record,
+    name_suffixes_by_feature : compilation_feature --> string,
+    compile_flags_by_feature : compilation_feature --> string
+  ];
+
+immutable compilation_feature_info := type fields
+  [
+    which_feature : compilation_feature,
+    name_suffix : string,
+    compile_flag : string
+  ];
+
+function make_compilation_feature_info(which_feature : compilation_feature,
+        name_suffix : string, compile_flag : string)
+                returns compilation_feature_info
+  {
+    return [which_feature := which_feature, name_suffix := name_suffix,
+            compile_flag := compile_flag];
+  };
+
+immutable c_file_header_list := type fields
+  [
+    c_file_name : string,
+    required_c_files : array[string]
+  ];
+
+function make_c_file_header_list(c_file_name : string,
+        required_c_files : array[string]) returns c_file_header_list
+  {
+    return [c_file_name := c_file_name, required_c_files := required_c_files];
+  };
+
+immutable object_feature_pairing := type fields
+  [
+    c_file_name : string,
+    feature_bits : [0...+oo)
+  ];
+
+function make_object_feature_pairing(c_file_name : string,
+        feature_bits : [0...+oo)) returns object_feature_pairing
+  {
+    return [c_file_name := c_file_name, feature_bits := feature_bits];
+  };
+
+lepton object_feature_lookup
+  [
+    bit_aa : array[integer],
+    index : !{} --> ([0...+oo))
+  ];
+
+immutable executable_info := type fields
+  [
+    driver_c_file : string,
+    executable_name : string,
+    features : array[object_feature_pairing]
+  ];
+
+function make_executable_info(driver_c_file : string, executable_name : string,
+        features : array[[...]] := []) returns executable_info
+  {
+    return [driver_c_file := driver_c_file, executable_name := executable_name,
+            features := apply(function(x) (call(make_object_feature_pairing,
+                                           x)), features)];
+  };
+
+immutable simple_test_info := type fields
+  [
+    executable : executable_info,
+    test_name : string,
+    case_arguments : array[string]
+  ];
+
+function make_simple_test_info(executable : [...],
+        test_name : string, case_arguments : array[string] := [])
+                returns simple_test_info
+  {
+    return [executable := call(make_executable_info, executable),
+            test_name := test_name, case_arguments := case_arguments];
+  };
+
+immutable coverage_test_info := type fields
+  [
+    test_name : string,
+    c_file_to_cover : string,
+    executables : array[executable_info],
+    harness : string | {null},
+    unreachable_code_points : array[string]
+  ];
+
+function make_coverage_test_info(test_name : string, c_file_to_cover : string,
+        executables : array[[...]], harness : string | {null},
+        unreachable_code_points : array[string]) returns coverage_test_info
+  {
+    return [test_name := test_name, c_file_to_cover := c_file_to_cover,
+            executables := apply(function(x) (call(make_executable_info, x)),
+                                 executables), harness := harness,
+            unreachable_code_points := unreachable_code_points];
+  };
+
+
+function apply(to_apply : !{} <-- (!{}), data : array) returns array
+  {
+    variable result := [];
+    iterate (element; data)
+        result ~= [to_apply(element)];;
+    return result;
+  };
+
+immutable master_feature_database : array[compilation_feature_info] :=
+    apply(function(x) (call(make_compilation_feature_info, x)),
+  [
+      [ CF_FAST, "_opt", "-O4 -DNDEBUG -Wno-uninitialized" ],
+      [ CF_MEMORY_TEST, "_m", "-DCHECK_MEMORY_ALLOCATION" ],
+      [ CF_ASSERT_MALLOCED_SIZES, "_ms", "-DASSERT_MALLOCED_SIZES" ],
+      [ CF_DISABLE_CHAR8_OPTIMIZATION, "_no_char8_opt",
+        "-DDISABLE_CHAR8_OPTIMIZATION" ],
+      [ CF_CODE_POINTS, "_coverage",
+        "'-DCODE_POINT_DECLARATION=extern void " ~
+                "test_code_point(const char *);'" ~
+        " '-Dcode_point(x)={" ~
+                           " static int done = 0;" ~
+
+                           " if (done == 0)" ~
+                             " {" ~
+                               " done = 1;" ~
+                               " test_code_point(#x);" ~
+                             " }" ~
+                         " }'" ],
+      [ CF_MULTI, "_multi", "-DMULTI_THREADED" ]
+  ]);
+
+immutable master_header_database : array[c_file_header_list] :=
+    apply(function(x) (call(make_c_file_header_list, x)),
+  [
+      [ "test_print_formatting/test_sprintf_driver.c",
+          [
+            "diagnostic.c",
+            "memory_allocation.c"
+          ]
+      ],
+
+      [ "test_print_formatting/test_print_formatting_driver.c",
+          [
+            "diagnostic.c",
+            "memory_allocation_test.c",
+            "print_formatting.c",
+            "print_formatting/sprintf_floating_point_conversion.c",
+            "print_formatting/division_floating_point_conversion.c",
+            "print_formatting/sprintf_pointer_conversion.c",
+            "print_formatting/bytewise_hex_pointer_conversion.c",
+            "print_formatting/floating_point_output.c"
+          ]
+      ],
+
+      [ "string_index.c",
+          [
+            "memory_allocation.c"
+          ]
+      ],
+
+      [ "merge_dense_integer_arrays.c",
+          [
+            "memory_allocation.c"
+          ]
+      ],
+
+      [ "memory_allocation.c",
+          [
+            "diagnostic.c"
+          ]
+      ],
+
+      [ "diagnostic.c",
+          [
+            "buffer_print.c",
+            "memory_allocation.c"
+          ]
+      ],
+
+      [ "buffer_print.c",
+          [
+            "memory_allocation.c",
+            "print_formatting.c"
+          ]
+      ],
+
+      [ "string_aam.c",
+          [
+            "memory_allocation.c"
+          ]
+      ],
+
+      [ "trace.c",
+          [
+            "diagnostic.c",
+            "memory_allocation.c",
+            "buffer_print.c",
+            "print_formatting.c"
+          ]
+      ],
+
+      [ "print_formatting.c",
+          [
+            "diagnostic.c",
+            "print_formatting/floating_point_output.c",
+            "print_formatting/sprintf_floating_point_conversion.c",
+            "print_formatting/sprintf_pointer_conversion.c",
+            "memory_allocation.c"
+          ]
+      ],
+
+      [ "print_formatting/floating_point_output.c",
+          [
+            "diagnostic.c",
+            "memory_allocation.c"
+          ]
+      ],
+
+      [ "print_formatting/sprintf_floating_point_conversion.c",
+          [
+            "diagnostic.c",
+            "memory_allocation.c",
+            "print_formatting/floating_point_output.c"
+          ]
+      ],
+
+      [ "print_formatting/division_floating_point_conversion.c",
+          [
+            "memory_allocation.c",
+            "print_formatting/floating_point_output.c",
+            "-lm"
+          ]
+      ],
+
+      [ "print_formatting/sprintf_pointer_conversion.c",
+          [
+          ]
+      ],
+
+      [ "print_formatting/bytewise_hex_pointer_conversion.c",
+          [
+            "memory_allocation.c"
+          ]
+      ],
+
+      [ "test_memory_allocation_test.c",
+          [
+            "memory_allocation_test.c"
+          ]
+      ],
+
+      [ "test_string_index.c",
+          [
+            "memory_allocation_test.c",
+            "string_index.c"
+          ]
+      ],
+
+      [ "test_merge_dense_integer_arrays.c",
+          [
+            "memory_allocation_test.c",
+            "merge_dense_integer_arrays.c"
+          ]
+      ],
+
+      [ "memory_allocation_test.c",
+          [
+          ]
+      ]
+  ]);
+
+immutable extra_clean_targets : array[string] :=
+  [
+    "code_points.txt",
+    "sorted_code_points.txt",
+    "unique_sorted_code_points.txt",
+    "tested_code_points.txt",
+    "sorted_tested_code_points.txt",
+    "unique_sorted_tested_code_points.txt"
+  ];
+
+immutable other_sources : array[string] :=
+  [
+    "build/makefile_generation.si",
+    "build/makefile_generation.salm",
+    "build/makefile_generation2.si",
+    "build/makefile_generation2.salm"
+  ];
+
+immutable simple_tests : array[simple_test_info] :=
+    apply(function(x) (call(make_simple_test_info, x)),
+  [
+      [
+          [ "test_string_index.c",
+            "test_string_index"
+          ],
+        "run_test_string_index"
+      ],
+      [
+          [ "test_string_index.c",
+            "test_string_index_no_char8_opt",
+              [ [ "string_index.c", MAKE_BIT(CF_DISABLE_CHAR8_OPTIMIZATION) ] ]
+          ],
+        "run_test_string_index_no_char8_opt"
+      ],
+      [
+          [ "test_merge_dense_integer_arrays.c",
+            "test_merge_dense_integer_arrays"
+          ],
+        "run_test_merge_dense_integer_arrays"
+      ],
+      [
+          [ "test_print_formatting/test_sprintf_driver.c",
+            "test_sprintf"
+          ],
+        "run_test_sprintf"
+      ],
+      [
+          [ "test_print_formatting/test_print_formatting_driver.c",
+            "do_test_print_formatting"
+          ],
+        "run_test_print_formatting",
+          [ "1", "2" ]
+      ]
+  ]);
+
+immutable string_index_unreachable_code_points : array[string] :=
+  [
+    /* Code point 123 can't be tested on machines with 8-bit char types. */
+    "123",
+    /* Code points 148-155 can't be tested on machines with 8-bit char types.
+     */
+    "148",
+    "149",
+    "150",
+    "151",
+    "152",
+    "153",
+    "154",
+    "155",
+    /* Code point 254 can't be tested on machines with 8-bit char types. */
+    "254",
+    /* Code point 300 can't be tested on machines with 8-bit char types. */
+    "300"
+  ];
+
+immutable merge_dense_integer_arrays_unreachable_code_points : array[string] :=
+  [
+  ];
+
+immutable memory_allocation_test_unreachable_code_points : array[string] :=
+  [
+    /* Code point 14 can't be tested without running out of memory. */
+    "14",
+    /* Code point 17 can't be tested without running out of memory. */
+    "17",
+    /* Code point 27 can't be tested without running out of memory. */
+    "27",
+    /* Code points 23 and 54-56 can't be tested without allocating such a vast
+     * number of blocks that memory would run out on any real system. */
+    "23",
+    "54",
+    "55",
+    "56"
+  ];
+
+immutable print_formatting_unreachable_code_points : array[string] :=
+  [
+    /* Code point 2 can't be tested on machines with twos-complement integer
+     * types. */
+    "2",
+    /* Code point 15 is for code to handle the case of printing UINT_MAX or
+     * more characters in a single format, so there's no easy way to test it
+     * without making a very large test case.  Because of this, we don't try to
+     * require our tests to hit this code point. */
+    "15",
+    /* Code point 156 can only be reached in the case where
+     * INT_MAX < USHRT_MAX.  This will be the case where short and and int are
+     * both the same number of bits and the signed versions are twos
+     * complement, but in most environments shorts are 16 bits and ints are 32
+     * bits, and code point 156 can't be reached in that case. */
+    "156",
+    /* Code point 328 is for code to handle the case of printing more than
+     * INT_MAX characters in a single format, so there's no easy way to test it
+     * without making a very large test case.  Because of this, we don't try to
+     * require our tests to hit this code point. */
+    "328",
+    /* Code point 332 is for code to handle the case of printing more than
+     * SHRT_MAX characters in a single format, so there's no easy way to test
+     * it without making a very large test case.  Because of this, we don't try
+     * to require our tests to hit this code point. */
+    "332",
+    /* Code point 336 is for code to handle the case of printing more than
+     * LONG_MAX characters in a single format, so there's no easy way to test
+     * it without making a very large test case.  Because of this, we don't try
+     * to require our tests to hit this code point. */
+    "336"
+  ];
+
+immutable floating_point_output_unreachable_code_points : array[string] :=
+  [
+    /* Code point 386 is for code to handle the case of printing UINT_MAX or
+     * more characters in a single format, so there's no easy way to test it
+     * without making a very large test case.  Because of this, we don't try to
+     * require our tests to hit this code point. */
+    "386"
+  ];
+
+immutable sprintf_floating_point_conversion_unreachable_code_points :
+        array[string] :=
+  [
+  ];
+
+immutable division_floating_point_conversion_unreachable_code_points :
+        array[string] :=
+  [
+  ];
+
+immutable coverage_tests : array[coverage_test_info] :=
+    apply(function(x) (call(make_coverage_test_info, x)),
+  [
+      [
+        "run_test_string_index_coverage",
+        "string_index.c",
+          [
+              [ "test_string_index.c", "test_string_index_coverage" ],
+              [ "test_string_index.c",
+                "test_string_index_no_char8_opt_coverage",
+                  [ [ "string_index.c", MAKE_BIT(CF_DISABLE_CHAR8_OPTIMIZATION)
+                    ]
+                  ]
+              ]
+          ],
+        null,
+        string_index_unreachable_code_points
+      ],
+      [
+        "run_test_merge_dense_integer_arrays_coverage",
+        "merge_dense_integer_arrays.c",
+          [
+              [ "test_merge_dense_integer_arrays.c",
+                "test_merge_dense_integer_arrays_coverage" ]
+          ],
+        null,
+        merge_dense_integer_arrays_unreachable_code_points
+      ],
+      [
+        "run_test_memory_allocation_test_coverage",
+        "memory_allocation_test.c",
+          [
+              [ "test_memory_allocation_test.c",
+                "test_memory_allocation_test_coverage" ]
+          ],
+        "./run_test_memory_allocation_test.perl",
+        memory_allocation_test_unreachable_code_points
+      ],
+      [
+        "run_test_print_formatting_coverage",
+        "print_formatting.c",
+          [
+              [ "test_print_formatting/test_print_formatting_driver.c",
+                "test_print_formatting_coverage" ]
+          ],
+        "./test_print_formatting/run_test_print_formatting.perl",
+        print_formatting_unreachable_code_points
+      ],
+      [
+        "run_test_floating_point_output_coverage",
+        "print_formatting/floating_point_output.c",
+          [
+              [ "test_print_formatting/test_print_formatting_driver.c",
+                "test_floating_point_output_coverage" ]
+          ],
+        "./test_print_formatting/run_test_print_formatting.perl",
+        floating_point_output_unreachable_code_points
+      ],
+      [
+        "run_test_sprintf_floating_point_conversion_coverage",
+        "print_formatting/sprintf_floating_point_conversion.c",
+          [
+              [ "test_print_formatting/test_print_formatting_driver.c",
+                "test_sprintf_floating_point_conversion_coverage" ]
+          ],
+        "./test_print_formatting/run_test_print_formatting.perl",
+        sprintf_floating_point_conversion_unreachable_code_points
+      ],
+      [
+        "run_test_division_floating_point_conversion_coverage",
+        "print_formatting/division_floating_point_conversion.c",
+          [
+              [ "test_print_formatting/test_print_formatting_driver.c",
+                "test_division_floating_point_conversion_coverage" ]
+          ],
+        "./test_print_formatting/run_test_print_formatting.perl",
+        division_floating_point_conversion_unreachable_code_points
+      ]
+  ]);
+
+immutable standard_check_object_features : array[object_feature_pairing] :=
+    apply(function(x) (call(make_object_feature_pairing, x)),
+  [
+      [ "buffer_print.c",
+        MAKE_BIT(CF_MEMORY_TEST) | MAKE_BIT(CF_ASSERT_MALLOCED_SIZES) ],
+      [ "diagnostic.c",
+        MAKE_BIT(CF_MEMORY_TEST) | MAKE_BIT(CF_ASSERT_MALLOCED_SIZES) ],
+      [ "print_formatting/floating_point_output.c",
+        MAKE_BIT(CF_MEMORY_TEST) | MAKE_BIT(CF_ASSERT_MALLOCED_SIZES) ],
+      [ "print_formatting/sprintf_floating_point_conversion.c",
+        MAKE_BIT(CF_MEMORY_TEST) | MAKE_BIT(CF_ASSERT_MALLOCED_SIZES) ],
+      [ "print_formatting/division_floating_point_conversion.c",
+        MAKE_BIT(CF_MEMORY_TEST) | MAKE_BIT(CF_ASSERT_MALLOCED_SIZES) ],
+      [ "print_formatting/sprintf_pointer_conversion.c",
+        MAKE_BIT(CF_MEMORY_TEST) | MAKE_BIT(CF_ASSERT_MALLOCED_SIZES) ],
+      [ "print_formatting/bytewise_hex_pointer_conversion.c",
+        MAKE_BIT(CF_MEMORY_TEST) | MAKE_BIT(CF_ASSERT_MALLOCED_SIZES) ],
+      [ "memory_allocation.c",
+        MAKE_BIT(CF_MEMORY_TEST) | MAKE_BIT(CF_ASSERT_MALLOCED_SIZES) ],
+      [ "merge_dense_integer_arrays.c",
+        MAKE_BIT(CF_MEMORY_TEST) | MAKE_BIT(CF_ASSERT_MALLOCED_SIZES) ],
+      [ "print_formatting.c",
+        MAKE_BIT(CF_MEMORY_TEST) | MAKE_BIT(CF_ASSERT_MALLOCED_SIZES) ],
+      [ "string_index.c",
+        MAKE_BIT(CF_MEMORY_TEST) | MAKE_BIT(CF_ASSERT_MALLOCED_SIZES) ],
+      [ "string_aam.c",
+        MAKE_BIT(CF_MEMORY_TEST) | MAKE_BIT(CF_ASSERT_MALLOCED_SIZES) ],
+      [ "trace.c",
+        MAKE_BIT(CF_MEMORY_TEST) | MAKE_BIT(CF_ASSERT_MALLOCED_SIZES) ],
+      [ "test_print_formatting/test_print_formatting_driver.c",
+        MAKE_BIT(CF_MEMORY_TEST) ],
+      [ "test_print_formatting/test_sprintf_driver.c",
+        MAKE_BIT(CF_MEMORY_TEST) ]
+  ]);
+
+immutable standard_fast_features : array[object_feature_pairing] :=
+    apply(function(x) (call(make_object_feature_pairing, x)),
+  [
+      [ "buffer_print.c",
+        MAKE_BIT(CF_FAST) ],
+      [ "diagnostic.c",
+        MAKE_BIT(CF_FAST) ],
+      [ "print_formatting/floating_point_output.c",
+        MAKE_BIT(CF_FAST) ],
+      [ "print_formatting/sprintf_floating_point_conversion.c",
+        MAKE_BIT(CF_FAST) ],
+      [ "print_formatting/division_floating_point_conversion.c",
+        MAKE_BIT(CF_FAST) ],
+      [ "print_formatting/sprintf_pointer_conversion.c",
+        MAKE_BIT(CF_FAST) ],
+      [ "print_formatting/bytewise_hex_pointer_conversion.c",
+        MAKE_BIT(CF_FAST) ],
+      [ "memory_allocation.c",
+        MAKE_BIT(CF_FAST) ],
+      [ "merge_dense_integer_arrays.c",
+        MAKE_BIT(CF_FAST) ],
+      [ "print_formatting.c",
+        MAKE_BIT(CF_FAST) ],
+      [ "string_index.c",
+        MAKE_BIT(CF_FAST) ],
+      [ "string_aam.c",
+        MAKE_BIT(CF_FAST) ],
+      [ "trace.c",
+        MAKE_BIT(CF_FAST) ],
+      [ "test_print_formatting/test_print_formatting_driver.c",
+        MAKE_BIT(CF_FAST) ],
+      [ "test_print_formatting/test_sprintf_driver.c",
+        MAKE_BIT(CF_FAST) ]
+  ]);
+
+immutable standard_multi_features : array[object_feature_pairing] :=
+    apply(function(x) (call(make_object_feature_pairing, x)),
+  [
+      [ "trace.c", MAKE_BIT(CF_MULTI) ]
+  ]);
+
+immutable standard_check_multi_features : array[object_feature_pairing] :=
+    apply(function(x) (call(make_object_feature_pairing, x)),
+  [
+      [ "buffer_print.c",
+        MAKE_BIT(CF_MEMORY_TEST) | MAKE_BIT(CF_ASSERT_MALLOCED_SIZES) ],
+      [ "diagnostic.c",
+        MAKE_BIT(CF_MEMORY_TEST) | MAKE_BIT(CF_ASSERT_MALLOCED_SIZES) ],
+      [ "print_formatting/floating_point_output.c",
+        MAKE_BIT(CF_MEMORY_TEST) | MAKE_BIT(CF_ASSERT_MALLOCED_SIZES) ],
+      [ "print_formatting/sprintf_floating_point_conversion.c",
+        MAKE_BIT(CF_MEMORY_TEST) | MAKE_BIT(CF_ASSERT_MALLOCED_SIZES) ],
+      [ "print_formatting/division_floating_point_conversion.c",
+        MAKE_BIT(CF_MEMORY_TEST) | MAKE_BIT(CF_ASSERT_MALLOCED_SIZES) ],
+      [ "print_formatting/sprintf_pointer_conversion.c",
+        MAKE_BIT(CF_MEMORY_TEST) | MAKE_BIT(CF_ASSERT_MALLOCED_SIZES) ],
+      [ "print_formatting/bytewise_hex_pointer_conversion.c",
+        MAKE_BIT(CF_MEMORY_TEST) | MAKE_BIT(CF_ASSERT_MALLOCED_SIZES) ],
+      [ "memory_allocation.c",
+        MAKE_BIT(CF_MEMORY_TEST) | MAKE_BIT(CF_ASSERT_MALLOCED_SIZES) ],
+      [ "memory_allocation_test.c", MAKE_BIT(CF_MULTI) ],
+      [ "merge_dense_integer_arrays.c",
+        MAKE_BIT(CF_MEMORY_TEST) | MAKE_BIT(CF_ASSERT_MALLOCED_SIZES) ],
+      [ "print_formatting.c",
+        MAKE_BIT(CF_MEMORY_TEST) | MAKE_BIT(CF_ASSERT_MALLOCED_SIZES) ],
+      [ "string_index.c",
+        MAKE_BIT(CF_MEMORY_TEST) | MAKE_BIT(CF_ASSERT_MALLOCED_SIZES) ],
+      [ "string_aam.c",
+        MAKE_BIT(CF_MEMORY_TEST) | MAKE_BIT(CF_ASSERT_MALLOCED_SIZES) ],
+      [ "trace.c",
+        MAKE_BIT(CF_MEMORY_TEST) | MAKE_BIT(CF_ASSERT_MALLOCED_SIZES) |
+        MAKE_BIT(CF_MULTI) ],
+      [ "test_print_formatting/test_print_formatting_driver.c",
+        MAKE_BIT(CF_MEMORY_TEST) ],
+      [ "test_print_formatting/test_sprintf_driver.c",
+        MAKE_BIT(CF_MEMORY_TEST) ]
+  ]);
+
+immutable standard_fast_multi_features : array[object_feature_pairing] :=
+    apply(function(x) (call(make_object_feature_pairing, x)),
+  [
+      [ "buffer_print.c", MAKE_BIT(CF_FAST) ],
+      [ "diagnostic.c", MAKE_BIT(CF_FAST) ],
+      [ "print_formatting/floating_point_output.c", MAKE_BIT(CF_FAST) ],
+      [ "print_formatting/sprintf_floating_point_conversion.c",
+        MAKE_BIT(CF_FAST) ],
+      [ "print_formatting/division_floating_point_conversion.c",
+        MAKE_BIT(CF_FAST) ],
+      [ "print_formatting/sprintf_pointer_conversion.c", MAKE_BIT(CF_FAST) ],
+      [ "print_formatting/bytewise_hex_pointer_conversion.c",
+        MAKE_BIT(CF_FAST) ],
+      [ "memory_allocation.c", MAKE_BIT(CF_FAST) ],
+      [ "merge_dense_integer_arrays.c", MAKE_BIT(CF_FAST) ],
+      [ "print_formatting.c", MAKE_BIT(CF_FAST) ],
+      [ "string_index.c", MAKE_BIT(CF_FAST) ],
+      [ "string_aam.c", MAKE_BIT(CF_FAST) ],
+      [ "trace.c", MAKE_BIT(CF_FAST) | MAKE_BIT(CF_MULTI) ],
+      [ "test_print_formatting/test_print_formatting_driver.c",
+        MAKE_BIT(CF_FAST) ],
+      [ "test_print_formatting/test_sprintf_driver.c", MAKE_BIT(CF_FAST) ]
+  ]);
+
+immutable main_library_roots : array[string] :=
+  [
+    "string_index.c",
+    "diagnostic.c",
+    "buffer_print.c",
+    "print_formatting.c",
+    "merge_dense_integer_arrays.c",
+    "memory_allocation.c",
+    "trace.c"
+  ];
+
+
+procedure generate_makefile()
+  {
+    generate_header();
+    generate_rules();
+  };
+
+procedure generate_header()
+  {
+    print(
+"# file \"Makefile\"\n" ~
+"#\n" ~
+"#   This is the Makefile for the string_index and merge_dense_integer_arrays\n" ~
+"#   modules and their tests.\n" ~
+"#\n" ~
+"#   Written by Chris Wilson.\n" ~
+"#\n" ~
+"#   This file is hearby placed in the public domain by its author.\n" ~
+"#\n" ~
+"\n" ~
+"\n" ~
+"#\n" ~
+"#       Usage\n" ~
+"#\n" ~
+"#   This Makefile builds the string_index module (the target string_index.o);\n" ~
+"#   the memory_allocation_test module (the memory_allocation_test.o target),\n" ~
+"#   which is used both for testing the other modules and for its own sake for\n" ~
+"#   testing other code; the merge_dense_integer_arrays module (the target\n" ~
+"#   merge_dense_integer_arrays.o); and tests for all of those modules.  The\n" ~
+"#   default target is ``all'', which is equivalent to ``alltests'', which\n" ~
+"#   builds the three modules and all their tests and then runs and checks all\n" ~
+"#   the tests.  If the tests all pass, the message ``All tests passed.'' is\n" ~
+"#   printed immediately before ``make'' exits.  Otherwise, appropriate error\n" ~
+"#   messages are printed before ``make'' exits.  The ``clean'' target removes\n" ~
+"#   all files generated by all the other targets of this Makefile.\n" ~
+"#\n" ~
+"#\n" ~
+"#       Requirements\n" ~
+"#\n" ~
+"#   This Makefile was developed using GNU Make version 3.80, but the syntax it\n" ~
+"#   uses is simple and is likely to work for any version of GNU Make.  Other\n" ~
+"#   versions of ``make'' are likely to work also, though they may not\n" ~
+"#   understand the ``.PHONY'' target -- this shouldn't break anything, it just\n" ~
+"#   may cause some things to be regenerated or some warning messages.\n" ~
+"#\n" ~
+"#   This Makefile uses the source files for all the modules and tests it\n" ~
+"#   builds, and it naturally requires anything that is required by those files,\n" ~
+"#   such as a Perl interpreter for the Perl source files.  It also uses gcc,\n" ~
+"#   for compiling and linking C source.  The C source is all ANSI C, but some\n" ~
+"#   of the command-line arguments to the compiler that this Makefile uses, such\n" ~
+"#   as -Wall, are specific to gcc and may not work on other compilers, so this\n" ~
+"#   Makefile will likely need modification to use some other compilers.  It was\n" ~
+"#   developed and the tests successfully run using gcc version 3.2, but likely\n" ~
+"#   just about any public release of gcc will work fine.\n" ~
+"#\n" ~
+"#\n" ~
+"#       Design Goals\n" ~
+"#\n" ~
+"#   This code is designed to work on standard Linux systems on the particular\n" ~
+"#   source files for these modules and tests.  It is not designed to be\n" ~
+"#   generalizable to more cases.\n" ~
+"#\n" ~
+"#\n" ~
+"#       History\n" ~
+"#\n" ~
+"#   This code was written by me, Chris Wilson, in 2003, 2004, and 2005 and\n" ~
+"#   placed in the public domain at that time.  It's entirely new code and isn't\n" ~
+"#   based on anything I or anyone else has written in the past.\n" ~
+"#\n" ~
+"#\n" ~
+"#       Legal Issues\n" ~
+"#\n" ~
+"#   I've written this code from scratch, without using or refering to any other\n" ~
+"#   code, on my own equipment and not for hire for anyone else, so I have full\n" ~
+"#   legal rights to place it in the public domain.\n" ~
+"#\n" ~
+"#   I've chosen to put this software in the public domain rather than\n" ~
+"#   copyrighting it and using the FSF's GPL or a Berkeley-style ``vanity''\n" ~
+"#   license because my personal opinion is that making it public domain\n" ~
+"#   maximizes its potential usefulness to others.  Anyone can feel free to use\n" ~
+"#   it for any purpose, including with their own proprietary code or with GPL\n" ~
+"#   code, without fear of intellectual property issues.  I have no desire to\n" ~
+"#   stop anyone else from making money on this code or getting any other\n" ~
+"#   advantages they can from it.\n" ~
+"#\n" ~
+"#   I do request that anyone who finds this software useful let me know about\n" ~
+"#   it.  You can drop me e-mail at \"Chris Wilson\" <chris@chriswilson.info> to\n" ~
+"#   let me know how you are using it and what is good and bad about it for you.\n" ~
+"#   Bug reports are also appreciated.  Also, if you release a product or\n" ~
+"#   software package of some sort that includes this software, I would like you\n" ~
+"#   to give me credit in the documentation as appropriate for the importance of\n" ~
+"#   my code in your product.  These are requests, not requirements, so you are\n" ~
+"#   not legally bound to do them, they're just a nice way to show appreciation.\n" ~
+"#\n" ~
+"#   Note that even though this software is public domain and there are no\n" ~
+"#   copyright laws that limit what you can do with it, other laws may apply.\n" ~
+"#   For example, if you lie and claim that you wrote this code when you did\n" ~
+"#   not, or you claim that I endorse a product of yours when I do not, that\n" ~
+"#   could be fraud and you could be legally liable.\n" ~
+"#\n" ~
+"#   There is absolutely no warranty for this software!  I am warning you now\n" ~
+"#   that it may or may not work.  It may have bugs that cause you a lot of\n" ~
+"#   problems.  I disclaim any implied warranties for merchantability or fitness\n" ~
+"#   for a particular purpose.  The fact that I have written some documentation\n" ~
+"#   on what I intended this software for should not be taken as any kind of\n" ~
+"#   warranty that it will actually behave that way.  I am providing this\n" ~
+"#   software as-is in the hope that it will be useful.\n" ~
+"#\n" ~
+"#           Chris Wilson, 2004-2005\n" ~
+"#\n" ~
+"\n");
+  };
+
+procedure generate_rules()
+  {
+    variable registry : makefile_registry;
+
+    init_registry(&registry);
+
+    iterate (item; master_feature_database)
+      {
+        immutable which_feature : compilation_feature := item.which_feature;
+        registry.name_suffixes_by_feature[which_feature] := item.name_suffix;
+        registry.compile_flags_by_feature[which_feature] := item.compile_flag;
+      };
+
+    iterate (item; master_header_database)
+      {
+        enter_header_info_into_registry(&registry, item.c_file_name,
+                                        item.required_c_files);
+      };
+
+    immutable all_dependences : array[string] :=
+      [
+        "libc_foundations.a",
+        "libc_foundations_check.a",
+        "libc_foundations_fast.a"
+      ];
+
+    ""!
+    "CC=gcc"!
+    "CFLAGS=-Wall"!
+
+    rule("all", all_dependences, null, TK_VIRTUAL);
+
+    rule("multi",
+         ["all", "libc_foundations_multi.a", "libc_foundations_check_multi.a",
+          "libc_foundations_fast_multi.a"], kind := TK_VIRTUAL);
+
+    generate_library_rule_using_registry("libc_foundations.a",
+            main_library_roots, "", &registry, [], null);
+
+    generate_library_rule_using_registry("libc_foundations_check.a",
+            main_library_roots, "", &registry, standard_check_object_features,
+            null);
+
+    generate_library_rule_using_registry("libc_foundations_fast.a",
+            main_library_roots, "", &registry, standard_fast_features, null);
+
+    generate_library_rule_using_registry("libc_foundations_multi.a",
+            main_library_roots, "", &registry, standard_multi_features, null);
+
+    generate_library_rule_using_registry("libc_foundations_check_multi.a",
+            main_library_roots, "", &registry, standard_check_multi_features,
+            null);
+
+    generate_library_rule_using_registry("libc_foundations_fast_multi.a",
+            main_library_roots, "", &registry, standard_fast_multi_features,
+            null);
+
+    rule("test_print_formatting/print_test_basic_n.h",
+         ["test_print_formatting/convert_tests_to_n_suffix.perl",
+          "test_print_formatting/print_test_basic.h"],
+         "test_print_formatting/convert_tests_to_n_suffix.perl " ~
+         "test_print_formatting/print_test_basic.h > " ~
+         "test_print_formatting/print_test_basic_n.h", TK_CONCRETE);
+
+    iterate (this_test; simple_tests)
+      {
+        variable feature_lookup : object_feature_lookup;
+        init_object_feature_lookup(&feature_lookup);
+
+        immutable this_executable_info : executable_info :=
+                this_test.executable;
+        iterate (pairing; this_executable_info.features)
+          {
+            object_feature_lookup_add_bits(&feature_lookup,
+                    pairing.c_file_name, pairing.feature_bits);
+          };
+        generate_executable_rule_using_registry(
+                this_executable_info.executable_name,
+                this_executable_info.driver_c_file, "", &registry,
+                standard_check_object_features, &feature_lookup);
+      };
+
+    iterate (this_test; coverage_tests)
+      {
+        iterate (this_executable_info; this_test.executables)
+          {
+            variable feature_lookup : object_feature_lookup;
+            init_object_feature_lookup(&feature_lookup);
+
+            iterate (pairing; this_executable_info.features)
+              {
+                object_feature_lookup_add_bits(&feature_lookup,
+                        pairing.c_file_name, pairing.feature_bits);
+              };
+
+            object_feature_lookup_add_bits(&feature_lookup,
+                    this_test.c_file_to_cover, MAKE_BIT(CF_CODE_POINTS));
+
+            generate_executable_rule_using_registry(
+                    this_executable_info.executable_name,
+                    this_executable_info.driver_c_file, "", &registry,
+                    standard_check_object_features, &feature_lookup);
+          };
+      };
+
+    rule("test_makefile", ["Makefile", "makefile.check"],
+         "diff Makefile makefile.check", TK_VIRTUAL);
+
+    variable alltests_dependences : array[string];
+    alltests_dependences := ["test_makefile", "check_object_dependences"];
+    variable basic_objects : array[string];
+    basic_objects := ["find_object_dependences.perl"];
+
+    iterate (entry; master_header_database)
+      {
+        immutable object_name : string :=
+                find_and_register_object_name(&registry, entry.c_file_name, 0)[
+                        0];
+        basic_objects ~= [object_name];
+      };
+
+    variable object_check_targets : array[string] := [];
+
+    for (c_file_num; 0; c_file_num < (length(basic_objects) - 1); 1)
+      {
+        immutable entry : c_file_header_list :=
+                master_header_database[c_file_num];
+
+        immutable c_base_name : string := file_base_name(entry.c_file_name);
+        assert(c_base_name in @\.c$@);
+
+        immutable rule_name : string :=
+                "check_object_dependence_" ~
+                substitute(@\.c$@, c_base_name, "");
+
+        object_check_targets ~= [rule_name];
+
+        variable command : string :=
+                "./find_object_dependences.perl " ~
+                basic_objects[c_file_num + 1];
+
+        for (all_num; 1; all_num < length(basic_objects); 1)
+          {
+            if (all_num == c_file_num + 1)
+                continue;;
+            command ~= " " ~ basic_objects[all_num];
+          };
+
+        command ~= " -e";
+
+        iterate (required_c_file; entry.required_c_files)
+          {
+            if (required_c_file in @^-l@)
+              {
+                command ~= " " ~ required_c_file;
+              }
+            else
+              {
+                immutable base : string := file_base_name(required_c_file);
+                assert(base in @\.c$@);
+                command ~= " " ~ substitute(@\.c$@, base, ".o");
+              };
+          };
+
+        command ~= " -lc";
+
+        rule(rule_name, basic_objects, command, TK_VIRTUAL);
+      };
+
+    rule("check_object_dependences", object_check_targets, kind := TK_VIRTUAL);
+
+    iterate (this_test; simple_tests)
+      {
+        generate_run_executable_rule(this_test.test_name,
+                this_test.executable.executable_name,
+                this_test.case_arguments);
+        alltests_dependences ~= [this_test.test_name];
+      };
+
+    iterate (this_test; coverage_tests)
+      {
+        assert(this_test.c_file_to_cover in @\.c$@);
+        immutable trace_file_name : string :=
+                substitute(@\.c$@, this_test.c_file_to_cover,
+                           "_code_point_trace.txt");
+
+        generate_coverage_test_rule(this_test.test_name,
+                this_test.c_file_to_cover, this_test.executables,
+                this_test.harness, this_test.unreachable_code_points,
+                trace_file_name);
+
+        alltests_dependences ~= [this_test.test_name];
+      };
+
+    generate_object_rules(&registry);
+
+    generate_dependence_rules(&registry);
+
+    rule("alltests", alltests_dependences, "echo \"All tests passed.\"",
+         TK_VIRTUAL);
+
+    rule("other_files", other_sources, kind := TK_VIRTUAL);
+
+    register_extra_files_to_clean(extra_clean_targets);
+
+    generate_list_sources_rule();
+    generate_clean_rule();
+    generate_phony_rule();
+  };
+
+/* @@@ */
+/*
+#if 0
+static verdict generate_executable_rule(const char *executable_file_name,
+        const char *flags, size_t object_file_count, const char **object_files)
+  {
+    return generate_object_combination_rule(executable_file_name,
+            "$(CC) $(CFLAGS) -o", flags, object_file_count, object_files);
+  }
+
+static verdict generate_library_rule(const char *library_file_name,
+        const char *flags, size_t object_file_count, const char **object_files)
+  {
+    return generate_object_combination_rule(library_file_name, "ar -r", flags,
+                                            object_file_count, object_files);
+  }
+#endif /* 0 */
+*/
+/* @@@ */
+
+procedure generate_object_combination_rule(combo_file_name : string,
+        command_prefix : string, flags : string, object_files : array[string])
+  {
+    variable command : string :=
+            command_prefix ~ " " ~ combo_file_name ~
+            ((flags != "") ? " " : "") ~ flags;
+
+    iterate (object_file; object_files)
+        command ~= " " ~ object_file;;
+
+    rule(combo_file_name, object_files, command, TK_CONCRETE);
+  };
+
+procedure generate_executable_rule_using_registry(
+        executable_file_name : string, main_c_file_name : string,
+        flags : string, registry : *makefile_registry,
+        object_feature_array : array[object_feature_pairing],
+        feature_lookup : *.object_feature_lookup)
+  {
+    generate_object_combination_rule_using_registry(executable_file_name,
+            "$(CC) $(CFLAGS) -o", [main_c_file_name], flags, registry,
+            object_feature_array, feature_lookup, false);
+  };
+
+procedure generate_library_rule_using_registry(library_file_name : string,
+        root_c_file_names : array[string], flags : string,
+        registry : *makefile_registry,
+        object_feature_array : array[object_feature_pairing],
+        feature_lookup : *.object_feature_lookup)
+  {
+    generate_object_combination_rule_using_registry(library_file_name, "ar -r",
+            root_c_file_names, flags, registry, object_feature_array,
+            feature_lookup, true);
+  };
+
+procedure generate_object_combination_rule_using_registry(
+        combo_file_name : string, command_prefix : string,
+        root_c_file_names : array[string], flags : string,
+        registry : *makefile_registry,
+        object_feature_array : array[object_feature_pairing],
+        feature_lookup : *.object_feature_lookup,
+        omit_library_inclusion : boolean)
+  {
+    variable new_feature_lookup : *object_feature_lookup;
+    if (feature_lookup == null)
+      {
+        new_feature_lookup := variable : object_feature_lookup;
+        init_object_feature_lookup(new_feature_lookup);
+      }
+    else
+      {
+        new_feature_lookup := feature_lookup;
+      };
+
+    iterate (item; object_feature_array)
+      {
+        object_feature_lookup_add_bits(new_feature_lookup, item.c_file_name,
+                                       item.feature_bits);
+      };
+
+    variable done_index : !{} --> boolean := <<(* --> false)>>;
+    variable to_process : array[string] := [];
+
+    iterate (root_c_file_name; root_c_file_names)
+      {
+        to_process ~= [root_c_file_name];
+        done_index[root_c_file_name] := true;
+      };
+
+    variable use_memory_test : boolean := false;
+    variable memory_test_used : boolean := false;
+    variable object_files : array[string] := [];
+
+    for (num_processed; 0; num_processed <= length(to_process); 1)
+      {
+        variable c_file_name : string;
+
+        if (num_processed < length(to_process))
+          {
+            c_file_name := to_process[num_processed];
+          }
+        else
+          {
+            if (memory_test_used)
+                break;;
+            if (!use_memory_test)
+                break;;
+            c_file_name := "memory_allocation_test.c";
+          };
+
+        if (c_file_name == "memory_allocation_test.c")
+            memory_test_used := true;;
+
+        if (c_file_name in @^-l@)
+          {
+            object_files ~= [c_file_name];
+            continue;
+          };
+
+        immutable feature_index : [0...+oo) :=
+                new_feature_lookup->index[c_file_name];
+        variable feature_bits : [0...+oo);
+        if (feature_index == 0)
+            feature_bits := 0;
+        else
+            feature_bits := new_feature_lookup->bit_aa[feature_index - 1];;
+
+        if ((feature_bits & MAKE_BIT(CF_MEMORY_TEST)) != 0)
+            use_memory_test := true;;
+
+        variable record : *c_file_record;
+        variable object_file_name : string;
+        [object_file_name, record] := find_and_register_object_name(registry,
+                c_file_name, feature_bits);
+
+        object_files ~= [object_file_name];
+
+        iterate (dependency_c_file; record->depends_upon)
+          {
+            if (omit_library_inclusion && (dependency_c_file in @^-l@))
+                continue;;
+            if (!(done_index[dependency_c_file]))
+              {
+                to_process ~= [dependency_c_file];
+                done_index[dependency_c_file] := true;
+              };
+          };
+      };
+
+    generate_object_combination_rule(combo_file_name, command_prefix, flags,
+                                     object_files);
+  };
+
+procedure generate_object_rules(registry : *makefile_registry)
+  {
+    variable follow_records : *.c_file_record := registry->record_list;
+
+    while (follow_records != null)
+      {
+        variable follow_objects : *.object_file_record :=
+                follow_records->object_files;
+        while (follow_objects != null)
+          {
+            object_rule(follow_records->c_file_name,
+                    follow_objects->object_file_name, follow_objects->flags,
+                    follow_objects->build_dependences);
+            follow_objects := follow_objects->next;
+          };
+
+        follow_records := follow_records->next;
+      };
+  };
+
+procedure generate_dependence_rules(registry : *makefile_registry)
+  {
+    variable dependence_files : array[string] := ["generate_makefile.salm"];
+    variable follow_records : *.c_file_record := registry->record_list;
+
+    while (follow_records != null)
+      {
+        variable follow_objects : *.object_file_record :=
+                follow_records->object_files;
+        while (follow_objects != null)
+          {
+            generate_dependence_rule(follow_records->c_file_name,
+                    follow_objects->dependence_file_name,
+                    follow_objects->flags, follow_objects->build_dependences);
+            dependence_files ~= [follow_objects->dependence_file_name];
+            follow_objects := follow_objects->next;
+          };
+
+        follow_records := follow_records->next;
+      };
+
+    rule("makefile.check", dependence_files,
+         "./generate_makefile.salm > makefile.check", TK_CONCRETE, [], []);
+  };
+
+procedure generate_dependence_rule(c_file_name : string,
+        dependence_file_name : string | {null}, flags : string,
+        build_dependences : string)
+  {
+    variable fixed_dependence_file_name : string;
+
+    if (dependence_file_name == null)
+      {
+        immutable c_base_name : string := file_base_name(c_file_name);
+        assert(c_base_name in @\.c$@);
+        fixed_dependence_file_name := substitute(@\.c$@, c_base_name, ".dep");
+      }
+    else
+      {
+        fixed_dependence_file_name := dependence_file_name;
+      };
+
+    rule(fixed_dependence_file_name,
+         filter(@.@, split(@[ \n\t\r]+@, build_dependences)),
+         "$(CC) $(CFLAGS) -MM -c" ~ ((flags != "") ? " " : "") ~ flags ~ " " ~
+         c_file_name ~ " > " ~ fixed_dependence_file_name, TK_CONCRETE);
+  };
+
+/* @@@ */
+/*
+#if 0
+static verdict generate_feature_object_rule(const char *c_file_name,
+        unsigned long feature_bits, makefile_registry *registry)
+  {
+    object_file_record record;
+
+    assert(c_file_name != NULL);
+    assert(registry != NULL);
+
+    TRY(abort,
+        generate_object_file_name_and_flags(c_file_name, feature_bits, &record,
+                                            registry));
+    assert(record.flags != NULL);
+
+    TRY(abort,
+        object_rule(c_file_name, record.object_file_name, record.flags, NULL));
+
+    free(record.object_file_name);
+    free(record.flags);
+
+    return MISSION_ACCOMPLISHED;
+
+    DO_ABORT(MISSION_FAILED);
+  }
+#endif /* 0 */
+*/
+/* @@@ */
+
+procedure generate_object_file_name_and_flags(c_file_name : string,
+        feature_bits : [0...+oo), record : *object_file_record,
+        registry : *makefile_registry)
+  {
+    immutable c_base_name : string := file_base_name(c_file_name);
+    assert(c_base_name in @\.c$@);
+    variable object_file_name : string := substitute(@\.c$@, c_base_name, "");
+    variable flags : string := "";
+
+    if ((feature_bits & MAKE_BIT(CF_FAST)) == 0)
+        flags := "-g";;
+
+    variable bits_left : [0...+oo) := feature_bits;
+    variable bit_num : [0...+oo) := 0;
+    while (bits_left > 0)
+      {
+        assert(bit_num < length(compilation_feature_by_number));
+
+        if ((bits_left & 0x1) != 0)
+          {
+            immutable name_suffix : string | {null} :=
+                    registry->name_suffixes_by_feature[
+                            compilation_feature_by_number[bit_num]];
+            if ((name_suffix != null) && (name_suffix != ""))
+              {
+                object_file_name ~= name_suffix;
+              };
+
+            immutable new_flags : string | {null} :=
+                    registry->compile_flags_by_feature[
+                            compilation_feature_by_number[bit_num]];
+            if ((new_flags != null) && (new_flags != ""))
+              {
+                if (flags != "")
+                    flags ~= " ";;
+                flags ~= new_flags;
+              };
+          };
+
+        bits_left >>= 1;
+        ++bit_num;
+      };
+
+    if (c_base_name != c_file_name)
+      {
+        if (flags != "")
+            flags ~= " ";;
+        flags ~= "-I.";
+      };
+
+    immutable dependence_file_name : string := object_file_name ~ ".dep";
+
+    object_file_name ~= ".o";
+
+    record->object_file_name := object_file_name;
+    record->flags := flags;
+
+    record->dependence_file_name := dependence_file_name;
+
+    record->build_dependences :=
+            read_object_build_dependences_file(dependence_file_name);
+  };
+
+procedure init_registry(registry : *makefile_registry)
+  {
+    registry->record_list := null;
+  };
+
+procedure enter_header_info_into_registry(registry : *makefile_registry,
+        c_file_name : string, required_c_files : array[string])
+  {
+    immutable record : *c_file_record := variable : c_file_record;
+
+    record->c_file_name := c_file_name;
+
+    record->next := registry->record_list;
+    registry->record_list := record;
+
+    record->object_files := null;
+    record->depends_upon := required_c_files;
+
+    registry->c_file_index[c_file_name] := record;
+  };
+
+procedure code_point_unreachable(code_point : string, trace_file_name : string)
+  {
+    command("echo \"Code point " ~ code_point ~ " reached.\" >> " ~
+            trace_file_name ~ " 2>&1");
+  };
+
+procedure code_points_unreachable(code_points : array[string],
+                                  trace_file_name : string)
+  {
+    iterate (point_label; code_points)
+        code_point_unreachable(point_label, trace_file_name);;
+  };
+
+procedure generate_coverage_test_rule(target : string,
+        c_file_to_cover : string, executables : array[executable_info],
+        harness : string | {null}, unreachable_code_points : array[string],
+        trace_file_name : string)
+  {
+    assert(length(executables) > 0);
+
+    variable dependences : array[string] := [];
+
+    iterate (this_executable; executables)
+        dependences ~= [this_executable.executable_name];;
+
+    dependences ~= [c_file_to_cover];
+
+    if (harness != null)
+        dependences ~= [harness];;
+
+    dependences ~= ["./verify_coverage.perl"];
+
+    if (harness != null)
+      {
+        rule(target, dependences,
+             harness ~ " ./" ~ executables[0].executable_name ~ " " ~
+             trace_file_name, TK_VIRTUAL, [trace_file_name], [TK_CONCRETE]);
+      }
+    else
+      {
+        for (executable_num; 0; executable_num < length(executables); 1)
+          {
+            immutable this_executable := executables[executable_num];
+
+            immutable the_command : string :=
+                    "./" ~ this_executable.executable_name ~ " " ~
+                    ((executable_num == 0) ? ">" : ">>") ~ " " ~
+                    trace_file_name ~ " 2>&1";
+
+            if (executable_num == 0)
+              {
+                rule(target, dependences, the_command, TK_VIRTUAL,
+                     [trace_file_name], [TK_CONCRETE]);
+              }
+            else
+              {
+                command(the_command);
+              };
+          };
+      };
+
+    code_points_unreachable(unreachable_code_points, trace_file_name);
+
+    command("./verify_coverage.perl " ~ trace_file_name ~ " " ~
+            c_file_to_cover);
+  };
+
+procedure generate_run_executable_rule(target : string, executable : string,
+                                       executable_arguments : array[string])
+  {
+    rule(target, [executable],
+         "./" ~ executable ~
+         ((length(executable_arguments) > 0) ?
+          (" " ~ executable_arguments[0]) : ""), TK_VIRTUAL);
+
+    iterate (argument; executable_arguments[1...+oo])
+        command("./" ~ executable ~ " " ~ argument);;
+  };
+
+procedure init_object_feature_lookup(lookup : *object_feature_lookup)
+  {
+    lookup->bit_aa := [];
+    lookup->index := <<(* --> 0)>>;
+  };
+
+procedure object_feature_lookup_add_bits(
+        feature_lookup : *object_feature_lookup, c_file_name : string,
+        new_bits : [0...+oo))
+  {
+    immutable feature_index : [0...+oo) := feature_lookup->index[c_file_name];
+
+    if (feature_index == 0)
+      {
+        feature_lookup->bit_aa ~= [new_bits];
+        feature_lookup->index[c_file_name] := length(feature_lookup->bit_aa);
+      }
+    else
+      {
+        feature_lookup->bit_aa[feature_index - 1] |= new_bits;
+      };
+  };
+
+function find_and_register_object_name(registry : *makefile_registry,
+        c_file_name : string, feature_bits : [0...+oo))
+                returns [string, *c_file_record]
+  {
+    immutable c_record : *c_file_record := registry->c_file_index[c_file_name];
+
+    variable this_object_record : *.object_file_record;
+    /* @@@ */
+//    variable follow_object_files : **.object_file_record :=
+    variable follow_object_files : *!{} :=
+    /* @@@ */
+            &(c_record->object_files);
+
+    while (true)
+      {
+        this_object_record := *follow_object_files;
+        if (this_object_record == null)
+          {
+            this_object_record := variable : object_file_record;
+            this_object_record->feature_bits := feature_bits;
+            this_object_record->next := null;
+            generate_object_file_name_and_flags(c_file_name, feature_bits,
+                                                this_object_record, registry);
+            *follow_object_files := this_object_record;
+            break;
+          };
+        if (this_object_record->feature_bits == feature_bits)
+            break;;
+        follow_object_files := &(this_object_record->next);
+      };
+    assert(this_object_record != null);
+    return [this_object_record->object_file_name, c_record];
+  };
+
+function read_object_build_dependences_file(dependence_file_name : string)
+        returns string
+  {
+    variable fp : input_text_stream;
+    try
+      {
+        fp := open_input_text_file(dependence_file_name);
+      }
+    catch
+      {
+        return "";
+      };
+
+    variable raw_text : string := "";
+
+    while (!(fp.is_end_of_input))
+      {
+        immutable next := fp.read_character();
+        if (next == end_of_input)
+            break;;
+        raw_text ~= next;
+      };
+
+    return substitute(@ +@, substitute(@\\\n@,
+            substitute(@^[^:]*: @, raw_text, ""), ""), " ");
+  };
+
+
+init_makefile_generation();
+generate_makefile();
+deinit_makefile_generation();
+return 0;

@@ -1,0 +1,32 @@
+/* file "thread.salm" */
+
+/*
+ *  This file runs a test of Salmon thread support.  It was created on
+ *  Saturday, March 12, 2011 in a slightly modified form where each loop was a
+ *  "while (true)" loop so it printed "A"s and "B"s indefinitely.  It first ran
+ *  that same day as the first Salmon program ever to run multi-threaded.
+ *  Later that day, it was modified to its current form (minus these comments)
+ *  and used to debug pre-emptive multi-threading support in SalmonEye.  By
+ *  Sunday, March 13 it consistently ran successfully on both thread-safe and
+ *  non-thread-safe builds of the interpreter.  On non-thread-safe builds of
+ *  the interpreter, pre-emptive multi-threading is disabled, so this program
+ *  prints all the "A"s first, then all the "B"s.  These comments were added on
+ *  Monday, March 14, to put this file in its current form.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+use "thread.salm" : "thread.si";
+
+
+[] := [create_thread(procedure()
+  {
+    for (i; 0; i < 1000; 1)
+        print("B");;
+  })];
+
+for (i; 0; i < 1000; 1)
+    print("A");;

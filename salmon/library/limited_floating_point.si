@@ -1,0 +1,124 @@
+/* file "limited_floating_point.si" */
+
+/*
+ *  This file contains the interface to a software implementation of floating
+ *  point arithmetic with a limit on the precision of the mantissa and,
+ *  optionally, a limit on the exponent, for the Salmon Programming Language.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+include "floating_point_interface.si",
+
+
+et_fp_bad_specifier :- any_quark,
+et_fp_integer_specifier_non_integer_value :- any_quark,
+et_fp_overflow :- any_quark,
+et_fp_underflow :- any_quark,
+et_fp_subnormal :- any_quark,
+et_fp_denormalized :- any_quark,
+et_fp_inexact :- any_quark,
+et_fp_division_by_zero :- any_quark,
+
+round_to_nearest_ties_even :- any_quark,
+round_to_nearest_ties_toward_zero :- any_quark,
+round_to_nearest_ties_away_from_zero :- any_quark,
+round_up :- any_quark,
+round_down :- any_quark,
+round_toward_zero :- any_quark,
+round_away_from_zero :- any_quark,
+
+rounding_mode :- {type
+  {
+    round_to_nearest_ties_even,
+    round_to_nearest_ties_toward_zero,
+    round_to_nearest_ties_away_from_zero,
+    round_up,
+    round_down,
+    round_toward_zero,
+    round_away_from_zero
+  }},
+
+fp_controller_type :- type interface[] <-- (conditions : type !{}),
+
+basic_fp_controller :- interface[] <-- (conditions : type !{}),
+
+fp_condition_overflow :- any_quark,
+fp_condition_underflow :- any_quark,
+fp_condition_subnormal :- any_quark,
+fp_condition_denormalized :- any_quark,
+fp_condition_inexact :- any_quark,
+fp_condition_division_by_zero :- any_quark,
+
+basic_conditions :- {type
+  {
+    fp_condition_overflow, fp_condition_underflow, fp_condition_subnormal,
+    fp_condition_denormalized, fp_condition_inexact,
+    fp_condition_division_by_zero
+  }},
+
+basic_fp_controller_type :- {type interface
+  [
+    handle_condition :- {} <-- (condition : basic_conditions),
+    set_exception_on_condition :- {} <--
+      (condition : basic_conditions, new_value : boolean),
+    check_condition_seen_flag :- boolean <-- (condition : basic_conditions),
+    set_condition_seen_flag :- {} <--
+      (condition : basic_conditions, new_value : boolean),
+    rounding :- rounding_mode <-- (),
+    set_rounding_mode :- {} <-- (new_mode : rounding_mode)
+  ]},
+
+default_fp_controller :- basic_fp_controller_type,
+
+static_item_type :- {type
+        (any_base_floating_point_interface &
+         <<numeric_operable(rational, any_base_floating_point_interface)>> &
+         interface
+           [
+             sprint :-
+                     string <--
+                     (specifier : string := *, plus : boolean := *,
+                      space : boolean := *, hash : boolean := *,
+                      zero_width : [0...+oo) := *,
+                      precision : [0...+oo) | {null} := *),
+             to_rational :- rational <-- (),
+             operator:: :- rational <-- ({rational})
+           ]) <--
+        (init_mantissa : rational | <<floating_point_access_type(type {})>>,
+         init_exponent : integer := *,
+         init_controller : basic_fp_controller_type := *)},
+
+limited_floating_point_ecosystem :- 
+  (object & interface
+    [
+      default_controller : basic_fp_controller_type,
+      mantissa_digit_count :- (0...+oo),
+      digit_count_minus_one :- [0...+oo),
+      mantissa_magnitude_top :- (0...+oo),
+      this_interface :- type !{},
+      null_exponent :- [-oo...+oo],
+      non_subnormal_mantissa_type :- type integer,
+      normalized_mantissa_type :- type integer,
+      normal_mantissa_type :- type integer,
+      constructor :- any_class,
+      operator_return_type :- type !{},
+      this_return :- type !{},
+      item_class :- static_item_type
+    ]) <--
+  (base : (0...+oo), mantissa_magnitude_lower_limit : (0...+oo),
+   mantissa_magnitude_upper_limit : (0...+oo) := *,
+   min_exponent : [-oo...+oo] := *, max_exponent : [-oo...+oo] := *,
+   subnormal_allowed : boolean := *, denormalized_allowed : boolean := *,
+   init_default_controller : basic_fp_controller_type := *),
+
+limited_floating_point :-
+        static_item_type <--
+        (base : (0...+oo), mantissa_magnitude_lower_limit : (0...+oo),
+         mantissa_magnitude_upper_limit : (0...+oo) := *,
+         min_exponent : [-oo...+oo] := *, max_exponent : [-oo...+oo] := *,
+         subnormal_allowed : boolean := *, denormalized_allowed : boolean := *,
+         init_default_controller : basic_fp_controller_type := *)

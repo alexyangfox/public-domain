@@ -1,0 +1,23 @@
+/* file "leak.salm" */
+
+/*
+ *  This file tests leaking of a class that includes a static variable.
+ *  Because the static variable in the class has a value that references the
+ *  class itself, simple reference counting won't catch when the class can be
+ *  de-allocated.  Some versions of the SalmonEye interpreter got an assertion
+ *  failure on this code because both the class and static variable instance
+ *  were still around after execution ended, and were de-allocated in arbitrary
+ *  order, which happened to de-allocate the variable first.  But the variable
+ *  has automatic allocation, so when the class was de-allocated, the
+ *  interpreter went to de-allocate the variable a second time.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+static ageless class c1(p1)
+  {
+    static variable v1 := c1;
+  };

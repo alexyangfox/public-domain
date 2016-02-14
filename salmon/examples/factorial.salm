@@ -1,0 +1,35 @@
+#!/usr/local/bin/salmoneye
+/* file "factorial.salm" */
+
+/*
+ *  This file is an example of Salmon.  This program computes the factorial of
+ *  its command-line argument, which should be a decimal integer.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+function factorial(arg : [0...+oo)) returns (0...+oo)
+  ((arg == 0) ? 1 : arg * factorial(arg - 1));
+
+try
+  {
+    assert(length(arguments) == 2);
+    assert(arguments[1] in @^[0-9]*$@);
+    factorial(scanf(open_input_string(arguments[1]), "%d%")[0])!
+  }
+catch
+  {
+    if (current_exceptions()[0].tag == exception_tag_stack_overflow)
+      {
+        standard_error.print(
+                "There was insufficient stack space to compute the " ~
+                "factorial.\n");
+      }
+    else
+      {
+        standard_error.print("Usage: ", arguments[0], " <number>\n");
+      };
+  };

@@ -1,0 +1,14 @@
+/* file "other.salm" */
+
+/*
+ *  This file is an include file used by "manual_examples.salm" to test include
+ *  statements.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+"The file \"other.salm\" has been included."!
+"It prints a couple of lines of text."!

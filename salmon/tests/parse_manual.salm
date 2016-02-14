@@ -1,0 +1,307 @@
+/* file "parse_manual.salm" */
+
+/*
+ *  This file is a parser for the Salmon Reference Manual.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+class salmon_reference_manual()
+  {
+    hide;
+
+    variable title_line : string;
+    variable version_line : string;
+    variable author_line : string;
+    variable chapters : array[chapter] := [];
+    variable chapters_by_title : !{} --> (chapter | {null}) :=
+            <<(* --> null)>>;
+
+    export;
+
+    function get_title_line()  (title_line);
+    function get_version_line()  (version_line);
+    function get_author_line()  (author_line);
+    function get_chapters()  (chapters);
+    function get_chapter(title : string)  (chapters_by_title[title]);
+
+    procedure set_title_line(line : string)
+      { title_line := line; };
+    procedure set_version_line(line : string)
+      { version_line := line; };
+    procedure set_author_line(line : string)
+      { author_line := line; };
+    procedure add_chapter(new_chapter : chapter)
+      {
+        chapters ~= [new_chapter];
+        chapters_by_title[new_chapter.get_title()] := new_chapter;
+      };
+  };
+
+class part(init_number : [1...+oo), init_title : string)
+  {
+    hide;
+
+    immutable number : [1...+oo) := init_number;
+    immutable title : string := init_title;
+    variable body : string := "";
+    variable sections : array[section] := [];
+    variable sections_by_title : !{} --> (section | {null}) :=
+            <<(* --> null)>>;
+
+    export;
+
+    function get_number()  (number);
+    function get_title()  (title);
+    function get_body()  (body);
+    function get_sections()  (sections);
+    function get_section(title : string)  (sections_by_title[title]);
+
+    procedure add_body_line(line : string)
+      { body ~= line ~ "\n"; };
+    procedure add_section(new_section : section)
+      {
+        sections ~= [new_section];
+        sections_by_title[new_section.get_title()] := new_section;
+      };
+  };
+
+class chapter(init_number : [1...+oo), init_title : string)
+  {
+    export;
+
+    use part(init_number, init_title);
+  };
+
+class section(init_number_prefix : string, init_number : [1...+oo),
+              init_title : string)
+  {
+    export;
+
+    use part(init_number, init_title);
+
+    hide;
+
+    immutable full_number : string := init_number_prefix ~ sprint(init_number);
+
+    hide get_sections;
+    hide add_section;
+
+    export;
+
+    function get_full_number()  (full_number);
+    function get_subsections()  (get_sections());
+
+    procedure add_subsection(new_subsection : section)
+      { add_section(new_subsection); };
+  };
+
+
+function parse_salmon_reference_manual(file_name : string)
+        returns salmon_reference_manual
+  {
+    variable line_number : [0...+oo) := 0;
+
+    procedure throw(message : string)
+      {
+        throw(quark, message, source_file_name := file_name,
+              source_start_line_number := line_number);
+      };
+
+    function read_and_check_line() returns string | {end_of_input}
+      {
+        ++line_number;
+
+        immutable result : string | {end_of_input} := stream.read_line();
+        if (result == end_of_input)
+            return end_of_input;;
+
+        if (result in @ $@)
+            throw("Trailing space found.");;
+
+        static immutable good_chars :=
+                @[a-zA-Z0-9 .,;?!+\-:=`'"*(){}[\]<>/\\\@|&~%^_$#]@;
+        static immutable filter := @^@ ~ *good_chars ~ @$@;
+
+        if (!(result in filter))
+          {
+            throw("Bad character found: `" ~
+                  characters(substitute(good_chars, result, ""))[0] ~ "'.");
+          };
+
+        if (length(result) > 79)
+            throw("Line too long.");;
+
+        return result;
+      };
+
+    procedure expect_blank()
+      {
+        immutable line := read_and_check_line();
+        if (line != "")
+            throw("Expected blank line missing.");;
+      };
+
+    immutable result : salmon_reference_manual := salmon_reference_manual();
+
+    immutable stream : input_text_stream := open_input_text_file(file_name);
+    cleanup  { delete(stream); };
+
+      {
+        function line_is_centered(line : string) returns boolean
+          {
+            immutable core := substitute(@^ +@, line, "");
+            immutable center_position := length(line) - (length(core) / 2);
+            return ((center_position >= 34.5) && (center_position <= 35));
+          };
+
+        function get_centered_line() returns string
+          {
+            immutable line := read_and_check_line();
+            if (!(line_is_centered(line)))
+                throw("Line is not centered.");;
+            return substitute(@^ +@, line, "");
+          };
+
+        expect_blank();
+
+        result.set_title_line(get_centered_line());
+
+        expect_blank();
+
+        result.set_version_line(get_centered_line());
+
+        expect_blank();
+        expect_blank();
+
+        result.set_author_line(get_centered_line());
+
+        expect_blank();
+        expect_blank();
+        expect_blank();
+      };
+
+    function header_pattern(title_word : string, spaces : string)
+            returns regular_expression
+      (@^@ ~ exact_string(spaces ~ title_word) ~ @ [0-9\.]+: @);
+
+    immutable chapter_spaces := "        ";
+    immutable section_spaces := "    ";
+    immutable chapter_pattern := header_pattern("Chapter", chapter_spaces);
+    immutable section_pattern := header_pattern("Section", section_spaces);
+
+    function is_chapter_header(line : string)
+      (line in chapter_pattern);
+
+    function parse_block(start_line : string, underline_char : character,
+            block_class : any_class, title_word : string,
+            title_spaces : string, expected_block_num : string,
+            create_block : object <-- (string) / block_class <-- (string),
+            handle_block : {} <-- (*) / {} <-- (block_class),
+            add_to_body : {} <-- (*) / {} <-- (block_class, string),
+            add_section : {} <-- (*) / {} <-- (block_class, section),
+            header_number_mismatch : {} <-- (string))
+      {
+        immutable title_pattern := header_pattern(title_word, title_spaces);
+
+        procedure expect_underlining(base : string)
+          {
+            immutable line := read_and_check_line();
+            immutable expected :=
+                    substitute(@[^ ].*@, base, "") ~
+                    substitute(@.@, substitute(@^ +@, base, ""),
+                               make_string([underline_char]));
+            if (line != expected)
+                throw("Expected underlining is wrong.");;
+          };
+
+        if (!(start_line in title_pattern))
+            header_number_mismatch("");;
+
+        immutable prefix_pattern : regular_expression :=
+                @^@ ~ exact_string(title_spaces ~ title_word) ~ @ @;
+        immutable block_num_and_title :=
+                substitute(prefix_pattern, start_line, "");
+        immutable block_num_found :=
+                substitute(@: .*@, block_num_and_title, "");
+        if (block_num_found != expected_block_num)
+            header_number_mismatch(block_num_found);;
+
+        immutable title := substitute(@^[0-9\.]+: @, block_num_and_title, "");
+
+        immutable this_block : block_class := create_block(title);
+        handle_block(this_block);
+
+        expect_underlining(start_line);
+
+        expect_blank();
+
+        while (true)
+          {
+            immutable line := read_and_check_line();
+            if (line == end_of_input)
+                return result from parse_salmon_reference_manual;;
+
+            if (is_chapter_header(line))
+                return line;;
+
+            if (line in section_pattern)
+              {
+                variable subsection_line := line;
+                variable subsection_num := 1;
+
+                while (true)
+                  {
+                    subsection_line := parse_block(subsection_line, '-',
+                            section, "Section", section_spaces,
+                            sprint(expected_block_num, ".", subsection_num),
+                            function(title : string) returns section
+                              (section(expected_block_num ~ ".",
+                                       subsection_num, title)),
+                            procedure(new_section : section)
+                              { add_section(this_block, new_section); },
+                            procedure(the_section : section, line : string)
+                              { the_section.add_body_line(line); },
+                            procedure(the_section : section,
+                                      new_subsection : section)
+                              { the_section.add_subsection(new_subsection); },
+                            procedure(block_num_found : string)
+                              { return subsection_line from parse_block; });
+                    if (is_chapter_header(subsection_line))
+                        return subsection_line;;
+                    ++subsection_num;
+                  };
+              };
+
+            add_to_body(this_block, line);
+          };
+      };
+
+    variable chapter_line := read_and_check_line();
+    variable chapter_num := 1;
+
+    while (true)
+      {
+        chapter_line := parse_block(chapter_line, '=', chapter, "Chapter",
+                chapter_spaces, sprint(chapter_num),
+                function(title : string) returns chapter
+                  (chapter(chapter_num, title)),
+                procedure(new_chapter : chapter)
+                  { result.add_chapter(new_chapter); },
+                procedure(the_chapter : chapter, line : string)
+                  { the_chapter.add_body_line(line); },
+                procedure(the_chapter : chapter, new_section : section)
+                  { the_chapter.add_section(new_section); },
+                procedure(block_num_found : string)
+                  {
+                    if (block_num_found == "")
+                        throw("Missing header line.");;
+                    throw(sprint("Expected chapter ", chapter_num,
+                                 ", found chapter ", block_num_found, "."));
+                  });
+        ++chapter_num;
+      };
+  };

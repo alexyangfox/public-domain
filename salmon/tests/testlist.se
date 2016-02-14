@@ -1,0 +1,49 @@
+/* file "testlist.se" */
+
+/*
+ *  This is a list of tests for a Salmon interpreter.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+  [
+    ["multi.salm", "expected_multi.txt"],
+    ["backtick.salm", "expected_backtick.txt"],
+    ["system.salm", "expected_system.txt", pass_interpreter := true],
+    [[["write_files.salm", "expected_write_files.txt"],
+      ["check_and_delete.salm", "expected_check_and_delete.txt",
+       pass_interpreter := true]]],
+    ["non_unicode.salm", "expected_non_unicode.txt", pass_interpreter := true],
+    ["exceptions.salm", "expected_exceptions.txt"],
+    ["type.salm", "expected_type.txt"],
+    ["invalid.salm", "expected_invalid.txt"],
+    ["print_types.salm", "expected_print_types.txt"],
+    ["test_short.salm", "expected_test_short.txt"],
+    ["test_shorter.salm", "expected_test_shorter.txt"],
+    ["alias_warning_driver.salm", "expected_alias_warning.txt",
+     pass_interpreter := true],
+    ["test_reference_manual.salm", "expected_test_reference_manual.txt"],
+    ["manual_examples.salm", "expected_manual_examples.txt"],
+    ["native_bridge_test.salm", "expected_native_bridge_test.txt",
+     pass_interpreter := true],
+    ["native_bridge_include_test.salm",
+     "expected_native_bridge_include_test.txt", pass_interpreter := true],
+    ["garbage_collection.salm", "expected_garbage_collection.txt"],
+    ["leak.salm", "expected_leak.txt"],
+    ["unlimited_floating_point.salm", "expected_unlimited_floating_point.txt"],
+    ["limited_floating_point.salm", "expected_limited_floating_point.txt"],
+    ["interval.salm", "expected_interval.txt"],
+    ["logarithm.salm", "expected_logarithm.txt"],
+    ["ieee754.salm", "expected_ieee754.txt"],
+    ["parse.salm", "expected_parse.txt"]
+  ] ~
+  (multi_threading_works ?
+  [
+    ["thread.salm", "expected_thread.txt", trace_locks := false],
+    ["thread_stress.salm", "expected_thread_stress.txt", trace_locks := false]
+  ] :
+  [
+  ])

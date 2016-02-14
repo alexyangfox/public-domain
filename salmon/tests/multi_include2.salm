@@ -1,0 +1,4 @@
+procedure p1()
+  { print("p1().\n"); };
+procedure p2(x : integer)
+  { print("p2(", x, ").\n"); };

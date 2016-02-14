@@ -1,0 +1,111 @@
+/* file "makefile_generation2.salm" */
+
+/*
+ *  This file contains the implementation of a module to assist in the
+ *  generation of Makefiles at a higher level than the makefile_generation
+ *  module.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+/*
+ *      History
+ *
+ *  This code was written by me, Chris Wilson, in 2008 and placed in the public
+ *  domain at that time.  I first created the code in this file within the
+ *  "generate_makefile.c" file for use within that file, but with the idea that
+ *  if I found it useful I might pull it out into a header file to be used
+ *  elsewhere in the future, and that's exactly what happened.
+ *
+ *  In September, 2009, I translated this code from C to Salmon.
+ *
+ *
+ *      Legal Issues
+ *
+ *  I've written this code from scratch, without using or refering to any other
+ *  code.  I've written it on my own equipment and not for hire for anyone
+ *  else, so I have full legal rights to place it in the public domain.
+ *
+ *  I've chosen to put this software in the public domain rather than
+ *  copyrighting it and using the FSF's GPL or a Berkeley-style ``vanity''
+ *  license because my personal opinion is that making it public domain
+ *  maximizes its potential usefulness to others.  Anyone can feel free to use
+ *  it for any purpose, including with their own proprietary code or with GPL
+ *  code, without fear of intellectual property issues.  I have no desire to
+ *  stop anyone else from making money on this code or getting any other
+ *  advantages they can from it.
+ *
+ *  I do request that anyone who finds this software useful let me know about
+ *  it.  You can drop me e-mail at "Chris Wilson" <chris@chriswilson.info> to
+ *  let me know how you are using it and what is good and bad about it for you.
+ *  Bug reports are also appreciated.  Also, if you release a product or
+ *  software package of some sort that includes this software, I would like you
+ *  to give me credit in the documentation as appropriate for the importance of
+ *  my code in your product.  These are requests, not requirements, so you are
+ *  not legally bound to do them, they're just a nice way to show appreciation.
+ *
+ *  Note that even though this software is public domain and there are no
+ *  copyright laws that limit what you can do with it, other laws may apply.
+ *  For example, if you lie and claim that you wrote this code when you did
+ *  not, or you claim that I endorse a product of yours when I do not, that
+ *  could be fraud and you could be legally liable.
+ *
+ *  There is absolutely no warranty for this software!  I am warning you now
+ *  that it may or may not work.  It may have bugs that cause you a lot of
+ *  problems.  I disclaim any implied warranties for merchantability or fitness
+ *  for a particular purpose.  The fact that I have written some documentation
+ *  on what I intended this software for should not be taken as any kind of
+ *  warranty that it will actually behave that way.  I am providing this
+ *  software as-is in the hope that it will be useful.
+ *
+ *          Chris Wilson, 2003-2004, 2008
+ */
+
+
+function file_base_name(file_name : string) returns string
+  {
+    return substitute(@.*/@, file_name, "");
+  };
+
+procedure object_rule(c_file_name : string,
+        object_file_name : string | {null} := null, flags : string,
+        build_dependences : string)
+  {
+    immutable c_base_name : string := file_base_name(c_file_name);
+
+    variable new_object_file_name : string;
+    variable output_file_name_is_standard : boolean;
+
+    if (object_file_name == null)
+      {
+        assert(c_base_name in @\.c$@);
+        new_object_file_name := substitute(@\.c$@, c_base_name, ".o");
+        output_file_name_is_standard := true;
+      }
+    else
+      {
+        new_object_file_name := object_file_name;
+
+        if ((!(c_base_name in @\.c$@)) ||
+            (substitute(@\.c$@, c_base_name, ".o") != object_file_name))
+          {
+            output_file_name_is_standard := false;
+          }
+        else
+          {
+            output_file_name_is_standard := true;
+          };
+      };
+
+    immutable dependence_aam : array[string] :=
+            filter(@.@, split(@[ \n\t\r]+@, build_dependences));
+
+    rule(new_object_file_name,
+         filter(@.@, split(@[ \n\t\r]+@, build_dependences)),
+         "$(CC) $(CFLAGS) -c" ~ (output_file_name_is_standard ? "" : " -o ") ~
+         (output_file_name_is_standard ? "" : new_object_file_name) ~
+         ((flags != "") ? " " : "") ~ flags ~ " " ~ c_file_name, TK_CONCRETE);
+  };

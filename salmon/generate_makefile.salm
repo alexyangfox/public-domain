@@ -1,0 +1,629 @@
+#!/usr/local/bin/salmoneye
+/* file "generate_makefile.salm" */
+
+/*
+ *  This file contains a program to generate the Makefile for SalmonEye.
+ *
+ *  This file is part of SalmonEye, an interpreter for the Salmon Programming
+ *  Language.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+pure function filter(source : array, transformer : !{} <-- (!{})) returns array
+  {
+    variable result := [];
+    iterate (source; source)
+        result ~= [transformer(source)];;
+    return result;
+  };
+
+use "build/makefile_generation.salm" : "build/makefile_generation.si";
+use "build/makefile_generation2.salm" : "build/makefile_generation2.si";
+
+
+immutable executable_name : string := "salmoneye";
+immutable check_executable_name : string := "salmoneye.check";
+immutable fast_executable_name : string := "salmoneye.fast";
+immutable multi_executable_name : string := "salmoneye.multi";
+immutable check_multi_executable_name : string := "salmoneye.check.multi";
+immutable fast_multi_executable_name : string := "salmoneye.fast.multi";
+immutable platform_salm : string := "library/platform_dependent.salm";
+variable objects : array[string] :=
+  [
+    "main.o",
+    "driver.o",
+    "source_location.o",
+    "i_integer.o",
+    "o_integer.o",
+    "rational.o",
+    "regular_expression.o",
+    "token.o",
+    "tokenizer.o",
+    "parser.o",
+    "file_parser.o",
+    "value.o",
+    "statement.o",
+    "open_statement.o",
+    "statement_block.o",
+    "open_statement_block.o",
+    "expression.o",
+    "open_expression.o",
+    "type_expression.o",
+    "open_type_expression.o",
+    "basket.o",
+    "open_basket.o",
+    "basket_instance.o",
+    "lookup_actual_arguments.o",
+    "routine_instance.o",
+    "call.o",
+    "open_call.o",
+    "type.o",
+    "quark.o",
+    "object.o",
+    "declaration.o",
+    "variable_declaration.o",
+    "routine_declaration.o",
+    "open_routine_declaration.o",
+    "tagalong_declaration.o",
+    "lepton_key_declaration.o",
+    "quark_declaration.o",
+    "lock_declaration.o",
+    "declaration_list.o",
+    "slot_location.o",
+    "formal_arguments.o",
+    "routine_declaration_chain.o",
+    "routine_instance_chain.o",
+    "semi_labeled_value_list.o",
+    "tagalong_key.o",
+    "lepton_key_instance.o",
+    "unbound.o",
+    "bind.o",
+    "context.o",
+    "instance.o",
+    "variable_instance.o",
+    "static_home.o",
+    "jump_target.o",
+    "jumper.o",
+    "purity_level.o",
+    "lock_instance.o",
+    "lock_chain.o",
+    "virtual_lookup.o",
+    "use_instance.o",
+    "execute.o",
+    "validator.o",
+    "native_bridge.o",
+    "standard_built_ins.o",
+    "unicode.o",
+    "exceptions.o",
+    "reference_cluster.o",
+    "include.o",
+    "thread.o",
+    "trace_channels.o",
+    "utility.o",
+    "profile.o",
+    "platform_dependent.o"
+  ];
+immutable headers : array[string] :=
+  [
+    "driver.h",
+    "basket.h",
+    "basket_instance.h",
+    "bind.h",
+    "native_bridge.h",
+    "call.h",
+    "context.h",
+    "execute.h",
+    "validator.h",
+    "expression.h",
+    "formal_arguments.h",
+    "i_integer.h",
+    "o_integer.h",
+    "jump_target.h",
+    "jumper.h",
+    "purity_level.h",
+    "lepton_key_declaration.h",
+    "lock_declaration.h",
+    "declaration_list.h",
+    "lock_instance.h",
+    "lock_chain.h",
+    "virtual_lookup.h",
+    "use_instance.h",
+    "lookup_actual_arguments.h",
+    "object.h",
+    "open_basket.h",
+    "open_call.h",
+    "open_expression.h",
+    "open_routine_declaration.h",
+    "open_statement.h",
+    "open_statement_block.h",
+    "open_type_expression.h",
+    "routine_declaration_chain.h",
+    "routine_instance_chain.h",
+    "precedence.h",
+    "parser.h",
+    "file_parser.h",
+    "quark.h",
+    "quark_declaration.h",
+    "rational.h",
+    "regular_expression.h",
+    "routine_instance.h",
+    "routine_declaration.h",
+    "semi_labeled_value_list.h",
+    "slot_location.h",
+    "source_location.h",
+    "standard_built_ins.h",
+    "unicode.h",
+    "all_exceptions.h",
+    "reference_cluster.h",
+    "include.h",
+    "thread.h",
+    "trace_channels.h",
+    "statement.h",
+    "statement_block.h",
+    "tagalong_declaration.h",
+    "tagalong_key.h",
+    "lepton_key_instance.h",
+    "token.h",
+    "tokenizer.h",
+    "type.h",
+    "type_expression.h",
+    "unbound.h",
+    "value.h",
+    "declaration.h",
+    "variable_declaration.h",
+    "instance.h",
+    "variable_instance.h",
+    "static_home.h",
+    "utility.h",
+    "profile.h",
+    "platform_dependent.h"
+  ];
+immutable c_foundations_headers : array[string] :=
+  [
+    "auto_array.h",
+    "auto_array_implementation.h",
+    "basic.h",
+    "buffer_print.h",
+    "code_point.h",
+    "diagnostic.h",
+    "memory_allocation.h",
+    "memory_allocation_test.h",
+    "merge_dense_integer_arrays.h",
+    "print_formatting.h",
+    "string_aam.h",
+    "string_index.h",
+    "trace.h",
+    "try.h"
+  ];
+immutable all_headers : array[string] :=
+        headers ~
+        comprehend(file; c_foundations_headers) ("c_foundations/" ~ file);
+immutable installable_library_sources : array[string] := 
+  [
+    "short.salm",
+    "shorter.salm",
+    "thread.si",
+    "date_utils.si",
+    "date_utils.salm",
+    "convertable.si",
+    "convertable.salm",
+    "numeric_operable.si",
+    "numeric_operable.salm",
+    "floating_point_interface.si",
+    "floating_point_interface.salm",
+    "unlimited_floating_point.si",
+    "unlimited_floating_point.salm",
+    "print_floating_point.si",
+    "print_floating_point.salm",
+    "scientific_form.si",
+    "scientific_form.salm",
+    "limited_floating_point.si",
+    "limited_floating_point.salm",
+    "interval.si",
+    "interval.salm",
+    "bullseye.si",
+    "bullseye.salm",
+    "logarithm.si",
+    "logarithm.salm",
+    "ieee754.si",
+    "ieee754.salm",
+    "string_char_op.salm",
+    "string_char_op.si",
+    "string_utf8_op.salm",
+    "string_utf8_op.si",
+    "string_utf16_op.salm",
+    "string_utf16_op.si",
+    "string_utf32_op.salm",
+    "string_utf32_op.si",
+    "parse.salm",
+    "parse.si",
+    "platform_dependent.si",
+    "module_makefile_generation.salm",
+    "module_makefile_generation.si"
+  ];
+immutable other_library_sources : array[string] := 
+  [
+    "nb_thread.c",
+    "unimplemented_thread.c",
+    "thread_implemented.salm",
+    "thread_unimplemented.salm",
+    "convertable.c",
+    "parse.c"
+  ];
+immutable test_sources : array[string] := 
+  [
+    "multi.salm",
+    "multi_include.salm",
+    "multi_include2.salm",
+    "multi_include2.si",
+    "multi_empty.si",
+    "multi_one_item.si",
+    "multi_two_items.si",
+    "multi_name_reference.salm",
+    "complex.salm",
+    "expected_multi.txt",
+    "tester.salm",
+    "backtick.salm",
+    "expected_backtick.txt",
+    "system.salm",
+    "expected_system.txt",
+    "write_files.salm",
+    "expected_write_files.txt",
+    "hexdump.salm",
+    "check_and_delete.salm",
+    "expected_check_and_delete.txt",
+    "runall.salm",
+    "testlist.se",
+    "runlocal.salm",
+    "directory.salm",
+    "file_info.salm",
+    "date.salm",
+    "print_args.salm",
+    "non_unicode.c",
+    "non_unicode.salm",
+    "expected_non_unicode.txt",
+    "exceptions.salm",
+    "expected_exceptions.txt",
+    "print_types.salm",
+    "expected_print_types.txt",
+    "test_short.salm",
+    "expected_test_short.txt",
+    "test_shorter.salm",
+    "expected_test_shorter.txt",
+    "parse_manual.salm",
+    "test_reference_manual.salm",
+    "expected_test_reference_manual.txt",
+    "alias_warning.salm",
+    "alias_warning_driver.salm",
+    "expected_alias_warning.txt",
+    "invalid.salm",
+    "expected_invalid.txt",
+    "type.salm",
+    "expected_type.txt",
+    "manual_examples.salm",
+    "other.salm",
+    "expected_manual_examples.txt",
+    "native_bridge_test.c",
+    "do_native_bridge_test.salm",
+    "native_bridge_test.salm",
+    "expected_native_bridge_test.txt",
+    "native_bridge_include_test.c",
+    "do_native_bridge_include_test.salm",
+    "native_bridge_include_test.salm",
+    "expected_native_bridge_include_test.txt",
+    "garbage_collection.salm",
+    "expected_garbage_collection.txt",
+    "leak.salm",
+    "expected_leak.txt",
+    "unlimited_floating_point.salm",
+    "expected_unlimited_floating_point.txt",
+    "limited_floating_point.salm",
+    "expected_limited_floating_point.txt",
+    "interval.salm",
+    "expected_interval.txt",
+    "logarithm.salm",
+    "expected_logarithm.txt",
+    "ieee754.salm",
+    "expected_ieee754.txt",
+    "parse.salm",
+    "parse_block1.salm",
+    "parse_expression1.salm",
+    "expected_parse.txt",
+    "thread.salm",
+    "expected_thread.txt",
+    "thread_stress.salm",
+    "expected_thread_stress.txt"
+  ];
+immutable other_sources : array[string] :=
+        all_headers ~
+        (comprehend(file; installable_library_sources ~ other_library_sources)
+          ("library/" ~ file)) ~
+  [
+    "generate_makefile.salm",
+    "build/makefile_generation.si",
+    "build/makefile_generation.salm",
+    "build/makefile_generation2.si",
+    "build/makefile_generation2.salm"
+  ] ~ (comprehend(file; test_sources) ("tests/" ~ file)) ~
+  [
+    "examples/factorial.salm",
+    "examples/factorial_no_recursion.salm",
+    "examples/factorial_block.salm",
+    "examples/y_combinator.salm",
+    "examples/thread.salm",
+    "examples/rename.salm",
+    "run_medium_test_suite.salm",
+    "run_very_large_test_suite.salm",
+    "Makefile",
+    "docs/Salmon_Reference_Manual.txt",
+    "docs/Salmon_Tutorial.txt",
+    "docs/Salmon_Summary_of_Features.txt",
+    "docs/The_Design_of_Salmon.txt",
+    "ReleaseNotes.txt",
+    "status.txt"
+  ];
+
+init_makefile_generation();
+
+"# file \"Makefile\""!
+"#"!
+"# Generated automatically by \"generate_makefile.salm\"."!
+
+""!
+"INSTALL_DIRECTORY=/usr/local"!
+"BINARY_INSTALL_DIRECTORY=$(INSTALL_DIRECTORY)/bin"!
+"LIBRARY_INSTALL_DIRECTORY=$(INSTALL_DIRECTORY)/lib"!
+"DLL_INSTALL_DIRECTORY=$(INSTALL_DIRECTORY)/lib"!
+"C_INCLUDE_INSTALL_DIRECTORY=$(INSTALL_DIRECTORY)/include"!
+"SALMON_LIBRARY_INSTALL_DIRECTORY=$(INSTALL_DIRECTORY)/salmoninclude"!
+"CC=gcc"!
+"CFLAGS=-Wall"!
+"BUILD_EXECUTABLE=$(CC) $(CFLAGS) -rdynamic -o"!
+"BUILD_SHARED_LIBRARY=$(CC) $(CFLAGS) --shared -o"!
+"FAST_FLAGS=-O4 -DNDEBUG -Wno-uninitialized -Wno-unused"!
+"STANDARD_FLAGS=-g"!
+
+rule("all",
+     [executable_name, check_executable_name, fast_executable_name,
+      "libsalmoneye.so", "libsalmoneye_check.so", "libsalmoneye_fast.so",
+      "maybe_pthread", "library", platform_salm], kind := TK_VIRTUAL);
+
+rule("all_pthread",
+     [multi_executable_name, check_multi_executable_name,
+      fast_multi_executable_name, "libsalmoneye_multi.so",
+      "libsalmoneye_check_multi.so", "libsalmoneye_fast_multi.so"],
+     kind := TK_VIRTUAL);
+
+immutable maybe_pthread_makefile := "Makefile.maybe_pthread";
+
+rule("maybe_pthread", [maybe_pthread_makefile],
+     "make -f " ~ maybe_pthread_makefile, TK_VIRTUAL);
+
+rule(maybe_pthread_makefile,
+     [executable_name, "generate_maybe_pthread_makefile.salm",
+      "library/platform_dependent.salm", "test_pthread.c"],
+     "./" ~ executable_name ~ " generate_maybe_pthread_makefile.salm > " ~
+     maybe_pthread_makefile, TK_CONCRETE);
+
+immutable library_makefile := "library/Makefile";
+
+rule("libsalmoneye.dll", ["libsalmoneye.so"],
+     "cp libsalmoneye.so libsalmoneye.dll", TK_CONCRETE);
+
+rule("library", [library_makefile, "libsalmoneye.dll"], "cd library; make",
+     TK_VIRTUAL);
+
+rule(library_makefile,
+     [executable_name, "library/generate_makefile.salm",
+      "library/test_thread_link.c", "libsalmoneye.dll"],
+     "./" ~ executable_name ~ " " ~
+     "library/generate_makefile.salm '$(CFLAGS)' > " ~ library_makefile,
+     TK_CONCRETE);
+
+register_extra_clean_command("-cd library; make clean");
+
+class interpreter_executable(executable_name : string,
+        c_foundations_lib_suffix : string, object_suffix : string,
+        extra_object_flags : string, extra_libraries : string := "")
+  {
+    static variable cf_seen : string --> boolean := <<(* : string --> false)>>;
+    hide cf_seen;
+
+    export object_suffix, extra_object_flags;
+    variable objects : array[string] := [];
+    immutable dll_name := "libsalmoneye" ~ c_foundations_lib_suffix ~ ".so";
+    procedure generate_executable_rules()
+      {
+        immutable cf_lib_file_name :=
+                "libc_foundations" ~ c_foundations_lib_suffix ~ ".a";
+        immutable cf_full := "c_foundations/" ~ cf_lib_file_name;
+
+        if (!(cf_seen[cf_full]))
+          {
+            rule(cf_full, [],
+                 "cd c_foundations; make CFLAGS='$(CFLAGS)' " ~
+                 cf_lib_file_name, TK_CONCRETE);
+            cf_seen[cf_full] := true;
+          };
+
+        rule(executable_name, objects ~ [cf_full, "platform_dependent_libs"],
+             "$(BUILD_EXECUTABLE) " ~ join([executable_name] ~ objects, " ") ~
+             " -Lc_foundations -lc_foundations" ~ c_foundations_lib_suffix ~
+             extra_libraries ~ "`./platform_dependent_libs`", TK_CONCRETE);
+
+        register_extra_files_to_clean([executable_name ~ ".exe"]);
+
+        immutable dll_objects := comprehend(x; objects; !(x in @^main@)) (x);
+        rule(dll_name, dll_objects ~ [cf_full, "platform_dependent_libs"],
+             "$(BUILD_SHARED_LIBRARY) " ~ join([dll_name] ~ dll_objects, " ") ~
+             " -Lc_foundations -lc_foundations" ~ c_foundations_lib_suffix ~
+             extra_libraries ~ "`./platform_dependent_libs`", TK_CONCRETE);
+      };
+  };
+
+immutable standard_flags := "$(STANDARD_FLAGS)";
+immutable check_flags :=
+        "$(STANDARD_FLAGS) -DCHECK_MEMORY_ALLOCATION -DASSERT_MALLOCED_SIZES";
+immutable fast_flags := "$(FAST_FLAGS)";
+immutable multi_flags := "-DMULTI_THREADED";
+variable interpreter_executables : array[interpreter_executable] :=
+  [
+    interpreter_executable(executable_name, "", "", standard_flags),
+    interpreter_executable(check_executable_name, "_check", "_m_ms",
+                           check_flags),
+    interpreter_executable(fast_executable_name, "_fast", "_opt", fast_flags),
+    interpreter_executable(multi_executable_name, "_multi", "_multi",
+                           standard_flags ~ " " ~ multi_flags, " -lpthread"),
+    interpreter_executable(check_multi_executable_name, "_check_multi",
+            "_m_ms_multi", check_flags ~ " " ~ multi_flags, " -lpthread"),
+    interpreter_executable(fast_multi_executable_name, "_fast_multi",
+            "_opt_multi", fast_flags ~ " " ~ multi_flags, " -lpthread")
+  ];
+
+iterate (base_object_file_name; objects)
+  {
+    if (!(base_object_file_name in @\.o$@))
+        continue;;
+    immutable c_file_name : string :=
+            substitute(@\.o$@, base_object_file_name, ".c");
+
+    variable object_flags : string := "";
+    if (base_object_file_name == "driver.o")
+      {
+        object_flags :=
+                "-DLIBRARY_INSTALL_DIRECTORY=" ~
+                "\\\"$(SALMON_LIBRARY_INSTALL_DIRECTORY)\\\"";
+      };
+
+    iterate (this_ie; interpreter_executables)
+      {
+        immutable this_object_file_name : string :=
+                substitute(@\.o$@, base_object_file_name,
+                           this_ie.object_suffix ~ ".o");
+
+        variable mod_ie := this_ie;
+        mod_ie.objects ~= [this_object_file_name];
+
+        immutable extra_object_flags := this_ie.extra_object_flags;
+        variable local_object_flags :=
+                ((object_flags == "") ? extra_object_flags :
+                 ((extra_object_flags == "") ? object_flags :
+                  object_flags ~ " " ~ extra_object_flags));
+        if (base_object_file_name == "main.o")
+          {
+            local_object_flags ~=
+                    " -DSALMONEYE_DLL_NAME=" ~
+                    "\\\"" ~ this_ie.dll_name ~ "\\\"";
+          };
+        object_rule(c_file_name, this_object_file_name, local_object_flags,
+                    c_file_name);
+      };
+  };
+
+iterate (executable; interpreter_executables)
+    executable.generate_executable_rules();;
+
+immutable generate_platform_salm := "./generate_platform_dependent_salm";
+immutable generate_platform_salm_c := "generate_platform_dependent_salm.c";
+
+rule(generate_platform_salm, [generate_platform_salm_c],
+     "$(BUILD_EXECUTABLE) " ~ generate_platform_salm ~
+     " -DINSTALL_DIRECTORY='\"$(INSTALL_DIRECTORY)\"'" ~
+     " -DBINARY_INSTALL_DIRECTORY='\"$(BINARY_INSTALL_DIRECTORY)\"'" ~
+     " -DLIBRARY_INSTALL_DIRECTORY='\"$(LIBRARY_INSTALL_DIRECTORY)\"'" ~
+     " -DDLL_INSTALL_DIRECTORY='\"$(DLL_INSTALL_DIRECTORY)\"'" ~
+     " -DC_INCLUDE_INSTALL_DIRECTORY='\"$(C_INCLUDE_INSTALL_DIRECTORY)\"'" ~
+     " -DSALMON_LIBRARY_INSTALL_DIRECTORY=" ~
+     "'\"$(SALMON_LIBRARY_INSTALL_DIRECTORY)\"' " ~ generate_platform_salm_c,
+     TK_CONCRETE);
+
+register_extra_files_to_clean([generate_platform_salm ~ ".exe"]);
+
+rule(platform_salm, [generate_platform_salm],
+     generate_platform_salm ~ " > " ~ platform_salm, TK_CONCRETE);
+
+rule("platform_dependent_libs", ["platform_dependent_libs.c"],
+     "$(BUILD_EXECUTABLE) platform_dependent_libs platform_dependent_libs.c",
+     TK_CONCRETE);
+
+register_extra_files_to_clean(["platform_dependent_libs.exe"]);
+
+rule("install",
+     ["salmoneye", "salmoneye.fast", "libsalmoneye.so", "libsalmoneye_fast.so",
+      "c_foundations/libc_foundations.a",
+      "c_foundations/libc_foundations_fast.a", "maybe_install_pthread"] ~
+     all_headers, "mkdir -p $(BINARY_INSTALL_DIRECTORY)", TK_VIRTUAL);
+command("cp salmoneye $(BINARY_INSTALL_DIRECTORY)");
+command("cp salmoneye.fast $(BINARY_INSTALL_DIRECTORY)");
+command("mkdir -p $(LIBRARY_INSTALL_DIRECTORY)");
+command("cp c_foundations/libc_foundations.a $(LIBRARY_INSTALL_DIRECTORY)");
+command("cp c_foundations/libc_foundations_fast.a " ~
+        "$(LIBRARY_INSTALL_DIRECTORY)");
+command("mkdir -p $(DLL_INSTALL_DIRECTORY)");
+command("cp libsalmoneye.so $(DLL_INSTALL_DIRECTORY)");
+command("cp libsalmoneye_fast.so $(DLL_INSTALL_DIRECTORY)");
+command("mkdir -p $(C_INCLUDE_INSTALL_DIRECTORY)/salmoneye");
+command("mkdir -p $(C_INCLUDE_INSTALL_DIRECTORY)/salmoneye/c_foundations");
+
+iterate(file; all_headers)
+  {
+    command("cp " ~ file ~ " $(C_INCLUDE_INSTALL_DIRECTORY)/salmoneye/" ~
+            file);
+  };
+
+command("mkdir -p $(SALMON_LIBRARY_INSTALL_DIRECTORY)");
+
+iterate(file; installable_library_sources)
+    command("cp library/" ~ file ~ " $(SALMON_LIBRARY_INSTALL_DIRECTORY)");;
+
+command("cp build/makefile_generation.salm " ~
+        "$(SALMON_LIBRARY_INSTALL_DIRECTORY)");
+command("cp build/makefile_generation.si $(SALMON_LIBRARY_INSTALL_DIRECTORY)");
+command("cp build/makefile_generation2.salm " ~
+        "$(SALMON_LIBRARY_INSTALL_DIRECTORY)");
+command("cp build/makefile_generation2.si " ~
+        "$(SALMON_LIBRARY_INSTALL_DIRECTORY)");
+command("cp library/thread.salm $(SALMON_LIBRARY_INSTALL_DIRECTORY)");
+command("-cp library/thread.so $(SALMON_LIBRARY_INSTALL_DIRECTORY)");
+command("-cp library/unimplemented_thread.so " ~
+        "$(SALMON_LIBRARY_INSTALL_DIRECTORY)");
+command("-cp library/convertable.so $(SALMON_LIBRARY_INSTALL_DIRECTORY)");
+command("-cp library/parse.so $(SALMON_LIBRARY_INSTALL_DIRECTORY)");
+
+command("cp " ~ platform_salm ~ " $(SALMON_LIBRARY_INSTALL_DIRECTORY)");
+
+rule("install_pthread",
+     ["salmoneye.multi", "salmoneye.fast.multi", "libsalmoneye_multi.so",
+      "libsalmoneye_fast_multi.so",
+      "c_foundations/libc_foundations_fast_multi.a",
+      "c_foundations/libc_foundations_multi.a"],
+     "mkdir -p $(BINARY_INSTALL_DIRECTORY)", TK_VIRTUAL);
+command("cp salmoneye.multi $(BINARY_INSTALL_DIRECTORY)");
+command("cp salmoneye.fast.multi $(BINARY_INSTALL_DIRECTORY)");
+command("mkdir -p $(LIBRARY_INSTALL_DIRECTORY)");
+command("cp c_foundations/libc_foundations_fast_multi.a " ~
+        "$(LIBRARY_INSTALL_DIRECTORY)");
+command("cp c_foundations/libc_foundations_multi.a " ~
+        "$(LIBRARY_INSTALL_DIRECTORY)");
+command("mkdir -p $(DLL_INSTALL_DIRECTORY)");
+command("cp libsalmoneye_multi.so $(DLL_INSTALL_DIRECTORY)");
+command("cp libsalmoneye_fast_multi.so $(DLL_INSTALL_DIRECTORY)");
+
+rule("maybe_install_pthread", [maybe_pthread_makefile],
+     "make -f " ~ maybe_pthread_makefile ~ " install", TK_VIRTUAL);
+
+rule("other_files", other_sources, null, TK_VIRTUAL);
+
+mark_directory_as_module("c_foundations");
+
+generate_list_sources_rule();
+generate_phony_rule();
+generate_clean_rule();
+
+deinit_makefile_generation();
+
+return 0;

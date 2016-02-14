@@ -1,0 +1,13 @@
+/* file "parse_expression1.salm" */
+
+/*
+ *  This file is used by "parse.salm" to do testing of dynamic Salmon file
+ *  parsing.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+[a := "water", b := 45]

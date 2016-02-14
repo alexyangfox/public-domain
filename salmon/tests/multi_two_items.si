@@ -1,0 +1,14 @@
+/* "multi_two_items.si" */
+
+/*
+ *  This file contains a Salmon interface with two items for use by interface
+ *  include testing code in "multi.salm".
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+ia : integer,
+ib : string

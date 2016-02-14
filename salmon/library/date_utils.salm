@@ -1,0 +1,56 @@
+/* file "date_utils.salm" */
+
+/*
+ *  This file contains the implementation of some date-related utilities for
+ *  Salmon.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+immutable month_num : (months --> [1...12]) :=
+  <<(January --> 1), (February --> 2), (March --> 3), (April --> 4),
+    (May --> 5), (June --> 6), (July --> 7), (August --> 8), (September --> 9),
+    (October --> 10), (November --> 11), (December --> 12)>>;
+
+immutable all_months : months[1...12] :=
+  <<(1 --> January), (2 --> February), (3 --> March), (4 --> April),
+    (5 --> May), (6 --> June), (7 --> July), (8 --> August), (9 --> September),
+    (10 --> October), (11 --> November), (12 --> December)>>;
+
+function is_leap_year(year : integer) returns boolean
+  (((year % 4) == 0) && (((year % 100) != 0) || ((year % 400) == 0)));
+
+function month_days(year : integer) returns (months --> [28...31])
+  (<<(January --> 31), (February --> is_leap_year(year) ? 29 : 28),
+     (March --> 31), (April --> 30), (May --> 31), (June --> 30),
+     (July --> 31), (August --> 31), (September --> 30), (October --> 31),
+     (November --> 30), (December --> 31)>>);
+
+function operator-(t1 : time_type, t2 : time_type) returns [-oo....+oo]
+  {
+    variable diff_days := (t1.day_of_month - t2.day_of_month);
+    variable t1_year := t1.year;
+    while (t1_year > t2.year)
+      {
+        immutable year_to_leap : integer :=
+                (t1.month in {January, February}) ? (t1_year - 1) : t1_year;
+        diff_days += (is_leap_year(year_to_leap) ? 366 : 365);
+        --(t1_year);
+      };
+    variable t1_month := t1.month;
+    while (month_num[t1_month] > month_num[t2.month])
+      {
+        t1_month := all_months[month_num[t1_month] - 1];
+        diff_days += month_days(t1_year)[t1_month];
+      };
+    while (month_num[t1_month] < month_num[t2.month])
+      {
+        diff_days -= month_days(t1_year)[t1_month];
+        t1_month := all_months[month_num[t1_month] + 1];
+      };
+    return (((((diff_days * 24) + (t1.hours - t2.hours)) * 60) +
+             (t1.minutes - t2.minutes)) * 60) + (t1.seconds - t2.seconds);
+  };

@@ -1,0 +1,34 @@
+/* file "string_char_op.salm" */
+
+/*
+ *  This file contains operator overloading to allow strings to be accessed
+ *  using lookup operators as if they were arrays of characters.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+function operator[](base : string, key : [0...+oo)) returns character
+  (characters(base)[key]);
+
+function operator[](base : string, lower : [0...+oo), upper : [0...+oo))
+        returns string
+  (make_string(characters(base)[lower...upper]));
+
+function operator[](base : string, key : [0...+oo), replacement : character)
+        returns string
+  {
+    variable result := characters(base);
+    result[key] := replacement;
+    return make_string(result);
+  };
+
+function operator[](base : string, lower : [0...+oo), upper : [0...+oo),
+                    replacement : string) returns string
+  {
+    variable result := characters(base);
+    result[lower...upper] := characters(replacement);
+    return make_string(result);
+  };

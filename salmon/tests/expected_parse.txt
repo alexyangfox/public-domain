@@ -1,0 +1,61 @@
+3
+[abc := 8]
+Exception: ["string":1:9-10] exception_tag_unbound_name_reference: `An unbound name reference expression was evaluated.'.
+[abc := 8]
+Exception: ["string":2:2-3] exception_tag_unbound_name_reference: `An unbound name reference expression was evaluated.'.
+[abc := 8]
+Exception: ["myfile.salm":2:2-3] exception_tag_unbound_name_reference: `An unbound name reference expression was evaluated.'.
+[abc := 8]
+Exception: ["string":135:2-3] exception_tag_unbound_name_reference: `An unbound name reference expression was evaluated.'.
+[abc := 8]
+Exception: ["string":2:2-3] exception_tag_unbound_name_reference: `An unbound name reference expression was evaluated.'.
+[abc := 8]
+Exception: ["string":1:20-21] exception_tag_unbound_name_reference: `An unbound name reference expression was evaluated.'.
+Exception: ["string":1:11-12] et_parse_more: `Junk was found past the end of the expression.'.
+Exception: ["string":1:10] et_parse_syntax_error: `Syntax error -- expected comma (",") or right square bracket ("]").'.
+[a := "water", b := 45]
+3
+[c := "tree", d := 18]
+p1(3).
+p1(4).
+17
+27
+37
+q1
+locks: Lock `l1' (declared at "tests/parse.salm":131:14) grabbed [1].
+l1
+locks: Lock `l1' (declared at "tests/parse.salm":131:14) released [0].
+l1[a := "phone", b := 18]
+83
+Unnamed binding works.
+x: 1.
+y: 2.
+x: 2.
+y: 1.
+Exception: ["tests/parse.salm":188:9-38] et_parse_bind_bad_value: `In bind(), the value for the target was bad.'.
+Exception: ["tests/parse.salm":199:9-41] et_parse_bind_no_name: `In bind(), an attempt was made to bind an un-named variable without providing a name.'.
+Exception: ["tests/parse.salm":210:9-46] et_parse_bind_no_name: `In bind(), an attempt was made to bind an un-named routine without providing a name.'.
+Exception: ["tests/parse.salm":221:9-41] et_parse_bind_no_name: `In bind(), an attempt was made to bind an un-named tagalong key without providing a name.'.
+Exception: ["tests/parse.salm":232:9-41] et_parse_bind_no_name: `In bind(), an attempt was made to bind an un-named lepton key without providing a name.'.
+Exception: ["tests/parse.salm":243:9-38] et_parse_bind_no_name: `In bind(), an attempt was made to bind an un-named quark without providing a name.'.
+Exception: ["tests/parse.salm":254:9-37] et_parse_bind_no_name: `In bind(), an attempt was made to bind an un-named lock without providing a name.'.
+x: 111.
+y: 222.
+p1() called.
+p2(1) called.
+p2(2) called.
+3..t1: default.
+l1[a := 57]: l1[a := 57].
+q1: q1.
+locks: Lock `lk1' (declared at "tests/parse.salm":280:18) grabbed [1].
+lk1: lk1.
+locks: Lock `lk1' (declared at "tests/parse.salm":280:18) released [0].
+length("abcdef"): 6.
+Exception: ["":1:2] et_parse_syntax_error: `Newline in string literal.'.
+5!: 120.
+[a := "arrow", b := "bow"]
+["x", "print", "y", "z"]
+[]
+["print", "y", "z"]
+["x"]
+Exception: ["tests/parse.salm":329:9-59] et_parse_unbound: `An attempt was made to execute parsed code while `aaa' was still unbound.'.

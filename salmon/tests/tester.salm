@@ -1,0 +1,37 @@
+/* file "tester.salm" */
+
+/*
+ *  This file is a utility for various tests.  It will return a return code
+ *  specified as its first command-line argument, print its second command-
+ *  line argument to standard output, and print its third command-line
+ *  argument to standard error.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+if (length(arguments) >= 3)
+  { standard_output.print(arguments[2]); };
+if (length(arguments) >= 4)
+  { standard_error.print(arguments[3]); };
+
+variable return_code : integer := 0;
+variable negative : boolean := false;
+
+iterate (char; characters(arguments[1]))
+  {
+    if (char == '-')
+      { negative := true; };
+    if ((to_utf32(char) >= to_utf32('0')) && (to_utf32(char) <= to_utf32('9')))
+      {
+        return_code *= 10;
+        return_code += to_utf32(char) - to_utf32('0');
+      };
+  };
+
+if (negative)
+  { return_code := -return_code; };
+
+return return_code;

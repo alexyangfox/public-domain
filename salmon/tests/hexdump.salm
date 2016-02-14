@@ -1,0 +1,100 @@
+/* file "hexdump.salm" */
+
+if (length(arguments) != 2)
+  {
+    standard_error.print("Usage: ", arguments[0], " <file-name>\n");
+    return -1;
+  };
+
+immutable stream := open_input_bit_file(arguments[1], little_endian);
+
+variable column : [0...15] := 0;
+variable line : [0...255][16];
+
+procedure print_suffix(count : [1...16])
+  {
+    print("    ");
+    for (ii; 0; ii < count)
+      {
+        if (ii == 8)
+          { print(" "); };
+        if ((line[ii] < 32) || (line[ii] > 126))
+          { print("."); }
+        else
+          { print(from_utf8([line[ii]])); };
+      };
+    print("\n");
+  };
+
+while (!(stream.is_end_of_input))
+  {
+    variable result : [[0...255]] | {end_of_input};
+
+    result := stream.read(bits := 8, count := 1);
+    if (result == end_of_input)
+      { break; };
+
+    line[column] := result[0];
+
+    if (column == 0)
+      { print("0x"); };
+    printf(" %02x%", result[0]);
+
+    if (column == 7)
+      {
+        print("  ");
+      }
+    else if ((column % 4) == 3)
+      {
+        print(" ");
+      };
+
+    if (column < 15)
+      {
+        ++column;
+      }
+    else
+      {
+        print_suffix(16);
+        column := 0;
+      };
+  };
+
+if (stream.have_error)
+  {
+    throw(tag := quark, message := stream.which_error.message);
+    return -1;
+  };
+
+delete(stream);
+
+if (column > 0)
+  {
+    immutable suffix_count := column;
+
+    while (true)
+      {
+        line[column] := 0;
+
+        printf("   ");
+
+        if (column == 7)
+          {
+            print("  ");
+          }
+        else if ((column % 4) == 3)
+          {
+            print(" ");
+          };
+
+        if (column < 15)
+          {
+            ++column;
+          }
+        else
+          {
+            print_suffix(suffix_count);
+            break;
+          };
+      };
+  };

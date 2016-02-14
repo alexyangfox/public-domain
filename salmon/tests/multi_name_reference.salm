@@ -1,0 +1,14 @@
+/* "multi_name_reference.si" */
+
+/*
+ *  This file contains a Salmon interface that references the outside name
+ *  ``outside'' for use by interface include testing code in "multi.salm".
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+outside :- any_quark,
+aaa :- {outside}

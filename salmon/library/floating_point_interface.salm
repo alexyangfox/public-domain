@@ -1,0 +1,68 @@
+/* file "floating_point_interface.salm" */
+
+/*
+ *  This file contains interfaces for floating-point modules for the Salmon
+ *  Programming Langauge.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+use "numeric_operable.salm" : "numeric_operable.si";
+
+
+function floating_point_access_type(base_type : type (0...+oo))
+        returns type interface
+          [
+            base :- (0...+oo) <-- (),
+            mantissa :- rational <-- (),
+            exponent :- (-oo...+oo) <-- ()
+          ]
+  {
+    return type interface
+      [
+        base :- base_type <-- (),
+        mantissa :- rational <-- (),
+        exponent :- (-oo...+oo) <-- ()
+      ];
+  };
+
+immutable any_base_floating_point_interface :=
+        floating_point_access_type(type (0...+oo));
+
+function floating_point_interface(base : (0...+oo))
+        returns type any_base_floating_point_interface
+  (floating_point_access_type(type {base}));
+
+function floating_point_full_interface(base_type : type (0...+oo),
+        additional_operand_type : type !{}, operator_return_type : type !{})
+        returns type
+                (<<floating_point_access_type(type (0...+oo))>> &
+                 <<numeric_operable(rational, type !{})>> &
+                 interface
+                   [
+                     sprint :-
+                             string <--
+                             (specifier : string := *, plus : boolean := *,
+                              space : boolean := *, hash : boolean := *,
+                              zero_width : [0...+oo) := *,
+                              precision : [0...+oo) | {null} := *),
+                     to_rational :- rational <-- (),
+                     operator:: :- rational <-- ({rational})
+                   ])
+  (type (<<floating_point_access_type(base_type)>> &
+         <<numeric_operable(type additional_operand_type | rational,
+                            operator_return_type)>> &
+         interface
+           [
+             sprint :-
+                     string <--
+                     (specifier : string := *, plus : boolean := *,
+                      space : boolean := *, hash : boolean := *,
+                      zero_width : [0...+oo) := *,
+                      precision : [0...+oo) | {null} := *),
+             to_rational :- rational <-- (),
+             operator:: :- rational <-- ({rational})
+           ]));

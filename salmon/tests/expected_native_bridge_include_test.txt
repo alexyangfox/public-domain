@@ -1,0 +1,14 @@
+statement table generator called.
+statement count generator called.
+source file name generator called.
+This line came from `native_bridge_include_test.c'.
+This file was dynamically loaded using the native bridge interface.
+demo() was called.
+arguments value kind: 7.
+arguments value: [].
+demo() was called.
+arguments value kind: 7.
+arguments value: [53].
+demo() was called.
+arguments value kind: 7.
+arguments value: [53, ["Abe Lincoln"]].

@@ -1,0 +1,20 @@
+/* file "system.salm" */
+
+/*
+ *  This file runs a test of sending a non-Unicode character in the command-
+ *  line arguments to a Salmon program.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+include "platform_dependent.salm";
+
+immutable interpreter := arguments[1] ~ " ";
+`gcc tests/non_unicode.c -o non_unicode`;
+`./non_unicode \"$interpreter tests/print_args.salm\"`;
+
+if (file_exists("non_unicode" ~ executable_suffix))
+    remove("non_unicode" ~ executable_suffix);;

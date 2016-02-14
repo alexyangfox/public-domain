@@ -1,0 +1,69 @@
+/* file "do_native_bridge_test.salm" */
+
+/*
+ *  This file is part of a test of the native bridge interface of SalmonEye.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+procedure demo(...) := nb_dll "../native_bridge_test.so" : "demo_handler";
+demo();
+demo(53);
+demo(53, ["Abe Lincoln"]);
+
+function plus_pure_ok(a : integer, b : integer) :=
+  nb_dll "../native_bridge_test.so" : "plus_handler" pure_safe;
+function plus_pure_not_ok(a : integer, b : integer) :=
+  nb_dll "../native_bridge_test.so" : "plus_handler";
+
+procedure do_try(to_try : {} <-- ())
+  {
+    try
+      {
+        to_try();
+        "No exception."!
+      }
+    catch (e1)
+        print("Caught: [", e1.tag, "] `", e1.message, "'.\n");;
+  };
+
+do_try(procedure()
+  {
+    "Trying pure ok in pure context."!
+    (pure function() (plus_pure_ok(5, 7))())!
+  });
+
+do_try(procedure()
+  {
+    "Trying not pure ok in pure context."!
+    (pure function() (plus_pure_not_ok(5, 7))())!
+  });
+
+do_try(procedure()
+  {
+    "Trying pure ok in impure context."!
+    (function() (plus_pure_ok(5, 7))())!
+  });
+
+do_try(procedure()
+  {
+    "Trying not pure ok in impure context."!
+    (function() (plus_pure_not_ok(5, 7))())!
+  });
+
+do_try(procedure()
+  {
+    function return_four() returns {4} :=
+      nb_dll "../native_bridge_test.so" : "return_three_handler";
+    [] := [return_four()];
+  });
+
+do_try(procedure()
+  {
+    function return_four() returns integer/{4} :=
+      nb_dll "../native_bridge_test.so" : "return_three_handler";
+    [] := [return_four()];
+  });

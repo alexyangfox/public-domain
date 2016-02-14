@@ -1,0 +1,1 @@
+Arguments: `["tests/print_args.salm", "abc", [100, 101, 102, 255, 103, 104, 105], "jkl"]'.

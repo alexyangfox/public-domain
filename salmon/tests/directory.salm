@@ -1,0 +1,17 @@
+/* file "directory.salm" */
+
+/*
+ *  This file is a test of Salmon's directory_contents() function.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+print("Contents of `", arguments[1], "':\n");
+
+iterate(item; directory_contents(arguments[1]))
+  {
+    print("    `", item, "'.\n");
+  };

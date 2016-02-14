@@ -1,0 +1,187 @@
+/* file "parse.salm" */
+
+/*
+ *  This file contains functionality for parsing Salmon code into an executable
+ *  form and running it.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+quark et_parse_syntax_error;
+quark et_parse_more;
+quark et_parse_bind_bad_value;
+quark et_parse_bind_no_name;
+quark et_parse_unbound;
+
+immutable bindable :=
+        type ((*!{}) | !{} <-- (*) | any_quark | any_lock | lepton_key |
+              tagalong_key);
+
+immutable open_code : type !{} := type interface
+  [
+    unbound_required_names :- array[string] <-- (),
+    unbound_optional_names :- array[string] <-- (),
+    bind :- {} <-- (name : string, target : bindable),
+    bind :- {} <-- (target : bindable),
+    bind :- {} <-- (list : [...]),
+    bind :- {} <-- (source : object),
+    bind_standard_library :- {} <-- ()
+  ];
+
+immutable open_expression : type !{} := type (open_code & interface
+  [
+    run :- !{} <-- ()
+  ]);
+
+immutable open_statement_block : type !{} := type (open_code & interface
+  [
+    run :- {} <-- ()
+  ]);
+
+hide;
+
+class open_code_implementation() returns open_code
+  {
+    function unbound_required_names() returns array[string]
+      (internal_call(
+               (function() := nb_dll "parse.so" : "unbound_required_names"),
+               []));
+    function unbound_optional_names() returns array[string]
+      (internal_call(
+               (function() := nb_dll "parse.so" : "unbound_optional_names"),
+               []));
+    procedure bind(name : string, target : bindable)
+      {
+        internal_call(
+                (procedure(name : string, target : bindable) :=
+                   nb_dll "parse.so" : "bind_one_with_name"), [name, target]);
+      };
+    procedure bind(target : bindable)
+      {
+        internal_call(
+                (procedure(target : bindable) :=
+                   nb_dll "parse.so" : "bind_one"), [target]);
+      };
+    procedure bind(list : [...])
+      {
+        internal_call(
+                (procedure(list : [...]) := nb_dll "parse.so" : "bind_list"),
+                [list]);
+      };
+    procedure bind(source : object)
+      {
+        internal_call(
+                (procedure(source : object) :=
+                   nb_dll "parse.so" : "bind_object_fields"), [source]);
+      };
+    procedure bind_standard_library()
+      {
+        internal_call(
+                (procedure() := nb_dll "parse.so" : "bind_standard_library"),
+                []);
+      };
+  };
+
+class open_expression_implementation(base : open_code_implementation)
+        returns open_expression
+  {
+    use base;
+
+    function run() returns !{}
+      (internal_call(
+               (function(base : object) :=
+                  nb_dll "parse.so" : "run_open_expression"), [this]));
+  };
+
+class open_statement_block_implementation(base : open_code_implementation)
+            returns open_statement_block
+  {
+    use base;
+
+    procedure run()
+      {
+        internal_call(
+                (procedure(base : object) :=
+                   nb_dll "parse.so" : "run_open_statement_block"), [this]);
+      };
+  };
+
+function parse_from_string(source : string, file_name : string | {null},
+        start_line : [1...+oo), start_column : [1...+oo), result : object,
+        base : open_code_implementation, is_expression : boolean,
+        init_executable_directory : string | {null} := executable_directory,
+        init_directory_paths : string := directory_paths)
+                returns object / {result} :=
+        nb_dll "parse.so" : "parse_from_string";
+
+function all_from_stream(stream : input_text_stream) returns string
+  {
+    variable source : string := "";
+    while (!(stream.is_end_of_input))
+      {
+        immutable chunk := stream.read_line();
+        if (chunk == end_of_input)
+            break;;
+        if (source != "")
+            source ~= "\n";;
+        source ~= chunk;
+      };
+    return source;
+  };
+
+export;
+
+variable executable_directory : string | {null} :=
+        (function() returns string | {null} :=
+           nb_dll "parse.so" : "get_executable_directory")();
+
+variable directory_paths : string :=
+        (function() returns string :=
+           nb_dll "parse.so" : "get_directory_paths")();
+
+function parse_expression(source : string, file_name : string | {null} := null,
+        start_line : [1...+oo) := 1, start_column : [1...+oo) := 1)
+                returns open_expression
+  {
+    immutable base : open_code_implementation := open_code_implementation();
+    return parse_from_string(source, file_name, start_line, start_column,
+                             open_expression_implementation(base), base, true);
+  };
+
+function parse_expression(stream : input_text_stream,
+        file_name : string | {null} := null, start_line : [1...+oo) := 1,
+        start_column : [1...+oo) := 1) returns open_expression
+  (internal_call(parse_expression,
+           [internal_call(all_from_stream, [stream]), file_name, start_line,
+            start_column]));
+
+function parse_expression_file(file_name : string,
+            format : utf_choice := utf_8) returns open_expression
+  (internal_call(parse_expression,
+           [internal_call(open_input_text_file, [file_name, format]),
+            file_name]));
+
+function parse_statement_block(source : string,
+        file_name : string | {null} := null, start_line : [1...+oo) := 1,
+        start_column : [1...+oo) := 1) returns open_statement_block
+  {
+    immutable base : open_code_implementation := open_code_implementation();
+    return parse_from_string(source, file_name, start_line, start_column,
+            open_statement_block_implementation(base), base, false);
+  };
+
+function parse_statement_block(stream : input_text_stream,
+        file_name : string | {null} := null, start_line : [1...+oo) := 1,
+        start_column : [1...+oo) := 1) returns open_statement_block
+  (internal_call(parse_statement_block,
+           [internal_call(all_from_stream, [stream]), file_name, start_line,
+            start_column]));
+
+function parse_statement_block_file(file_name : string,
+            format : utf_choice := utf_8) returns open_statement_block
+  (internal_call(parse_statement_block,
+           [internal_call(open_input_text_file, [file_name, format]),
+            file_name]));

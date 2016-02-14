@@ -1,0 +1,21 @@
+/* file "platform_dependent.si" */
+
+/*
+ *  This file contains the interface to the platform_dependent module, which
+ *  gives information about the platform on which Salmon is running.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+path_separator :- string,
+shared_library_suffix :- string,
+executable_suffix :- string,
+install_directory :- string,
+binary_install_directory :- string,
+library_install_directory :- string,
+dll_install_directory :- string,
+c_include_install_directory :- string,
+salmon_library_install_directory :- string

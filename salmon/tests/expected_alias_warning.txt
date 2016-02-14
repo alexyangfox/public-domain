@@ -1,0 +1,12 @@
+WARNING: [tests/alias_warning.salm, line 24, column 15] `param1' was used as the name of a formal parameter, but that name is aliased to `param_alias', so referencing this parameter by this name will not work.
+WARNING: [tests/alias_warning.salm, line 27, column 6] `for1' was used to declare the index of a ``for'' statement, but that name is aliased to `for_alias', so referencing this index by this name will not work.
+WARNING: [tests/alias_warning.salm, line 31, column 10] `iter1' was used to declare the index of an ``iterate'' statement, but that name is aliased to `iter_alias', so referencing this index by this name will not work.
+WARNING: [tests/alias_warning.salm, line 15, column 1] `label1' was used as the name in a declaration, but that name is aliased to `label_alias', so referencing this declaration by this name will not work.
+WARNING: [tests/alias_warning.salm, line 18, column 10] `var1' was used as the name in a declaration, but that name is aliased to `var_alias', so referencing this declaration by this name will not work.
+WARNING: [tests/alias_warning.salm, line 21, column 10] `fun1' was used as the name in a declaration, but that name is aliased to `fun_alias', so referencing this declaration by this name will not work.
+WARNING: [tests/alias_warning.salm, line 35, column 10] `tag1' was used as the name in a declaration, but that name is aliased to `tag_alias', so referencing this declaration by this name will not work.
+WARNING: [tests/alias_warning.salm, line 38, column 8] `lep1' was used as the name in a declaration, but that name is aliased to `lep_alias', so referencing this declaration by this name will not work.
+WARNING: [tests/alias_warning.salm, line 41, column 7] `quark1' was used as the name in a declaration, but that name is aliased to `quark1_alias', so referencing this declaration by this name will not work.
+WARNING: [tests/alias_warning.salm, line 45, column 27] `quark2' was used as the name in a declaration, but that name is aliased to `quark2_alias', so referencing this declaration by this name will not work.
+WARNING: [tests/alias_warning.salm, line 45, column 19] `enum1' was used as the name in a declaration, but that name is aliased to `enum_alias', so referencing this declaration by this name will not work.
+WARNING: [tests/alias_warning.salm, line 48, column 6] `lock1' was used as the name in a declaration, but that name is aliased to `lock_alias', so referencing this declaration by this name will not work.

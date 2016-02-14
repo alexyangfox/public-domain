@@ -1,0 +1,34 @@
+/* file "system.salm" */
+
+/*
+ *  This file runs some tests of the system() standard library routine of
+ *  Salmon.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+immutable interpreter := arguments[1] ~ " ";
+immutable tester := "tests/tester.salm ";
+
+procedure run_tests(this_test : string)
+  {
+    print("system(\"", this_test, "\"): ", system(interpreter ~ this_test),
+          ".\n");
+    print("system(\"", this_test, "\", true): ",
+          system(interpreter ~ this_test, true), ".\n");
+    print("system(\"", this_test, "\", true, true): ",
+          system(interpreter ~ this_test, true, true), ".\n");
+    print("system(\"", this_test, "\", false, true): ",
+          system(interpreter ~ this_test, false, true), ".\n");
+  };
+
+run_tests(tester ~ "0 hello");
+run_tests(tester ~ "1 hello");
+run_tests(tester ~ "0 aaa bbb");
+run_tests(tester ~ "1 aaa bbb");
+run_tests(tester ~ "2 aaa bbb");
+run_tests(tester ~ "-1 aaa bbb");
+run_tests(tester ~ "-2 aaa bbb");

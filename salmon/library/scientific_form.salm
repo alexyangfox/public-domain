@@ -1,0 +1,88 @@
+/* file "scientific_form.salm" */
+
+/*
+ *  This file contains the implementation of a routine to put a positive finite
+ *  rational value into scientific form for a given base -- that is, find a
+ *  mantissa and exponent such that the mantissa is greater than or equal to
+ *  one and less than the base and the mantissa times the base to the power of
+ *  the exponent is the original rational value.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+function find_scientific_form(start : (0....+oo), base : (0...+oo),
+                              bottom : (0...+oo) := 1)
+        returns [mantissa : [1....+oo), exponent : (-oo...+oo)] /
+                [mantissa : [bottom....base * bottom), exponent : (-oo...+oo)]
+  {
+    immutable start_numerator : [0...+oo) := numerator(start);
+    immutable start_denominator : (0...+oo) := denominator(start);
+    immutable start_integer_part : [0...+oo) :=
+            (start_numerator /:: start_denominator);
+    immutable start_remainder : [0...+oo) :=
+            (start_numerator % start_denominator);
+    immutable result := find_integer_scientific_form(start_integer_part,
+            start_remainder, start_denominator, base, bottom);
+    return [mantissa :=
+            (result.mantissa_integer_part +
+             (result.mantissa_remainder / result.mantissa_denominator)),
+            exponent := result.exponent];
+  };
+
+function find_integer_scientific_form(start_integer_part : [0...+oo),
+        start_remainder : [0...+oo) / [0...start_denominator),
+        start_denominator : (0...+oo), base : (0...+oo),
+        bottom : (0...+oo) := 1)
+                returns [mantissa_integer_part : [1...+oo),
+                         mantissa_remainder : [0...+oo),
+                         mantissa_denominator : (0...+oo),
+                         exponent : (-oo...+oo)] /
+                        [mantissa_integer_part : [bottom...base * bottom),
+                         mantissa_remainder : [0...+oo),
+                         mantissa_denominator : (0...+oo),
+                         exponent : (-oo...+oo)]
+  {
+    immutable top : (0...+oo) := (base * bottom);
+    if ((start_integer_part >= bottom) && (start_integer_part < top))
+      {
+        return [mantissa_integer_part := start_integer_part,
+                mantissa_remainder := start_remainder,
+                mantissa_denominator := start_denominator, exponent := 0];
+      };
+
+    immutable remainder_times_base : [0...+oo) := (start_remainder * base);
+    immutable start_times_base_integer_part : [0...+oo) :=
+           ((start_integer_part * base) +
+            (remainder_times_base /:: start_denominator));
+    if ((start_integer_part < bottom) &&
+        (start_times_base_integer_part >= bottom))
+      {
+        immutable start_times_base_remainder : [0...start_denominator) :=
+               (remainder_times_base % start_denominator);
+        return [mantissa_integer_part := start_times_base_integer_part,
+                mantissa_remainder := start_times_base_remainder,
+                mantissa_denominator := start_denominator, exponent := -1];
+      };
+
+    immutable sub := find_integer_scientific_form(start_integer_part,
+            start_remainder, start_denominator, (base * base), bottom);
+    if (sub.mantissa_integer_part < top)
+      {
+        return [mantissa_integer_part := sub.mantissa_integer_part,
+                mantissa_remainder := sub.mantissa_remainder,
+                mantissa_denominator := sub.mantissa_denominator,
+                exponent := sub.exponent * 2];
+      }
+    else
+      {
+        return [mantissa_integer_part := (sub.mantissa_integer_part /:: base),
+                mantissa_remainder :=
+                        (((sub.mantissa_integer_part % base) *
+                          sub.mantissa_denominator) + sub.mantissa_remainder),
+                mantissa_denominator := (sub.mantissa_denominator * base),
+                exponent := (sub.exponent * 2) + 1];
+      };
+  };

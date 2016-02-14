@@ -1,0 +1,49 @@
+/* file "print_types.salm" */
+
+/*
+ *  This file contains tests of printing types in Salmon.  Note that there are
+ *  multiple legal ways to print a given type in Salmon, so the results from
+ *  running this test may vary from one implementation of Salmon to another.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+pure function t1(x) returns boolean ((x in integer) && ((x % 5) == 1));
+pure function t2(x) returns boolean ((x in integer) && ((x % 6) == 1));
+pure function t3(x) returns boolean ((x in integer) && ((x % 7) == 1));
+pure function t4(x) returns boolean ((x in integer) && ((x % 8) == 1));
+
+print("Type t1: ", type t1, ".\n");
+print("Type t2: ", type t2, ".\n");
+print("Type t3: ", type t3, ".\n");
+print("Type !t1: ", type !t1, ".\n");
+print("Type t1 | t2: ", type t1 | t2, ".\n");
+print("Type t1 & t2: ", type t1 & t2, ".\n");
+print("Type t1 ^ t2: ", type t1 ^ t2, ".\n");
+print("Type t1 | t2 | t3: ", type t1 | t2 | t3, ".\n");
+print("Type (t1 | t2) | t3: ", type (t1 | t2) | t3, ".\n");
+print("Type t1 | (t2 | t3): ", type t1 | (t2 | t3), ".\n");
+print("Type t1 | t2 | t3 | t4: ", type t1 | t2 | t3 | t4, ".\n");
+print("Type t1 | t2 | (t3 | t4): ", type t1 | t2 | (t3 | t4), ".\n");
+print("Type (t1 | t2) | (t3 | t4): ", type (t1 | t2) | (t3 | t4), ".\n");
+print("Type t1 & t2 & t3: ", type t1 & t2 & t3, ".\n");
+print("Type (t1 & t2) & t3: ", type (t1 & t2) & t3, ".\n");
+print("Type t1 & (t2 & t3): ", type t1 & (t2 & t3), ".\n");
+print("Type t1 & t2 & t3 & t4: ", type t1 & t2 & t3 & t4, ".\n");
+print("Type t1 & t2 & (t3 & t4): ", type t1 & t2 & (t3 & t4), ".\n");
+print("Type (t1 & t2) & (t3 & t4): ", type (t1 & t2) & (t3 & t4), ".\n");
+print("Type t1 ^ t2 ^ t3: ", type t1 ^ t2 ^ t3, ".\n");
+print("Type (t1 ^ t2) ^ t3: ", type (t1 ^ t2) ^ t3, ".\n");
+print("Type t1 ^ (t2 ^ t3): ", type t1 ^ (t2 ^ t3), ".\n");
+print("Type t1 ^ t2 ^ t3 ^ t4: ", type t1 ^ t2 ^ t3 ^ t4, ".\n");
+print("Type t1 ^ t2 ^ (t3 ^ t4): ", type t1 ^ t2 ^ (t3 ^ t4), ".\n");
+print("Type (t1 ^ t2) ^ (t3 ^ t4): ", type (t1 ^ t2) ^ (t3 ^ t4), ".\n");
+print("Type t1 | t2 & t3: ", type t1 | t2 & t3, ".\n");
+print("Type (t1 | t2) & t3: ", type (t1 | t2) & t3, ".\n");
+print("Type t1 | (t2 & t3): ", type t1 | (t2 & t3), ".\n");
+print("Type !t1 | t2: ", type !t1 | t2, ".\n");
+print("Type (!t1) | t2: ", type (!t1) | t2, ".\n");
+print("Type !(t1 | t2): ", type !(t1 | t2), ".\n");

@@ -1,0 +1,22 @@
+/* file "convertable.si" */
+
+/*
+ *  This file contains the interface to functions for generating types of
+ *  values that can be converted to or from other types of values.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+et_convertable_unknown :- any_quark,
+
+convertable :-
+        boolean <--
+        (target : type !{}, source : type !{},
+         tag : {et_convertable_unknown} := *),
+
+convertable_to :- type !{} <-- (target : type !{}),
+
+convertable_from :- type !{} <-- (source : type !{})

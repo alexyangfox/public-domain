@@ -1,0 +1,60 @@
+/* file "shorter.salm" */
+
+/*
+ *  This file provides very short versions of some keywords and names from the
+ *  standard library of Salmon.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+include "short.salm";
+
+alias v variable;
+alias i immutable;
+alias f function;
+alias p procedure;
+alias r return;
+alias rs returns;
+alias a arguments;
+alias t tagalong;
+alias l lepton;
+alias m multiset;
+alias s single;
+alias c cleanup;
+alias it iterate;
+alias cn continue;
+alias e export;
+alias h hide;
+alias g goto;
+alias q quark;
+
+alias b boolean;
+alias re regular_expression;
+alias aq any_quark;
+alias al any_lepton;
+alias lk lepton_key;
+alias jt jump_target;
+alias ac any_class;
+alias o object;
+alias tk tagalong_key;
+alias alk any_lock;
+alias n null;
+alias tr true;
+alias fa false;
+alias ms make_string;
+alias cp unicode_code_point;
+alias d delete;
+alias sp split;
+alias j join;
+alias si standard_input;
+alias so standard_output;
+alias out standard_output;
+alias se standard_error;
+alias err standard_error;
+alias pr print;
+alias spr sprint;
+alias prf printf;
+alias sprf sprintf;

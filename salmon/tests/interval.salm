@@ -1,0 +1,20 @@
+/* file "interval.salm" */
+
+/*
+ *  This file runs tests of the interval module.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+use "interval.salm" : "interval.si";
+
+
+immutable test_type := interval(10, 6);
+
+test_type(9, 11)!
+immutable i2 := test_type(1) / test_type(3);
+i2!
+printf("%.6g%\n", i2);

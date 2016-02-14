@@ -1,0 +1,16 @@
+/* file "do_native_bridge_include_test.salm" */
+
+/*
+ *  This file is part of a test of the native bridge include interface of
+ *  SalmonEye.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+include "../native_bridge_include_test.so";
+demo();
+demo(53);
+demo(53, ["Abe Lincoln"]);

@@ -1,0 +1,35 @@
+/* file "string_utf32_op.salm" */
+
+/*
+ *  This file contains operator overloading to allow strings to be accessed
+ *  using lookup operators as if they were arrays of unsigned 32-bit integers
+ *  in UTF-32 form.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+function operator[](base : string, key : [0...+oo)) returns u32
+  (to_utf32(base)[key]);
+
+function operator[](base : string, lower : [0...+oo), upper : [0...+oo))
+        returns string
+  (string_from_utf32(to_utf32(base)[lower...upper]));
+
+function operator[](base : string, key : [0...+oo), replacement : u32)
+        returns string
+  {
+    variable result := to_utf32(base);
+    result[key] := replacement;
+    return string_from_utf32(result);
+  };
+
+function operator[](base : string, lower : [0...+oo), upper : [0...+oo),
+                    replacement : string) returns string
+  {
+    variable result := to_utf32(base);
+    result[lower...upper] := to_utf32(replacement);
+    return string_from_utf32(result);
+  };

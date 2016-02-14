@@ -1,0 +1,1083 @@
+
+                           Salmon Tutorial
+
+
+                           by Chris Wilson
+
+
+
+        Introduction
+        ============
+
+Salmon is a general purpose, strongly-typed, object-oriented,
+procedural programming language.  This document is a tutorial to teach
+Salmon to someone who already knows how to program in another
+language.
+
+For full details about Salmon, see the Salmon Reference Manual.
+
+
+        Lesson 1: Hello, World
+        ======================
+
+Here's the traditional first program, ``Hello, World!'', written in
+Salmon:
+
+    print("Hello, World!\n");
+
+Note that this is the complete program -- no opening or include lines
+or anything else is needed.
+
+The text between the double quotes is what's printed.  The double
+quotes and everything between them is a string literal.  The "\n"
+stands for a new line, so this program prints its text, then the new
+line character and then exits.
+
+The semicolon at the end of the line indicates the end of a statement.
+Every statement in Salmon ends with a semicolon.
+
+
+        Lesson 2: Comments
+        ==================
+
+Now here's the same program with comments added:
+
+    /* Comment 1. */
+    // Comment 2.
+    # Comment 3.
+    /* /* Comment 4. */ */
+    print("Hello, World!\n");
+
+This program does exactly the same thing as the previous one and
+illustrates how comments can be used in Salmon.
+
+Comment 1 uses the classic C-style comment syntax, where "/*" starts a
+comment and "*/" ends it.  Comment 2 uses the newer C++-style comment
+syntax where "//" starts a comment and the end of the line ends it.
+
+Comment 3 uses syntax similar to Comment 2 but with "#" instead of
+"//" starting the comment and the end of the line finishing it.  This
+comment syntax is included in Salmon to allow Salmon source code files
+to be executed directly on systems that use the Unix-style "#!" syntax
+for specifying the interpreter to be used to execute a script.  If the
+Salmon interpreter is "/usr/local/bin/salmoneye", for example, then if
+the first line of the Salmon source file is
+"#!/usr/local/bin/salmoneye" then the source file name can be typed as
+a command and it will be run with the specified interpreter.
+
+Finally, Comment 4 illustrates how Salmon comments can be nested.
+This is useful for commenting-out code that includes comments.
+
+
+        Lesson 3: More Arguments to print()
+        ===================================
+
+This program:
+
+    print("AAA", "BBB", "CCC", "\n");
+
+prints "AAABBBCCC" to its output and then a new line character and
+then exits.  Any number of comma-separated string literals may be
+passed as arguments to the print() procedure and they are printed one
+after the other.
+
+
+        Lesson 4: Printing Integers
+        ===========================
+
+This program:
+
+    print("One: ", 1, ".\n");
+    print("Five hundred: ", 500, ".\n");
+    print("Negative eight: ", -8, ".\n");
+
+gives the following output:
+
+    One: 1.
+    Five hundred: 500.
+    Negative eight: -8.
+
+Here, we have a program with several print statements in a row.  The
+statements are executed sequentially.  The print statements also
+include a mix of string literals and decimal integer literals.
+
+
+        Lesson 5: Variables
+        ===================
+
+Here's the next program:
+
+    variable x;
+    x := 15;
+    print("x is ", x, ".\n");
+    x := 18;
+    print("x is ", x, ".\n");
+    x := "blue";
+    print("x is ", x, ".\n");
+
+The output from this program is:
+
+    x is 15.
+    x is 18.
+    x is blue.
+
+The first line declares a variable named ``x''.  Subsequent lines
+assign different values to this variable and print them out.  Note
+that both integer values and string values may be assigned to a
+variable.
+
+
+        Lesson 6: Variables with Types
+        ==============================
+
+Our next program is:
+
+    variable x : integer;
+    variable y : string;
+    x := 15;
+    y := "blue";
+    print("x is ", x, ".\n");
+    print("y is ", y, ".\n");
+    x := 18;
+    y := "red";
+    print("x is ", x, ".\n");
+    print("y is ", y, ".\n");
+
+The output is:
+
+    x is 15.
+    y is blue.
+    x is 18.
+    y is red.
+
+Note that in the declaration of the variable x in this example a colon
+and "integer" have been added.  The word "integer" specifies a type.
+In Salmon, types are sets of values.  The word "integer" specifies the
+type of all integers.  So the values 3 and -17 are in this type but
+the string "purple" is not.  Adding a colon and a type specification
+to a variable declaration specifies that that variable is only allowed
+to have values in that type.
+
+Similarly, the variable y uses the type "string", which specifies the
+type of all strings.  So the value 15 could be assigned to x, but it
+would be illegal to assign it to y.  On the other hand, the value
+"blue" can be assigned to y but not to x.
+
+Note that we could remove the types from the variables and the program
+would still function the same way.  Types are not required on
+variables in Salmon, as the previous examples showed.  But adding
+types two variables can have three main advantages.  The first
+advantage is that they can help a human reader of the program
+understand it better.  The type conveys some very precise information
+about how that variable is intended to be used.
+
+The second advantage is that types on variables can help the compiler
+or interpreter implementing Salmon catch certain kinds of bugs and
+bring them to the attention of the developer.  If the developer
+specifies a type for a variable and then an attempt is made to set
+that variable to a value not in that type, something is happing that
+the developer did not expect.  The compiler or interpreter can print
+an error message and let the developer fix the problem.
+
+The third main advantage to putting types on variables is that a
+Salmon compiler might be able to generate better-optimized code
+because it knows that the values that variable might take are limited
+as specified by the type.
+
+
+        Lesson 7: Initialization of Variables
+        =====================================
+
+Next, consider this program:
+
+    variable x : integer := 15;
+    variable y : string := "blue";
+    print("x is ", x, ".\n");
+    print("y is ", y, ".\n");
+    x := 18;
+    y := "red";
+    print("x is ", x, ".\n");
+    print("y is ", y, ".\n");
+
+This program has exactly the same effect as the previous one, but the
+first four lines have been combined into two by combining variable
+declarations with assignments to those variables.  Since it's common
+to assign a value to a variable when it is declared, Salmon allows
+variable declarations to include initializers.
+
+
+        Lesson 8: Immutables
+        ====================
+
+Here's our next program:
+
+    immutable x : integer := 15;
+    variable y : string := "blue";
+    print("x is ", x, ".\n");
+    print("y is ", y, ".\n");
+    y := "red";
+    print("x is ", x, ".\n");
+    print("y is ", y, ".\n");
+
+The output is:
+
+    x is 15.
+    y is blue.
+    x is 15.
+    y is red.
+
+In this example, x looks like a variable except that the key word
+"immutable" is used to declare it instead of the keyword "variable".
+An immutable is exactly the same as a variable except that its value
+can only be set one, by the initializer in its declaration.  After the
+declaration is done, it is illegal to try to set an immutable's value.
+
+Note that we could change the word "immutable" to "variable" in this
+example and the program would work exactly the same way.  Using
+"immutable" instead of "variable" is useful for the same reasons that
+using types on variables is useful: it adds limitations, and those
+limitations can help human readers of the code understand what is
+happening, help a compiler or interpreter flag bugs, and help a
+compiler generate more efficient code.
+
+
+        Lesson 9: Procedures
+        ====================
+
+This is the next example program:
+
+    procedure print_twice(a)
+      {
+        print("First time: ", a, ".\n");
+        print("Second time: ", a, ".\n");
+      };
+
+    print_twice(15);
+    print_twice("apple");
+
+And here's the output:
+
+    First time: 15.
+    Second time: 15.
+    First time: 17.
+    Second time: 17.
+
+This example declares a procedure named "print_twice" and calls it
+twice.  First it calls it with the argument 15 and then with the
+argument 17.  The declaration of print_twice() specifies that it takes
+exactly one argument.  The calls to print_twice() are similar to the
+calls to print() in the previous examples -- print() is a procedure
+that's always available to Salmon programs as part of the Salmon
+Standard Runtime Library while print_twice() is declared in the
+program itself.
+
+
+        Lesson 9: More Procedures
+        =========================
+
+Next we have:
+
+    procedure name_and_number(name : string, number : integer)
+      {
+        print("Name: ", name, ".\n");
+        print("Number: ", number, ".\n");
+      };
+
+    name_and_number("Chris Wilson", 1968);
+    name_and_number("James Bond", 007);
+
+The output from this program is:
+
+    Name: Chris Wilson.
+    Number: 1968.
+    Name: James Bond.
+    Number: 007.
+
+In this case, the declaration of the procedure specifies that it has
+two arguments, "name" and "number".  It would be illegal to call this
+procedure with one argument or with three arguments.
+
+Also, the declaration specifies types for its two arguments, using the
+same syntax used for specifying types for variable and immutable
+declarations.  As with variables and immutables, these types specify
+that those parameters are only allowed to take values in those types.
+To call the procedure with values outside one of those types for one
+of those arguments would be illegal.
+
+Note that the formal parameters to a procedure are like immutables --
+their values are assigned only once per invocation of the procedure
+and cannot be modified by the procedure.  But they can change from one
+invocation of the procedure to the next.
+
+
+        Lesson 10: Overloading
+        ======================
+
+Here's our next example program:
+
+    procedure show(a : integer)
+      {
+        print("Integer: ", a, ".\n");
+      };
+    procedure show(a : string)
+      {
+        print("String: ", a, ".\n");
+      };
+
+    show(15);
+    show("blue");
+    show("red");
+    show(-105);
+
+The output in this case is:
+
+    Integer: 15.
+    String: blue.
+    String: red.
+    Integer: -105.
+
+In this case, two different procedures are declared with the same
+name but with different type requirements on their arguments.  Then,
+which one is actually called depends on which one has argument types
+that match the arguments being used by a particular call site.  The
+first and fourth call sites use integer arguments, so the first
+version of the procedure is called.  The second and third call sites
+use string arguments, so the second version of the procedure is used
+in these cases.
+
+To determine which procedure will be called, start with the last one
+and see if the actual arguments at the call site would match it.  If
+so, this is the procedure that will be used.  Otherwise, go up to the
+next one and continue until one is found that matches.
+
+
+        Lesson 11: More Types
+        =====================
+
+This is the next program:
+
+    procedure show(a)
+      {
+        print("Version 1.\n");
+      };
+    procedure show(a : integer)
+      {
+        print("Version 2.\n");
+      };
+    procedure show(a : [10...17])
+      {
+        print("Version 3.\n");
+      };
+    procedure show(a : [8...12])
+      {
+        print("Version 4.\n");
+      };
+    procedure show(a : {3, 5, 9, "red", "blue"})
+      {
+        print("Version 5.\n");
+      };
+    procedure show(a : {"green"})
+      {
+        print("Version 6.\n");
+      };
+
+    show(1);
+    show(3);
+    show(8);
+    show(9);
+    show(10);
+    show(11);
+    show(12);
+    show(13);
+    show(17);
+    show(18);
+    show("red");
+    show("green");
+    show("blue");
+    show("yellow");
+
+Its output is:
+
+    Version 2.
+    Version 5.
+    Version 4.
+    Version 5.
+    Version 4.
+    Version 4.
+    Version 4.
+    Version 3.
+    Version 3.
+    Version 2.
+    Version 5.
+    Version 6.
+    Version 6.
+    Version 1.
+
+This program introduces two new ways of specifying types.  The first
+is used in the third version of the show() procedure, where the type
+of the parameter a is given by ``[10...17]''.  This is a type
+expression that means the set of all integer values from 10 to 17,
+inclusive.  A similar type expression is used in the fourth version of
+show() in this example.
+
+The other new way of specifying a type is used by the fifth version of
+show() in this example.  In this case, ``{3, 5, 9, "red", "blue"}'' is
+used to specify the type.  This means the set that includes the values
+3, 5, 9, "red", and "blue" but no others.  A similar type expression
+is used in the sixth version of show().
+
+Note that in this example, some of the call sites match more than one
+of the versions of show().  For example, ``show(3);'' matches versions
+1, 2 and 5.  Since the later versions are tried first when looking to
+resolve overloading, it is version 5 that ends up getting called.
+
+
+        Lesson 12: Nesting
+        ==================
+
+Here's the next example program:
+
+    procedure outer()
+      {
+        procedure show(a : [10...17])
+          {
+            print("Version 3.\n");
+          };
+        procedure show(a : [8...12])
+          {
+            print("Version 4.\n");
+          };
+
+        show(4);
+        show(12);
+        show(14);
+        show(24);
+        show("orange");
+      };
+    procedure show(a)
+      {
+        print("Version 1.\n");
+      };
+    procedure show(a : integer)
+      {
+        print("Version 2.\n");
+      };
+
+    outer();
+    show(4);
+    show(12);
+    show(14);
+    show(24);
+    show("orange");
+
+This time, the output is:
+
+    Version 2.
+    Version 4.
+    Version 3.
+    Version 2.
+    Version 1.
+    Version 2.
+    Version 2.
+    Version 2.
+    Version 2.
+    Version 1.
+
+In this example, some of the versions of show() are nested inside the
+procedure outer() and some are not.  When resolving overloading from
+within outer(), the versions of show() that are local are tried
+first.  Then, if they fail to resolve overloading, the top-level
+versions are tried.
+
+Note also that the procedure outer() takes no arguments.
+
+
+        Lesson 13: Named Callsite Arguments
+        ===================================
+
+Now we'll look at this program:
+
+    procedure print_some(a, b, c, d, e)
+      {
+        print("Arguments: ", a, ", ", b, ", ", c, ", ", d, ", ", e, ".\n");
+      };
+
+    print_some(1, 2, 3, 4, 5);
+    print_some(a := 1, 2, 3, 4, 5);
+    print_some(1, 2, c := 3, 4, 5);
+    print_some(a := 1, b := 2, c := 3, d := 4, e := 5);
+    print_some(e := 1, b := 2, c := 3, d := 4, a := 5);
+    print_some(b := 1, 2, 3, 4, a := 5);
+
+Its output is:
+
+    Arguments: 1, 2, 3, 4, 5.
+    Arguments: 1, 2, 3, 4, 5.
+    Arguments: 1, 2, 3, 4, 5.
+    Arguments: 1, 2, 3, 4, 5.
+    Arguments: 5, 2, 3, 4, 1.
+    Arguments: 5, 1, 2, 3, 4.
+
+This example shows how argument names may optionally be used at a call
+site.
+
+In the first call to print_some(), no arguments are named and the call
+site looks like the call sites in previous examples.  Which argument
+goes to which of the formal parameters in the declaration depends on
+the order.  The parameter 1 is the first actual argument, so it is
+assigned to a, the first formal parmeter.  The parameter 2 is the
+second, so it is assigned to b, and so on.
+
+The second call to print_some() is the same except that ``a :='' is
+added at the start of the argument list.  Note that this is not
+variable assignment.  Unlike some programming languages, Salmon does
+not allow assignments as expressions, only as statements, so this is
+not an assignment to a local variable a.  The a here refers to the
+name of a formal parameter in the declaration of print_some().
+
+The next two calls to print_some() are similar.  In every case, the
+same parameters are used in the same order, but with various
+combinations of explicitly specifying the name and not.
+
+One reason to specify the name of the parameter at the call site is to
+make the code easier to read.  When a procedure has a number of
+parameters and the call site just has a list of values separated by
+commas, it's not always clear which value means what, and it can be
+easy to get confused and put the parameters in the wrong order.
+Putting in explicit names in some cases can make the code easier to
+read and also help avoid some kinds of bugs.
+
+The final two calls to print_some() are different.  In these calls,
+the names of the parameters are out of order.  For example, in the
+second-to-last case the first argument is given the name of the last
+argument, e, of the declaration.  This means that the value 1 should
+be assigned to the last parameter, not the first.
+
+In the last call to print_some(), the first actual argument is
+assigned to b, which is the second formal parameter.  But then the
+next argument isn't given a name.  Whenever an actual argument isn't
+given a name, it is assumed to correspond to the next position in the
+formal parameter list.  So, in this case, this value 2 is assigned to
+the formal parameter c.  This continues until we get to the final
+actual argument, which is given the name a, so it is assigned to the
+first formal parameter.
+
+Note that when names are used, each formal parameter needs to end up
+with a value and no two actual arguments can be assigned to the same
+formal parameter.  So ``print_some(1, a := 2, 3, 4, 5, 6);'' would be
+illegal because both 1 and 2 would be assigned to the first formal
+parameter.  And ``print_some(d := 1, 2);'' would be illegal because no
+value would be assigned to a.  Note that when a call would be illegal
+for a particular procedure for one of these reasons the program still
+might work if there were another version of the procedure that did
+match.  Just as in the case where the parameter types didn't match,
+overloading can resolve such problems.
+
+
+        Lesson 14: Default Arguments
+        ============================
+
+Next, we have this program:
+
+    variable x := 15;
+    procedure print_some(a := 3, b, c := x, d := b, e := 7)
+      {
+        immutable x := 25;
+        print("Arguments: ", a, ", ", b, ", ", c, ", ", d, ", ", e, ".\n");
+      };
+
+    print_some(1, 2, 3, 4, 5);
+    print_some(1, 2, 3, 4);
+    print_some(b := 2, 3, 4);
+    print_some(b := 2, 3);
+    print_some(b := 2);
+    x := 20;
+    print_some(b := 2);
+
+If we run it, the output will be:
+
+    Arguments: 1, 2, 3, 4, 5.
+    Arguments: 1, 2, 3, 4, 7.
+    Arguments: 3, 2, 3, 4, 7.
+    Arguments: 3, 2, 3, 2, 7.
+    Arguments: 3, 2, 15, 2, 7.
+    Arguments: 3, 2, 20, 2, 7.
+
+In this example, the print_some() procedure declaration is the same as
+before except that some of the formal parameters have ":=" followed by
+some expression.  This is the same syntax as initializers for
+variables and immediates.  But in the case of formal parameters, the
+expressions are called default value expressions instead of
+initializers.
+
+The way default value expressions work is that they fill in missing
+values.  If all parameters are assigned values at the call site, they
+have no effect.  That's why the first call to print_some() has exactly
+the same effect it had in the previous example.
+
+The second call to print_some() leaves off the final argument.  So the
+formal parameter e is not given a value at the call site.  In the
+previous example that would have been illegal, but in this example, e
+has a default value expression.  So when the call to print_some()
+happens, the default value expression for e is evaluated and e is
+given the value 7.
+
+The third call to print_some() shows how named arguments can be used
+to leave the first formal parameter without an explicit argument while
+later parameters are given explicit arguments.  In this case, both a
+and e have to use their default value expressions while the other
+parameters do not.
+
+The fourth call to print_some() illustrates another important point:
+that the default value expression can use the value of another formal
+parameter.  In this case, no value is given for d, so the expression
+``b'' is used to find its default value.  In this case ``b'' refers to
+the formal parameter b, which is given the value 2, so this is the
+value that d gets also.  Note that default value expressions are only
+allowed to use parameters that come earlier in the formal parameter
+list -- it would have been illegal for d's default value expression to
+use e instead of b because e comes later in the list.  This rule
+avoids any circularity problems where parameters depend on one another
+and also makes the order of evaluation of the default expressions
+explicit -- they are always handled from left to right.
+
+The fifth call to print_some() demonstrates another feature of default
+value expressions: they can refer to variables.  In fact, they can
+refer to anything that an expression used as a parameter argument,
+variable assignment value, or any other normal expression can refer
+to.  But note that there is an x inside print_some() and an x outside
+print_some(); the x in the default value expression refers to the one
+outside.  Nothing inside the procedure is visible to the default value
+expressions and only formal parameters earlier in the formal parameter
+list are visible.
+
+Finally, the sixth call to print_some() illustrates another point
+about default value expressions.  While in the previous call to
+print_some(), the parameter c had the value 15, in this call it has
+the value 20.  That's because the value of x was changed between the
+two calls.  The default value expression isn't just evaluated once
+when the procedure is declared and then used whenever it is needed.
+Instead, the whole expression is evaluated when needed.
+
+
+        Lesson 15: Basic Arithmetic
+        ===========================
+
+Our next example program is:
+
+    print("2 + 2: ", 2 + 2, ".\n");
+    immutable x := 15 - 3;
+    print("15 - 3: ", x, ".\n");
+    print("12 * 2: ", x * 2, ".\n");
+    variable y := -4;
+    print("y: ", y, ".\n");
+    y += 8;
+    print("y: ", y, ".\n");
+    y -= 2;
+    print("y: ", y, ".\n");
+    ++y;
+    print("y: ", y, ".\n");
+    --y;
+    print("y: ", y, ".\n");
+    y *= 3;
+    print("y: ", y, ".\n");
+    print("-y: ", -y, ".\n");
+    y := 7777777777777777777 + 1111111111111111111;
+    print("y: ", y, ".\n");
+
+Its output is:
+
+    2 + 2: 4.
+    15 - 3: 12.
+    12 * 2: 24.
+    y: -4.
+    y: 4.
+    y: 2.
+    y: 3.
+    y: 2.
+    y: 6.
+    -y: -6.
+    y: 8888888888888888888.
+
+This illustrates basic addition, subtraction, multiplication and
+negation expressions.  Note that such expressions can be used anywhere
+any other expression can be used, including in the arguments to
+procedures and the values to be assigned to variables.
+
+This example also shows the use of the "+=", "-=", and "*="
+operators.  These are like the ":=" assignment operator except that
+instead of just assigning the new values, they combine the new values
+with the old values already in the variables by using addition,
+subtraction, and multiplication respectively.
+
+This example also shows increment and decrement statements, which use
+the "++" and "--" operators respectively.
+
+All of these arithmetic operations are valid only on certain values.
+It is legal to use them on integers, but it would not be legal to use
+them on strings, for example.
+
+Note, also that the final addition is done on two quite large integers
+-- enough to overlow the integer types of some programming languages.
+In Salmon, integers are not limited to 32 bits, 64 bits, or any other
+fixed number of bits.  They are only limited by the amount of memory
+available on the system.  Salmon can easily handle numbers tens of
+thousands of bits long.
+
+
+        Lesson 16: Functions
+        ====================
+
+Here's a program that illustrates the use of functions in Salmon:
+
+    function add(a : integer, b : integer)
+      {
+        immutable result := a + b;
+        return result;
+      };
+
+    print("3 + 7: ", add(3, 7), ".\n");
+
+    function add_to_x(a : integer)
+      {
+        return x + a;
+      };
+
+    variable x := 17;
+    print("17 + 3: ", add_to_x(3), ".\n");
+    x := 27;
+    print("27 + 3: ", add_to_x(3), ".\n");
+
+    function subtract_from_x(a : integer) (x - a);
+
+    print("27 - 3: ", subtract_from_x(3), ".\n");
+
+    routine multiply(a : integer, b : integer) returns integer
+      {
+        return a * b;
+      };
+    routine print_product(a : integer, b : integer)
+      {
+        print(a, " * ", b, ": ", multiply(a, b), ".\n");
+      };
+
+    print_product(4, 5);
+
+And here's its output:
+
+    3 + 7: 10.
+    17 + 3: 20.
+    27 + 3: 30.
+    27 - 3: 24.
+    4 * 5: 20.
+
+This example shows how functions work in Salmon.  In Salmon, a
+function is like a procedure except it returns a value.  So calls to
+functions are expressions, not statements, like calls to procedures.
+In Salmon, we use the term ``routines'' (short for ``subroutines'')
+when we want to talk about both procedures and functions.
+
+The first function here is add().  It declares a variable "result" and
+computes the sum of its two parameters and puts it in that variable.
+Then, it uses a "return" statement to specify that that value is to be
+returned to the caller.
+
+Procedures return implicitly when control reaches the end of the
+procedure body.  It is illegal for control to reach the end of a
+procedure body.  Instead, a return statement must be executed
+specifying a value to return and causing control to immediately return
+to the call site.
+
+The add_to_x() function illustrates how the body of a function can
+refer to a name from an enclosing scope (in this case, x).
+
+The subtract_from_x() function illustrates short-hand notation for
+simple functions.  For functions that only consist of a single
+statement, a return statement, instead of writing out the whole thing,
+the body can be replaced with just the expression for the return
+statement in parentheses.
+
+The multiply() and print_procedure() routines illustrate how the
+keyword "routine" can be used instead of "function" or "procedure".
+Also, the multiply() routine illustrates how a type can be specified
+for a return value.  In this case, the ``returns integer'' part
+specifies that the value returned by the function has to be an
+integer.  It is illegal for the returned value to be anything but an
+integer.
+
+
+        Lesson 17: If Statements and Boolean Values
+        ===========================================
+
+Here's the next example program:
+
+    procedure test(a : integer)
+      {
+        if (a > 10)
+          {
+            print(a, " is > 10.\n");
+          };
+        if (a < 15)
+          {
+            print(a, " is < 15.\n");
+          }
+        else
+          {
+            print(a, " is not < 15.\n");
+          };
+      };
+
+    test(12);
+    test(8);
+    test(20);
+
+The output here is:
+
+    12 is > 10.
+    12 is < 15.
+    8 is < 15.
+    20 is > 10.
+    20 is not < 15.
+
+This example introduces ``if'' statements and boolean expressions.
+
+The ``<'' and ``>'' operators may be applied to pairs of integer
+values.  The result is the value true or the value false.  When used
+as the test of an ``if'' statement, the body is executed if and only
+if the value is true.  If there is an ``else'' part to the ``if''
+statement then it is evaluated if and only if the value of the test is
+false.
+
+Note that in Salmon the values true and false are different from
+integer values.  Unlike in some programming languages, ``if (1)'' is
+illegal in Salmon because 1 is neither true nor false.
+
+
+        Lesson 18: More Boolean Values
+        ==============================
+
+Here's our next example:
+
+    procedure test(a : boolean)
+      {
+        if (a)
+          {
+            print("a is true.\n");
+          }
+        else
+          {
+            print("a is false.\n");
+          };
+      };
+
+    test(1 < 5);
+    test(5 < 1);
+    test(5 <= 5);
+    test(5 <= 6);
+    test(5 >= 6);
+    variable x := (10 < 17);
+    test(x);
+    x := false;
+    test(x);
+    test(!x);
+    test(17 == 17);
+    test(17 != 17);
+    test(17 == "orange");
+    test("apple" == "orange");
+    test("orange" == "orange");
+
+The output in this case is:
+
+    a is true.
+    a is false.
+    a is true.
+    a is true.
+    a is false.
+    a is true.
+    a is false.
+    a is true.
+    a is true.
+    a is false.
+    a is false.
+    a is false.
+    a is true.
+
+This example shows more about boolean expressions and values.  Note
+that the operators "<", ">", "<=", ">=" can be used to do order
+comparisons on integers; "==" and "!=" can be used to compare any two
+values for equality or inequality; boolean values may be assigned to
+variables and passed to routines just like any other values; the words
+"true" and "false" may be used to specify the values true and false;
+and the operator "!" may be applied to a boolean value to give the
+opposite boolean value.
+
+
+        Lesson 19: Compound Return Values
+        =================================
+
+Next, let's look at this program:
+
+    function sum_product(a : integer, b : integer)
+      {
+        return [a + b, a * b];
+      };
+
+    variable sum;
+    variable product;
+    [sum, product] := sum_product(2, 3);
+    print("Sum: ", sum, ".\n");
+    print("Product: ", product, ".\n");
+    variable x;
+    [x] := sum_product(5, 7);
+    print("5 + 7: ", x, ".\n");
+    [, x] := sum_product(8, 8);
+    print("8 * 8: ", x, ".\n");
+
+It gives this output:
+
+    Sum: 5.
+    Product: 6.
+    5 + 7: 12.
+    8 * 8: 64.
+
+In this case, our function returns two different values in one call.
+The first call site assigns the two values to two variables.  Any
+number of values may be returned from a single function this way.
+
+The second call site only uses the first of the two values returned by
+the function.  The second value is simply ignored.  The third call
+site only uses the second of the two values and ignores the first.
+
+
+        Lesson 20: Named Compound Return Values
+        =======================================
+
+This is the next example:
+
+    function sum_product(a : integer, b : integer)
+      {
+        return [sum := a + b, product := a * b];
+      };
+
+    variable x;
+    variable y;
+    [x, y] := sum_product(2, 3);
+    print("x: ", x, ".\n");
+    print("y: ", y, ".\n");
+
+    [x := sum, y] := sum_product(3, 4);
+    print("x: ", x, ".\n");
+    print("y: ", y, ".\n");
+
+    [x, y := product] := sum_product(4, 5);
+    print("x: ", x, ".\n");
+    print("y: ", y, ".\n");
+
+    [x := sum, y := product] := sum_product(5, 6);
+    print("x: ", x, ".\n");
+    print("y: ", y, ".\n");
+
+    [x := product, y := sum] := sum_product(6, 7);
+    print("x: ", x, ".\n");
+    print("y: ", y, ".\n");
+
+The output in this case is:
+
+    x: 5.
+    y: 6.
+    x: 7.
+    y: 12.
+    x: 9.
+    y: 20.
+    x: 11.
+    y: 30.
+    x: 42.
+    y: 13.
+
+This example illustrates how a function can give names to the
+different values it returns when it returns multiple return values.
+Then, the call site is free to use either the order of the values or
+the names of one or more of the values when assigning values.  This is
+analagous to the use of names for arguments at call sites.
+
+
+        Lesson 21: Semi-Labeled Value Lists
+        ===================================
+
+Now, we have this example:
+
+    function sum_product(a : integer, b : integer)
+      {
+        variable result := [sum := a + b, product := a * b];
+        return result;
+      };
+
+    variable x;
+    variable y;
+    [x := product, y := sum] := sum_product(6, 7);
+    print("x: ", x, ".\n");
+    print("y: ", y, ".\n");
+
+    variable c;
+    c := sum_product(10, 5);
+    print("c[0]: ", c[0], ".\n");
+    print("c[1]: ", c[1], ".\n");
+    print("c.sum: ", c.sum, ".\n");
+    print("c.product: ", c.product, ".\n");
+    [x := product, y := sum] := c;
+    print("x: ", x, ".\n");
+    print("y: ", y, ".\n");
+    [x, y] := [y, x];
+    print("x: ", x, ".\n");
+    print("y: ", y, ".\n");
+
+The output in this case is:
+
+    x: 42.
+    y: 13.
+    c[0]: 15.
+    c[1]: 50.
+    c.sum: 15.
+    c.product: 50.
+    x: 50.
+    y: 15.
+    x: 15.
+    y: 50.
+
+First of all, notice that in this example the declaration of
+sum_product() is the same as in the previous example except that the
+part after the word "return" is instead used to assign to the variable
+"result".  Then "result" is returned.  As the first call site
+illustrates, this has exactly the same effect as the sum_product()
+function of the previous example.
+
+So really when we were returning multiple values in the previous
+lessons we were really constructing a compound value consisting of
+more than one component value and returning that one compound value.
+Then, the call site was extracting components of that compound value.
+
+The kind of compound value we are dealing with here is called a
+semi-labeled value list.  It's a value list because it is a sequence
+of values with ordering information.  It's ``semi-labeled'' because
+the individual values may optionally have labels attached to them.  If
+the values have labels attached to them, they may be accessed by
+name.  Whether or not they have labels attached to them, they may be
+accessed by position in the list.
+
+This example also uses "." expressions to show how a "." followed by a
+name can be used to access a component of a semi-labeled value list by
+its label.  It also uses "[" and "]" to extract a component by
+explicitly giving the number of that component.  Note that the first
+element in a list has component index zero.
+
+Finally, this example show how the values of the variables x and y can
+be swapped without an explicit temporary variable by creating a
+compound value and then extracting its components using the same
+syntax we used to assign multiple variables from the components of a
+function returning multiple values.
+
+
+        Lesson 22: Maps
+        ===============
+
+This tutorial is under construction, with more to come soon.

@@ -1,0 +1,21 @@
+/* file "native_bridge_include_test.salm" */
+
+/*
+ *  This file runs a test of the native bridge include interface of SalmonEye.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+include "platform_dependent.salm";
+
+immutable link_extras : string :=
+        ((shared_library_suffix == ".dll") ? " -L. -L.. -lsalmoneye" : "");
+
+`gcc -Wall --shared -o native_bridge_include_test$shared_library_suffix tests/native_bridge_include_test.c$link_extras`;
+
+`$(arguments[1]) tests/do_native_bridge_include_test.salm`;
+
+remove("native_bridge_include_test" ~ shared_library_suffix);

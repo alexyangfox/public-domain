@@ -1,0 +1,1317 @@
+/* file "type.salm" */
+
+/*
+ *  This file runs tests of the mechanism for determining whether a given value
+ *  is in a given type.  For each value/type pair being tested, it prints
+ *  whether the value is in the type, whether it's undetermined, and the reason
+ *  if it's not in the type.  The results printed by this program are intended
+ *  to be compared against the expected output.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+procedure test(value, test_type : type !{})
+  {
+    print("Testing if ", value, " is in ", test_type, ": ");
+    core_test(value, test_type);
+  };
+
+procedure anonymous_test(value, test_type : type !{})
+  {
+    print("Anonymous test: ");
+    core_test(value, test_type);
+  };
+
+procedure core_test(value, test_type : type !{})
+  {
+    try
+      {
+        if (value in test_type)
+            print("yes.\n");
+        else
+            print("no (", why_not_in(value, test_type), ").\n");;
+      }
+    catch
+      {
+        immutable the_exception : exception := current_exceptions()[0];
+        if (exception_tag_in_indeterminate == the_exception.tag)
+          {
+            print("unknown (", why_not_in(value, test_type), ").\n");
+          }
+        else
+          {
+            print("Error -- unexpected exception with tag ", the_exception.tag,
+                  " (", the_exception.message, ").\n");
+          };
+      };
+  };
+
+anonymous_test(
+        { immutable result := variable; delete(result); return result; },
+        type !{});
+anonymous_test(
+        { immutable result := variable; delete(result); return result; },
+        type {});
+anonymous_test(
+        { immutable result := variable; delete(result); return result; },
+        type <<pure function(x) returns boolean
+                 ((x in integer) && ((x % 5) == 3))>>);
+anonymous_test(
+        { immutable result := variable; delete(result); return result; },
+        type <<pure function(x) returns boolean
+                 ((x in integer) && ((x % 5) == 3))>> | integer);
+anonymous_test(
+        { immutable result := variable; delete(result); return result; },
+        integer);
+
+test(1, type !{});
+
+test(1, type {});
+
+test(1, integer);
+test("blue", integer);
+
+test(1, rational);
+test(1.5, rational);
+test("blue", rational);
+
+test(@abc@, regular_expression);
+test(1, regular_expression);
+
+quark q1;
+test(q1, any_quark);
+test(1, any_quark);
+
+lepton l1;
+test(l1[], any_lepton);
+test(1, any_lepton);
+
+test(l1, lepton_key);
+test(1, lepton_key);
+
+j1:
+test(j1, jump_target);
+test(1, jump_target);
+
+class c1() {};
+routine r1() {};
+test(c1, any_class);
+test(r1, any_class);
+anonymous_test(class() {}, any_class);
+anonymous_test(routine() {}, any_class);
+test(1, any_class);
+
+anonymous_test(c1(), object);
+test(1, object);
+
+tagalong t1;
+test(t1, tagalong_key);
+test(1, tagalong_key);
+
+lock lk1;
+test(lk1, any_lock);
+test(1, any_lock);
+
+test("blue", string);
+test(1, string);
+
+test('T', character);
+test(1, character);
+
+pure function filter_a(x) returns boolean ((x in integer) && ((x % 5) == 3));
+pure function filter_b(x) returns boolean ((x in integer) && ((x % 4) == 3));
+pure function filter_c(x) returns boolean ((x in integer) && ((x % 7) == 3));
+
+test(1, type {1, 2, 3});
+test(4, type {1, 2, 3});
+test(type filter_a, type {type filter_b});
+test(type filter_a, type {type filter_b, type filter_c});
+test(type filter_b, type {type filter_b, type filter_c});
+test(type filter_c, type {type filter_b, type filter_c});
+test(1, type {type filter_b, type filter_c});
+
+test(type filter_a, type !{type filter_b, type filter_c});
+test(type filter_b, type !{type filter_b, type filter_c});
+test(1, type !{type filter_b, type filter_c});
+
+test(1, type {1, 2} & {2, 3});
+test(2, type {1, 2} & {2, 3});
+test(3, type {1, 2} & {2, 3});
+test(4, type {1, 2} & {2, 3});
+test('a', type {'a', 'b'} & {'b', 'c'});
+test('b', type {'a', 'b'} & {'b', 'c'});
+test('c', type {'a', 'b'} & {'b', 'c'});
+test('d', type {'a', 'b'} & {'b', 'c'});
+test(type filter_a, type {type filter_a} & {type filter_b});
+test(type filter_b, type {type filter_a} & {type filter_b});
+test(type filter_c, type {type filter_a} & {type filter_b});
+
+pure function filter_any(x) returns boolean (true);
+
+test(1, type (filter_a | filter_b));
+test(2, type (filter_a | filter_b));
+test(3, type (filter_a | filter_b));
+test(4, type (filter_a | filter_b));
+test(5, type (filter_a | filter_b));
+test(6, type (filter_a | filter_b));
+test(7, type (filter_a | filter_b));
+test(8, type (filter_a | filter_b));
+test(9, type (filter_a | filter_b));
+test(type filter_a, type (integer | {type filter_b}));
+test(type filter_a, type ({type filter_b} | filter_c));
+test(type filter_a, type ({type filter_b} | ({type filter_c} & filter_any)));
+test(type filter_a, type ({type filter_b} | filter_any));
+
+test(1, type (filter_a ^ filter_b));
+test(2, type (filter_a ^ filter_b));
+test(3, type (filter_a ^ filter_b));
+test(4, type (filter_a ^ filter_b));
+test(5, type (filter_a ^ filter_b));
+test(6, type (filter_a ^ filter_b));
+test(7, type (filter_a ^ filter_b));
+test(8, type (filter_a ^ filter_b));
+test(9, type (filter_a ^ filter_b));
+test(type filter_a, type (integer ^ {type filter_b}));
+test(type filter_a, type ({type filter_b} ^ filter_c));
+test(type filter_a, type ({type filter_b} ^ ({type filter_c} & filter_any)));
+
+test(1, type array[integer]);
+test(<<>>, type array[integer]);
+test(<<(5 --> 17)>>, type array[integer]);
+test(<<(5 --> "purple")>>, type array[integer]);
+test(<<(-5 --> 17)>>, type array[integer]);
+test(<<(-5 --> "purple")>>, type array[integer]);
+test(<<(*: [-5...5] --> 17)>>, type array[integer]);
+test(<<(*: [-5...5] --> "purple")>>, type array[integer]);
+test(<<(* --> 17)>>, type array[integer]);
+test(<<(* --> "purple")>>, type array[integer]);
+test(<<("blue" --> 17)>>, type array[integer]);
+test(<<("blue" --> "purple")>>, type array[integer]);
+test(<<(1/0 --> 17)>>, type array[integer]);
+test(<<(1/0 --> "purple")>>, type array[integer]);
+test(<<(0/0 --> 17)>>, type array[integer]);
+test(<<(0/0 --> "purple")>>, type array[integer]);
+test(<<(-1 --> 17)>>, type integer[0...1]);
+test(<<(0 --> 17)>>, type integer[0...1]);
+test(<<(1 --> 17)>>, type integer[0...1]);
+test(<<(2 --> 17)>>, type integer[0...1]);
+test(<<(1 --> type filter_a)>>, type (type filter_b)[0...1]);
+test(<<(*: filter_a --> 17)>>, type integer[0...1]);
+
+test([], type integer[0...1]);
+test([1], type integer[0...1]);
+test([1], type integer[1...2]);
+test([1], type integer[-1...2]);
+test([1, 1], type integer[0...1]);
+test([1, 1, 1], type integer[0...1]);
+test([1, a := 1], type integer[0...1]);
+test([1, "purple"], type integer[0...1]);
+test([type filter_a], type (type filter_b)[0...1]);
+
+test(-1, type [0...1]);
+test(0, type [0...1]);
+test(0.5, type [0...1]);
+test(1, type [0...1]);
+test(1.5, type [0...1]);
+test(2, type [0...1]);
+test(1/0, type [0...1]);
+test(0/0, type [0...1]);
+test("purple", type [0...1]);
+
+test(-1, type [0....1]);
+test(0, type [0....1]);
+test(0.5, type [0....1]);
+test(1, type [0....1]);
+test(1.5, type [0....1]);
+test(2, type [0....1]);
+test(1/0, type [0....1]);
+test(0/0, type [0....1]);
+test("purple", type [0....1]);
+
+test(-1, type (0...1]);
+test(0, type (0...1]);
+test(0.5, type (0...1]);
+test(1, type (0...1]);
+test(1.5, type (0...1]);
+test(2, type (0...1]);
+test(1/0, type (0...1]);
+test(0/0, type (0...1]);
+test("purple", type (0...1]);
+
+test(-1, type (0....1]);
+test(0, type (0....1]);
+test(0.5, type (0....1]);
+test(1, type (0....1]);
+test(1.5, type (0....1]);
+test(2, type (0....1]);
+test(1/0, type (0....1]);
+test(0/0, type (0....1]);
+test("purple", type (0....1]);
+
+test(-1, type [0...1));
+test(0, type [0...1));
+test(0.5, type [0...1));
+test(1, type [0...1));
+test(1.5, type [0...1));
+test(2, type [0...1));
+test(1/0, type [0...1));
+test(0/0, type [0...1));
+test("purple", type [0...1));
+
+test(-1, type [0....1));
+test(0, type [0....1));
+test(0.5, type [0....1));
+test(1, type [0....1));
+test(1.5, type [0....1));
+test(2, type [0....1));
+test(1/0, type [0....1));
+test(0/0, type [0....1));
+test("purple", type [0....1));
+
+test(-1, type (0...1));
+test(0, type (0...1));
+test(0.5, type (0...1));
+test(1, type (0...1));
+test(1.5, type (0...1));
+test(2, type (0...1));
+test(1/0, type (0...1));
+test(0/0, type (0...1));
+test("purple", type (0...1));
+
+test(-1, type (0....1));
+test(0, type (0....1));
+test(0.5, type (0....1));
+test(1, type (0....1));
+test(1.5, type (0....1));
+test(2, type (0....1));
+test(1/0, type (0....1));
+test(0/0, type (0....1));
+test("purple", type (0....1));
+
+test(-oo, type (0....+oo));
+test(-1, type (0....+oo));
+test(0, type (0....+oo));
+test(1, type (0....+oo));
+test(+oo, type (0....+oo));
+
+test(-oo, type (-oo....0));
+test(-1, type (-oo....0));
+test(0, type (-oo....0));
+test(1, type (-oo....0));
+test(+oo, type (-oo....0));
+
+test(-oo, type (-oo....+oo));
+test(-1, type (-oo....+oo));
+test(0, type (-oo....+oo));
+test(1, type (-oo....+oo));
+test(+oo, type (-oo....+oo));
+
+test(-oo, type (0....+oo]);
+test(-1, type (0....+oo]);
+test(0, type (0....+oo]);
+test(1, type (0....+oo]);
+test(+oo, type (0....+oo]);
+
+test(-oo, type [-oo....0));
+test(-1, type [-oo....0));
+test(0, type [-oo....0));
+test(1, type [-oo....0));
+test(+oo, type [-oo....0));
+
+test(-oo, type [-oo....+oo]);
+test(-1, type [-oo....+oo]);
+test(0, type [-oo....+oo]);
+test(1, type [-oo....+oo]);
+test(+oo, type [-oo....+oo]);
+
+test(null, type *.integer);
+test(null, type *integer);
+test(15, type *integer);
+test({ ageless variable x : integer; return &x; }, type *+integer);
+test({ ageless immutable x : integer; return &x; }, type *+integer);
+test({ ageless variable x : filter_a; return &x; }, type *integer);
+test({ ageless variable x : rational; return &x; }, type *integer);
+test({ ageless variable x : rational; return &x; }, type +integer);
+test({ ageless variable x : filter_a; return &x; }, type +integer);
+test({ ageless variable x : integer; return &x; }, type +rational);
+
+test(989, type type !{});
+test(type integer, type type rational);
+test(type rational, type type integer);
+test(type filter_a, type type integer);
+
+test(<<>>, type integer --> string);
+test(<<(*: integer --> "hello")>>, type integer --> string);
+test(<<(*: filter_a --> "hello")>>, type integer --> string);
+test(<<((type filter_a) --> "hello")>>, type (type integer) --> string);
+test(<<(*: rational --> "hello")>>, type integer --> string);
+test(<<(18.5 --> "hello")>>, type integer --> string);
+test(<<(*: filter_a --> "hello"), (*: rational --> "hello")>>,
+     type integer --> string);
+test(<<((type filter_a) --> "hello"), (18.5 --> "hello")>>,
+     type integer --> string);
+test(<<("hello" --> type filter_a)>>, type string --> type integer);
+test(<<(*: string --> type filter_a)>>, type string --> type integer);
+test(<<("hello" --> 18.5)>>, type string --> integer);
+test([], type integer --> string);
+test(["aaa", "bbb"], type integer --> string);
+test(["aaa", c := "bbb"], type integer --> string);
+test(["aaa", "bbb"], type [0...1] --> string);
+test(["aaa", "bbb", "ccc"], type [0...1] --> string);
+test([type filter_a], type [0...1] --> type integer);
+test([18.5], type [0...1] --> integer);
+test(12, type integer --> string);
+
+anonymous_test(procedure() {}, type {} <-- ());
+anonymous_test(procedure(: integer) {}, type {} <-- (integer));
+anonymous_test(procedure(x : integer) {}, type {} <-- (x : integer));
+anonymous_test(procedure(: integer) {}, type {} <-- (x : integer));
+anonymous_test(procedure(y : integer) {}, type {} <-- (x : integer));
+anonymous_test(procedure(: integer, : integer) {},
+               type {} <-- (integer, integer := *));
+anonymous_test(procedure(: filter_a) {}, type {} <-- (integer));
+anonymous_test(procedure(: [0...1000]) {}, type {} <-- (integer));
+anonymous_test(procedure(: integer := 2) {}, type {} <-- ());
+anonymous_test(procedure(: integer) {}, type {} <-- ());
+anonymous_test(procedure(: integer, : integer) {}, type {} <-- (integer));
+anonymous_test(procedure(: integer, : integer, : integer) {},
+               type {} <-- (integer, integer));
+anonymous_test(procedure(: integer, ...) {}, type {} <-- (integer, integer));
+anonymous_test(procedure() {}, type {} <-- (integer));
+anonymous_test(procedure(: integer) {}, type {} <-- (integer, integer));
+anonymous_test(procedure(: integer, : integer) {},
+               type {} <-- (integer, integer, integer));
+anonymous_test(procedure(: integer, : integer, ...) {},
+               type {} <-- (integer, integer, x : integer));
+anonymous_test(procedure(: integer, : integer) {},
+               type {} <-- (integer, integer, ...));
+anonymous_test(function() returns integer { return 3; }, type rational <-- ());
+anonymous_test(function() returns rational { return 3; }, type integer <-- ());
+anonymous_test(function() returns filter_a { return 3; }, type integer <-- ());
+test({ ageless procedure p() {}; return p; }, type {} <-- ());
+test({ ageless procedure p(: integer) {}; return p; }, type {} <-- (integer));
+test({ ageless procedure p(x : integer) {}; return p; },
+     type {} <-- (x : integer));
+test({ ageless procedure p(: integer) {}; return p; },
+     type {} <-- (x : integer));
+test({ ageless procedure p(y : integer) {}; return p; },
+     type {} <-- (x : integer));
+test({ ageless procedure p(: filter_a) {}; return p; }, type {} <-- (integer));
+test({ ageless function f() returns filter_a { return 3; }; return f; },
+     type integer <-- ());
+test({ ageless function f() returns rational { return 3/5; }; return f; },
+     type integer <-- ());
+test(12, type integer <-- ());
+
+test("bacon", type fields[a : integer, b : string]);
+test([a := 5, b := "bacon"], type fields[a : integer, b : string]);
+test([a := 5, b := 212], type fields[a : integer, b : string]);
+test([a := 5], type fields[a : integer, b : string]);
+test([a := 5, b := "bacon", c := 212], type fields[a : integer, b : string]);
+test([a := 5, b := "bacon", 212], type fields[a : integer, b : string]);
+test([a := 5, b := "bacon", c := 212],
+     type fields[a : integer, b : string, ...]);
+test([a := 5, b := "bacon", 212], type fields[a : integer, b : string, ...]);
+test([a := 5, b := type filter_a], type fields[a : integer, b : type integer]);
+anonymous_test(class() { immutable a := 5, b := "bacon"; }(),
+               type fields[a : integer, b : string]);
+anonymous_test(class() { immutable a := 5, b := 212; }(),
+               type fields[a : integer, b : string]);
+anonymous_test(class() { immutable a := 5; }(),
+               type fields[a : integer, b : string]);
+anonymous_test(class() { immutable a := 5, b := "bacon", c := 212; }(),
+               type fields[a : integer, b : string]);
+anonymous_test(class() { immutable a := 5, b := "bacon", c := 212; }(),
+               type fields[a : integer, b : string, ...]);
+anonymous_test(class() { immutable a := 5, b := type filter_a; }(),
+               type fields[a : integer, b : type integer]);
+anonymous_test(class() { variable a : integer := 8, b : string := "bacon"; }(),
+               type fields[a : integer, b : string]);
+anonymous_test(
+        class() { variable a : rational := 8, b : string := "bacon"; }(),
+        type fields[a : integer, b : string]);
+anonymous_test(
+        class() { variable a : filter_a := 8, b : string := "bacon"; }(),
+        type fields[a : integer, b : string]);
+test(
+  {
+    variable result := [];
+    result.a := 5;
+    result.b := "bacon";
+    return result;
+  }, type fields[a : integer, b : string]);
+test(
+  {
+    variable result := [];
+    result.a := 5;
+    result.b := 212;
+    return result;
+  }, type fields[a : integer, b : string]);
+test(l1[a := 5, b := "bacon"], type fields[a : integer, b : string]);
+test(l1[a := 5, b := 212], type fields[a : integer, b : string]);
+
+test("bacon", type lepton l1[a : integer, b : string]);
+test([a := 5, b := "bacon"], type lepton l1[a : integer, b : string]);
+test([a := 5, b := 212], type lepton l1[a : integer, b : string]);
+anonymous_test(class() { immutable a := 5, b := "bacon"; }(),
+               type lepton l1[a : integer, b : string]);
+anonymous_test(class() { immutable a := 5, b := 212; }(),
+               type lepton l1[a : integer, b : string]);
+test(
+  {
+    variable result := [];
+    result.a := 5;
+    result.b := "bacon";
+    return result;
+  }, type lepton l1[a : integer, b : string]);
+test(
+  {
+    variable result := [];
+    result.a := 5;
+    result.b := 212;
+    return result;
+  }, type lepton l1[a : integer, b : string]);
+test(l1[a := 5, b := "bacon"], type lepton l1[a : integer, b : string]);
+test(l1[a := 5, b := 212], type lepton l1[a : integer, b : string]);
+lepton l2;
+test(l2[a := 5, b := "bacon"], type lepton l1[a : integer, b : string]);
+test(l2[a := 5, b := 212], type lepton l1[a : integer, b : string]);
+
+test("bacon", type multiset[a : integer, b : string]);
+test([a := 5, b := "bacon"], type multiset[a : integer, b : string]);
+test([a := 5, b := 212], type multiset[a : integer, b : string]);
+anonymous_test(class() { immutable a := 5, b := "bacon"; }(),
+               type multiset[a : integer, b : string]);
+anonymous_test(class() { immutable a := 5, b := 212; }(),
+               type multiset[a : integer, b : string]);
+test(
+  {
+    variable result := [];
+    result.a := 5;
+    result.b := "bacon";
+    return result;
+  }, type multiset[a : integer, b : string]);
+test(
+  {
+    variable result := [];
+    result.b := "bacon";
+    result.a := 5;
+    return result;
+  }, type multiset[a : integer, b : string]);
+test(
+  {
+    variable result := [];
+    result.a := 5;
+    result.b := 212;
+    return result;
+  }, type multiset[a : integer, b : string]);
+test(l1[a := 5, b := "bacon"], type multiset[a : integer, b : string]);
+test(l1[a := 5, b := 212], type multiset[a : integer, b : string]);
+
+test("bacon", type interface[a : integer, b : string]);
+test([a := 5, b := "bacon"], type interface[a : integer, b : string]);
+test([a := 5, b := 212], type interface[a : integer, b : string]);
+anonymous_test(class() { immutable a := 5, b := "bacon"; }(),
+               type interface[a : integer, b : string]);
+anonymous_test(class() { immutable a := 5, b := 212; }(),
+               type interface[a : integer, b : string]);
+anonymous_test(class() { variable a : integer := 5, b : string := "bacon"; }(),
+               type interface[a : integer, b : string]);
+anonymous_test(class() { variable a : integer := 5, b : integer := 212; }(),
+               type interface[a : integer, b : string]);
+anonymous_test(class() { variable a : integer := 5; procedure b(){}; }(),
+               type interface[a : integer, b : !{} <-- ()]);
+anonymous_test(class() { variable a : integer := 5; procedure b(){}; }(),
+               type interface[a : integer, b :- !{} <-- ()]);
+anonymous_test(class() { variable a : integer := 5, b : string := "bacon"; }(),
+               type interface[a : rational, b : string]);
+anonymous_test(
+        class() { variable a : filter_a := 8, b : string := "bacon"; }(),
+        type interface[a : !{}, b : string]);
+test(
+  {
+    variable result := [];
+    result.a := 5;
+    result.b := "bacon";
+    return result;
+  }, type interface[a : integer, b : string]);
+test(
+  {
+    variable result := [];
+    result.b := "bacon";
+    result.a := 5;
+    return result;
+  }, type interface[a : integer, b : string]);
+test(
+  {
+    variable result := [];
+    result.a := 5;
+    result.b := 212;
+    return result;
+  }, type interface[a : integer, b : string]);
+test(l1[a := 5, b := "bacon"], type interface[a : integer, b : string]);
+test(l1[a := 5, b := 212], type interface[a : integer, b : string]);
+test("bacon", type interface[a :- integer, b :- string]);
+test([a := 5, b := "bacon"], type interface[a :- integer, b :- string]);
+test([a := 5, b := 212], type interface[a :- integer, b :- string]);
+anonymous_test(class() { immutable a := 5, b := "bacon"; }(),
+               type interface[a :- integer, b :- string]);
+anonymous_test(class() { immutable a := 5, b := 212; }(),
+               type interface[a :- integer, b :- string]);
+anonymous_test(class() { variable a : integer := 5, b : string := "bacon"; }(),
+               type interface[a :- integer, b :- string]);
+anonymous_test(class() { variable a : integer := 5, b : integer := 212; }(),
+               type interface[a :- integer, b :- string]);
+test(
+  {
+    variable result := [];
+    result.a := 5;
+    result.b := "bacon";
+    return result;
+  }, type interface[a :- integer, b :- string]);
+test(
+  {
+    variable result := [];
+    result.b := "bacon";
+    result.a := 5;
+    return result;
+  }, type interface[a :- integer, b :- string]);
+test(
+  {
+    variable result := [];
+    result.a := 5;
+    result.b := 212;
+    return result;
+  }, type interface[a :- integer, b :- string]);
+test(l1[a := 5, b := "bacon"], type interface[a :- integer, b :- string]);
+test(l1[a := 5, b := 212], type interface[a :- integer, b :- string]);
+
+test(72, type [a : integer, b : string]);
+test(<<(*: filter_a --> "Bob")>>, type [string, string]);
+test(<<(*: filter_a --> "Bob"), (0 --> "Fred"), (1 --> "Ginger")>>,
+     type [string, string]);
+test(<<(*: [0...1] --> "Bob")>>, type [string, string]);
+test(<<(*: [0...2] --> "Bob")>>, type [string, string]);
+test(<<(*: [0...1] --> "Bob"), ("Chuck" --> "Sarah")>>,
+     type [string, string, ...]);
+test(<<(*: [0...1] --> "Bob"), (2 --> "Sarah")>>, type [string, string, ...]);
+test(<<(*: [0...1] --> "Bob"), (-1 --> "Sarah")>>, type [string, string, ...]);
+test(<<(*: [0...1] --> "Bob"), (+oo --> "Sarah")>>,
+     type [string, string, ...]);
+test(<<(*: [0...1] --> "Bob"), (-oo --> "Sarah")>>,
+     type [string, string, ...]);
+test(<<(*: [0...1] --> "Bob"), (1/0 --> "Sarah")>>,
+     type [string, string, ...]);
+test(<<(*: [0...1] --> "Bob"), (0/0 --> "Sarah")>>,
+     type [string, string, ...]);
+test(<<(*: [0...1] --> "Bob"), (2 --> "Sarah")>>, type [string, string]);
+test(<<(*: [0...1] --> "Bob")>>, type [string, b : string]);
+test(<<(0 --> "Bob"), (1 --> 47)>>, type [string, string]);
+test(<<(0 --> "Bob"), (1 --> type filter_a)>>, type [string, type integer]);
+test([], type [string, string]);
+test(["fish"], type [string, string]);
+test(["fish", "bird"], type [string, string]);
+test(["fish", "bird", "lizard"], type [string, string]);
+test([], type [string, string, ...]);
+test(["fish"], type [string, string, ...]);
+test(["fish", "bird"], type [string, string, ...]);
+test(["fish", "bird", "lizard"], type [string, string, ...]);
+test([], type [string]);
+test(["fish"], type [string]);
+test(["fish", "bird"], type [string]);
+test(["fish", "bird", "lizard"], type [string]);
+test([], type [string, ...]);
+test(["fish"], type [string, ...]);
+test(["fish", "bird"], type [string, ...]);
+test(["fish", "bird", "lizard"], type [string, ...]);
+test([], type []);
+test(["fish"], type []);
+test([], type [...]);
+test(["fish"], type [...]);
+test(["fish", b := "bird"], type [string, b : string]);
+test(["fish", "bird"], type [string, b : string]);
+test(["fish", c := "bird"], type [string, b : string]);
+test(["fish", c := "bird", "lizard"], type [string, string, c : string]);
+test(["fish", 17], type [string, string]);
+test(["fish", type filter_a], type [string, type integer]);
+
+test(5, type @ab@);
+test("a", type @ab@);
+test("b", type @ab@);
+test("ab", type @ab@);
+test("ba", type @ab@);
+test("abc", type @ab@);
+test("zabc", type @ab@);
+
+class c2()
+  {
+    function f1(x : rational, y : rational) returns rational (x + y);
+    function f2(x : rational, y : rational) returns rational (x * y);
+  };
+class c3()
+  {
+    function f3(x : rational, y : rational) returns rational (x / y);
+  };
+test(5, type c2);
+anonymous_test(c2(), type c2);
+anonymous_test(c3(), type c2);
+
+immutable odd := pure function(x) returns boolean
+  ((x in integer) && ((x % 2) == 1));
+anonymous_test(0, type odd);
+anonymous_test(1, type odd);
+anonymous_test(2, type odd);
+anonymous_test(3, type odd);
+anonymous_test(4, type odd);
+anonymous_test(5, type odd);
+
+pure function filter_d(x) returns boolean (false);
+pure function filter_d(x : integer) returns boolean ((x % 5) == 3);
+
+test(1, type filter_d);
+test(2, type filter_d);
+test(3, type filter_d);
+test(4, type filter_d);
+test(7, type filter_d);
+test(8, type filter_d);
+
+test(type filter_a, type type !{});
+test(type {}, type type filter_a);
+test(type filter_a, type type filter_a);
+test(type integer, type type {});
+test(type filter_a, type type {});
+test(type {1, 2, 3}, type type integer);
+test(type {1, 2, 3}, type type [0...2]);
+test(type {type filter_a, 1, 2, 3}, type type {type filter_b, 1, 2, 3});
+test(type {type filter_a, 1, 2, 3}, type type {type filter_b, 1, 2, 4});
+immutable i1 := type integer;
+immutable i2 := type rational;
+anonymous_test(type {1, 2, 3}, type lazy i1);
+test(type {1, 2, 3}, type type integer);
+anonymous_test(type {1, 2, 3}, type type lazy i1);
+anonymous_test(type integer, type type lazy i1);
+anonymous_test(type integer, type type lazy i2);
+anonymous_test(type rational, type type lazy i1);
+anonymous_test(type rational, type type lazy i2);
+test(type !integer, type type !rational);
+test(type !rational, type type !integer);
+test(type !filter_a, type type !integer);
+test(type (filter_a & integer), type type (filter_a & rational));
+test(type (filter_a & integer), type type (filter_a & string));
+test(type (filter_a | integer), type type (filter_a | rational));
+test(type (filter_a | integer), type type (filter_a | string));
+test(type (filter_a ^ integer), type type (filter_a ^ rational));
+test(type integer[1...5], type type (rational[1...5]));
+test(type rational[1...5], type type (integer[1...5]));
+test(type filter_a[1...5], type type (integer[1...5]));
+test(type integer[0...5], type type (rational[1...5]));
+test(type integer[2...5], type type (rational[1...5]));
+test(type integer[1...4], type type (rational[1...5]));
+test(type integer[1...6], type type (rational[1...5]));
+test(type filter_a[1...5], type type (filter_a[1...5]));
+test(type filter_a[0...5], type type (filter_a[1...5]));
+test(type filter_a[2...5], type type (filter_a[1...5]));
+test(type filter_a[1...4], type type (filter_a[1...5]));
+test(type filter_a[1...6], type type (filter_a[1...5]));
+test(type [1...5], type type ([1...5]));
+test(type [0...5], type type ([1...5]));
+test(type [2...5], type type ([1...5]));
+test(type [1...4], type type ([1...5]));
+test(type [1...6], type type ([1...5]));
+test(type *integer, type type *integer);
+test(type *.integer, type type *integer);
+test(type *integer, type type *.integer);
+test(type *.integer, type type *.integer);
+test(type *+integer, type type *integer);
+test(type *integer, type type *+integer);
+test(type *+integer, type type *+integer);
+test(type +integer, type type +integer);
+test(type *+integer, type type +integer);
+test(type +integer, type type *+integer);
+test(type *filter_a, type type *filter_a);
+test(type *.filter_a, type type *filter_a);
+test(type *filter_a, type type *.filter_a);
+test(type *.filter_a, type type *.filter_a);
+test(type *+filter_a, type type *filter_a);
+test(type *filter_a, type type *+filter_a);
+test(type *+filter_a, type type *+filter_a);
+test(type +filter_a, type type +filter_a);
+test(type *+filter_a, type type +filter_a);
+test(type +filter_a, type type *+filter_a);
+test(type *integer, type type *integer);
+test(type *integer, type type *rational);
+test(type *rational, type type *integer);
+test(type *rational, type type *rational);
+test(type *integer, type type *integer);
+test(type *integer, type type *filter_a);
+test(type *filter_a, type type *integer);
+test(type *filter_a, type type *filter_a);
+test(type +integer, type type +integer);
+test(type +integer, type type +rational);
+test(type +rational, type type +integer);
+test(type +rational, type type +rational);
+test(type +integer, type type +integer);
+test(type +integer, type type +filter_a);
+test(type +filter_a, type type +integer);
+test(type +filter_a, type type +filter_a);
+test(type *+integer, type type *+integer);
+test(type *+integer, type type *+rational);
+test(type *+rational, type type *+integer);
+test(type *+rational, type type *+rational);
+test(type *+integer, type type *+integer);
+test(type *+integer, type type *+filter_a);
+test(type *+filter_a, type type *+integer);
+test(type *+filter_a, type type *+filter_a);
+test(type *filter_a, type type +filter_a);
+test(type *integer, type type +integer);
+test(type type integer, type type type rational);
+test(type type rational, type type type integer);
+test(type type filter_a, type type type integer);
+test(type integer --> integer, type type (rational --> rational));
+test(type rational --> rational, type type (integer --> integer));
+test(type {} --> rational, type type (integer --> integer));
+test(type rational --> {}, type type (integer --> integer));
+test(type rational --> filter_a, type type (integer --> integer));
+test(type {} --> rational, type type (integer --> integer));
+test(type integer --> rational, type type (integer --> integer));
+test(type filter_a --> rational, type type (integer --> integer));
+test(type filter_a --> integer, type type (integer --> integer));
+test(type integer --> filter_a, type type (integer --> integer));
+test(type integer <-- (), type type (integer <-- ()));
+test(type integer <-- (...), type type (integer <-- ()));
+test(type integer <-- (), type type (integer <-- (...)));
+test(type integer <-- (...), type type (integer <-- (...)));
+test(type integer <-- (*), type type (integer <-- ()));
+test(type integer <-- (), type type (integer <-- (*)));
+test(type integer <-- (*), type type (integer <-- (*)));
+test(type integer <-- (), type type (rational <-- ()));
+test(type rational <-- (), type type (integer <-- ()));
+test(type filter_a <-- (), type type (integer <-- ()));
+test(type integer <-- (), type type (filter_a <-- ()));
+test(type integer <-- (), type type (integer <-- (integer)));
+test(type integer <-- (...), type type (integer <-- (integer, ...)));
+test(type integer <-- (*), type type (integer <-- (integer, *)));
+test(type integer <-- (integer), type type (integer <-- (integer, integer)));
+test(type integer <-- (integer, ...),
+     type type (integer <-- (integer, integer, ...)));
+test(type integer <-- (integer, *),
+     type type (integer <-- (integer, integer, *)));
+test(type integer <-- (integer, integer),
+     type type (integer <-- (integer, integer, integer)));
+test(type integer <-- (integer, integer, ...),
+     type type (integer <-- (integer, integer, integer, ...)));
+test(type integer <-- (integer, integer, *),
+     type type (integer <-- (integer, integer, integer, *)));
+test(type integer <-- (integer), type type (integer <-- ()));
+test(type integer <-- (integer, ...), type type (integer <-- (...)));
+test(type integer <-- (integer, *), type type (integer <-- (*)));
+test(type integer <-- (integer, integer), type type (integer <-- (integer)));
+test(type integer <-- (integer, integer, ...),
+     type type (integer <-- (integer, ...)));
+test(type integer <-- (integer, integer, *),
+     type type (integer <-- (integer, *)));
+test(type integer <-- (integer, integer, integer),
+     type type (integer <-- (integer, integer)));
+test(type integer <-- (integer, integer, integer, ...),
+     type type (integer <-- (integer, integer, ...)));
+test(type integer <-- (integer, integer, integer, *),
+     type type (integer <-- (integer, integer, *)));
+test(type integer <-- (rational), type type (integer <-- (integer)));
+test(type integer <-- (integer), type type (integer <-- (rational)));
+test(type integer <-- (integer), type type (integer <-- (filter_a)));
+test(type integer <-- (integer), type type (integer <-- (integer)));
+test(type integer <-- (integer), type type (integer <-- (a : integer)));
+test(type integer <-- (a : integer), type type (integer <-- (integer)));
+test(type integer <-- (a : integer), type type (integer <-- (a : integer)));
+test(type integer <-- (a : integer), type type (integer <-- (b : integer)));
+test(type integer <-- (integer), type type (integer <-- (integer := *)));
+test(type integer <-- (integer := *), type type (integer <-- (integer)));
+test(type integer <-- (integer := *), type type (integer <-- (integer := *)));
+test(type fields[a : integer], type type fields[a : integer]);
+test(type fields[a : integer], type type fields[a : integer, ...]);
+test(type fields[a : integer, ...], type type fields[a : integer]);
+test(type fields[a : integer, ...], type type fields[a : integer, ...]);
+test(type fields[a : filter_a, ...], type type fields[a : integer]);
+test(type fields[a : integer], type type multiset[a : integer]);
+test(type multiset[a : integer], type type fields[a : integer]);
+test(type (fields[b : filter_a] & multiset[a : filter_a]),
+     type type fields[a : filter_a]);
+test(type (fields[b : filter_a, ...] & multiset[a : filter_a, b : filter_a]),
+     type type fields[a : filter_a]);
+test(type fields[a : integer, b : string, ...],
+     type type fields[a : integer, ...]);
+test(type fields[a : integer, ...],
+     type type fields[a : integer, b : string, ...]);
+test(type fields[a : integer, b : string, ...],
+     type type fields[a : integer, b : string, ...]);
+test(type fields[a : filter_a, b : string, ...],
+     type type fields[a : filter_a, ...]);
+test(type fields[a : filter_a, ...],
+     type type fields[a : filter_a, b : string, ...]);
+test(type fields[a : filter_a, b : string, ...],
+     type type fields[a : filter_a, b : string, ...]);
+test(type fields[a : integer, b : string], type type fields[a : integer]);
+test(type fields[a : filter_a, b : string], type type fields[a : filter_a]);
+test(type fields[a : integer, b : filter_a], type type fields[a : integer]);
+test(type fields[a : filter_a, b : filter_a], type type fields[a : filter_a]);
+test(type fields[a : integer, b : integer],
+     type type fields[a : integer, b : rational]);
+test(type fields[a : integer, b : rational],
+     type type fields[a : integer, b : integer]);
+test(type fields[a : filter_a, b : integer],
+     type type fields[a : filter_a, b : rational]);
+test(type fields[a : filter_a, b : rational],
+     type type fields[a : filter_a, b : integer]);
+test(type fields[a : filter_a, b : filter_a],
+     type type fields[a : filter_a, b : integer]);
+test(type lepton l1[a : integer, b : integer],
+     type type lepton l2[a : integer, b : rational]);
+test(type (lepton l1[a : filter_a, b : integer] & fields[a : filter_a, ...]),
+     type type lepton l2[a : filter_a, b : rational]);
+test(type lepton l1[a : integer, b : integer],
+     type type lepton l1[a : integer, b : rational]);
+test(type lepton l1[a : integer, b : rational],
+     type type lepton l1[a : integer, b : integer]);
+test(type multiset[a : integer, b : integer],
+     type type multiset[a : integer, b : rational]);
+test(type multiset[a : integer, b : rational],
+     type type multiset[a : integer, b : integer]);
+test(type interface[a : integer, b : string],
+     type type interface[a : integer]);
+test(type interface[a :- integer, b : string],
+     type type interface[a : integer]);
+test(type interface[a : integer, b : string],
+     type type interface[a :- integer]);
+test(type interface[a :- integer, b : string],
+     type type interface[a :- integer]);
+test(type interface[a : integer, b : filter_a],
+     type type interface[a : integer]);
+test(type interface[a :- integer, b : filter_a],
+     type type interface[a : integer]);
+test(type interface[a : integer, b : filter_a],
+     type type interface[a :- integer]);
+test(type interface[a :- integer, b : filter_a],
+     type type interface[a :- integer]);
+test(type interface[a :- integer, b : filter_a],
+     type type interface[a :- rational]);
+test(type interface[a :- rational, b : filter_a],
+     type type interface[a :- integer]);
+test(type interface[a :- filter_a, b : filter_a],
+     type type interface[a :- integer]);
+test(type interface[a :- integer, b : string],
+     type type interface[a :- rational]);
+test(type interface[a :- rational, b : string],
+     type type interface[a :- integer]);
+test(type interface[a :- filter_a, b : string],
+     type type interface[a :- integer]);
+test(type [a : integer, string], type type [a : integer, string]);
+test(type [a : integer, string], type type [a : integer, string, ...]);
+test(type [a : integer, string, ...], type type [a : integer, string]);
+test(type [a : integer, string, ...], type type [a : integer, string, ...]);
+test(type [a : integer, filter_a], type type [a : integer, filter_a]);
+test(type [a : integer, filter_a], type type [a : integer, filter_a, ...]);
+test(type [a : integer, filter_a, ...], type type [a : integer, filter_a]);
+test(type [a : integer, filter_a, ...],
+     type type [a : integer, filter_a, ...]);
+test(type [a : integer], type type [a : integer, string]);
+test(type [a : integer], type type [a : integer, string, ...]);
+test(type [a : filter_a], type type [a : filter_a, string]);
+test(type [a : filter_a], type type [a : filter_a, string, ...]);
+test(type [a : integer, string], type type [a : integer]);
+test(type [a : integer, string, ...], type type [a : integer]);
+test(type [a : filter_a, string], type type [a : filter_a]);
+test(type [a : filter_a, string, ...], type type [a : filter_a]);
+test(type [], type type [string]);
+test(type [], type type [string, ...]);
+test(type [string], type type []);
+test(type [string, ...], type type []);
+test(type [filter_a], type type []);
+test(type [filter_a, ...], type type []);
+test(type [a : integer, b : rational],
+     type type [a : integer, b : rational, string]);
+test(type [a : integer, b : rational],
+     type type [a : integer, b : rational, string, ...]);
+test(type [a : filter_a, b : rational],
+     type type [a : filter_a, b : rational, string]);
+test(type [a : filter_a, b : rational],
+     type type [a : filter_a, b : rational, string, ...]);
+test(type [a : integer, b : rational, string],
+     type type [a : integer, b : rational]);
+test(type [a : integer, b : rational, string, ...],
+     type type [a : integer, b : rational]);
+test(type [a : filter_a, b : rational, string],
+     type type [a : filter_a, b : rational]);
+test(type [a : filter_a, b : rational, string, ...],
+     type type [a : filter_a, b : rational]);
+test(type [a : integer], type type [a : rational]);
+test(type [a : rational], type type [a : integer]);
+test(type [a : filter_a], type type [a : integer]);
+test(type [a : integer, filter_a], type type [a : rational, filter_a]);
+test(type [a : rational, filter_a], type type [a : integer, filter_a]);
+test(type [a : filter_a, filter_a], type type [a : integer, filter_a]);
+test(type [integer], type type [rational]);
+test(type [a : integer], type type [rational]);
+test(type [integer], type type [a : rational]);
+test(type [a : integer], type type [a : rational]);
+test(type [a : integer], type type [b : rational]);
+test(type [integer, filter_a], type type [rational, filter_a]);
+test(type [a : integer, filter_a], type type [rational, filter_a]);
+test(type [integer, filter_a], type type [a : rational, filter_a]);
+test(type [a : integer, filter_a], type type [a : rational, filter_a]);
+test(type [a : integer, filter_a], type type [b : rational, filter_a]);
+test(type @.*ab*@, type type @.*abb*@);
+test(type c1, type type c1);
+test(type c1, type type c2);
+test(type filter_a, type type filter_a);
+test(type filter_a, type type filter_b);
+test(type !{}, type type !{});
+test(type !{}, type type rational);
+test(type !{}, type type filter_a);
+test(type !integer, type type rational);
+test(type (integer & rational), type type integer);
+test(type ((integer | string) & rational), type type integer);
+test(type ((character | string) & rational), type type integer);
+test(type (filter_a | integer), type type integer);
+test(type (filter_a | filter_b), type type filter_a);
+test(type (filter_a | filter_b), type type filter_b);
+test(type (integer ^ rational), type type string);
+test(type filter_a, type type integer);
+test(type integer, type type !string);
+test(type integer, type type (string & @ab*@));
+test(type integer, type type (rational | @ab*@));
+test(type integer, type type (rational ^ @ab*@));
+test(type integer, type type filter_a);
+test(type integer, type type {1, 2, 3});
+test(type @a|b@, type type {"a", "b"});
+test(type integer, type type rational);
+test(type integer, type type [-5...5]);
+test(type integer, type type [-oo...+oo]);
+test(type integer, type type string);
+test(type integer, type type regular_expression);
+test(type integer, type type any_quark);
+test(type integer, type type any_lepton);
+test(type integer, type type lepton_key);
+test(type integer, type type jump_target);
+test(type integer, type type any_class);
+test(type integer, type type object);
+test(type integer, type type tagalong_key);
+test(type integer, type type any_lock);
+test(type integer, type type character);
+test(type integer, type type (integer[0...5]));
+test(type integer, type type *integer);
+test(type integer, type type type integer);
+test(type integer, type type (integer --> integer));
+test(type integer, type type (integer <-- ()));
+test(type integer, type type fields[a : integer, ...]);
+test(type integer, type type lepton l1[...]);
+test(type integer, type type multiset[a : integer, ...]);
+test(type integer, type type interface[a : integer]);
+test(type integer, type type [a : integer, ...]);
+test(type integer, type type @ab@);
+test(type integer, type type c1);
+test(type rational, type type integer);
+test(type rational, type type [-5...5]);
+test(type rational, type type [-oo...+oo]);
+test(type rational, type type string);
+test(type regular_expression, type type [-5...5]);
+test(type any_quark, type type integer);
+test(type any_lepton, type type fields[...]);
+test(type any_lepton, type type fields[]);
+test(type any_lepton, type type fields[a : !{}, ...]);
+test(type any_lepton, type type fields[a : rational, ...]);
+test(type any_lepton, type type fields[a : filter_a, ...]);
+test(type object, type type fields[...]);
+test(type object, type type fields[]);
+test(type object, type type fields[a : !{}, ...]);
+test(type object, type type fields[a : rational, ...]);
+test(type object, type type fields[a : filter_a, ...]);
+test(type any_lepton, type type interface[]);
+test(type any_lepton, type type interface[a :- !{}]);
+test(type object, type type interface[]);
+test(type object, type type interface[a :- !{}]);
+test(type any_lepton, type type lepton l1[...]);
+test(type object, type type lepton l1[...]);
+test(type any_lepton, type type c1);
+test(type object, type type c1);
+test(type any_lepton, type type rational);
+test(type object, type type rational);
+test(type lepton_key, type type string);
+test(type jump_target, type type string);
+test(type any_class, type type (!{} <-- ()));
+test(type any_class, type type (!{} <-- (*)));
+test(type any_class, type type string);
+test(type tagalong_key, type type string);
+test(type any_lock, type type string);
+test(type string, type type @ab@);
+test(type string, type type rational);
+test(type character, type type string);
+test(type character[0...5], type type (integer --> character));
+test(type character[0...5], type type (integer --> string));
+test(type character[0...5], type type [...]);
+test(type {}[0...5], type type [...]);
+test(type {}[0...5], type type []);
+test(type {}[0...5], type type [a : integer, ...]);
+test(type {}[0...5], type type [a : integer]);
+test(type integer[0...5], type type [...]);
+test(type integer[0...5], type type []);
+test(type integer[0...5], type type [a : integer, ...]);
+test(type integer[0...5], type type [a : integer]);
+test(type filter_a[0...5], type type []);
+test(type integer[0...-1], type type []);
+test(type integer[-5...5], type type [...]);
+test(type filter_a[-5...5], type type [...]);
+test(type integer[0...5], type type integer);
+test(type [0...5], type type integer);
+test(type [0...5], type type rational);
+test(type [0...5], type type string);
+test(type *integer, type type string);
+test(type *filter_a, type type string);
+test(type type !{}, type type string);
+test(type type filter_a, type type string);
+test(type [0...5] --> string, type type (string[0...4]));
+test(type [0...5] --> string, type type (string[0...5]));
+test(type [0...5] --> string, type type (string[0...6]));
+test(type [0...5] --> string, type type [string]);
+test(type [0...5] --> string, type type []);
+test(type [0...5] --> string, type type [...]);
+test(type rational --> string, type type []);
+test(type rational --> string, type type [...]);
+test(type filter_a --> string, type type []);
+test(type filter_a --> string, type type [...]);
+test(type rational --> {}, type type []);
+test(type rational --> {}, type type [...]);
+test(type rational --> filter_a, type type []);
+test(type rational --> filter_a, type type [...]);
+test(type rational --> filter_a, type type string);
+test(type integer <-- (), type type any_class);
+test(type integer <-- (), type type string);
+test(type fields[a : integer], type type interface[a :- integer]);
+test(type fields[a : integer], type type interface[a : integer]);
+test(type fields[a : filter_a], type type interface[a :- filter_a]);
+test(type fields[a : filter_a], type type interface[a : filter_a]);
+test(type fields[a : rational], type type interface[a :- integer]);
+test(type fields[a : integer, b : filter_a], type type interface[a : integer]);
+test(type fields[a : integer], type type any_lepton);
+test(type fields[a : integer], type type (integer[0...5]));
+test(type fields[a : integer], type type (integer --> string));
+test(type fields[a : integer], type type lepton l1[...]);
+test(type fields[a : integer], type type multiset[a : integer]);
+test(type fields[a : integer], type type [a : integer]);
+test(type fields[a : integer], type type object);
+test(type fields[a : integer], type type c1);
+test(type fields[a : integer], type type integer);
+test(type lepton l1[...], type type any_lepton);
+test(type lepton l1[a : integer], type type any_lepton);
+test(type lepton l1[...], type type fields[...]);
+test(type lepton l1[a : integer], type type fields[a : integer]);
+test(type lepton l1[...], type type interface[]);
+test(type lepton l1[a : integer], type type interface[a :- integer]);
+test(type lepton l1[...], type type integer);
+test(type lepton l1[a : integer], type type integer);
+test(type multiset[...], type type any_lepton);
+test(type multiset[a : integer], type type any_lepton);
+test(type multiset[...], type type fields[...]);
+test(type multiset[a : integer], type type fields[a : integer]);
+test(type multiset[...], type type interface[]);
+test(type multiset[a : integer], type type interface[a :- integer]);
+test(type multiset[...], type type integer);
+test(type multiset[a : integer], type type integer);
+test(type interface[], type type fields[...]);
+test(type interface[], type type fields[]);
+test(type interface[a : integer], type type fields[a : integer, ...]);
+test(type interface[a :- integer], type type fields[a : integer, ...]);
+test(type interface[a :- integer], type type fields[a : rational, ...]);
+test(type interface[a :- rational], type type fields[a : integer, ...]);
+test(type interface[a :- integer], type type any_lepton);
+test(type interface[a :- integer], type type (integer[0...5]));
+test(type interface[a :- integer], type type (integer --> string));
+test(type interface[a :- integer], type type lepton l1[...]);
+test(type interface[a :- integer], type type multiset[a : integer]);
+test(type interface[a :- integer], type type [a : integer]);
+test(type interface[a :- integer], type type object);
+test(type interface[a :- integer], type type c1);
+test(type interface[a :- integer], type type integer);
+test(type [], type type (integer[0...5]));
+test(type [], type type ({}[0...5]));
+test(type [{}], type type ({}[0...5]));
+test(type [{}, {}], type type ({}[0...5]));
+test(type [integer, b : {}], type type ({}[0...5]));
+test(type [integer, b : integer], type type ({}[0...5]));
+test(type [filter_a, b : integer], type type ({}[0...5]));
+test(type [filter_a, b : filter_a], type type ({}[0...5]));
+test(type [...], type type (integer[0...5]));
+test(type [...], type type ((!{})[0...5]));
+test(type [...], type type ((!{})[0...+oo]));
+test(type [...], type type (integer[0...+oo]));
+test(type [...], type type (filter_a[0...+oo]));
+test(type [integer, ...], type type ((!{})[0...+oo]));
+test(type [filter_a, ...], type type ((!{})[0...+oo]));
+test(type [filter_a, ...], type type ((!{})[0...5]));
+test(type [filter_a, ...], type type (filter_a[0...+oo]));
+test(type [filter_a, ...], type type (integer[0...+oo]));
+test(type [a : integer, ...], type type ((!{})[0...+oo]));
+test(type [integer], type type (integer[0...5]));
+test(type [a : integer], type type (integer[0...5]));
+test(type [a : integer], type type (!{}[0...5]));
+test(type [a : integer, filter_a], type type (!{}[0...5]));
+test(type [a : filter_a], type type (!{}[0...5]));
+test(type [integer, integer, integer], type type (integer[0...1]));
+test(type [integer, integer, integer], type type (integer[0...2]));
+test(type [integer, integer, integer], type type (integer[0...3]));
+test(type [integer, integer, integer], type type (integer[-1...2]));
+test(type [integer, integer, integer], type type (integer[0...2]));
+test(type [integer, integer, integer], type type (integer[1...2]));
+test(type [filter_a, integer, integer], type type (integer[1...2]));
+test(type [filter_a, integer, integer], type type (integer[0...2]));
+test(type [rational, integer, integer], type type (integer[0...2]));
+test(type [rational, filter_a, integer], type type (integer[0...2]));
+test(type [rational, integer, integer], type type (integer[1...2]));
+test(type [rational, filter_a, integer], type type (integer[1...2]));
+test(type [], type type (integer --> string));
+test(type [...], type type (integer --> string));
+test(type [...], type type (integer --> !{}));
+test(type [], type type ([0...5] --> integer));
+test(type [], type type ([0...5] --> {}));
+test(type [{}], type type ([0...5] --> {}));
+test(type [{}, {}], type type ([0...5] --> {}));
+test(type [integer, b : {}], type type ([0...5] --> {}));
+test(type [integer, b : integer], type type ([0...5] --> {}));
+test(type [filter_a, b : integer], type type ([0...5] --> {}));
+test(type [filter_a, b : filter_a], type type ([0...5] --> {}));
+test(type [...], type type ([0...5] --> integer));
+test(type [...], type type ([0...5] --> !{}));
+test(type [...], type type ([0...+oo] --> !{}));
+test(type [...], type type (filter_a --> !{}));
+test(type [...], type type ([0...+oo] --> integer));
+test(type [...], type type ([0...+oo] --> filter_a));
+test(type [integer, ...], type type ([0...+oo] --> !{}));
+test(type [filter_a, ...], type type ([0...+oo] --> !{}));
+test(type [filter_a, ...], type type ([0...5] --> !{}));
+test(type [filter_a, ...], type type ([0...+oo] --> filter_a));
+test(type [filter_a, ...], type type ([0...+oo] --> integer));
+test(type [a : integer, ...], type type ([0...+oo] --> !{}));
+test(type [integer], type type ([0...5] --> integer));
+test(type [a : integer], type type ([0...5] --> integer));
+test(type [a : integer], type type ([0...5] --> !{}));
+test(type [a : integer, filter_a], type type ([0...5] --> !{}));
+test(type [a : filter_a], type type ([0...5] --> !{}));
+test(type [integer, integer, integer], type type ([0...1] --> integer));
+test(type [integer, integer, integer], type type ([0...2] --> integer));
+test(type [integer, integer, integer], type type ([0...3] --> integer));
+test(type [integer, integer, integer], type type ([-1...2] --> integer));
+test(type [integer, integer, integer], type type ([0...2] --> integer));
+test(type [integer, integer, integer], type type ([1...2] --> integer));
+test(type [filter_a, integer, integer], type type ([1...2] --> integer));
+test(type [filter_a, integer, integer], type type ([0...2] --> integer));
+test(type [rational, integer, integer], type type ([0...2] --> integer));
+test(type [rational, filter_a, integer], type type ([0...2] --> integer));
+test(type [rational, integer, integer], type type ([1...2] --> integer));
+test(type [rational, filter_a, integer], type type ([1...2] --> integer));
+test(type [...], type type fields[a : integer, b : string]);
+test(type [a : filter_a, ...], type type fields[a : filter_a, b : string]);
+test(type [a : integer, b : string, ...],
+     type type fields[a : integer, b : string, ...]);
+test(type [a : integer, b : string, ...],
+     type type interface[a : integer, b : string]);
+test(type [a : integer, b : string],
+     type type fields[a : integer, b : string]);
+test(type [a : integer, b : string], type type fields[a : integer]);
+test(type [a : integer, string], type type fields[a : integer]);
+test(type [a : filter_a, b : string],
+     type type fields[a : filter_a, b : string]);
+test(type [a : filter_a, b : string], type type fields[a : filter_a]);
+test(type [a : filter_a, string], type type fields[a : filter_a]);
+test(type [a : filter_a, b : string],
+     type type fields[a : integer, b : string]);
+test(type [a : rational, b : string],
+     type type fields[a : integer, b : string]);
+test(type [a : integer, b : string],
+     type type fields[a : rational, b : string]);
+test(type [a : rational, b : filter_a],
+     type type fields[a : integer, b : filter_a]);
+test(type [a : integer], type type fields[a : integer, b : filter_a]);
+test(type [a : integer], type type interface[a : integer, b : filter_a]);
+test(type [a : filter_a], type type fields[a : filter_a, b : filter_a]);
+test(type [a : filter_a], type type interface[a : filter_a, b : filter_a]);
+test(type [a : integer], type type integer);
+test(type [a : filter_a], type type integer);
+test(type @ab@, type type string);
+test(type @ab@, type type integer);
+test(type c1, type type object);
+test(type c1, type type fields[a : integer, b : string]);
+test(type c1, type type interface[a : integer, b : string]);
+test(type c1, type type integer);
+
+  {
+    function f1(x : string, y : string) returns integer (x);
+    function f1(x : string, y : integer) returns integer (x);
+    function f1(x : integer, y : string) returns integer (x);
+    function f1(x : integer, y : integer) returns integer (x);
+    test(f1, type integer <-- (string | integer, string | integer));
+  };
+  {
+    function f1(x : string, y : integer) returns integer (x);
+    function f1(x : integer, y : string) returns integer (x);
+    function f1(x : integer, y : integer) returns integer (x);
+    test(f1, type integer <-- (string | integer, string | integer));
+  };
+
+  {
+    function f1(x : string, y : string) returns integer (x);
+    function f1(x : integer, y : string) returns integer (x);
+    function f1(x : integer, y : integer) returns integer (x);
+    test(f1, type integer <-- (string | integer, string | integer));
+  };
+
+  {
+    function f1(x : string, y : string) returns integer (x);
+    function f1(x : string, y : integer) returns integer (x);
+    function f1(x : integer, y : integer) returns integer (x);
+    test(f1, type integer <-- (string | integer, string | integer));
+  };
+
+  {
+    function f1(x : string, y : string) returns integer (x);
+    function f1(x : string, y : integer) returns integer (x);
+    function f1(x : integer, y : string) returns integer (x);
+    test(f1, type integer <-- (string | integer, string | integer));
+  };
+
+  {
+    function f1(x : string, y : string) returns rational (x);
+    function f1(x : string, y : integer) returns integer (x);
+    function f1(x : integer, y : string) returns integer (x);
+    function f1(x : integer, y : integer) returns integer (x);
+    test(f1, type integer <-- (string | integer, string | integer));
+  };
+
+  {
+    function f1(x : string, y : string) returns rational (x);
+    function f1(x : string, y : string) returns integer (x);
+    function f1(x : string, y : integer) returns integer (x);
+    function f1(x : integer, y : string) returns integer (x);
+    function f1(x : integer, y : integer) returns integer (x);
+    test(f1, type integer <-- (string | integer, string | integer));
+  };
+
+  {
+    function f1(x : string, y : string) returns integer (x);
+    function f1(x : string, y : integer) returns integer (x);
+    function f1(x : integer, y : string) returns integer (x);
+    function f1(x : integer, y : integer) returns integer (x);
+    function f1(x : {"c", "d"}, y : string) returns rational (x);
+    test(f1, type integer <-- ({"a", "b"}, string | integer));
+  };
+
+  {
+    function f1(x : string, y : string) returns integer (x);
+    function f1(x : string, y : integer) returns integer (x);
+    function f1(x : integer, y : string) returns integer (x);
+    function f1(x : integer, y : integer) returns integer (x);
+    function f1(x : <<pure function(x) returns boolean (x in {"c", "d"})>>,
+                y : string) returns rational (x);
+    test(f1, type integer <-- ({"a", "b"}, string | integer));
+  };

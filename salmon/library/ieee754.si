@@ -1,0 +1,284 @@
+/* file "ieee754.si" */
+
+/*
+ *  This file contains the interface to a software implementation of the IEEE
+ *  754-2008 floating point standard for the Salmon Programming Language.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+et_fp_bad_specifier :- any_quark,
+et_fp_integer_specifier_non_integer_value :- any_quark,
+et_fp_overflow :- any_quark,
+et_fp_underflow :- any_quark,
+et_fp_subnormal :- any_quark,
+et_fp_denormalized :- any_quark,
+et_fp_inexact :- any_quark,
+et_fp_division_by_zero :- any_quark,
+
+any_base_floating_point_interface :- {type interface
+  [
+    base :- (0...+oo) <-- (),
+    mantissa :- rational <-- (),
+    exponent :- (-oo...+oo) <-- ()
+  ]},
+
+round_to_nearest_ties_even :- any_quark,
+round_to_nearest_ties_toward_zero :- any_quark,
+round_to_nearest_ties_away_from_zero :- any_quark,
+round_up :- any_quark,
+round_down :- any_quark,
+round_toward_zero :- any_quark,
+round_away_from_zero :- any_quark,
+
+rounding_mode :- {type
+  {
+    round_to_nearest_ties_even,
+    round_to_nearest_ties_toward_zero,
+    round_to_nearest_ties_away_from_zero,
+    round_up,
+    round_down,
+    round_toward_zero,
+    round_away_from_zero
+  }},
+
+negative_zero :- any_quark,
+negative_zero_zero :- any_quark,
+signalling_zero_zero :- any_quark,
+negative_signalling_zero_zero :- any_quark,
+
+fp_controller_type :- type interface[] <-- (conditions : type !{}),
+
+fp_condition_overflow :- any_quark,
+fp_condition_underflow :- any_quark,
+fp_condition_subnormal :- any_quark,
+fp_condition_denormalized :- any_quark,
+fp_condition_inexact :- any_quark,
+fp_condition_division_by_zero :- any_quark,
+
+basic_conditions :- {type
+  {
+    fp_condition_overflow, fp_condition_underflow, fp_condition_subnormal,
+    fp_condition_denormalized, fp_condition_inexact,
+    fp_condition_division_by_zero
+  }},
+
+floating_point_interface :- type any_base_floating_point_interface <-- (
+        base : (0...+oo)),
+
+rational_extensions :- {type
+  {
+    negative_zero, negative_zero_zero, signalling_zero_zero,
+    negative_signalling_zero_zero
+  }},
+
+extended_rational :- {type (rational | rational_extensions)},
+
+et_fp_invalid_operation :- any_quark,
+
+fp_condition_invalid_operation :- any_quark,
+
+ieee_754_additional_conditions :- {type
+  { fp_condition_invalid_operation }},
+
+ieee_754_conditions :-
+        {type (basic_conditions | ieee_754_additional_conditions)},
+
+ieee_754_fp_controller_type :-
+        {type <<fp_controller_type(ieee_754_conditions)>> & interface
+  [
+    decimal_use_binary_encoding :- boolean <-- (),
+    set_decimal_use_binary_encoding :- {} <-- (boolean)
+  ]},
+
+default_fp_controller :- ieee_754_fp_controller_type,
+
+format_name :- tagalong_key,
+format_bits :- tagalong_key,
+decode_bits :- tagalong_key,
+
+ieee_754_floating_point_ecosystem :- (object & interface
+  [
+    mantissa_magnitude_lower_limit :- (0...+oo),
+    mantissa_magnitude_upper_limit :- (0...+oo),
+    max_exponent :- (0...+oo),
+    min_fraction_exponent :- (-oo...0],
+    min_exponent :- (-oo...+oo),
+    this_interface :- type !{},
+    non_subnormal_mantissa_type :- type integer,
+    normalized_mantissa_type :- type integer,
+    unsigned_infinity :- {1/0},
+    zero_zero :- {0/0},
+    constructor :- any_class,
+    operator_return_type :- type !{},
+    default_controller :- basic_fp_controller_type,
+    item_class :- any_base_floating_point_interface <--
+            (init_mantissa : extended_rational, init_exponent : integer := *,
+             init_controller : ieee_754_fp_controller_type := *)
+  ]) <-- (base : (0...+oo), mantissa_digits : (0...+oo),
+          max_fraction_exponent : (0...+oo), encoding_bit_count : (0...+oo),
+          subnormal_allowed : boolean := *,
+          denormalized_allowed : boolean := *,
+          init_default_controller : ieee_754_fp_controller_type := *),
+
+ieee_754_floating_point :-
+        (any_base_floating_point_interface <--
+                 (init_mantissa : extended_rational,
+                  init_exponent : integer := *,
+                  init_controller : ieee_754_fp_controller_type := *)) <--
+        (base : (0...+oo), mantissa_digits : (0...+oo),
+         max_fraction_exponent : (0...+oo), encoding_bit_count : (0...+oo),
+         subnormal_allowed : boolean := *, denormalized_allowed : boolean := *,
+         init_default_controller : ieee_754_fp_controller_type := *),
+
+ieee_754_binary_ecosystem :- (object & interface
+  [
+    exponent_bit_count :- [0...+oo),
+    exponent_count :- (0...+oo),
+    exponent_mask :- [0...+oo),
+    mantissa_count :- (0...+oo),
+    mantissa_mask :- [0...+oo),
+    exponent_bias :- (-oo...+oo),
+    silent_nan_mask :- (0...+oo),
+    silent_nan_payload_mask :- [0...+oo),
+    item_class :- <<floating_point_interface(2)>> <--
+            (init_mantissa : extended_rational, init_exponent : integer := *,
+             init_controller : ieee_754_fp_controller_type := *,
+             init_nan_payload : [0...+oo) := *),
+    constructor :- any_class,
+    operator_return_type :- type !{},
+    decode_bits :- <<floating_point_interface(2)>> <-- (bits : [0...+oo))
+  ]) <-- (encoding_bit_count : (0...+oo), mantissa_explicit_digits : (0...+oo),
+          max_fraction_exponent : (0...+oo) := *,
+          subnormal_allowed : boolean := *,
+          denormalized_allowed : boolean := *,
+          local_default_controller : ieee_754_fp_controller_type := *,
+          name : string | {null} := *),
+
+ieee_754_binary :- 
+        (<<floating_point_interface(2)>> <--
+                 (init_mantissa : extended_rational,
+                  init_exponent : integer := *,
+                  init_controller : ieee_754_fp_controller_type := *)) <--
+        (encoding_bit_count : (0...+oo), mantissa_explicit_digits : (0...+oo),
+         max_fraction_exponent : (0...+oo) := *,
+         subnormal_allowed : boolean := *, denormalized_allowed : boolean := *,
+         local_default_controller : ieee_754_fp_controller_type := *,
+         name : string | {null} := *),
+
+one_mod_three :- boolean <-- (!{}),
+
+ieee_754_decimal_ecosystem :- (object & interface
+  [
+    max_mantissa :- (0...+oo),
+    max_payload :- [0...+oo),
+    t_field_digits :- [0...+oo),
+    t_field_bit_count :- [0...+oo),
+    t_field_count :- [0...+oo),
+    t_mask :- [0...+oo),
+    exponent_bias :- (-oo...+oo),
+    g_field_bit_count :- (5...+oo),
+    g_mask :- (0...+oo),
+    decode_densely_packed_decimal_declet :- [0...999] <-- (data : [0...0x3ff]),
+    encode_densely_packed_decimal_declet :- [0...0x3ff] <-- (data : [0...999]),
+    item_class :- <<floating_point_interface(10)>> <--
+            (init_mantissa : extended_rational, init_exponent : integer := *,
+             init_controller : ieee_754_fp_controller_type := *,
+             init_nan_payload : [0...+oo) := *),
+    constructor :- any_class,
+    operator_return_type :- type !{},
+    decode_bits :- <<floating_point_interface(10)>> <-- (bits : [0...+oo))
+  ]) <-- (encoding_bit_count : (0...+oo),
+          mantissa_digits : (0...+oo) & one_mod_three := *,
+          max_fraction_exponent : (0...+oo) := *,
+          subnormal_allowed : boolean := *,
+          denormalized_allowed : boolean := *,
+          local_default_controller : ieee_754_fp_controller_type := *,
+          name : string | {null} := *),
+
+ieee_754_decimal :-
+        (<<floating_point_interface(10)>> <--
+                 (init_mantissa : extended_rational,
+                  init_exponent : integer := *,
+                  init_controller : ieee_754_fp_controller_type := *)) <--
+        (encoding_bit_count : (0...+oo),
+         mantissa_digits : (0...+oo) & one_mod_three := *,
+         max_fraction_exponent : (0...+oo) := *,
+         subnormal_allowed : boolean := *, denormalized_allowed : boolean := *,
+         local_default_controller : ieee_754_fp_controller_type := *,
+         name : string | {null} := *),
+
+binary16 :-
+        <<floating_point_interface(2)>> <--
+                (init_mantissa : extended_rational,
+                 init_exponent : integer := *,
+                 init_controller : ieee_754_fp_controller_type := *),
+binary32 :-
+        <<floating_point_interface(2)>> <--
+                (init_mantissa : extended_rational,
+                 init_exponent : integer := *,
+                 init_controller : ieee_754_fp_controller_type := *),
+binary64 :-
+        <<floating_point_interface(2)>> <--
+                (init_mantissa : extended_rational,
+                 init_exponent : integer := *,
+                 init_controller : ieee_754_fp_controller_type := *),
+binary128 :-
+        <<floating_point_interface(2)>> <--
+                (init_mantissa : extended_rational,
+                 init_exponent : integer := *,
+                 init_controller : ieee_754_fp_controller_type := *),
+
+decimal32 :-
+        <<floating_point_interface(10)>> <--
+                (init_mantissa : extended_rational,
+                 init_exponent : integer := *,
+                 init_controller : ieee_754_fp_controller_type := *),
+decimal64 :-
+        <<floating_point_interface(10)>> <--
+                (init_mantissa : extended_rational,
+                 init_exponent : integer := *,
+                 init_controller : ieee_754_fp_controller_type := *),
+decimal128 :-
+        <<floating_point_interface(10)>> <--
+                (init_mantissa : extended_rational,
+                 init_exponent : integer := *,
+                 init_controller : ieee_754_fp_controller_type := *),
+
+log :- binary16 <-- (base : (0....+oo), operand : binary16),
+log2 :- binary16 <-- (operand : binary16),
+log10 :- binary16 <-- (operand : binary16),
+exponential :- binary16 <-- (operand : binary16),
+
+log :- binary32 <-- (base : (0....+oo), operand : binary32),
+log2 :- binary32 <-- (operand : binary32),
+log10 :- binary32 <-- (operand : binary32),
+exponential :- binary32 <-- (operand : binary32),
+
+log :- binary64 <-- (base : (0....+oo), operand : binary64),
+log2 :- binary64 <-- (operand : binary64),
+log10 :- binary64 <-- (operand : binary64),
+exponential :- binary64 <-- (operand : binary64),
+
+log :- binary128 <-- (base : (0....+oo), operand : binary128),
+log2 :- binary128 <-- (operand : binary128),
+log10 :- binary128 <-- (operand : binary128),
+exponential :- binary128 <-- (operand : binary128),
+
+log :- decimal32 <-- (base : (0....+oo), operand : decimal32),
+log2 :- decimal32 <-- (operand : decimal32),
+log10 :- decimal32 <-- (operand : decimal32),
+exponential :- decimal32 <-- (operand : decimal32),
+
+log :- decimal64 <-- (base : (0....+oo), operand : decimal64),
+log2 :- decimal64 <-- (operand : decimal64),
+log10 :- decimal64 <-- (operand : decimal64),
+exponential :- decimal64 <-- (operand : decimal64),
+
+log :- decimal128 <-- (base : (0....+oo), operand : decimal128),
+log2 :- decimal128 <-- (operand : decimal128),
+log10 :- decimal128 <-- (operand : decimal128),
+exponential :- decimal128 <-- (operand : decimal128)

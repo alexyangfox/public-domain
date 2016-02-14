@@ -1,0 +1,21 @@
+/* file "string_utf8_op.si" */
+
+/*
+ *  This file contains the interface to operator overloading to allow strings
+ *  to be accessed using lookup operators as if they were arrays of bytes in
+ *  UTF-8 form.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+operator[] :- u8 <-- (base : string, key : [0...+oo)),
+
+operator[] :- string <-- (base : string, lower : [0...+oo), upper : [0...+oo)),
+
+operator[] :- string <-- (base : string, key : [0...+oo), replacement : u8),
+
+operator[] :- string <-- (base : string, lower : [0...+oo), upper : [0...+oo),
+                          replacement : string)

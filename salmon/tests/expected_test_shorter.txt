@@ -1,0 +1,72 @@
+v1: 87.
+i1: 8.
+f1(8): 11.
+x: 22.
+f2(8): 24.
+f3(8): 64.
+a: [1, 12].
+v1.t1: 5.
+l1[a := 5, b := "hello"]: l1[a := 5, b := "hello"].
+i2: type multiset[a : integer, b : string].
+locks: Lock `single-statement' (declared at "tests/test_shorter.salm":51:3) grabbed [1].
+Single.
+locks: Lock `single-statement' (declared at "tests/test_shorter.salm":51:3) released [0].
+A.
+C.
+B.
+e1: 1.
+e1: 4.
+e1: 9.
+e1: 1.
+e1: 9.
+c2().v2: 2.
+Caught exception.
+A.
+C.
+qe1: type {qel1, qel2}.
+3.5 in b: false.
+false in b: true.
+'d' in re: false.
+@d@ in re: true.
+@d@ in aq: false.
+q1 in aq: true.
+q1 in al: false.
+l1[a := 5] in al: true.
+l1[a := 5] in lk: false.
+l1 in lk: true.
+l1 in jt: false.
+jt1 in jt: true.
+jt1 in ac: false.
+c2 in ac: true.
+c2 in o: false.
+c2() in o: true.
+c2() in tk: false.
+t1 in tk: true.
+t1 in alk: false.
+l2 in alk: true.
+&i2 == n: false.
+null == n: true.
+tr: true.
+fa: false.
+ms(['H', 'i', '!']): Hi!.
+0xd7ff in cp: true.
+0xd800 in cp: false.
+d == delete: true.
+d == print: false.
+sp(@,@, "aa,bb,cc"): ["aa", "bb", "cc"].
+j(["a", "b", "c"], ","): a,b,c.
+si == standard_input: true.
+si == standard_error: false.
+so == standard_output: true.
+so == standard_input: false.
+out == standard_output: true.
+out == standard_input: false.
+se == standard_error: true.
+se == standard_output: false.
+err == standard_error: true.
+err == standard_output: false.
+abc.
+spr(16): 16.
+%x%, 16: 10.
+sprf("%x%", 16): 10.
+v4: 5.

@@ -1,0 +1,21 @@
+/* file "string_utf16_op.si" */
+
+/*
+ *  This file contains the interface to operator overloading to allow strings
+ *  to be accessed using lookup operators as if they were arrays of unsigned
+ *  16-bit integers in UTF-16 form.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+operator[] :- u16 <-- (base : string, key : [0...+oo)),
+
+operator[] :- string <-- (base : string, lower : [0...+oo), upper : [0...+oo)),
+
+operator[] :- string <-- (base : string, key : [0...+oo), replacement : u16),
+
+operator[] :- string <-- (base : string, lower : [0...+oo), upper : [0...+oo),
+                          replacement : string)

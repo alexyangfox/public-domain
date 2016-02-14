@@ -1,0 +1,100 @@
+/* file "bullseye.salm" */
+
+/*
+ *  This file contains a routine to calculate a given real function with enough
+ *  precision to get the error within a given bound.  It must be passed a
+ *  function that can compute an approximation to the real function within any
+ *  specified bound using any specified floating-point interval type.  It uses
+ *  successively more precise calls to the approximation function until the
+ *  width of the result interval is small enough to meet the error bound.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+hide;
+
+use "scientific_form.salm" : "scientific_form.si";
+use "limited_floating_point.salm" : "limited_floating_point.si";
+use "convertable.salm" : "convertable.si";
+
+export;
+
+use "interval.salm" : "interval.si";
+
+
+quark enumeration bound_kind { relative, absolute };
+
+function bullseye(
+        approximator :
+        any_interval <--
+        (compute_type : type any_interval, error_bound : (0....+oo)),
+        error_bound : (0....+oo), kind : bound_kind) returns any_interval
+  {
+    variable significant_bits : (-oo...+oo) :=
+            -(find_scientific_form(error_bound, 2).exponent);
+    if (significant_bits <= 0)
+        significant_bits := 1;;
+
+    while (true)
+      {
+        significant_bits += 32;
+        immutable approximation :=
+          {
+            try
+              {
+                return approximator(interval(2, significant_bits),
+                                    error_bound / 2);
+              }
+            catch
+              {
+                immutable e := current_exceptions()[0];
+                if (e.tag != et_interval_comparison_indeterminate)
+                    throw(e);;
+                continue;
+              };
+          };
+        if (approximation.upper() == approximation.lower())
+            return approximation;;
+        immutable absolute_bound : rational :=
+          {
+            if (kind == absolute)
+                return error_bound;;
+            if ((approximation.lower() <= 0) && (approximation.upper() >= 0))
+                continue;;
+            if (approximation.lower() > 0)
+                return (error_bound * (approximation.lower() :: rational));
+            else
+                return -(error_bound * (approximation.upper() :: rational));;
+          };
+        if ((approximation.upper() - approximation.lower()) <=
+            (absolute_bound / 2))
+          {
+            return approximation;
+          };
+      };
+  };
+
+immutable convertable_from_rational := convertable_from(rational);
+
+function best_approximation(destination_type : convertable_from_rational,
+        approximator : any_interval <-- (tolerance : rational),
+        start_tolerance : rational := 1e-5,
+        tolerance_increment : rational := 1000) returns !{} / destination_type
+  {
+    variable tolerance : rational := start_tolerance;
+
+    while (true)
+      {
+        immutable this_approximation : any_interval := approximator(tolerance);
+        immutable lower : destination_type ::=
+                (this_approximation.lower() :: rational);
+        immutable upper : destination_type ::=
+                (this_approximation.upper() :: rational);
+        if (lower == upper)
+            return lower;;
+        tolerance /= tolerance_increment;
+      };
+  };

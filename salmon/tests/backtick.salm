@@ -1,0 +1,20 @@
+/* file "backtick.salm" */
+
+/*
+ *  This file runs some tests of backtick expressions in Salmon.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+`echo hello`;
+`echo this is fun!`;
+`echo $$ is $$..$$!`;
+print("a: ", `true`, ".\n");
+print("b: ", `false`, ".\n");
+`echo $(3 + 15)`;
+variable x := [1, 2, 3];
+`echo $(x[1...2])`;
+`echo abc$x-def`;

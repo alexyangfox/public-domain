@@ -1,0 +1,344 @@
+/* file "test_short.salm" */
+
+/*
+ *  This file is a test of "short.salm".
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+include "short.salm";
+
+var v1 := 17;
+v1 := 87;
+print("v1: ", v1, ".\n");
+
+imm i1 := 8;
+print("i1: ", i1, ".\n");
+
+fun f1(x) (x + 3);
+print("f1(8): ", f1(8), ".\n");
+
+proc p1(x)
+  { print("x: ", x, ".\n"); };
+p1(22);
+
+fun f2(x)
+  { ret (x * 3); };
+print("f2(8): ", f2(8), ".\n");
+
+fun f3(x : integer) rets integer
+  { ret (x * x); };
+print("f3(8): ", f3(8), ".\n");
+
+proc p2(...)
+  { print("args: ", args, ".\n"); };
+p2(1, 12);
+
+taga t1;
+v1.t1 := 5;
+print("v1.t1: ", v1.t1, ".\n");
+
+lep l1[a : integer, b : string];
+print("l1[a := 5, b := \"hello\"]: ", l1[a := 5, b := "hello"], ".\n");
+
+imm i2 := type mult[a : integer, b : string];
+print("i2: ", i2, ".\n");
+
+imm i3 := type inter[a : integer, b : string];
+print("i3: ", i3, ".\n");
+
+inc "multi_include.salm";
+
+sin
+  {
+    print("Single.\n");
+  };
+
+class c1()
+  {
+    vir fun m1() (3);
+    proc p3()
+      { print("m1(): ", m1(), ".\n"); };
+  };
+c1().p3();
+  {
+    fun m1() (5);
+    use c1();
+    p3();
+  };
+
+  {
+    print("A.\n");
+    clean { print("B.\n"); };
+    print("C.\n");
+  };
+
+var v2 := [1, 2, 3];
+var v3;
+par for (e1; 0; e1 < 3)
+    v3[e1] := v2[e1] * v2[e1];;
+print("v3: ", v3, ".\n");
+
+iter (e1; v3)
+    print("e1: ", e1, ".\n");;
+
+iter (e1; v3)
+  {
+    if (e1 == 4)
+        cont;;
+    print("e1: ", e1, ".\n");
+  };
+
+imm c2 := class()
+  {
+    hide;
+    variable v1 := 1;
+    exp;
+    variable v2 := 2;
+  };
+print("c2().v2: ", c2().v2, ".\n");
+
+print("A.\n");
+go lab1;
+print("B.\n");
+lab1:
+print("C.\n");
+
+quark enum qe1 { qel1, qel2 };
+print("qe1: ", qe1, ".\n");
+
+print("3 in int: ", 3 in int, ".\n");
+print("3.5 in int: ", 3.5 in int, ".\n");
+
+print("3.5 in rat: ", 3.5 in rat, ".\n");
+print("\"a\" in rat: ", "a" in rat, ".\n");
+
+print("3.5 in str: ", 3.5 in str, ".\n");
+print("\"a\" in str: ", "a" in str, ".\n");
+
+print("3.5 in bool: ", 3.5 in bool, ".\n");
+print("false in bool: ", false in bool, ".\n");
+
+print("3.5 in char: ", 3.5 in char, ".\n");
+print("'d' in char: ", 'd' in char, ".\n");
+
+print("'d' in regex: ", 'd' in regex, ".\n");
+print("@d@ in regex: ", @d@ in regex, ".\n");
+
+quark q1;
+print("@d@ in anyq: ", @d@ in anyq, ".\n");
+print("q1 in anyq: ", q1 in anyq, ".\n");
+
+print("q1 in anyl: ", q1 in anyl, ".\n");
+print("l1[a := 5] in anyl: ", l1[a := 5] in anyl, ".\n");
+
+print("l1[a := 5] in lepkey: ", l1[a := 5] in lepkey, ".\n");
+print("l1 in lepkey: ", l1 in lepkey, ".\n");
+
+jt1:
+print("l1 in target: ", l1 in target, ".\n");
+print("jt1 in target: ", jt1 in target, ".\n");
+
+print("jt1 in anyc: ", jt1 in anyc, ".\n");
+print("c2 in anyc: ", c2 in anyc, ".\n");
+
+print("c2 in obj: ", c2 in obj, ".\n");
+print("c2() in obj: ", c2() in obj, ".\n");
+
+print("c2() in tagkey: ", c2() in tagkey, ".\n");
+print("t1 in tagkey: ", t1 in tagkey, ".\n");
+
+lock l2;
+print("t1 in anylk: ", t1 in anylk, ".\n");
+print("l2 in anylk: ", l2 in anylk, ".\n");
+
+print("&i3 == nil: ", &i3 == nil, ".\n");
+print("null == nil: ", null == nil, ".\n");
+
+print("chars(\"Hi!\"): ", chars("Hi!"), ".\n");
+
+print("mstr(['H', 'i', '!']): ", mstr(['H', 'i', '!']), ".\n");
+
+print("0xd7ff in cpoint: ", 0xd7ff in cpoint, ".\n");
+print("0xd800 in cpoint: ", 0xd800 in cpoint, ".\n");
+
+print("futf8([72]): ", futf8([72]), ".\n");
+
+print("futf16([72]): ", futf16([72]), ".\n");
+
+print("futf32(72): ", futf32(72), ".\n");
+
+print("utf8('H'): ", utf8('H'), ".\n");
+print("utf8(\"Hi!\"): ", utf8("Hi!"), ".\n");
+
+print("utf16('H'): ", utf16('H'), ".\n");
+print("utf16(\"Hi!\"): ", utf16("Hi!"), ".\n");
+
+print("utf32('H'): ", utf32('H'), ".\n");
+print("utf32(\"Hi!\"): ", utf32("Hi!"), ".\n");
+
+print("sfutf8([72, 105, 33]): ", sfutf8([72, 105, 33]), ".\n");
+print("sfutf16([72, 105, 33]): ", sfutf16([72, 105, 33]), ".\n");
+print("sfutf32([72, 105, 33]): ", sfutf32([72, 105, 33]), ".\n");
+
+print("del == delete: ", del == delete, ".\n");
+print("del == print: ", del == print, ".\n");
+
+print("sub(@[0-9]@, \"abc123\", \"d\"): ", sub(@[0-9]@, "abc123", "d"), ".\n");
+
+print("pat(@[0-9]@): ", pat(@[0-9]@), ".\n");
+
+print("pregex(\"[0-9]\"): ", pregex("[0-9]"), ".\n");
+
+print("@[0-9]@ in regexf: ", @[0-9]@ in regexf, ".\n");
+print("create_follower(@[0-9]@) in regexf: ",
+      create_follower(@[0-9]@) in regexf, ".\n");
+
+print("len(\"Hi!\"): ", len("Hi!"), ".\n");
+
+fun f4()
+  {
+  local:
+    print("f4 retexp(local): ", retexp(local), ".\n");
+    return retexp(local);
+  };
+proc p3()
+  {
+  local:
+    print("p3 retexp(local): ", retexp(local), ".\n");
+  };
+[] := [f4()];
+p3();
+
+print("eof == nil: ", eof == nil, ".\n");
+print("eof == end_of_input: ", eof == end_of_input, ".\n");
+
+print("ioerr == nil: ", ioerr == nil, ".\n");
+print("ioerr == io_error: ", ioerr == io_error, ".\n");
+
+print("otstream == output_text_stream: ", otstream == output_text_stream,
+      ".\n");
+print("otstream == input_text_stream: ", otstream == input_text_stream, ".\n");
+
+print("itstream == input_text_stream: ", itstream == input_text_stream, ".\n");
+print("itstream == output_text_stream: ", itstream == output_text_stream,
+      ".\n");
+
+print("lastream == look_ahead_stream: ", lastream == look_ahead_stream, ".\n");
+print("lastream == output_bit_stream: ", lastream == output_bit_stream, ".\n");
+
+print("obstream == output_bit_stream: ", obstream == output_bit_stream, ".\n");
+print("obstream == look_ahead_stream: ", obstream == look_ahead_stream, ".\n");
+
+print("ibstream == input_bit_stream: ", ibstream == input_bit_stream, ".\n");
+print("ibstream == seekable_stream: ", ibstream == seekable_stream, ".\n");
+
+print("sstream == seekable_stream: ", sstream == seekable_stream, ".\n");
+print("sstream == input_bit_stream: ", sstream == input_bit_stream, ".\n");
+
+print("laadd == add_text_look_ahead_buffer: ",
+      laadd == add_text_look_ahead_buffer, ".\n");
+print("laadd == print: ", laadd == print, ".\n");
+
+print("stdin == standard_input: ", stdin == standard_input, ".\n");
+print("stdin == standard_error: ", stdin == standard_error, ".\n");
+
+print("stdout == standard_output: ", stdout == standard_output, ".\n");
+print("stdout == standard_input: ", stdout == standard_input, ".\n");
+
+print("stderr == standard_error: ", stderr == standard_error, ".\n");
+print("stderr == standard_output: ", stderr == standard_output, ".\n");
+
+print("itfopen == open_input_text_file: ", itfopen == open_input_text_file,
+      ".\n");
+print("itfopen == open_output_text_file: ", itfopen == open_output_text_file,
+      ".\n");
+
+print("otfopen == open_output_text_file: ", otfopen == open_output_text_file,
+      ".\n");
+print("otfopen == open_input_text_file: ", otfopen == open_input_text_file,
+      ".\n");
+
+print("iotfopen == open_input_output_text_file: ",
+      iotfopen == open_input_output_text_file, ".\n");
+print("iotfopen == open_input_bit_file: ", iotfopen == open_input_bit_file,
+      ".\n");
+
+print("ibfopen == open_input_bit_file: ", ibfopen == open_input_bit_file,
+      ".\n");
+print("ibfopen == open_input_output_text_file: ",
+      ibfopen == open_input_output_text_file, ".\n");
+
+print("obfopen == open_output_bit_file: ", obfopen == open_output_bit_file,
+      ".\n");
+print("obfopen == open_input_output_bit_file: ",
+      obfopen == open_input_output_bit_file, ".\n");
+
+print("iobfopen == open_input_output_bit_file: ",
+      iobfopen == open_input_output_bit_file, ".\n");
+print("iobfopen == open_output_bit_file: ", iobfopen == open_output_bit_file,
+      ".\n");
+
+print("isopen == open_input_string: ", isopen == open_input_string, ".\n");
+print("isopen == open_output_string: ", isopen == open_output_string, ".\n");
+
+print("osopen == open_output_string: ", osopen == open_output_string, ".\n");
+print("osopen == open_input_string: ", osopen == open_input_string, ".\n");
+
+print("fexists == file_exists: ", fexists == file_exists, ".\n");
+print("fexists == print: ", fexists == print, ".\n");
+
+print("dexists == directory_exists: ", dexists == directory_exists, ".\n");
+print("dexists == print: ", dexists == print, ".\n");
+
+print("dirlist == directory_contents: ", dirlist == directory_contents, ".\n");
+print("dirlist == print: ", dirlist == print, ".\n");
+
+print("rem == remove: ", rem == remove, ".\n");
+print("rem == print: ", rem == print, ".\n");
+
+print("ren == rename: ", ren == rename, ".\n");
+print("ren == print: ", ren == print, ".\n");
+
+print("rchar == read_character: ", rchar == read_character, ".\n");
+print("rchar == print: ", rchar == print, ".\n");
+
+print("rstr == read_string: ", rstr == read_string, ".\n");
+print("rstr == print: ", rstr == print, ".\n");
+
+print("sys == system: ", sys == system, ".\n");
+print("sys == print: ", sys == print, ".\n");
+
+print("cswitch == context_switching: ", cswitch == context_switching, ".\n");
+print("cswitch == print: ", cswitch == print, ".\n");
+
+print("timet == time_type: ", timet == time_type, ".\n");
+print("timet == integer: ", timet == integer, ".\n");
+
+print("getltime == local_time_and_date: ", getltime == local_time_and_date,
+      ".\n");
+print("getltime == utc_time_and_date: ", getltime == utc_time_and_date, ".\n");
+
+print("getutime == utc_time_and_date: ", getutime == utc_time_and_date, ".\n");
+print("getutime == local_time_and_date: ", getutime == local_time_and_date,
+      ".\n");
+
+print("trans == translate: ", trans == translate, ".\n");
+print("trans == print: ", trans == print, ".\n");
+
+try
+  {
+    throw(quark, "This is an exception.");
+  }
+catch
+  {
+    print("curexc()[0].message: ", curexc()[0].message, ".\n");
+    print("curexc()[0] in exc: ", curexc()[0] in exc, ".\n");
+  };
+
+print("num(-4/10): ", num(-4/10), ".\n");
+print("den(-4/10): ", den(-4/10), ".\n");
+print("pow(2, 6): ", pow(2, 6), ".\n");

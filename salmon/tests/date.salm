@@ -1,0 +1,65 @@
+/* file "date.salm" */
+
+/*
+ *  This file is a test of Salmon date and time functions.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+function stamp_to_string(stamp : time_type) returns string
+  {
+    variable second_fraction :=
+            sprint(((stamp.seconds * 1000000) :: integer) % 1000000);
+    while (length(second_fraction) < 6)
+      { second_fraction := "0" ~ second_fraction; };
+    variable result : string :=
+        sprint(((stamp.hours + 11) % 12) + 1) ~ ":" ~
+        ((stamp.minutes < 10) ? "0" : "") ~ sprint(stamp.minutes) ~ ":" ~
+        ((stamp.seconds < 10) ? "0" : "") ~ sprint(stamp.seconds :: integer) ~
+        "." ~ second_fraction ~
+        (((stamp.hours /:: 12) == 0) ? "am" : "pm") ~ " " ~
+        (<<(Monday --> "Monday"), (Tuesday --> "Tuesday"),
+           (Wednesday --> "Wednesday"), (Thursday --> "Thursday"),
+           (Friday --> "Friday"), (Saturday --> "Saturday"),
+           (Sunday --> "Sunday")>>)[stamp.day_of_week] ~ ", " ~
+        (<<(January --> "January"), (February --> "February"),
+           (March --> "March"), (April --> "April"), (May --> "May"),
+           (June --> "June"), (July --> "July"), (August --> "August"),
+           (September --> "September"), (October --> "October"),
+           (November --> "November"), (December --> "December")>>)[
+                stamp.month] ~ " " ~ sprint(stamp.day_of_month) ~ ", " ~
+        sprint(stamp.year) ~ " " ~ stamp.zone;
+
+    if (stamp.seconds_ahead_of_utc != null)
+      {
+        variable seconds := stamp.seconds_ahead_of_utc;
+        result ~= " (UTC" ~ (seconds >= 0 ? "+" : "");
+        result ~= sprint(seconds /:: (60 * 60));
+        seconds %= (60 * 60);
+        if (seconds > 0)
+          {
+            result ~= ":" ~ ((seconds < 600) ? "0" : "") ~
+                      sprint(seconds /:: (60));
+            seconds %= 60;
+            if (seconds > 0)
+              {
+                result ~= ":" ~ ((seconds < 10) ? "0" : "") ~ sprint(seconds);
+              };
+          };
+        result ~= ")";
+      };
+
+    if (stamp.is_daylight_savings != null)
+      {
+        result ~= " (" ~
+                  (stamp.is_daylight_savings ? "daylight" : "standard") ~ ")";
+      };
+
+    return result;
+  };
+
+print("Local date and time: ", stamp_to_string(local_time_and_date()), ".\n");
+print("Zulu date and time: ", stamp_to_string(utc_time_and_date()), ".\n");

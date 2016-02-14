@@ -1,0 +1,187 @@
+Sum from 0 to 999 using 4 threads: 499500.
+Cubes of [0...10]: 0, 1, 8, 27, 64, 125, 216, 343, 512, 729, 1000.
+Multi-threading works?  Yes.
+Name of thread1: `Thread 6'.
+Name of thread2: `Name Test Thread'.
+Status of thread1: running.
+Status of thread2: running.
+Is thread1's status running?  Yes.
+Is thread1's status a valid status?  Yes.
+Suspending thread1.
+Is thread1's status running?  No.
+Is thread1's status suspended?  Yes.
+Is thread1's status a valid status?  Yes.
+Status of thread1: suspended.
+Status of thread2: running.
+Suspending thread2.
+Status of thread1: suspended.
+Status of thread2: suspended.
+Resuming thread1.
+Status of thread1: running.
+Status of thread2: suspended.
+Is thread1 done?  No.
+Is thread2 done?  No.
+Killing thread1.
+Status of thread1: finished.
+Status of thread2: suspended.
+Is thread1 done?  Yes.
+Is thread2 done?  No.
+Is thread1's status running?  No.
+Is thread1's status finished?  Yes.
+Killing thread2.
+Status of thread1: finished.
+Status of thread2: finished.
+Is thread1 done?  Yes.
+Is thread2 done?  Yes.
+Exit status of thread1: exit_killed.
+Exit status of thread2: exit_killed.
+Is thread1's exit status exit_normal?  No.
+Is thread1's exit status exit_killed?  Yes.
+Is thread1's exit status a valid exit_status?  Yes.
+Status of sleeping_thread: sleeping.
+Is sleeping_thread's status running?  No.
+Is sleeping_thread's status sleeping?  Yes.
+Location of sleeping_thread: "tests/thread.salm":191:[9-17].
+Waiting for sleeping_thread to finish.
+Status of sleeping_thread: finished.
+Exit status of sleeping_thread: exit_normal.
+Is sleeping_thread's exit status exit_normal?  Yes.
+Status of blocking_thread: blocked.
+Is blocking_thread's status running?  No.
+Is blocking_thread's status blocked?  Yes.
+Location of blocking_thread: "tests/thread.salm":186:[9-23].
+Unblocking blocking_thread.
+Waiting for blocking_thread to finish.
+Status of blocking_thread: finished.
+Exit status of jump_out_thread: exit_jumped_out.
+Is jump_out_thread's exit status exit_normal?  No.
+Is jump_out_thread's exit status exit_jumped_out?  Yes.
+Exit jump target of jump_out_thread: jump_out.
+Exit status of exception_thread: exit_exceptions.
+Is exception_thread's exit status exit_normal?  No.
+Is exception_thread's exit status exit_exceptions?  Yes.
+Exit exception count of exception_thread: 1.
+Exit exception message of exception_thread: `Illegal right operand to add expression: string.'.
+Exit status of dying_thread: exit_died.
+Is dying_thread's exit status exit_normal?  No.
+Is dying_thread's exit status exit_died?  Yes.
+Interrupting interruptable_thread.
+Thread caught an exception: `You have been interrupted.'.
+Tag: my_interrupt_tag.
+Interrupting interruptable_thread again.
+Thread caught another exception: `You have been interrupted again.'.
+Tag: my_interrupt_tag.
+Special: 88.
+Current value of semaphore1: 5.
+Calling v().
+Current value of semaphore1: 6.
+Calling v(2).
+Current value of semaphore1: 8.
+Calling signal().
+Current value of semaphore1: 9.
+Calling signal(2).
+Current value of semaphore1: 11.
+Calling up().
+Current value of semaphore1: 12.
+Calling up(2).
+Current value of semaphore1: 14.
+Calling release().
+Current value of semaphore1: 15.
+Calling release(2).
+Current value of semaphore1: 17.
+Calling post().
+Current value of semaphore1: 18.
+Calling post(2).
+Current value of semaphore1: 20.
+Calling vacate().
+Current value of semaphore1: 21.
+Calling vacate(2).
+Current value of semaphore1: 23.
+Calling p().
+Current value of semaphore1: 22.
+Calling p(2).
+Current value of semaphore1: 20.
+Calling wait().
+Current value of semaphore1: 19.
+Calling wait(2).
+Current value of semaphore1: 17.
+Calling down().
+Current value of semaphore1: 16.
+Calling down(2).
+Current value of semaphore1: 14.
+Calling acquire().
+Current value of semaphore1: 13.
+Calling acquire(2).
+Current value of semaphore1: 11.
+Calling pend().
+Current value of semaphore1: 10.
+Calling pend(2).
+Current value of semaphore1: 8.
+Calling procure().
+Current value of semaphore1: 7.
+Calling procure(2).
+Current value of semaphore1: 5.
+Calling try_p().
+Result: true.
+Current value of semaphore1: 4.
+Calling try_p(2).
+Result: true.
+Current value of semaphore1: 2.
+Calling try_p(2, 0.2).
+Result: true.
+Current value of semaphore1: 0.
+Calling try_p(2, 0.2).
+Result: false.
+Current value of semaphore1: 0.
+Current value of semaphore2: 0.
+Current value of semaphore3: 0.
+Current value of semaphore4: 1.
+Current value of semaphore5: 0.
+Thread count: 4.
+    Thread: `Blocker 3'.
+        Is thread2?  No.
+    Thread: `Blocker 2'.
+        Is thread2?  Yes.
+    Thread: `Blocker 1'.
+        Is thread2?  No.
+    Thread: `Root Thread'.
+        Is thread2?  No.
+Waiting for all threads.
+Thread count: 1.
+    Thread: `Root Thread'.
+        Is thread2?  No.
+Root Current thread: `Root Thread'.
+Child Current thread: `Name Printer'.
+About to sleep 0.05.
+About to sleep 1.2.
+About to sleep 2.
+Done sleeping.
+Exception with tag et_time_too_far:
+    "tests/thread.salm":559:12:"In a semaphore's try_down() method, the `seconds' parameter specified a finite time farther in the future than the underlying system can support."
+5
+6
+8
+Exception with tag et_semaphore_up_beyond_limit:
+    "tests/thread.salm":574:5:"In a semaphore's up() method, an attempt was made to increment the value to 13, which is beyond that semaphore's limit of 10."
+Exception with tag et_wait_all_not_root:
+    "tests/thread.salm":585:13:"A thread that was not the root thread called wait_for_all_threads()."
+Exception with tag et_interrupt_unnamed_extra:
+    "tests/thread.salm":603:9:"The ``other'' parameter to an interrupt() call contained an unnamed field."
+Exception with tag et_interrupt_finished:
+    "tests/thread.salm":620:9:"An interrupt() call was made on a thread that had already finished."
+Exception with tag et_suspend_finished:
+    "tests/thread.salm":634:9:"A suspend() call was made on a thread that had already finished."
+Exception with tag et_suspend_suspended:
+    "tests/thread.salm":650:9:"A suspend() call was made on a thread that had already been suspended."
+Exception with tag et_resume_not_suspended:
+    "tests/thread.salm":668:9:"A resume() call was made on a thread that was not suspended."
+Exception with tag et_get_exit_status_not_finished:
+    "tests/thread.salm":685:16:"A get_exit_status() call was made on a thread that had not yet exited."
+Exception with tag et_get_exit_exceptions_not_finished:
+    "tests/thread.salm":703:16:"A get_exit_exceptions() call was made on a thread that had not yet exited."
+Exception with tag et_get_exit_exceptions_no_exception:
+    "tests/thread.salm":720:16:"A get_exit_exceptions() call was made on a thread whose exit status was not exit_exceptions."
+Exception with tag et_get_exit_jump_target_not_finished:
+    "tests/thread.salm":736:16:"A get_exit_jump_target() call was made on a thread that had not yet exited."
+Exception with tag et_get_exit_jump_target_no_jump:
+    "tests/thread.salm":752:16:"A get_exit_jump_target() call was made on a thread whose exit status was not exit_jumped_out."

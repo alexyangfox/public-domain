@@ -1,0 +1,66 @@
+/* file "logarithm.salm" */
+
+/*
+ *  This file runs tests of the logarithm module.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+use "logarithm.salm" : "logarithm.si";
+
+
+  {
+    procedure try2(x)
+      { printf("log2(%v%): %.40g%.\n", x, log2(x, 1e-45)); };
+    procedure try10(x)
+      { printf("log10(%v%): %.40g%.\n", x, log10(x, 1e-45)); };
+    procedure tryexp(x)
+      { printf("exponential(%v%): %.40g%.\n", x, exponential(x, 1e-45)); };
+    procedure tryln(x)
+      {
+        printf("ln(%v%): %.40g%.\n", x, log(exponential(1, 1e-45), x, 1e-45));
+      };
+
+    try2(0);
+    try2(+oo);
+    try2(1);
+    try2(2);
+    try2(4);
+    try2(8);
+    try2(16);
+    try2(0.5);
+    try2(0.25);
+    try2(3);
+    try2(1/3);
+    try2(10);
+
+    try10(0);
+    try10(+oo);
+    try10(1);
+    try10(10);
+    try10(100);
+    try10(1000);
+    try10(10000);
+    try10(0.1);
+    try10(0.01);
+    try10(3);
+    try10(1/3);
+    try10(7);
+    try10(23);
+
+    tryexp(-oo);
+    tryexp(+oo);
+    tryexp(0);
+    tryexp(1);
+    tryexp(-1);
+    tryexp(1/2);
+    tryexp(3/2);
+    tryexp(2);
+
+    tryln(0);
+    tryln(+oo);
+    tryln(5);
+  };

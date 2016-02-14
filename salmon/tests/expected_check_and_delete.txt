@@ -1,0 +1,370 @@
+Contents of "utf8_test.txt":
+abcdXf
+Contents of "utf8_test.txt" four characters at a time:
+abcd
+Xf
+Contents of "utf8_test2.txt":
+abcdXf
+Contents of "utf8_test2.txt" four characters at a time:
+abcd
+Xf
+Contents of "utf16_le_test.txt":
+abXdef
+Contents of "utf16_le_test.txt" four characters at a time:
+abXd
+ef
+Contents of "utf16_be_test.txt":
+abXdef
+Contents of "utf16_be_test.txt" four characters at a time:
+abXd
+ef
+Contents of "utf32_le_test.txt":
+aXcdef
+Contents of "utf32_le_test.txt" four characters at a time:
+aXcd
+ef
+Contents of "utf32_be_test.txt":
+aXcdef
+Contents of "utf32_be_test.txt" four characters at a time:
+aXcd
+ef
+Character 1: `a'.
+Next: `b'.
+Lookahead 0: `b'.
+Lookahead 1: `c'.
+Lookahead 2: `d'.
+Lookahead 0: `b'.
+Lookahead 1: `c'.
+Lookahead 2: `d'.
+Read: `b'.
+Lookahead 0: `c'.
+Lookahead 1: `d'.
+Lookahead 2: `X'.
+Read: `c'.
+Read: `d'.
+Read: `X'.
+Read: `f'.
+Lookahead 0: `a'.
+Lookahead 1: `b'.
+Lookahead 2: `c'.
+String(2): `ab'.
+String(3): `cdX'.
+String(1): `f'.
+Contents of "bit_8_le_test.bit":
+0x00
+0x01
+0x02
+0x03
+0x04
+0x05
+0x06
+0x07
+0x08
+0x09
+0x0a
+
+Contents of "bit_8_be_test.bit":
+0x00
+0x01
+0x02
+0x03
+0x04
+0x05
+0x06
+0x07
+0x08
+0x09
+0x0a
+
+Contents of "bit_16_le_test.bit":
+0x0000
+0x0001
+0x0002
+0x0003
+0x0004
+0x0005
+0x0006
+0x0007
+0x0008
+0x0009
+0x000a
+
+Contents of "bit_16_be_test.bit":
+0x0000
+0x0001
+0x0002
+0x0003
+0x0004
+0x0005
+0x0006
+0x0007
+0x0008
+0x0009
+0x000a
+
+Contents of "bit_32_le_test.bit":
+0x00000000
+0x00000001
+0x00000002
+0x00000003
+0x00000004
+0x00000005
+0x00000006
+0x00000007
+0x00000008
+0x00000009
+0x0000000a
+
+Contents of "bit_32_be_test.bit":
+0x00000000
+0x00000001
+0x00000002
+0x00000003
+0x00000004
+0x00000005
+0x00000006
+0x00000007
+0x00000008
+0x00000009
+0x0000000a
+
+Contents of "bit_1_le_test.bit":
+0x1
+0x0
+0x1
+0x1
+0x0
+0x0
+0x0
+0x1
+0x0
+0x1
+0x1
+0x0
+0x0
+0x1
+0x0
+0x0
+0x0
+0x1
+0x1
+0x0
+0x1
+0x1
+0x0
+0x0
+
+Contents of "bit_1_be_test.bit":
+0x1
+0x0
+0x1
+0x1
+0x0
+0x0
+0x0
+0x1
+0x0
+0x1
+0x1
+0x0
+0x0
+0x1
+0x0
+0x0
+0x0
+0x1
+0x1
+0x0
+0x1
+0x1
+0x0
+0x0
+
+Contents of "bit_2_le_test.bit":
+0x3
+0x2
+0x1
+0x2
+0x1
+0x0
+0x3
+0x3
+0x0
+0x2
+0x2
+0x0
+
+Contents of "bit_2_be_test.bit":
+0x3
+0x2
+0x1
+0x2
+0x1
+0x0
+0x3
+0x3
+0x0
+0x2
+0x2
+0x0
+
+Contents of "bit_3_le_test.bit":
+0x7
+0x2
+0x4
+0x2
+0x0
+0x5
+0x5
+0x6
+0x3
+0x3
+0x7
+0x2
+0x1
+0x0
+0x5
+0x6
+0x7
+0x4
+0x2
+0x1
+0x3
+0x0
+0x0
+0x7
+
+Contents of "bit_3_be_test.bit":
+0x7
+0x2
+0x4
+0x2
+0x0
+0x5
+0x5
+0x6
+0x3
+0x3
+0x7
+0x2
+0x1
+0x0
+0x5
+0x6
+0x7
+0x4
+0x2
+0x1
+0x3
+0x0
+0x0
+0x7
+
+Contents of "bit_9_le_test.bit":
+0x17f
+0x0fe
+0x0e5
+0x127
+0x035
+0x15b
+0x1b5
+0x16c
+0x088
+0x1ff
+0x137
+0x025
+0x111
+0x000
+0x05f
+0x167
+0x07a
+0x144
+0x1d2
+0x1ee
+0x033
+0x057
+0x0bc
+0x175
+
+Contents of "bit_9_be_test.bit":
+0x17f
+0x0fe
+0x0e5
+0x127
+0x035
+0x15b
+0x1b5
+0x16c
+0x088
+0x1ff
+0x137
+0x025
+0x111
+0x000
+0x05f
+0x167
+0x07a
+0x144
+0x1d2
+0x1ee
+0x033
+0x057
+0x0bc
+0x175
+
+Contents of "bit_32_be_test.bit" in 13-byte chunks:
+0x00000000000000010000000200
+0x00000300000004000000050000
+0x00060000000700000008000000
+0x090000000a
+
+File "utf8_test.txt":
+0x 61 62 63 64  58 66                                      abcdXf
+File "utf8_test2.txt":
+0x 61 62 63 64  58 66                                      abcdXf
+File "utf16_le_test.txt":
+0x 61 00 62 00  58 00 64 00   65 00 66 00                  a.b.X.d. e.f.
+File "utf16_be_test.txt":
+0x 00 61 00 62  00 58 00 64   00 65 00 66                  .a.b.X.d .e.f
+File "utf32_le_test.txt":
+0x 61 00 00 00  58 00 00 00   63 00 00 00  64 00 00 00     a...X... c...d...
+0x 65 00 00 00  66 00 00 00                                e...f...
+File "utf32_be_test.txt":
+0x 00 00 00 61  00 00 00 58   00 00 00 63  00 00 00 64     ...a...X ...c...d
+0x 00 00 00 65  00 00 00 66                                ...e...f
+File "bit_8_le_test.bit":
+0x 00 01 02 03  04 05 06 07   08 09 0a                     ........ ...
+File "bit_8_be_test.bit":
+0x 00 01 02 03  04 05 06 07   08 09 0a                     ........ ...
+File "bit_16_le_test.bit":
+0x 00 00 01 00  02 00 03 00   04 00 05 00  06 00 07 00     ........ ........
+0x 08 00 09 00  0a 00                                      ......
+File "bit_16_be_test.bit":
+0x 00 00 00 01  00 02 00 03   00 04 00 05  00 06 00 07     ........ ........
+0x 00 08 00 09  00 0a                                      ......
+File "bit_32_le_test.bit":
+0x 00 00 00 00  01 00 00 00   02 00 00 00  03 00 00 00     ........ ........
+0x 04 00 00 00  05 00 00 00   06 00 00 00  07 00 00 00     ........ ........
+0x 08 00 00 00  09 00 00 00   0a 00 00 00                  ........ ....
+File "bit_32_be_test.bit":
+0x 00 00 00 00  00 00 00 01   00 00 00 02  00 00 00 03     ........ ........
+0x 00 00 00 04  00 00 00 05   00 00 00 06  00 00 00 07     ........ ........
+0x 00 00 00 08  00 00 00 09   00 00 00 0a                  ........ ....
+File "bit_1_le_test.bit":
+0x 8d 26 36                                                .&6
+File "bit_1_be_test.bit":
+0x b1 64 6c                                                .dl
+File "bit_2_le_test.bit":
+0x 9b f1 28                                                ..(
+File "bit_2_be_test.bit":
+0x e6 4f 28                                                .O(
+File "bit_3_le_test.bit":
+0x 17 85 d6 db  15 d4 a7 32   e0                           .......2 .
+File "bit_3_be_test.bit":
+0x ea 21 6e 6f  a2 2e f1 16   07                           .!no.... .
+File "bit_9_le_test.bit":
+0x 7f fd 95 3b  59 63 6b 6d   b6 88 fe df  2c 11 11 c0     ...;Yckm ....,...
+0x 97 b3 7a 88  4a 77 3f e3   0a af ba                     ..z.Jw?. ...
+File "bit_9_be_test.bit":
+0x bf bf 9c b2  71 ad 6f 6b   6c 44 7f e6  e2 58 88 00     ....q.ok lD...X..
+0x bf 67 3d 51  3a 5e e1 99   5d 79 75                     .g=Q:^.. ]yu

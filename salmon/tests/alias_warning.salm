@@ -1,0 +1,48 @@
+/* file "alias_warning.salm" */
+
+/*
+ *  This file is a test of various conditions under which a warning should be
+ *  issued by SalmonEye about a declaration whose name is invisible because of
+ *  aliasing.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+alias label1 label_alias;
+label1:
+
+alias var1 var_alias;
+variable var1;
+
+alias fun1 fun_alias;
+function fun1(x) (x + 1);
+
+alias param1 param_alias;
+function fun2(param1) (1);
+
+alias for1 for_alias;
+for (for1; 0; false)
+    [] := [fun2(1)];;
+
+alias iter1 iter_alias;
+iterate (iter1; [1, 2])
+    [] := [fun2(1)];;
+
+alias tag1 tag_alias;
+tagalong tag1;
+
+alias lep1 lep_alias;
+lepton lep1[...];
+
+alias quark1 quark1_alias;
+quark quark1;
+
+alias enum1 enum_alias;
+alias quark2 quark2_alias;
+quark enumeration enum1 { quark2 };
+
+alias lock1 lock_alias;
+lock lock1;

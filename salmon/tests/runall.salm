@@ -1,0 +1,326 @@
+/* file "runall.salm" */
+
+/*
+ *  This file is a top-level test driver file that runs a series of tests of a
+ *  Salmon interpreter.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+include "platform_dependent.salm";
+
+function filter(element_type := type !{},
+        source : array[!{}] / array[element_type],
+        test : (boolean | [{true}, !{}]) <-- ({}) /
+               (boolean | [{true}, element_type]) <-- (element_type))
+                returns array[!{}] / array[element_type]
+  {
+    variable result : array[element_type] := [];
+    iterate (element; source)
+      {
+        immutable test_result : boolean | [{true}, element_type] :=
+                test(element);
+        if (test_result in boolean)
+          {
+            if (test_result)
+                result ~= [element];;
+          }
+        else
+          {
+            result ~= [test_result[1]];
+          };
+      };
+    return result;
+  };
+
+function filter(source : array[!{}],
+                test : (boolean | [{true}, !{}]) <-- (!{}))
+  (filter(type !{}, source, test));
+
+variable success_count := 0;
+variable failure_count := 0;
+
+procedure note_test_result(passed : boolean)
+  {
+    if (passed)
+      {
+        print("Test passed.\n");
+        ++success_count;
+      }
+    else
+      {
+        print("Test failed!\n");
+        ++failure_count;
+      };
+  };
+
+quark enumeration which_interpreter
+  { standard, fast, debug, leak_finding, multi, fast_multi, debug_multi };
+immutable interpreter_name : which_interpreter --> string :=
+  <<(standard --> "standard"), (fast --> "fast"), (debug --> "debug"),
+    (leak_finding --> "leak-finding"), (multi --> "multi"),
+    (fast_multi --> "fast-multi"), (debug_multi --> "debug-multi")>>;
+
+immutable basic_test_item_type := type [string, string, ...];
+immutable test_item_type :=
+        type basic_test_item_type | [array[basic_test_item_type], ...];
+
+variable exclude_pair : string --> (string --> boolean) :=
+  <<(* : string --> <<(* : string --> false)>>)>>;
+
+variable time_prefix := "";
+
+variable interpreter_prefix := "";
+
+procedure run_test(test_file : string, expected_output_file : string,
+        which : which_interpreter, pass_interpreter : boolean := false,
+        trace_locks : boolean := true)
+  {
+    if (exclude_pair[test_file][interpreter_name[which]])
+        return;;
+    print("Running test \"", test_file, "\" on the ", interpreter_name[which],
+          " interpreter.\n");
+    variable suffix : string :=
+            ((which == fast) ? ".fast" :
+             ((which == debug) ? ".check" :
+              ((which == leak_finding) ? ".fast -llc -lld" :
+               ((which == multi) ? ".multi" :
+                ((which == fast_multi) ? ".fast.multi" :
+                 ((which == debug_multi) ? ".check.multi" : ""))))));
+    suffix ~= " -ip '" ~ directory_paths ~ "'";
+    immutable args : string :=
+            (pass_interpreter ? " " ~ interpreter_prefix ~ "salmoneye" ~ suffix
+                              : "");
+    variable test_code;
+    [test_code,,] :=
+      `$time_prefix $(interpreter_prefix)salmoneye$suffix $(trace_locks ? "-trace-locks-stdout" : "") tests/$test_file$args > out.txt`;
+    if (test_code == 0)
+      { [test_code,,] := `diff tests/$expected_output_file out.txt`; };
+    `rm out.txt`;
+    note_test_result(test_code == 0);
+  };
+
+variable which_interpreters_to_use : array[which_interpreter] :=
+        [standard, fast, leak_finding, debug, multi, fast_multi, debug_multi];
+
+procedure run_tests(test_file : string, expected_output_file : string,
+        which : array[which_interpreter] := which_interpreters_to_use,
+        pass_interpreter : boolean := false, trace_locks : boolean := true)
+  {
+    iterate(which; which)
+      {
+        run_test(test_file, expected_output_file, which, pass_interpreter,
+                 trace_locks);
+      };
+  };
+
+procedure run_tests(test_pairs : array[basic_test_item_type],
+        which : array[which_interpreter] := which_interpreters_to_use)
+  {
+    iterate(which; which)
+        iterate(test_pair; test_pairs)
+            call(run_test, test_pair ~ [which := which]);;;
+  };
+
+use "parse.salm" : "parse.si";
+use "thread.salm" : "thread.si" for multi_threading_works;
+
+variable test_list : array[test_item_type] :=
+  {
+    immutable expression := parse_expression_file("tests/testlist.se");
+    expression.bind_standard_library();
+    expression.bind(&multi_threading_works);
+    return expression.run();
+  };
+
+variable runall_return_code : [0...1 << 32) := 0;
+
+procedure exit(return_code : [0...1 << 32))
+  {
+    runall_return_code := return_code;
+    goto done;
+  };
+
+procedure error(...)
+  {
+    print("Error: ");
+    call(print, arguments);
+    print("\n");
+    exit(1);
+  };
+
+procedure filter_test_list(good : string --> boolean)
+  {
+    test_list := filter(test_item_type, test_list,
+            function(old_test : test_item_type)
+                    returns (boolean | [{true}, test_item_type])
+              ((old_test in basic_test_item_type) ?
+               good[old_test[0]] :
+               [true,
+                [filter(basic_test_item_type, old_test[0],
+                        function(old_test : basic_test_item_type)
+                                returns boolean (good[old_test[0]]))] ~
+                old_test[1...+oo]]));
+  };
+
+procedure filter_interpreter_list(good : string --> boolean)
+  {
+    which_interpreters_to_use :=
+            filter(which_interpreter, which_interpreters_to_use,
+                   function(interpreter : which_interpreter) returns boolean
+                     (good[interpreter_name[interpreter]]));
+  };
+
+procedure usage()
+  {
+    "Usage: runall.salm { <option> } *"!
+    "  Options:"!
+    "    -h"!
+    "    --help"!
+    "        Print this message."!
+    "    -t <test-list>"!
+    "    --test-list <test-list>"!
+    "        Run only the tests in the comma-separated <test-list>."!
+    "    -xt <test-list>"!
+    "    --exclude-test-list <test-list>"!
+    "        Run only the tests not in the comma-separated <test-list>."!
+    "    -i <interpreter-list>"!
+    "    --interpreter-list <interpreter-list>"!
+    "        Run only the interpreters in the comma-separated " ~
+            "<interpreter-list>."!
+    "    -xi <interpreter-list>"!
+    "    --exclude-interpreter-list <interpreter-list>"!
+    "        Run only the interpreters not in the comma-separated"!
+    "        <interpreter-list>."!
+    "    -xp <test>,<interpreter>"!
+    "    --exclude-pair <test>,<interpreter>"!
+    "        Don't run test <test>, on interpreter <interprer>."!
+    "    -T"!
+    "    --show-times"!
+    "        Show how much time each test took."!
+    "    -sep <prefix>"!
+    "    --salmoneye-prefix <prefix>"!
+    "        Prepend <prefix> to the name of each Salmon interpreter to run."!
+    exit(0);
+  };
+
+variable next_handler : {} <-- (string | {null}) | {null} := null;
+iterate (argument; arguments[1...+oo])
+  {
+    if (next_handler != null)
+      {
+        immutable handler := next_handler;
+        next_handler := null;
+        handler(argument);
+        continue;
+      };
+
+    function require_arg(ageless handler : {} <-- (string))
+            returns {} <-- (string | {null})
+      (procedure(arg : string | {null})
+        {
+          static immutable last_argument := argument;
+          if (arg == null)
+            {
+              error("Command-line argument `", last_argument,
+                    "' expects an argument.");
+            };
+          handler(arg);
+        });
+
+    switch (argument)
+    case ({"-h", "--help"})
+      {
+        usage();
+      }
+    case ({"-t", "--test-list"})
+      {
+        next_handler := require_arg(procedure(arg : string)
+          {
+            variable good : string --> boolean := <<(* : string --> false)>>;
+            iterate (test; split(@,@, arg))
+                good[test ~ ".salm"] := true;;
+            filter_test_list(good);
+          });
+      }
+    case ({"-xt", "--exclude-test-list"})
+      {
+        next_handler := require_arg(procedure(arg : string)
+          {
+            variable good : string --> boolean := <<(* : string --> true)>>;
+            iterate (test; split(@,@, arg))
+                good[test ~ ".salm"] := false;;
+            filter_test_list(good);
+          });
+      }
+    case ({"-i", "--interpreter-list"})
+      {
+        next_handler := require_arg(procedure(arg : string)
+          {
+            variable good : string --> boolean := <<(* : string --> false)>>;
+            iterate (test; split(@,@, arg))
+                good[test] := true;;
+            filter_interpreter_list(good);
+          });
+      }
+    case ({"-xi", "--exclude-interpreter-list"})
+      {
+        next_handler := require_arg(procedure(arg : string)
+          {
+            variable good : string --> boolean := <<(* : string --> true)>>;
+            iterate (test; split(@,@, arg))
+                good[test] := false;;
+            filter_interpreter_list(good);
+          });
+      }
+    case ({"-xp", "--exclude-pair"})
+      {
+        next_handler := require_arg(procedure(arg : string)
+          {
+            immutable arg_components := split(@,@, arg);
+            if (length(arg_components) != 2)
+                usage();;
+            exclude_pair[arg_components[0] ~ ".salm"][arg_components[1]] :=
+                    true;
+          });
+      }
+    case ({"-T", "--show-times"})
+      {
+        time_prefix := "time ";
+      }
+    case ({"-sep", "--salmoneye-prefix"})
+      {
+        next_handler := require_arg(procedure(arg : string)
+          { interpreter_prefix := arg; });
+      }
+    case (!{})
+      {
+        error("Command-line argument `", argument, "' not understood.");
+      };
+  };
+
+if (next_handler != null)
+    next_handler(null);;
+
+iterate(test_args; test_list)
+    call(run_tests, test_args);;
+
+immutable total_count := success_count + failure_count;
+print("Ran ", total_count, " test", ((total_count != 1) ? "s" : ""), ".\n");
+if (failure_count == 0)
+  {
+    print("All tests passed!\n");
+    return 0;
+  }
+else
+  {
+    print(failure_count, " test", ((failure_count != 1) ? "s" : ""),
+          " failed.\n");
+    return 1;
+  };
+
+done:
+return runall_return_code;

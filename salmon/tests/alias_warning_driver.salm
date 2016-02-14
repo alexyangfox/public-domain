@@ -1,0 +1,14 @@
+/* file "alias_warning_driver.salm" */
+
+/*
+ *  This file is a wrapper for "alias_warning.salm" to send the warnings to
+ *  standard output so they fit in the usual test harness.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+print(system(arguments[1] ~ " tests/alias_warning.salm",
+             capture_standard_error := true).standard_error);

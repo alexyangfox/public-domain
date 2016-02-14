@@ -1,0 +1,21 @@
+/* file "string_utf32_op.si" */
+
+/*
+ *  This file contains the interface to operator overloading to allow strings
+ *  to be accessed using lookup operators as if they were arrays of unsigned
+ *  32-bit integers in UTF-32 form.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+operator[] :- u32 <-- (base : string, key : [0...+oo)),
+
+operator[] :- string <-- (base : string, lower : [0...+oo), upper : [0...+oo)),
+
+operator[] :- string <-- (base : string, key : [0...+oo), replacement : u32),
+
+operator[] :- string <-- (base : string, lower : [0...+oo), upper : [0...+oo),
+                          replacement : string)

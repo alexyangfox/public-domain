@@ -1,0 +1,44 @@
+#!/usr/local/bin/salmoneye
+/* file "rename.salm" */
+
+/*
+ *  This file is a program that renames .cwx1 files to use the .salm extension.
+ *  It was used when the name of the language was changed from CWX1 to Salmon.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+immutable all_contents : array[string] := directory_contents(".");
+immutable cwx1_files : array[string] := filter(@\.cwx1@, all_contents);
+
+outer:
+iterate(old_name; cwx1_files)
+  {
+    immutable new_name := substitute(@\.cwx1@, old_name, ".salm");
+    while (true)
+      {
+        print("Rename `", old_name, "' to `", new_name, "'? ");
+        immutable answer : string := substitute(@\n$@, scanf("#.*\n#")[0], "");
+        switch (answer)
+        case ({"yes"})
+          {
+            rename(old_name, new_name);
+            print("Done.\n");
+            continue with outer;
+          }
+        case ({"no"})
+          {
+            print("Skipping.\n");
+            continue with outer;
+          }
+        case ({"quit"})
+          {
+            print("Quitting.\n");
+            return 0;
+          };
+
+        print("Please answer `yes', `no', or `quit'.\n");
+      };
+  };

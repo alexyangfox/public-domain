@@ -1,0 +1,15 @@
+/* file "file_info.salm" */
+
+/*
+ *  This file is a test of Salmon's file_exists() and directory_exists()
+ *  functions.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+immutable name : string := arguments[1];
+print("`", name, "' is a file? ", file_exists(name), ".\n");
+print("`", name, "' is a directory? ", directory_exists(name), ".\n");

@@ -1,0 +1,335 @@
+
+            The Design of the Salmon Programming Language
+
+
+                           by Chris Wilson
+
+
+    Introduction
+    ============
+
+No one programming language can be best for all programming jobs.
+Features that are helpful in some circumstances are liabilities in
+others.  And individual programmers have very different programming
+styles from one another -- what makes a job easy for one can make it
+hard for another.
+
+But, while a language may not be perfect for a given programming job,
+it can be good enough to be very useful for that job.  While the
+language may not perfectly fit a given programmer, it may be a good
+enough fit to allow the job to get done.
+
+So the job of designing a programming language is not a job of finding
+a perfect language.  It's a job of making a language that's good
+enough for a certain set of tasks and a certain set of programmers.
+The language is more useful if it can be good enough for a larger
+variety of tasks and a larger set of programmers.  In designing
+Salmon, I've tried to make trade-offs that overall make the language
+more useful in more situtations.
+
+
+    Specific Targets of Salmon
+    ==========================
+
+The highest priority target of Salmon is large, complex software
+projects where optimizing for speed and size are important.  Those
+kinds of projects are the ones I've had the most experience with in my
+career.  They include compilers, operating systems, and embedded
+software.  Such projects are typically developed by a number of
+programmers working together, and then maintained and expanded over a
+period of years, often by different people than those who originally
+started them.  The code is often re-used and ported to environments it
+was not originally designed for.
+
+What I have seen in such projects is room for improvements in the
+languages and language tools (compilers, assemblers, linkers, etc.)
+available, which are primarily C and C++ variants.  In particular, I
+believe that changes in both the language and tool chain can help
+mitigate problems in scaling of complexity in large software systems
+and in handoff and maintenance of software systems over time.  It is
+these scaling and maintenance issues that Salmon is specifically
+intended to address.
+
+Secondarily, some of the same language features that are useful for
+software scalability and maintenance also make a language more useful
+for scripting.  Typically, different languages are used for scripting
+than for large, complex software systems.  But I believe that some of
+the higher-level constructs in Salmon that are useful for large,
+complex systems also make it good enough for a lot of scripting
+applications.  So I've tried to keep scripting applications in mind
+and keep Salmon as useful as possible for scripting while not
+compromising on suitability for large, complex systems.
+
+
+    The Salmon Programming Model
+    ============================
+
+The Salmon programming model is enabled by both features of the
+language and features of the compiler, working together.  The model
+aims to make large software systems more scalable by allowing the same
+level of time and space optimization with less of the low-level
+details being done by hand.  The model does not envision the compiler
+automatically doing all this optimization.  Under the Salmon model,
+the compiler does some optimization automatically and does further
+optimization under the direction of the programmer, to whatever level
+of detail is desired.  Critically, the compiler ensures that bugs
+aren't introduced by this optimization.
+
+So Salmon provides higher-level constructs that the programmer can
+use, but constructs that are designed to allow for efficient
+implementation.  And the compiler allows the programmer to give more
+information to allow the compiler to do a better job of efficiently
+implementing those high-level constructs, while ensuring the
+optimizations don't change the semantics.
+
+
+    Header Files and Separate Compilation
+    =====================================
+
+Salmon has a very different model than C and C++ in terms of header
+files and separate compilation.  In the standard C and C++ model, most
+of the compilation work is done with only one source file fully
+visible and header files to provide some information about other parts
+of the program.  The stage of compilation that finally has access to
+the whole program (the linker) does only a fairly minor amount of
+work.
+
+One problem with the standard C and C++ model is a lack of information
+when many critical decisions are made.  For example, in C++ only part
+of the class hierarchy is known when decisions are typically made
+about setting up virtual function tables.
+
+Another problem with the standard C and C++ model is a scaling
+problem.  Since many decisions are made by the compiler when only
+header files are available, to get good optimizations a lot of code
+has to be put in the private parts of class declarations in header
+files.  This code is not part of the interface -- it's only in the
+header file for optimization.  And as that code needs things from
+other header files, a whole web of other header files need to be
+included.  I've seen large projects end up requiring most header files
+to be parsed when compiling each .cpp file.  So all the work of
+parsing all those header files has to happen over and over, once for
+each .cpp file.  As the number of header/.cpp file pairs grows, this
+causes the amount of time it takes to build the system to grow
+quadratically.
+
+And another problem is the header files can get out of sync with code
+in other header files or .cpp or object files.  This can cause strange
+bugs that can be difficult to track down.
+
+In Salmon, there are no header files.  Interfaces are never separated
+from implementation.  This doesn't mean that there is no such thing as
+separate compilation, just that when a file is compiled or partly
+compiled, the resulting partly-digested file retains both the
+interface and implementation information.
+
+
+    Pre-Processing
+    ==============
+
+C and C++ share a pre-processing phase that does both header file
+inclusion and macro substitution.  This pre-processing is both very
+powerful in some ways and deficient in others.
+
+Salmon does not have a similar pre-processor.  The most common uses of
+the pre-processor in C and C++ -- including files, giving symbolic
+names to constants, reusing chuncks of code, and conditionally
+compiling different code based on compile-time information -- is
+handled in Salmon through constructs in the core of the language.
+Still, there are things that the C and C++ pre-processor can do that
+have no analog in Salmon.  Instead, such situations can be handled by
+writing Salmon code that runs at build time and generates other Salmon
+code.  In a sense, this is using Salmon as its own pre-processor --
+and one that is far more powerful than the C and C++ pre-processor.
+
+Part of the reason for avoiding a pre-processor in Salmon is
+readability -- when you see an identifier in Salmon, you know exactly
+what it is and that it isn't a macro that was defined elsewhere.
+Additionally, the compiler can provide more useful information and do
+its job better when constructs of the core language are used instead
+of macros.
+
+Another reason for avoiding the pre-processor is to make it easier for
+other tools to work with Salmon files.  For example, consider a text
+editor that has language-specific features, such as using different
+colors to denote functions or other constructs.  In Salmon, only local
+information is needed to parse a fragment of code.  In C or C++, local
+information can be used to usually do a good job, but unless the tool
+has access to all header files and a macro processor, it will be
+confused by certain uses of macros.
+
+
+    Assignment Within Expressions
+    =============================
+
+Unlike C or C++, Salmon does not consider assignments to be
+expressions.  This makes some code moderately more verbose.  For
+example, where in C one might have
+
+    if (x = p())
+
+Salmon would require
+
+    x := p();
+    if (x)
+
+Part of the reason for this is an emphasis on maintainability in
+Salmon.  While it's slightly faster to write the C version, the person
+maintaining the code is less likely to notice an assignment when it's
+buried within an expression.
+
+But another part of the reason for this change is to free up the
+assignment operator for some additional uses in Salmon.  For example,
+take this fragment of C code:
+
+    p(x = 13);
+
+In C, this means to assign the value 13 to the local variable x and
+then pass 13 as the first parameter to p().  But the equivalent Salmon
+code,
+
+    p(x := 13);
+
+has a different meaning.  In the Salmon code, x binds not to a local
+variable but to a formal parameter of p().  This code says to assign
+the value 13 to p()'s formal parameter named x.  In the case of a
+function with a single argument, there's no value in that over just
+
+    p(13);
+
+However, if p() takes 13 arguments, specifying the name for each can
+be a big win in readability and avoiding bugs.  Compare:
+
+    p(13, 87, true, false, false, false, true);
+
+to
+
+    p(lines := 13, columns := 87, flashing := true, bold := false,
+      auto_hide := false, invert := false, bubble := true);
+
+In Salmon, either form may be used.
+
+Further, using a name for a parameter at a call site allows more
+freedom with default values.  C++ allows default values for functions,
+but only parameters after those specified can get default values.
+With the ability to name arguments, any combination of arguments can
+have default values.  For example,
+
+    p(invert := false);
+
+can be used even if ``invert'' is the sixth formal parameter, and all
+the other parameters can get default values.
+
+All made possible by removing assignment as an expression in Salmon.
+
+On the other hand, if you really must have an expression have the side
+effect of assigning to a variable, you can do it in Salmon, you just
+need to be more verbose about it:
+
+    p({x := 13; return 13});
+
+in Salmon gives the effect of
+
+    p(x = 13);
+
+in C.  But the conspicuous keyword ``return'' and curly braces make it
+easier to spot the fact that this expression has a side effect.
+
+
+    Assignment Operator
+    ===================
+
+Salmon uses ``:='' instead of the ``='' of C and C++ as its assignment
+operator.  While syntax of C and C++ was retained in many cases in
+Salmon, to make it easier to get a C or C++ user going on Salmon, in
+this case it was changed.  That's because in C and C++ ``='' and
+``=='' are too easy to mix up -- both by accidentally typing the wrong
+one and in reading it wrong when reading code.  Changing to ``:='' and
+``=='' doesn't make mixing them up impossible, but it makes it a
+little less likely that they will be mixed up.  And ``:='' is the
+assignment operator in Pascal, so there is some precedent for it.
+
+
+    Braces and Semicolons in Control Flow Statements
+    ================================================
+
+In C, if the body of an ``if'', ``while'', or ``do-while'' statement
+is a single statement, braces are not required around it.  In Salmon,
+they are.  For example, C's
+
+    if (y > x)
+        y = x;
+
+becomes Salmon's
+
+    if (y > x)
+      {
+        y := x;
+      };
+
+Note also the semicolon after the closing brace.  In C, even if the
+braces are used, the semicolon is not needed.
+
+Part of the reason for this is for maintenance -- for example, if
+someone goes and replaces all instances of ``y = x;'' with ``y.a =
+x.a; y.b = x.b'', then they won't get what they intended unless they
+add braces.
+
+As to the semicolon, part of the reason for requiring it is
+consistency.  A semicolon after braces is required in C after an
+initializer, such as
+
+    int x[] = { 3, 5, 7 };
+
+but it is not required after braces in other kinds of statements.
+Salmon consistently requires a semicolon at the end of every
+statement.  While it may seem strange at first for those used to C and
+C++, ultimately it keeps everything more consistent.
+
+Also, the braces and semicolon avoid potential problems with confusion
+about which ``if'' statement a given ``else'' applies to.  For
+example, in this C code:
+
+    if (x)
+        if (y)
+            p();
+    else
+        q();
+
+The ``else'' applies to the ``if (y)'', even though that might not be
+what is intended.  In Salmon, there is no such ambiguity because of
+the braces and semicolon that are required.
+
+But another reason for the rules about braces and semicolons is about
+leaving open the possibility of making the set of flow-control
+statements in Salmon extensible.  C and C++ have a fixed set of
+flow-control statements -- ``if'', ``while'', ``try-catch'', etc.  So
+does Salmon, though the set is somewhat different.  But different
+control-flow constructs can be useful for different applications.
+While Salmon allows the same effect as adding new control-flow
+statements through routines called with routine expressions, the
+syntax is somewhat clumsy.
+
+Salmon's syntax was designed with the idea of supporting user-defined
+control-flow statements.  With this enabled, an identified followed by
+any combination of parentesized blocks, additional identifiers, and
+braced blocks would be considered a control-flow statement.  The
+semicolon would mark the end.  Then ``if-else'', ``switch'',
+``do-while'', etc. would all just be examples of the same syntactic
+pattern as any user-defined control-flow statements -- they'd be
+special only in the sense of being pre-defined, just as the print()
+function is pre-defined but doesn't have any special syntax.
+
+In the end, this kind of extensible set of control-flow statements
+didn't make it into Salmon.  Part of the problem was that ``for'' and
+``iterate'' statements didn't cleanly fit this paradigm because they
+declare identifiers.  Another issue was that it's harder to read and
+understand unfamiliar code if the writer of that code went crazy with
+new control-flow constructs.  I decided user-defined control-flow
+statements weren't useful enough to justify the drawbacks.  But since
+the syntax of the existing control-flow constructs (aside from the
+variable names of ``for'' and ``iterate'' statements) fit the pattern,
+it will be cleaner to add back in user-defined control-flow statements
+in the future should the need arise.  Eliminating the brace and
+semicolon requirements would make the addition of user-defined
+control-flow statements less clean.

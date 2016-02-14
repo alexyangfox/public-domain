@@ -1,0 +1,133 @@
+/* file "thread_stress.salm" */
+
+/*
+ *  This file runs stress tests of Salmon thread support.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+use "thread.salm" : "thread.si";
+
+
+/*
+ * The idea here is to try to tease out bugs caused by the failure of certain
+ * modules to be thread-safe.
+ */
+
+/*
+ * The first stress test will be of integers, with multiple threads accessing
+ * the same integers at the same time.  This test also stresses variable access
+ * and map value updates.
+ */
+  {
+    immutable i1 := 113;
+    immutable i2 := 647;
+    "Starting integer stress test."!
+    single variable result : integer[0...9] := <<(* : [0...9] --> 0)>>;
+    for (ii; 0; ii < 10)
+      {
+        ageless immutable my_num := ii;
+        [] := [create_thread(procedure()
+          {
+            for (jj; 0; jj < 10000)
+              {
+                if (i1 + i2 == 760)
+                    ++result[my_num];;
+              };
+          })];
+      };
+    wait_for_all_threads();
+    for (ii; 0; ii < 10)
+      {
+        if ((result[ii] != 10000))
+            print("Thread ", ii, " failed.\n");;
+      };
+    "Integer stress test finished."!
+  };
+
+/*
+ * Next, we'll try the same test but without the ``single'' flag on the result
+ * variable.  This will mean that some of the results are likely to be lost,
+ * but it will catch bugs that might cause a crash when there's the kind of
+ * contention you get only when variables that aren't being locked properly are
+ * being updated by more than one thread.
+ */
+  {
+    immutable i1 := 113;
+    immutable i2 := 647;
+    "Starting map variable update stress test."!
+    variable result : integer[0...9] := <<(* : [0...9] --> 0)>>;
+    for (ii; 0; ii < 10)
+      {
+        ageless immutable my_num := ii;
+        [] := [create_thread(procedure()
+          {
+            for (jj; 0; jj < 10000)
+              {
+                if (i1 + i2 == 760)
+                    ++result[my_num];;
+              };
+          })];
+      };
+    wait_for_all_threads();
+    "Map variable update stress test finished."!
+  };
+
+/*
+ * The next stress test is designed to have different threads adding and
+ * removing references to the same integers.
+ */
+  {
+    variable v1 := 113;
+    variable v2 := 647;
+    "Starting integer reference stress test."!
+    for (ii; 0; ii < 10)
+      {
+        ageless immutable my_num := ii;
+        [] := [create_thread(procedure()
+          {
+            for (jj; 0; jj < 10000)
+              {
+                if ((type [v1...v2] != type [v2 - 534 ... v1 + 534]) ||
+                    (type [v1...v2] != type [v2 - 534 ... v1 + 534]) ||
+                    (type [v1...v2] != type [v2 - 534 ... v1 + 534]) ||
+                    (type [v1...v2] != type [v2 - 534 ... v1 + 534]) ||
+                    (type [v1...v2] != type [v2 - 534 ... v1 + 534]) ||
+                    (type [v1...v2] != type [v2 - 534 ... v1 + 534]) ||
+                    (type [v1...v2] != type [v2 - 534 ... v1 + 534]))
+                  {
+                    print("Thread ", my_num, " failed.\n");
+                  };
+                v1 := 113;
+                v2 := 647;
+              };
+          })];
+      };
+    wait_for_all_threads();
+    "Integer reference stress test finished."!
+  };
+
+/*
+ * The next stress test tests regular expressions.
+ */
+  {
+    immutable i1 := type @a((b.)*|(bcb.cb))@;
+    "Starting regular expression stress test."!
+    for (ii; 0; ii < 10)
+      {
+        ageless immutable my_num := ii;
+        [] := [create_thread(procedure()
+          {
+            for (jj; 0; jj < 10000)
+              {
+                if (!("abcbccb" in i1))
+                    print("Thread ", my_num, " failed.\n");;
+              };
+          })];
+      };
+    wait_for_all_threads();
+    "Regular expression stress test finished."!
+  };

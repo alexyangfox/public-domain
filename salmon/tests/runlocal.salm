@@ -1,0 +1,25 @@
+#!./salmoneye
+/* file "runlocal.salm" */
+
+/*
+ *  This file runs runall.salm with parameters appropriate for using everything
+ *  local instead of the installed versions.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+variable added : string := "";
+
+iterate (arg; arguments[1...+oo])
+    added ~= " " ~ arg;;
+
+use "../library/platform_dependent.salm";
+
+variable include_path : string := "library" ~ path_separator ~ "ID";
+if (path_separator == ";")
+    include_path := "'" ~ include_path ~ "'";;
+
+`./salmoneye -ip $include_path tests/runall.salm -sep ./$added`;

@@ -1,0 +1,67 @@
+/* file "parse.si" */
+
+/*
+ *  This file contains the interface to functionality for parsing Salmon code
+ *  into an executable form and running it.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+et_parse_syntax_error :- any_quark,
+et_parse_more :- any_quark,
+et_parse_bind_bad_value :- any_quark,
+et_parse_bind_no_name :- any_quark,
+et_parse_unbound :- any_quark,
+
+bindable :-
+        {type ((*!{}) | !{} <-- (*) | any_quark | any_lock | lepton_key |
+               tagalong_key)},
+
+open_code :- {type interface
+  [
+    unbound_required_names :- array[string] <-- (),
+    unbound_optional_names :- array[string] <-- (),
+    bind :- {} <-- (name : string, target : bindable),
+    bind :- {} <-- (target : bindable),
+    bind :- {} <-- (list : [...]),
+    bind :- {} <-- (source : object),
+    bind_standard_library :- {} <-- ()
+  ]},
+
+open_expression :- {type (open_code & interface
+  [
+    run :- !{} <-- ()
+  ])},
+
+open_statement_block :- {type (open_code & interface
+  [
+    run :- {} <-- ()
+  ])},
+
+executable_directory : string | {null},
+directory_paths : string,
+
+parse_expression :- open_expression <-- (source : string,
+        file_name : string | {null} := *, start_line : [1...+oo) := *,
+        start_column : [1...+oo) := *),
+
+parse_expression :- open_expression <-- (stream : input_text_stream,
+        file_name : string | {null} := *, start_line : [1...+oo) := *,
+        start_column : [1...+oo) := *),
+
+parse_expression_file :- open_expression <-- (file_name : string,
+                                              format : utf_choice := *),
+
+parse_statement_block :- open_statement_block <-- (source : string,
+        file_name : string | {null} := *, start_line : [1...+oo) := *,
+        start_column : [1...+oo) := *),
+
+parse_statement_block :- open_statement_block <-- (stream : input_text_stream,
+        file_name : string | {null} := *, start_line : [1...+oo) := *,
+        start_column : [1...+oo) := *),
+
+parse_statement_block_file :- open_statement_block <-- (file_name : string,
+        format : utf_choice := *)

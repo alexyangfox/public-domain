@@ -1,0 +1,90 @@
+/* file "limited_floating_point.salm" */
+
+/*
+ *  This file runs tests of the limited_floating_point module.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+use "limited_floating_point.salm" : "limited_floating_point.si";
+
+
+  {
+    immutable lfp10_5 := limited_floating_point(10, 10000);
+
+    print("lfp10_5(1, 0): ", lfp10_5(1, 0), ".\n");
+    print("lfp10_5(1/2, 0): ", lfp10_5(1/2, 0), ".\n");
+    print("lfp10_5(1/3, 0): ", lfp10_5(1/3, 0), ".\n");
+    print("lfp10_5(2/3, 0): ", lfp10_5(2/3, 0), ".\n");
+    print("lfp10_5(9, 0): ", lfp10_5(9, 0), ".\n");
+    print("lfp10_5(10, 0): ", lfp10_5(10, 0), ".\n");
+    print("lfp10_5(1/3, 0) + lfp10_5(1/3, 0) + lfp10_5(1/3, 0): ",
+          lfp10_5(1/3, 0) + lfp10_5(1/3, 0) + lfp10_5(1/3, 0), ".\n");
+
+    immutable i1 : lfp10_5 ::= 87.3e-14;
+    printf("i1: %.6g%.\n", i1);
+    immutable i2 : rational ::= i1;
+    print("i2: ", i2, ".\n");
+    print("lfp10_5([base := function() returns {10} (10),\n" ~
+          "         mantissa := function() returns rational (37),\n" ~
+          "         exponent := function() returns (-oo...+oo) (5)]): ",
+          lfp10_5([base := function() returns {10} (10),
+                   mantissa := function() returns rational (37),
+                   exponent := function() returns (-oo...+oo) (5)]), ".\n");
+
+    immutable values := [+oo, -oo, 1/0, 0/0, 0, 1, -1, 5, 1.2, 3.4e3, 7.6e-4];
+
+    iterate(x; values)
+      {
+        immutable lfp10_5x := lfp10_5(x);
+        iterate(y; values)
+          {
+            immutable lfp10_5y := lfp10_5(y);
+            print("lfp10_5(", x, ") + lfp10_5(", y, "): ", lfp10_5x + lfp10_5y,
+                  ".\n");
+            print("lfp10_5(", x, ") + ", y, ": ", lfp10_5x + y, ".\n");
+            print(x, " + lfp10_5(", y, "): ", x + lfp10_5y, ".\n");
+            print("lfp10_5(", x, ") - lfp10_5(", y, "): ", lfp10_5x - lfp10_5y,
+                  ".\n");
+            print("lfp10_5(", x, ") - ", y, ": ", lfp10_5x - y, ".\n");
+            print(x, " - lfp10_5(", y, "): ", x - lfp10_5y, ".\n");
+            print("lfp10_5(", x, ") * lfp10_5(", y, "): ", lfp10_5x * lfp10_5y,
+                  ".\n");
+            print("lfp10_5(", x, ") * ", y, ": ", lfp10_5x * y, ".\n");
+            print(x, " * lfp10_5(", y, "): ", x * lfp10_5y, ".\n");
+            print("lfp10_5(", x, ") / lfp10_5(", y, "): ", lfp10_5x / lfp10_5y,
+                  ".\n");
+            print("lfp10_5(", x, ") / ", y, ": ", lfp10_5x / y, ".\n");
+            print(x, " / lfp10_5(", y, "): ", x / lfp10_5y, ".\n");
+            print("lfp10_5(", x, ") == lfp10_5(", y, "): ",
+                  lfp10_5x == lfp10_5y, ".\n");
+            print("lfp10_5(", x, ") == ", y, ": ", lfp10_5x == y, ".\n");
+            print(x, " == lfp10_5(", y, "): ", x == lfp10_5y, ".\n");
+            print("lfp10_5(", x, ") != lfp10_5(", y, "): ",
+                  lfp10_5x != lfp10_5y, ".\n");
+            print("lfp10_5(", x, ") != ", y, ": ", lfp10_5x != y, ".\n");
+            print(x, " != lfp10_5(", y, "): ", x != lfp10_5y, ".\n");
+            print("lfp10_5(", x, ") < lfp10_5(", y, "): ", lfp10_5x < lfp10_5y,
+                  ".\n");
+            print("lfp10_5(", x, ") < ", y, ": ", lfp10_5x < y, ".\n");
+            print(x, " < lfp10_5(", y, "): ", x < lfp10_5y, ".\n");
+            print("lfp10_5(", x, ") > lfp10_5(", y, "): ", lfp10_5x > lfp10_5y,
+                  ".\n");
+            print("lfp10_5(", x, ") > ", y, ": ", lfp10_5x > y, ".\n");
+            print(x, " > lfp10_5(", y, "): ", x > lfp10_5y, ".\n");
+            print("lfp10_5(", x, ") <= lfp10_5(", y, "): ",
+                  lfp10_5x <= lfp10_5y, ".\n");
+            print("lfp10_5(", x, ") <= ", y, ": ", lfp10_5x <= y, ".\n");
+            print(x, " <= lfp10_5(", y, "): ", x <= lfp10_5y, ".\n");
+            print("lfp10_5(", x, ") >= lfp10_5(", y, "): ",
+                  lfp10_5x >= lfp10_5y, ".\n");
+            print("lfp10_5(", x, ") >= ", y, ": ", lfp10_5x >= y, ".\n");
+            print(x, " >= lfp10_5(", y, "): ", x >= lfp10_5y, ".\n");
+          };
+        print("-lfp10_5(", x, "): ", -lfp10_5x, ".\n");
+        print("+lfp10_5(", x, "): ", +lfp10_5x, ".\n");
+      };
+  };

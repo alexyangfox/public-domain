@@ -1,0 +1,55 @@
+/* file "interval.si" */
+
+/*
+ *  This file contains the interface to a class for doing interval arithmetic.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+include "numeric_operable.si",
+
+
+et_interval_comparison_indeterminate :- any_quark,
+
+interval_access_type :-
+        type !{} <-- (lower_type : type !{}, upper_type : type !{}),
+
+any_interval :-
+        {type (<<numeric_operable(interval_access_type(type {}, type {}),
+                                  interval_access_type(type !{}, type !{}))>> &
+               <<interval_access_type(type !{}, type !{})>> &
+               interface
+                 [
+                   compare :-
+                           {-1, 0, 1} <--
+                           (other :
+                            <<interval_access_type(type {}, type {})>>),
+                   sprint :-
+                           string <--
+                           (specifier : string := *, plus : boolean := *,
+                            space : boolean := *, hash : boolean := *,
+                            zero_width : [0...+oo) := *,
+                            precision : [0...+oo) | {null} := *)
+                 ])},
+
+static_item_type :-
+        {type any_interval <--
+              (init_lower_value : {}, init_upper_value : {} := *)},
+
+interval_ecosystem :- 
+        interface
+          [
+            this_return :- type !{},
+            item_class :- static_item_type
+          ] <--
+        (lower_type : type !{}, upper_type : type !{},
+         operand_base_type : type !{}),
+
+interval :-
+        (static_item_type <--
+         (lower_type : type !{}, upper_type : type !{},
+          operand_base_type : type !{})) &
+        (static_item_type <-- (base : (0...+oo), mantissa_digits : (0...+oo)))

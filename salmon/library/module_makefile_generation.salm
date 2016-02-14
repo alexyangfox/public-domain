@@ -1,0 +1,96 @@
+/* file "module_makefile_generation.salm" */
+
+/*
+ *  This file contains functionality for generating makefiles for add-on
+ *  modules for Salmon.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+hide;
+
+use "makefile_generation.salm" : "makefile_generation.si";
+use "platform_dependent.salm";
+
+variable shared_library_link_arguments := " -lc_foundations";
+
+if (path_separator == ";")
+    shared_library_link_arguments := "";;
+
+if (shared_library_suffix == ".dll")
+  {
+    shared_library_link_arguments ~=
+            " -L" ~ dll_install_directory ~ " -lsalmoneye";
+  };
+
+export;
+
+procedure generate_module_makefile(config)
+  {
+    init_makefile_generation();
+
+    "# Generated automatically from \"module_makefile_generation.salm\"."!
+
+    immutable installable_salmon_sources : array[string] :=
+            ((config in interface[installable_salmon_sources :- array[string]])
+             ? config.installable_salmon_sources : []);
+
+    variable other_sources : array[string] :=
+            ((config in interface[other_sources :- array[string]]) ?
+             config.other_sources : []);
+
+    variable installable_generated : array[string] :=
+            ((config in interface[installable_generated :- array[string]]) ?
+             config.installable_generated : []);
+
+    immutable plugins : array[[string, string]] :=
+            ((config in interface[plugins :- array[[string, string]]]) ?
+             config.plugins : []);
+
+    iterate (plugin; plugins)
+      {
+        installable_generated ~= [plugin[0]];
+        other_sources ~= [plugin[1]];
+      };
+
+    print("\n");
+    print("INSTALL_DIRECTORY=", install_directory, "\n");
+    print("BINARY_INSTALL_DIRECTORY=", binary_install_directory, "\n");
+    print("LIBRARY_INSTALL_DIRECTORY=", library_install_directory, "\n");
+    print("DLL_INSTALL_DIRECTORY=", dll_install_directory, "\n");
+    print("C_INCLUDE_INSTALL_DIRECTORY=", c_include_install_directory, "\n");
+    print("SALMON_LIBRARY_INSTALL_DIRECTORY=",
+          salmon_library_install_directory, "\n");
+    print("CC=gcc\n");
+    print("CFLAGS=-Wall\n");
+    print("BUILD_SHARED_LIBRARY=$(CC) $(CFLAGS) --shared -o\n");
+    print("STANDARD_FLAGS=-g\n");
+
+    rule("all", installable_generated, kind := TK_VIRTUAL);
+
+    iterate (plugin; plugins)
+      {
+        rule(plugin[0], [plugin[1]],
+             "$(BUILD_SHARED_LIBRARY) " ~ plugin[0] ~ " $(STANDARD_FLAGS) " ~
+             plugin[1] ~ shared_library_link_arguments, kind := TK_CONCRETE);
+      };
+
+    rule("install", installable_salmon_sources ~ installable_generated,
+         kind := TK_VIRTUAL);
+    if (length(installable_salmon_sources ~ installable_generated) != 0)
+        command("mkdir -p $(SALMON_LIBRARY_INSTALL_DIRECTORY)");;
+    iterate (file; installable_salmon_sources ~ installable_generated)
+        command("cp " ~ file ~ " $(SALMON_LIBRARY_INSTALL_DIRECTORY)");;
+
+    rule("list_sources", [], kind := TK_VIRTUAL);
+    iterate (file; installable_salmon_sources ~ other_sources)
+        command("@echo " ~ file);;
+
+    generate_phony_rule();
+    generate_clean_rule();
+
+    deinit_makefile_generation();
+  };

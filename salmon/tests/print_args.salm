@@ -1,0 +1,13 @@
+/* file "print_args.salm" */
+
+/*
+ *  This file prints its command-line arguments to standard output.  It is part
+ *  of a test suite for Salmon.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+print("Arguments: `", arguments, "'.\n");

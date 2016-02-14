@@ -1,0 +1,1186 @@
+/* file "limited_floating_point.salm" */
+
+/*
+ *  This file contains a software implementation of floating point arithmetic
+ *  with a limit on the precision of the mantissa and, optionally, a limit on
+ *  the exponent, for the Salmon Programming Language.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+use "floating_point_interface.salm" : "floating_point_interface.si";
+
+
+hide;
+
+
+use "print_floating_point.salm" : "print_floating_point.si";
+use "scientific_form.salm" : "scientific_form.si";
+
+
+export et_fp_bad_specifier;
+export et_fp_integer_specifier_non_integer_value;
+export any_base_floating_point_interface;
+export floating_point_interface;
+
+/*
+ *  The following function returns -1 if left < right * base^-exponent, 0 if
+ *  left == right * base^-exponent, and 1 if left > right * base^-exponent.
+ */
+function compare_with_exponent_term(left : (0...+oo), right : (0...+oo),
+                                    base : (0...+oo), exponent : [0...+oo))
+        returns {-1, 0, 1}
+  {
+    if (left > right)
+        return 1;;
+
+    variable product : [1...+oo) := left;
+    variable base_power : [1...+oo) := base;
+    variable expected_exponent : [0...+oo) := exponent;
+    while (true)
+      {
+        if (right < (base_power * left))
+          {
+            if (0 < expected_exponent)
+                return 1;;
+            break;
+          };
+
+        if (expected_exponent == 0)
+            return -1;;
+
+        if ((expected_exponent % 2) != 0)
+            product *= base_power;;
+        base_power *= base_power;
+        expected_exponent := (expected_exponent /:: 2);
+      };
+    if (right > product)
+        return -1;;
+    if (right < product)
+        return 1;;
+    return 0;
+  };
+
+function dynamic_item_type(base : (0...+oo))
+  (type <<floating_point_full_interface(type {base},
+                  floating_point_interface(base),
+                  any_base_floating_point_interface)>> <--
+        (init_mantissa :
+                 rational | <<floating_point_access_type(type {base})>>,
+         init_exponent : integer := *,
+         init_controller : basic_fp_controller_type := *));
+
+
+export;
+
+
+quark et_fp_overflow;
+quark et_fp_underflow;
+quark et_fp_subnormal;
+quark et_fp_denormalized;
+quark et_fp_inexact;
+quark et_fp_division_by_zero;
+
+quark enumeration rounding_mode
+  {
+    round_to_nearest_ties_even,
+    round_to_nearest_ties_toward_zero,
+    round_to_nearest_ties_away_from_zero,
+    round_up,
+    round_down,
+    round_toward_zero,
+    round_away_from_zero
+  };
+
+function fp_controller_type(conditions : type !{}) returns type interface[]
+  (type interface
+    [
+      handle_condition :- {} <-- (condition : conditions),
+      set_exception_on_condition :- {} <--
+        (condition : conditions, new_value : boolean),
+      check_condition_seen_flag :- boolean <-- (condition : conditions),
+      set_condition_seen_flag :- {} <--
+        (condition : conditions, new_value : boolean),
+      rounding :- rounding_mode <-- (),
+      set_rounding_mode :- {} <-- (new_mode : rounding_mode)
+    ]);
+
+class basic_fp_controller(conditions : type !{}) returns
+        interface[] / <<fp_controller_type(conditions)>>
+  {
+    hide;
+
+    variable exception_on_condition : conditions --> boolean :=
+      <<(* : conditions --> false)>>;
+    variable condition_seen : conditions --> boolean :=
+      <<(* : conditions --> false)>>;
+    variable current_rounding_mode : rounding_mode :=
+            round_to_nearest_ties_even;
+
+    export;
+
+    procedure handle_condition(condition : conditions)
+      {
+        condition_seen[condition] := true;
+        if (exception_on_condition[condition])
+          {
+            switch (condition)
+            case (fp_condition_overflow)
+              {
+                throw(et_fp_overflow,
+                      "A finite floating-point value had a magnitude too " ~
+                      "large for the floating-point representation.");
+              }
+            case (fp_condition_underflow)
+              {
+                throw(et_fp_underflow,
+                      "A finite non-zero floating-point value had a " ~
+                      "magnitude too small to represent as a non-zero value " ~
+                      "in the floating-point representation.");
+              }
+            case (fp_condition_subnormal)
+              {
+                throw(et_fp_subnormal,
+                      "A sub-normal floating-point value was generated.");
+              }
+            case (fp_condition_denormalized)
+              {
+                throw(et_fp_denormalized,
+                      "A de-normalized floating-point value was generated.");
+              }
+            case (fp_condition_inexact)
+              {
+                throw(et_fp_inexact,
+                      "A value couldn't be represented exactly in the " ~
+                      "floating-point representation.");
+              }
+            case (fp_condition_division_by_zero)
+              {
+                throw(et_fp_division_by_zero,
+                      "An attempt was made to divide a floating-point value " ~
+                      "by zero.");
+              }
+            case (!{})
+              {
+                assert(false);
+              };
+          };
+      };
+
+    procedure set_exception_on_condition(condition : conditions,
+                                         new_value : boolean)
+      { exception_on_condition[condition] := new_value; };
+
+    function check_condition_seen_flag(condition : conditions) returns boolean
+      (condition_seen[condition]);
+    procedure set_condition_seen_flag(condition : conditions,
+                                      new_value : boolean)
+      { condition_seen[condition] := new_value; };
+
+    function rounding() returns rounding_mode
+      (current_rounding_mode);
+    procedure set_rounding_mode(new_mode : rounding_mode)
+      { current_rounding_mode := new_mode; };
+  };
+
+quark enumeration basic_conditions
+  {
+    fp_condition_overflow, fp_condition_underflow, fp_condition_subnormal,
+    fp_condition_denormalized, fp_condition_inexact,
+    fp_condition_division_by_zero
+  };
+
+immutable basic_fp_controller_type := fp_controller_type(basic_conditions);
+
+immutable default_fp_controller : basic_fp_controller_type :=
+        basic_fp_controller(basic_conditions);
+
+immutable static_item_type : type !{} := type
+        <<floating_point_full_interface(type (0...+oo), type {},
+                  any_base_floating_point_interface)>> <--
+        (init_mantissa : rational | <<floating_point_access_type(type {})>>,
+         init_exponent : integer := *,
+         init_controller : basic_fp_controller_type := *);
+
+class limited_floating_point_ecosystem(ageless base : (0...+oo),
+        ageless mantissa_magnitude_lower_limit : (0...+oo),
+        ageless mantissa_magnitude_upper_limit :
+                (0...+oo) / [mantissa_magnitude_lower_limit * base...+oo) :=
+                        mantissa_magnitude_lower_limit * base,
+        ageless min_exponent : [-oo...+oo] := -oo,
+        ageless max_exponent : [-oo...+oo] / [min_exponent...+oo] := +oo,
+        ageless subnormal_allowed : boolean := true,
+        ageless denormalized_allowed : boolean := false,
+        ageless init_default_controller : basic_fp_controller_type :=
+                default_fp_controller) returns object & interface
+          [
+            default_controller : basic_fp_controller_type,
+            mantissa_digit_count :- (0...+oo),
+            digit_count_minus_one :- [0...+oo),
+            mantissa_magnitude_top :- (0...+oo),
+            this_interface :- type !{},
+            null_exponent :- [-oo...+oo],
+            non_subnormal_mantissa_type :- type integer,
+            normalized_mantissa_type :- type integer,
+            normal_mantissa_type :- type integer,
+            constructor :- any_class,
+            operator_return_type :- type !{},
+            this_return :- type !{},
+            item_class :- static_item_type
+          ] / object & interface
+          [
+            default_controller : basic_fp_controller_type,
+            mantissa_digit_count :- (0...+oo),
+            digit_count_minus_one :- [0...+oo),
+            mantissa_magnitude_top :- (0...+oo),
+            this_interface :- type !{},
+            null_exponent :- [-oo...+oo],
+            non_subnormal_mantissa_type :- type integer,
+            normalized_mantissa_type :- type integer,
+            normal_mantissa_type :- type integer,
+            constructor :- any_class,
+            operator_return_type :- type !{},
+            this_return :- type !{},
+            item_class :- <<dynamic_item_type(base)>>
+          ]
+  {
+    variable default_controller : basic_fp_controller_type :=
+            init_default_controller;
+
+    immutable mantissa_digit_count : (0...+oo) :=
+      {
+        variable result : [0...+oo) := 0;
+        variable remainder : (0...+oo) := mantissa_magnitude_lower_limit;
+        while (remainder > 1)
+          {
+            assert((remainder % base) == 0);
+            remainder /::= base;
+            ++result;
+          };
+        return result + 1;
+      };
+    immutable digit_count_minus_one : [0...+oo) := (mantissa_digit_count - 1);
+
+    immutable mantissa_magnitude_top : (0...+oo) :=
+            (mantissa_magnitude_lower_limit * base);
+    immutable this_interface := floating_point_interface(base);
+
+    immutable null_exponent :=
+            ((min_exponent > 0) ? min_exponent :
+             ((max_exponent < 0) ? max_exponent : 0));
+
+    immutable non_subnormal_mantissa_type :=
+            type (-mantissa_magnitude_upper_limit...
+                  -mantissa_magnitude_lower_limit] | {0} |
+                 [mantissa_magnitude_lower_limit...
+                  mantissa_magnitude_upper_limit);
+    immutable normalized_mantissa_type : type integer :=
+            type <<((subnormal_allowed || denormalized_allowed) ?
+                    type (-mantissa_magnitude_upper_limit...
+                           mantissa_magnitude_upper_limit) :
+                    non_subnormal_mantissa_type)>> | {+oo, -oo, 1/0, 0/0};
+
+    immutable normal_mantissa_type : type integer :=
+            type (-mantissa_magnitude_top...-mantissa_magnitude_lower_limit] |
+                 [mantissa_magnitude_lower_limit...mantissa_magnitude_top);
+
+    virtual immutable constructor := item_class;
+    virtual immutable operator_return_type := type lazy item_class;
+
+    immutable this_return := floating_point_full_interface(type {base},
+            floating_point_access_type(type {base}),
+            type (any_base_floating_point_interface & operator_return_type));
+
+    class item_class(
+            init_mantissa :
+                    rational | <<floating_point_access_type(type {base})>>,
+            init_exponent : integer := 0,
+            init_controller : basic_fp_controller_type := default_controller)
+                    returns this_return
+      {
+        hide;
+
+        virtual function add(other_mantissa : rational,
+                other_exponent : integer, negate : boolean := false)
+                returns constructor & this_return
+          {
+            immutable fixed_mantissa : normalized_mantissa_type :=
+                    (negate ? -normalized_mantissa : normalized_mantissa);
+
+            if (other_exponent == normalized_exponent)
+              {
+                return constructor(fixed_mantissa + other_mantissa,
+                                   normalized_exponent, controller);
+              };
+
+            variable a_mantissa;
+            variable a_exponent;
+            variable b_mantissa;
+            variable b_exponent;
+            if (other_exponent >= normalized_exponent)
+              {
+                a_mantissa := fixed_mantissa;
+                a_exponent := normalized_exponent;
+                b_mantissa := other_mantissa;
+                b_exponent := other_exponent;
+              }
+            else
+              {
+                a_mantissa := other_mantissa;
+                a_exponent := other_exponent;
+                b_mantissa := fixed_mantissa;
+                b_exponent := normalized_exponent;
+              };
+
+            if ((b_exponent > (a_exponent + 1)) &&
+                ((b_mantissa >= mantissa_magnitude_lower_limit) ||
+                 (b_mantissa <= -mantissa_magnitude_lower_limit)))
+              {
+                immutable scale_factor : [1...+oo) :=
+                        power(base, (b_exponent - (1 + a_exponent)));
+                immutable integer_a : integer := a_mantissa :: integer;
+                immutable fractional_a : [0....1) :=
+                        ((a_mantissa == integer_a) ? 0 :
+                         (a_mantissa - integer_a));
+                immutable scaled_b : rational := (b_mantissa * base);
+                immutable integer_b : integer := scaled_b :: integer;
+                immutable fractional_b : [0....1) :=
+                        ((scaled_b == integer_b) ? 0 : (scaled_b - integer_b));
+                variable integer_mantissa : integer :=
+                        (integer_a /:: scale_factor) + integer_b;
+                variable mantissa_remainder :=
+                        (fractional_a + (fractional_b * scale_factor) +
+                         (integer_a % scale_factor));
+                while (mantissa_remainder < 0)
+                  {
+                    --integer_mantissa;
+                    mantissa_remainder += scale_factor;
+                  };
+                while (mantissa_remainder >= scale_factor)
+                  {
+                    ++integer_mantissa;
+                    mantissa_remainder -= scale_factor;
+                  };
+                assert(mantissa_remainder < scale_factor);
+                assert(mantissa_remainder < scale_factor);
+                if (mantissa_remainder > 0)
+                  {
+                    switch (controller.rounding())
+                    case ({round_to_nearest_ties_even})
+                      {
+                        immutable double_remainder := mantissa_remainder * 2;
+                        if (double_remainder < scale_factor)
+                          {
+                            /* Do nothing. */
+                          }
+                        else if (double_remainder > scale_factor)
+                          {
+                            ++integer_mantissa;
+                          }
+                        else
+                          {
+                            if (integer_mantissa % 2 == 1)
+                                ++integer_mantissa;;
+                          };
+                      }
+                    case ({round_to_nearest_ties_toward_zero})
+                      {
+                        immutable double_remainder := mantissa_remainder * 2;
+                        if (double_remainder < scale_factor)
+                          {
+                            /* Do nothing. */
+                          }
+                        else if (double_remainder > scale_factor)
+                          {
+                            ++integer_mantissa;
+                          }
+                        else
+                          {
+                            integer_mantissa +=
+                                    ((integer_mantissa >= 0) ? 0 : 1);
+                          };
+                      }
+                    case ({round_to_nearest_ties_away_from_zero})
+                      {
+                        immutable double_remainder := mantissa_remainder * 2;
+                        if (double_remainder < scale_factor)
+                          {
+                            /* Do nothing. */
+                          }
+                        else if (double_remainder > scale_factor)
+                          {
+                            ++integer_mantissa;
+                          }
+                        else
+                          {
+                            integer_mantissa +=
+                                    ((integer_mantissa >= 0) ? 1 : 0);
+                          };
+                      }
+                    case ({round_up})
+                      {
+                        ++integer_mantissa;
+                      }
+                    case ({round_down})
+                      {
+                        /* Do nothing. */
+                      }
+                    case ({round_toward_zero})
+                      {
+                        integer_mantissa += ((integer_mantissa >= 0) ? 0 : 1);
+                      }
+                    case ({round_away_from_zero})
+                      {
+                        integer_mantissa += ((integer_mantissa >= 0) ? 1 : 0);
+                      };
+                  };
+                return constructor(integer_mantissa, b_exponent - 1,
+                                   controller);
+              };
+
+            return constructor(
+                    a_mantissa +
+                    (b_mantissa * power(base, (b_exponent - a_exponent))),
+                    a_exponent, controller);
+          };
+
+        function divide(numerator_mantissa : rational,
+                numerator_exponent : (-oo...+oo),
+                denominator_mantissa : rational,
+                denominator_exponent : (-oo...+oo))
+                returns constructor & this_return
+          {
+            if (denominator_mantissa == 0)
+                controller.handle_condition(fp_condition_division_by_zero);;
+            immutable numerator_numerator : integer :=
+                    numerator(numerator_mantissa);
+            immutable numerator_denominator : (0...+oo) :=
+                    denominator(numerator_mantissa);
+            immutable denominator_numerator : integer :=
+                    numerator(denominator_mantissa);
+            immutable denominator_denominator : (0...+oo) :=
+                    denominator(denominator_mantissa);
+            variable result_numerator : integer :=
+                    (numerator_numerator * denominator_denominator);
+            variable result_denominator : integer :=
+                    (numerator_denominator * denominator_numerator);
+            variable result_exponent : (-oo...+oo) :=
+                    (numerator_exponent - denominator_exponent);
+            if ((result_numerator in {-oo, +oo, 1/0, 0/0, 0}) ||
+                (result_denominator in {-oo, +oo, 1/0, 0/0, 0}))
+              {
+                return constructor(result_numerator / result_denominator,
+                                   result_exponent, controller);
+              };
+            variable negative : boolean := false;
+            if (result_numerator < 0)
+              {
+                result_numerator := -result_numerator;
+                negative := !negative;
+              };
+            if (result_denominator < 0)
+              {
+                result_denominator := -result_denominator;
+                negative := !negative;
+              };
+            if ((numerator_mantissa in normal_mantissa_type) &&
+                (denominator_mantissa in normal_mantissa_type))
+              {
+                if (result_numerator >= result_denominator)
+                  {
+                    result_numerator *= mantissa_magnitude_lower_limit;
+                    result_exponent -= digit_count_minus_one;
+                  }
+                else
+                  {
+                    result_numerator *= mantissa_magnitude_top;
+                    result_exponent -= mantissa_digit_count;
+                  };
+              };
+            variable result_integer_part : [0...+oo) :=
+                    (result_numerator /:: result_denominator);
+            variable result_remainder : [0...result_denominator) :=
+                    (result_numerator % result_denominator);
+            immutable normalized := find_mantissa_and_exponent(
+                    result_integer_part, result_remainder, result_denominator,
+                    result_exponent, negative, controller);
+            return constructor((negative ? -normalized[0] : normalized[0]),
+                               normalized[1], controller);
+          };
+
+        export;
+
+        function operator+(other : this_interface, reversed : boolean)
+                returns constructor & this_return
+          (add(other.mantissa(), other.exponent()));
+
+        function operator+(other : rational, reversed : boolean)
+                returns constructor & this_return
+          (add(other, 0));
+
+        function operator+() returns constructor & this_return
+          (constructor(normalized_mantissa, normalized_exponent, controller));
+
+        function operator-(other : this_interface, reversed : boolean)
+                returns constructor & this_return
+          (add((reversed ? other.mantissa() : -other.mantissa()),
+               other.exponent(), negate := reversed));
+
+        function operator-(other : rational, reversed : boolean)
+                returns constructor & this_return
+          (add((reversed ? other : -other), 0, negate := reversed));
+
+        function operator-() returns constructor & this_return
+          (constructor(-normalized_mantissa, normalized_exponent, controller));
+
+        function operator*(other : this_interface, reversed : boolean)
+                returns constructor & this_return
+          (operator*(other.mantissa(), other.exponent(), reversed := false));
+
+        function operator*(other_mantissa : rational, reversed : boolean)
+                        returns constructor & this_return
+          (operator*(other_mantissa, 0, reversed := reversed));
+
+        function operator*(other_mantissa : rational,
+                other_exponent : (-oo...+oo), reversed : boolean)
+                        returns constructor & this_return
+          {
+            variable negative : boolean := false;
+
+            variable left_mantissa_magnitude := normalized_mantissa;
+            if (left_mantissa_magnitude < 0)
+              {
+                left_mantissa_magnitude := -left_mantissa_magnitude;
+                negative := true;
+              };
+
+            variable right_mantissa_magnitude := other_mantissa;
+            if (right_mantissa_magnitude < 0)
+              {
+                right_mantissa_magnitude := -right_mantissa_magnitude;
+                negative := !negative;
+              };
+
+            variable product_mantissa :=
+                    (left_mantissa_magnitude * right_mantissa_magnitude);
+            variable product_exponent :=
+                    (normalized_exponent + other_exponent);
+
+            if ((left_mantissa_magnitude >= mantissa_magnitude_lower_limit) &&
+                (right_mantissa_magnitude >= mantissa_magnitude_lower_limit) &&
+                (mantissa_magnitude_lower_limit > 1))
+              {
+                immutable integer_part := (product_mantissa :: integer);
+                variable new_mantissa :=
+                        (integer_part /:: mantissa_magnitude_lower_limit);
+                immutable remainder :=
+                        (integer_part % mantissa_magnitude_lower_limit);
+                if (remainder == 0)
+                  {
+                    new_mantissa += ((product_mantissa in integer) ? 0 : 0.25);
+                  }
+                else
+                  {
+                    immutable twice_remainder := (remainder * 2);
+                    if (twice_remainder == mantissa_magnitude_lower_limit)
+                      {
+                        new_mantissa +=
+                                ((product_mantissa in integer) ? 0.5 : 0.25);
+                      }
+                    else if (twice_remainder < mantissa_magnitude_lower_limit)
+                      {
+                        new_mantissa += 0.25;
+                      }
+                    else
+                      {
+                        new_mantissa += 0.75;
+                      };
+                  };
+                product_exponent += (mantissa_digit_count - 1);
+                product_mantissa := new_mantissa;
+                assert(product_mantissa >= mantissa_magnitude_lower_limit);
+              };
+
+            if (negative)
+                product_mantissa := -product_mantissa;;
+            return constructor(product_mantissa, product_exponent, controller);
+          };
+
+        function operator/(other : this_interface, reversed : boolean)
+                returns constructor & this_return
+          {
+            if (reversed)
+              {
+                return divide(other.mantissa(), other.exponent(),
+                              normalized_mantissa, normalized_exponent);
+              }
+            else
+              {
+                return divide(normalized_mantissa, normalized_exponent,
+                              other.mantissa(), other.exponent());
+              };
+          };
+
+        function operator/(other : rational, reversed : boolean)
+                returns constructor & this_return
+          {
+            if (reversed)
+              {
+                return divide(other, 0, normalized_mantissa,
+                              normalized_exponent);
+              }
+            else
+              {
+                return divide(normalized_mantissa, normalized_exponent, other,
+                              0);
+              };
+          };
+
+        function multiply_add(to_multiply : this_interface,
+                              to_add : this_interface)
+                returns constructor & this_return
+          {
+            immutable product_exponent : (-oo...+oo) :=
+                    normalized_exponent + to_multiply.exponent();
+            if (to_add.exponent() >= product_exponent)
+              {
+                return constructor(
+                        (normalized_mantissa * to_multiply.mantissa()) +
+                        (to_add.mantissa() *
+                         power(base, (to_add.exponent() - product_exponent))),
+                        product_exponent, controller);
+              }
+            else
+              {
+                return constructor(
+                        (normalized_mantissa * to_multiply.mantissa() *
+                         power(base, (product_exponent - to_add.exponent()))) +
+                        to_add.mantissa(), to_add.exponent(), controller);
+              };
+          };
+
+        function compare(other_mantissa : rational,
+                         other_exponent : (-oo...+oo) := 0)
+                returns {-1, 0, 1, 0/0}
+          {
+            static immutable finite_non_zero_integer : type !{} :=
+                    type (-oo...+oo) & !{0};
+            if ((!(normalized_mantissa in finite_non_zero_integer)) ||
+                (!(other_mantissa in finite_non_zero_integer)))
+              {
+                if ((normalized_mantissa in {1/0, 0/0}) ||
+                    (other_mantissa in {1/0, 0/0}))
+                  {
+                    return ((normalized_mantissa == other_mantissa) ? 0 : 0/0);
+                  };
+                if ((normalized_mantissa in {+oo, -oo, 0}) ||
+                    (other_mantissa in {+oo, -oo, 0}))
+                  {
+                    return ((normalized_mantissa == other_mantissa) ? 0 :
+                            ((normalized_mantissa < other_mantissa) ? -1 : 1));
+                  };
+              };
+            if (normalized_exponent == other_exponent)
+              {
+                return ((normalized_mantissa == other_mantissa) ? 0 :
+                        ((normalized_mantissa < other_mantissa) ? -1 : 1));
+              };
+            if ((normalized_mantissa < 0) != (other_mantissa < 0))
+                return ((normalized_mantissa < 0) ? -1 : 1);;
+
+            immutable left : (0...+oo) :=
+                    (((normalized_mantissa < 0) ? -normalized_mantissa :
+                      normalized_mantissa) * denominator(other_mantissa));
+            immutable right : (0...+oo) :=
+                    ((other_mantissa < 0) ? -numerator(other_mantissa) :
+                                            numerator(other_mantissa));
+            variable result : {-1, 0, 1};
+            if (other_exponent >= normalized_exponent)
+              {
+                result := -(compare_with_exponent_term(right, left, base,
+                        other_exponent - normalized_exponent));
+              }
+            else
+              {
+                result := compare_with_exponent_term(left, right, base,
+                        normalized_exponent - other_exponent);
+              };
+            return ((normalized_mantissa < 0) ? -result : result);
+          };
+
+        function compare(other : this_interface) returns {-1, 0, 1, 0/0}
+          (compare(other.mantissa(), other.exponent()));
+
+        function operator==(other : this_interface, reversed : boolean)
+                returns boolean
+          (compare(other) == 0);
+
+        function operator==(other : rational, reversed : boolean)
+                returns boolean
+          (compare(other) == 0);
+
+        function operator!=(other : this_interface, reversed : boolean)
+                returns boolean
+          (compare(other) != 0);
+
+        function operator!=(other : rational, reversed : boolean)
+                returns boolean
+          (compare(other) != 0);
+
+        function operator>=(other : this_interface, reversed : boolean)
+                returns boolean
+          (reversed ? (compare(other) <= 0) : (compare(other) >= 0) );
+
+        function operator>=(other : rational, reversed : boolean)
+                returns boolean
+          (reversed ? (compare(other) <= 0) : (compare(other) >= 0));
+
+        function operator<=(other : this_interface, reversed : boolean)
+                returns boolean
+          (reversed ? (compare(other) >= 0) : (compare(other) <= 0));
+
+        function operator<=(other : rational, reversed : boolean)
+                returns boolean
+          (reversed ? (compare(other) >= 0) : (compare(other) <= 0));
+
+        function operator>(other : this_interface, reversed : boolean)
+                returns boolean
+          (reversed ? (compare(other) < 0) : (compare(other) > 0));
+
+        function operator>(other : rational, reversed : boolean)
+                returns boolean
+          (reversed ? (compare(other) < 0) : (compare(other) > 0));
+
+        function operator<(other : this_interface, reversed : boolean)
+                returns boolean
+          (reversed ? (compare(other) > 0) : (compare(other) < 0));
+
+        function operator<(other : rational, reversed : boolean)
+                returns boolean
+          (reversed ? (compare(other) > 0) : (compare(other) < 0));
+
+        hide;
+
+        variable normalized_mantissa : normalized_mantissa_type;
+        variable normalized_exponent :
+                [min_exponent...max_exponent] & (-oo...+oo);
+        variable controller : basic_fp_controller_type := init_controller;
+
+        static function find_mantissa_and_exponent(
+                mantissa_magnitude_integer_part : [0...+oo),
+                mantissa_magnitude_remainder :
+                        [0...+oo) / [0...mantissa_magnitude_denominator),
+                mantissa_magnitude_denominator : (0...+oo),
+                init_exponent : (-oo...+oo), negative_mantissa : boolean,
+                controller : basic_fp_controller_type)
+                        returns [normalized_mantissa_type,
+                                 [min_exponent...max_exponent] & (-oo...+oo)]
+          {
+            if (denormalized_allowed)
+              {
+                variable try_mantissa_integer_part : [0...+oo) :=
+                        mantissa_magnitude_integer_part;
+                variable try_mantissa_remainder :
+                        [0...mantissa_magnitude_denominator) :=
+                                mantissa_magnitude_remainder;
+                variable try_exponent : (-oo...+oo) := init_exponent;
+                if (try_exponent > max_exponent)
+                  {
+                    immutable factor : (0...+oo) :=
+                            power(base, (try_exponent - max_exponent));
+                    try_mantissa_integer_part *= factor;
+                    immutable scaled_remainder : [0...+oo) :=
+                            (try_mantissa_remainder * factor);
+                    try_mantissa_integer_part +=
+                            (scaled_remainder /::
+                             mantissa_magnitude_denominator);
+                    try_mantissa_remainder :=
+                            (scaled_remainder %
+                             mantissa_magnitude_denominator);
+                    try_exponent := max_exponent;
+                  };
+                while (true)
+                  {
+                    if (try_exponent < min_exponent)
+                        break;;
+                    if (try_mantissa_integer_part >=
+                        mantissa_magnitude_upper_limit)
+                      {
+                        break;
+                      };
+                    if (try_mantissa_remainder == 0)
+                        return [try_mantissa_integer_part, try_exponent];;
+                    try_mantissa_integer_part *= base;
+                    immutable scaled_remainder : [0...+oo) :=
+                            (try_mantissa_remainder * base);
+                    try_mantissa_integer_part +=
+                            (scaled_remainder /::
+                             mantissa_magnitude_denominator);
+                    try_mantissa_remainder :=
+                            (scaled_remainder %
+                             mantissa_magnitude_denominator);
+                    --try_exponent;
+                  };
+              };
+
+            variable new_exponent := init_exponent;
+            variable pre_round_integer_part : [0...+oo);
+            variable pre_round_remainder : [0...+oo);
+            variable pre_round_denominator : (0...+oo);
+
+            if (mantissa_magnitude_integer_part >= mantissa_magnitude_top)
+              {
+                variable factor : (0...+oo) := base;
+                variable factor_power : (0...+oo) := 1;
+                variable factors : [0...+oo) --> (0...+oo);
+                variable factor_num : [0...+oo) := 0;
+                while (mantissa_magnitude_integer_part >=
+                       (mantissa_magnitude_top * factor))
+                  {
+                    factors[factor_num] := factor;
+                    ++factor_num;
+                    factor *= factor;
+                    factor_power *= 2;
+                  };
+                variable factor_accumulator : (0...+oo) := 1;
+                variable test_accumulator : (0...+oo) :=
+                        (factor_accumulator * factor);
+                while (true)
+                  {
+                    if (mantissa_magnitude_integer_part >=
+                        (mantissa_magnitude_lower_limit * test_accumulator))
+                      {
+                        factor_accumulator := test_accumulator;
+                        new_exponent += factor_power;
+                      };
+                    if (mantissa_magnitude_integer_part <
+                        (mantissa_magnitude_top * factor_accumulator))
+                      {
+                        break;
+                      };
+                    assert(factor_num > 0);
+                    --factor_num;
+                    factor := factors[factor_num];
+                    assert((factor_power % 2) == 0);
+                    factor_power /::= 2;
+                    test_accumulator := (factor_accumulator * factor);
+                  };
+                pre_round_integer_part :=
+                        (mantissa_magnitude_integer_part /::
+                         factor_accumulator);
+                pre_round_remainder :=
+                        (((mantissa_magnitude_integer_part %
+                           factor_accumulator) *
+                          mantissa_magnitude_denominator) +
+                         mantissa_magnitude_remainder);
+                pre_round_denominator :=
+                        (factor_accumulator * mantissa_magnitude_denominator);
+              }
+            else if (mantissa_magnitude_integer_part <
+                     mantissa_magnitude_lower_limit)
+              {
+                variable new_mantissa_integer_part : [0...+oo) :=
+                        mantissa_magnitude_integer_part;
+                variable new_mantissa_remainder :
+                        [0...mantissa_magnitude_denominator) :=
+                        mantissa_magnitude_remainder;
+                variable factor : (0...+oo) := base;
+                variable factor_power : (0...+oo) := 1;
+                immutable factored_remainder :=
+                        (new_mantissa_remainder * factor);
+                variable test_integer_part : [0...+oo) :=
+                        ((new_mantissa_integer_part * factor) +
+                         (factored_remainder /::
+                          mantissa_magnitude_denominator));
+                variable test_remainder : [0...mantissa_magnitude_denominator)
+                        :=
+                        (factored_remainder % mantissa_magnitude_denominator);
+                variable factors : [0...+oo) --> (0...+oo);
+                variable factor_num : [0...+oo) := 0;
+                while (test_integer_part < mantissa_magnitude_lower_limit)
+                  {
+                    factors[factor_num] := factor;
+                    ++factor_num;
+                    factor *= factor;
+                    factor_power *= 2;
+                    immutable factored_remainder :=
+                            (new_mantissa_remainder * factor);
+                    test_integer_part :=
+                            ((new_mantissa_integer_part * factor) +
+                             (factored_remainder /::
+                              mantissa_magnitude_denominator));
+                    test_remainder :=
+                            (factored_remainder %
+                             mantissa_magnitude_denominator);
+                  };
+                while (true)
+                  {
+                    if (test_integer_part < mantissa_magnitude_top)
+                      {
+                        new_mantissa_integer_part := test_integer_part;
+                        new_mantissa_remainder := test_remainder;
+                        new_exponent -= factor_power;
+                      };
+                    if (new_mantissa_integer_part >=
+                        mantissa_magnitude_lower_limit)
+                      {
+                        break;
+                      };
+                    assert(factor_num > 0);
+                    --factor_num;
+                    factor := factors[factor_num];
+                    assert((factor_power % 2) == 0);
+                    factor_power /::= 2;
+                    immutable factored_remainder :=
+                            (new_mantissa_remainder * factor);
+                    test_integer_part :=
+                            ((new_mantissa_integer_part * factor) +
+                             (factored_remainder /::
+                              mantissa_magnitude_denominator));
+                    test_remainder :=
+                            (factored_remainder %
+                             mantissa_magnitude_denominator);
+                  };
+                pre_round_integer_part := new_mantissa_integer_part;
+                pre_round_remainder := new_mantissa_remainder;
+                pre_round_denominator := mantissa_magnitude_denominator;
+              }
+            else
+              {
+                pre_round_integer_part := mantissa_magnitude_integer_part;
+                pre_round_remainder := mantissa_magnitude_remainder;
+                pre_round_denominator := mantissa_magnitude_denominator;
+              };
+
+            variable rounded_mantissa :
+                    [mantissa_magnitude_lower_limit...mantissa_magnitude_top]
+                    :=
+                    round_mantissa(pre_round_integer_part, pre_round_remainder,
+                            pre_round_denominator, negative_mantissa,
+                            controller);
+
+            variable rounded_exponent := new_exponent;
+            if (rounded_mantissa == mantissa_magnitude_top)
+              {
+                rounded_mantissa := mantissa_magnitude_lower_limit;
+                ++rounded_exponent;
+              };
+
+            if (rounded_exponent < min_exponent)
+              {
+                if (subnormal_allowed)
+                  {
+                    immutable divisor : (0...+oo) :=
+                            power(base, (min_exponent - new_exponent));
+                    immutable new_integer_part : [0...+oo) :=
+                            (pre_round_integer_part /:: divisor);
+                    immutable new_denominator : (0...+oo) :=
+                            (divisor * pre_round_denominator);
+                    immutable new_remainder : [0...new_denominator) :=
+                            (((pre_round_integer_part % divisor) *
+                              pre_round_denominator) + pre_round_remainder);
+                    variable subnormal_mantissa :
+                            [0...mantissa_magnitude_lower_limit) :=
+                            round_mantissa(new_integer_part, new_remainder,
+                                    new_denominator, negative_mantissa,
+                                    controller);
+                    if (subnormal_mantissa > 0)
+                      {
+                        controller.handle_condition(fp_condition_subnormal);
+                        return [subnormal_mantissa, min_exponent];
+                      };
+                  };
+
+                controller.handle_condition(fp_condition_underflow);
+                return [0, null_exponent];
+              };
+
+            if (rounded_exponent > max_exponent)
+              {
+                controller.handle_condition(fp_condition_overflow);
+                return [+oo, null_exponent];
+              };
+
+            return [rounded_mantissa, rounded_exponent];
+          };
+
+        static function round_mantissa(integer_part : [0...+oo),
+                fractional_numerator : [0...+oo),
+                fractional_denominator :
+                        [1...+oo) / (fractional_numerator...+oo),
+                negative_mantissa : boolean,
+                controller : basic_fp_controller_type)
+          {
+            if (fractional_numerator == 0)
+                return integer_part;;
+
+            controller.handle_condition(fp_condition_inexact);
+
+            switch (controller.rounding())
+            case ({round_to_nearest_ties_even})
+              {
+                immutable twice_remainder : [0...+oo) :=
+                        (2 * fractional_numerator);
+                if (twice_remainder != fractional_denominator)
+                  {
+                    return (integer_part +
+                            ((twice_remainder < fractional_denominator) ? 0 :
+                                                                          1));
+                  };
+                if (integer_part % 2 == 0)
+                    return integer_part;
+                else
+                    return integer_part + 1;;
+              }
+            case ({round_to_nearest_ties_toward_zero})
+              {
+                immutable twice_remainder : [0...+oo) :=
+                        (2 * fractional_numerator);
+                return (integer_part +
+                        ((twice_remainder <= fractional_denominator) ? 0 : 1));
+              }
+            case ({round_to_nearest_ties_away_from_zero})
+              {
+                immutable twice_remainder : [0...+oo) :=
+                        (2 * fractional_numerator);
+                return (integer_part +
+                        ((twice_remainder < fractional_denominator) ? 0 : 1));
+              }
+            case ({round_up})
+              {
+                return (integer_part + ((!negative_mantissa) ? 1 : 0));
+              }
+            case ({round_down})
+              {
+                return (integer_part + (negative_mantissa ? 1 : 0));
+              }
+            case ({round_toward_zero})
+              {
+                return integer_part;
+              }
+            case ({round_away_from_zero})
+              {
+                return integer_part + 1;
+              };
+          };
+
+        immutable init_rational_mantissa : rational :=
+                ((init_mantissa in rational) ? init_mantissa :
+                 init_mantissa.mantissa());
+        immutable init_real_exponent : integer :=
+                ((init_mantissa in rational) ? init_exponent :
+                 (init_exponent + init_mantissa.exponent()));
+
+        switch ([init_rational_mantissa, init_real_exponent])
+        case ([{+oo, -oo, 1/0, 0/0}, integer] |
+              [rational, {+oo, -oo, 1/0, 0/0}])
+          {
+            normalized_mantissa :=
+                    init_rational_mantissa * power(base, init_real_exponent);
+            normalized_exponent := null_exponent;
+          }
+        case ([{0}, integer])
+          {
+            normalized_mantissa := 0;
+            if (denormalized_allowed)
+              {
+                if (init_real_exponent < min_exponent)
+                    normalized_exponent := min_exponent;
+                else if (init_real_exponent > max_exponent)
+                    normalized_exponent := max_exponent;
+                else
+                    normalized_exponent := init_real_exponent;;
+              }
+            else
+              {
+                normalized_exponent := null_exponent;
+              };
+          }
+        case ([non_subnormal_mantissa_type, [min_exponent...max_exponent]])
+          {
+            normalized_mantissa := init_rational_mantissa;
+            normalized_exponent := init_real_exponent;
+          }
+        case (!{})
+          {
+            immutable mantissa_magnitude_numerator : (0...+oo) :=
+                    ((init_rational_mantissa < 0) ?
+                     -numerator(init_rational_mantissa) :
+                     numerator(init_rational_mantissa));
+            immutable mantissa_magnitude_denominator : (0...+oo) :=
+                    denominator(init_rational_mantissa);
+            immutable mantissa_magnitude_integer_part : [0...+oo) :=
+                    (mantissa_magnitude_numerator /::
+                     mantissa_magnitude_denominator);
+            immutable mantissa_magnitude_remainder :
+                    [0...mantissa_magnitude_denominator) :=
+                    ((mantissa_magnitude_denominator == 1) ? 0 :
+                     (mantissa_magnitude_numerator %
+                      mantissa_magnitude_denominator));
+            [normalized_mantissa, normalized_exponent] :=
+                    find_mantissa_and_exponent(mantissa_magnitude_integer_part,
+                            mantissa_magnitude_remainder,
+                            mantissa_magnitude_denominator, init_real_exponent,
+                            (init_rational_mantissa < 0), controller);
+            if (init_rational_mantissa < 0)
+                normalized_mantissa := -normalized_mantissa;;
+          };
+
+        function base_method() returns {base}
+          {
+            return base;
+          };
+
+        export base_method as base;
+
+        export;
+
+        function mantissa() returns normalized_mantissa_type
+          {
+            return normalized_mantissa;
+          };
+
+        function exponent() returns [min_exponent...max_exponent] & (-oo...+oo)
+          {
+            return normalized_exponent;
+          };
+
+        function sprint(specifier : string := "v", plus : boolean := false,
+                space : boolean := false, hash : boolean := false,
+                zero_width : [0...+oo) := 0,
+                precision : [0...+oo) | {null} := null) returns string
+          {
+            return call(floating_point_formatting,
+                    [original_mantissa := normalized_mantissa,
+                     original_exponent := normalized_exponent,
+                     original_base := base] ~ arguments);
+          };
+
+        function to_rational() returns rational
+          (normalized_mantissa * power(base, normalized_exponent));
+        function operator::(: {rational}) returns rational
+          (to_rational());
+      };
+  };
+
+function limited_floating_point(base : (0...+oo),
+        mantissa_magnitude_lower_limit : (0...+oo),
+        mantissa_magnitude_upper_limit :
+                (0...+oo) / [mantissa_magnitude_lower_limit * base...+oo) :=
+                        mantissa_magnitude_lower_limit * base,
+        min_exponent : [-oo...+oo] := -oo,
+        max_exponent : [-oo...+oo] / [min_exponent...+oo] := +oo,
+        subnormal_allowed : boolean := true,
+        denormalized_allowed : boolean := false,
+        init_default_controller : basic_fp_controller_type :=
+                default_fp_controller)
+        returns static_item_type / <<dynamic_item_type(base)>>
+  {
+    return limited_floating_point_ecosystem(base,
+            mantissa_magnitude_lower_limit, mantissa_magnitude_upper_limit,
+            min_exponent, max_exponent, subnormal_allowed,
+            denormalized_allowed, init_default_controller).item_class;
+  };

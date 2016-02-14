@@ -1,0 +1,331 @@
+/* file "parse.salm" */
+
+/*
+ *  This file runs tests of the parse module.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+procedure do_exception(to_try : {} <-- ())
+  {
+    try
+      {
+        to_try();
+        "No exception."!
+      }
+    catch
+      {
+        iterate (e1; current_exceptions())
+          {
+            use e1;
+            use source;
+            print("Exception: [");
+            printf("%v%:", file_name);
+            if (start_line == end_line)
+              {
+                printf("%d%:", start_line);
+                if (start_column == end_column)
+                    printf("%d%", start_column);
+                else
+                    printf("%d%-%d%", start_column, end_column);;
+              }
+            else
+              {
+                printf("[%d%:%d%]-[%d%:%d%]", start_line, start_column,
+                       end_line, end_column);
+              };
+            print("] ", tag, ": `", message, "'.\n");
+          };
+      };
+  };
+
+  {
+    use "parse.salm" : "parse.si";
+
+    parse_expression("3").run()!
+    parse_expression("[abc:=3+5]").run()!
+    do_exception(procedure() { parse_expression("[abc:=3+x]").run()! });
+    parse_expression("[abc:=3\n+5]").run()!
+    do_exception(procedure() { parse_expression("[abc:=3\n+x]").run()! });
+    parse_expression("[abc:=3\n+5]", file_name := "myfile.salm").run()!
+    do_exception(procedure()
+      {
+        parse_expression("[abc:=3\n+x]", file_name := "myfile.salm").run()!
+      });
+    parse_expression("[abc:=3\n+5]", start_line := 134).run()!
+    do_exception(procedure()
+      {
+        parse_expression("[abc:=3\n+x]", start_line := 134).run()!
+      });
+    parse_expression("[abc:=3\n+5]", start_column := 12).run()!
+    do_exception(procedure()
+      {
+        parse_expression("[abc:=3\n+x]", start_column := 12).run()!
+      });
+    parse_expression("[abc:=3+5]", start_column := 12).run()!
+    do_exception(procedure()
+      {
+        parse_expression("[abc:=3+x]", start_column := 12).run()!
+      });
+    do_exception(procedure() { parse_expression("[abc:=3+5]7").run()! });
+    do_exception(procedure() { parse_expression("[abc:=3+5").run()! });
+    parse_expression_file("tests/parse_expression1.salm").run()!
+
+    parse_statement_block("immutable i1 := 15;").run();
+
+      {
+        immutable block1 := parse_statement_block("3!");
+        block1.bind("print", print);
+        block1.run();
+      };
+
+      {
+        immutable block1 := parse_statement_block("x!");
+        block1.bind("print", print);
+        immutable i1 := [c := "tree", d := 18];
+        block1.bind("x", &i1);
+        block1.run();
+      };
+
+      {
+        immutable block1 := parse_statement_block("p1(3); p1(4);");
+        procedure p1(x : {3})
+          { "p1(3)."! };
+        procedure p1(x : {4})
+          { "p1(4)."! };
+        block1.bind("p1", p1);
+        block1.run();
+      };
+
+      {
+        immutable block1 := parse_statement_block("x!");
+        immutable i1 := 17;
+        block1.bind("print", print);
+        block1.bind("x", &i1);
+        block1.run();
+      };
+
+      {
+        immutable block1 := parse_statement_block("x!");
+        variable v1 := 27;
+        block1.bind("print", print);
+        block1.bind("x", &v1);
+        block1.run();
+        v1 := 37;
+        block1.run();
+      };
+
+      {
+        immutable block1 := parse_statement_block("x!");
+        quark q1;
+        block1.bind("print", print);
+        block1.bind("x", q1);
+        block1.run();
+      };
+
+      {
+        immutable block1 := parse_statement_block("single(x) { x! };");
+        lock l1;
+        block1.bind("print", print);
+        block1.bind("x", l1);
+        block1.run();
+      };
+
+      {
+        immutable block1 :=
+                parse_statement_block("x[a := \"phone\", b := 0x12]!");
+        lepton l1;
+        block1.bind("print", print);
+        block1.bind("x", l1);
+        block1.run();
+      };
+
+      {
+        immutable block1 := parse_statement_block("5..x!");
+        tagalong t1 := 83;
+        block1.bind("print", print);
+        block1.bind("x", t1);
+        block1.run();
+      };
+
+      {
+        immutable block1 :=
+                parse_statement_block("\"Unnamed binding works.\"!");
+        block1.bind(print);
+        block1.run();
+      };
+
+      {
+        immutable block1 := parse_statement_block(
+                "print(\"x: \", x, \".\\n\");\n" ~
+                "print(\"y: \", y, \".\\n\");");
+        block1.bind(print);
+        immutable x := 1, y := 2;
+        block1.bind([&x, &y]);
+        block1.run();
+      };
+
+      {
+        immutable block1 := parse_statement_block(
+                "print(\"x: \", x, \".\\n\");\n" ~
+                "print(\"y: \", y, \".\\n\");");
+        block1.bind(print);
+        immutable x := 1, y := 2;
+        block1.bind([y := &x, x := &y]);
+        block1.run();
+      };
+
+    do_exception(procedure()
+      {
+        immutable block1 := parse_statement_block(
+                "print(\"x: \", x, \".\\n\");\n" ~
+                "print(\"y: \", y, \".\\n\");");
+        block1.bind(print);
+        immutable x := 1, y := 2;
+        block1.bind([y := x, x := y]);
+        block1.run();
+      });
+
+    do_exception(procedure()
+      {
+        immutable block1 := parse_statement_block(
+                "print(\"x: \", x, \".\\n\");\n" ~
+                "print(\"y: \", y, \".\\n\");");
+        block1.bind(print);
+        immutable x := 1, y := 2;
+        block1.bind([variable, x := &y]);
+        block1.run();
+      });
+
+    do_exception(procedure()
+      {
+        immutable block1 := parse_statement_block(
+                "print(\"x: \", x, \".\\n\");\n" ~
+                "print(\"y: \", y, \".\\n\");");
+        block1.bind(print);
+        immutable x := 1, y := 2;
+        block1.bind([function()(5), x := &y]);
+        block1.run();
+      });
+
+    do_exception(procedure()
+      {
+        immutable block1 := parse_statement_block(
+                "print(\"x: \", x, \".\\n\");\n" ~
+                "print(\"y: \", y, \".\\n\");");
+        block1.bind(print);
+        immutable x := 1, y := 2;
+        block1.bind([tagalong, x := &y]);
+        block1.run();
+      });
+
+    do_exception(procedure()
+      {
+        immutable block1 := parse_statement_block(
+                "print(\"x: \", x, \".\\n\");\n" ~
+                "print(\"y: \", y, \".\\n\");");
+        block1.bind(print);
+        immutable x := 1, y := 2;
+        block1.bind([lepton[], x := &y]);
+        block1.run();
+      });
+
+    do_exception(procedure()
+      {
+        immutable block1 := parse_statement_block(
+                "print(\"x: \", x, \".\\n\");\n" ~
+                "print(\"y: \", y, \".\\n\");");
+        block1.bind(print);
+        immutable x := 1, y := 2;
+        block1.bind([quark, x := &y]);
+        block1.run();
+      });
+
+    do_exception(procedure()
+      {
+        immutable block1 := parse_statement_block(
+                "print(\"x: \", x, \".\\n\");\n" ~
+                "print(\"y: \", y, \".\\n\");");
+        block1.bind(print);
+        immutable x := 1, y := 2;
+        block1.bind([lock, x := &y]);
+        block1.run();
+      });
+
+      {
+        immutable block1 := parse_statement_block(
+                "print(\"x: \", x, \".\\n\");\n" ~
+                "print(\"y: \", y, \".\\n\");\n" ~
+                "p1();\n" ~
+                "p2(1);\n" ~
+                "p2(2);\n" ~
+                "print(\"3..t1: \", 3..t1, \".\\n\");\n" ~
+                "print(\"l1[a := 57]: \", l1[a := 57], \".\\n\");\n" ~
+                "print(\"q1: \", q1, \".\\n\");\n" ~
+                "single(lk1) { print(\"lk1: \", lk1, \".\\n\"); };");
+        block1.bind(print);
+        class c1()
+          {
+            immutable x := 111;
+            variable y := 222;
+            procedure p1() { "p1() called."! };
+            procedure p2(:{1}) { "p2(1) called."! };
+            procedure p2(:{2}) { "p2(2) called."! };
+            tagalong t1 := "default";
+            lepton l1[...];
+            quark q1;
+            lock lk1;
+          };
+        block1.bind(c1());
+        block1.run();
+      };
+
+      {
+        immutable block1 := parse_statement_block(
+                "print(\"length(\\\"abcdef\\\"): \", length(\"abcdef\"), " ~
+                "\".\\n\");");
+        block1.bind_standard_library();
+        block1.run();
+      };
+
+    do_exception(procedure()
+      {
+        [] := [parse_statement_block("\"\n\"!")];
+      });
+
+      {
+        immutable block1 :=
+                parse_statement_block_file("tests/parse_block1.salm");
+        block1.bind_standard_library();
+        block1.run();
+      };
+
+      {
+        immutable expression1 :=
+                parse_expression("[a := x, b := y]", start_column := 12);
+        immutable x := "arrow", y := "bow";
+        expression1.bind([&x, &y]);
+        expression1.run()!
+      };
+
+      {
+        immutable block1 := parse_statement_block("x! y! z!");
+        block1.unbound_required_names()!
+        block1.unbound_optional_names()!
+      };
+
+      {
+        immutable block1 :=
+                parse_statement_block("use [x := 3] for x; x! y! z!");
+        block1.unbound_required_names()!
+        block1.unbound_optional_names()!
+      };
+
+    do_exception(procedure()
+      {
+        parse_statement_block("return 53 from aaa;").run();
+      });
+  };

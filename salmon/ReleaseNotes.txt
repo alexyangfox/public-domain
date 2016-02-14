@@ -1,0 +1,347 @@
+
+                       SalmonEye Release Notes
+                       =======================
+
+    Changes in 0.24.3 versus 0.24.2
+    -------------------------------
+
+  * I added a fix that I accidentally left out of 0.24.2 to get CFLAGS
+    passed to the compiles that happen in the library directory.
+
+
+    Changes in 0.24.2 versus 0.24.1
+    -------------------------------
+
+  * Bug fixes for building for 64-bit x86 Linux have been done.
+
+  * Some Makefiles and code generating Makefiles have been modified to
+    get the CFLAGS specified on the make command-line passed down to
+    all the places it could be used.
+
+
+    Changes in 0.24.1 versus 0.10.0
+    -------------------------------
+
+These changes are too numerous to list, since I haven't been keeping
+track of them since version 0.10.0.
+
+    Changes in 0.10.0 versus 0.9.0
+    ------------------------------
+
+  * The syntax has changed to allow many places that used to require a
+    braced statement block to allow the option of a single statement
+    instead.  For example, ``if (a) { b(); };'' may now be written
+    ``if (a) b();;''.
+
+  * An alias statement has been added.  This allows one identifier to
+    be used as an alias for another.
+
+  * The features added to the reference manual in the last release but
+    not implemented have now been implemented.  These features are:
+
+      + New ``forall'' and ``exists'' expressions
+      + New theorem statements and proof steps
+      + The ability to specify a type with "*" in maps to read or
+        write all elements with a given type at once
+      + The ability to use "::=" instead of ":=" in variable and
+        immutable initializations, default values for tagalongs,
+        formal parameter default value expressions, basket component
+	extractors, and lepton expressions
+      + The ability to specify a type on a ``use'' statement
+      + The ability to use string literals for the value and/or type
+        of a ``use'' statement, meaning to include the relevant
+        information from a source file
+
+  * SalmonEye will now search a list of directories for include files.
+    This can include absolute entries, entries relative to the
+    including file, and entries relative to the SalmonEye executable.
+    The default include directory list may be specified on the command
+    line when compiling SalmonEye.  This default may be over-ridden by
+    an environment variable.  The environment variable may be
+    over-ridden by a command-line argument to SalmonEye.
+
+  * There is a library directory containing Salmon code available to
+    be included.  This Salmon code is installed by the ``install''
+    target of the Makefile.
+
+  * There are new files "short.salm" and "shorter.salm".  These
+    provide shorter aliases for some of the more commonly used
+    keywords and library identifiers.  "shorter.salm" provides even
+    shorter aliases than "short.salm".
+
+  * All exception tags that can easily be tested in a self-contained
+    test are now tested.
+
+  * There are new tests of the reference manual that relate it to the
+    code and other tests.
+
+
+    Changes in 0.9.0 versus 0.8.0
+    -----------------------------
+
+  * The name of the language has been changed from ``CWX1'' to
+    ``Salmon'' and the name of the interpreter has been changed from
+    ``CWX1 Interpreter Zero'' to ``SalmonEye''.
+
+  * Support has been added for interface includes.  This allows an
+    file containing an interface item list to be included in an
+    interface type declaration.  This feature provides functionality
+    similar to header files for modules in C and C++ -- an interface
+    specification for the module in a separate file, with comments, so
+    that the person using the interface only needs to look at the
+    interface file, not the implementation for that module.
+
+  * There is a new ``ageless'' modifier for declarations.  When used,
+    this means that instances created from that declaration do not
+    have pre-set lifetimes that end when their scopes exit.  Instead,
+    they live on until explicitly deleted or garbage collected if all
+    links to them have disappeared.
+
+  * Shorthand syntax has been introduced for functions that only need
+    a single expression to specify the values they return.  Thus
+    ``function(x, y) { return (x < y); }'' can now be written
+    ``function(x, y) (x < y)''.  The longer form can still be used, so
+    this change is completely backward compatible.
+
+  * The code to handle includes has been broken out, making it easier
+    to substitute a different way to handle includes, which might be
+    useful if this interpreter code is embedded in some other
+    program.  In addition, some bugs in the way file name information
+    for included files was handled have been fixed.
+
+  * An optimized version of the interpreter is now built in addition
+    to the standard and memory-checking versions.  This is called
+    "salmoneye.fast" and seems to run in about 60% of the time of the
+    standard interpreter.
+
+  * Source location information is provided for more exceptions in the
+    standard runtime library.
+
+  * Some bugs have been fixed.
+
+  * Some new features have been added to the Reference Manual but not
+    yet implemented in the interpreter.  These features are:
+
+      + New ``forall'' and ``exists'' expressions
+      + New theorem statements and proof steps
+      + The ability to specify a type with "*" in maps to read or
+        write all elements with a given type at once
+      + The ability to use "::=" instead of ":=" in variable and
+        immutable initializations, default values for tagalongs,
+        formal parameter default value expressions, and basket
+        component extractors
+      + The ability to specify a type on a ``use'' statement
+      + The ability to use string literals for the value and/or type
+        of a ``use'' statement, meaning to include the relevant
+        information from a source file
+
+  * A re-write of the tutorial has been started.  The new tutorial
+    removes the focus on comparisons to C and instead just assumes
+    familiarity with general programming practices.  The new tutorial
+    is only partly complete.
+
+  * A new document has been added giving an overview of the features
+    of Salmon compared with other programming languages.
+
+
+    Changes in 0.8.0 versus 0.7.0
+    -----------------------------
+
+  * ``if else'' clauses have been added to the syntax of ``if''
+    statements and have been tested.
+
+  * Multiple declarations are now allowed in the same declaration
+    statement, separated by commas.  For example,
+
+        variable x;
+        variable y;
+        variable z;
+
+    may now be written
+
+        variable x, y, z;
+
+  * ``quark enumeration'' statements have been added to the language,
+    implemented, and tested.
+
+  * A routine formal parameter may now have a dynamic type, evaluated
+    at call time, after parameter values have been computed, in
+    addition to its static type that is computed at routine
+    declaration time.  Similarly, a function may have a dynamic return
+    type in addition to its static type.  For both parameter and
+    return dynamic types, the parameter values may be used in the type
+    expression.
+
+  * ``iterate'' statements now allow objects with ``iterator'' fields
+    to allow user-defined ways of iterating.
+
+  * ``virtual'' modifiers on declarations have been implemented and
+    partly tested.
+
+  * The implementation of ``use'' statements has been completed and
+    tested.
+
+  * Date and time functions have been added to the standard runtime
+    library, implemented, and tested.
+
+  * The implementation of routine calls has been changed to allow the
+    passing of named arguments though ``...''.
+
+  * The standard runtime library implementation has been completed.
+    An extensive set of tests of the standard runtime library has been
+    completed.  All bugs it turned up have been fixed.
+
+  * Many bugs have been fixed.
+
+
+    Changes in 0.7.0 versus 0.6.1
+    -----------------------------
+
+  * Operator overloading is now implemented and tested.
+
+  * ``single'' modifiers on declarations are now implemented and
+    tested.
+
+  * ``static'' modifiers on declarations are now implemented and
+    tested.
+
+  * ``construct'' expressions are now implemented and tested.
+
+  * ``this'' expressions are now implemented and partly tested.
+
+  * Overloading resolution across multiple scopes now works properly.
+
+  * The standard library system() routine is now implemented and
+    tested.
+
+  * Backtick expressions are now implemented and tested.
+
+  * The standard library delete() routine is now implemented.
+
+  * The standard library call() routine is now properly implemented
+    for both function and procedure calls, and it is tested.
+
+  * A standard library return_value_expected() routine has been added,
+    implemented, and tested.
+
+  * The standard library translate() routine is now implemented and
+    tested.
+
+  * A standard library remove() routine has been added, implmented,
+    and tested.
+
+  * A standard library rename() routine has been added, implemented,
+    and tested.
+
+  * New syntax has been added to routine type expressions to indicate
+    that routines match no matter what their limitations of parameters
+    beyond those specified in the type.  This is indicated with a "*"
+    instead of "..." at the end of the parameter list in the type
+    expression.
+
+  * When printing values, if the value has a sprint() method, that
+    method will now be called to generate the string to print for that
+    value instead of using the default printing method.
+
+  * Return statements now work at the top level, not just within
+    routines.  If an integer value is returned at the top level, the
+    interpreter will return that value as its own return code.
+
+  * The implementation of destructors has been fixed so that jumps out
+    of destructor code, including those caused by exceptions, work
+    properly.
+
+  * Many bugs have been fixed.
+
+  * Tracing functionality is now implemented.  Tracing is special
+    debugging output that is turned on by command-line flags to the
+    interpreter.  Three tracing channels are currently available:
+    assignment tracing, call tracing, and lock tracing.
+
+
+    Changes in 0.6.1 versus 0.5.0
+    -----------------------------
+
+  * Many bugs have been fixed and many features added.  The tests have
+    been expanded to cover a number of new features.
+
+
+    Changes in 0.5.0 versus 0.4.0
+    -----------------------------
+
+  * Some things have been added to the language, both in the Reference
+    Manual and in the Interpreter Zero implementation.  These include
+    ``export'', ``hide'', ``use'', and ``include'' statements.
+
+  * Various bugs are fixed and features implemented.  There are still
+    some features not implemented, but fewere than before.
+
+  * The test code has been expanded to cover more cases.
+
+
+    Changes in 0.4.0 versus 0.3.1
+    -----------------------------
+
+  * Various bugs are fixed.
+
+  * The CWX1 Reference Manual and Tutorial from C are now included as
+    part of the CWX1 Interpreter Zero release.
+
+  * Many type expressions are now implemented but not tested.
+
+  * Iterate statements are implemented and partly tested.
+
+  * Semi-labeled expression list expressions are implemented and
+    partly tested.
+
+  * Break statements are implemented and tested.
+
+  * Continue statements are implemented and tested.
+
+  * Return statements are implemented and tested.
+
+  * Call expressions are implemented and partly tested.
+
+  * Increment and decrement statements are now implemented but not yet
+    tested.
+
+  * Negation expressions on integer arguments are now implemented but
+    not yet tested.
+
+  * Logical not expressions are now implemented but not yet tested.
+
+  * Bitwise not expressions are now implemented but not yet tested.
+
+  * Tagalong, lepton key, quark, and lock declaration statements are
+    now implemented but not yet tested.
+
+  * All declaration expressions are now implemented but not yet
+    tested.
+
+  * All name reference expressions are now implemented but all but
+    routine and variable reference expressions are not yet tested.
+
+  * Statement block expressions are implemented and tested.
+
+  * Statement block statements are implemented but not yet tested.
+
+  * There is a new binary operator (using the tilde character) that
+    does concatenation on strings and arrays.  It is now implemented,
+    but not yet tested.
+
+  * Switch statements are implemented but not tested.
+
+  * Cleanup statements are implemented but not tested.
+
+  * Tagalong field reference expressions are now implemented but not
+    yet tested.
+
+  * ``Arguments'' expressions are now implemented but not yet tested.
+
+  * Map list expressions are now implemented but not yet tested.
+
+  * Lepton expressions are now implemented but not yet tested.
+
+  * Type value expressions are now implemented but not yet tested.
+
+  * Unary plus expressions are implemented but not yet tested.

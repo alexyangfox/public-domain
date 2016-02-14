@@ -1,0 +1,106 @@
+/* file "short.salm" */
+
+/*
+ *  This file provides short versions of some keywords and names from the
+ *  standard library of Salmon.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+alias var variable;
+alias imm immutable;
+alias fun function;
+alias proc procedure;
+alias ret return;
+alias rets returns;
+alias args arguments;
+alias taga tagalong;
+alias lep lepton;
+alias mult multiset;
+alias inter interface;
+alias inc include;
+alias sin single;
+alias vir virtual;
+alias clean cleanup;
+alias par parallel;
+alias iter iterate;
+alias cont continue;
+alias exp export;
+alias go goto;
+alias enum enumeration;
+
+alias int integer;
+alias rat rational;
+alias str string;
+alias bool boolean;
+alias char character;
+alias regex regular_expression;
+alias anyq any_quark;
+alias anyl any_lepton;
+alias lepkey lepton_key;
+alias target jump_target;
+alias anyc any_class;
+alias obj object;
+alias tagkey tagalong_key;
+alias anylk any_lock;
+alias nil null;
+alias chars characters;
+alias mstr make_string;
+alias cpoint unicode_code_point;
+alias futf8 from_utf8;
+alias futf16 from_utf16;
+alias futf32 from_utf32;
+alias utf8 to_utf8;
+alias utf16 to_utf16;
+alias utf32 to_utf32;
+alias sfutf8 string_from_utf8;
+alias sfutf16 string_from_utf16;
+alias sfutf32 string_from_utf32;
+alias del delete;
+alias sub substitute;
+alias pat pattern;
+alias pregex parse_regular_expression;
+alias regexf regular_expression_follower;
+alias len length;
+alias retexp return_value_expected;
+alias eof end_of_input;
+alias ioerr io_error;
+alias otstream output_text_stream;
+alias itstream input_text_stream;
+alias lastream look_ahead_stream;
+alias obstream output_bit_stream;
+alias ibstream input_bit_stream;
+alias sstream seekable_stream;
+alias laadd add_text_look_ahead_buffer;
+alias stdin standard_input;
+alias stdout standard_output;
+alias stderr standard_error;
+alias itfopen open_input_text_file;
+alias otfopen open_output_text_file;
+alias iotfopen open_input_output_text_file;
+alias ibfopen open_input_bit_file;
+alias obfopen open_output_bit_file;
+alias iobfopen open_input_output_bit_file;
+alias isopen open_input_string;
+alias osopen open_output_string;
+alias fexists file_exists;
+alias dexists directory_exists;
+alias dirlist directory_contents;
+alias rem remove;
+alias ren rename;
+alias rchar read_character;
+alias rstr read_string;
+alias sys system;
+alias cswitch context_switching;
+alias timet time_type;
+alias getltime local_time_and_date;
+alias getutime utc_time_and_date;
+alias trans translate;
+alias exc exception;
+alias curexc current_exceptions;
+alias num numerator;
+alias den denominator;
+alias pow power;

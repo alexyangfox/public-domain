@@ -1,0 +1,142 @@
+/* file "write_files.salm" */
+
+/*
+ *  This file is a test of Salmon file I/O.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+procedure do_text_output_test(stream : output_text_stream & seekable_stream)
+  {
+    stream.print("abc");
+    print("Current position: ", stream.tell(), ".\n");
+    stream.print("def");
+    print("Current position: ", stream.tell(), ".\n");
+
+    stream.seek(4);
+    stream.print("X");
+    print("Current position: ", stream.tell(), ".\n");
+
+    delete(stream);
+  };
+
+procedure do_bit_output_test(stream : output_bit_stream & seekable_stream,
+                             bit_count : [1...+oo))
+  {
+    stream.write(bit_count, [0, 1, 2, 3, 4]);
+    stream.write(bit_count, 5);
+    stream.write(bit_count, 6);
+
+    variable the_map : integer[0...4];
+    the_map[3] := 10;
+    the_map[2] := 9;
+    the_map[1] := 8;
+    the_map[0] := 7;
+    stream.write(bit_count, the_map);
+
+    delete(stream);
+  };
+
+do_text_output_test(open_output_text_file("utf8_test.txt"));
+do_text_output_test(open_output_text_file("utf8_test2.txt", utf_8));
+do_text_output_test(open_output_text_file("utf16_le_test.txt", utf_16_le));
+do_text_output_test(open_output_text_file("utf16_be_test.txt", utf_16_be));
+do_text_output_test(open_output_text_file("utf32_le_test.txt", utf_32_le));
+do_text_output_test(open_output_text_file("utf32_be_test.txt", utf_32_be));
+
+do_bit_output_test(open_output_bit_file("bit_8_le_test.bit", little_endian),
+                   8);
+do_bit_output_test(open_output_bit_file("bit_8_be_test.bit", big_endian), 8);
+do_bit_output_test(open_output_bit_file("bit_16_le_test.bit", little_endian),
+                   16);
+do_bit_output_test(open_output_bit_file("bit_16_be_test.bit", big_endian), 16);
+do_bit_output_test(open_output_bit_file("bit_32_le_test.bit", little_endian),
+                   32);
+do_bit_output_test(open_output_bit_file("bit_32_be_test.bit", big_endian), 32);
+
+  {
+    immutable stream : output_bit_stream & seekable_stream :=
+            open_output_bit_file("bit_1_le_test.bit", little_endian);
+
+    stream.write(1, [1, 0, 1, 1, 0, 0, 0, 1]);
+    stream.write(1, [0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0]);
+
+    delete(stream);
+  };
+
+  {
+    immutable stream : output_bit_stream & seekable_stream :=
+            open_output_bit_file("bit_1_be_test.bit", big_endian);
+
+    stream.write(1, [1, 0, 1, 1, 0, 0, 0, 1]);
+    stream.write(1, [0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0]);
+
+    delete(stream);
+  };
+
+  {
+    immutable stream : output_bit_stream & seekable_stream :=
+            open_output_bit_file("bit_2_le_test.bit", little_endian);
+
+    stream.write(2, [3, 2, 1, 2]);
+    stream.write(2, [1, 0, 3, 3, 0, 2, 2, 0]);
+
+    delete(stream);
+  };
+
+  {
+    immutable stream : output_bit_stream & seekable_stream :=
+            open_output_bit_file("bit_2_be_test.bit", big_endian);
+
+    stream.write(2, [3, 2, 1, 2]);
+    stream.write(2, [1, 0, 3, 3, 0, 2, 2, 0]);
+
+    delete(stream);
+  };
+
+  {
+    immutable stream : output_bit_stream & seekable_stream :=
+            open_output_bit_file("bit_3_le_test.bit", little_endian);
+
+    stream.write(3, [7, 2, 4, 2, 0, 5, 5, 6]);
+    stream.write(3, [3, 3, 7, 2, 1, 0, 5, 6, 7, 4, 2, 1, 3, 0, 0, 7]);
+
+    delete(stream);
+  };
+
+  {
+    immutable stream : output_bit_stream & seekable_stream :=
+            open_output_bit_file("bit_3_be_test.bit", big_endian);
+
+    stream.write(3, [7, 2, 4, 2, 0, 5, 5, 6]);
+    stream.write(3, [3, 3, 7, 2, 1, 0, 5, 6, 7, 4, 2, 1, 3, 0, 0, 7]);
+
+    delete(stream);
+  };
+
+  {
+    immutable stream : output_bit_stream & seekable_stream :=
+            open_output_bit_file("bit_9_le_test.bit", little_endian);
+
+    stream.write(9, [0x17f, 0x0fe, 0x0e5, 0x127, 0x035, 0x15b, 0x1b5, 0x16c]);
+    stream.write(9,
+            [0x088, 0x1ff, 0x137, 0x025, 0x111, 0x000, 0x05f, 0x167, 0x07a,
+             0x144, 0x1d2, 0x1ee, 0x033, 0x057, 0x0bc, 0x175]);
+
+    delete(stream);
+  };
+
+  {
+    immutable stream : output_bit_stream & seekable_stream :=
+            open_output_bit_file("bit_9_be_test.bit", big_endian);
+
+    stream.write(9, [0x17f, 0x0fe, 0x0e5, 0x127, 0x035, 0x15b, 0x1b5, 0x16c]);
+    stream.write(9,
+            [0x088, 0x1ff, 0x137, 0x025, 0x111, 0x000, 0x05f, 0x167, 0x07a,
+             0x144, 0x1d2, 0x1ee, 0x033, 0x057, 0x0bc, 0x175]);
+
+    delete(stream);
+  };

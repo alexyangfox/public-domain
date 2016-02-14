@@ -1,0 +1,25 @@
+/* file "unlimited_floating_point.si" */
+
+/*
+ *  This file contains the interface to a software implementation of floating
+ *  point arithmetic with no limit on mantissa precision or exponent for the
+ *  Salmon Programming Langauge.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+include "floating_point_interface.si",
+
+
+et_fp_bad_specifier :- any_quark,
+et_fp_integer_specifier_non_integer_value :- any_quark,
+
+unlimited_floating_point :-
+        ((any_base_floating_point_interface &
+          <<numeric_operable(rational, any_base_floating_point_interface)>>)
+         <--
+         (init_mantissa : rational | <<floating_point_access_type(type {})>>,
+          init_exponent : integer := *)) <-- (base : (0...+oo))

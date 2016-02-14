@@ -1,0 +1,16 @@
+/* file "date_utils.si" */
+
+/*
+ *  This file gives the interface to some date-related utilities for Salmon.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+month_num :- (months --> [1...12]),
+all_months :- months[1...12],
+is_leap_year :- boolean <-- (year : integer),
+month_days :- (months --> [28...31]) <-- (year : integer),
+operator- :- [-oo....+oo] <-- (t1 : time_type, t2 : time_type)

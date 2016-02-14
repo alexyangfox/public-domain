@@ -1,0 +1,270 @@
+/* file "thread_implemented.salm" */
+
+/*
+ *  This file gives a part of the implementation of a thread module for Salmon.
+ *  The parts that can be written in Salmon itself are here and it uses
+ *  "thread.so" to do the work that needs to be done on the other side of the
+ *  native bridge interface.  This is the version of "thread.salm" for systems
+ *  for which multi-threading is actually implemented.  For systems that don't
+ *  have a working version of multi-threading for Salmon,
+ *  "thread_unimplemented.salm" should be used instead of this file.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+immutable multi_threading_works := true;
+
+quark enumeration status { running, finished, blocked, sleeping, suspended };
+
+quark enumeration exit_status
+  { exit_normal, exit_exceptions, exit_killed, exit_died, exit_jumped_out };
+
+immutable thread := type interface
+  [
+    name :- string <-- (),
+    is_done :- boolean <-- (),
+    interrupt :- {} <-- (tag : any_quark, message : string,
+                         other : [...] := *),
+    kill :- {} <-- (),
+    wait_for_termination :- {} <-- (),
+    get_status :- status <-- (),
+    suspend :- {} <-- (),
+    resume :- {} <-- (),
+    get_source_position :- source_region <-- (),
+    get_exit_status :- exit_status <-- (),
+    get_exit_exceptions :- array[exception] <-- (),
+    get_exit_jump_target :- jump_target <-- ()
+  ];
+
+immutable semaphore := type interface
+  [
+    /*
+     * Semaphores have two core operations, the first of which increments the
+     * counter and the second of which decrements it, waiting if necessary
+     * until that is possible without going below zero.  The use of semaphores
+     * has a long history, and different names have been used over the years
+     * for these same two operations.  According to Wikipedia's "Semaphore
+     * (programming)" article (as accessed on Tuesday, March 15, 2011), common
+     * names for the first operation are "V", "signal", "up", "release",
+     * "post", and "vacate".  Common names for the second operation are "P",
+     * "wait", "down", "acquire", "pend", and "procure".  In the interest of
+     * allowing users to use the names they are already familiar with, and
+     * following the convention in this interface that only lower-case letters
+     * are used in identifiers, the lower-case versions of all of these names
+     * are provided in this interface as aliases to the two core operations.
+     *
+     * The optional integer parameter is the amount by which the semaphore
+     * value is to be increased or decreased.  It defaults to one if this
+     * parameter is not provided.
+     */
+
+    v :- {} <-- ([1...+oo] := *),
+    signal :- {} <-- ([1...+oo] := *),
+    up :- {} <-- ([1...+oo] := *),
+    release :- {} <-- ([1...+oo] := *),
+    post :- {} <-- ([1...+oo] := *),
+    vacate :- {} <-- ([1...+oo] := *),
+
+    p :- {} <-- ([1...+oo] := *),
+    wait :- {} <-- ([1...+oo] := *),
+    down :- {} <-- ([1...+oo] := *),
+    acquire :- {} <-- ([1...+oo] := *),
+    pend :- {} <-- ([1...+oo] := *),
+    procure :- {} <-- ([1...+oo] := *),
+
+    current :- [0...+oo] <-- (),
+
+    /*
+     * The try_p() method is a variant on p() that has a time limit.  If the
+     * p() operation can complete in the time specified by the "seconds"
+     * parameter, it acts like p() and returns true.  Otherwise, it leaves the
+     * semaphore unchanged and returns false.  The default value of "seconds"
+     * is zero, so if "seconds" is not provided, try_p() is non-blocking and
+     * will always return immediately one was or the other.  If "seconds" is
+     * "+oo", the effect is the same as p() and it will never return false.
+     */
+    try_p :- boolean <-- ([1...+oo] := *, seconds : [0....+oo] := *)
+  ];
+
+quark et_thread_creation_failed;
+quark et_time_too_far;
+quark et_semaphore_up_beyond_limit;
+quark et_wait_all_not_root;
+quark et_interrupt_unnamed_extra;
+quark et_interrupt_finished;
+quark et_suspend_finished;
+quark et_suspend_suspended;
+quark et_resume_not_suspended;
+quark et_get_exit_status_not_finished;
+quark et_get_exit_exceptions_not_finished;
+quark et_get_exit_exceptions_no_exception;
+quark et_get_exit_jump_target_not_finished;
+quark et_get_exit_jump_target_no_jump;
+
+hide;
+
+dummy_child_exception_target:
+
+class internal_thread()
+  {
+    function name() returns string (thread_name(this));
+    function is_done() returns boolean (thread_is_done(this));
+    procedure interrupt(tag : any_quark, message : string, other : [...] := [])
+      { internal_call(thread_interrupt, [this, tag, message, other]); };
+    procedure kill() { thread_kill(this); };
+    procedure wait_for_termination() { thread_wait_for_termination(this); };
+    function get_status() returns status (thread_get_status(this));
+    procedure suspend() { internal_call(thread_suspend, [this]); };
+    procedure resume() { internal_call(thread_resume, [this]); };
+    function get_source_position() returns source_region
+      (thread_get_source_position(this));
+    function get_exit_status() returns exit_status
+      (internal_call(thread_get_exit_status, [this]));
+    function get_exit_exceptions() returns array[exception]
+      (internal_call(thread_get_exit_exceptions, [this]));
+    function get_exit_jump_target() returns jump_target
+      (internal_call(thread_get_exit_jump_target, [this]));
+  };
+
+function create_thread_internal(handle : internal_thread, body : {} <-- (),
+                                parent : object, name : string)
+        returns thread :=
+  nb_dll "thread.so" : "create_thread_internal_handler";
+
+function thread_name(handle : internal_thread) returns string :=
+  nb_dll "thread.so" : "thread_name_handler";
+
+function thread_is_done(handle : internal_thread) returns boolean :=
+  nb_dll "thread.so" : "thread_is_done_handler";
+
+procedure thread_interrupt(handle : internal_thread, tag : any_quark,
+                           message : string, other : [...]) :=
+  nb_dll "thread.so" : "thread_interrupt_handler";
+
+procedure thread_kill(handle : internal_thread) :=
+  nb_dll "thread.so" : "thread_kill_handler";
+
+procedure thread_wait_for_termination(handle : internal_thread) :=
+  nb_dll "thread.so" : "thread_wait_for_termination_handler";
+
+function thread_get_status(handle : internal_thread) returns status :=
+  nb_dll "thread.so" : "thread_get_status_handler";
+
+procedure thread_suspend(handle : internal_thread) :=
+  nb_dll "thread.so" : "thread_suspend_handler";
+
+procedure thread_resume(handle : internal_thread) :=
+  nb_dll "thread.so" : "thread_resume_handler";
+
+function thread_get_source_position(handle : internal_thread)
+        returns source_region :=
+  nb_dll "thread.so" : "thread_get_source_position_handler";
+
+function thread_get_exit_status(handle : internal_thread)
+        returns exit_status :=
+  nb_dll "thread.so" : "thread_get_exit_status_handler";
+
+function thread_get_exit_exceptions(handle : internal_thread)
+        returns array[exception] :=
+  nb_dll "thread.so" : "thread_get_exit_exceptions_handler";
+
+function thread_get_exit_jump_target(handle : internal_thread)
+        returns jump_target :=
+  nb_dll "thread.so" : "thread_get_exit_jump_target_handler";
+
+class internal_semaphore(limit : [1...+oo], start : [0...+oo])
+  {
+    procedure v(amount : [1...+oo] := 1)
+      { semaphore_up(this, amount); };
+    procedure signal(amount : [1...+oo] := 1)
+      { semaphore_up(this, amount); };
+    procedure up(amount : [1...+oo] := 1)
+      { semaphore_up(this, amount); };
+    procedure release(amount : [1...+oo] := 1)
+      { semaphore_up(this, amount); };
+    procedure post(amount : [1...+oo] := 1)
+      { semaphore_up(this, amount); };
+    procedure vacate(amount : [1...+oo] := 1)
+      { semaphore_up(this, amount); };
+    procedure p(amount : [1...+oo] := 1)
+      { internal_call(semaphore_down, [this, amount]); };
+    procedure wait(amount : [1...+oo] := 1)
+      { internal_call(semaphore_down, [this, amount]); };
+    procedure down(amount : [1...+oo] := 1)
+      { internal_call(semaphore_down, [this, amount]); };
+    procedure acquire(amount : [1...+oo] := 1)
+      { internal_call(semaphore_down, [this, amount]); };
+    procedure pend(amount : [1...+oo] := 1)
+      { internal_call(semaphore_down, [this, amount]); };
+    procedure procure(amount : [1...+oo] := 1)
+      { internal_call(semaphore_down, [this, amount]); };
+    function current() returns [0...+oo]
+      (semaphore_current(this));
+    function try_p(amount : [1...+oo] := 1, seconds : [0....+oo] := 0)
+            returns boolean
+      (semaphore_try_down(this, amount, seconds));
+    initialize_semaphore(this, limit, start);
+  };
+
+procedure initialize_semaphore(handle : internal_semaphore, limit : [1...+oo],
+        start : [0...+oo], parent := this) :=
+  nb_dll "thread.so" : "initialize_semaphore_handler" pure_safe;
+
+procedure semaphore_up(handle : internal_semaphore, amount : [1...+oo] := 1) :=
+  nb_dll "thread.so" : "semaphore_up_handler";
+
+procedure semaphore_down(handle : internal_semaphore,
+                         amount : [1...+oo] := 1) :=
+  nb_dll "thread.so" : "semaphore_down_handler";
+
+function semaphore_current(handle : internal_semaphore) returns [0...+oo] :=
+  nb_dll "thread.so" : "semaphore_current_handler";
+
+function semaphore_try_down(handle : internal_semaphore, amount : [1...+oo],
+        seconds : [0....+oo], parent := this) returns boolean :=
+  nb_dll "thread.so" : "semaphore_try_down_handler";
+
+function generate_name()
+  {
+    static variable number := 0;
+    ++number;
+    return "Thread " ~ sprint(number);
+  };
+
+export;
+
+function create_thread(body : {} <-- (), name : string := generate_name())
+        returns thread
+  (create_thread_internal(internal_thread(), body, this, name));
+
+function boolean_semaphore(start : boolean := false) returns semaphore
+  (internal_semaphore(1, start ? 1 : 0));
+
+function integer_semaphore(limit : [1...+oo], start : [0...+oo] := 0)
+        returns semaphore
+  (internal_semaphore(limit, start));
+
+procedure wait_for_all_threads() :=
+  nb_dll "thread.so" : "wait_for_all_threads_handler";
+
+function all_threads() returns array[thread] :=
+  nb_dll "thread.so" : "all_threads_handler";
+
+function current_thread() returns thread :=
+  nb_dll "thread.so" : "current_thread_handler";
+
+procedure sleep(seconds : [0....+oo]) :=
+  nb_dll "thread.so" : "sleep_handler" pure_safe;
+
+procedure yield() := nb_dll "thread.so" : "yield_handler" pure_safe;
+
+hide;
+
+procedure initialize_module(handle : internal_thread, parent : object,
+                            dummy_child_exception_target : jump_target) :=
+  nb_dll "thread.so" : "initialize_module_handler" pure_safe;
+
+initialize_module(internal_thread(), this, dummy_child_exception_target);

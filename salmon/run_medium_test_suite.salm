@@ -1,0 +1,14 @@
+#!./salmoneye
+/* file "run_medium_test_suite.salm" */
+
+/*
+ *  This runs all the tests in my SalmonEye test suite that can run in a
+ *  reasonable amount of time and memory.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+`./salmoneye tests/runlocal.salm -T -xp multi,debug -xp multi,debug-multi -xp test_reference_manual,debug -xp test_reference_manual,debug-multi -xp unlimited_floating_point,debug -xp unlimited_floating_point,debug-multi -xp limited_floating_point,debug -xp limited_floating_point,debug-multi -xp logarithm,debug -xp logarithm,debug-multi -xp ieee754,debug -xp ieee754,debug-multi -xp thread_stress,debug -xp thread_stress,debug-multi`;

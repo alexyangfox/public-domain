@@ -1,0 +1,55 @@
+#!/usr/local/bin/salmoneye
+/* file "factorial_block.salm" */
+
+/*
+ *  This file is an example of Salmon.  This program computes the factorial of
+ *  its command-line argument, which should be a decimal integer.  This version
+ *  of the program does the multiplication in blocks for efficency because
+ *  multiplication of large values that are close to the same size is more
+ *  efficient than doing a bunch of asymmetric multiplies of small values by
+ *  much larger values.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+function block_multiply(lower : (0...+oo), upper : (0...+oo) / [lower...+oo))
+        returns (0...+oo)
+  {
+    immutable diff := upper - lower;
+    if (diff >= 3)
+      {
+        immutable mid := lower + (diff /:: 2);
+        return block_multiply(lower, mid) * block_multiply(mid + 1, upper);
+      }
+    else
+      {
+        if (diff == 2)
+            return (lower * (lower + 1)) * upper;;
+        return lower * upper;
+      };
+  };
+
+function factorial(upper : [0...+oo)) returns (0...+oo)
+  {
+    if (upper == 0)
+        return 1;;
+    if (upper == 1)
+        return 1;;
+    if (upper == 2)
+        return 2;;
+    return block_multiply(2, upper);
+  };
+
+try
+  {
+    assert(length(arguments) == 2);
+    assert(arguments[1] in @^[0-9]*$@);
+    block_multiply(1, scanf(open_input_string(arguments[1]), "%d%")[0])!
+  }
+catch
+  {
+    standard_error.print("Usage: ", arguments[0], " <number>\n");
+  };

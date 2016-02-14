@@ -1,0 +1,644 @@
+/* file "test_reference_manual.salm" */
+
+/*
+ *  This file checks for certain kinds of errors in the Salmon Reference
+ *  Manual.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+include "parse_manual.salm";
+
+
+immutable generate_fixed_manual_sections : boolean := false;
+
+variable manual_file_name : string := "docs/Salmon_Reference_Manual.txt";
+variable header_file_name : string := "all_exceptions.h";
+variable test_file_name : string := "tests/exceptions.salm";
+
+if (length(arguments) > 1)
+    manual_file_name := arguments[1];;
+if (length(arguments) > 2)
+    header_file_name := arguments[2];;
+if (length(arguments) > 3)
+    test_file_name := arguments[3];;
+
+immutable manual : salmon_reference_manual :=
+        parse_salmon_reference_manual(manual_file_name);
+
+class example()
+  {
+    hide;
+
+    variable body : string := "";
+    variable have_one : boolean := false;
+    variable last_indentation : [0...+oo) := 0;
+
+    export;
+
+    function get_body()  (body);
+    procedure set_body(new_body : string)  { body := new_body; };
+
+    procedure add_line(line : string)
+      {
+        immutable de_indented := substitute(@^ +@, line, "");
+        immutable indentation := length(line) - length(de_indented);
+        if (have_one && (indentation > (last_indentation + 4)))
+          {
+            body ~= " ";
+            body ~= de_indented;
+          }
+        else
+          {
+            if (have_one)
+                body ~= "\n";;
+            body ~= line;
+            last_indentation := indentation;
+          };
+        have_one := true;
+      };
+  };
+
+class manual_one_tag_info(init_tag : string)
+  {
+    hide;
+
+    immutable tag : string := init_tag;
+    variable body : string := "";
+    variable examples : array[example] := [];
+
+    export;
+
+    function get_tag()  (tag);
+    function get_body()  (body);
+    function get_examples()  (examples);
+
+    procedure add_line(line : string)
+      { body ~= line ~ "\n"; };
+    procedure add_example(new_example : example)
+      { examples ~= [new_example]; };
+  };
+
+class manual_all_tag_info(manual : salmon_reference_manual)
+  {
+    hide;
+
+    variable tags : array[manual_one_tag_info] := [];
+    variable lookup : !{} --> (manual_one_tag_info | {null}) :=
+            <<(* --> null)>>;
+
+    export;
+
+    function get_tags()  (tags);
+    function get_tag(tag : string)  (lookup[tag]);
+
+      {
+        immutable tag_section : section :=
+                manual.get_chapter("Standard Library").
+                        get_section("Exceptions");
+        immutable tag_lines : array[string] :=
+                split(@\n@, tag_section.get_body());
+
+        variable current_tag_info : manual_one_tag_info | {null} := null;
+        variable current_example : example | {null} := null;
+        variable in_examples_section : boolean := false;
+        variable multiple_examples_expected : boolean := false;
+        variable multiple_examples_found : boolean := false;
+        variable expect_blank : boolean := false;
+        variable blank_count : [0...+oo) := 0;
+
+        procedure check_examples()
+          {
+            if (in_examples_section && (current_example == null))
+              {
+                throw(quark, sprint("For tag `", current_tag_info.get_tag(),
+                             "', an example section had no examples."));
+              };
+            if (in_examples_section && multiple_examples_expected &&
+                !multiple_examples_found)
+              {
+                throw(quark, sprint("For tag `", current_tag_info.get_tag(),
+                        "', multiple examples were specified but only one " ~
+                        "was found."));
+              };
+          };
+
+        iterate (tag_line; tag_lines)
+          {
+            if (expect_blank)
+              {
+                if (tag_line == "")
+                  {
+                    expect_blank := false;
+                  }
+                else
+                  {
+                    throw(quark, sprint("Expected blank line, found `",
+                                        tag_line, "'."));
+                  };
+              };
+
+            switch (tag_line)
+            case (@^  \* @)
+              {
+                if (!(tag_line in @^  \* quark exception_tag_[a-z0-9_]+;$@))
+                  {
+                    throw(quark, sprint("Confused by line `", tag_line, "'."));
+                  };
+                immutable tag := substitute(
+                        @(^  \* quark exception_tag_)|(;$)@, tag_line, "");
+
+                check_examples();
+
+                current_tag_info := manual_one_tag_info(tag);
+                if (lookup[tag] != null)
+                  {
+                    throw(quark,
+                          "Tag `" ~ tag ~
+                          "' appears more than once in the manual.");
+                  };
+                tags ~= [current_tag_info];
+                lookup[tag] := current_tag_info;
+                current_example := null;
+                in_examples_section := false;
+
+                expect_blank := true;
+              }
+            case ({"EXAMPLE:", "EXAMPLES:"})
+              {
+                if (current_tag_info == null)
+                  {
+                    throw(quark, sprint(
+                            "An example section was found outside the " ~
+                            "section for any tag.\n"));
+                  };
+
+                if (in_examples_section)
+                  {
+                    throw(quark, sprint(
+                            "More than one example section found for tag `",
+                            current_tag_info.get_tag(), ".\n"));
+                  };
+
+                in_examples_section := true;
+                multiple_examples_expected := (tag_line == "EXAMPLES:");
+                multiple_examples_found := false;
+
+                expect_blank := true;
+              }
+            case (@^      \+ @)
+              {
+                if (!in_examples_section)
+                  {
+                    if (current_tag_info != null)
+                        current_tag_info.add_line(tag_line);;
+                    continue;
+                  };
+
+                if (current_example != null)
+                  {
+                    multiple_examples_found := true;
+                    if (!multiple_examples_expected)
+                      {
+                        throw(quark, sprint(
+                                "For tag `", current_tag_info.get_tag(),
+                                "', one example was specified but more than " ~
+                                "one was found."));
+                      };
+                  };
+
+                current_example := example();
+                blank_count := 0;
+                current_tag_info.add_example(current_example);
+                current_example.add_line(
+                        substitute(@^      \+ @, tag_line, ""));
+              }
+            case (string)
+              {
+                if (!in_examples_section)
+                  {
+                    if (current_tag_info != null)
+                        current_tag_info.add_line(tag_line);;
+                    continue;
+                  };
+
+                if (tag_line == "")
+                  {
+                    ++blank_count;
+                  }
+                else if ((current_example != null) &&
+                         (tag_line in @^        @))
+                  {
+                    while (blank_count > 0)
+                      {
+                        current_example.add_line("");
+                        --blank_count;
+                      };
+                    current_example.add_line(
+                            substitute(@^        @, tag_line, ""));
+                  }
+                else
+                  {
+                    throw(quark, sprint(
+                            "For tag `", current_tag_info.get_tag(),
+                            "', line `", tag_line,
+                            "' in the example section wasn't understood."));
+                  };
+              };
+          };
+
+        check_examples();
+      };
+  };
+
+class header_all_tag_info(file_name : string)
+  {
+    hide;
+
+    variable tags : array[string] := [];
+    variable lookup : !{} --> boolean := <<(* --> false)>>;
+
+    export;
+
+    function get_tags() returns array[string]  (tags);
+    function has_tag(tag : string) returns boolean (lookup[tag]);
+
+      {
+        immutable stream : input_text_stream :=
+                open_input_text_file(file_name);
+        cleanup { delete(stream); };
+
+        while (true)
+          {
+            immutable line : string | {end_of_input} := stream.read_line();
+            if (line == end_of_input)
+                break;;
+
+            if (line in @^DEFINE_EXCEPTION_TAG\(.*\)$@)
+              {
+                immutable tag : string := substitute(
+                        @(^DEFINE_EXCEPTION_TAG\()|(\)$)@, line, "");
+                if (lookup[tag])
+                  {
+                    throw(quark,
+                          "Tag `" ~ tag ~ "' appears more than once in \"" ~
+                          file_name ~ "\".");
+                  };
+                tags ~= [tag];
+                lookup[tag] := true;
+              };
+          };
+      };
+  };
+
+immutable manual_tag_info : manual_all_tag_info := manual_all_tag_info(manual);
+
+immutable header_tag_info : header_all_tag_info :=
+        header_all_tag_info(header_file_name);
+
+procedure error(...)
+  { print("Error: ", call(sprint, arguments), "\n"); };
+
+class test_one_tag_info(init_tag : string)
+  {
+    hide;
+
+    immutable tag : string := init_tag;
+    variable examples : array[example] := [];
+
+    export;
+
+    function get_tag()  (tag);
+    function get_examples()  (examples);
+
+    procedure add_example(new_example : example)
+      { examples ~= [new_example]; };
+  };
+
+quark untestable;
+
+immutable top_level_start_prefix : regular_expression :=
+        @^print\(\"Testing for \", exception_tag_@;
+immutable top_level_start_suffix : regular_expression :=
+        @, \" exception\.\\n\"\);$@;
+immutable top_level_start_pattern : regular_expression :=
+        top_level_start_prefix ~ @.*@ ~ top_level_start_suffix;
+immutable top_level_substitute_pattern : regular_expression :=
+        top_level_start_prefix | top_level_start_suffix;
+
+class test_all_tag_info(file_name : string)
+  {
+    hide;
+
+    immutable tag_info_type := type test_one_tag_info | {untestable, null};
+
+    variable tags : array[test_one_tag_info] := [];
+    variable lookup : !{} --> tag_info_type := <<(* --> null)>>;
+
+    export;
+
+    function get_tags() returns array[test_one_tag_info]  (tags);
+    function get_tag(tag : string) returns tag_info_type (lookup[tag]);
+
+      {
+        immutable stream : input_text_stream :=
+                open_input_text_file(file_name);
+        cleanup { delete(stream); };
+
+        variable ignore_next : boolean := false;
+
+        while (true)
+          {
+            immutable line : string | {end_of_input} := stream.read_line();
+            if (line == end_of_input)
+                break;;
+
+            procedure do_example(tag : string, prefix : string | {null},
+                                 closer : string)
+              {
+                procedure handle_example(info : test_one_tag_info)
+                  {
+                    immutable this_example : example := example();
+                    info.add_example(this_example);
+
+                    immutable first_line : string | {end_of_input} :=
+                            stream.read_line();
+                    if (first_line != "  {")
+                      {
+                        error("In test file \"", file_name,
+                              "\", found a bad line (`", first_line,
+                              "') as the first line of a test of tag `", tag,
+                              "'.");
+                        return;
+                      };
+
+                    variable lines : array[string] := [];
+                    variable indented : boolean := false;
+
+                    if (prefix in string)
+                        lines ~= [prefix];;
+
+                    while (true)
+                      {
+                        immutable line : string | {end_of_input} :=
+                                stream.read_line();
+                        switch (line)
+                        case ({end_of_input})
+                          {
+                            error("Test file \"", file_name,
+                                  "\" ends in the middle of a test of tag `",
+                                  tag, "'.");
+                            break;
+                          }
+                        case ({closer})
+                          {
+                            break;
+                          }
+                        case (@^    @)
+                          {
+                            lines ~= [substitute(indented ? @^  @ : @^    @,
+                                                 line, "")];
+                          }
+                        case (@^  @)
+                          {
+                            if (!indented)
+                              {
+                                for (num; 0; num < length(lines))
+                                  {
+                                    if (lines[num] != "")
+                                        lines[num] := "  " ~ lines[num];;
+                                  };
+                                indented := true;
+                              };
+                            lines ~= [substitute(@^  @, line, "")];
+                          }
+                        case ({""})
+                          {
+                            lines ~= [""];
+                          }
+                        case (!{})
+                          {
+                            error("In test file \"", file_name,
+                                  "\", found a bad line (`", line, "') in " ~
+                                  "the middle of a test of tag `", tag, "'.");
+                            break;
+                          };
+                      };
+
+                    iterate (line; lines)
+                        this_example.add_line(line);;
+
+                    if (prefix == "/* At top level. */")
+                      {
+                        variable body : string := this_example.get_body();
+                        body := substitute(
+                                @cleanup\n  \{\n    try\n      \{\n        @,
+                                body, "cleanup { ");
+                        body := substitute(
+                          @\n      \}\n    catch\n      \{\n.*\n      \};\n  @,
+                          body, " ");
+                        this_example.set_body(body);
+                      };
+                  };
+
+                if (ignore_next)
+                  {
+                    ignore_next := false;
+                    continue;
+                  };
+
+                immutable existing : tag_info_type := lookup[tag];
+                switch (existing)
+                case (test_one_tag_info)
+                  {
+                    handle_example(existing);
+                  }
+                case ({null, untestable})
+                  {
+                    immutable new_info : test_one_tag_info :=
+                            test_one_tag_info(tag);
+                    tags ~= [new_info];
+                    lookup[tag] := new_info;
+                    handle_example(new_info);
+                  };
+              };
+
+            if (line in @^test\(exception_tag_.*, procedure\(\)$@)
+              {
+                immutable tag : string := substitute(
+                        @(^test\(exception_tag_)|(, procedure\(\)$)@, line,
+                        "");
+                do_example(tag := tag, prefix := null, closer := "  });");
+              }
+            else if (line == "/*")
+              {
+                variable comment_line : string | {end_of_input} :=
+                        stream.read_line();
+                if (comment_line == end_of_input)
+                  {
+                    error("File \"", file_name,
+                          "\" ends in the middle of a comment.\n");
+                    break;
+                  };
+
+                if (comment_line in @^ \*  Note that@)
+                  {
+                    while (true)
+                      {
+                        immutable components : array[string] :=
+                                split(@ exception_tag_@, comment_line);
+                        iterate(component;
+                                components[1...length(components) - 1])
+                          {
+                            immutable tag : string :=
+                                    substitute(@[^a-z0-9_].*@, component, "");
+                            if (!(lookup[tag] in test_one_tag_info))
+                                lookup[tag] := untestable;;
+                          };
+
+                        if (comment_line in @\*/@)
+                            break;;
+
+                        comment_line := stream.read_line();
+                        if (comment_line == end_of_input)
+                          {
+                            error("File \"", file_name,
+                                  "\" ends in the middle of a comment.\n");
+                            break;
+                          };
+                      };
+                  };
+              }
+            else if (line ==
+                     "/* Next, comes another infrastructure test.  This test" ~
+                     " should produce an error")
+              {
+                immutable comment_line : string | {end_of_input} :=
+                        stream.read_line();
+                if (comment_line == end_of_input)
+                  {
+                    error("File \"", file_name,
+                          "\" ends in the middle of a comment.\n");
+                    break;
+                  };
+
+                if (comment_line ==
+                    " * message about the wrong tag for the exception. */")
+                  {
+                    ignore_next := true;
+                  };
+              }
+            else if (line in top_level_start_pattern)
+              {
+                immutable tag : string :=
+                        substitute(top_level_substitute_pattern, line, "");
+                do_example(tag := tag, prefix := "/* At top level. */",
+                           closer := "  };");
+              };
+          };
+      };
+  };
+
+immutable test_tag_info : test_all_tag_info :=
+        test_all_tag_info(test_file_name);
+
+iterate (tag_info; manual_tag_info.get_tags())
+  {
+    immutable tag : string := tag_info.get_tag();
+
+    if (!(header_tag_info.has_tag(tag)))
+      {
+        error("Tag `", tag, "' shows up in the manual but not in \"",
+              header_file_name, "\".");
+      };
+
+    immutable test_info : test_one_tag_info | {untestable, null} :=
+            test_tag_info.get_tag(tag);
+    switch (test_info)
+    case (test_one_tag_info)
+      {
+        immutable manual_examples : array[example] := tag_info.get_examples();
+        immutable test_examples : array[example] := test_info.get_examples();
+        for (example_num; 0;
+             ((example_num < length(manual_examples)) &&
+              (example_num < length(test_examples))))
+          {
+            if (manual_examples[example_num].get_body() !=
+                test_examples[example_num].get_body())
+              {
+                error("For tag `", tag,
+                      "', the manual and test have different versions of " ~
+                      "example ", example_num + 1, ".");
+                print("    Manual Version:\n");
+                print(manual_examples[example_num].get_body(), "\n");
+                print("    Test Version:\n");
+                print(test_examples[example_num].get_body(), "\n");
+                print("\n");
+              };
+          };
+        for (example_num; length(manual_examples);
+             example_num < length(test_examples))
+          {
+            if (generate_fixed_manual_sections)
+              {
+                if (example_num == length(manual_examples))
+                  {
+                    print("  * quark exception_tag_", tag, ";\n");
+                    print("\n");
+                    print("@@@\n");
+                    print("\n");
+                    print("EXAMPLE");
+                    if (example_num + 1 < length(test_examples))
+                        print("S");;
+                    print(":\n");
+                    print("\n");
+                  };
+                print("      + ");
+                print(substitute(@        \n@,
+                        substitute(@\n@, test_examples[example_num].get_body(),
+                                   "\n        "), "\n"), "\n");
+                print("\n");
+              }
+            else
+              {
+                error("For tag `", tag,
+                      "', the test has an example that the manual does not:");
+                print(test_examples[example_num].get_body(), "\n");
+                print("\n");
+              };
+          };
+        for (example_num; length(test_examples);
+             example_num < length(manual_examples))
+          {
+            error("For tag `", tag,
+                  "', the manual has an example that the test does not:");
+            print(manual_examples[example_num].get_body(), "\n");
+            print("\n");
+          };
+      }
+    case ({untestable})
+      {
+        if (length(tag_info.get_examples()) > 0)
+          {
+            error("The manual lists an example for tag `", tag,
+                  "', but the test file says it's untestable.");
+          };
+      }
+    case ({null})
+      {
+        error("The manual lists tag `", tag,
+              "', but the test file does not mention it.");
+      };
+  };
+
+iterate (tag; header_tag_info.get_tags())
+  {
+    if (manual_tag_info.get_tag(tag) == null)
+      {
+        error("Tag `", tag, "' shows up in \"", header_file_name,
+              "\" but not in the manual.");
+      };
+  };

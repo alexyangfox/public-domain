@@ -1,0 +1,391 @@
+/* file "unlimited_floating_point.salm" */
+
+/*
+ *  This file contains a software implementation of floating point arithmetic
+ *  with no limit on mantissa precision or exponent for the Salmon Programming
+ *  Langauge.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+hide;
+
+
+use "print_floating_point.salm" : "print_floating_point.si";
+use "scientific_form.salm" : "scientific_form.si";
+
+
+export et_fp_bad_specifier;
+export et_fp_integer_specifier_non_integer_value;
+
+export;
+
+
+use "floating_point_interface.salm" : "floating_point_interface.si";
+
+
+function unlimited_floating_point(ageless base : (0...+oo))
+        returns <<floating_point_full_interface(type (0...+oo), type {},
+                          any_base_floating_point_interface)>> <--
+                (init_mantissa :
+                         rational | <<floating_point_access_type(type {})>>,
+                 init_exponent : integer := *) /
+                <<floating_point_full_interface(type {base},
+                          floating_point_interface(base),
+                          any_base_floating_point_interface)>> <--
+                (init_mantissa : rational | <<floating_point_interface(base)>>,
+                 init_exponent : integer := *)
+  {
+    ageless immutable this_interface := floating_point_interface(base);
+
+    ageless immutable this_return := floating_point_full_interface(type {base},
+            floating_point_interface(base), any_base_floating_point_interface);
+
+    ageless class this_class(init_mantissa : rational | this_interface,
+                             init_exponent : integer := 0) returns this_return
+      {
+        hide;
+
+        static function normalize(init_mantissa : rational,
+                                  init_exponent : integer)
+                returns [mantissa : rational, exponent : (-oo...+oo)]
+          {
+            switch ([init_mantissa, init_exponent])
+            case ([{+oo, -oo, 1/0, 0/0}, integer] |
+                  [rational, {+oo, -oo, 1/0, 0/0}])
+              {
+                return [mantissa := init_mantissa * power(base, init_exponent),
+                        exponent := 0];
+              }
+            case ([{0}, integer])
+              {
+                return [mantissa := 0, exponent := 0];
+              }
+            case ([(-oo....0), integer])
+              {
+                immutable negated :=
+                        find_scientific_form(-init_mantissa, base);
+                return [mantissa := -(negated[0]),
+                        exponent := negated[1] + init_exponent];
+              }
+            case (!{})
+              {
+                immutable norm := find_scientific_form(init_mantissa, base);
+                return [mantissa := norm[0],
+                        exponent := norm[1] + init_exponent];
+              };
+          };
+
+        export;
+
+        virtual immutable constructor := this_class;
+        immutable op_result_type := type (constructor & this_return);
+
+        function operator+(other : this_interface, reversed : boolean)
+                returns op_result_type
+          {
+            return constructor(
+                    normalized_mantissa +
+                    (other.mantissa() *
+                     power(base, (other.exponent() - normalized_exponent))),
+                    normalized_exponent);
+          };
+
+        function operator+(other : rational, reversed : boolean)
+                returns op_result_type
+          {
+            return constructor(
+                    normalized_mantissa +
+                    (other * power(base, -normalized_exponent)),
+                    normalized_exponent);
+          };
+
+        function operator-(other : this_interface, reversed : boolean)
+                returns op_result_type
+          {
+            if (reversed)
+              {
+                return constructor(
+                        other.mantissa() -
+                        (normalized_mantissa *
+                         power(base,
+                               (normalized_exponent - other.exponent()))),
+                        other.exponent());
+              }
+            else
+              {
+                return constructor(
+                        normalized_mantissa -
+                        (other.mantissa() *
+                         power(base,
+                               (other.exponent() - normalized_exponent))),
+                        normalized_exponent);
+              };
+          };
+
+        function operator-(other : rational, reversed : boolean)
+                returns op_result_type
+          {
+            if (reversed)
+              {
+                return constructor(
+                        other -
+                        (normalized_mantissa *
+                         power(base, normalized_exponent)), 0);
+              }
+            else
+              {
+                return constructor(
+                        normalized_mantissa -
+                        (other * power(base, -normalized_exponent)),
+                        normalized_exponent);
+              };
+          };
+
+        function operator-()
+                returns op_result_type
+          {
+            return constructor(-normalized_mantissa, normalized_exponent);
+          };
+
+        function operator+()
+                returns op_result_type
+          {
+            return constructor(normalized_mantissa, normalized_exponent);
+          };
+
+        function operator*(other : this_interface, reversed : boolean)
+                returns op_result_type
+          {
+            return constructor(normalized_mantissa * other.mantissa(),
+                               normalized_exponent + other.exponent());
+          };
+
+        function operator*(other : rational, reversed : boolean)
+                returns op_result_type
+          {
+            return constructor(normalized_mantissa * other,
+                               normalized_exponent);
+          };
+
+        function operator/(other : this_interface, reversed : boolean)
+                returns op_result_type
+          {
+            if (reversed)
+              {
+                return constructor(other.mantissa() / normalized_mantissa,
+                                   other.exponent() - normalized_exponent);
+              }
+            else
+              {
+                return constructor(normalized_mantissa / other.mantissa(),
+                                   normalized_exponent - other.exponent());
+              };
+          };
+
+        function operator/(other : rational, reversed : boolean)
+                returns op_result_type
+          {
+            if (reversed)
+              {
+                return constructor(other / normalized_mantissa,
+                                   -normalized_exponent);
+              }
+            else
+              {
+                return constructor(normalized_mantissa / other,
+                                   normalized_exponent);
+              };
+          };
+
+        function operator==(other : this_interface, reversed : boolean)
+                returns boolean
+          {
+            return ((normalized_mantissa == other.mantissa()) &&
+                    (normalized_exponent == other.exponent()));
+          };
+
+        function operator==(other : rational, reversed : boolean)
+                returns boolean
+          {
+            return (this == constructor(other, 0));
+          };
+
+        function operator!=(other : this_interface, reversed : boolean)
+                returns boolean
+          {
+            return !(this == other);
+          };
+
+        function operator!=(other : rational, reversed : boolean)
+                returns boolean
+          {
+            return !(this == other);
+          };
+
+        function operator>=(other_mantissa : rational,
+                other_exponent : (-oo...+oo), reversed : boolean)
+                        returns boolean
+          {
+            if (reversed)
+              {
+                if ((normalized_mantissa in {+oo, -oo, 1/0, 0/0, 0}) ||
+                    (other_mantissa in {+oo, -oo, 1/0, 0/0, 0}))
+                  {
+                    return (normalized_mantissa <= other_mantissa);
+                  };
+                if ((normalized_mantissa >= 0) != (other_mantissa >= 0))
+                    return (normalized_mantissa <= other_mantissa);;
+                immutable normalized_other :=
+                        normalize(other_mantissa, other_exponent);
+                if (normalized_exponent < normalized_other.exponent)
+                    return (normalized_mantissa >= 0);;
+                if (normalized_exponent > normalized_other.exponent)
+                    return (normalized_mantissa < 0);;
+                return (normalized_mantissa <= normalized_other.mantissa);
+              }
+            else
+              {
+                if ((normalized_mantissa in {+oo, -oo, 1/0, 0/0, 0}) ||
+                    (other_mantissa in {+oo, -oo, 1/0, 0/0, 0}))
+                  {
+                    return (normalized_mantissa >= other_mantissa);
+                  };
+                if ((normalized_mantissa >= 0) != (other_mantissa >= 0))
+                    return (normalized_mantissa >= other_mantissa);;
+                immutable normalized_other :=
+                        normalize(other_mantissa, other_exponent);
+                if (normalized_exponent > normalized_other.exponent)
+                    return (normalized_mantissa >= 0);;
+                if (normalized_exponent < normalized_other.exponent)
+                    return (normalized_mantissa < 0);;
+                return (normalized_mantissa >= normalized_other.mantissa);
+              };
+          };
+
+        function operator>=(other_mantissa : rational, reversed : boolean)
+                returns boolean
+          {
+            return operator>=(other_mantissa, 0, reversed);
+          };
+
+        function operator>=(other : this_interface, reversed : boolean)
+                returns boolean
+          {
+            return operator>=(other.mantissa(), other.exponent(), reversed);
+          };
+
+        function operator<=(other : this_interface, reversed : boolean)
+                returns boolean
+          {
+            return operator>=(other.mantissa(), other.exponent(), !reversed);
+          };
+
+        function operator<=(other : rational, reversed : boolean)
+                returns boolean
+          {
+            return operator>=(other, reversed := !reversed);
+          };
+
+        function operator>(other_mantissa : rational,
+                other_exponent : (-oo...+oo), reversed : boolean)
+                        returns boolean
+          {
+            if ((normalized_mantissa in {+oo, -oo, 1/0, 0/0, 0}) ||
+                (other_mantissa in {+oo, -oo, 1/0, 0/0, 0}))
+              {
+                return (reversed ? (normalized_mantissa < other_mantissa) :
+                                   (normalized_mantissa > other_mantissa));
+              };
+            return !(operator>=(other_mantissa, other_exponent, !reversed));
+          };
+
+        function operator>(other_mantissa : rational, reversed : boolean)
+                returns boolean
+          {
+            return operator>(other_mantissa, 0, reversed);
+          };
+
+        function operator<(other_mantissa : rational,
+                other_exponent : (-oo...+oo), reversed : boolean)
+                        returns boolean
+          {
+            if ((normalized_mantissa in {+oo, -oo, 1/0, 0/0, 0}) ||
+                (other_mantissa in {+oo, -oo, 1/0, 0/0, 0}))
+              {
+                return (reversed ? (normalized_mantissa > other_mantissa) :
+                                   (normalized_mantissa < other_mantissa));
+              };
+            return !(operator>=(other_mantissa, other_exponent, reversed));
+          };
+
+        function operator<(other_mantissa : rational, reversed : boolean)
+                returns boolean
+          {
+            return operator<(other_mantissa, 0, reversed);
+          };
+
+        function operator>(other : this_interface, reversed : boolean)
+                returns boolean
+          {
+            return operator>(other.mantissa(), other.exponent(), reversed);
+          };
+
+        function operator<(other : this_interface, reversed : boolean)
+                returns boolean
+          {
+            return operator<(other.mantissa(), other.exponent(), reversed);
+          };
+
+        hide;
+
+        variable normalized_mantissa : rational;
+        variable normalized_exponent : (-oo...+oo);
+
+        [normalized_mantissa, normalized_exponent] :=
+                ((init_mantissa in rational) ?
+                 normalize(init_mantissa, init_exponent) :
+                 normalize(init_mantissa.mantissa(),
+                           init_exponent + init_mantissa.exponent()));
+
+        function base_method() returns {base}
+          {
+            return base;
+          };
+
+        export base_method as base;
+
+        export;
+
+        function mantissa() returns rational
+          {
+            return normalized_mantissa;
+          };
+
+        function exponent() returns (-oo...+oo)
+          {
+            return normalized_exponent;
+          };
+
+        function sprint(specifier : string := "v", plus : boolean := false,
+                space : boolean := false, hash : boolean := false,
+                zero_width : [0...+oo) := 0,
+                precision : [0...+oo) | {null} := null) returns string
+          {
+            return call(floating_point_formatting,
+                    [original_mantissa := normalized_mantissa,
+                     original_exponent := normalized_exponent,
+                     original_base := base] ~ arguments);
+          };
+
+        function to_rational() returns rational
+          (normalized_mantissa * power(base, normalized_exponent));
+        function operator::(: {rational}) returns rational
+          (to_rational());
+      };
+
+    return this_class;
+  };

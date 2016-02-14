@@ -1,0 +1,13 @@
+/* "multi_one_item.si" */
+
+/*
+ *  This file contains a Salmon interface with one item for use by interface
+ *  include testing code in "multi.salm".
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+ia : integer

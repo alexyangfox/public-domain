@@ -1,0 +1,754 @@
+/* file "thread.salm" */
+
+/*
+ *  This file runs tests of Salmon thread support.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+use "thread.salm" : "thread.si";
+
+
+/*
+ * First, we'll use four threads to together add up the numbers from 0 to 999.
+ */
+  {
+    single variable full_sum : integer := 0;
+    immutable thread_count := 4;
+    variable threads : thread[0...(thread_count - 1)];
+    immutable chunk_count := 1000 /:: thread_count;
+    for (i; 0; i < thread_count)
+      {
+        ageless immutable start := i * chunk_count;
+        threads[i] := create_thread(procedure()
+          {
+            variable my_sum : integer := 0;
+            for (j; start; j < start + chunk_count)
+                my_sum += j;;
+            full_sum += my_sum;
+          });
+      };
+
+    iterate(one_thread; threads)
+        one_thread.wait_for_termination();;
+
+    print("Sum from 0 to 999 using ", thread_count, " threads: ", full_sum,
+          ".\n");
+  };
+
+/*
+ * Next, we'll test inter-thread synchronization using semaphores.
+ */
+  {
+    immutable creator_ready := boolean_semaphore(false);
+    immutable consumer_ready := boolean_semaphore(false);
+    variable portal : integer;
+
+    immutable creator := create_thread(procedure()
+      {
+        for (i; 0; i <= 10)
+          {
+            consumer_ready.down();
+            portal := i * i;
+            creator_ready.up();
+          };
+      });
+
+    print("Cubes of [0...10]: ");
+    for (j; 0; j <= 10)
+      {
+        consumer_ready.up();
+        creator_ready.down();
+        if (j > 0)
+            print(", ");;
+        print(portal * j);
+      };
+    print(".\n");
+
+    creator.wait_for_termination();;
+  };
+
+/*
+ * Now, let's check the multi_threading_works flag.
+ */
+print("Multi-threading works?  ", (multi_threading_works ? "Yes" : "No"),
+      ".\n");
+
+/*
+ * Next, we'll try the various methods available on a thread.
+ */
+  {
+    procedure print_location(region : source_region)
+      {
+        printf("%v%:", region.file_name);
+        if (region.start_line == region.end_line)
+          {
+            printf("%d%:[%d%-%d%]", region.start_line, region.start_column,
+                   region.end_column);
+          }
+        else
+          {
+            printf("[%d%:%d%]-[%d%:%d%]", region.start_line,
+                   region.start_column, region.end_line, region.end_column);
+          };
+      };
+
+    immutable thread1 := create_thread(procedure()
+      {
+        while (true)
+            yield();;
+      });
+
+    immutable thread2 := create_thread(procedure()
+      {
+        while (true)
+            yield();;
+      }, "Name Test Thread");
+
+    print("Name of thread1: `", thread1.name(), "'.\n");
+    print("Name of thread2: `", thread2.name(), "'.\n");
+
+    print("Status of thread1: ", thread1.get_status(), ".\n");
+    print("Status of thread2: ", thread2.get_status(), ".\n");
+
+    print("Is thread1's status running?  ",
+          ((thread1.get_status() == running) ? "Yes" : "No"), ".\n");
+    print("Is thread1's status a valid status?  ",
+          ((thread1.get_status() in status) ? "Yes" : "No"), ".\n");
+
+    print("Suspending thread1.\n");
+    thread1.suspend();
+
+    print("Is thread1's status running?  ",
+          ((thread1.get_status() == running) ? "Yes" : "No"), ".\n");
+    print("Is thread1's status suspended?  ",
+          ((thread1.get_status() == suspended) ? "Yes" : "No"), ".\n");
+    print("Is thread1's status a valid status?  ",
+          ((thread1.get_status() in status) ? "Yes" : "No"), ".\n");
+
+    print("Status of thread1: ", thread1.get_status(), ".\n");
+    print("Status of thread2: ", thread2.get_status(), ".\n");
+
+    print("Suspending thread2.\n");
+    thread2.suspend();
+
+    print("Status of thread1: ", thread1.get_status(), ".\n");
+    print("Status of thread2: ", thread2.get_status(), ".\n");
+
+    print("Resuming thread1.\n");
+    thread1.resume();
+
+    print("Status of thread1: ", thread1.get_status(), ".\n");
+    print("Status of thread2: ", thread2.get_status(), ".\n");
+
+    print("Is thread1 done?  ", (thread1.is_done() ? "Yes" : "No"), ".\n");
+    print("Is thread2 done?  ", (thread2.is_done() ? "Yes" : "No"), ".\n");
+
+    print("Killing thread1.\n");
+    thread1.kill();
+
+    print("Status of thread1: ", thread1.get_status(), ".\n");
+    print("Status of thread2: ", thread2.get_status(), ".\n");
+
+    print("Is thread1 done?  ", (thread1.is_done() ? "Yes" : "No"), ".\n");
+    print("Is thread2 done?  ", (thread2.is_done() ? "Yes" : "No"), ".\n");
+
+    print("Is thread1's status running?  ",
+          ((thread1.get_status() == running) ? "Yes" : "No"), ".\n");
+    print("Is thread1's status finished?  ",
+          ((thread1.get_status() == finished) ? "Yes" : "No"), ".\n");
+
+    print("Killing thread2.\n");
+    thread2.kill();
+
+    print("Status of thread1: ", thread1.get_status(), ".\n");
+    print("Status of thread2: ", thread2.get_status(), ".\n");
+
+    print("Is thread1 done?  ", (thread1.is_done() ? "Yes" : "No"), ".\n");
+    print("Is thread2 done?  ", (thread2.is_done() ? "Yes" : "No"), ".\n");
+
+    print("Exit status of thread1: ", thread1.get_exit_status(), ".\n");
+    print("Exit status of thread2: ", thread2.get_exit_status(), ".\n");
+
+    print("Is thread1's exit status exit_normal?  ",
+          ((thread1.get_exit_status() == exit_normal) ? "Yes" : "No"), ".\n");
+    print("Is thread1's exit status exit_killed?  ",
+          ((thread1.get_exit_status() == exit_killed) ? "Yes" : "No"), ".\n");
+    print("Is thread1's exit status a valid exit_status?  ",
+          ((thread1.get_exit_status() in exit_status) ? "Yes" : "No"), ".\n");
+
+    immutable blocker := boolean_semaphore(false);
+    immutable blocking_thread := create_thread(procedure()
+      {
+        blocker.down();
+      });
+
+    immutable sleeping_thread := create_thread(procedure()
+      {
+        sleep(1);
+      });
+
+    sleep(0.2);
+
+    print("Status of sleeping_thread: ", sleeping_thread.get_status(), ".\n");
+
+    print("Is sleeping_thread's status running?  ",
+          ((sleeping_thread.get_status() == running) ? "Yes" : "No"), ".\n");
+    print("Is sleeping_thread's status sleeping?  ",
+          ((sleeping_thread.get_status() == sleeping) ? "Yes" : "No"), ".\n");
+
+    print("Location of sleeping_thread: ");
+    print_location(sleeping_thread.get_source_position());
+    print(".\n");
+
+    print("Waiting for sleeping_thread to finish.\n");
+    sleeping_thread.wait_for_termination();
+
+    print("Status of sleeping_thread: ", sleeping_thread.get_status(), ".\n");
+
+    print("Exit status of sleeping_thread: ",
+          sleeping_thread.get_exit_status(), ".\n");
+
+    print("Is sleeping_thread's exit status exit_normal?  ",
+          ((sleeping_thread.get_exit_status() == exit_normal) ? "Yes" : "No"),
+          ".\n");
+
+    print("Status of blocking_thread: ", blocking_thread.get_status(), ".\n");
+
+    print("Is blocking_thread's status running?  ",
+          ((blocking_thread.get_status() == running) ? "Yes" : "No"), ".\n");
+    print("Is blocking_thread's status blocked?  ",
+          ((blocking_thread.get_status() == blocked) ? "Yes" : "No"), ".\n");
+
+    print("Location of blocking_thread: ");
+    print_location(blocking_thread.get_source_position());
+    print(".\n");
+
+    print("Unblocking blocking_thread.\n");
+    blocker.up();
+
+    print("Waiting for blocking_thread to finish.\n");
+    blocking_thread.wait_for_termination();
+
+    print("Status of blocking_thread: ", blocking_thread.get_status(), ".\n");
+
+    immutable jump_out_thread := create_thread(procedure()
+      {
+        goto jump_out;
+      });
+  jump_out:
+
+    jump_out_thread.wait_for_termination();
+
+    print("Exit status of jump_out_thread: ",
+          jump_out_thread.get_exit_status(), ".\n");
+
+    print("Is jump_out_thread's exit status exit_normal?  ",
+          ((jump_out_thread.get_exit_status() == exit_normal) ? "Yes" : "No"),
+          ".\n");
+    print("Is jump_out_thread's exit status exit_jumped_out?  ",
+          ((jump_out_thread.get_exit_status() == exit_jumped_out) ? "Yes" :
+           "No"), ".\n");
+
+    print("Exit jump target of jump_out_thread: ",
+          jump_out_thread.get_exit_jump_target(), ".\n");
+
+    immutable exception_thread := create_thread(procedure()
+      {
+        [] := [5 + "five"];
+      });
+
+    exception_thread.wait_for_termination();
+
+    print("Exit status of exception_thread: ",
+          exception_thread.get_exit_status(), ".\n");
+
+    print("Is exception_thread's exit status exit_normal?  ",
+          ((exception_thread.get_exit_status() == exit_normal) ? "Yes" : "No"),
+          ".\n");
+    print("Is exception_thread's exit status exit_exceptions?  ",
+          ((exception_thread.get_exit_status() == exit_exceptions) ? "Yes" :
+           "No"), ".\n");
+
+    print("Exit exception count of exception_thread: ",
+          length(exception_thread.get_exit_exceptions()), ".\n");
+    print("Exit exception message of exception_thread: `",
+          exception_thread.get_exit_exceptions()[0].message, "'.\n");
+
+    immutable dying_thread := create_thread(procedure()
+      {
+        standard_error.print(
+                "Expect an out-of-memory error message to follow.  It is " ~
+                "normal and expected as\n" ~
+                "part of this test.\n");
+        [] := [1 << (1 << 1000)];
+      });
+
+    dying_thread.wait_for_termination();
+
+    print("Exit status of dying_thread: ", dying_thread.get_exit_status(),
+          ".\n");
+
+    print("Is dying_thread's exit status exit_normal?  ",
+          ((dying_thread.get_exit_status() == exit_normal) ? "Yes" : "No"),
+          ".\n");
+    print("Is dying_thread's exit status exit_died?  ",
+          ((dying_thread.get_exit_status() == exit_died) ? "Yes" : "No"),
+          ".\n");
+
+    immutable interruptable_ready := boolean_semaphore(false);
+    immutable interruptable_thread := create_thread(procedure()
+      {
+        try
+          {
+            interruptable_ready.up();
+            while (true)
+                sleep(0.01);;
+          }
+        catch
+          {
+            print("Thread caught an exception: `",
+                  current_exceptions()[0].message, "'.\n");
+            print("Tag: ", current_exceptions()[0].tag, ".\n");
+          };
+
+        try
+          {
+            interruptable_ready.up();
+            while (true)
+                sleep(0.01);;
+          }
+        catch
+          {
+            print("Thread caught another exception: `",
+                  current_exceptions()[0].message, "'.\n");
+            print("Tag: ", current_exceptions()[0].tag, ".\n");
+            print("Special: ", current_exceptions()[0].special, ".\n");
+          };
+      });
+
+    interruptable_ready.down();
+
+    print("Interrupting interruptable_thread.\n");
+    quark my_interrupt_tag;
+    interruptable_thread.interrupt(my_interrupt_tag,
+                                   "You have been interrupted.");
+
+    interruptable_ready.down();
+
+    print("Interrupting interruptable_thread again.\n");
+    interruptable_thread.interrupt(my_interrupt_tag,
+            "You have been interrupted again.", [special := 88]);
+
+    interruptable_thread.wait_for_termination();
+  };
+
+/*
+ * Next, we'll try the various methods available on a semaphore.
+ */
+  {
+    immutable semaphore1 := integer_semaphore(limit := 200, start := 5);
+
+    print("Current value of semaphore1: ", semaphore1.current(), ".\n");
+
+    print("Calling v().\n");
+    semaphore1.v();
+    print("Current value of semaphore1: ", semaphore1.current(), ".\n");
+    print("Calling v(2).\n");
+    semaphore1.v(2);
+    print("Current value of semaphore1: ", semaphore1.current(), ".\n");
+
+    print("Calling signal().\n");
+    semaphore1.signal();
+    print("Current value of semaphore1: ", semaphore1.current(), ".\n");
+    print("Calling signal(2).\n");
+    semaphore1.signal(2);
+    print("Current value of semaphore1: ", semaphore1.current(), ".\n");
+
+    print("Calling up().\n");
+    semaphore1.up();
+    print("Current value of semaphore1: ", semaphore1.current(), ".\n");
+    print("Calling up(2).\n");
+    semaphore1.up(2);
+    print("Current value of semaphore1: ", semaphore1.current(), ".\n");
+
+    print("Calling release().\n");
+    semaphore1.release();
+    print("Current value of semaphore1: ", semaphore1.current(), ".\n");
+    print("Calling release(2).\n");
+    semaphore1.release(2);
+    print("Current value of semaphore1: ", semaphore1.current(), ".\n");
+
+    print("Calling post().\n");
+    semaphore1.post();
+    print("Current value of semaphore1: ", semaphore1.current(), ".\n");
+    print("Calling post(2).\n");
+    semaphore1.post(2);
+    print("Current value of semaphore1: ", semaphore1.current(), ".\n");
+
+    print("Calling vacate().\n");
+    semaphore1.vacate();
+    print("Current value of semaphore1: ", semaphore1.current(), ".\n");
+    print("Calling vacate(2).\n");
+    semaphore1.vacate(2);
+    print("Current value of semaphore1: ", semaphore1.current(), ".\n");
+
+    print("Calling p().\n");
+    semaphore1.p();
+    print("Current value of semaphore1: ", semaphore1.current(), ".\n");
+    print("Calling p(2).\n");
+    semaphore1.p(2);
+    print("Current value of semaphore1: ", semaphore1.current(), ".\n");
+
+    print("Calling wait().\n");
+    semaphore1.wait();
+    print("Current value of semaphore1: ", semaphore1.current(), ".\n");
+    print("Calling wait(2).\n");
+    semaphore1.wait(2);
+    print("Current value of semaphore1: ", semaphore1.current(), ".\n");
+
+    print("Calling down().\n");
+    semaphore1.down();
+    print("Current value of semaphore1: ", semaphore1.current(), ".\n");
+    print("Calling down(2).\n");
+    semaphore1.down(2);
+    print("Current value of semaphore1: ", semaphore1.current(), ".\n");
+
+    print("Calling acquire().\n");
+    semaphore1.acquire();
+    print("Current value of semaphore1: ", semaphore1.current(), ".\n");
+    print("Calling acquire(2).\n");
+    semaphore1.acquire(2);
+    print("Current value of semaphore1: ", semaphore1.current(), ".\n");
+
+    print("Calling pend().\n");
+    semaphore1.pend();
+    print("Current value of semaphore1: ", semaphore1.current(), ".\n");
+    print("Calling pend(2).\n");
+    semaphore1.pend(2);
+    print("Current value of semaphore1: ", semaphore1.current(), ".\n");
+
+    print("Calling procure().\n");
+    semaphore1.procure();
+    print("Current value of semaphore1: ", semaphore1.current(), ".\n");
+    print("Calling procure(2).\n");
+    semaphore1.procure(2);
+    print("Current value of semaphore1: ", semaphore1.current(), ".\n");
+
+    variable result;
+
+    print("Calling try_p().\n");
+    result := semaphore1.try_p();
+    print("Result: ", result, ".\n");
+    print("Current value of semaphore1: ", semaphore1.current(), ".\n");
+
+    print("Calling try_p(2).\n");
+    result := semaphore1.try_p(2);
+    print("Result: ", result, ".\n");
+    print("Current value of semaphore1: ", semaphore1.current(), ".\n");
+
+    print("Calling try_p(2, 0.2).\n");
+    result := semaphore1.try_p(2, 0.2);
+    print("Result: ", result, ".\n");
+    print("Current value of semaphore1: ", semaphore1.current(), ".\n");
+
+    print("Calling try_p(2, 0.2).\n");
+    result := semaphore1.try_p(2, 0.2);
+    print("Result: ", result, ".\n");
+    print("Current value of semaphore1: ", semaphore1.current(), ".\n");
+
+    immutable semaphore2 := integer_semaphore(10);
+    print("Current value of semaphore2: ", semaphore2.current(), ".\n");
+
+    immutable semaphore3 := boolean_semaphore();
+    print("Current value of semaphore3: ", semaphore3.current(), ".\n");
+
+    immutable semaphore4 := boolean_semaphore(true);
+    print("Current value of semaphore4: ", semaphore4.current(), ".\n");
+
+    immutable semaphore5 := boolean_semaphore(false);
+    print("Current value of semaphore5: ", semaphore5.current(), ".\n");
+  };
+
+/*
+ * Now, we'll exercise all_threads(), wait_for_all_threads(), and
+ * current_thread().
+ */
+  {
+    immutable blocker := integer_semaphore(3);
+    immutable thread1 := create_thread(procedure()
+      {
+        blocker.down();
+      }, "Blocker 1");
+    immutable thread2 := create_thread(procedure()
+      {
+        blocker.down();
+      }, "Blocker 2");
+    immutable thread3 := create_thread(procedure()
+      {
+        blocker.down();
+      }, "Blocker 3");
+
+    variable threads := all_threads();
+    print("Thread count: ", length(threads), ".\n");
+    iterate (one_thread; threads)
+      {
+        print("    Thread: `", one_thread.name(), "'.\n");
+        print("        Is thread2?  ",
+              ((one_thread == thread2) ? "Yes" : "No"), ".\n");
+      };
+
+    print("Waiting for all threads.\n");
+    blocker.up(3);
+    wait_for_all_threads();
+
+    threads := all_threads();
+    print("Thread count: ", length(threads), ".\n");
+    iterate (one_thread; threads)
+      {
+        print("    Thread: `", one_thread.name(), "'.\n");
+        print("        Is thread2?  ",
+              ((one_thread == thread2) ? "Yes" : "No"), ".\n");
+      };
+
+    print("Root Current thread: `", current_thread().name(), "'.\n");
+
+    immutable thread4 := create_thread(procedure()
+      {
+        print("Child Current thread: `", current_thread().name(), "'.\n");
+      }, "Name Printer");
+
+    thread4.wait_for_termination();
+  };
+
+/*
+ * Now, we'll try sleep().
+ */
+"About to sleep 0.05."!
+sleep(0.05);
+"About to sleep 1.2."!
+sleep(1.2);
+"About to sleep 2."!
+sleep(2);
+"Done sleeping."!
+
+procedure try_exception(body : !{} <-- ())
+  {
+    try
+      {
+        body();
+      }
+    catch
+      {
+        immutable e1 := current_exceptions()[0];
+        print("Exception with tag ", e1.tag, ":\n");
+        print("    \"", e1.source.file_name, "\":", e1.source.start_line, ":",
+              e1.source.start_column, ":\"", e1.message, "\"\n");
+      };
+  };
+
+/*
+ * Next, let's try to generate an et_time_too_far exception.
+ */
+try_exception(procedure()
+  {
+    immutable sem := boolean_semaphore();
+    [] := [sem.try_p(seconds := 1 << 1000)];
+    "No exception from try_p(seconds := 1 << 1000)."!
+  });
+
+/*
+ * Now, let's try to generate an et_semaphore_up_beyond_limit exception.
+ */
+try_exception(procedure()
+  {
+    immutable sem := integer_semaphore(limit := 10, start := 5);
+    sem.current()!
+    sem.up();
+    sem.current()!
+    sem.up(2);
+    sem.current()!
+    sem.up(5);
+  });
+
+/*
+ * Next, let's try to generate an et_wait_all_not_root exception.
+ */
+  {
+    immutable child : thread := create_thread(procedure()
+      {
+        try_exception(procedure()
+          {
+            wait_for_all_threads();
+          });
+      });
+    child.wait_for_termination();
+  };
+
+/*
+ * Next, let's try to generate an et_interrupt_unnamed_extra exception.
+ */
+  {
+    immutable blocker := boolean_semaphore(false);
+    immutable child : thread := create_thread(procedure()
+      {
+        blocker.down();
+      });
+    quark my_interrupt_tag;
+    try_exception(procedure()
+      {
+        child.interrupt(my_interrupt_tag, "You have been interrupted.", [88]);
+      });
+    blocker.up();
+    child.wait_for_termination();
+  };
+
+/*
+ * Next, let's try to generate an et_interrupt_finished exception.
+ */
+  {
+    immutable child : thread := create_thread(procedure()
+      {
+      });
+    child.wait_for_termination();
+    quark my_interrupt_tag;
+    try_exception(procedure()
+      {
+        child.interrupt(my_interrupt_tag, "You have been interrupted.");
+      });
+  };
+
+/*
+ * Next, let's try to generate an et_suspend_finished exception.
+ */
+  {
+    immutable child : thread := create_thread(procedure()
+      {
+      });
+    child.wait_for_termination();
+    try_exception(procedure()
+      {
+        child.suspend();
+      });
+  };
+
+/*
+ * Next, let's try to generate an et_suspend_suspended exception.
+ */
+  {
+    immutable blocker := boolean_semaphore(false);
+    immutable child : thread := create_thread(procedure()
+      {
+        blocker.down();
+      });
+    child.suspend();
+    try_exception(procedure()
+      {
+        child.suspend();
+      });
+    child.resume();
+    blocker.up();
+    child.wait_for_termination();
+  };
+
+/*
+ * Next, let's try to generate an et_resume_not_suspended exception.
+ */
+  {
+    immutable blocker := boolean_semaphore(false);
+    immutable child : thread := create_thread(procedure()
+      {
+        blocker.down();
+      });
+    try_exception(procedure()
+      {
+        child.resume();
+      });
+    blocker.up();
+    child.wait_for_termination();
+  };
+
+/*
+ * Next, let's try to generate an et_get_exit_status_not_finished exception.
+ */
+  {
+    immutable blocker := boolean_semaphore(false);
+    immutable child : thread := create_thread(procedure()
+      {
+        blocker.down();
+      });
+    try_exception(procedure()
+      {
+        [] := [child.get_exit_status()];
+      });
+    blocker.up();
+    child.wait_for_termination();
+  };
+
+/*
+ * Next, let's try to generate an et_get_exit_exceptions_not_finished
+ * exception.
+ */
+  {
+    immutable blocker := boolean_semaphore(false);
+    immutable child : thread := create_thread(procedure()
+      {
+        blocker.down();
+      });
+    try_exception(procedure()
+      {
+        [] := [child.get_exit_exceptions()];
+      });
+    blocker.up();
+    child.wait_for_termination();
+  };
+
+/*
+ * Next, let's try to generate an et_get_exit_exceptions_no_exception
+ * exception.
+ */
+  {
+    immutable child : thread := create_thread(procedure()
+      {
+      });
+    child.wait_for_termination();
+    try_exception(procedure()
+      {
+        [] := [child.get_exit_exceptions()];
+      });
+  };
+
+/*
+ * Next, let's try to generate an et_get_exit_jump_target_not_finished
+ * exception.
+ */
+  {
+    immutable blocker := boolean_semaphore(false);
+    immutable child : thread := create_thread(procedure()
+      {
+        blocker.down();
+      });
+    try_exception(procedure()
+      {
+        [] := [child.get_exit_jump_target()];
+      });
+    blocker.up();
+    child.wait_for_termination();
+  };
+
+/*
+ * Next, let's try to generate an et_get_exit_jump_target_no_jump exception.
+ */
+  {
+    immutable child : thread := create_thread(procedure()
+      {
+      });
+    child.wait_for_termination();
+    try_exception(procedure()
+      {
+        [] := [child.get_exit_jump_target()];
+      });
+  };

@@ -1,0 +1,651 @@
+/* file "invalid.salm" */
+
+/*
+ *  This file runs tests of various situations that are supposed to produce
+ *  validity exceptions if and only if particular values are invalid.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+immutable invalid := immutable;
+delete(invalid);
+immutable valid := immutable;
+variable questionable_type : type !{} := integer;
+variable questionable_value := immutable;
+variable questionable_tagalong : tagalong_key := tagalong;
+variable questionable_function : !{} <-- () := function() (3);
+variable finalizable_type_element := immutable;
+variable finalizable_type : type !{} :=
+        type integer | {finalizable_type_element};
+variable finalizable_object := class(){}();
+variable is_invalid : boolean := false;
+function finalize_questionable()
+  {
+    if (is_invalid)
+      {
+        delete(questionable_value);
+        delete(questionable_tagalong);
+        delete(questionable_function);
+        delete(finalizable_type_element);
+        delete(finalizable_object);
+      };
+  };
+
+procedure test(name : string, to_test : {} <-- (!{}))
+  {
+    static variable last_line_number : [0...+oo) := 0;
+
+    iterate(x; [["invalid", invalid], ["valid", valid]])
+      {
+        try
+          {
+            questionable_value := immutable;
+            questionable_tagalong := tagalong;
+            questionable_function := function() (3);
+            finalizable_type_element := immutable;
+            finalizable_type := type integer | {finalizable_type_element};
+            finalizable_object := class(){}();
+            if (x[0] != "invalid")
+              {
+                questionable_type := integer;
+                is_invalid := false;
+              }
+            else
+              {
+                immutable going := immutable;
+                questionable_type := type {going};
+                delete(going);
+                is_invalid := true;
+              };
+            to_test(x[1]);
+            print("In test `", x[0], "-", name,
+                  "', there was no exception.\n");
+          }
+        catch
+          {
+            immutable the_exception : exception := current_exceptions()[0];
+            print("In test `", x[0], "-", name, "', there was ");
+            if (the_exception.tag in
+                {
+                  exception_tag_variable_use_before_instantiation,
+                  exception_tag_routine_use_before_instantiation,
+                  exception_tag_tagalong_use_before_instantiation,
+                  exception_tag_lepton_key_use_before_instantiation,
+                  exception_tag_quark_use_before_instantiation,
+                  exception_tag_lock_use_before_instantiation,
+                  exception_tag_variable_use_after_deallocation,
+                  exception_tag_routine_use_after_deallocation,
+                  exception_tag_tagalong_use_after_deallocation,
+                  exception_tag_lepton_key_use_after_deallocation,
+                  exception_tag_quark_use_after_deallocation,
+                  exception_tag_lock_use_after_deallocation,
+                  exception_tag_jump_target_use_after_deallocation,
+                  exception_tag_object_use_after_deallocation,
+                  exception_tag_routine_type_uninstantiated,
+                  exception_tag_routine_type_deallocated
+                })
+              {
+                print("an invalidity exception.\n");
+              }
+            else
+              {
+                print("an other exception.\n");
+              };
+          };
+      };
+  };
+
+test("no-exception", procedure(x)
+  {
+  });
+
+test("in", procedure(x)
+  {
+    [] := [x in integer];
+  });
+
+test("plus-left", procedure(x)
+  {
+    [] := [x + 1];
+  });
+
+test("plus-right", procedure(x)
+  {
+    [] := [1 + x];
+  });
+
+test("lookup", procedure(x)
+  {
+    [] := [[0, 1][x]];
+  });
+
+test("modify-field", procedure(x)
+  {
+    variable v1 := x;
+    v1.f1 := 18;
+  });
+
+test("lepton-bad-key", procedure(x)
+  {
+    [] := [x[a := 12]];
+  });
+
+test("enumeration-bad-value", procedure(x)
+  {
+    [] := [type {x}];
+  });
+
+test("lepton-key-type-invalid", procedure(x)
+  {
+    lepton l1[a : integer | {questionable_value}];
+    finalize_questionable();
+    [] := [l1[a := 12]];
+  });
+
+test("lepton-component-force", procedure(x)
+  {
+    lepton l1[a : {}];
+    [] := [l1[a ::= x]];
+  });
+
+test("tagalong-reference-key", procedure(x)
+  {
+    [] := [valid..x];
+  });
+
+test("map-filter-target", procedure(x)
+  {
+    [] := [<<(* : {questionable_value} -->
+              { finalize_questionable(); return 17; })>>];
+  });
+
+test("map-key-target", procedure(x)
+  {
+    [] := [<<(questionable_value -->
+              { finalize_questionable(); return 17; })>>];
+  });
+
+test("in-type", procedure(x)
+  {
+    [] := [3 in questionable_type];
+  });
+
+test("force-type", procedure(x)
+  {
+    [] := [3 :: questionable_type];
+  });
+
+test("force-value", procedure(x)
+  {
+    [] := [x :: {}];
+  });
+
+test("not-type", procedure(x)
+  {
+    [] := [type !questionable_type];
+  });
+
+test("intersection-left", procedure(x)
+  {
+    [] := [type questionable_type & {}];
+  });
+
+test("intersection-right", procedure(x)
+  {
+    [] := [type {} & questionable_type];
+  });
+
+test("union-left", procedure(x)
+  {
+    [] := [type questionable_type | {}];
+  });
+
+test("union-right", procedure(x)
+  {
+    [] := [type {} | questionable_type];
+  });
+
+test("xor-left", procedure(x)
+  {
+    [] := [type questionable_type ^ {}];
+  });
+
+test("xor-right", procedure(x)
+  {
+    [] := [type {} ^ questionable_type];
+  });
+
+test("lepton-type-field", procedure(x)
+  {
+    lepton l1[a : !{}];
+    [] := [type lepton l1[a : questionable_type]];
+  });
+
+test("lookup-actuals", procedure(x)
+  {
+    immutable map := <<(* --> [a := "hello"])>>;
+    immutable lookup := &(map[questionable_value]);
+    finalize_questionable();
+    [] := [lookup->a];
+  });
+
+test("tagalong-read", procedure(x)
+  {
+    variable base := 15;
+    base..questionable_tagalong := [a := "hello"];
+    immutable access := &(base..questionable_tagalong);
+    finalize_questionable();
+    [] := [access->a];
+  });
+
+test("formal-type", procedure(x)
+  {
+    procedure p1(x : finalizable_type :=
+                 { finalize_questionable(); return 13; })  { };
+    p1();
+  });
+
+test("formal-value-invalid", procedure(x)
+  {
+    procedure p1(x : {} ::= questionable_value)  { };
+    finalize_questionable();
+    p1();
+  });
+
+test("formal-dynamic-type", procedure(x)
+  {
+    procedure p1(x : !{} / questionable_type)  { };
+    p1(5);
+  });
+
+test("switch-case", procedure(x)
+  {
+    switch (13)
+    case (questionable_type)
+      { };;
+  });
+
+test("iterate", procedure(x)
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 2));
+    immutable subject :=
+      <<(* : {1, 2, 3} --> "goodbye"),
+        (* : ({1, 2, 3} & ((string | integer) & (finalizable_type | filter_a)))
+         --> "hello")>>;
+    iterate (x; subject)
+      {
+        finalize_questionable();
+      };
+  });
+
+test("use", procedure(x)
+  {
+    finalize_questionable();
+    use finalizable_object;
+  });
+
+test("use-type", procedure(x)
+  {
+    use class(){}() :
+      <<
+        {
+          immutable result := type fields[] | finalizable_type;
+          finalize_questionable();
+          return result;
+        }
+      >>;
+  });
+
+test("overload-object", procedure(x)
+  {
+    [] := [finalizable_object ::
+           <<{ finalize_questionable(); return object; }>>];
+  });
+
+test("filter-return-type-chain", procedure(x)
+  {
+    pure function f1(x) returns boolean & !finalizable_type (true);
+    finalize_questionable();
+    [] := [type f1];
+  });
+
+test("filter-return-type-one", procedure(x)
+  {
+    immutable i1 := pure function(x) returns boolean & !finalizable_type
+      (true);
+    finalize_questionable();
+    [] := [type i1];
+  });
+
+test("filter-formal-type", procedure(x)
+  {
+    immutable i1 :=
+            pure function(x : finalizable_type) returns boolean (true);
+    finalize_questionable();
+    [] := [type i1];
+  });
+
+test("tagalong-during-write", procedure(x)
+  {
+    variable v1 := 13;
+    v1..questionable_tagalong := [a := 15];
+    class c1()
+      {
+        cleanup
+          { finalize_questionable(); };
+      };
+    immutable location := &(v1..questionable_tagalong.c);
+    class c2(aa, bb)
+      {
+        variable a := c1(), b := bb;
+      };
+    *location := [a := c2(11, 12), b := 13];
+    (*location).a.a := 16;
+  });
+
+test("tagalong-on-type-write", procedure(x)
+  {
+    tagalong t1 on integer | finalizable_type;
+    variable v1 := 15;
+    immutable location := &(v1..t1);
+    finalize_questionable();
+    *location := 3;
+  });
+
+test("tagalong-type-write", procedure(x)
+  {
+    tagalong t1 : integer | finalizable_type;
+    variable v1 := 15;
+    immutable location := &(v1..t1);
+    finalize_questionable();
+    *location := 3;
+  });
+
+test("object-during-write", procedure(x)
+  {
+    class c1()
+      {
+        cleanup
+          {
+            if (is_invalid)
+                delete(v1);;
+          };
+      };
+    class c2(aa, bb)
+      {
+        variable a := c1(), b := bb;
+      };
+    class c3(aa, bb)
+      {
+        variable a := aa, b := bb;
+      };
+    variable v1 := c3(5, c2(22, 23));
+    immutable location := &(v1.b.a);
+    *location := 17;
+  });
+
+test("lookup-write", procedure(x)
+  {
+    variable v1 := <<>>;
+    immutable location := &(v1[questionable_value]);
+    finalize_questionable();
+    *location := 3;
+  });
+
+test("variable-during-write", procedure(x)
+  {
+    class c1()
+      {
+        cleanup
+          {
+            if (is_invalid)
+                delete(i1);;
+          };
+      };
+    class c2(aa, bb)
+      {
+        variable a := c1(), b := bb;
+      };
+    immutable i1 := variable := c2(7, 8);
+    immutable location := &((*i1).a);
+    *location := 5;
+  });
+
+test("force-value", procedure(x)
+  {
+    finalize_questionable();
+    immutable i1 : {} ::= questionable_value;
+  });
+
+test("variable-initialize-type", procedure(x)
+  {
+    finalize_questionable();
+    immutable i1 : finalizable_type ::= 13;
+  });
+
+test("tagalong-initialize-type", procedure(x)
+  {
+    finalize_questionable();
+    tagalong t1 : finalizable_type ::= 13;
+  });
+
+test("basket-assign-type", procedure(x)
+  {
+    variable v1 : finalizable_type ::= 13;
+    finalize_questionable();
+    [v1 ::= a] := [a := 13];
+  });
+
+test("basket-component-assign", procedure(x)
+  {
+    variable v1;
+    immutable i1 := <<(0 --> "one"), (questionable_value --> "unknown")>>;
+    finalize_questionable();
+    [v1] := i1;
+  });
+
+test("object-field-read", procedure(x)
+  {
+    class c1()
+      {
+        immutable a := 5;
+      };
+    immutable i1 := c1();
+    if (is_invalid)
+        delete(i1);;
+    [] := [i1.a];
+  });
+
+test("iterate", procedure(x)
+  {
+    immutable i1 := <<(* : finalizable_type --> 13)>>;
+    finalize_questionable();
+    iterate(x; i1)
+      {
+      };
+  });
+
+test("array-type", procedure(x)
+  {
+    immutable i1 := type questionable_type[0...5];
+  });
+
+test("pointer-type", procedure(x)
+  {
+    immutable i1 := type *questionable_type;
+  });
+
+test("type-type", procedure(x)
+  {
+    immutable i1 := type type questionable_type;
+  });
+
+test("map-type-key", procedure(x)
+  {
+    immutable i1 := type questionable_type --> integer;
+  });
+
+test("map-type-target", procedure(x)
+  {
+    immutable i1 := type integer --> questionable_type;
+  });
+
+test("routine-type-result", procedure(x)
+  {
+    immutable i1 := type questionable_type <-- ();
+  });
+
+test("routine-type-result2", procedure(x)
+  {
+    immutable i1 := type questionable_type <-- (integer, b : string);
+  });
+
+test("routine-type-argument", procedure(x)
+  {
+    immutable i1 := type string <-- (integer, b : questionable_type);
+  });
+
+test("semi-labeled-type", procedure(x)
+  {
+    immutable i1 := type [integer, b : questionable_type];
+  });
+
+test("filter-type", procedure(x)
+  {
+    ageless pure function f1(x) returns boolean (x == 5);
+    procedure p1()
+      {
+        if (is_invalid)
+            delete(f1);;
+      };
+      {
+        pure function f1(x : integer) returns boolean (x == 7);
+        p1();
+        immutable i1 : f1;
+      };
+  });
+
+test("filter-type2", procedure(x)
+  {
+    ageless pure function f1(x) returns boolean (x == 5);
+    procedure p1()
+      {
+        if (is_invalid)
+            delete(f1);;
+      };
+      {
+        pure function f1() returns boolean (x == 9);
+        pure function f1() returns boolean (x == 7);
+        p1();
+        immutable i1 : f1;
+      };
+  });
+
+test("return-for-routine-in-type-test", procedure(x)
+  {
+    function f1() returns finalizable_type (5);
+    finalize_questionable();
+    [] := [f1 in integer <-- ()];
+  });
+
+test("return-for-routine-in-type-test2", procedure(x)
+  {
+    immutable f1 := function() returns finalizable_type (5);
+    finalize_questionable();
+    [] := [f1 in integer <-- ()];
+  });
+
+test("object-field-in-type-test", procedure(x)
+  {
+    class c1()
+      {
+        ageless variable a : integer := 5;
+        if (is_invalid)
+            delete(&a);;
+      };
+    [] := [c1() in interface[a : integer]];
+  });
+
+test("object-variable-field-type-in-type-test", procedure(x)
+  {
+    class c1()
+      {
+        ageless variable a : finalizable_type := 5;
+        finalize_questionable();
+      };
+    [] := [c1() in interface[a : integer]];
+  });
+
+test("lazy-type", procedure(x)
+  {
+    immutable i1 := finalizable_type;
+    immutable i2 := type lazy i1;
+    finalize_questionable();
+    [] := [type integer in type i2];
+  });
+
+test("force-object-field-interface", procedure(x)
+  {
+    class c1()
+      {
+        variable a := questionable_value;
+      };
+    finalize_questionable();
+    [] := [c1() :: interface[a : integer]];
+  });
+
+test("force-object-field-semi-labeled", procedure(x)
+  {
+    class c1()
+      {
+        variable a := questionable_value;
+      };
+    finalize_questionable();
+    [] := [c1() :: [a : integer]];
+  });
+
+test("filter-override", procedure(x)
+  {
+    class c1()
+      {
+        cleanup
+          { finalize_questionable(); };
+      };
+    variable v1 :=
+      <<(* : {1, 2} --> c1()), (* : {3} --> 5), (* : finalizable_type --> 7)>>;
+  });
+
+test("overload-read-return-type", procedure(x)
+  {
+    function operator*(: {3}) returns questionable_type (5);
+    immutable i1 : *integer := &(*3);
+  });
+
+test("overload-use-read-return-type", procedure(x)
+  {
+    use class()
+      {
+        immutable operator* := function(: {3}) returns questionable_type (5);
+      }();
+    immutable i1 : *integer := &(*3);
+  });
+
+test("overload-write-return-type", procedure(x)
+  {
+    function operator*(: {3}, : !{}) returns questionable_type (5);
+    immutable i1 : +integer := &(*3);
+  });
+
+test("overload-use-write-return-type", procedure(x)
+  {
+    use class()
+      {
+        immutable operator* := function(: {3}, : !{}) returns questionable_type
+          (5);
+      }();
+    immutable i1 : +integer := &(*3);
+  });

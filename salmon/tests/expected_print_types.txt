@@ -1,0 +1,31 @@
+Type t1: type t1.
+Type t2: type t2.
+Type t3: type t3.
+Type !t1: type !t1.
+Type t1 | t2: type t1 | t2.
+Type t1 & t2: type t1 & t2.
+Type t1 ^ t2: type t1 ^ t2.
+Type t1 | t2 | t3: type t1 | t2 | t3.
+Type (t1 | t2) | t3: type t1 | t2 | t3.
+Type t1 | (t2 | t3): type t2 | t3 | t1.
+Type t1 | t2 | t3 | t4: type t1 | t2 | t3 | t4.
+Type t1 | t2 | (t3 | t4): type t1 | t2 | (t3 | t4).
+Type (t1 | t2) | (t3 | t4): type t1 | t2 | (t3 | t4).
+Type t1 & t2 & t3: type t1 & t2 & t3.
+Type (t1 & t2) & t3: type t1 & t2 & t3.
+Type t1 & (t2 & t3): type t2 & t3 & t1.
+Type t1 & t2 & t3 & t4: type t1 & t2 & t3 & t4.
+Type t1 & t2 & (t3 & t4): type t1 & t2 & (t3 & t4).
+Type (t1 & t2) & (t3 & t4): type t1 & t2 & (t3 & t4).
+Type t1 ^ t2 ^ t3: type t1 ^ t2 ^ t3.
+Type (t1 ^ t2) ^ t3: type t1 ^ t2 ^ t3.
+Type t1 ^ (t2 ^ t3): type t2 ^ t3 ^ t1.
+Type t1 ^ t2 ^ t3 ^ t4: type t1 ^ t2 ^ t3 ^ t4.
+Type t1 ^ t2 ^ (t3 ^ t4): type t1 ^ t2 ^ (t3 ^ t4).
+Type (t1 ^ t2) ^ (t3 ^ t4): type t1 ^ t2 ^ (t3 ^ t4).
+Type t1 | t2 & t3: type t2 & t3 | t1.
+Type (t1 | t2) & t3: type (t1 | t2) & t3.
+Type t1 | (t2 & t3): type t2 & t3 | t1.
+Type !t1 | t2: type !t1 | t2.
+Type (!t1) | t2: type !t1 | t2.
+Type !(t1 | t2): type !t1 & !t2.

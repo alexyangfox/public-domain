@@ -1,0 +1,13 @@
+/* file "module_makefile_generation.si" */
+
+/*
+ *  This file contains the interface to functionality for generating makefiles
+ *  for add-on modules for Salmon.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+generate_module_makefile :- {} <-- (config : !{})

@@ -1,0 +1,233 @@
+/* file "logarithm.salm" */
+
+/*
+ *  This file contains implementations of algorithms to calculate
+ *  approximations to logarithms and the exponential function on real-valued
+ *  arguments (not complex) in the Salmon Programming Language.  It will work
+ *  with operands of various scalar numerical types, including rationals and
+ *  various floating-point types.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+use "convertable.salm" : "convertable.si";
+use "interval.salm" : "interval.si";
+
+
+hide;
+
+use "bullseye.salm" : "bullseye.si";
+
+export convertable_from_rational;
+export relative;
+export absolute;
+export bound_kind;
+
+export;
+
+
+immutable convertable_to_rational : type !{} := convertable_to(rational);
+
+function raw_log(base : (0....+oo), operand, tolerance : (0....+oo))
+  {
+    assert(operand >= 0);
+    assert(operand <= +oo);
+    assert(tolerance > 0);
+
+    if (operand == 0)
+        return -oo;;
+
+    if (operand == +oo)
+        return +oo;;
+
+    variable result := 0;
+    variable remainder := operand;
+    variable factor := 1;
+
+    while (remainder >= base)
+      {
+        remainder /= base;
+        ++result;
+      };
+
+    while (remainder < 1)
+      {
+        remainder *= base;
+        --result;
+      };
+
+    while (factor > tolerance)
+      {
+        assert(remainder >= 1);
+        assert(remainder < base);
+
+        if (remainder == 1)
+            return result;;
+
+        remainder *= remainder;
+        factor /= 2;
+        if (remainder >= base)
+          {
+            remainder /= base;
+            result += factor;
+          };
+      };
+
+    return result;
+  };
+
+function raw_exponential(operand, tolerance : (0....+oo))
+  {
+    if (operand == -oo)
+        return 0;;
+
+    if (operand == +oo)
+        return +oo;;
+
+    variable result := 0;
+
+    variable term := 1;
+    variable term_num := 0;
+
+    immutable big_term := (2 * ((operand < 0) ? -operand : operand));
+    while ((term_num < big_term) || ((term * 2) > tolerance) ||
+           ((term * 2) < -tolerance))
+      {
+        result += term;
+        term *= operand;
+        ++term_num;
+        term /= term_num;
+      };
+
+    return result;
+  };
+
+function interval_log(interval_type : any_class & (any_interval <-- (*)),
+        base : (0....+oo), operand : !{} / interval_type,
+        tolerance : (0....+oo)) returns any_interval / interval_type
+  {
+    return interval_type(raw_log(base, operand.lower(), tolerance),
+                         raw_log(base, operand.upper(), tolerance));
+  };
+
+function interval_exponential(
+        interval_type : any_class & (any_interval <-- (*)),
+        operand : !{} / interval_type, tolerance : (0....+oo))
+                returns any_interval / interval_type
+  {
+    return interval_type(raw_exponential(operand.lower(), tolerance),
+                         raw_exponential(operand.upper(), tolerance));
+  };
+
+function log(base : (0....+oo), operand : rational, tolerance : (0....+oo),
+             kind : bound_kind := absolute) returns rational
+  {
+    immutable result := bullseye(
+            function(compute_type, error_bound : (0....+oo))
+                    returns any_interval
+              (interval_log(compute_type, base, operand :: compute_type,
+                            error_bound) :: compute_type), tolerance, kind);
+    return (result.upper().to_rational() + result.lower().to_rational()) / 2;
+  };
+
+function log2(operand : rational, tolerance : (0....+oo),
+              kind : bound_kind := absolute) returns rational
+  (log(2, operand, tolerance, kind));
+
+function log10(operand : rational, tolerance : (0....+oo),
+               kind : bound_kind := absolute) returns rational
+  (log(10, operand, tolerance, kind));
+
+function exponential(operand : rational, tolerance : (0....+oo),
+                     kind : bound_kind := absolute) returns rational
+  {
+    immutable result := bullseye(
+            function(compute_type, error_bound : (0....+oo))
+                    returns any_interval
+              (interval_exponential(compute_type, operand :: compute_type,
+                       error_bound) :: compute_type), tolerance, kind);
+    return (result.upper().to_rational() + result.lower().to_rational()) / 2;
+  };
+
+
+function log(destination_type : convertable_from_rational,
+        source_type : convertable_to_rational, base : (0....+oo),
+        operand : !{} / source_type, start_tolerance : rational := 1e-5,
+        tolerance_increment : rational := 1000) returns !{} / destination_type
+  {
+    immutable rational_operand := operand :: rational;
+    return best_approximation(destination_type,
+            function(tolerance : rational) returns any_interval
+              (bullseye(
+                       function(compute_type : type any_interval,
+                                error_bound : (0....+oo)) returns any_interval
+                         (interval_log(compute_type, base,
+                                  rational_operand :: compute_type,
+                                  error_bound)), tolerance, relative)),
+            start_tolerance, tolerance_increment);
+  };
+
+function log2(destination_type : convertable_from_rational,
+        source_type : convertable_to_rational, operand : !{} / source_type,
+        start_tolerance : rational := 1e-5,
+        tolerance_increment : rational := 1000) returns !{} / destination_type
+  (log(destination_type, source_type, 2, operand, start_tolerance,
+       tolerance_increment));
+
+function log10(destination_type : convertable_from_rational,
+        source_type : convertable_to_rational, operand : !{} / source_type,
+        start_tolerance : rational := 1e-5,
+        tolerance_increment : rational := 1000) returns !{} / destination_type
+  (log(destination_type, source_type, 10, operand, start_tolerance,
+       tolerance_increment));
+
+function exponential(destination_type : convertable_from_rational,
+        source_type : convertable_to_rational, operand : !{} / source_type,
+        start_tolerance : rational := 1e-5,
+        tolerance_increment : rational := 1000) returns !{} / destination_type
+  {
+    immutable rational_operand := operand :: rational;
+    return best_approximation(destination_type,
+            function(tolerance : rational) returns any_interval
+              (bullseye(
+                       function(compute_type : type any_interval,
+                                error_bound : (0....+oo)) returns any_interval
+                         (interval_exponential(compute_type,
+                                  rational_operand :: compute_type,
+                                  error_bound)), tolerance, relative)),
+            start_tolerance, tolerance_increment);
+  };
+
+class functions(ageless destination_type : convertable_from_rational,
+        ageless source_type : convertable_to_rational,
+        ageless start_tolerance : rational := 1e-5,
+        tolerance_increment : rational := 1000)
+    returns interface
+      [
+        log :- !{} <-- (base : (0....+oo), operand : {}),
+        log2 :- !{} <-- (operand : {}),
+        log10 :- !{} <-- (operand : {}),
+        exponential :- !{} <-- (operand : {})
+      ] / interface
+      [
+        log :- destination_type <-- (base : (0....+oo), operand : source_type),
+        log2 :- destination_type <-- (operand : source_type),
+        log10 :- destination_type <-- (operand : source_type),
+        exponential :- destination_type <-- (operand : source_type)
+      ]
+  {
+    function log(base : (0....+oo), operand : source_type)
+            returns destination_type
+      (log(source_type, destination_type, base, operand, start_tolerance,
+           tolerance_increment));
+    function log2(operand : source_type) returns destination_type
+      (this.log(2, operand));
+    function log10(operand : source_type) returns destination_type
+      (this.log(10, operand));
+    function exponential(operand : source_type) returns destination_type
+      (exponential(source_type, destination_type, operand, start_tolerance,
+                   tolerance_increment));
+  };

@@ -1,0 +1,24 @@
+/* file "print_floating_point.si" */
+
+/*
+ *  This file contains the interface to code to print floating-point values.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+et_fp_bad_specifier :- any_quark,
+et_fp_integer_specifier_non_integer_value :- any_quark,
+
+print_floating_point_exact :- {} <-- (mantissa : [0....+oo),
+        original_base : [1...+oo), original_exponent : (-oo...+oo),
+        new_base : [1...+oo), digit_count : [0...+oo], complement : boolean,
+        send_exponent : {} <-- ((-oo...+oo)), send_digit : {} <-- (*)),
+
+floating_point_formatting :- string <-- (original_mantissa : rational,
+        original_exponent : (-oo...+oo), original_base : (0...+oo),
+        specifier : string := *, plus : boolean := *, space : boolean := *,
+        hash : boolean := *, zero_width : [0...+oo) := *,
+        precision : [0...+oo) | {null} := *)

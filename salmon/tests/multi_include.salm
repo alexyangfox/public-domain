@@ -1,0 +1,2 @@
+print("File \"multi_include.salm\" line 1.\n");
+print("File \"multi_include.salm\" line 2.\n");

@@ -1,0 +1,587 @@
+
+        Summary of Features of the Salmon Programming Language
+
+
+                           by Chris Wilson
+
+
+
+This is a summary of the features of the Salmon Programming Language,
+with more detail on features that are less common in other programming
+languages.
+
+
+    Typical Imperitive Language Features
+    ------------------------------------
+
+Salmon includes basic features common in imperitive programming
+languages.  Among these are the ability to declare variables and
+assign to them multiple times; construct compound data structures;
+allocate space on a heap; declare and call routines (procedures and
+functions) with arguments passed as parameters and, in the case of
+functions, values returned; use structured control-flow constructs
+such as if-else and loop constructs; use gotos; use integer constants;
+use built-in integer arithmetic; use built-in printing and file I/O
+routines; and use pointers.
+
+
+    Higher-Level Imperitive Language Features
+    -----------------------------------------
+
+Salmon also includes some features that are often found in imperitive
+languages that are considered higher-level but not in some lower-level
+imperitive languages.  These include nested routines, anonymous
+routines; closures; non-local jumps up the call stack (escape
+continuations); routines as first-class values; types as first-class
+values (parametric polymorphism); exceptions; strings as first-class
+values; a string-concatenation operator; built-in unlimited-precision
+integer arithmetic; built-in unlimited-precision rational arithmetic;
+regular expression literals, several regular expression matching
+routines, and regular expressions as first-class objects; overloading
+of routines; and characters as first-class values that are different
+from integer values.
+
+Note, however, that Salmon does not include fully general
+continuations, where control may be returned to a point after the
+scope for that point has exited.
+
+
+    Object-Oriented Features
+    ------------------------
+
+Salmon includes syntax for declaring classes and using inheritance and
+virtual method declarations.  Most built-in operators may be
+overloaded, either at the class level to apply to objects of that
+class or in regular scoping to add new behavior for both objects and
+other values.
+
+Salmon uses the same mechanism for inheritance that it uses for using
+what C++ would call namespaces, making some object's fields available
+without having to explicitly specify the object.  This allows the user
+to specify the exact order of operations when inheritance is done,
+giving more control than languages like C++.
+
+
+    Functional Programming
+    ----------------------
+
+Salmon is not a pure functional programming language.  But removing a
+single key word changes it into a functional programming language (by
+one common definition of ``functional'').  That keyword is
+``variable''.
+
+In Salmon, variables are declared with the ``variable'' key word.  For
+example:
+
+    variable x;
+
+declares a variable named x.
+
+    variable x : integer;
+
+declares a variable x of type integer.
+
+    variable x : integer := 15;
+
+Both declares a variable named x and assigns it the initial value 15.
+
+Alternately, the keyword ``variable'' may be replaced with the keyword
+``immutable''.  For example,
+
+    immutable x : integer := 15;
+
+This is exactly the same as a variable except that it may only be
+assigned once, by its initializer, and may never be changed again.
+This single-assignment semantics is what pure functional programming
+languages use.
+
+In Salmon, variables and immutables may be mixed, and the keyword
+``immutable'' makes the code easier to read and helps find certain
+kinds of bugs by making it clear which names are supposed to be
+assigned once and never changed.
+
+So, if the keyword ``variable'' is never used, only ``immutable'' is
+left, so there cannot be any side-effects and the program is purely
+functional.
+
+In addition, Salmon has support for a ``pure'' keyword on functions.
+When the ``pure'' keyword is used on a function declaration, it is an
+assertion that the function will have no side effects and will not
+depend on any external state that may change, so it will always return
+the same value when called (unless there is an exception) and calling
+it will not affect anything else.  This is another way to make part of
+a Salmon program purely functional while allowing other parts of the
+program to not be purely functional.
+
+Salmon has most of the features a typical functional programming
+language has, but there are some features in some functional
+programming languages that Salmon does not support.  Notably,
+fully-general continuations are not supported in Salmon.  Also, there
+isn't any direct syntax for co-routines or generators in Salmon,
+though those can be built on top of thread support for implementations
+of Salmon that support multi-threading.
+
+
+    The Type System
+    ---------------
+
+Salmon is a strongly typed language.  Among other things, this makes
+it much easier to do a good job of automatic garbage collection.
+
+One of the most common ways of classifying languages is as dynamically
+typed or statically typed.  Salmon may be used either way.  That's
+because the type system and how it's used are somewhat different than
+in many programming languages.
+
+A language implementation often needs to know what a given pattern of
+bits means in order to perform an operation on it.  In statically
+typed languages, the user is required to give that information
+statically, so for any given static instance of an operation, a
+compiler can generate one set of code for it.  In dynamically typed
+languages, that information is carried with the value, so a given line
+of source code may perform different operations at different times.
+This information about what a given set of bits means is often equated
+with the term ``type'', particularly in object-oriented languages.  In
+such languages, every value has a unique type and it makes sense to
+speak of ``the type'' of a value.
+
+In Salmon, the term ``type'' is used more generally.  A type in Salmon
+may be any set of values.  So a value doesn't have just a single type
+-- it may be in many different types at the same time.
+
+Variables in Salmon may optionally be given types.  If a variable is
+given a type, it's like an assertion that the value of that variable
+will always be in that type.  If an attempt is ever made to cause a
+variable to have a value that is not in its type, an exception occurs
+instead.
+
+If enough type information is included in a program, a compiler will
+be able to do static (compile-time) checks that will guarantee that no
+type errors will occur at runtime.  This is similar to many statically
+typed languages.  Note however, that since in Salmon types can be
+constructed on-the-fly and passed around as first-class objects and
+then used when declaring variables, even if static type checking
+guarantees no type errors, what a given line of code does might still
+be data-dependent, so in this sense it's still dynamically typed.  In
+fact, a special case of this is that all types are the type of all
+values -- in this case, static analysis guarantees no type errors
+because there can't be any errors, but it's completely ``dynamically
+typed'' in the traditional sense.
+
+Salmon includes basic types like the type of all strings, the type of
+all integers, etc.  Types can also be constructed from other types in
+many of the ways they can in many other languages -- an array of some
+other type, a pointer to some other type, a function returning one
+type and arguments with particular types, etc.  But in addition types
+can be constructed from lists of values (a generalization of
+enumerated types), from unions of other types (not the same thing as a
+union in C, where the user is required to explicitly choose which type
+a given value uses!), from intersections of other types, and even from
+an arbitrary user-defined filter function.
+
+For one example of an advantage of this type system over more
+conventional type systems, consider a function that reads a character
+from an input stream.  It might return either a character value or a
+special value indicating end-of-input.  In some programming languages,
+this is kludged by either using one of the character values as the
+end-of-input marker, leading to files with that character being
+indistinguishable from truncated files; or by having the return type
+of the function be some larger integer type that must then be cast to
+a character to use the value as a character.  Salmon has an elegant
+solution: the return type of the function is
+``character | {end_of_input}'' where end_of_input is a special value
+that is different from any others (specifically, it's a quark, which
+will be discussed later).  This says the return value can either be a
+character value or the special value.
+
+
+    Tagalongs
+    ---------
+
+Salmon includes a way to essentially add private fields to a value.
+This helps maintain modularity -- rather than having to declare a
+structure or class in which all the fields used by all modules
+touching a given value are declared, tagalongs can be used to declare
+additional fields private to some particular section of code.
+
+Where basic fields use a dot to access a field (value.field), tagalong
+fields use a double-dot (value..tagalong_field).  Tagalongs can be
+declared with default values, so that the tagalong field is
+initialized to a given value for all values until it is modified.
+
+    Cleanups
+    --------
+
+Salmon includes something called a cleanup.  A cleanup is similar to a
+destructor for a class, except that it can occur in any scope.  It
+declares that a particular piece of code should be executed whenever
+the current scope exits for whatever reason, normal exit, an
+exception, or a non-local jump, return, break, or continue.
+
+    Calling Conveniences
+    --------------------
+
+Salmon includes some conveniences to make call sites more concise and
+easier to read.
+
+One issue that can come up for routines with many arguments is that
+it's not always clear at a callsite what each argument means.  For
+example, if you have this function:
+
+    function make_pixel(red, blue, green, depth, clarity);
+
+And this call site:
+
+    pixel := make_pixel(15, 12, 4, 37.8, 0.75);
+
+then it might not be clear what each of the values means without
+looking at the declaration.
+
+Salmon allows call sites like this, but it also allows alternate
+syntax to make the call site more readable.  For example, the previous
+call site could instead be written:
+
+    pixel := make_pixel(red := 15, blue := 12, green := 4,
+                        depth := 37.8, clarity := 0.75);
+
+This is more verbose, but easier to understand.
+
+Further, once you have names attached to parameters at the call site,
+you don't have to remember in what order they occur in the
+declaration.  The last example could be changed to:
+
+    pixel := make_pixel(depth := 37.8, clarity := 0.75,
+                        red := 15, blue := 12, green := 4);
+
+with the same meaning.
+
+Even further, Salmon allows default parameter values.  Defaults may be
+provided for some, all, or none of the parameters.  Some other
+languages have this, but it's even more useful in conjunction with the
+ability to name parameters at a call site.  In C++, for example, one
+can leave off explicit parameters at the end of a parameter list if
+they have defaults, but it's not possible to explicitly specify a
+later parameter but get defaults for earlier parameters.  With Salmon,
+this is not an issue -- the last parameter could be the only one
+specified, for example, and all the other parameters would get default
+values.
+
+
+    Return Values
+    -------------
+
+Salmon also makes it easy to return more than one value from a
+function.  For example
+
+    function name_number(x)
+      {
+        /* ... */
+        return [y.name, y.number];
+      }
+
+returns two values, a name and a number.  At a call site, you can
+assign them to two variables like this:
+
+    [name5, number5] := name_number(x5);
+
+Or, if you only care about the number, you can use
+
+    [, number5] := name_number(x5);
+
+This is more convenient and clearer than having to explicitly declare
+a new structure type just to return two values or having to pass in
+pointers to return additional values.
+
+Further, in an analogy with calling conventions, the returned values
+can be given names.  For example, the function might use.
+
+    function name_number(x)
+      {
+        /* ... */
+        return [name := y.name, number := y.number];
+      }
+
+Now, the call site can extract the return values either by their order
+or by name, such as:
+
+    [number5 := number, name5 := name] := name_number(x5);
+
+This makes it clearer which value means which thing and makes it
+harder to have bugs go unnoticed where the wrong order of values is
+assumed.
+
+This mechanism in Salmon is actually even more general, though.  This
+return statement:
+
+        return [name := y.name, number := y.number];
+
+is actually packaging values into a compound value and returning that
+compound value.  The call site:
+
+    [number5 := number, name5 := name] := name_number(x5);
+
+is just extracting those values.  But they could be kept packaged
+together and passed around further.  For example, the call site could be
+
+    immutable x := name_number(x5);
+    [number5 := number, name5 := name] := x;
+
+Or,
+
+    immutable x := name_number(x5);
+    number5 := x.number;
+    name5 := x.name;
+
+Or,
+
+    immutable x := name_number(x5);
+    number5 := x[0];
+    name5 := x[1];
+
+Compound values like this are called semi-labeled value lists in
+Salmon, and they are first-class values.  They contain fields with
+ordering information as a list and also, optional, names attached to
+some or all of the values in the list.  With the names attached, they
+may be accessed either by name or by number.
+
+    Maps
+    ----
+
+Semi-labeled value lists are one generalization that Salmon has for
+what some other languages call lists or arrays.  Salmon also includes
+another kind of compound value that is a generalization of lists in
+another way.  This is a map.
+
+A map is a set of key-value pairs where the keys are unique and the
+values may be looked up by key.  The special case where the keys are
+integers is an array.  But any values at all may be used as keys.
+When the keys are strings, the effect is the same as a ``hash'' in
+Perl.
+
+Square-bracket syntax may be used to both set elements in a map and to
+look them up.  For example:
+
+    a := map1[3];
+    b := map2["blue"];
+    map3[37.8] := "dog";
+
+Maps may also be specified with syntax to list their key-value pairs:
+
+    immutable my_map := <<("one" --> 1), ("two" --> 2), ("three" --> 3)>>;
+
+Note that when the keys used are integers, the square-bracket syntax
+can be used on either semi-labeled value lists or maps.  So for dense
+integer arrays, the semi-labeled value list form and the map form are
+equivalent.
+
+    Quarks
+    ------
+
+Many languages have enumerated type, specifying that a value can be
+one of a fixed number of finite, abstract values, each of which has
+its own name.  But its often not easy to extend an enumerated type.
+For example, if a base module understands five kinds of vehicles that
+it understands and an enumerated type for those five kinds of
+vehicles, it's not easy to add an extension module that understands
+three new types of vehicles without modifying the enumerated type in
+the base module.
+
+Salmon solves such issues by liberating the abstract values that are
+the enumeration constants from being tied to a single enumerated type
+each.  Such a liberated enumeration constant in Salmon is called a
+quark (because it's a very basic unit).  A given quark can appear in
+several different enumeration types.  And enumeration types can
+include other values besides quarks.
+
+
+    Structures
+    ----------
+
+Some languages use structural equivalence for structure or record
+types and others use name equivalence.  Salmon allows either.
+Semi-labeled value lists can be used for named fields.  There are also
+semi-labeled multi-sets, which do away with the ordering information
+of semi-labeled value lists and leave only the values and the labels.
+These are essentially records with structural equivalency.
+
+Alternatively, in Salmon leptons can be declared.  A lepton is
+essentially a tagged structure.  Only leptons with the same tag are
+equivalent and the lepton can be used as a type to specify only values
+with a given tag.
+
+    Theorems and Proofs
+    -------------------
+
+A theorem in Salmon is much like an assertion except that instead of
+being checked at runtime, a theorem is expected to be verified at
+compile time.  Salmon also has assertions, which are checked at
+runtime, as in other languages.
+
+Some theorems can automatically be verified by the compiler without
+any additional help from the user.  But some will be beyond what the
+compiler can figure out on its own.  For those cases, syntax exists in
+Salmon for specifying a proof to the compiler.  This allows the user
+to explain to the compiler why the theorem has to be true.  The
+compiler can verify the proof is correct and eliminate whole classes
+of potential bugs.
+
+Note that a Salmon interpreter will typically ignore theorems, just as
+it will not do most other static checking and optimization.  It is a
+compiler that is expected to check theorems and do other static
+checks.
+
+
+    Array Accesses
+    --------------
+
+Salmon supports some high-level array manipulation constructs,
+including multi-level array accesses and array slices.
+
+
+    Backtick Syntax
+    ---------------
+
+Salmon has syntax similar to Perl's backtick syntax, for a similar
+purpose: to make it easier to generate calls out to a shell.
+
+For example, in Salmon
+
+    `mv $source $(targets[p])`;
+
+is short-hand for
+
+    system("mv " ~ source ~ " " ~ targets[p]);
+
+Note that the dollar-sign syntax is limited to use in backtick
+constructs like this -- it is not otherwise used to access variables,
+as it is in Perl and various shell scripts.
+
+Note also that the system() function can be overloaded, so backtick
+constructs can be used to send commands to places other than the usual
+command-line shell.
+
+
+    Parallelism
+    -----------
+
+Salmon supports both parallel and non-parallel implementations.  In
+the core language there is support for declaring locks and attaching
+those locks to sections of code, routines, variables, and whole
+classes.  That way, library code can be written that will work in a
+single-threaded implementation (where locks essentially have no
+effect) and also in multi-threaded implementations.  Also, the keyword
+``parallel'' may be added to certain loop expressions to indicate that
+the implementation is free to run the implementation in parallel.  The
+implementation is still free to run them sequentially, however.
+
+No mechanism exists in the core of the Salmon language for explicit
+multi-threading or other forms of required parallelism.  This is to
+allow single-threaded implementations.  But implementations are
+allowed to provide library routines to enable multi-threading and make
+full use of the lock mechanism in the core of the language.
+
+
+    Pointer Type Details
+    --------------------
+
+Pointer types in Salmon have a couple of features that are different
+than in most languages.
+
+One feature is the ability to specify whether a null pointer is
+allowed or not.  For example, in the interface to some functions, a
+null pointer is allowed and in the interface to other functions, a
+null pointer is not allowed.  In Salmon, ``*integer'' is a pointer to
+an integer that is not allowed to be null and ``*.integer'' is a
+pointer that is allowed to be null.
+
+Another feature is to specify whether a pointer is allowed to be used
+for reading, writing or both.  ``*integer'' is a read-only pointer to
+an integer, ``+integer'' is a write-only pointer to an integer, and
+``*+integer'' is a read-write pointer to an integer.
+
+
+    Internationalization
+    --------------------
+
+All strings and characters in Salmon are in Unicode.  They are
+abstract Unicode strings and code points, not integers or arrays of
+integers, so there's no issue of which character encoding is used --
+the implementation is free to use UTF-8, UTF-16, UTF-32, or something
+totally different under the hood.  Standard runtime libraries are
+provided to convert to and from UTF-8, UTF-16, UTF-32 bit
+representations.
+
+A Salmon program is also itself in Unicode.  An implementation is
+likely to support UTF-8, so as a special case ASCII source code is
+fine, but an implementation is also free to support UTF-16 or UTF-32
+for Salmon source code.  All Unicode characters are available for use
+in comments, string literals, character literals, and regular
+expression literals in Salmon (except, of course, for a few specific
+ASCII characters that have special meanings in those contexts, such as
+a double-quote character in a string literal).
+
+Also, Salmon includes a translate() routine in the standard library.
+The standard library version is a no-op, but it can be over-ridden by
+program-specific code.  That way, a library writer can wrap all
+natural language strings with a translate() call.  Code that only
+supports that language can just use the default translate() function.
+But a program that supports user interaction in multiple languages can
+replace the translate() function with one that looks up the string in
+a table and translates it to the equivalent in the appropriate
+language.  That way, the library that was written with no knowledge of
+any other language can be used in a system that supports multiple
+languages without a need to modify the library source code.
+
+However, only ASCII characters are allowed in Salmon identifiers.
+This is to ensure that only the ability to render and distinguish
+ASCII characters is needed to read and fully understand Salmon code --
+the comments might be in another language and string literals might be
+in another language, but the program itself should be understood
+without having to be able to distinguish more than the standard ASCII
+character set.
+
+
+    Floating Point
+    --------------
+
+Unlike many languages, floating point is not built in to Salmon.
+Instead, floating point is implemented on top of more basic constructs
+that are built into Salmon.
+
+The reason floating point is not built in to Salmon is that there are
+a lot of different ways to do floating point.  Some languages (such as
+C, C++, and Fortran) have floating point built into the language but
+leave many of the details implementation-dependent.  This means that
+programs that use floating point in these languages can have different
+results on different implementations.  Other languages, such as Java,
+define more of the details of how floating point has to work.  This
+make programs more portable, but removes flexibility.
+
+Because floating point is put into extensions in Salmon rather than
+the core language, implementations are free to provide different
+floating-point semantics for different purposes and different hardware
+platforms.  Software implementations of floating point in Salmon will
+work on all implementations while hardware-specific extensions will
+allow access to fast hardware-assisted floating point on particular
+platforms.  The IEEE floating-point standard is implemented in
+hardware on many different platforms -- with Salmon's extension
+mechanism, a program can use an interface to the IEEE floating-point
+functionality and then have that map to hardware floating point on
+systems that support it and software floating point on systems that do
+not directly support IEEE floating point in hardware.  The fact that
+it's in an extension rather than built into the core of the language
+should not make it harder to use or keep it from working across all
+platforms.
+
+Salmon does support scientific notation for numeric constants that is
+similar to that supported by other programming languages.  But in
+Salmon such constants in scientific notation are treated as rationals
+by default.  Arithmetic on them is pure rational arithmetic unless the
+user specifies treating them as some floating-point type with a
+specific size.  For example, an implementation might have three
+classes, f32 for 32-bit hardware floating-point types, f64 for 64-bit
+hardware floating-point types, and f128 for 128-bit hardware
+floating-point types.  The constant 1.23e-57 by itself will be taken
+as a rational value, while f32(1.23e-57) will produce the 32-bit
+floating-point representation, f64(1.23e-57) will produce the 64-bit
+floating-point representation, and so on.

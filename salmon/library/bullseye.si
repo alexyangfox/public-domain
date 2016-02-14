@@ -1,0 +1,36 @@
+/* file "bullseye.si" */
+
+/*
+ *  This file contains the interface to a routine to calculate a given real
+ *  function with enough precision to get the error within a given bound.  It
+ *  must be passed a function that can compute an approximation to the real
+ *  function within any specified bound using any specified floating-point
+ *  interval type.  It uses successively more precise calls to the
+ *  approximation function until the width of the result interval is small
+ *  enough to meet the error bound.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+include "interval.si",
+
+
+relative :- any_quark,
+absolute :- any_quark,
+
+bound_kind :- {type { relative, absolute }},
+
+bullseye :- any_interval <-- (
+        approximator :
+        any_interval <--
+        (compute_type : type any_interval, error_bound : (0....+oo)),
+        error_bound : (0....+oo), kind : bound_kind),
+
+convertable_from_rational :- type !{},
+
+best_approximation :- !{} <-- (destination_type : convertable_from_rational,
+        approximator : any_interval <-- (tolerance : rational),
+        start_tolerance : rational := *, tolerance_increment : rational := *)

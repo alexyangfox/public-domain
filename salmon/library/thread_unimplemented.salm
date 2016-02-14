@@ -1,0 +1,266 @@
+/* file "thread_unimplemented.salm" */
+
+/*
+ *  This file gives a dummy implementation of a thread module for Salmon.  This
+ *  is the version of "thread.salm" for systems which don't have a working
+ *  version of multi-threading.  It is used so that programs that use the
+ *  multi-threading interface can still run, they just can't use multiple
+ *  threads.  For systems that do have a working version of multi-threading for
+ *  Salmon, "thread_implemented.salm" should be used instead of this file.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+hide;
+
+use "date_utils.salm" : "date_utils.si";
+
+export;
+
+immutable multi_threading_works := false;
+
+quark enumeration status { running, finished, blocked, sleeping, suspended };
+
+quark enumeration exit_status
+  { exit_normal, exit_exceptions, exit_killed, exit_died, exit_jumped_out };
+
+immutable thread := type interface
+  [
+    name :- string <-- (),
+    is_done :- boolean <-- (),
+    interrupt :- {} <-- (tag : any_quark, message : string,
+                         other : [...] := *),
+    kill :- {} <-- (),
+    wait_for_termination :- {} <-- (),
+    get_status :- status <-- (),
+    suspend :- {} <-- (),
+    resume :- {} <-- (),
+    get_source_position :- source_region <-- (),
+    get_exit_status :- exit_status <-- (),
+    get_exit_exceptions :- array[exception] <-- (),
+    get_exit_jump_target :- jump_target <-- ()
+  ];
+
+function create_thread(body : {} <-- (), name : string := "???") returns thread
+  {
+    throw(et_thread_creation_failed,
+          "Multi-threading not supported on this system.");
+  };
+
+immutable semaphore := type interface
+  [
+    /*
+     * Semaphores have two core operations, the first of which increments the
+     * counter and the second of which decrements it, waiting if necessary
+     * until that is possible without going below zero.  The use of semaphores
+     * has a long history, and different names have been used over the years
+     * for these same two operations.  According to Wikipedia's "Semaphore
+     * (programming)" article (as accessed on Tuesday, March 15, 2011), common
+     * names for the first operation are "V", "signal", "up", "release",
+     * "post", and "vacate".  Common names for the second operation are "P",
+     * "wait", "down", "acquire", "pend", and "procure".  In the interest of
+     * allowing users to use the names they are already familiar with, and
+     * following the convention in this interface that only lower-case letters
+     * are used in identifiers, the lower-case versions of all of these names
+     * are provided in this interface as aliases to the two core operations.
+     *
+     * The optional integer parameter is the amount by which the semaphore
+     * value is to be increased or decreased.  It defaults to one if this
+     * parameter is not provided.
+     */
+
+    v :- {} <-- ([1...+oo] := *),
+    signal :- {} <-- ([1...+oo] := *),
+    up :- {} <-- ([1...+oo] := *),
+    release :- {} <-- ([1...+oo] := *),
+    post :- {} <-- ([1...+oo] := *),
+    vacate :- {} <-- ([1...+oo] := *),
+
+    p :- {} <-- ([1...+oo] := *),
+    wait :- {} <-- ([1...+oo] := *),
+    down :- {} <-- ([1...+oo] := *),
+    acquire :- {} <-- ([1...+oo] := *),
+    pend :- {} <-- ([1...+oo] := *),
+    procure :- {} <-- ([1...+oo] := *),
+
+    current :- [0...+oo] <-- (),
+
+    /*
+     * The try_p() method is a variant on p() that has a time limit.  If the
+     * p() operation can complete in the time specified by the "seconds"
+     * parameter, it acts like p() and returns true.  Otherwise, it leaves the
+     * semaphore unchanged and returns false.  The default value of "seconds"
+     * is zero, so if "seconds" is not provided, try_p() is non-blocking and
+     * will always return immediately one was or the other.  If "seconds" is
+     * "+oo", the effect is the same as p() and it will never return false.
+     */
+    try_p :- boolean <-- ([1...+oo] := *, seconds : [0....+oo] := *)
+  ];
+
+function boolean_semaphore(start : boolean := false) returns semaphore
+  {
+    return class()
+      {
+        use integer_semaphore(limit := 1, start := (start ? 1 : 0));
+      }();
+  };
+
+function integer_semaphore(limit : [1...+oo], start : [0...+oo] := 0)
+        returns semaphore
+  (integer_semaphore_implementation(limit, start));
+
+hide;
+
+class integer_semaphore_implementation(limit : [1...+oo],
+                                       start : [0...+oo] := 0)
+  {
+    hide;
+
+    variable my_current : [0...limit] := start;
+    immutable my_limit := limit;
+
+    export;
+
+    procedure v(amount : [1...+oo] := 1)
+      {
+        if (my_current + amount > my_limit)
+          {
+            throw(et_semaphore_up_beyond_limit,
+                  "In a semaphore's up() method, an attempt was made to " ~
+                  "increment the value to " ~ sprint(my_current + amount) ~
+                  ", which is beyond that semaphore's limit of " ~
+                  sprint(my_limit) ~ ".");
+          };
+        amount := my_current + amount;
+      };
+    procedure signal(amount : [1...+oo] := 1)  { v(amount); };
+    procedure up(amount : [1...+oo] := 1)  { v(amount); };
+    procedure release(amount : [1...+oo] := 1)  { v(amount); };
+    procedure post(amount : [1...+oo] := 1)  { v(amount); };
+    procedure vacate(amount : [1...+oo] := 1)  { v(amount); };
+
+    procedure p(amount : [1...+oo] := 1)
+      {
+        if (amount > my_current)
+          {
+            throw(exception_tag_deadlock,
+                  "The only running thread is waiting on a semaphore.");
+          };
+        my_current -= amount;
+      };
+    procedure wait(amount : [1...+oo] := 1)  { p(amount); };
+    procedure down(amount : [1...+oo] := 1)  { p(amount); };
+    procedure acquire(amount : [1...+oo] := 1)  { p(amount); };
+    procedure pend(amount : [1...+oo] := 1)  { p(amount); };
+    procedure procure(amount : [1...+oo] := 1)  { p(amount); };
+
+    function current() returns [0...limit]  (my_limit);
+
+    function try_p(amount : [1...+oo] := 1, seconds : [0....+oo] := 0)
+            returns boolean
+      {
+        if (amount <= my_current)
+          {
+            my_current -= amount;
+            return true;
+          };
+
+        sleep(seconds);
+        return false;
+      };
+  };
+
+use "unimplemented_thread.so";
+
+immutable root_thread : thread := class()
+  {
+    function name() returns string  ("Root Thread");
+    function is_done() returns boolean  (false);
+    procedure interrupt(tag : any_quark, message : string, other : [...] := [])
+      {
+        throw(tag := tag, message := message, other := other);
+      };
+    procedure kill()
+      {
+        commit_suicide();
+      };
+    procedure wait_for_termination()
+      {
+        throw(exception_tag_deadlock,
+              "The only running thread is waiting for its own termination.");
+      };
+    function get_status() returns status  (running);
+    procedure suspend()
+      {
+        throw(exception_tag_deadlock,
+              "The only running thread tried to suspend itself.");
+      };
+    procedure resume()
+      {
+        throw(et_resume_not_suspended,
+              "A resume() call was made on a thread that was not suspended.");
+      };
+    function get_source_position() returns source_region
+      {
+        return source_region[
+            file_name := "thread.salm",
+            start_line := 196,
+            start_column := 9,
+            end_line := 202,
+            end_column := 12
+          ];
+      };
+    function get_exit_status() returns exit_status
+      {
+        throw(et_get_exit_status_not_finished,
+              "A get_exit_status() call was made on a thread that had not " ~
+              "yet exited.");
+      };
+    function get_exit_exceptions() returns array[exception]
+      {
+        throw(et_get_exit_exceptions_not_finished,
+              "A get_exit_exceptions() call was made on a thread that had " ~
+              "not yet exited.");
+      };
+    function get_exit_jump_target() returns jump_target
+      {
+        throw(et_get_exit_jump_target_not_finished,
+              "A get_exit_jump_target() call was made on a thread that had " ~
+              "not yet exited.");
+      };
+  }();
+
+export;
+
+procedure wait_for_all_threads()  { };
+function all_threads() returns array[thread]  ([root_thread]);
+function current_thread() returns thread  (root_thread);
+procedure sleep(seconds : [0....+oo])
+  {
+    immutable start : time_type := utc_time_and_date();
+    while (true)
+      {
+        variable now : time_type := utc_time_and_date();
+        if ((now - start) >= seconds)
+            return;;
+      };
+  };
+procedure yield()  { };
+
+quark et_thread_creation_failed;
+quark et_time_too_far;
+quark et_semaphore_up_beyond_limit;
+quark et_wait_all_not_root;
+quark et_interrupt_unnamed_extra;
+quark et_interrupt_finished;
+quark et_suspend_finished;
+quark et_suspend_suspended;
+quark et_resume_not_suspended;
+quark et_get_exit_status_not_finished;
+quark et_get_exit_exceptions_not_finished;
+quark et_get_exit_exceptions_no_exception;
+quark et_get_exit_jump_target_not_finished;
+quark et_get_exit_jump_target_no_jump;

@@ -1,0 +1,61 @@
+/* "complex.salm" */
+
+/*
+ *  This file contains an implementation of complex arithmetic in Salmon.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+class complex(real_part : rational, imaginary_part : rational)
+  {
+    function real() returns rational  { return real_part; };
+    function imaginary() returns rational  { return imaginary_part; };
+    function sprint() returns string
+      ("(" ~ sprint(real_part) ~ ", " ~ sprint(imaginary_part) ~ ")");
+    function operator+(other : rational, reversed : boolean) returns complex
+      (complex(real_part + other, imaginary_part));
+    function operator+(other : complex, reversed : boolean) returns complex
+      (complex(real_part + other.real(), imaginary_part + other.imaginary()));
+    function operator-(other : rational, reversed : boolean) returns complex
+      (reversed ? complex(other - real_part, -imaginary_part) :
+                  complex(real_part - other, imaginary_part));
+    function operator-(other : complex, reversed : boolean) returns complex
+      (reversed ?
+       complex(other.real() - real_part, other.imaginary() - imaginary_part) :
+       complex(real_part - other.real(), imaginary_part - other.imaginary()));
+    function operator*(other : rational, reversed : boolean) returns complex
+      (complex(real_part * other, imaginary_part * other));
+    function operator*(other : complex, reversed : boolean) returns complex
+      (complex((real_part * other.real()) -
+               (imaginary_part * other.imaginary()),
+               (real_part * other.imaginary()) +
+               (imaginary_part * other.real())));
+    function operator/(other : rational, reversed : boolean) returns complex
+      (reversed ? (complex(other, 0) / this) :
+                  complex(real_part / other, imaginary_part / other));
+    function operator/(other : complex, reversed : {false}) returns complex
+      {
+        immutable denominator := (other.real() * other.real()) +
+                                 (other.imaginary() * other.imaginary());
+        return complex(
+                ((real_part * other.real()) +
+                 (other.imaginary() * imaginary_part)) / denominator,
+                ((other.real() * imaginary_part) -
+                 (other.imaginary() * real_part)) / denominator);
+      };
+    function operator==(other : rational, reversed : boolean) returns boolean
+      ((real_part == other) && (imaginary_part == 0));
+    function operator==(other : complex, reversed : boolean) returns boolean
+      ((real_part == other.real()) && (imaginary_part == other.imaginary()));
+    function operator!=(other : rational, reversed : boolean) returns boolean
+      (!(this == other));
+    function operator!=(other : complex, reversed : boolean) returns boolean
+      (!(this == other));
+    function operator+() returns complex  { return this; };
+    function operator-() returns complex
+      { return complex(-real_part, -imaginary_part); };
+  };
+
+immutable i := complex(0, 1);

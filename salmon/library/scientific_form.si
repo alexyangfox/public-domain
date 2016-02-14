@@ -1,0 +1,26 @@
+/* file "scientific_form.si" */
+
+/*
+ *  This file contains the interface to a routine to put a positive finite
+ *  rational value into scientific form for a given base -- that is, find a
+ *  mantissa and exponent such that the mantissa is greater than or equal to
+ *  one and less than the base and the mantissa times the base to the power of
+ *  the exponent is the original rational value.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+find_scientific_form :-
+        [mantissa : [1....+oo), exponent : (-oo...+oo)] <--
+                (start : (0....+oo), base : (0...+oo),
+                 bottom : (0...+oo) := *),
+
+find_integer_scientific_form :-
+        [mantissa_integer_part : [1...+oo), mantissa_remainder : [0...+oo),
+         mantissa_denominator : (0...+oo), exponent : (-oo...+oo)] <--
+                (start_integer_part : [0...+oo), start_remainder : [0...+oo),
+                 start_denominator : (0...+oo), base : (0...+oo),
+                 bottom : (0...+oo) := *)

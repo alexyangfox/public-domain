@@ -1,0 +1,57 @@
+/* file "numeric_operable.salm" */
+
+/*
+ *  This file contains a couple of functions for generating types of values
+ *  that can be used with the normal arithmetic operators.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+function numeric_operable(ageless operand_type : type !{},
+                          ageless result_type : type !{})
+        returns type !{}
+  {
+    variable result := type interface
+      [
+        operator+ :- result_type <-- (operand_type, reversed : boolean),
+        operator+ :- result_type <-- (),
+        operator- :- result_type <-- (operand_type, reversed : boolean),
+        operator- :- result_type <-- (),
+        operator* :- result_type <-- (operand_type, reversed : boolean),
+        operator/ :- result_type <-- (operand_type, reversed : boolean),
+        operator== :- boolean <-- (operand_type, reversed : boolean),
+        operator!= :- boolean <-- (operand_type, reversed : boolean),
+        operator>= :- boolean <-- (operand_type, reversed : boolean),
+        operator<= :- boolean <-- (operand_type, reversed : boolean),
+        operator> :- boolean <-- (operand_type, reversed : boolean),
+        operator< :- boolean <-- (operand_type, reversed : boolean)
+      ];
+
+    try
+      {
+        if ((type operand_type in type rational) &&
+            (type rational in type result_type))
+          {
+            result := type result | rational;
+          };
+      }
+    catch
+      {
+        immutable e1 := current_exceptions()[0];
+        if (e1.tag != exception_tag_in_indeterminate)
+            throw(e1);;
+      };
+
+    return result;
+  };
+
+function numeric_operable_closed(starting_operand_type : type !{})
+        returns type !{}
+  {
+    ageless immutable result : type !{} := numeric_operable(
+            type starting_operand_type | lazy result, type lazy result);
+    return result;
+  };

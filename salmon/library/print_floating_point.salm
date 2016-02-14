@@ -1,0 +1,661 @@
+/* file "print_floating_point.salm" */
+
+/*
+ *  This file contains code to generate mantissa digits and an exponent value
+ *  for printing floating-point values in a base that may differ from the
+ *  original base of the floating-point value.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+hide;
+
+
+use "scientific_form.salm" : "scientific_form.si";
+
+
+export;
+
+
+quark et_fp_bad_specifier;
+quark et_fp_integer_specifier_non_integer_value;
+
+
+procedure print_floating_point_exact(mantissa : [0....+oo),
+        original_base : [1...+oo), original_exponent : (-oo...+oo),
+        new_base : [1...+oo), digit_count : [0...+oo], complement : boolean,
+        send_exponent : {} <-- ((-oo...+oo)),
+        send_digit : {} <-- (*) / {} <-- ([0...new_base)))
+  {
+    if (mantissa == 0)
+      {
+        send_exponent(0);
+        for (num; 0; num < digit_count; 1)
+            send_digit(0);;
+        return;
+      };
+
+    variable remainder : [0....+oo);
+    variable new_exponent : (-oo...+oo);
+
+    if (original_base == new_base)
+      {
+        remainder := mantissa;
+        new_exponent := original_exponent;
+      }
+    else
+      {
+        variable remaining_base : (0...+oo) := original_base;
+        variable remaining_exponent : (-oo...+oo) := original_exponent;
+        remainder := mantissa;
+        new_exponent := 0;
+
+        while (remaining_base != 1)
+          {
+            if ((remaining_base % new_base) == 0)
+              {
+                remaining_base /= new_base;
+                new_exponent += remaining_exponent;
+                continue;
+              };
+
+            variable factor := 1;
+            variable powered_base := remaining_base;
+            while (powered_base <= new_base)
+              {
+                if (powered_base == new_base)
+                  {
+                    new_exponent += remaining_exponent /:: factor;
+                    remaining_exponent := remaining_exponent % factor;
+                    break;
+                  };
+                ++factor;
+                powered_base *= remaining_base;
+              };
+
+            remainder *= power(remaining_base, remaining_exponent);
+            break;
+          };
+      };
+
+    immutable scientific := find_scientific_form(remainder, new_base);
+    remainder := scientific.mantissa;
+    new_exponent += scientific.exponent;
+
+    assert((remainder >= 0) && (remainder < new_base));
+
+    if (complement)
+      {
+        assert(remainder > 0);
+        remainder := new_base - remainder;
+        assert(remainder > 0);
+      };
+
+    use class()
+      {
+        variable pending : [0...new_base) | {null} := null;
+        variable max_count : [0...+oo) := 0;
+        variable exponent_sent : boolean := false;
+
+        procedure send_raw_digit(to_send : [0...new_base])
+          {
+            if (to_send == (new_base - 1))
+              {
+                ++max_count;
+              }
+            else if (to_send == new_base)
+              {
+                if (pending == null)
+                  {
+                    assert(!exponent_sent);
+                    send_exponent(new_exponent + 1);
+                    exponent_sent := true;
+                    send_digit(1);
+                  }
+                else
+                  {
+                    if (!exponent_sent)
+                      {
+                        send_exponent(new_exponent);
+                        exponent_sent := true;
+                      };
+                    send_digit(pending + 1);
+                    pending := 0;
+                  };
+                while (max_count > 0)
+                  {
+                    send_digit(0);
+                    --max_count;
+                  };
+              }
+            else
+              {
+                finalize();
+                pending := to_send;
+              };
+          };
+
+        procedure finalize()
+          {
+            if (!exponent_sent)
+              {
+                send_exponent(new_exponent);
+                exponent_sent := true;
+              };
+            if (pending != null)
+                send_digit(pending);;
+            while (max_count > 0)
+              {
+                send_digit(new_base - 1);
+                --max_count;
+              };
+          };
+      }();
+
+    for (num; 0; num < digit_count; 1)
+      {
+        assert((remainder >= 0) && (remainder < new_base));
+        if (num + 1 == digit_count)
+            remainder += 0.5;;
+        assert((remainder >= 0) && (remainder < (new_base + 1)));
+        immutable digit : [0...new_base] := remainder :: integer;
+        remainder -= digit;
+        assert((remainder >= 0) && (remainder < 1));
+        send_raw_digit(digit);
+        remainder *= new_base;
+        assert((remainder >= 0) && (remainder < new_base));
+      };
+    assert((remainder >= 0) && (remainder < new_base));
+
+    finalize();
+  };
+
+function floating_point_formatting(original_mantissa : rational,
+        original_exponent : (-oo...+oo), original_base : (0...+oo),
+        specifier : string := "v", plus : boolean := false,
+        space : boolean := false, hash : boolean := false,
+        zero_width : [0...+oo) := 0, precision : [0...+oo) | {null} := null)
+                returns string
+  {
+    quark enumeration base_kinds
+      { unknown_base, octal, decimal, lower_hex, upper_hex };
+    variable print_base : base_kinds := unknown_base;
+    variable print_base_value : [0...16];
+    procedure set_print_base(new_kind : base_kinds & !{unknown_base})
+      {
+        if (print_base != unknown_base)
+          {
+            throw(et_fp_bad_specifier,
+                  "More than one base specification was found in the format " ~
+                  "for printing a floating-point value.");;
+          };
+        print_base := new_kind;
+        switch (new_kind)
+        case ({octal})
+          { print_base_value := 8; }
+        case ({decimal})
+          { print_base_value := 10; }
+        case ({lower_hex})
+          { print_base_value := 16; }
+        case ({upper_hex})
+          { print_base_value := 16; };
+      };
+
+    variable complement : boolean := false;
+
+    immutable specifier_chars : character[0...+oo] := characters(specifier);
+
+    if (length(specifier_chars) <= 0)
+      {
+        throw(et_fp_bad_specifier,
+              "A zero-length specifier was used to attempt formatted " ~
+              "printing of a floating-point value.");;
+      };
+
+    iterate(modifier; specifier_chars[0...length(specifier_chars) - 2])
+      {
+        switch (modifier)
+        case ({'o'})
+          { set_print_base(octal); }
+        case ({'x'})
+          { set_print_base(lower_hex); }
+        case ({'X'})
+          { set_print_base(upper_hex); }
+        case ({'c'})
+          {
+            if (complement)
+              {
+                throw(et_fp_bad_specifier,
+                      "The complement specifier prefix character `c' was " ~
+                      "used more than once in the same specifier for an " ~
+                      "attempt to do formatted printing of a floating-point " ~
+                      "value.");
+              };
+            complement := true;
+          }
+        case (!{})
+          {
+            throw(et_fp_bad_specifier,
+                  "Illegal specifier prefix character `" ~ modifier ~
+                  "' was used to attempt formatted printing of a" ~
+                  " floating-point value.");
+          };
+      };
+
+    immutable base_specifier : character :=
+            specifier_chars[length(specifier_chars) - 1];
+
+    if (base_specifier in
+        !{'v', 'd', 'i', 'o', 'x', 'X', 'f', 'e', 'E', 'g', 'G'})
+      {
+        throw(et_fp_bad_specifier,
+              "Illegal specifier base character `" ~ base_specifier ~
+              "' was used to attempt formatted printing of a floating-point " ~
+              "value.");
+      };
+
+    if (original_mantissa in !(-oo....+oo))
+      {
+        variable result : string := sprint(original_mantissa);
+        if (base_specifier == 'v')
+          {
+            result ~= "*" ~ sprint(original_base) ~ "^" ~
+                      sprint(original_exponent);
+          };
+        while (zero_width > length(result))
+            result := " " ~ result;;
+        return result;
+      };
+
+    immutable original_complement : boolean := complement;
+    variable prefix : string;
+    variable mantissa_magnitude : [0....+oo);
+    if (original_mantissa < 0)
+      {
+        mantissa_magnitude := -original_mantissa;
+        assert(mantissa_magnitude >= 1);
+        prefix := "-";
+      }
+    else
+      {
+        complement := false;
+        mantissa_magnitude := original_mantissa;
+        if (plus)
+            prefix := "+";
+        else if (space)
+            prefix := " ";
+        else
+            prefix := "";;
+      };
+
+    function digit_value_to_character(
+            digit_value : [0...16] / [0...print_base_value)) returns character
+      {
+        variable base : character := '0';
+        variable offset : [0...print_base_value) :=
+                (complement ? ((print_base_value - digit_value) - 1) :
+                 digit_value);
+        if (offset >= 10)
+          {
+            if (print_base == lower_hex)
+              {
+                base := 'a';
+              }
+            else
+              {
+                assert(print_base == upper_hex);
+                base := 'A';
+              };
+            offset -= 10;
+          };
+        return from_utf32(to_utf32(base) + offset);
+      };
+
+    procedure add_fill(count : [0...+oo))
+      {
+        immutable fill_character : character := digit_value_to_character(0);
+        for (left; count; left > 0; -1)
+            prefix ~= fill_character;;
+      };
+
+    procedure print_integer()
+      {
+        immutable to_print : [0....+oo) :=
+                mantissa_magnitude * power(original_base, original_exponent);
+        if (to_print in !integer)
+          {
+            throw(et_fp_integer_specifier_non_integer_value,
+                  "An integer specifier was used to attempt to print a " ~
+                  "non-integer floating-point value.");
+          };
+        print_integer(to_print);
+
+        immutable final_precision : [0...+oo) :=
+                ((precision == null) ? 1 : precision);
+        if (length(result) < final_precision)
+            add_fill(final_precision - length(result));;
+      };
+
+    procedure print_integer(to_print : [0...+oo))
+      {
+        variable remainder : [0...+oo) := to_print;
+
+        if (complement)
+            --remainder;;
+
+        result := "";
+        while (remainder != 0)
+          {
+            result := digit_value_to_character(remainder % print_base_value) ~
+                      result;
+            remainder /::= print_base_value;
+          };
+
+        if (hash)
+          {
+            if (print_base == octal)
+              {
+                if (to_print != 0)
+                  {
+                    prefix ~= ((complement && (original_mantissa < 0)) ? "7" :
+                               "0");
+                  };
+              }
+            else if (print_base == lower_hex)
+              {
+                prefix ~= "0x";
+              }
+            else if (print_base == upper_hex)
+              {
+                prefix ~= "0X";
+              };
+          };
+      };
+
+    procedure add_scientific_notation_exponent(base_specifier : character,
+                                               output_exponent: (-oo...+oo))
+      {
+        variable exponent_marker : character := base_specifier;
+        if (print_base in {lower_hex, upper_hex})
+            exponent_marker := ((exponent_marker == 'e') ? 'x' : 'X');;
+        result ~= exponent_marker;
+
+        immutable exponent_format : (base_kinds & !{unknown_base}) --> string
+                :=
+          <<(octal --> "o"), (decimal --> "d"),
+            (lower_hex --> "x"), (upper_hex --> "X")>>;
+        result ~= sprintf(
+                "%+.2" ~ (original_complement ? "c" : "") ~
+                exponent_format[print_base] ~ "%", output_exponent);
+      };
+
+    variable result : string;
+    switch (base_specifier)
+    case ({'v'})
+      {
+        if (print_base != unknown_base)
+          {
+            throw(et_fp_bad_specifier,
+                  "A base modifier was used with a `v' base specifier when " ~
+                  "attempting to print a floating-point value.");
+          };
+        if (precision != null)
+          {
+            throw(et_fp_bad_specifier,
+                  "A precision was used with a `v' base specifier when " ~
+                  "attempting to print a floating-point value.");
+          };
+
+        variable format : string := "d%";
+        if (complement)
+            format := "c" ~ format;;
+        if (hash)
+            format := "#" ~ format;;
+        format := "%" ~ format;;
+        variable mantissa_part : string :=
+                sprintf(format, numerator(original_mantissa));
+        if (original_mantissa < 0)
+            mantissa_part := substitute(@^-@, mantissa_part, "");;
+        if (!(mantissa_magnitude in integer))
+          {
+            prefix ~= "(";
+            mantissa_part ~=
+                    "/" ~ sprintf(format, denominator(original_mantissa)) ~
+                    ")";
+          };
+        result := mantissa_part ~ "*" ~ sprint(original_base) ~ "^" ~
+                  sprint(original_exponent);
+      }
+    case ({'d', 'i'})
+      {
+        set_print_base(decimal);
+        print_integer();
+      }
+    case ({'o'})
+      {
+        set_print_base(octal);
+        print_integer();
+      }
+    case ({'x'})
+      {
+        set_print_base(lower_hex);
+        print_integer();
+      }
+    case ({'X'})
+      {
+        set_print_base(upper_hex);
+        print_integer();
+      }
+    case ({'f'})
+      {
+        if (print_base == unknown_base)
+            set_print_base(decimal);;
+        immutable final_precision : [0...+oo) :=
+                ((precision == null) ? 6 : precision);
+
+        variable remainder : [0....+oo) :=
+                mantissa_magnitude * power(original_base, original_exponent);
+        immutable rounder := 0.5 * power(print_base_value, -final_precision);
+        if (complement)
+          {
+            if (remainder > rounder)
+              {
+                remainder -= rounder;
+              }
+            else
+              {
+                remainder := 0;
+              };
+          }
+        else
+          {
+            remainder += rounder;
+          };
+        if (((remainder < (2 * rounder)) && (original_mantissa < 0) &&
+             !complement) || (complement && (remainder == 0)))
+          {
+            return floating_point_formatting(original_mantissa := 0,
+                    original_exponent := 0, original_base := original_base,
+                    specifier := specifier, plus := plus, space := space,
+                    hash := hash, zero_width := zero_width,
+                    precision := precision);
+          };
+        variable whole_part := remainder :: integer;
+        remainder -= whole_part;
+        assert((remainder >= 0) && (remainder < 1));
+        if (complement && (remainder > 0))
+          {
+            remainder := 1 - remainder;
+            ++whole_part;
+          };
+        assert((remainder >= 0) && (remainder < 1));
+        print_integer(whole_part);
+        if (length(result) < 1)
+            add_fill(1 - length(result));;
+
+        if ((final_precision > 0) || hash)
+            result ~= ".";;
+
+        immutable saved_complement : boolean := complement;
+        complement := false;
+
+        for (digit_num; 0; digit_num < final_precision; 1)
+          {
+            assert((remainder >= 0) && (remainder < 1));
+            remainder *= print_base_value;
+            assert((remainder >= 0) && (remainder < print_base_value));
+            immutable new_digit := remainder :: integer;
+            remainder -= new_digit;
+            assert((remainder >= 0) && (remainder < 1));
+            result ~= digit_value_to_character(new_digit);
+          };
+        assert((remainder >= 0) && (remainder < 1));
+
+        complement := saved_complement;
+      }
+    case ({'e', 'E'})
+      {
+        if (print_base == unknown_base)
+            set_print_base(decimal);;
+
+        variable output_exponent : (-oo...+oo);
+
+        result := "";
+        print_floating_point_exact(mantissa_magnitude, original_base,
+                original_exponent, print_base_value,
+                digit_count := ((precision == null) ? 6 : precision) + 1,
+                complement := complement,
+                send_exponent := procedure(new_exponent : (-oo...+oo))
+          { output_exponent := new_exponent; },
+                send_digit := procedure(new_digit : [0...print_base_value))
+          {
+            if (length(result) == 1)
+                result ~= ".";;
+            result ~= digit_value_to_character(
+                    complement ? (print_base_value - (new_digit + 1)) :
+                                 new_digit);
+          });
+
+        if (hash)
+          {
+            if (print_base == octal)
+              {
+                immutable octal_prefix :=
+                        ((complement && (original_mantissa < 0)) ? '7' : '0');
+                if (characters(result)[0] != octal_prefix)
+                    prefix ~= octal_prefix;;
+              }
+            else if (print_base == lower_hex)
+              {
+                prefix ~= "0x";
+              }
+            else if (print_base == upper_hex)
+              {
+                prefix ~= "0X";
+              };
+          };
+
+        if (hash && (length(result) == 1))
+            result ~= ".";;
+
+        add_scientific_notation_exponent(base_specifier, output_exponent);
+      }
+    case ({'g', 'G'})
+      {
+        if (print_base == unknown_base)
+            set_print_base(decimal);;
+        immutable final_precision : [0...+oo) :=
+                ((precision in {null, 0}) ? 1 : precision);
+
+        variable scientific_notation_exponent : (-oo...+oo) | {null};
+        variable zero_count : [0...+oo) := 0;
+        variable digits_before_point := 1;
+        procedure append_digit(new_digit : [0...print_base_value))
+          {
+            if (length(result) == digits_before_point)
+                result ~= ".";;
+            result ~= digit_value_to_character(
+                    complement ? (print_base_value - (new_digit + 1)) :
+                                 new_digit);
+          };
+
+        procedure send_digit(new_digit : [0...print_base_value))
+          {
+            if ((new_digit == 0) && (!hash) &&
+                (length(result) >= digits_before_point))
+              {
+                ++zero_count;
+              }
+            else
+              {
+                while (zero_count > 0)
+                  {
+                    append_digit(0);
+                    --zero_count;
+                  };
+                append_digit(new_digit);
+              };
+          };
+
+        result := "";
+        print_floating_point_exact(mantissa_magnitude, original_base,
+                original_exponent, print_base_value, final_precision,
+                complement,
+                send_exponent := procedure(new_exponent : (-oo...+oo))
+          {
+            if ((new_exponent < -4) || (new_exponent >= final_precision))
+              {
+                scientific_notation_exponent := new_exponent;
+              }
+            else
+              {
+                if (new_exponent > 0)
+                    digits_before_point := (new_exponent + 1);;
+                scientific_notation_exponent := null;
+                for (left; new_exponent; left < 0; 1)
+                    send_digit(complement ? (print_base_value - 1) : 0);;
+              };
+          }, send_digit := send_digit);
+
+        if (hash)
+          {
+            if (print_base == octal)
+              {
+                immutable octal_prefix :=
+                        ((complement && (original_mantissa < 0)) ? '7' : '0');
+                if (characters(result)[0] != octal_prefix)
+                    prefix ~= octal_prefix;;
+              }
+            else if (print_base == lower_hex)
+              {
+                prefix ~= "0x";
+              }
+            else if (print_base == upper_hex)
+              {
+                prefix ~= "0X";
+              };
+          };
+
+        if ((length(result) == 1) && hash)
+            result ~= ".";;
+
+        if (scientific_notation_exponent != null)
+          {
+            add_scientific_notation_exponent(
+                    ((base_specifier == 'g') ? 'e' : 'E'),
+                    scientific_notation_exponent);
+          };
+      }
+    case (!{})
+      {
+        assert(false);
+      };
+
+    if (length(prefix) + length(result) < zero_width)
+        add_fill(zero_width - (length(prefix) + length(result)));;
+
+    return prefix ~ result;
+  };

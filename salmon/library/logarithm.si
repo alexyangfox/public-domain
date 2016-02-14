@@ -1,0 +1,78 @@
+/* file "logarithm.si" */
+
+/*
+ *  This file contains the interface to algorithms to calculate approximations
+ *  to logarithms and the exponential function on real-valued arguments (not
+ *  complex) in the Salmon Programming Language.  It will work with operands of
+ *  various scalar numerical types, including rationals and various floating-
+ *  point types.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+include "convertable.si",
+include "interval.si",
+
+
+relative :- any_quark,
+absolute :- any_quark,
+
+bound_kind :- {type { relative, absolute }},
+
+convertable_from_rational :- type !{},
+convertable_to_rational :- type !{},
+
+raw_log :- !{} <-- (base : (0....+oo), operand : !{}, tolerance : (0....+oo)),
+
+raw_exponential :- !{} <-- (operand : !{}, tolerance : (0....+oo)),
+
+interval_log :- any_interval <-- (
+        interval_type : any_class & (any_interval <-- (*)), base : (0....+oo),
+        operand : !{}, tolerance : (0....+oo)),
+
+interval_exponential :- any_interval <-- (
+        interval_type : any_class & (any_interval <-- (*)), operand : !{},
+        tolerance : (0....+oo)),
+
+log :- ((rational <-- (base : (0....+oo), operand : rational,
+                       tolerance : (0....+oo), kind : bound_kind := *)) &
+        (!{} <-- (destination_type : convertable_from_rational,
+                  source_type : convertable_to_rational, base : (0....+oo),
+                  operand : !{}, start_tolerance : rational := *,
+                  tolerance_increment : rational := *))),
+
+log2 :- ((rational <-- (operand : rational, tolerance : (0....+oo),
+                        kind : bound_kind := *)) &
+         (!{} <-- (destination_type : convertable_from_rational,
+                   source_type : convertable_to_rational, operand : !{},
+                   start_tolerance : rational := *,
+                   tolerance_increment : rational := *))),
+
+log10 :- ((rational <-- (operand : rational, tolerance : (0....+oo),
+                         kind : bound_kind := *)) &
+          (!{} <-- (destination_type : convertable_from_rational,
+                    source_type : convertable_to_rational, operand : !{},
+                    start_tolerance : rational := *,
+                    tolerance_increment : rational := *))),
+
+exponential :- ((rational <-- (operand : rational, tolerance : (0....+oo),
+                               kind : bound_kind := *)) &
+                (!{} <-- (destination_type : convertable_from_rational,
+                          source_type : convertable_to_rational, operand : !{},
+                          start_tolerance : rational := *,
+                          tolerance_increment : rational := *))),
+
+functions :-
+    interface
+      [
+        log :- !{} <-- (base : (0....+oo), operand : {}),
+        log2 :- !{} <-- (operand : {}),
+        log10 :- !{} <-- (operand : {}),
+        exponential :- !{} <-- (operand : {})
+      ] <-- (destination_type : convertable_from_rational,
+             source_type : convertable_to_rational,
+             start_tolerance : rational := *,
+             tolerance_increment : rational := *)

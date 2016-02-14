@@ -1,0 +1,158 @@
+v1: 87.
+i1: 8.
+f1(8): 11.
+x: 22.
+f2(8): 24.
+f3(8): 64.
+args: [1, 12].
+v1.t1: 5.
+l1[a := 5, b := "hello"]: l1[a := 5, b := "hello"].
+i2: type multiset[a : integer, b : string].
+i3: type interface[a : integer, b : string].
+File "multi_include.salm" line 1.
+File "multi_include.salm" line 2.
+locks: Lock `single-statement' (declared at "tests/test_short.salm":56:3) grabbed [1].
+Single.
+locks: Lock `single-statement' (declared at "tests/test_short.salm":56:3) released [0].
+m1(): 3.
+m1(): 5.
+A.
+C.
+B.
+v3: <<(0 --> 1), (1 --> 4), (2 --> 9)>>.
+e1: 1.
+e1: 4.
+e1: 9.
+e1: 1.
+e1: 9.
+c2().v2: 2.
+A.
+C.
+qe1: type {qel1, qel2}.
+3 in int: true.
+3.5 in int: false.
+3.5 in rat: true.
+"a" in rat: false.
+3.5 in str: false.
+"a" in str: true.
+3.5 in bool: false.
+false in bool: true.
+3.5 in char: false.
+'d' in char: true.
+'d' in regex: false.
+@d@ in regex: true.
+@d@ in anyq: false.
+q1 in anyq: true.
+q1 in anyl: false.
+l1[a := 5] in anyl: true.
+l1[a := 5] in lepkey: false.
+l1 in lepkey: true.
+l1 in target: false.
+jt1 in target: true.
+jt1 in anyc: false.
+c2 in anyc: true.
+c2 in obj: false.
+c2() in obj: true.
+c2() in tagkey: false.
+t1 in tagkey: true.
+t1 in anylk: false.
+l2 in anylk: true.
+&i3 == nil: false.
+null == nil: true.
+chars("Hi!"): ['H', 'i', '!'].
+mstr(['H', 'i', '!']): Hi!.
+0xd7ff in cpoint: true.
+0xd800 in cpoint: false.
+futf8([72]): H.
+futf16([72]): H.
+futf32(72): H.
+utf8('H'): [72].
+utf8("Hi!"): [72, 105, 33].
+utf16('H'): [72].
+utf16("Hi!"): [72, 105, 33].
+utf32('H'): 72.
+utf32("Hi!"): [72, 105, 33].
+sfutf8([72, 105, 33]): Hi!.
+sfutf16([72, 105, 33]): Hi!.
+sfutf32([72, 105, 33]): Hi!.
+del == delete: true.
+del == print: false.
+sub(@[0-9]@, "abc123", "d"): abcddd.
+pat(@[0-9]@): [0-9].
+pregex("[0-9]"): @[0-9]@.
+@[0-9]@ in regexf: false.
+create_follower(@[0-9]@) in regexf: true.
+len("Hi!"): 3.
+f4 retexp(local): true.
+p3 retexp(local): false.
+eof == nil: false.
+eof == end_of_input: true.
+ioerr == nil: false.
+ioerr == io_error: true.
+otstream == output_text_stream: true.
+otstream == input_text_stream: false.
+itstream == input_text_stream: true.
+itstream == output_text_stream: false.
+lastream == look_ahead_stream: true.
+lastream == output_bit_stream: false.
+obstream == output_bit_stream: true.
+obstream == look_ahead_stream: false.
+ibstream == input_bit_stream: true.
+ibstream == seekable_stream: false.
+sstream == seekable_stream: true.
+sstream == input_bit_stream: false.
+laadd == add_text_look_ahead_buffer: true.
+laadd == print: false.
+stdin == standard_input: true.
+stdin == standard_error: false.
+stdout == standard_output: true.
+stdout == standard_input: false.
+stderr == standard_error: true.
+stderr == standard_output: false.
+itfopen == open_input_text_file: true.
+itfopen == open_output_text_file: false.
+otfopen == open_output_text_file: true.
+otfopen == open_input_text_file: false.
+iotfopen == open_input_output_text_file: true.
+iotfopen == open_input_bit_file: false.
+ibfopen == open_input_bit_file: true.
+ibfopen == open_input_output_text_file: false.
+obfopen == open_output_bit_file: true.
+obfopen == open_input_output_bit_file: false.
+iobfopen == open_input_output_bit_file: true.
+iobfopen == open_output_bit_file: false.
+isopen == open_input_string: true.
+isopen == open_output_string: false.
+osopen == open_output_string: true.
+osopen == open_input_string: false.
+fexists == file_exists: true.
+fexists == print: false.
+dexists == directory_exists: true.
+dexists == print: false.
+dirlist == directory_contents: true.
+dirlist == print: false.
+rem == remove: true.
+rem == print: false.
+ren == rename: true.
+ren == print: false.
+rchar == read_character: true.
+rchar == print: false.
+rstr == read_string: true.
+rstr == print: false.
+sys == system: true.
+sys == print: false.
+cswitch == context_switching: true.
+cswitch == print: false.
+timet == time_type: true.
+timet == integer: false.
+getltime == local_time_and_date: true.
+getltime == utc_time_and_date: false.
+getutime == utc_time_and_date: true.
+getutime == local_time_and_date: false.
+trans == translate: true.
+trans == print: false.
+curexc()[0].message: This is an exception..
+curexc()[0] in exc: true.
+num(-4/10): -2.
+den(-4/10): 5.
+pow(2, 6): 64.

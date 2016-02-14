@@ -1,0 +1,1104 @@
+/* file "ieee754.salm" */
+
+/*
+ *  This file contains a software implementation of the IEEE 754-2008 floating
+ *  point standard for the Salmon Programming Language.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+hide;
+
+use "limited_floating_point.salm" : "limited_floating_point.si";
+
+export et_fp_bad_specifier;
+export et_fp_integer_specifier_non_integer_value;
+export et_fp_overflow;
+export et_fp_underflow;
+export et_fp_subnormal;
+export et_fp_denormalized;
+export et_fp_inexact;
+export et_fp_division_by_zero;
+export any_base_floating_point_interface;
+export rounding_mode;
+export round_to_nearest_ties_even,
+       round_to_nearest_ties_toward_zero,
+       round_to_nearest_ties_away_from_zero,
+       round_up,
+       round_down,
+       round_toward_zero,
+       round_away_from_zero;
+export fp_controller_type;
+export basic_fp_controller_type;
+export fp_condition_overflow;
+export fp_condition_underflow;
+export fp_condition_subnormal;
+export fp_condition_denormalized;
+export fp_condition_inexact;
+export fp_condition_division_by_zero;
+export basic_conditions;
+export floating_point_interface;
+
+function basic_item_type(base : (0...+oo)) returns type !{}
+  (floating_point_full_interface(type {base},
+           floating_point_access_type(type {base}),
+           type (any_base_floating_point_interface)));
+
+function dynamic_item_type(base : (0...+oo))
+  (type <<basic_item_type(base)>> <--
+        (init_mantissa : extended_rational, init_exponent : integer := *,
+         init_controller : ieee_754_fp_controller_type := *));
+
+export;
+
+quark enumeration rational_extensions
+  {
+    negative_zero, negative_zero_zero, signalling_zero_zero,
+    negative_signalling_zero_zero
+  };
+
+immutable extended_rational := type rational | rational_extensions;
+
+quark et_fp_invalid_operation;
+
+quark enumeration ieee_754_additional_conditions
+  { fp_condition_invalid_operation };
+immutable ieee_754_conditions :=
+        type (basic_conditions | ieee_754_additional_conditions);
+
+immutable ieee_754_fp_controller_type :=
+        type <<fp_controller_type(ieee_754_conditions)>> & interface
+  [
+    decimal_use_binary_encoding :- boolean <-- (),
+    set_decimal_use_binary_encoding :- {} <-- (boolean)
+  ];
+
+immutable default_fp_controller : ieee_754_fp_controller_type :=
+    class ()
+      {
+        hide;
+
+        variable current_decimal_use_binary_encoding : boolean := false;
+        export;
+
+        use basic_fp_controller(ieee_754_conditions);
+
+        function decimal_use_binary_encoding() returns boolean
+          (current_decimal_use_binary_encoding);
+        procedure set_decimal_use_binary_encoding(new_value : boolean)
+          { current_decimal_use_binary_encoding := new_value; };
+      }();
+
+tagalong format_name : string on
+        any_base_floating_point_interface <--
+        (init_mantissa : extended_rational, init_exponent : integer := *,
+         init_controller : ieee_754_fp_controller_type := *);
+tagalong format_bits : (0...+oo) on
+        any_base_floating_point_interface <--
+        (init_mantissa : extended_rational, init_exponent : integer := *,
+         init_controller : ieee_754_fp_controller_type := *);
+tagalong decode_bits : any_base_floating_point_interface <-- ([0...+oo)) on
+        any_base_floating_point_interface <--
+        (init_mantissa : extended_rational, init_exponent : integer := *,
+         init_controller : ieee_754_fp_controller_type := *);
+
+class ieee_754_floating_point_ecosystem(ageless base : (0...+oo),
+        ageless mantissa_digits : (0...+oo),
+        ageless max_fraction_exponent : (0...+oo),
+        encoding_bit_count : (0...+oo),
+        ageless subnormal_allowed : boolean := true,
+        ageless denormalized_allowed : boolean := false,
+        ageless init_default_controller : ieee_754_fp_controller_type :=
+                default_fp_controller)
+        returns object & interface
+          [
+            mantissa_magnitude_lower_limit :- (0...+oo),
+            mantissa_magnitude_upper_limit :- (0...+oo),
+            max_exponent :- (0...+oo),
+            min_fraction_exponent :- (-oo...0],
+            min_exponent :- (-oo...+oo),
+            this_interface :- type !{},
+            non_subnormal_mantissa_type :- type integer,
+            normalized_mantissa_type :- type integer,
+            unsigned_infinity :- {1/0},
+            zero_zero :- {0/0},
+            constructor :- any_class,
+            operator_return_type :- type !{},
+            default_controller :- basic_fp_controller_type,
+            item_class :- any_base_floating_point_interface <--
+                    (init_mantissa : extended_rational,
+                     init_exponent : integer := *,
+                     init_controller : ieee_754_fp_controller_type := *)
+          ] / object & interface
+          [
+            mantissa_magnitude_lower_limit :- (0...+oo),
+            mantissa_magnitude_upper_limit :- (0...+oo),
+            max_exponent :- (0...+oo),
+            min_fraction_exponent :- (-oo...0],
+            min_exponent :- (-oo...+oo),
+            this_interface :- type !{},
+            non_subnormal_mantissa_type :- type integer,
+            normalized_mantissa_type :- type integer,
+            unsigned_infinity :- {1/0},
+            zero_zero :- {0/0},
+            constructor :- any_class,
+            operator_return_type :- type !{},
+            default_controller :- basic_fp_controller_type,
+            item_class :- <<dynamic_item_type(base)>>
+          ]
+  {
+    immutable mantissa_magnitude_lower_limit : (0...+oo) :=
+            power(base, (mantissa_digits - 1));
+    immutable mantissa_magnitude_upper_limit : (0...+oo) :=
+            mantissa_magnitude_lower_limit * base;
+    immutable max_exponent : (0...+oo) :=
+            max_fraction_exponent - (mantissa_digits - 1);
+    immutable min_fraction_exponent : (-oo...0] := 1 - max_fraction_exponent;
+    immutable min_exponent : (-oo...+oo) :=
+            min_fraction_exponent - (mantissa_digits - 1);
+
+    immutable non_subnormal_mantissa_type := 
+            type (-mantissa_magnitude_upper_limit...
+                  -mantissa_magnitude_lower_limit] | {0} |
+                 [mantissa_magnitude_lower_limit...
+                  mantissa_magnitude_upper_limit);
+    immutable normalized_mantissa_type : type integer :=
+            type <<((subnormal_allowed || denormalized_allowed) ?
+                    type (-mantissa_magnitude_upper_limit...
+                           mantissa_magnitude_upper_limit) :
+                    non_subnormal_mantissa_type)>> | {+oo, -oo, 1/0, 0/0};
+
+    immutable unsigned_infinity := 1/0;
+    immutable zero_zero := 0/0;
+
+    virtual immutable constructor := item_class;
+    virtual immutable operator_return_type := type lazy item_class;
+
+    use limited_floating_point_ecosystem(base, mantissa_magnitude_lower_limit,
+            mantissa_magnitude_upper_limit, min_exponent, max_exponent,
+            subnormal_allowed, denormalized_allowed, init_default_controller)
+                    for item_class as superclass, default_controller;
+
+    immutable this_interface := floating_point_full_interface(type {base},
+           floating_point_access_type(type {base}),
+           type (any_base_floating_point_interface & operator_return_type));
+
+    class item_class(init_mantissa : extended_rational,
+            init_exponent : integer := 0,
+            init_controller : ieee_754_fp_controller_type :=
+                    default_controller)
+            returns this_interface
+      {
+        hide;
+
+        immutable rational_mantissa : rational & !{unsigned_infinity} :=
+          {
+            switch (init_mantissa)
+            case ({unsigned_infinity})
+              { return +oo; }
+            case (rational)
+              { return init_mantissa; }
+            case ({negative_zero})
+              { return 0; }
+            case ({negative_zero_zero, signalling_zero_zero,
+                   negative_signalling_zero_zero})
+              { return zero_zero; }
+            case (!{})
+              { assert(false); };
+          };
+        immutable special_mantissa : rational_extensions | {null} :=
+                ((init_mantissa in rational) ? null : init_mantissa);
+
+        export;
+
+        virtual immutable self := this;
+
+
+        use superclass(rational_mantissa, init_exponent, init_controller)
+                except base;
+
+        /* @@@ -- Arithmetic operations from the superclass need to be
+         * @@@    over-ridden to handle some non-finite and positive and
+         * @@@    negative zero values differently in some cases. */
+
+        hide;
+
+        function base_method() returns {base}
+          {
+            return base;
+          };
+
+        export base_method as base;
+
+        export;
+
+        virtual function encoding_bits()
+                returns [0...(1 << encoding_bit_count)) := null;
+
+        function extended_mantissa()
+                returns (normalized_mantissa_type & !{1/0}) |
+                        rational_extensions
+          ((special_mantissa == null) ? mantissa() : special_mantissa);
+
+        virtual function nan_payload() returns [0...+oo) := null;
+
+        function nan_payload_string() returns string
+          (sprintf("[%" ~ ((base == 10) ? "d" : "#x") ~ "%]", nan_payload()));
+
+        function sprint(specifier : {"t"} := "t", plus : boolean := false,
+                space : boolean := false, hash : boolean := false,
+                zero_width : [0...+oo) := 0,
+                precision : [0...+oo) | {null} := null) returns string
+          {
+            variable result;
+
+            switch (special_mantissa)
+            case ({null})
+              {
+                if (mantissa() != 0/0)
+                  {
+                    return sprint("v", plus := plus, space := space,
+                            hash := hash, zero_width := zero_width,
+                            precision := precision);
+                  };
+
+                result := "0/0" ~ nan_payload_string();
+              }
+            case ({negative_zero})
+              {
+                if (precision != null)
+                  {
+                    throw(et_fp_bad_specifier,
+                          "A precision was used with a `t' base specifier " ~
+                          "when attempting to print a floating-point value.");
+                  };
+
+                variable prefix : string := "-";
+
+                result := "0*" ~ sprint(base) ~ "^" ~ sprint(exponent());
+
+                if (length(prefix) + length(result) < zero_width)
+                  {
+                    immutable count : [0...+oo) :=
+                            (zero_width - (length(prefix) + length(result)));
+                    for (left; count; left > 0; -1)
+                        prefix ~= '0';;
+                  };
+
+                return prefix ~ result;
+              }
+            case ({negative_zero_zero})
+              {
+                result := "-0/0" ~ nan_payload_string();
+              }
+            case ({signalling_zero_zero})
+              {
+                result := "sNaN" ~ nan_payload_string();
+              }
+            case ({negative_signalling_zero_zero})
+              {
+                result := "-sNaN" ~ nan_payload_string();
+              }
+            case (!{})
+              {
+                assert(false);
+              };
+
+            result ~= "*" ~ sprint(base) ~ "^0";
+            while (zero_width > length(result))
+                result := " " ~ result;;
+
+            return result;
+          };
+      };
+  };
+
+function ieee_754_floating_point(ageless base : (0...+oo),
+        mantissa_digits : (0...+oo), max_fraction_exponent : (0...+oo),
+        encoding_bit_count : (0...+oo), subnormal_allowed : boolean := true,
+        denormalized_allowed : boolean := false,
+        init_default_controller : ieee_754_fp_controller_type :=
+                default_fp_controller)
+        returns any_base_floating_point_interface <--
+                    (init_mantissa : extended_rational,
+                     init_exponent : integer := *,
+                     init_controller : ieee_754_fp_controller_type := *) /
+                <<dynamic_item_type(base)>>
+  {
+    return ieee_754_floating_point_ecosystem(base, mantissa_digits,
+            max_fraction_exponent, encoding_bit_count, subnormal_allowed,
+            denormalized_allowed, init_default_controller).item_class;
+  };
+
+class ieee_754_binary_ecosystem(ageless encoding_bit_count : (0...+oo),
+        ageless mantissa_explicit_digits : (0...+oo),
+        ageless max_fraction_exponent : (0...+oo) :=
+                ((1 <<
+                  (encoding_bit_count - (mantissa_explicit_digits + 2))) - 1),
+        subnormal_allowed : boolean := true,
+        denormalized_allowed : boolean := false,
+        ageless local_default_controller : ieee_754_fp_controller_type :=
+                default_fp_controller,
+        name : string | {null} := "binary" ~ sprint(encoding_bit_count))
+        returns object & interface
+          [
+            exponent_bit_count :- [0...+oo),
+            exponent_count :- (0...+oo),
+            exponent_mask :- [0...+oo),
+            mantissa_count :- (0...+oo),
+            mantissa_mask :- [0...+oo),
+            exponent_bias :- (-oo...+oo),
+            silent_nan_mask :- (0...+oo),
+            silent_nan_payload_mask :- [0...+oo),
+            item_class :- <<basic_item_type(2)>> <--
+                    (init_mantissa : extended_rational,
+                     init_exponent : integer := *,
+                     init_controller : ieee_754_fp_controller_type := *,
+                     init_nan_payload : [0...+oo) := *),
+            constructor :- any_class,
+            operator_return_type :- type !{},
+            decode_bits :- <<basic_item_type(2)>> <-- (bits : [0...+oo))
+          ]
+  {
+    immutable exponent_bit_count : [0...+oo) :=
+            (encoding_bit_count - (mantissa_explicit_digits + 1));
+    immutable exponent_count : (0...+oo) := (1 << exponent_bit_count);
+    immutable exponent_mask : [0...+oo) := (exponent_count - 1);
+    immutable mantissa_count : (0...+oo) := (1 << mantissa_explicit_digits);
+    immutable mantissa_mask : [0...+oo) := (mantissa_count - 1);
+    immutable exponent_bias : (-oo...+oo) :=
+            (max_fraction_exponent + mantissa_explicit_digits);
+    immutable silent_nan_mask : (0...+oo) :=
+            (1 << (mantissa_explicit_digits - 1));
+    immutable silent_nan_payload_mask : [0...+oo) := silent_nan_mask - 1;
+
+    assert(max_fraction_exponent == ((exponent_count / 2) - 1));
+
+    class item_class(init_mantissa : extended_rational,
+            init_exponent : integer := 0,
+            init_controller : ieee_754_fp_controller_type :=
+                    local_default_controller,
+            ageless init_nan_payload :
+                    [0...+oo) / [0...1 << (mantissa_explicit_digits - 1)) :=
+                    ((init_mantissa in
+                      {signalling_zero_zero, negative_signalling_zero_zero}) ?
+                     1 : 0))
+            returns <<basic_item_type(2)>>
+      {
+        assert((init_mantissa in
+                {0/0, negative_zero_zero, signalling_zero_zero,
+                 negative_signalling_zero_zero}) || (init_nan_payload == 0));
+        assert((!(init_mantissa in
+                  {signalling_zero_zero, negative_signalling_zero_zero})) ||
+               (init_nan_payload != 0));
+
+        export;
+
+        virtual immutable constructor := item_class;
+        virtual immutable self := this;
+
+        use base_class(init_mantissa, init_exponent, init_controller);
+
+        function nan_payload()
+                returns [0...1 << (mantissa_explicit_digits - 1))
+          (init_nan_payload);
+
+        function encoding_bits() returns [0...(1 << encoding_bit_count))
+          {
+            immutable em := extended_mantissa();
+            switch (em)
+            case ({0})
+              {
+                return 0;
+              }
+            case ((-oo....+oo))
+              {
+                variable exponent_bits := (exponent() + exponent_bias);
+                variable mantissa_bits := ((em < 0) ? -em : em);
+                assert(exponent_bits > 0);
+                if (mantissa_bits < mantissa_count)
+                  {
+                    assert(exponent_bits == 1);
+                    exponent_bits := 0;
+                  }
+                else
+                  {
+                    assert(exponent_bits > 0);
+                    mantissa_bits -= mantissa_count;
+                    assert(mantissa_bits < mantissa_count);
+                  };
+                assert(mantissa_bits < mantissa_count);
+                return ((em < 0) ? 1 << (encoding_bit_count - 1) : 0) |
+                       exponent_bits << mantissa_explicit_digits |
+                       mantissa_bits;
+              }
+            case ({negative_zero})
+              {
+                return (1 << (encoding_bit_count - 1));
+              }
+            case ({+oo})
+              {
+                return (1 << (encoding_bit_count - 1)) -
+                       (1 << mantissa_explicit_digits);
+              }
+            case ({-oo})
+              {
+                return (1 << encoding_bit_count) -
+                       (1 << mantissa_explicit_digits);
+              }
+            case ({0/0})
+              {
+                return ((1 << (encoding_bit_count - 1)) -
+                        (1 << (mantissa_explicit_digits - 1))) | nan_payload();
+              }
+            case ({negative_zero_zero})
+              {
+                return ((1 << encoding_bit_count) -
+                        (1 << (mantissa_explicit_digits - 1))) | nan_payload();
+              }
+            case ({signalling_zero_zero})
+              {
+                return ((1 << (encoding_bit_count - 1)) -
+                        (1 << mantissa_explicit_digits)) | nan_payload();
+              }
+            case ({negative_signalling_zero_zero})
+              {
+                return ((1 << encoding_bit_count) -
+                        (1 << mantissa_explicit_digits)) | nan_payload();
+              }
+            case (!{})
+              {
+                assert(false);
+              };
+          };
+      };
+
+    virtual immutable constructor := item_class;
+    virtual immutable operator_return_type := type lazy item_class;
+
+    use ieee_754_floating_point_ecosystem(2, mantissa_explicit_digits + 1,
+            max_fraction_exponent, encoding_bit_count, subnormal_allowed,
+            denormalized_allowed, local_default_controller)
+                    for item_class as base_class;
+
+    function decode_bits(bits : [0...+oo)) returns <<basic_item_type(2)>>
+      {
+        assert(bits < (1 << encoding_bit_count));
+        immutable sign : [0...1] := (bits >> (encoding_bit_count - 1));
+        immutable sign_factor : {-1, 1} := ((sign == 1) ? -1 : 1);
+        immutable exponent : [0...exponent_count) :=
+                ((bits >> mantissa_explicit_digits) & exponent_mask);
+        immutable mantissa : [0...mantissa_count) := bits & mantissa_mask;
+        switch (exponent)
+        case ({0})
+          {
+            if ((mantissa == 0) && (sign == 1))
+                return item_class(negative_zero);;
+            return item_class(sign_factor * mantissa, 1 - exponent_bias);
+          }
+        case ({exponent_mask})
+          {
+            if (mantissa == 0)
+                return item_class((sign == 1) ? -oo : +oo);;
+            if ((mantissa & silent_nan_mask) != 0)
+              {
+                return item_class(((sign == 1) ? negative_zero_zero : 0/0),
+                        init_nan_payload :=
+                                mantissa & silent_nan_payload_mask);
+              }
+            else
+              {
+                return item_class(
+                        ((sign == 1) ? negative_signalling_zero_zero :
+                         signalling_zero_zero), init_nan_payload := mantissa);
+              };
+          }
+        case (!{})
+          {
+            return item_class(sign_factor * (mantissa + mantissa_count),
+                              exponent - exponent_bias);
+          };
+      };
+  };
+
+function ieee_754_binary(encoding_bit_count : (0...+oo),
+        mantissa_explicit_digits : (0...+oo),
+        max_fraction_exponent : (0...+oo) :=
+                ((1 <<
+                  (encoding_bit_count - (mantissa_explicit_digits + 2))) - 1),
+        subnormal_allowed : boolean := true,
+        denormalized_allowed : boolean := false,
+        local_default_controller : ieee_754_fp_controller_type :=
+                default_fp_controller,
+        name : string | {null} := "binary" ~ sprint(encoding_bit_count))
+        returns <<basic_item_type(2)>> <--
+                    (init_mantissa : extended_rational,
+                     init_exponent : integer := *,
+                     init_controller : ieee_754_fp_controller_type := *)
+  {
+    variable ecosystem := ieee_754_binary_ecosystem(encoding_bit_count,
+            mantissa_explicit_digits, max_fraction_exponent, subnormal_allowed,
+            denormalized_allowed, local_default_controller, name);
+    variable result := ecosystem.item_class;
+
+    if (name != null)
+        result..format_name := name;;
+    result..format_bits := encoding_bit_count;
+
+    result..decode_bits := ecosystem.decode_bits;
+
+    return result;
+  };
+
+pure function one_mod_three(x) returns boolean
+ ((x in integer) && ((x % 3) == 1));
+
+class ieee_754_decimal_ecosystem(ageless encoding_bit_count : (0...+oo),
+        mantissa_digits : (0...+oo) & one_mod_three :=
+                (((9 * encoding_bit_count) /:: 32) - 2),
+        max_fraction_exponent : (0...+oo) :=
+                (3 *
+                 (0x1 <<
+                  (((encoding_bit_count - (((mantissa_digits - 1) / 3) * 10)) -
+                    7)))),
+        subnormal_allowed : boolean := true,
+        denormalized_allowed : boolean := true,
+        ageless local_default_controller : ieee_754_fp_controller_type :=
+                default_fp_controller,
+        name : string | {null} := "decimal" ~ sprint(encoding_bit_count))
+        returns object & interface
+          [
+            max_mantissa :- (0...+oo),
+            max_payload :- [0...+oo),
+            t_field_digits :- [0...+oo),
+            t_field_bit_count :- [0...+oo),
+            t_field_count :- [0...+oo),
+            t_mask :- [0...+oo),
+            exponent_bias :- (-oo...+oo),
+            g_field_bit_count :- (5...+oo),
+            g_mask :- (0...+oo),
+            decode_densely_packed_decimal_declet :-
+                    [0...999] <-- (data : [0...0x3ff]),
+            encode_densely_packed_decimal_declet :-
+                    [0...0x3ff] <-- (data : [0...999]),
+            item_class :- <<basic_item_type(10)>> <--
+                    (init_mantissa : extended_rational,
+                     init_exponent : integer := *,
+                     init_controller : ieee_754_fp_controller_type := *,
+                     init_nan_payload : [0...+oo) := *),
+            constructor :- any_class,
+            operator_return_type :- type !{},
+            decode_bits :- <<basic_item_type(10)>> <-- (bits : [0...+oo))
+          ]
+  {
+    assert((mantissa_digits % 3) == 1);
+
+    immutable max_mantissa : (0...+oo) := (power(10, mantissa_digits) - 1);
+    immutable max_payload : [0...+oo) := (power(10, mantissa_digits - 1) - 1);
+    immutable t_field_digits : [0...+oo) :=
+            ((mantissa_digits - 1) / 3);
+    immutable t_field_bit_count : [0...+oo) := (t_field_digits * 10);
+    immutable t_field_count : [0...+oo) := (1 << t_field_bit_count);
+    immutable t_mask : [0...+oo) := (t_field_count - 1);
+    immutable exponent_bias : (-oo...+oo) :=
+            (max_fraction_exponent + (mantissa_digits - 2));
+
+    assert((t_field_bit_count + 6) < encoding_bit_count);
+
+    immutable g_field_bit_count : (5...+oo) :=
+            (encoding_bit_count - (1 + t_field_bit_count));
+    immutable g_mask : (0...+oo) := ((1 << g_field_bit_count) - 1);
+
+    static function decode_densely_packed_decimal_declet(data : [0...0x3ff])
+            returns [0...999]
+      {
+        if ((data & 0xe) == 0xe)
+          {
+            if ((data & 0x40) == 0x40)
+              {
+                if ((data & 0x20) == 0x20)
+                  {
+                    return (((8 + ((data >> 7) & 0x1)) * 100) +
+                            ((8 + ((data >> 4) & 0x1)) * 10) +
+                            (8 + (data & 0x1)));
+                  }
+                else
+                  {
+                    return (((data >> 7) * 100) +
+                            ((8 + ((data >> 4) & 0x1)) * 10) +
+                            (8 + (data & 0x1)));
+                  };
+              }
+            else
+              {
+                if ((data & 0x20) == 0x20)
+                  {
+                    return (((8 + ((data >> 7) & 0x1)) * 100) +
+                            ((((data >> 7) & 0x6) | ((data >> 4) & 0x1)) * 10)
+                            + (8 + (data & 0x1)));
+                  }
+                else
+                  {
+                    return (((8 + ((data >> 7) & 0x1)) * 100) +
+                            ((8 + ((data >> 4) & 0x1)) * 10) +
+                            ((data & 0x1) + ((data >> 7) & 0x6)));
+                  };
+              };
+          }
+        else
+          {
+            if (((data + 2) & 0xc) == 0xc)
+              {
+                if ((data & 0xc) == 0xc)
+                  {
+                    return (((8 + ((data >> 7) & 0x1)) * 100) +
+                            (((data >> 4) & 0x7) * 10) +
+                            ((data & 0x1) + ((data >> 7) & 0x6)));
+                  }
+                else
+                  {
+                    return (((data >> 7) * 100) +
+                            ((8 + ((data >> 4) & 0x1)) * 10) +
+                            ((data & 0x1) + ((data >> 4) & 0x6)));
+                  };
+              }
+            else
+              {
+                if ((data & 0x8) == 0x8)
+                  {
+                    return (((data >> 7) * 100) + (((data >> 4) & 0x7) * 10) +
+                            (8 + (data & 0x1)));
+                  }
+                else
+                  {
+                    return (((data >> 7) * 100) + (((data >> 4) & 0x7) * 10) +
+                            (data & 0x7));
+                  };
+              };
+          };
+      };
+
+    static function encode_densely_packed_decimal_declet(data : [0...999])
+            returns [0...0x3ff]
+      {
+        immutable digit1 : [0...10) := (data /:: 100);
+        immutable digit2 : [0...10) := ((data /:: 10) % 10);
+        immutable digit3 : [0...10) := (data % 10);
+
+        if (digit1 < 8)
+          {
+            if (digit2 < 8)
+              {
+                if (digit3 < 8)
+                  {
+                    return ((digit1 << 7) | (digit2 << 4) | digit3);
+                  }
+                else
+                  {
+                    return ((digit1 << 7) | (digit2 << 4) | 0x8 |
+                            (digit3 & 0x1));
+                  };
+              }
+            else
+              {
+                if (digit3 < 8)
+                  {
+                    return ((digit1 << 7) |
+                            (((digit3 & 0x6) | (digit2 & 0x1)) << 4) | 0xa |
+                            (digit3 & 0x1));
+                  }
+                else
+                  {
+                    return ((digit1 << 7) | ((digit2 & 0x1) << 4) | 0x4e |
+                            (digit3 & 0x1));
+                  };
+              };
+          }
+        else
+          {
+            if (digit2 < 8)
+              {
+                if (digit3 < 8)
+                  {
+                    return ((((digit3 & 0x6) | (digit1 & 0x1)) << 7) |
+                            (digit2 << 4) | 0xc | (digit3 & 0x1));
+                  }
+                else
+                  {
+                    return ((((digit2 & 0x6) | (digit1 & 0x1)) << 7) |
+                            ((digit2 & 0x1) << 4) | 0x2e | (digit3 & 0x1));
+                  };
+              }
+            else
+              {
+                if (digit3 < 8)
+                  {
+                    return ((((digit3 & 0x6) | (digit1 & 0x1)) << 7) |
+                            ((digit2 & 0x1) << 4) | 0xe | (digit3 & 0x1));
+                  }
+                else
+                  {
+                    return (((digit1 & 0x1) << 7) | ((digit2 & 0x1) << 4) |
+                            0x6e | (digit3 & 0x1));
+                  };
+              };
+          };
+      };
+
+    class item_class(init_mantissa : extended_rational,
+            init_exponent : integer := 0,
+            init_controller : ieee_754_fp_controller_type :=
+                    local_default_controller,
+            ageless init_nan_payload : [0...+oo) / [0...max_payload] := 0)
+                    returns <<basic_item_type(10)>>
+      {
+        export;
+
+        virtual immutable constructor := item_class;
+        virtual immutable self := this;
+
+        use base_class(init_mantissa, init_exponent, init_controller);
+
+        function nan_payload() returns [0...max_payload]
+          (init_nan_payload);
+
+        function encoding_bits() returns [0...(1 << encoding_bit_count))
+          {
+            function encode_densely_packed_decimal_mantissa(
+                    mantissa : [0...max_mantissa])
+                            returns [[0...t_field_count), [0...10)]
+              {
+                variable remainder : [0...max_mantissa] := mantissa;
+                variable result : [0...t_field_count) := 0;
+                for (shift_amount; 0; shift_amount < t_field_bit_count; 10)
+                  {
+                    result |= (encode_densely_packed_decimal_declet(
+                                       remainder % 1000) << shift_amount);
+                    remainder /::= 1000;
+                  };
+                assert(remainder < 10);
+                return [result, remainder];
+              };
+
+            function encode_binary_mantissa(mantissa : [0...max_mantissa])
+                    returns [0...(t_field_count))
+              (mantissa & t_mask);
+
+            function encoded_nan_payload()
+              {
+                return ((init_controller.decimal_use_binary_encoding()) ?
+                        encode_binary_mantissa(nan_payload()) :
+                        encode_densely_packed_decimal_mantissa(
+                                nan_payload())[0]);
+              };
+
+            immutable em := extended_mantissa();
+            switch (em)
+            case ({0})
+              {
+                variable exponent_bits := (exponent() + exponent_bias);
+                if (init_controller.decimal_use_binary_encoding())
+                  {
+                    return (exponent_bits << (t_field_bit_count + 3));
+                  }
+                else
+                  {
+                    immutable exponent_top : [0...2] :=
+                            (exponent_bits >> (g_field_bit_count - 5));
+                    immutable exponent_bottom :=
+                            (exponent_bits &
+                             ((0x1 << (g_field_bit_count - 5)) - 1));
+                    return ((exponent_bottom << t_field_bit_count) |
+                            (exponent_top << (encoding_bit_count - 3)));
+                  };
+              }
+            case ((-oo....+oo))
+              {
+                variable exponent_bits := (exponent() + exponent_bias);
+                variable mantissa_magnitude : (0...+oo) :=
+                        ((em < 0) ? -em : em);
+                immutable sign_bit :=
+                        ((em < 0) ? (0x1 << (encoding_bit_count - 1)) : 0);
+                if (init_controller.decimal_use_binary_encoding())
+                  {
+                    if ((mantissa_magnitude & (0x1 << (t_field_bit_count + 3)))
+                        != 0)
+                      {
+                        return (sign_bit | (0x3 << (encoding_bit_count - 3)) |
+                                (exponent_bits << (t_field_bit_count + 1)) |
+                                (mantissa_magnitude &
+                                 ((1 << (t_field_bit_count + 1)) - 1)));
+                      }
+                    else
+                      {
+                        return (sign_bit |
+                                (exponent_bits << (t_field_bit_count + 3)) |
+                                mantissa_magnitude);
+                      };
+                  }
+                else
+                  {
+                    variable mantissa_bits : [0...t_field_count);
+                    variable top_digit : [0...10);
+                    [mantissa_bits, top_digit] :=
+                            encode_densely_packed_decimal_mantissa(
+                                    mantissa_magnitude);
+                    immutable exponent_top : [0...2] :=
+                            (exponent_bits >> (g_field_bit_count - 5));
+                    immutable exponent_bottom :=
+                            (exponent_bits &
+                             ((0x1 << (g_field_bit_count - 5)) - 1));
+                    immutable result :=
+                            (sign_bit | (exponent_bottom << t_field_bit_count)
+                             | mantissa_bits);
+                    if (top_digit >= 8)
+                      {
+                        return (result | (0x3 << (encoding_bit_count - 3)) |
+                                (exponent_top << (encoding_bit_count - 5)) |
+                                ((top_digit & 0x1) <<
+                                 (encoding_bit_count - 6)));
+                      }
+                    else
+                      {
+                        return (result |
+                                (exponent_top << (encoding_bit_count - 3)) |
+                                (top_digit << (encoding_bit_count - 6)));
+                      };
+                  };
+              }
+            case ({negative_zero})
+              {
+                variable exponent_bits := (exponent() + exponent_bias);
+                immutable sign_bit := (0x1 << (encoding_bit_count - 1));
+                if (init_controller.decimal_use_binary_encoding())
+                  {
+                    return (sign_bit |
+                            (exponent_bits << (t_field_bit_count + 3)));
+                  }
+                else
+                  {
+                    immutable exponent_top : [0...2] :=
+                            (exponent_bits >> (g_field_bit_count - 5));
+                    immutable exponent_bottom :=
+                            (exponent_bits &
+                             ((0x1 << (g_field_bit_count - 5)) - 1));
+                    return ((sign_bit |
+                             (exponent_bottom << t_field_bit_count)) |
+                            (exponent_top << (encoding_bit_count - 3)));
+                  };
+              }
+            case ({+oo})
+              {
+                return (0xf << (encoding_bit_count - 5));
+              }
+            case ({-oo})
+              {
+                return (0x1f << (encoding_bit_count - 5));
+              }
+            case ({0/0})
+              {
+                return ((0x1f << (encoding_bit_count - 6)) |
+                        encoded_nan_payload());
+              }
+            case ({negative_zero_zero})
+              {
+                return ((0x3f << (encoding_bit_count - 6)) |
+                        encoded_nan_payload());
+              }
+            case ({signalling_zero_zero})
+              {
+                return ((0x3f << (encoding_bit_count - 7)) |
+                        encoded_nan_payload());
+              }
+            case ({negative_signalling_zero_zero})
+              {
+                return ((0x7f << (encoding_bit_count - 7)) |
+                        encoded_nan_payload());
+              }
+            case (!{})
+              {
+                assert(false);
+              };
+          };
+      };
+
+    virtual immutable constructor := item_class;
+    virtual immutable operator_return_type := type lazy item_class;
+
+    use ieee_754_floating_point_ecosystem(10, mantissa_digits,
+            max_fraction_exponent, encoding_bit_count, subnormal_allowed,
+            denormalized_allowed, local_default_controller)
+                    for item_class as base_class;
+
+    function decode_bits(bits : [0...+oo)) returns <<basic_item_type(10)>>
+      {
+        assert(bits < (1 << encoding_bit_count));
+        immutable sign : [0...1] := (bits >> (encoding_bit_count - 1));
+        immutable sign_factor : {-1, 1} := ((sign == 1) ? -1 : 1);
+        immutable g_bits : [0...(1 << g_field_bit_count)) :=
+                ((bits >> t_field_bit_count) & g_mask);
+        immutable t_bits : [0...(t_field_count)) := bits & t_mask;
+
+        immutable g_top5 := (g_bits >> (g_field_bit_count - 5));
+
+        function decode_densely_packed_decimal_mantissa(
+                lead_decimal_digit : [0...9]) returns [0...max_mantissa]
+          {
+            variable factor : [1...+oo) := 1;
+            variable result : [0...max_mantissa] := 0;
+            variable remainder : [0...(t_field_count)) := t_bits;
+            for (x; 0; x < t_field_digits; 1)
+              {
+                result += (decode_densely_packed_decimal_declet(
+                                   remainder & 0x3ff) * factor);
+                remainder >>= 10;
+                factor *= 1000;
+              };
+            assert(remainder == 0);
+            result += lead_decimal_digit * factor;
+            return result;
+          };
+
+        function decode_binary_mantissa(
+                lead_decimal_digit : [0...9]) returns [0...max_mantissa]
+          {
+            immutable result : [0...(10 * (1 << t_field_bit_count))) :=
+                    ((lead_decimal_digit << t_field_bit_count) | t_bits);
+            return ((result <= max_mantissa) ? result : 0);
+          };
+
+        if (g_top5 == 0x1f)
+          {
+            immutable payload : [0...max_payload] :=
+                    ((local_default_controller.decimal_use_binary_encoding()) ?
+                     decode_binary_mantissa(0) :
+                     decode_densely_packed_decimal_mantissa(0));
+            if ((g_bits >> (g_field_bit_count - 6) & 0x1) != 0)
+              {
+                return item_class(
+                        ((sign == 1) ? negative_signalling_zero_zero :
+                         signalling_zero_zero), init_nan_payload := payload);
+              }
+            else
+              {
+                return item_class(((sign == 1) ? negative_zero_zero : 0/0),
+                                  init_nan_payload := payload);
+              };
+          };
+
+        if (g_top5 == 0x1e)
+            return item_class((sign == 1) ? -oo : +oo);;
+
+        variable exponent : [0...3 * (1 << (g_field_bit_count - 5)));
+        variable mantissa : [0...max_mantissa];
+
+        if (local_default_controller.decimal_use_binary_encoding())
+          {
+            variable mantissa_top4 : [0...9];
+
+            if ((g_top5 >> 3) == 0x3)
+              {
+                mantissa_top4 := (8 + (g_bits & 0x1));
+                exponent :=
+                        ((g_bits >> 1) & ((1 << (g_field_bit_count - 3)) - 1));
+              }
+            else
+              {
+                mantissa_top4 := (g_bits & 0x7);
+                exponent := (g_bits >> 3);
+              };
+
+            mantissa := decode_binary_mantissa(mantissa_top4);
+          }
+        else
+          {
+            variable lead_decimal_digit : [0...9];
+            variable exponent_top2 : [0...2];
+
+            if ((g_top5 >> 3) == 0x3)
+              {
+                lead_decimal_digit := (8 + (g_top5 & 0x1));
+                exponent_top2 := ((g_top5 >> 1) & 0x3);
+              }
+            else
+              {
+                lead_decimal_digit := (g_top5 & 0x7);
+                exponent_top2 := (g_top5 >> 3);
+              };
+
+            exponent :=
+                    ((exponent_top2 << (g_field_bit_count - 5)) |
+                     (g_bits & ((1 << (g_field_bit_count - 5)) - 1)));
+
+            mantissa :=
+                    decode_densely_packed_decimal_mantissa(lead_decimal_digit);
+          };
+
+        return item_class(
+                (((mantissa == 0) && (sign == 1)) ? negative_zero :
+                 (sign_factor * mantissa)), exponent - exponent_bias);
+      };
+  };
+
+function ieee_754_decimal(encoding_bit_count : (0...+oo),
+        mantissa_digits : (0...+oo) & one_mod_three :=
+                (((9 * encoding_bit_count) /:: 32) - 2),
+        max_fraction_exponent : (0...+oo) :=
+                (3 *
+                 (0x1 <<
+                  (((encoding_bit_count - (((mantissa_digits - 1) / 3) * 10)) -
+                    7)))),
+        subnormal_allowed : boolean := true,
+        denormalized_allowed : boolean := true,
+        local_default_controller : ieee_754_fp_controller_type :=
+                default_fp_controller,
+        name : string | {null} := "decimal" ~ sprint(encoding_bit_count))
+        returns <<basic_item_type(10)>> <--
+                    (init_mantissa : extended_rational,
+                     init_exponent : integer := *,
+                     init_controller : ieee_754_fp_controller_type := *)
+  {
+    variable ecosystem := ieee_754_decimal_ecosystem(encoding_bit_count,
+            mantissa_digits, max_fraction_exponent, subnormal_allowed,
+            denormalized_allowed, local_default_controller, name);
+    variable result := ecosystem.item_class;
+
+    if (name != null)
+        result..format_name := name;;
+    result..format_bits := encoding_bit_count;
+
+    result..decode_bits := ecosystem.decode_bits;
+
+    return result;
+  };
+
+
+immutable binary16 := ieee_754_binary(16, 10);
+immutable binary32 := ieee_754_binary(32, 23);
+immutable binary64 := ieee_754_binary(64, 52);
+immutable binary128 := ieee_754_binary(128, 112);
+immutable decimal32 := ieee_754_decimal(32);
+immutable decimal64 := ieee_754_decimal(64);
+immutable decimal128 := ieee_754_decimal(128);
+
+
+hide;
+
+use "logarithm.salm" : "logarithm.si";
+
+export;
+
+use functions(type binary16, type binary16, start_tolerance := 1 / (1 << 16));
+use functions(type binary32, type binary32, start_tolerance := 1 / (1 << 32));
+use functions(type binary64, type binary64, start_tolerance := 1 / (1 << 64));
+use functions(type binary128, type binary128,
+              start_tolerance := 1 / (1 << 128));
+use functions(type decimal32, type decimal32,
+              start_tolerance := 1 / (1 << 32));
+use functions(type decimal64, type decimal64,
+              start_tolerance := 1 / (1 << 64));
+use functions(type decimal128, type decimal128,
+              start_tolerance := 1 / (1 << 128));

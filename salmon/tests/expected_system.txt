@@ -1,0 +1,28 @@
+hellosystem("tests/tester.salm 0 hello"): [return_code := 0, standard_out := "", standard_error := ""].
+system("tests/tester.salm 0 hello", true): [return_code := 0, standard_out := "hello", standard_error := ""].
+system("tests/tester.salm 0 hello", true, true): [return_code := 0, standard_out := "hello", standard_error := ""].
+hellosystem("tests/tester.salm 0 hello", false, true): [return_code := 0, standard_out := "", standard_error := ""].
+hellosystem("tests/tester.salm 1 hello"): [return_code := 256, standard_out := "", standard_error := ""].
+system("tests/tester.salm 1 hello", true): [return_code := 256, standard_out := "hello", standard_error := ""].
+system("tests/tester.salm 1 hello", true, true): [return_code := 256, standard_out := "hello", standard_error := ""].
+hellosystem("tests/tester.salm 1 hello", false, true): [return_code := 256, standard_out := "", standard_error := ""].
+aaasystem("tests/tester.salm 0 aaa bbb"): [return_code := 0, standard_out := "", standard_error := ""].
+system("tests/tester.salm 0 aaa bbb", true): [return_code := 0, standard_out := "aaa", standard_error := ""].
+system("tests/tester.salm 0 aaa bbb", true, true): [return_code := 0, standard_out := "aaa", standard_error := "bbb"].
+aaasystem("tests/tester.salm 0 aaa bbb", false, true): [return_code := 0, standard_out := "", standard_error := "bbb"].
+aaasystem("tests/tester.salm 1 aaa bbb"): [return_code := 256, standard_out := "", standard_error := ""].
+system("tests/tester.salm 1 aaa bbb", true): [return_code := 256, standard_out := "aaa", standard_error := ""].
+system("tests/tester.salm 1 aaa bbb", true, true): [return_code := 256, standard_out := "aaa", standard_error := "bbb"].
+aaasystem("tests/tester.salm 1 aaa bbb", false, true): [return_code := 256, standard_out := "", standard_error := "bbb"].
+aaasystem("tests/tester.salm 2 aaa bbb"): [return_code := 512, standard_out := "", standard_error := ""].
+system("tests/tester.salm 2 aaa bbb", true): [return_code := 512, standard_out := "aaa", standard_error := ""].
+system("tests/tester.salm 2 aaa bbb", true, true): [return_code := 512, standard_out := "aaa", standard_error := "bbb"].
+aaasystem("tests/tester.salm 2 aaa bbb", false, true): [return_code := 512, standard_out := "", standard_error := "bbb"].
+aaasystem("tests/tester.salm -1 aaa bbb"): [return_code := 65280, standard_out := "", standard_error := ""].
+system("tests/tester.salm -1 aaa bbb", true): [return_code := 65280, standard_out := "aaa", standard_error := ""].
+system("tests/tester.salm -1 aaa bbb", true, true): [return_code := 65280, standard_out := "aaa", standard_error := "bbb"].
+aaasystem("tests/tester.salm -1 aaa bbb", false, true): [return_code := 65280, standard_out := "", standard_error := "bbb"].
+aaasystem("tests/tester.salm -2 aaa bbb"): [return_code := 65024, standard_out := "", standard_error := ""].
+system("tests/tester.salm -2 aaa bbb", true): [return_code := 65024, standard_out := "aaa", standard_error := ""].
+system("tests/tester.salm -2 aaa bbb", true, true): [return_code := 65024, standard_out := "aaa", standard_error := "bbb"].
+aaasystem("tests/tester.salm -2 aaa bbb", false, true): [return_code := 65024, standard_out := "", standard_error := "bbb"].

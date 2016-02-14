@@ -1,0 +1,23 @@
+Native bridge test initialization called.
+demo() was called.
+arguments value kind: 7.
+arguments value: [].
+demo() was called.
+arguments value kind: 7.
+arguments value: [53].
+demo() was called.
+arguments value kind: 7.
+arguments value: [53, ["Abe Lincoln"]].
+Trying pure ok in pure context.
+12
+No exception.
+Trying not pure ok in pure context.
+Caught: [exception_tag_call_side_effect_external_from_pure] `An external routine that might have side effects was called from a pure context.'.
+Trying pure ok in impure context.
+12
+No exception.
+Trying not pure ok in impure context.
+12
+No exception.
+Caught: [exception_tag_call_return_type_mismatch] `The value returned from a function call didn't match the static return type of the function because the value is 3 and the type is a subset of the integers that does not include that value.'.
+Caught: [exception_tag_call_return_type_mismatch] `The value returned from a function call didn't match the dynamic return type of the function because the value is 3 and the type is a subset of the integers that does not include that value.'.

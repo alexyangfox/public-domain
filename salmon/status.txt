@@ -1,0 +1,108 @@
+
+This file lists the current status of SalmonEye.
+
+Tested:
+  * string constant expressions
+  * character constant expressions
+  * decimal integer constant expressions
+  * variable reference expressions
+  * routine reference expressions
+  * variable declaration statements
+  * if statements
+  * for statements
+  * statement blocks
+  * while statements
+  * do-while statements
+  * routine declaration statements
+  * break statements
+  * continue statements
+  * return statements
+  * statement block expressions
+  * try-catch statements
+  * try-handle statements
+  * rational constant expressions
+  * regular expression constant expressions
+  * type expressions
+  * `single' statements
+  * `single' modifiers on declarations
+  * `static' modifiers on declarations
+  * construct expressions
+  * operator overloading
+  * the standard library call() routine
+  * the standard library return_value_expected() routine
+  * the standard library translate() function
+  * the standard library system() routine
+  * backtick expressions
+  * `use' statements
+  * the standard library scanf() function
+  * binary `/' on integers
+  * left and right shift expressions on integers
+  * bitwise `and', `or', and `exclusive or' expressions
+  * logical `and' expressions
+  * logical `or' expressions
+  * switch statements
+  * quark expressions
+  * lock expressions
+
+Partly Tested:
+  * assign statements
+  * call statements
+  * iterate statements
+  * semi-labeled expression list expressions
+  * call expressions
+  * label statements
+  * `this' expressions
+  * `virtual' modifiers on declarations
+  * hexadecimal integer constant expressions
+  * immutable reference expressions
+  * lookup expressions
+  * field reference expressions
+  * pointer field reference expressions
+  * conditional expressions
+  * binary `+', `-', `*', and `%' on integers
+  * binary `<', `>', `<=', and `>=' expressions on integers
+  * equality and inequality expressions
+  * `in' expressions
+  * immutable declaration statements
+  * goto statements
+  * string concatenation
+  * array and semi-labeled value list concatenation
+  * statement block statements
+  * increment statements
+  * tagalong declaration statements
+  * lepton key declaration statements
+  * quark declaration statements
+  * lock declaration statements
+  * tagalong key reference expressions
+  * lepton key reference expressions
+  * quark reference expressions
+  * lock reference expressions
+  * label reference expressions
+  * routine expressions
+  * arguments expressions
+  * negate expressions on integers
+  * logical not expressions
+  * type value expressions
+  * map list expressions
+  * tagalong field reference expressions
+  * cleanup statements
+  * lepton expressions
+  * negate expressions on rationals
+  * the standard library delete() procedure
+  * dereference expressions
+  * location-of expressions
+  * decrement statements
+  * new expressions
+  * tagalong expressions
+  * lepton key expressions
+
+Untested:
+  * unary plus expressions
+  * bitwise not expressions
+  * binary `+', `-', `*', `/', and `%' expressions on rationals
+  * binary `+', and `-' expressions on a pointer and an integer
+  * binary `<', `>', `<=', and `>=' expressions on rationals
+  * binary `<', `>', `<=', and `>=' expressions on pointers
+
+Unimplemented:
+  * enforcement of `pure' modifiers on declarations

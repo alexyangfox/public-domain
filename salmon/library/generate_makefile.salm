@@ -1,0 +1,96 @@
+#!/usr/local/bin/salmoneye
+/* file "generate_makefile.salm" */
+
+/*
+ *  This file is used to generate the makefile for the library directory based
+ *  on whether or not pthread is useable on this system.
+ *
+ *  This file is part of SalmonEye, an interpreter for the Salmon Programming
+ *  Language.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+include "./platform_dependent.salm";
+
+
+immutable c_flags : string := arguments[1];
+
+"# Generated automatically by \"generate_makefile\"."!
+""!
+
+print("CFLAGS=", c_flags, "\n");
+""!
+
+variable shared_library_link_arguments :=
+        " -L../c_foundations -lc_foundations";
+
+if (path_separator == ";")
+    shared_library_link_arguments := "";;
+
+if (shared_library_suffix == ".dll")
+    shared_library_link_arguments ~= " -L.. -lsalmoneye";;
+
+variable pthread_ok : boolean := false;
+variable thread_library_options : string := " -lpthread -lrt";
+iterate (libraries; ["", " -lpthread", " -lrt", " -lpthread -lrt"])
+  {
+    if (pthread_ok)
+        break;;
+    thread_library_options := libraries;
+    standard_error.print(
+            "Testing thread module link with: `" ~ libraries ~ "'...");
+    pthread_ok :=
+            (system("gcc " ~ c_flags ~ " -o test_thread_link " ~
+                    "library/test_thread_link.c library/nb_thread.c " ~
+                    "-Lc_foundations -L../c_foundations -lc_foundations" ~
+                    thread_library_options ~ " -L. -L.. -lsalmoneye",
+                    capture_standard_out := true,
+                    capture_standard_error := true).return_code == 0);
+    standard_error.print(pthread_ok ? "succeeded" : "failed", ".\n");
+  };
+
+try
+  { remove("test_thread_link"); }
+catch { };
+try
+  { remove("test_thread_link" ~ executable_suffix); }
+catch { };
+
+print("all: convertable.so parse.so ");
+if (pthread_ok)
+    print("thread.so");
+else
+    print("unimplemented_thread.so");;
+print(" thread.salm\n");
+""!
+"convertable.so: convertable.c"!
+"\tgcc $(CFLAGS) -g --shared -o convertable.so convertable.c" ~ shared_library_link_arguments!
+""!
+"parse.so: parse.c"!
+"\tgcc $(CFLAGS) -g --shared -o parse.so parse.c" ~ shared_library_link_arguments!
+""!
+"thread.so: nb_thread.c"!
+"\tgcc $(CFLAGS) -g --shared -o thread.so nb_thread.c" ~ shared_library_link_arguments ~ thread_library_options!
+""!
+"unimplemented_thread.so: unimplemented_thread.c"!
+"\tgcc $(CFLAGS) -g --shared -o unimplemented_thread.so unimplemented_thread.c" ~ shared_library_link_arguments!
+""!
+if (pthread_ok)
+  {
+    "thread.salm: thread_implemented.salm"!
+    "\trm -f thread.salm"!
+    "\tcp thread_implemented.salm thread.salm"!
+  }
+else
+  {
+    "thread.salm: thread_unimplemented.salm"!
+    "\trm -f thread.salm"!
+    "\tcp thread_unimplemented.salm thread.salm"!
+  };
+""!
+"clean:"!
+"\trm -f convertable.so parse.so thread.so unimplemented_thread.so thread.salm"!

@@ -1,0 +1,40 @@
+#!/usr/local/bin/salmoneye
+/* file "generate_maybe_pthread_makefile.salm" */
+
+/*
+ *  This file is used to generate "Makefile.maybe_pthread" based on whether or
+ *  not pthread is useable on this system.
+ *
+ *  This file is part of SalmonEye, an interpreter for the Salmon Programming
+ *  Language.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+include "library/platform_dependent.salm";
+
+
+"# Generated automatically by \"generate_maybe_pthread_makefile\"."!
+""!
+"all:"!
+
+immutable pthread_ok :=
+        (`gcc -o test_pthread test_pthread.c -lpthread`.return_code == 0);
+
+try
+  { remove("test_pthread"); }
+catch { };
+try
+  { remove("test_pthread" ~ executable_suffix); }
+catch { };
+
+if (pthread_ok)
+    "\tmake -f Makefile all_pthread"!;
+
+""!
+"install:"!
+if (pthread_ok)
+    "\tmake -f Makefile install_pthread"!;

@@ -1,0 +1,3146 @@
+/* file "exceptions.salm" */
+
+/*
+ *  This file runs tests of various situations that are supposed to produce
+ *  exceptions and verifies that they produce the expected exceptions.  It
+ *  prints the messages from those exceptions, too, so its output can be
+ *  compared with a file containing the expected output to make sure the text
+ *  of the exceptions is correct.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+procedure test(expected_tag : any_quark, to_test : {} <-- ())
+  {
+    static variable last_line_number : [0...+oo) := 0;
+
+    print("Testing for ", expected_tag, " exception.\n");
+    try
+      {
+        to_test();
+      }
+    catch
+      {
+        immutable the_exception : exception := current_exceptions()[0];
+        if (expected_tag == the_exception.tag)
+          {
+            print("    An exception with the correct tag was caught.\n");
+          }
+        else
+          {
+            print("    Error!  The exception had the wrong tag (",
+                  the_exception.tag, ").\n");
+          };
+        printf("    Message: %v%.\n", the_exception.message);
+        variable correction := last_line_number;
+        if (the_exception.source.file_name != "tests/exceptions.salm")
+          { correction := 0; };
+        printf("    Source: %v%, [%d%:%d%] - [%d%:%d%].\n\n",
+               the_exception.source.file_name,
+               the_exception.source.start_line - correction,
+               the_exception.source.start_column,
+               the_exception.source.end_line - correction,
+               the_exception.source.end_column);
+        if (the_exception.source.file_name == "tests/exceptions.salm")
+          { last_line_number := the_exception.source.start_line; };
+        return;
+      };
+    print("    Error!  No exception was generated.\n\n");
+  };
+
+/* First, we test the infrastructure.  This first test should produce an error
+ * message about no exception being generated. */
+test(exception_tag_unbound_name_reference, procedure() {});
+
+/* Next, comes another infrastructure test.  This test should produce an error
+ * message about the wrong tag for the exception. */
+test(exception_tag_unbound_name_reference, procedure()
+  {
+    use class(){}();
+    p1();
+  });
+
+/* Now, we're done with the infrastructure tests and ready to get to the real
+ * tests of conditions that should generate exceptions. */
+
+
+test(exception_tag_pure_virtual_no_override, procedure()
+  {
+    [] := [{ virtual procedure p1() := null; return 0; }];
+  });
+
+test(exception_tag_call_class_return_value, procedure()
+  {
+    class myclass()  { return 5; };
+    [] := myclass();
+  });
+
+test(exception_tag_call_function_no_return_value, procedure()
+  {
+    procedure p1()  { };
+    [] := p1();
+  });
+
+test(exception_tag_call_function_no_return_value, procedure()
+  {
+    procedure p1()  { return; };
+    [] := p1();
+  });
+
+test(exception_tag_call_return_type_mismatch, procedure()
+  {
+    function f1() returns integer  ("five");
+    [] := f1();
+  });
+
+test(exception_tag_call_return_type_mismatch, procedure()
+  {
+    function f1(x) returns integer/{x}  (x + 1);
+    [] := f1(5);
+  });
+
+test(exception_tag_call_return_type_match_indeterminate, procedure()
+  {
+    pure function a(x) returns boolean  ((x % 4) == 3);
+    pure function b(x) returns boolean  ((x % 3) == 2);
+    function f1() returns type a  (type type b);
+    [] := f1();
+  });
+
+test(exception_tag_call_return_type_match_indeterminate, procedure()
+  {
+    pure function a(x) returns boolean  ((x % 4) == 3);
+    pure function b(x) returns boolean  ((x % 3) == 2);
+    function f1(x) returns !{}/type x  (type b);
+    [] := f1(a);
+  });
+
+test(exception_tag_call_two_return_values, procedure()
+  {
+    function f1()
+      {
+        cleanup { return 5; };
+        return 6;
+      };
+    [] := f1();
+  });
+
+test(exception_tag_call_two_return_values, procedure()
+  {
+    print(
+      {
+        cleanup { return 5; };
+        return 6;
+      }, ".\n");
+  });
+
+test(exception_tag_call_procedure_return_value, procedure()
+  {
+    function f1(x)  (x + 2);
+    f1(3);
+  });
+
+test(exception_tag_call_procedure_return_value, procedure()
+  {
+    length([15, 57]);
+  });
+
+test(exception_tag_variable_use_before_instantiation, procedure()
+  {
+    [] := [&v1 == 7];
+    variable v1;
+  });
+
+test(exception_tag_variable_use_before_instantiation, procedure()
+  {
+    v1 := "spleen";
+    variable v1;
+  });
+
+test(exception_tag_variable_use_before_instantiation, procedure()
+  {
+    v1[1] := "spleen";
+    variable v1 := ["ankle", "wrist", "head"];
+  });
+
+test(exception_tag_routine_use_before_instantiation, procedure()
+  {
+    [] := [p1 == 7];
+    procedure p1()  { };
+  });
+
+test(exception_tag_tagalong_use_before_instantiation, procedure()
+  {
+    [] := [t1 == 7];
+    tagalong t1;
+  });
+
+test(exception_tag_lepton_key_use_before_instantiation, procedure()
+  {
+    [] := [l1 == 7];
+    lepton l1;
+  });
+
+test(exception_tag_quark_use_before_instantiation, procedure()
+  {
+    [] := [q1 == 7];
+    quark q1;
+  });
+
+test(exception_tag_lock_use_before_instantiation, procedure()
+  {
+    [] := [l1 == 7];
+    lock l1;
+  });
+
+test(exception_tag_variable_use_after_deallocation, procedure()
+  {
+    variable v1;
+      {
+        variable v2;
+        v1 := &v2;
+        [] := [v1 == 7];
+      };
+    [] := [v1 == 7];
+  });
+
+test(exception_tag_variable_use_after_deallocation, procedure()
+  {
+    immutable i1 := variable;
+    [] := [i1 == 7];
+    delete(i1);
+    [] := [i1 == 7];
+  });
+
+test(exception_tag_variable_use_after_deallocation, procedure()
+  {
+    variable p1 : *integer;
+      {
+        variable v1 : integer := 17;
+        p1 := &v1;
+      };
+    *p1 := 18;
+  });
+
+test(exception_tag_variable_use_after_deallocation, procedure()
+  {
+    variable p1 : *integer := variable : integer := 17;
+    delete(p1);
+    *p1 := 18;
+  });
+
+test(exception_tag_variable_use_after_deallocation, procedure()
+  {
+    variable p1 : *array[string] :=
+            variable : array[string] := ["ankle", "wrist", "head"];
+    delete(p1);
+    (*p1)[1] := "spleen";
+  });
+
+test(exception_tag_routine_use_after_deallocation, procedure()
+  {
+    variable v1;
+      {
+        procedure p1()  { };
+        v1 := p1;
+        [] := [v1 == 7];
+      };
+    [] := [v1 == 7];
+  });
+
+test(exception_tag_routine_use_after_deallocation, procedure()
+  {
+    immutable i1 := procedure()  { };
+    [] := [i1 == 7];
+    delete(i1);
+    [] := [i1 == 7];
+  });
+
+test(exception_tag_tagalong_use_after_deallocation, procedure()
+  {
+    variable v1;
+      {
+        tagalong t1;
+        v1 := t1;
+        [] := [v1 == 7];
+      };
+    [] := [v1 == 7];
+  });
+
+test(exception_tag_tagalong_use_after_deallocation, procedure()
+  {
+    immutable i1 := tagalong;
+    [] := [i1 == 7];
+    delete(i1);
+    [] := [i1 == 7];
+  });
+
+test(exception_tag_lepton_key_use_after_deallocation, procedure()
+  {
+    variable v1;
+      {
+        lepton l1;
+        v1 := l1;
+        [] := [v1 == 7];
+      };
+    [] := [v1 == 7];
+  });
+
+test(exception_tag_lepton_key_use_after_deallocation, procedure()
+  {
+    immutable i1 := lepton;
+    [] := [i1 == 7];
+    delete(i1);
+    [] := [i1 == 7];
+  });
+
+test(exception_tag_quark_use_after_deallocation, procedure()
+  {
+    variable v1;
+      {
+        quark q1;
+        v1 := q1;
+        [] := [v1 == 7];
+      };
+    [] := [v1 == 7];
+  });
+
+test(exception_tag_quark_use_after_deallocation, procedure()
+  {
+    immutable i1 := quark;
+    [] := [i1 == 7];
+    delete(i1);
+    [] := [i1 == 7];
+  });
+
+test(exception_tag_lock_use_after_deallocation, procedure()
+  {
+    variable v1;
+      {
+        lock l1;
+        v1 := l1;
+        [] := [v1 == 7];
+      };
+    [] := [v1 == 7];
+  });
+
+test(exception_tag_lock_use_after_deallocation, procedure()
+  {
+    immutable i1 := lock;
+    [] := [i1 == 7];
+    delete(i1);
+    [] := [i1 == 7];
+  });
+
+test(exception_tag_jump_target_use_after_deallocation, procedure()
+  {
+    variable v1;
+      {
+      l1:
+        v1 := l1;
+        [] := [v1 == 7];
+      };
+    [] := [v1 == 7];
+  });
+
+test(exception_tag_object_use_after_deallocation, procedure()
+  {
+    class c1()  { };
+    immutable i1 := c1();
+    [] := [i1 == 7];
+    delete(i1);
+    [] := [i1 == 7];
+  });
+
+/*
+ *  Note that in regular execution it's not possible to get an exception with
+ *  the exception_tag_unbound_name_reference tag (except, of course, by
+ *  manually throwing it directly).  That's because normally a failure to bind
+ *  an identifier causes the implementation to bail out at bind time when the
+ *  binding operation failed.  This tag is provided by the standard library to
+ *  cover cases where an implementation for some reason specifically let's the
+ *  user run code that is known to have unbound references.  So we can't test
+ *  this tag here because if this test code is being run under normal
+ *  circumstances, the bind-time failure would prevent this exception from ever
+ *  being generated.
+ */
+
+test(exception_tag_lepton_bad_key, procedure()
+  {
+    immutable bad_key := 17;
+    [] := [bad_key[a := 12, b := 15]];
+  });
+
+test(exception_tag_lepton_key_deleted_in_expression, procedure()
+  {
+    immutable key := lepton[...];
+    [] := [key[a := 12, b := { delete(key); return 15; }]];
+  });
+
+test(exception_tag_lepton_key_use_after_deallocation, procedure()
+  {
+    function expired_key()
+      {
+        lepton my_key[a : integer, b : string];
+        return my_key;
+      };
+    [] := [expired_key()[a := 12, b := "fifteen"]];
+  });
+
+test(exception_tag_lepton_key_use_after_deallocation, procedure()
+  {
+    immutable my_key := lepton[a : integer, b : string];
+    variable v1;
+    [] := [my_key[a := 12, b := "fifteen"]];
+    delete(my_key);
+    [] := [my_key[a := 12, b := "fifteen"]];
+  });
+
+test(exception_tag_lepton_field_type_cant_force, procedure()
+  {
+    lepton my_key[a : integer, b : string];
+    [] := [my_key[a := 12, b ::= 15]];
+  });
+
+test(exception_tag_lepton_field_type_mismatch, procedure()
+  {
+    lepton my_key[a : integer, b : string];
+    [] := [my_key[a := 12, b := 15]];
+  });
+
+test(exception_tag_lepton_field_type_match_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_b(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    lepton my_key[a : integer, b : type filter_a];
+    [] := [my_key[a := 12, b := type filter_b]];
+  });
+
+test(exception_tag_lepton_field_disallowed, procedure()
+  {
+    lepton my_key[a : integer, b : integer];
+    [] := [my_key[a := 12, b := 15, c := 17]];
+  });
+
+test(exception_tag_pointer_field_reference_bad_base, procedure()
+  {
+    [] := [13->a];
+  });
+
+test(exception_tag_pointer_field_reference_bad_base, procedure()
+  {
+    [] := [&(13->a)];
+  });
+
+test(exception_tag_tagalong_reference_bad_key, procedure()
+  {
+    [] := [13..5];
+  });
+
+test(exception_tag_tagalong_reference_bad_key, procedure()
+  {
+    variable v1;
+    [] := [&(v1..5)];
+  });
+
+test(exception_tag_tagalong_reference_undefined, procedure()
+  {
+    variable v1 := 15;
+    tagalong t1;
+    [] := [v1..t1];
+  });
+
+test(exception_tag_statement_block_expression_no_value, procedure()
+  {
+    [] := [{}];
+  });
+
+test(exception_tag_statement_block_expression_return_no_value, procedure()
+  {
+    [] := [{ return; }];
+  });
+
+test(exception_tag_semi_labeled_expression_list_duplicate_label, procedure()
+  {
+    [] := [["fish", c := "bird", c := "lizard"]];
+  });
+
+test(exception_tag_conditional_bad_test, procedure()
+  {
+    [] := ["hello" ? 1 : 2];
+  });
+
+test(exception_tag_dereference_bad_base, procedure()
+  {
+    [] := [*237];
+  });
+
+test(exception_tag_in_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_b(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    [] := [type filter_a in type filter_b];
+  });
+
+test(exception_tag_force_indeterminate, procedure()
+  {
+    [] := [7 :: {3, 5, 18, "blue"}];
+  });
+
+test(exception_tag_force_indeterminate, procedure()
+  {
+    [] := [7 :: !{3, 5, 7, 18, "blue"}];
+  });
+
+test(exception_tag_force_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    [] := [7 :: filter_a & !{7}];
+  });
+
+test(exception_tag_force_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    [] := [7 :: filter_a | !{7}];
+  });
+
+test(exception_tag_force_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    [] := [7 :: filter_a ^ !{7}];
+  });
+
+test(exception_tag_force_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    [] := [7 :: filter_a];
+  });
+
+test(exception_tag_force_indeterminate, procedure()
+  {
+    immutable filter_a := pure function (x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    [] := [7 :: filter_a];
+  });
+
+test(exception_tag_force_cant_force, procedure()
+  {
+    [] := ["horse" :: integer];
+  });
+
+test(exception_tag_comprehend_bad_test, procedure()
+  {
+    [] := [comprehend (x; [1, 2, 3]; "plumb") (x*x)];
+  });
+
+test(exception_tag_forall_executed, procedure()
+  {
+    [] := [forall(x : boolean) (x || !x)];
+  });
+
+test(exception_tag_exists_executed, procedure()
+  {
+    [] := [exists(x : integer) (x + 17 == 57)];
+  });
+
+test(exception_tag_pointer_subtraction_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_b(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    variable v1 := <<(* --> 15)>>;
+    [] := [&(v1[type filter_a]) - &(v1[type filter_b])];
+  });
+
+test(exception_tag_pointer_subtraction_non_lookup, procedure()
+  {
+    variable v1 := <<(* --> 15)>>;
+    [] := [&v1 - &(v1[15])];
+  });
+
+test(exception_tag_pointer_subtraction_overload_mismatch, procedure()
+  {
+    variable v1 := <<(* --> 15)>>;
+    immutable p1 := &(v1[82]);
+      {
+        function operator[](x, key : integer)  (key * 5);
+        [] := [p1 - &(v1[84])];
+      };
+  });
+
+test(exception_tag_pointer_subtraction_base_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_b(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    variable v1 := <<(* --> 15)>>;
+    [] := [&(v1[type filter_a][15]) - &(v1[type filter_b][17])];
+  });
+
+test(exception_tag_pointer_subtraction_base_mismatch, procedure()
+  {
+    variable v1 := <<(* --> 15)>>;
+    variable v2 := <<(* --> 15)>>;
+    [] := [&(v1[15]) - &(v2[17])];
+  });
+
+test(exception_tag_divide_force_rational, procedure()
+  {
+    [] := [17.2 /:: 5];
+  });
+
+test(exception_tag_divide_force_rational, procedure()
+  {
+    [] := [17 /:: 5.2];
+  });
+
+test(exception_tag_remainder_rational, procedure()
+  {
+    [] := [17.2 % 5];
+  });
+
+test(exception_tag_remainder_rational, procedure()
+  {
+    [] := [17 % 5.2];
+  });
+
+test(exception_tag_left_shift_rational, procedure()
+  {
+    [] := [17.2 << 5];
+  });
+
+test(exception_tag_left_shift_rational, procedure()
+  {
+    [] := [17 << 5.2];
+  });
+
+test(exception_tag_right_shift_rational, procedure()
+  {
+    [] := [17.2 >> 5];
+  });
+
+test(exception_tag_right_shift_rational, procedure()
+  {
+    [] := [17 >> 5.2];
+  });
+
+test(exception_tag_pointer_comparison_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_b(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    variable v1 := <<(* --> 15)>>;
+    [] := [&(v1[type filter_a]) < &(v1[type filter_b])];
+  });
+
+test(exception_tag_pointer_comparison_non_lookup, procedure()
+  {
+    variable v1 := <<(* --> 15)>>;
+    [] := [&v1 < &(v1[15])];
+  });
+
+test(exception_tag_pointer_comparison_overload_mismatch, procedure()
+  {
+    variable v1 := <<(* --> 15)>>;
+    immutable p1 := &(v1[82]);
+      {
+        function operator[](x, key : integer)  (key * 5);
+        [] := [p1 > &(v1[84])];
+      };
+  });
+
+test(exception_tag_pointer_comparison_base_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_b(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    variable v1 := <<(* --> 15)>>;
+    [] := [&(v1[type filter_a][15]) <= &(v1[type filter_b][17])];
+  });
+
+test(exception_tag_pointer_comparison_base_mismatch, procedure()
+  {
+    variable v1 := <<(* --> 15)>>;
+    variable v2 := <<(* --> 15)>>;
+    [] := [&(v1[15]) >= &(v2[17])];
+  });
+
+test(exception_tag_binary_bad_operands, procedure()
+  {
+    variable v1 := <<(* --> 15)>>;
+    [] := [&(v1[15]) >= 17];
+  });
+
+test(exception_tag_binary_bad_operands, procedure()
+  {
+    [] := ["tree" ~ 17];
+  });
+
+test(exception_tag_binary_bad_operands, procedure()
+  {
+    [] := ["tree" ~ [17]];
+  });
+
+test(exception_tag_equality_test_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_b(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    [] := [type filter_a == type filter_b];
+  });
+
+test(exception_tag_equality_test_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_b(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    [] := [type filter_a != type filter_b];
+  });
+
+test(exception_tag_array_type_bad_lower, procedure()
+  {
+    variable v1 : integer["five"...17];
+  });
+
+test(exception_tag_array_type_bad_lower, procedure()
+  {
+    variable v1 : integer[0/0...17];
+  });
+
+test(exception_tag_array_type_bad_lower, procedure()
+  {
+    variable v1 : integer[1/0...17];
+  });
+
+test(exception_tag_array_type_bad_upper, procedure()
+  {
+    variable v1 : integer[17..."five"];
+  });
+
+test(exception_tag_array_type_bad_upper, procedure()
+  {
+    variable v1 : integer[17...0/0];
+  });
+
+test(exception_tag_array_type_bad_upper, procedure()
+  {
+    variable v1 : integer[17...1/0];
+  });
+
+test(exception_tag_range_type_bad_lower, procedure()
+  {
+    variable v1 : ["five"...17];
+  });
+
+test(exception_tag_range_type_bad_lower, procedure()
+  {
+    variable v1 : [0/0...17];
+  });
+
+test(exception_tag_range_type_bad_lower, procedure()
+  {
+    variable v1 : [1/0...17];
+  });
+
+test(exception_tag_range_type_bad_upper, procedure()
+  {
+    variable v1 : [17..."five"];
+  });
+
+test(exception_tag_range_type_bad_upper, procedure()
+  {
+    variable v1 : [17...0/0];
+  });
+
+test(exception_tag_range_type_bad_upper, procedure()
+  {
+    variable v1 : [17...1/0];
+  });
+
+test(exception_tag_lepton_type_bad_key, procedure()
+  {
+    variable v1 : lepton 37[a : string, b : integer];
+  });
+
+test(exception_tag_routine_addressed, procedure()
+  {
+    use class()
+      {
+        function f1(x)  (x + 3);
+      }();
+    [] := [&f1];
+  });
+
+test(exception_tag_routine_addressed, procedure()
+  {
+    use class()
+      {
+        function f1(x)  (x + 3);
+        function f1(x, y)  (x + y);
+      }();
+    [] := [&f1];
+  });
+
+test(exception_tag_label_addressed, procedure()
+  {
+  l1:
+      {
+        use class()  {}();
+        [] := [&l1];
+      };
+  });
+
+test(exception_tag_tagalong_key_addressed, procedure()
+  {
+    use class()
+      {
+        tagalong t1;
+      }();
+    [] := [&t1];
+  });
+
+test(exception_tag_lepton_key_addressed, procedure()
+  {
+    use class()
+      {
+        lepton l1;
+      }();
+    [] := [&l1];
+  });
+
+test(exception_tag_quark_addressed, procedure()
+  {
+    use class()
+      {
+        quark q1;
+      }();
+    [] := [&q1];
+  });
+
+test(exception_tag_lock_addressed, procedure()
+  {
+    use class()
+      {
+        lock l1;
+      }();
+    [] := [&l1];
+  });
+
+test(exception_tag_tagalong_unset, procedure()
+  {
+    variable v1 := 15;
+    tagalong t1;
+    [] := [*&(v1..t1)];
+  });
+
+test(exception_tag_tagalong_base_undefined, procedure()
+  {
+    variable v1;
+    tagalong t1;
+    v1..t1 := 15;
+  });
+
+test(exception_tag_tagalong_type_mismatch, procedure()
+  {
+    variable v1 := "apple";
+    tagalong t1 : integer on integer;
+    v1..t1 := 15;
+  });
+
+test(exception_tag_tagalong_type_match_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_b(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    variable v1 := type filter_a;
+    tagalong t1 : integer on type filter_b;
+    v1..t1 := 15;
+  });
+
+test(exception_tag_non_pointer_no_overloaded_match, procedure()
+  {
+    function operator*(x : [1...14])  (x * 15);
+    [] := [*&*15];
+  });
+
+test(exception_tag_non_pointer_no_overloaded_match, procedure()
+  {
+    function operator->(x : [1...14], field : string)  (x * 15);
+    [] := [*&(15->a)];
+  });
+
+test(exception_tag_non_pointer_no_overloaded_match, procedure()
+  {
+    function operator*(base : [1...15])  (base);
+    procedure operator*(base : [1...1500], new_value : [12...93])  { };
+    function operator[](base : integer, key : integer, new_value : integer)
+      (base + key + new_value);
+    (*4)[3] := 87;
+  });
+
+test(exception_tag_non_pointer_no_overloaded_match, procedure()
+  {
+    function operator->(base : [1...15], field : string)  (base);
+    procedure operator->(base : [1...1500], field : string,
+                         new_value : [12...93])  { };
+    function operator[](base : integer, key : integer, new_value : integer)
+      (base + key + new_value);
+    (4->b)[3] := 87;
+  });
+
+test(exception_tag_multi_lookup_bad_key, procedure()
+  {
+    variable v1 := <<(* --> 15)>>;
+    [] := [v1["hello", 15]];
+  });
+
+test(exception_tag_lookup_bad_lower, procedure()
+  {
+    variable v1 := <<(* --> 15)>>;
+    [] := [v1["hello"...15]];
+  });
+
+test(exception_tag_lookup_bad_lower, procedure()
+  {
+    variable v1 := <<(* --> 15)>>;
+    [] := [v1[1/0...15]];
+  });
+
+test(exception_tag_lookup_bad_lower, procedure()
+  {
+    variable v1 := <<(* --> 15)>>;
+    [] := [v1[0/0...15]];
+  });
+
+test(exception_tag_lookup_bad_upper, procedure()
+  {
+    variable v1 := <<(* --> 15)>>;
+    [] := [v1[1..."hello"]];
+  });
+
+test(exception_tag_lookup_bad_upper, procedure()
+  {
+    variable v1 := <<(* --> 15)>>;
+    [] := [v1[1...1/0]];
+  });
+
+test(exception_tag_lookup_bad_upper, procedure()
+  {
+    variable v1 := <<(* --> 15)>>;
+    [] := [v1[1...0/0]];
+  });
+
+test(exception_tag_overloading_resolution_no_match, procedure()
+  {
+    procedure p1(x : integer)  { };
+    procedure p1(x : string)  { };
+    p1(5.7);
+  });
+
+test(exception_tag_overloading_resolution_no_match, procedure()
+  {
+    (procedure(x : integer)  { })();
+  });
+
+/*
+ *  Note that it's not possible to portably get an exception with the
+ *  exception_tag_stack_overflow tag (except, of course, by manually throwing
+ *  it directly).  That's because implementations of Salmon are not required to
+ *  detect stack overflow and generate an exception.  They are allowed to crash
+ *  the program or have undefined behavior on stack overflow.
+ */
+
+test(exception_tag_call_no_routine, procedure()
+  {
+    57(17);
+  });
+
+test(exception_tag_call_class_procedure, procedure()
+  {
+    class c1()  {};
+    c1();
+  });
+
+test(exception_tag_call_argument_type_mismatch, procedure()
+  {
+    procedure p1(x : integer := 17.2)  { };
+    p1();
+  });
+
+test(exception_tag_call_argument_type_mismatch, procedure()
+  {
+    procedure p1(: integer := 17.2)  { };
+    p1();
+  });
+
+test(exception_tag_call_argument_type_match_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_b(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    procedure p1(x : type filter_a := type filter_b)  { };
+    p1();
+  });
+
+test(exception_tag_call_argument_type_match_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_b(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    procedure p1(: type filter_a := type filter_b)  { };
+    p1();
+  });
+
+test(exception_tag_call_dynamic_parameter_type_mismatch, procedure()
+  {
+    procedure p1(x : integer,
+            y : integer / <<pure function(z) returns boolean (z < x)>>)  { };
+    p1(10, 15);
+  });
+
+test(exception_tag_call_dynamic_parameter_type_match_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_b(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    procedure p1(x : integer, y : type !{} / type filter_a)  { };
+    p1(10, type filter_b);
+  });
+
+test(exception_tag_call_side_effect_external_from_pure, procedure()
+  {
+    [] := [pure function() { print("Something.\n"); }()];
+  });
+
+test(exception_tag_if_bad_test, procedure()
+  {
+    if (15)
+      { };
+  });
+
+test(exception_tag_if_bad_test, procedure()
+  {
+    if (false)
+      { }
+    else if (15)
+      { };
+  });
+
+test(exception_tag_switch_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_b(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    switch (type filter_a)
+    case (type filter_b)
+      { };
+  });
+
+test(exception_tag_goto_bad_target, procedure()
+  {
+    goto 1955;
+  });
+
+test(exception_tag_goto_target_deallocated, procedure()
+  {
+    variable v1;
+      {
+      l1:
+        v1 := l1;
+      };
+    goto v1;
+  });
+
+test(exception_tag_goto_target_deallocated, procedure()
+  {
+    variable v1;
+    variable v2;
+      {
+      l1:
+        v1 := l1;
+        v2 := function(x)(x*x);
+      };
+    goto v1;
+  });
+
+test(exception_tag_return_target_deallocated, procedure()
+  {
+    variable v1;
+    routine f1()
+      { v1 := procedure() { return from f1; }; };
+    f1();
+    v1();
+  });
+
+test(exception_tag_for_bad_initial, procedure()
+  {
+    for (x; [10]; x < 50)
+      { };
+  });
+
+test(exception_tag_for_bad_step, procedure()
+  {
+    for (x; 10; x < 50; [1])
+      { };
+  });
+
+test(exception_tag_for_bad_test, procedure()
+  {
+    for (x; 10; [x < 50])
+      { };
+  });
+
+test(exception_tag_iteration_base_array_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    iterate (x; <<(* : filter_a --> 10)>>)
+      { };
+  });
+
+test(exception_tag_iteration_base_array_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    iterate (x; <<(* : ([0...8] & filter_a) --> 10)>>)
+      { };
+  });
+
+test(exception_tag_iteration_bad_base, procedure()
+  {
+    iterate (x; 10)
+      { };
+  });
+
+test(exception_tag_iteration_bad_base, procedure()
+  {
+    iterate (x; <<("apple" --> 15)>>)
+      { };
+  });
+
+test(exception_tag_iteration_bad_base, procedure()
+  {
+    iterate (x; <<(0 --> "first"), (3 --> "second")>>)
+      { };
+  });
+
+test(exception_tag_iterator_bad_is_done, procedure()
+  {
+    class c1()
+      {
+        function iterator()  (16);
+      };
+    iterate (x; c1())
+      { };
+  });
+
+test(exception_tag_iterator_bad_is_done, procedure()
+  {
+    class square(count : integer)
+      {
+        hide position;
+        variable position := 0;
+        function is_done()  (position);
+        function current() returns integer  (position * position);
+        procedure step()  { ++position; };
+      };
+    class c1()
+      {
+        function iterator()  (square(16));
+      };
+    iterate (x; c1())
+      { print(x, ".\n"); };
+  });
+
+test(exception_tag_iterator_bad_current, procedure()
+  {
+    class square(count : integer)
+      {
+        hide position;
+        variable position := 0;
+        function is_done() returns boolean  (position >= count);
+        procedure step()  { ++position; };
+      };
+    class c1()
+      {
+        function iterator()  (square(16));
+      };
+    iterate (x; c1())
+      { print(x, ".\n"); };
+  });
+
+test(exception_tag_iterator_bad_step, procedure()
+  {
+    class square(count : integer)
+      {
+        hide position;
+        variable position := 0;
+        function is_done() returns boolean  (position >= count);
+        function current() returns integer  (position * position);
+      };
+    class c1()
+      {
+        function iterator()  (square(16));
+      };
+    iterate (x; c1())
+      { };
+  });
+
+test(exception_tag_iterate_bad_test, procedure()
+  {
+    iterate (x; [1, 2, 3]; "clams")
+      { };
+  });
+
+test(exception_tag_while_bad_test, procedure()
+  {
+    while ("clams")
+      { };
+  });
+
+test(exception_tag_do_while_bad_test, procedure()
+  {
+    do
+      { } while (57);
+  });
+
+test(exception_tag_single_lock_not_lock, procedure()
+  {
+    single (38) { };
+  });
+
+test(exception_tag_try_handle_bad_handler, procedure()
+  {
+    try {}
+    handle "clock";
+  });
+
+test(exception_tag_export_label, procedure()
+  {
+    class c1()
+      {
+      l1:
+        export l1;
+      };
+    [] := [c1()];
+  });
+
+test(exception_tag_export_label, procedure()
+  {
+  l1:
+    class c1()
+      {
+        use class() {}();
+        export l1;
+      };
+    [] := [c1()];
+  });
+
+test(exception_tag_use_type_match_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_b(x) returns boolean
+      ((x in integer) && ((x % 4) == 1));
+    use class()
+      {
+        function f1() returns filter_b (1);
+      }() : interface [f1 :- filter_a <-- ()];
+  });
+
+test(exception_tag_use_type_mismatch, procedure()
+  {
+    use class(){}() : integer;
+  });
+
+test(exception_tag_use_bad_base, procedure()
+  {
+    use 118;
+  });
+
+test(exception_tag_use_missing_field, procedure()
+  {
+    class c2()
+      {
+      };
+    class c1()
+      {
+        use c2() for practice;
+      };
+    [] := [c1()];
+  });
+
+test(exception_tag_use_not_executed, procedure()
+  {
+    p1();
+    use class() {}();
+  });
+
+test(exception_tag_use_multiply_instantiated, procedure()
+  {
+  loop:
+    use class() {}();
+    goto loop;
+  });
+
+test(exception_tag_use_unbound_remains, procedure()
+  {
+    use class(){}();
+    p1();
+  });
+
+test(exception_tag_cleanup_jump, procedure()
+  {
+  l1:
+    cleanup
+      { goto l1; };
+  });
+
+test(exception_tag_cleanup_jump, procedure()
+  {
+    class c1()
+      {
+      l1:
+        cleanup
+          { goto l1; };
+      };
+    [] := [c1()];
+  });
+
+test(exception_tag_variable_lock_not_lock, procedure()
+  {
+    single (15) variable v1;
+  });
+
+test(exception_tag_routine_lock_not_lock, procedure()
+  {
+    single ("Pluto") procedure p1()  { };
+  });
+
+test(exception_tag_routine_lock_not_lock, procedure()
+  {
+    single ("Pluto") function f1()  ("Charon");
+  });
+
+test(exception_tag_tagalong_lock_not_lock, procedure()
+  {
+    single (5.7) tagalong t1;
+  });
+
+test(exception_tag_lock_single_lock_not_lock, procedure()
+  {
+    single ([]) lock l1;
+  });
+
+test(exception_tag_initialize_variable_mismatch, procedure()
+  {
+    variable v1 : string := 1066;
+  });
+
+test(exception_tag_initialize_variable_mismatch, procedure()
+  {
+    [] := [variable : string := 1066];
+  });
+
+test(exception_tag_initialize_variable_match_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_b(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    variable v1 : type filter_a := type filter_b;
+  });
+
+test(exception_tag_initialize_variable_match_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_b(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    [] := [variable : type filter_a := type filter_b];
+  });
+
+test(exception_tag_tagalong_default_mismatch, procedure()
+  {
+    tagalong t1 : string := 1066;
+  });
+
+test(exception_tag_tagalong_default_mismatch, procedure()
+  {
+    [] := [tagalong : string := 1066];
+  });
+
+test(exception_tag_tagalong_default_match_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_b(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    tagalong t1 : type filter_a := type filter_b;
+  });
+
+test(exception_tag_tagalong_default_match_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_b(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    [] := [tagalong : type filter_a := type filter_b];
+  });
+
+test(exception_tag_variable_declaration_re_executed, procedure()
+  {
+  loop:
+    variable v1;
+    goto loop;
+  });
+
+test(exception_tag_routine_declaration_re_executed, procedure()
+  {
+  loop:
+    function f1(x)  (x + 17);
+    goto loop;
+  });
+
+test(exception_tag_tagalong_declaration_re_executed, procedure()
+  {
+  loop:
+    tagalong t1;
+    goto loop;
+  });
+
+test(exception_tag_lepton_key_declaration_re_executed, procedure()
+  {
+  loop:
+    lepton my_lepton;
+    goto loop;
+  });
+
+test(exception_tag_quark_declaration_re_executed, procedure()
+  {
+  loop:
+    quark q1;
+    goto loop;
+  });
+
+test(exception_tag_lock_declaration_re_executed, procedure()
+  {
+  loop:
+    lock l1;
+    goto loop;
+  });
+
+test(exception_tag_read_variable_uninstantiated, procedure()
+  {
+    [] := [v1];
+    variable v1 := "13";
+  });
+
+test(exception_tag_read_variable_deallocated, procedure()
+  {
+    alias operator* undefined;
+    variable p1 : *integer;
+      {
+        variable v1 : integer := 17;
+        p1 := &v1;
+      };
+    [] := [*p1];
+  });
+
+test(exception_tag_read_variable_deallocated, procedure()
+  {
+    alias operator* undefined;
+    variable p1 : *integer := variable : integer := 17;
+    delete(p1);
+    [] := [*p1];
+  });
+
+test(exception_tag_read_variable_undefined, procedure()
+  {
+    variable v1;
+    [] := [v1];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := [-"tulip"];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := [+"tulip"];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := [12 + "red"];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := ["red" + 12];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := [12 - "red"];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := ["red" - 12];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := [12 * "red"];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := ["red" * 12];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := [12 / "red"];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := ["red" / 12];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := [12 /:: "red"];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := ["red" /:: 12];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := [12 % "red"];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := ["red" % 12];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := [12 << "red"];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := ["red" << 12];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := [12 >> "red"];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := ["red" >> 12];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := [~"smile"];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := [0xfe & "wall"];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := ["wall" & 0xfe];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := [0xfe | "wall"];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := ["wall" | 0xfe];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := [0xfe ^ "wall"];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := ["wall" ^ 0xfe];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := [!"smile"];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := [true && "wall"];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := ["wall" && true];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := [false || "wall"];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := ["wall" || false];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := [12 < "red"];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := ["red" < 12];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := [12 > "red"];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := ["red" > 12];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := [12 <= "red"];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := ["red" <= 12];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := [12 >= "red"];
+  });
+
+test(exception_tag_bad_operands, procedure()
+  {
+    [] := ["red" >= 12];
+  });
+
+test(exception_tag_field_undefined, procedure()
+  {
+    [] := [[a := "train", b := "car"].c];
+  });
+
+test(exception_tag_field_undefined, procedure()
+  {
+    lepton my_lepton;
+    [] := [my_lepton[a := "train", b := "car"].c];
+  });
+
+test(exception_tag_field_undefined, procedure()
+  {
+    variable v1;
+    v1.a := "train";
+    v1.b := "car";
+    [] := [v1.c];
+  });
+
+test(exception_tag_object_no_field, procedure()
+  {
+    class c1()
+      {
+        immutable a := "train";
+        immutable b := "car";
+      };
+    [] := [c1().c];
+  });
+
+test(exception_tag_object_no_field, procedure()
+  {
+    class c1()
+      {
+        immutable a := "train";
+        immutable b := "car";
+      };
+    variable v1 := c1();
+    v1.c[15] := 8;
+  });
+
+test(exception_tag_object_write_non_data_field, procedure()
+  {
+    class c1()
+      {
+        function f1(x)  (x * 3);
+      };
+    variable v1 := c1();
+    v1.f1 := 8;
+  });
+
+test(exception_tag_object_write_non_data_field, procedure()
+  {
+    class c1()
+      {
+        tagalong t1;
+      };
+    variable v1 := c1();
+    v1.t1 := 8;
+  });
+
+test(exception_tag_object_write_non_data_field, procedure()
+  {
+    class c1()
+      {
+        lepton l1;
+      };
+    variable v1 := c1();
+    v1.l1 := 8;
+  });
+
+test(exception_tag_object_write_non_data_field, procedure()
+  {
+    class c1()
+      {
+        quark q1;
+      };
+    variable v1 := c1();
+    v1.q1 := 8;
+  });
+
+test(exception_tag_object_write_non_data_field, procedure()
+  {
+    class c1()
+      {
+        lock l1;
+      };
+    variable v1 := c1();
+    v1.l1 := 8;
+  });
+
+test(exception_tag_field_read_bad_base, procedure()
+  {
+    [] := ["sandwich".c];
+  });
+
+test(exception_tag_basket_read_no_component, procedure()
+  {
+    [, ] += 3;
+  });
+
+test(exception_tag_immutable_modification, procedure()
+  {
+    immutable i1 := 8;
+    i1 := 9;
+  });
+
+test(exception_tag_immutable_modification, procedure()
+  {
+    immutable i1 := [8, 9, 10];
+    i1[1] := 9.5;
+  });
+
+test(exception_tag_immutable_modification, procedure()
+  {
+    class c1()
+      {
+        immutable i1 := 8;
+      };
+    variable v1 := c1();
+    v1.i1 := 9;
+  });
+
+test(exception_tag_write_variable_uninstantiated, procedure()
+  {
+    class c1()
+      {
+        export v1;
+        variable my_this := this;
+          {
+            cleanup
+              { my_this := null; };
+            my_this.v1 := "spleen";
+          };
+        variable v1;
+      };
+    immutable i1 := c1();
+  });
+
+test(exception_tag_write_variable_deallocated, procedure()
+  {
+    class c1()
+      {
+        export v1;
+        ageless variable v1;
+        variable my_this := this;
+          {
+            cleanup
+              { my_this := null; };
+            delete(&v1);
+            my_this.v1 := "spleen";
+          };
+      };
+    immutable i1 := c1();
+  });
+
+test(exception_tag_assign_multiple_too_few, procedure()
+  {
+    variable v1, v2;
+    [v1, v2] := [13];
+  });
+
+test(exception_tag_assign_multiple_undefined, procedure()
+  {
+    variable v1, v2, v3;
+    [v1, v2, v3] := <<(0 --> 12), (2 --> 13)>>;
+  });
+
+test(exception_tag_assign_multiple_unordered, procedure()
+  {
+    variable v1, v2;
+    v1.puppy := "bed";
+    [v2] := v1;
+  });
+
+test(exception_tag_assign_multiple_unordered, procedure()
+  {
+    lepton l1;
+    immutable i1 := l1[puppy := "bed"];
+    variable v1;
+    [v1] := i1;
+  });
+
+test(exception_tag_assign_multiple_unordered, procedure()
+  {
+    class c1(x)
+      {
+        export puppy;
+        variable puppy := x;
+      };
+    immutable i1 := c1("bed");
+    variable v1;
+    [v1] := i1;
+  });
+
+test(exception_tag_assign_multiple_not_compound, procedure()
+  {
+    variable v1;
+    [v1] := 15;
+  });
+
+test(exception_tag_write_by_name_missing_field, procedure()
+  {
+    variable v1;
+    [v1 := cat] := [dog := 15];
+  });
+
+test(exception_tag_write_by_name_missing_field, procedure()
+  {
+    variable v1;
+    v1.dog := 15;
+    variable v2;
+    [v2 := cat] := v1;
+  });
+
+test(exception_tag_write_by_name_missing_field, procedure()
+  {
+    lepton l1;
+    immutable i1 := l1[dog := 15];
+    variable v1;
+    [v1 := cat] := i1;
+  });
+
+test(exception_tag_write_by_name_missing_field, procedure()
+  {
+    variable v1;
+    [v1 := cat] := <<(0 --> 12), (2 --> 13)>>;
+  });
+
+test(exception_tag_assignment_type_mismatch, procedure()
+  {
+    variable v1 : string;
+    v1 := 12;
+  });
+
+test(exception_tag_assignment_type_match_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_b(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    variable v1 : type filter_a;
+    v1 := type filter_b;
+  });
+
+test(exception_tag_concatenation_array_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    [] := [<<(* : filter_a --> 10)>> ~ [0]];
+  });
+
+test(exception_tag_concatenation_array_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    [] := [<<(* : ([0...8] & filter_a) --> 10)>> ~ [0]];
+  });
+
+test(exception_tag_concatenation_non_array_map, procedure()
+  {
+    [] := [<<(0 --> "blue")>> ~ <<("zero" --> "red")>>];
+  });
+
+test(exception_tag_concatenation_sparse_array, procedure()
+  {
+    [] := [<<(0 --> "blue")>> ~ <<(0 --> "red"), (2 --> "green")>>];
+  });
+
+test(exception_tag_routine_type_uninstantiated, procedure()
+  {
+    variable v1 : type filter_a;
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_a(x, y) returns boolean
+      ((x in integer) && ((x % y) == 1));
+  });
+
+test(exception_tag_routine_type_deallocated, procedure()
+  {
+    variable v1;
+      {
+        pure function filter_a(x) returns boolean
+          ((x in integer) && ((x % 5) == 1));
+        pure function filter_a(x, y) returns boolean
+          ((x in integer) && ((x % y) == 1));
+        v1 := filter_a;
+      };
+    variable v2 : type v1;
+  });
+
+test(exception_tag_routine_type_deallocated, procedure()
+  {
+    variable v1 := pure function(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    delete(v1);
+    variable v2 : type v1;
+  });
+
+test(exception_tag_function_type_non_pure, procedure()
+  {
+    function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_a(x : {5, 15}) returns boolean  (true);
+    variable v1 : type filter_a;
+  });
+
+test(exception_tag_function_type_non_pure, procedure()
+  {
+    immutable i1 := function(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    variable v1 : type i1;
+  });
+
+test(exception_tag_function_type_return_type_mismatch, procedure()
+  {
+    pure function filter_a(x) returns boolean | {5}
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_a(x : {5, 15}) returns boolean  (true);
+    variable v1 : type filter_a;
+  });
+
+test(exception_tag_function_type_return_type_mismatch, procedure()
+  {
+    immutable i1 := pure function(x) returns boolean | {5}
+      ((x in integer) && ((x % 5) == 1));
+    variable v1 : type i1;
+  });
+
+test(exception_tag_function_type_return_type_match_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_b(x) returns filter_a
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_b(x : {5, 15}) returns boolean  (true);
+    variable v1 : type filter_b;
+  });
+
+test(exception_tag_function_type_return_type_match_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    immutable i1 := pure function(x) returns filter_a
+      ((x in integer) && ((x % 5) == 1));
+    variable v1 : type i1;
+  });
+
+test(exception_tag_function_type_no_arguments, procedure()
+  {
+    immutable i1 := pure function() returns boolean  (true);
+    variable v1 : type i1;
+  });
+
+test(exception_tag_function_type_argument_type_mismatch, procedure()
+  {
+    immutable i1 := pure function(x : rational) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    variable v1 : type i1;
+  });
+
+test(exception_tag_function_type_argument_type_match_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    immutable i1 := pure function(x : filter_a) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    variable v1 : type i1;
+  });
+
+test(exception_tag_function_type_too_many_arguments, procedure()
+  {
+    immutable i1 := pure function(x, y) returns boolean
+      ((x in integer) && ((x % y) == 1));
+    variable v1 : type i1;
+  });
+
+test(exception_tag_function_type_resolution_indeterminate, procedure()
+  {
+    pure function filter_a(x : rational) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_a(x : {5, 15}) returns boolean  (true);
+    variable v1 : type filter_a;
+  });
+
+test(exception_tag_type_bad_value, procedure()
+  {
+    immutable i1 := 12.3;
+    variable v1 : type i1;
+  });
+
+test(exception_tag_type_bad_value, procedure()
+  {
+    variable v1 : <<12.3>>;
+  });
+
+test(exception_tag_lepton_key_uninstantiated, procedure()
+  {
+    variable v1 : l1;
+    lepton l1;
+  });
+
+test(exception_tag_lepton_key_deallocated, procedure()
+  {
+    ageless lepton l1;
+    delete(l1);
+    variable v1 : l1;
+  });
+
+test(exception_tag_pointer_subtraction_dimension_mismatch, procedure()
+  {
+    variable v1;
+    [] := [&v1[1] - &v1[2, 3]];
+  });
+
+test(exception_tag_pointer_subtraction_lower_dimension_mismatch, procedure()
+  {
+    variable v1;
+    [] := [&v1[1, 2] - &v1[3, 4]];
+  });
+
+/*
+ *  Note that an exception with tag
+ *  exception_tag_pointer_subtraction_lower_dimension_doubt is never currently
+ *  generated because multi-dimensional lookups currently require all their
+ *  arguments to be integers, and it's always easy to determine whether two
+ *  integers are equal.  If, in the future, the Salmon language is extended to
+ *  allow non-integer values for multi-dimensional lookups, then this tag will
+ *  be used.
+ */
+
+test(exception_tag_pointer_subtraction_star_non_star, procedure()
+  {
+    variable v1;
+    [] := [&v1[*] - &v1[3]];
+  });
+
+test(exception_tag_pointer_subtraction_star_difference, procedure()
+  {
+    variable v1;
+    [] := [&v1[* : integer] - &v1[* : rational]];
+  });
+
+test(exception_tag_pointer_subtraction_range_non_range, procedure()
+  {
+    variable v1;
+    [] := [&v1[3...5] - &v1[3]];
+  });
+
+test(exception_tag_pointer_subtraction_incompatible_ranges, procedure()
+  {
+    variable v1;
+    [] := [&v1[3...5] - &v1[3...6]];
+  });
+
+/*
+ *  Note that an exception with tag
+ *  exception_tag_pointer_subtraction_final_match_doubt is never currently
+ *  generated because a test for equality is done first, which gives an
+ *  exception_tag_pointer_subtraction_indeterminate exception in the cases that
+ *  could lead to an exception_tag_pointer_subtraction_final_match_doubt
+ *  exception.
+ */
+
+test(exception_tag_pointer_subtraction_final_non_integer, procedure()
+  {
+    variable v1;
+    [] := [&v1[3] - &v1["sheep"]];
+  });
+
+test(exception_tag_pointer_integer_addition_non_lookup, procedure()
+  {
+    variable v1;
+    [] := [&(v1.c) + 5];
+  });
+
+test(exception_tag_pointer_integer_addition_unsigned_infinity, procedure()
+  {
+    variable v1;
+    [] := [&(v1[5]) + 1/0];
+  });
+
+test(exception_tag_pointer_integer_addition_zero_zero, procedure()
+  {
+    variable v1;
+    [] := [&(v1[5]) + 0/0];
+  });
+
+test(exception_tag_pointer_integer_addition_star, procedure()
+  {
+    variable v1;
+    [] := [&(v1[*]) + 5];
+  });
+
+test(exception_tag_pointer_integer_addition_non_integer, procedure()
+  {
+    variable v1;
+    [] := [&(v1["snake"]) + 5];
+  });
+
+test(exception_tag_pointer_comparison_dimension_mismatch, procedure()
+  {
+    variable v1;
+    [] := [&(v1[3, 5]) < &(v1[7])];
+  });
+
+test(exception_tag_pointer_comparison_lower_dimension_mismatch, procedure()
+  {
+    variable v1;
+    [] := [&(v1[3, 5]) < &(v1[4, 2])];
+  });
+
+/*
+ *  Note that an exception with tag
+ *  exception_tag_pointer_comparison_lower_dimension_doubt is never currently
+ *  generated because lower dimensions are required by be integers and there is
+ *  never a doubt about whether integers match.
+ */
+
+test(exception_tag_pointer_comparison_star_non_star, procedure()
+  {
+    variable v1;
+    [] := [&(v1[*]) < &(v1[4])];
+  });
+
+test(exception_tag_pointer_comparison_star_difference, procedure()
+  {
+    variable v1;
+    [] := [&(v1[* : integer]) < &(v1[* : rational])];
+  });
+
+test(exception_tag_pointer_comparison_range_non_range, procedure()
+  {
+    variable v1;
+    [] := [&(v1[5]) < &(v1[4...6])];
+  });
+
+test(exception_tag_pointer_comparison_incompatible_ranges, procedure()
+  {
+    variable v1;
+    [] := [&(v1[3...5]) < &(v1[3...6])];
+  });
+
+test(exception_tag_pointer_comparison_undecidable_order, procedure()
+  {
+    variable v1;
+    [] := [&(v1[1/0]) < &(v1[3])];
+  });
+
+/*
+ *  Note that an exception with tag
+ *  exception_tag_pointer_comparison_final_match_doubt is never currently
+ *  generated because a test for equality is done first, which gives an
+ *  exception_tag_pointer_comparison_indeterminate exception in the cases that
+ *  could lead to an exception_tag_pointer_comparison_final_match_doubt
+ *  exception.
+ */
+
+test(exception_tag_pointer_comparison_final_non_integer, procedure()
+  {
+    variable v1;
+    [] := [&(v1["Chuck"]) < &(v1["Sarah"])];
+  });
+
+test(exception_tag_lookup_overloaded_range_bad_value, procedure()
+  {
+    immutable i1 := 17;
+    function operator[](value : integer, lower : integer, upper : integer)
+      { return "Silicon Spice"; };
+    [] := [i1[3...4, 22]];
+  });
+
+test(exception_tag_lookup_overloaded_range_bad_value, procedure()
+  {
+    variable v1 := 17;
+    function operator[](value : integer, lower : integer, upper : integer)
+      { return "Broadcom"; };
+    v1[3...4].a := [18, 19];
+  });
+
+test(exception_tag_lookup_overloaded_star_bad_value, procedure()
+  {
+    immutable i1 := 17;
+    function operator[](value : integer, star : {"*"})
+      { return "Agricola"; };
+    [] := [i1[*, 33]];
+  });
+
+test(exception_tag_lookup_overloaded_star_bad_value, procedure()
+  {
+    variable v1 := 17;
+    function operator[](value : integer, star : {"*"})
+      { return "Settlers of Catan"; };
+    v1[*].a := [18, 19];
+  });
+
+test(exception_tag_lookup_non_integer_non_map, procedure()
+  {
+    immutable i1 := [18, 19];
+    [] := [i1["flower"]];
+  });
+
+test(exception_tag_lookup_match_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_b(x) returns boolean
+      ((x in integer) && ((x % 3) == 1));
+    immutable i1 := <<((type filter_a) --> 12)>>;
+    [] := [i1[type filter_b]];
+  });
+
+test(exception_tag_lookup_filter_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_b(x) returns boolean
+      ((x in integer) && ((x % 3) == 1));
+    immutable i1 := <<((type filter_a) --> 12)>>;
+    [] := [i1[* : type filter_b]];
+  });
+
+test(exception_tag_lookup_undefined, procedure()
+  {
+    [] := [[12, 13][-1]];
+  });
+
+test(exception_tag_lookup_undefined, procedure()
+  {
+    [] := [[12, 13][3]];
+  });
+
+test(exception_tag_lookup_undefined, procedure()
+  {
+    [] := [<<(5 --> 12), (7 --> 13)>>[6]];
+  });
+
+test(exception_tag_lookup_bad_base, procedure()
+  {
+    [] := [5[3]];
+  });
+
+test(exception_tag_lookup_bad_base, procedure()
+  {
+    [] := [5[3...7]];
+  });
+
+test(exception_tag_lookup_bad_base, procedure()
+  {
+    [] := [5[*]];
+  });
+
+test(exception_tag_lookup_write_match_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_b(x) returns boolean
+      ((x in integer) && ((x % 3) == 1));
+    variable v1 := <<((type filter_a) --> 12)>>;
+    v1[type filter_b].b := 13;
+  });
+
+test(exception_tag_lookup_write_range_not_array, procedure()
+  {
+    variable v1;
+    v1[15...18] := 18;
+  });
+
+test(exception_tag_lookup_write_range_not_array, procedure()
+  {
+    variable v1;
+    v1[15...18].f1 := 18;
+  });
+
+test(exception_tag_lookup_write_range_not_array, procedure()
+  {
+    function operator[](value, lower : integer, upper : integer)
+      { return [f1 := "Broadcom"]; };
+    function operator[](value, new_value)
+      { return ["Broadcom", new_value]; };
+    variable v1 := 17;
+    v1[15...18].f1 := 18;
+  });
+
+test(exception_tag_lookup_write_star_not_array, procedure()
+  {
+    variable v1;
+    v1[*] := 18;
+  });
+
+test(exception_tag_lookup_write_star_not_array, procedure()
+  {
+    variable v1;
+    v1[*].f1 := 18;
+  });
+
+test(exception_tag_lookup_write_star_not_array, procedure()
+  {
+    function operator[](value, star : {"*"})
+      { return [f1 := "Broadcom"]; };
+    variable v1 := 17;
+    v1[*].f1 := 18;
+  });
+
+test(exception_tag_overloading_resolution_uninstantiated, procedure()
+  {
+    procedure p1(x : {3, 5})
+      { print("a.\n"); };
+    p1(7);
+    procedure p1(x : {7, 9})
+      { print("b.\n"); };
+  });
+
+test(exception_tag_overloading_resolution_uninstantiated, procedure()
+  {
+    [] := [3 + 2];
+    function operator+(x : integer, y : integer)
+      { return x - y; };
+  });
+
+test(exception_tag_overloading_resolution_deallocated, procedure()
+  {
+    variable v1;
+      {
+        procedure p1(x : {3, 5})
+          { print("a.\n"); };
+        procedure p1(x : {7, 9})
+          { print("b.\n"); };
+        v1 := p1;
+      };
+    v1(7);
+  });
+
+test(exception_tag_overloading_resolution_deallocated, procedure()
+  {
+    variable v1;
+      {
+        function operator+(x : integer, y : integer)
+          { return x - y; };
+        v1 := procedure() { [] := [3 + 2]; };
+      };
+    v1();
+  });
+
+test(exception_tag_overloading_resolution_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_b(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    procedure p1(x)
+      { print("a.\n"); };
+    procedure p1(x : type filter_a)
+      { print("b.\n"); };
+    p1(type filter_b);
+  });
+
+test(exception_tag_assertion_failure, procedure()
+  {
+    assert(false);
+  });
+
+test(exception_tag_make_string_undefined, procedure()
+  {
+    immutable i1 := <<(0 --> 'H'), (2 --> 'i')>>;
+    [] := [make_string(i1)];
+  });
+
+test(exception_tag_from_utf8_undefined, procedure()
+  {
+    immutable i1 := <<(0 --> 0xfe), (2 --> 0xa2)>>;
+    [] := [from_utf8(i1)];
+  });
+
+test(exception_tag_from_utf8_more_than_one, procedure()
+  {
+    immutable i1 := <<(0 --> 0x28), (1 --> 0x24)>>;
+    [] := [from_utf8(i1)];
+  });
+
+test(exception_tag_from_utf16_undefined, procedure()
+  {
+    immutable i1 := <<(1 --> 0xfe87)>>;
+    [] := [from_utf16(i1)];
+  });
+
+test(exception_tag_from_utf16_more_than_one, procedure()
+  {
+    immutable i1 := <<(0 --> 0x28), (1 --> 0x24)>>;
+    [] := [from_utf16(i1)];
+  });
+
+test(exception_tag_string_from_utf8_undefined, procedure()
+  {
+    immutable i1 := <<(0 --> 0xfe), (2 --> 0xa2)>>;
+    [] := [string_from_utf8(i1)];
+  });
+
+test(exception_tag_string_from_utf16_undefined, procedure()
+  {
+    immutable i1 := <<(1 --> 0xfe87)>>;
+    [] := [string_from_utf16(i1)];
+  });
+
+test(exception_tag_string_from_utf32_undefined, procedure()
+  {
+    immutable i1 := <<(1 --> 0xfe87)>>;
+    [] := [string_from_utf32(i1)];
+  });
+
+test(exception_tag_delete_variable_component, procedure()
+  {
+    variable v1;
+    delete(&(v1[3]));
+  });
+
+test(exception_tag_delete_variable_component, procedure()
+  {
+    variable v1;
+    delete(&(v1.a));
+  });
+
+test(exception_tag_delete_variable_component, procedure()
+  {
+    variable v1;
+    tagalong t1;
+    delete(&(v1..t1));
+  });
+
+test(exception_tag_delete_variable_overloaded, procedure()
+  {
+    function operator*(base : [1...15])  (base);
+    delete(&(*7));
+  });
+
+test(exception_tag_delete_variable_overloaded, procedure()
+  {
+    variable v1 := 5;
+    function operator*(base : [1...15])  (base);
+    delete(&(*&v1));
+  });
+
+test(exception_tag_delete_variable_automatic, procedure()
+  {
+    variable v1;
+    delete(&v1);
+  });
+
+test(exception_tag_delete_routine_automatic, procedure()
+  {
+    procedure p1() { };
+    delete(p1);
+  });
+
+test(exception_tag_delete_routine_active, procedure()
+  {
+    ageless procedure p1(x := {delete(p1); return 5;}, y)
+      {
+      };
+    p1(y := 7);
+  });
+
+test(exception_tag_delete_routine_active, procedure()
+  {
+    ageless procedure p1()
+      {
+        delete(p1);
+      };
+    p1();
+  });
+
+test(exception_tag_delete_tagalong_key_automatic, procedure()
+  {
+    tagalong t1;
+    delete(t1);
+  });
+
+test(exception_tag_delete_lepton_key_automatic, procedure()
+  {
+    lepton l1;
+    delete(l1);
+  });
+
+test(exception_tag_delete_quark_automatic, procedure()
+  {
+    quark q1;
+    delete(q1);
+  });
+
+test(exception_tag_delete_lock_automatic, procedure()
+  {
+    lock l1;
+    delete(l1);
+  });
+
+test(exception_tag_delete_object_incomplete, procedure()
+  {
+    class c1()
+      {
+        delete(this);
+        immutable i1 := 53;
+      };
+    [] := [c1()];
+  });
+
+test(exception_tag_split_null_match, procedure()
+  {
+    [] := [split(@@, "abc")];
+  });
+
+test(exception_tag_join_undefined, procedure()
+  {
+    [] := [join(<<(0 --> "ab"), (2 --> "cd")>>, ",")];
+  });
+
+test(exception_tag_join_undefined, procedure()
+  {
+    [] := [join(<<(0 --> "ab"), (2 --> "cd")>>,
+                function() returns string (","))];
+  });
+
+test(exception_tag_filter_undefined, procedure()
+  {
+    [] := [filter(@a@, <<(0 --> "ab"), (2 --> "cd")>>)];
+  });
+
+test(exception_tag_filter_undefined, procedure()
+  {
+    [] := [filter(type string, <<(0 --> "ab"), (2 --> "cd")>>)];
+  });
+
+test(exception_tag_filter_doubt, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_b(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    [] := [filter(type type filter_a, [type filter_b])];
+  });
+
+test(exception_tag_substitute_null_match, procedure()
+  {
+    [] := [substitute(@@, "abc", ",")];
+  });
+
+test(exception_tag_substitute_null_match, procedure()
+  {
+    [] := [substitute(@@, "abc",
+                      function(x : string) returns string ("-" ~ x))];
+  });
+
+test(exception_tag_parse_regular_expression_bad_pattern, procedure()
+  {
+    [] := [parse_regular_expression(")")];
+  });
+
+test(exception_tag_parse_regular_expression_bad_pattern, procedure()
+  {
+    [] := [parse_regular_expression("(")];
+  });
+
+test(exception_tag_parse_regular_expression_bad_pattern, procedure()
+  {
+    [] := [parse_regular_expression("*")];
+  });
+
+test(exception_tag_parse_regular_expression_bad_pattern, procedure()
+  {
+    [] := [parse_regular_expression("+")];
+  });
+
+test(exception_tag_parse_regular_expression_bad_pattern, procedure()
+  {
+    [] := [parse_regular_expression("?")];
+  });
+
+test(exception_tag_parse_regular_expression_bad_pattern, procedure()
+  {
+    [] := [parse_regular_expression("{}")];
+  });
+
+test(exception_tag_parse_regular_expression_bad_pattern, procedure()
+  {
+    [] := [parse_regular_expression("[a-z")];
+  });
+
+test(exception_tag_parse_regular_expression_bad_pattern, procedure()
+  {
+    [] := [parse_regular_expression("\\xQ")];
+  });
+
+test(exception_tag_parse_regular_expression_bad_pattern, procedure()
+  {
+    [] := [parse_regular_expression("\\x")];
+  });
+
+test(exception_tag_parse_regular_expression_bad_pattern, procedure()
+  {
+    [] := [parse_regular_expression("\\x0")];
+  });
+
+test(exception_tag_parse_regular_expression_bad_pattern, procedure()
+  {
+    [] := [parse_regular_expression("\\xd800")];
+  });
+
+test(exception_tag_parse_regular_expression_bad_pattern, procedure()
+  {
+    [] := [parse_regular_expression("\\x110000")];
+  });
+
+test(exception_tag_parse_regular_expression_bad_pattern, procedure()
+  {
+    [] := [parse_regular_expression("\\w")];
+  });
+
+test(exception_tag_parse_regular_expression_bad_pattern, procedure()
+  {
+    [] := [parse_regular_expression("[\\s-z]")];
+  });
+
+test(exception_tag_parse_regular_expression_bad_pattern, procedure()
+  {
+    [] := [parse_regular_expression("[a-\\s]")];
+  });
+
+test(exception_tag_parse_regular_expression_bad_pattern, procedure()
+  {
+    [] := [parse_regular_expression("a{5}")];
+  });
+
+test(exception_tag_parse_regular_expression_bad_pattern, procedure()
+  {
+    [] := [parse_regular_expression("a{5,7")];
+  });
+
+test(exception_tag_parse_regular_expression_bad_pattern, procedure()
+  {
+    [] := [parse_regular_expression("a{7,5}")];
+  });
+
+test(exception_tag_character_set_undefined, procedure()
+  {
+    [] := [character_set(<<(0 --> 'a'), (2 --> 'b')>>)];
+  });
+
+test(exception_tag_array_length_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    [] := [length(<<(* : ([0...8] & filter_a) --> 10)>>)];
+  });
+
+test(exception_tag_call_undefined, procedure()
+  {
+    procedure p1(...)  { print("arguments: ", arguments, ".\n"); };
+    call(p1, <<(0 --> 'a'), (2 --> 'b')>>);
+  });
+
+/*
+ *  Note that exceptions with tags exception_tag_closed_stream_used,
+ *  exception_tag_file_tell_failed, exception_tag_file_seek_failed,
+ *  exception_tag_file_open_failed, exception_tag_file_io_failure,
+ *  exception_tag_directory_read_failed, exception_tag_remove_failed, and
+ *  exception_tag_rename_failed occur in situations that depend on the external
+ *  file system.  To keep this test suite self-contained, exceptions with these
+ *  tags are not tested here.
+ */
+
+test(exception_tag_throw_unnamed_extra, procedure()
+  {
+    throw(quark, "Test", other := [17]);
+  });
+
+test(exception_tag_current_exceptions_no_exception, procedure()
+  {
+    [] := [current_exceptions()];
+  });
+
+test(exception_tag_bad_utf8, procedure()
+  {
+    [] := [string_from_utf8([0x80, 0x80])];
+  });
+
+test(exception_tag_bad_utf8, procedure()
+  {
+    [] := [string_from_utf8([0xf8, 0x80])];
+  });
+
+test(exception_tag_bad_utf8, procedure()
+  {
+    [] := [string_from_utf8([0xc0])];
+  });
+
+test(exception_tag_bad_utf8, procedure()
+  {
+    [] := [string_from_utf8([0xc0, 0x08])];
+  });
+
+test(exception_tag_bad_utf8, procedure()
+  {
+    [] := [string_from_utf8([0xed, 0xa0, 0x80])];
+  });
+
+test(exception_tag_bad_utf8, procedure()
+  {
+    [] := [string_from_utf8([0xf4, 0x90, 0x80, 0x80])];
+  });
+
+test(exception_tag_bad_utf8, procedure()
+  {
+    [] := [string_from_utf8([0xc0, 0x85])];
+  });
+
+test(exception_tag_bad_utf8, procedure()
+  {
+    [] := [string_from_utf8([0xe0, 0x80, 0x85])];
+  });
+
+test(exception_tag_bad_utf8, procedure()
+  {
+    [] := [string_from_utf8([0xf0, 0x80, 0x80, 0x85])];
+  });
+
+test(exception_tag_bad_utf16, procedure()
+  {
+    [] := [string_from_utf16([0xdc00, 0x8000])];
+  });
+
+test(exception_tag_bad_utf16, procedure()
+  {
+    [] := [string_from_utf16([0xd800])];
+  });
+
+test(exception_tag_bad_utf16, procedure()
+  {
+    [] := [string_from_utf16([0xd800, 0x0000])];
+  });
+
+/*
+ *  Note that exceptions with tags exception_tag_bad_utf32,
+ *  exception_tag_read_count_too_big,
+ *  exception_tag_read_bit_count_not_8_divisible,
+ *  exception_tag_write_count_too_big,
+ *  exception_tag_write_bit_count_not_8_divisible,
+ *  exception_tag_write_missing_element, and
+ *  exception_tag_write_element_too_big occur in situations that depend on the
+ *  external file system.  To keep this test suite self-contained, exceptions
+ *  with these tags are not tested here.
+ */
+
+test(exception_tag_array_too_large, procedure()
+  {
+    [] := [make_string(<<(0 --> 'A'), (1 << 1000 --> 'B')>>)];
+  });
+
+test(exception_tag_array_too_large, procedure()
+  {
+    [] := [string_from_utf8(<<(0 --> 32), (1 << 1000 --> 32)>>)];
+  });
+
+test(exception_tag_array_too_large, procedure()
+  {
+    [] := [string_from_utf16(<<(0 --> 32), (1 << 1000 --> 32)>>)];
+  });
+
+test(exception_tag_array_too_large, procedure()
+  {
+    [] := [string_from_utf32(<<(0 --> 32), (1 << 1000 --> 32)>>)];
+  });
+
+test(exception_tag_array_too_large, procedure()
+  {
+    [] := [join(<<(0 --> "A"), (1 << 1000 --> "B")>>, " + ")];
+  });
+
+test(exception_tag_array_too_large, procedure()
+  {
+    [] := [join(<<(0 --> "A"), (1 << 1000 --> "B")>>,
+                function() returns string (" + "))];
+  });
+
+test(exception_tag_array_too_large, procedure()
+  {
+    [] := [filter(@AB@, <<(0 --> "A"), (1 << 1000 --> "B")>>)];
+  });
+
+test(exception_tag_array_too_large, procedure()
+  {
+    [] := [filter(type integer, <<(0 --> 17), (1 << 1000 --> 18)>>)];
+  });
+
+test(exception_tag_array_too_large, procedure()
+  {
+    [] := [character_set(<<(0 --> 'A'), (1 << 1000 --> 'B')>>)];
+  });
+
+test(exception_tag_array_too_large, procedure()
+  {
+    call(procedure(x) { }, <<(0 --> 'A'), (1 << 1000 --> 'B')>>);
+  });
+
+test(exception_tag_sprint_not_string, procedure()
+  {
+    class c1(x)
+      {
+        function sprint() (x);
+      };
+    print(c1(5));
+  });
+
+test(exception_tag_printf_unclosed_specifier, procedure()
+  {
+    printf("%a");
+  });
+
+test(exception_tag_printf_too_few_arguments, procedure()
+  {
+    [] := [sprintf("%f%")];
+  });
+
+test(exception_tag_printf_too_few_arguments, procedure()
+  {
+    [] := [sprintf("%20:f%", 12)];
+  });
+
+test(exception_tag_printf_zero_argument, procedure()
+  {
+    [] := [sprintf("%0:f%", 12)];
+  });
+
+test(exception_tag_printf_bad_argument_name, procedure()
+  {
+    [] := [sprintf("%b:f%", a := 12)];
+  });
+
+test(exception_tag_printf_sprint_not_string, procedure()
+  {
+    class c1(x)
+      {
+        function sprint() (x);
+      };
+    printf("%v%", c1(5));
+  });
+
+test(exception_tag_printf_bad_specifier, procedure()
+  {
+    printf("%q%", 87);
+  });
+
+test(exception_tag_printf_not_string, procedure()
+  {
+    printf("%s%", 57);
+  });
+
+test(exception_tag_printf_not_integer, procedure()
+  {
+    printf("%i%", "tomato");
+  });
+
+test(exception_tag_printf_not_rational, procedure()
+  {
+    printf("%f%", "tomato");
+  });
+
+test(exception_tag_force_match_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_b(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    [] := [type filter_a :: type filter_b];
+  });
+
+test(exception_tag_force_match_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    pure function filter_b(x) returns boolean
+      ((x in integer) && ((x % 3) == 1));
+    [] := [<<(18 --> "something"), ((type filter_a) --> 3)>> ::
+           (type filter_b) --> string];
+  });
+
+test(exception_tag_force_match_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    [] := [[12, <<(* --> "default")>>] :: [[0...4], filter_a --> string]];
+  });
+
+test(exception_tag_type_for_invalid_nothing_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    [] := [(&i1) in filter_a];
+    immutable i1 := 5;
+  });
+
+test(exception_tag_type_for_invalid_everything_indeterminate, procedure()
+  {
+    pure function filter_a(x) returns boolean
+      ((x in integer) && ((x % 5) == 1));
+    [] := [(&i1) in (integer | filter_a)];
+    immutable i1 := 5;
+  });
+
+test(exception_tag_lock_grab_uninstantiated, procedure()
+  {
+    single(l1) { };
+    lock l1;
+  });
+
+test(exception_tag_lock_grab_deallocated, procedure()
+  {
+    variable v1;
+      {
+        lock l1;
+        v1 := single(l1) procedure() { };
+      };
+    v1();
+  });
+
+/*
+ *  Note that an exception with tag exception_tag_lock_release_uninstantiated
+ *  is never currently generated because a lock is currently only released
+ *  after having been grabbed, and when it was grabbed it had to have been
+ *  instantiated or an exception would have occurred at that point.
+ */
+
+test(exception_tag_lock_release_deallocated, procedure()
+  {
+    variable v1 := lock;
+    single (v1)
+      {
+        delete(v1);
+      };
+  });
+
+/*
+ *  Note that an exception with tag exception_tag_lock_release_not_held is
+ *  never currently generated because a lock is currently only released
+ *  after having been grabbed.
+ */
+
+test(exception_tag_tagalong_reference_scope_exited, procedure()
+  {
+    variable v1;
+      {
+        tagalong ta1;
+        v1 := procedure() { v1..ta1 := 5; };
+      };
+    v1();
+  });
+
+test(exception_tag_object_tagalong_read_non_object, procedure()
+  {
+    class c1() { };
+    tagalong t1 := 8 on object !{};
+    variable v1 := 5;
+    [] := [v1..t1];
+  });
+
+test(exception_tag_object_tagalong_write_non_object, procedure()
+  {
+    class c1() { };
+    tagalong t1 on object !{};
+    variable v1 := 5;
+    v1..t1 := 7;
+  });
+
+/*
+ *  Note that an exception with tag
+ *  exception_tag_try_catch_tag_match_indeterminate can't ordinarily be
+ *  generated since under ordinary circumstances the implementation will always
+ *  be able to tell if a quark is in a given type.
+ */
+
+/*
+ *  Note that an exception with tag exception_tag_deadlock can only be
+ *  generated when more than one thread is running.  So we won't try to have
+ *  tests for this exception tag in this file because doing so would make this
+ *  test suite fail to be portable to all implementations of the core Salmon
+ *  language.
+ */
+
+  {
+    procedure a()
+      { b(); };
+    immutable b := procedure()
+      { c(); };
+    procedure c()
+      {
+        try
+          {
+            [] := [1 + "one"];
+          }
+        catch
+          {
+            procedure print_location(region : source_region)
+              {
+                printf("%v%:", region.file_name);
+                if (region.start_line == region.end_line)
+                  {
+                    printf("%d%:[%d%-%d%]", region.start_line,
+                           region.start_column, region.end_column);
+                  }
+                else
+                  {
+                    printf("[%d%:%d%]-[%d%:%d%]", region.start_line,
+                           region.start_column, region.end_line,
+                           region.end_column);
+                  };
+              };
+            immutable e1 := current_exceptions()[0];
+            print("Caught exception with tag ", e1.tag, ":\n");
+            print("    Message: \"", e1.message, "\".\n");
+            print("    Call site: ");
+            print_location(e1.source);
+            print("\n");
+            print("    Call stack:\n");
+            iterate (item; e1.call_stack)
+              {
+                print("      [\n");
+                print("        callee: ",
+                      ((item.callee_name == null) ? "Anonymous routine" :
+                       item.callee_name ~ "()"), " from ");
+                print_location(item.callee);
+                print(".\n");
+                print("        call site: ");
+                print_location(item.call_site);
+                print(".\n");
+                print("      ]\n");
+              };
+          };
+      };
+    a();
+  };
+
+print("\n");
+print("Testing for ", exception_tag_call_two_return_values, " exception.\n");
+  {
+    cleanup
+      {
+        try
+          {
+            return 1;
+          }
+        catch
+          {
+            immutable the_exception : exception := current_exceptions()[0];
+            if (exception_tag_call_two_return_values == the_exception.tag)
+              {
+                print("    An exception with the correct tag was caught.\n");
+              }
+            else
+              {
+                print("    Error!  The exception had the wrong tag (",
+                      the_exception.tag, ").\n");
+              };
+            printf("    Message: %v%.\n", the_exception.message);
+            printf("    Source: %v%, [%d%:%d%] - [%d%:%d%].\n",
+                   the_exception.source.file_name,
+                   the_exception.source.start_line,
+                   the_exception.source.start_column,
+                   the_exception.source.end_line,
+                   the_exception.source.end_column);
+          };
+      };
+    return 0;
+  };
+print("    Error!  No exception was generated.\n\n");

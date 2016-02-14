@@ -1,0 +1,58 @@
+/* file "manual_examples.salm" */
+
+/*
+ *  This file runs tests of Salmon garbage collection.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+  {
+    "Test 1."!
+    class c1()
+      {
+        cleanup { "Cleanup."! };
+      };
+    [] := [c1()];
+    "Done."!
+  };
+
+  {
+    "Test 2."!
+    class c1()
+      {
+        variable v1;
+        cleanup { "Cleanup."! };
+      };
+    [] := [c1()];
+    "Done."!
+  };
+
+  {
+    "Test 3."!
+    class c1()
+      {
+        variable v1 := 5;
+        export;
+        function f1() (&v1);
+        cleanup { "Cleanup."! };
+      };
+    *(c1().f1())!
+    "Done."!
+  };
+
+  {
+    "Test 4."!
+    class c1()
+      {
+        hide;
+        variable v1 := 5;
+        export;
+        function f1() (&v1);
+        cleanup { "Cleanup."! };
+      };
+    *(c1().f1())!
+    "Done."!
+  };

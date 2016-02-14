@@ -1,0 +1,16 @@
+#!./salmoneye
+/* file "run_very_large_test_suite.salm" */
+
+/*
+ *  This runs all the tests in my SalmonEye test suite.  It can take between
+ *  one and two hours to run because two of the tests take a huge amount of
+ *  memory on the memory checking version of the interpreter and generally
+ *  cause a lot of swapping
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+`./salmoneye tests/runlocal.salm -T`;

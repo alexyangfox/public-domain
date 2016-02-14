@@ -1,0 +1,182 @@
+/* file "check_and_delete_written_files.salm" */
+
+/*
+ *  This file is the second part of a test of Salmon file I/O.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+immutable interpreter := arguments[1];
+
+procedure read_file_as_text(name : string, format : utf_choice)
+  {
+    print("Contents of \"", name, "\":\n");
+    immutable stream : input_text_stream := open_input_text_file(name, format);
+    while (true)
+      {
+        immutable this_character := stream.read_character();
+        if (this_character == end_of_input)
+            break;;
+        print(this_character);
+      };
+    delete(stream);
+    print("\n");
+
+    print("Contents of \"", name, "\" four characters at a time:\n");
+    immutable stream2 : input_text_stream :=
+            open_input_text_file(name, format);
+    while (true)
+      {
+        immutable this_string := stream2.read_string(4, 1);
+        if (this_string == end_of_input)
+            break;;
+        print(this_string);
+        print("\n");
+      };
+    delete(stream2);
+  };
+
+procedure read_file_as_bits(name : string, which_endian : endianness,
+                            bits : [1...+oo))
+  {
+    print("Contents of \"", name, "\":\n");
+    immutable stream : input_bit_stream :=
+            open_input_bit_file(name, which_endian);
+    while (true)
+      {
+        function lcm(x : [1...+oo), y : [1...+oo))
+          { return ((x * y) / gcd(x, y)); };
+        function gcd(x : [1...+oo), y : [1...+oo))
+          {
+            if (x == 1)
+              { return 1; };
+            if (y == 1)
+              { return 1; };
+            immutable mod := x % y;
+            if (mod == 0)
+              { return y; };
+            return gcd(y, mod);
+          };
+
+        immutable data := stream.read(bits, lcm(bits, 8) / bits);
+        if (data == end_of_input)
+          { break; };
+        iterate (unit; data)
+          {
+            printf(sprintf("0x%%0%d%x%%\n", ((bits + 3) /:: 4)), unit);
+          };
+      };
+    delete(stream);
+    print("\n");
+  };
+
+procedure read_13_byte_chunks(name : string)
+  {
+    print("Contents of \"", name, "\" in 13-byte chunks:\n");
+    immutable stream : input_bit_stream :=
+            open_input_bit_file(name, big_endian);
+    while (true)
+      {
+        immutable data := stream.read(8, 13, 1);
+        if (data == end_of_input)
+            break;;
+        print("0x");
+        iterate (unit; data)
+            printf("%02x%", unit);;
+        print("\n");
+      };
+    delete(stream);
+    print("\n");
+  };
+
+procedure dump_file(name : string)
+  {
+    print("File \"", name, "\":\n");
+    standard_output.flush();
+    `$interpreter tests/hexdump.salm $name`;
+    remove(name);
+  };
+
+read_file_as_text("utf8_test.txt", utf_8);
+read_file_as_text("utf8_test2.txt", utf_8);
+read_file_as_text("utf16_le_test.txt", utf_16_le);
+read_file_as_text("utf16_be_test.txt", utf_16_be);
+read_file_as_text("utf32_le_test.txt", utf_32_le);
+read_file_as_text("utf32_be_test.txt", utf_32_be);
+
+  {
+    immutable stream : input_text_stream :=
+            add_text_look_ahead_buffer(
+                    open_input_text_file("utf8_test.txt", utf_8));
+    print("Character 1: `", stream.read_character(), "'.\n");
+    print("Next: `", stream.next_character(), "'.\n");
+    print("Lookahead 0: `", stream.look_ahead(0), "'.\n");
+    print("Lookahead 1: `", stream.look_ahead(1), "'.\n");
+    print("Lookahead 2: `", stream.look_ahead(2), "'.\n");
+    print("Lookahead 0: `", stream.look_ahead(0), "'.\n");
+    print("Lookahead 1: `", stream.look_ahead(1), "'.\n");
+    print("Lookahead 2: `", stream.look_ahead(2), "'.\n");
+    print("Read: `", stream.read_character(), "'.\n");
+    print("Lookahead 0: `", stream.look_ahead(0), "'.\n");
+    print("Lookahead 1: `", stream.look_ahead(1), "'.\n");
+    print("Lookahead 2: `", stream.look_ahead(2), "'.\n");
+    print("Read: `", stream.read_character(), "'.\n");
+    print("Read: `", stream.read_character(), "'.\n");
+    print("Read: `", stream.read_character(), "'.\n");
+    print("Read: `", stream.read_character(), "'.\n");
+
+    stream.base().seek(0);
+
+    print("Lookahead 0: `", stream.look_ahead(0), "'.\n");
+    print("Lookahead 1: `", stream.look_ahead(1), "'.\n");
+    print("Lookahead 2: `", stream.look_ahead(2), "'.\n");
+    print("String(2): `", stream.read_string(2), "'.\n");
+    print("String(3): `", stream.read_string(3), "'.\n");
+    print("String(1): `", stream.read_string(1), "'.\n");
+
+    delete(stream.base());
+  };
+
+read_file_as_bits("bit_8_le_test.bit", little_endian, 8);
+read_file_as_bits("bit_8_be_test.bit", big_endian, 8);
+read_file_as_bits("bit_16_le_test.bit", little_endian, 16);
+read_file_as_bits("bit_16_be_test.bit", big_endian, 16);
+read_file_as_bits("bit_32_le_test.bit", little_endian, 32);
+read_file_as_bits("bit_32_be_test.bit", big_endian, 32);
+
+read_file_as_bits("bit_1_le_test.bit", little_endian, 1);
+read_file_as_bits("bit_1_be_test.bit", big_endian, 1);
+read_file_as_bits("bit_2_le_test.bit", little_endian, 2);
+read_file_as_bits("bit_2_be_test.bit", big_endian, 2);
+read_file_as_bits("bit_3_le_test.bit", little_endian, 3);
+read_file_as_bits("bit_3_be_test.bit", big_endian, 3);
+read_file_as_bits("bit_9_le_test.bit", little_endian, 9);
+read_file_as_bits("bit_9_be_test.bit", big_endian, 9);
+
+read_13_byte_chunks("bit_32_be_test.bit");
+
+dump_file("utf8_test.txt");
+dump_file("utf8_test2.txt");
+dump_file("utf16_le_test.txt");
+dump_file("utf16_be_test.txt");
+dump_file("utf32_le_test.txt");
+dump_file("utf32_be_test.txt");
+
+dump_file("bit_8_le_test.bit");
+dump_file("bit_8_be_test.bit");
+dump_file("bit_16_le_test.bit");
+dump_file("bit_16_be_test.bit");
+dump_file("bit_32_le_test.bit");
+dump_file("bit_32_be_test.bit");
+
+dump_file("bit_1_le_test.bit");
+dump_file("bit_1_be_test.bit");
+dump_file("bit_2_le_test.bit");
+dump_file("bit_2_be_test.bit");
+dump_file("bit_3_le_test.bit");
+dump_file("bit_3_be_test.bit");
+dump_file("bit_9_le_test.bit");
+dump_file("bit_9_be_test.bit");

@@ -1,0 +1,49 @@
+/* file "floating_point_interface.si" */
+
+/*
+ *  This file contains the interface to a module of interfaces for
+ *  floating-point modules for the Salmon Programming Langauge.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+include "numeric_operable.si",
+
+
+floating_point_access_type :- type interface
+  [
+    base :- (0...+oo) <-- (),
+    mantissa :- rational <-- (),
+    exponent :- (-oo...+oo) <-- ()
+  ] <-- (base_type : type (0...+oo)),
+
+any_base_floating_point_interface :- {type interface
+  [
+    base :- (0...+oo) <-- (),
+    mantissa :- rational <-- (),
+    exponent :- (-oo...+oo) <-- ()
+  ]},
+
+floating_point_interface :-
+        type any_base_floating_point_interface <-- (base : (0...+oo)),
+
+floating_point_full_interface :-
+        (type
+         (<<floating_point_access_type(type (0...+oo))>> &
+          <<numeric_operable(rational, type !{})>> &
+          interface
+            [
+              sprint :-
+                      string <--
+                      (specifier : string := *, plus : boolean := *,
+                       space : boolean := *, hash : boolean := *,
+                       zero_width : [0...+oo) := *,
+                       precision : [0...+oo) | {null} := *),
+              to_rational :- rational <-- (),
+              operator:: :- rational <-- ({rational})
+            ])) <--
+        (base_type : type (0...+oo), additional_operand_type : type !{},
+         operator_return_type : type !{})

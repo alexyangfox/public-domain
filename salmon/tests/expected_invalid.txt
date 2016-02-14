@@ -1,0 +1,146 @@
+In test `invalid-no-exception', there was no exception.
+In test `valid-no-exception', there was no exception.
+In test `invalid-in', there was an invalidity exception.
+In test `valid-in', there was no exception.
+In test `invalid-plus-left', there was an invalidity exception.
+In test `valid-plus-left', there was an other exception.
+In test `invalid-plus-right', there was an invalidity exception.
+In test `valid-plus-right', there was an other exception.
+In test `invalid-lookup', there was an invalidity exception.
+In test `valid-lookup', there was an other exception.
+In test `invalid-modify-field', there was an invalidity exception.
+In test `valid-modify-field', there was no exception.
+In test `invalid-lepton-bad-key', there was an invalidity exception.
+In test `valid-lepton-bad-key', there was an other exception.
+In test `invalid-enumeration-bad-value', there was an invalidity exception.
+In test `valid-enumeration-bad-value', there was no exception.
+In test `invalid-lepton-key-type-invalid', there was an invalidity exception.
+In test `valid-lepton-key-type-invalid', there was no exception.
+In test `invalid-lepton-component-force', there was an invalidity exception.
+In test `valid-lepton-component-force', there was an other exception.
+In test `invalid-tagalong-reference-key', there was an invalidity exception.
+In test `valid-tagalong-reference-key', there was an other exception.
+In test `invalid-map-filter-target', there was an invalidity exception.
+In test `valid-map-filter-target', there was no exception.
+In test `invalid-map-key-target', there was an invalidity exception.
+In test `valid-map-key-target', there was no exception.
+In test `invalid-in-type', there was an invalidity exception.
+In test `valid-in-type', there was no exception.
+In test `invalid-force-type', there was an invalidity exception.
+In test `valid-force-type', there was no exception.
+In test `invalid-force-value', there was an invalidity exception.
+In test `valid-force-value', there was an other exception.
+In test `invalid-not-type', there was an invalidity exception.
+In test `valid-not-type', there was no exception.
+In test `invalid-intersection-left', there was an invalidity exception.
+In test `valid-intersection-left', there was no exception.
+In test `invalid-intersection-right', there was an invalidity exception.
+In test `valid-intersection-right', there was no exception.
+In test `invalid-union-left', there was an invalidity exception.
+In test `valid-union-left', there was no exception.
+In test `invalid-union-right', there was an invalidity exception.
+In test `valid-union-right', there was no exception.
+In test `invalid-xor-left', there was an invalidity exception.
+In test `valid-xor-left', there was no exception.
+In test `invalid-xor-right', there was an invalidity exception.
+In test `valid-xor-right', there was no exception.
+In test `invalid-lepton-type-field', there was an invalidity exception.
+In test `valid-lepton-type-field', there was no exception.
+In test `invalid-lookup-actuals', there was an invalidity exception.
+In test `valid-lookup-actuals', there was no exception.
+In test `invalid-tagalong-read', there was an invalidity exception.
+In test `valid-tagalong-read', there was no exception.
+In test `invalid-formal-type', there was an invalidity exception.
+In test `valid-formal-type', there was no exception.
+In test `invalid-formal-value-invalid', there was an invalidity exception.
+In test `valid-formal-value-invalid', there was an other exception.
+In test `invalid-formal-dynamic-type', there was an invalidity exception.
+In test `valid-formal-dynamic-type', there was no exception.
+In test `invalid-switch-case', there was an invalidity exception.
+In test `valid-switch-case', there was no exception.
+In test `invalid-iterate', there was an invalidity exception.
+In test `valid-iterate', there was no exception.
+In test `invalid-use', there was an invalidity exception.
+In test `valid-use', there was no exception.
+In test `invalid-use-type', there was an invalidity exception.
+In test `valid-use-type', there was no exception.
+In test `invalid-overload-object', there was an invalidity exception.
+In test `valid-overload-object', there was no exception.
+In test `invalid-filter-return-type-chain', there was an invalidity exception.
+In test `valid-filter-return-type-chain', there was no exception.
+In test `invalid-filter-return-type-one', there was an invalidity exception.
+In test `valid-filter-return-type-one', there was no exception.
+In test `invalid-filter-formal-type', there was an invalidity exception.
+In test `valid-filter-formal-type', there was an other exception.
+In test `invalid-tagalong-during-write', there was an invalidity exception.
+In test `valid-tagalong-during-write', there was no exception.
+In test `invalid-tagalong-on-type-write', there was an invalidity exception.
+In test `valid-tagalong-on-type-write', there was no exception.
+In test `invalid-tagalong-type-write', there was an invalidity exception.
+In test `valid-tagalong-type-write', there was no exception.
+In test `invalid-object-during-write', there was an invalidity exception.
+In test `valid-object-during-write', there was no exception.
+In test `invalid-lookup-write', there was an invalidity exception.
+In test `valid-lookup-write', there was no exception.
+In test `invalid-variable-during-write', there was an invalidity exception.
+In test `valid-variable-during-write', there was no exception.
+In test `invalid-force-value', there was an invalidity exception.
+In test `valid-force-value', there was an other exception.
+In test `invalid-variable-initialize-type', there was an invalidity exception.
+In test `valid-variable-initialize-type', there was no exception.
+In test `invalid-tagalong-initialize-type', there was an invalidity exception.
+In test `valid-tagalong-initialize-type', there was no exception.
+In test `invalid-basket-assign-type', there was an invalidity exception.
+In test `valid-basket-assign-type', there was no exception.
+In test `invalid-basket-component-assign', there was an invalidity exception.
+In test `valid-basket-component-assign', there was no exception.
+In test `invalid-object-field-read', there was an invalidity exception.
+In test `valid-object-field-read', there was no exception.
+In test `invalid-iterate', there was an invalidity exception.
+In test `valid-iterate', there was an other exception.
+In test `invalid-array-type', there was an invalidity exception.
+In test `valid-array-type', there was no exception.
+In test `invalid-pointer-type', there was an invalidity exception.
+In test `valid-pointer-type', there was no exception.
+In test `invalid-type-type', there was an invalidity exception.
+In test `valid-type-type', there was no exception.
+In test `invalid-map-type-key', there was an invalidity exception.
+In test `valid-map-type-key', there was no exception.
+In test `invalid-map-type-target', there was an invalidity exception.
+In test `valid-map-type-target', there was no exception.
+In test `invalid-routine-type-result', there was an invalidity exception.
+In test `valid-routine-type-result', there was no exception.
+In test `invalid-routine-type-result2', there was an invalidity exception.
+In test `valid-routine-type-result2', there was no exception.
+In test `invalid-routine-type-argument', there was an invalidity exception.
+In test `valid-routine-type-argument', there was no exception.
+In test `invalid-semi-labeled-type', there was an invalidity exception.
+In test `valid-semi-labeled-type', there was no exception.
+In test `invalid-filter-type', there was an invalidity exception.
+In test `valid-filter-type', there was no exception.
+In test `invalid-filter-type2', there was an invalidity exception.
+In test `valid-filter-type2', there was no exception.
+In test `invalid-return-for-routine-in-type-test', there was an invalidity exception.
+In test `valid-return-for-routine-in-type-test', there was no exception.
+In test `invalid-return-for-routine-in-type-test2', there was an invalidity exception.
+In test `valid-return-for-routine-in-type-test2', there was no exception.
+In test `invalid-object-field-in-type-test', there was an invalidity exception.
+In test `valid-object-field-in-type-test', there was no exception.
+In test `invalid-object-variable-field-type-in-type-test', there was an invalidity exception.
+In test `valid-object-variable-field-type-in-type-test', there was no exception.
+In test `invalid-lazy-type', there was an invalidity exception.
+In test `valid-lazy-type', there was no exception.
+In test `invalid-force-object-field-interface', there was an invalidity exception.
+In test `valid-force-object-field-interface', there was an other exception.
+In test `invalid-force-object-field-semi-labeled', there was an invalidity exception.
+In test `valid-force-object-field-semi-labeled', there was an other exception.
+In test `invalid-filter-override', there was an invalidity exception.
+In test `valid-filter-override', there was no exception.
+In test `invalid-overload-read-return-type', there was an invalidity exception.
+In test `valid-overload-read-return-type', there was no exception.
+In test `invalid-overload-use-read-return-type', there was an invalidity exception.
+In test `valid-overload-use-read-return-type', there was no exception.
+In test `invalid-overload-write-return-type', there was an invalidity exception.
+In test `valid-overload-write-return-type', there was an other exception.
+In test `invalid-overload-use-write-return-type', there was an invalidity exception.
+In test `valid-overload-use-write-return-type', there was an other exception.

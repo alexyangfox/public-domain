@@ -1,0 +1,2160 @@
+Testing for exception_tag_unbound_name_reference exception.
+    Error!  No exception was generated.
+
+Testing for exception_tag_unbound_name_reference exception.
+    Error!  The exception had the wrong tag (exception_tag_use_unbound_remains).
+    Message: "Unbound use of `p1\' (used at \"tests/exceptions.salm\":63:5) that could have been resolved by a `use\' statement was left unbound.".
+    Source: "tests/exceptions.salm", [62:5] - [62:21].
+
+Testing for exception_tag_pure_virtual_no_override exception.
+    An exception with the correct tag was caught.
+    Message: "The statement block containing a pure virtual routine (routine `p1\' (declared at \"tests/exceptions.salm\":72:22)) was entered without an override for that routine.".
+    Source: "tests/exceptions.salm", [10:22] - [10:36].
+
+Testing for exception_tag_call_class_return_value exception.
+    An exception with the correct tag was caught.
+    Message: "A value was returned from a class constructor call.".
+    Source: "tests/exceptions.salm", [5:24] - [5:33].
+
+Testing for exception_tag_call_function_no_return_value exception.
+    An exception with the correct tag was caught.
+    Message: "A function call did not return a value.".
+    Source: "tests/exceptions.salm", [7:11] - [7:15].
+
+Testing for exception_tag_call_function_no_return_value exception.
+    An exception with the correct tag was caught.
+    Message: "A function call did not return a value.".
+    Source: "tests/exceptions.salm", [5:23] - [5:30].
+
+Testing for exception_tag_call_return_type_mismatch exception.
+    An exception with the correct tag was caught.
+    Message: "The value returned from a function call didn\'t match the static return type of the function because the value is not an integer and the type is that of all integers.".
+    Source: "tests/exceptions.salm", [6:36] - [6:44].
+
+Testing for exception_tag_call_return_type_mismatch exception.
+    An exception with the correct tag was caught.
+    Message: "The value returned from a function call didn\'t match the dynamic return type of the function because the value is 6 and the type is a subset of the integers that does not include that value.".
+    Source: "tests/exceptions.salm", [6:41] - [6:48].
+
+Testing for exception_tag_call_return_type_match_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "SalmonEye could not determine whether the value returned from a function call matched the static return type of the function because the type is a type type and the value is a type for which it is unclear whether it is a subset of the base type of the type because the candidate super-type is a filter function type and SalmonEye doesn\'t try to dig deeper in such situations.".
+    Source: "tests/exceptions.salm", [8:35] - [8:48].
+
+Testing for exception_tag_call_return_type_match_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "SalmonEye could not determine whether the value returned from a function call matched the dynamic return type of the function because the type is a type type and the value is a type for which it is unclear whether it is a subset of the base type of the type because the candidate sub-type and the candidate super-type are both filter function types but with different filter functions and SalmonEye doesn\'t try to dig deeper in such situations.".
+    Source: "tests/exceptions.salm", [8:40] - [8:48].
+
+Testing for exception_tag_call_two_return_values exception.
+    An exception with the correct tag was caught.
+    Message: "A second return was executed within a function call.".
+    Source: "tests/exceptions.salm", [8:19] - [8:28].
+
+Testing for exception_tag_call_two_return_values exception.
+    An exception with the correct tag was caught.
+    Message: "A second return was executed for a block expression.".
+    Source: "tests/exceptions.salm", [10:19] - [10:28].
+
+Testing for exception_tag_call_procedure_return_value exception.
+    An exception with the correct tag was caught.
+    Message: "A value was returned from a procedure call.".
+    Source: "tests/exceptions.salm", [7:21] - [7:28].
+
+Testing for exception_tag_call_procedure_return_value exception.
+    An exception with the correct tag was caught.
+    Message: "A value was returned from a procedure call.".
+    Source: "tests/exceptions.salm", [6:5] - [6:21].
+
+Testing for exception_tag_variable_use_before_instantiation exception.
+    An exception with the correct tag was caught.
+    Message: "Variable `v1\' (declared at \"tests/exceptions.salm\":154:14) was used before it was instantiated by executing its declaration.".
+    Source: "tests/exceptions.salm", [5:12] - [5:20].
+
+Testing for exception_tag_variable_use_before_instantiation exception.
+    An exception with the correct tag was caught.
+    Message: "Variable `v1\' (declared at \"tests/exceptions.salm\":160:14) was used before it was instantiated by executing its declaration.".
+    Source: "tests/exceptions.salm", [6:5] - [6:20].
+
+Testing for exception_tag_variable_use_before_instantiation exception.
+    An exception with the correct tag was caught.
+    Message: "Variable `v1\' (declared at \"tests/exceptions.salm\":166:14) was used before it was instantiated by executing its declaration.".
+    Source: "tests/exceptions.salm", [6:5] - [6:23].
+
+Testing for exception_tag_routine_use_before_instantiation exception.
+    An exception with the correct tag was caught.
+    Message: "Routine `p1\' (declared at \"tests/exceptions.salm\":172:15) was used before it was instantiated by executing its declaration.".
+    Source: "tests/exceptions.salm", [6:12] - [6:19].
+
+Testing for exception_tag_tagalong_use_before_instantiation exception.
+    An exception with the correct tag was caught.
+    Message: "Tagalong `t1\' (declared at \"tests/exceptions.salm\":178:14) was used before it was instantiated by executing its declaration.".
+    Source: "tests/exceptions.salm", [6:12] - [6:19].
+
+Testing for exception_tag_lepton_key_use_before_instantiation exception.
+    An exception with the correct tag was caught.
+    Message: "Lepton key `l1\' (declared at \"tests/exceptions.salm\":184:12) was used before it was instantiated by executing its declaration.".
+    Source: "tests/exceptions.salm", [6:12] - [6:19].
+
+Testing for exception_tag_quark_use_before_instantiation exception.
+    An exception with the correct tag was caught.
+    Message: "Quark `q1\' (declared at \"tests/exceptions.salm\":190:11) was used before it was instantiated by executing its declaration.".
+    Source: "tests/exceptions.salm", [6:12] - [6:19].
+
+Testing for exception_tag_lock_use_before_instantiation exception.
+    An exception with the correct tag was caught.
+    Message: "Lock `l1\' (declared at \"tests/exceptions.salm\":196:10) was used before it was instantiated by executing its declaration.".
+    Source: "tests/exceptions.salm", [6:12] - [6:19].
+
+Testing for exception_tag_variable_use_after_deallocation exception.
+    An exception with the correct tag was caught.
+    Message: "Variable `v2\' (declared at \"tests/exceptions.salm\":203:18) was used after it had been deallocated.".
+    Source: "tests/exceptions.salm", [12:12] - [12:19].
+
+Testing for exception_tag_variable_use_after_deallocation exception.
+    An exception with the correct tag was caught.
+    Message: "Anonymous variable (declared at \"tests/exceptions.salm\":212:29) was used after it had been deallocated.".
+    Source: "tests/exceptions.salm", [8:12] - [8:19].
+
+Testing for exception_tag_variable_use_after_deallocation exception.
+    An exception with the correct tag was caught.
+    Message: "Variable `v1\' (declared at \"tests/exceptions.salm\":222:18) was used after it had been deallocated.".
+    Source: "tests/exceptions.salm", [10:5] - [10:15].
+
+Testing for exception_tag_variable_use_after_deallocation exception.
+    An exception with the correct tag was caught.
+    Message: "Anonymous variable (declared at \"tests/exceptions.salm\":230:40) was used after it had been deallocated.".
+    Source: "tests/exceptions.salm", [7:5] - [7:15].
+
+Testing for exception_tag_variable_use_after_deallocation exception.
+    An exception with the correct tag was caught.
+    Message: "Anonymous variable (declared at \"tests/exceptions.salm\":238:22) was used after it had been deallocated.".
+    Source: "tests/exceptions.salm", [8:5] - [8:26].
+
+Testing for exception_tag_routine_use_after_deallocation exception.
+    An exception with the correct tag was caught.
+    Message: "Routine `p1\' (declared at \"tests/exceptions.salm\":247:19) was used after it had been deallocated.".
+    Source: "tests/exceptions.salm", [11:12] - [11:19].
+
+Testing for exception_tag_routine_use_after_deallocation exception.
+    An exception with the correct tag was caught.
+    Message: "Anonymous routine (declared at \"tests/exceptions.salm\":256:30) was used after it had been deallocated.".
+    Source: "tests/exceptions.salm", [8:12] - [8:19].
+
+Testing for exception_tag_tagalong_use_after_deallocation exception.
+    An exception with the correct tag was caught.
+    Message: "Tagalong `t1\' (declared at \"tests/exceptions.salm\":266:18) was used after it had been deallocated.".
+    Source: "tests/exceptions.salm", [11:12] - [11:19].
+
+Testing for exception_tag_tagalong_use_after_deallocation exception.
+    An exception with the correct tag was caught.
+    Message: "Anonymous tagalong (declared at \"tests/exceptions.salm\":275:29) was used after it had been deallocated.".
+    Source: "tests/exceptions.salm", [8:12] - [8:19].
+
+Testing for exception_tag_lepton_key_use_after_deallocation exception.
+    An exception with the correct tag was caught.
+    Message: "Lepton key `l1\' (declared at \"tests/exceptions.salm\":285:16) was used after it had been deallocated.".
+    Source: "tests/exceptions.salm", [11:12] - [11:19].
+
+Testing for exception_tag_lepton_key_use_after_deallocation exception.
+    An exception with the correct tag was caught.
+    Message: "Anonymous lepton key (declared at \"tests/exceptions.salm\":294:27) was used after it had been deallocated.".
+    Source: "tests/exceptions.salm", [8:12] - [8:19].
+
+Testing for exception_tag_quark_use_after_deallocation exception.
+    An exception with the correct tag was caught.
+    Message: "Quark `q1\' (declared at \"tests/exceptions.salm\":304:15) was used after it had been deallocated.".
+    Source: "tests/exceptions.salm", [11:12] - [11:19].
+
+Testing for exception_tag_quark_use_after_deallocation exception.
+    An exception with the correct tag was caught.
+    Message: "Anonymous quark (declared at \"tests/exceptions.salm\":313:26) was used after it had been deallocated.".
+    Source: "tests/exceptions.salm", [8:12] - [8:19].
+
+Testing for exception_tag_lock_use_after_deallocation exception.
+    An exception with the correct tag was caught.
+    Message: "Lock `l1\' (declared at \"tests/exceptions.salm\":323:14) was used after it had been deallocated.".
+    Source: "tests/exceptions.salm", [11:12] - [11:19].
+
+Testing for exception_tag_lock_use_after_deallocation exception.
+    An exception with the correct tag was caught.
+    Message: "Anonymous lock (declared at \"tests/exceptions.salm\":332:25) was used after it had been deallocated.".
+    Source: "tests/exceptions.salm", [8:12] - [8:19].
+
+Testing for exception_tag_jump_target_use_after_deallocation exception.
+    An exception with the correct tag was caught.
+    Message: "Jump target `l1\' (\"tests/exceptions.salm\":342:7) was used after it had been deallocated.".
+    Source: "tests/exceptions.salm", [11:12] - [11:19].
+
+Testing for exception_tag_object_use_after_deallocation exception.
+    An exception with the correct tag was caught.
+    Message: "An object was used after it had been deallocated.".
+    Source: "tests/exceptions.salm", [9:12] - [9:19].
+
+Testing for exception_tag_lepton_bad_key exception.
+    An exception with the correct tag was caught.
+    Message: "The key expression of a lepton expression evaluated to a integer, not a lepton key.".
+    Source: "tests/exceptions.salm", [19:12] - [19:37].
+
+Testing for exception_tag_lepton_key_deleted_in_expression exception.
+    An exception with the correct tag was caught.
+    Message: "While evaluating a lepton expression, the key for the expression was deleted while evaluating one of the component value expressions.".
+    Source: "tests/exceptions.salm", [6:12] - [6:58].
+
+Testing for exception_tag_lepton_key_use_after_deallocation exception.
+    An exception with the correct tag was caught.
+    Message: "Lepton key `my_key\' (declared at \"tests/exceptions.salm\":387:16) was used after it had been deallocated.".
+    Source: "tests/exceptions.salm", [10:12] - [10:50].
+
+Testing for exception_tag_lepton_key_use_after_deallocation exception.
+    An exception with the correct tag was caught.
+    Message: "Anonymous lepton key (declared at \"tests/exceptions.salm\":395:31) was used after it had been deallocated.".
+    Source: "tests/exceptions.salm", [9:12] - [9:43].
+
+Testing for exception_tag_lepton_field_type_cant_force exception.
+    An exception with the correct tag was caught.
+    Message: "While evaluating a lepton expression, the field value for field `b\' couldn\'t be forced into the lepton\'s type for that field.".
+    Source: "tests/exceptions.salm", [6:12] - [6:37].
+
+Testing for exception_tag_lepton_field_type_mismatch exception.
+    An exception with the correct tag was caught.
+    Message: "While evaluating a lepton expression, the field value for field `b\' wasn\'t in the lepton\'s type for that field because the value is not a string and the type is that of all strings.".
+    Source: "tests/exceptions.salm", [6:12] - [6:36].
+
+Testing for exception_tag_lepton_field_type_match_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "While evaluating a lepton expression, SalmonEye was unable to determine whether the field value for field `b\' was in the lepton\'s type for that field because the type is a type type and the value is a type for which it is unclear whether it is a subset of the base type of the type because the candidate sub-type and the candidate super-type are both filter function types but with different filter functions and SalmonEye doesn\'t try to dig deeper in such situations.".
+    Source: "tests/exceptions.salm", [10:12] - [10:47].
+
+Testing for exception_tag_lepton_field_disallowed exception.
+    An exception with the correct tag was caught.
+    Message: "While evaluating a lepton expression, a field named `c\' was encountered, but the lepton key doesn\'t allow fields with that name.".
+    Source: "tests/exceptions.salm", [6:12] - [6:45].
+
+Testing for exception_tag_pointer_field_reference_bad_base exception.
+    An exception with the correct tag was caught.
+    Message: "The base operand of a pointer field access evaluated to something other than a slot location.".
+    Source: "tests/exceptions.salm", [5:12] - [5:17].
+
+Testing for exception_tag_pointer_field_reference_bad_base exception.
+    An exception with the correct tag was caught.
+    Message: "The base operand of a pointer field access evaluated to something other than a slot location.".
+    Source: "tests/exceptions.salm", [5:14] - [5:19].
+
+Testing for exception_tag_tagalong_reference_bad_key exception.
+    An exception with the correct tag was caught.
+    Message: "The key operand for a tagalong field access evaluated to something other than a tagalong key reference.".
+    Source: "tests/exceptions.salm", [5:12] - [5:17].
+
+Testing for exception_tag_tagalong_reference_bad_key exception.
+    An exception with the correct tag was caught.
+    Message: "The key operand for a tagalong field access evaluated to something other than a tagalong key reference.".
+    Source: "tests/exceptions.salm", [6:14] - [6:19].
+
+Testing for exception_tag_tagalong_reference_undefined exception.
+    An exception with the correct tag was caught.
+    Message: "A tagalong field reference using a key without a default value accessed an undefined value.".
+    Source: "tests/exceptions.salm", [7:12] - [7:18].
+
+Testing for exception_tag_statement_block_expression_no_value exception.
+    An exception with the correct tag was caught.
+    Message: "Executing the statement block of a statement block expression didn\'t return a value.".
+    Source: "tests/exceptions.salm", [5:12] - [5:14].
+
+Testing for exception_tag_statement_block_expression_return_no_value exception.
+    An exception with the correct tag was caught.
+    Message: "A return without a value was executed with reference to a statement block expression.".
+    Source: "tests/exceptions.salm", [5:14] - [5:21].
+
+Testing for exception_tag_semi_labeled_expression_list_duplicate_label exception.
+    An exception with the correct tag was caught.
+    Message: "A semi-labeled expression list expression specified more than one value for the key `c\'.".
+    Source: "tests/exceptions.salm", [5:12] - [5:48].
+
+Testing for exception_tag_conditional_bad_test exception.
+    An exception with the correct tag was caught.
+    Message: "The test argument to a conditional expression evaluated to something other than a boolean value.".
+    Source: "tests/exceptions.salm", [5:12] - [5:27].
+
+Testing for exception_tag_dereference_bad_base exception.
+    An exception with the correct tag was caught.
+    Message: "The operand of a pointer dereference expression evaluated to something other than a slot location.".
+    Source: "tests/exceptions.salm", [5:12] - [5:16].
+
+Testing for exception_tag_in_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating an `in\' expression, SalmonEye was unable to determine whether the value was in the type because the type is a type type and the value is a type for which it is unclear whether it is a subset of the base type of the type because the candidate sub-type and the candidate super-type are both filter function types but with different filter functions and SalmonEye doesn\'t try to dig deeper in such situations.".
+    Source: "tests/exceptions.salm", [9:12] - [9:42].
+
+Testing for exception_tag_force_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to force a value to an enumeration type, and SalmonEye doesn\'t try to determine whether an enumeration type is equivalent to a type for which a forcing operation is legal.".
+    Source: "tests/exceptions.salm", [5:12] - [5:35].
+
+Testing for exception_tag_force_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to force a value to a type that is the negation of another type, and SalmonEye doesn\'t try to determine whether such a type is equivalent to a type for which a forcing operation is legal.".
+    Source: "tests/exceptions.salm", [5:12] - [5:39].
+
+Testing for exception_tag_force_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to force a value to a type that is the intersection of other types, and SalmonEye doesn\'t try to determine whether such a type is equivalent to a type for which a forcing operation is legal.".
+    Source: "tests/exceptions.salm", [7:12] - [7:32].
+
+Testing for exception_tag_force_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to force a value to a type that is the union of other types, and SalmonEye doesn\'t try to determine whether such a type is equivalent to a type for which a forcing operation is legal.".
+    Source: "tests/exceptions.salm", [7:12] - [7:32].
+
+Testing for exception_tag_force_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to force a value to a type that is the exclusive or of other types, and SalmonEye doesn\'t try to determine whether such a type is equivalent to a type for which a forcing operation is legal.".
+    Source: "tests/exceptions.salm", [7:12] - [7:32].
+
+Testing for exception_tag_force_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to force a value to a type that is defined by a filter function, and SalmonEye doesn\'t try to determine whether such a type is equivalent to a type for which a forcing operation is legal.".
+    Source: "tests/exceptions.salm", [7:12] - [7:25].
+
+Testing for exception_tag_force_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to force a value to a type that is defined by a filter function, and SalmonEye doesn\'t try to determine whether such a type is equivalent to a type for which a forcing operation is legal.".
+    Source: "tests/exceptions.salm", [7:12] - [7:25].
+
+Testing for exception_tag_force_cant_force exception.
+    An exception with the correct tag was caught.
+    Message: "A force expression was evaluated with a value that couldn\'t be forced into the specified type.".
+    Source: "tests/exceptions.salm", [5:12] - [5:30].
+
+Testing for exception_tag_comprehend_bad_test exception.
+    An exception with the correct tag was caught.
+    Message: "The test argument to a comprehend expression evaluated to something other than a boolean value.".
+    Source: "tests/exceptions.salm", [5:38] - [5:45].
+
+Testing for exception_tag_forall_executed exception.
+    An exception with the correct tag was caught.
+    Message: "A forall expression was evaluated.".
+    Source: "tests/exceptions.salm", [5:12] - [5:41].
+
+Testing for exception_tag_exists_executed exception.
+    An exception with the correct tag was caught.
+    Message: "An exists expression was evaluated.".
+    Source: "tests/exceptions.salm", [5:12] - [5:46].
+
+Testing for exception_tag_pointer_subtraction_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating the subtraction of one pointer from another, SalmonEye was unable to determine whether the two values were equal.".
+    Source: "tests/exceptions.salm", [10:12] - [10:55].
+
+Testing for exception_tag_pointer_subtraction_non_lookup exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating the subtraction of one pointer from another, the pointers were unequal but one of them was not a lookup.".
+    Source: "tests/exceptions.salm", [6:12] - [6:27].
+
+Testing for exception_tag_pointer_subtraction_overload_mismatch exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating the subtraction of one pointer from another, different overloading applied to the two pointers.".
+    Source: "tests/exceptions.salm", [9:16] - [9:30].
+
+Testing for exception_tag_pointer_subtraction_base_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating the subtraction of one pointer from another, SalmonEye was unable to determine whether the bases of the two pointers were equal.".
+    Source: "tests/exceptions.salm", [11:12] - [11:63].
+
+Testing for exception_tag_pointer_subtraction_base_mismatch exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating the subtraction of one pointer from another, the bases of the two pointers were not equal.".
+    Source: "tests/exceptions.salm", [7:12] - [7:33].
+
+Testing for exception_tag_divide_force_rational exception.
+    An exception with the correct tag was caught.
+    Message: "The divide-force operation with a non-integer rational operand is illegal.".
+    Source: "tests/exceptions.salm", [5:12] - [5:22].
+
+Testing for exception_tag_divide_force_rational exception.
+    An exception with the correct tag was caught.
+    Message: "The divide-force operation with a non-integer rational operand is illegal.".
+    Source: "tests/exceptions.salm", [5:12] - [5:22].
+
+Testing for exception_tag_remainder_rational exception.
+    An exception with the correct tag was caught.
+    Message: "The remainder operation with a non-integer rational operand is illegal.".
+    Source: "tests/exceptions.salm", [5:12] - [5:20].
+
+Testing for exception_tag_remainder_rational exception.
+    An exception with the correct tag was caught.
+    Message: "The remainder operation with a non-integer rational operand is illegal.".
+    Source: "tests/exceptions.salm", [5:12] - [5:20].
+
+Testing for exception_tag_left_shift_rational exception.
+    An exception with the correct tag was caught.
+    Message: "The left shift operation with a non-integer rational operand is illegal.".
+    Source: "tests/exceptions.salm", [5:12] - [5:21].
+
+Testing for exception_tag_left_shift_rational exception.
+    An exception with the correct tag was caught.
+    Message: "The left shift operation with a non-integer rational operand is illegal.".
+    Source: "tests/exceptions.salm", [5:12] - [5:21].
+
+Testing for exception_tag_right_shift_rational exception.
+    An exception with the correct tag was caught.
+    Message: "The right shift operation with a non-integer rational operand is illegal.".
+    Source: "tests/exceptions.salm", [5:12] - [5:21].
+
+Testing for exception_tag_right_shift_rational exception.
+    An exception with the correct tag was caught.
+    Message: "The right shift operation with a non-integer rational operand is illegal.".
+    Source: "tests/exceptions.salm", [5:12] - [5:21].
+
+Testing for exception_tag_pointer_comparison_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating the order comparison of two pointers, SalmonEye was unable to determine whether the two values were equal.".
+    Source: "tests/exceptions.salm", [10:12] - [10:55].
+
+Testing for exception_tag_pointer_comparison_non_lookup exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating the order comparison of two pointers, the pointers were unequal but one of them was not a lookup.".
+    Source: "tests/exceptions.salm", [6:12] - [6:27].
+
+Testing for exception_tag_pointer_comparison_overload_mismatch exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating the order comparison of two pointers, different overloading applied to the two pointers.".
+    Source: "tests/exceptions.salm", [9:16] - [9:30].
+
+Testing for exception_tag_pointer_comparison_base_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating the order comparison of two pointers, SalmonEye was unable to determine whether the bases of the two pointers were equal.".
+    Source: "tests/exceptions.salm", [11:12] - [11:64].
+
+Testing for exception_tag_pointer_comparison_base_mismatch exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating the order comparison of two pointers, the bases of the two pointers were not equal.".
+    Source: "tests/exceptions.salm", [7:12] - [7:34].
+
+Testing for exception_tag_binary_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal operands to greater than or equal to expression: slot location and integer.".
+    Source: "tests/exceptions.salm", [6:12] - [6:27].
+
+Testing for exception_tag_binary_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal operands to concatenate expression: string and integer.".
+    Source: "tests/exceptions.salm", [5:12] - [5:23].
+
+Testing for exception_tag_binary_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal operands to concatenate expression: string and semi-labeled value list.".
+    Source: "tests/exceptions.salm", [5:12] - [5:25].
+
+Testing for exception_tag_equality_test_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating a binary equality test expression, SalmonEye was unable to determine whether the two values were equal.".
+    Source: "tests/exceptions.salm", [9:12] - [9:42].
+
+Testing for exception_tag_equality_test_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating a binary equality test expression, SalmonEye was unable to determine whether the two values were equal.".
+    Source: "tests/exceptions.salm", [9:12] - [9:42].
+
+Testing for exception_tag_array_type_bad_lower exception.
+    An exception with the correct tag was caught.
+    Message: "The lower bound of an array type expression evaluated to a string, not an integer.".
+    Source: "tests/exceptions.salm", [5:19] - [5:39].
+
+Testing for exception_tag_array_type_bad_lower exception.
+    An exception with the correct tag was caught.
+    Message: "The lower bound of an array type expression evaluated to zero-zero.".
+    Source: "tests/exceptions.salm", [5:19] - [5:36].
+
+Testing for exception_tag_array_type_bad_lower exception.
+    An exception with the correct tag was caught.
+    Message: "The lower bound of an array type expression evaluated to unsigned infinity.".
+    Source: "tests/exceptions.salm", [5:19] - [5:36].
+
+Testing for exception_tag_array_type_bad_upper exception.
+    An exception with the correct tag was caught.
+    Message: "The upper bound of an array type expression evaluated to a string, not an integer.".
+    Source: "tests/exceptions.salm", [5:19] - [5:39].
+
+Testing for exception_tag_array_type_bad_upper exception.
+    An exception with the correct tag was caught.
+    Message: "The upper bound of an array type expression evaluated to zero-zero.".
+    Source: "tests/exceptions.salm", [5:19] - [5:36].
+
+Testing for exception_tag_array_type_bad_upper exception.
+    An exception with the correct tag was caught.
+    Message: "The upper bound of an array type expression evaluated to unsigned infinity.".
+    Source: "tests/exceptions.salm", [5:19] - [5:36].
+
+Testing for exception_tag_range_type_bad_lower exception.
+    An exception with the correct tag was caught.
+    Message: "The lower bound of an integer range type expression evaluated to a string, not an integer.".
+    Source: "tests/exceptions.salm", [5:19] - [5:32].
+
+Testing for exception_tag_range_type_bad_lower exception.
+    An exception with the correct tag was caught.
+    Message: "The lower bound of an integer range type expression evaluated to zero-zero.".
+    Source: "tests/exceptions.salm", [5:19] - [5:29].
+
+Testing for exception_tag_range_type_bad_lower exception.
+    An exception with the correct tag was caught.
+    Message: "The lower bound of an integer range type expression evaluated to unsigned infinity.".
+    Source: "tests/exceptions.salm", [5:19] - [5:29].
+
+Testing for exception_tag_range_type_bad_upper exception.
+    An exception with the correct tag was caught.
+    Message: "The upper bound of an integer range type expression evaluated to a string, not an integer.".
+    Source: "tests/exceptions.salm", [5:19] - [5:32].
+
+Testing for exception_tag_range_type_bad_upper exception.
+    An exception with the correct tag was caught.
+    Message: "The upper bound of an integer range type expression evaluated to zero-zero.".
+    Source: "tests/exceptions.salm", [5:19] - [5:29].
+
+Testing for exception_tag_range_type_bad_upper exception.
+    An exception with the correct tag was caught.
+    Message: "The upper bound of an integer range type expression evaluated to unsigned infinity.".
+    Source: "tests/exceptions.salm", [5:19] - [5:29].
+
+Testing for exception_tag_lepton_type_bad_key exception.
+    An exception with the correct tag was caught.
+    Message: "The key expression of a lepton type expression evaluated to a integer, not a lepton key.".
+    Source: "tests/exceptions.salm", [5:19] - [5:53].
+
+Testing for exception_tag_routine_addressed exception.
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to take the address of a routine.".
+    Source: "tests/exceptions.salm", [9:13] - [9:15].
+
+Testing for exception_tag_routine_addressed exception.
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to take the address of a routine.".
+    Source: "tests/exceptions.salm", [10:13] - [10:15].
+
+Testing for exception_tag_label_addressed exception.
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to take the address of a label.".
+    Source: "tests/exceptions.salm", [8:17] - [8:19].
+
+Testing for exception_tag_tagalong_key_addressed exception.
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to take the address of a tagalong key.".
+    Source: "tests/exceptions.salm", [10:13] - [10:15].
+
+Testing for exception_tag_lepton_key_addressed exception.
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to take the address of a lepton key.".
+    Source: "tests/exceptions.salm", [9:13] - [9:15].
+
+Testing for exception_tag_quark_addressed exception.
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to take the address of a quark.".
+    Source: "tests/exceptions.salm", [9:13] - [9:15].
+
+Testing for exception_tag_lock_addressed exception.
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to take the address of a lock.".
+    Source: "tests/exceptions.salm", [9:13] - [9:15].
+
+Testing for exception_tag_tagalong_unset exception.
+    An exception with the correct tag was caught.
+    Message: "Attempted to read a tagalong from a value for which that tagalong was not set.".
+    Source: "tests/exceptions.salm", [7:12] - [7:22].
+
+Testing for exception_tag_tagalong_base_undefined exception.
+    An exception with the correct tag was caught.
+    Message: "Attempted to set a tagalong field on an uninitialized value.".
+    Source: "tests/exceptions.salm", [7:5] - [7:18].
+
+Testing for exception_tag_tagalong_type_mismatch exception.
+    An exception with the correct tag was caught.
+    Message: "Attempted to set a tagalong field on a value that wasn\'t allowed for that tagalong because the value is not an integer and the type is that of all integers.".
+    Source: "tests/exceptions.salm", [7:5] - [7:18].
+
+Testing for exception_tag_tagalong_type_match_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "When setting a tagalong field, SalmonEye was unable to determine whether the base value was in the type allowed as a base for that tagalong because the type is a type type and the value is a type for which it is unclear whether it is a subset of the base type of the type because the candidate sub-type and the candidate super-type are both filter function types but with different filter functions and SalmonEye doesn\'t try to dig deeper in such situations.".
+    Source: "tests/exceptions.salm", [11:5] - [11:18].
+
+Testing for exception_tag_non_pointer_no_overloaded_match exception.
+    An exception with the correct tag was caught.
+    Message: "No overloaded operator matched a read through an overloaded dereference on a non-pointer value.".
+    Source: "tests/exceptions.salm", [6:12] - [6:17].
+
+Testing for exception_tag_non_pointer_no_overloaded_match exception.
+    An exception with the correct tag was caught.
+    Message: "No overloaded operator matched a read through an overloaded pointer field access on a non-pointer value.".
+    Source: "tests/exceptions.salm", [6:12] - [6:21].
+
+Testing for exception_tag_non_pointer_no_overloaded_match exception.
+    An exception with the correct tag was caught.
+    Message: "No overloaded operator matched a write through an overloaded dereference on a non-pointer value.".
+    Source: "tests/exceptions.salm", [9:5] - [9:19].
+
+Testing for exception_tag_non_pointer_no_overloaded_match exception.
+    An exception with the correct tag was caught.
+    Message: "No overloaded operator matched a write through an overloaded pointer field access on a non-pointer value.".
+    Source: "tests/exceptions.salm", [10:5] - [10:21].
+
+Testing for exception_tag_multi_lookup_bad_key exception.
+    An exception with the correct tag was caught.
+    Message: "A multi-dimensional lookup was evaluated with a non-integer key.".
+    Source: "tests/exceptions.salm", [6:12] - [6:27].
+
+Testing for exception_tag_lookup_bad_lower exception.
+    An exception with the correct tag was caught.
+    Message: "A lookup was evaluated with a non-integer lower bound.".
+    Source: "tests/exceptions.salm", [6:12] - [6:28].
+
+Testing for exception_tag_lookup_bad_lower exception.
+    An exception with the correct tag was caught.
+    Message: "A lookup was evaluated with unsigned infinity as a lower bound.".
+    Source: "tests/exceptions.salm", [6:12] - [6:24].
+
+Testing for exception_tag_lookup_bad_lower exception.
+    An exception with the correct tag was caught.
+    Message: "A lookup was evaluated with zero-zero as a lower bound.".
+    Source: "tests/exceptions.salm", [6:12] - [6:24].
+
+Testing for exception_tag_lookup_bad_upper exception.
+    An exception with the correct tag was caught.
+    Message: "A lookup was evaluated with a non-integer upper bound.".
+    Source: "tests/exceptions.salm", [6:12] - [6:27].
+
+Testing for exception_tag_lookup_bad_upper exception.
+    An exception with the correct tag was caught.
+    Message: "A lookup was evaluated with unsigned infinity as an upper bound.".
+    Source: "tests/exceptions.salm", [6:12] - [6:23].
+
+Testing for exception_tag_lookup_bad_upper exception.
+    An exception with the correct tag was caught.
+    Message: "A lookup was evaluated with zero-zero as an upper bound.".
+    Source: "tests/exceptions.salm", [6:12] - [6:23].
+
+Testing for exception_tag_overloading_resolution_no_match exception.
+    An exception with the correct tag was caught.
+    Message: "No routine matched an overloaded call to p1.".
+    Source: "tests/exceptions.salm", [7:5] - [7:12].
+
+Testing for exception_tag_overloading_resolution_no_match exception.
+    An exception with the correct tag was caught.
+    Message: "The routine for a call didn\'t match the actual arguments.".
+    Source: "tests/exceptions.salm", [5:5] - [5:36].
+
+Testing for exception_tag_call_no_routine exception.
+    An exception with the correct tag was caught.
+    Message: "The routine expression for a call did not evaluate to a routine.".
+    Source: "tests/exceptions.salm", [13:5] - [13:11].
+
+Testing for exception_tag_call_class_procedure exception.
+    An exception with the correct tag was caught.
+    Message: "A class was called as a procedure.".
+    Source: "tests/exceptions.salm", [6:5] - [6:9].
+
+Testing for exception_tag_call_argument_type_mismatch exception.
+    An exception with the correct tag was caught.
+    Message: "Immutable `x\' (declared at \"tests/exceptions.salm\":984:18) was assigned a value that didn\'t match its type because the value is not an integer and the type is that of all integers.".
+    Source: "tests/exceptions.salm", [6:5] - [6:9].
+
+Testing for exception_tag_call_argument_type_mismatch exception.
+    An exception with the correct tag was caught.
+    Message: "Anonymous immutable (declared at \"tests/exceptions.salm\":990:18) was assigned a value that didn\'t match its type because the value is not an integer and the type is that of all integers.".
+    Source: "tests/exceptions.salm", [6:5] - [6:9].
+
+Testing for exception_tag_call_argument_type_match_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "While preparing a call, SalmonEye was unable to determine whether an actual parameter value was in the formal parameter\'s type because the type is a type type and the value is a type for which it is unclear whether it is a subset of the base type of the type because the candidate sub-type and the candidate super-type are both filter function types but with different filter functions and SalmonEye doesn\'t try to dig deeper in such situations.".
+    Source: "tests/exceptions.salm", [10:5] - [10:9].
+
+Testing for exception_tag_call_argument_type_match_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "While preparing a call, SalmonEye was unable to determine whether an actual parameter value was in the formal parameter\'s type because the type is a type type and the value is a type for which it is unclear whether it is a subset of the base type of the type because the candidate sub-type and the candidate super-type are both filter function types but with different filter functions and SalmonEye doesn\'t try to dig deeper in such situations.".
+    Source: "tests/exceptions.salm", [10:5] - [10:9].
+
+Testing for exception_tag_call_dynamic_parameter_type_mismatch exception.
+    An exception with the correct tag was caught.
+    Message: "The value of parameter number 2 in a routine call didn\'t match the dynamic type of that parameter because the type is a test function and calling the function on the value returned false.".
+    Source: "tests/exceptions.salm", [7:5] - [7:15].
+
+Testing for exception_tag_call_dynamic_parameter_type_match_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "SalmonEye could not determine whether the value of parameter number 2 in a routine call matched the dynamic type of that parameter because the type is a type type and the value is a type for which it is unclear whether it is a subset of the base type of the type because the candidate sub-type and the candidate super-type are both filter function types but with different filter functions and SalmonEye doesn\'t try to dig deeper in such situations.".
+    Source: "tests/exceptions.salm", [10:5] - [10:26].
+
+Testing for exception_tag_call_side_effect_external_from_pure exception.
+    An exception with the correct tag was caught.
+    Message: "An external routine that might have side effects was called from a pure context.".
+    Source: "tests/exceptions.salm", [5:30] - [5:51].
+
+Testing for exception_tag_if_bad_test exception.
+    An exception with the correct tag was caught.
+    Message: "The test argument to an if statement evaluated to something other than a boolean value.".
+    Source: "tests/exceptions.salm", [5:9] - [5:11].
+
+Testing for exception_tag_if_bad_test exception.
+    An exception with the correct tag was caught.
+    Message: "An `else if\' test argument to an if statement evaluated to something other than a boolean value.".
+    Source: "tests/exceptions.salm", [8:14] - [8:16].
+
+Testing for exception_tag_switch_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "While testing a case of a switch statement, SalmonEye was unable to determine whether the test value was in the case type because the type is a type type and the value is a type for which it is unclear whether it is a subset of the base type of the type because the candidate sub-type and the candidate super-type are both filter function types but with different filter functions and SalmonEye doesn\'t try to dig deeper in such situations.".
+    Source: "tests/exceptions.salm", [11:11] - [11:24].
+
+Testing for exception_tag_goto_bad_target exception.
+    An exception with the correct tag was caught.
+    Message: "The argument to a goto statement evaluated to something other than a jump target.".
+    Source: "tests/exceptions.salm", [6:5] - [6:15].
+
+Testing for exception_tag_goto_target_deallocated exception.
+    An exception with the correct tag was caught.
+    Message: "The target of a goto statement had been de-allocated because its scope had exited.".
+    Source: "tests/exceptions.salm", [10:5] - [10:13].
+
+Testing for exception_tag_goto_target_deallocated exception.
+    An exception with the correct tag was caught.
+    Message: "The target of a goto statement had been de-allocated because its scope had exited.".
+    Source: "tests/exceptions.salm", [12:5] - [12:13].
+
+Testing for exception_tag_return_target_deallocated exception.
+    An exception with the correct tag was caught.
+    Message: "The target of a return statement had been de-allocated because its scope had exited.".
+    Source: "tests/exceptions.salm", [7:29] - [7:44].
+
+Testing for exception_tag_for_bad_initial exception.
+    An exception with the correct tag was caught.
+    Message: "The initial value argument to a for statement evaluated to something other than an integer value.".
+    Source: "tests/exceptions.salm", [7:13] - [7:17].
+
+Testing for exception_tag_for_bad_step exception.
+    An exception with the correct tag was caught.
+    Message: "The step value argument to a for statement evaluated to something other than an integer value.".
+    Source: "tests/exceptions.salm", [6:25] - [6:28].
+
+Testing for exception_tag_for_bad_test exception.
+    An exception with the correct tag was caught.
+    Message: "The test argument to a for statement evaluated to something other than a boolean value.".
+    Source: "tests/exceptions.salm", [6:17] - [6:25].
+
+Testing for exception_tag_iteration_base_array_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "While executing an iterate statement, SalmonEye was unable to determine whether the base value was a map value whose keys are all integers.".
+    Source: "tests/exceptions.salm", [8:17] - [8:42].
+
+Testing for exception_tag_iteration_base_array_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "While executing an iterate statement, SalmonEye was unable to determine the minimum index of the base array.".
+    Source: "tests/exceptions.salm", [8:17] - [8:54].
+
+Testing for exception_tag_iteration_bad_base exception.
+    An exception with the correct tag was caught.
+    Message: "The base argument to an iterate statement evaluated to something other than an array or semi-labeled value list that didn\'t have an `iterator\' function.".
+    Source: "tests/exceptions.salm", [6:17] - [6:19].
+
+Testing for exception_tag_iteration_bad_base exception.
+    An exception with the correct tag was caught.
+    Message: "The base argument to an iterate statement evaluated to a map value whose keys are not all integers.".
+    Source: "tests/exceptions.salm", [6:17] - [6:37].
+
+Testing for exception_tag_iteration_bad_base exception.
+    An exception with the correct tag was caught.
+    Message: "The base argument to an iterate statement evaluated to a sparse array.".
+    Source: "tests/exceptions.salm", [6:17] - [6:54].
+
+Testing for exception_tag_iterator_bad_is_done exception.
+    An exception with the correct tag was caught.
+    Message: "Unable to call is_done() on the iterator of an iterate statement.".
+    Source: "tests/exceptions.salm", [10:17] - [10:21].
+
+Testing for exception_tag_iterator_bad_is_done exception.
+    An exception with the correct tag was caught.
+    Message: "The return value from is_done() on the iterator of an iterate statement was not a boolean.".
+    Source: "tests/exceptions.salm", [18:17] - [18:21].
+
+Testing for exception_tag_iterator_bad_current exception.
+    An exception with the correct tag was caught.
+    Message: "Unable to call current() on the iterator of an iterate statement.".
+    Source: "tests/exceptions.salm", [17:17] - [17:21].
+
+Testing for exception_tag_iterator_bad_step exception.
+    An exception with the correct tag was caught.
+    Message: "Unable to call step() on the iterator of an iterate statement.".
+    Source: "tests/exceptions.salm", [17:17] - [17:21].
+
+Testing for exception_tag_iterate_bad_test exception.
+    An exception with the correct tag was caught.
+    Message: "The test argument to an iterate statement evaluated to something other than a boolean value.".
+    Source: "tests/exceptions.salm", [6:28] - [6:35].
+
+Testing for exception_tag_while_bad_test exception.
+    An exception with the correct tag was caught.
+    Message: "The test argument to a while statement evaluated to something other than a boolean value.".
+    Source: "tests/exceptions.salm", [6:12] - [6:19].
+
+Testing for exception_tag_do_while_bad_test exception.
+    An exception with the correct tag was caught.
+    Message: "The test argument to a do-while statement evaluated to something other than a boolean value.".
+    Source: "tests/exceptions.salm", [7:18] - [7:20].
+
+Testing for exception_tag_single_lock_not_lock exception.
+    An exception with the correct tag was caught.
+    Message: "The `single\' expression of a `single\' statement evaluated to something other than a lock value.".
+    Source: "tests/exceptions.salm", [5:13] - [5:15].
+
+Testing for exception_tag_try_handle_bad_handler exception.
+    An exception with the correct tag was caught.
+    Message: "The handler expression for a try-handle statement did not evaluate to a routine.".
+    Source: "tests/exceptions.salm", [6:12] - [6:19].
+
+Testing for exception_tag_export_label exception.
+    An exception with the correct tag was caught.
+    Message: "Attempted to export a label.".
+    Source: "tests/exceptions.salm", [8:9] - [8:19].
+
+Testing for exception_tag_export_label exception.
+    An exception with the correct tag was caught.
+    Message: "Attempted to export a label.".
+    Source: "tests/exceptions.salm", [11:9] - [11:19].
+
+Testing for exception_tag_use_type_match_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "When executing a use statement, SalmonEye was unable to determine whether the value was in the type because the type requires that the field named `f1\' have type filter_a <-- (), but the value has a field of that name with value f1 and SalmonEye is unable to determine whether that field value is in the required type because the routine value matches parameters, but SalmonEye is unable to determine whether its return type matches because the candidate sub-type and the candidate super-type are both filter function types but with different filter functions and SalmonEye doesn\'t try to dig deeper in such situations.".
+    Source: "tests/exceptions.salm", [11:5] - [14:47].
+
+Testing for exception_tag_use_type_mismatch exception.
+    An exception with the correct tag was caught.
+    Message: "The value for a use statement didn\'t match its type because the value is not an integer and the type is that of all integers.".
+    Source: "tests/exceptions.salm", [8:5] - [8:31].
+
+Testing for exception_tag_use_bad_base exception.
+    An exception with the correct tag was caught.
+    Message: "The expression for a `use\' statement evaluated to a value without fields.".
+    Source: "tests/exceptions.salm", [5:5] - [5:13].
+
+Testing for exception_tag_use_missing_field exception.
+    An exception with the correct tag was caught.
+    Message: "A `use\' statement specified using a field that didn\'t exist in the object.".
+    Source: "tests/exceptions.salm", [10:9] - [10:31].
+
+Testing for exception_tag_use_not_executed exception.
+    An exception with the correct tag was caught.
+    Message: "Name `p1\' was accessed before the `use\' statement that could bind it was executed.".
+    Source: "tests/exceptions.salm", [7:5] - [7:7].
+
+Testing for exception_tag_use_multiply_instantiated exception.
+    An exception with the correct tag was caught.
+    Message: "A `use\' statement was executed a second time in the same scope.".
+    Source: "tests/exceptions.salm", [7:5] - [7:22].
+
+Testing for exception_tag_use_unbound_remains exception.
+    An exception with the correct tag was caught.
+    Message: "Unbound use of `p1\' (used at \"tests/exceptions.salm\":1311:5) that could have been resolved by a `use\' statement was left unbound.".
+    Source: "tests/exceptions.salm", [6:5] - [6:21].
+
+Testing for exception_tag_cleanup_jump exception.
+    An exception with the correct tag was caught.
+    Message: "A jump was attempted from within a cleanup statement to another part of the statement block containing that cleanup statement.".
+    Source: "tests/exceptions.salm", [7:5] - [8:20].
+
+Testing for exception_tag_cleanup_jump exception.
+    An exception with the correct tag was caught.
+    Message: "A jump was attempted from within a cleanup statement to another part of the statement block containing that cleanup statement.".
+    Source: "tests/exceptions.salm", [9:9] - [10:24].
+
+Testing for exception_tag_variable_lock_not_lock exception.
+    An exception with the correct tag was caught.
+    Message: "The `single\' expression of a variable declaration evaluated to something other than a lock value.".
+    Source: "tests/exceptions.salm", [8:13] - [8:15].
+
+Testing for exception_tag_routine_lock_not_lock exception.
+    An exception with the correct tag was caught.
+    Message: "The `single\' expression of a routine declaration evaluated to something other than a lock value.".
+    Source: "tests/exceptions.salm", [5:13] - [5:20].
+
+Testing for exception_tag_routine_lock_not_lock exception.
+    An exception with the correct tag was caught.
+    Message: "The `single\' expression of a routine declaration evaluated to something other than a lock value.".
+    Source: "tests/exceptions.salm", [5:13] - [5:20].
+
+Testing for exception_tag_tagalong_lock_not_lock exception.
+    An exception with the correct tag was caught.
+    Message: "The `single\' expression of a tagalong declaration evaluated to something other than a lock value.".
+    Source: "tests/exceptions.salm", [5:13] - [5:16].
+
+Testing for exception_tag_lock_single_lock_not_lock exception.
+    An exception with the correct tag was caught.
+    Message: "The `single\' expression of a lock declaration evaluated to something other than a lock value.".
+    Source: "tests/exceptions.salm", [5:13] - [5:15].
+
+Testing for exception_tag_initialize_variable_mismatch exception.
+    An exception with the correct tag was caught.
+    Message: "Type error on initialization: value 1066 is not in type string because the value is not a string and the type is that of all strings.".
+    Source: "tests/exceptions.salm", [5:29] - [5:33].
+
+Testing for exception_tag_initialize_variable_mismatch exception.
+    An exception with the correct tag was caught.
+    Message: "Type error on initialization: value 1066 is not in type string because the value is not a string and the type is that of all strings.".
+    Source: "tests/exceptions.salm", [5:33] - [5:37].
+
+Testing for exception_tag_initialize_variable_match_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "On initialization, SalmonEye was unable to determine whether the new value was in the proper type because the type is a type type and the value is a type for which it is unclear whether it is a subset of the base type of the type because the candidate sub-type and the candidate super-type are both filter function types but with different filter functions and SalmonEye doesn\'t try to dig deeper in such situations.".
+    Source: "tests/exceptions.salm", [9:36] - [9:49].
+
+Testing for exception_tag_initialize_variable_match_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "On initialization, SalmonEye was unable to determine whether the new value was in the proper type because the type is a type type and the value is a type for which it is unclear whether it is a subset of the base type of the type because the candidate sub-type and the candidate super-type are both filter function types but with different filter functions and SalmonEye doesn\'t try to dig deeper in such situations.".
+    Source: "tests/exceptions.salm", [9:40] - [9:53].
+
+Testing for exception_tag_tagalong_default_mismatch exception.
+    An exception with the correct tag was caught.
+    Message: "Type error on tagalong initialization: value 1066 is not in type string because the value is not a string and the type is that of all strings.".
+    Source: "tests/exceptions.salm", [5:29] - [5:33].
+
+Testing for exception_tag_tagalong_default_mismatch exception.
+    An exception with the correct tag was caught.
+    Message: "Type error on tagalong initialization: value 1066 is not in type string because the value is not a string and the type is that of all strings.".
+    Source: "tests/exceptions.salm", [5:33] - [5:37].
+
+Testing for exception_tag_tagalong_default_match_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "On tagalong initialization, SalmonEye was unable to determine whether the new value was in the proper type because the type is a type type and the value is a type for which it is unclear whether it is a subset of the base type of the type because the candidate sub-type and the candidate super-type are both filter function types but with different filter functions and SalmonEye doesn\'t try to dig deeper in such situations.".
+    Source: "tests/exceptions.salm", [9:36] - [9:49].
+
+Testing for exception_tag_tagalong_default_match_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "On tagalong initialization, SalmonEye was unable to determine whether the new value was in the proper type because the type is a type type and the value is a type for which it is unclear whether it is a subset of the base type of the type because the candidate sub-type and the candidate super-type are both filter function types but with different filter functions and SalmonEye doesn\'t try to dig deeper in such situations.".
+    Source: "tests/exceptions.salm", [9:40] - [9:53].
+
+Testing for exception_tag_variable_declaration_re_executed exception.
+    An exception with the correct tag was caught.
+    Message: "A variable declaration was executed more than once for the same instance.".
+    Source: "tests/exceptions.salm", [6:14] - [6:16].
+
+Testing for exception_tag_routine_declaration_re_executed exception.
+    An exception with the correct tag was caught.
+    Message: "A routine declaration was executed more than once for the same instance.".
+    Source: "tests/exceptions.salm", [7:14] - [7:29].
+
+Testing for exception_tag_tagalong_declaration_re_executed exception.
+    An exception with the correct tag was caught.
+    Message: "A tagalong key declaration was executed more than once for the same instance.".
+    Source: "tests/exceptions.salm", [7:14] - [7:16].
+
+Testing for exception_tag_lepton_key_declaration_re_executed exception.
+    An exception with the correct tag was caught.
+    Message: "A lepton key declaration was executed more than once for the same instance.".
+    Source: "tests/exceptions.salm", [7:12] - [7:21].
+
+Testing for exception_tag_quark_declaration_re_executed exception.
+    An exception with the correct tag was caught.
+    Message: "A quark declaration was executed more than once for the same instance.".
+    Source: "tests/exceptions.salm", [7:11] - [7:13].
+
+Testing for exception_tag_lock_declaration_re_executed exception.
+    An exception with the correct tag was caught.
+    Message: "A lock declaration was executed more than once for the same instance.".
+    Source: "tests/exceptions.salm", [7:10] - [7:12].
+
+Testing for exception_tag_read_variable_uninstantiated exception.
+    An exception with the correct tag was caught.
+    Message: "Variable `v1\' (declared at \"tests/exceptions.salm\":1458:14) was referenced before it was instantiated.".
+    Source: "tests/exceptions.salm", [6:12] - [6:14].
+
+Testing for exception_tag_read_variable_deallocated exception.
+    An exception with the correct tag was caught.
+    Message: "Variable `v1\' (declared at \"tests/exceptions.salm\":1466:18) was referenced after it had ceased to exist because its scope had ended.".
+    Source: "tests/exceptions.salm", [12:12] - [12:15].
+
+Testing for exception_tag_read_variable_deallocated exception.
+    An exception with the correct tag was caught.
+    Message: "Anonymous variable (declared at \"tests/exceptions.salm\":1475:40) was referenced after it had ceased to exist because its scope had ended.".
+    Source: "tests/exceptions.salm", [8:12] - [8:15].
+
+Testing for exception_tag_read_variable_undefined exception.
+    An exception with the correct tag was caught.
+    Message: "Variable `v1\' (declared at \"tests/exceptions.salm\":1482:14) was referenced while its value was undefined.".
+    Source: "tests/exceptions.salm", [6:12] - [6:14].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal operand to negate expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:20].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal operand to unary plus expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:20].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal right operand to add expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:22].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal left operand to add expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:22].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal right operand to subtract expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:22].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal left operand to subtract expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:22].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal right operand to multiply expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:22].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal left operand to multiply expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:22].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal right operand to divide expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:22].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal left operand to divide expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:22].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal right operand to divide-force expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:24].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal left operand to divide-force expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:24].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal right operand to remainder expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:22].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal left operand to remainder expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:22].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal right operand to shift left expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:23].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal left operand to shift left expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:23].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal right operand to shift right expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:23].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal left operand to shift right expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:23].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal operand to bitwise not expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:20].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal right operand to bitwise and expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:25].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal left operand to bitwise and expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:25].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal right operand to bitwise or expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:25].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal left operand to bitwise or expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:25].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal right operand to bitwise exclusive or expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:25].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal left operand to bitwise exclusive or expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:25].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal operand to logical not expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:20].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal right operand to logical and expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:26].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal left operand to logical and expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:26].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal right operand to logical or expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:27].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal left operand to logical or expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:27].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal right operand to less than expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:22].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal left operand to less than expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:22].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal right operand to greater than expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:22].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal left operand to greater than expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:22].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal right operand to less than or equal to expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:23].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal left operand to less than or equal to expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:23].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal right operand to greater than or equal to expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:23].
+
+Testing for exception_tag_bad_operands exception.
+    An exception with the correct tag was caught.
+    Message: "Illegal left operand to greater than or equal to expression: string.".
+    Source: "tests/exceptions.salm", [5:12] - [5:23].
+
+Testing for exception_tag_field_undefined exception.
+    An exception with the correct tag was caught.
+    Message: "Field `c\' not defined when reading field value.".
+    Source: "tests/exceptions.salm", [5:12] - [5:40].
+
+Testing for exception_tag_field_undefined exception.
+    An exception with the correct tag was caught.
+    Message: "Field `c\' not defined when reading field value.".
+    Source: "tests/exceptions.salm", [6:12] - [6:49].
+
+Testing for exception_tag_field_undefined exception.
+    An exception with the correct tag was caught.
+    Message: "Field `c\' not defined when reading field value.".
+    Source: "tests/exceptions.salm", [8:12] - [8:16].
+
+Testing for exception_tag_object_no_field exception.
+    An exception with the correct tag was caught.
+    Message: "Object has no field named `c\'.".
+    Source: "tests/exceptions.salm", [10:12] - [10:18].
+
+Testing for exception_tag_object_no_field exception.
+    An exception with the correct tag was caught.
+    Message: "Object has no field named `c\'.".
+    Source: "tests/exceptions.salm", [11:5] - [11:19].
+
+Testing for exception_tag_object_write_non_data_field exception.
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to assign to non-data field `f1\'.".
+    Source: "tests/exceptions.salm", [10:5] - [10:16].
+
+Testing for exception_tag_object_write_non_data_field exception.
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to assign to non-data field `t1\'.".
+    Source: "tests/exceptions.salm", [10:5] - [10:16].
+
+Testing for exception_tag_object_write_non_data_field exception.
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to assign to non-data field `l1\'.".
+    Source: "tests/exceptions.salm", [10:5] - [10:16].
+
+Testing for exception_tag_object_write_non_data_field exception.
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to assign to non-data field `q1\'.".
+    Source: "tests/exceptions.salm", [10:5] - [10:16].
+
+Testing for exception_tag_object_write_non_data_field exception.
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to assign to non-data field `l1\'.".
+    Source: "tests/exceptions.salm", [10:5] - [10:16].
+
+Testing for exception_tag_field_read_bad_base exception.
+    An exception with the correct tag was caught.
+    Message: "Attempted to read field `c\' from a value that does not have fields.".
+    Source: "tests/exceptions.salm", [5:12] - [5:24].
+
+Testing for exception_tag_basket_read_no_component exception.
+    An exception with the correct tag was caught.
+    Message: "Attempted to read from a basket instance that doesn\'t have a component basket for component 0.".
+    Source: "tests/exceptions.salm", [5:5] - [5:15].
+
+Testing for exception_tag_immutable_modification exception.
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to modify immutable `i1\' (declared at \"tests/exceptions.salm\":1778:15).".
+    Source: "tests/exceptions.salm", [6:5] - [6:13].
+
+Testing for exception_tag_immutable_modification exception.
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to modify immutable `i1\' (declared at \"tests/exceptions.salm\":1784:15).".
+    Source: "tests/exceptions.salm", [6:5] - [6:18].
+
+Testing for exception_tag_immutable_modification exception.
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to modify immutable `i1\' (declared at \"tests/exceptions.salm\":1792:19).".
+    Source: "tests/exceptions.salm", [10:5] - [10:16].
+
+Testing for exception_tag_write_variable_uninstantiated exception.
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to modify variable `v1\' (declared at \"tests/exceptions.salm\":1809:18) before it was instantiated.".
+    Source: "tests/exceptions.salm", [12:13] - [12:36].
+
+Testing for exception_tag_write_variable_deallocated exception.
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to modify variable `v1\' (declared at \"tests/exceptions.salm\":1819:17) after it had ceased to exist because its scope had ended.".
+    Source: "tests/exceptions.salm", [18:13] - [18:36].
+
+Testing for exception_tag_assign_multiple_too_few exception.
+    An exception with the correct tag was caught.
+    Message: "The value being written to a list basket didn\'t have enough elements.".
+    Source: "tests/exceptions.salm", [9:5] - [9:22].
+
+Testing for exception_tag_assign_multiple_undefined exception.
+    An exception with the correct tag was caught.
+    Message: "An undefined element value was written into a list basket.".
+    Source: "tests/exceptions.salm", [6:5] - [6:48].
+
+Testing for exception_tag_assign_multiple_unordered exception.
+    An exception with the correct tag was caught.
+    Message: "A basket with an unlabeled element was written with a value that didn\'t include element ordering information.".
+    Source: "tests/exceptions.salm", [7:5] - [7:16].
+
+Testing for exception_tag_assign_multiple_unordered exception.
+    An exception with the correct tag was caught.
+    Message: "A basket with an unlabeled element was written with a value that didn\'t include element ordering information.".
+    Source: "tests/exceptions.salm", [8:5] - [8:16].
+
+Testing for exception_tag_assign_multiple_unordered exception.
+    An exception with the correct tag was caught.
+    Message: "A basket with an unlabeled element was written with a value that didn\'t include element ordering information.".
+    Source: "tests/exceptions.salm", [12:5] - [12:16].
+
+Testing for exception_tag_assign_multiple_not_compound exception.
+    An exception with the correct tag was caught.
+    Message: "Attempted to assign to a list basket from a value that can\'t be broken into components.".
+    Source: "tests/exceptions.salm", [6:5] - [6:16].
+
+Testing for exception_tag_write_by_name_missing_field exception.
+    An exception with the correct tag was caught.
+    Message: "A list basket element requiring field `cat\' was written with a value that did not have that field defined.".
+    Source: "tests/exceptions.salm", [6:5] - [6:32].
+
+Testing for exception_tag_write_by_name_missing_field exception.
+    An exception with the correct tag was caught.
+    Message: "A list basket element requiring field `cat\' was written with a value that did not have that field defined.".
+    Source: "tests/exceptions.salm", [8:5] - [8:23].
+
+Testing for exception_tag_write_by_name_missing_field exception.
+    An exception with the correct tag was caught.
+    Message: "A list basket element requiring field `cat\' was written with a value that did not have that field defined.".
+    Source: "tests/exceptions.salm", [8:5] - [8:23].
+
+Testing for exception_tag_write_by_name_missing_field exception.
+    An exception with the correct tag was caught.
+    Message: "A list basket element requiring field `cat\' was written with a value that did not have that field defined.".
+    Source: "tests/exceptions.salm", [6:5] - [6:47].
+
+Testing for exception_tag_assignment_type_mismatch exception.
+    An exception with the correct tag was caught.
+    Message: "Type error on assignment: value 12 is not in type string because the value is not a string and the type is that of all strings.".
+    Source: "tests/exceptions.salm", [6:5] - [6:14].
+
+Testing for exception_tag_assignment_type_match_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "On assignment, SalmonEye was unable to determine whether the new value was in the proper type because the type is a type type and the value is a type for which it is unclear whether it is a subset of the base type of the type because the candidate sub-type and the candidate super-type are both filter function types but with different filter functions and SalmonEye doesn\'t try to dig deeper in such situations.".
+    Source: "tests/exceptions.salm", [10:5] - [10:25].
+
+Testing for exception_tag_concatenation_array_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "While evaluating a concatenate expression, SalmonEye was unable to determine whether one of the operands was a map value whose keys are all integers.".
+    Source: "tests/exceptions.salm", [7:12] - [7:43].
+
+Testing for exception_tag_concatenation_array_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "While evaluating a concatenate expression, SalmonEye was unable to determine the minimum index of one of the operands.".
+    Source: "tests/exceptions.salm", [7:12] - [7:55].
+
+Testing for exception_tag_concatenation_non_array_map exception.
+    An exception with the correct tag was caught.
+    Message: "Concatenation of a non-array map value is illegal.".
+    Source: "tests/exceptions.salm", [5:12] - [5:55].
+
+Testing for exception_tag_concatenation_sparse_array exception.
+    An exception with the correct tag was caught.
+    Message: "Concatenation of a sparse array is illegal.".
+    Source: "tests/exceptions.salm", [5:12] - [5:67].
+
+Testing for exception_tag_routine_type_uninstantiated exception.
+    An exception with the correct tag was caught.
+    Message: "Routine `filter_a\' (declared at \"tests/exceptions.salm\":1949:10) was used as part of a type before it was instantiated by executing its declaration.".
+    Source: "tests/exceptions.salm", [5:24] - [5:32].
+
+Testing for exception_tag_routine_type_deallocated exception.
+    An exception with the correct tag was caught.
+    Message: "Routine `filter_a\' (declared at \"tests/exceptions.salm\":1959:14) was used as part of a type after it had been deallocated.".
+    Source: "tests/exceptions.salm", [17:24] - [17:26].
+
+Testing for exception_tag_routine_type_deallocated exception.
+    An exception with the correct tag was caught.
+    Message: "Anonymous routine (declared at \"tests/exceptions.salm\":1968:25) was used as a type after it had been deallocated.".
+    Source: "tests/exceptions.salm", [8:24] - [8:26].
+
+Testing for exception_tag_function_type_non_pure exception.
+    An exception with the correct tag was caught.
+    Message: "An overloaded routine that is not always pure is illegal as a type.".
+    Source: "tests/exceptions.salm", [8:24] - [8:32].
+
+Testing for exception_tag_function_type_non_pure exception.
+    An exception with the correct tag was caught.
+    Message: "A non-pure routine is illegal as a type.".
+    Source: "tests/exceptions.salm", [7:24] - [7:26].
+
+Testing for exception_tag_function_type_return_type_mismatch exception.
+    An exception with the correct tag was caught.
+    Message: "An overloaded routine used as a type had a non-boolean return type because the candidate sub-type is an enumeration containing the value 5, which is not in the candidate super-type because the type is an enumeration and the value is not in the enumeration list.".
+    Source: "tests/exceptions.salm", [8:24] - [8:32].
+
+Testing for exception_tag_function_type_return_type_mismatch exception.
+    An exception with the correct tag was caught.
+    Message: "A routine used as a type had a non-boolean return type because the candidate sub-type is an enumeration containing the value 5, which is not in the candidate super-type because the type is an enumeration and the value is not in the enumeration list.".
+    Source: "tests/exceptions.salm", [7:24] - [7:26].
+
+Testing for exception_tag_function_type_return_type_match_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "SalmonEye wasn\'t able to determine whether an overloaded routine used as a type had a boolean return type because the candidate sub-type is a union type and SalmonEye is unable to determine whether the right component of the union is in the candidate super-type because the candidate sub-type is a filter function type and SalmonEye doesn\'t try to dig deeper in such situations.".
+    Source: "tests/exceptions.salm", [10:24] - [10:32].
+
+Testing for exception_tag_function_type_return_type_match_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "SalmonEye wasn\'t able to determine whether a routine used as a type had a boolean return type because the candidate sub-type is a filter function type and SalmonEye doesn\'t try to dig deeper in such situations.".
+    Source: "tests/exceptions.salm", [9:24] - [9:26].
+
+Testing for exception_tag_function_type_no_arguments exception.
+    An exception with the correct tag was caught.
+    Message: "A function that doesn\'t allow any arguments is illegal as a type.".
+    Source: "tests/exceptions.salm", [6:24] - [6:26].
+
+Testing for exception_tag_function_type_argument_type_mismatch exception.
+    An exception with the correct tag was caught.
+    Message: "A function that doesn\'t accept all values as its first argument is illegal as a type, and the type of all values is not a sub-type of the type of the first argument in this case because the candidate sub-type is the type containing all values and the candidate super-type does not contain all values.".
+    Source: "tests/exceptions.salm", [7:24] - [7:26].
+
+Testing for exception_tag_function_type_argument_type_match_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "SalmonEye wasn\'t able to determine whether a function used as a type accepts all values as its first argument because the candidate sub-type is the type containing all values and SalmonEye is unable to determine whether the candidate super-type is the type containing all values.".
+    Source: "tests/exceptions.salm", [9:24] - [9:26].
+
+Testing for exception_tag_function_type_too_many_arguments exception.
+    An exception with the correct tag was caught.
+    Message: "A function that has a formal parameter beyond the first without a default value is illegal as a type.".
+    Source: "tests/exceptions.salm", [7:24] - [7:26].
+
+Testing for exception_tag_function_type_resolution_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "An overloaded function that isn\'t guaranteed to resolve with a single argument is illegal as a type.".
+    Source: "tests/exceptions.salm", [8:24] - [8:32].
+
+Testing for exception_tag_type_bad_value exception.
+    An exception with the correct tag was caught.
+    Message: "A rational value is illegal as a type.".
+    Source: "tests/exceptions.salm", [6:24] - [6:26].
+
+Testing for exception_tag_type_bad_value exception.
+    An exception with the correct tag was caught.
+    Message: "A rational value is illegal as a type.".
+    Source: "tests/exceptions.salm", [5:21] - [5:25].
+
+Testing for exception_tag_lepton_key_uninstantiated exception.
+    An exception with the correct tag was caught.
+    Message: "Lepton key `l1\' was used to create a type before it was instantiated by executing its declaration.".
+    Source: "tests/exceptions.salm", [5:19] - [5:21].
+
+Testing for exception_tag_lepton_key_deallocated exception.
+    An exception with the correct tag was caught.
+    Message: "Lepton key `l1\' was used to create a type after it had been deallocated.".
+    Source: "tests/exceptions.salm", [8:19] - [8:21].
+
+Testing for exception_tag_pointer_subtraction_dimension_mismatch exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating the subtraction of one pointer from another, the two pointers were lookups with different numbers of dimensions.".
+    Source: "tests/exceptions.salm", [6:12] - [6:30].
+
+Testing for exception_tag_pointer_subtraction_lower_dimension_mismatch exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating the subtraction of one pointer from another, the two pointers were lookups that differed before their final dimensions.".
+    Source: "tests/exceptions.salm", [6:12] - [6:33].
+
+Testing for exception_tag_pointer_subtraction_star_non_star exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating the subtraction of one pointer from another, the two pointers were lookups where one had a star in the final dimension while the other did not.".
+    Source: "tests/exceptions.salm", [16:12] - [16:27].
+
+Testing for exception_tag_pointer_subtraction_star_difference exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating the subtraction of one pointer from another, the two pointers were lookups with mis-matching filters in the final dimension.".
+    Source: "tests/exceptions.salm", [6:12] - [6:48].
+
+Testing for exception_tag_pointer_subtraction_range_non_range exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating the subtraction of one pointer from another, the two pointers were lookups where one had a range in the final dimension while the other did not.".
+    Source: "tests/exceptions.salm", [6:12] - [6:31].
+
+Testing for exception_tag_pointer_subtraction_incompatible_ranges exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating the subtraction of one pointer from another, the two pointers were lookups with incompatible ranges in the final dimension.".
+    Source: "tests/exceptions.salm", [6:12] - [6:35].
+
+Testing for exception_tag_pointer_subtraction_final_non_integer exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating the subtraction of one pointer from another, the two pointers were lookups that had different values in their final dimension that weren\'t both integers.".
+    Source: "tests/exceptions.salm", [15:12] - [15:33].
+
+Testing for exception_tag_pointer_integer_addition_non_lookup exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating the addition of a pointer and a non-zero integer, the pointer was not a lookup.".
+    Source: "tests/exceptions.salm", [6:12] - [6:23].
+
+Testing for exception_tag_pointer_integer_addition_unsigned_infinity exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating the addition of a pointer and an integer, the integer was unsigned infinity.".
+    Source: "tests/exceptions.salm", [6:12] - [6:26].
+
+Testing for exception_tag_pointer_integer_addition_zero_zero exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating the addition of a pointer and an integer, the integer was zero-zero.".
+    Source: "tests/exceptions.salm", [6:12] - [6:26].
+
+Testing for exception_tag_pointer_integer_addition_star exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating the addition of a pointer and a non-zero integer, the pointer was a lookup with a filter as the key for the final dimension.".
+    Source: "tests/exceptions.salm", [6:12] - [6:24].
+
+Testing for exception_tag_pointer_integer_addition_non_integer exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating the addition of a pointer and a non-zero integer, the pointer was a lookup with a non-integer value as the key for the final dimension.".
+    Source: "tests/exceptions.salm", [6:12] - [6:30].
+
+Testing for exception_tag_pointer_comparison_dimension_mismatch exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating the order comparison of two pointers, the two pointers were lookups with different numbers of dimensions.".
+    Source: "tests/exceptions.salm", [6:12] - [6:34].
+
+Testing for exception_tag_pointer_comparison_lower_dimension_mismatch exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating the order comparison of two pointers, the two pointers were lookups that differed before their final dimensions.".
+    Source: "tests/exceptions.salm", [6:12] - [6:37].
+
+Testing for exception_tag_pointer_comparison_star_non_star exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating the order comparison of two pointers, the two pointers were lookups where one had a star in the final dimension while the other did not.".
+    Source: "tests/exceptions.salm", [13:12] - [13:31].
+
+Testing for exception_tag_pointer_comparison_star_difference exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating the order comparison of two pointers, the two pointers were lookups with mis-matching filters in the final dimension.".
+    Source: "tests/exceptions.salm", [6:12] - [6:52].
+
+Testing for exception_tag_pointer_comparison_range_non_range exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating the order comparison of two pointers, the two pointers were lookups where one had a range in the final dimension while the other did not.".
+    Source: "tests/exceptions.salm", [6:12] - [6:35].
+
+Testing for exception_tag_pointer_comparison_incompatible_ranges exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating the order comparison of two pointers, the two pointers were lookups with incompatible ranges in the final dimension.".
+    Source: "tests/exceptions.salm", [6:12] - [6:39].
+
+Testing for exception_tag_pointer_comparison_undecidable_order exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating the order comparison of two pointers, the two pointers were lookups whose order was undecidable.".
+    Source: "tests/exceptions.salm", [6:12] - [6:33].
+
+Testing for exception_tag_pointer_comparison_final_non_integer exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating the order comparison of two pointers, the two pointers were lookups that had different values in their final dimension that weren\'t both integers.".
+    Source: "tests/exceptions.salm", [15:12] - [15:43].
+
+Testing for exception_tag_lookup_overloaded_range_bad_value exception.
+    An exception with the correct tag was caught.
+    Message: "An overloaded lookup of a range returned something other than a map or a semi-labeled value list when the lookup had more dimensions.".
+    Source: "tests/exceptions.salm", [8:12] - [8:25].
+
+Testing for exception_tag_lookup_overloaded_range_bad_value exception.
+    An exception with the correct tag was caught.
+    Message: "An overloaded lookup of a range returned something other than a map or a semi-labeled value list.".
+    Source: "tests/exceptions.salm", [8:5] - [8:29].
+
+Testing for exception_tag_lookup_overloaded_star_bad_value exception.
+    An exception with the correct tag was caught.
+    Message: "An overloaded lookup of a star returned something other than a map or a semi-labeled value list when the lookup had more dimensions.".
+    Source: "tests/exceptions.salm", [8:12] - [8:21].
+
+Testing for exception_tag_lookup_overloaded_star_bad_value exception.
+    An exception with the correct tag was caught.
+    Message: "An overloaded lookup of a star returned something other than a map or a semi-labeled value list.".
+    Source: "tests/exceptions.salm", [8:5] - [8:25].
+
+Testing for exception_tag_lookup_non_integer_non_map exception.
+    An exception with the correct tag was caught.
+    Message: "A lookup was evaluated with a non-integer key on a non-map base value.".
+    Source: "tests/exceptions.salm", [6:12] - [6:24].
+
+Testing for exception_tag_lookup_match_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "A lookup was evaluated with a key for which SalmonEye could not determine whether there was a match or not.".
+    Source: "tests/exceptions.salm", [10:12] - [10:29].
+
+Testing for exception_tag_lookup_filter_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "A lookup was evaluated with a filter dimension and a key for which SalmonEye was unable to determine whether that key was in the filter type.".
+    Source: "tests/exceptions.salm", [10:12] - [10:33].
+
+Testing for exception_tag_lookup_undefined exception.
+    An exception with the correct tag was caught.
+    Message: "A lookup referenced an undefined element.".
+    Source: "tests/exceptions.salm", [5:12] - [5:24].
+
+Testing for exception_tag_lookup_undefined exception.
+    An exception with the correct tag was caught.
+    Message: "A lookup referenced an undefined element.".
+    Source: "tests/exceptions.salm", [5:12] - [5:23].
+
+Testing for exception_tag_lookup_undefined exception.
+    An exception with the correct tag was caught.
+    Message: "A lookup referenced an undefined element.".
+    Source: "tests/exceptions.salm", [5:12] - [5:41].
+
+Testing for exception_tag_lookup_bad_base exception.
+    An exception with the correct tag was caught.
+    Message: "A lookup was evaluated with a base value that was not a map or a semi-labeled value list.".
+    Source: "tests/exceptions.salm", [5:12] - [5:16].
+
+Testing for exception_tag_lookup_bad_base exception.
+    An exception with the correct tag was caught.
+    Message: "A lookup was evaluated with a base value that was not a map or a semi-labeled value list.".
+    Source: "tests/exceptions.salm", [5:12] - [5:20].
+
+Testing for exception_tag_lookup_bad_base exception.
+    An exception with the correct tag was caught.
+    Message: "A lookup was evaluated with a base value that was not a map or a semi-labeled value list.".
+    Source: "tests/exceptions.salm", [5:12] - [5:16].
+
+Testing for exception_tag_lookup_write_match_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "A write through a lookup expression was evaluated with a key for which SalmonEye could not determine whether there was an existing match or not.".
+    Source: "tests/exceptions.salm", [10:5] - [10:31].
+
+Testing for exception_tag_lookup_write_range_not_array exception.
+    An exception with the correct tag was caught.
+    Message: "An assignment through a lookup was evaluated with a range, but the value being assigned was not a map or a semi-labeled value list.".
+    Source: "tests/exceptions.salm", [6:5] - [6:23].
+
+Testing for exception_tag_lookup_write_range_not_array exception.
+    An exception with the correct tag was caught.
+    Message: "An assignment through a lookup was evaluated with a range, but the value being assigned was not a map or a semi-labeled value list.".
+    Source: "tests/exceptions.salm", [6:5] - [6:26].
+
+Testing for exception_tag_lookup_write_range_not_array exception.
+    An exception with the correct tag was caught.
+    Message: "An assignment through a lookup was evaluated with a range, but the value being assigned was not a map or a semi-labeled value list.".
+    Source: "tests/exceptions.salm", [10:5] - [10:26].
+
+Testing for exception_tag_lookup_write_star_not_array exception.
+    An exception with the correct tag was caught.
+    Message: "An assignment through a lookup was evaluated with a star, but the value being assigned was not a map or a semi-labeled value list.".
+    Source: "tests/exceptions.salm", [6:5] - [6:17].
+
+Testing for exception_tag_lookup_write_star_not_array exception.
+    An exception with the correct tag was caught.
+    Message: "An assignment through a lookup was evaluated with a star, but the value being assigned was not a map or a semi-labeled value list.".
+    Source: "tests/exceptions.salm", [6:5] - [6:20].
+
+Testing for exception_tag_lookup_write_star_not_array exception.
+    An exception with the correct tag was caught.
+    Message: "An assignment through a lookup was evaluated with a star, but the value being assigned was not a map or a semi-labeled value list.".
+    Source: "tests/exceptions.salm", [8:5] - [8:20].
+
+Testing for exception_tag_overloading_resolution_uninstantiated exception.
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to resolve overloading that possibly included routine `p1\' (declared at \"tests/exceptions.salm\":2384:15) before it was instantiated by executing its declaration.".
+    Source: "tests/exceptions.salm", [7:5] - [7:10].
+
+Testing for exception_tag_overloading_resolution_uninstantiated exception.
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to resolve overloading that possibly included routine `operator+\' (declared at \"tests/exceptions.salm\":2391:14) before it was instantiated by executing its declaration.".
+    Source: "tests/exceptions.salm", [7:12] - [7:17].
+
+Testing for exception_tag_overloading_resolution_deallocated exception.
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to resolve overloading that possibly included routine `p1\' (declared at \"tests/exceptions.salm\":2401:19) after it had ceased to exist because its scope had ended.".
+    Source: "tests/exceptions.salm", [15:5] - [15:10].
+
+Testing for exception_tag_overloading_resolution_deallocated exception.
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to resolve overloading that possibly included routine `operator+\' (declared at \"tests/exceptions.salm\":2412:18) after it had ceased to exist because its scope had ended.".
+    Source: "tests/exceptions.salm", [9:36] - [9:41].
+
+Testing for exception_tag_overloading_resolution_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "When trying to resolve overloading, SalmonEye could not determine whether a parameter type matched an actual parameter value because the type is a type type and the value is a type for which it is unclear whether it is a subset of the base type of the type because the candidate sub-type and the candidate super-type are both filter function types but with different filter functions and SalmonEye doesn\'t try to dig deeper in such situations.".
+    Source: "tests/exceptions.salm", [15:5] - [15:22].
+
+Testing for exception_tag_assertion_failure exception.
+    An exception with the correct tag was caught.
+    Message: "Assertion failed.".
+    Source: "tests/exceptions.salm", [5:5] - [5:18].
+
+Testing for exception_tag_make_string_undefined exception.
+    An exception with the correct tag was caught.
+    Message: "In make_string(), element 1 of the array is undefined.".
+    Source: "tests/exceptions.salm", [6:12] - [6:27].
+
+Testing for exception_tag_from_utf8_undefined exception.
+    An exception with the correct tag was caught.
+    Message: "In from_utf8(), element 1 of the array is undefined.".
+    Source: "tests/exceptions.salm", [6:12] - [6:25].
+
+Testing for exception_tag_from_utf8_more_than_one exception.
+    An exception with the correct tag was caught.
+    Message: "In from_utf8(), the argument array contains more than a single character in UTF-8 format.".
+    Source: "tests/exceptions.salm", [6:12] - [6:25].
+
+Testing for exception_tag_from_utf16_undefined exception.
+    An exception with the correct tag was caught.
+    Message: "In from_utf16(), element 0 of the array is undefined.".
+    Source: "tests/exceptions.salm", [6:12] - [6:26].
+
+Testing for exception_tag_from_utf16_more_than_one exception.
+    An exception with the correct tag was caught.
+    Message: "In from_utf16(), the argument array contains more than a single character in UTF-16 format.".
+    Source: "tests/exceptions.salm", [6:12] - [6:26].
+
+Testing for exception_tag_string_from_utf8_undefined exception.
+    An exception with the correct tag was caught.
+    Message: "In string_from_utf8(), element 1 of the array is undefined.".
+    Source: "tests/exceptions.salm", [6:12] - [6:32].
+
+Testing for exception_tag_string_from_utf16_undefined exception.
+    An exception with the correct tag was caught.
+    Message: "In string_from_utf16(), element 0 of the array is undefined.".
+    Source: "tests/exceptions.salm", [6:12] - [6:33].
+
+Testing for exception_tag_string_from_utf32_undefined exception.
+    An exception with the correct tag was caught.
+    Message: "In string_from_utf32(), element 0 of the array is undefined.".
+    Source: "tests/exceptions.salm", [6:12] - [6:33].
+
+Testing for exception_tag_delete_variable_component exception.
+    An exception with the correct tag was caught.
+    Message: "In delete(), an attempt was made to delete a component of a variable instead of the entire variable.".
+    Source: "tests/exceptions.salm", [6:5] - [6:21].
+
+Testing for exception_tag_delete_variable_component exception.
+    An exception with the correct tag was caught.
+    Message: "In delete(), an attempt was made to delete a component of a variable instead of the entire variable.".
+    Source: "tests/exceptions.salm", [6:5] - [6:20].
+
+Testing for exception_tag_delete_variable_component exception.
+    An exception with the correct tag was caught.
+    Message: "In delete(), an attempt was made to delete a component of a variable instead of the entire variable.".
+    Source: "tests/exceptions.salm", [7:5] - [7:22].
+
+Testing for exception_tag_delete_variable_overloaded exception.
+    An exception with the correct tag was caught.
+    Message: "In delete(), an attempt was made to delete through an overloaded pointer.".
+    Source: "tests/exceptions.salm", [6:5] - [6:18].
+
+Testing for exception_tag_delete_variable_overloaded exception.
+    An exception with the correct tag was caught.
+    Message: "In delete(), an attempt was made to delete through an overloaded pointer.".
+    Source: "tests/exceptions.salm", [7:5] - [7:20].
+
+Testing for exception_tag_delete_variable_automatic exception.
+    An exception with the correct tag was caught.
+    Message: "In delete(), the variable to be deleted was automatically allocated.".
+    Source: "tests/exceptions.salm", [6:5] - [6:16].
+
+Testing for exception_tag_delete_routine_automatic exception.
+    An exception with the correct tag was caught.
+    Message: "In delete(), the routine to be deleted was automatically allocated.".
+    Source: "tests/exceptions.salm", [6:5] - [6:15].
+
+Testing for exception_tag_delete_routine_active exception.
+    An exception with the correct tag was caught.
+    Message: "In delete(), the routine to be deleted was executing at the point an attempt was being made to delete it.".
+    Source: "tests/exceptions.salm", [5:32] - [5:42].
+
+Testing for exception_tag_delete_routine_active exception.
+    An exception with the correct tag was caught.
+    Message: "In delete(), the routine to be deleted was executing at the point an attempt was being made to delete it.".
+    Source: "tests/exceptions.salm", [10:9] - [10:19].
+
+Testing for exception_tag_delete_tagalong_key_automatic exception.
+    An exception with the correct tag was caught.
+    Message: "In delete(), the tagalong key to be deleted was automatically allocated.".
+    Source: "tests/exceptions.salm", [8:5] - [8:15].
+
+Testing for exception_tag_delete_lepton_key_automatic exception.
+    An exception with the correct tag was caught.
+    Message: "In delete(), the lepton key to be deleted was automatically allocated.".
+    Source: "tests/exceptions.salm", [6:5] - [6:15].
+
+Testing for exception_tag_delete_quark_automatic exception.
+    An exception with the correct tag was caught.
+    Message: "In delete(), the quark to be deleted was automatically allocated.".
+    Source: "tests/exceptions.salm", [6:5] - [6:15].
+
+Testing for exception_tag_delete_lock_automatic exception.
+    An exception with the correct tag was caught.
+    Message: "In delete(), the lock to be deleted was automatically allocated.".
+    Source: "tests/exceptions.salm", [6:5] - [6:15].
+
+Testing for exception_tag_delete_object_incomplete exception.
+    An exception with the correct tag was caught.
+    Message: "In delete(), an attempt was made to delete an incomplete object.".
+    Source: "tests/exceptions.salm", [7:9] - [7:21].
+
+Testing for exception_tag_split_null_match exception.
+    An exception with the correct tag was caught.
+    Message: "In split(), the empty string matched the pattern.".
+    Source: "tests/exceptions.salm", [8:12] - [8:28].
+
+Testing for exception_tag_join_undefined exception.
+    An exception with the correct tag was caught.
+    Message: "In join(), element 1 of the array is undefined.".
+    Source: "tests/exceptions.salm", [5:12] - [5:53].
+
+Testing for exception_tag_join_undefined exception.
+    An exception with the correct tag was caught.
+    Message: "In join(), element 1 of the array is undefined.".
+    Source: "tests/exceptions.salm", [5:12] - [6:49].
+
+Testing for exception_tag_filter_undefined exception.
+    An exception with the correct tag was caught.
+    Message: "In filter(), element 1 of the array is undefined.".
+    Source: "tests/exceptions.salm", [6:12] - [6:55].
+
+Testing for exception_tag_filter_undefined exception.
+    An exception with the correct tag was caught.
+    Message: "In filter(), element 1 of the array is undefined.".
+    Source: "tests/exceptions.salm", [5:12] - [5:63].
+
+Testing for exception_tag_filter_doubt exception.
+    An exception with the correct tag was caught.
+    Message: "In filter(), SalmonEye was unable to determine whether element 0 of the array is in the type because the type is a type type and the value is a type for which it is unclear whether it is a subset of the base type of the type because the candidate sub-type and the candidate super-type are both filter function types but with different filter functions and SalmonEye doesn\'t try to dig deeper in such situations.".
+    Source: "tests/exceptions.salm", [9:12] - [9:55].
+
+Testing for exception_tag_substitute_null_match exception.
+    An exception with the correct tag was caught.
+    Message: "In substitute(), the empty string matched the pattern.".
+    Source: "tests/exceptions.salm", [5:12] - [5:38].
+
+Testing for exception_tag_substitute_null_match exception.
+    An exception with the correct tag was caught.
+    Message: "In substitute(), the empty string matched the pattern.".
+    Source: "tests/exceptions.salm", [5:12] - [6:69].
+
+Testing for exception_tag_parse_regular_expression_bad_pattern exception.
+    An exception with the correct tag was caught.
+    Message: "In parse_regular_expression(): The regular expression pattern contains a right parenthesis with no matching left parenthesis.".
+    Source: "tests/exceptions.salm", [6:12] - [6:41].
+
+Testing for exception_tag_parse_regular_expression_bad_pattern exception.
+    An exception with the correct tag was caught.
+    Message: "In parse_regular_expression(): The regular expression pattern contains a left parenthesis with no matching right parenthesis.".
+    Source: "tests/exceptions.salm", [5:12] - [5:41].
+
+Testing for exception_tag_parse_regular_expression_bad_pattern exception.
+    An exception with the correct tag was caught.
+    Message: "In parse_regular_expression(): The regular expression pattern contains an asterix without a pattern to its left.".
+    Source: "tests/exceptions.salm", [5:12] - [5:41].
+
+Testing for exception_tag_parse_regular_expression_bad_pattern exception.
+    An exception with the correct tag was caught.
+    Message: "In parse_regular_expression(): The regular expression pattern contains a plus sign without a pattern to its left.".
+    Source: "tests/exceptions.salm", [5:12] - [5:41].
+
+Testing for exception_tag_parse_regular_expression_bad_pattern exception.
+    An exception with the correct tag was caught.
+    Message: "In parse_regular_expression(): The regular expression pattern contains a question mark without a pattern to its left.".
+    Source: "tests/exceptions.salm", [5:12] - [5:41].
+
+Testing for exception_tag_parse_regular_expression_bad_pattern exception.
+    An exception with the correct tag was caught.
+    Message: "In parse_regular_expression(): The regular expression pattern contains a left curly brace without a pattern to its left.".
+    Source: "tests/exceptions.salm", [5:12] - [5:42].
+
+Testing for exception_tag_parse_regular_expression_bad_pattern exception.
+    An exception with the correct tag was caught.
+    Message: "In parse_regular_expression(): The regular expression pattern contains a character range without a closing right square bracket.".
+    Source: "tests/exceptions.salm", [5:12] - [5:44].
+
+Testing for exception_tag_parse_regular_expression_bad_pattern exception.
+    An exception with the correct tag was caught.
+    Message: "In parse_regular_expression(): The regular expression pattern contains a backslash-x that isn\'t followed by at least one hex digit.".
+    Source: "tests/exceptions.salm", [5:12] - [5:44].
+
+Testing for exception_tag_parse_regular_expression_bad_pattern exception.
+    An exception with the correct tag was caught.
+    Message: "In parse_regular_expression(): The regular expression pattern contains a backslash-x that isn\'t followed by at least one hex digit.".
+    Source: "tests/exceptions.salm", [5:12] - [5:43].
+
+Testing for exception_tag_parse_regular_expression_bad_pattern exception.
+    An exception with the correct tag was caught.
+    Message: "In parse_regular_expression(): The regular expression pattern contains a hex escape sequence encoding character zero.".
+    Source: "tests/exceptions.salm", [5:12] - [5:44].
+
+Testing for exception_tag_parse_regular_expression_bad_pattern exception.
+    An exception with the correct tag was caught.
+    Message: "In parse_regular_expression(): The regular expression pattern contains a hex escape sequence encoding a UTF-16 surrogate character, which is not a valid Unicode character.".
+    Source: "tests/exceptions.salm", [5:12] - [5:47].
+
+Testing for exception_tag_parse_regular_expression_bad_pattern exception.
+    An exception with the correct tag was caught.
+    Message: "In parse_regular_expression(): The regular expression pattern contains a hex escape sequence encoding a value greater than any Unicode code point.".
+    Source: "tests/exceptions.salm", [5:12] - [5:49].
+
+Testing for exception_tag_parse_regular_expression_bad_pattern exception.
+    An exception with the correct tag was caught.
+    Message: "In parse_regular_expression(): The regular expression pattern contains an escaped letter that is not a valid escape sequence.".
+    Source: "tests/exceptions.salm", [5:12] - [5:43].
+
+Testing for exception_tag_parse_regular_expression_bad_pattern exception.
+    An exception with the correct tag was caught.
+    Message: "In parse_regular_expression(): The regular expression pattern contains a character range specification that starts with an escape sequence representing more than a single character.".
+    Source: "tests/exceptions.salm", [5:12] - [5:47].
+
+Testing for exception_tag_parse_regular_expression_bad_pattern exception.
+    An exception with the correct tag was caught.
+    Message: "In parse_regular_expression(): The regular expression pattern contains a character range specification that ends with an escape sequence representing more than a single character.".
+    Source: "tests/exceptions.salm", [5:12] - [5:47].
+
+Testing for exception_tag_parse_regular_expression_bad_pattern exception.
+    An exception with the correct tag was caught.
+    Message: "In parse_regular_expression(): The regular expression pattern contains a repeat specification in curly braces that doesn\'t have a comma after the minimum repetition count.".
+    Source: "tests/exceptions.salm", [5:12] - [5:44].
+
+Testing for exception_tag_parse_regular_expression_bad_pattern exception.
+    An exception with the correct tag was caught.
+    Message: "In parse_regular_expression(): The regular expression pattern contains a repeat specification in curly braces that doesn\'t have a closing curly brace where expected.".
+    Source: "tests/exceptions.salm", [5:12] - [5:45].
+
+Testing for exception_tag_parse_regular_expression_bad_pattern exception.
+    An exception with the correct tag was caught.
+    Message: "In parse_regular_expression(): The regular expression pattern contains a repeat specification in curly braces in which the lower bound on the number of repetitions is greater than the upper bound.".
+    Source: "tests/exceptions.salm", [5:12] - [5:46].
+
+Testing for exception_tag_character_set_undefined exception.
+    An exception with the correct tag was caught.
+    Message: "In character_set(), element 1 of the array is undefined.".
+    Source: "tests/exceptions.salm", [5:12] - [5:55].
+
+Testing for exception_tag_array_length_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "In length(), SalmonEye was unable to determine the length of the array.".
+    Source: "tests/exceptions.salm", [7:12] - [7:57].
+
+Testing for exception_tag_call_undefined exception.
+    An exception with the correct tag was caught.
+    Message: "In call(), element 1 of the array is undefined.".
+    Source: "tests/exceptions.salm", [6:5] - [6:43].
+
+Testing for exception_tag_throw_unnamed_extra exception.
+    An exception with the correct tag was caught.
+    Message: "The ``other\'\' parameter to a throw() call contained an unnamed field.".
+    Source: "tests/exceptions.salm", [15:5] - [15:40].
+
+Testing for exception_tag_current_exceptions_no_exception exception.
+    An exception with the correct tag was caught.
+    Message: "The current_exceptions() function was called outside the ``catch\'\' part of a try-catch statement.".
+    Source: "tests/exceptions.salm", [5:12] - [5:32].
+
+Testing for exception_tag_bad_utf8 exception.
+    An exception with the correct tag was caught.
+    Message: "Bad UTF-8 encoding -- a byte (0x80) with 0x2 as its high two bits was found at the start of a character.".
+    Source: "tests/exceptions.salm", [5:12] - [5:42].
+
+Testing for exception_tag_bad_utf8 exception.
+    An exception with the correct tag was caught.
+    Message: "Bad UTF-8 encoding -- a byte (0xf8) with 0x1f as its high five bits was found at the start of a character.".
+    Source: "tests/exceptions.salm", [5:12] - [5:42].
+
+Testing for exception_tag_bad_utf8 exception.
+    An exception with the correct tag was caught.
+    Message: "Bad UTF-8 encoding -- the input ends in the middle of a multi-byte character.".
+    Source: "tests/exceptions.salm", [5:12] - [5:36].
+
+Testing for exception_tag_bad_utf8 exception.
+    An exception with the correct tag was caught.
+    Message: "Bad UTF-8 encoding -- a character continuation byte (0x08) was found without 0x2 as its high two bits.".
+    Source: "tests/exceptions.salm", [5:12] - [5:42].
+
+Testing for exception_tag_bad_utf8 exception.
+    An exception with the correct tag was caught.
+    Message: "Bad UTF-8 encoding -- UTF-16 surrogate code point encoded.".
+    Source: "tests/exceptions.salm", [5:12] - [5:48].
+
+Testing for exception_tag_bad_utf8 exception.
+    An exception with the correct tag was caught.
+    Message: "Bad UTF-8 encoding -- value greater than 0x10ffff encoded.".
+    Source: "tests/exceptions.salm", [5:12] - [5:54].
+
+Testing for exception_tag_bad_utf8 exception.
+    An exception with the correct tag was caught.
+    Message: "Bad UTF-8 encoding -- two-byte encoding used unnecessarily.".
+    Source: "tests/exceptions.salm", [5:12] - [5:42].
+
+Testing for exception_tag_bad_utf8 exception.
+    An exception with the correct tag was caught.
+    Message: "Bad UTF-8 encoding -- three-byte encoding used unnecessarily.".
+    Source: "tests/exceptions.salm", [5:12] - [5:48].
+
+Testing for exception_tag_bad_utf8 exception.
+    An exception with the correct tag was caught.
+    Message: "Bad UTF-8 encoding -- four-byte encoding used unnecessarily.".
+    Source: "tests/exceptions.salm", [5:12] - [5:54].
+
+Testing for exception_tag_bad_utf16 exception.
+    An exception with the correct tag was caught.
+    Message: "Bad UTF-16 encoding -- a word (0xdc00) with 0x37 as its high six bits was found at the start of a character.".
+    Source: "tests/exceptions.salm", [5:12] - [5:47].
+
+Testing for exception_tag_bad_utf16 exception.
+    An exception with the correct tag was caught.
+    Message: "Bad UTF-16 encoding -- the input ends in the middle of a multi-word character.".
+    Source: "tests/exceptions.salm", [5:12] - [5:39].
+
+Testing for exception_tag_bad_utf16 exception.
+    An exception with the correct tag was caught.
+    Message: "Bad UTF-16 encoding -- a character continuation word (0x0000) was found without 0x37 as its high six bits.".
+    Source: "tests/exceptions.salm", [5:12] - [5:47].
+
+Testing for exception_tag_array_too_large exception.
+    An exception with the correct tag was caught.
+    Message: "The array argument to make_string() was too enormous to be handled.".
+    Source: "tests/exceptions.salm", [17:12] - [17:61].
+
+Testing for exception_tag_array_too_large exception.
+    An exception with the correct tag was caught.
+    Message: "The array argument to string_from_utf8() was too enormous to be handled.".
+    Source: "tests/exceptions.salm", [5:12] - [5:64].
+
+Testing for exception_tag_array_too_large exception.
+    An exception with the correct tag was caught.
+    Message: "The array argument to string_from_utf16() was too enormous to be handled.".
+    Source: "tests/exceptions.salm", [5:12] - [5:65].
+
+Testing for exception_tag_array_too_large exception.
+    An exception with the correct tag was caught.
+    Message: "The array argument to string_from_utf32() was too enormous to be handled.".
+    Source: "tests/exceptions.salm", [5:12] - [5:65].
+
+Testing for exception_tag_array_too_large exception.
+    An exception with the correct tag was caught.
+    Message: "The array argument to join() was too enormous to be handled.".
+    Source: "tests/exceptions.salm", [5:12] - [5:61].
+
+Testing for exception_tag_array_too_large exception.
+    An exception with the correct tag was caught.
+    Message: "The array argument to join() was too enormous to be handled.".
+    Source: "tests/exceptions.salm", [5:12] - [6:51].
+
+Testing for exception_tag_array_too_large exception.
+    An exception with the correct tag was caught.
+    Message: "The array argument to filter() was too enormous to be handled.".
+    Source: "tests/exceptions.salm", [6:12] - [6:62].
+
+Testing for exception_tag_array_too_large exception.
+    An exception with the correct tag was caught.
+    Message: "The array argument to filter() was too enormous to be handled.".
+    Source: "tests/exceptions.salm", [5:12] - [5:68].
+
+Testing for exception_tag_array_too_large exception.
+    An exception with the correct tag was caught.
+    Message: "The array argument to character_set() was too enormous to be handled.".
+    Source: "tests/exceptions.salm", [5:12] - [5:63].
+
+Testing for exception_tag_array_too_large exception.
+    An exception with the correct tag was caught.
+    Message: "The array argument to call() was too enormous to be handled.".
+    Source: "tests/exceptions.salm", [5:5] - [5:65].
+
+Testing for exception_tag_sprint_not_string exception.
+    An exception with the correct tag was caught.
+    Message: "When printing an object with a sprint() routine, the sprint() routine returned a value that wasn\'t a string.".
+    Source: "tests/exceptions.salm", [9:5] - [9:17].
+
+Testing for exception_tag_printf_unclosed_specifier exception.
+    An exception with the correct tag was caught.
+    Message: "When doing formatted printing, a percent sign (`%\') was found without a matching closing percent sign.".
+    Source: "tests/exceptions.salm", [5:5] - [5:17].
+
+Testing for exception_tag_printf_too_few_arguments exception.
+    An exception with the correct tag was caught.
+    Message: "When doing formatted printing, not enough arguments were supplied.".
+    Source: "tests/exceptions.salm", [5:12] - [5:26].
+
+Testing for exception_tag_printf_too_few_arguments exception.
+    An exception with the correct tag was caught.
+    Message: "When doing formatted printing, not enough arguments were supplied.".
+    Source: "tests/exceptions.salm", [5:12] - [5:33].
+
+Testing for exception_tag_printf_zero_argument exception.
+    An exception with the correct tag was caught.
+    Message: "When doing formatted printing, a conversion specifier specified zero as an argument number.".
+    Source: "tests/exceptions.salm", [5:12] - [5:32].
+
+Testing for exception_tag_printf_bad_argument_name exception.
+    An exception with the correct tag was caught.
+    Message: "When doing formatted printing, a conversion specifier specified an argument named `b\', but no such argument was found.".
+    Source: "tests/exceptions.salm", [5:12] - [5:37].
+
+Testing for exception_tag_printf_sprint_not_string exception.
+    An exception with the correct tag was caught.
+    Message: "When doing formatted printing, the result of a field sprint() was not a string value.".
+    Source: "tests/exceptions.salm", [9:5] - [9:25].
+
+Testing for exception_tag_printf_bad_specifier exception.
+    An exception with the correct tag was caught.
+    Message: "When doing formatted printing, format specification string `q\' was not understood.".
+    Source: "tests/exceptions.salm", [5:5] - [5:22].
+
+Testing for exception_tag_printf_not_string exception.
+    An exception with the correct tag was caught.
+    Message: "When doing formatted printing, a string conversion specification was used with a non-string, non-character value.".
+    Source: "tests/exceptions.salm", [5:5] - [5:22].
+
+Testing for exception_tag_printf_not_integer exception.
+    An exception with the correct tag was caught.
+    Message: "When doing formatted printing, an integer conversion specification was used with a non-integer value.".
+    Source: "tests/exceptions.salm", [5:5] - [5:28].
+
+Testing for exception_tag_printf_not_rational exception.
+    An exception with the correct tag was caught.
+    Message: "When doing formatted printing, a rational conversion specification was used with a non-rational value.".
+    Source: "tests/exceptions.salm", [5:5] - [5:28].
+
+Testing for exception_tag_force_match_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "When evaluating a force expression, SalmonEye was unable to determine whether the value was in the type because the type is a type type and the value is a type for which it is unclear whether it is a subset of the base type of the type because the candidate sub-type and the candidate super-type are both filter function types but with different filter functions and SalmonEye doesn\'t try to dig deeper in such situations.".
+    Source: "tests/exceptions.salm", [9:12] - [9:42].
+
+Testing for exception_tag_force_match_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "While attempting to force a value to a type, SalmonEye could not determine whether there was a match or not.".
+    Source: "tests/exceptions.salm", [9:12] - [10:38].
+
+Testing for exception_tag_force_match_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "While attempting to force a value to a type, SalmonEye could not determine whether there was a match or not because the value is a map with a key filter type of !{} and the type is a map type with a key type for which it is unclear whether that key type is included because the candidate sub-type is the type containing all values and SalmonEye is unable to determine whether the candidate super-type is the type containing all values.".
+    Source: "tests/exceptions.salm", [8:12] - [8:73].
+
+Testing for exception_tag_type_for_invalid_nothing_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "While checking to see if an invaid value was in a type, SalmonEye could not determine whether the type could be the empty type or not.".
+    Source: "tests/exceptions.salm", [7:12] - [7:29].
+
+Testing for exception_tag_type_for_invalid_everything_indeterminate exception.
+    An exception with the correct tag was caught.
+    Message: "While checking to see if an invaid value was in a type, SalmonEye could not determine whether the type could be the type of all values or not.".
+    Source: "tests/exceptions.salm", [8:12] - [8:41].
+
+Testing for exception_tag_lock_grab_uninstantiated exception.
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to grab a lock before the lock had been instantiated by executing its declaration.".
+    Source: "tests/exceptions.salm", [6:5] - [6:20].
+
+Testing for exception_tag_lock_grab_deallocated exception.
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to grab a lock after it had been de-allocated.".
+    Source: "tests/exceptions.salm", [11:5] - [11:9].
+
+Testing for exception_tag_lock_release_deallocated exception.
+locks: Anonymous lock (declared at "tests/exceptions.salm":3007:24) grabbed [1].
+    An exception with the correct tag was caught.
+    Message: "An attempt was made to release a lock after it had been de-allocated.".
+    Source: "tests/exceptions.salm", [13:5] - [16:9].
+
+Testing for exception_tag_tagalong_reference_scope_exited exception.
+    An exception with the correct tag was caught.
+    Message: "A write was attempted through a tagalong key after that key had ceased to exist.".
+    Source: "tests/exceptions.salm", [17:29] - [17:42].
+
+Testing for exception_tag_object_tagalong_read_non_object exception.
+    An exception with the correct tag was caught.
+    Message: "An object tagalong key (tagalong `t1\' (declared at \"tests/exceptions.salm\":3033:14)) was used to try to read a tagalong on a non-object value.".
+    Source: "tests/exceptions.salm", [10:12] - [10:18].
+
+Testing for exception_tag_object_tagalong_write_non_object exception.
+    An exception with the correct tag was caught.
+    Message: "An object tagalong key (tagalong `t1\' (declared at \"tests/exceptions.salm\":3041:14)) was used to try to set a tagalong on a non-object value.".
+    Source: "tests/exceptions.salm", [8:5] - [8:17].
+
+Caught exception with tag exception_tag_bad_operands:
+    Message: "Illegal right operand to add expression: string.".
+    Call site: "tests/exceptions.salm":3070:[20-29]
+    Call stack:
+      [
+        callee: c() from "tests/exceptions.salm":[3066:15]-[3110:8].
+        call site: "tests/exceptions.salm":3065:[9-12].
+      ]
+      [
+        callee: Anonymous routine from "tests/exceptions.salm":[3064:29]-[3065:15].
+        call site: "tests/exceptions.salm":3063:[9-12].
+      ]
+      [
+        callee: a() from "tests/exceptions.salm":[3062:15]-[3063:15].
+        call site: "tests/exceptions.salm":3111:[5-8].
+      ]
+
+Testing for exception_tag_call_two_return_values exception.
+    An exception with the correct tag was caught.
+    Message: "A second return was executed at the top level.".
+    Source: "tests/exceptions.salm", [3121:13] - [3121:22].

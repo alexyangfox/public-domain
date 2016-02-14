@@ -1,0 +1,34 @@
+/* file "string_utf8_op.salm" */
+
+/*
+ *  This file contains operator overloading to allow strings to be accessed
+ *  using lookup operators as if they were arrays of bytes in UTF-8 form.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+function operator[](base : string, key : [0...+oo)) returns u8
+  (to_utf8(base)[key]);
+
+function operator[](base : string, lower : [0...+oo), upper : [0...+oo))
+        returns string
+  (string_from_utf8(to_utf8(base)[lower...upper]));
+
+function operator[](base : string, key : [0...+oo), replacement : u8)
+        returns string
+  {
+    variable result := to_utf8(base);
+    result[key] := replacement;
+    return string_from_utf8(result);
+  };
+
+function operator[](base : string, lower : [0...+oo), upper : [0...+oo),
+                    replacement : string) returns string
+  {
+    variable result := to_utf8(base);
+    result[lower...upper] := to_utf8(replacement);
+    return string_from_utf8(result);
+  };

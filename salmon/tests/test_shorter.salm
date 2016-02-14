@@ -1,0 +1,171 @@
+/* file "test_shorter.salm" */
+
+/*
+ *  This file is a test of "shorter.salm".
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+include "shorter.salm";
+
+v v1 := 17;
+v1 := 87;
+print("v1: ", v1, ".\n");
+
+i i1 := 8;
+print("i1: ", i1, ".\n");
+
+f f1(x) (x + 3);
+print("f1(8): ", f1(8), ".\n");
+
+p p1(x)
+  { print("x: ", x, ".\n"); };
+p1(22);
+
+f f2(x)
+  { r (x * 3); };
+print("f2(8): ", f2(8), ".\n");
+
+f f3(x : integer) rs integer
+  { r (x * x); };
+print("f3(8): ", f3(8), ".\n");
+
+p p2(...)
+  { print("a: ", a, ".\n"); };
+p2(1, 12);
+
+t t1;
+v1.t1 := 5;
+print("v1.t1: ", v1.t1, ".\n");
+
+l l1[a : integer, b : string];
+print("l1[a := 5, b := \"hello\"]: ", l1[a := 5, b := "hello"], ".\n");
+
+i i2 := type m[a : integer, b : string];
+print("i2: ", i2, ".\n");
+
+s
+  {
+    print("Single.\n");
+  };
+
+  {
+    print("A.\n");
+    c { print("B.\n"); };
+    print("C.\n");
+  };
+
+v v3 := [1, 4, 9];
+it (e1; v3)
+  { print("e1: ", e1, ".\n"); };
+
+it (e1; v3)
+  {
+    if (e1 == 4)
+        cn;;
+    print("e1: ", e1, ".\n");
+  };
+
+i c2 := class()
+  {
+    h;
+    variable v1 := 1;
+    e;
+    variable v2 := 2;
+  };
+print("c2().v2: ", c2().v2, ".\n");
+try
+    print("c2().v1: ", c2().v1, ".\n");
+catch
+    print("Caught exception.\n");;
+
+print("A.\n");
+g lab1;
+print("B.\n");
+lab1:
+print("C.\n");
+
+q enum qe1 { qel1, qel2 };
+print("qe1: ", qe1, ".\n");
+
+print("3.5 in b: ", 3.5 in b, ".\n");
+print("false in b: ", false in b, ".\n");
+
+print("'d' in re: ", 'd' in re, ".\n");
+print("@d@ in re: ", @d@ in re, ".\n");
+
+q q1;
+print("@d@ in aq: ", @d@ in aq, ".\n");
+print("q1 in aq: ", q1 in aq, ".\n");
+
+print("q1 in al: ", q1 in al, ".\n");
+print("l1[a := 5] in al: ", l1[a := 5] in al, ".\n");
+
+print("l1[a := 5] in lk: ", l1[a := 5] in lk, ".\n");
+print("l1 in lk: ", l1 in lk, ".\n");
+
+jt1:
+print("l1 in jt: ", l1 in jt, ".\n");
+print("jt1 in jt: ", jt1 in jt, ".\n");
+
+print("jt1 in ac: ", jt1 in ac, ".\n");
+print("c2 in ac: ", c2 in ac, ".\n");
+
+print("c2 in o: ", c2 in o, ".\n");
+print("c2() in o: ", c2() in o, ".\n");
+
+print("c2() in tk: ", c2() in tk, ".\n");
+print("t1 in tk: ", t1 in tk, ".\n");
+
+lock l2;
+print("t1 in alk: ", t1 in alk, ".\n");
+print("l2 in alk: ", l2 in alk, ".\n");
+
+print("&i2 == n: ", &i2 == n, ".\n");
+print("null == n: ", null == n, ".\n");
+
+print("tr: ", tr, ".\n");
+
+print("fa: ", fa, ".\n");
+
+print("ms(['H', 'i', '!']): ", ms(['H', 'i', '!']), ".\n");
+
+print("0xd7ff in cp: ", 0xd7ff in cp, ".\n");
+print("0xd800 in cp: ", 0xd800 in cp, ".\n");
+
+print("d == delete: ", d == delete, ".\n");
+print("d == print: ", d == print, ".\n");
+
+print("sp(@,@, \"aa,bb,cc\"): ", sp(@,@, "aa,bb,cc"), ".\n");
+
+print("j([\"a\", \"b\", \"c\"], \",\"): ", j(["a", "b", "c"], ","), ".\n");
+
+print("si == standard_input: ", si == standard_input, ".\n");
+print("si == standard_error: ", si == standard_error, ".\n");
+
+print("so == standard_output: ", so == standard_output, ".\n");
+print("so == standard_input: ", so == standard_input, ".\n");
+
+print("out == standard_output: ", out == standard_output, ".\n");
+print("out == standard_input: ", out == standard_input, ".\n");
+
+print("se == standard_error: ", se == standard_error, ".\n");
+print("se == standard_output: ", se == standard_output, ".\n");
+
+print("err == standard_error: ", err == standard_error, ".\n");
+print("err == standard_output: ", err == standard_output, ".\n");
+
+pr("abc.\n");
+
+print("spr(16): ", spr(16), ".\n");
+
+prf("%%x%%, 16: %x%.\n", 16);
+
+print("sprf(\"%x%\", 16): ", sprf("%x%", 16), ".\n");
+
+/* Make sure "short.salm" is there too. */
+var v4 := 5;
+print("v4: ", v4, ".\n");

@@ -1,0 +1,26 @@
+/* file "y_combinator.salm" */
+
+/*
+ *  This file is an example of Salmon.  In this example, a version of the Y
+ *  combinator is defined and then applied to the factorial function.  This
+ *  example is directly translated from a Python example in the Wikipedia
+ *  article entitled "Fixed point combinator" as retrieved on Saturday, March
+ *  12, 2011.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+immutable Z :=
+  function(ageless f)
+    (function(ageless x)
+       (function(...)(call(x(x), arguments)))(
+               function(ageless x)
+                 (f(function(...)
+                      (call(x(x), arguments))))));
+
+immutable fact := function(ageless f)(function(x)((x == 0) ? 1 : x * f(x-1)));
+
+Z(fact)(5)!

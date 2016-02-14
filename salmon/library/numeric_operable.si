@@ -1,0 +1,16 @@
+/* file "numeric_operable.si" */
+
+/*
+ *  This file contains the interface to a couple of functions for generating
+ *  types of values that can be used with the normal arithmetic operators.
+ *
+ *  Written by Chris Wilson.
+ *
+ *  This file is hearby placed in the public domain by its author.
+ */
+
+
+numeric_operable :-
+        (type !{}) <-- (operand_type : type !{}, result_type : type !{}),
+
+numeric_operable_closed :- (type !{}) <-- (starting_operand_type : type !{})
