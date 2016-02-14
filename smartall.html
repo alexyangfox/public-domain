@@ -1,0 +1,547 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>SMARTALLOC: Smart Memory Allocation With Checking</title>
+<link rel="stylesheet" href="standard_screen.css" type="text/css" />
+<style type="text/css">
+    tt, code, pre {
+	font-weight: bold;
+    }
+</style>
+<meta name="author" content="John Walker" />
+<meta name="description" content="SMARTALLOC: Smart Memory Allocation With Orphaned Buffer Detection" />
+<meta name="keywords" content="smartalloc, malloc, orphan, buffer, memory, leak" />
+</head>
+
+<body class="standard">
+<center>
+<h1><font color="#0000D8"><img src="smartall.png" width="444" height="68" alt="SMARTALLOC" /></font></h1>
+<h3><font color="#0000D8">Smart Memory Allocation With Orphaned Buffer Detection
+</font></h3>
+</center>
+
+<hr />
+
+<p class="j">
+Few things are as embarrassing as a program that leaks, yet few errors 
+are so easy to commit or as difficult to track down in a large, 
+complicated program as failure to release allocated memory. SMARTALLOC 
+replaces the standard C library memory allocation functions with 
+versions which keep track of buffer allocations and releases and report 
+all orphaned buffers at the end of program execution. By including this 
+package in your program during development and testing, you can 
+identify code that loses buffers right when it's added and most easily 
+fixed, rather than as part of a crisis debugging push when the problem 
+is identified much later in the testing cycle (or even worse, when the 
+code is in the hands of a customer). When program testing is complete, 
+simply recompiling with different flags removes SMARTALLOC from your 
+program, permitting it to run without speed or storage penalties.
+</p>
+
+<p class="j">
+In addition to detecting orphaned buffers, SMARTALLOC also helps to 
+find other common problems in management of dynamic storage including 
+storing before the start or beyond the end of an allocated buffer, 
+referencing data through a pointer to a previously released buffer, 
+attempting to release a buffer twice or releasing storage not
+obtained  from the allocator, and assuming the initial contents of
+storage  allocated by functions that do not guarantee a known value. 
+SMARTALLOC's checking does not usually add a large amount of overhead 
+to a program (except for programs which use <tt>realloc()</tt>
+extensively; see below). SMARTALLOC focuses on proper storage 
+management rather than internal consistency of the heap as checked by 
+the <code>malloc_debug</code> facility available on some systems.
+SMARTALLOC does  not conflict with <code>malloc_debug</code> and both
+may be used together, if you  wish. SMARTALLOC makes no assumptions
+regarding the internal structure  of the heap and thus should be
+compatible with any C language  implementation of the standard memory
+allocation functions.
+</p>
+
+<h3>Installing SMARTALLOC</h3>
+<p class="j">
+SMARTALLOC is provided as a Zipped archive, <a
+href="smartall.zip">smartall.zip</a>;  see the download instructions
+below.
+</p>
+
+<p class="j">
+To install SMARTALLOC in your program, simply add the statement:
+</p>
+
+<pre>
+<code>#include "smartall.h"</code>
+</pre>
+
+<p class="j">
+to every C program file which calls any of the memory allocation 
+functions (<tt>malloc</tt>, <tt>calloc</tt>, <tt>free</tt>, etc.). 
+SMARTALLOC must be used for all memory allocation with a program, so 
+it's best to add the <code>#include</code> of
+&ldquo;<code>smartall.h</code>&rdquo; to the omnibus  include file for
+your entire program, if you have such a thing. Next,  define the
+symbol SMARTALLOC in the compilation before the inclusion of
+<code>smartall.h</code>. I usually do this by having my
+<code>Makefile</code> add the &ldquo;<tt>-DSMARTALLOC</tt>&rdquo; 
+option to the C compiler for non-production builds. You can define
+the  symbol manually, if you prefer, by adding the statement:
+</p>
+
+<pre>
+<code>#define SMARTALLOC</code>
+</pre>
+
+<p class="j">
+before the <code>#include</code> of
+&ldquo;<code>smartall.h</code>&rdquo;.
+</p>
+
+<p class="j">
+At the point where your program is all done and ready to relinquish 
+control to the operating system, add the call:
+</p>
+
+<p class="j">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sm_dump(</tt><em>datadump</em><tt>);</tt>
+</p>
+
+<p class="j">
+where <em>datadump</em> specifies whether the contents of orphaned 
+buffers are to be dumped in addition printing to their size and place 
+of allocation. The data are dumped only if <em>datadump</em> is 
+nonzero, so most programs will normally use
+&ldquo;<tt>sm_dump(0);</tt>&rdquo;.  If a mysterious orphaned buffer
+appears that can't be identified from  the information this prints
+about it, replace the statement with
+&ldquo;<tt>sm_dump(1)</tt>;&rdquo;.  Usually the dump of the buffer's
+data will furnish the additional clues  you need to excavate and
+extirpate the elusive error that left the  buffer allocated.
+</p>
+
+<p class="j">
+Finally, add the files &ldquo;<code>smartall.h</code>&rdquo; and 
+&ldquo;<code>smartall.c</code>&rdquo; from this release to your source
+directory, make  dependencies, and linker input. You needn't make
+inclusion of  <code>smartall.c</code> in your link optional; if
+compiled with SMARTALLOC not  defined it generates no code, so you may
+always include it knowing it  will waste no storage in production
+builds. Now when you run your  program, if it leaves any buffers
+around when it's done, each will be  reported by <tt>sm_dump()</tt> on
+<code>stderr</code> as follows:
+</p>
+
+<pre>
+Orphaned buffer:     120 bytes allocated at line 50 of gutshot.c
+</pre>
+
+<h3>Squelching a SMARTALLOC</h3>
+
+<p class="j">
+Usually, when you first install SMARTALLOC in an existing program 
+you'll find it nattering about lots of orphaned buffers. Some of these 
+turn out to be legitimate errors, but some are storage allocated during 
+program initialisation that, while dynamically allocated, is logically 
+static storage not intended to be released. Of course, you can get rid 
+of the complaints about these buffers by adding code to release them, 
+but by doing so you're adding unnecessary complexity and code size to 
+your program just to silence the nattering of a SMARTALLOC, so an 
+escape hatch is provided to eliminate the need to release these 
+buffers.
+</p>
+
+<p class="j">
+Normally all storage allocated with the functions <tt>malloc()</tt>,
+<tt>calloc()</tt>,  and <tt>realloc()</tt> is monitored by SMARTALLOC.
+If you make the  function call:
+</p>
+
+<pre>
+        sm_static(1);
+</pre>
+
+<p class="j">
+you declare that subsequent storage allocated by <tt>malloc()</tt>,
+<tt>calloc()</tt>,  and <tt>realloc()</tt> should not be considered
+orphaned if found to be  allocated when <tt>sm_dump()</tt> is called.
+I use a call on &ldquo;<tt>sm_static(1);</tt>&rdquo;  before I
+allocate things like program configuration tables so I don't  have to
+add code to release them at end of program time. After  allocating
+unmonitored data this way, be sure to add a call to:
+</p>
+
+<pre>
+        sm_static(0);
+</pre>
+
+<p class="j">
+to resume normal monitoring of buffer allocations. Buffers allocated 
+while <tt>sm_static(1</tt>) is in effect are not checked for having 
+been orphaned but all the other safeguards provided by SMARTALLOC 
+remain in effect. You may release such buffers, if you like; but you 
+don't have to.
+</p>
+
+<h3>Living with Libraries</h3>
+
+<p class="j">
+Some library functions for which source code is unavailable may 
+gratuitously allocate and return buffers that contain their results, or 
+require you to pass them buffers which they subsequently release. If 
+you have source code for the library, by far the best approach is to 
+simply install SMARTALLOC in it, particularly since this kind of 
+ill-structured dynamic storage management is the source of so many 
+storage leaks. Without source code, however, there's no option but to 
+provide a way to bypass SMARTALLOC for the buffers the library 
+allocates and/or releases with the standard system functions.
+</p>
+
+<p class="j">
+For each function <em>xxx</em> redefined by SMARTALLOC, a corresponding 
+routine named &ldquo;<tt>actually</tt><em>xxx</em>&rdquo; is furnished 
+which provides direct access to the underlying system function, as 
+follows:
+</p>
+
+<center>
+<table>
+    <tr>
+        <th align="left">Standard function </th>
+        <th align="left">Direct access function </th>
+    </tr>
+    <tr>
+        <td><tt>malloc(</tt><i>size</i><tt>)</tt></td>
+        <td><tt>actuallymalloc(</tt><i>size</i><tt>)</tt> </td>
+    </tr>
+    <tr>
+        <td><tt>calloc(</tt><i>nelem</i><tt>,</tt> <i>elsize</i><tt>)</tt>
+             </td>
+        <td><tt>actuallycalloc(</tt><i>nelem</i>, <i>elsize</i><tt>)</tt>
+             </td>
+    </tr>
+    <tr>
+        <td><tt>realloc(</tt><i>ptr</i><tt>,</tt> <i>size</i><tt>)</tt> </td>
+        <td><tt>actuallyrealloc(</tt><i>ptr</i>, <i>size</i><tt>)</tt> </td>
+    </tr>
+    <tr>
+        <td><tt>free(</tt><i>ptr</i><tt>)</tt> </td>
+        <td><tt>actuallyfree(</tt><i>ptr</i><tt>)</tt> </td>
+    </tr>
+</table>
+</center>
+
+<p class="j">
+For example, suppose there exists a system library function named
+&ldquo;<tt>getimage()</tt>&rdquo;  which reads a raster image file and
+returns the address of a buffer  containing it. Since the library
+routine allocates the image directly  with <tt>malloc()</tt>, you
+can't use SMARTALLOC's <tt>free()</tt>, as  that call expects
+information placed in the buffer by SMARTALLOC's  special version of
+<tt>malloc()</tt>, and hence would report an error.  To release the
+buffer you should call <tt>actuallyfree()</tt>, as in  this code
+fragment:
+</p>
+
+<pre>
+        struct image *ibuf = getimage("ratpack.img");
+        display_on_screen(ibuf);
+        actuallyfree(ibuf);
+</pre>
+
+<p class="j">
+Conversely, suppose we are to call a library function,
+&ldquo;<tt>putimage()</tt>&rdquo;,  which writes an image buffer into
+a file and then releases the buffer  with <tt>free()</tt>. Since the
+system <tt>free()</tt> is being called,  we can't pass a buffer
+allocated by SMARTALLOC's allocation routines,  as it contains special
+information that the system <tt>free()</tt> doesn't expect to be
+there. The following code uses <tt>actuallymalloc()</tt> to obtain the
+buffer passed to such a routine.
+</p>
+
+<pre>
+        struct image *obuf = 
+           (struct image *) actuallymalloc(sizeof(struct image));
+        dump_screen_to_image(obuf);
+        putimage("scrdump.img", obuf);  /* putimage() releases obuf */
+</pre>
+
+<p class="j">
+It's unlikely you'll need any of the &ldquo;actually&rdquo; calls
+except  under very odd circumstances (in four products and three
+years, I've  only needed them once), but they're there for the rare
+occasions that  demand them. Don't use them to subvert the error
+checking of  SMARTALLOC; if you want to disable orphaned buffer
+detection, use the <tt>sm_static(1)</tt> mechanism described above.
+That way you don't forfeit all the other  advantages of SMARTALLOC as
+you do when using <tt>actuallymalloc()</tt> and
+<tt>actuallyfree()</tt>.
+</p>
+
+<h3>SMARTALLOC Details</h3>
+
+<p class="j">
+When you include &ldquo;<code>smartall.h</code>&rdquo; and define
+SMARTALLOC, the  following standard system library functions are
+redefined with the  <code>#define</code> mechanism to call
+corresponding functions within <code>smartall.c</code> instead. (For
+details of the redefinitions, please refer to 
+<code>smartall.h</code>.)
+</p>
+
+<pre>
+        void *malloc(size_t size)
+        void *calloc(size_t nelem, size_t elsize)
+        void *realloc(void *ptr, size_t size)
+        void free(void *ptr)
+        void cfree(void *ptr)
+</pre>
+
+<p class="j">
+<tt>cfree()</tt> is a historical artefact identical to <tt>free()</tt>.
+</p>
+
+<p class="j">
+In addition to allocating storage in the same way as the standard 
+library functions, the SMARTALLOC versions expand the buffers they 
+allocate to include information that identifies where each buffer was 
+allocated and to chain all allocated buffers together. When a buffer
+is  released, it is removed from the allocated buffer chain. A call on
+<tt>sm_dump()</tt> is able, by scanning the chain of allocated
+buffers, to find all  orphaned buffers. Buffers allocated while
+<tt>sm_static(1)</tt> is in  effect are specially flagged so that,
+despite appearing on the  allocated buffer chain, <tt>sm_dump()</tt>
+will not deem them orphans.
+</p>
+
+<p class="j">
+When a buffer is allocated by <tt>malloc()</tt> or expanded with
+<tt>realloc()</tt>,  all bytes of newly allocated storage are set to
+the hexadecimal value  0x55 (alternating one and zero bits). Note that
+for <tt>realloc()</tt> this applies only to the bytes added at the end
+of buffer; the  original contents of the buffer are not modified.
+Initialising  allocated storage to a distinctive nonzero pattern is
+intended to catch  code that erroneously assumes newly allocated
+buffers are cleared to  zero; in fact their contents are random. The
+<tt>calloc()</tt> function, defined as returning a buffer cleared to
+zero, continues to  zero its buffers under SMARTALLOC.
+</p>
+
+<p class="j">
+Buffers obtained with the SMARTALLOC functions contain a special 
+sentinel byte at the end of the user data area. This byte is set to a 
+special key value based upon the buffer's memory address. When the 
+buffer is released, the key is tested and if it has been overwritten
+an  assertion in the <tt>free</tt> function will fail. This catches
+incorrect  program code that stores beyond the storage allocated for
+the buffer.  At <tt>free()</tt> time the queue links are also
+validated and an  assertion failure will occur if the program has
+destroyed them by  storing before the start of the allocated storage.
+</p>
+
+<p class="j">
+In addition, when a buffer is released with <tt>free()</tt>, its 
+contents are immediately destroyed by overwriting them with the 
+hexadecimal pattern 0xAA (alternating bits, the one's complement of
+the  initial value pattern). This will usually trip up code that keeps
+a  pointer to a buffer that's been freed and later attempts to
+reference  data within the released buffer. Incredibly, this is
+<em>legal</em> in  the standard Unix memory allocation package, which
+permits programs to  <code>free()</code> buffers, then raise them from
+the grave with <tt>realloc()</tt>.  Such program &ldquo;logic&rdquo;
+should be fixed, not accommodated, and  SMARTALLOC brooks no such
+&ldquo;<a href="/etexts/www/Bible/John.html#11">Lazarus</a>
+buffer&rdquo; nonsense.
+</p>
+
+<p class="j">
+Some C libraries allow a zero size argument in calls to
+<tt>malloc()</tt>.  Since this is far more likely to indicate a
+program error than a  defensible programming stratagem, SMARTALLOC
+disallows it with an  assertion.
+</p>
+
+<p class="j">
+When the standard library <tt>realloc()</tt> function is called to 
+expand a buffer, it attempts to expand the buffer in place if
+possible,  moving it only if necessary. Because SMARTALLOC must place
+its own  private storage in the buffer and also to aid in error
+detection, its  version of <tt>realloc()</tt> always moves and copies
+the buffer except  in the trivial case where the size of the buffer is
+not being changed.  By forcing the buffer to move on every call and
+destroying the contents  of the old buffer when it is released,
+SMARTALLOC traps programs which  keep pointers into a buffer across a
+call on <tt>realloc()</tt> which  may move it. This strategy may prove
+very costly to programs which make  extensive use of
+<tt>realloc()</tt>. If this proves to be a problem,  such programs may
+wish to use <tt>actuallymalloc()</tt>, <tt>actuallyrealloc()</tt>, 
+and <tt>actuallyfree()</tt> for such frequently-adjusted buffers, 
+trading error detection for performance. Although not specified in
+the  System V Interface Definition, many C library implementations of
+<tt>realloc()</tt> permit an old buffer argument of <code>NULL</code>,
+causing <tt>realloc()</tt> to  allocate a new buffer. The SMARTALLOC
+version permits this.
+</p>
+
+<h3>When SMARTALLOC is Disabled</h3>
+
+<p class="j">
+When SMARTALLOC is disabled by compiling a program with the symbol 
+SMARTALLOC not defined, calls on the functions otherwise redefined by 
+SMARTALLOC go directly to the system functions. In addition, 
+compile-time definitions translate calls on the
+&ldquo;<tt>actually</tt>&hellip;<tt>()</tt>&rdquo;  functions into the
+corresponding library calls;
+&ldquo;<tt>actuallymalloc(100)</tt>&rdquo;,  for example, compiles
+into &ldquo;<tt>malloc(100)</tt>&rdquo;. The two  special SMARTALLOC
+functions, <tt>sm_dump()</tt> and <tt>sm_static()</tt>,  are defined
+to generate no code (hence the null statement). Finally, if 
+SMARTALLOC is not defined, compilation of the file
+<code>smartall.c</code> generates  no code or data at all, effectively
+removing it from the program even  if named in the link instructions.
+</p>
+
+<p class="j">
+Thus, except for unusual circumstances, a program that works with 
+SMARTALLOC defined for testing should require no changes when built 
+without it for production release.
+</p>
+
+<h3>The <code>alloc()</code> Function</h3>
+
+<p class="j">
+Many programs I've worked on use very few direct calls to
+<tt>malloc()</tt>,  using the identically declared <tt>alloc()</tt>
+function instead. The <tt>alloc()</tt> function detects out-of-memory
+conditions and aborts, removing the need for  error checking on every
+call of <tt>malloc()</tt> (and the temptation  to skip checking for
+out-of-memory).
+</p>
+
+<p class="j">
+As a convenience, SMARTALLOC supplies a compatible version of <tt>alloc()</tt>
+in the file <code>alloc.c</code>, with its definition in the file <code>alloc.h</code>. This 
+version of <tt>alloc()</tt> is sensitive to the definition of 
+SMARTALLOC and cooperates with SMARTALLOC's orphaned buffer detection. 
+In addition, when SMARTALLOC is defined and <tt>alloc()</tt> detects an 
+out of memory condition, it takes advantage of the SMARTALLOC 
+diagnostic information to identify the file and line number of the call 
+on <tt>alloc()</tt> that failed.
+</p>
+
+<h3>Overlays and Underhandedness</h3>
+
+<p class="j">
+String constants in the C language are considered to be static arrays 
+of characters accessed through a pointer constant. The arrays are 
+potentially writable even though their pointer is a constant. 
+SMARTALLOC uses the compile-time definition <tt>__FILE__</tt> to obtain 
+the name of the file in which a call on buffer allocation was 
+performed. Rather than reserve space in a buffer to save this 
+information, SMARTALLOC simply stores the pointer to the compiled-in 
+text of the file name. This works fine as long as the program does not 
+overlay its data among modules. If data are overlayed, the area of 
+memory which contained the file name at the time it was saved in the 
+buffer may contain something else entirely when <tt>sm_dump()</tt> gets 
+around to using the pointer to edit the file name which allocated the 
+buffer.
+</p>
+
+<p class="j">
+If you want to use SMARTALLOC in a program with overlayed data, you'll 
+have to modify <code>smartall.c</code> to either copy the file name to a 
+fixed-length field added to the <tt>abufhead</tt> structure, or else 
+allocate storage with <tt>malloc()</tt>, copy the file name there, and 
+set the <tt>abfname</tt> pointer to that buffer, then remember to 
+release the buffer in <tt>sm_free</tt>. Either of these approaches are 
+wasteful of storage and time, and should be considered only if there is 
+no alternative. Since most initial debugging is done in non-overlayed 
+environments, the restrictions on SMARTALLOC with data overlaying may 
+never prove a problem. Note that conventional overlaying of code, by 
+far the most common form of overlaying, poses no problems for 
+SMARTALLOC; you need only be concerned if you're using exotic tools for 
+data overlaying on MS-DOS or other address-space-challenged systems.
+</p>
+
+<p class="j">
+Since a C language &ldquo;constant&rdquo; string can actually be written 
+into, most C compilers generate a unique copy of each string used in a 
+module, even if the same constant string appears many times. In modules 
+that contain many calls on allocation functions, this results in 
+substantial wasted storage for the strings that identify the file name. 
+If your compiler permits optimisation of multiple occurrences of 
+constant strings, enabling this mode will eliminate the overhead for 
+these strings. Of course, it's up to you to make sure choosing this 
+compiler mode won't wreak havoc on some other part of your program.
+</p>
+
+<h3>Test and Demonstration Program</h3>
+
+<p class="j">
+A test and demonstration program, <code>smtest.c</code>, is supplied with 
+SMARTALLOC. You can build this program with the <code>Makefile</code> included. 
+Please refer to the comments in <code>smtest.c</code> and the <code>Makefile</code> for 
+information on this program. If you're attempting to use SMARTALLOC on 
+a new machine or with a new compiler or operating system, it's a wise 
+first step to check it out with <code>smtest</code> first.
+</p>
+
+<h3>Invitation to the Hack</h3>
+
+<p class="j">
+SMARTALLOC is not intended to be a panacea for storage management 
+problems, nor is it universally applicable or effective; it's another 
+weapon in the arsenal of the defensive professional programmer 
+attempting to create reliable products. It represents the current state 
+of evolution of expedient debug code which has been used in several 
+commercial software products which have, collectively, sold more than 
+third of a million copies in the retail market, and can be expected to 
+continue to develop through time as it is applied to ever more 
+demanding projects.
+</p>
+
+<p class="j">
+The version of SMARTALLOC here has been tested on a Sun SPARCStation, 
+Silicon Graphics Indigo&sup2;, and on MS-DOS using both Borland and 
+Microsoft C. Moving from compiler to compiler requires the usual small 
+changes to resolve disputes about prototyping of functions, whether the 
+type returned by buffer allocation is <code>char&nbsp;*</code> or <code>void&nbsp;*</code>, 
+and so forth, but following those changes it works in a variety of
+environments. I hope you'll find SMARTALLOC as useful for 
+your projects as I've found it in mine.
+</p>
+
+<h2><a href="smartall.zip"><img src="/images/icons/file.png" alt=""
+    align="middle" width="40" height="40" border="0" /></a> <a href="smartall.zip">Download smartall.zip</a> (Zipped archive)</h2>
+
+<p class="j">
+    SMARTALLOC is provided as <a href="smartall.zip">smartall.zip</a>, a
+    <a href="http://www.info-zip.org/" target="_blank">Zipped</a> archive containing
+    source code, documentation, and a
+    <code>Makefile</code> to build the software under Unix.
+</p>
+
+
+<h3>Copying</h3>
+
+<blockquote>
+<p class="j">
+This software is in the public domain. Permission to use, copy, modify, 
+and distribute this software and its documentation for any purpose and 
+without fee is hereby granted, without any conditions or restrictions. 
+This software is provided &ldquo;as is&rdquo; without express or implied 
+warranty.
+</p>
+</blockquote>
+
+<hr />
+<address>
+by <a href="/">John Walker</a><br />
+Release 1: September 10th, 1989<br />
+Release 2: October 30th, 1998<br />
+Release 3: February 20th, 2002<br />
+Documentation revised: October 14th, 2007
+</address>
+</body>
+</html>

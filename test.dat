@@ -1,0 +1,5 @@
+Orphaned buffer:     120 bytes allocated at line 53 of smtest.c
+Orphaned buffer:     200 bytes allocated at line 54 of smtest.c
+Orphaned buffer:      40 bytes allocated at line 55 of smtest.c
+Orphaned buffer:      55 bytes allocated at line 62 of smtest.c
+No orphaned buffer messages should follow this line.
