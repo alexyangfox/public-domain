@@ -1,0 +1,64 @@
+|Discretization into bins of size 0
+|
+|Discretization of Attribute: "Refractive Index"
+|* Note: attribute "Refractive Index" had only one value
+|  (only one bin was used). 
+|
+|Bin0: (-INF, +INF)
+|
+|Discretization of Attribute: "Sodium"
+|
+|Bin0: (-INF, 14.13999)
+|Bin1: [14.13999,+INF)
+|
+|Discretization of Attribute: "Magnesium"
+|
+|Bin0: (-INF, 2.38999)
+|Bin1: [2.38999,+INF)
+|
+|Discretization of Attribute: "Aluminum"
+|
+|Bin0: (-INF, 1.40999)
+|Bin1: [1.40999,1.78999)
+|Bin2: [1.78999,+INF)
+|
+|Discretization of Attribute: "Silicon"
+|* Note: attribute "Silicon" had only one value
+|  (only one bin was used). 
+|
+|Bin0: (-INF, +INF)
+|
+|Discretization of Attribute: "Potassium"
+|
+|Bin0: (-INF, 0.07999)
+|Bin1: [0.07999,+INF)
+|
+|Discretization of Attribute: "Calcium"
+|
+|Bin0: (-INF, 8.42999)
+|Bin1: [8.42999,10.08999)
+|Bin2: [10.08999,10.55999)
+|Bin3: [10.55999,+INF)
+|
+|Discretization of Attribute: "Barium"
+|
+|Bin0: (-INF, 0.39999)
+|Bin1: [0.39999,+INF)
+|
+|Discretization of Attribute: "Iron"
+|* Note: attribute "Iron" had only one value
+|  (only one bin was used). 
+|
+|Bin0: (-INF, +INF)
+|MLC++ discretize utility
+building_windows_float_processed, building_windows_non_float_processed, vehicle_windows_float_processed, vehicle_windows_non_float_processed, containers, tableware, headlamps.
+
+Refractive Index: ignore.
+Sodium: -Inf-14\.13999, 14\.13999-Inf.
+Magnesium: -Inf-2\.38999, 2\.38999-Inf.
+Aluminum: -Inf-1\.40999, 1\.40999-1\.78999, 1\.78999-Inf.
+Silicon: ignore.
+Potassium: -Inf-0\.07999, 0\.07999-Inf.
+Calcium: -Inf-8\.42999, 8\.42999-10\.08999, 10\.08999-10\.55999, 10\.55999-Inf.
+Barium: -Inf-0\.39999, 0\.39999-Inf.
+Iron: ignore.

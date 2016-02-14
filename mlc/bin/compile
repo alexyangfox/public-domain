@@ -1,0 +1,39 @@
+#!/bin/tcsh
+#Compile MLC program for library
+#By Ronny Kohavi  9/5/93
+# Updated, Greg Snyder Mon Jan  9  1995
+
+
+if ("$1" == "") then
+  echo Missing first argument
+  exit 2
+else if ("$2" == "") then
+  echo Missing second argument
+  exit 2
+endif
+
+# generate writable files
+umask 002 
+if (-r $1) rm -f $1
+
+set rep = ""
+if ("$CFRONT_COMPILE" == "yes") then
+   set rep = -ptr$GLOBALREP
+endif
+
+# CC -c $2 |& awk -f ~mlcadmin/bin/cc.awk # Old CC was too verbose.
+# Don't confuse header files with other libraries
+if ("$CCECHO" == "yes")  echo CC $rep $CCFLAGS -c $2
+CC $rep $CCFLAGS -c $2 |& tee /tmp/compile$1.$$.out
+set pgmStatus = $status
+if ($CFRONT_COMPILE != "yes" && -s /tmp/compile$1.$$.out) set pgmStatus = 1
+rm /tmp/compile$1.$$.out
+
+if ($pgmStatus) then 
+  rm -f $1
+  echo "*** compilation failed ***"
+  exit 2
+endif
+
+
+

@@ -1,0 +1,11 @@
+t_StatData executing
+3, 4, 5, 6, 8
+low=2, high=9
+low=3, high=8
+low=4, high=7
+low=5, high=6
+BarChart[{2, 1, 2, 0, 2, 1}, Ticks->{{{1, -6.19},{2, -4.19},{3, -2.19},{4, -0.19},{5, 1.81},{6, 3.81}}, Automatic}]
+mean is -2.1875
+1, 2, 3
+4, 5
+1, 2, 3, 4, 5

@@ -1,0 +1,122 @@
+Inducer: t_Bootstrap id3 inducer
+Number of times: 1
+Training list: young, myope, no, reduced, no contact lenses.
+young, myope, no, normal, soft contact lenses.
+young, myope, yes, reduced, no contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+young, hypermetrope, yes, reduced, no contact lenses.
+young, hypermetrope, yes, normal, hard contanct lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+pre-presbyopic, myope, nInducer: my c45 inducer
+Number of times: 2
+Training list: young, myope, no, reduced, no contact lenses.
+young, myope, no, normal, soft contact lenses.
+young, myope, yes, reduced, no contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+young, hypermetrope, yes, reduced, no contact lenses.
+young, hypermetrope, yes, normal, hard contanct lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+pre-presbyopic, myope, no, normal, soft contact lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+pre-presbyopic, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+presbyopic, myope, no, reduced, no contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+presbyopic, myope, yes, reduced, no contact lenses.
+presbyopic, myope, yes, normal, hard contanct lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+presbyopic, hypermetrope, yes, normal, no contact lenses.
+
+Stratification: Training: 0/4/5/15/  Test: 0/4/5/15/
+Individual accuracy: 0.916667
+Total samples: 24	Unique Used Samples: 15	Unused Samples: 9
+bootstrap sample:
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, myope, no, normal, soft contact lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+young, myope, no, normal, soft contact lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+young, hypermetrope, yes, normal, hard contanct lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+young, myope, yes, reduced, no contact lenses.
+
+unused sample:
+young, myope, no, reduced, no contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+young, hypermetrope, yes, reduced, no contact lenses.
+presbyopic, myope, no, reduced, no contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+presbyopic, myope, yes, reduced, no contact lenses.
+presbyopic, myope, yes, normal, hard contanct lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+presbyopic, hypermetrope, yes, normal, no contact lenses.
+
+Stratification: Training: 0/2/8/14/  Test: 0/2/0/7/
+Individual accuracy: 0.758667
+Total samples: 24	Unique Used Samples: 16	Unused Samples: 8
+bootstrap sample:
+young, myope, no, normal, soft contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+young, hypermetrope, yes, reduced, no contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+presbyopic, myope, yes, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+presbyopic, myope, yes, normal, hard contanct lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+young, hypermetrope, yes, normal, hard contanct lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+young, hypermetrope, yes, reduced, no contact lenses.
+pre-presbyopic, myope, no, normal, soft contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+young, hypermetrope, yes, normal, hard contanct lenses.
+young, myope, no, normal, soft contact lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+
+unused sample:
+young, myope, no, reduced, no contact lenses.
+young, myope, yes, reduced, no contact lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+presbyopic, myope, no, reduced, no contact lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+presbyopic, hypermetrope, yes, normal, no contact lenses.
+
+Stratification: Training: 0/7/7/10/  Test: 0/0/0/8/
+Individual accuracy: 0.890333
+Accuracy: 82.45% +- 6.58% (75.87% - 89.03%)
+c4.5 accuracy is 0.8245
+Running C4.5 manually yields 0.666667, 0.875 and apparent 0.916667 with the average 0.8245

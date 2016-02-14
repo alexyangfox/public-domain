@@ -1,0 +1,15 @@
+Training ... 
+Graph has 70 nodes, and 53 leaves.
+Testing red and yellow jacket subgraphs
+Conflict Number:62
+Testing red and green jacket subgraphs
+Conflict Number:84
+Testing red and blue jacket subgraphs
+Conflict Number:83
+Testing yellow and green jacket subgraphs
+Conflict Number:52
+Testing yellow and blue jacket subgraphs
+Conflict Number:50
+Testing green and blue jacket subgraphs
+Conflict Number:44
+Testing the connectivity...

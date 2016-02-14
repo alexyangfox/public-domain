@@ -1,0 +1,13 @@
+
+t_ProjectInd testing start.
+Projected Categorizer Results
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 420.  Number incorrect: 12
+Generalization accuracy: 96.10%.  Memorization accuracy: 100.00%
+Accuracy: 97.22% +- 0.79% [95.21% - 98.40%]
+
+Wrapped Inducer: ProjectInd: wrapped ID3 Inducer used.
+
+   Testing error conditions.
+t_ProjectInd testing competed.

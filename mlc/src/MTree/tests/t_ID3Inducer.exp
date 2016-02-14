@@ -1,0 +1,136 @@
+t_ID3Inducer executing
+ID3 Inducer Results
+Number of training instances: 4
+Number of test instances: 6.  Unseen: 2,  seen 4.
+Number correct: 5.  Number incorrect: 1
+Generalization accuracy: 50.00%.  Memorization accuracy: 100.00%
+Accuracy: 83.33% +- 16.67% [43.65% - 96.99%]
+Id3 overall accuracy: 0.833333
+Id3 memorized accuracy: 1
+Id3 generalized accuracy: 0.5
+Number of training instances: 4
+Number of test instances: 6.  Unseen: 2,  seen 4.
+Number correct: 5.  Number incorrect: 1
+Generalization accuracy: 50.00%.  Memorization accuracy: 100.00%
+Accuracy: 83.33% +- 16.67% [43.65% - 96.99%]
+Incorrect classifications ... 
+sunny, false, Play.
+Displaying correct classifications ... 
+sunny, true, Don't Play.
+overcast, false, Play.
+rain, true, Don't Play.
+overcast, true, Play.
+rain, false, Don't Play.
+
+Displaying confusion matrix... 
+ (a)  (b)    <-- classified as 
+---- ---- 
+   2    1    (a): class Play
+   0    3    (b): class Don't Play
+
+Displaying category distribution ... 
+Class Play : 2
+Class Don't Play : 4
+Num right = 4
+Num nodes = 5
+Rooted Decision Graph Categorizer t_ID3Inducer
+Root: outlook (#=4/E=1.000/MI=0.631)
+
+[0](outlook (#=4/E=1.000/MI=0.631)) : [0]--(?)-->[1][0]--(sunny)-->[2][0]--(overcast)-->[3][0]--(rain)-->[4]
+[1](Play (#=0)) : 
+[2](Don't Play (#=1)) : 
+[3](Play (#=2)) : 
+[4](Don't Play (#=1)) : 
+
+ID3 Inducer Results
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 350.  Number incorrect: 82
+Generalization accuracy: 73.38%.  Memorization accuracy: 100.00%
+Accuracy: 81.02% +- 1.89% [77.05% - 84.44%]
+Id3 overall accuracy: 0.810185
+Id3 memorized accuracy: 1
+Id3 generalized accuracy: 0.733766
+Rooted Decision Graph Categorizer t_ID3InducerReal
+Root: Uniformity of Cell Size (#=683/E=0.934/MI=0.589)
+
+[0](Uniformity of Cell Size (#=683/E=0.934/MI=0.589)) : [0]--(?)-->[1][0]--(<= 2.5)-->[2][0]--(> 2.5)-->[21]
+[1](benign (#=0)) : 
+[2](Bare Nuclei (#=418/E=0.188/MI=0.090)) : [2]--(?)-->[3][2]--(<= 3.5)-->[4][2]--(> 3.5)-->[11]
+[3](benign (#=0)) : 
+[4](Single Epithelial Cell Size (#=395/E=0.046/MI=0.021)) : [4]--(?)-->[5][4]--(<= 2.5)-->[6][4]--(> 2.5)-->[7]
+[5](benign (#=0)) : 
+[6](benign (#=371)) : 
+[7](Uniformity of Cell Shape (#=24/E=0.414/MI=0.414)) : [7]--(?)-->[8][7]--(<= 2.5)-->[9][7]--(> 2.5)-->[10]
+[8](benign (#=0)) : 
+[9](benign (#=22)) : 
+[10](malignant (#=2)) : 
+[11](Clump Thickness (#=23/E=0.988/MI=0.649)) : [11]--(?)-->[12][11]--(<= 3.5)-->[13][11]--(> 3.5)-->[14]
+[12](benign (#=0)) : 
+[13](benign (#=11)) : 
+[14](Bland Chromatin (#=12/E=0.650/MI=0.317)) : [14]--(?)-->[15][14]--(<= 2.5)-->[16][14]--(> 2.5)-->[20]
+[15](malignant (#=0)) : 
+[16](Marginal Adhesion (#=4/E=1.000/MI=1.000)) : [16]--(?)-->[17][16]--(<= 3.5)-->[18][16]--(> 3.5)-->[19]
+[17](malignant (#=0)) : 
+[18](malignant (#=2)) : 
+[19](benign (#=2)) : 
+[20](malignant (#=8)) : 
+[21](Uniformity of Cell Size (#=265/E=0.593/MI=0.183)) : [21]--(?)-->[22][21]--(<= 4.5)-->[23][21]--(> 4.5)-->[63]
+[22](malignant (#=0)) : 
+[23](Bare Nuclei (#=90/E=0.964/MI=0.314)) : [23]--(?)-->[24][23]--(<= 2.5)-->[25][23]--(> 2.5)-->[35]
+[24](malignant (#=0)) : 
+[25](Normal Nucleoli (#=30/E=0.650/MI=0.286)) : [25]--(?)-->[26][25]--(<= 2.5)-->[27][25]--(> 2.5)-->[28]
+[26](benign (#=0)) : 
+[27](benign (#=19)) : 
+[28](Marginal Adhesion (#=11/E=0.994/MI=0.404)) : [28]--(?)-->[29][28]--(<= 3.5)-->[30][28]--(> 3.5)-->[34]
+[29](benign (#=0)) : 
+[30](Clump Thickness (#=8/E=0.811/MI=0.467)) : [30]--(?)-->[31][30]--(<= 5.5)-->[32][30]--(> 5.5)-->[33]
+[31](benign (#=0)) : 
+[32](benign (#=5)) : 
+[33](malignant (#=3)) : 
+[34](malignant (#=3)) : 
+[35](Clump Thickness (#=60/E=0.650/MI=0.120)) : [35]--(?)-->[36][35]--(<= 6.5)-->[37][35]--(> 6.5)-->[56]
+[36](malignant (#=0)) : 
+[37](Bland Chromatin (#=28/E=0.906/MI=0.141)) : [37]--(?)-->[38][37]--(<= 3.5)-->[39][37]--(> 3.5)-->[49]
+[38](malignant (#=0)) : 
+[39](Uniformity of Cell Size (#=10/E=0.971/MI=0.281)) : [39]--(?)-->[40][39]--(<= 3.5)-->[41][39]--(> 3.5)-->[48]
+[40](benign (#=0)) : 
+[41](Uniformity of Cell Shape (#=7/E=0.985/MI=0.470)) : [41]--(?)-->[42][41]--(<= 2.5)-->[43][41]--(> 2.5)-->[44]
+[42](malignant (#=0)) : 
+[43](benign (#=2)) : 
+[44](Bare Nuclei (#=5/E=0.722/MI=0.322)) : [44]--(?)-->[45][44]--(<= 7.5)-->[46][44]--(> 7.5)-->[47]
+[45](malignant (#=0)) : 
+[46](malignant (#=3)) : 
+[47](malignant (#=2)) : 
+[48](benign (#=3)) : 
+[49](Bare Nuclei (#=18/E=0.650/MI=0.317)) : [49]--(?)-->[50][49]--(<= 6)-->[51][49]--(> 6)-->[55]
+[50](malignant (#=0)) : 
+[51](Single Epithelial Cell Size (#=6/E=1.000/MI=1.000)) : [51]--(?)-->[52][51]--(<= 3.5)-->[53][51]--(> 3.5)-->[54]
+[52](malignant (#=0)) : 
+[53](malignant (#=3)) : 
+[54](benign (#=3)) : 
+[55](malignant (#=12)) : 
+[56](Bare Nuclei (#=32/E=0.201/MI=0.059)) : [56]--(?)-->[57][56]--(<= 7.5)-->[58][56]--(> 7.5)-->[62]
+[57](malignant (#=0)) : 
+[58](Marginal Adhesion (#=9/E=0.503/MI=0.281)) : [58]--(?)-->[59][58]--(<= 4.5)-->[60][58]--(> 4.5)-->[61]
+[59](malignant (#=0)) : 
+[60](malignant (#=7)) : 
+[61](malignant (#=2)) : 
+[62](malignant (#=23)) : 
+[63](Bland Chromatin (#=175/E=0.125/MI=0.034)) : [63]--(?)-->[64][63]--(<= 4.5)-->[65][63]--(> 4.5)-->[78]
+[64](malignant (#=0)) : 
+[65](Clump Thickness (#=46/E=0.348/MI=0.106)) : [65]--(?)-->[66][65]--(<= 6.5)-->[67][65]--(> 6.5)-->[77]
+[66](malignant (#=0)) : 
+[67](Bare Nuclei (#=16/E=0.696/MI=0.265)) : [67]--(?)-->[68][67]--(<= 8.5)-->[69][67]--(> 8.5)-->[76]
+[68](malignant (#=0)) : 
+[69](Uniformity of Cell Shape (#=7/E=0.985/MI=0.522)) : [69]--(?)-->[70][69]--(<= 6.5)-->[71][69]--(> 6.5)-->[72]
+[70](malignant (#=0)) : 
+[71](malignant (#=3)) : 
+[72](Clump Thickness (#=4/E=0.811/MI=0.311)) : [72]--(?)-->[73][72]--(<= 5.5)-->[74][72]--(> 5.5)-->[75]
+[73](benign (#=0)) : 
+[74](benign (#=2)) : 
+[75](benign (#=2)) : 
+[76](malignant (#=9)) : 
+[77](malignant (#=30)) : 
+[78](malignant (#=129)) : 
+

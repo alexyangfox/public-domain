@@ -1,0 +1,86 @@
+testing t_CFInducer.c ... 
+-------------------------------------
+DATAFILE : monk1-full
+NORMALIZATION : NO NORMALIZATION
+CONVERSION : LOCAL
+ACCURACY : 0.62037
+-------------------------------------
+
+-------------------------------------
+DATAFILE : monk1-full
+NORMALIZATION : EXTREME
+CONVERSION : LOCAL
+ACCURACY : 0.62037
+-------------------------------------
+
+-------------------------------------
+DATAFILE : monk1-full
+NORMALIZATION : NORMAL DISTANCE
+CONVERSION : LOCAL
+ACCURACY : 0.62037
+-------------------------------------
+
+-------------------------------------
+DATAFILE : monk1-full
+NORMALIZATION : NO NORMALIZATION
+CONVERSION : BINARY
+ACCURACY : 0.546296
+-------------------------------------
+
+-------------------------------------
+DATAFILE : monk1-full
+NORMALIZATION : EXTREME
+CONVERSION : BINARY
+ACCURACY : 0.546296
+-------------------------------------
+
+-------------------------------------
+DATAFILE : monk1-full
+NORMALIZATION : NORMAL DISTANCE
+CONVERSION : BINARY
+ACCURACY : 0.546296
+-------------------------------------
+
+-------------------------------------
+DATAFILE : vote
+NORMALIZATION : NO NORMALIZATION
+CONVERSION : LOCAL
+ACCURACY : 0.985185
+-------------------------------------
+
+-------------------------------------
+DATAFILE : vote
+NORMALIZATION : EXTREME
+CONVERSION : LOCAL
+ACCURACY : 0.985185
+-------------------------------------
+
+-------------------------------------
+DATAFILE : vote
+NORMALIZATION : NORMAL DISTANCE
+CONVERSION : LOCAL
+ACCURACY : 0.985185
+-------------------------------------
+
+-------------------------------------
+DATAFILE : vote
+NORMALIZATION : NO NORMALIZATION
+CONVERSION : BINARY
+ACCURACY : 0.97037
+-------------------------------------
+
+-------------------------------------
+DATAFILE : vote
+NORMALIZATION : EXTREME
+CONVERSION : BINARY
+ACCURACY : 0.97037
+-------------------------------------
+
+-------------------------------------
+DATAFILE : vote
+NORMALIZATION : NORMAL DISTANCE
+CONVERSION : BINARY
+ACCURACY : 0.97037
+-------------------------------------
+
+Success!

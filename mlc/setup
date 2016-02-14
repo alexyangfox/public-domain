@@ -1,0 +1,131 @@
+#!source_this do not execute it (this line won't let you execute it)
+# Setup MLC environment names for users of the MLC++ library.
+# This file should be executed by doing "source <file>" from your .login
+# Also add "source $MLCDIR/aliases" in your .cshrc
+# We are assuming csh
+# By Ronny Kohavi  2/21/94.
+# Revised, Greg Snyder Mon Jan  9  1995
+# Revised, Ronny Kohavi 10/6/95 for SGI. 
+
+
+# set verbose = 1
+
+# MLCDIR is the directory where MLC++ resides.
+setenv MLCDIR  ~/mlc
+setenv MLCPATH ".:$MLCDIR/db"
+if (! $?cdpath) set cdpath=($MLCDIR/src)
+setenv OPTION_DUMP ~/.mlcoptions
+# TMPDIR is used by "ar"
+setenv TMPDIR "/usr/tmp"
+
+# Developers should be at debug level 1
+if ($?MLCDEV) then
+  setenv DEBUGLEVEL 1 
+  setenv LOGLEVEL 1
+  setenv DUMPCORE yes
+endif
+
+# These XXX_COMPILE affect templ_compile and below.  Only one must be true
+#  MLCSOCKETLIBS is the link flags you need for sockets and bcopy
+setenv CFRONT_COMPILE no
+setenv SGI_COMPILE no
+setenv RUNRANLIB 0
+setenv CCINCLUDE ""
+setenv TAGSFLAGS "-a -o ${MLCDIR}/src/TAGS"
+set os=`uname -sr`
+if ("$os" == "IRIX 5.3") then
+  setenv SGI_COMPILE yes
+  setenv MLCSOCKETLIBS ""
+  setenv MALLOC_FASTCHK
+  setenv MALLOC_VERBOSE 0
+  setenv MALLOC_FULLWARN
+  setenv MALLOC_CLEAR_FREE
+  setenv MALLOC_CLEAR_MALLOC
+  setenv INCCCFLAGS "-fullwarn -I. -I$MLCDIR/inc $CCINCLUDE -I$MLCDIR/CClibg++/include -DFUNCPROTO -DIRIX $MLCDIR/src/MCore/basicCore.o"
+  setenv CFLAGS  "-I. -I$MLCDIR/inc -DFUNCPROTO" 
+  setenv FASTCCFLAGS "-O2 -Olimit 3000 $INCCCFLAGS -DFAST"
+  setenv ORGCCFLAGS "-g $INCCCFLAGS"
+else if ("$os" == "SunOS 5.3") then
+  setenv CFRONT_COMPILE yes
+  setenv MLCSOCKETLIBS "-lsocket -lucb"
+  setenv CCINCLUDE "-I/usr/local/CenterLine/clc++/sparc-solaris2/incl"
+  setenv INCCCFLAGS "-I. -I$MLCDIR/inc $CCINCLUDE -I/usr/local/include -I$MLCDIR/CClibg++/include -I/usr/include -DFUNCPROTO -DSOLARIS -DCENTERLINE -DCFRONT"
+  setenv FASTCCFLAGS "-O2 -ptr./fastrepository -ptr$MLCDIR/src/mlcfastrepository $INCCCFLAGS -DFAST -DFASTINLINE"
+  setenv CFLAGS  "-I. -I$MLCDIR/inc -I/local/CenterLine/clcc/sparc-sunos4/inc\
+         -Dsun -DBSD -Dsparc -DFUNCPROTO" 
+  setenv ORGCCFLAGS "-ptr./ptrepository  -ptr$MLCDIR/src/mlcptrepository -g $INCCCFLAGS"
+else if ("$os" == "SunOS 4.1.3") then
+  setenv CFRONT_COMPILE yes
+  setenv MLCSOCKETLIBS ""
+  setenv RUNRANLIB 1
+  setenv CCINCLUDE "-I/usr/local/CenterLine/clc++/sparc-sunos4/incl"
+  setenv INCCCFLAGS "-I. -I$MLCDIR/inc $CCINCLUDE -I/usr/local/include -I$MLCDIR/CClibg++/include -I/usr/include -DFUNCPROTO -DSUNOS -DCENTERLINE -DCFRONT"
+  setenv FASTCCFLAGS  "-O2 -ptr./fastrepository -ptr$MLCDIR/src/mlcfastrepository $INCCCFLAGS -DFAST -DFASTINLINE"
+  setenv CFLAGS  "-I. -I$MLCDIR/inc -I/local/CenterLine/clcc/sparc-sunos4/inc -Dsun -DBSD -Dsparc -DFUNCPROTO" 
+  setenv ORGCCFLAGS "-ptr./ptrepository  -ptr$MLCDIR/src/mlcptrepository -g $INCCCFLAGS"
+  setenv TAGSFLAGS "-a -f ${MLCDIR}/src/TAGS"
+else
+   echo "Unrecognized compile in $MLCDIR/setup"
+endif
+
+
+# set RANDOM_OBJ to random.o on systems without random (solaris)
+setenv RANDOM_OBJ
+# CCECHO shows the compile line to CC
+setenv CCECHO no
+
+if ("$CFRONT_COMPILE" == "yes") then
+   setenv LOCALREP ./ptrepository
+   setenv GLOBALREP $MLCDIR/src/mlcptrepository
+else if ("$SGI_COMPILE" == "yes") then
+   setenv LOCALREP ./ii_files
+   setenv GLOBALREP ./ii_files
+endif
+
+
+# This is done using eval so that fastlib/proflib etc will change the
+# value.  See aliasMLC
+# we need MWrapper twice because env_inducer may be called in MWrapper
+setenv MLCLIB "lib"
+setenv ORGLIB  "lib"
+setenv FASTLIB "fastlib"
+
+setenv evalMLCLINKLIBS '-L$MLCDIR/src/$MLCLIB -lMWrapper -lMFSS -lMWrapper -lMTrans -lMGraph -lMInd -lMTree -lML -lMCore -lCCg++ -lG -lL -lm'
+setenv MLCLINKLIBS "`eval echo $evalMLCLINKLIBS`"
+
+setenv MLCMOTIFLIBS  "-lXm -lXt -lX11"
+
+set path = (. $MLCDIR/bin $MLCDIR/util $path)
+
+# Relative paths for MLC directories.  Must be relative.  Add *NEW DIRS* here.
+setenv MLCALLSRCDIRS "./src/MCore ./src/ML ./src/MTree ./src/MGraph  ./src/MWrapper ./src/MInstGen ./src/MGLD ./src/MTrans ./src/MInd ./src/MFSS ./inc ./src ./util"
+
+setenv MLCTESTDIRS "./src/MCore/tests ./src/ML/tests ./src/MTree/tests ./src/MGraph/tests ./src/MWrapper/tests ./src/MInstGen/tests ./src/MGLD/tests ./src/MTrans/tests ./src/MInd/tests ./src/MFSS/tests"
+
+setenv MLCALLDIRS "$MLCALLSRCDIRS $MLCTESTDIRS ./src/lib"
+
+# Here we make the list of all dirs, in its absolute path, which means
+#  replacing ./ with $MLCDIR, but as $MLCDIR contains /s, we have to do some
+#  fancy stuff.  Note the very, very nasty hack of echo'ing to a file and cat'
+#  ing it.  This isn't too slow, but it a result of csh being broken.
+
+
+set sedablemlc=`echo $MLCDIR | sed 's/\//\\\//g'`
+\rm -f /tmp/tmp$$
+echo $MLCALLDIRS | sed 's/\.\//'$sedablemlc'\//g' > /tmp/tmp$$
+setenv MLCABSDIRS "`cat /tmp/tmp$$`"
+unset sedablemlc
+
+# now generate the relative RCS dir list
+\rm -f /tmp/tmp$$
+echo $MLCALLDIRS | awk 'BEGIN {f=1} {while (f<=NF)  { printf "%s ",$f"/RCS"; f+=1}; printf "\n"}' > /tmp/tmp$$
+setenv MLCRCSDIRS "`cat /tmp/tmp$$`"
+\rm -f /tmp/tmp$$
+
+# This is for DOT/LEFTY
+setenv LEFTYPATH $MLCDIR/graphviz/lib/lefty
+
+setenv CCFLAGS "$ORGCCFLAGS"
+setenv LOGLEVEL 1
+
+

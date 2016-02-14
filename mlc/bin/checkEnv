@@ -1,0 +1,13 @@
+#!/bin/csh
+#Check setup
+
+if (! $?MLCDIR) then
+   echo "MLCDIR not set.  You have to 'source setup'"
+   exit 1
+endif
+
+if (! -r $MLCDIR) then
+   echo "MLCDIR, set to $MLCDIR, is unreadable"
+   exit 1
+endif
+

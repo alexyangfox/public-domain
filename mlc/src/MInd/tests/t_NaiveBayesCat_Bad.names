@@ -1,0 +1,7 @@
+| discretized from golf with extra values to produce matchless instance.
+Work, Play, Don't Play, RunAround, Throw Chairs.
+
+outlook: sunny, overcast, rain, blizard.
+temperature: 64,65,69,68,70,71, 72, 75,80,81,83,85, 232.
+humidity: 65,70,75,78,80,85,90,95,96, 101.
+windy: true, false, yes.

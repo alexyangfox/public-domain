@@ -1,0 +1,38 @@
+#!/bin/csh
+# put templates from repository into library
+# Greg Snyder, Tue Dec 20 1994
+
+
+umask 002 
+
+if ("$1" == "") then
+  echo "Missing first argument (library name)"
+  exit 2
+endif
+
+if ("$2" == "") then
+  echo "Missing second argument (template generator object)"
+  exit 2
+endif
+
+if ("$CFRONT_COMPILE" == "yes") then
+   set REPDIR=./ptrepository
+   
+   set TEMPF=${REPDIR}/bogus.o
+   touch $TEMPF
+   set olist=${REPDIR}/*.o
+   \rm -f $TEMPF
+   if ($#olist == 1) then
+     echo "no files..."
+   else
+    set olist=${REPDIR}/*.o
+    ar cr $1 $olist
+    echo "Archiving ptrepository templates to $1"
+    if ("$RUNRANLIB" == "1") ranlib $1
+   endif
+else if ("$SGI_COMPILE" == "yes") then
+   echo ar cr $1 $2
+   ar cr $1 $2
+endif
+
+

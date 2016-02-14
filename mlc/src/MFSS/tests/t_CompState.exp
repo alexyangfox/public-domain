@@ -1,0 +1,15 @@
+Evaluating state [3, 3, 3, 3, 3]: -1  (number -1): 4.47214
+Evaluating state [4, 3, 3, 3, 3]: -1  (number -1): 4.12311
+Evaluating state [2, 3, 3, 3, 3]: -1  (number -1): 5
+Evaluating state [3, 4, 3, 3, 3]: -1  (number -1): 4.12311
+Evaluating state [3, 2, 3, 3, 3]: -1  (number -1): 5
+Evaluating state [3, 3, 4, 3, 3]: -1  (number -1): 4.12311
+Evaluating state [3, 3, 2, 3, 3]: -1  (number -1): 5
+Evaluating state [3, 3, 3, 4, 3]: -1  (number -1): 4.12311
+Evaluating state [3, 3, 3, 2, 3]: -1  (number -1): 5
+Evaluating state [3, 3, 3, 3, 4]: -1  (number -1): 4.12311
+Evaluating state [3, 3, 3, 3, 2]: -1  (number -1): 5
+Evaluating state [3, 3, 3, 4, 4]: -1  (number -1): 3.74166
+Evaluating state [3, 3, 4, 4, 4]: -1  (number -1): 3.31662
+Evaluating state [3, 4, 4, 4, 4]: -1  (number -1): 2.82843
+Evaluating state [4, 4, 4, 4, 4]: -1  (number -1): 2.23607

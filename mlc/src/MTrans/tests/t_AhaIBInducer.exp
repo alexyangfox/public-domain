@@ -1,0 +1,36 @@
+testing t_AhaIBInducer.c
+ DATAFILE : crx
+ IB CLASS : IB1
+ Accuracy   : 0.75
+ DATAFILE : crx
+ IB CLASS : IB2
+ Accuracy   : 0.75
+ DATAFILE : crx
+ IB CLASS : IB3
+ Accuracy   : 0.78
+ DATAFILE : crx
+ IB CLASS : IB4
+ Accuracy   : 0.82
+ Running aha's IBL, should have warning messages 
+
+ AhaIBInducer::parse_output: Warning - Aha's IBL program issued the following portion of message:
+FATAL ERROR in translate_instance.
+
+ AhaIBInducer::parse_output: Warning - Aha's IBL program issued the following portion of message:
+FATAL ERROR in translate_instance.
+
+ AhaIBInducer::parse_output: Warning - Aha's IBL program issued the following portion of message:
+FATAL ERROR in translate_instance.
+
+ AhaIBInducer::parse_output: Warning - Aha's IBL program issued the following portion of message:
+FATAL ERROR in translate_instance.
+
+ AhaIBInducer::parse_output: Warning - Aha's IBL program issued the following portion of message:
+FATAL ERROR in translate_instance.
+
+ AhaIBInducer::parse_output: Warning - Aha's IBL program issued the following portion of message:
+FATAL ERROR in translate_instance.
+
+ AhaIBInducer::parse_output: Warning - Aha's IBL program issued the following portion of message:
+FATAL ERROR in translate_instance.
+ Accuracy : 0

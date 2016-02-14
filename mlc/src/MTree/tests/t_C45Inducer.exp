@@ -1,0 +1,3 @@
+t_C45Inducer executing
+C4.5 run yields accuracy 0.756944 (pruned), 0.766204 (unpruned)
+     size 18 (pruned), 43 (unpruned)

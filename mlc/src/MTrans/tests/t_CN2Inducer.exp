@@ -1,0 +1,11 @@
+testing t_CN2Inducer.c
+DATAFILE : monk1-full
+ACCURACY : 0.986
+
+DATAFILE : glass
+ACCURACY : 0.764
+
+DATAFILE : crx
+ACCURACY : 0.8
+
+Success!

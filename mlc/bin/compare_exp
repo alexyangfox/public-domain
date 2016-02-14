@@ -1,0 +1,62 @@
+#!/bin/csh
+# Run a program and compare expected output
+# By Ronny Kohavi  5/21/94
+# This is part of compile_tester
+# First argument is the program name (with no suffix)
+
+if ("$1" == "") then
+  echo Missing first argument (program name)
+  exit 2
+else if ("$2" == "") then
+  echo Missing debug level
+  exit 2
+else if ("$3" == "") then
+  echo Missing executable
+  exit 2
+endif
+
+setenv DEBUGLEVEL $2
+setenv SHOW_LOG_ORIGIN no
+foreach i ("" 1 2 3 4 5 6 7 8 9)
+   if (-r $1.out$i) rm -f $1.out$i
+end
+echo -n "Executing $1 at debug level $2."
+if (-r $1.cin) then
+  $3 <$1.cin >& $1.out 
+  set savestatus = $status
+else
+# remove the Fast MLC++ library string which comes from libraries compiled 
+# for fast execution (fastlib).
+# Grep fails for lines > BUFSIZ (documented!), so this doesn't work well.
+# We only print this with LOGLEVEL > 0, so this is fine now.
+#  $3 |& grep -v "Fast MLC++ library" > $1.out
+  $3 < /dev/null >& $1.out
+  set savestatus = $status
+endif
+# Make sure we get good status on everything but t_error/t_error1/t_error2
+if ($savestatus) then
+  if ($1 != "t_error" && $1 != "t_error1" && $1 != "t_error2") then
+     echo ""; echo "*** Bad status ($savestatus) from $1 ***"
+     exit 2
+  else
+     echo 't_error* generated error as expected.'
+  endif
+else if ($1 == "t_error" || $1 == "t_error1" || $1 == "t_error2") then
+     echo ""; echo "***t_error/t_error1/t_error2 terminated with good status instead of bad ***"
+     exit 2
+endif
+echo -n "  Checking output"
+if (! -r $1.exp) echo "*** Warning: no expected output file for $1 ***"
+foreach i ("" 1 2 3 4 5 6 7 8 9)
+  if (-r $1.exp$i) then
+    echo -n " $i"
+    # sdiff sometimes just gets stuck!
+    # echo "sdiff -w 80 -s $1.exp$i $1.out$i"
+    diff $1.out$i $1.exp$i
+    if ($status) then
+      echo ""; echo "*** diff failed for $1.exp$i (debuglevel $2) ***"
+      exit 2
+    endif
+  endif
+end
+echo ""

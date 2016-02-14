@@ -1,0 +1,24 @@
+#!/bin/csh
+#Verify execution of C45Tree
+
+rm -f crx-pruned.dot crx-unpruned.dot
+source $MLCDIR/bin/unsetmlc
+setenv LOGLEVEL 1
+setenv OPTION_DUMP .mlcoptions
+rm -f .mlcoptions
+setenv DEBUGLEVEL 1
+setenv DATAFILE monk1-full
+rm -f C45Tree.out
+setenv DATAFILE crx
+setenv DIST_DISP no
+setenv DISPGRAPH no
+# The warning appears on SunOS sometimes.
+C45Tree |& grep -v "wait for C4.5" >& C45Tree.out
+diff C45Tree.out C45Tree.exp
+if ($status) exit $status
+diff crx-pruned.dot crx-pruned.dot.good
+if ($status) exit $status
+diff crx-unpruned.dot crx-unpruned.dot.good
+exit $status
+
+

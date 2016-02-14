@@ -1,0 +1,3651 @@
+TDDTInducer:: training with bag
+sunny, true, Don't Play.
+overcast, false, Play.
+rain, true, Don't Play.
+overcast, true, Play.
+
+TDDTInducer::induce_decision_tree:  training set =
+sunny, true, Don't Play.
+overcast, false, Play.
+rain, true, Don't Play.
+overcast, true, Play.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 0, 2, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 1, 0, 1, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 1, 1, 
+
+  Label 1, label count=2
+  Value counts:  0, 2, 0, 
+Attribute counts
+Attribute 0  0, 1, 2, 1, 
+Attribute 1  0, 3, 1, 
+Testing attribute 0 (outlook): Mutual info is 1
+Testing attribute 1 (windy): Mutual info is 0.311278
+Creating split on attribute 0 (outlook) at level 0
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:Play (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+sunny, true, Don't Play.
+
+TDDTInducer::create_leaf_categorizer: leaf is:Don't Play (1)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+overcast, false, Play.
+overcast, true, Play.
+
+TDDTInducer::create_leaf_categorizer: leaf is:Play (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+rain, true, Don't Play.
+
+TDDTInducer::create_leaf_categorizer: leaf is:Don't Play (1)
+TDDTInducer:: training with bag
+0, 0, 0, Even.
+0, 0, 1, Odd.
+0, 1, 0, Odd.
+0, 1, 1, Even.
+1, 0, 0, Odd.
+1, 0, 1, Even.
+1, 1, 0, Even.
+1, 1, 1, Odd.
+
+TDDTInducer::induce_decision_tree:  training set =
+0, 0, 0, Even.
+0, 0, 1, Odd.
+0, 1, 0, Odd.
+0, 1, 1, Even.
+1, 0, 0, Odd.
+1, 0, 1, Even.
+1, 1, 0, Even.
+1, 1, 1, Odd.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=4
+  Value counts:  0, 2, 2, 
+
+  Label 1, label count=4
+  Value counts:  0, 2, 2, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=4
+  Value counts:  0, 2, 2, 
+
+  Label 1, label count=4
+  Value counts:  0, 2, 2, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=4
+  Value counts:  0, 2, 2, 
+
+  Label 1, label count=4
+  Value counts:  0, 2, 2, 
+Attribute counts
+Attribute 0  0, 4, 4, 
+Attribute 1  0, 4, 4, 
+Attribute 2  0, 4, 4, 
+Testing attribute 0 (Attr1): Mutual info is 0
+Testing attribute 1 (Attr2): Mutual info is 0
+Testing attribute 2 (Attr3): Mutual info is 0
+Creating split on attribute 0 (Attr1) at level 0
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:Even (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+0, 0, 0, Even.
+0, 0, 1, Odd.
+0, 1, 0, Odd.
+0, 1, 1, Even.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 2, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 2, 0, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 1, 1, 
+
+  Label 1, label count=2
+  Value counts:  0, 1, 1, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 1, 1, 
+
+  Label 1, label count=2
+  Value counts:  0, 1, 1, 
+Attribute counts
+Attribute 0  0, 4, 0, 
+Attribute 1  0, 2, 2, 
+Attribute 2  0, 2, 2, 
+Testing attribute 0 (Attr1): No reasonable split
+Testing attribute 1 (Attr2): Mutual info is 0
+Testing attribute 2 (Attr3): Mutual info is 0
+Creating split on attribute 1 (Attr2) at level 1
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:Even (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+0, 0, 0, Even.
+0, 0, 1, Odd.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 1, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 1, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 1, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 
+Attribute counts
+Attribute 0  0, 2, 0, 
+Attribute 1  0, 2, 0, 
+Attribute 2  0, 1, 1, 
+Testing attribute 0 (Attr1): No reasonable split
+Testing attribute 1 (Attr2): No reasonable split
+Testing attribute 2 (Attr3): Mutual info is 1
+Creating split on attribute 2 (Attr3) at level 2
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:Even (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+0, 0, 0, Even.
+
+TDDTInducer::create_leaf_categorizer: leaf is:Even (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+0, 0, 1, Odd.
+
+TDDTInducer::create_leaf_categorizer: leaf is:Odd (1)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+0, 1, 0, Odd.
+0, 1, 1, Even.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 1, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 1, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 1, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 
+Attribute counts
+Attribute 0  0, 2, 0, 
+Attribute 1  0, 0, 2, 
+Attribute 2  0, 1, 1, 
+Testing attribute 0 (Attr1): No reasonable split
+Testing attribute 1 (Attr2): No reasonable split
+Testing attribute 2 (Attr3): Mutual info is 1
+Creating split on attribute 2 (Attr3) at level 2
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:Even (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+0, 1, 0, Odd.
+
+TDDTInducer::create_leaf_categorizer: leaf is:Odd (1)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+0, 1, 1, Even.
+
+TDDTInducer::create_leaf_categorizer: leaf is:Even (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+1, 0, 0, Odd.
+1, 0, 1, Even.
+1, 1, 0, Even.
+1, 1, 1, Odd.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 0, 2, 
+
+  Label 1, label count=2
+  Value counts:  0, 0, 2, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 1, 1, 
+
+  Label 1, label count=2
+  Value counts:  0, 1, 1, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 1, 1, 
+
+  Label 1, label count=2
+  Value counts:  0, 1, 1, 
+Attribute counts
+Attribute 0  0, 0, 4, 
+Attribute 1  0, 2, 2, 
+Attribute 2  0, 2, 2, 
+Testing attribute 0 (Attr1): No reasonable split
+Testing attribute 1 (Attr2): Mutual info is 0
+Testing attribute 2 (Attr3): Mutual info is 0
+Creating split on attribute 1 (Attr2) at level 1
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:Even (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+1, 0, 0, Odd.
+1, 0, 1, Even.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 1, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 1, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 1, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 
+Attribute counts
+Attribute 0  0, 0, 2, 
+Attribute 1  0, 2, 0, 
+Attribute 2  0, 1, 1, 
+Testing attribute 0 (Attr1): No reasonable split
+Testing attribute 1 (Attr2): No reasonable split
+Testing attribute 2 (Attr3): Mutual info is 1
+Creating split on attribute 2 (Attr3) at level 2
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:Even (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+1, 0, 0, Odd.
+
+TDDTInducer::create_leaf_categorizer: leaf is:Odd (1)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+1, 0, 1, Even.
+
+TDDTInducer::create_leaf_categorizer: leaf is:Even (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+1, 1, 0, Even.
+1, 1, 1, Odd.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 1, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 1, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 1, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 
+Attribute counts
+Attribute 0  0, 0, 2, 
+Attribute 1  0, 0, 2, 
+Attribute 2  0, 1, 1, 
+Testing attribute 0 (Attr1): No reasonable split
+Testing attribute 1 (Attr2): No reasonable split
+Testing attribute 2 (Attr3): Mutual info is 1
+Creating split on attribute 2 (Attr3) at level 2
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:Even (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+1, 1, 0, Even.
+
+TDDTInducer::create_leaf_categorizer: leaf is:Even (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+1, 1, 1, Odd.
+
+TDDTInducer::create_leaf_categorizer: leaf is:Odd (1)
+TDDTInducer:: training with bag
+round, round, yes, sword, green, yes, yes.
+round, round, yes, sword, green, no, yes.
+round, round, yes, flag, yellow, yes, yes.
+round, round, yes, flag, green, no, yes.
+round, round, no, sword, yellow, yes, yes.
+round, round, no, sword, yellow, no, yes.
+round, round, no, balloon, green, yes, yes.
+round, round, no, balloon, blue, yes, yes.
+round, round, no, flag, red, no, yes.
+round, square, yes, sword, red, no, yes.
+round, square, yes, sword, yellow, yes, no.
+round, square, yes, sword, green, yes, no.
+round, square, yes, sword, blue, no, no.
+round, square, yes, balloon, red, yes, yes.
+round, square, yes, balloon, green, yes, no.
+round, square, yes, balloon, green, no, no.
+round, square, yes, balloon, blue, no, no.
+round, square, yes, flag, yellow, yes, no.
+round, square, yes, flag, blue, no, no.
+round, square, no, sword, yellow, no, no.
+round, square, no, balloon, green, no, no.
+round, square, no, balloon, blue, yes, no.
+round, square, no, balloon, blue, no, no.
+round, square, no, flag, yellow, no, no.
+round, square, no, flag, green, yes, no.
+round, square, no, flag, green, no, no.
+round, octagon, yes, sword, yellow, yes, no.
+round, octagon, yes, sword, blue, yes, no.
+round, octagon, yes, balloon, yellow, yes, no.
+round, octagon, yes, balloon, blue, yes, no.
+round, octagon, yes, flag, red, no, yes.
+round, octagon, yes, flag, yellow, no, no.
+round, octagon, yes, flag, green, yes, no.
+round, octagon, yes, flag, blue, yes, no.
+round, octagon, yes, flag, blue, no, no.
+round, octagon, no, sword, yellow, no, no.
+round, octagon, no, balloon, red, no, yes.
+round, octagon, no, balloon, yellow, no, no.
+round, octagon, no, balloon, green, no, no.
+round, octagon, no, balloon, blue, yes, no.
+round, octagon, no, balloon, blue, no, no.
+round, octagon, no, flag, red, yes, yes.
+round, octagon, no, flag, yellow, yes, no.
+round, octagon, no, flag, blue, yes, no.
+round, octagon, no, flag, blue, no, no.
+square, round, yes, sword, green, yes, no.
+square, round, yes, sword, green, no, no.
+square, round, yes, balloon, red, yes, yes.
+square, round, yes, balloon, red, no, yes.
+square, round, yes, balloon, yellow, no, no.
+square, round, yes, balloon, green, yes, no.
+square, round, yes, balloon, blue, yes, no.
+square, round, yes, balloon, blue, no, no.
+square, round, yes, flag, blue, yes, no.
+square, round, no, sword, yellow, no, no.
+square, round, no, sword, green, yes, no.
+square, round, no, sword, blue, no, no.
+square, round, no, balloon, green, yes, no.
+square, round, no, balloon, blue, no, no.
+square, round, no, flag, yellow, no, no.
+square, round, no, flag, blue, yes, no.
+square, square, yes, sword, yellow, yes, yes.
+square, square, yes, sword, yellow, no, yes.
+square, square, yes, sword, green, yes, yes.
+square, square, yes, balloon, green, no, yes.
+square, square, yes, flag, red, yes, yes.
+square, square, yes, flag, red, no, yes.
+square, square, yes, flag, yellow, no, yes.
+square, square, yes, flag, green, no, yes.
+square, square, yes, flag, blue, no, yes.
+square, square, no, sword, red, yes, yes.
+square, square, no, sword, green, no, yes.
+square, square, no, sword, blue, yes, yes.
+square, square, no, sword, blue, no, yes.
+square, square, no, balloon, yellow, yes, yes.
+square, square, no, flag, blue, yes, yes.
+square, octagon, yes, sword, red, yes, yes.
+square, octagon, yes, balloon, red, yes, yes.
+square, octagon, yes, balloon, green, yes, no.
+square, octagon, yes, flag, red, no, yes.
+square, octagon, yes, flag, green, yes, no.
+square, octagon, yes, flag, blue, no, no.
+square, octagon, no, sword, green, no, no.
+square, octagon, no, balloon, red, yes, yes.
+square, octagon, no, balloon, red, no, yes.
+square, octagon, no, balloon, yellow, yes, no.
+square, octagon, no, flag, green, no, no.
+octagon, round, yes, sword, red, yes, yes.
+octagon, round, yes, sword, red, no, yes.
+octagon, round, yes, balloon, red, yes, yes.
+octagon, round, yes, balloon, yellow, no, no.
+octagon, round, yes, flag, yellow, no, no.
+octagon, round, no, sword, red, yes, yes.
+octagon, round, no, sword, yellow, no, no.
+octagon, round, no, balloon, yellow, no, no.
+octagon, round, no, balloon, green, no, no.
+octagon, round, no, flag, yellow, no, no.
+octagon, square, yes, sword, red, yes, yes.
+octagon, square, yes, sword, blue, no, no.
+octagon, square, yes, balloon, red, no, yes.
+octagon, square, yes, balloon, blue, no, no.
+octagon, square, no, sword, red, yes, yes.
+octagon, square, no, sword, red, no, yes.
+octagon, square, no, sword, green, no, no.
+octagon, square, no, flag, red, yes, yes.
+octagon, square, no, flag, yellow, yes, no.
+octagon, square, no, flag, blue, yes, no.
+octagon, octagon, yes, sword, red, yes, yes.
+octagon, octagon, yes, sword, yellow, yes, yes.
+octagon, octagon, yes, sword, blue, no, yes.
+octagon, octagon, yes, balloon, green, no, yes.
+octagon, octagon, yes, balloon, blue, no, yes.
+octagon, octagon, yes, flag, red, no, yes.
+octagon, octagon, yes, flag, yellow, yes, yes.
+octagon, octagon, yes, flag, yellow, no, yes.
+octagon, octagon, yes, flag, blue, no, yes.
+octagon, octagon, no, sword, red, yes, yes.
+octagon, octagon, no, sword, green, no, yes.
+octagon, octagon, no, sword, blue, yes, yes.
+octagon, octagon, no, sword, blue, no, yes.
+octagon, octagon, no, flag, red, no, yes.
+octagon, octagon, no, flag, yellow, no, yes.
+octagon, octagon, no, flag, green, no, yes.
+octagon, octagon, no, flag, blue, no, yes.
+
+TDDTInducer::induce_decision_tree:  training set =
+round, round, yes, sword, green, yes, yes.
+round, round, yes, sword, green, no, yes.
+round, round, yes, flag, yellow, yes, yes.
+round, round, yes, flag, green, no, yes.
+round, round, no, sword, yellow, yes, yes.
+round, round, no, sword, yellow, no, yes.
+round, round, no, balloon, green, yes, yes.
+round, round, no, balloon, blue, yes, yes.
+round, round, no, flag, red, no, yes.
+round, square, yes, sword, red, no, yes.
+round, square, yes, sword, yellow, yes, no.
+round, square, yes, sword, green, yes, no.
+round, square, yes, sword, blue, no, no.
+round, square, yes, balloon, red, yes, yes.
+round, square, yes, balloon, green, yes, no.
+round, square, yes, balloon, green, no, no.
+round, square, yes, balloon, blue, no, no.
+round, square, yes, flag, yellow, yes, no.
+round, square, yes, flag, blue, no, no.
+round, square, no, sword, yellow, no, no.
+round, square, no, balloon, green, no, no.
+round, square, no, balloon, blue, yes, no.
+round, square, no, balloon, blue, no, no.
+round, square, no, flag, yellow, no, no.
+round, square, no, flag, green, yes, no.
+round, square, no, flag, green, no, no.
+round, octagon, yes, sword, yellow, yes, no.
+round, octagon, yes, sword, blue, yes, no.
+round, octagon, yes, balloon, yellow, yes, no.
+round, octagon, yes, balloon, blue, yes, no.
+round, octagon, yes, flag, red, no, yes.
+round, octagon, yes, flag, yellow, no, no.
+round, octagon, yes, flag, green, yes, no.
+round, octagon, yes, flag, blue, yes, no.
+round, octagon, yes, flag, blue, no, no.
+round, octagon, no, sword, yellow, no, no.
+round, octagon, no, balloon, red, no, yes.
+round, octagon, no, balloon, yellow, no, no.
+round, octagon, no, balloon, green, no, no.
+round, octagon, no, balloon, blue, yes, no.
+round, octagon, no, balloon, blue, no, no.
+round, octagon, no, flag, red, yes, yes.
+round, octagon, no, flag, yellow, yes, no.
+round, octagon, no, flag, blue, yes, no.
+round, octagon, no, flag, blue, no, no.
+square, round, yes, sword, green, yes, no.
+square, round, yes, sword, green, no, no.
+square, round, yes, balloon, red, yes, yes.
+square, round, yes, balloon, red, no, yes.
+square, round, yes, balloon, yellow, no, no.
+square, round, yes, balloon, green, yes, no.
+square, round, yes, balloon, blue, yes, no.
+square, round, yes, balloon, blue, no, no.
+square, round, yes, flag, blue, yes, no.
+square, round, no, sword, yellow, no, no.
+square, round, no, sword, green, yes, no.
+square, round, no, sword, blue, no, no.
+square, round, no, balloon, green, yes, no.
+square, round, no, balloon, blue, no, no.
+square, round, no, flag, yellow, no, no.
+square, round, no, flag, blue, yes, no.
+square, square, yes, sword, yellow, yes, yes.
+square, square, yes, sword, yellow, no, yes.
+square, square, yes, sword, green, yes, yes.
+square, square, yes, balloon, green, no, yes.
+square, square, yes, flag, red, yes, yes.
+square, square, yes, flag, red, no, yes.
+square, square, yes, flag, yellow, no, yes.
+square, square, yes, flag, green, no, yes.
+square, square, yes, flag, blue, no, yes.
+square, square, no, sword, red, yes, yes.
+square, square, no, sword, green, no, yes.
+square, square, no, sword, blue, yes, yes.
+square, square, no, sword, blue, no, yes.
+square, square, no, balloon, yellow, yes, yes.
+square, square, no, flag, blue, yes, yes.
+square, octagon, yes, sword, red, yes, yes.
+square, octagon, yes, balloon, red, yes, yes.
+square, octagon, yes, balloon, green, yes, no.
+square, octagon, yes, flag, red, no, yes.
+square, octagon, yes, flag, green, yes, no.
+square, octagon, yes, flag, blue, no, no.
+square, octagon, no, sword, green, no, no.
+square, octagon, no, balloon, red, yes, yes.
+square, octagon, no, balloon, red, no, yes.
+square, octagon, no, balloon, yellow, yes, no.
+square, octagon, no, flag, green, no, no.
+octagon, round, yes, sword, red, yes, yes.
+octagon, round, yes, sword, red, no, yes.
+octagon, round, yes, balloon, red, yes, yes.
+octagon, round, yes, balloon, yellow, no, no.
+octagon, round, yes, flag, yellow, no, no.
+octagon, round, no, sword, red, yes, yes.
+octagon, round, no, sword, yellow, no, no.
+octagon, round, no, balloon, yellow, no, no.
+octagon, round, no, balloon, green, no, no.
+octagon, round, no, flag, yellow, no, no.
+octagon, square, yes, sword, red, yes, yes.
+octagon, square, yes, sword, blue, no, no.
+octagon, square, yes, balloon, red, no, yes.
+octagon, square, yes, balloon, blue, no, no.
+octagon, square, no, sword, red, yes, yes.
+octagon, square, no, sword, red, no, yes.
+octagon, square, no, sword, green, no, no.
+octagon, square, no, flag, red, yes, yes.
+octagon, square, no, flag, yellow, yes, no.
+octagon, square, no, flag, blue, yes, no.
+octagon, octagon, yes, sword, red, yes, yes.
+octagon, octagon, yes, sword, yellow, yes, yes.
+octagon, octagon, yes, sword, blue, no, yes.
+octagon, octagon, yes, balloon, green, no, yes.
+octagon, octagon, yes, balloon, blue, no, yes.
+octagon, octagon, yes, flag, red, no, yes.
+octagon, octagon, yes, flag, yellow, yes, yes.
+octagon, octagon, yes, flag, yellow, no, yes.
+octagon, octagon, yes, flag, blue, no, yes.
+octagon, octagon, no, sword, red, yes, yes.
+octagon, octagon, no, sword, green, no, yes.
+octagon, octagon, no, sword, blue, yes, yes.
+octagon, octagon, no, sword, blue, no, yes.
+octagon, octagon, no, flag, red, no, yes.
+octagon, octagon, no, flag, yellow, no, yes.
+octagon, octagon, no, flag, green, no, yes.
+octagon, octagon, no, flag, blue, no, yes.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=62
+  Value counts:  0, 31, 20, 11, 
+
+  Label 1, label count=62
+  Value counts:  0, 14, 22, 26, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=62
+  Value counts:  0, 20, 20, 22, 
+
+  Label 1, label count=62
+  Value counts:  0, 15, 22, 25, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=62
+  Value counts:  0, 30, 32, 
+
+  Label 1, label count=62
+  Value counts:  0, 35, 27, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=62
+  Value counts:  0, 16, 24, 22, 
+
+  Label 1, label count=62
+  Value counts:  0, 26, 15, 21, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=62
+  Value counts:  0, 0, 20, 19, 23, 
+
+  Label 1, label count=62
+  Value counts:  0, 29, 11, 11, 11, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=62
+  Value counts:  0, 27, 35, 
+
+  Label 1, label count=62
+  Value counts:  0, 29, 33, 
+Attribute counts
+Attribute 0  0, 45, 42, 37, 
+Attribute 1  0, 35, 42, 47, 
+Attribute 2  0, 65, 59, 
+Attribute 3  0, 42, 39, 43, 
+Attribute 4  0, 29, 31, 30, 34, 
+Attribute 5  0, 56, 68, 
+Testing attribute 0 (Head shape): Mutual info is 0.0752726
+Testing attribute 1 (Body shape): Mutual info is 0.00583843
+Testing attribute 2 (Is smiling): Mutual info is 0.00470757
+Testing attribute 3 (Holding): Mutual info is 0.0263117
+Testing attribute 4 (Jacket color): Mutual info is 0.287031
+Testing attribute 5 (Has tie): Mutual info is 0.000757856
+Creating split on attribute 4 (Jacket color) at level 0
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, round, no, flag, red, no, yes.
+round, square, yes, sword, red, no, yes.
+round, square, yes, balloon, red, yes, yes.
+round, octagon, yes, flag, red, no, yes.
+round, octagon, no, balloon, red, no, yes.
+round, octagon, no, flag, red, yes, yes.
+square, round, yes, balloon, red, yes, yes.
+square, round, yes, balloon, red, no, yes.
+square, square, yes, flag, red, yes, yes.
+square, square, yes, flag, red, no, yes.
+square, square, no, sword, red, yes, yes.
+square, octagon, yes, sword, red, yes, yes.
+square, octagon, yes, balloon, red, yes, yes.
+square, octagon, yes, flag, red, no, yes.
+square, octagon, no, balloon, red, yes, yes.
+square, octagon, no, balloon, red, no, yes.
+octagon, round, yes, sword, red, yes, yes.
+octagon, round, yes, sword, red, no, yes.
+octagon, round, yes, balloon, red, yes, yes.
+octagon, round, no, sword, red, yes, yes.
+octagon, square, yes, sword, red, yes, yes.
+octagon, square, yes, balloon, red, no, yes.
+octagon, square, no, sword, red, yes, yes.
+octagon, square, no, sword, red, no, yes.
+octagon, square, no, flag, red, yes, yes.
+octagon, octagon, yes, sword, red, yes, yes.
+octagon, octagon, yes, flag, red, no, yes.
+octagon, octagon, no, sword, red, yes, yes.
+octagon, octagon, no, flag, red, no, yes.
+
+TDDTInducer::create_leaf_categorizer: leaf is:yes (1)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, round, yes, flag, yellow, yes, yes.
+round, round, no, sword, yellow, yes, yes.
+round, round, no, sword, yellow, no, yes.
+round, square, yes, sword, yellow, yes, no.
+round, square, yes, flag, yellow, yes, no.
+round, square, no, sword, yellow, no, no.
+round, square, no, flag, yellow, no, no.
+round, octagon, yes, sword, yellow, yes, no.
+round, octagon, yes, balloon, yellow, yes, no.
+round, octagon, yes, flag, yellow, no, no.
+round, octagon, no, sword, yellow, no, no.
+round, octagon, no, balloon, yellow, no, no.
+round, octagon, no, flag, yellow, yes, no.
+square, round, yes, balloon, yellow, no, no.
+square, round, no, sword, yellow, no, no.
+square, round, no, flag, yellow, no, no.
+square, square, yes, sword, yellow, yes, yes.
+square, square, yes, sword, yellow, no, yes.
+square, square, yes, flag, yellow, no, yes.
+square, square, no, balloon, yellow, yes, yes.
+square, octagon, no, balloon, yellow, yes, no.
+octagon, round, yes, balloon, yellow, no, no.
+octagon, round, yes, flag, yellow, no, no.
+octagon, round, no, sword, yellow, no, no.
+octagon, round, no, balloon, yellow, no, no.
+octagon, round, no, flag, yellow, no, no.
+octagon, square, no, flag, yellow, yes, no.
+octagon, octagon, yes, sword, yellow, yes, yes.
+octagon, octagon, yes, flag, yellow, yes, yes.
+octagon, octagon, yes, flag, yellow, no, yes.
+octagon, octagon, no, flag, yellow, no, yes.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=20
+  Value counts:  0, 10, 4, 6, 
+
+  Label 1, label count=11
+  Value counts:  0, 3, 4, 4, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=20
+  Value counts:  0, 8, 5, 7, 
+
+  Label 1, label count=11
+  Value counts:  0, 3, 4, 4, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=20
+  Value counts:  0, 8, 12, 
+
+  Label 1, label count=11
+  Value counts:  0, 7, 4, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=20
+  Value counts:  0, 6, 6, 8, 
+
+  Label 1, label count=11
+  Value counts:  0, 5, 1, 5, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=20
+  Value counts:  0, 0, 20, 0, 0, 
+
+  Label 1, label count=11
+  Value counts:  0, 0, 11, 0, 0, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=20
+  Value counts:  0, 7, 13, 
+
+  Label 1, label count=11
+  Value counts:  0, 6, 5, 
+Attribute counts
+Attribute 0  0, 13, 8, 10, 
+Attribute 1  0, 11, 9, 11, 
+Attribute 2  0, 15, 16, 
+Attribute 3  0, 11, 7, 13, 
+Attribute 4  0, 0, 31, 0, 0, 
+Attribute 5  0, 13, 18, 
+Testing attribute 0 (Head shape): Mutual info is 0.0402168
+Testing attribute 1 (Body shape): Mutual info is 0.0150635
+Testing attribute 2 (Is smiling): Mutual info is 0.0372726
+Testing attribute 3 (Holding): Mutual info is 0.0488922
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): Mutual info is 0.0258073
+Creating split on attribute 3 (Holding) at level 1
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, round, no, sword, yellow, yes, yes.
+round, round, no, sword, yellow, no, yes.
+round, square, yes, sword, yellow, yes, no.
+round, square, no, sword, yellow, no, no.
+round, octagon, yes, sword, yellow, yes, no.
+round, octagon, no, sword, yellow, no, no.
+square, round, no, sword, yellow, no, no.
+square, square, yes, sword, yellow, yes, yes.
+square, square, yes, sword, yellow, no, yes.
+octagon, round, no, sword, yellow, no, no.
+octagon, octagon, yes, sword, yellow, yes, yes.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=6
+  Value counts:  0, 4, 1, 1, 
+
+  Label 1, label count=5
+  Value counts:  0, 2, 2, 1, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=6
+  Value counts:  0, 2, 2, 2, 
+
+  Label 1, label count=5
+  Value counts:  0, 2, 2, 1, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=6
+  Value counts:  0, 2, 4, 
+
+  Label 1, label count=5
+  Value counts:  0, 3, 2, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=6
+  Value counts:  0, 6, 0, 0, 
+
+  Label 1, label count=5
+  Value counts:  0, 5, 0, 0, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=6
+  Value counts:  0, 0, 6, 0, 0, 
+
+  Label 1, label count=5
+  Value counts:  0, 0, 5, 0, 0, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=6
+  Value counts:  0, 2, 4, 
+
+  Label 1, label count=5
+  Value counts:  0, 3, 2, 
+Attribute counts
+Attribute 0  0, 6, 3, 2, 
+Attribute 1  0, 4, 4, 3, 
+Attribute 2  0, 5, 6, 
+Attribute 3  0, 11, 0, 0, 
+Attribute 4  0, 0, 11, 0, 0, 
+Attribute 5  0, 5, 6, 
+Testing attribute 0 (Head shape): Mutual info is 0.0608791
+Testing attribute 1 (Body shape): Mutual info is 0.0163132
+Testing attribute 2 (Is smiling): Mutual info is 0.0518004
+Testing attribute 3 (Holding): No reasonable split
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): Mutual info is 0.0518004
+Creating split on attribute 0 (Head shape) at level 2
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, round, no, sword, yellow, yes, yes.
+round, round, no, sword, yellow, no, yes.
+round, square, yes, sword, yellow, yes, no.
+round, square, no, sword, yellow, no, no.
+round, octagon, yes, sword, yellow, yes, no.
+round, octagon, no, sword, yellow, no, no.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=4
+  Value counts:  0, 4, 0, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 2, 0, 0, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=4
+  Value counts:  0, 0, 2, 2, 
+
+  Label 1, label count=2
+  Value counts:  0, 2, 0, 0, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=4
+  Value counts:  0, 2, 2, 
+
+  Label 1, label count=2
+  Value counts:  0, 0, 2, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=4
+  Value counts:  0, 4, 0, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 2, 0, 0, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=4
+  Value counts:  0, 0, 4, 0, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 0, 2, 0, 0, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=4
+  Value counts:  0, 2, 2, 
+
+  Label 1, label count=2
+  Value counts:  0, 1, 1, 
+Attribute counts
+Attribute 0  0, 6, 0, 0, 
+Attribute 1  0, 2, 2, 2, 
+Attribute 2  0, 2, 4, 
+Attribute 3  0, 6, 0, 0, 
+Attribute 4  0, 0, 6, 0, 0, 
+Attribute 5  0, 3, 3, 
+Testing attribute 0 (Head shape): No reasonable split
+Testing attribute 1 (Body shape): Mutual info is 0.918296
+Testing attribute 2 (Is smiling): Mutual info is 0.251629
+Testing attribute 3 (Holding): No reasonable split
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): Mutual info is 0
+Creating split on attribute 1 (Body shape) at level 3
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, round, no, sword, yellow, yes, yes.
+round, round, no, sword, yellow, no, yes.
+
+TDDTInducer::create_leaf_categorizer: leaf is:yes (1)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, square, yes, sword, yellow, yes, no.
+round, square, no, sword, yellow, no, no.
+
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, octagon, yes, sword, yellow, yes, no.
+round, octagon, no, sword, yellow, no, no.
+
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+square, round, no, sword, yellow, no, no.
+square, square, yes, sword, yellow, yes, yes.
+square, square, yes, sword, yellow, no, yes.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 1, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 0, 2, 0, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 1, 0, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 0, 2, 0, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 1, 
+
+  Label 1, label count=2
+  Value counts:  0, 2, 0, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 1, 0, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 2, 0, 0, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 1, 0, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 0, 2, 0, 0, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 1, 
+
+  Label 1, label count=2
+  Value counts:  0, 1, 1, 
+Attribute counts
+Attribute 0  0, 0, 3, 0, 
+Attribute 1  0, 1, 2, 0, 
+Attribute 2  0, 2, 1, 
+Attribute 3  0, 3, 0, 0, 
+Attribute 4  0, 0, 3, 0, 0, 
+Attribute 5  0, 1, 2, 
+Testing attribute 0 (Head shape): No reasonable split
+Testing attribute 1 (Body shape): Mutual info is 0.918296
+Testing attribute 2 (Is smiling): Mutual info is 0.918296
+Testing attribute 3 (Holding): No reasonable split
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): Mutual info is 0.251629
+Creating split on attribute 1 (Body shape) at level 3
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:yes (1)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+square, round, no, sword, yellow, no, no.
+
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+square, square, yes, sword, yellow, yes, yes.
+square, square, yes, sword, yellow, no, yes.
+
+TDDTInducer::create_leaf_categorizer: leaf is:yes (1)
+TDDTInducer::induce_decision_tree: Category: 2 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:yes (1)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+octagon, round, no, sword, yellow, no, no.
+octagon, octagon, yes, sword, yellow, yes, yes.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 0, 1, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 0, 1, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 1, 0, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 0, 1, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 1, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 1, 0, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 0, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 1, 0, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 0, 0, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 1, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 
+Attribute counts
+Attribute 0  0, 0, 0, 2, 
+Attribute 1  0, 1, 0, 1, 
+Attribute 2  0, 1, 1, 
+Attribute 3  0, 2, 0, 0, 
+Attribute 4  0, 0, 2, 0, 0, 
+Attribute 5  0, 1, 1, 
+Testing attribute 0 (Head shape): No reasonable split
+Testing attribute 1 (Body shape): Mutual info is 1
+Testing attribute 2 (Is smiling): Mutual info is 1
+Testing attribute 3 (Holding): No reasonable split
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): Mutual info is 1
+Creating split on attribute 1 (Body shape) at level 3
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+octagon, round, no, sword, yellow, no, no.
+
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Category: 1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+octagon, octagon, yes, sword, yellow, yes, yes.
+
+TDDTInducer::create_leaf_categorizer: leaf is:yes (1)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, octagon, yes, balloon, yellow, yes, no.
+round, octagon, no, balloon, yellow, no, no.
+square, round, yes, balloon, yellow, no, no.
+square, square, no, balloon, yellow, yes, yes.
+square, octagon, no, balloon, yellow, yes, no.
+octagon, round, yes, balloon, yellow, no, no.
+octagon, round, no, balloon, yellow, no, no.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=6
+  Value counts:  0, 2, 2, 2, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 0, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=6
+  Value counts:  0, 3, 0, 3, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 0, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=6
+  Value counts:  0, 3, 3, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=6
+  Value counts:  0, 0, 6, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 0, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=6
+  Value counts:  0, 0, 6, 0, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 0, 0, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=6
+  Value counts:  0, 2, 4, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 
+Attribute counts
+Attribute 0  0, 2, 3, 2, 
+Attribute 1  0, 3, 1, 3, 
+Attribute 2  0, 3, 4, 
+Attribute 3  0, 0, 7, 0, 
+Attribute 4  0, 0, 7, 0, 0, 
+Attribute 5  0, 3, 4, 
+Testing attribute 0 (Head shape): Mutual info is 0.198117
+Testing attribute 1 (Body shape): Mutual info is 0.591673
+Testing attribute 2 (Is smiling): Mutual info is 0.128085
+Testing attribute 3 (Holding): No reasonable split
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): Mutual info is 0.198117
+Creating split on attribute 1 (Body shape) at level 2
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+square, round, yes, balloon, yellow, no, no.
+octagon, round, yes, balloon, yellow, no, no.
+octagon, round, no, balloon, yellow, no, no.
+
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+square, square, no, balloon, yellow, yes, yes.
+
+TDDTInducer::create_leaf_categorizer: leaf is:yes (1)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, octagon, yes, balloon, yellow, yes, no.
+round, octagon, no, balloon, yellow, no, no.
+square, octagon, no, balloon, yellow, yes, no.
+
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, round, yes, flag, yellow, yes, yes.
+round, square, yes, flag, yellow, yes, no.
+round, square, no, flag, yellow, no, no.
+round, octagon, yes, flag, yellow, no, no.
+round, octagon, no, flag, yellow, yes, no.
+square, round, no, flag, yellow, no, no.
+square, square, yes, flag, yellow, no, yes.
+octagon, round, yes, flag, yellow, no, no.
+octagon, round, no, flag, yellow, no, no.
+octagon, square, no, flag, yellow, yes, no.
+octagon, octagon, yes, flag, yellow, yes, yes.
+octagon, octagon, yes, flag, yellow, no, yes.
+octagon, octagon, no, flag, yellow, no, yes.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=8
+  Value counts:  0, 4, 1, 3, 
+
+  Label 1, label count=5
+  Value counts:  0, 1, 1, 3, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=8
+  Value counts:  0, 3, 3, 2, 
+
+  Label 1, label count=5
+  Value counts:  0, 1, 1, 3, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=8
+  Value counts:  0, 3, 5, 
+
+  Label 1, label count=5
+  Value counts:  0, 4, 1, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=8
+  Value counts:  0, 0, 0, 8, 
+
+  Label 1, label count=5
+  Value counts:  0, 0, 0, 5, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=8
+  Value counts:  0, 0, 8, 0, 0, 
+
+  Label 1, label count=5
+  Value counts:  0, 0, 5, 0, 0, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=8
+  Value counts:  0, 3, 5, 
+
+  Label 1, label count=5
+  Value counts:  0, 2, 3, 
+Attribute counts
+Attribute 0  0, 5, 2, 6, 
+Attribute 1  0, 4, 4, 5, 
+Attribute 2  0, 7, 6, 
+Attribute 3  0, 0, 0, 13, 
+Attribute 4  0, 0, 13, 0, 0, 
+Attribute 5  0, 5, 8, 
+Testing attribute 0 (Head shape): Mutual info is 0.0681873
+Testing attribute 1 (Body shape): Mutual info is 0.088546
+Testing attribute 2 (Is smiling): Mutual info is 0.130719
+Testing attribute 3 (Holding): No reasonable split
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): Mutual info is 0.000450067
+Creating split on attribute 2 (Is smiling) at level 2
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, round, yes, flag, yellow, yes, yes.
+round, square, yes, flag, yellow, yes, no.
+round, octagon, yes, flag, yellow, no, no.
+square, square, yes, flag, yellow, no, yes.
+octagon, round, yes, flag, yellow, no, no.
+octagon, octagon, yes, flag, yellow, yes, yes.
+octagon, octagon, yes, flag, yellow, no, yes.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=3
+  Value counts:  0, 2, 0, 1, 
+
+  Label 1, label count=4
+  Value counts:  0, 1, 1, 2, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=3
+  Value counts:  0, 1, 1, 1, 
+
+  Label 1, label count=4
+  Value counts:  0, 1, 1, 2, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=3
+  Value counts:  0, 3, 0, 
+
+  Label 1, label count=4
+  Value counts:  0, 4, 0, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=3
+  Value counts:  0, 0, 0, 3, 
+
+  Label 1, label count=4
+  Value counts:  0, 0, 0, 4, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=3
+  Value counts:  0, 0, 3, 0, 0, 
+
+  Label 1, label count=4
+  Value counts:  0, 0, 4, 0, 0, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=3
+  Value counts:  0, 1, 2, 
+
+  Label 1, label count=4
+  Value counts:  0, 2, 2, 
+Attribute counts
+Attribute 0  0, 3, 1, 3, 
+Attribute 1  0, 2, 2, 3, 
+Attribute 2  0, 7, 0, 
+Attribute 3  0, 0, 0, 7, 
+Attribute 4  0, 0, 7, 0, 0, 
+Attribute 5  0, 3, 4, 
+Testing attribute 0 (Head shape): Mutual info is 0.198117
+Testing attribute 1 (Body shape): Mutual info is 0.0202442
+Testing attribute 2 (Is smiling): No reasonable split
+Testing attribute 3 (Holding): No reasonable split
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): Mutual info is 0.0202442
+Creating split on attribute 0 (Head shape) at level 3
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:yes (1)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, round, yes, flag, yellow, yes, yes.
+round, square, yes, flag, yellow, yes, no.
+round, octagon, yes, flag, yellow, no, no.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 2, 0, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 0, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 0, 1, 1, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 0, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 2, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 0, 0, 2, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 0, 1, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 0, 2, 0, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 0, 0, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 1, 1, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 
+Attribute counts
+Attribute 0  0, 3, 0, 0, 
+Attribute 1  0, 1, 1, 1, 
+Attribute 2  0, 3, 0, 
+Attribute 3  0, 0, 0, 3, 
+Attribute 4  0, 0, 3, 0, 0, 
+Attribute 5  0, 2, 1, 
+Testing attribute 0 (Head shape): No reasonable split
+Testing attribute 1 (Body shape): Mutual info is 0.918296
+Testing attribute 2 (Is smiling): No reasonable split
+Testing attribute 3 (Holding): No reasonable split
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): Mutual info is 0.251629
+Creating split on attribute 1 (Body shape) at level 4
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, round, yes, flag, yellow, yes, yes.
+
+TDDTInducer::create_leaf_categorizer: leaf is:yes (1)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, square, yes, flag, yellow, yes, no.
+
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, octagon, yes, flag, yellow, no, no.
+
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+square, square, yes, flag, yellow, no, yes.
+
+TDDTInducer::create_leaf_categorizer: leaf is:yes (1)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+octagon, round, yes, flag, yellow, no, no.
+octagon, octagon, yes, flag, yellow, yes, yes.
+octagon, octagon, yes, flag, yellow, no, yes.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 0, 1, 
+
+  Label 1, label count=2
+  Value counts:  0, 0, 0, 2, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 1, 0, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 0, 0, 2, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 1, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 2, 0, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 0, 1, 
+
+  Label 1, label count=2
+  Value counts:  0, 0, 0, 2, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 1, 0, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 0, 2, 0, 0, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 1, 
+
+  Label 1, label count=2
+  Value counts:  0, 1, 1, 
+Attribute counts
+Attribute 0  0, 0, 0, 3, 
+Attribute 1  0, 1, 0, 2, 
+Attribute 2  0, 3, 0, 
+Attribute 3  0, 0, 0, 3, 
+Attribute 4  0, 0, 3, 0, 0, 
+Attribute 5  0, 1, 2, 
+Testing attribute 0 (Head shape): No reasonable split
+Testing attribute 1 (Body shape): Mutual info is 0.918296
+Testing attribute 2 (Is smiling): No reasonable split
+Testing attribute 3 (Holding): No reasonable split
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): Mutual info is 0.251629
+Creating split on attribute 1 (Body shape) at level 4
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:yes (1)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+octagon, round, yes, flag, yellow, no, no.
+
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Category: 1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:yes (1)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+octagon, octagon, yes, flag, yellow, yes, yes.
+octagon, octagon, yes, flag, yellow, no, yes.
+
+TDDTInducer::create_leaf_categorizer: leaf is:yes (1)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, square, no, flag, yellow, no, no.
+round, octagon, no, flag, yellow, yes, no.
+square, round, no, flag, yellow, no, no.
+octagon, round, no, flag, yellow, no, no.
+octagon, square, no, flag, yellow, yes, no.
+octagon, octagon, no, flag, yellow, no, yes.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=5
+  Value counts:  0, 2, 1, 2, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 0, 1, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=5
+  Value counts:  0, 2, 2, 1, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 0, 1, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=5
+  Value counts:  0, 0, 5, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=5
+  Value counts:  0, 0, 0, 5, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 0, 1, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=5
+  Value counts:  0, 0, 5, 0, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 0, 0, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=5
+  Value counts:  0, 2, 3, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 
+Attribute counts
+Attribute 0  0, 2, 1, 3, 
+Attribute 1  0, 2, 2, 2, 
+Attribute 2  0, 0, 6, 
+Attribute 3  0, 0, 0, 6, 
+Attribute 4  0, 0, 6, 0, 0, 
+Attribute 5  0, 2, 4, 
+Testing attribute 0 (Head shape): Mutual info is 0.190875
+Testing attribute 1 (Body shape): Mutual info is 0.316689
+Testing attribute 2 (Is smiling): No reasonable split
+Testing attribute 3 (Holding): No reasonable split
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): Mutual info is 0.10917
+Creating split on attribute 1 (Body shape) at level 3
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+square, round, no, flag, yellow, no, no.
+octagon, round, no, flag, yellow, no, no.
+
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, square, no, flag, yellow, no, no.
+octagon, square, no, flag, yellow, yes, no.
+
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, octagon, no, flag, yellow, yes, no.
+octagon, octagon, no, flag, yellow, no, yes.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 1, 0, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 0, 1, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 0, 1, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 0, 1, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 1, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 0, 1, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 0, 1, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 1, 0, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 0, 0, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 1, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 
+Attribute counts
+Attribute 0  0, 1, 0, 1, 
+Attribute 1  0, 0, 0, 2, 
+Attribute 2  0, 0, 2, 
+Attribute 3  0, 0, 0, 2, 
+Attribute 4  0, 0, 2, 0, 0, 
+Attribute 5  0, 1, 1, 
+Testing attribute 0 (Head shape): Mutual info is 1
+Testing attribute 1 (Body shape): No reasonable split
+Testing attribute 2 (Is smiling): No reasonable split
+Testing attribute 3 (Holding): No reasonable split
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): Mutual info is 1
+Creating split on attribute 0 (Head shape) at level 4
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, octagon, no, flag, yellow, yes, no.
+
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Category: 1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+octagon, octagon, no, flag, yellow, no, yes.
+
+TDDTInducer::create_leaf_categorizer: leaf is:yes (1)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, round, yes, sword, green, yes, yes.
+round, round, yes, sword, green, no, yes.
+round, round, yes, flag, green, no, yes.
+round, round, no, balloon, green, yes, yes.
+round, square, yes, sword, green, yes, no.
+round, square, yes, balloon, green, yes, no.
+round, square, yes, balloon, green, no, no.
+round, square, no, balloon, green, no, no.
+round, square, no, flag, green, yes, no.
+round, square, no, flag, green, no, no.
+round, octagon, yes, flag, green, yes, no.
+round, octagon, no, balloon, green, no, no.
+square, round, yes, sword, green, yes, no.
+square, round, yes, sword, green, no, no.
+square, round, yes, balloon, green, yes, no.
+square, round, no, sword, green, yes, no.
+square, round, no, balloon, green, yes, no.
+square, square, yes, sword, green, yes, yes.
+square, square, yes, balloon, green, no, yes.
+square, square, yes, flag, green, no, yes.
+square, square, no, sword, green, no, yes.
+square, octagon, yes, balloon, green, yes, no.
+square, octagon, yes, flag, green, yes, no.
+square, octagon, no, sword, green, no, no.
+square, octagon, no, flag, green, no, no.
+octagon, round, no, balloon, green, no, no.
+octagon, square, no, sword, green, no, no.
+octagon, octagon, yes, balloon, green, no, yes.
+octagon, octagon, no, sword, green, no, yes.
+octagon, octagon, no, flag, green, no, yes.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=19
+  Value counts:  0, 8, 9, 2, 
+
+  Label 1, label count=11
+  Value counts:  0, 4, 4, 3, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=19
+  Value counts:  0, 6, 7, 6, 
+
+  Label 1, label count=11
+  Value counts:  0, 4, 4, 3, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=19
+  Value counts:  0, 9, 10, 
+
+  Label 1, label count=11
+  Value counts:  0, 7, 4, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=19
+  Value counts:  0, 6, 8, 5, 
+
+  Label 1, label count=11
+  Value counts:  0, 5, 3, 3, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=19
+  Value counts:  0, 0, 0, 19, 0, 
+
+  Label 1, label count=11
+  Value counts:  0, 0, 0, 11, 0, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=19
+  Value counts:  0, 10, 9, 
+
+  Label 1, label count=11
+  Value counts:  0, 3, 8, 
+Attribute counts
+Attribute 0  0, 12, 13, 5, 
+Attribute 1  0, 10, 11, 9, 
+Attribute 2  0, 16, 14, 
+Attribute 3  0, 11, 11, 8, 
+Attribute 4  0, 0, 0, 30, 0, 
+Attribute 5  0, 13, 17, 
+Testing attribute 0 (Head shape): Mutual info is 0.0330551
+Testing attribute 1 (Body shape): Mutual info is 0.00219718
+Testing attribute 2 (Is smiling): Mutual info is 0.0179823
+Testing attribute 3 (Holding): Mutual info is 0.0191228
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): Mutual info is 0.0451085
+Creating split on attribute 5 (Has tie) at level 1
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, round, yes, sword, green, yes, yes.
+round, round, no, balloon, green, yes, yes.
+round, square, yes, sword, green, yes, no.
+round, square, yes, balloon, green, yes, no.
+round, square, no, flag, green, yes, no.
+round, octagon, yes, flag, green, yes, no.
+square, round, yes, sword, green, yes, no.
+square, round, yes, balloon, green, yes, no.
+square, round, no, sword, green, yes, no.
+square, round, no, balloon, green, yes, no.
+square, square, yes, sword, green, yes, yes.
+square, octagon, yes, balloon, green, yes, no.
+square, octagon, yes, flag, green, yes, no.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=10
+  Value counts:  0, 4, 6, 0, 
+
+  Label 1, label count=3
+  Value counts:  0, 2, 1, 0, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=10
+  Value counts:  0, 4, 3, 3, 
+
+  Label 1, label count=3
+  Value counts:  0, 2, 1, 0, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=10
+  Value counts:  0, 7, 3, 
+
+  Label 1, label count=3
+  Value counts:  0, 2, 1, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=10
+  Value counts:  0, 3, 4, 3, 
+
+  Label 1, label count=3
+  Value counts:  0, 2, 1, 0, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=10
+  Value counts:  0, 0, 0, 10, 0, 
+
+  Label 1, label count=3
+  Value counts:  0, 0, 0, 3, 0, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=10
+  Value counts:  0, 10, 0, 
+
+  Label 1, label count=3
+  Value counts:  0, 3, 0, 
+Attribute counts
+Attribute 0  0, 6, 7, 0, 
+Attribute 1  0, 6, 4, 3, 
+Attribute 2  0, 9, 4, 
+Attribute 3  0, 5, 5, 3, 
+Attribute 4  0, 0, 0, 13, 0, 
+Attribute 5  0, 13, 0, 
+Testing attribute 0 (Head shape): Mutual info is 0.036928
+Testing attribute 1 (Body shape): Mutual info is 0.105897
+Testing attribute 2 (Is smiling): Mutual info is 0.000661141
+Testing attribute 3 (Holding): Mutual info is 0.128243
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): No reasonable split
+Creating split on attribute 3 (Holding) at level 2
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, round, yes, sword, green, yes, yes.
+round, square, yes, sword, green, yes, no.
+square, round, yes, sword, green, yes, no.
+square, round, no, sword, green, yes, no.
+square, square, yes, sword, green, yes, yes.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=3
+  Value counts:  0, 1, 2, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 1, 1, 0, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=3
+  Value counts:  0, 2, 1, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 1, 1, 0, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=3
+  Value counts:  0, 2, 1, 
+
+  Label 1, label count=2
+  Value counts:  0, 2, 0, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=3
+  Value counts:  0, 3, 0, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 2, 0, 0, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=3
+  Value counts:  0, 0, 0, 3, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 0, 0, 2, 0, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=3
+  Value counts:  0, 3, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 2, 0, 
+Attribute counts
+Attribute 0  0, 2, 3, 0, 
+Attribute 1  0, 3, 2, 0, 
+Attribute 2  0, 4, 1, 
+Attribute 3  0, 5, 0, 0, 
+Attribute 4  0, 0, 0, 5, 0, 
+Attribute 5  0, 5, 0, 
+Testing attribute 0 (Head shape): Mutual info is 0.0199731
+Testing attribute 1 (Body shape): Mutual info is 0.0199731
+Testing attribute 2 (Is smiling): Mutual info is 0.170951
+Testing attribute 3 (Holding): No reasonable split
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): No reasonable split
+Creating split on attribute 2 (Is smiling) at level 3
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, round, yes, sword, green, yes, yes.
+round, square, yes, sword, green, yes, no.
+square, round, yes, sword, green, yes, no.
+square, square, yes, sword, green, yes, yes.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 1, 1, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 1, 1, 0, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 1, 1, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 1, 1, 0, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 2, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 2, 0, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 2, 0, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 2, 0, 0, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 0, 0, 2, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 0, 0, 2, 0, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 2, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 2, 0, 
+Attribute counts
+Attribute 0  0, 2, 2, 0, 
+Attribute 1  0, 2, 2, 0, 
+Attribute 2  0, 4, 0, 
+Attribute 3  0, 4, 0, 0, 
+Attribute 4  0, 0, 0, 4, 0, 
+Attribute 5  0, 4, 0, 
+Testing attribute 0 (Head shape): Mutual info is 0
+Testing attribute 1 (Body shape): Mutual info is 0
+Testing attribute 2 (Is smiling): No reasonable split
+Testing attribute 3 (Holding): No reasonable split
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): No reasonable split
+Creating split on attribute 0 (Head shape) at level 4
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, round, yes, sword, green, yes, yes.
+round, square, yes, sword, green, yes, no.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 1, 0, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 0, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 1, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 0, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 1, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 1, 0, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 0, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 0, 1, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 0, 1, 0, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 1, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 
+Attribute counts
+Attribute 0  0, 2, 0, 0, 
+Attribute 1  0, 1, 1, 0, 
+Attribute 2  0, 2, 0, 
+Attribute 3  0, 2, 0, 0, 
+Attribute 4  0, 0, 0, 2, 0, 
+Attribute 5  0, 2, 0, 
+Testing attribute 0 (Head shape): No reasonable split
+Testing attribute 1 (Body shape): Mutual info is 1
+Testing attribute 2 (Is smiling): No reasonable split
+Testing attribute 3 (Holding): No reasonable split
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): No reasonable split
+Creating split on attribute 1 (Body shape) at level 5
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, round, yes, sword, green, yes, yes.
+
+TDDTInducer::create_leaf_categorizer: leaf is:yes (1)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, square, yes, sword, green, yes, no.
+
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Category: 2 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+square, round, yes, sword, green, yes, no.
+square, square, yes, sword, green, yes, yes.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 1, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 0, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 1, 0, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 0, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 1, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 1, 0, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 0, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 0, 1, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 0, 1, 0, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 1, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 
+Attribute counts
+Attribute 0  0, 0, 2, 0, 
+Attribute 1  0, 1, 1, 0, 
+Attribute 2  0, 2, 0, 
+Attribute 3  0, 2, 0, 0, 
+Attribute 4  0, 0, 0, 2, 0, 
+Attribute 5  0, 2, 0, 
+Testing attribute 0 (Head shape): No reasonable split
+Testing attribute 1 (Body shape): Mutual info is 1
+Testing attribute 2 (Is smiling): No reasonable split
+Testing attribute 3 (Holding): No reasonable split
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): No reasonable split
+Creating split on attribute 1 (Body shape) at level 5
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+square, round, yes, sword, green, yes, no.
+
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+square, square, yes, sword, green, yes, yes.
+
+TDDTInducer::create_leaf_categorizer: leaf is:yes (1)
+TDDTInducer::induce_decision_tree: Category: 2 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Category: 2 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+square, round, no, sword, green, yes, no.
+
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, round, no, balloon, green, yes, yes.
+round, square, yes, balloon, green, yes, no.
+square, round, yes, balloon, green, yes, no.
+square, round, no, balloon, green, yes, no.
+square, octagon, yes, balloon, green, yes, no.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=4
+  Value counts:  0, 1, 3, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 0, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=4
+  Value counts:  0, 2, 1, 1, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 0, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=4
+  Value counts:  0, 3, 1, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=4
+  Value counts:  0, 0, 4, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 0, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=4
+  Value counts:  0, 0, 0, 4, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 0, 1, 0, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=4
+  Value counts:  0, 4, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 
+Attribute counts
+Attribute 0  0, 2, 3, 0, 
+Attribute 1  0, 3, 1, 1, 
+Attribute 2  0, 3, 2, 
+Attribute 3  0, 0, 5, 0, 
+Attribute 4  0, 0, 0, 5, 0, 
+Attribute 5  0, 5, 0, 
+Testing attribute 0 (Head shape): Mutual info is 0.321928
+Testing attribute 1 (Body shape): Mutual info is 0.170951
+Testing attribute 2 (Is smiling): Mutual info is 0.321928
+Testing attribute 3 (Holding): No reasonable split
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): No reasonable split
+Creating split on attribute 0 (Head shape) at level 3
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, round, no, balloon, green, yes, yes.
+round, square, yes, balloon, green, yes, no.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 1, 0, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 0, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 1, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 0, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 1, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 1, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 0, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 0, 1, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 0, 1, 0, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 1, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 
+Attribute counts
+Attribute 0  0, 2, 0, 0, 
+Attribute 1  0, 1, 1, 0, 
+Attribute 2  0, 1, 1, 
+Attribute 3  0, 0, 2, 0, 
+Attribute 4  0, 0, 0, 2, 0, 
+Attribute 5  0, 2, 0, 
+Testing attribute 0 (Head shape): No reasonable split
+Testing attribute 1 (Body shape): Mutual info is 1
+Testing attribute 2 (Is smiling): Mutual info is 1
+Testing attribute 3 (Holding): No reasonable split
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): No reasonable split
+Creating split on attribute 1 (Body shape) at level 4
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, round, no, balloon, green, yes, yes.
+
+TDDTInducer::create_leaf_categorizer: leaf is:yes (1)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, square, yes, balloon, green, yes, no.
+
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Category: 2 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+square, round, yes, balloon, green, yes, no.
+square, round, no, balloon, green, yes, no.
+square, octagon, yes, balloon, green, yes, no.
+
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Category: 2 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, square, no, flag, green, yes, no.
+round, octagon, yes, flag, green, yes, no.
+square, octagon, yes, flag, green, yes, no.
+
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, round, yes, sword, green, no, yes.
+round, round, yes, flag, green, no, yes.
+round, square, yes, balloon, green, no, no.
+round, square, no, balloon, green, no, no.
+round, square, no, flag, green, no, no.
+round, octagon, no, balloon, green, no, no.
+square, round, yes, sword, green, no, no.
+square, square, yes, balloon, green, no, yes.
+square, square, yes, flag, green, no, yes.
+square, square, no, sword, green, no, yes.
+square, octagon, no, sword, green, no, no.
+square, octagon, no, flag, green, no, no.
+octagon, round, no, balloon, green, no, no.
+octagon, square, no, sword, green, no, no.
+octagon, octagon, yes, balloon, green, no, yes.
+octagon, octagon, no, sword, green, no, yes.
+octagon, octagon, no, flag, green, no, yes.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=9
+  Value counts:  0, 4, 3, 2, 
+
+  Label 1, label count=8
+  Value counts:  0, 2, 3, 3, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=9
+  Value counts:  0, 2, 4, 3, 
+
+  Label 1, label count=8
+  Value counts:  0, 2, 3, 3, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=9
+  Value counts:  0, 2, 7, 
+
+  Label 1, label count=8
+  Value counts:  0, 5, 3, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=9
+  Value counts:  0, 3, 4, 2, 
+
+  Label 1, label count=8
+  Value counts:  0, 3, 2, 3, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=9
+  Value counts:  0, 0, 0, 9, 0, 
+
+  Label 1, label count=8
+  Value counts:  0, 0, 0, 8, 0, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=9
+  Value counts:  0, 0, 9, 
+
+  Label 1, label count=8
+  Value counts:  0, 0, 8, 
+Attribute counts
+Attribute 0  0, 6, 6, 5, 
+Attribute 1  0, 4, 7, 6, 
+Attribute 2  0, 7, 10, 
+Attribute 3  0, 6, 6, 5, 
+Attribute 4  0, 0, 0, 17, 0, 
+Attribute 5  0, 0, 17, 
+Testing attribute 0 (Head shape): Mutual info is 0.0348833
+Testing attribute 1 (Body shape): Mutual info is 0.00358508
+Testing attribute 2 (Is smiling): Mutual info is 0.123694
+Testing attribute 3 (Holding): Mutual info is 0.0348833
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): No reasonable split
+Creating split on attribute 2 (Is smiling) at level 2
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, round, yes, sword, green, no, yes.
+round, round, yes, flag, green, no, yes.
+round, square, yes, balloon, green, no, no.
+square, round, yes, sword, green, no, no.
+square, square, yes, balloon, green, no, yes.
+square, square, yes, flag, green, no, yes.
+octagon, octagon, yes, balloon, green, no, yes.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 1, 1, 0, 
+
+  Label 1, label count=5
+  Value counts:  0, 2, 2, 1, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 1, 1, 0, 
+
+  Label 1, label count=5
+  Value counts:  0, 2, 2, 1, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 2, 0, 
+
+  Label 1, label count=5
+  Value counts:  0, 5, 0, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 1, 1, 0, 
+
+  Label 1, label count=5
+  Value counts:  0, 1, 2, 2, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 0, 0, 2, 0, 
+
+  Label 1, label count=5
+  Value counts:  0, 0, 0, 5, 0, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 0, 2, 
+
+  Label 1, label count=5
+  Value counts:  0, 0, 5, 
+Attribute counts
+Attribute 0  0, 3, 3, 1, 
+Attribute 1  0, 3, 3, 1, 
+Attribute 2  0, 7, 0, 
+Attribute 3  0, 2, 3, 2, 
+Attribute 4  0, 0, 0, 7, 0, 
+Attribute 5  0, 0, 7, 
+Testing attribute 0 (Head shape): Mutual info is 0.0760099
+Testing attribute 1 (Body shape): Mutual info is 0.0760099
+Testing attribute 2 (Is smiling): No reasonable split
+Testing attribute 3 (Holding): Mutual info is 0.183851
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): No reasonable split
+Creating split on attribute 3 (Holding) at level 3
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:yes (1)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, round, yes, sword, green, no, yes.
+square, round, yes, sword, green, no, no.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 1, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 0, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 1, 0, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 0, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 1, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 1, 0, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 0, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 0, 1, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 0, 1, 0, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 1, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 
+Attribute counts
+Attribute 0  0, 1, 1, 0, 
+Attribute 1  0, 2, 0, 0, 
+Attribute 2  0, 2, 0, 
+Attribute 3  0, 2, 0, 0, 
+Attribute 4  0, 0, 0, 2, 0, 
+Attribute 5  0, 0, 2, 
+Testing attribute 0 (Head shape): Mutual info is 1
+Testing attribute 1 (Body shape): No reasonable split
+Testing attribute 2 (Is smiling): No reasonable split
+Testing attribute 3 (Holding): No reasonable split
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): No reasonable split
+Creating split on attribute 0 (Head shape) at level 4
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, round, yes, sword, green, no, yes.
+
+TDDTInducer::create_leaf_categorizer: leaf is:yes (1)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+square, round, yes, sword, green, no, no.
+
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Category: 2 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, square, yes, balloon, green, no, no.
+square, square, yes, balloon, green, no, yes.
+octagon, octagon, yes, balloon, green, no, yes.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 1, 0, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 0, 1, 1, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 1, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 0, 1, 1, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 1, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 2, 0, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 1, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 0, 2, 0, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 0, 1, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 0, 0, 2, 0, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=1
+  Value counts:  0, 0, 1, 
+
+  Label 1, label count=2
+  Value counts:  0, 0, 2, 
+Attribute counts
+Attribute 0  0, 1, 1, 1, 
+Attribute 1  0, 0, 2, 1, 
+Attribute 2  0, 3, 0, 
+Attribute 3  0, 0, 3, 0, 
+Attribute 4  0, 0, 0, 3, 0, 
+Attribute 5  0, 0, 3, 
+Testing attribute 0 (Head shape): Mutual info is 0.918296
+Testing attribute 1 (Body shape): Mutual info is 0.251629
+Testing attribute 2 (Is smiling): No reasonable split
+Testing attribute 3 (Holding): No reasonable split
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): No reasonable split
+Creating split on attribute 0 (Head shape) at level 4
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:yes (1)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, square, yes, balloon, green, no, no.
+
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+square, square, yes, balloon, green, no, yes.
+
+TDDTInducer::create_leaf_categorizer: leaf is:yes (1)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+octagon, octagon, yes, balloon, green, no, yes.
+
+TDDTInducer::create_leaf_categorizer: leaf is:yes (1)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, round, yes, flag, green, no, yes.
+square, square, yes, flag, green, no, yes.
+
+TDDTInducer::create_leaf_categorizer: leaf is:yes (1)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, square, no, balloon, green, no, no.
+round, square, no, flag, green, no, no.
+round, octagon, no, balloon, green, no, no.
+square, square, no, sword, green, no, yes.
+square, octagon, no, sword, green, no, no.
+square, octagon, no, flag, green, no, no.
+octagon, round, no, balloon, green, no, no.
+octagon, square, no, sword, green, no, no.
+octagon, octagon, no, sword, green, no, yes.
+octagon, octagon, no, flag, green, no, yes.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=7
+  Value counts:  0, 3, 2, 2, 
+
+  Label 1, label count=3
+  Value counts:  0, 0, 1, 2, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=7
+  Value counts:  0, 1, 3, 3, 
+
+  Label 1, label count=3
+  Value counts:  0, 0, 1, 2, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=7
+  Value counts:  0, 0, 7, 
+
+  Label 1, label count=3
+  Value counts:  0, 0, 3, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=7
+  Value counts:  0, 2, 3, 2, 
+
+  Label 1, label count=3
+  Value counts:  0, 2, 0, 1, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=7
+  Value counts:  0, 0, 0, 7, 0, 
+
+  Label 1, label count=3
+  Value counts:  0, 0, 0, 3, 0, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=7
+  Value counts:  0, 0, 7, 
+
+  Label 1, label count=3
+  Value counts:  0, 0, 3, 
+Attribute counts
+Attribute 0  0, 3, 3, 4, 
+Attribute 1  0, 1, 4, 5, 
+Attribute 2  0, 0, 10, 
+Attribute 3  0, 4, 3, 3, 
+Attribute 4  0, 0, 0, 10, 0, 
+Attribute 5  0, 0, 10, 
+Testing attribute 0 (Head shape): Mutual info is 0.205802
+Testing attribute 1 (Body shape): Mutual info is 0.0713044
+Testing attribute 2 (Is smiling): No reasonable split
+Testing attribute 3 (Holding): Mutual info is 0.205802
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): No reasonable split
+Creating split on attribute 0 (Head shape) at level 3
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, square, no, balloon, green, no, no.
+round, square, no, flag, green, no, no.
+round, octagon, no, balloon, green, no, no.
+
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+square, square, no, sword, green, no, yes.
+square, octagon, no, sword, green, no, no.
+square, octagon, no, flag, green, no, no.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 0, 2, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 0, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 0, 0, 2, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 0, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 0, 2, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 1, 0, 1, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 0, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 0, 0, 2, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 0, 1, 0, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 0, 2, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 
+Attribute counts
+Attribute 0  0, 0, 3, 0, 
+Attribute 1  0, 0, 1, 2, 
+Attribute 2  0, 0, 3, 
+Attribute 3  0, 2, 0, 1, 
+Attribute 4  0, 0, 0, 3, 0, 
+Attribute 5  0, 0, 3, 
+Testing attribute 0 (Head shape): No reasonable split
+Testing attribute 1 (Body shape): Mutual info is 0.918296
+Testing attribute 2 (Is smiling): No reasonable split
+Testing attribute 3 (Holding): Mutual info is 0.251629
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): No reasonable split
+Creating split on attribute 1 (Body shape) at level 4
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Category: 0 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+square, square, no, sword, green, no, yes.
+
+TDDTInducer::create_leaf_categorizer: leaf is:yes (1)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+square, octagon, no, sword, green, no, no.
+square, octagon, no, flag, green, no, no.
+
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+octagon, round, no, balloon, green, no, no.
+octagon, square, no, sword, green, no, no.
+octagon, octagon, no, sword, green, no, yes.
+octagon, octagon, no, flag, green, no, yes.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 0, 0, 2, 
+
+  Label 1, label count=2
+  Value counts:  0, 0, 0, 2, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 1, 1, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 0, 0, 2, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 0, 2, 
+
+  Label 1, label count=2
+  Value counts:  0, 0, 2, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 1, 1, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 1, 0, 1, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 0, 0, 2, 0, 
+
+  Label 1, label count=2
+  Value counts:  0, 0, 0, 2, 0, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=2
+  Value counts:  0, 0, 2, 
+
+  Label 1, label count=2
+  Value counts:  0, 0, 2, 
+Attribute counts
+Attribute 0  0, 0, 0, 4, 
+Attribute 1  0, 1, 1, 2, 
+Attribute 2  0, 0, 4, 
+Attribute 3  0, 2, 1, 1, 
+Attribute 4  0, 0, 0, 4, 0, 
+Attribute 5  0, 0, 4, 
+Testing attribute 0 (Head shape): No reasonable split
+Testing attribute 1 (Body shape): Mutual info is 1
+Testing attribute 2 (Is smiling): No reasonable split
+Testing attribute 3 (Holding): Mutual info is 0.5
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): No reasonable split
+Creating split on attribute 1 (Body shape) at level 4
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+octagon, round, no, balloon, green, no, no.
+
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+octagon, square, no, sword, green, no, no.
+
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+octagon, octagon, no, sword, green, no, yes.
+octagon, octagon, no, flag, green, no, yes.
+
+TDDTInducer::create_leaf_categorizer: leaf is:yes (1)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, round, no, balloon, blue, yes, yes.
+round, square, yes, sword, blue, no, no.
+round, square, yes, balloon, blue, no, no.
+round, square, yes, flag, blue, no, no.
+round, square, no, balloon, blue, yes, no.
+round, square, no, balloon, blue, no, no.
+round, octagon, yes, sword, blue, yes, no.
+round, octagon, yes, balloon, blue, yes, no.
+round, octagon, yes, flag, blue, yes, no.
+round, octagon, yes, flag, blue, no, no.
+round, octagon, no, balloon, blue, yes, no.
+round, octagon, no, balloon, blue, no, no.
+round, octagon, no, flag, blue, yes, no.
+round, octagon, no, flag, blue, no, no.
+square, round, yes, balloon, blue, yes, no.
+square, round, yes, balloon, blue, no, no.
+square, round, yes, flag, blue, yes, no.
+square, round, no, sword, blue, no, no.
+square, round, no, balloon, blue, no, no.
+square, round, no, flag, blue, yes, no.
+square, square, yes, flag, blue, no, yes.
+square, square, no, sword, blue, yes, yes.
+square, square, no, sword, blue, no, yes.
+square, square, no, flag, blue, yes, yes.
+square, octagon, yes, flag, blue, no, no.
+octagon, square, yes, sword, blue, no, no.
+octagon, square, yes, balloon, blue, no, no.
+octagon, square, no, flag, blue, yes, no.
+octagon, octagon, yes, sword, blue, no, yes.
+octagon, octagon, yes, balloon, blue, no, yes.
+octagon, octagon, yes, flag, blue, no, yes.
+octagon, octagon, no, sword, blue, yes, yes.
+octagon, octagon, no, sword, blue, no, yes.
+octagon, octagon, no, flag, blue, no, yes.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=23
+  Value counts:  0, 13, 7, 3, 
+
+  Label 1, label count=11
+  Value counts:  0, 1, 4, 6, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=23
+  Value counts:  0, 6, 8, 9, 
+
+  Label 1, label count=11
+  Value counts:  0, 1, 4, 6, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=23
+  Value counts:  0, 13, 10, 
+
+  Label 1, label count=11
+  Value counts:  0, 4, 7, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=23
+  Value counts:  0, 4, 10, 9, 
+
+  Label 1, label count=11
+  Value counts:  0, 5, 2, 4, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=23
+  Value counts:  0, 0, 0, 0, 23, 
+
+  Label 1, label count=11
+  Value counts:  0, 0, 0, 0, 11, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=23
+  Value counts:  0, 10, 13, 
+
+  Label 1, label count=11
+  Value counts:  0, 4, 7, 
+Attribute counts
+Attribute 0  0, 14, 11, 9, 
+Attribute 1  0, 7, 12, 15, 
+Attribute 2  0, 17, 17, 
+Attribute 3  0, 9, 12, 13, 
+Attribute 4  0, 0, 0, 0, 34, 
+Attribute 5  0, 14, 20, 
+Testing attribute 0 (Head shape): Mutual info is 0.206291
+Testing attribute 1 (Body shape): Mutual info is 0.0338984
+Testing attribute 2 (Is smiling): Mutual info is 0.0259061
+Testing attribute 3 (Holding): Mutual info is 0.0759329
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): Mutual info is 0.00332396
+Creating split on attribute 0 (Head shape) at level 1
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, round, no, balloon, blue, yes, yes.
+round, square, yes, sword, blue, no, no.
+round, square, yes, balloon, blue, no, no.
+round, square, yes, flag, blue, no, no.
+round, square, no, balloon, blue, yes, no.
+round, square, no, balloon, blue, no, no.
+round, octagon, yes, sword, blue, yes, no.
+round, octagon, yes, balloon, blue, yes, no.
+round, octagon, yes, flag, blue, yes, no.
+round, octagon, yes, flag, blue, no, no.
+round, octagon, no, balloon, blue, yes, no.
+round, octagon, no, balloon, blue, no, no.
+round, octagon, no, flag, blue, yes, no.
+round, octagon, no, flag, blue, no, no.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=13
+  Value counts:  0, 13, 0, 0, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 0, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=13
+  Value counts:  0, 0, 5, 8, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 0, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=13
+  Value counts:  0, 7, 6, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=13
+  Value counts:  0, 2, 6, 5, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 1, 0, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=13
+  Value counts:  0, 0, 0, 0, 13, 
+
+  Label 1, label count=1
+  Value counts:  0, 0, 0, 0, 1, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=13
+  Value counts:  0, 6, 7, 
+
+  Label 1, label count=1
+  Value counts:  0, 1, 0, 
+Attribute counts
+Attribute 0  0, 14, 0, 0, 
+Attribute 1  0, 1, 5, 8, 
+Attribute 2  0, 7, 7, 
+Attribute 3  0, 2, 7, 5, 
+Attribute 4  0, 0, 0, 0, 14, 
+Attribute 5  0, 7, 7, 
+Testing attribute 0 (Head shape): No reasonable split
+Testing attribute 1 (Body shape): Mutual info is 0.371232
+Testing attribute 2 (Is smiling): Mutual info is 0.0753959
+Testing attribute 3 (Holding): Mutual info is 0.0753959
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): Mutual info is 0.0753959
+Creating split on attribute 1 (Body shape) at level 2
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, round, no, balloon, blue, yes, yes.
+
+TDDTInducer::create_leaf_categorizer: leaf is:yes (1)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, square, yes, sword, blue, no, no.
+round, square, yes, balloon, blue, no, no.
+round, square, yes, flag, blue, no, no.
+round, square, no, balloon, blue, yes, no.
+round, square, no, balloon, blue, no, no.
+
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+round, octagon, yes, sword, blue, yes, no.
+round, octagon, yes, balloon, blue, yes, no.
+round, octagon, yes, flag, blue, yes, no.
+round, octagon, yes, flag, blue, no, no.
+round, octagon, no, balloon, blue, yes, no.
+round, octagon, no, balloon, blue, no, no.
+round, octagon, no, flag, blue, yes, no.
+round, octagon, no, flag, blue, no, no.
+
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+square, round, yes, balloon, blue, yes, no.
+square, round, yes, balloon, blue, no, no.
+square, round, yes, flag, blue, yes, no.
+square, round, no, sword, blue, no, no.
+square, round, no, balloon, blue, no, no.
+square, round, no, flag, blue, yes, no.
+square, square, yes, flag, blue, no, yes.
+square, square, no, sword, blue, yes, yes.
+square, square, no, sword, blue, no, yes.
+square, square, no, flag, blue, yes, yes.
+square, octagon, yes, flag, blue, no, no.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=7
+  Value counts:  0, 0, 7, 0, 
+
+  Label 1, label count=4
+  Value counts:  0, 0, 4, 0, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=7
+  Value counts:  0, 6, 0, 1, 
+
+  Label 1, label count=4
+  Value counts:  0, 0, 4, 0, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=7
+  Value counts:  0, 4, 3, 
+
+  Label 1, label count=4
+  Value counts:  0, 1, 3, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=7
+  Value counts:  0, 1, 3, 3, 
+
+  Label 1, label count=4
+  Value counts:  0, 2, 0, 2, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=7
+  Value counts:  0, 0, 0, 0, 7, 
+
+  Label 1, label count=4
+  Value counts:  0, 0, 0, 0, 4, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=7
+  Value counts:  0, 3, 4, 
+
+  Label 1, label count=4
+  Value counts:  0, 2, 2, 
+Attribute counts
+Attribute 0  0, 0, 11, 0, 
+Attribute 1  0, 6, 4, 1, 
+Attribute 2  0, 5, 6, 
+Attribute 3  0, 3, 3, 5, 
+Attribute 4  0, 0, 0, 0, 11, 
+Attribute 5  0, 5, 6, 
+Testing attribute 0 (Head shape): No reasonable split
+Testing attribute 1 (Body shape): Mutual info is 0.94566
+Testing attribute 2 (Is smiling): Mutual info is 0.0720566
+Testing attribute 3 (Holding): Mutual info is 0.253875
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): Mutual info is 0.00343049
+Creating split on attribute 1 (Body shape) at level 2
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+square, round, yes, balloon, blue, yes, no.
+square, round, yes, balloon, blue, no, no.
+square, round, yes, flag, blue, yes, no.
+square, round, no, sword, blue, no, no.
+square, round, no, balloon, blue, no, no.
+square, round, no, flag, blue, yes, no.
+
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+square, square, yes, flag, blue, no, yes.
+square, square, no, sword, blue, yes, yes.
+square, square, no, sword, blue, no, yes.
+square, square, no, flag, blue, yes, yes.
+
+TDDTInducer::create_leaf_categorizer: leaf is:yes (1)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+square, octagon, yes, flag, blue, no, no.
+
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+octagon, square, yes, sword, blue, no, no.
+octagon, square, yes, balloon, blue, no, no.
+octagon, square, no, flag, blue, yes, no.
+octagon, octagon, yes, sword, blue, no, yes.
+octagon, octagon, yes, balloon, blue, no, yes.
+octagon, octagon, yes, flag, blue, no, yes.
+octagon, octagon, no, sword, blue, yes, yes.
+octagon, octagon, no, sword, blue, no, yes.
+octagon, octagon, no, flag, blue, no, yes.
+
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=3
+  Value counts:  0, 0, 0, 3, 
+
+  Label 1, label count=6
+  Value counts:  0, 0, 0, 6, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=3
+  Value counts:  0, 0, 3, 0, 
+
+  Label 1, label count=6
+  Value counts:  0, 0, 0, 6, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=3
+  Value counts:  0, 2, 1, 
+
+  Label 1, label count=6
+  Value counts:  0, 3, 3, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=3
+  Value counts:  0, 1, 1, 1, 
+
+  Label 1, label count=6
+  Value counts:  0, 3, 1, 2, 
+Attribute 4:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=3
+  Value counts:  0, 0, 0, 0, 3, 
+
+  Label 1, label count=6
+  Value counts:  0, 0, 0, 0, 6, 
+Attribute 5:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=3
+  Value counts:  0, 1, 2, 
+
+  Label 1, label count=6
+  Value counts:  0, 1, 5, 
+Attribute counts
+Attribute 0  0, 0, 0, 9, 
+Attribute 1  0, 0, 3, 6, 
+Attribute 2  0, 5, 4, 
+Attribute 3  0, 4, 2, 3, 
+Attribute 4  0, 0, 0, 0, 9, 
+Attribute 5  0, 2, 7, 
+Testing attribute 0 (Head shape): No reasonable split
+Testing attribute 1 (Body shape): Mutual info is 0.918296
+Testing attribute 2 (Is smiling): Mutual info is 0.0183108
+Testing attribute 3 (Holding): Mutual info is 0.0294069
+Testing attribute 4 (Jacket color): No reasonable split
+Testing attribute 5 (Has tie): Mutual info is 0.0247576
+Creating split on attribute 1 (Body shape) at level 2
+TDDTInducer::induce_decision_tree: Category: -1 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:yes (1)
+TDDTInducer::induce_decision_tree: Category: 0 empty.  Assigning majority
+TDDTInducer::create_leaf_categorizer: leaf is:yes (1)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+octagon, square, yes, sword, blue, no, no.
+octagon, square, yes, balloon, blue, no, no.
+octagon, square, no, flag, blue, yes, no.
+
+TDDTInducer::create_leaf_categorizer: leaf is:no (0)
+TDDTInducer::induce_decision_tree: Recursive call
+TDDTInducer::induce_decision_tree:  training set =
+octagon, octagon, yes, sword, blue, no, yes.
+octagon, octagon, yes, balloon, blue, no, yes.
+octagon, octagon, yes, flag, blue, no, yes.
+octagon, octagon, no, sword, blue, yes, yes.
+octagon, octagon, no, sword, blue, no, yes.
+octagon, octagon, no, flag, blue, no, yes.
+
+TDDTInducer::create_leaf_categorizer: leaf is:yes (1)

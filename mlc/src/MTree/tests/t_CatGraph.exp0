@@ -1,0 +1,547 @@
+
+[0](ConstCat0) : [0]--(Unknown)-->[1] [0]--(first)-->[2] 
+[1](ConstCat1) : [1]--(Unknown)-->[2] [1]--(first)-->[3] 
+[2](ConstCat2) : [2]--(Unknown)-->[3] [2]--(first)-->[4] 
+[3](ConstCat3) : [3]--(Unknown)-->[4] [3]--(first)-->[5] 
+[4](ConstCat4) : [4]--(Unknown)-->[5] [4]--(first)-->[6] 
+[5](ConstCat5) : [5]--(Unknown)-->[6] [5]--(first)-->[7] 
+[6](ConstCat6) : [6]--(Unknown)-->[7] [6]--(first)-->[8] 
+[7](ConstCat7) : [7]--(Unknown)-->[8] [7]--(first)-->[9] 
+[8](ConstCat8) : [8]--(Unknown)-->[9] [8]--(first)-->[10] 
+[9](ConstCat9) : [9]--(Unknown)-->[10] 
+[10](ConstCat10) : 
+
+/* Machine generated dot file */
+
+digraph G { 
+
+/*  node 0:  */
+node_0 [label="ConstCat0"]
+node_0->node_1 [label="Unknown"] 
+node_0->node_2 [label="first"] 
+/*  node 1:  */
+node_1 [label="ConstCat1"]
+node_1->node_2 [label="Unknown"] 
+node_1->node_3 [label="first"] 
+/*  node 2:  */
+node_2 [label="ConstCat2"]
+node_2->node_3 [label="Unknown"] 
+node_2->node_4 [label="first"] 
+/*  node 3:  */
+node_3 [label="ConstCat3"]
+node_3->node_4 [label="Unknown"] 
+node_3->node_5 [label="first"] 
+/*  node 4:  */
+node_4 [label="ConstCat4"]
+node_4->node_5 [label="Unknown"] 
+node_4->node_6 [label="first"] 
+/*  node 5:  */
+node_5 [label="ConstCat5"]
+node_5->node_6 [label="Unknown"] 
+node_5->node_7 [label="first"] 
+/*  node 6:  */
+node_6 [label="ConstCat6"]
+node_6->node_7 [label="Unknown"] 
+node_6->node_8 [label="first"] 
+/*  node 7:  */
+node_7 [label="ConstCat7"]
+node_7->node_8 [label="Unknown"] 
+node_7->node_9 [label="first"] 
+/*  node 8:  */
+node_8 [label="ConstCat8"]
+node_8->node_9 [label="Unknown"] 
+node_8->node_10 [label="first"] 
+/*  node 9:  */
+node_9 [label="ConstCat9"]
+node_9->node_10 [label="Unknown"] 
+/*  node 10:  */
+node_10 [label="ConstCat10"]
+}
+%!PS-Adobe-2.0
+%%Creator: dot version 92c (09-01-94)
+%%For: (ronnyk) Ronny Kohavi
+%%Title: G
+%%Pages: (atend)
+%%BoundingBox: 36 36 577 470
+%%EndComments
+%%BeginProlog
+save
+/DotDict 200 dict def
+DotDict begin
+
+%%BeginResource: procset
+/coord-font-family /Times-Roman def
+/default-font-family /Times-Roman def
+/coordfont coord-font-family findfont 8 scalefont def
+
+/InvScaleFactor 1.0 def
+/set_scale {
+	dup 1 exch div /InvScaleFactor exch def
+	dup scale
+} bind def
+
+% styles
+/solid { } bind def
+/dashed { [9 InvScaleFactor mul dup ] 0 setdash } bind def
+/dotted { [1 InvScaleFactor mul 6 InvScaleFactor mul] 0 setdash } bind def
+/invis {/fill {newpath} def /stroke {newpath} def /show {pop newpath} def} bind def
+/bold { 2 setlinewidth } bind def
+/filled { } bind def
+/unfilled { } bind def
+/rounded { } bind def
+/diagonals { } bind def
+
+% hooks for setting color 
+/nodecolor { sethsbcolor } bind def
+/edgecolor { sethsbcolor } bind def
+/graphcolor { sethsbcolor } bind def
+/nopcolor {pop pop pop} bind def
+
+/beginpage {	% i j npages
+	/npages exch def
+	/j exch def
+	/i exch def
+	/str 10 string def
+	npages 1 gt {
+		gsave
+			coordfont setfont
+			0 0 moveto
+			(\() show i str cvs show (,) show j str cvs show (\)) show
+		grestore
+	} if
+} bind def
+
+/set_font {
+	findfont exch
+	scalefont setfont
+} def
+
+/arrowhead {
+	/arrowwidth exch def
+	/arrowlength exch def
+	gsave
+		3 1 roll
+		translate
+			rotate
+			newpath
+			arrowlength arrowwidth 2 div moveto
+			0 0 lineto
+			arrowlength arrowwidth -2 div lineto
+		closepath fill
+		stroke
+	grestore
+} def
+
+% draw aligned label in bounding box aligned to current point
+% alignfactor tells what fraction to place on the left.
+% -.5 is centered.
+/alignedtext {			% text labelwidth fontsz alignfactor
+	/alignfactor exch def
+	/fontsz exch def
+	/width exch def
+	/text exch def
+	gsave
+		% even if node or edge is dashed, don't paint text with dashes
+		[] 0 setdash
+		currentpoint newpath moveto
+		text stringwidth pop
+		alignfactor mul fontsz -.3 mul rmoveto
+		text show
+	grestore
+} def
+
+/boxprim {				% xcorner ycorner xsize ysize
+		4 2 roll
+		moveto
+		2 copy
+		exch 0 rlineto
+		0 exch rlineto
+		pop neg 0 rlineto
+		closepath
+} bind def
+
+/ellipse_path {
+	/ry exch def
+	/rx exch def
+	/y exch def
+	/x exch def
+	matrix currentmatrix
+	newpath
+	x y translate
+	rx ry scale
+	0 0 1 0 360 arc
+	setmatrix
+} bind def
+
+/endpage { showpage } bind def
+
+/layercolorseq
+	[	% layer color sequence - darkest to lightest
+		[0 0 0]
+		[.2 .8 .8]
+		[.4 .8 .8]
+		[.6 .8 .8]
+		[.8 .8 .8]
+	]
+def
+
+/setlayer {/maxlayer exch def /curlayer exch def
+	layercolorseq curlayer get
+	aload pop sethsbcolor
+	/nodecolor {nopcolor} def
+	/edgecolor {nopcolor} def
+	/graphcolor {nopcolor} def
+} bind def
+
+/onlayer { curlayer ne {invis} if } def
+
+/onlayers {
+	/myupper exch def
+	/mylower exch def
+	curlayer mylower lt
+	curlayer myupper gt
+	or
+	{invis} if
+} def
+
+/curlayer 0 def
+
+%%EndResource
+%%EndProlog
+%%BeginSetup
+14 default-font-family set_font
+% /arrowlength 10 def
+% /arrowwidth 5 def
+%%EndSetup
+%%Page: 1 (atend)
+%%PageBoundingBox: 36 36 577 470
+gsave
+35 35 542 435 boxprim clip newpath
+36 36 translate
+gsave 540 0 translate 90 rotate
+0 0 2 beginpage
+grestore
+0.786026 set_scale
+687 0 translate 90 rotate
+0.000 0.000 0.000 graphcolor
+14.00 /Times-Roman set_font
+
+%	node_3
+gsave 10 dict begin
+98 634 41 18 ellipse_path
+stroke
+gsave 10 dict begin
+98 635 moveto (ConstCat3) 59 14.00 -0.50 alignedtext
+end grestore
+end grestore
+
+%	node_1 -> node_3
+newpath 170 792 moveto
+156 760 126 695 109 659 curveto
+stroke
+106 652 66.80 10.00 5.00 arrowhead
+gsave 10 dict begin
+165 723 moveto (first) 22 14.00 -0.50 alignedtext
+end grestore
+
+%	node_2 -> node_3
+newpath 395 713 moveto
+333 697 205 662 139 645 curveto
+stroke
+133 643 18.43 10.00 5.00 arrowhead
+gsave 10 dict begin
+329 679 moveto (Unknown) 55 14.00 -0.50 alignedtext
+end grestore
+
+%	node_4
+gsave 10 dict begin
+430 546 41 18 ellipse_path
+stroke
+gsave 10 dict begin
+430 547 moveto (ConstCat4) 59 14.00 -0.50 alignedtext
+end grestore
+end grestore
+
+%	node_2 -> node_4
+newpath 430 704 moveto
+430 672 430 607 430 571 curveto
+stroke
+430 564 90.00 10.00 5.00 arrowhead
+gsave 10 dict begin
+448 635 moveto (first) 22 14.00 -0.50 alignedtext
+end grestore
+
+%	node_3 -> node_4
+newpath 133 625 moveto
+195 609 323 574 389 557 curveto
+stroke
+395 555 161.57 10.00 5.00 arrowhead
+gsave 10 dict begin
+329 591 moveto (Unknown) 55 14.00 -0.50 alignedtext
+end grestore
+
+%	node_5
+gsave 10 dict begin
+98 458 41 18 ellipse_path
+stroke
+gsave 10 dict begin
+98 459 moveto (ConstCat5) 59 14.00 -0.50 alignedtext
+end grestore
+end grestore
+
+%	node_3 -> node_5
+newpath 98 616 moveto
+98 584 98 519 98 483 curveto
+stroke
+98 476 90.00 10.00 5.00 arrowhead
+gsave 10 dict begin
+116 547 moveto (first) 22 14.00 -0.50 alignedtext
+end grestore
+
+%	node_4 -> node_5
+newpath 395 537 moveto
+333 521 205 486 139 469 curveto
+stroke
+133 467 18.43 10.00 5.00 arrowhead
+gsave 10 dict begin
+329 503 moveto (Unknown) 55 14.00 -0.50 alignedtext
+end grestore
+
+%	node_6
+gsave 10 dict begin
+430 370 41 18 ellipse_path
+stroke
+gsave 10 dict begin
+430 371 moveto (ConstCat6) 59 14.00 -0.50 alignedtext
+end grestore
+end grestore
+
+%	node_4 -> node_6
+newpath 430 528 moveto
+430 496 430 431 430 395 curveto
+stroke
+430 388 90.00 10.00 5.00 arrowhead
+gsave 10 dict begin
+448 459 moveto (first) 22 14.00 -0.50 alignedtext
+end grestore
+
+%	node_5 -> node_6
+newpath 133 449 moveto
+195 433 323 398 389 381 curveto
+stroke
+395 379 161.57 10.00 5.00 arrowhead
+gsave 10 dict begin
+329 415 moveto (Unknown) 55 14.00 -0.50 alignedtext
+end grestore
+
+%	node_7
+gsave 10 dict begin
+98 282 41 18 ellipse_path
+stroke
+gsave 10 dict begin
+98 283 moveto (ConstCat7) 59 14.00 -0.50 alignedtext
+end grestore
+end grestore
+
+%	node_5 -> node_7
+newpath 98 440 moveto
+98 408 98 343 98 307 curveto
+stroke
+98 300 90.00 10.00 5.00 arrowhead
+gsave 10 dict begin
+116 371 moveto (first) 22 14.00 -0.50 alignedtext
+end grestore
+
+%	node_6 -> node_7
+newpath 395 361 moveto
+333 345 205 310 139 293 curveto
+stroke
+133 291 18.43 10.00 5.00 arrowhead
+gsave 10 dict begin
+329 327 moveto (Unknown) 55 14.00 -0.50 alignedtext
+end grestore
+
+%	node_8
+gsave 10 dict begin
+430 194 41 18 ellipse_path
+stroke
+gsave 10 dict begin
+430 195 moveto (ConstCat8) 59 14.00 -0.50 alignedtext
+end grestore
+end grestore
+
+%	node_6 -> node_8
+newpath 430 352 moveto
+430 320 430 255 430 219 curveto
+stroke
+430 212 90.00 10.00 5.00 arrowhead
+gsave 10 dict begin
+448 283 moveto (first) 22 14.00 -0.50 alignedtext
+end grestore
+
+%	node_7 -> node_8
+newpath 133 273 moveto
+195 257 323 222 389 205 curveto
+stroke
+395 203 161.57 10.00 5.00 arrowhead
+gsave 10 dict begin
+329 239 moveto (Unknown) 55 14.00 -0.50 alignedtext
+end grestore
+
+%	node_9
+gsave 10 dict begin
+178 106 41 18 ellipse_path
+stroke
+gsave 10 dict begin
+178 107 moveto (ConstCat9) 59 14.00 -0.50 alignedtext
+end grestore
+end grestore
+
+%	node_7 -> node_9
+newpath 106 264 moveto
+120 232 150 167 167 131 curveto
+stroke
+170 124 113.20 10.00 5.00 arrowhead
+gsave 10 dict begin
+165 195 moveto (first) 22 14.00 -0.50 alignedtext
+end grestore
+
+%	node_8 -> node_9
+newpath 398 183 moveto
+352 167 267 137 217 119 curveto
+stroke
+210 117 15.95 10.00 5.00 arrowhead
+gsave 10 dict begin
+361 151 moveto (Unknown) 55 14.00 -0.50 alignedtext
+end grestore
+
+%	node_10
+gsave 10 dict begin
+344 18 45 18 ellipse_path
+stroke
+gsave 10 dict begin
+344 19 moveto (ConstCat10) 66 14.00 -0.50 alignedtext
+end grestore
+end grestore
+
+%	node_8 -> node_10
+newpath 421 176 moveto
+405 144 374 79 356 43 curveto
+stroke
+353 36 66.80 10.00 5.00 arrowhead
+gsave 10 dict begin
+413 107 moveto (first) 22 14.00 -0.50 alignedtext
+end grestore
+
+%	node_9 -> node_10
+newpath 204 92 moveto
+233 77 278 53 310 36 curveto
+stroke
+317 32 150.26 10.00 5.00 arrowhead
+gsave 10 dict begin
+311 63 moveto (Unknown) 55 14.00 -0.50 alignedtext
+end grestore
+endpage
+grestore
+%%PageTrailer
+%%Page: 2 (atend)
+%%PageBoundingBox: 36 36 577 470
+gsave
+35 35 542 435 boxprim clip newpath
+36 36 translate
+gsave 540 0 translate 90 rotate
+0 1 2 beginpage
+grestore
+0.786026 set_scale
+1374 0 translate 90 rotate
+0.000 0.000 0.000 graphcolor
+14.00 /Times-Roman set_font
+
+%	node_0
+gsave 10 dict begin
+344 898 41 18 ellipse_path
+stroke
+gsave 10 dict begin
+344 899 moveto (ConstCat0) 59 14.00 -0.50 alignedtext
+end grestore
+end grestore
+
+%	node_1
+gsave 10 dict begin
+178 810 41 18 ellipse_path
+stroke
+gsave 10 dict begin
+178 811 moveto (ConstCat1) 59 14.00 -0.50 alignedtext
+end grestore
+end grestore
+
+%	node_0 -> node_1
+newpath 318 884 moveto
+289 868 243 844 211 827 curveto
+stroke
+204 824 23.20 10.00 5.00 arrowhead
+gsave 10 dict begin
+311 855 moveto (Unknown) 55 14.00 -0.50 alignedtext
+end grestore
+
+%	node_2
+gsave 10 dict begin
+430 722 41 18 ellipse_path
+stroke
+gsave 10 dict begin
+430 723 moveto (ConstCat2) 59 14.00 -0.50 alignedtext
+end grestore
+end grestore
+
+%	node_0 -> node_2
+newpath 353 880 moveto
+369 848 400 783 418 747 curveto
+stroke
+421 740 113.20 10.00 5.00 arrowhead
+gsave 10 dict begin
+413 811 moveto (first) 22 14.00 -0.50 alignedtext
+end grestore
+
+%	node_1 -> node_2
+newpath 210 799 moveto
+256 783 341 753 391 735 curveto
+stroke
+398 733 164.05 10.00 5.00 arrowhead
+gsave 10 dict begin
+361 767 moveto (Unknown) 55 14.00 -0.50 alignedtext
+end grestore
+
+%	node_1 -> node_3
+newpath 170 792 moveto
+156 760 126 695 109 659 curveto
+stroke
+106 652 66.80 10.00 5.00 arrowhead
+gsave 10 dict begin
+165 723 moveto (first) 22 14.00 -0.50 alignedtext
+end grestore
+
+%	node_2 -> node_3
+newpath 395 713 moveto
+333 697 205 662 139 645 curveto
+stroke
+133 643 18.43 10.00 5.00 arrowhead
+gsave 10 dict begin
+329 679 moveto (Unknown) 55 14.00 -0.50 alignedtext
+end grestore
+
+%	node_2 -> node_4
+newpath 430 704 moveto
+430 672 430 607 430 571 curveto
+stroke
+430 564 90.00 10.00 5.00 arrowhead
+gsave 10 dict begin
+448 635 moveto (first) 22 14.00 -0.50 alignedtext
+end grestore
+endpage
+grestore
+%%PageTrailer
+%%Trailer
+%%Pages: 2
+end
+restore
+%%EOF

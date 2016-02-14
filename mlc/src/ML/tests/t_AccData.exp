@@ -1,0 +1,23 @@
+t_AccData executing
+est only: 40.00% +- 5.77% (30.00% - 50.00%)
+real only: 75.00% (test set).
+Test Set: 75.00% +- 9.93% [53.13% - 88.81%].  Bias: 0.00%
+both: 40.00% +- 5.77% (30.00% - 50.00%).
+Test Set: 50.00% +- 11.47% [29.93% - 70.07%].  Bias: -10.00%
+clear: (empty)
+no variance (0 real): 50.00%.
+Test Set: 90.00%.  Bias: -40.00%
+no variance (1 real): 50.00%.
+Test Set: 80.00%.  Bias: -30.00%
+append (1): 10.00%.
+Test Set: 90.00%.  Bias: -80.00%
+append (2): 30.00%.
+Test Set: 90.00%.  Bias: -60.00%
+append (2+1): 20.00% +- 10.00% (10.00% - 30.00%).
+Test Set: 90.00%.  Bias: -70.00%
+assign -> 1: 20.00% +- 10.00% (10.00% - 30.00%).
+Test Set: 90.00%.  Bias: -70.00%
+append 1 -> empty: 20.00% +- 10.00% (10.00% - 30.00%).
+Test Set: 90.00%.  Bias: -70.00%
+append empty -> 2: 20.00% +- 10.00% (10.00% - 30.00%).
+Test Set: 90.00%.  Bias: -70.00%

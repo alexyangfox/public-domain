@@ -1,0 +1,14 @@
+#!source_this do not execute it (this line won't let you execute it)
+# Some aliases for MLC++ "users."  Developers should use aliasMLC
+# This file should be "sourced" in your .cshrc
+# Ronny Kohavi
+
+# pmake is needed for "..." in makefiles
+alias make 'pmake -J1'
+alias  MLCC 'CC $CCFLAGS \!* $MLCLINKLIBS -lmalloc_cv'
+alias  MLCCX 'CC $CCFLAGS \!*  $MLCLINKLIBS $MLCMOTIFLIBS -lmalloc_cv'
+# MLCCF is faster because it doesn't link with MFSS stuff.
+alias  MLCCF 'CC $CCFLAGS \!* `echo $MLCLINKLIBS | sed -e s/-lMFSS//` -lmalloc_cv'
+alias  orglib      'setenv CCFLAGS "$ORGCCFLAGS"; setenv MLCLIB "$ORGLIB"; setenv MLCLINKLIBS "`eval echo $evalMLCLINKLIBS`"; $MLCDIR/bin/extractBasic'
+alias  fastlib     'setenv CCFLAGS "$FASTCCFLAGS"; setenv MLCLIB "$FASTLIB"; setenv MLCLINKLIBS "`eval echo $evalMLCLINKLIBS`"; $MLCDIR/bin/extractBasic'
+

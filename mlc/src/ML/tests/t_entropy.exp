@@ -1,0 +1,12 @@
+t_entropy executing
+Bag is overcast, 83, 78, false, Play.
+rain, 70, 96, false, Play.
+rain, 68, 80, false, Play.
+rain, 65, 70, true, Don't Play.
+overcast, 64, 65, true, Play.
+rain, 75, 80, false, Play.
+overcast, 72, 90, true, Play.
+overcast, 81, 75, false, Play.
+rain, 71, 80, true, Don't Play.
+
+Entropies are 0.924457, 0.938952, 0.958094, 1

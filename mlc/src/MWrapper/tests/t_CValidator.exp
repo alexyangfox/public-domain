@@ -1,0 +1,30 @@
+t_CValidator executing
+ID3 categorizer cross validation from /tmp/t_lensesCV is 81.48% +- 5.54% (33.33% - 100.00%)
+ID3 CV in memory 81.48% +- 5.54% (33.33% - 100.00%)
+leave one out is 79.17% +- 8.47% (0.00% - 100.00%)
+Inducer: my c45 inducer
+Number of folds: 2, Number of times: 1
+Number of instances in fold 0: 12. Stratification: Training: 0/2/1/9/  Test: 0/2/4/6/
+Acc 0.5
+Number of instances in fold 1: 12. Stratification: Training: 0/2/4/6/  Test: 0/2/1/9/
+Acc 0.833333
+fold 66.67% +- 16.67% (50.00% - 83.33%). Untrimmed accuracy 66.67% +- 16.67% (50.00% - 83.33%)
+c4.5 accuracy is 0.6667
+Running C4.5 manually yields 0.5 and 0.833333 with the average 0.6667
+auto_set_folds trying 10 folds...mean 83.67% +- 7.64% (average of 5)
+auto_set_folds trying 5 folds...mean 84% +- 6.12% (average of 5)
+auto_set_folds trying 2 folds...mean 66.67% +- 10.76% (average of 5)
+Fold setting set to 5 (significant deterioration or above std-dev threshold)
+Inducer: my c45 inducer
+Number of folds: 5. Looping until std-dev of mean =0.01
+fold 83.00% +- 7.68% (60.00% - 100.00%). Overall acc: 83.00% +- 7.68% (60.00% - 100.00%)
+fold 88.00% +- 4.90% (80.00% - 100.00%). Overall acc: 85.50% +- 4.37% (60.00% - 100.00%)
+fold 87.00% +- 5.39% (75.00% - 100.00%). Overall acc: 86.00% +- 3.32% (60.00% - 100.00%)
+fold 88.00% +- 4.90% (80.00% - 100.00%). Overall acc: 86.50% +- 2.72% (60.00% - 100.00%)
+fold 88.00% +- 8.00% (60.00% - 100.00%). Overall acc: 86.80% +- 2.61% (60.00% - 100.00%)
+fold 84.00% +- 7.48% (60.00% - 100.00%). Overall acc: 86.33% +- 2.46% (60.00% - 100.00%)
+fold 83.00% +- 7.68% (60.00% - 100.00%). Overall acc: 85.86% +- 2.33% (60.00% - 100.00%)
+fold 83.00% +- 4.36% (75.00% - 100.00%). Overall acc: 85.50% +- 2.10% (60.00% - 100.00%)
+fold 75.00% +- 11.62% (40.00% - 100.00%). Overall acc: 84.33% +- 2.26% (60.00% - 100.00%)
+fold 75.00% +- 9.75% (40.00% - 100.00%). Overall acc: 83.40% +- 2.25% (40.00% - 100.00%)
+Untrimmed accuracy 83.40% +- 2.25% (40.00% - 100.00%)

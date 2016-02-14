@@ -1,0 +1,137 @@
+testing t_LazyDTInducer.c ... 
+=================================================
+Data File     : monk1
+MIN SPLIT        : 1
+MUTUAL_INFO_RATE    : 0
+USE ATTR EQ CAT     : Yes
+DEL RATE : 0
+MULTI SPLIT : Yes
+MULTI SPLIT RATE  : 0.1
+PESSIMISTIC Z VAL    : 0
+PENALTY POWER : 0
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 397.  Number incorrect: 35
+Generalization accuracy: 88.64%.  Memorization accuracy: 100.00%
+Accuracy: 91.90% +- 1.31% [88.94% - 94.12%]
+=================================================
+
+=================================================
+Data File     : monk1
+MIN SPLIT        : 1
+MUTUAL_INFO_RATE    : 0
+USE ATTR EQ CAT     : Yes
+DEL RATE : 0
+MULTI SPLIT : No
+MULTI SPLIT RATE  : Not Applicable
+PESSIMISTIC Z VAL    : 0
+PENALTY POWER : 0
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 364.  Number incorrect: 68
+Generalization accuracy: 77.92%.  Memorization accuracy: 100.00%
+Accuracy: 84.26% +- 1.75% [80.52% - 87.39%]
+=================================================
+
+=================================================
+Data File     : monk1
+MIN SPLIT        : 1
+MUTUAL_INFO_RATE    : 0
+USE ATTR EQ CAT     : No
+DEL RATE : 0
+MULTI SPLIT : Yes
+MULTI SPLIT RATE  : 0.1
+PESSIMISTIC Z VAL    : 0
+PENALTY POWER : 0
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 369.  Number incorrect: 63
+Generalization accuracy: 79.55%.  Memorization accuracy: 100.00%
+Accuracy: 85.42% +- 1.70% [81.78% - 88.43%]
+=================================================
+
+=================================================
+Data File     : monk1
+MIN SPLIT        : 1
+MUTUAL_INFO_RATE    : 0
+USE ATTR EQ CAT     : No
+DEL RATE : 0
+MULTI SPLIT : No
+MULTI SPLIT RATE  : Not Applicable
+PESSIMISTIC Z VAL    : 0
+PENALTY POWER : 0
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 378.  Number incorrect: 54
+Generalization accuracy: 82.47%.  Memorization accuracy: 100.00%
+Accuracy: 87.50% +- 1.59% [84.05% - 90.29%]
+=================================================
+
+=================================================
+Data File     : vote
+MIN SPLIT        : 1
+MUTUAL_INFO_RATE    : 0
+USE ATTR EQ CAT     : Yes
+DEL RATE : 0
+MULTI SPLIT : Yes
+MULTI SPLIT RATE  : 0.1
+PESSIMISTIC Z VAL    : 0
+PENALTY POWER : 0
+Number of training instances: 300
+Number of test instances: 135.  Unseen: 92,  seen 43.
+Number correct: 127.  Number incorrect: 8
+Generalization accuracy: 91.30%.  Memorization accuracy: 100.00%
+Accuracy: 94.07% +- 2.04% [88.74% - 96.97%]
+=================================================
+
+=================================================
+Data File     : vote
+MIN SPLIT        : 1
+MUTUAL_INFO_RATE    : 0
+USE ATTR EQ CAT     : Yes
+DEL RATE : 0
+MULTI SPLIT : No
+MULTI SPLIT RATE  : Not Applicable
+PESSIMISTIC Z VAL    : 0
+PENALTY POWER : 0
+Number of training instances: 300
+Number of test instances: 135.  Unseen: 92,  seen 43.
+Number correct: 128.  Number incorrect: 7
+Generalization accuracy: 92.39%.  Memorization accuracy: 100.00%
+Accuracy: 94.81% +- 1.92% [89.68% - 97.47%]
+=================================================
+
+=================================================
+Data File     : vote
+MIN SPLIT        : 1
+MUTUAL_INFO_RATE    : 0
+USE ATTR EQ CAT     : No
+DEL RATE : 0
+MULTI SPLIT : Yes
+MULTI SPLIT RATE  : 0.1
+PESSIMISTIC Z VAL    : 0
+PENALTY POWER : 0
+Number of training instances: 300
+Number of test instances: 135.  Unseen: 92,  seen 43.
+Number correct: 130.  Number incorrect: 5
+Generalization accuracy: 94.57%.  Memorization accuracy: 100.00%
+Accuracy: 96.30% +- 1.63% [91.62% - 98.41%]
+=================================================
+
+=================================================
+Data File     : vote
+MIN SPLIT        : 1
+MUTUAL_INFO_RATE    : 0
+USE ATTR EQ CAT     : No
+DEL RATE : 0
+MULTI SPLIT : No
+MULTI SPLIT RATE  : Not Applicable
+PESSIMISTIC Z VAL    : 0
+PENALTY POWER : 0
+Number of training instances: 300
+Number of test instances: 135.  Unseen: 92,  seen 43.
+Number correct: 130.  Number incorrect: 5
+Generalization accuracy: 94.57%.  Memorization accuracy: 100.00%
+Accuracy: 96.30% +- 1.63% [91.62% - 98.41%]
+=================================================
+

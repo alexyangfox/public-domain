@@ -1,0 +1,15 @@
+t_BagFeature.c executing
+sunny, 85, 85, false, sunny * false, Don't Play.
+sunny, 80, 90, true, sunny * true, Don't Play.
+overcast, 83, 78, false, overcast * false, Play.
+rain, 70, 96, false, rain * false, Play.
+rain, 68, 80, false, rain * false, Play.
+rain, 65, 70, true, rain * true, Don't Play.
+overcast, 64, 65, true, overcast * true, Play.
+sunny, 72, 95, false, sunny * false, Don't Play.
+sunny, 69, 70, false, sunny * false, Play.
+rain, 75, 80, false, rain * false, Play.
+sunny, 75, 70, true, sunny * true, Play.
+overcast, 72, 90, true, overcast * true, Play.
+overcast, 81, 75, false, overcast * false, Play.
+rain, 71, 80, true, rain * true, Don't Play.

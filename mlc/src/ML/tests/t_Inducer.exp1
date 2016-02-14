@@ -1,0 +1,7 @@
+val0-0, val1-0, val2-0, val3-0, val4-0, val5-0 is long enough to cause a new 
+   line in display, Label0.
+val0-1, val1-1, val2-1, val3-1, val4-1, val5-1, Label1.
+val0-2, val1-2, val2-2, val3-2, val4-2, val5-2, Label2.
+val0-2, val1-2, val2-3, val3-3, val4-2, val5-2, Label3.
+val0-2, val1-2, val2-4, val3-3, val4-2, val5-2, Label3.
+val0-0, val1-1, val2-2, val3-3, continuous, ?, Label3.

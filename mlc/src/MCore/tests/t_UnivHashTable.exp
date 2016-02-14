@@ -1,0 +1,60 @@
+O.K. : duplicate data test 
+#0 random small test .. 
+#30 random small test .. 
+#60 random small test .. 
+#90 random small test .. 
+#120 random small test .. 
+#150 random small test .. 
+#180 random small test .. 
+#210 random small test .. 
+#240 random small test .. 
+#270 random small test .. 
+find test ... 
+find test ..OK. 
+
+The    0th (bucket number :   190)
+JSGLADQSNYOMUNGQLTHJMFXONESOCK 2147483618
+, 
+The    1th (bucket number :   199)
+PCRHOHOSLDGKJWSILFMDKAUJOVGRQ 2147483619
+, 
+The    2th (bucket number :   253)
+JRSYTQASBACARKWJBWVRIJE 2147483625
+, 
+The    3th (bucket number :   271)
+HHMJNSGCHUWDSBISCOXNH 2147483627
+, 
+The    4th (bucket number :   307)
+XHASBEMAVNYYXJCAH 2147483631
+, 
+The    5th (bucket number :   325)
+XWCGANTEEITSMYJ 2147483633
+, 
+The    6th (bucket number :   352)
+SJNKECITCSIG 2147483636
+, 
+The    7th (bucket number :   361)
+TUGLGOOXONJ 2147483637
+, 
+The    8th (bucket number :   379)
+LHKQYYKDT 2147483639
+, 
+The    9th (bucket number :   406)
+SGNYWO 2147483642
+, 
+The   10th (bucket number :   415)
+YQKGV 2147483643
+, 
+The   11th (bucket number :   424)
+YDIC 2147483644
+, 
+The   12th (bucket number :   433)
+JWR 2147483645
+, 
+The   13th (bucket number :   442)
+MF 2147483646
+, O.K. random tests in small hash table
+Checking insert() ....
+Checking find() ....
+Checking del() .... 
+O.K. : large-scale sequential test 

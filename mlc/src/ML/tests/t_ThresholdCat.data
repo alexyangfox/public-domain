@@ -1,0 +1,7 @@
+|Test file for t_ThresholdCat
+
+val0-0, 1.35, 3.67, val3-0, Label0.
+val0-1, 8.2, 6.3, val3-1, Label1.
+val0-2, 4.67, 5.86, val3-2, Label2.
+val0-2, 7.32, 1.23, val3-3, Label0.
+val0-2, 4.21, 1.76, val3-3, Label3.

@@ -1,0 +1,30 @@
+#!/bin/csh
+#Verify execution of LearnCurve
+
+source $MLCDIR/bin/unsetmlc
+setenv DUMPSTEM 
+setenv DEBUGLEVEL 1
+setenv LOGLEVEL 1
+setenv OPTION_DUMP .mlcoptions
+rm -f .mlcoptions
+setenv DATAFILE monk1-full
+setenv NUM_INTERVALS 5
+setenv NUM_REPEATS 3
+setenv MATH_DISPLAY yes
+setenv SHOW_LOG_ORIGIN no
+setenv INDUCER ID3
+rm -f LearnCurve.out
+echo "Test 1" > LearnCurve.out
+LearnCurve >> LearnCurve.out
+
+echo "Test 2" >> LearnCurve.out
+setenv INDUCER table-majority
+LearnCurve >> LearnCurve.out
+
+unsetenv MIN_TEST_SIZE 74
+echo "Test 3" >> LearnCurve.out
+LearnCurve >> LearnCurve.out
+
+
+diff LearnCurve.out LearnCurve.exp
+exit $status

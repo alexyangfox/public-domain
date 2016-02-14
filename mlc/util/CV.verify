@@ -1,0 +1,55 @@
+#!/bin/csh
+#Verify execution of CV.
+
+source $MLCDIR/bin/unsetmlc
+setenv LOGLEVEL 1
+setenv DEBUGLEVEL 1
+setenv OPTION_DUMP .mlcoptions
+rm -f .mlcoptions
+setenv CV_TYPE cv
+setenv DATAFILE monk1-full
+setenv CV_FOLDS 5
+setenv CV_TIMES 2
+setenv INDUCER C4.5
+setenv SHOW_LOG_ORIGIN no
+rm -f CV.out
+echo "Test 1" > CV.out
+CV >>& CV.out
+setenv TESTFILE monk1-full.test
+echo "Test 2" >>& CV.out
+setenv CV_FOLDS 3
+CV >>& CV.out
+
+echo "Test 3" >>& CV.out
+setenv INDUCER table
+setenv CV_TYPE cvinc
+setenv CV_FOLDS -1
+CV >>& CV.out
+
+echo "Test 4" >>& CV.out
+setenv INDUCER table
+setenv CV_FOLDS -2
+CV >>& CV.out
+
+echo "Test 5 (should be zero acc)" >>& CV.out
+setenv CV_TYPE cv
+setenv INDUCER const
+setenv CV_FOLDS -1
+CV >>& CV.out
+
+echo "Test 6" >>& CV.out
+setenv CV_FOLDS -2
+CV >>& CV.out
+
+echo "Test 7 (should be zero acc)" >>& CV.out
+setenv CV_FOLDS -1
+setenv CV_TYPE stratcv
+CV >>& CV.out
+
+echo "Test 8 (should be 50%)" >>& CV.out
+setenv CV_FOLDS -2
+setenv CV_TYPE stratcv
+CV >>& CV.out
+
+diff CV.out CV.exp
+exit $status

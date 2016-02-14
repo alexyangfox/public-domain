@@ -1,0 +1,35 @@
+/* Machine generated dot file */
+
+digraph G { 
+
+/*  node 0:  */
+node_0 [label="no"]
+/*  node 1:  */
+node_1 [label="yes"]
+/*  node 2:  */
+node_2 [label="Body shape"]
+node_2->node_1 [label="round"] 
+node_2->node_0 [label="square"] 
+node_2->node_0 [label="octagon"] 
+/*  node 3:  */
+node_3 [label="Body shape"]
+node_3->node_0 [label="round"] 
+node_3->node_1 [label="square"] 
+node_3->node_0 [label="octagon"] 
+/*  node 4:  */
+node_4 [label="Body shape"]
+node_4->node_0 [label="round"] 
+node_4->node_0 [label="square"] 
+node_4->node_1 [label="octagon"] 
+/*  node 5:  */
+node_5 [label="Head shape"]
+node_5->node_2 [label="round"] 
+node_5->node_3 [label="square"] 
+node_5->node_4 [label="octagon"] 
+/*  node 6:  */
+node_6 [label="Jacket color"]
+node_6->node_1 [label="red"] 
+node_6->node_5 [label="yellow"] 
+node_6->node_5 [label="green"] 
+node_6->node_5 [label="blue"] 
+}

@@ -1,0 +1,46 @@
+0, 0, 0, 0.
+0, 1, 0, 0.
+1, 0, 0, 0.
+1, 1, 0, 0.
+0, 0, 1, 0.
+0, 1, 1, 0.
+1, 0, 1, 0.
+1, 1, 1, 1.
+
+TRY TO SET BAD MAX EPOCHS
+TRY TO SET BAD LEARNING RATE
+INITIAL PERCEPTRON
+PerceptronInducer::train() epoch iteration 0
+Linear Discriminant Categorizer PInducer Test1 Weights: 1, 1, 1, 1
+PerceptronInducer::train() epoch iteration 1
+Linear Discriminant Categorizer PInducer Test1 Weights: 0.4, 0.4, 0.4, -0.4
+PerceptronInducer::train() epoch iteration 2
+Linear Discriminant Categorizer PInducer Test1 Weights: 0.4, 0.2, 0.6, -0.6
+PerceptronInducer::train() epoch iteration 3
+Linear Discriminant Categorizer PInducer Test1 Weights: 0.2, 0.2, 0.6, -0.8
+PerceptronInducer::train() epoch iteration 4
+Linear Discriminant Categorizer PInducer Test1 Weights: 0.4, 0.2, 0.6, -0.8
+PerceptronInducer::train() epoch iteration 5
+Linear Discriminant Categorizer PInducer Test1 Weights: 0.6, 0.2, 0.6, -0.8
+PerceptronInducer::train() epoch iteration 6
+Linear Discriminant Categorizer PInducer Test1 Weights: 0.4, 0.2, 0.6, -1
+PerceptronInducer::train() epoch iteration 7
+Linear Discriminant Categorizer PInducer Test1 Weights: 0.4, 0.4, 0.6, -1
+PerceptronInducer::train() epoch iteration 8
+Linear Discriminant Categorizer PInducer Test1 Weights: 0.6, 0.4, 0.6, -1
+PerceptronInducer::train() epoch iteration 9
+Linear Discriminant Categorizer PInducer Test1 Weights: 0.4, 0.2, 0.6, -1.2
+TRAINED PERCEPTRON
+Linear Discriminant Categorizer PInducer Test1 Weights: 0.4, 0.2, 0.6, -1.2
+Perceptron Inducer Results
+Number of training instances: 8
+Number of test instances: 8.  Unseen: 0,  seen 8.
+Number correct: 8.  Number incorrect: 0
+Generalization accuracy: unknown.  Memorization accuracy: 100.00%
+Accuracy: 100.00% +- 0.00% [67.56% - 100.00%]
+CATEGORIZER IS: Linear Discriminant Categorizer PInducer Test1 Weights: 0.4, 0.2, 0.6, -1.2
+
+TRYING TO TRAIN WITHOUT DATA
+Does PInducer Test3 have data? 
+Was PInducer Test3 trained? 
+TRYING TO PREDICT WITHOUT TRAINING

@@ -1,0 +1,22 @@
+|This line should not be read.
+Label0, Label1, Label2, Label3.  | These are the labels.
+
+|And now some attributes:
+ATTR0: val0-0, val0-1, val0-2.
+ATTR1: val1-0, val1-1, val1-2.   | Oh neat, another comment.
+
+ATTR2: val2-0, val2-1, val2-2, val2-3, | within the value list
+
+	val2-4	| skipped a line; some tabs; no period at the end
+ATTR3: val3-0, val3-1, val3-2, val3-3
+
+	ATTR4:
+val4-0, val4-1	, | should remove the trailing whitespace
+val4-2, continuous. | the name continuous should be legal when not first.
+
+ATTR5: val5-0 is long enough to cause a new line in display,
+val5-1, val5-2
+
+|That's all I have for now.
+|Only NominalAttrInfo is used now.
+

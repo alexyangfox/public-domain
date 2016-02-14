@@ -1,0 +1,10 @@
+Rooted Decision Graph Categorizer for t_DTCategorizer
+Root: AttrCat on attr 0
+
+[0](AttrCat on attr 0, level 0) : [0]--(0)-->[1][0]--(1)-->[2][0]--(2)-->[3]
+[1](Const Cat returning Label0, level 1) : 
+[2](Const Cat returning Label1, level 1) : 
+[3](AttrCat on attr 1, level 1) : [3]--(0)-->[4][3]--(1)-->[5]
+[4](Const Cat returning Label2, level 2) : 
+[5](Const Cat returning Unknown Label, level 2) : 
+

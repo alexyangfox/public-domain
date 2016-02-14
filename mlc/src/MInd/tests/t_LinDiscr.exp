@@ -1,0 +1,35 @@
+0, 0, 0.
+0, 1, 0.
+1, 0, 0.
+1, 1, 1.
+
+CREATING CATEGORIZER
+INITIAL WEIGHTS
+Linear Discriminant Categorizer PercepCat Test Weights: 0, 0, 0
+SETTING RANDOM WEIGHTS
+Linear Discriminant Categorizer PercepCat Test Weights: -0.976423, -0.405459, 0.147448
+SETTING FIXED WEIGHTS
+Linear Discriminant Categorizer PercepCat Test Weights: 1, 0, -1
+SETTING WEIGHTS
+Linear Discriminant Categorizer PercepCat Test Weights: 1, 1, -1
+ADDING TO WEIGHTS <1 1 -1>
+Linear Discriminant Categorizer PercepCat Test Weights: 2, 2, -2
+MULTIPLYING WEIGHTS <1 0 -1>
+Linear Discriminant Categorizer PercepCat Test Weights: 2, 0, 2
+TESTING CATEGORIZER
+ 1 (1) 1 (1) 1 (1) 1 (1)
+COPYING CATEGORIZER
+CHECKING == OPERATOR
+copy is the same as original
+original is the same as original
+TESTING CATEGORIZER
+ 1 (1) 1 (1) 1 (1) 1 (1)
+TESTING COPY
+ 1 (1) 1 (1) 1 (1) 1 (1)
+TRYING TO CREATE LINEAR DISCRIMINANT WITH 3 CLASSES
+Database has 3 classes
+TRYING TO CREATE PERCEPTRON WITH NOMINAL ATTINFO
+SETTING WEIGHTS WITH BOGUS ARRAY
+SETTING WEIGHTS WITH BOGUS ARRAY
+ADDING BOGUS ARRAY TO WEIGHTS
+MULTIPLYING BOGUS ARRAY WITH WEIGHTS

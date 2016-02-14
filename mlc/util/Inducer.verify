@@ -1,0 +1,52 @@
+#!/bin/csh
+#Verify execution of Inducer
+
+echo "In inducer.verify"
+source $MLCDIR/bin/unsetmlc
+setenv LOGLEVEL 1
+setenv OPTION_DUMP .mlcoptions
+rm -f .mlcoptions
+setenv DEBUGLEVEL 0
+setenv DATAFILE monk1-full
+setenv INDUCER ID3
+setenv DISP_CONFUSION_MAT yes
+setenv DISP_MISCLASS yes
+unsetenv DISPLAY_STRUCT
+rm -f Inducer.out
+echo "Test 1" > Inducer.out
+Inducer >>& Inducer.out
+
+echo "Test 2" >> Inducer.out
+setenv INDUCER C4.5
+Inducer >>& Inducer.out
+
+echo "Test 3" >> Inducer.out
+setenv INDUCER ID3
+setenv DATAFILE hypothyroid
+Inducer >>& Inducer.out
+
+echo "Test 4" >> Inducer.out
+setenv INDUCER C4.5
+setenv DATAFILE crx
+Inducer >>& Inducer.out
+
+echo "Test 5" >> Inducer.out
+setenv DISP_MISCLASS no
+setenv INDUCER disc-filter
+setenv DISCF_INDUCER ID3
+setenv DATAFILE crx
+setenv DISPLAY_STRUCT dot
+Inducer >>& Inducer.out
+
+echo "Test 6" >> Inducer.out
+unsetenv DISPLAY_STRUCT
+setenv ID3_MAX_LEVEL 3
+setenv INDUCER ID3
+setenv DATAFILE crx
+Inducer >>& Inducer.out
+
+diff Inducer.out Inducer.exp
+if ($status) exit $status
+diff Inducer.dot Inducer.dot.exp
+exit $status
+

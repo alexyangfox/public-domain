@@ -1,0 +1,7 @@
+|This line should not be read.
+Label0, Label1, Label2, Label3.  | These are the labels.
+
+|And now some attributes:
+ATTR0: continuous. | Should be error; unimplemented type line 5
+
+

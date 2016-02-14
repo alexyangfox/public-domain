@@ -1,0 +1,14 @@
+t_StratifiedCV executing
+ID3 categorizer cross validation from /tmp/t_lensesSCV is 81.48% +- 5.54% (33.33% - 100.00%)
+ID3 cv in memory 81.48% +- 5.54% (33.33% - 100.00%)
+leave one out is 79.17% +- 8.47% (0.00% - 100.00%)
+Inducer: my c45 inducer
+Number of folds: 2, Number of times: 1
+Number of splits: 4
+Number of instances in fold 0: 12. Stratification: Training: 0/2/3/7/  Test: 0/2/2/8/
+Acc 0.833333
+Number of instances in fold 1: 12. Stratification: Training: 0/2/2/8/  Test: 0/2/3/7/
+Acc 0.5
+Untrimmed accuracy 66.67% +- 16.67% (50.00% - 83.33%)
+c4.5 accuracy is 0.6667
+Running C4.5 manually yields 0.833333 and 0.5 with the average 0.6667

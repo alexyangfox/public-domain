@@ -1,0 +1,12 @@
+| This describes a weighted file
+
+	\weighted   | tab it in just for fun
+
+| make sure that the \ is ignored when it is in a comment...
+
+Play, Don't Play.
+
+outlook: sunny, overcast, rain.
+temperature: continuous.
+humidity: continuous.
+windy: true, false.

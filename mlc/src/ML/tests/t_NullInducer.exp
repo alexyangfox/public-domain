@@ -1,0 +1,6 @@
+Executing t_NullInducer
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 0.  Number incorrect: 432
+Generalization accuracy: 0.00%.  Memorization accuracy: 0.00%
+Accuracy: 0.00% +- 0.00% [0.00% - 0.88%]

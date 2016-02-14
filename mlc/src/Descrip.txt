@@ -1,0 +1,5 @@
+MLC++ is public domain software that was originally developed
+at Stanford University and is now being distributed through SGI.
+
+For more information, see
+   http://robotics.stanford.edu/users/ronnyk/mlc.html

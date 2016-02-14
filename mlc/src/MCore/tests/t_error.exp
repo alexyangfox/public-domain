@@ -1,0 +1,6 @@
+Test 1
+Test 2
+
+Error - Program should abort with this long message which is more than 160
+   characters long so it should wrap at least two lines because the default
+   line width is set to 80 characters and this is more.

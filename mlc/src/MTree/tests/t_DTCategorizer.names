@@ -1,0 +1,9 @@
+| This bag is used in t_DTCategorizer.c
+Label0, Label1, Label2.
+
+Attr0: 0,1,2.
+Attr1: 0,1.
+Attr2: 0,1,2.
+|Attr0: attrVal0-0, attrVal0-1, attrVal0-2.
+|Attr1: attrVal1-0, attrVal1-1.
+|Attr2: attrVal2-0, attrVal2-1, attrVal2-2.

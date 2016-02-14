@@ -1,0 +1,8 @@
+TableInducer : monk1-full tests OK without default category.
+TableInducer : parity5+5 tests OK without default category.
+TableInducer : crx tests OK without default category.
+TableInducer : vote tests OK without default category.
+TableInducer : monk1-full default category behaviour tests OK.
+TableInducer : parity5+5 default category behaviour tests OK.
+TableInducer : crx default category behaviour tests OK.
+TableInducer : vote default category behaviour tests OK.

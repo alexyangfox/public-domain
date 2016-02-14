@@ -1,0 +1,95 @@
+#!/bin/csh
+#Verify execution of indTester
+
+limit coredumpsize 0
+source $MLCDIR/bin/unsetmlc
+unsetenv PROMPTLEVEL
+touch u_indTest.out1; rm -f u_indTest.*out{1,2}
+touch u_indTest.out1.display u_indTest.out2.display
+rm -f u_indTest.*out{1,2}.display
+touch u_indTest.X.diff; rm -f u_indTest.*.diff
+setenv LOGLEVEL 1
+setenv OPTION_DUMP .mlcoptions
+rm -f .mlcoptions
+setenv DEBUGLEVEL 0
+
+rm -f indTest.out
+echo "Test 1" > indTest.out
+setenv INDUCER IB
+setenv EXPECTED_WARNINGS 0
+indTest >>& indTest.out
+
+echo "Test 2" >> indTest.out
+setenv EXPECTED_WARNINGS 0
+setenv INDUCER ID3
+indTest >>& indTest.out
+
+echo "Test 3" >> indTest.out
+setenv INDUCER c4.5
+indTest >>& indTest.out
+
+echo "Test 4" >> indTest.out
+setenv INDUCER bag
+setenv BAG_INDUCER naive
+# Bagging has a random component
+setenv EXPECTED_WARNINGS 2
+indTest >>& indTest.out
+
+echo "Test 5" >> indTest.out
+setenv EXPECTED_WARNINGS 0
+setenv INDUCER lazy
+indTest >>& indTest.out
+
+echo "Test 6" >> indTest.out
+setenv INDUCER const
+indTest >>& indTest.out
+
+echo "Test 7" >> indTest.out
+setenv DISCF_INDUCER HOODG
+setenv INDUCER disc-filter
+setenv REMOVE_UNKNOWN_INST yes
+indTest >>& indTest.out
+unsetenv REMOVE_UNKNOWN_INST 
+
+echo "Test 8" >> indTest.out
+setenv INDUCER naive
+indTest >>& indTest.out
+
+echo "Test 9" >> indTest.out
+setenv INDUCER table-majority
+setenv EXPECTED_WARNINGS 0
+indTest >>& indTest.out
+
+echo "Test 10" >> indTest.out
+setenv INDUCER table-no-majority
+setenv EXPECTED_WARNINGS 0
+indTest >>& indTest.out
+
+echo "Test 11" >> indTest.out
+setenv INDUCER aha
+setenv EXPECTED_WARNINGS 0
+indTest >>& indTest.out
+
+echo "Test 12" >> indTest.out
+setenv INDUCER c4.5-auto-parm
+setenv EXPECTED_WARNINGS 0
+setenv AP_MAX_STALE 2
+setenv AP_CV_FOLDS  5
+setenv AP_ACC_ESTIMATOR strat-cv
+indTest >>& indTest.out
+
+echo "Test 13" >> indTest.out
+setenv EXPECTED_WARNINGS 0
+setenv INDUCER c4.5-no-pruning
+indTest >>& indTest.out
+
+echo "Test 14" >> indTest.out
+setenv INDUCER c4.5-rules
+setenv INDUCER c4.5-no-pruning
+indTest >>& indTest.out
+
+diff indTest.out indTest.exp
+if ($status) exit $status
+exit $status
+
+

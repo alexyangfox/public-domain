@@ -1,0 +1,17 @@
+t_LogOptions executing
+In output_text()
+In output_text()
+This is a test of the log options which should wrap over more than one line to see that everything is working.
+In test_flog()
+This is a test of the function log options and executed when log level is set to 1.
+In output_text()
+This is a test of the log options which should wrap over more than one line to see that everything is working.
+This is executed when log level is set to 2 only.
+It is longer than the previous statement and should start to wrap sometimes now 12345 67890
+In test_flog()
+This is a test of the function log options and executed when log level is set to 1.
+This is excuted when loglevel is set to 2 only.
+In output_text()
+[1<=2] t_LogOptions.c::  44: This is a test of the log options which should wrap over more than one line to see that everything is working.
+[2<=2] t_LogOptions.c::  45: This is executed when log level is set to 2 only.
+[2<=2] t_LogOptions.c::  45: It is longer than the previous statement and should start to wrap sometimes now 12345 67890

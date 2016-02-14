@@ -1,0 +1,44 @@
+# This rule makes everything:  it is the default rule
+all :  ${CC_DEP_BINS} 
+
+.SUFFIXES: 
+.SUFFIXES: .tc .c
+
+LIBNAME = ${MLCDIR}/src/${MLCLIB}/lib${DIRNAME}.a
+
+TC_DEP_BINS = ${CC_SRCS:.c=.tc}
+
+alltc : ${TC_DEP_BINS}
+
+# This is the conversion rule from .c to no suffix.
+.c:
+	@echo "Compiling $@ from $<:"
+	@rm -f $@
+	@${MLCDIR}/bin/compile_tester $@ $< ${DIRNAME} ${LINKLIBS}
+
+# This is the conversion rule from .o to no suffix.
+.o:
+	@echo "Compiling $@ from $<:"
+	@rm -f $@
+	@${MLCDIR}/bin/compile_tester $@ $< ${DIRNAME} ${LINKLIBS}
+
+# Note that TAGS don't depend on .h because the names aren't listed
+# here.  We might want to add them, but it's not critical.
+TAGS : ${CC_SRCS}
+	@${GENTAGS} $${TAGSFLAGS} ${CC_SRCS}
+
+clean: 
+	@echo "Test clean starting.  Cleaning ${LOCALREP}, .out."
+	@${RM} -f ${CC_ALL_OBJS} ${CC_ALL_BINS} core
+	@${RM} -rf ${LOCALREP}
+	@${MKDIR} ${LOCALREP}
+	@${CHMOD} g+w ${LOCALREP}
+	@${TOUCH} foobar.out
+	@${RM} -f *.out*
+
+scratch: clean all
+
+# Used to force a rule to happen
+FORCE:
+
+# Specific rules for just this directory

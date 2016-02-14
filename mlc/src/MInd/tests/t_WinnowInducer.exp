@@ -1,0 +1,35 @@
+Read instances...
+0, 0, 0.
+0, 1, 0.
+1, 0, 0.
+1, 1, 1.
+
+INITIAL WINNOW
+TRYING TO SET BAD INITIAL WEIGHTS
+TRYING TO SET BAD INITIAL THRESHOLD
+TRYING TO SET BAD MAX EPOCHS
+TRYING TO SET BAD ALPHA
+TRYING TO SET BAD BETA
+INITIAL WINNOW
+WinnowInducer::train() epoch iteration 0
+Linear Discriminant Categorizer WInducer Test1 Weights: 4, 2, -0.7
+WinnowInducer::train() epoch iteration 1
+Linear Discriminant Categorizer WInducer Test1 Weights: 2, 1, -0.7
+WinnowInducer::train() epoch iteration 2
+Linear Discriminant Categorizer WInducer Test1 Weights: 1, 0.5, -0.7
+WinnowInducer::train() epoch iteration 3
+Linear Discriminant Categorizer WInducer Test1 Weights: 0.5, 0.5, -0.7
+TRAINED WINNOW
+Linear Discriminant Categorizer WInducer Test1 Weights: 0.5, 0.5, -0.7
+Winnow Inducer Results
+Number of training instances: 4
+Number of test instances: 4.  Unseen: 0,  seen 4.
+Number correct: 4.  Number incorrect: 0
+Generalization accuracy: unknown.  Memorization accuracy: 100.00%
+Accuracy: 100.00% +- 0.00% [51.01% - 100.00%]
+CATEGORIZER IS: Linear Discriminant Categorizer WInducer Test1 Weights: 0.5, 0.5, -0.7
+
+TRYING TO TRAIN WITHOUT DATA
+Does WInducer Test3 have data: no
+Was WInducer Test3 trained? no
+TRYING TO PREDICT WITHOUT TRAINING

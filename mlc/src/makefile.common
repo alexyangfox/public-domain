@@ -1,0 +1,109 @@
+# This rule makes everything:  it is the default rule
+
+LIBNAME = ${MLCDIR}/src/${MLCLIB}/lib${DIRNAME}.a
+SHORTLIB = ${MLCLIB}/lib${DIRNAME}.a
+
+all : ${CC_DEP_OBJS}
+	@${MAKE} ${TEMPLATE_BINS}
+	@${MAKE} ${LIBNAME}
+	@${MAKE} tests
+
+notests: ${CC_DEP_OBJS}
+	@${MAKE} ${TEMPLATE_BINS}
+	@${MAKE} ${LIBNAME}
+
+notempls: ${CC_DEP_OBJS}
+
+tests: FORCE
+	@echo "Making $@..."
+	@(cd tests; $(MAKE) $(MFLAGS) -f Makefile)
+
+tests.TAGS: FORCE
+	@echo "Making ${DIRNAME}/test TAGS"
+	@(cd tests; $(MAKE) -f Makefile $(MFLAGS) TAGS)
+
+${LIBNAME}: ${CC_DEP_OBJS} ${TEMPLATE_BINS}
+	...
+	@rm -f ${LIBNAME}
+	@echo "Archiving to ${LIBNAME}"
+	@${FAST_AR} ${LIBNAME} ${CC_DEP_OBJS}
+	@${MLCDIR}/bin/archive_templates ${LIBNAME} ${TEMPLATE_OBJS}
+	@${RANLIB} ${LIBNAME}
+	@echo "Done Archiving to ${LIBNAME}"
+
+libnotempl:
+	@rm -f ${LIBNAME}
+	@echo "Archiving to ${LIBNAME}"
+	@${FAST_AR} ${LIBNAME} ${CC_DEP_OBJS}
+	@${RANLIB} ${LIBNAME}
+
+
+
+
+# build templates by compiling these files	
+# The three dots are for pmake to wait until things are done.
+.c:
+	...
+	${MAKE} libnotempl
+	@echo "Compiling template $@ from $<:"
+	@${MLCDIR}/bin/templ_compile  $@ $< ${LINKLIBS}
+
+
+#  How to compile all normal .c files
+# The template is removed so that we'll archive the files.
+#   Files can't archive immediately because they conflict when
+#   parallel makes take place.
+.c.o:
+	@echo "Compiling $@ from $<:"
+	@${MLCDIR}/bin/compile  $@ $<
+
+#	@echo "Archiving $@ to ${LIBNAME}:"
+#	@(umask 002; ${AR} cr ${LIBNAME} $@)
+
+
+
+cleantemplates:
+	@echo "Cleaning templates..."
+	${RM} -f ${TEMPLATE_OBJS} ${TEMPLATE_BINS}
+	#  this deletes all the template files, but not defmap.*
+	${TOUCH} ${LOCALREP}/a_a
+	${RM} -f ${LOCALREP}/*_*
+
+#  Use this rule when you want to regenerate the library with the latest
+#   templates. 
+newtemplates: cleantemplates lib templates
+	
+TAGS : ${CC_SRCS} tests.TAGS
+	@echo "Making ${DIRNAME} TAGS"
+	@${GENTAGS} $${TAGSFLAGS} ${CC_SRCS}
+
+#	@echo "Clearing hdrepository"; 
+#	@${RM} -rf ${MLCDIR}/inc/hdrepository
+
+main.clean:
+	@echo "Main clean starting.  Cleaning ${SHORTLIB}, ${LOCALREP}."
+	@${RM} -f ${CC_ALL_OBJS} core
+	@${RM} -f ${TEMPLATE_BINS} ${TEMPLATE_OBJS}
+	@${RM} -f ${LIBNAME}
+	@${RM} -rf ${LOCALREP}
+	@${MKDIR} ${LOCALREP}
+	@${CHMOD} g+w ${LOCALREP}
+
+tests.clean: FORCE
+	@echo "Making $@..."
+	@(cd tests; $(MAKE) -f Makefile $(MFLAGS) clean)
+
+clean: tests.clean main.clean
+
+scratch: clean
+	@${MAKE} all
+
+scratchnotests: clean
+	@${MAKE} notests
+
+
+# Used to force a rule to happen
+FORCE:
+
+
+

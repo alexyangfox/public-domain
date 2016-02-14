@@ -1,0 +1,7 @@
+t_Attribute.c executing
+The value 0 is converted to 0
+ by RealAttrInfo::attrValue_to_string.
+The value 123.0456789 is converted to 123.0457
+ by RealAttrInfo::attrValue_to_string.
+The value -9876543210.01235 is converted to -9.876543e+09
+ by RealAttrInfo::attrValue_to_string.

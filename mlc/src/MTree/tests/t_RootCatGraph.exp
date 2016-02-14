@@ -1,0 +1,28 @@
+t_RootCatGraph executing
+Root: Root ConstCat-0
+
+[0](Root ConstCat-0) : [0]--(unknown)-->[1][0]--(first)-->[2]
+[1](ConstCat0-1) : [1]--(unknown)-->[2][1]--(first)-->[3]
+[2](ConstCat0-2) : [2]--(unknown)-->[3][2]--(first)-->[4]
+[3](ConstCat0-3) : [3]--(unknown)-->[4][3]--(first)-->[5]
+[4](ConstCat0-4) : [4]--(unknown)-->[5][4]--(first)-->[6]
+[5](ConstCat0-5) : [5]--(unknown)-->[6][5]--(first)-->[7]
+[6](ConstCat0-6) : [6]--(unknown)-->[7][6]--(first)-->[8]
+[7](ConstCat0-7) : [7]--(unknown)-->[8][7]--(first)-->[9]
+[8](ConstCat0-8) : [8]--(unknown)-->[9]
+[9](ConstCat0-9) : 
+
+Root: Root ConstCat-1
+
+[0](Root ConstCat-1) : [0]--(unknown)-->[1][0]--(first)-->[2]
+[1](ConstCat1-1) : [1]--(unknown)-->[2][1]--(first)-->[3]
+[2](ConstCat1-2) : [2]--(unknown)-->[3][2]--(first)-->[4]
+[3](ConstCat1-3) : [3]--(unknown)-->[4][3]--(first)-->[5]
+[4](ConstCat1-4) : [4]--(unknown)-->[5][4]--(first)-->[6]
+[5](ConstCat1-5) : [5]--(unknown)-->[6][5]--(first)-->[7]
+[6](ConstCat1-6) : [6]--(unknown)-->[7][6]--(first)-->[8]
+[7](ConstCat1-7) : [7]--(unknown)-->[8][7]--(first)-->[9]
+[8](ConstCat1-8) : [8]--(unknown)-->[9][8]--(first)-->[10]
+[9](ConstCat1-9) : [9]--(unknown)-->[10]
+[10](ConstCat1-10) : 
+

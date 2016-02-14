@@ -1,0 +1,18 @@
+
+t_ProjectCat starting.
+Projected File Results
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 12,  seen 420.
+Number correct: 420.  Number incorrect: 12
+Generalization accuracy: 0.00%.  Memorization accuracy: 100.00%
+Accuracy: 97.22% +- 0.79% [95.21% - 98.40%]
+
+Projected Categorizer Results
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 420.  Number incorrect: 12
+Generalization accuracy: 96.10%.  Memorization accuracy: 100.00%
+Accuracy: 97.22% +- 0.79% [95.21% - 98.40%]
+
+
+t_ProjectCat competed.

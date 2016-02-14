@@ -1,0 +1,81 @@
+Test 1
+MLC++ Debug level is 1, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION DATAFILE = monk1-full
+OPTION NAMESFILE = monk1-full.names
+OPTION DUMPSTEM = 
+OPTION NUM_INTERVALS = 5
+OPTION NUM_REPEATS = 3
+OPTION SEED = 7258789
+OPTION MIN_TEST_SIZE = 0
+Inducer: ID3.  Intervals: 5, Repeats: 3, Min test size: 25.  Seed: 7258789
+DATAFILE: monk1-full.data (size=124)
+Inducer is ID3
+Train Size: 25; training 3 times...Mean accuracy: 58.25% +- 6.71%
+Train Size: 50; training 3 times...Mean accuracy: 70.72% +- 3.85%
+Train Size: 74; training 3 times...Mean accuracy: 87.33% +- 0.67%
+Train Size: 99; training 3 times...Mean accuracy: 72.00% +- 6.11%
+data={{25, 0.585859, 0.69697, 0.464646},
+      {50, 0.783784, 0.675676, 0.662162},
+      {74, 0.86, 0.88, 0.88},
+      {99, 0.68, 0.84, 0.64}}
+      
+Size,  Acc, std-dev of mean
+    25, 58.25% +- 6.71%
+    50, 70.72% +- 3.85%
+    74, 87.33% +- 0.67%
+    99, 72.00% +- 6.11%
+Test 2
+MLC++ Debug level is 1, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION DATAFILE = monk1-full
+OPTION NAMESFILE = monk1-full.names
+OPTION DUMPSTEM = 
+OPTION NUM_INTERVALS = 5
+OPTION NUM_REPEATS = 3
+OPTION SEED = 7258789
+OPTION MIN_TEST_SIZE = 0
+Inducer: table-majority.  Intervals: 5, Repeats: 3, Min test size: 25.  Seed: 7258789
+DATAFILE: monk1-full.data (size=124)
+Inducer is table-majority
+Train Size: 25; training 3 times...Mean accuracy: 47.81% +- 0.67%
+Train Size: 50; training 3 times...Mean accuracy: 46.85% +- 0.45%
+Train Size: 74; training 3 times...Mean accuracy: 47.33% +- 1.33%
+Train Size: 99; training 3 times...Mean accuracy: 45.33% +- 1.33%
+data={{25, 0.484848, 0.484848, 0.464646},
+      {50, 0.472973, 0.459459, 0.472973},
+      {74, 0.46, 0.5, 0.46},
+      {99, 0.44, 0.48, 0.44}}
+      
+Size,  Acc, std-dev of mean
+    25, 47.81% +- 0.67%
+    50, 46.85% +- 0.45%
+    74, 47.33% +- 1.33%
+    99, 45.33% +- 1.33%
+Test 3
+MLC++ Debug level is 1, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION DATAFILE = monk1-full
+OPTION NAMESFILE = monk1-full.names
+OPTION DUMPSTEM = 
+OPTION NUM_INTERVALS = 5
+OPTION NUM_REPEATS = 3
+OPTION SEED = 7258789
+OPTION MIN_TEST_SIZE = 0
+Inducer: table-majority.  Intervals: 5, Repeats: 3, Min test size: 25.  Seed: 7258789
+DATAFILE: monk1-full.data (size=124)
+Inducer is table-majority
+Train Size: 25; training 3 times...Mean accuracy: 47.81% +- 0.67%
+Train Size: 50; training 3 times...Mean accuracy: 46.85% +- 0.45%
+Train Size: 74; training 3 times...Mean accuracy: 47.33% +- 1.33%
+Train Size: 99; training 3 times...Mean accuracy: 45.33% +- 1.33%
+data={{25, 0.484848, 0.484848, 0.464646},
+      {50, 0.472973, 0.459459, 0.472973},
+      {74, 0.46, 0.5, 0.46},
+      {99, 0.44, 0.48, 0.44}}
+      
+Size,  Acc, std-dev of mean
+    25, 47.81% +- 0.67%
+    50, 46.85% +- 0.45%
+    74, 47.33% +- 1.33%
+    99, 45.33% +- 1.33%

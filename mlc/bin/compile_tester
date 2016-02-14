@@ -1,0 +1,92 @@
+#!/bin/csh
+# Compile MLC tester program
+# By Ronny Kohavi  8/24/93
+# The executable is called a.out if anything fails.
+# If a .exp file exists, it is compare with the output.
+# If a .exp<d> exists, it is compared with .out1 which may be generated
+#    by the program.  <d> is a digit from 1 to 9
+# If a .cin file exists, it will be directed as input to the program.
+# If the first argument is X, we link with X motif
+
+
+if ("$1" == "") then
+  echo Missing first argument (object file)
+  exit 2
+else if ("$2" == "") then
+  echo Missing second argument (source file)
+  exit 2
+else if ("$3" == "") then
+  echo Missing third argument (library name)
+  exit 2
+endif
+
+
+if ("$1" == "X") then
+  set xlink= -lXm -lXt -lX11
+  shift
+else
+  set xlink=
+endif
+
+#remove the -g flag so template files will be smaller
+#setenv CCFLAGS "`echo $CCFLAGS | sed -e 's/-g//'`"
+
+set restargs=($argv)
+shift restargs
+shift restargs
+shift restargs
+
+umask 002 
+# remove any a.out so we can mv to it in case there's an error.
+# remove core to save space
+rm -f $1 core
+set tester=$1.tmp
+
+# basics.o comes first so that t_init is executed second (static stuff 
+#   for defaultOpenProt)
+set tdirname=$3
+
+if ("$CFRONT_COMPILE" == "yes") then
+   if ("$CCECHO" == "yes")  echo CC -o $tester \$CCFLAGS $2 -L${MLCDIR}/src/${MLCLIB}/ $restargs $xlink 
+   CC -o $tester $CCFLAGS $2 -L${MLCDIR}/src/${MLCLIB}/ $restargs $xlink 
+   set pgmStatus = $status
+else if ("$SGI_COMPILE" == "yes") then
+   set malloclib = "-lmalloc_cv"
+   if ("$1" == "t_safe_new") set malloclib = ""
+   if ("$CCECHO" == "yes")  echo CC -o $tester \$CCFLAGS $2 -L${MLCDIR}/src/${MLCLIB}/ $malloclib $restargs $xlink 
+   CC -o $tester $CCFLAGS $2 -L${MLCDIR}/src/${MLCLIB}/ $malloclib $restargs $xlink |& tee /tmp/compile$$.out
+   set pgmStatus = $status
+   grep -v "C++ prelinker" /tmp/compile$$.out > /tmp/compile$$.out1
+   if (-s /tmp/compile$$.out1) set pgmStatus = 1
+   rm /tmp/compile$$.out{,1}
+endif
+
+if ($pgmStatus) then 
+  echo "*** compilation failed.  File left as $tester ***"
+  exit 2
+endif
+
+setenv LOGLEVEL 0
+source $MLCDIR/bin/unsetmlc
+# We execute with 1 first so that common errors will be found
+# and because it's not as slow as 2
+# If we're in fastlib, DEBUGLEVEL has no meaning, so we execute
+# only once (it also shows a warning message otherwise).
+if ($MLCLIB != "fastlib") then
+   $MLCDIR/bin/compare_exp $1 1 $tester
+   if ($status) exit $status
+   $MLCDIR/bin/compare_exp $1 0 $tester
+   if ($status) exit $status
+   $MLCDIR/bin/compare_exp $1 2 $tester
+   if ($status) exit $status
+else
+   $MLCDIR/bin/compare_exp $1 0 $tester
+   if ($status) exit $status
+endif
+
+if (! $?DONT_REMOVE_TESTER) rm -f $tester
+#strip a.out
+# touch leaves it size 0, so we won't waste space
+touch $1
+chmod g+w $1
+

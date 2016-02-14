@@ -1,0 +1,6 @@
+| This bag is used in t_RDGCat.c
+Label0, Label1.
+
+Attr0: 0,1,2
+Attr1: 0,1.
+Attr2: 0,1,2.

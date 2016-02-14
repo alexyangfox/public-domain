@@ -1,0 +1,82 @@
+Test 1
+MLC++ Debug level is 0, log level is 2
+OPTION PROMPTLEVEL = required-only
+CrossValidator dump executing
+DATAFILE=pima.all
+NAMESFILE=pima.names
+DUMPSTEM=/tmp/GenCVFiles
+CV_FOLDS=3
+CV_TIMES=2
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading pima.all........ done.
+AccEstimator::dump_files: estimated accuracies will be 0.0
+Inducer: /tmp/GenCVFiles Null Inducer
+Number of folds: 3, Number of times: 2
+Inducer::train_and_test for inducer /tmp/GenCVFiles Null Inducer
+OPTION DISP_CONFUSION_MAT = false
+OPTION DISP_MISCLASS = false
+Number of training instances: 512
+Number of test instances: 256.  Unseen: 256,  seen 0.
+Number correct: 0.  Number incorrect: 256
+Generalization accuracy: 0.00%.  Memorization accuracy: unknown
+Accuracy: 0.00% +- 0.00% [0.00% - 1.48%]
+Inducer::train_and_test for inducer /tmp/GenCVFiles Null Inducer
+Number of training instances: 512
+Number of test instances: 256.  Unseen: 256,  seen 0.
+Number correct: 0.  Number incorrect: 256
+Generalization accuracy: 0.00%.  Memorization accuracy: unknown
+Accuracy: 0.00% +- 0.00% [0.00% - 1.48%]
+Inducer::train_and_test for inducer /tmp/GenCVFiles Null Inducer
+Number of training instances: 512
+Number of test instances: 256.  Unseen: 256,  seen 0.
+Number correct: 0.  Number incorrect: 256
+Generalization accuracy: 0.00%.  Memorization accuracy: unknown
+Accuracy: 0.00% +- 0.00% [0.00% - 1.48%]
+fold 0.00% +- 0.00% (0.00% - 0.00%). Overall: 0.00% +- 0.00% (0.00% - 0.00%)
+Inducer::train_and_test for inducer /tmp/GenCVFiles Null Inducer
+Number of training instances: 512
+Number of test instances: 256.  Unseen: 256,  seen 0.
+Number correct: 0.  Number incorrect: 256
+Generalization accuracy: 0.00%.  Memorization accuracy: unknown
+Accuracy: 0.00% +- 0.00% [0.00% - 1.48%]
+Inducer::train_and_test for inducer /tmp/GenCVFiles Null Inducer
+Number of training instances: 512
+Number of test instances: 256.  Unseen: 256,  seen 0.
+Number correct: 0.  Number incorrect: 256
+Generalization accuracy: 0.00%.  Memorization accuracy: unknown
+Accuracy: 0.00% +- 0.00% [0.00% - 1.48%]
+Inducer::train_and_test for inducer /tmp/GenCVFiles Null Inducer
+Number of training instances: 512
+Number of test instances: 256.  Unseen: 256,  seen 0.
+Number correct: 0.  Number incorrect: 256
+Generalization accuracy: 0.00%.  Memorization accuracy: unknown
+Accuracy: 0.00% +- 0.00% [0.00% - 1.48%]
+fold 0.00% +- 0.00% (0.00% - 0.00%). Overall: 0.00% +- 0.00% (0.00% - 0.00%)
+Untrimmed accuracy 0.00% +- 0.00% (0.00% - 0.00%)
+MLC++ Debug level is 0, log level is 2
+OPTION PROMPTLEVEL = required-only
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading pima.all........ done.
+Folds:3 times:2 seed:7258789
+DATAFILE is pima.all with 768 instances
+Inducer: const
+Number of folds: 3, Number of times: 2
+fold 65.10% +- 1.28% (63.28% - 67.58%). Overall: 65.10% +- 1.28% (63.28% - 67.58%)
+fold 65.10% +- 1.97% (61.33% - 67.97%). Overall: 65.10% +- 1.05% (61.33% - 67.97%)
+Untrimmed accuracy 65.10% +- 1.05% (61.33% - 67.97%)
+Inducer: const 65.10% +- 1.05% (61.33% - 67.97%)
+MLC++ Debug level is 0, log level is 2
+OPTION PROMPTLEVEL = required-only
+FILESTEM is /tmp/GenCVFiles
+AccEstimator::estimate_accuracy: Inducer: const
+AccEstimator::estimate_accuracy: Number of files: 3
+Estimate_Accuracy::estimate_accuracy: Accuracy of set: 65.10% +- 1.28% (63.28% - 67.58%)
+fold accuracy for set 0 is 0.651042
+AccEstimator::estimate_accuracy: Inducer: const
+AccEstimator::estimate_accuracy: Number of files: 3
+Estimate_Accuracy::estimate_accuracy: Accuracy of set: 65.10% +- 1.97% (61.33% - 67.97%)
+fold accuracy for set 1 is 0.651042
+accuracy: 65.10% +- 1.05% (61.33% - 67.97%)
+Inducer: const 65.10% +- 1.05% (61.33% - 67.97%)

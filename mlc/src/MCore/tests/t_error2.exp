@@ -1,0 +1,4 @@
+t_error2 running
+error.c::fatal_error: fatal_error loop
+t_error2.
+t_error2.c::fatal_abort: Start fatal_error loop.

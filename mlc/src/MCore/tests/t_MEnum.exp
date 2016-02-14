@@ -1,0 +1,4 @@
+t_MEnum executing
+zero, one, two, three, four, five, foo
+zero, one, two, three, four, five, foo
+zero=0, one=1, two=2, three=3, four=4, five=3, foo=3

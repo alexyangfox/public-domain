@@ -1,0 +1,8 @@
+| Names file used in the MLC++ tutorial
+| Ronny Kohavi
+
+accept, reject
+
+hair color: black, brown, blonde, grey.
+car : cheap, average, expensive.
+own house: yes, no.

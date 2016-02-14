@@ -1,0 +1,8 @@
+ Testing two IBCat's with weight (1, 0) 
+ BagCat acc : 0.837963
+ The first IBCat acc : 0.837963
+Success! 
+ Testing two IBCat's with weight (0, 1) 
+ BatCat acc : 0.798611
+ The second IBCat acc : 0.798611
+Success!

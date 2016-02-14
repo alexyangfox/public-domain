@@ -1,0 +1,13 @@
+sunny,    80, false, Don't Play
+sunny,    90, true, Don't Play
+rain,     80, false, Play
+rain,     90, false, Play
+sunny,    90, false, Play
+sunny,    70, true, Play
+overcast, 70, true, Play
+overcast, 65, true, Play
+overcast, 80, true, Play
+overcast, 70, false, Play
+rain,     70, true, Don't Play
+sunny,    65, false, Play
+foo,      99, false, Don't Play

@@ -1,0 +1,6 @@
+| discretized from golf.
+Play, Don't Play.
+
+outlook: sunny, overcast, rain,foo.
+humidity: 65,70,80,90,99
+windy: true, false.

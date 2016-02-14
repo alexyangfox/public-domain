@@ -1,0 +1,33 @@
+Const Inducer Results
+Number of training instances: 4
+Number of test instances: 6.  Unseen: 2,  seen 4.
+Number correct: 3.  Number incorrect: 3
+Generalization accuracy: 50.00%.  Memorization accuracy: 50.00%
+Accuracy: 50.00% +- 22.36% [18.76% - 81.24%]
+Number Test Instances Off Train: 2  Number Test Instances On Train: 4
+Const overall accuracy: 0.5
+Const memorized accuracy: 0.5
+Const generalized accuracy: 0.5
+Number of training instances: 4
+Number of test instances: 6.  Unseen: 2,  seen 4.
+Number correct: 3.  Number incorrect: 3
+Generalization accuracy: 50.00%.  Memorization accuracy: 50.00%
+Accuracy: 50.00% +- 22.36% [18.76% - 81.24%]
+Incorrect classifications ... 
+sunny, true, Don't Play.
+rain, true, Don't Play.
+rain, false, Don't Play.
+Displaying correct classifications ... 
+overcast, false, Play.
+overcast, true, Play.
+sunny, false, Play.
+
+Displaying confusion matrix... 
+ (a)  (b)    <-- classified as 
+---- ---- 
+   3    0    (a): class Play
+   3    0    (b): class Don't Play
+
+Displaying category distribution ... 
+Class Play : 6
+Class Don't Play : 0

@@ -1,0 +1,12 @@
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION DATAFILE = monk1
+OPTION NAMESFILE = monk1.names
+OPTION DUMPSTEM = /tmp/monk1-tmp
+Converting...
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1.data.. done.
+OPTION TESTFILE = monk1.test
+Reading monk1.test..... done.
+Done.

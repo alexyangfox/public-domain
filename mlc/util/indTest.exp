@@ -1,0 +1,2038 @@
+Test 1
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION EXPECTED_WARNINGS = 0
+Testing monk1-full
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+OPTION INDUCER = IB
+OPTION INDUCER_NAME = IB
+OPTION NUM_NEIGHBORS = 1
+OPTION EDITING = false
+OPTION NNKVALUE = num-distances
+OPTION NORMALIZATION = extreme
+OPTION NEIGHBOR_VOTE = inverse-distance
+OPTION MANUAL_WEIGHTS = false
+OPTION INDUCER = IB
+OPTION INDUCER_NAME = IB
+OPTION NUM_NEIGHBORS = 1
+OPTION EDITING = false
+OPTION NNKVALUE = num-distances
+OPTION NORMALIZATION = extreme
+OPTION NEIGHBOR_VOTE = inverse-distance
+OPTION MANUAL_WEIGHTS = false
+doing small large dataset test...
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+Reading breast.data..... done.
+Reading breast.test... done.
+Inducer::train_and_test for inducer IB
+OPTION DISP_CONFUSION_MAT = false
+OPTION DISP_MISCLASS = false
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 362.  Number incorrect: 70
+Generalization accuracy: 77.27%.  Memorization accuracy: 100.00%
+Accuracy: 83.80% +- 1.77% [80.03% - 86.97%]
+Inducer::train_and_test for inducer IB
+Number of training instances: 466
+Number of test instances: 233.  Unseen: 230,  seen 3.
+Number correct: 224.  Number incorrect: 9
+Generalization accuracy: 96.09%.  Memorization accuracy: 100.00%
+Accuracy: 96.14% +- 1.27% [92.82% - 97.95%]
+doing simple accuracy check... 
+Inducer::train_and_test for inducer IB
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 362.  Number incorrect: 70
+Generalization accuracy: 77.27%.  Memorization accuracy: 100.00%
+Accuracy: 83.80% +- 1.77% [80.03% - 86.97%]
+doing logging output check... 
+doing zero attribute check...
+Inducer::train_and_test for inducer const inducer
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 216.  Number incorrect: 216
+Generalization accuracy: 50.00%.  Memorization accuracy: 50.00%
+Accuracy: 50.00% +- 2.41% [45.31% - 54.69%]
+Inducer::train_and_test for inducer IB
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 0,  seen 432.
+Number correct: 216.  Number incorrect: 216
+Generalization accuracy: unknown.  Memorization accuracy: 50.00%
+Accuracy: 50.00% +- 2.41% [45.31% - 54.69%]
+Testing crx
+Reading crx.data..... done.
+Reading crx.test.. done.
+OPTION INDUCER = IB
+OPTION INDUCER_NAME = IB
+OPTION NUM_NEIGHBORS = 1
+OPTION EDITING = false
+OPTION NNKVALUE = num-distances
+OPTION NORMALIZATION = extreme
+OPTION NEIGHBOR_VOTE = inverse-distance
+OPTION MANUAL_WEIGHTS = false
+OPTION INDUCER = IB
+OPTION INDUCER_NAME = IB
+OPTION NUM_NEIGHBORS = 1
+OPTION EDITING = false
+OPTION NNKVALUE = num-distances
+OPTION NORMALIZATION = extreme
+OPTION NEIGHBOR_VOTE = inverse-distance
+OPTION MANUAL_WEIGHTS = false
+doing small large dataset test...
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+Reading breast.data..... done.
+Reading breast.test... done.
+Inducer::train_and_test for inducer IB
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 362.  Number incorrect: 70
+Generalization accuracy: 77.27%.  Memorization accuracy: 100.00%
+Accuracy: 83.80% +- 1.77% [80.03% - 86.97%]
+Inducer::train_and_test for inducer IB
+Number of training instances: 466
+Number of test instances: 233.  Unseen: 230,  seen 3.
+Number correct: 224.  Number incorrect: 9
+Generalization accuracy: 96.09%.  Memorization accuracy: 100.00%
+Accuracy: 96.14% +- 1.27% [92.82% - 97.95%]
+doing simple accuracy check... 
+Inducer::train_and_test for inducer IB
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 200,  seen 0.
+Number correct: 155.  Number incorrect: 45
+Generalization accuracy: 77.50%.  Memorization accuracy: unknown
+Accuracy: 77.50% +- 2.96% [71.23% - 82.74%]
+doing logging output check... 
+doing zero attribute check...
+Inducer::train_and_test for inducer const inducer
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 200,  seen 0.
+Number correct: 110.  Number incorrect: 90
+Generalization accuracy: 55.00%.  Memorization accuracy: unknown
+Accuracy: 55.00% +- 3.53% [48.08% - 61.74%]
+Inducer::train_and_test for inducer IB
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 0,  seen 200.
+Number correct: 110.  Number incorrect: 90
+Generalization accuracy: unknown.  Memorization accuracy: 55.00%
+Accuracy: 55.00% +- 3.53% [48.08% - 61.74%]
+Test 2
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION EXPECTED_WARNINGS = 0
+Testing monk1-full
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+OPTION INDUCER = ID3
+OPTION INDUCER_NAME = ID3
+OPTION ID3_MAX_LEVEL = 0
+OPTION ID3_LBOUND_MIN_SPLIT = 1
+OPTION ID3_UBOUND_MIN_SPLIT = 25
+OPTION ID3_MIN_SPLIT_WEIGHT = 0
+OPTION ID3_DEBUG = false
+OPTION ID3_UNKNOWN_EDGES = true
+OPTION ID3_SPLIT_BY = normalized_mutual_info
+OPTION INDUCER = ID3
+OPTION INDUCER_NAME = ID3
+OPTION ID3_MAX_LEVEL = 0
+OPTION ID3_LBOUND_MIN_SPLIT = 1
+OPTION ID3_UBOUND_MIN_SPLIT = 25
+OPTION ID3_MIN_SPLIT_WEIGHT = 0
+OPTION ID3_DEBUG = false
+OPTION ID3_UNKNOWN_EDGES = true
+OPTION ID3_SPLIT_BY = normalized_mutual_info
+doing small large dataset test...
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+Reading breast.data..... done.
+Reading breast.test... done.
+Tree has 124 nodes, and 92 leaves.
+Inducer::train_and_test for inducer ID3
+OPTION DISP_CONFUSION_MAT = false
+OPTION DISP_MISCLASS = false
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 350.  Number incorrect: 82
+Generalization accuracy: 73.38%.  Memorization accuracy: 100.00%
+Accuracy: 81.02% +- 1.89% [77.05% - 84.44%]
+Tree has 52 nodes, and 35 leaves.
+Inducer::train_and_test for inducer ID3
+Number of training instances: 466
+Number of test instances: 233.  Unseen: 230,  seen 3.
+Number correct: 220.  Number incorrect: 13
+Generalization accuracy: 94.35%.  Memorization accuracy: 100.00%
+Accuracy: 94.42% +- 1.51% [90.69% - 96.71%]
+doing simple accuracy check... 
+Tree has 124 nodes, and 92 leaves.
+Inducer::train_and_test for inducer ID3
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 350.  Number incorrect: 82
+Generalization accuracy: 73.38%.  Memorization accuracy: 100.00%
+Accuracy: 81.02% +- 1.89% [77.05% - 84.44%]
+Tree has 124 nodes, and 92 leaves.
+doing logging output check... 
+doing zero attribute check...
+Inducer::train_and_test for inducer const inducer
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 216.  Number incorrect: 216
+Generalization accuracy: 50.00%.  Memorization accuracy: 50.00%
+Accuracy: 50.00% +- 2.41% [45.31% - 54.69%]
+Tree has 1 nodes, and 1 leaves.
+Inducer::train_and_test for inducer ID3
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 0,  seen 432.
+Number correct: 216.  Number incorrect: 216
+Generalization accuracy: unknown.  Memorization accuracy: 50.00%
+Accuracy: 50.00% +- 2.41% [45.31% - 54.69%]
+Testing crx
+Reading crx.data..... done.
+Reading crx.test.. done.
+OPTION INDUCER = ID3
+OPTION INDUCER_NAME = ID3
+OPTION ID3_MAX_LEVEL = 0
+OPTION ID3_LBOUND_MIN_SPLIT = 1
+OPTION ID3_UBOUND_MIN_SPLIT = 25
+OPTION ID3_MIN_SPLIT_WEIGHT = 0
+OPTION ID3_DEBUG = false
+OPTION ID3_UNKNOWN_EDGES = true
+OPTION ID3_SPLIT_BY = normalized_mutual_info
+OPTION INDUCER = ID3
+OPTION INDUCER_NAME = ID3
+OPTION ID3_MAX_LEVEL = 0
+OPTION ID3_LBOUND_MIN_SPLIT = 1
+OPTION ID3_UBOUND_MIN_SPLIT = 25
+OPTION ID3_MIN_SPLIT_WEIGHT = 0
+OPTION ID3_DEBUG = false
+OPTION ID3_UNKNOWN_EDGES = true
+OPTION ID3_SPLIT_BY = normalized_mutual_info
+doing small large dataset test...
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+Reading breast.data..... done.
+Reading breast.test... done.
+Tree has 124 nodes, and 92 leaves.
+Inducer::train_and_test for inducer ID3
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 350.  Number incorrect: 82
+Generalization accuracy: 73.38%.  Memorization accuracy: 100.00%
+Accuracy: 81.02% +- 1.89% [77.05% - 84.44%]
+Tree has 52 nodes, and 35 leaves.
+Inducer::train_and_test for inducer ID3
+Number of training instances: 466
+Number of test instances: 233.  Unseen: 230,  seen 3.
+Number correct: 220.  Number incorrect: 13
+Generalization accuracy: 94.35%.  Memorization accuracy: 100.00%
+Accuracy: 94.42% +- 1.51% [90.69% - 96.71%]
+doing simple accuracy check... 
+Tree has 176 nodes, and 122 leaves.
+Inducer::train_and_test for inducer ID3
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 200,  seen 0.
+Number correct: 145.  Number incorrect: 55
+Generalization accuracy: 72.50%.  Memorization accuracy: unknown
+Accuracy: 72.50% +- 3.17% [65.93% - 78.22%]
+Tree has 176 nodes, and 122 leaves.
+doing logging output check... 
+doing zero attribute check...
+Inducer::train_and_test for inducer const inducer
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 200,  seen 0.
+Number correct: 110.  Number incorrect: 90
+Generalization accuracy: 55.00%.  Memorization accuracy: unknown
+Accuracy: 55.00% +- 3.53% [48.08% - 61.74%]
+Tree has 1 nodes, and 1 leaves.
+Inducer::train_and_test for inducer ID3
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 0,  seen 200.
+Number correct: 110.  Number incorrect: 90
+Generalization accuracy: unknown.  Memorization accuracy: 55.00%
+Accuracy: 55.00% +- 3.53% [48.08% - 61.74%]
+Test 3
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION EXPECTED_WARNINGS = 0
+Testing monk1-full
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+OPTION INDUCER = c4.5
+OPTION INDUCER_NAME = c4.5
+OPTION C45_FLAGS = -u -f %s 
+OPTION INDUCER = c4.5
+OPTION INDUCER_NAME = c4.5
+OPTION C45_FLAGS = -u -f %s 
+doing small large dataset test...
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+Reading breast.data..... done.
+Reading breast.test... done.
+OPTION C45_RETRIES = 0
+OPTION C45_STATS = false
+doing simple accuracy check... 
+doing logging output check... 
+doing zero attribute check...
+Inducer::train_and_test for inducer const inducer
+OPTION DISP_CONFUSION_MAT = false
+OPTION DISP_MISCLASS = false
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 216.  Number incorrect: 216
+Generalization accuracy: 50.00%.  Memorization accuracy: 50.00%
+Accuracy: 50.00% +- 2.41% [45.31% - 54.69%]
+Testing crx
+Reading crx.data..... done.
+Reading crx.test.. done.
+OPTION INDUCER = c4.5
+OPTION INDUCER_NAME = c4.5
+OPTION C45_FLAGS = -u -f %s 
+OPTION INDUCER = c4.5
+OPTION INDUCER_NAME = c4.5
+OPTION C45_FLAGS = -u -f %s 
+doing small large dataset test...
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+Reading breast.data..... done.
+Reading breast.test... done.
+doing simple accuracy check... 
+doing logging output check... 
+doing zero attribute check...
+Inducer::train_and_test for inducer const inducer
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 200,  seen 0.
+Number correct: 110.  Number incorrect: 90
+Generalization accuracy: 55.00%.  Memorization accuracy: unknown
+Accuracy: 55.00% +- 3.53% [48.08% - 61.74%]
+Average nodes for all C4.5 trees:14.
+Test 4
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION EXPECTED_WARNINGS = 2
+Testing monk1-full
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+OPTION INDUCER = bag
+OPTION INDUCER_NAME = bagging
+OPTION BAG_REPLICATIONS = 10
+OPTION BAG_PROPORTION = 0.8
+OPTION BAG_UNIF_WEIGHTS = true
+OPTION BAG_SEED = 7258789
+OPTION BAG_INDUCER = naive
+OPTION BAG_INDUCER_NAME = naive-bayes
+OPTION INDUCER = bag
+OPTION INDUCER_NAME = bagging
+OPTION BAG_REPLICATIONS = 10
+OPTION BAG_PROPORTION = 0.8
+OPTION BAG_UNIF_WEIGHTS = true
+OPTION BAG_SEED = 7258789
+OPTION BAG_INDUCER = naive
+OPTION BAG_INDUCER_NAME = naive-bayes
+doing small large dataset test...
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+Reading breast.data..... done.
+Reading breast.test... done.
+Inducer::train_and_test for inducer bagging
+OPTION DISP_CONFUSION_MAT = false
+OPTION DISP_MISCLASS = false
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 313.  Number incorrect: 119
+Generalization accuracy: 68.83%.  Memorization accuracy: 81.45%
+Accuracy: 72.45% +- 2.15% [68.06% - 76.45%]
+Inducer::train_and_test for inducer bagging
+Number of training instances: 466
+Number of test instances: 233.  Unseen: 230,  seen 3.
+Number correct: 225.  Number incorrect: 8
+Generalization accuracy: 96.52%.  Memorization accuracy: 100.00%
+Accuracy: 96.57% +- 1.20% [93.37% - 98.25%]
+doing simple accuracy check... 
+Inducer::train_and_test for inducer bagging
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 313.  Number incorrect: 119
+Generalization accuracy: 68.83%.  Memorization accuracy: 81.45%
+Accuracy: 72.45% +- 2.15% [68.06% - 76.45%]
+WARNING u_indTest.c:The accuracies from train_and_test and CatTestResult are different (0.724537 <-> 0.715278).
+doing logging output check... 
+doing zero attribute check...
+Inducer::train_and_test for inducer const inducer
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 216.  Number incorrect: 216
+Generalization accuracy: 50.00%.  Memorization accuracy: 50.00%
+Accuracy: 50.00% +- 2.41% [45.31% - 54.69%]
+Inducer::train_and_test for inducer bagging
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 0,  seen 432.
+Number correct: 216.  Number incorrect: 216
+Generalization accuracy: unknown.  Memorization accuracy: 50.00%
+Accuracy: 50.00% +- 2.41% [45.31% - 54.69%]
+Testing crx
+Reading crx.data..... done.
+Reading crx.test.. done.
+OPTION INDUCER = bag
+OPTION INDUCER_NAME = bagging
+OPTION BAG_REPLICATIONS = 10
+OPTION BAG_PROPORTION = 0.8
+OPTION BAG_UNIF_WEIGHTS = true
+OPTION BAG_SEED = 7258789
+OPTION BAG_INDUCER = naive
+OPTION BAG_INDUCER_NAME = naive-bayes
+OPTION INDUCER = bag
+OPTION INDUCER_NAME = bagging
+OPTION BAG_REPLICATIONS = 10
+OPTION BAG_PROPORTION = 0.8
+OPTION BAG_UNIF_WEIGHTS = true
+OPTION BAG_SEED = 7258789
+OPTION BAG_INDUCER = naive
+OPTION BAG_INDUCER_NAME = naive-bayes
+doing small large dataset test...
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+Reading breast.data..... done.
+Reading breast.test... done.
+Inducer::train_and_test for inducer bagging
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 313.  Number incorrect: 119
+Generalization accuracy: 68.83%.  Memorization accuracy: 81.45%
+Accuracy: 72.45% +- 2.15% [68.06% - 76.45%]
+Inducer::train_and_test for inducer bagging
+Number of training instances: 466
+Number of test instances: 233.  Unseen: 230,  seen 3.
+Number correct: 225.  Number incorrect: 8
+Generalization accuracy: 96.52%.  Memorization accuracy: 100.00%
+Accuracy: 96.57% +- 1.20% [93.37% - 98.25%]
+doing simple accuracy check... 
+Inducer::train_and_test for inducer bagging
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 200,  seen 0.
+Number correct: 156.  Number incorrect: 44
+Generalization accuracy: 78.00%.  Memorization accuracy: unknown
+Accuracy: 78.00% +- 2.94% [71.76% - 83.18%]
+WARNING u_indTest.c:The accuracies from train_and_test and CatTestResult are different (0.78 <-> 0.77).
+doing logging output check... 
+doing zero attribute check...
+Inducer::train_and_test for inducer const inducer
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 200,  seen 0.
+Number correct: 110.  Number incorrect: 90
+Generalization accuracy: 55.00%.  Memorization accuracy: unknown
+Accuracy: 55.00% +- 3.53% [48.08% - 61.74%]
+Inducer::train_and_test for inducer bagging
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 0,  seen 200.
+Number correct: 110.  Number incorrect: 90
+Generalization accuracy: unknown.  Memorization accuracy: 55.00%
+Accuracy: 55.00% +- 3.53% [48.08% - 61.74%]
+Test 5
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION EXPECTED_WARNINGS = 0
+Testing monk1-full
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+OPTION INDUCER = lazy
+OPTION INDUCER_NAME = lazyDT
+OPTION LAZYDT_MIN_SPLIT = 1
+OPTION LAZYDT_ATTR_EQ_CAT = true
+OPTION LAZYDT_MINFO_RATE = 0
+OPTION LAZYDT_USE_MSPLIT = true
+OPTION LAZYDT_MSPLIT_RATE = 0.1
+OPTION LAZYDT_DEL_RATE = 0
+OPTION LAZYDT_PESSIMISTIC_Z = 0
+OPTION LAZYDT_PENALTY_POWER = 0
+OPTION DISCF_DISC_TYPE = entropy
+OPTION DISCF_DISC_NUM_INTR = Algo-heuristic
+OPTION DISCF_MIN_SPLIT = 1
+OPTION INDUCER = lazy
+OPTION INDUCER_NAME = lazyDT
+OPTION LAZYDT_MIN_SPLIT = 1
+OPTION LAZYDT_ATTR_EQ_CAT = true
+OPTION LAZYDT_MINFO_RATE = 0
+OPTION LAZYDT_USE_MSPLIT = true
+OPTION LAZYDT_MSPLIT_RATE = 0.1
+OPTION LAZYDT_DEL_RATE = 0
+OPTION LAZYDT_PESSIMISTIC_Z = 0
+OPTION LAZYDT_PENALTY_POWER = 0
+OPTION DISCF_DISC_TYPE = entropy
+OPTION DISCF_DISC_NUM_INTR = Algo-heuristic
+OPTION DISCF_MIN_SPLIT = 1
+doing small large dataset test...
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+Reading breast.data..... done.
+Reading breast.test... done.
+Discretization vector:*, *, *, *, *, *
+Inducer::train_and_test for inducer lazyDT
+OPTION DISP_CONFUSION_MAT = false
+OPTION DISP_MISCLASS = false
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 397.  Number incorrect: 35
+Generalization accuracy: 88.64%.  Memorization accuracy: 100.00%
+Accuracy: 91.90% +- 1.31% [88.94% - 94.12%]
+Discretization vector:1, 3, 4, 3, 3, 3, 3, 3, 3, 2
+Inducer::train_and_test for inducer lazyDT
+Number of training instances: 466
+Number of test instances: 233.  Unseen: 60,  seen 173.
+Number correct: 218.  Number incorrect: 15
+Generalization accuracy: 76.67%.  Memorization accuracy: 99.42%
+Accuracy: 93.56% +- 1.61% [89.65% - 96.06%]
+doing simple accuracy check... 
+Discretization vector:*, *, *, *, *, *
+Inducer::train_and_test for inducer lazyDT
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 397.  Number incorrect: 35
+Generalization accuracy: 88.64%.  Memorization accuracy: 100.00%
+Accuracy: 91.90% +- 1.31% [88.94% - 94.12%]
+Discretization vector:*, *, *, *, *, *
+doing logging output check... 
+doing zero attribute check...
+Inducer::train_and_test for inducer const inducer
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 216.  Number incorrect: 216
+Generalization accuracy: 50.00%.  Memorization accuracy: 50.00%
+Accuracy: 50.00% +- 2.41% [45.31% - 54.69%]
+Discretization vector:
+Inducer::train_and_test for inducer lazyDT
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 0,  seen 432.
+Number correct: 216.  Number incorrect: 216
+Generalization accuracy: unknown.  Memorization accuracy: 50.00%
+Accuracy: 50.00% +- 2.41% [45.31% - 54.69%]
+Testing crx
+Reading crx.data..... done.
+Reading crx.test.. done.
+OPTION INDUCER = lazy
+OPTION INDUCER_NAME = lazyDT
+OPTION LAZYDT_MIN_SPLIT = 1
+OPTION LAZYDT_ATTR_EQ_CAT = true
+OPTION LAZYDT_MINFO_RATE = 0
+OPTION LAZYDT_USE_MSPLIT = true
+OPTION LAZYDT_MSPLIT_RATE = 0.1
+OPTION LAZYDT_DEL_RATE = 0
+OPTION LAZYDT_PESSIMISTIC_Z = 0
+OPTION LAZYDT_PENALTY_POWER = 0
+OPTION DISCF_DISC_TYPE = entropy
+OPTION DISCF_DISC_NUM_INTR = Algo-heuristic
+OPTION DISCF_MIN_SPLIT = 1
+OPTION INDUCER = lazy
+OPTION INDUCER_NAME = lazyDT
+OPTION LAZYDT_MIN_SPLIT = 1
+OPTION LAZYDT_ATTR_EQ_CAT = true
+OPTION LAZYDT_MINFO_RATE = 0
+OPTION LAZYDT_USE_MSPLIT = true
+OPTION LAZYDT_MSPLIT_RATE = 0.1
+OPTION LAZYDT_DEL_RATE = 0
+OPTION LAZYDT_PESSIMISTIC_Z = 0
+OPTION LAZYDT_PENALTY_POWER = 0
+OPTION DISCF_DISC_TYPE = entropy
+OPTION DISCF_DISC_NUM_INTR = Algo-heuristic
+OPTION DISCF_MIN_SPLIT = 1
+doing small large dataset test...
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+Reading breast.data..... done.
+Reading breast.test... done.
+Discretization vector:*, *, *, *, *, *
+Inducer::train_and_test for inducer lazyDT
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 397.  Number incorrect: 35
+Generalization accuracy: 88.64%.  Memorization accuracy: 100.00%
+Accuracy: 91.90% +- 1.31% [88.94% - 94.12%]
+Discretization vector:1, 3, 4, 3, 3, 3, 3, 3, 3, 2
+Inducer::train_and_test for inducer lazyDT
+Number of training instances: 466
+Number of test instances: 233.  Unseen: 60,  seen 173.
+Number correct: 218.  Number incorrect: 15
+Generalization accuracy: 76.67%.  Memorization accuracy: 99.42%
+Accuracy: 93.56% +- 1.61% [89.65% - 96.06%]
+doing simple accuracy check... 
+Discretization vector:*, 2, 2, *, *, *, *, 2, *, *, 2, *, *, 2, 2
+Inducer::train_and_test for inducer lazyDT
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 179,  seen 21.
+Number correct: 159.  Number incorrect: 41
+Generalization accuracy: 78.77%.  Memorization accuracy: 85.71%
+Accuracy: 79.50% +- 2.86% [73.37% - 84.51%]
+Discretization vector:*, 2, 2, *, *, *, *, 2, *, *, 2, *, *, 2, 2
+doing logging output check... 
+doing zero attribute check...
+Inducer::train_and_test for inducer const inducer
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 200,  seen 0.
+Number correct: 110.  Number incorrect: 90
+Generalization accuracy: 55.00%.  Memorization accuracy: unknown
+Accuracy: 55.00% +- 3.53% [48.08% - 61.74%]
+Discretization vector:
+Inducer::train_and_test for inducer lazyDT
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 0,  seen 200.
+Number correct: 110.  Number incorrect: 90
+Generalization accuracy: unknown.  Memorization accuracy: 55.00%
+Accuracy: 55.00% +- 3.53% [48.08% - 61.74%]
+Test 6
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION EXPECTED_WARNINGS = 0
+Testing monk1-full
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+OPTION INDUCER = const
+OPTION INDUCER_NAME = const
+OPTION INDUCER = const
+OPTION INDUCER_NAME = const
+doing small large dataset test...
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+Reading breast.data..... done.
+Reading breast.test... done.
+Inducer::train_and_test for inducer const
+OPTION DISP_CONFUSION_MAT = false
+OPTION DISP_MISCLASS = false
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 216.  Number incorrect: 216
+Generalization accuracy: 50.00%.  Memorization accuracy: 50.00%
+Accuracy: 50.00% +- 2.41% [45.31% - 54.69%]
+Inducer::train_and_test for inducer const
+Number of training instances: 466
+Number of test instances: 233.  Unseen: 230,  seen 3.
+Number correct: 164.  Number incorrect: 69
+Generalization accuracy: 70.00%.  Memorization accuracy: 100.00%
+Accuracy: 70.39% +- 3.00% [64.23% - 75.88%]
+doing simple accuracy check... 
+Inducer::train_and_test for inducer const
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 216.  Number incorrect: 216
+Generalization accuracy: 50.00%.  Memorization accuracy: 50.00%
+Accuracy: 50.00% +- 2.41% [45.31% - 54.69%]
+doing logging output check... 
+doing zero attribute check...
+Inducer::train_and_test for inducer const inducer
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 216.  Number incorrect: 216
+Generalization accuracy: 50.00%.  Memorization accuracy: 50.00%
+Accuracy: 50.00% +- 2.41% [45.31% - 54.69%]
+Inducer::train_and_test for inducer const
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 0,  seen 432.
+Number correct: 216.  Number incorrect: 216
+Generalization accuracy: unknown.  Memorization accuracy: 50.00%
+Accuracy: 50.00% +- 2.41% [45.31% - 54.69%]
+Testing crx
+Reading crx.data..... done.
+Reading crx.test.. done.
+OPTION INDUCER = const
+OPTION INDUCER_NAME = const
+OPTION INDUCER = const
+OPTION INDUCER_NAME = const
+doing small large dataset test...
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+Reading breast.data..... done.
+Reading breast.test... done.
+Inducer::train_and_test for inducer const
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 216.  Number incorrect: 216
+Generalization accuracy: 50.00%.  Memorization accuracy: 50.00%
+Accuracy: 50.00% +- 2.41% [45.31% - 54.69%]
+Inducer::train_and_test for inducer const
+Number of training instances: 466
+Number of test instances: 233.  Unseen: 230,  seen 3.
+Number correct: 164.  Number incorrect: 69
+Generalization accuracy: 70.00%.  Memorization accuracy: 100.00%
+Accuracy: 70.39% +- 3.00% [64.23% - 75.88%]
+doing simple accuracy check... 
+Inducer::train_and_test for inducer const
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 200,  seen 0.
+Number correct: 110.  Number incorrect: 90
+Generalization accuracy: 55.00%.  Memorization accuracy: unknown
+Accuracy: 55.00% +- 3.53% [48.08% - 61.74%]
+doing logging output check... 
+doing zero attribute check...
+Inducer::train_and_test for inducer const inducer
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 200,  seen 0.
+Number correct: 110.  Number incorrect: 90
+Generalization accuracy: 55.00%.  Memorization accuracy: unknown
+Accuracy: 55.00% +- 3.53% [48.08% - 61.74%]
+Inducer::train_and_test for inducer const
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 0,  seen 200.
+Number correct: 110.  Number incorrect: 90
+Generalization accuracy: unknown.  Memorization accuracy: 55.00%
+Accuracy: 55.00% +- 3.53% [48.08% - 61.74%]
+Test 7
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION EXPECTED_WARNINGS = 0
+Testing monk1-full
+OPTION REMOVE_UNKNOWN_INST = yes
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+OPTION INDUCER = disc-filter
+OPTION INDUCER_NAME = disc-filter
+OPTION DISCF_INDUCER = HOODG
+OPTION DISCF_INDUCER_NAME = HOODG
+OPTION DISCF_DISCF_DISC_TYPE = entropy
+OPTION DISCF_DISCF_DISC_NUM_INTR = Algo-heuristic
+OPTION DISCF_DISCF_MIN_SPLIT = 1
+OPTION DISCF_DISC_TYPE = entropy
+OPTION DISCF_DISC_NUM_INTR = Algo-heuristic
+OPTION DISCF_MIN_SPLIT = 1
+OPTION INDUCER = disc-filter
+OPTION INDUCER_NAME = disc-filter
+OPTION DISCF_INDUCER = HOODG
+OPTION DISCF_INDUCER_NAME = HOODG
+OPTION DISCF_DISCF_DISC_TYPE = entropy
+OPTION DISCF_DISCF_DISC_NUM_INTR = Algo-heuristic
+OPTION DISCF_DISCF_MIN_SPLIT = 1
+OPTION DISCF_DISC_TYPE = entropy
+OPTION DISCF_DISC_NUM_INTR = Algo-heuristic
+OPTION DISCF_MIN_SPLIT = 1
+doing small large dataset test...
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+Reading breast.data..... Removed 9 instances.
+Reading breast.test... Removed 7 instances.
+Discretization vector:*, *, *, *, *, *
+Discretization vector:*, *, *, *, *, *
+OODGInducer::Splitting on attribute 3 (Holding). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 2 (Is smiling). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 3 (Has tie). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 2 (Jacket color). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 1 (Body shape). There are 3 nodes (were 3)
+OODGInducer::Splitting on attribute 0 (Head shape). There are 1 nodes (were 1)
+CoverInstanceHeuristic total summary:
+  Total number of unforced instance covers: 185
+  Consistent choices: 0, Included choices: 0, Consistent & not incl: 0
+Inducer::train_and_test for inducer HOODG
+OPTION DISP_CONFUSION_MAT = false
+OPTION DISP_MISCLASS = false
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 432.  Number incorrect: 0
+Generalization accuracy: 100.00%.  Memorization accuracy: 100.00%
+Accuracy: 100.00% +- 0.00% [99.12% - 100.00%]
+Discretization vector:1, 3, 4, 3, 3, 3, 3, 3, 3, 2
+Discretization vector:*, *, *, *, *, *, *, *, *, *
+Removed duplicates/conflicting instances.  Num instances:195 down from 457
+OODGInducer::Splitting on attribute 9 (Mitoses). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 7 (Bland Chromatin). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 3 (Uniformity of Cell Shape). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 0 (Sample code number). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 0 (Clump Thickness). There are 3 nodes (were 3)
+OODGInducer::Splitting on attribute 1 (Marginal Adhesion). There are 6 nodes (were 6)
+Unknown destination for value 1 setting to 2
+Unknown destination for value 2 setting to 2
+OODGInducer::Splitting on attribute 2 (Bare Nuclei). There are 9 nodes (were 9)
+OODGInducer::Splitting on attribute 0 (Uniformity of Cell Size). There are 8 nodes (were 8)
+Unknown destination for value 1 setting to 2
+Unknown destination for value 0 setting to 2
+Unknown destination for value 1 setting to 2
+OODGInducer::Splitting on attribute 1 (Normal Nucleoli). There are 3 nodes (were 3)
+Unknown destination for value 2 setting to 0
+OODGInducer::Splitting on attribute 0 (Single Epithelial Cell Size). There are 1 nodes (were 1)
+CoverInstanceHeuristic total summary:
+  Total number of unforced instance covers: 735
+  Consistent choices: 82, Included choices: 81, Consistent & not incl: 1
+Inducer::train_and_test for inducer HOODG
+Number of training instances: 195
+Number of test instances: 226.  Unseen: 54,  seen 172.
+Number correct: 219.  Number incorrect: 7
+Generalization accuracy: 88.89%.  Memorization accuracy: 99.42%
+Accuracy: 96.90% +- 1.15% [93.75% - 98.49%]
+doing simple accuracy check... 
+Discretization vector:*, *, *, *, *, *
+Discretization vector:*, *, *, *, *, *
+OODGInducer::Splitting on attribute 3 (Holding). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 2 (Is smiling). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 3 (Has tie). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 2 (Jacket color). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 1 (Body shape). There are 3 nodes (were 3)
+OODGInducer::Splitting on attribute 0 (Head shape). There are 1 nodes (were 1)
+CoverInstanceHeuristic total summary:
+  Total number of unforced instance covers: 185
+  Consistent choices: 0, Included choices: 0, Consistent & not incl: 0
+Inducer::train_and_test for inducer HOODG
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 432.  Number incorrect: 0
+Generalization accuracy: 100.00%.  Memorization accuracy: 100.00%
+Accuracy: 100.00% +- 0.00% [99.12% - 100.00%]
+Discretization vector:*, *, *, *, *, *
+Discretization vector:*, *, *, *, *, *
+OODGInducer::Splitting on attribute 3 (Holding). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 2 (Is smiling). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 3 (Has tie). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 2 (Jacket color). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 1 (Body shape). There are 3 nodes (were 3)
+OODGInducer::Splitting on attribute 0 (Head shape). There are 1 nodes (were 1)
+CoverInstanceHeuristic total summary:
+  Total number of unforced instance covers: 185
+  Consistent choices: 0, Included choices: 0, Consistent & not incl: 0
+doing logging output check... 
+doing zero attribute check...
+Inducer::train_and_test for inducer const inducer
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 216.  Number incorrect: 216
+Generalization accuracy: 50.00%.  Memorization accuracy: 50.00%
+Accuracy: 50.00% +- 2.41% [45.31% - 54.69%]
+Discretization vector:
+Discretization vector:
+Removed duplicates/conflicting instances.  Num instances:1 down from 124
+Inducer::train_and_test for inducer HOODG
+Number of training instances: 1
+Number of test instances: 432.  Unseen: 0,  seen 432.
+Number correct: 216.  Number incorrect: 216
+Generalization accuracy: unknown.  Memorization accuracy: 50.00%
+Accuracy: 50.00% +- 2.41% [45.31% - 54.69%]
+Testing crx
+Reading crx.data..... Removed 25 instances.
+Reading crx.test.. Removed 12 instances.
+OPTION INDUCER = disc-filter
+OPTION INDUCER_NAME = disc-filter
+OPTION DISCF_INDUCER = HOODG
+OPTION DISCF_INDUCER_NAME = HOODG
+OPTION DISCF_DISCF_DISC_TYPE = entropy
+OPTION DISCF_DISCF_DISC_NUM_INTR = Algo-heuristic
+OPTION DISCF_DISCF_MIN_SPLIT = 1
+OPTION DISCF_DISC_TYPE = entropy
+OPTION DISCF_DISC_NUM_INTR = Algo-heuristic
+OPTION DISCF_MIN_SPLIT = 1
+OPTION INDUCER = disc-filter
+OPTION INDUCER_NAME = disc-filter
+OPTION DISCF_INDUCER = HOODG
+OPTION DISCF_INDUCER_NAME = HOODG
+OPTION DISCF_DISCF_DISC_TYPE = entropy
+OPTION DISCF_DISCF_DISC_NUM_INTR = Algo-heuristic
+OPTION DISCF_DISCF_MIN_SPLIT = 1
+OPTION DISCF_DISC_TYPE = entropy
+OPTION DISCF_DISC_NUM_INTR = Algo-heuristic
+OPTION DISCF_MIN_SPLIT = 1
+doing small large dataset test...
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+Reading breast.data..... Removed 9 instances.
+Reading breast.test... Removed 7 instances.
+Discretization vector:*, *, *, *, *, *
+Discretization vector:*, *, *, *, *, *
+OODGInducer::Splitting on attribute 3 (Holding). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 2 (Is smiling). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 3 (Has tie). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 2 (Jacket color). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 1 (Body shape). There are 3 nodes (were 3)
+OODGInducer::Splitting on attribute 0 (Head shape). There are 1 nodes (were 1)
+CoverInstanceHeuristic total summary:
+  Total number of unforced instance covers: 185
+  Consistent choices: 0, Included choices: 0, Consistent & not incl: 0
+Inducer::train_and_test for inducer HOODG
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 432.  Number incorrect: 0
+Generalization accuracy: 100.00%.  Memorization accuracy: 100.00%
+Accuracy: 100.00% +- 0.00% [99.12% - 100.00%]
+Discretization vector:1, 3, 4, 3, 3, 3, 3, 3, 3, 2
+Discretization vector:*, *, *, *, *, *, *, *, *, *
+Removed duplicates/conflicting instances.  Num instances:195 down from 457
+OODGInducer::Splitting on attribute 9 (Mitoses). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 7 (Bland Chromatin). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 3 (Uniformity of Cell Shape). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 0 (Sample code number). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 0 (Clump Thickness). There are 3 nodes (were 3)
+OODGInducer::Splitting on attribute 1 (Marginal Adhesion). There are 6 nodes (were 6)
+Unknown destination for value 1 setting to 2
+Unknown destination for value 2 setting to 2
+OODGInducer::Splitting on attribute 2 (Bare Nuclei). There are 9 nodes (were 9)
+OODGInducer::Splitting on attribute 0 (Uniformity of Cell Size). There are 8 nodes (were 8)
+Unknown destination for value 1 setting to 2
+Unknown destination for value 0 setting to 2
+Unknown destination for value 1 setting to 2
+OODGInducer::Splitting on attribute 1 (Normal Nucleoli). There are 3 nodes (were 3)
+Unknown destination for value 2 setting to 0
+OODGInducer::Splitting on attribute 0 (Single Epithelial Cell Size). There are 1 nodes (were 1)
+CoverInstanceHeuristic total summary:
+  Total number of unforced instance covers: 735
+  Consistent choices: 82, Included choices: 81, Consistent & not incl: 1
+Inducer::train_and_test for inducer HOODG
+Number of training instances: 195
+Number of test instances: 226.  Unseen: 54,  seen 172.
+Number correct: 219.  Number incorrect: 7
+Generalization accuracy: 88.89%.  Memorization accuracy: 99.42%
+Accuracy: 96.90% +- 1.15% [93.75% - 98.49%]
+doing simple accuracy check... 
+Discretization vector:*, 2, 2, *, *, *, *, 2, *, *, 2, *, *, 3, 2
+Discretization vector:*, *, *, *, *, *, *, *, *, *, *, *, *, *, *
+Removed duplicates/conflicting instances.  Num instances:436 down from 465
+OODGInducer::Splitting on attribute 11 (A12). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 9 (A10). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 7 (A8). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 4 (A5). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 9 (A14). There are 3 nodes (were 3)
+OODGInducer::Splitting on attribute 9 (A15). There are 5 nodes (were 5)
+OODGInducer::Splitting on attribute 6 (A9). There are 6 nodes (were 6)
+OODGInducer::Splitting on attribute 6 (A11). There are 13 nodes (were 13)
+Least commitment cover was useful
+OODGInducer::Splitting on attribute 6 (A13). There are 20 nodes (were 20)
+Unknown destination for value 1 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 1 setting to 0
+Least commitment cover was useful
+OODGInducer::Splitting on attribute 4 (A6). There are 20 nodes (were 20)
+Unknown destination for value 7 setting to 0
+Unknown destination for value 4 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 13 setting to 0
+Unknown destination for value 4 setting to 0
+Unknown destination for value 6 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 10 setting to 0
+Unknown destination for value 13 setting to 0
+Unknown destination for value 6 setting to 0
+Unknown destination for value 11 setting to 0
+Unknown destination for value 12 setting to 0
+Unknown destination for value 13 setting to 0
+Unknown destination for value 4 setting to 0
+Unknown destination for value 13 setting to 0
+Unknown destination for value 4 setting to 0
+Unknown destination for value 5 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 10 setting to 0
+Unknown destination for value 11 setting to 0
+Unknown destination for value 13 setting to 0
+Unknown destination for value 2 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 8 setting to 0
+Unknown destination for value 10 setting to 0
+Unknown destination for value 11 setting to 0
+Unknown destination for value 4 setting to 0
+Unknown destination for value 6 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 4 setting to 0
+Unknown destination for value 5 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 11 setting to 0
+Unknown destination for value 12 setting to 0
+Unknown destination for value 13 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 2 setting to 0
+Unknown destination for value 4 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 13 setting to 0
+Unknown destination for value 4 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 11 setting to 0
+Unknown destination for value 12 setting to 0
+Unknown destination for value 13 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 4 setting to 0
+Unknown destination for value 5 setting to 0
+Unknown destination for value 6 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 8 setting to 0
+Unknown destination for value 9 setting to 0
+Unknown destination for value 12 setting to 0
+Unknown destination for value 13 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 4 setting to 0
+Unknown destination for value 6 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 11 setting to 0
+Unknown destination for value 12 setting to 0
+Unknown destination for value 13 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 2 setting to 0
+Unknown destination for value 4 setting to 0
+Unknown destination for value 5 setting to 0
+Unknown destination for value 6 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 9 setting to 0
+Unknown destination for value 13 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 2 setting to 0
+Unknown destination for value 4 setting to 0
+Unknown destination for value 6 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 9 setting to 0
+Unknown destination for value 13 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 2 setting to 0
+Unknown destination for value 6 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 9 setting to 0
+Unknown destination for value 11 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 2 setting to 0
+Unknown destination for value 6 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 9 setting to 0
+Unknown destination for value 10 setting to 0
+Unknown destination for value 11 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 2 setting to 0
+Unknown destination for value 4 setting to 0
+Unknown destination for value 5 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 8 setting to 0
+Unknown destination for value 9 setting to 0
+Unknown destination for value 10 setting to 0
+Unknown destination for value 11 setting to 0
+Unknown destination for value 12 setting to 0
+Unknown destination for value 13 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 2 setting to 0
+Unknown destination for value 4 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 8 setting to 0
+Unknown destination for value 9 setting to 0
+Unknown destination for value 10 setting to 0
+Unknown destination for value 11 setting to 0
+Unknown destination for value 12 setting to 0
+Unknown destination for value 13 setting to 0
+OODGInducer::Splitting on attribute 4 (A7). There are 16 nodes (were 16)
+Unknown destination for value 3 setting to 7
+Unknown destination for value 5 setting to 7
+Unknown destination for value 8 setting to 7
+Unknown destination for value 3 setting to 7
+Unknown destination for value 5 setting to 7
+Unknown destination for value 8 setting to 7
+Unknown destination for value 4 setting to 7
+Unknown destination for value 5 setting to 7
+Unknown destination for value 8 setting to 7
+Unknown destination for value 4 setting to 7
+Unknown destination for value 5 setting to 7
+Unknown destination for value 6 setting to 7
+Unknown destination for value 4 setting to 7
+Unknown destination for value 5 setting to 7
+Unknown destination for value 6 setting to 7
+Unknown destination for value 8 setting to 7
+Unknown destination for value 3 setting to 7
+Unknown destination for value 4 setting to 7
+Unknown destination for value 5 setting to 7
+Unknown destination for value 8 setting to 7
+Unknown destination for value 3 setting to 7
+Unknown destination for value 4 setting to 7
+Unknown destination for value 6 setting to 7
+Unknown destination for value 8 setting to 7
+Unknown destination for value 3 setting to 7
+Unknown destination for value 4 setting to 7
+Unknown destination for value 6 setting to 7
+Unknown destination for value 8 setting to 7
+Unknown destination for value 3 setting to 7
+Unknown destination for value 4 setting to 7
+Unknown destination for value 5 setting to 7
+Unknown destination for value 6 setting to 7
+Unknown destination for value 8 setting to 7
+Unknown destination for value 3 setting to 7
+Unknown destination for value 4 setting to 7
+Unknown destination for value 5 setting to 7
+Unknown destination for value 6 setting to 7
+Unknown destination for value 3 setting to 7
+Unknown destination for value 4 setting to 7
+Unknown destination for value 5 setting to 7
+Unknown destination for value 6 setting to 7
+Unknown destination for value 8 setting to 7
+Unknown destination for value 2 setting to 7
+Unknown destination for value 3 setting to 7
+Unknown destination for value 4 setting to 7
+Unknown destination for value 5 setting to 7
+Unknown destination for value 6 setting to 7
+Unknown destination for value 8 setting to 7
+Unknown destination for value 2 setting to 7
+Unknown destination for value 3 setting to 7
+Unknown destination for value 4 setting to 7
+Unknown destination for value 5 setting to 7
+Unknown destination for value 6 setting to 7
+Unknown destination for value 8 setting to 7
+Unknown destination for value 2 setting to 7
+Unknown destination for value 4 setting to 7
+Unknown destination for value 5 setting to 7
+Unknown destination for value 6 setting to 7
+Unknown destination for value 7 setting to 7
+Unknown destination for value 8 setting to 7
+Unknown destination for value 0 setting to 7
+Unknown destination for value 2 setting to 7
+Unknown destination for value 3 setting to 7
+Unknown destination for value 4 setting to 7
+Unknown destination for value 5 setting to 7
+Unknown destination for value 6 setting to 7
+Unknown destination for value 8 setting to 7
+Unknown destination for value 0 setting to 7
+Unknown destination for value 2 setting to 7
+Unknown destination for value 3 setting to 7
+Unknown destination for value 4 setting to 7
+Unknown destination for value 5 setting to 7
+Unknown destination for value 6 setting to 7
+Unknown destination for value 8 setting to 7
+OODGInducer::Splitting on attribute 3 (A4). There are 8 nodes (were 8)
+Unknown destination for value 3 setting to 4
+Unknown destination for value 3 setting to 4
+Unknown destination for value 2 setting to 4
+Unknown destination for value 3 setting to 4
+Unknown destination for value 2 setting to 4
+Unknown destination for value 3 setting to 4
+Unknown destination for value 2 setting to 4
+Unknown destination for value 3 setting to 4
+Unknown destination for value 2 setting to 4
+Unknown destination for value 3 setting to 4
+Unknown destination for value 2 setting to 4
+Unknown destination for value 3 setting to 4
+Unknown destination for value 2 setting to 4
+Unknown destination for value 3 setting to 4
+OODGInducer::Splitting on attribute 2 (A3). There are 4 nodes (were 4)
+OODGInducer::Splitting on attribute 1 (A2). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 0 (A1). There are 1 nodes (were 1)
+CoverInstanceHeuristic total summary:
+  Total number of unforced instance covers: 3004
+  Consistent choices: 1937, Included choices: 1464, Consistent & not incl: 473
+Inducer::train_and_test for inducer HOODG
+Number of training instances: 436
+Number of test instances: 188.  Unseen: 174,  seen 14.
+Number correct: 154.  Number incorrect: 34
+Generalization accuracy: 81.61%.  Memorization accuracy: 85.71%
+Accuracy: 81.91% +- 2.81% [75.79% - 86.76%]
+Discretization vector:*, 2, 2, *, *, *, *, 2, *, *, 2, *, *, 3, 2
+Discretization vector:*, *, *, *, *, *, *, *, *, *, *, *, *, *, *
+Removed duplicates/conflicting instances.  Num instances:436 down from 465
+OODGInducer::Splitting on attribute 11 (A12). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 9 (A10). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 7 (A8). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 4 (A5). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 9 (A14). There are 3 nodes (were 3)
+OODGInducer::Splitting on attribute 9 (A15). There are 5 nodes (were 5)
+OODGInducer::Splitting on attribute 6 (A9). There are 6 nodes (were 6)
+OODGInducer::Splitting on attribute 6 (A11). There are 13 nodes (were 13)
+Least commitment cover was useful
+OODGInducer::Splitting on attribute 6 (A13). There are 20 nodes (were 20)
+Unknown destination for value 1 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 1 setting to 0
+Least commitment cover was useful
+OODGInducer::Splitting on attribute 4 (A6). There are 20 nodes (were 20)
+Unknown destination for value 7 setting to 0
+Unknown destination for value 4 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 13 setting to 0
+Unknown destination for value 4 setting to 0
+Unknown destination for value 6 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 10 setting to 0
+Unknown destination for value 13 setting to 0
+Unknown destination for value 6 setting to 0
+Unknown destination for value 11 setting to 0
+Unknown destination for value 12 setting to 0
+Unknown destination for value 13 setting to 0
+Unknown destination for value 4 setting to 0
+Unknown destination for value 13 setting to 0
+Unknown destination for value 4 setting to 0
+Unknown destination for value 5 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 10 setting to 0
+Unknown destination for value 11 setting to 0
+Unknown destination for value 13 setting to 0
+Unknown destination for value 2 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 8 setting to 0
+Unknown destination for value 10 setting to 0
+Unknown destination for value 11 setting to 0
+Unknown destination for value 4 setting to 0
+Unknown destination for value 6 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 4 setting to 0
+Unknown destination for value 5 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 11 setting to 0
+Unknown destination for value 12 setting to 0
+Unknown destination for value 13 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 2 setting to 0
+Unknown destination for value 4 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 13 setting to 0
+Unknown destination for value 4 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 11 setting to 0
+Unknown destination for value 12 setting to 0
+Unknown destination for value 13 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 4 setting to 0
+Unknown destination for value 5 setting to 0
+Unknown destination for value 6 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 8 setting to 0
+Unknown destination for value 9 setting to 0
+Unknown destination for value 12 setting to 0
+Unknown destination for value 13 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 4 setting to 0
+Unknown destination for value 6 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 11 setting to 0
+Unknown destination for value 12 setting to 0
+Unknown destination for value 13 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 2 setting to 0
+Unknown destination for value 4 setting to 0
+Unknown destination for value 5 setting to 0
+Unknown destination for value 6 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 9 setting to 0
+Unknown destination for value 13 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 2 setting to 0
+Unknown destination for value 4 setting to 0
+Unknown destination for value 6 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 9 setting to 0
+Unknown destination for value 13 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 2 setting to 0
+Unknown destination for value 6 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 9 setting to 0
+Unknown destination for value 11 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 2 setting to 0
+Unknown destination for value 6 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 9 setting to 0
+Unknown destination for value 10 setting to 0
+Unknown destination for value 11 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 2 setting to 0
+Unknown destination for value 4 setting to 0
+Unknown destination for value 5 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 8 setting to 0
+Unknown destination for value 9 setting to 0
+Unknown destination for value 10 setting to 0
+Unknown destination for value 11 setting to 0
+Unknown destination for value 12 setting to 0
+Unknown destination for value 13 setting to 0
+Unknown destination for value 1 setting to 0
+Unknown destination for value 2 setting to 0
+Unknown destination for value 4 setting to 0
+Unknown destination for value 7 setting to 0
+Unknown destination for value 8 setting to 0
+Unknown destination for value 9 setting to 0
+Unknown destination for value 10 setting to 0
+Unknown destination for value 11 setting to 0
+Unknown destination for value 12 setting to 0
+Unknown destination for value 13 setting to 0
+OODGInducer::Splitting on attribute 4 (A7). There are 16 nodes (were 16)
+Unknown destination for value 3 setting to 7
+Unknown destination for value 5 setting to 7
+Unknown destination for value 8 setting to 7
+Unknown destination for value 3 setting to 7
+Unknown destination for value 5 setting to 7
+Unknown destination for value 8 setting to 7
+Unknown destination for value 4 setting to 7
+Unknown destination for value 5 setting to 7
+Unknown destination for value 8 setting to 7
+Unknown destination for value 4 setting to 7
+Unknown destination for value 5 setting to 7
+Unknown destination for value 6 setting to 7
+Unknown destination for value 4 setting to 7
+Unknown destination for value 5 setting to 7
+Unknown destination for value 6 setting to 7
+Unknown destination for value 8 setting to 7
+Unknown destination for value 3 setting to 7
+Unknown destination for value 4 setting to 7
+Unknown destination for value 5 setting to 7
+Unknown destination for value 8 setting to 7
+Unknown destination for value 3 setting to 7
+Unknown destination for value 4 setting to 7
+Unknown destination for value 6 setting to 7
+Unknown destination for value 8 setting to 7
+Unknown destination for value 3 setting to 7
+Unknown destination for value 4 setting to 7
+Unknown destination for value 6 setting to 7
+Unknown destination for value 8 setting to 7
+Unknown destination for value 3 setting to 7
+Unknown destination for value 4 setting to 7
+Unknown destination for value 5 setting to 7
+Unknown destination for value 6 setting to 7
+Unknown destination for value 8 setting to 7
+Unknown destination for value 3 setting to 7
+Unknown destination for value 4 setting to 7
+Unknown destination for value 5 setting to 7
+Unknown destination for value 6 setting to 7
+Unknown destination for value 3 setting to 7
+Unknown destination for value 4 setting to 7
+Unknown destination for value 5 setting to 7
+Unknown destination for value 6 setting to 7
+Unknown destination for value 8 setting to 7
+Unknown destination for value 2 setting to 7
+Unknown destination for value 3 setting to 7
+Unknown destination for value 4 setting to 7
+Unknown destination for value 5 setting to 7
+Unknown destination for value 6 setting to 7
+Unknown destination for value 8 setting to 7
+Unknown destination for value 2 setting to 7
+Unknown destination for value 3 setting to 7
+Unknown destination for value 4 setting to 7
+Unknown destination for value 5 setting to 7
+Unknown destination for value 6 setting to 7
+Unknown destination for value 8 setting to 7
+Unknown destination for value 2 setting to 7
+Unknown destination for value 4 setting to 7
+Unknown destination for value 5 setting to 7
+Unknown destination for value 6 setting to 7
+Unknown destination for value 7 setting to 7
+Unknown destination for value 8 setting to 7
+Unknown destination for value 0 setting to 7
+Unknown destination for value 2 setting to 7
+Unknown destination for value 3 setting to 7
+Unknown destination for value 4 setting to 7
+Unknown destination for value 5 setting to 7
+Unknown destination for value 6 setting to 7
+Unknown destination for value 8 setting to 7
+Unknown destination for value 0 setting to 7
+Unknown destination for value 2 setting to 7
+Unknown destination for value 3 setting to 7
+Unknown destination for value 4 setting to 7
+Unknown destination for value 5 setting to 7
+Unknown destination for value 6 setting to 7
+Unknown destination for value 8 setting to 7
+OODGInducer::Splitting on attribute 3 (A4). There are 8 nodes (were 8)
+Unknown destination for value 3 setting to 4
+Unknown destination for value 3 setting to 4
+Unknown destination for value 2 setting to 4
+Unknown destination for value 3 setting to 4
+Unknown destination for value 2 setting to 4
+Unknown destination for value 3 setting to 4
+Unknown destination for value 2 setting to 4
+Unknown destination for value 3 setting to 4
+Unknown destination for value 2 setting to 4
+Unknown destination for value 3 setting to 4
+Unknown destination for value 2 setting to 4
+Unknown destination for value 3 setting to 4
+Unknown destination for value 2 setting to 4
+Unknown destination for value 3 setting to 4
+OODGInducer::Splitting on attribute 2 (A3). There are 4 nodes (were 4)
+OODGInducer::Splitting on attribute 1 (A2). There are 2 nodes (were 2)
+OODGInducer::Splitting on attribute 0 (A1). There are 1 nodes (were 1)
+CoverInstanceHeuristic total summary:
+  Total number of unforced instance covers: 3004
+  Consistent choices: 1937, Included choices: 1464, Consistent & not incl: 473
+doing logging output check... 
+doing zero attribute check...
+Inducer::train_and_test for inducer const inducer
+Number of training instances: 465
+Number of test instances: 188.  Unseen: 188,  seen 0.
+Number correct: 104.  Number incorrect: 84
+Generalization accuracy: 55.32%.  Memorization accuracy: unknown
+Accuracy: 55.32% +- 3.64% [48.18% - 62.25%]
+Discretization vector:
+Discretization vector:
+Removed duplicates/conflicting instances.  Num instances:1 down from 465
+Inducer::train_and_test for inducer HOODG
+Number of training instances: 1
+Number of test instances: 188.  Unseen: 0,  seen 188.
+Number correct: 104.  Number incorrect: 84
+Generalization accuracy: unknown.  Memorization accuracy: 55.32%
+Accuracy: 55.32% +- 3.64% [48.18% - 62.25%]
+Test 8
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION EXPECTED_WARNINGS = 0
+Testing monk1-full
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+OPTION INDUCER = naive
+OPTION INDUCER_NAME = naive-bayes
+OPTION INDUCER = naive
+OPTION INDUCER_NAME = naive-bayes
+doing small large dataset test...
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+Reading breast.data..... done.
+Reading breast.test... done.
+Inducer::train_and_test for inducer naive-bayes
+OPTION DISP_CONFUSION_MAT = false
+OPTION DISP_MISCLASS = false
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 308.  Number incorrect: 124
+Generalization accuracy: 67.86%.  Memorization accuracy: 79.84%
+Accuracy: 71.30% +- 2.18% [66.86% - 75.36%]
+Inducer::train_and_test for inducer naive-bayes
+Number of training instances: 466
+Number of test instances: 233.  Unseen: 230,  seen 3.
+Number correct: 225.  Number incorrect: 8
+Generalization accuracy: 96.52%.  Memorization accuracy: 100.00%
+Accuracy: 96.57% +- 1.20% [93.37% - 98.25%]
+doing simple accuracy check... 
+Inducer::train_and_test for inducer naive-bayes
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 308.  Number incorrect: 124
+Generalization accuracy: 67.86%.  Memorization accuracy: 79.84%
+Accuracy: 71.30% +- 2.18% [66.86% - 75.36%]
+doing logging output check... 
+doing zero attribute check...
+Inducer::train_and_test for inducer const inducer
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 216.  Number incorrect: 216
+Generalization accuracy: 50.00%.  Memorization accuracy: 50.00%
+Accuracy: 50.00% +- 2.41% [45.31% - 54.69%]
+Inducer::train_and_test for inducer naive-bayes
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 0,  seen 432.
+Number correct: 216.  Number incorrect: 216
+Generalization accuracy: unknown.  Memorization accuracy: 50.00%
+Accuracy: 50.00% +- 2.41% [45.31% - 54.69%]
+Testing crx
+Reading crx.data..... done.
+Reading crx.test.. done.
+OPTION INDUCER = naive
+OPTION INDUCER_NAME = naive-bayes
+OPTION INDUCER = naive
+OPTION INDUCER_NAME = naive-bayes
+doing small large dataset test...
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+Reading breast.data..... done.
+Reading breast.test... done.
+Inducer::train_and_test for inducer naive-bayes
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 308.  Number incorrect: 124
+Generalization accuracy: 67.86%.  Memorization accuracy: 79.84%
+Accuracy: 71.30% +- 2.18% [66.86% - 75.36%]
+Inducer::train_and_test for inducer naive-bayes
+Number of training instances: 466
+Number of test instances: 233.  Unseen: 230,  seen 3.
+Number correct: 225.  Number incorrect: 8
+Generalization accuracy: 96.52%.  Memorization accuracy: 100.00%
+Accuracy: 96.57% +- 1.20% [93.37% - 98.25%]
+doing simple accuracy check... 
+Inducer::train_and_test for inducer naive-bayes
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 200,  seen 0.
+Number correct: 153.  Number incorrect: 47
+Generalization accuracy: 76.50%.  Memorization accuracy: unknown
+Accuracy: 76.50% +- 3.01% [70.16% - 81.84%]
+doing logging output check... 
+doing zero attribute check...
+Inducer::train_and_test for inducer const inducer
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 200,  seen 0.
+Number correct: 110.  Number incorrect: 90
+Generalization accuracy: 55.00%.  Memorization accuracy: unknown
+Accuracy: 55.00% +- 3.53% [48.08% - 61.74%]
+Inducer::train_and_test for inducer naive-bayes
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 0,  seen 200.
+Number correct: 110.  Number incorrect: 90
+Generalization accuracy: unknown.  Memorization accuracy: 55.00%
+Accuracy: 55.00% +- 3.53% [48.08% - 61.74%]
+Test 9
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION EXPECTED_WARNINGS = 0
+Testing monk1-full
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+OPTION INDUCER = table-majority
+OPTION INDUCER_NAME = table-majority
+OPTION INDUCER = table-majority
+OPTION INDUCER_NAME = table-majority
+doing small large dataset test...
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+Reading breast.data..... done.
+Reading breast.test... done.
+Inducer::train_and_test for inducer table-majority
+OPTION DISP_CONFUSION_MAT = false
+OPTION DISP_MISCLASS = false
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 278.  Number incorrect: 154
+Generalization accuracy: 50.00%.  Memorization accuracy: 100.00%
+Accuracy: 64.35% +- 2.31% [59.73% - 68.72%]
+Inducer::train_and_test for inducer table-majority
+Number of training instances: 466
+Number of test instances: 233.  Unseen: 230,  seen 3.
+Number correct: 164.  Number incorrect: 69
+Generalization accuracy: 70.00%.  Memorization accuracy: 100.00%
+Accuracy: 70.39% +- 3.00% [64.23% - 75.88%]
+doing simple accuracy check... 
+Inducer::train_and_test for inducer table-majority
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 278.  Number incorrect: 154
+Generalization accuracy: 50.00%.  Memorization accuracy: 100.00%
+Accuracy: 64.35% +- 2.31% [59.73% - 68.72%]
+doing logging output check... 
+doing zero attribute check...
+Inducer::train_and_test for inducer const inducer
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 216.  Number incorrect: 216
+Generalization accuracy: 50.00%.  Memorization accuracy: 50.00%
+Accuracy: 50.00% +- 2.41% [45.31% - 54.69%]
+Inducer::train_and_test for inducer table-majority
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 0,  seen 432.
+Number correct: 216.  Number incorrect: 216
+Generalization accuracy: unknown.  Memorization accuracy: 50.00%
+Accuracy: 50.00% +- 2.41% [45.31% - 54.69%]
+Testing crx
+Reading crx.data..... done.
+Reading crx.test.. done.
+OPTION INDUCER = table-majority
+OPTION INDUCER_NAME = table-majority
+OPTION INDUCER = table-majority
+OPTION INDUCER_NAME = table-majority
+doing small large dataset test...
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+Reading breast.data..... done.
+Reading breast.test... done.
+Inducer::train_and_test for inducer table-majority
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 278.  Number incorrect: 154
+Generalization accuracy: 50.00%.  Memorization accuracy: 100.00%
+Accuracy: 64.35% +- 2.31% [59.73% - 68.72%]
+Inducer::train_and_test for inducer table-majority
+Number of training instances: 466
+Number of test instances: 233.  Unseen: 230,  seen 3.
+Number correct: 164.  Number incorrect: 69
+Generalization accuracy: 70.00%.  Memorization accuracy: 100.00%
+Accuracy: 70.39% +- 3.00% [64.23% - 75.88%]
+doing simple accuracy check... 
+Inducer::train_and_test for inducer table-majority
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 200,  seen 0.
+Number correct: 110.  Number incorrect: 90
+Generalization accuracy: 55.00%.  Memorization accuracy: unknown
+Accuracy: 55.00% +- 3.53% [48.08% - 61.74%]
+doing logging output check... 
+doing zero attribute check...
+Inducer::train_and_test for inducer const inducer
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 200,  seen 0.
+Number correct: 110.  Number incorrect: 90
+Generalization accuracy: 55.00%.  Memorization accuracy: unknown
+Accuracy: 55.00% +- 3.53% [48.08% - 61.74%]
+Inducer::train_and_test for inducer table-majority
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 0,  seen 200.
+Number correct: 110.  Number incorrect: 90
+Generalization accuracy: unknown.  Memorization accuracy: 55.00%
+Accuracy: 55.00% +- 3.53% [48.08% - 61.74%]
+Test 10
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION EXPECTED_WARNINGS = 0
+Testing monk1-full
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+OPTION INDUCER = table-no-majority
+OPTION INDUCER_NAME = table-no-majority
+OPTION INDUCER = table-no-majority
+OPTION INDUCER_NAME = table-no-majority
+doing small large dataset test...
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+Reading breast.data..... done.
+Reading breast.test... done.
+Inducer::train_and_test for inducer table-no-majority
+OPTION DISP_CONFUSION_MAT = false
+OPTION DISP_MISCLASS = false
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 124.  Number incorrect: 308
+Generalization accuracy: 0.00%.  Memorization accuracy: 100.00%
+Accuracy: 28.70% +- 2.18% [24.64% - 33.14%]
+Inducer::train_and_test for inducer table-no-majority
+Number of training instances: 466
+Number of test instances: 233.  Unseen: 230,  seen 3.
+Number correct: 3.  Number incorrect: 230
+Generalization accuracy: 0.00%.  Memorization accuracy: 100.00%
+Accuracy: 1.29% +- 0.74% [0.44% - 3.72%]
+doing simple accuracy check... 
+Inducer::train_and_test for inducer table-no-majority
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 124.  Number incorrect: 308
+Generalization accuracy: 0.00%.  Memorization accuracy: 100.00%
+Accuracy: 28.70% +- 2.18% [24.64% - 33.14%]
+doing logging output check... 
+doing zero attribute check...
+Inducer::train_and_test for inducer const inducer
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 216.  Number incorrect: 216
+Generalization accuracy: 50.00%.  Memorization accuracy: 50.00%
+Accuracy: 50.00% +- 2.41% [45.31% - 54.69%]
+Inducer::train_and_test for inducer table-no-majority
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 0,  seen 432.
+Number correct: 216.  Number incorrect: 216
+Generalization accuracy: unknown.  Memorization accuracy: 50.00%
+Accuracy: 50.00% +- 2.41% [45.31% - 54.69%]
+Testing crx
+Reading crx.data..... done.
+Reading crx.test.. done.
+OPTION INDUCER = table-no-majority
+OPTION INDUCER_NAME = table-no-majority
+OPTION INDUCER = table-no-majority
+OPTION INDUCER_NAME = table-no-majority
+doing small large dataset test...
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+Reading breast.data..... done.
+Reading breast.test... done.
+Inducer::train_and_test for inducer table-no-majority
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 124.  Number incorrect: 308
+Generalization accuracy: 0.00%.  Memorization accuracy: 100.00%
+Accuracy: 28.70% +- 2.18% [24.64% - 33.14%]
+Inducer::train_and_test for inducer table-no-majority
+Number of training instances: 466
+Number of test instances: 233.  Unseen: 230,  seen 3.
+Number correct: 3.  Number incorrect: 230
+Generalization accuracy: 0.00%.  Memorization accuracy: 100.00%
+Accuracy: 1.29% +- 0.74% [0.44% - 3.72%]
+doing simple accuracy check... 
+Inducer::train_and_test for inducer table-no-majority
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 200,  seen 0.
+Number correct: 0.  Number incorrect: 200
+Generalization accuracy: 0.00%.  Memorization accuracy: unknown
+Accuracy: 0.00% +- 0.00% [0.00% - 1.88%]
+doing logging output check... 
+doing zero attribute check...
+Inducer::train_and_test for inducer const inducer
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 200,  seen 0.
+Number correct: 110.  Number incorrect: 90
+Generalization accuracy: 55.00%.  Memorization accuracy: unknown
+Accuracy: 55.00% +- 3.53% [48.08% - 61.74%]
+Inducer::train_and_test for inducer table-no-majority
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 0,  seen 200.
+Number correct: 110.  Number incorrect: 90
+Generalization accuracy: unknown.  Memorization accuracy: 55.00%
+Accuracy: 55.00% +- 3.53% [48.08% - 61.74%]
+Test 11
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION EXPECTED_WARNINGS = 0
+Testing monk1-full
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+OPTION INDUCER = aha
+OPTION INDUCER_NAME = aha-ib
+OPTION IBL_PGM_NAME = ibl
+OPTION IBL_FLAGS =  
+OPTION IBL_SEED = 7258789
+OPTION IB_CLASS = ib1
+OPTION STORE_ALL = true
+OPTION INDUCER = aha
+OPTION INDUCER_NAME = aha-ib
+OPTION IBL_PGM_NAME = ibl
+OPTION IBL_FLAGS =  
+OPTION IBL_SEED = 7258789
+OPTION IB_CLASS = ib1
+OPTION STORE_ALL = true
+doing small large dataset test...
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+Reading breast.data..... done.
+Reading breast.test... done.
+doing simple accuracy check... 
+doing logging output check... 
+doing zero attribute check...
+Inducer::train_and_test for inducer const inducer
+OPTION DISP_CONFUSION_MAT = false
+OPTION DISP_MISCLASS = false
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 216.  Number incorrect: 216
+Generalization accuracy: 50.00%.  Memorization accuracy: 50.00%
+Accuracy: 50.00% +- 2.41% [45.31% - 54.69%]
+Testing crx
+Reading crx.data..... done.
+Reading crx.test.. done.
+OPTION INDUCER = aha
+OPTION INDUCER_NAME = aha-ib
+OPTION IBL_PGM_NAME = ibl
+OPTION IBL_FLAGS =  
+OPTION IBL_SEED = 7258789
+OPTION IB_CLASS = ib1
+OPTION STORE_ALL = true
+OPTION INDUCER = aha
+OPTION INDUCER_NAME = aha-ib
+OPTION IBL_PGM_NAME = ibl
+OPTION IBL_FLAGS =  
+OPTION IBL_SEED = 7258789
+OPTION IB_CLASS = ib1
+OPTION STORE_ALL = true
+doing small large dataset test...
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+Reading breast.data..... done.
+Reading breast.test... done.
+doing simple accuracy check... 
+doing logging output check... 
+doing zero attribute check...
+Inducer::train_and_test for inducer const inducer
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 200,  seen 0.
+Number correct: 110.  Number incorrect: 90
+Generalization accuracy: 55.00%.  Memorization accuracy: unknown
+Accuracy: 55.00% +- 3.53% [48.08% - 61.74%]
+Test 12
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION EXPECTED_WARNINGS = 0
+Testing monk1-full
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+OPTION INDUCER = c4.5-auto-parm
+OPTION INDUCER_NAME = C4.5-auto-parm
+OPTION AP_DOT_FILE = AP.dot
+OPTION AP_SEARCH_METHOD = best-first
+OPTION AP_EVAL_LIMIT = 0
+OPTION AP_SHOW_REAL_ACC = best-only
+OPTION AP_MAX_STALE = 2
+OPTION AP_EPSILON = 0.001
+OPTION AP_USE_COMPOUND = true
+OPTION AP_CMPLX_PENALTY = 0
+OPTION AP_ACC_ESTIMATOR = strat-cv
+OPTION AP_ACC_EST_SEED = 7258789
+OPTION AP_ACC_TRIM = 0
+OPTION AP_CV_FOLDS = 5
+OPTION AP_CV_TIMES = 1
+OPTION AP_CV_FRACT = 1
+Method: strat-cv
+Trim: 0
+Seed: 7258789
+Folds: 5,  Times: 1
+OPTION AP_VARY_M = true
+OPTION AP_VARY_C = true
+OPTION AP_VARY_G = true
+OPTION AP_VARY_S = true
+OPTION INDUCER = c4.5-auto-parm
+OPTION INDUCER_NAME = C4.5-auto-parm
+OPTION AP_DOT_FILE = AP.dot
+OPTION AP_SEARCH_METHOD = best-first
+OPTION AP_EVAL_LIMIT = 0
+OPTION AP_SHOW_REAL_ACC = best-only
+OPTION AP_MAX_STALE = 2
+OPTION AP_EPSILON = 0.001
+OPTION AP_USE_COMPOUND = true
+OPTION AP_CMPLX_PENALTY = 0
+OPTION AP_ACC_ESTIMATOR = strat-cv
+OPTION AP_ACC_EST_SEED = 7258789
+OPTION AP_ACC_TRIM = 0
+OPTION AP_CV_FOLDS = 5
+OPTION AP_CV_TIMES = 1
+OPTION AP_CV_FRACT = 1
+Method: strat-cv
+Trim: 0
+Seed: 7258789
+Folds: 5,  Times: 1
+OPTION AP_VARY_M = true
+OPTION AP_VARY_C = true
+OPTION AP_VARY_G = true
+OPTION AP_VARY_S = true
+doing small large dataset test...
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+Reading breast.data..... done.
+Reading breast.test... done.
+OPTION C45_RETRIES = 0
+OPTION C45_STATS = false
+new best node (1 evals) #0 [-m2 -c25]: accuracy: 75.83% +- 6.04% (52.00% - 84.00%).
+Test Set: 75.69% +- 2.07% [71.43% - 79.50%].  Bias: 0.14% cost: 5 complexity: 0
+new best node (8 evals) #6 [-m2 -c25 -s]: accuracy: 87.10% +- 4.63% (72.00% - 100.00%).
+Test Set: 100.00% +- 0.00% [99.12% - 100.00%].  Bias: -12.90% cost: 5 complexity: 0
+final best node #9 [-m1 -c25 -s]: accuracy: 100.00% +- 0.00% (100.00% - 100.00%).
+Test Set: 100.00% +- 0.00% [99.12% - 100.00%].  Bias: 0.00% cost: 5 complexity: 0
+expanded 2 nodes
+new best node (1 evals) #0 [-m2 -c25]: accuracy: 94.85% +- 1.04% (92.47% - 97.85%).
+Test Set: 93.99% +- 1.56% [90.17% - 96.39%].  Bias: 0.86% cost: 5 complexity: 0
+new best node (10 evals) #3 [-m2 -c30]: accuracy: 95.28% +- 0.87% (93.55% - 97.85%).
+Test Set: 93.99% +- 1.56% [90.17% - 96.39%].  Bias: 1.29% cost: 5 complexity: 0
+final best node #3 [-m2 -c30]: accuracy: 95.28% +- 0.87% (93.55% - 97.85%).
+Test Set: 93.99% +- 1.56% [90.17% - 96.39%].  Bias: 1.29% cost: 5 complexity: 0
+expanded 4 nodes
+doing simple accuracy check... 
+doing logging output check... 
+doing zero attribute check...
+Inducer::train_and_test for inducer const inducer
+OPTION DISP_CONFUSION_MAT = false
+OPTION DISP_MISCLASS = false
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 216.  Number incorrect: 216
+Generalization accuracy: 50.00%.  Memorization accuracy: 50.00%
+Accuracy: 50.00% +- 2.41% [45.31% - 54.69%]
+new best node (1 evals) #0 [-m2 -c25]: accuracy: 47.57% +- 0.43% (45.83% - 48.00%).
+Test Set: 50.00% +- 2.41% [45.31% - 54.69%].  Bias: -2.43% cost: 5 complexity: 0
+final best node #0 [-m2 -c25]: accuracy: 47.57% +- 0.43% (45.83% - 48.00%).
+Test Set: 50.00% +- 2.41% [45.31% - 54.69%].  Bias: -2.43% cost: 5 complexity: 0
+expanded 3 nodes
+Testing crx
+Reading crx.data..... done.
+Reading crx.test.. done.
+OPTION INDUCER = c4.5-auto-parm
+OPTION INDUCER_NAME = C4.5-auto-parm
+OPTION AP_DOT_FILE = AP.dot
+OPTION AP_SEARCH_METHOD = best-first
+OPTION AP_EVAL_LIMIT = 0
+OPTION AP_SHOW_REAL_ACC = best-only
+OPTION AP_MAX_STALE = 2
+OPTION AP_EPSILON = 0.001
+OPTION AP_USE_COMPOUND = true
+OPTION AP_CMPLX_PENALTY = 0
+OPTION AP_ACC_ESTIMATOR = strat-cv
+OPTION AP_ACC_EST_SEED = 7258789
+OPTION AP_ACC_TRIM = 0
+OPTION AP_CV_FOLDS = 5
+OPTION AP_CV_TIMES = 1
+OPTION AP_CV_FRACT = 1
+Method: strat-cv
+Trim: 0
+Seed: 7258789
+Folds: 5,  Times: 1
+OPTION AP_VARY_M = true
+OPTION AP_VARY_C = true
+OPTION AP_VARY_G = true
+OPTION AP_VARY_S = true
+OPTION INDUCER = c4.5-auto-parm
+OPTION INDUCER_NAME = C4.5-auto-parm
+OPTION AP_DOT_FILE = AP.dot
+OPTION AP_SEARCH_METHOD = best-first
+OPTION AP_EVAL_LIMIT = 0
+OPTION AP_SHOW_REAL_ACC = best-only
+OPTION AP_MAX_STALE = 2
+OPTION AP_EPSILON = 0.001
+OPTION AP_USE_COMPOUND = true
+OPTION AP_CMPLX_PENALTY = 0
+OPTION AP_ACC_ESTIMATOR = strat-cv
+OPTION AP_ACC_EST_SEED = 7258789
+OPTION AP_ACC_TRIM = 0
+OPTION AP_CV_FOLDS = 5
+OPTION AP_CV_TIMES = 1
+OPTION AP_CV_FRACT = 1
+Method: strat-cv
+Trim: 0
+Seed: 7258789
+Folds: 5,  Times: 1
+OPTION AP_VARY_M = true
+OPTION AP_VARY_C = true
+OPTION AP_VARY_G = true
+OPTION AP_VARY_S = true
+doing small large dataset test...
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+Reading breast.data..... done.
+Reading breast.test... done.
+new best node (1 evals) #0 [-m2 -c25]: accuracy: 75.83% +- 6.04% (52.00% - 84.00%).
+Test Set: 75.69% +- 2.07% [71.43% - 79.50%].  Bias: 0.14% cost: 5 complexity: 0
+new best node (8 evals) #6 [-m2 -c25 -s]: accuracy: 87.10% +- 4.63% (72.00% - 100.00%).
+Test Set: 100.00% +- 0.00% [99.12% - 100.00%].  Bias: -12.90% cost: 5 complexity: 0
+final best node #9 [-m1 -c25 -s]: accuracy: 100.00% +- 0.00% (100.00% - 100.00%).
+Test Set: 100.00% +- 0.00% [99.12% - 100.00%].  Bias: 0.00% cost: 5 complexity: 0
+expanded 2 nodes
+new best node (1 evals) #0 [-m2 -c25]: accuracy: 94.85% +- 1.04% (92.47% - 97.85%).
+Test Set: 93.99% +- 1.56% [90.17% - 96.39%].  Bias: 0.86% cost: 5 complexity: 0
+new best node (10 evals) #3 [-m2 -c30]: accuracy: 95.28% +- 0.87% (93.55% - 97.85%).
+Test Set: 93.99% +- 1.56% [90.17% - 96.39%].  Bias: 1.29% cost: 5 complexity: 0
+final best node #3 [-m2 -c30]: accuracy: 95.28% +- 0.87% (93.55% - 97.85%).
+Test Set: 93.99% +- 1.56% [90.17% - 96.39%].  Bias: 1.29% cost: 5 complexity: 0
+expanded 4 nodes
+doing simple accuracy check... 
+doing logging output check... 
+doing zero attribute check...
+Inducer::train_and_test for inducer const inducer
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 200,  seen 0.
+Number correct: 110.  Number incorrect: 90
+Generalization accuracy: 55.00%.  Memorization accuracy: unknown
+Accuracy: 55.00% +- 3.53% [48.08% - 61.74%]
+new best node (1 evals) #0 [-m2 -c25]: accuracy: 55.71% +- 0.25% (55.10% - 56.12%).
+Test Set: 55.00% +- 3.53% [48.08% - 61.74%].  Bias: 0.71% cost: 5 complexity: 0
+final best node #0 [-m2 -c25]: accuracy: 55.71% +- 0.25% (55.10% - 56.12%).
+Test Set: 55.00% +- 3.53% [48.08% - 61.74%].  Bias: 0.71% cost: 5 complexity: 0
+expanded 3 nodes
+Average nodes for all C4.5 trees:12.234.
+Test 13
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION EXPECTED_WARNINGS = 0
+Testing monk1-full
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+OPTION INDUCER = c4.5-no-pruning
+OPTION INDUCER_NAME = c4.5-no-pruning
+OPTION C45_FLAGS = -u -f %s 
+OPTION INDUCER = c4.5-no-pruning
+OPTION INDUCER_NAME = c4.5-no-pruning
+OPTION C45_FLAGS = -u -f %s 
+doing small large dataset test...
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+Reading breast.data..... done.
+Reading breast.test... done.
+OPTION C45_RETRIES = 0
+OPTION C45_STATS = false
+doing simple accuracy check... 
+doing logging output check... 
+doing zero attribute check...
+Inducer::train_and_test for inducer const inducer
+OPTION DISP_CONFUSION_MAT = false
+OPTION DISP_MISCLASS = false
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 216.  Number incorrect: 216
+Generalization accuracy: 50.00%.  Memorization accuracy: 50.00%
+Accuracy: 50.00% +- 2.41% [45.31% - 54.69%]
+Testing crx
+Reading crx.data..... done.
+Reading crx.test.. done.
+OPTION INDUCER = c4.5-no-pruning
+OPTION INDUCER_NAME = c4.5-no-pruning
+OPTION C45_FLAGS = -u -f %s 
+OPTION INDUCER = c4.5-no-pruning
+OPTION INDUCER_NAME = c4.5-no-pruning
+OPTION C45_FLAGS = -u -f %s 
+doing small large dataset test...
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+Reading breast.data..... done.
+Reading breast.test... done.
+doing simple accuracy check... 
+doing logging output check... 
+doing zero attribute check...
+Inducer::train_and_test for inducer const inducer
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 200,  seen 0.
+Number correct: 110.  Number incorrect: 90
+Generalization accuracy: 55.00%.  Memorization accuracy: unknown
+Accuracy: 55.00% +- 3.53% [48.08% - 61.74%]
+Average nodes for all C4.5 trees:14.
+Test 14
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION EXPECTED_WARNINGS = 0
+Testing monk1-full
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+OPTION INDUCER = c4.5-no-pruning
+OPTION INDUCER_NAME = c4.5-no-pruning
+OPTION C45_FLAGS = -u -f %s 
+OPTION INDUCER = c4.5-no-pruning
+OPTION INDUCER_NAME = c4.5-no-pruning
+OPTION C45_FLAGS = -u -f %s 
+doing small large dataset test...
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+Reading breast.data..... done.
+Reading breast.test... done.
+OPTION C45_RETRIES = 0
+OPTION C45_STATS = false
+doing simple accuracy check... 
+doing logging output check... 
+doing zero attribute check...
+Inducer::train_and_test for inducer const inducer
+OPTION DISP_CONFUSION_MAT = false
+OPTION DISP_MISCLASS = false
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 216.  Number incorrect: 216
+Generalization accuracy: 50.00%.  Memorization accuracy: 50.00%
+Accuracy: 50.00% +- 2.41% [45.31% - 54.69%]
+Testing crx
+Reading crx.data..... done.
+Reading crx.test.. done.
+OPTION INDUCER = c4.5-no-pruning
+OPTION INDUCER_NAME = c4.5-no-pruning
+OPTION C45_FLAGS = -u -f %s 
+OPTION INDUCER = c4.5-no-pruning
+OPTION INDUCER_NAME = c4.5-no-pruning
+OPTION C45_FLAGS = -u -f %s 
+doing small large dataset test...
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+Reading breast.data..... done.
+Reading breast.test... done.
+doing simple accuracy check... 
+doing logging output check... 
+doing zero attribute check...
+Inducer::train_and_test for inducer const inducer
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 200,  seen 0.
+Number correct: 110.  Number incorrect: 90
+Generalization accuracy: 55.00%.  Memorization accuracy: unknown
+Accuracy: 55.00% +- 3.53% [48.08% - 61.74%]
+Average nodes for all C4.5 trees:14.

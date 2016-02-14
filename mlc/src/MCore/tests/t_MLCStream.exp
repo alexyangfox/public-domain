@@ -1,0 +1,85 @@
+t_MLCStream executing ...
+Testing linecounting and line position accuracy ... 
+<NL>1
+<WP>2
+<WP>3
+<WP>4
+<WP>5
+<WP>
+Testing embedded newlines ... 
+<NLP>Char
+<WP>with a
+<WP>
+<WP>newline
+<NLP>
+<WP> there
+<WP>and 
+<NLP>
+<WP> there
+<WP>...
+Check .. 
+Please type in 'test1': 
+Please type in 'test2': 
+Please type in 'test3': 
+Should go to cerr (1)
+Should go to cerr (2)
+Testing stream manipulators and input...
+foo-str
+foo
+5.12346
+5.12
+7.777777777
+11 Passed.
+Testing binary IO ... 
+Check...
+test four point five 4.5 three 3
+
+foo
+C4.5 run yields accuracy 0.97 (pruned), 0.95 (unpruned)
+     size 10 (pruned), 15 (unpruned)
+Testing Line Position 
+ABCDE
+Check ...
+x
+x
+xfoo
+x
+xfoo
+ybar
+z3
+z
+z
+<WP><0000000000>
+z
+<WP><0000000000>foo
+zThis is a 
+<WP>real 
+<WP>wrapping
+<WP>test to
+<WP>see how
+<WP>this 
+<WP>works 
+<WP>...
+Reset MLC++ stream options to defaults ...
+DATAFILE=foo
+NAMESFILE=bar
+t_MLCStream.c:: test_nl: test
+t_MLCStream.c:: test_nl: 
+t_MLCStream.c:: test_nl: 
+t_MLCStream.c:: test_nl: test
+MLCOstream::output_format_stream: buffer overflow on standard output (cout).
+Continuing but some output was  probably lost. Increase MLCOStream::MAX_BUFFER_SIZE.
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+Check...
+String-on-line: 1position: 15
+Check...
+Testing string stream ...
+Check...
+testing testing testing testing testing testing testing testing string? testing testing testing testing testing testing testing testing 
+1.2000, 1.5555
+1.2550, 1.5555
+0.0000, 1.5555
+1.0000, 0.0000
+Testing complete...
+Testing complete...

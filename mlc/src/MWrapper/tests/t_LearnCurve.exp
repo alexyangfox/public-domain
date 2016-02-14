@@ -1,0 +1,73 @@
+t_LearnCurve executing
+Train Size: 2; trained 5 times.
+	Accuracy on training 0: 0.136364
+	Accuracy on training 1: 0.272727
+	Accuracy on training 2: 0.5
+	Accuracy on training 3: 0.590909
+	Accuracy on training 4: 0.590909
+Average accuracy: 0.418182
+
+Train Size: 4; trained 5 times.
+	Accuracy on training 0: 0.65
+	Accuracy on training 1: 0.35
+	Accuracy on training 2: 0.45
+	Accuracy on training 3: 0.4
+	Accuracy on training 4: 0.45
+Average accuracy: 0.46
+
+Train Size: 7; trained 5 times.
+	Accuracy on training 0: 0.529412
+	Accuracy on training 1: 0.764706
+	Accuracy on training 2: 0.294118
+	Accuracy on training 3: 0.352941
+	Accuracy on training 4: 0.529412
+Average accuracy: 0.494118
+
+Train Size: 9; trained 5 times.
+	Accuracy on training 0: 0.866667
+	Accuracy on training 1: 0.533333
+	Accuracy on training 2: 0.8
+	Accuracy on training 3: 0.666667
+	Accuracy on training 4: 0.8
+Average accuracy: 0.733333
+
+Train Size: 12; trained 5 times.
+	Accuracy on training 0: 0.583333
+	Accuracy on training 1: 0.333333
+	Accuracy on training 2: 0.5
+	Accuracy on training 3: 0.833333
+	Accuracy on training 4: 0.833333
+Average accuracy: 0.616667
+
+Train Size: 14; trained 5 times.
+	Accuracy on training 0: 0.7
+	Accuracy on training 1: 0.7
+	Accuracy on training 2: 0.9
+	Accuracy on training 3: 0.7
+	Accuracy on training 4: 0.9
+Average accuracy: 0.78
+
+Train Size: 16; trained 5 times.
+	Accuracy on training 0: 0.25
+	Accuracy on training 1: 0.875
+	Accuracy on training 2: 0.875
+	Accuracy on training 3: 0.625
+	Accuracy on training 4: 0.625
+Average accuracy: 0.65
+
+Train Size: 19; trained 5 times.
+	Accuracy on training 0: 1
+	Accuracy on training 1: 0.6
+	Accuracy on training 2: 0.8
+	Accuracy on training 3: 0.8
+	Accuracy on training 4: 0.6
+Average accuracy: 0.76
+
+Train Size: 21; trained 5 times.
+	Accuracy on training 0: 1
+	Accuracy on training 1: 0.666667
+	Accuracy on training 2: 0.666667
+	Accuracy on training 3: 1
+	Accuracy on training 4: 0.666667
+Average accuracy: 0.8
+

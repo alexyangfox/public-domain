@@ -1,0 +1,253 @@
+** Testing NaiveBayesCat
+**** Testing Contiguous DataFile t_NaiveBayesCat_Con
+NaiveBayes Inducer test nb categorizer
+ Continuous Attribute # 1, Label -1: Mean = 0, Variation = 1
+ Continuous Attribute # 1, Label 0: Mean = 73, Variation = 38
+ Continuous Attribute # 1, Label 1: Mean = 74.6, Variation = 62.3
+ Continuous Attribute # 1, Label 2: Mean = 33, Variation = 1
+ Continuous Attribute # 1, Label 3: Mean = 22, Variation = 0.01
+ Continuous Attribute # 2, Label -1: Mean = 0, Variation = 1
+ Continuous Attribute # 2, Label 0: Mean = 78.2222, Variation = 97.6944
+ Continuous Attribute # 2, Label 1: Mean = 84, Variation = 92.5
+ Continuous Attribute # 2, Label 2: Mean = 43, Variation = 1
+ Continuous Attribute # 2, Label 3: Mean = 5, Variation = 0.01
+** Constructors and destructor OK
+ Continuous Attribute # 1, Label -1: Mean = 0, Variation = 1
+ Continuous Attribute # 1, Label 0: Mean = 73, Variation = 38
+ Continuous Attribute # 1, Label 1: Mean = 74.6, Variation = 62.3
+ Continuous Attribute # 1, Label 2: Mean = 33, Variation = 1
+ Continuous Attribute # 1, Label 3: Mean = 22, Variation = 0.01
+ Continuous Attribute # 2, Label -1: Mean = 0, Variation = 1
+ Continuous Attribute # 2, Label 0: Mean = 78.2222, Variation = 97.6944
+ Continuous Attribute # 2, Label 1: Mean = 84, Variation = 92.5
+ Continuous Attribute # 2, Label 2: Mean = 43, Variation = 1
+ Continuous Attribute # 2, Label 3: Mean = 5, Variation = 0.01
+NaiveBayes Inducer test nb categorizer
+Current Categorizer 
+Simple NaiveBayes Cat test nb categorizer categorizing using prevalence data in bag: 
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=9
+  Value counts:  0, 2, 4, 3, 0, 
+
+  Label 1, label count=5
+  Value counts:  0, 3, 0, 2, 0, 
+
+  Label 2, label count=1
+  Value counts:  0, 0, 0, 0, 1, 
+
+  Label 3, label count=2
+  Value counts:  0, 1, 1, 0, 0, 
+Attribute 1:  is not nominal.
+Attribute 2:  is not nominal.
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=9
+  Value counts:  0, 3, 6, 0, 
+
+  Label 1, label count=5
+  Value counts:  0, 3, 2, 0, 
+
+  Label 2, label count=1
+  Value counts:  0, 0, 1, 0, 
+
+  Label 3, label count=2
+  Value counts:  0, 1, 1, 0, 
+Attribute counts
+Attribute 0  0, 6, 5, 5, 1, 
+Attribute 1  NULL
+Attribute 2  NULL
+Attribute 3  0, 7, 10, 0, 
+
+Categorizing uses Normal Density to estimate probability of continuous attributes.  The mean, variance, and standard deviation of each attribute,label combination is: 
+Attribute 0: Nominal Attribute.
+Attribute 1:
+  Label 0		73	38
+  Label 1		74.6	62.3
+  Label 2		33	1
+  Label 3		22	0.01
+Attribute 2:
+  Label 0		78.2222	97.6944
+  Label 1		84	92.5
+  Label 2		43	1
+  Label 3		5	0.01
+Attribute 3: Nominal Attribute.
+
+test2_categorizing
+Instance to categorize: overcast, 64, 65, true, 
+Best category: Play (0) (Occurs 9 times in training set)
+
+Instance to categorize: sunny, 65, 85, false, 
+Best category: Don't Play (1) (Occurs 5 times in training set)
+
+Instance to categorize: rain, 65, 70, true, 
+Best category: Play (0) (Occurs 9 times in training set)
+
+Instance to categorize: blizard, 232, 101, ?, 
+Best category: Don't Play (1) (Occurs 5 times in training set)
+
+Number of training instances: 17
+Number of test instances: 4.  Unseen: 2,  seen 2.
+Number correct: 4.  Number incorrect: 0
+Generalization accuracy: 100.00%.  Memorization accuracy: 100.00%
+Accuracy: 100.00% +- 0.00% [51.01% - 100.00%]
+
+** Categorizing OK
+** Modifying training set OK
+** operators OK
+Simple NaiveBayes Cat test nb categorizer categorizing using prevalence data in bag: 
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=9
+  Value counts:  0, 2, 4, 3, 0, 
+
+  Label 1, label count=5
+  Value counts:  0, 3, 0, 2, 0, 
+
+  Label 2, label count=1
+  Value counts:  0, 0, 0, 0, 1, 
+
+  Label 3, label count=2
+  Value counts:  0, 1, 1, 0, 0, 
+Attribute 1:  is not nominal.
+Attribute 2:  is not nominal.
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=9
+  Value counts:  0, 3, 6, 0, 
+
+  Label 1, label count=5
+  Value counts:  0, 3, 2, 0, 
+
+  Label 2, label count=1
+  Value counts:  0, 0, 1, 0, 
+
+  Label 3, label count=2
+  Value counts:  0, 1, 1, 0, 
+Attribute counts
+Attribute 0  0, 6, 5, 5, 1, 
+Attribute 1  NULL
+Attribute 2  NULL
+Attribute 3  0, 7, 10, 0, 
+
+Categorizing uses Normal Density to estimate probability of continuous attributes.  The mean, variance, and standard deviation of each attribute,label combination is: 
+Attribute 0: Nominal Attribute.
+Attribute 1:
+  Label 0		73	38
+  Label 1		74.6	62.3
+  Label 2		33	1
+  Label 3		22	0.01
+Attribute 2:
+  Label 0		78.2222	97.6944
+  Label 1		84	92.5
+  Label 2		43	1
+  Label 3		5	0.01
+Attribute 3: Nominal Attribute.
+Number of training instances = 17
+** Display OK
+
+**** Testing Nominal Only DataFile t_NaiveBayesCat
+** Constructors and destructor OK
+test2_categorizing
+Instance to categorize: overcast, 64, 65, true, 
+Best category: Play (1) (Occurs 9 times in training set)
+
+Instance to categorize: sunny, 65, 85, false, 
+Best category: Don't Play (0) (Occurs 5 times in training set)
+
+Instance to categorize: rain, 65, 70, true, 
+Best category: Don't Play (0) (Occurs 5 times in training set)
+
+Instance to categorize: blizard, 232, 101, ?, 
+Best category: Play (1) (Occurs 9 times in training set)
+
+Number of training instances: 14
+Number of test instances: 4.  Unseen: 2,  seen 2.
+Number correct: 4.  Number incorrect: 0
+Generalization accuracy: 100.00%.  Memorization accuracy: 100.00%
+Accuracy: 100.00% +- 0.00% [51.01% - 100.00%]
+
+** Categorizing OK
+** Modifying training set OK
+** operators OK
+Simple NaiveBayes Cat test nb categorizer categorizing using prevalence data in bag: 
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 0, label count=5
+  Value counts:  0, 3, 0, 2, 0, 
+
+  Label 1, label count=9
+  Value counts:  0, 2, 4, 3, 0, 
+
+  Label 2, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+
+  Label 3, label count=0
+  Value counts:  0, 0, 0, 0, 0, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+
+  Label 0, label count=5
+  Value counts:  0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 
+
+  Label 1, label count=9
+  Value counts:  0, 1, 0, 1, 1, 1, 0, 1, 2, 0, 1, 1, 0, 0, 
+
+  Label 2, label count=0
+  Value counts:  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+
+  Label 3, label count=0
+  Value counts:  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+
+  Label 0, label count=5
+  Value counts:  0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 
+
+  Label 1, label count=9
+  Value counts:  0, 1, 2, 1, 1, 2, 0, 1, 0, 1, 0, 
+
+  Label 2, label count=0
+  Value counts:  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+
+  Label 3, label count=0
+  Value counts:  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=5
+  Value counts:  0, 3, 2, 0, 
+
+  Label 1, label count=9
+  Value counts:  0, 3, 6, 0, 
+
+  Label 2, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 3, label count=0
+  Value counts:  0, 0, 0, 0, 
+Attribute counts
+Attribute 0  0, 5, 4, 5, 0, 
+Attribute 1  0, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 0, 
+Attribute 2  0, 1, 3, 1, 1, 3, 1, 2, 1, 1, 0, 
+Attribute 3  0, 6, 8, 0, 
+
+Number of training instances = 14
+** Display OK
+** NaiveBayesCat testing completed

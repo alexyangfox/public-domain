@@ -1,0 +1,31 @@
+#!/bin/csh
+#Verify execution of GenCVFiles
+
+source $MLCDIR/bin/unsetmlc
+setenv LOGLEVEL 2
+setenv DEBUGLEVEL 0
+setenv SHOW_LOG_ORIGIN no
+setenv DATAFILE pima.all
+setenv OPTION_DUMP .mlcoptions
+rm -f .mlcoptions
+setenv DUMPSTEM /tmp/GenCVFiles
+touch /tmp/GenCVFiles.foo
+rm -f /tmp/GenCVFiles*
+setenv CV_FOLDS 3
+setenv CV_TIMES 2
+setenv SHOW_LOG_ORIGIN no
+rm -f GenCVFiles.out
+echo "Test 1" > GenCVFiles.out
+GenCVFiles >> GenCVFiles.out
+setenv INDUCER Const
+setenv LOGLEVEL 2
+CV >> GenCVFiles.out
+setenv FILESTEM $DUMPSTEM
+unsetenv DATAFILE
+CV >> GenCVFiles.out
+diff GenCVFiles.out GenCVFiles.exp
+if ($status) exit $status
+diff /tmp/GenCVFiles-0-0.data $MLCDIR/db/pima.data
+if ($status) exit $status
+diff /tmp/GenCVFiles-0-0.test $MLCDIR/db/pima.test
+exit $status

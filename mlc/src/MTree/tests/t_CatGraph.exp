@@ -1,0 +1,18 @@
+Executing t_CatGraph
+
+[0](ConstCat0) : [0]--(Unknown)-->[1][0]--(first)-->[2]
+[1](ConstCat1) : [1]--(Unknown)-->[2][1]--(first)-->[3]
+[2](ConstCat2) : [2]--(Unknown)-->[3][2]--(first)-->[4]
+[3](ConstCat3) : [3]--(Unknown)-->[4][3]--(first)-->[5]
+[4](ConstCat4) : [4]--(Unknown)-->[5][4]--(first)-->[6]
+[5](ConstCat5) : [5]--(Unknown)-->[6][5]--(first)-->[7]
+[6](ConstCat6) : [6]--(Unknown)-->[7][6]--(first)-->[8]
+[7](ConstCat7) : [7]--(Unknown)-->[8][7]--(first)-->[9]
+[8](ConstCat8) : [8]--(Unknown)-->[9][8]--(first)-->[10]
+[9](ConstCat9) : [9]--(Unknown)-->[10]
+[10](ConstCat10) : 
+
+
+default finished
+copy constructor ok
+copy constructor deleted

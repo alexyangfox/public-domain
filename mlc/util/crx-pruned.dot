@@ -1,0 +1,136 @@
+/* Machine generated dot file */
+
+digraph G { 
+
+/*  node 0:  */
+node_0 [label="A9"]
+node_0->node_1 [label="t"] 
+node_0->node_43 [label="f"] 
+/*  node 1:  */
+node_1 [label="A15"]
+node_1->node_2 [label="<= 500"] 
+node_1->node_42 [label="> 500"] 
+/*  node 2:  */
+node_2 [label="A11"]
+node_2->node_3 [label="<= 3"] 
+node_2->node_41 [label="> 3"] 
+/*  node 3:  */
+node_3 [label="A14"]
+node_3->node_4 [label="<= 102"] 
+node_3->node_13 [label="> 102"] 
+/*  node 4:  */
+node_4 [label="A3"]
+node_4->node_5 [label="<= 15"] 
+node_4->node_12 [label="> 15"] 
+/*  node 5:  */
+node_5 [label="A4"]
+node_5->node_6 [label="u"] 
+node_5->node_7 [label="y"] 
+node_5->node_10 [label="l"] 
+node_5->node_11 [label="t"] 
+/*  node 6:  */
+node_6 [label="yes"]
+/*  node 7:  */
+node_7 [label="A8"]
+node_7->node_8 [label="<= 5.5"] 
+node_7->node_9 [label="> 5.5"] 
+/*  node 8:  */
+node_8 [label="yes"]
+/*  node 9:  */
+node_9 [label="no"]
+/*  node 10:  */
+node_10 [label="yes"]
+/*  node 11:  */
+node_11 [label="yes"]
+/*  node 12:  */
+node_12 [label="no"]
+/*  node 13:  */
+node_13 [label="A8"]
+node_13->node_14 [label="<= 7.585"] 
+node_13->node_40 [label="> 7.585"] 
+/*  node 14:  */
+node_14 [label="A7"]
+node_14->node_15 [label="v"] 
+node_14->node_30 [label="h"] 
+node_14->node_33 [label="bb"] 
+node_14->node_34 [label="j"] 
+node_14->node_35 [label="n"] 
+node_14->node_36 [label="z"] 
+node_14->node_37 [label="dd"] 
+node_14->node_38 [label="ff"] 
+node_14->node_39 [label="o"] 
+/*  node 15:  */
+node_15 [label="A15"]
+node_15->node_16 [label="<= 80"] 
+node_15->node_29 [label="> 80"] 
+/*  node 16:  */
+node_16 [label="A3"]
+node_16->node_17 [label="<= 0.835"] 
+node_16->node_18 [label="> 0.835"] 
+/*  node 17:  */
+node_17 [label="no"]
+/*  node 18:  */
+node_18 [label="A2"]
+node_18->node_19 [label="<= 35.75"] 
+node_18->node_28 [label="> 35.75"] 
+/*  node 19:  */
+node_19 [label="A3"]
+node_19->node_20 [label="<= 1.04"] 
+node_19->node_21 [label="> 1.04"] 
+/*  node 20:  */
+node_20 [label="yes"]
+/*  node 21:  */
+node_21 [label="A3"]
+node_21->node_22 [label="<= 6.04"] 
+node_21->node_27 [label="> 6.04"] 
+/*  node 22:  */
+node_22 [label="A14"]
+node_22->node_23 [label="<= 368"] 
+node_22->node_26 [label="> 368"] 
+/*  node 23:  */
+node_23 [label="A14"]
+node_23->node_24 [label="<= 140"] 
+node_23->node_25 [label="> 140"] 
+/*  node 24:  */
+node_24 [label="yes"]
+/*  node 25:  */
+node_25 [label="no"]
+/*  node 26:  */
+node_26 [label="yes"]
+/*  node 27:  */
+node_27 [label="no"]
+/*  node 28:  */
+node_28 [label="yes"]
+/*  node 29:  */
+node_29 [label="yes"]
+/*  node 30:  */
+node_30 [label="A14"]
+node_30->node_31 [label="<= 160"] 
+node_30->node_32 [label="> 160"] 
+/*  node 31:  */
+node_31 [label="no"]
+/*  node 32:  */
+node_32 [label="yes"]
+/*  node 33:  */
+node_33 [label="no"]
+/*  node 34:  */
+node_34 [label="no"]
+/*  node 35:  */
+node_35 [label="no"]
+/*  node 36:  */
+node_36 [label="no"]
+/*  node 37:  */
+node_37 [label="no"]
+/*  node 38:  */
+node_38 [label="no"]
+/*  node 39:  */
+node_39 [label="no"]
+/*  node 40:  */
+node_40 [label="no"]
+/*  node 41:  */
+node_41 [label="yes"]
+/*  node 42:  */
+node_42 [label="yes"]
+/*  node 43:  */
+node_43 [label="no"]
+}

@@ -1,0 +1,76 @@
+|Discretization into bins of size 0
+|
+|Discretization of Attribute: "Refractive Index"
+|
+|Bin0: (-INF, 1.51719)
+|Bin1: [1.51719,1.51808)
+|Bin2: [1.51808,1.51892)
+|Bin3: [1.51892,1.523)
+|Bin4: [1.523,1.52365)
+|Bin5: [1.52365,+INF)
+|
+|Discretization of Attribute: "Sodium"
+|
+|Bin0: (-INF, 13.83)
+|Bin1: [13.83,14.36)
+|Bin2: [14.36,+INF)
+|
+|Discretization of Attribute: "Magnesium"
+|
+|Bin0: (-INF, 2.2)
+|Bin1: [2.2,2.39)
+|Bin2: [2.39,3.34)
+|Bin3: [3.34,3.86)
+|Bin4: [3.86,+INF)
+|
+|Discretization of Attribute: "Aluminum"
+|
+|Bin0: (-INF, 1.38)
+|Bin1: [1.38,1.4)
+|Bin2: [1.4,1.76)
+|Bin3: [1.76,+INF)
+|
+|Discretization of Attribute: "Silicon"
+|
+|Bin0: (-INF, 71.24)
+|Bin1: [71.24,72.14)
+|Bin2: [72.14,72.96)
+|Bin3: [72.96,73.28)
+|Bin4: [73.28,+INF)
+|
+|Discretization of Attribute: "Potassium"
+|
+|Bin0: (-INF, 0)
+|Bin1: [0,0.65)
+|Bin2: [0.65,1.1)
+|Bin3: [1.1,+INF)
+|
+|Discretization of Attribute: "Calcium"
+|
+|Bin0: (-INF, 6.93)
+|Bin1: [6.93,8.27)
+|Bin2: [8.27,9.95)
+|Bin3: [9.95,10.17)
+|Bin4: [10.17,+INF)
+|
+|Discretization of Attribute: "Barium"
+|
+|Bin0: (-INF, 0.15)
+|Bin1: [0.15,+INF)
+|
+|Discretization of Attribute: "Iron"
+|
+|Bin0: (-INF, 0.09)
+|Bin1: [0.09,+INF)
+|MLC++ discretize utility
+building_windows_float_processed, building_windows_non_float_processed, vehicle_windows_float_processed, vehicle_windows_non_float_processed, containers, tableware, headlamps.
+
+Refractive Index: -Inf-1\.51719, 1\.51719-1\.51808, 1\.51808-1\.51892, 1\.51892-1\.523, 1\.523-1\.52365, 1\.52365-Inf.
+Sodium: -Inf-13\.83, 13\.83-14\.36, 14\.36-Inf.
+Magnesium: -Inf-2\.2, 2\.2-2\.39, 2\.39-3\.34, 3\.34-3\.86, 3\.86-Inf.
+Aluminum: -Inf-1\.38, 1\.38-1\.4, 1\.4-1\.76, 1\.76-Inf.
+Silicon: -Inf-71\.24, 71\.24-72\.14, 72\.14-72\.96, 72\.96-73\.28, 73\.28-Inf.
+Potassium: -Inf-0, 0-0\.65, 0\.65-1\.1, 1\.1-Inf.
+Calcium: -Inf-6\.93, 6\.93-8\.27, 8\.27-9\.95, 9\.95-10\.17, 10\.17-Inf.
+Barium: -Inf-0\.15, 0\.15-Inf.
+Iron: -Inf-0\.09, 0\.09-Inf.

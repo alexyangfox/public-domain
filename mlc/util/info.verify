@@ -1,0 +1,21 @@
+#!/bin/csh
+#Verify execution of info
+
+source $MLCDIR/bin/unsetmlc
+setenv LOGLEVEL 1
+setenv OPTION_DUMP .mlcoptions
+rm -f .mlcoptions
+setenv DEBUGLEVEL 1
+echo "Test 1" > info.out
+setenv DATAFILE soybean-small
+setenv SHOW_ATTR_INFO yes
+info >>& info.out
+echo "Test 2" >> info.out
+setenv DATAFILE monk1-full
+info >>& info.out
+echo "Test 3" >> info.out
+setenv DATAFILE crx
+info >>& info.out
+diff info.out info.exp
+exit $status
+

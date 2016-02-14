@@ -1,0 +1,58 @@
+#!/bin/csh
+#Compile MLC template programs for library
+# Greg Snyder, Dec 24, 1994
+# Ronny Kohavi, Oct 22, 1995
+
+if ("$1" == "") then
+  echo Missing first argument (output file)
+  exit 2
+else if ("$2" == "") then
+  echo Missing second argument (input file)
+  exit 2
+else if ("$3" == "") then
+  echo Missing third argument (link flags))
+  exit 2
+endif
+
+# generate writable files
+umask 002 
+if (-r $1) rm -f $1
+
+set out=$1
+set obj=$out.o
+shift
+set inp=$1
+shift
+
+if ("$CFRONT_COMPILE" == "yes") then
+  # remove the -g flag so template files will be smaller
+  setenv CCFLAGS "`echo $CCFLAGS | sed -e 's/-g//'` -pth"
+  if ("$CCECHO" == "yes") \
+     echo CC -DTEMPL_MAIN \$CCFLAGS $inp -L${MLCDIR}/src/${MLCLIB} $*
+  CC  -DTEMPL_MAIN $CCFLAGS $inp -L${MLCDIR}/src/${MLCLIB} $*
+  set pgmStatus = $status
+  rm -f a.out
+  # in CFRONT, you don't really need the file
+else if ("$SGI_COMPILE" == "yes") then
+  if ("$CCECHO" == "yes") \
+     echo CC -c $CCFLAGS $inp\; /usr/lib/DCC/edg_prelink $obj -L${MLCDIR}/src/${MLCLIB}/ $*;
+     CC -c $CCFLAGS $inp
+     set pgmStatus = $status
+     # edg_prelink takes -v for verbose.
+     if ($pgmStatus == 0) then
+         /usr/lib/DCC/edg_prelink $obj -L${MLCDIR}/src/${MLCLIB}/ $*;
+        set pgmStatus = $status
+    endif
+else
+   echo "Unrecognized compiler (CFRONT_COMPILE/SGI_COMPILE not set)"
+   exit 2
+endif
+  
+
+if ($pgmStatus) then 
+  echo "*** compilation failed ***"
+  exit 2
+else
+  # touch the template itself (that's what the Makefile rule depends on).
+  touch $out
+endif

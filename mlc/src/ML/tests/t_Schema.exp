@@ -1,0 +1,69 @@
+OK.
+Attributes:
+test nominal0: VAL0.
+Label: test nominal1: VAL0.
+
+
+
+Attributes:
+test nominal0: VAL0, VAL1.
+test nominal1: VAL0, VAL1.
+Label: test nominal2: VAL0, VAL1.
+
+
+
+Attributes:
+test nominal0: VAL0, VAL1, VAL2.
+test nominal1: VAL0, VAL1, VAL2.
+test nominal2: VAL0, VAL1, VAL2.
+Label: test nominal3: VAL0, VAL1, VAL2.
+
+
+
+Attributes:
+test nominal0: VAL0, VAL1, VAL2, VAL3.
+test nominal1: VAL0, VAL1, VAL2, VAL3.
+test nominal2: VAL0, VAL1, VAL2, VAL3.
+test nominal3: VAL0, VAL1, VAL2, VAL3.
+Label: test nominal4: VAL0, VAL1, VAL2, VAL3.
+
+
+
+Attributes:
+test nominal0: VAL0, VAL1, VAL2, VAL3, VAL4.
+test nominal1: VAL0, VAL1, VAL2, VAL3, VAL4.
+test nominal2: VAL0, VAL1, VAL2, VAL3, VAL4.
+test nominal3: VAL0, VAL1, VAL2, VAL3, VAL4.
+test nominal4: VAL0, VAL1, VAL2, VAL3, VAL4.
+Label: test nominal5: VAL0, VAL1, VAL2, VAL3, VAL4.
+
+
+
+Random Test on SchemaRC
+OK.
+|The name file of monk2
+0, 1.
+
+attribute#1: 1, 2, 3.
+attribute#2: 1, 2, 3.
+attribute#3: 1, 2.
+attribute#4: 1, 2, 3.
+attribute#5: 1, 2, 3, 4.
+attribute#6: 1, 2.
+
+project(): 
+   The source schema Attributes:
+attribute#1: 1, 2, 3.
+attribute#2: 1, 2, 3.
+attribute#3: 1, 2.
+attribute#4: 1, 2, 3.
+attribute#5: 1, 2, 3, 4.
+attribute#6: 1, 2.
+Label: Label: 0, 1.
+
+   Projected every other Attributes:
+attribute#2: 1, 2, 3.
+attribute#4: 1, 2, 3.
+attribute#6: 1, 2.
+Label: Label: 0, 1.
+

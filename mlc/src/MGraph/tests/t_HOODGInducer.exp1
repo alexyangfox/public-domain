@@ -1,0 +1,11 @@
+Rooted Decision Graph Categorizer test hoodg
+Root: Head shape
+
+[0](no) : 
+[1](yes) : 
+[2](Jacket color) : [2]--(red)-->[1][2]--(yellow)-->[0][2]--(green)-->[0][2]--(blue)-->[0]
+[3](Body shape) : [3]--(round)-->[1][3]--(square)-->[2][3]--(octagon)-->[2]
+[4](Body shape) : [4]--(round)-->[2][4]--(square)-->[1][4]--(octagon)-->[2]
+[5](Body shape) : [5]--(round)-->[2][5]--(square)-->[2][5]--(octagon)-->[1]
+[6](Head shape) : [6]--(round)-->[3][6]--(square)-->[4][6]--(octagon)-->[5]
+

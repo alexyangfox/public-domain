@@ -1,0 +1,28 @@
+
+t_CascadeCat starting.
+table inducer/categorizer created
+project inducer with TableInducer inside created: ProjectInd Inducer ProjectInd: test CascadeCat
+    Wrapped Inducer: ProjectInd: inner TableInducer
+    Current Categorizer 
+Projecting Categorizer for ProjectInd: test CascadeCat
+   Attribute Mask: T, T, F, F, T, F
+   Projected Schema: Attributes:
+Head shape: round, square, octagon.
+Body shape: round, square, octagon.
+Jacket color: red, yellow, green, blue.
+Label: Label: no, yes.
+
+   Using Categorizer: Table Categorizer Table Categorizer with default class -1
+and the following labelled instances in the table:
+
+
+const inducer for fallback category: 
+Cascaded Categorizer Results
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 432.  Number incorrect: 0
+Generalization accuracy: 100.00%.  Memorization accuracy: 100.00%
+Accuracy: 100.00% +- 0.00% [99.12% - 100.00%]
+
+
+t_CascadeCat competed.

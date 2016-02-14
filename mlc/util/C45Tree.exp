@@ -1,0 +1,16 @@
+MLC++ Debug level is 1, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION DATAFILE = crx
+OPTION NAMESFILE = crx.names
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading crx.data..... done.
+OPTION TESTFILE = crx.test
+Reading crx.test.. done.
+OPTION C45_FLAGS = -u -f %s 
+OPTION C45_RETRIES = 0
+OPTION C45_STATS = false
+Accuracy of pruned C45 tree is 0.8
+OPTION DIST_DISP = no
+OPTION DISPGRAPH = no
+Average nodes for all C4.5 trees:44.

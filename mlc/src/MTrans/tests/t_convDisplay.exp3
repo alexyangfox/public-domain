@@ -1,0 +1,31 @@
+|Bin encoding conversion
+good, bad.
+duration: continuous.
+wage increase first year: continuous.
+wage increase second year: continuous.
+wage increase third year: continuous.
+cost of living adjustment-none: continuous
+cost of living adjustment-tcf: continuous
+cost of living adjustment-tc: continuous
+working hours: continuous.
+pension-none: continuous
+pension-ret_allw: continuous
+pension-empl_contr: continuous
+standby pay: continuous.
+shift differential: continuous.
+education allowance-yes: continuous
+education allowance-no: continuous
+statutory holidays: continuous.
+vacation-below average: continuous
+vacation-average: continuous
+vacation-generous: continuous
+longterm disability assistance-yes: continuous
+longterm disability assistance-no: continuous
+contribution to dental plan-none: continuous
+contribution to dental plan-half: continuous
+contribution to dental plan-full: continuous
+bereavement assistance-yes: continuous
+bereavement assistance-no: continuous
+contribution to health plan-none: continuous
+contribution to health plan-half: continuous
+contribution to health plan-full: continuous

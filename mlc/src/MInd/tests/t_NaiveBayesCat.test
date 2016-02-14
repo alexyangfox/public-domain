@@ -1,0 +1,7 @@
+overcast, 64, 65, true, Play.
+sunny, 65, 85, false, Don't Play.
+rain, 65, 70, true, Don't Play.
+| the next item has no relation to the training set.
+blizard, 232, 101, ?, Play.
+
+

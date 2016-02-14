@@ -1,0 +1,70 @@
+t_CVIncremental executing
+young, no, reduced, no contact lenses.
+young, no, normal, soft contact lenses.
+young, yes, reduced, no contact lenses.
+young, yes, normal, hard contanct lenses.
+young, no, reduced, no contact lenses.
+young, no, normal, soft contact lenses.
+young, yes, reduced, no contact lenses.
+young, yes, normal, hard contanct lenses.
+pre-presbyopic, no, reduced, no contact lenses.
+pre-presbyopic, no, normal, soft contact lenses.
+pre-presbyopic, yes, reduced, no contact lenses.
+pre-presbyopic, yes, normal, hard contanct lenses.
+pre-presbyopic, no, reduced, no contact lenses.
+pre-presbyopic, no, normal, soft contact lenses.
+pre-presbyopic, yes, reduced, no contact lenses.
+pre-presbyopic, yes, normal, no contact lenses.
+presbyopic, no, reduced, no contact lenses.
+presbyopic, no, normal, no contact lenses.
+presbyopic, yes, reduced, no contact lenses.
+presbyopic, yes, normal, hard contanct lenses.
+presbyopic, no, reduced, no contact lenses.
+presbyopic, no, normal, soft contact lenses.
+presbyopic, yes, reduced, no contact lenses.
+presbyopic, yes, normal, no contact lenses.
+
+Comparing 1x-1 cross validation.
+Accuracy for CValidator: 0.75 +- 0.0902894
+Accuracy for CVIncremental : 0.75 +- 0.0902894
+
+Comparing 1x-2 cross validation.
+Accuracy for CValidator: 0.666667 +- 0.0940127
+Accuracy for CVIncremental : 0.666667 +- 0.0940127
+
+Comparing 1x-3 cross validation.
+Accuracy for CValidator: 0.708333 +- 0.0983495
+Accuracy for CVIncremental : 0.708333 +- 0.0983495
+
+Comparing 1x-3 cross validation.
+Accuracy for CValidator: 0.253968 +- 0.024257
+Accuracy for CVIncremental : 0.253968 +- 0.024257
+
+Comparing 1x-4 cross validation.
+Accuracy for CValidator: 0.583333 +- 0.0527046
+Accuracy for CVIncremental : 0.583333 +- 0.0527046
+
+Comparing 1x-5 cross validation.
+Accuracy for CValidator: 0.75 +- 0.0387298
+Accuracy for CVIncremental : 0.75 +- 0.0387298
+
+Comparing 2x-1 cross validation.
+Accuracy for CValidator: 0.75 +- 0.0631614
+Accuracy for CVIncremental : 0.75 +- 0.0631614
+
+Comparing 2x-2 cross validation.
+Accuracy for CValidator: 0.75 +- 0.0601929
+Accuracy for CVIncremental : 0.75 +- 0.0601929
+
+Comparing 2x-3 cross validation.
+Accuracy for CValidator: 0.708333 +- 0.0671855
+Accuracy for CVIncremental : 0.708333 +- 0.0671855
+
+Comparing 2x-4 cross validation.
+Accuracy for CValidator: 0.708333 +- 0.0602499
+Accuracy for CVIncremental : 0.708333 +- 0.0602499
+
+Comparing 2x-5 cross validation.
+Accuracy for CValidator: 0.735 +- 0.0421966
+Accuracy for CVIncremental : 0.735 +- 0.0421966
+

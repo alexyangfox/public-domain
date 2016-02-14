@@ -1,0 +1,7 @@
+t_ThresholdCat executing
+Threshold Categorizer Test1 ThresholdCat categorizing on attribute ATTR1
+<= 4.3
+> 4.3
+> 4.3
+> 4.3
+<= 4.3

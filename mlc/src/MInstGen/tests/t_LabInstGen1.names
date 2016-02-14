@@ -1,0 +1,14 @@
+| LabInstGen1.names
+| 2 to 4 Multiplexer names file.
+
+| Label values: 0 and 1.
+0, 1.
+
+| Attributes.
+AddrBit1: 0, 1.
+AddrBit0: 0, 1.
+DataBit0: 0, 1.
+DataBit1: 0, 1.
+DataBit2: 0, 1.
+DataBit3: 0, 1.
+

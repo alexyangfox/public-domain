@@ -1,0 +1,276 @@
+Test 1
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION INDUCER = ID3
+OPTION INDUCER_NAME = ID3
+OPTION ID3_MAX_LEVEL = 0
+OPTION ID3_LBOUND_MIN_SPLIT = 1
+OPTION ID3_UBOUND_MIN_SPLIT = 25
+OPTION ID3_MIN_SPLIT_WEIGHT = 0
+OPTION ID3_DEBUG = false
+OPTION ID3_UNKNOWN_EDGES = true
+OPTION ID3_SPLIT_BY = normalized_mutual_info
+OPTION DATAFILE = monk1-full
+OPTION NAMESFILE = monk1-full.names
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+Tree has 124 nodes, and 92 leaves.
+OPTION TESTFILE = monk1-full.test
+Reading monk1-full.test..... done.
+OPTION DISP_CONFUSION_MAT = yes
+OPTION DISP_MISCLASS = yes
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 350.  Number incorrect: 82
+Generalization accuracy: 73.38%.  Memorization accuracy: 100.00%
+Accuracy: 81.02% +- 1.89% [77.05% - 84.44%]
+
+Displaying confusion matrix... 
+ (a)  (b)    <-- classified as 
+---- ---- 
+ 168   48    (a): class no
+  34  182    (b): class yes
+Incorrect classifications ... 
+round, round, yes, sword, yellow, yes, yes.
+round, round, yes, sword, yellow, no, yes.
+round, round, yes, balloon, yellow, yes, yes.
+round, round, yes, balloon, yellow, no, yes.
+round, round, yes, balloon, green, yes, yes.
+round, round, yes, balloon, green, no, yes.
+round, round, yes, flag, green, yes, yes.
+round, round, no, sword, green, yes, yes.
+round, round, no, sword, green, no, yes.
+round, round, no, balloon, green, no, yes.
+round, round, no, flag, green, yes, yes.
+round, round, no, flag, green, no, yes.
+round, square, yes, sword, green, no, no.
+round, square, yes, flag, green, no, no.
+round, square, no, balloon, green, yes, no.
+round, octagon, yes, sword, green, no, no.
+round, octagon, yes, flag, green, no, no.
+round, octagon, no, balloon, green, yes, no.
+square, round, yes, sword, yellow, yes, no.
+square, round, yes, sword, yellow, no, no.
+square, round, yes, balloon, green, no, no.
+square, round, yes, flag, yellow, yes, no.
+square, round, yes, flag, yellow, no, no.
+square, round, yes, flag, green, no, no.
+square, round, no, sword, yellow, yes, no.
+square, round, no, balloon, yellow, yes, no.
+square, round, no, flag, yellow, yes, no.
+square, square, yes, sword, green, no, yes.
+square, square, yes, balloon, yellow, yes, yes.
+square, square, yes, balloon, yellow, no, yes.
+square, square, yes, balloon, green, yes, yes.
+square, square, yes, flag, green, yes, yes.
+square, square, no, sword, yellow, no, yes.
+square, square, no, sword, green, yes, yes.
+square, square, no, balloon, yellow, no, yes.
+square, square, no, balloon, green, yes, yes.
+square, square, no, flag, yellow, no, yes.
+square, square, no, flag, green, yes, yes.
+square, octagon, yes, sword, yellow, yes, no.
+square, octagon, yes, sword, yellow, no, no.
+square, octagon, yes, balloon, green, no, no.
+square, octagon, yes, flag, yellow, yes, no.
+square, octagon, yes, flag, yellow, no, no.
+square, octagon, yes, flag, green, no, no.
+octagon, round, yes, sword, yellow, yes, no.
+octagon, round, yes, sword, yellow, no, no.
+octagon, round, yes, sword, green, no, no.
+octagon, round, yes, sword, blue, yes, no.
+octagon, round, yes, sword, blue, no, no.
+octagon, round, yes, balloon, green, no, no.
+octagon, round, yes, balloon, blue, yes, no.
+octagon, round, yes, balloon, blue, no, no.
+octagon, round, yes, flag, green, no, no.
+octagon, round, yes, flag, blue, yes, no.
+octagon, round, yes, flag, blue, no, no.
+octagon, round, no, sword, yellow, yes, no.
+octagon, round, no, sword, blue, yes, no.
+octagon, round, no, sword, blue, no, no.
+octagon, round, no, balloon, yellow, yes, no.
+octagon, round, no, balloon, blue, yes, no.
+octagon, round, no, balloon, blue, no, no.
+octagon, round, no, flag, yellow, yes, no.
+octagon, round, no, flag, blue, yes, no.
+octagon, round, no, flag, blue, no, no.
+octagon, square, yes, sword, yellow, yes, no.
+octagon, square, yes, sword, yellow, no, no.
+octagon, square, yes, sword, green, no, no.
+octagon, square, yes, balloon, green, no, no.
+octagon, square, yes, flag, yellow, yes, no.
+octagon, square, yes, flag, yellow, no, no.
+octagon, square, yes, flag, green, no, no.
+octagon, octagon, yes, sword, green, yes, yes.
+octagon, octagon, yes, balloon, yellow, yes, yes.
+octagon, octagon, yes, balloon, yellow, no, yes.
+octagon, octagon, yes, balloon, green, yes, yes.
+octagon, octagon, yes, flag, green, yes, yes.
+octagon, octagon, no, sword, yellow, yes, yes.
+octagon, octagon, no, sword, green, yes, yes.
+octagon, octagon, no, balloon, yellow, yes, yes.
+octagon, octagon, no, balloon, green, yes, yes.
+octagon, octagon, no, flag, yellow, yes, yes.
+octagon, octagon, no, flag, green, yes, yes.
+
+OPTION DISPLAY_STRUCT = none
+Test 2
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION INDUCER = C4.5
+OPTION INDUCER_NAME = c4.5
+OPTION C45_FLAGS = -u -f %s 
+OPTION DATAFILE = monk1-full
+OPTION NAMESFILE = monk1-full.names
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+OPTION TESTFILE = monk1-full.test
+Reading monk1-full.test..... done.
+OPTION C45_RETRIES = 0
+OPTION C45_STATS = false
+Accuracy: 75.69% +- 2.07% [71.43% - 79.50%]
+Average nodes for all C4.5 trees:18.
+Test 3
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION INDUCER = ID3
+OPTION INDUCER_NAME = ID3
+OPTION ID3_MAX_LEVEL = 0
+OPTION ID3_LBOUND_MIN_SPLIT = 1
+OPTION ID3_UBOUND_MIN_SPLIT = 25
+OPTION ID3_MIN_SPLIT_WEIGHT = 0
+OPTION ID3_DEBUG = false
+OPTION ID3_UNKNOWN_EDGES = true
+OPTION ID3_SPLIT_BY = normalized_mutual_info
+OPTION DATAFILE = hypothyroid
+OPTION NAMESFILE = hypothyroid.names
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading hypothyroid.data..................... done.
+Tree has 73 nodes, and 49 leaves.
+OPTION TESTFILE = hypothyroid.test
+Reading hypothyroid.test.......... done.
+OPTION DISP_CONFUSION_MAT = yes
+OPTION DISP_MISCLASS = yes
+Number of training instances: 2108
+Number of test instances: 1055.  Unseen: 1025,  seen 30.
+Number correct: 1045.  Number incorrect: 10
+Generalization accuracy: 99.12%.  Memorization accuracy: 96.67%
+Accuracy: 99.05% +- 0.30% [98.26% - 99.48%]
+
+Displaying confusion matrix... 
+ (a)  (b)    <-- classified as 
+---- ---- 
+  48    7    (a): class hypothyroid
+   3  997    (b): class negative
+Incorrect classifications ... 
+55, F, f, f, t, f, f, f, f, f, f, f, f, y, 8.4, y, 1.4, y, 44, y, 1.03, y, 43, n, ?, negative.
+60, F, f, f, f, f, t, f, f, f, f, f, f, y, 8.2, y, 1.7, y, 65, y, 0.96, y, 68, n, ?, hypothyroid.
+?, F, f, f, f, f, f, f, f, f, f, f, f, y, 35, y, 1.4, y, 78, y, 0.98, y, 80, n, ?, hypothyroid.
+34, F, t, f, f, f, f, f, f, f, f, f, f, y, 0.25, y, 6.7, y, 230, y, 1.73, y, 133, n, ?, hypothyroid.
+18, F, f, f, f, t, f, f, f, f, f, f, f, y, 16, y, 1.3, y, 75, y, 1.11, y, 68, n, ?, hypothyroid.
+72, F, f, f, f, f, f, f, f, f, f, f, f, y, 15, y, 2.2, y, 98, y, 1.29, y, 76, n, ?, hypothyroid.
+27, F, f, f, t, f, f, f, f, f, f, f, f, y, 56, y, 2, y, 36, y, 1.11, y, 32, n, ?, negative.
+65, F, t, f, f, f, f, f, f, f, f, f, f, y, 55, y, 1, y, 50, y, 1.17, y, 43, n, ?, hypothyroid.
+67, M, f, f, f, f, f, f, f, f, f, f, f, y, 24, y, 1.4, y, 72, y, 1.01, y, 71, n, ?, negative.
+30, F, t, f, f, f, f, f, f, f, f, f, f, y, 41, y, 3, y, 109, y, 1.79, y, 61, n, ?, hypothyroid.
+
+OPTION DISPLAY_STRUCT = none
+Test 4
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION INDUCER = C4.5
+OPTION INDUCER_NAME = c4.5
+OPTION C45_FLAGS = -u -f %s 
+OPTION DATAFILE = crx
+OPTION NAMESFILE = crx.names
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading crx.data..... done.
+OPTION TESTFILE = crx.test
+Reading crx.test.. done.
+OPTION C45_RETRIES = 0
+OPTION C45_STATS = false
+Accuracy: 80.00% +- 2.84% [73.91% - 84.95%]
+Average nodes for all C4.5 trees:44.
+Test 5
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION INDUCER = disc-filter
+OPTION INDUCER_NAME = disc-filter
+OPTION DISCF_INDUCER = ID3
+OPTION DISCF_INDUCER_NAME = ID3
+OPTION DISCF_ID3_MAX_LEVEL = 0
+OPTION DISCF_ID3_LBOUND_MIN_SPLIT = 1
+OPTION DISCF_ID3_UBOUND_MIN_SPLIT = 25
+OPTION DISCF_ID3_MIN_SPLIT_WEIGHT = 0
+OPTION DISCF_ID3_DEBUG = false
+OPTION DISCF_ID3_UNKNOWN_EDGES = true
+OPTION DISCF_ID3_SPLIT_BY = normalized_mutual_info
+OPTION DISCF_DISC_TYPE = entropy
+OPTION DISCF_DISC_NUM_INTR = Algo-heuristic
+OPTION DISCF_MIN_SPLIT = 1
+OPTION DATAFILE = crx
+OPTION NAMESFILE = crx.names
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading crx.data..... done.
+Discretization vector:*, 2, 2, *, *, *, *, 2, *, *, 2, *, *, 2, 2
+Tree has 320 nodes, and 252 leaves.
+OPTION TESTFILE = crx.test
+Reading crx.test.. done.
+OPTION DISP_CONFUSION_MAT = yes
+OPTION DISP_MISCLASS = no
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 200,  seen 0.
+Number correct: 157.  Number incorrect: 43
+Generalization accuracy: 78.50%.  Memorization accuracy: unknown
+Accuracy: 78.50% +- 2.91% [72.30% - 83.63%]
+
+Displaying confusion matrix... 
+ (a)  (b)    <-- classified as 
+---- ---- 
+  70   20    (a): class yes
+  23   87    (b): class no
+
+OPTION DISPLAY_STRUCT = dot
+OPTION INDUCER_DOT = Inducer.dot
+OPTION DIST_DISP = false
+Test 6
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION INDUCER = ID3
+OPTION INDUCER_NAME = ID3
+OPTION ID3_MAX_LEVEL = 3
+OPTION ID3_LBOUND_MIN_SPLIT = 1
+OPTION ID3_UBOUND_MIN_SPLIT = 25
+OPTION ID3_MIN_SPLIT_WEIGHT = 0
+OPTION ID3_DEBUG = false
+OPTION ID3_UNKNOWN_EDGES = true
+OPTION ID3_SPLIT_BY = normalized_mutual_info
+OPTION DATAFILE = crx
+OPTION NAMESFILE = crx.names
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading crx.data..... done.
+Tree has 26 nodes, and 18 leaves.
+OPTION TESTFILE = crx.test
+Reading crx.test.. done.
+OPTION DISP_CONFUSION_MAT = yes
+OPTION DISP_MISCLASS = no
+Number of training instances: 490
+Number of test instances: 200.  Unseen: 200,  seen 0.
+Number correct: 166.  Number incorrect: 34
+Generalization accuracy: 83.00%.  Memorization accuracy: unknown
+Accuracy: 83.00% +- 2.66% [77.18% - 87.57%]
+
+Displaying confusion matrix... 
+ (a)  (b)    <-- classified as 
+---- ---- 
+  83    7    (a): class yes
+  27   83    (b): class no
+
+OPTION DISPLAY_STRUCT = none

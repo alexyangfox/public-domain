@@ -1,0 +1,7 @@
+| golf with continuous attributes & extra values to produce matchless instance.
+Play, Don't Play, Clueless, Weep.
+
+outlook: sunny, overcast, rain, blizard.
+temperature: continuous
+humidity: continuous
+windy: true, false, yes.

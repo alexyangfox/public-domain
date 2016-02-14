@@ -1,0 +1,114 @@
+AccEstimator::dump_files: estimated accuracies will be 0.0
+Inducer: /tmp/t_lensesSCV Null Inducer
+Number of folds: 9, Number of times: 2
+Overall: 0.00% +- 0.00% (0.00% - 0.00%)
+Overall: 0.00% +- 0.00% (0.00% - 0.00%)
+Untrimmed accuracy 0.00% +- 0.00% (0.00% - 0.00%)
+Finished dump
+AccEstimator::estimate_accuracy: Inducer: t_SCValidator id3 inducer
+AccEstimator::estimate_accuracy: Number of files: 9
+Estimate_Accuracy::estimate_accuracy: Accuracy of set: 81.48% +- 9.80% (33.33% - 100.00%)
+fold accuracy for set 0 is 0.814815
+AccEstimator::estimate_accuracy: Inducer: t_SCValidator id3 inducer
+AccEstimator::estimate_accuracy: Number of files: 9
+Estimate_Accuracy::estimate_accuracy: Accuracy of set: 81.48% +- 5.86% (66.67% - 100.00%)
+fold accuracy for set 1 is 0.814815
+accuracy: 81.48% +- 5.54% (33.33% - 100.00%)
+ID3 categorizer cross validation from /tmp/t_lensesSCV is 81.48% +- 5.54% (33.33% - 100.00%)
+Inducer: t_SCValidator id3 inducer
+Number of folds: 9, Number of times: 2
+Number of splits: 4
+Number of instances in fold 0: 3. Stratification: Training: 0/4/4/13/  Test: 0/0/1/2/
+Acc 1
+Number of instances in fold 1: 3. Stratification: Training: 0/3/5/13/  Test: 0/1/0/2/
+Acc 1
+Number of instances in fold 2: 3. Stratification: Training: 0/4/4/13/  Test: 0/0/1/2/
+Acc 0.666667
+Number of instances in fold 3: 3. Stratification: Training: 0/3/4/14/  Test: 0/1/1/1/
+Acc 0.333333
+Number of instances in fold 4: 3. Stratification: Training: 0/3/5/13/  Test: 0/1/0/2/
+Acc 1
+Number of instances in fold 5: 3. Stratification: Training: 0/4/4/13/  Test: 0/0/1/2/
+Acc 0.333333
+Number of instances in fold 6: 2. Stratification: Training: 0/4/5/13/  Test: 0/0/0/2/
+Acc 1
+Number of instances in fold 7: 2. Stratification: Training: 0/4/4/14/  Test: 0/0/1/1/
+Acc 1
+Number of instances in fold 8: 2. Stratification: Training: 0/3/5/14/  Test: 0/1/0/1/
+Acc 1
+Overall: 81.48% +- 9.80% (33.33% - 100.00%)
+Number of splits: 4
+Number of instances in fold 0: 3. Stratification: Training: 0/4/4/13/  Test: 0/0/1/2/
+Acc 0.666667
+Number of instances in fold 1: 3. Stratification: Training: 0/3/5/13/  Test: 0/1/0/2/
+Acc 1
+Number of instances in fold 2: 3. Stratification: Training: 0/3/5/13/  Test: 0/1/0/2/
+Acc 0.666667
+Number of instances in fold 3: 3. Stratification: Training: 0/4/4/13/  Test: 0/0/1/2/
+Acc 0.666667
+Number of instances in fold 4: 3. Stratification: Training: 0/3/5/13/  Test: 0/1/0/2/
+Acc 0.666667
+Number of instances in fold 5: 3. Stratification: Training: 0/4/4/13/  Test: 0/0/1/2/
+Acc 0.666667
+Number of instances in fold 6: 2. Stratification: Training: 0/4/4/14/  Test: 0/0/1/1/
+Acc 1
+Number of instances in fold 7: 2. Stratification: Training: 0/3/5/14/  Test: 0/1/0/1/
+Acc 1
+Number of instances in fold 8: 2. Stratification: Training: 0/4/4/14/  Test: 0/0/1/1/
+Acc 1
+Overall: 81.48% +- 5.54% (33.33% - 100.00%)
+Untrimmed accuracy 81.48% +- 5.54% (33.33% - 100.00%)
+ID3 cv in memory 81.48% +- 5.54% (33.33% - 100.00%)
+ID3 categorizer cross validation from bag: 81.48% +- 5.54% (33.33% - 100.00%)
+Inducer: t_SCValidator id3 inducer
+Number of folds: 24 (leave 1 out), Number of times: 1
+Number of splits: 4
+Number of instances in fold 0: 1. Stratification: Training: 0/4/5/14/  Test: 0/0/0/1/
+Acc 0
+Number of instances in fold 1: 1. Stratification: Training: 0/3/5/15/  Test: 0/1/0/0/
+Acc 0
+Number of instances in fold 2: 1. Stratification: Training: 0/4/5/14/  Test: 0/0/0/1/
+Acc 1
+Number of instances in fold 3: 1. Stratification: Training: 0/4/4/15/  Test: 0/0/1/0/
+Acc 1
+Number of instances in fold 4: 1. Stratification: Training: 0/4/5/14/  Test: 0/0/0/1/
+Acc 1
+Number of instances in fold 5: 1. Stratification: Training: 0/4/5/14/  Test: 0/0/0/1/
+Acc 1
+Number of instances in fold 6: 1. Stratification: Training: 0/3/5/15/  Test: 0/1/0/0/
+Acc 1
+Number of instances in fold 7: 1. Stratification: Training: 0/4/5/14/  Test: 0/0/0/1/
+Acc 1
+Number of instances in fold 8: 1. Stratification: Training: 0/4/5/14/  Test: 0/0/0/1/
+Acc 1
+Number of instances in fold 9: 1. Stratification: Training: 0/4/5/14/  Test: 0/0/0/1/
+Acc 1
+Number of instances in fold 10: 1. Stratification: Training: 0/4/4/15/  Test: 0/0/1/0/
+Acc 1
+Number of instances in fold 11: 1. Stratification: Training: 0/4/5/14/  Test: 0/0/0/1/
+Acc 0
+Number of instances in fold 12: 1. Stratification: Training: 0/4/4/15/  Test: 0/0/1/0/
+Acc 1
+Number of instances in fold 13: 1. Stratification: Training: 0/4/5/14/  Test: 0/0/0/1/
+Acc 1
+Number of instances in fold 14: 1. Stratification: Training: 0/4/4/15/  Test: 0/0/1/0/
+Acc 1
+Number of instances in fold 15: 1. Stratification: Training: 0/4/5/14/  Test: 0/0/0/1/
+Acc 1
+Number of instances in fold 16: 1. Stratification: Training: 0/3/5/15/  Test: 0/1/0/0/
+Acc 1
+Number of instances in fold 17: 1. Stratification: Training: 0/4/5/14/  Test: 0/0/0/1/
+Acc 0
+Number of instances in fold 18: 1. Stratification: Training: 0/4/5/14/  Test: 0/0/0/1/
+Acc 1
+Number of instances in fold 19: 1. Stratification: Training: 0/4/5/14/  Test: 0/0/0/1/
+Acc 1
+Number of instances in fold 20: 1. Stratification: Training: 0/4/5/14/  Test: 0/0/0/1/
+Acc 1
+Number of instances in fold 21: 1. Stratification: Training: 0/4/5/14/  Test: 0/0/0/1/
+Acc 1
+Number of instances in fold 22: 1. Stratification: Training: 0/3/5/15/  Test: 0/1/0/0/
+Acc 1
+Number of instances in fold 23: 1. Stratification: Training: 0/4/4/15/  Test: 0/0/1/0/
+Acc 0
+Untrimmed accuracy 79.17% +- 8.47% (0.00% - 100.00%)

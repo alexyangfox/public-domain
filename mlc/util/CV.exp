@@ -1,0 +1,110 @@
+Test 1
+MLC++ Debug level is 1, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+Folds:5 times:2 seed:7258789
+DATAFILE is monk1-full.data with 124 instances
+Inducer: c4.5
+Number of folds: 5, Number of times: 2
+Untrimmed accuracy 79.80% +- 3.66% (56.00% - 96.00%)
+Inducer: c4.5 79.80% +- 3.66% (56.00% - 96.00%)
+Test 2
+MLC++ Debug level is 1, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+Folds:3 times:2 seed:7258789
+DATAFILE is monk1-full.data with 124 instances
+Inducer: c4.5
+Number of folds: 3, Number of times: 2
+Untrimmed accuracy 77.39% +- 3.34% (60.98% - 82.93%)
+Inducer: c4.5 77.39% +- 3.34% (60.98% - 82.93%)
+Testing on monk1-full.test
+Accuracy on test file: 0.756944
+Test 3
+MLC++ Debug level is 1, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+Folds:-1 times:2 seed:7258789
+DATAFILE is monk1-full.data with 124 instances
+Inducer: table-majority
+Number of folds: 124 (leave 1 out), Number of times: 2
+Untrimmed accuracy 0.00% +- 0.00% (0.00% - 0.00%)
+Inducer: table-majority 0.00% +- 0.00% (0.00% - 0.00%)
+Testing on monk1-full.test
+Accuracy on test file: 0.643519
+Test 4
+MLC++ Debug level is 1, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+Folds:-2 times:2 seed:7258789
+DATAFILE is monk1-full.data with 124 instances
+Inducer: table-majority
+Number of folds: 62 (leave 2 out), Number of times: 2
+Untrimmed accuracy 27.42% +- 2.24% (0.00% - 50.00%)
+Inducer: table-majority 27.42% +- 2.24% (0.00% - 50.00%)
+Testing on monk1-full.test
+Accuracy on test file: 0.643519
+Test 5 (should be zero acc)
+MLC++ Debug level is 1, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+Folds:-1 times:2 seed:7258789
+DATAFILE is monk1-full.data with 124 instances
+Inducer: const
+Number of folds: 124 (leave 1 out), Number of times: 2
+Untrimmed accuracy 0.00% +- 0.00% (0.00% - 0.00%)
+Inducer: const 0.00% +- 0.00% (0.00% - 0.00%)
+Testing on monk1-full.test
+Accuracy on test file: 0.5
+Test 6
+MLC++ Debug level is 1, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+Folds:-2 times:2 seed:7258789
+DATAFILE is monk1-full.data with 124 instances
+Inducer: const
+Number of folds: 62 (leave 2 out), Number of times: 2
+Untrimmed accuracy 27.42% +- 2.24% (0.00% - 50.00%)
+Inducer: const 27.42% +- 2.24% (0.00% - 50.00%)
+Testing on monk1-full.test
+Accuracy on test file: 0.5
+Test 7 (should be zero acc)
+MLC++ Debug level is 1, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+Folds:-1 times:2 seed:7258789
+DATAFILE is monk1-full.data with 124 instances
+Inducer: const
+Number of folds: 124 (leave 1 out), Number of times: 2
+Untrimmed accuracy 0.00% +- 0.00% (0.00% - 0.00%)
+Inducer: const 0.00% +- 0.00% (0.00% - 0.00%)
+Testing on monk1-full.test
+Accuracy on test file: 0.5
+Test 8 (should be 50%)
+MLC++ Debug level is 1, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+Folds:-2 times:2 seed:7258789
+DATAFILE is monk1-full.data with 124 instances
+Inducer: const
+Number of folds: 62 (leave 2 out), Number of times: 2
+Untrimmed accuracy 50.00% +- 0.00% (50.00% - 50.00%)
+Inducer: const 50.00% +- 0.00% (50.00% - 50.00%)
+Testing on monk1-full.test
+Accuracy on test file: 0.5

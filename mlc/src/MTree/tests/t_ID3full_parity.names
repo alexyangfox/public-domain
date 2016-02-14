@@ -1,0 +1,9 @@
+| Full parity
+| Has three Boolean attributes and a label for the parity 
+| (xor of the 3 attributes)
+
+Even, Odd. | The number of Ts.
+
+Attr1: 0, 1.
+Attr2: 0, 1.
+Attr3: 0, 1.

@@ -1,0 +1,118 @@
+Test 1
+MLC++ Debug level is 1, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION DATAFILE = soybean-small
+OPTION NAMESFILE = soybean-small.names
+DataFile is soybean-small.data. LOGLEVEL is 1
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading soybean-small.data. done.
+Reading soybean-small.test. done.
+Reading soybean-small.all. done.
+Data + Test == All
+Number of instances in .all = 47 (duplicate or conflicting instances : 0)
+Number of instances in soybean-small.data = 31 (duplicate or conflicting instances : 0)
+Number of instances in .test = 16 (duplicate or conflicting instances : 0)
+.all file - Class probability for the label 'D1' : 21.28%
+.all file - Class probability for the label 'D2' : 21.28%
+.all file - Class probability for the label 'D3' : 21.28%
+.all file - Class probability for the label 'D4' : 36.17%
+Number of attributes = 35 (continuous : 35 nominal : 0)
+OPTION SHOW_ATTR_INFO = yes
+Information about .all file : 
+   7 distinct values for attribute #0 (Attribute 0) continuous
+   2 distinct values for attribute #1 (Attribute 1) continuous
+   3 distinct values for attribute #2 (Attribute 2) continuous
+   3 distinct values for attribute #3 (Attribute 3) continuous
+   2 distinct values for attribute #4 (Attribute 4) continuous
+   4 distinct values for attribute #5 (Attribute 5) continuous
+   4 distinct values for attribute #6 (Attribute 6) continuous
+   2 distinct values for attribute #7 (Attribute 7) continuous
+   2 distinct values for attribute #8 (Attribute 8) continuous
+   3 distinct values for attribute #9 (Attribute 9) continuous
+   1 distinct values for attribute #10 (Attribute 10) continuous
+   2 distinct values for attribute #11 (Attribute 11) continuous
+   1 distinct values for attribute #12 (Attribute 12) continuous
+   1 distinct values for attribute #13 (Attribute 13) continuous
+   1 distinct values for attribute #14 (Attribute 14) continuous
+   1 distinct values for attribute #15 (Attribute 15) continuous
+   1 distinct values for attribute #16 (Attribute 16) continuous
+   1 distinct values for attribute #17 (Attribute 17) continuous
+   1 distinct values for attribute #18 (Attribute 18) continuous
+   2 distinct values for attribute #19 (Attribute 19) continuous
+   4 distinct values for attribute #20 (Attribute 20) continuous
+   4 distinct values for attribute #21 (Attribute 21) continuous
+   2 distinct values for attribute #22 (Attribute 22) continuous
+   2 distinct values for attribute #23 (Attribute 23) continuous
+   2 distinct values for attribute #24 (Attribute 24) continuous
+   2 distinct values for attribute #25 (Attribute 25) continuous
+   2 distinct values for attribute #26 (Attribute 26) continuous
+   2 distinct values for attribute #27 (Attribute 27) continuous
+   1 distinct values for attribute #28 (Attribute 28) continuous
+   1 distinct values for attribute #29 (Attribute 29) continuous
+   1 distinct values for attribute #30 (Attribute 30) continuous
+   1 distinct values for attribute #31 (Attribute 31) continuous
+   1 distinct values for attribute #32 (Attribute 32) continuous
+   1 distinct values for attribute #33 (Attribute 33) continuous
+   2 distinct values for attribute #34 (Attribute 34) continuous
+Test 2
+MLC++ Debug level is 1, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION DATAFILE = monk1-full
+OPTION NAMESFILE = monk1-full.names
+DataFile is monk1-full.data. LOGLEVEL is 1
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+Reading monk1-full.test..... done.
+Reading monk1-full.all..... done.
+*** Warning: Data + Test != All
+Number of instances in .all = 432 (duplicate or conflicting instances : 0)
+Number of instances in monk1-full.data = 124 (duplicate or conflicting instances : 0)
+Number of instances in .test = 432 (duplicate or conflicting instances : 0)
+.all file - Class probability for the label 'no' : 50.00%
+.all file - Class probability for the label 'yes' : 50.00%
+Number of attributes = 6 (continuous : 0 nominal : 6)
+OPTION SHOW_ATTR_INFO = yes
+Information about .all file : 
+   3 distinct values for attribute #0 (Head shape) nominal
+   3 distinct values for attribute #1 (Body shape) nominal
+   2 distinct values for attribute #2 (Is smiling) nominal
+   3 distinct values for attribute #3 (Holding) nominal
+   4 distinct values for attribute #4 (Jacket color) nominal
+   2 distinct values for attribute #5 (Has tie) nominal
+Test 3
+MLC++ Debug level is 1, log level is 1
+OPTION PROMPTLEVEL = required-only
+OPTION DATAFILE = crx
+OPTION NAMESFILE = crx.names
+DataFile is crx.data. LOGLEVEL is 1
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading crx.data..... done.
+Reading crx.test.. done.
+Reading crx.all....... done.
+Data + Test == All
+Number of instances in .all = 690 (duplicate or conflicting instances : 0)
+Number of instances in crx.data = 490 (duplicate or conflicting instances : 0)
+Number of instances in .test = 200 (duplicate or conflicting instances : 0)
+.all file - Class probability for the label 'yes' : 44.49%
+.all file - Class probability for the label 'no' : 55.51%
+Number of attributes = 15 (continuous : 6 nominal : 9)
+OPTION SHOW_ATTR_INFO = yes
+Information about .all file : 
+   3 distinct values for attribute #0 (A1) nominal
+ 349 distinct values for attribute #1 (A2) continuous
+ 215 distinct values for attribute #2 (A3) continuous
+   4 distinct values for attribute #3 (A4) nominal
+   4 distinct values for attribute #4 (A5) nominal
+  15 distinct values for attribute #5 (A6) nominal
+  10 distinct values for attribute #6 (A7) nominal
+ 132 distinct values for attribute #7 (A8) continuous
+   2 distinct values for attribute #8 (A9) nominal
+   2 distinct values for attribute #9 (A10) nominal
+  23 distinct values for attribute #10 (A11) continuous
+   2 distinct values for attribute #11 (A12) nominal
+   3 distinct values for attribute #12 (A13) nominal
+ 170 distinct values for attribute #13 (A14) continuous
+ 240 distinct values for attribute #14 (A15) continuous

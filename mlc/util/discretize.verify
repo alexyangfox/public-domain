@@ -1,0 +1,54 @@
+#!/bin/csh
+#Verify execution of discretize
+
+set diff=diff
+
+echo "discretize.verify"
+source $MLCDIR/bin/unsetmlc
+setenv LOGLEVEL 1
+setenv OPTION_DUMP .mlcoptions
+rm -f .mlcoptions
+setenv DEBUGLEVEL 0
+setenv DATAFILE glass
+setenv MIN_INST 1
+
+echo "Test 1" > discretize.out
+setenv DUMPSTEM discE
+discretize >>& discretize.out < /dev/null
+$diff discE.data discE.data.exp
+$diff discE.names discE.names.exp
+
+setenv DISC_TYPE 1r
+setenv DUMPSTEM disc1R
+discretize >>& discretize.out < /dev/null
+$diff disc1R.data disc1R.data.exp
+$diff disc1R.names disc1R.names.exp
+
+setenv DISC_TYPE bin
+setenv DUMPSTEM discB
+discretize >>& discretize.out < /dev/null
+$diff discB.data discB.data.exp
+$diff discB.names discB.names.exp
+
+setenv DISC_TYPE c4.5
+setenv DUMPSTEM discC
+discretize >>& discretize.out < /dev/null
+$diff discC.data discC.data.exp
+$diff discC.names discC.names.exp
+
+setenv DISC_TYPE t2
+setenv DUMPSTEM discT
+discretize >>& discretize.out < /dev/null
+$diff discT.data discT.data.exp
+$diff discT.names discT.names.exp
+
+setenv DISC_NUM_INTR mdl
+setenv DUMPSTEM discTMDL
+discretize >>& discretize.out < /dev/null
+$diff discTMDL.data discTMDL.data.exp
+$diff discTMDL.names discTMDL.names.exp
+
+
+$diff discretize.out discretize.exp
+if ($status) exit $status
+

@@ -1,0 +1,260 @@
+1, 3, 5, 7, 9, 121, 3, 5, 7, 9, 12
+1, 3, 5, 7, 9, 12 - 3, 5, 7, 9 = 1, 12
+expected: 1, 12
+proj1: 1, 2, 5, 7, 9
+inst1: 3, 4, 6, 8
+delta1: 2, 5
+new proj: 1, 7, 9
+new inst: 2, 3, 4, 5, 6, 8
+Head shape, Body shape, Is smiling, Holding, Jacket color, Has tie
+Body shape, Is smiling: 
+  round, yes
+  round, yes
+  round, yes
+  round, yes
+  round, no
+  round, no
+  round, no
+  round, no
+  round, no
+  square, yes
+  square, yes
+  square, yes
+  square, yes
+  square, yes
+  square, yes
+  square, yes
+  square, yes
+  square, yes
+  square, yes
+  square, no
+  square, no
+  square, no
+  square, no
+  square, no
+  square, no
+  square, no
+  octagon, yes
+  octagon, yes
+  octagon, yes
+  octagon, yes
+  octagon, yes
+  octagon, yes
+  octagon, yes
+  octagon, yes
+  octagon, yes
+  octagon, no
+  octagon, no
+  octagon, no
+  octagon, no
+  octagon, no
+  octagon, no
+  octagon, no
+  octagon, no
+  octagon, no
+  octagon, no
+  round, yes
+  round, yes
+  round, yes
+  round, yes
+  round, yes
+  round, yes
+  round, yes
+  round, yes
+  round, yes
+  round, no
+  round, no
+  round, no
+  round, no
+  round, no
+  round, no
+  round, no
+  square, yes
+  square, yes
+  square, yes
+  square, yes
+  square, yes
+  square, yes
+  square, yes
+  square, yes
+  square, yes
+  square, no
+  square, no
+  square, no
+  square, no
+  square, no
+  square, no
+  octagon, yes
+  octagon, yes
+  octagon, yes
+  octagon, yes
+  octagon, yes
+  octagon, yes
+  octagon, no
+  octagon, no
+  octagon, no
+  octagon, no
+  octagon, no
+  round, yes
+  round, yes
+  round, yes
+  round, yes
+  round, yes
+  round, no
+  round, no
+  round, no
+  round, no
+  round, no
+  square, yes
+  square, yes
+  square, yes
+  square, yes
+  square, no
+  square, no
+  square, no
+  square, no
+  square, no
+  square, no
+  octagon, yes
+  octagon, yes
+  octagon, yes
+  octagon, yes
+  octagon, yes
+  octagon, yes
+  octagon, yes
+  octagon, yes
+  octagon, yes
+  octagon, no
+  octagon, no
+  octagon, no
+  octagon, no
+  octagon, no
+  octagon, no
+  octagon, no
+  octagon, no
+Head shape, Holding, Jacket color, Has tie: 
+  round, sword, green, yes
+  round, sword, green, no
+  round, flag, yellow, yes
+  round, flag, green, no
+  round, sword, yellow, yes
+  round, sword, yellow, no
+  round, balloon, green, yes
+  round, balloon, blue, yes
+  round, flag, red, no
+  round, sword, red, no
+  round, sword, yellow, yes
+  round, sword, green, yes
+  round, sword, blue, no
+  round, balloon, red, yes
+  round, balloon, green, yes
+  round, balloon, green, no
+  round, balloon, blue, no
+  round, flag, yellow, yes
+  round, flag, blue, no
+  round, sword, yellow, no
+  round, balloon, green, no
+  round, balloon, blue, yes
+  round, balloon, blue, no
+  round, flag, yellow, no
+  round, flag, green, yes
+  round, flag, green, no
+  round, sword, yellow, yes
+  round, sword, blue, yes
+  round, balloon, yellow, yes
+  round, balloon, blue, yes
+  round, flag, red, no
+  round, flag, yellow, no
+  round, flag, green, yes
+  round, flag, blue, yes
+  round, flag, blue, no
+  round, sword, yellow, no
+  round, balloon, red, no
+  round, balloon, yellow, no
+  round, balloon, green, no
+  round, balloon, blue, yes
+  round, balloon, blue, no
+  round, flag, red, yes
+  round, flag, yellow, yes
+  round, flag, blue, yes
+  round, flag, blue, no
+  square, sword, green, yes
+  square, sword, green, no
+  square, balloon, red, yes
+  square, balloon, red, no
+  square, balloon, yellow, no
+  square, balloon, green, yes
+  square, balloon, blue, yes
+  square, balloon, blue, no
+  square, flag, blue, yes
+  square, sword, yellow, no
+  square, sword, green, yes
+  square, sword, blue, no
+  square, balloon, green, yes
+  square, balloon, blue, no
+  square, flag, yellow, no
+  square, flag, blue, yes
+  square, sword, yellow, yes
+  square, sword, yellow, no
+  square, sword, green, yes
+  square, balloon, green, no
+  square, flag, red, yes
+  square, flag, red, no
+  square, flag, yellow, no
+  square, flag, green, no
+  square, flag, blue, no
+  square, sword, red, yes
+  square, sword, green, no
+  square, sword, blue, yes
+  square, sword, blue, no
+  square, balloon, yellow, yes
+  square, flag, blue, yes
+  square, sword, red, yes
+  square, balloon, red, yes
+  square, balloon, green, yes
+  square, flag, red, no
+  square, flag, green, yes
+  square, flag, blue, no
+  square, sword, green, no
+  square, balloon, red, yes
+  square, balloon, red, no
+  square, balloon, yellow, yes
+  square, flag, green, no
+  octagon, sword, red, yes
+  octagon, sword, red, no
+  octagon, balloon, red, yes
+  octagon, balloon, yellow, no
+  octagon, flag, yellow, no
+  octagon, sword, red, yes
+  octagon, sword, yellow, no
+  octagon, balloon, yellow, no
+  octagon, balloon, green, no
+  octagon, flag, yellow, no
+  octagon, sword, red, yes
+  octagon, sword, blue, no
+  octagon, balloon, red, no
+  octagon, balloon, blue, no
+  octagon, sword, red, yes
+  octagon, sword, red, no
+  octagon, sword, green, no
+  octagon, flag, red, yes
+  octagon, flag, yellow, yes
+  octagon, flag, blue, yes
+  octagon, sword, red, yes
+  octagon, sword, yellow, yes
+  octagon, sword, blue, no
+  octagon, balloon, green, no
+  octagon, balloon, blue, no
+  octagon, flag, red, no
+  octagon, flag, yellow, yes
+  octagon, flag, yellow, no
+  octagon, flag, blue, no
+  octagon, sword, red, yes
+  octagon, sword, green, no
+  octagon, sword, blue, yes
+  octagon, sword, blue, no
+  octagon, flag, red, no
+  octagon, flag, yellow, no
+  octagon, flag, green, no
+  octagon, flag, blue, no
+(empty)2, 3, 8

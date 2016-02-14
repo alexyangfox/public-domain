@@ -1,0 +1,12 @@
+
+t_FSSInducer start.
+Projected Categorizer Results
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 420.  Number incorrect: 12
+Generalization accuracy: 96.10%.  Memorization accuracy: 100.00%
+Accuracy: 97.22% +- 0.79% [95.21% - 98.40%]
+
+Proceding with regular train & test
+Accuracy found is 0.972222
+t_FSSInducer completed.

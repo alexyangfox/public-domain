@@ -1,0 +1,21 @@
+#!/bin/csh
+#Verify execution of convertNames
+
+source $MLCDIR/bin/unsetmlc
+setenv LOGLEVEL 1
+setenv DATAFILE monk1
+setenv OPTION_DUMP /tmp/.mlcoptions
+rm -f /tmp/.mlcoptions
+setenv DUMPSTEM /tmp/monk1-tmp
+touch /tmp/monk1-tmp.foo; rm -f /tmp/monk1-tmp*
+rm -f convertNames.out
+rm -f /tmp/monk1-tmp.names
+cp ${MLCDIR}/db/monk1-full.names /tmp/monk1-tmp.names
+convertNames > $MLCDIR/util/convertNames.out
+diff $MLCDIR/util/convertNames.out $MLCDIR/util/convertNames.exp
+if ($status) exit $status
+diff /tmp/monk1-tmp.data ${MLCDIR}/db/monk1-full.data
+if ($status) exit $status
+diff /tmp/monk1-tmp.test ${MLCDIR}/db/monk1-full.test
+if ($status) exit $status
+rm -f /tmp/monk1-tmp.*

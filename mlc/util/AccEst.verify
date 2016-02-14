@@ -1,0 +1,128 @@
+#!/bin/csh
+#Verify execution of AccEst.
+
+source $MLCDIR/bin/unsetmlc
+setenv DEBUGLEVEL 0
+setenv LOGLEVEL 1
+#cross validation: 1
+setenv PROMPTLEVEL req
+setenv OPTION_DUMP .mlcoptions
+rm -f .mlcoptions
+setenv DATAFILE monk1-full
+setenv GET_REAL_ACCURACY true
+setenv INDUCER id3
+setenv INDUCERNAME ID3
+setenv ID3_LOGLEVEL 0
+setenv ACC_ESTIMATOR cv
+setenv ACC_EST_SEED 7258789
+setenv ACC_TRIM 0.1
+setenv CV_FOLDS 10
+setenv CV_TIMES 1
+rm -f AccEst.out
+echo "Test 1" > AccEst.out
+AccEst >>& AccEst.out
+
+#cross validation: 2
+setenv GET_REAL_ACCURACY false
+setenv INDUCER C4.5
+setenv CV_FOLDS 3
+echo "Test 2" >>& AccEst.out
+AccEst >>& AccEst.out
+
+#cross validation: 3
+setenv INDUCER table-maj
+setenv CV_TIMES 0
+setenv DATAFILE lenses
+setenv GET_REAL_ACCURACY true
+echo "Test 3" >>& AccEst.out
+AccEst >>& AccEst.out
+
+#stratified: 4
+setenv DATAFILE monk1-full
+setenv GET_REAL_ACCURACY true
+setenv INDUCER id3
+setenv INDUCERNAME ID3
+setenv ID3_LOGLEVEL 0
+setenv ACC_ESTIMATOR strat
+setenv ACC_EST_SEED 7258789
+setenv ACC_TRIM 0.1
+setenv CV_FOLDS 10
+setenv CV_TIMES 1
+echo "Test 4" >>& AccEst.out
+AccEst >>& AccEst.out
+
+#stratified: 5
+setenv INDUCER C4.5
+setenv CV_FOLDS 3
+echo "Test 5" >>& AccEst.out
+AccEst >>& AccEst.out
+
+#bootstrap: 6
+setenv DATAFILE monk1-full
+setenv GET_REAL_ACCURACY true
+setenv INDUCER id3
+setenv INDUCERNAME ID3
+setenv ID3_LOGLEVEL 0
+setenv ACC_ESTIMATOR boot
+setenv ACC_EST_SEED 7258789
+setenv ACC_TRIM 0.1
+setenv STD_DEV_TRIM 0
+setenv BS_TIMES 10
+setenv BS_FRACTION 0.632
+echo "Test 6" >>& AccEst.out
+AccEst >>& AccEst.out
+
+#bootstrap: 7
+setenv DATAFILE lenses
+setenv INDUCER C4.5
+setenv BS_TIMES 5
+setenv BS_FRACTION 0.5
+echo "Test 7" >>& AccEst.out
+AccEst >>& AccEst.out
+
+#holdout: 8
+setenv DATAFILE monk1-full
+setenv GET_REAL_ACCURACY true
+setenv INDUCER id3
+setenv INDUCERNAME ID3
+setenv ID3_LOGLEVEL 0
+setenv ACC_ESTIMATOR hold
+setenv ACC_EST_SEED 7258789
+setenv ACC_TRIM 0.1
+setenv HO_TIMES 1
+setenv HO_NUMBER 0
+setenv HO_PERCENT 0.67
+echo "Test 8" >>& AccEst.out
+AccEst >>& AccEst.out
+echo "Test 8:2" >>& AccEst.out
+AccEst >>& AccEst.out
+
+#holdout: 9
+setenv HO_TIMES 2
+setenv HO_NUMBER 20
+echo "Test 9" >>& AccEst.out
+AccEst >>& AccEst.out
+
+#holdout: 10
+setenv HO_TIMES 3
+setenv HO_NUMBER -20
+echo "Test 10" >>& AccEst.out
+AccEst >>& AccEst.out
+
+#test-set: 11
+setenv ACC_ESTIMATOR test
+echo "Test 11" >>& AccEst.out
+AccEst >>& AccEst.out
+
+#using .all file (holdout): 12
+setenv HO_TIMES 2
+setenv HO_PERCENT 0.67
+setenv ACC_ESTIMATOR hold
+setenv DATAFILE monk1-full.all
+echo "Test 12" >>& AccEst.out
+AccEst >>& AccEst.out
+
+
+diff AccEst.out AccEst.exp
+exit $status
+

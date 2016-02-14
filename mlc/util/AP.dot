@@ -1,0 +1,55 @@
+/* Machine generated dot file */
+
+digraph G { 
+
+/*  node 0:  */
+node_0 [label="#0 [-m2 -c25]\nest: 55.71% +- 0.25%\nreal: 55.00% +- 3.53%",style=filled,color=gray95]
+node_0->node_1 [label="0"] 
+node_0->node_2 [label="0"] 
+node_0->node_3 [label="0"] 
+node_0->node_4 [label="0"] 
+node_0->node_5 [label="0"] 
+node_0->node_6 [label="0"] 
+node_0->node_7 [label="0"] 
+node_0->node_8 [label="0"] 
+node_0->node_9 [label="0"] 
+/*  node 1:  */
+node_1 [label="#1 [-m3 -c25]\nest: 55.71% +- 0.25%\nreal: 55.00% +- 3.53%"]
+node_1->node_10 [label="0"] 
+node_1->node_11 [label="0"] 
+node_1->node_12 [label="0"] 
+node_1->node_13 [label="0"] 
+node_1->node_14 [label="0"] 
+node_1->node_15 [label="0"] 
+node_1->node_16 [label="0"] 
+/*  node 2:  */
+node_2 [label="#2 [-m1 -c25]\nest: 55.71% +- 0.25%\nreal: 55.00% +- 3.53%"]
+/*  node 3:  */
+node_3 [label="#3 [-m2 -c30]\nest: 55.71% +- 0.25%"]
+/*  node 4:  */
+node_4 [label="#4 [-m2 -c20]\nest: 55.71% +- 0.25%"]
+/*  node 5:  */
+node_5 [label="#5 [-m2 -c25 -g]\nest: 55.71% +- 0.25%"]
+/*  node 6:  */
+node_6 [label="#6 [-m2 -c25 -s]\nest: 55.71% +- 0.25%"]
+/*  node 7:  */
+node_7 [label="#7 [-m2 -c25 -g -s]\nest: 55.71% +- 0.25%"]
+/*  node 8:  */
+node_8 [label="#8 [-m2 -c30 -g -s]\nest: 55.71% +- 0.25%"]
+/*  node 9:  */
+node_9 [label="#9 [-m3 -c30 -g -s]\nest: 55.71% +- 0.25%"]
+/*  node 10:  */
+node_10 [label="#10 [-m4 -c25]\nest: 55.71% +- 0.25%"]
+/*  node 11:  */
+node_11 [label="#11 [-m3 -c30]\nest: 55.71% +- 0.25%"]
+/*  node 12:  */
+node_12 [label="#12 [-m3 -c20]\nest: 55.71% +- 0.25%"]
+/*  node 13:  */
+node_13 [label="#13 [-m3 -c25 -g]\nest: 55.71% +- 0.25%"]
+/*  node 14:  */
+node_14 [label="#14 [-m3 -c25 -s]\nest: 55.71% +- 0.25%"]
+/*  node 15:  */
+node_15 [label="#15 [-m3 -c25 -g -s]\nest: 55.71% +- 0.25%"]
+/*  node 16:  */
+node_16 [label="#16 [-m4 -c30 -g -s]\nest: 55.71% +- 0.25%"]
+}

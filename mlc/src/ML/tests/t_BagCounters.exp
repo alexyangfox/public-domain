@@ -1,0 +1,49 @@
+t_BagCounters executing
+Value counters:
+Attribute 0:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 
+
+  Label 0, label count=9
+  Value counts:  0, 2, 4, 3, 
+
+  Label 1, label count=5
+  Value counts:  0, 3, 0, 2, 
+Attribute 1:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+
+  Label 0, label count=9
+  Value counts:  0, 1, 0, 1, 1, 1, 0, 1, 2, 0, 1, 1, 0, 
+
+  Label 1, label count=5
+  Value counts:  0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 
+Attribute 2:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+
+  Label 0, label count=9
+  Value counts:  0, 1, 2, 1, 1, 2, 0, 1, 0, 1, 
+
+  Label 1, label count=5
+  Value counts:  0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 
+Attribute 3:
+  Label -1, label count=0
+  Value counts:  0, 0, 0, 
+
+  Label 0, label count=9
+  Value counts:  0, 3, 6, 
+
+  Label 1, label count=5
+  Value counts:  0, 3, 2, 
+Attribute counts
+Attribute 0  0, 5, 4, 5, 
+Attribute 1  0, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 
+Attribute 2  0, 1, 3, 1, 1, 3, 1, 2, 1, 1, 
+Attribute 3  0, 6, 8, 
+Testing accessor functions
+label_counts:
+0, 9, 5
+attr_counts:
+0, 5, 4, 5
+Real instances:  14

@@ -1,0 +1,86 @@
+
+C4.5 [release 5] decision tree generator	Wed Sep  8 19:23:05 1993
+----------------------------------------
+
+    Options:
+	File stem </u/mlc/db/monk1>
+
+Read 124 cases (6 attributes) from /u/mlc/db/monk1.data
+
+Decision Tree:
+
+attribute#5 = 1: 1 (29.0)
+attribute#5 = 2:
+|   attribute#3 = 1:
+|   |   attribute#4 = 2: 0 (3.0)
+|   |   attribute#4 = 1:
+|   |   |   attribute#1 = 1: 0 (2.0)
+|   |   |   attribute#1 = 2: 1 (2.0)
+|   |   |   attribute#1 = 3: 1 (1.0)
+|   |   attribute#4 = 3:
+|   |   |   attribute#1 = 1: 0 (3.0/1.0)
+|   |   |   attribute#1 = 2: 1 (1.0)
+|   |   |   attribute#1 = 3: 1 (3.0/1.0)
+|   attribute#3 = 2:
+|   |   attribute#6 = 1:
+|   |   |   attribute#2 = 1: 1 (1.0)
+|   |   |   attribute#2 = 2: 0 (2.0/1.0)
+|   |   |   attribute#2 = 3: 0 (2.0)
+|   |   attribute#6 = 2:
+|   |   |   attribute#2 = 2: 0 (2.0)
+|   |   |   attribute#2 = 3: 0 (3.0/1.0)
+|   |   |   attribute#2 = 1:
+|   |   |   |   attribute#1 = 1: 1 (1.0)
+|   |   |   |   attribute#1 = 2: 0 (2.0)
+|   |   |   |   attribute#1 = 3: 0 (3.0)
+attribute#5 = 3:
+|   attribute#6 = 1: 0 (13.0/3.0)
+|   attribute#6 = 2:
+|   |   attribute#3 = 1: 1 (7.0/2.0)
+|   |   attribute#3 = 2: 0 (10.0/3.0)
+attribute#5 = 4:
+|   attribute#1 = 1:
+|   |   attribute#2 = 1: 1 (1.0)
+|   |   attribute#2 = 2: 0 (5.0)
+|   |   attribute#2 = 3: 0 (8.0)
+|   attribute#1 = 2:
+|   |   attribute#2 = 1: 0 (6.0)
+|   |   attribute#2 = 2: 1 (4.0)
+|   |   attribute#2 = 3: 0 (1.0)
+|   attribute#1 = 3:
+|   |   attribute#2 = 1: 1 (0.0)
+|   |   attribute#2 = 2: 0 (3.0)
+|   |   attribute#2 = 3: 1 (6.0)
+
+
+Simplified Decision Tree:
+
+attribute#5 = 1: 1 (29.0/1.4)
+attribute#5 = 2: 0 (31.0/13.4)
+attribute#5 = 3:
+|   attribute#6 = 1: 0 (13.0/4.7)
+|   attribute#6 = 2:
+|   |   attribute#3 = 1: 1 (7.0/3.4)
+|   |   attribute#3 = 2: 0 (10.0/4.6)
+attribute#5 = 4:
+|   attribute#1 = 1: 0 (14.0/2.5)
+|   attribute#1 = 2:
+|   |   attribute#2 = 1: 0 (6.0/1.2)
+|   |   attribute#2 = 2: 1 (4.0/1.2)
+|   |   attribute#2 = 3: 0 (1.0/0.8)
+|   attribute#1 = 3:
+|   |   attribute#2 = 1: 1 (0.0)
+|   |   attribute#2 = 2: 0 (3.0/1.1)
+|   |   attribute#2 = 3: 1 (6.0/1.2)
+
+
+Tree saved
+
+
+Evaluation on training data (124 items):
+
+	 Before Pruning           After Pruning
+	----------------   ---------------------------
+	Size      Errors   Size      Errors   Estimate
+
+	  43   12( 9.7%)     18   20(16.1%)    (28.6%)   <<

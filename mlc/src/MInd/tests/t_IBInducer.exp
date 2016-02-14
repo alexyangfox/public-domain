@@ -1,0 +1,368 @@
+=================================================
+Data File     : t_IBInducer2
+Voting        : equal
+NNK value     : num-neighbors
+Editing       : No
+Normalization : Interquartile
+Max Epochs    : 1
+K value       : 1
+Weight Vector : 1
+Number of training instances: 8
+Number of test instances: 2.  Unseen: 1,  seen 1.
+Number correct: 0.  Number incorrect: 2
+Generalization accuracy: 0.00%.  Memorization accuracy: 0.00%
+Accuracy: 0.00% +- 0.00% [0.00% - 65.76%]
+=================================================
+
+=================================================
+Data File     : t_IBInducer2
+Voting        : equal
+NNK value     : num-distances
+Editing       : No
+Normalization : Interquartile
+Max Epochs    : 1
+K value       : 1
+Weight Vector : 1
+Number of training instances: 8
+Number of test instances: 2.  Unseen: 1,  seen 1.
+Number correct: 2.  Number incorrect: 0
+Generalization accuracy: 100.00%.  Memorization accuracy: 100.00%
+Accuracy: 100.00% +- 0.00% [34.24% - 100.00%]
+=================================================
+
+=================================================
+Data File     : t_IBInducer3
+Voting        : inverse-distance
+NNK value     : num-neighbors
+Editing       : No
+Normalization : Interquartile
+Max Epochs    : 1
+K value       : 3
+Weight Vector : 1
+Number of training instances: 3
+Number of test instances: 1.  Unseen: 1,  seen 0.
+Number correct: 1.  Number incorrect: 0
+Generalization accuracy: 100.00%.  Memorization accuracy: unknown
+Accuracy: 100.00% +- Undefined [20.65% - 100.00%]
+=================================================
+
+=================================================
+Data File     : t_IBInducer3
+Voting        : equal
+NNK value     : num-neighbors
+Editing       : No
+Normalization : Interquartile
+Max Epochs    : 1
+K value       : 3
+Weight Vector : 1
+Number of training instances: 3
+Number of test instances: 1.  Unseen: 1,  seen 0.
+Number correct: 0.  Number incorrect: 1
+Generalization accuracy: 0.00%.  Memorization accuracy: unknown
+Accuracy: 0.00% +- Undefined [0.00% - 79.35%]
+=================================================
+
+=================================================
+Data File     : t_IBInducer
+Voting        : inverse-distance
+NNK value     : num-distances
+Editing       : Yes
+Normalization : Interquartile
+Max Epochs    : 1
+K value       : 1
+Weight Vector : 1, 1
+Number of training instances: 10
+Number of test instances: 1.  Unseen: 1,  seen 0.
+Number correct: 1.  Number incorrect: 0
+Generalization accuracy: 100.00%.  Memorization accuracy: unknown
+Accuracy: 100.00% +- Undefined [20.65% - 100.00%]
+=================================================
+
+=================================================
+Data File     : t_IBInducer
+Voting        : inverse-distance
+NNK value     : num-distances
+Editing       : Yes
+Normalization : Extreme
+Max Epochs    : 1
+K value       : 1
+Weight Vector : 1, 1
+Number of training instances: 10
+Number of test instances: 1.  Unseen: 1,  seen 0.
+Number correct: 0.  Number incorrect: 1
+Generalization accuracy: 0.00%.  Memorization accuracy: unknown
+Accuracy: 0.00% +- Undefined [0.00% - 79.35%]
+=================================================
+
+=================================================
+Data File     : t_IBInducer
+Voting        : inverse-distance
+NNK value     : num-distances
+Editing       : No
+Normalization : Interquartile
+Max Epochs    : 1
+K value       : 1
+Weight Vector : 1, 1
+Number of training instances: 10
+Number of test instances: 1.  Unseen: 1,  seen 0.
+Number correct: 1.  Number incorrect: 0
+Generalization accuracy: 100.00%.  Memorization accuracy: unknown
+Accuracy: 100.00% +- Undefined [20.65% - 100.00%]
+=================================================
+
+=================================================
+Data File     : t_IBInducer
+Voting        : inverse-distance
+NNK value     : num-distances
+Editing       : No
+Normalization : Extreme
+Max Epochs    : 1
+K value       : 1
+Weight Vector : 1, 1
+Number of training instances: 10
+Number of test instances: 1.  Unseen: 1,  seen 0.
+Number correct: 0.  Number incorrect: 1
+Generalization accuracy: 0.00%.  Memorization accuracy: unknown
+Accuracy: 0.00% +- Undefined [0.00% - 79.35%]
+=================================================
+
+=================================================
+Data File     : iris
+Voting        : inverse-distance
+NNK value     : num-distances
+Editing       : Yes
+Normalization : Interquartile
+Max Epochs    : 1
+K value       : 1
+Weight Vector : 1, 1, 1, 1
+Number of training instances: 100
+Number of test instances: 50.  Unseen: 50,  seen 0.
+Number correct: 42.  Number incorrect: 8
+Generalization accuracy: 84.00%.  Memorization accuracy: unknown
+Accuracy: 84.00% +- 5.24% [71.49% - 91.66%]
+=================================================
+
+=================================================
+Data File     : iris
+Voting        : inverse-distance
+NNK value     : num-distances
+Editing       : Yes
+Normalization : Interquartile
+Max Epochs    : 2
+K value       : 1
+Weight Vector : 1, 1, 1, 1
+Number of training instances: 100
+Number of test instances: 50.  Unseen: 50,  seen 0.
+Number correct: 46.  Number incorrect: 4
+Generalization accuracy: 92.00%.  Memorization accuracy: unknown
+Accuracy: 92.00% +- 3.88% [81.16% - 96.85%]
+=================================================
+
+=================================================
+Data File     : iris
+Voting        : inverse-distance
+NNK value     : num-distances
+Editing       : Yes
+Normalization : Interquartile
+Max Epochs    : 3
+K value       : 1
+Weight Vector : 1, 1, 1, 1
+Number of training instances: 100
+Number of test instances: 50.  Unseen: 50,  seen 0.
+Number correct: 46.  Number incorrect: 4
+Generalization accuracy: 92.00%.  Memorization accuracy: unknown
+Accuracy: 92.00% +- 3.88% [81.16% - 96.85%]
+=================================================
+
+=================================================
+Data File     : iris
+Voting        : inverse-distance
+NNK value     : num-distances
+Editing       : Yes
+Normalization : Extreme
+Max Epochs    : 1
+K value       : 1
+Weight Vector : 1, 1, 1, 1
+Number of training instances: 100
+Number of test instances: 50.  Unseen: 50,  seen 0.
+Number correct: 46.  Number incorrect: 4
+Generalization accuracy: 92.00%.  Memorization accuracy: unknown
+Accuracy: 92.00% +- 3.88% [81.16% - 96.85%]
+=================================================
+
+=================================================
+Data File     : iris
+Voting        : inverse-distance
+NNK value     : num-distances
+Editing       : Yes
+Normalization : Extreme
+Max Epochs    : 2
+K value       : 1
+Weight Vector : 1, 1, 1, 1
+Number of training instances: 100
+Number of test instances: 50.  Unseen: 50,  seen 0.
+Number correct: 46.  Number incorrect: 4
+Generalization accuracy: 92.00%.  Memorization accuracy: unknown
+Accuracy: 92.00% +- 3.88% [81.16% - 96.85%]
+=================================================
+
+=================================================
+Data File     : iris
+Voting        : inverse-distance
+NNK value     : num-distances
+Editing       : Yes
+Normalization : Extreme
+Max Epochs    : 3
+K value       : 1
+Weight Vector : 1, 1, 1, 1
+Number of training instances: 100
+Number of test instances: 50.  Unseen: 50,  seen 0.
+Number correct: 46.  Number incorrect: 4
+Generalization accuracy: 92.00%.  Memorization accuracy: unknown
+Accuracy: 92.00% +- 3.88% [81.16% - 96.85%]
+=================================================
+
+=================================================
+Data File     : monk1
+Voting        : inverse-distance
+NNK value     : num-distances
+Editing       : No
+Normalization : Interquartile
+Max Epochs    : 1
+K value       : 1
+Weight Vector : 1, 1, 0, 0, 1, 0
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 432.  Number incorrect: 0
+Generalization accuracy: 100.00%.  Memorization accuracy: 100.00%
+Accuracy: 100.00% +- 0.00% [99.12% - 100.00%]
+=================================================
+
+=================================================
+Data File     : monk1
+Voting        : inverse-distance
+NNK value     : num-distances
+Editing       : No
+Normalization : Interquartile
+Max Epochs    : 1
+K value       : 3
+Weight Vector : 1, 1, 0, 0, 1, 0
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 432.  Number incorrect: 0
+Generalization accuracy: 100.00%.  Memorization accuracy: 100.00%
+Accuracy: 100.00% +- 0.00% [99.12% - 100.00%]
+=================================================
+
+=================================================
+Data File     : monk1
+Voting        : inverse-distance
+NNK value     : num-distances
+Editing       : No
+Normalization : Interquartile
+Max Epochs    : 1
+K value       : 5
+Weight Vector : 1, 1, 0, 0, 1, 0
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 432.  Number incorrect: 0
+Generalization accuracy: 100.00%.  Memorization accuracy: 100.00%
+Accuracy: 100.00% +- 0.00% [99.12% - 100.00%]
+=================================================
+
+=================================================
+Data File     : iris
+Voting        : equal
+NNK value     : num-distances
+Editing       : No
+Normalization : Interquartile
+Max Epochs    : 1
+K value       : 1
+Weight Vector : 1, 1, 1, 1
+Number of training instances: 100
+Number of test instances: 50.  Unseen: 50,  seen 0.
+Number correct: 48.  Number incorrect: 2
+Generalization accuracy: 96.00%.  Memorization accuracy: unknown
+Accuracy: 96.00% +- 2.80% [86.54% - 98.90%]
+=================================================
+
+=================================================
+Data File     : iris
+Voting        : equal
+NNK value     : num-distances
+Editing       : No
+Normalization : Interquartile
+Max Epochs    : 1
+K value       : 1
+Weight Vector : 1, 1, 1, 1
+Number of training instances: 100
+Number of test instances: 50.  Unseen: 50,  seen 0.
+Number correct: 48.  Number incorrect: 2
+Generalization accuracy: 96.00%.  Memorization accuracy: unknown
+Accuracy: 96.00% +- 2.80% [86.54% - 98.90%]
+=================================================
+
+=================================================
+Data File     : iris
+Voting        : equal
+NNK value     : num-distances
+Editing       : No
+Normalization : Interquartile
+Max Epochs    : 1
+K value       : 3
+Weight Vector : 1, 1, 1, 1
+Number of training instances: 100
+Number of test instances: 50.  Unseen: 50,  seen 0.
+Number correct: 47.  Number incorrect: 3
+Generalization accuracy: 94.00%.  Memorization accuracy: unknown
+Accuracy: 94.00% +- 3.39% [83.78% - 97.94%]
+=================================================
+
+=================================================
+Data File     : iris
+Voting        : inverse-distance
+NNK value     : num-distances
+Editing       : No
+Normalization : Interquartile
+Max Epochs    : 1
+K value       : 3
+Weight Vector : 1, 1, 1, 1
+Number of training instances: 100
+Number of test instances: 50.  Unseen: 50,  seen 0.
+Number correct: 49.  Number incorrect: 1
+Generalization accuracy: 98.00%.  Memorization accuracy: unknown
+Accuracy: 98.00% +- 2.00% [89.50% - 99.65%]
+=================================================
+
+=================================================
+Data File     : iris
+Voting        : equal
+NNK value     : num-neighbors
+Editing       : No
+Normalization : Interquartile
+Max Epochs    : 1
+K value       : 3
+Weight Vector : 1, 1, 1, 1
+Number of training instances: 100
+Number of test instances: 50.  Unseen: 50,  seen 0.
+Number correct: 47.  Number incorrect: 3
+Generalization accuracy: 94.00%.  Memorization accuracy: unknown
+Accuracy: 94.00% +- 3.39% [83.78% - 97.94%]
+=================================================
+
+=================================================
+Data File     : iris
+Voting        : inverse-distance
+NNK value     : num-neighbors
+Editing       : No
+Normalization : Interquartile
+Max Epochs    : 1
+K value       : 3
+Weight Vector : 1, 1, 1, 1
+Number of training instances: 100
+Number of test instances: 50.  Unseen: 50,  seen 0.
+Number correct: 49.  Number incorrect: 1
+Generalization accuracy: 98.00%.  Memorization accuracy: unknown
+Accuracy: 98.00% +- 2.00% [89.50% - 99.65%]
+=================================================
+

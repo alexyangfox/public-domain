@@ -1,0 +1,153 @@
+Data with unknows
+sunny, 85, 85, false, Don't Play.
+sunny, 85, 85, ?, Don't Play.
+sunny, 80, 90, true, Don't Play.
+?, 83, 78, false, Play.
+overcast, 83, 78, false, Play.
+rain, 70, 96, false, Play.
+rain, 68, 80, false, Play.
+rain, 65, 70, true, Don't Play.
+overcast, 64, 65, true, Play.
+sunny, 72, 95, false, Don't Play.
+?, 83, 78, false, Play.
+?, 83, ?, ?, Play.
+sunny, 69, 70, false, Play.
+rain, 75, 80, false, Play.
+sunny, 75, 70, true, Play.
+overcast, 72, 90, true, Play.
+overcast, 72, ?, true, Play.
+overcast, 81, 75, false, Play.
+rain, 71, 80, true, Don't Play.
+?, 83, 78, false, Play.
+
+Data with unknows removed
+sunny, 85, 85, false, Don't Play.
+sunny, 80, 90, true, Don't Play.
+overcast, 83, 78, false, Play.
+rain, 70, 96, false, Play.
+rain, 68, 80, false, Play.
+rain, 65, 70, true, Don't Play.
+overcast, 64, 65, true, Play.
+sunny, 72, 95, false, Don't Play.
+sunny, 69, 70, false, Play.
+rain, 75, 80, false, Play.
+sunny, 75, 70, true, Play.
+overcast, 72, 90, true, Play.
+overcast, 81, 75, false, Play.
+rain, 71, 80, true, Don't Play.
+
+Displaying names file
+|Test names file
+Play, Don't Play.
+
+outlook: sunny, overcast, rain.
+temperature: 64, 65, 69, 68, 70, 71, 72, 75, 80, 81, 83, 85.
+humidity: 65, 70, 75, 78, 80, 85, 90, 95, 96.
+windy: true, false.
+
+Data with conflicting instances
+sunny, 85, 85, false, Don't Play.
+sunny, 85, 85, false, Don't Play.
+sunny, 85, 85, false, Play.
+sunny, 85, 85, false, Cat3.
+sunny, 85, 85, false, Cat3.
+rain, 70, 96, false, Cat3.
+sunny, 85, 85, false, Cat3.
+sunny, 85, 85, false, Cat4.
+sunny, 80, 90, true, Don't Play.
+overcast, 83, 78, false, Play.
+rain, 70, 96, false, Play.
+rain, 70, 96, false, Don't Play.
+rain, 70, 96, false, Cat3.
+rain, 68, 80, false, Play.
+rain, 65, 70, true, Don't Play.
+overcast, 64, 65, true, Play.
+sunny, 72, 95, false, Don't Play.
+sunny, 69, 70, false, Play.
+rain, 75, 80, false, Play.
+rain, 75, 80, false, Play.
+sunny, 75, 70, true, Play.
+overcast, 72, 90, true, Play.
+overcast, 81, 75, false, Play.
+rain, 71, 80, true, Don't Play.
+rain, 70, 96, false, Cat4.
+
+Data with conflicting instances removed
+sunny, 85, 85, false, Cat3.
+rain, 70, 96, false, Cat3.
+sunny, 80, 90, true, Don't Play.
+overcast, 83, 78, false, Play.
+rain, 68, 80, false, Play.
+rain, 65, 70, true, Don't Play.
+overcast, 64, 65, true, Play.
+sunny, 72, 95, false, Don't Play.
+sunny, 69, 70, false, Play.
+rain, 75, 80, false, Play.
+sunny, 75, 70, true, Play.
+overcast, 72, 90, true, Play.
+overcast, 81, 75, false, Play.
+rain, 71, 80, true, Don't Play.
+
+Data with all attributes
+sunny, 85, 85, false, Don't Play.
+sunny, 80, 90, true, Don't Play.
+overcast, 83, 78, false, Play.
+rain, 70, 96, false, Play.
+rain, 68, 80, false, Play.
+rain, 65, 70, true, Don't Play.
+overcast, 64, 65, true, Play.
+sunny, 72, 95, false, Don't Play.
+sunny, 69, 70, false, Play.
+rain, 75, 80, false, Play.
+sunny, 75, 70, true, Play.
+overcast, 72, 90, true, Play.
+overcast, 81, 75, false, Play.
+rain, 71, 80, true, Don't Play.
+
+Data with an attribute removed
+sunny, 85, 85, Don't Play.
+sunny, 80, 90, Don't Play.
+overcast, 83, 78, Play.
+rain, 70, 96, Play.
+rain, 68, 80, Play.
+rain, 65, 70, Don't Play.
+overcast, 64, 65, Play.
+sunny, 72, 95, Don't Play.
+sunny, 69, 70, Play.
+rain, 75, 80, Play.
+sunny, 75, 70, Play.
+overcast, 72, 90, Play.
+overcast, 81, 75, Play.
+rain, 71, 80, Don't Play.
+
+Data with all attributes
+sunny, 85, 85, false, Don't Play.
+sunny, 80, 90, true, Don't Play.
+overcast, 83, 78, false, Play.
+rain, 70, 96, false, Play.
+rain, 68, 80, false, Play.
+rain, 65, 70, true, Don't Play.
+overcast, 64, 65, true, Play.
+sunny, 72, 95, false, Don't Play.
+sunny, 69, 70, false, Play.
+rain, 75, 80, false, Play.
+sunny, 75, 70, true, Play.
+overcast, 72, 90, true, Play.
+overcast, 81, 75, false, Play.
+rain, 71, 80, true, Don't Play.
+
+Data with multiple attributes removed
+sunny, 85, Don't Play.
+sunny, 90, Don't Play.
+overcast, 78, Play.
+rain, 96, Play.
+rain, 80, Play.
+rain, 70, Don't Play.
+overcast, 65, Play.
+sunny, 95, Don't Play.
+sunny, 70, Play.
+rain, 80, Play.
+sunny, 70, Play.
+overcast, 90, Play.
+overcast, 75, Play.
+rain, 80, Don't Play.

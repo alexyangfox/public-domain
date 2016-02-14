@@ -1,0 +1,58 @@
+#!/bin/csh
+# Compile MLC utililty program
+# Ronny Kohavi 1994
+# Greg Snyder, 9 Jan 1995
+# Ronny Kohavi 11 Nov 1995 allow parallel execution.
+# If a .verify file exists, it is run
+# If the first argument is X, we link with X motif
+
+
+if ("$1" == "") then
+  echo Missing first argument (output file)
+  exit 2
+else if ("$2" == "") then
+  echo Missing second argument (source file)
+  exit 2
+else if ("$3" == "") then
+  echo Missing third argument (dirname)
+  exit 2
+endif
+
+echo Making utility $1
+if ("$1" == "X") then
+  set xlink= -lXm -lXt -lX11
+  shift
+else
+  set xlink=
+endif
+
+set tdirname=$3
+set restargs=($argv)
+shift restargs
+shift restargs
+shift restargs
+
+umask 002 
+rm -f $1
+if ("$CCECHO" == "yes")  echo CC -o $1 \$CCFLAGS $2 -L${MLCDIR}/src/${MLCLIB}/ $restargs $xlink 
+CC -o $1 $CCFLAGS $2 -L${MLCDIR}/src/${MLCLIB}/ $restargs $xlink 
+if ($status) then 
+  rm -f $1
+  echo "*** compilation failed ***"
+  exit 2
+endif
+
+strip $1
+
+set verifyfile=$1.verify
+if (-e $verifyfile) then
+echo "Running $verifyfile"
+$verifyfile < /dev/null
+
+if ("$status" != 0) then
+echo "*** error in verify ***"
+# rm -f $1
+exit 2
+endif
+
+endif

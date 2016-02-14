@@ -1,0 +1,408 @@
+Test 1
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = req
+OPTION INDUCER = id3
+OPTION INDUCER_NAME = ID3
+OPTION ID3_MAX_LEVEL = 0
+OPTION ID3_LBOUND_MIN_SPLIT = 1
+OPTION ID3_UBOUND_MIN_SPLIT = 25
+OPTION ID3_MIN_SPLIT_WEIGHT = 0
+OPTION ID3_DEBUG = false
+OPTION ID3_UNKNOWN_EDGES = true
+OPTION ID3_SPLIT_BY = normalized_mutual_info
+OPTION DATAFILE = monk1-full
+OPTION NAMESFILE = monk1-full.names
+OPTION ACC_ESTIMATOR = cv
+OPTION ACC_EST_SEED = 7258789
+OPTION ACC_TRIM = 0.1
+OPTION CV_FOLDS = 10
+OPTION CV_TIMES = 1
+OPTION CV_FRACT = 1
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+OPTION TESTFILE = monk1-full.test
+Reading monk1-full.test..... done.
+Inducer: ID3
+Number of folds: 10, Number of times: 1
+Untrimmed accuracy 76.47% +- 3.82% (58.33% - 92.31%)
+Method: cv
+Trim: 0.1
+Seed: 7258789
+Folds: 10,  Times: 1
+Accuracy: 76.76% +- 4.73% (58.33% - 92.31%).
+Test Set: 81.02% +- 1.89% [77.05% - 84.44%].  Bias: -4.26%
+Test 2
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = req
+OPTION INDUCER = C4.5
+OPTION INDUCER_NAME = c4.5
+OPTION C45_FLAGS = -u -f %s 
+OPTION DATAFILE = monk1-full
+OPTION NAMESFILE = monk1-full.names
+OPTION ACC_ESTIMATOR = cv
+OPTION ACC_EST_SEED = 7258789
+OPTION ACC_TRIM = 0.1
+OPTION CV_FOLDS = 3
+OPTION CV_TIMES = 1
+OPTION CV_FRACT = 1
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+OPTION TESTFILE = monk1-full.test
+Reading monk1-full.test..... done.
+Inducer: c4.5
+Number of folds: 3, Number of times: 1
+OPTION C45_RETRIES = 0
+OPTION C45_STATS = false
+Untrimmed accuracy 74.95% +- 7.01% (60.98% - 82.93%)
+Method: cv
+Trim: 0.1
+Seed: 7258789
+Folds: 3,  Times: 1
+Accuracy: 74.95% +- 8.76% (60.98% - 82.93%).
+Test Set: 75.69% +- 2.07% [71.43% - 79.50%].  Bias: -0.74%
+Average nodes for all C4.5 trees:19.
+Test 3
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = req
+OPTION INDUCER = table-maj
+OPTION INDUCER_NAME = table-majority
+OPTION DATAFILE = lenses
+OPTION NAMESFILE = lenses.names
+OPTION ACC_ESTIMATOR = cv
+OPTION ACC_EST_SEED = 7258789
+OPTION ACC_TRIM = 0.1
+OPTION CV_FOLDS = 3
+OPTION CV_TIMES = 0
+OPTION CV_FRACT = 1
+OPTION DES_STD_DEV = 0.01
+OPTION MAX_TIMES = 5
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading lenses.data done.
+OPTION TESTFILE = lenses.test
+Reading lenses.test done.
+Inducer: table-majority
+Number of folds: 3. Looping until std-dev of mean =0.01
+Untrimmed accuracy 75.11% +- 4.20% (50.00% - 100.00%)
+Method: cv
+Trim: 0.1
+Seed: 7258789
+Folds: 3,  Desired std dev: 0.01,  Max times: 5
+Accuracy: 75.13% +- 4.96% (50.00% - 100.00%).
+Test Set: 37.50% +- 18.30% [13.68% - 69.43%].  Bias: 37.63%
+Test 4
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = req
+OPTION INDUCER = id3
+OPTION INDUCER_NAME = ID3
+OPTION ID3_MAX_LEVEL = 0
+OPTION ID3_LBOUND_MIN_SPLIT = 1
+OPTION ID3_UBOUND_MIN_SPLIT = 25
+OPTION ID3_MIN_SPLIT_WEIGHT = 0
+OPTION ID3_DEBUG = false
+OPTION ID3_UNKNOWN_EDGES = true
+OPTION ID3_SPLIT_BY = normalized_mutual_info
+OPTION DATAFILE = monk1-full
+OPTION NAMESFILE = monk1-full.names
+OPTION ACC_ESTIMATOR = strat
+OPTION ACC_EST_SEED = 7258789
+OPTION ACC_TRIM = 0.1
+OPTION CV_FOLDS = 10
+OPTION CV_TIMES = 1
+OPTION CV_FRACT = 1
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+OPTION TESTFILE = monk1-full.test
+Reading monk1-full.test..... done.
+Inducer: ID3
+Number of folds: 10, Number of times: 1
+Untrimmed accuracy 75.64% +- 4.66% (41.67% - 92.31%)
+Method: strat-cv
+Trim: 0.1
+Seed: 7258789
+Folds: 10,  Times: 1
+Accuracy: 77.80% +- 3.73% (41.67% - 92.31%).
+Test Set: 81.02% +- 1.89% [77.05% - 84.44%].  Bias: -3.21%
+Test 5
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = req
+OPTION INDUCER = C4.5
+OPTION INDUCER_NAME = c4.5
+OPTION C45_FLAGS = -u -f %s 
+OPTION DATAFILE = monk1-full
+OPTION NAMESFILE = monk1-full.names
+OPTION ACC_ESTIMATOR = strat
+OPTION ACC_EST_SEED = 7258789
+OPTION ACC_TRIM = 0.1
+OPTION CV_FOLDS = 3
+OPTION CV_TIMES = 1
+OPTION CV_FRACT = 1
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+OPTION TESTFILE = monk1-full.test
+Reading monk1-full.test..... done.
+Inducer: c4.5
+Number of folds: 3, Number of times: 1
+OPTION C45_RETRIES = 0
+OPTION C45_STATS = false
+Untrimmed accuracy 74.99% +- 4.96% (65.85% - 82.93%)
+Method: strat-cv
+Trim: 0.1
+Seed: 7258789
+Folds: 3,  Times: 1
+Accuracy: 74.99% +- 6.21% (65.85% - 82.93%).
+Test Set: 75.69% +- 2.07% [71.43% - 79.50%].  Bias: -0.70%
+Average nodes for all C4.5 trees:21.25.
+Test 6
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = req
+OPTION INDUCER = id3
+OPTION INDUCER_NAME = ID3
+OPTION ID3_MAX_LEVEL = 0
+OPTION ID3_LBOUND_MIN_SPLIT = 1
+OPTION ID3_UBOUND_MIN_SPLIT = 25
+OPTION ID3_MIN_SPLIT_WEIGHT = 0
+OPTION ID3_DEBUG = false
+OPTION ID3_UNKNOWN_EDGES = true
+OPTION ID3_SPLIT_BY = normalized_mutual_info
+OPTION DATAFILE = monk1-full
+OPTION NAMESFILE = monk1-full.names
+OPTION ACC_ESTIMATOR = boot
+OPTION ACC_EST_SEED = 7258789
+OPTION ACC_TRIM = 0.1
+OPTION BS_TIMES = 10
+OPTION BS_FRACTION = 0.632
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+OPTION TESTFILE = monk1-full.test
+Reading monk1-full.test..... done.
+Method: bootstrap
+Trim: 0.1
+Seed: 7258789
+Times: 10,  Fraction: 0.632
+Accuracy: 87.68% +- 1.93% (77.53% - 94.94%).
+Test Set: 81.02% +- 1.89% [77.05% - 84.44%].  Bias: 6.66%
+Test 7
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = req
+OPTION INDUCER = C4.5
+OPTION INDUCER_NAME = c4.5
+OPTION C45_FLAGS = -u -f %s 
+OPTION DATAFILE = lenses
+OPTION NAMESFILE = lenses.names
+OPTION ACC_ESTIMATOR = boot
+OPTION ACC_EST_SEED = 7258789
+OPTION ACC_TRIM = 0.1
+OPTION BS_TIMES = 5
+OPTION BS_FRACTION = 0.5
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading lenses.data done.
+OPTION TESTFILE = lenses.test
+Reading lenses.test done.
+OPTION C45_RETRIES = 0
+OPTION C45_STATS = false
+Method: bootstrap
+Trim: 0.1
+Seed: 7258789
+Times: 5,  Fraction: 0.5
+Accuracy: 81.92% +- 2.75% (75.45% - 86.88%).
+Test Set: 62.50% +- 18.30% [30.57% - 86.32%].  Bias: 19.42%
+Average nodes for all C4.5 trees:6.14286.
+Test 8
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = req
+OPTION INDUCER = id3
+OPTION INDUCER_NAME = ID3
+OPTION ID3_MAX_LEVEL = 0
+OPTION ID3_LBOUND_MIN_SPLIT = 1
+OPTION ID3_UBOUND_MIN_SPLIT = 25
+OPTION ID3_MIN_SPLIT_WEIGHT = 0
+OPTION ID3_DEBUG = false
+OPTION ID3_UNKNOWN_EDGES = true
+OPTION ID3_SPLIT_BY = normalized_mutual_info
+OPTION DATAFILE = monk1-full
+OPTION NAMESFILE = monk1-full.names
+OPTION ACC_ESTIMATOR = hold
+OPTION ACC_EST_SEED = 7258789
+OPTION ACC_TRIM = 0.1
+OPTION HO_TIMES = 1
+OPTION HO_NUMBER = 0
+OPTION HO_PERCENT = 0.67
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+OPTION TESTFILE = monk1-full.test
+Reading monk1-full.test..... done.
+Inducer: ID3
+Description: 1 x hold out 67%
+Accuracy: 82.93%
+Method: hold-out
+Trim: 0.1
+Seed: 7258789
+Times: 1,  Percent: 0.67
+Accuracy: 82.93%.
+Test Set: 81.02% +- 1.89% [77.05% - 84.44%].  Bias: 1.91%
+Test 8:2
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = req
+OPTION INDUCER = id3
+OPTION INDUCER_NAME = ID3
+OPTION ID3_MAX_LEVEL = 0
+OPTION ID3_LBOUND_MIN_SPLIT = 1
+OPTION ID3_UBOUND_MIN_SPLIT = 25
+OPTION ID3_MIN_SPLIT_WEIGHT = 0
+OPTION ID3_DEBUG = false
+OPTION ID3_UNKNOWN_EDGES = true
+OPTION ID3_SPLIT_BY = normalized_mutual_info
+OPTION DATAFILE = monk1-full
+OPTION NAMESFILE = monk1-full.names
+OPTION ACC_ESTIMATOR = hold
+OPTION ACC_EST_SEED = 7258789
+OPTION ACC_TRIM = 0.1
+OPTION HO_TIMES = 1
+OPTION HO_NUMBER = 0
+OPTION HO_PERCENT = 0.67
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+OPTION TESTFILE = monk1-full.test
+Reading monk1-full.test..... done.
+Inducer: ID3
+Description: 1 x hold out 67%
+Accuracy: 82.93%
+Method: hold-out
+Trim: 0.1
+Seed: 7258789
+Times: 1,  Percent: 0.67
+Accuracy: 82.93%.
+Test Set: 81.02% +- 1.89% [77.05% - 84.44%].  Bias: 1.91%
+Test 9
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = req
+OPTION INDUCER = id3
+OPTION INDUCER_NAME = ID3
+OPTION ID3_MAX_LEVEL = 0
+OPTION ID3_LBOUND_MIN_SPLIT = 1
+OPTION ID3_UBOUND_MIN_SPLIT = 25
+OPTION ID3_MIN_SPLIT_WEIGHT = 0
+OPTION ID3_DEBUG = false
+OPTION ID3_UNKNOWN_EDGES = true
+OPTION ID3_SPLIT_BY = normalized_mutual_info
+OPTION DATAFILE = monk1-full
+OPTION NAMESFILE = monk1-full.names
+OPTION ACC_ESTIMATOR = hold
+OPTION ACC_EST_SEED = 7258789
+OPTION ACC_TRIM = 0.1
+OPTION HO_TIMES = 2
+OPTION HO_NUMBER = 20
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+OPTION TESTFILE = monk1-full.test
+Reading monk1-full.test..... done.
+Inducer: ID3
+Description: 2 x hold out 20
+Accuracy: 68.27% +- 0.00% (68.27% - 68.27%)
+Method: hold-out
+Trim: 0.1
+Seed: 7258789
+Times: 2,  Number: 20
+Accuracy: 68.27% +- 0.00% (68.27% - 68.27%).
+Test Set: 81.02% +- 1.89% [77.05% - 84.44%].  Bias: -12.75%
+Test 10
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = req
+OPTION INDUCER = id3
+OPTION INDUCER_NAME = ID3
+OPTION ID3_MAX_LEVEL = 0
+OPTION ID3_LBOUND_MIN_SPLIT = 1
+OPTION ID3_UBOUND_MIN_SPLIT = 25
+OPTION ID3_MIN_SPLIT_WEIGHT = 0
+OPTION ID3_DEBUG = false
+OPTION ID3_UNKNOWN_EDGES = true
+OPTION ID3_SPLIT_BY = normalized_mutual_info
+OPTION DATAFILE = monk1-full
+OPTION NAMESFILE = monk1-full.names
+OPTION ACC_ESTIMATOR = hold
+OPTION ACC_EST_SEED = 7258789
+OPTION ACC_TRIM = 0.1
+OPTION HO_TIMES = 3
+OPTION HO_NUMBER = -20
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+OPTION TESTFILE = monk1-full.test
+Reading monk1-full.test..... done.
+Inducer: ID3
+Description: 3 x hold out -20
+Accuracy: 80.00% +- 2.89% (75.00% - 85.00%)
+Method: hold-out
+Trim: 0.1
+Seed: 7258789
+Times: 3,  Number: -20
+Accuracy: 80.00% +- 3.61% (75.00% - 85.00%).
+Test Set: 81.02% +- 1.89% [77.05% - 84.44%].  Bias: -1.02%
+Test 11
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = req
+OPTION INDUCER = id3
+OPTION INDUCER_NAME = ID3
+OPTION ID3_MAX_LEVEL = 0
+OPTION ID3_LBOUND_MIN_SPLIT = 1
+OPTION ID3_UBOUND_MIN_SPLIT = 25
+OPTION ID3_MIN_SPLIT_WEIGHT = 0
+OPTION ID3_DEBUG = false
+OPTION ID3_UNKNOWN_EDGES = true
+OPTION ID3_SPLIT_BY = normalized_mutual_info
+OPTION DATAFILE = monk1-full
+OPTION NAMESFILE = monk1-full.names
+OPTION ACC_ESTIMATOR = test
+OPTION ACC_EST_SEED = 7258789
+OPTION ACC_TRIM = 0.1
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.data.. done.
+OPTION TESTFILE = monk1-full.test
+Reading monk1-full.test..... done.
+Method: test-set
+Trim: 0.1
+Seed: 7258789
+Accuracy: 81.02% (test set).
+Test Set: 81.02% +- 1.89% [77.05% - 84.44%].  Bias: 0.00%
+Test 12
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = req
+OPTION INDUCER = id3
+OPTION INDUCER_NAME = ID3
+OPTION ID3_MAX_LEVEL = 0
+OPTION ID3_LBOUND_MIN_SPLIT = 1
+OPTION ID3_UBOUND_MIN_SPLIT = 25
+OPTION ID3_MIN_SPLIT_WEIGHT = 0
+OPTION ID3_DEBUG = false
+OPTION ID3_UNKNOWN_EDGES = true
+OPTION ID3_SPLIT_BY = normalized_mutual_info
+OPTION DATAFILE = monk1-full.all
+OPTION NAMESFILE = monk1-full.names
+OPTION ACC_ESTIMATOR = hold
+OPTION ACC_EST_SEED = 7258789
+OPTION ACC_TRIM = 0.1
+OPTION HO_TIMES = 2
+OPTION HO_NUMBER = -20
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading monk1-full.all..... done.
+OPTION TESTFILE =  
+Inducer: ID3
+Description: 2 x hold out -20
+Accuracy: 100.00% +- 0.00% (100.00% - 100.00%)
+Method: hold-out
+Trim: 0.1
+Seed: 7258789
+Times: 2,  Number: -20
+Accuracy: 100.00% +- 0.00% (100.00% - 100.00%)

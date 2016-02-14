@@ -1,0 +1,294 @@
+Nominal Attribute is: "test nominal1", nominal
+	names format: test nominal1: VAL0.
+
+Real Attribute is: "test real1", real
+	names format: test real1: continuous.
+
+Nominal Attribute is: "test nominal2", nominal
+	names format: test nominal2: VAL0, VAL1.
+
+Real Attribute is: "test real2", real
+	names format: test real2: continuous.
+
+Nominal Attribute is: "test nominal3", nominal
+	names format: test nominal3: VAL0, VAL1, VAL2.
+
+Real Attribute is: "test real3", real
+	names format: test real3: continuous.
+
+Nominal Attribute is: "test nominal4", nominal
+	names format: test nominal4: VAL0, VAL1, VAL2, VAL3.
+
+Real Attribute is: "test real4", real
+	names format: test real4: continuous.
+
+Nominal Attribute is: "test nominal5", nominal
+	names format: test nominal5: VAL0, VAL1, VAL2, VAL3, VAL4.
+
+Real Attribute is: "test real5", real
+	names format: test real5: continuous.
+
+Nominal Attribute is: "test nominal6", nominal
+	names format: test nominal6: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5.
+
+Real Attribute is: "test real6", real
+	names format: test real6: continuous.
+
+Nominal Attribute is: "test nominal7", nominal
+	names format: test nominal7: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6.
+
+Real Attribute is: "test real7", real
+	names format: test real7: continuous.
+
+Nominal Attribute is: "test nominal8", nominal
+	names format: test nominal8: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7.
+
+Real Attribute is: "test real8", real
+	names format: test real8: continuous.
+
+Nominal Attribute is: "test nominal9", nominal
+	names format: test nominal9: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8.
+
+Real Attribute is: "test real9", real
+	names format: test real9: continuous.
+
+Nominal Attribute is: "test nominal10", nominal
+	names format: test nominal10: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9.
+
+Real Attribute is: "test real10", real
+	names format: test real10: continuous.
+
+Nominal Attribute is: "test nominal11", nominal
+	names format: test nominal11: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10.
+
+Real Attribute is: "test real11", real
+	names format: test real11: continuous.
+
+Nominal Attribute is: "test nominal12", nominal
+	names format: test nominal12: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11.
+
+Real Attribute is: "test real12", real
+	names format: test real12: continuous.
+
+Nominal Attribute is: "test nominal13", nominal
+	names format: test nominal13: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12.
+
+Real Attribute is: "test real13", real
+	names format: test real13: continuous.
+
+Nominal Attribute is: "test nominal14", nominal
+	names format: test nominal14: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13.
+
+Real Attribute is: "test real14", real
+	names format: test real14: continuous.
+
+Nominal Attribute is: "test nominal15", nominal
+	names format: test nominal15: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14.
+
+Real Attribute is: "test real15", real
+	names format: test real15: continuous.
+
+Nominal Attribute is: "test nominal16", nominal
+	names format: test nominal16: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15.
+
+Real Attribute is: "test real16", real
+	names format: test real16: continuous.
+
+Nominal Attribute is: "test nominal17", nominal
+	names format: test nominal17: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16.
+
+Real Attribute is: "test real17", real
+	names format: test real17: continuous.
+
+Nominal Attribute is: "test nominal18", nominal
+	names format: test nominal18: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17.
+
+Real Attribute is: "test real18", real
+	names format: test real18: continuous.
+
+Nominal Attribute is: "test nominal19", nominal
+	names format: test nominal19: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18.
+
+Real Attribute is: "test real19", real
+	names format: test real19: continuous.
+
+Nominal Attribute is: "test nominal20", nominal
+	names format: test nominal20: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18, VAL19.
+
+Real Attribute is: "test real20", real
+	names format: test real20: continuous.
+
+Nominal Attribute is: "test nominal21", nominal
+	names format: test nominal21: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18, VAL19, VAL20.
+
+Real Attribute is: "test real21", real
+	names format: test real21: continuous.
+
+Nominal Attribute is: "test nominal22", nominal
+	names format: test nominal22: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18, VAL19, VAL20, VAL21.
+
+Real Attribute is: "test real22", real
+	names format: test real22: continuous.
+
+Nominal Attribute is: "test nominal23", nominal
+	names format: test nominal23: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18, VAL19, VAL20, VAL21, VAL22.
+
+Real Attribute is: "test real23", real
+	names format: test real23: continuous.
+
+Nominal Attribute is: "test nominal24", nominal
+	names format: test nominal24: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18, VAL19, VAL20, VAL21, VAL22, VAL23.
+
+Real Attribute is: "test real24", real
+	names format: test real24: continuous.
+
+Nominal Attribute is: "test nominal25", nominal
+	names format: test nominal25: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18, VAL19, VAL20, VAL21, VAL22, VAL23, VAL24.
+
+Real Attribute is: "test real25", real
+	names format: test real25: continuous.
+
+Nominal Attribute is: "test nominal26", nominal
+	names format: test nominal26: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18, VAL19, VAL20, VAL21, VAL22, VAL23, VAL24, VAL25.
+
+Real Attribute is: "test real26", real
+	names format: test real26: continuous.
+
+Nominal Attribute is: "test nominal27", nominal
+	names format: test nominal27: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18, VAL19, VAL20, VAL21, VAL22, VAL23, VAL24, VAL25, VAL26.
+
+Real Attribute is: "test real27", real
+	names format: test real27: continuous.
+
+Nominal Attribute is: "test nominal28", nominal
+	names format: test nominal28: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18, VAL19, VAL20, VAL21, VAL22, VAL23, VAL24, VAL25, VAL26, VAL27.
+
+Real Attribute is: "test real28", real
+	names format: test real28: continuous.
+
+Nominal Attribute is: "test nominal29", nominal
+	names format: test nominal29: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18, VAL19, VAL20, VAL21, VAL22, VAL23, VAL24, VAL25, VAL26, VAL27, VAL28.
+
+Real Attribute is: "test real29", real
+	names format: test real29: continuous.
+
+Nominal Attribute is: "test nominal30", nominal
+	names format: test nominal30: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18, VAL19, VAL20, VAL21, VAL22, VAL23, VAL24, VAL25, VAL26, VAL27, VAL28, VAL29.
+
+Real Attribute is: "test real30", real
+	names format: test real30: continuous.
+
+Nominal Attribute is: "test nominal31", nominal
+	names format: test nominal31: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18, VAL19, VAL20, VAL21, VAL22, VAL23, VAL24, VAL25, VAL26, VAL27, VAL28, VAL29, VAL30.
+
+Real Attribute is: "test real31", real
+	names format: test real31: continuous.
+
+Nominal Attribute is: "test nominal32", nominal
+	names format: test nominal32: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18, VAL19, VAL20, VAL21, VAL22, VAL23, VAL24, VAL25, VAL26, VAL27, VAL28, VAL29, VAL30, VAL31.
+
+Real Attribute is: "test real32", real
+	names format: test real32: continuous.
+
+Nominal Attribute is: "test nominal33", nominal
+	names format: test nominal33: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18, VAL19, VAL20, VAL21, VAL22, VAL23, VAL24, VAL25, VAL26, VAL27, VAL28, VAL29, VAL30, VAL31, VAL32.
+
+Real Attribute is: "test real33", real
+	names format: test real33: continuous.
+
+Nominal Attribute is: "test nominal34", nominal
+	names format: test nominal34: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18, VAL19, VAL20, VAL21, VAL22, VAL23, VAL24, VAL25, VAL26, VAL27, VAL28, VAL29, VAL30, VAL31, VAL32, VAL33.
+
+Real Attribute is: "test real34", real
+	names format: test real34: continuous.
+
+Nominal Attribute is: "test nominal35", nominal
+	names format: test nominal35: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18, VAL19, VAL20, VAL21, VAL22, VAL23, VAL24, VAL25, VAL26, VAL27, VAL28, VAL29, VAL30, VAL31, VAL32, VAL33, VAL34.
+
+Real Attribute is: "test real35", real
+	names format: test real35: continuous.
+
+Nominal Attribute is: "test nominal36", nominal
+	names format: test nominal36: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18, VAL19, VAL20, VAL21, VAL22, VAL23, VAL24, VAL25, VAL26, VAL27, VAL28, VAL29, VAL30, VAL31, VAL32, VAL33, VAL34, VAL35.
+
+Real Attribute is: "test real36", real
+	names format: test real36: continuous.
+
+Nominal Attribute is: "test nominal37", nominal
+	names format: test nominal37: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18, VAL19, VAL20, VAL21, VAL22, VAL23, VAL24, VAL25, VAL26, VAL27, VAL28, VAL29, VAL30, VAL31, VAL32, VAL33, VAL34, VAL35, VAL36.
+
+Real Attribute is: "test real37", real
+	names format: test real37: continuous.
+
+Nominal Attribute is: "test nominal38", nominal
+	names format: test nominal38: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18, VAL19, VAL20, VAL21, VAL22, VAL23, VAL24, VAL25, VAL26, VAL27, VAL28, VAL29, VAL30, VAL31, VAL32, VAL33, VAL34, VAL35, VAL36, VAL37.
+
+Real Attribute is: "test real38", real
+	names format: test real38: continuous.
+
+Nominal Attribute is: "test nominal39", nominal
+	names format: test nominal39: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18, VAL19, VAL20, VAL21, VAL22, VAL23, VAL24, VAL25, VAL26, VAL27, VAL28, VAL29, VAL30, VAL31, VAL32, VAL33, VAL34, VAL35, VAL36, VAL37, VAL38.
+
+Real Attribute is: "test real39", real
+	names format: test real39: continuous.
+
+Nominal Attribute is: "test nominal40", nominal
+	names format: test nominal40: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18, VAL19, VAL20, VAL21, VAL22, VAL23, VAL24, VAL25, VAL26, VAL27, VAL28, VAL29, VAL30, VAL31, VAL32, VAL33, VAL34, VAL35, VAL36, VAL37, VAL38, VAL39.
+
+Real Attribute is: "test real40", real
+	names format: test real40: continuous.
+
+Nominal Attribute is: "test nominal41", nominal
+	names format: test nominal41: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18, VAL19, VAL20, VAL21, VAL22, VAL23, VAL24, VAL25, VAL26, VAL27, VAL28, VAL29, VAL30, VAL31, VAL32, VAL33, VAL34, VAL35, VAL36, VAL37, VAL38, VAL39, VAL40.
+
+Real Attribute is: "test real41", real
+	names format: test real41: continuous.
+
+Nominal Attribute is: "test nominal42", nominal
+	names format: test nominal42: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18, VAL19, VAL20, VAL21, VAL22, VAL23, VAL24, VAL25, VAL26, VAL27, VAL28, VAL29, VAL30, VAL31, VAL32, VAL33, VAL34, VAL35, VAL36, VAL37, VAL38, VAL39, VAL40, VAL41.
+
+Real Attribute is: "test real42", real
+	names format: test real42: continuous.
+
+Nominal Attribute is: "test nominal43", nominal
+	names format: test nominal43: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18, VAL19, VAL20, VAL21, VAL22, VAL23, VAL24, VAL25, VAL26, VAL27, VAL28, VAL29, VAL30, VAL31, VAL32, VAL33, VAL34, VAL35, VAL36, VAL37, VAL38, VAL39, VAL40, VAL41, VAL42.
+
+Real Attribute is: "test real43", real
+	names format: test real43: continuous.
+
+Nominal Attribute is: "test nominal44", nominal
+	names format: test nominal44: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18, VAL19, VAL20, VAL21, VAL22, VAL23, VAL24, VAL25, VAL26, VAL27, VAL28, VAL29, VAL30, VAL31, VAL32, VAL33, VAL34, VAL35, VAL36, VAL37, VAL38, VAL39, VAL40, VAL41, VAL42, VAL43.
+
+Real Attribute is: "test real44", real
+	names format: test real44: continuous.
+
+Nominal Attribute is: "test nominal45", nominal
+	names format: test nominal45: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18, VAL19, VAL20, VAL21, VAL22, VAL23, VAL24, VAL25, VAL26, VAL27, VAL28, VAL29, VAL30, VAL31, VAL32, VAL33, VAL34, VAL35, VAL36, VAL37, VAL38, VAL39, VAL40, VAL41, VAL42, VAL43, VAL44.
+
+Real Attribute is: "test real45", real
+	names format: test real45: continuous.
+
+Nominal Attribute is: "test nominal46", nominal
+	names format: test nominal46: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18, VAL19, VAL20, VAL21, VAL22, VAL23, VAL24, VAL25, VAL26, VAL27, VAL28, VAL29, VAL30, VAL31, VAL32, VAL33, VAL34, VAL35, VAL36, VAL37, VAL38, VAL39, VAL40, VAL41, VAL42, VAL43, VAL44, VAL45.
+
+Real Attribute is: "test real46", real
+	names format: test real46: continuous.
+
+Nominal Attribute is: "test nominal47", nominal
+	names format: test nominal47: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18, VAL19, VAL20, VAL21, VAL22, VAL23, VAL24, VAL25, VAL26, VAL27, VAL28, VAL29, VAL30, VAL31, VAL32, VAL33, VAL34, VAL35, VAL36, VAL37, VAL38, VAL39, VAL40, VAL41, VAL42, VAL43, VAL44, VAL45, VAL46.
+
+Real Attribute is: "test real47", real
+	names format: test real47: continuous.
+
+Nominal Attribute is: "test nominal48", nominal
+	names format: test nominal48: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18, VAL19, VAL20, VAL21, VAL22, VAL23, VAL24, VAL25, VAL26, VAL27, VAL28, VAL29, VAL30, VAL31, VAL32, VAL33, VAL34, VAL35, VAL36, VAL37, VAL38, VAL39, VAL40, VAL41, VAL42, VAL43, VAL44, VAL45, VAL46, VAL47.
+
+Real Attribute is: "test real48", real
+	names format: test real48: continuous.
+
+Nominal Attribute is: "test nominal49", nominal
+	names format: test nominal49: VAL0, VAL1, VAL2, VAL3, VAL4, VAL5, VAL6, VAL7, VAL8, VAL9, VAL10, VAL11, VAL12, VAL13, VAL14, VAL15, VAL16, VAL17, VAL18, VAL19, VAL20, VAL21, VAL22, VAL23, VAL24, VAL25, VAL26, VAL27, VAL28, VAL29, VAL30, VAL31, VAL32, VAL33, VAL34, VAL35, VAL36, VAL37, VAL38, VAL39, VAL40, VAL41, VAL42, VAL43, VAL44, VAL45, VAL46, VAL47, VAL48.
+
+Real Attribute is: "test real49", real
+	names format: test real49: continuous.
+

@@ -1,0 +1,14 @@
+0.1, sunny, 85, 85, false, Don't Play.
+1.1, sunny, 80, 90, true, Don't Play.
+2.1, overcast, 83, 78, false, Play.
+3.1, rain, 70, 96, false, Play.
+4.1, rain, 68, 80, false, Play.
+5.1, rain, 65, 70, true, Don't Play.
+6.1, overcast, 64, 65, true, Play.
+7.1, sunny, 72, 95, false, Don't Play.
+8.1, sunny, 69, 70, false, Play.
+9.1, rain, 75, 80, false, Play.
+10.1, sunny, 75, 70, true, Play.
+11.1, overcast, 72, 90, true, Play.
+12.1, overcast, 81, 75, false, Play.
+13.1, rain, 71, 80, true, Don't Play.

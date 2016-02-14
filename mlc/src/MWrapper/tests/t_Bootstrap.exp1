@@ -1,0 +1,899 @@
+no accuracy data
+AccEstimator::dump_files: estimated accuracies will be 0.0
+Inducer: /tmp/t_lensesBS Null Inducer
+Number of times: 20
+Individual accuracy: 0
+Total samples: 24	Unique Used Samples: 15	Unused Samples: 9
+Individual accuracy: 0
+Total samples: 24	Unique Used Samples: 16	Unused Samples: 8
+Individual accuracy: 0
+Total samples: 24	Unique Used Samples: 14	Unused Samples: 10
+Individual accuracy: 0
+Total samples: 24	Unique Used Samples: 15	Unused Samples: 9
+Individual accuracy: 0
+Total samples: 24	Unique Used Samples: 16	Unused Samples: 8
+Individual accuracy: 0
+Total samples: 24	Unique Used Samples: 15	Unused Samples: 9
+Individual accuracy: 0
+Total samples: 24	Unique Used Samples: 15	Unused Samples: 9
+Individual accuracy: 0
+Total samples: 24	Unique Used Samples: 15	Unused Samples: 9
+Individual accuracy: 0
+Total samples: 24	Unique Used Samples: 14	Unused Samples: 10
+Individual accuracy: 0
+Total samples: 24	Unique Used Samples: 16	Unused Samples: 8
+Individual accuracy: 0
+Total samples: 24	Unique Used Samples: 16	Unused Samples: 8
+Individual accuracy: 0
+Total samples: 24	Unique Used Samples: 11	Unused Samples: 13
+Individual accuracy: 0
+Total samples: 24	Unique Used Samples: 16	Unused Samples: 8
+Individual accuracy: 0
+Total samples: 24	Unique Used Samples: 16	Unused Samples: 8
+Individual accuracy: 0
+Total samples: 24	Unique Used Samples: 17	Unused Samples: 7
+Individual accuracy: 0
+Total samples: 24	Unique Used Samples: 17	Unused Samples: 7
+Individual accuracy: 0
+Total samples: 24	Unique Used Samples: 17	Unused Samples: 7
+Individual accuracy: 0
+Total samples: 24	Unique Used Samples: 15	Unused Samples: 9
+Individual accuracy: 0
+Total samples: 24	Unique Used Samples: 15	Unused Samples: 9
+Individual accuracy: 0
+Total samples: 24	Unique Used Samples: 15	Unused Samples: 9
+Individual accuracy: 0
+Accuracy: 0.00% +- 0.00% (0.00% - 0.00%)
+Finished dump
+AccEstimator::estimate_accuracy: Inducer: t_Bootstrap id3 inducer
+AccEstimator::estimate_accuracy: Number of files: 20
+Individual accuracy: 0.888889
+Individual accuracy: 0.875
+Individual accuracy: 1
+Individual accuracy: 0.777778
+Individual accuracy: 0.875
+Individual accuracy: 0.666667
+Individual accuracy: 0.888889
+Individual accuracy: 0.888889
+Individual accuracy: 0.8
+Individual accuracy: 0.75
+Individual accuracy: 0.875
+Individual accuracy: 0.461538
+Individual accuracy: 0.875
+Individual accuracy: 0.75
+Individual accuracy: 0.857143
+Individual accuracy: 0.714286
+Individual accuracy: 0.571429
+Individual accuracy: 0.666667
+Individual accuracy: 0.777778
+Individual accuracy: 0.777778
+Estimate_Accuracy::estimate_accuracy: Accuracy of set: 78.69% +- 2.82% (46.15% - 100.00%)
+Accuracy: 78.69% +- 2.82% (46.15% - 100.00%)
+ID3 categorizer bootstrap from /tmp/t_lensesBS78.69% +- 2.82% (46.15% - 100.00%)
+Inducer: t_Bootstrap id3 inducer
+Number of times: 20
+Training list: young, myope, no, reduced, no contact lenses.
+young, myope, no, normal, soft contact lenses.
+young, myope, yes, reduced, no contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+young, hypermetrope, yes, reduced, no contact lenses.
+young, hypermetrope, yes, normal, hard contanct lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+pre-presbyopic, myope, no, normal, soft contact lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+pre-presbyopic, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+presbyopic, myope, no, reduced, no contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+presbyopic, myope, yes, reduced, no contact lenses.
+presbyopic, myope, yes, normal, hard contanct lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+presbyopic, hypermetrope, yes, normal, no contact lenses.
+
+Stratification: Training: 0/4/5/15/  Test: 0/4/5/15/
+Individual accuracy: 1
+Total samples: 24	Unique Used Samples: 15	Unused Samples: 9
+bootstrap sample:
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, myope, no, normal, soft contact lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+young, myope, no, normal, soft contact lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+young, hypermetrope, yes, normal, hard contanct lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+young, myope, yes, reduced, no contact lenses.
+
+unused sample:
+young, myope, no, reduced, no contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+young, hypermetrope, yes, reduced, no contact lenses.
+presbyopic, myope, no, reduced, no contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+presbyopic, myope, yes, reduced, no contact lenses.
+presbyopic, myope, yes, normal, hard contanct lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+presbyopic, hypermetrope, yes, normal, no contact lenses.
+
+Stratification: Training: 0/2/8/14/  Test: 0/2/0/7/
+Individual accuracy: 0.888889
+Total samples: 24	Unique Used Samples: 16	Unused Samples: 8
+bootstrap sample:
+young, myope, no, normal, soft contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+young, hypermetrope, yes, reduced, no contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+presbyopic, myope, yes, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+presbyopic, myope, yes, normal, hard contanct lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+young, hypermetrope, yes, normal, hard contanct lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+young, hypermetrope, yes, reduced, no contact lenses.
+pre-presbyopic, myope, no, normal, soft contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+young, hypermetrope, yes, normal, hard contanct lenses.
+young, myope, no, normal, soft contact lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+
+unused sample:
+young, myope, no, reduced, no contact lenses.
+young, myope, yes, reduced, no contact lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+presbyopic, myope, no, reduced, no contact lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+presbyopic, hypermetrope, yes, normal, no contact lenses.
+
+Stratification: Training: 0/7/7/10/  Test: 0/0/0/8/
+Individual accuracy: 0.875
+Total samples: 24	Unique Used Samples: 14	Unused Samples: 10
+bootstrap sample:
+presbyopic, myope, yes, normal, hard contanct lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+young, myope, no, normal, soft contact lenses.
+young, hypermetrope, yes, normal, hard contanct lenses.
+presbyopic, myope, no, reduced, no contact lenses.
+young, myope, no, normal, soft contact lenses.
+presbyopic, hypermetrope, yes, normal, no contact lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+presbyopic, hypermetrope, yes, normal, no contact lenses.
+young, hypermetrope, yes, reduced, no contact lenses.
+presbyopic, hypermetrope, yes, normal, no contact lenses.
+young, hypermetrope, yes, normal, hard contanct lenses.
+presbyopic, myope, yes, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+young, myope, no, reduced, no contact lenses.
+young, myope, no, normal, soft contact lenses.
+young, myope, no, reduced, no contact lenses.
+presbyopic, myope, no, reduced, no contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+
+unused sample:
+young, myope, yes, reduced, no contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+pre-presbyopic, myope, no, normal, soft contact lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+
+Stratification: Training: 0/4/4/16/  Test: 0/1/3/6/
+Individual accuracy: 1
+Total samples: 24	Unique Used Samples: 15	Unused Samples: 9
+bootstrap sample:
+pre-presbyopic, myope, no, reduced, no contact lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+young, myope, yes, reduced, no contact lenses.
+young, myope, yes, reduced, no contact lenses.
+young, myope, no, normal, soft contact lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+young, myope, no, reduced, no contact lenses.
+young, myope, no, reduced, no contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+young, myope, no, normal, soft contact lenses.
+presbyopic, myope, yes, normal, hard contanct lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+young, hypermetrope, yes, reduced, no contact lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+
+unused sample:
+young, hypermetrope, yes, normal, hard contanct lenses.
+pre-presbyopic, myope, no, normal, soft contact lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+presbyopic, myope, no, reduced, no contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+presbyopic, myope, yes, reduced, no contact lenses.
+presbyopic, hypermetrope, yes, normal, no contact lenses.
+
+Stratification: Training: 0/4/6/14/  Test: 0/1/2/6/
+Individual accuracy: 0.777778
+Total samples: 24	Unique Used Samples: 16	Unused Samples: 8
+bootstrap sample:
+pre-presbyopic, myope, no, normal, soft contact lenses.
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+young, hypermetrope, yes, normal, hard contanct lenses.
+pre-presbyopic, hypermetrope, no, reduced, no contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+young, myope, no, normal, soft contact lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+young, hypermetrope, yes, normal, hard contanct lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+young, myope, yes, reduced, no contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+presbyopic, myope, yes, normal, hard contanct lenses.
+presbyopic, hypermetrope, yes, normal, no contact lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+
+unused sample:
+young, myope, no, reduced, no contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+young, hypermetrope, yes, reduced, no contact lenses.
+presbyopic, myope, no, reduced, no contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+presbyopic, myope, yes, reduced, no contact lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+
+Stratification: Training: 0/4/9/11/  Test: 0/1/0/7/
+Individual accuracy: 0.875
+Total samples: 24	Unique Used Samples: 15	Unused Samples: 9
+bootstrap sample:
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+presbyopic, myope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+presbyopic, myope, no, reduced, no contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+young, myope, yes, normal, hard contanct lenses.
+young, myope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+young, myope, yes, reduced, no contact lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+young, myope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+presbyopic, myope, yes, reduced, no contact lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+
+unused sample:
+young, myope, no, normal, soft contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+young, hypermetrope, yes, reduced, no contact lenses.
+young, hypermetrope, yes, normal, hard contanct lenses.
+pre-presbyopic, myope, no, normal, soft contact lenses.
+presbyopic, myope, yes, normal, hard contanct lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+presbyopic, hypermetrope, yes, normal, no contact lenses.
+
+Stratification: Training: 0/5/1/18/  Test: 0/2/4/3/
+Individual accuracy: 0.666667
+Total samples: 24	Unique Used Samples: 15	Unused Samples: 9
+bootstrap sample:
+presbyopic, myope, yes, normal, hard contanct lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+presbyopic, hypermetrope, yes, normal, no contact lenses.
+presbyopic, hypermetrope, yes, normal, no contact lenses.
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+pre-presbyopic, hypermetrope, no, reduced, no contact lenses.
+young, myope, yes, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, no, reduced, no contact lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+young, hypermetrope, yes, normal, hard contanct lenses.
+presbyopic, myope, yes, normal, hard contanct lenses.
+presbyopic, myope, yes, normal, hard contanct lenses.
+pre-presbyopic, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, myope, no, normal, soft contact lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+young, myope, no, reduced, no contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+
+unused sample:
+young, myope, no, normal, soft contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+young, hypermetrope, yes, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+presbyopic, myope, no, reduced, no contact lenses.
+presbyopic, myope, yes, reduced, no contact lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+
+Stratification: Training: 0/5/4/15/  Test: 0/1/2/6/
+Individual accuracy: 0.888889
+Total samples: 24	Unique Used Samples: 15	Unused Samples: 9
+bootstrap sample:
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, myope, no, normal, soft contact lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+presbyopic, hypermetrope, yes, normal, no contact lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+pre-presbyopic, myope, no, normal, soft contact lenses.
+young, myope, no, normal, soft contact lenses.
+young, hypermetrope, yes, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, myope, no, normal, soft contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+young, myope, yes, reduced, no contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+
+unused sample:
+young, myope, no, reduced, no contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+young, hypermetrope, yes, normal, hard contanct lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+presbyopic, myope, no, reduced, no contact lenses.
+presbyopic, myope, yes, reduced, no contact lenses.
+presbyopic, myope, yes, normal, hard contanct lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+
+Stratification: Training: 0/3/9/12/  Test: 0/3/0/6/
+Individual accuracy: 0.888889
+Total samples: 24	Unique Used Samples: 14	Unused Samples: 10
+bootstrap sample:
+young, hypermetrope, no, normal, soft contact lenses.
+young, hypermetrope, yes, reduced, no contact lenses.
+young, hypermetrope, yes, normal, hard contanct lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+presbyopic, myope, yes, reduced, no contact lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+presbyopic, myope, no, reduced, no contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+presbyopic, myope, no, normal, no contact lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+
+unused sample:
+young, myope, no, reduced, no contact lenses.
+young, myope, no, normal, soft contact lenses.
+young, myope, yes, reduced, no contact lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, myope, no, normal, soft contact lenses.
+pre-presbyopic, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+presbyopic, myope, yes, normal, hard contanct lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+presbyopic, hypermetrope, yes, normal, no contact lenses.
+
+Stratification: Training: 0/4/5/15/  Test: 0/1/3/6/
+Individual accuracy: 0.8
+Total samples: 24	Unique Used Samples: 16	Unused Samples: 8
+bootstrap sample:
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+presbyopic, hypermetrope, yes, normal, no contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+young, myope, yes, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+young, myope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+presbyopic, myope, yes, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+young, myope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, myope, no, normal, soft contact lenses.
+presbyopic, myope, yes, normal, hard contanct lenses.
+
+unused sample:
+young, myope, no, normal, soft contact lenses.
+young, hypermetrope, yes, reduced, no contact lenses.
+young, hypermetrope, yes, normal, hard contanct lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+presbyopic, myope, no, reduced, no contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+
+Stratification: Training: 0/4/6/14/  Test: 0/1/1/6/
+Individual accuracy: 0.75
+Total samples: 24	Unique Used Samples: 16	Unused Samples: 8
+bootstrap sample:
+pre-presbyopic, myope, no, reduced, no contact lenses.
+presbyopic, myope, yes, reduced, no contact lenses.
+pre-presbyopic, myope, no, normal, soft contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, myope, no, normal, soft contact lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+presbyopic, myope, yes, normal, hard contanct lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+presbyopic, myope, no, reduced, no contact lenses.
+young, myope, no, reduced, no contact lenses.
+presbyopic, myope, yes, normal, hard contanct lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+presbyopic, hypermetrope, yes, normal, no contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+young, myope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+
+unused sample:
+young, myope, no, normal, soft contact lenses.
+young, myope, yes, reduced, no contact lenses.
+young, hypermetrope, yes, reduced, no contact lenses.
+young, hypermetrope, yes, normal, hard contanct lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+pre-presbyopic, hypermetrope, no, reduced, no contact lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+
+Stratification: Training: 0/3/6/15/  Test: 0/2/1/5/
+Individual accuracy: 0.875
+Total samples: 24	Unique Used Samples: 11	Unused Samples: 13
+bootstrap sample:
+presbyopic, myope, no, normal, no contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+presbyopic, myope, no, normal, no contact lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+young, myope, no, normal, soft contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+pre-presbyopic, myope, no, normal, soft contact lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, myope, no, normal, soft contact lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+young, myope, no, normal, soft contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+
+unused sample:
+young, myope, no, reduced, no contact lenses.
+young, myope, yes, reduced, no contact lenses.
+young, hypermetrope, yes, reduced, no contact lenses.
+young, hypermetrope, yes, normal, hard contanct lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+pre-presbyopic, hypermetrope, no, reduced, no contact lenses.
+presbyopic, myope, no, reduced, no contact lenses.
+presbyopic, myope, yes, reduced, no contact lenses.
+presbyopic, myope, yes, normal, hard contanct lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+presbyopic, hypermetrope, yes, normal, no contact lenses.
+
+Stratification: Training: 0/2/7/15/  Test: 0/3/1/9/
+Individual accuracy: 0.461538
+Total samples: 24	Unique Used Samples: 16	Unused Samples: 8
+bootstrap sample:
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+presbyopic, myope, yes, reduced, no contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+presbyopic, myope, yes, reduced, no contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+presbyopic, myope, no, normal, no contact lenses.
+young, hypermetrope, yes, normal, hard contanct lenses.
+presbyopic, hypermetrope, yes, normal, no contact lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, hypermetrope, no, reduced, no contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+young, hypermetrope, yes, reduced, no contact lenses.
+pre-presbyopic, myope, no, normal, soft contact lenses.
+presbyopic, myope, yes, normal, hard contanct lenses.
+young, hypermetrope, yes, normal, hard contanct lenses.
+
+unused sample:
+young, myope, no, reduced, no contact lenses.
+young, myope, no, normal, soft contact lenses.
+young, myope, yes, reduced, no contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+presbyopic, myope, no, reduced, no contact lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+
+Stratification: Training: 0/8/4/12/  Test: 0/0/2/6/
+Individual accuracy: 0.875
+Total samples: 24	Unique Used Samples: 16	Unused Samples: 8
+bootstrap sample:
+presbyopic, myope, no, reduced, no contact lenses.
+presbyopic, hypermetrope, yes, normal, no contact lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, no, reduced, no contact lenses.
+young, myope, no, reduced, no contact lenses.
+pre-presbyopic, myope, no, normal, soft contact lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+young, hypermetrope, yes, normal, hard contanct lenses.
+presbyopic, hypermetrope, yes, normal, no contact lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+presbyopic, myope, no, reduced, no contact lenses.
+young, myope, no, reduced, no contact lenses.
+presbyopic, myope, no, reduced, no contact lenses.
+young, hypermetrope, yes, reduced, no contact lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, myope, no, normal, soft contact lenses.
+young, myope, no, normal, soft contact lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+young, myope, yes, reduced, no contact lenses.
+
+unused sample:
+young, hypermetrope, no, reduced, no contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+presbyopic, myope, yes, reduced, no contact lenses.
+presbyopic, myope, yes, normal, hard contanct lenses.
+
+Stratification: Training: 0/2/5/17/  Test: 0/2/2/4/
+Individual accuracy: 0.75
+Total samples: 24	Unique Used Samples: 17	Unused Samples: 7
+bootstrap sample:
+pre-presbyopic, myope, no, normal, soft contact lenses.
+young, myope, no, reduced, no contact lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+presbyopic, myope, yes, normal, hard contanct lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+young, hypermetrope, yes, reduced, no contact lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+young, myope, no, normal, soft contact lenses.
+young, myope, yes, reduced, no contact lenses.
+presbyopic, myope, yes, normal, hard contanct lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+presbyopic, myope, no, normal, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+
+unused sample:
+young, hypermetrope, yes, normal, hard contanct lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+presbyopic, myope, no, reduced, no contact lenses.
+presbyopic, myope, yes, reduced, no contact lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+presbyopic, hypermetrope, yes, normal, no contact lenses.
+
+Stratification: Training: 0/3/7/14/  Test: 0/2/0/5/
+Individual accuracy: 0.857143
+Total samples: 24	Unique Used Samples: 17	Unused Samples: 7
+bootstrap sample:
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+presbyopic, myope, no, normal, no contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+presbyopic, myope, yes, reduced, no contact lenses.
+young, myope, yes, reduced, no contact lenses.
+young, myope, no, reduced, no contact lenses.
+pre-presbyopic, myope, no, normal, soft contact lenses.
+presbyopic, hypermetrope, yes, normal, no contact lenses.
+young, myope, yes, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, no, reduced, no contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+presbyopic, hypermetrope, yes, normal, no contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+young, myope, no, normal, soft contact lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+young, hypermetrope, yes, reduced, no contact lenses.
+
+unused sample:
+young, hypermetrope, no, reduced, no contact lenses.
+young, hypermetrope, yes, normal, hard contanct lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+presbyopic, myope, no, reduced, no contact lenses.
+presbyopic, myope, yes, normal, hard contanct lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+
+Stratification: Training: 0/3/6/15/  Test: 0/2/1/4/
+Individual accuracy: 0.714286
+Total samples: 24	Unique Used Samples: 17	Unused Samples: 7
+bootstrap sample:
+young, hypermetrope, yes, normal, hard contanct lenses.
+young, hypermetrope, yes, reduced, no contact lenses.
+young, myope, no, normal, soft contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+young, myope, no, reduced, no contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+presbyopic, myope, yes, reduced, no contact lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+presbyopic, myope, yes, normal, hard contanct lenses.
+pre-presbyopic, hypermetrope, no, reduced, no contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+presbyopic, myope, no, reduced, no contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+
+unused sample:
+young, myope, yes, reduced, no contact lenses.
+pre-presbyopic, myope, no, normal, soft contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+presbyopic, hypermetrope, yes, normal, no contact lenses.
+
+Stratification: Training: 0/3/4/17/  Test: 0/1/2/4/
+Individual accuracy: 0.571429
+Total samples: 24	Unique Used Samples: 15	Unused Samples: 9
+bootstrap sample:
+presbyopic, hypermetrope, yes, normal, no contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+young, myope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, no, reduced, no contact lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+young, myope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+presbyopic, hypermetrope, yes, normal, no contact lenses.
+presbyopic, myope, yes, reduced, no contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+young, myope, no, reduced, no contact lenses.
+young, hypermetrope, yes, reduced, no contact lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+presbyopic, myope, yes, normal, hard contanct lenses.
+presbyopic, myope, no, reduced, no contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+
+unused sample:
+young, myope, no, normal, soft contact lenses.
+young, myope, yes, reduced, no contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+young, hypermetrope, yes, normal, hard contanct lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+pre-presbyopic, myope, no, normal, soft contact lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+
+Stratification: Training: 0/2/5/17/  Test: 0/2/2/5/
+Individual accuracy: 0.666667
+Total samples: 24	Unique Used Samples: 15	Unused Samples: 9
+bootstrap sample:
+presbyopic, myope, yes, normal, hard contanct lenses.
+young, myope, yes, reduced, no contact lenses.
+young, myope, yes, reduced, no contact lenses.
+pre-presbyopic, myope, no, normal, soft contact lenses.
+pre-presbyopic, myope, no, normal, soft contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+young, myope, no, reduced, no contact lenses.
+presbyopic, myope, no, reduced, no contact lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+young, myope, no, reduced, no contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+presbyopic, hypermetrope, yes, normal, no contact lenses.
+young, myope, yes, reduced, no contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+pre-presbyopic, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+
+unused sample:
+young, myope, no, normal, soft contact lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+young, hypermetrope, yes, reduced, no contact lenses.
+young, hypermetrope, yes, normal, hard contanct lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+presbyopic, myope, no, normal, no contact lenses.
+presbyopic, myope, yes, reduced, no contact lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+
+Stratification: Training: 0/4/8/12/  Test: 0/1/2/6/
+Individual accuracy: 0.777778
+Total samples: 24	Unique Used Samples: 15	Unused Samples: 9
+bootstrap sample:
+pre-presbyopic, hypermetrope, no, reduced, no contact lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+presbyopic, myope, no, reduced, no contact lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, myope, no, normal, soft contact lenses.
+presbyopic, myope, yes, normal, hard contanct lenses.
+presbyopic, myope, no, normal, no contact lenses.
+pre-presbyopic, myope, no, reduced, no contact lenses.
+young, myope, yes, reduced, no contact lenses.
+young, hypermetrope, yes, reduced, no contact lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+young, hypermetrope, yes, normal, hard contanct lenses.
+presbyopic, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, yes, reduced, no contact lenses.
+pre-presbyopic, myope, yes, reduced, no contact lenses.
+young, myope, yes, reduced, no contact lenses.
+presbyopic, hypermetrope, yes, reduced, no contact lenses.
+presbyopic, hypermetrope, yes, normal, no contact lenses.
+presbyopic, myope, yes, normal, hard contanct lenses.
+young, hypermetrope, no, reduced, no contact lenses.
+pre-presbyopic, hypermetrope, no, reduced, no contact lenses.
+young, hypermetrope, yes, normal, hard contanct lenses.
+
+unused sample:
+young, myope, no, reduced, no contact lenses.
+young, myope, no, normal, soft contact lenses.
+young, myope, yes, normal, hard contanct lenses.
+young, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, myope, yes, normal, hard contanct lenses.
+pre-presbyopic, hypermetrope, no, normal, soft contact lenses.
+pre-presbyopic, hypermetrope, yes, normal, no contact lenses.
+presbyopic, myope, yes, reduced, no contact lenses.
+presbyopic, hypermetrope, no, normal, soft contact lenses.
+
+Stratification: Training: 0/4/1/19/  Test: 0/2/4/3/
+Individual accuracy: 0.777778
+Accuracy: 78.69% +- 2.82% (46.15% - 100.00%)
+ID3 bs in memory 78.69% +- 2.82% (46.15% - 100.00%)
+ID3 categorizer bootstrap from bag: 
+78.69% +- 2.82% (46.15% - 100.00%)

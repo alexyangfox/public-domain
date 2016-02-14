@@ -1,0 +1,111 @@
+t_InstanceHash.c executing
+InstanceHashTable test executed
+num of instances : 88
+
+The    0th (bucket number :   976)
+f, f, f, f, f, won.
+f, f, f, f, f, won.
+f, f, f, f, f, won.
+f, f, f, f, f, won.
+f, f, f, f, f, nowin.
+f, f, f, f, f, won.
+f, f, f, f, f, won.
+f, f, f, f, f, won.
+f, f, f, f, f, won.
+f, f, f, f, f, nowin.
+f, f, f, f, f, won.
+f, f, f, f, f, nowin.
+f, f, f, f, f, won.
+f, f, f, f, f, won.
+f, f, f, f, f, nowin.
+f, f, f, f, f, won.
+f, f, f, f, f, won.
+f, f, f, f, f, won.
+f, f, f, f, f, won.
+f, f, f, f, f, won.
+f, f, f, f, f, nowin.
+, 
+The    1th (bucket number :  1018)
+f, f, f, t, f, nowin.
+f, f, f, t, f, nowin.
+, 
+The    2th (bucket number :  1046)
+f, f, f, f, t, nowin.
+f, f, f, f, t, nowin.
+f, f, f, f, t, nowin.
+f, f, f, f, t, nowin.
+f, f, f, f, t, won.
+f, f, f, f, t, nowin.
+f, f, f, f, t, nowin.
+f, f, f, f, t, nowin.
+f, f, f, f, t, nowin.
+f, f, f, f, t, nowin.
+f, f, f, f, t, nowin.
+f, f, f, f, t, nowin.
+f, f, f, f, t, nowin.
+f, f, f, f, t, nowin.
+f, f, f, f, t, nowin.
+f, f, f, f, t, nowin.
+f, f, f, f, t, nowin.
+f, f, f, f, t, nowin.
+, 
+The    3th (bucket number :  1153)
+t, f, f, f, f, nowin.
+t, f, f, f, f, nowin.
+t, f, f, f, f, nowin.
+t, f, f, f, f, nowin.
+t, f, f, f, f, nowin.
+t, f, f, f, f, nowin.
+t, f, f, f, f, nowin.
+t, f, f, f, f, nowin.
+t, f, f, f, f, nowin.
+t, f, f, f, f, nowin.
+t, f, f, f, f, nowin.
+t, f, f, f, f, nowin.
+t, f, f, f, f, nowin.
+t, f, f, f, f, nowin.
+t, f, f, f, f, nowin.
+t, f, f, f, f, nowin.
+t, f, f, f, f, nowin.
+t, f, f, f, f, nowin.
+t, f, f, f, f, nowin.
+t, f, f, f, f, nowin.
+, 
+The    4th (bucket number :  1211)
+f, f, t, f, f, won.
+f, f, t, f, f, won.
+f, f, t, f, f, won.
+f, f, t, f, f, won.
+f, f, t, f, f, won.
+f, f, t, f, f, won.
+f, f, t, f, f, won.
+f, f, t, f, f, won.
+, 
+The    5th (bucket number :  1223)
+t, f, f, f, t, nowin.
+t, f, f, f, t, nowin.
+t, f, f, f, t, nowin.
+t, f, f, f, t, nowin.
+t, f, f, f, t, nowin.
+t, f, f, f, t, nowin.
+t, f, f, f, t, nowin.
+t, f, f, f, t, nowin.
+t, f, f, f, t, nowin.
+t, f, f, f, t, nowin.
+, 
+The    6th (bucket number :  1281)
+f, f, t, f, t, won.
+f, f, t, f, t, won.
+f, f, t, f, t, won.
+, 
+The    7th (bucket number :  1388)
+t, f, t, f, f, won.
+t, f, t, f, f, won.
+t, f, t, f, f, won.
+, 
+The    8th (bucket number :  1458)
+t, f, t, f, t, won.
+t, f, t, f, t, won.
+t, f, t, f, t, won.
+, InstanceBagSameAttr_ test executed
+Success!

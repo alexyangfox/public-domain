@@ -1,0 +1,9 @@
+t_HOODGInducer executing
+Starting train
+End train
+HOODG Inducer Results
+Number of training instances: 124
+Number of test instances: 432.  Unseen: 308,  seen 124.
+Number correct: 432.  Number incorrect: 0
+Generalization accuracy: 100.00%.  Memorization accuracy: 100.00%
+Accuracy: 100.00% +- 0.00% [99.12% - 100.00%]

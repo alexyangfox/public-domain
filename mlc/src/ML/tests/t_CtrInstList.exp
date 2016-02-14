@@ -1,0 +1,4 @@
+t_CtrInstList executing
+Check corrupt unknown part 1 OK
+Check corrupt unknown part 2 OK
+Check corrupt had 465 instances, now  it has 265 (should be somewhat over a half)

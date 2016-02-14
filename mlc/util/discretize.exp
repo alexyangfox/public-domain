@@ -1,0 +1,147 @@
+Test 1
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = required-only
+MLC++ Discretize utility
+OPTION DATAFILE = glass
+OPTION NAMESFILE = glass.names
+OPTION DUMPSTEM = discE
+OPTION DISC_TYPE = entropy
+OPTION DISC_NUM_INTR = Algo-heuristic
+OPTION MIN_SPLIT = 1
+OPTION PROJECT_ONLY = false
+Entropy discretization selected.
+Using minsplit of 1
+Performing automatic discretization. 
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading glass.data. done.
+Discretization vector:1, 2, 2, 3, 1, 2, 4, 2, 1
+Discretizing data file: glass.data
+OPTION TESTFILE = glass.test
+Reading glass.test done.
+Discretizing test file: glass.test
+Outputting names file discE.names
+Dumping data file discE.data
+Dumping test file discE.test
+Process complete. 
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = required-only
+MLC++ Discretize utility
+OPTION DATAFILE = glass
+OPTION NAMESFILE = glass.names
+OPTION DUMPSTEM = disc1R
+OPTION DISC_TYPE = 1r
+OPTION DISC_NUM_INTR = Algo-heuristic
+OPTION MIN_INST = 1
+OPTION PROJECT_ONLY = false
+1-Rule discretization selected.
+Using 1 minimum number of instances per label.
+Performing automatic discretization. 
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading glass.data. done.
+DiscDispatch::alocate; 0 bin specified in 1R initial vector.Using (1, 1, 1, 1, 1, 1, 1, 1, 1).
+Discretization vector:30, 27, 22, 20, 28, 15, 29, 3, 9
+Discretizing data file: glass.data
+OPTION TESTFILE = glass.test
+Reading glass.test done.
+Discretizing test file: glass.test
+Outputting names file disc1R.names
+Dumping data file disc1R.data
+Dumping test file disc1R.test
+Process complete. 
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = required-only
+MLC++ Discretize utility
+OPTION DATAFILE = glass
+OPTION NAMESFILE = glass.names
+OPTION DUMPSTEM = discB
+OPTION DISC_TYPE = bin
+OPTION DISC_NUM_INTR = Algo-heuristic
+OPTION PROJECT_ONLY = false
+Binning discretization selected.
+Performing automatic discretization. 
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading glass.data. done.
+Discretization vector:14, 14, 12, 13, 13, 11, 13, 9, 9
+Discretizing data file: glass.data
+OPTION TESTFILE = glass.test
+Reading glass.test done.
+Discretizing test file: glass.test
+Outputting names file discB.names
+Dumping data file discB.data
+Dumping test file discB.test
+Process complete. 
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = required-only
+MLC++ Discretize utility
+OPTION DATAFILE = glass
+OPTION NAMESFILE = glass.names
+OPTION DUMPSTEM = discC
+OPTION DISC_TYPE = c4.5
+OPTION PROJECT_ONLY = false
+C4.5 discretization selected.
+Performing automatic discretization. 
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading glass.data. done.
+OPTION DISC_C45_FLAGS = -u -c1 -f %s 
+OPTION C45_RETRIES = 0
+OPTION C45_STATS = false
+Discretization vector:6, 3, 5, 4, 5, 4, 5, 2, 2
+Discretizing data file: glass.data
+OPTION TESTFILE = glass.test
+Reading glass.test done.
+Discretizing test file: glass.test
+Outputting names file discC.names
+Dumping data file discC.data
+Dumping test file discC.test
+Process complete. 
+Average nodes for all C4.5 trees:7.
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = required-only
+MLC++ Discretize utility
+OPTION DATAFILE = glass
+OPTION NAMESFILE = glass.names
+OPTION DUMPSTEM = discT
+OPTION DISC_TYPE = t2
+OPTION DISC_NUM_INTR = Algo-heuristic
+OPTION PROJECT_ONLY = false
+T2 discretization selected.
+Performing automatic discretization. 
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading glass.data. done.
+Discretization vector:8, 8, 8, 8, 8, 8, 8, 5, 7
+Discretizing data file: glass.data
+OPTION TESTFILE = glass.test
+Reading glass.test done.
+Discretizing test file: glass.test
+Outputting names file discT.names
+Dumping data file discT.data
+Dumping test file discT.test
+Process complete. 
+MLC++ Debug level is 0, log level is 1
+OPTION PROMPTLEVEL = required-only
+MLC++ Discretize utility
+OPTION DATAFILE = glass
+OPTION NAMESFILE = glass.names
+OPTION DUMPSTEM = discTMDL
+OPTION DISC_TYPE = t2
+OPTION DISC_NUM_INTR = mdl
+OPTION PROJECT_ONLY = false
+T2 discretization selected.
+Performing automatic discretization. 
+OPTION REMOVE_UNKNOWN_INST = false
+OPTION CORRUPT_UNKNOWN_RATE = 0
+Reading glass.data. done.
+Discretization vector:1, 2, 2, 3, 1, 2, 4, 2, 1
+Discretizing data file: glass.data
+OPTION TESTFILE = glass.test
+Reading glass.test done.
+Discretizing test file: glass.test
+Outputting names file discTMDL.names
+Dumping data file discTMDL.data
+Dumping test file discTMDL.test
+Process complete. 

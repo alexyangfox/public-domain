@@ -1,0 +1,218 @@
+t_HOODGCIH executing
+Bag -1
+No instances
+
+Bag 0
+rain, 80, false, Play.
+rain, 90, false, Play.
+sunny, 90, false, Play.
+sunny, 70, true, Play.
+overcast, 70, true, Play.
+overcast, 65, true, Play.
+overcast, 80, true, Play.
+overcast, 70, false, Play.
+sunny, 65, false, Play.
+
+Bag 1
+sunny, 80, false, Don't Play.
+sunny, 90, true, Don't Play.
+rain, 70, true, Don't Play.
+foo, 99, false, Don't Play.
+
+Displaying ProjLIBag
+80, false, 
+   Known destination for 2 instances:sunny->1(1) rain->0(1) 
+90, false, 
+   Known destination for 2 instances:sunny->0(1) rain->0(1) 
+70, true, 
+   Known destination for 3 instances:sunny->0(1) overcast->0(1) rain->1(1) 
+65, true, 
+   Known destination for 1 instances:overcast->0(1) 
+80, true, 
+   Known destination for 1 instances:overcast->0(1) 
+70, false, 
+   Known destination for 1 instances:overcast->0(1) 
+65, false, 
+   Known destination for 1 instances:sunny->0(1) 
+90, true, 
+   Known destination for 1 instances:sunny->1(1) 
+99, false, 
+   Known destination for 1 instances:foo->1(1) 
+
+Covering instance 80, false, 
+   Known destination for 2 instances:sunny->1(1) rain->0(1) 
+New (forced) projection.  Bag number is 0
+   80, false, 
+   Known destination for 2 instances:sunny->1(1) rain->0(1) 
+
+Covering instance 90, false, 
+   Known destination for 2 instances:sunny->0(1) rain->0(1) 
+New (forced) projection.  Bag number is 1
+   90, false, 
+   Known destination for 2 instances:sunny->0(1) rain->0(1) 
+
+Covering instance 70, true, 
+   Known destination for 3 instances:sunny->0(1) overcast->0(1) rain->1(1) 
+New (forced) projection.  Bag number is 2
+   70, true, 
+   Known destination for 3 instances:sunny->0(1) overcast->0(1) rain->1(1) 
+
+Covering instance 65, true, 
+   Known destination for 1 instances:overcast->0(1) 
+Bag 0 is best
+Bag 1 is best
+Bag 2 is best
+Projection included in bag 2 result is 
+   Known destination for 4 instances:sunny->0(1) overcast->0(2) rain->1(1) 
+
+Covering instance 80, true, 
+   Known destination for 1 instances:overcast->0(1) 
+Bag 0 is best
+Bag 2 is best
+Projection included in bag 2 result is 
+   Known destination for 5 instances:sunny->0(1) overcast->0(3) rain->1(1) 
+
+Covering instance 70, false, 
+   Known destination for 1 instances:overcast->0(1) 
+Bag 0 is best
+Bag 1 is best
+Bag 2 is best
+Projection included in bag 2 result is 
+   Known destination for 6 instances:sunny->0(1) overcast->0(4) rain->1(1) 
+
+Covering instance 65, false, 
+   Known destination for 1 instances:sunny->0(1) 
+Bag 1 is best
+Bag 2 is best
+Projection included in bag 2 result is 
+   Known destination for 7 instances:sunny->0(2) overcast->0(4) rain->1(1) 
+
+Covering instance 90, true, 
+   Known destination for 1 instances:sunny->1(1) 
+Bag 0 is best
+Projection included in bag 0 result is 
+   Known destination for 3 instances:sunny->1(2) rain->0(1) 
+
+Covering instance 99, false, 
+   Known destination for 1 instances:foo->1(1) 
+Bag 0 is best
+Bag 2 is best
+Projection merged with bag 2 result is 
+   Known destination for 8 instances:sunny->0(2) overcast->0(4) rain->1(1) foo->1(1) 
+CoverInstanceHeuristic level summary:
+  Number of unforced instance covers: 9
+  Consistent choices: 6, Included choices: 1, Consistent & not incl: 5
+The same statistics are
+CoverInstanceHeuristic level summary:
+  Number of unforced instance covers: 9
+  Consistent choices: 6, Included choices: 1, Consistent & not incl: 5
+Displaying ProjLIBag
+80, false, 
+   Known destination for 2 instances:sunny->1(1) rain->0(1) 
+90, false, 
+   Known destination for 2 instances:sunny->0(1) rain->0(1) 
+70, true, 
+   Known destination for 3 instances:sunny->0(1) overcast->0(1) rain->1(1) 
+65, true, 
+   Known destination for 1 instances:overcast->0(1) 
+80, true, 
+   Known destination for 1 instances:overcast->0(1) 
+70, false, 
+   Known destination for 1 instances:overcast->0(1) 
+65, false, 
+   Known destination for 1 instances:sunny->0(1) 
+90, true, 
+   Known destination for 1 instances:sunny->1(1) 
+99, false, 
+   Known destination for 1 instances:foo->1(1) 
+
+Covering instance 80, false, 
+   Known destination for 2 instances:sunny->1(1) rain->0(1) 
+New (forced) projection.  Bag number is 0
+   80, false, 
+   Known destination for 2 instances:sunny->1(1) rain->0(1) 
+
+Covering instance 90, false, 
+   Known destination for 2 instances:sunny->0(1) rain->0(1) 
+New (forced) projection.  Bag number is 1
+   90, false, 
+   Known destination for 2 instances:sunny->0(1) rain->0(1) 
+
+Covering instance 70, true, 
+   Known destination for 3 instances:sunny->0(1) overcast->0(1) rain->1(1) 
+New (forced) projection.  Bag number is 2
+   70, true, 
+   Known destination for 3 instances:sunny->0(1) overcast->0(1) rain->1(1) 
+
+Covering instance 65, true, 
+   Known destination for 1 instances:overcast->0(1) 
+Bag 0 is best
+Bag 1 is best
+Bag 2 is best
+Projection included in bag 2 result is 
+   Known destination for 4 instances:sunny->0(1) overcast->0(2) rain->1(1) 
+
+Covering instance 80, true, 
+   Known destination for 1 instances:overcast->0(1) 
+Bag 0 is best
+Bag 2 is best
+Projection included in bag 2 result is 
+   Known destination for 5 instances:sunny->0(1) overcast->0(3) rain->1(1) 
+
+Covering instance 70, false, 
+   Known destination for 1 instances:overcast->0(1) 
+Bag 0 is best
+Bag 1 is best
+Bag 2 is best
+Projection included in bag 2 result is 
+   Known destination for 6 instances:sunny->0(1) overcast->0(4) rain->1(1) 
+
+Covering instance 65, false, 
+   Known destination for 1 instances:sunny->0(1) 
+Bag 1 is best
+Bag 2 is best
+Projection included in bag 2 result is 
+   Known destination for 7 instances:sunny->0(2) overcast->0(4) rain->1(1) 
+
+Covering instance 90, true, 
+   Known destination for 1 instances:sunny->1(1) 
+Bag 0 is best
+Projection included in bag 0 result is 
+   Known destination for 3 instances:sunny->1(2) rain->0(1) 
+
+Covering instance 99, false, 
+   Known destination for 1 instances:foo->1(1) 
+Bag 0 is best
+Bag 2 is best
+Projection merged with bag 2 result is 
+   Known destination for 8 instances:sunny->0(2) overcast->0(4) rain->1(1) foo->1(1) 
+CoverInstanceHeuristic level summary:
+  Number of unforced instance covers: 9
+  Consistent choices: 6, Included choices: 1, Consistent & not incl: 5
+The same statistics are
+CoverInstanceHeuristic level summary:
+  Number of unforced instance covers: 9
+  Consistent choices: 6, Included choices: 1, Consistent & not incl: 5
+CoverInstanceHeuristic total summary:
+  Total number of unforced instance covers: 18
+  Consistent choices: 12, Included choices: 2, Consistent & not incl: 10
+CoverInstanceHeuristic level summary:
+  Number of unforced instance covers: 9
+  Consistent choices: 6, Included choices: 1, Consistent & not incl: 5
+The same statistics are
+CoverInstanceHeuristic level summary:
+  Number of unforced instance covers: 9
+  Consistent choices: 6, Included choices: 1, Consistent & not incl: 5
+CoverInstanceHeuristic level summary:
+  Number of unforced instance covers: 9
+  Consistent choices: 6, Included choices: 1, Consistent & not incl: 5
+The same statistics are
+CoverInstanceHeuristic level summary:
+  Number of unforced instance covers: 9
+  Consistent choices: 6, Included choices: 1, Consistent & not incl: 5
+CoverInstanceHeuristic total summary:
+  Total number of unforced instance covers: 18
+  Consistent choices: 12, Included choices: 2, Consistent & not incl: 10
+CoverInstanceHeuristic total summary:
+  Total number of unforced instance covers: 18
+  Consistent choices: 12, Included choices: 2, Consistent & not incl: 10

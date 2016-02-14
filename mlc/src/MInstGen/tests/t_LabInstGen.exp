@@ -1,0 +1,19 @@
+t_LabelledInstanceGenerator.c executing
+Proto zero is:0.25, 0.25, 0.25, 0.25, 0.25, ?.
+
+Proto one is:0.75, 0.75, 0.75, 0.75, 0.75, ?.
+
+t_LabInstGen.out5 IB equal weights acc=0.844444
+t_LabInstGen.out5 IB perfect weights acc=0.844444
+Proto zero is:0.25, 0.25, 0.25, 0.25, 0.25, ?.
+
+Proto one is:0.75, 0.75, 0.75, 0.75, 0.75, ?.
+
+t_LabInstGen.out6 IB equal weights acc=0.863889
+t_LabInstGen.out6 IB perfect weights acc=0.918333
+Proto zero is:0.25, 0.25, 0.25, 0.25, 0.25, ?.
+
+Proto one is:0.75, 0.75, 0.75, 0.75, 0.75, ?.
+
+t_LabInstGen.out7 IB equal weights acc=0.841111
+t_LabInstGen.out7 IB perfect weights acc=0.906111

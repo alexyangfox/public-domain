@@ -1,0 +1,5 @@
+:petal-length:Iris-setosa	35, 0, 0
+:petal-length:petal-width:petal-length:Iris-versicolor	0, 32, 0
+:petal-length:petal-width:petal-length:sepal-length:Iris-versicolor	0, 1, 0
+:petal-length:petal-width:petal-length:sepal-length:Iris-virginica	0, 0, 3
+:petal-length:petal-width:Iris-virginica	0, 0, 29

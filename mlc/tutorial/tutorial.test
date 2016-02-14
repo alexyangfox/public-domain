@@ -1,0 +1,18 @@
+| tutorial data
+| Ronny Kohavi
+
+brown, cheap,    yes, reject.
+grey,  cheap,    yes, reject.
+black, average,  yes, reject.
+brown, average,  yes, reject.
+grey,  average,  yes, reject.
+brown, expensive,yes, accept.
+grey,  expensive,yes, accept.
+brown, cheap,    no,  reject.
+blonde,cheap,    no,  reject.
+grey,  cheap,    no,  reject.
+black, average,  no,  reject.
+brown, average,  no,  reject.
+blonde,average,  no,  reject.
+black, expensive,no,  reject.
+grey,  expensive,no,  reject.

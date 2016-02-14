@@ -1,0 +1,23 @@
+OK.
+Tests on the basic operations of reference counting classes
+Random Test on InstanceRC
+VAL0, VAL0.
+VAL0 VAL0 
+VAL1, VAL0.
+VAL0 VAL1 
+VAL2, VAL0.
+VAL0 VAL2 
+VAL0, VAL0.
+VAL0 VAL0 
+VAL1, VAL0.
+VAL0 VAL1 
+OK.
+Instance before change ...
+Nominal-2, Nominal-2, Nominal-1, Nominal-0.
+
+Instance after change ...
+Alt-Nominal-2, Alt-Nominal-2, Alt-Nominal-1, Alt-Nominal-0.
+
+
+Testing project()
+  project() OK.
