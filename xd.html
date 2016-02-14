@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html version="-//W3C//DTD HTML 3.2 Final//EN">
+<head>
+<title>xd: Extended Dump and Load Utility</title>
+<style type="text/css">
+    BODY.standard {
+        margin-left: 15%;
+        margin-right: 10%
+    }
+</style><meta name="keywords" content="xd, dump, hexadecimal, octal, decimal, ASCII, ISO">
+<meta name="description" content="xd: Extended Dump and Load Utility">
+<meta name="author" content="John Walker">
+<meta name="robots" content="index">
+</head>
+
+<body bgcolor="#FFFFFF" class="standard">
+
+<center>
+<h1><img src="xd.gif" width=257 height=123 alt="XD"></h1>
+<h3><font color="#0000FF"><em>Extended Dump and Load Utility</em></font></h3>
+</center>
+
+<hr>
+
+<p>
+
+This page describes, in Unix manual page style,
+<b>xd</b>, a utility which dumps files in hexadecimal,
+decimal, or octal, with file addresses shown in any of
+those formats.  <b>xd</b> can read files in any of the
+formats it writes, recreating binary files, including
+modifications made by editing the dump with any text
+editor.  In addition, <b>xd</b> can transform a binary
+file into a C data declaration which permits embedding
+its contents into a program.  <b>xd</b> is available as
+C source code compatible with most Unix systems and
+as a ready-to-run 32-bit Windows executable.
+
+<h3>NAME</h3>
+     <b>xd</b> - extended dump and load utility
+
+<h3>SYNOPSIS</h3>
+     <b>xd</b> [ <b>-a</b><i>addrfmt</i> <b>-c</b>
+         <b>-d</b><i>label</i> <b>-l</b> <b>-n</b><i>datafmt</i>
+         <b>-s</b> ] [ <i>infile</i> [  <i>outfile</i> ] ]
+
+<h3>DESCRIPTION</h3>
+     <b>xd</b> dumps files in hexadecimal, decimal, or octal, optionally with
+     ISO characters side by side.  File addresses can likewise be
+     displayed in hex, decimal, or octal notation.
+
+<p>
+
+     <b>xd</b> can <em>read</em> dump files in the same formats it writes and create
+     binary files from the data therein.  This allows you to dump a
+     binary file with <b>xd</b>, edit it with your favourite text editor,
+     then make a new binary file containing whatever changes you've
+     made.  When creating a binary file, <b>xd</b> normally assumes you've
+     only modified data in place (neither expanding nor contracting
+     the file) and verifies file addresses to guarantee this.
+     However, a "stream" option is available which ignores file
+     addresses so you're free to insert and delete bytes at will.  <b>xd</b>
+     thus turns your existing text editor into a binary file editor
+     without requiring you to learn any new commands.
+
+<p>
+
+     Finally, <b>xd</b> can read a binary file and emit a C language data
+     declaration which contains the data from the file.  This is handy
+     when you wish to embed binary data within C programs.
+
+<h3>OPTIONS</h3>
+<dl compact>
+<dt><b>-a</b><i>addrfmt</i>  <dd>Displays addresses in the dumped file as specified
+               by <i>addrfmt</i>: <b>d</b> for decimal, <b>h</b> or <b>x</b> for hexadecimal, and
+               <b>o</b> for octal.  By default, addresses are shown in
+               hexadecimal.
+
+<p>
+<dt><b>-c</b>  <dd>Display ISO characters alongside the numeric
+               dump.  Non-printing characters (according to ISO
+               8859/1) are shown as periods.  The ISO characters are
+               separated from the dump by vertical bar characters,
+               which <b>xd</b> treats as comment delimiters when loading a
+               file.
+
+<p>
+<dt><b>-d</b><i>label</i> <dd>Dumps the file as a C language declaration of  an
+               array of <tt>unsigned char</tt> which, when compiled, will
+               contain the same data as the binary input file.  The C
+               array declaration is given the variable name <i>label</i>, or
+               <tt>xd_data</tt> if no label specification is given.  Data are
+               declared as individual bytes to guarantee portability
+               across architectures with different byte ordering
+               conventions, and are expressed as decimal numbers in
+               lines of less than 80 characters for maximum
+               portability among compilers.  The C operator <tt>sizeof</tt> may
+               be applied to the array <i>label</i> to obtain its length in
+               bytes.
+
+<p>
+<dt><b>-l</b> <dd>Load file from dump.  <b>xd</b> reads a file in the same
+               format it writes, creating a binary output file.  Each
+               line is assumed to begin with a file address terminated
+               by a colon.  Data bytes are separated by white space,
+               and any characters after a vertical bar are ignored
+               (thus discarding any ISO characters included in the
+               dump with the <b>-c</b> option).  If the <b>-s</b> option is not
+               specified, each file address is checked against the
+               number of bytes written so far to guarantee that no
+               bytes have been added or deleted.  Files must be loaded
+               with the <b>-a</b> and <b>-n</b> options set the same as when the
+               file was dumped.
+
+<p>
+<dt><b>-n</b><i>datafmt</i> <dd>Edits bytes in the dumped file as specified by
+               <i>datafmt</i>: <b>d</b> for decimal, <b>h</b> or
+               <b>x</b> for hexadecimal, and <b>o</b> for octal.  By
+               default, bytes are shown in hexadecimal.
+
+<p>
+<dt><b>-s</b>  <dd>Stream input when loading file.  If  this  option
+               is specified in conjunction with the <b>-l</b> option, file
+               addresses are not verified when loading a file and, in
+               fact, need not be specified at all.  The input file is
+               treated as a stream of byte values separated by white
+               space.  This option allows you to create a dump with
+               <b>xd</b>, edit it as you wish with any text editor, inserting
+               and deleting bytes in the file wherever you like, then
+               create a binary file from the modified dump with the
+               command <b>xd -l -s</b> <i>dumpfile outfile</i>.
+
+<p>
+<dt><b>-u</b>  <dd>Print how-to-call information.
+</dl>
+
+<h3>FILES</h3>
+     If no <i>infile</i> is specified, <b>xd</b> obtains its input from standard
+     input; if no <i>outfile</i> is given, output is sent to standard output.
+     The input and output are processed in a strictly serial manner
+     regardless of options; consequently <b>xd</b> may be used in pipelines
+     without restrictions.
+
+<h3>BUGS</h3>
+     Input error checking in load mode might be improved.  Note that
+     each byte in load mode must be specified as a number in the same
+     format selected by the <b>-n</b> option when the file was dumped,
+     separated by white space, and that the <b>-a</b> and <b>-n</b> options must be
+     set the same when loading a file as when it was dumped.
+
+<h3>SEE ALSO</h3>
+     <b>cc</b>(1), <b>od</b>(1), <b>iso_8859_1</b>(7)
+
+<h2><a href="xd.zip"><img src="/images/icons/file.gif" alt="" align=middle width=40 height=40></a> <a href="xd.zip">Download xd.zip</a> (Zipped archive)</h2>
+
+The release archive contains source code, a <tt>Makefile</tt>
+for building the program, and documentation in manual page and
+HTML form.  A ready-to-run WIN32 executable,
+<tt><b>xd.exe</b></tt> is included, along with the workspace
+and project definition files used to build it with Microsoft
+Visual C 5.0.
+
+<h3>COPYING</h3>
+
+<blockquote>
+     This software is in the public domain.  Permission to use, copy,
+     modify, and distribute this software and its documentation for
+     any purpose and without fee is hereby granted, without any
+     conditions or restrictions.  This software is provided "as is"
+     without express or implied warranty.
+</blockquote>
+
+<h4><a href="/sitemap.html#unixtools">Other Unix Utilities at this Site</a></h4>
+<h4><a href="/">Fourmilab Home Page</a></h4>
+
+<p>
+<hr>
+<p>
+<address>
+by <a href="/">John Walker</a><br>
+Version 1.3<br>
+September, MM
+</address>
+
+</body>
+</html>

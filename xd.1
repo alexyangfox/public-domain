@@ -1,0 +1,182 @@
+'\" t
+.TH XD 1 "29 AUG 2000"
+.UC 4
+.SH NAME
+xd \- extended dump and load utility
+.SH SYNOPSIS
+.B xd
+[
+.BI \-a addrfmt
+.B \-c
+.BI \-d label
+.B \-l
+.BI \-n datafmt
+.B \-s
+] [
+.I infile
+[
+.I outfile
+] ]
+.SH DESCRIPTION
+.B xd
+dumps files in hexadecimal, decimal, or octal, optionally with ISO characters side by
+side.
+File addresses can likewise be displayed in hex, decimal, or octal notation.
+.PP
+.B xd
+can
+.I read
+dump files in the same formats it writes and create binary files from
+the data therein.  This allows you to dump a binary file with
+.BR xd ,
+edit it with your  favourite  text  editor,  then
+make  a  new  binary  file containing whatever changes you've made.  When
+creating a binary file,
+.B xd
+normally assumes you've only modified data in place (neither expanding
+nor contracting the file) and verifies file addresses to guarantee
+this.  However, a ``stream'' option is available which ignores file
+addresses so you're free to insert and delete bytes at
+will.
+.B xd
+thus turns your existing text editor into a binary file editor without
+requiring you to learn any new commands.
+.PP
+Finally,
+.B xd
+can read a binary file and emit a C language data declaration which
+contains the data from the file.  This is handy when you wish to embed
+binary data within C programs.
+.SH OPTIONS
+.TP 10
+.BI \-a addrfmt
+Displays addresses in the dumped file as specified by
+.IR addrfmt :
+.B d
+for decimal,
+.B h
+or
+.B x
+for hexadecimal, and
+.B o
+for octal.  By default, addresses are shown in hexadecimal.
+.TP
+.B \-c
+Display ISO characters alongside the numeric dump.  Non-printing
+characters (according to ISO 8859/1) are shown as periods.  The ISO
+characters are separated from the dump by vertical bar
+characters, which
+.B xd
+treats as comment delimiters when loading a file.
+.TP
+.BI \-d label
+Dumps the file as a C language declaration of an array of
+.B unsigned char
+which, when compiled, will contain the same data as the binary input file.
+The C array declaration is given the variable name
+.IR label ,
+or
+.B xd_data
+if no
+.I label
+specification is given.  Data are declared as individual bytes to
+guarantee portability across architectures with different byte ordering
+conventions, and are expressed as decimal numbers in lines of less than
+80 characters for maximum portability among compilers.  The
+C operator
+.B sizeof
+may be applied to the array
+.I label
+to obtain its length in bytes.
+.TP
+.B \-l
+Load file from dump.
+.B xd
+reads a file in the same format it writes, creating a binary output
+file.  Each line is assumed to begin with a file address terminated by
+a colon.  Data bytes are separated by white space,
+and any characters after a vertical bar
+are ignored (thus discarding any ISO characters included in the
+dump with the
+.B \-c
+option).  If the
+.B \-s
+option is not specified, each file address is checked against the
+number of bytes written so far to guarantee that no bytes have been
+added or deleted.
+Files must be loaded with the
+.B \-a
+and
+.B \-n
+options set the same as when the file was dumped.
+.TP
+.BI \-n datafmt
+Edits bytes in the dumped file as specified by
+.IR datafmt :
+.B d
+for decimal,
+.B h
+or
+.B x
+for hexadecimal, and
+.B o
+for octal.  By default, bytes are shown in hexadecimal.
+.TP
+.B \-s
+Stream input when loading file.  If this option is specified in conjunction
+with the
+.B \-l
+option, file addresses are not verified when loading a file and, in fact,
+need not be specified at all.  The input file is treated as a stream
+of byte values separated by white space.  This option allows
+you to create a dump with
+.BR xd ,
+edit it as you wish with any text editor, inserting and deleting bytes
+in the file wherever you like, then create a binary file from the
+modified dump with the command
+.B xd \-l \-s
+.IR "dumpfile outfile" .
+.TP
+.B \-u
+Print how-to-call information.
+.SH FILES
+If no
+.I infile
+is specified,
+.B xd
+obtains its input from standard input; if no
+.I outfile
+is given, output is sent to standard output.  The input and
+output are processed in a strictly serial manner regardless
+of options; consequently
+.B xd
+may be used in pipelines without restrictions.
+.SH BUGS
+.PP
+Input error checking in load mode might be improved.  Note that each
+byte in load mode must be specified as a number in the same format
+selected by the
+.B \-n
+option when the file was dumped,
+separated by white space, and that the
+.B \-a
+and
+.B \-n
+options must be set the same when loading a file as
+when it was dumped.
+.SH "SEE ALSO"
+.PD
+.BR cc (1),
+.BR od (1),
+.BR iso_8859_1 (7)
+.ne 10
+.SH AUTHOR
+.ce 2
+John Walker
+http://www.fourmilab.ch/
+.PP
+This software is in the public domain.
+Permission to use, copy, modify, and distribute this software and its
+documentation for any purpose and without fee is hereby granted,
+without any conditions or restrictions.  This software is provided ``as
+is'' without express or implied warranty.

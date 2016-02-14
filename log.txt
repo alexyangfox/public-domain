@@ -1,0 +1,19 @@
+
+                                  XD
+                           Development Log
+
+2000 August 29
+
+Added _WIN32 code to xd.c to set input and output text/binary
+modes and force modes of standard input and output depending on
+the operation being performed.  Input is set to binary except
+when a "-l" option load is selected, in which case the input
+file is text mode and the output is binary.
+
+2000 September 10
+
+Remade logo using Snap ITC font as before, changing background
+colour to be white as used in the updated HTML file.  Note that
+due to an error in this font's bounding box calculation one
+must prefix "XD" with a space to avoid truncation of the left
+part of the "X".
