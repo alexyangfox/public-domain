@@ -1,0 +1,48 @@
+
+                                    clock24
+
+   Clock24 is the 24-hour analog clock for those programmers who have to
+   get their work done before midnight. The short hand travels around in
+   a day, whereas those on conventional analog clocks do so in half a
+   day. The biggest reasons why I wrote this are that I often write code
+   in the basement to find myself not sure whether it's nighttime or
+   daytime, and that I prefer analog clocks to digital clocks.
+
+   This program uses OpenGL to draw an analog clock, and GLUT to do UI
+   stuff. It works well with X11 utilities like Devil's Pie.
+
+Features
+
+   Compatibility mode(-c)
+          Emulates conventional 12-hour analog clock.
+
+   Reverse mode(-r)
+          With this option, midnight(0:00) goes to the bottom.
+
+   GMT mode(-g)
+          Shows GMT instead of local time.
+
+   Online help(-h)
+          Though it lacks man page.
+
+   Alarm
+          On the time that the alarm is set, the color of backpanel
+          changes to red. It often means that you missed a deadline.
+
+   All these options can also be turned on/off using a pop-up menu.
+
+How to compile
+
+   I checked this program to compile and run on Ubuntu 8.04(AMD64) and
+   MacOS X 10.5.4(ppc).
+     * On GNU/Linux, make sure you have GLUT and its development files
+       installed, and type `make' to get the executable `clock24'. It can
+       be put anywhere you like, such as /usr/bin.
+     * On Apple MacOS X, type `make -f Makefile.macosx' to use the
+       Makefile that I wrote for MacOS X users. Put `clock24' anywhere
+       you like.
+     * On *BSD, most users tend to know what they are doing. Please
+       compile clock24.c, whose object links against GLUT and OpenGL. I
+       hear OpenBSD is getting hardware rendering support, with which
+       this application runs more smoothly on the platform.
+
