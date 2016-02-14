@@ -1,0 +1,46 @@
+Changes to version 0.6.0:
+-------------------------
+- Tiger tree definition changed, incompatible with previous releases.
+- Added video plugin. (delirium)
+
+Changes to version 0.4.0:
+-------------------------
+- Added support for calculating eDonkey "ed2k" and FastTrack "sig2dat"
+  identifiers.
+- Added support for PNG images to the image plugin. (delirium)
+- Turned off calculating/reporting MD5 hashes by default.
+
+Changes to version 0.3.4:
+-------------------------
+- Changed the character set used for Base32 encoding and added a . between
+  the sha1 and tigertree hash
+
+Changes to version 0.3.3:
+-------------------------
+- Added support for calculating MD5 hashes.
+
+Changes to version 0.3.2:
+-------------------------
+- A new image plugin as been added. This image plugin was written
+  by Bitizen delirium and supports GIF, BMP and JPG files)
+- ID3v2 genres were being reported as strings and not as numeric ID3v1 
+  equivalents. Now all ID3v2 genres that map to ID3v1 genres should
+  work ok.
+- fixed bug where an extra semi-colon would cause an if-block to always
+  execute and sometimes crash.
+- fixed an incorrect detect sha1 presence line of code (valid sha1s
+  may start with a \0 (DUH!)
+- Started using libltdl for dynamic loading, thus making the bitcollider
+  more cross-platform compatible
+- Applied Nathan Lutchansky -f patch (with some debugging to handle
+  single file submits correctly), which also sends debugging printfs
+  to stderr, not stdout
+- Converted bitcollider to use new base32 encoding, rather than base16
+- Adapted bitprinting code from the bitprint.[ch] for more modular
+  bitprintint capabilities.
+- Now using a word64 type to calculate the progress indicator -- this
+  should fix the funky progress indicator for large files.
+- Fixed a problem where the bitcollider could not traverse compressed directory
+  trees. (Thanks to Scott Hernandez for catching this)
+- Fixed the windows shell extension to allow bitprinting of a large
+  number of files.

@@ -1,0 +1,4 @@
+Known issues:
+
+ - The temp files are not cleaned up right now.
+

@@ -1,0 +1,35 @@
+Compilation notes for Win32:
+============================
+
+Berkeley DB notes:
+------------------
+
+To build the Berkeley DB support into the bitcollider you will need
+to install the Berkeley DB from Sleepy Cat software:
+
+   http://www.sleepycat.com
+
+The BDB installation needs to reside in a directory called 'db' at
+the same level the bitcollider source directory. 
+
+Example: If you unzipped the bitcollider source into C:\devel\bitcollider,
+         you must install the Berkeley DB into c:\devel\db.
+
+If you do not want to use the Berkeley DB with the Bitcollider, go into
+the options for the project bc_dll and under Compile, Preprocessor
+options, remove the define USE_BDB. 
+
+
+Vorbis Support notes:
+---------------------
+
+In order to compile the vorbis plugin in win32, you must install
+the vorbis sdk into a directory called vorbis-sdk right alongside the
+bitcollider source directory.
+
+Example: If you unzipped the bitcollider source into C:\devel\bitcollider,
+         you must install the Vorbis SDK into C:\devel\vorbis-sdk
+
+If you do not want to build the Vorbis plugin, go to Project|Dependecies
+and deselect the vorbis project from the dependecies of the bitcollider
+project.

@@ -1,0 +1,89 @@
+dnl (PD) 2001 The Bitzi Corporation
+dnl Please see file COPYING or http://bitzi.com/publicdomain 
+dnl for more info.
+dnl
+dnl $Id: configure.in,v 1.18 2004/02/03 01:25:53 mayhemchaos Exp $
+AC_INIT(src/bitcollider.c)
+VERSION="0.6.0"
+AM_INIT_AUTOMAKE(bitcollider, "$VERSION")
+
+CFLAGS="-Wall -g -O3"
+
+dnl Canonicalize host.
+AC_CANONICAL_HOST
+case "${host_cpu}-${host_os}" in
+  *-beos*)    os=beos; LIBS='-lbe -lroot' ;;
+  *-cygwin*)  os=cygwin; LIBS='-lwinmm' ;;
+  *-freebsd*) os=freebsd ;;
+  *-darwin*)  os=darwin ;;
+  *-irix*)    os=irix; CXXFLAGS="$CFLAGS -fsquangle";
+                       LIBS='-lcdaudio -lmediad -lds' ;;
+  *-linux*)   os=linux ;;
+  *-netbsd*)  os=netbsd ;;
+  *-openbsd*) os=openbsd ;;
+  *-os2_emx*) os=os2 ;;
+  *-solaris*) os=solaris; LIBS='-lsocket -lnsl' ;;
+  *-qnx*)     os=qnx; LIBS='-lsocket' ;;
+  *)          AC_MSG_RESULT([WARNING: unknown system]) ;;
+esac
+if test x$os = xdarwin; then
+    AC_DEFINE(DARWIN, 1, Are we on Darwin?)
+else
+    AC_DEFINE(DARWIN, 0, Are we on Darwin?)
+fi
+AC_SUBST(DARWIN)
+
+dnl Checks for programs.
+AC_PROG_AWK
+AC_PROG_CC
+AC_LIBLTDL_CONVENIENCE
+AC_SUBST(INCLTDL)
+AC_SUBST(LIBLTDL)
+AC_LIBTOOL_DLOPEN
+AM_PROG_LIBTOOL
+AC_SUBST(LIBTOOL_DEPS)  
+AC_PROG_INSTALL
+AC_C_BIGENDIAN
+AC_CHECK_SIZEOF(long)
+
+dnl Checks for libraries.
+
+dnl Checks for header files.
+
+dnl Checks for typedefs, structures, and compiler characteristics.
+
+dnl AC_CHECK_LIB(db, db_create, have_db="yes", have_db="no")
+dnl if test "$have_db" = "yes"; then
+dnl      AC_DEFINE(USE_BDB, 1, "[Berkeley DB Support]")
+dnl      BDB_LIBS="-ldb"
+dnl      AC_SUBST(BDB_LIBS)
+dnl      AC_MSG_RESULT([compiling caching support])
+dnl fi
+BDB_LIBS=""
+AC_SUBST(BDB_LIBS)
+
+AC_CHECK_LIB(ogg, ogg_sync_init, have_ogg="yes", have_ogg="no")
+AC_CHECK_LIB(vorbisfile, ov_info, have_vorbis="yes",have_vorbis="no", 
+             -lvorbis -logg)
+
+VORBIS_SUB=""
+if test "$have_ogg" = "yes"; then
+  if test "$have_vorbis" = "yes"; then
+     AC_DEFINE(USE_VORBIS, 1, "[ogg/vorbis support]")
+     VORBIS_LIBS="-lvorbisfile -lvorbis -logg"
+     VORBIS_SUB="vorbis"
+     AC_SUBST(VORBIS_LIBS)
+     AC_MSG_RESULT([compiling ogg/vorbis support])
+  fi
+fi
+AC_SUBST(VORBIS_SUB)
+
+if test "${prefix}" = "NONE"; then
+  prefix="/usr/local" 
+fi
+
+AC_SUBST(CFLAGS)  
+AC_DEFINE_UNQUOTED(PREFIX, "${prefix}", "PREFIX") 
+AM_CONFIG_HEADER(config.h)
+AC_CONFIG_SUBDIRS(libltdl)
+AC_OUTPUT(Makefile lib/Makefile src/Makefile vorbis/Makefile wav/Makefile image/Makefile video/Makefile, echo timestamp > stamp-h)

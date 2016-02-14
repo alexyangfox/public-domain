@@ -1,0 +1,16 @@
+Credits
+=======
+
+The following people have contributed to this program:
+
+  Bitzi Inc.
+  - original code
+
+  Image plugin (BMP, GIF, JPG, PNG)
+  Video plugin (AVI/QT/MPEG-1/MPEG-2)
+  - Mark Nelson [delirium] <delirium4u@theoffspring.net>
+
+  Support for the -f option and printing error messages to stderr
+  - Nathan Lutchansky <lutchann@litech.org>
+
+(please send changes/patches to info@bitzi.com)
