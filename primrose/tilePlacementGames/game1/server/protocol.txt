@@ -1,0 +1,45 @@
+All returns are whitespace-delimited.
+
+Error returns start with the string "ERROR:"
+
+
+
+
+=== Call:
+server.php?action=fetch_scores
+
+Returns:
+numAllTimeScores
+scoreBundle0
+scoreBundle1
+...
+scoreBundleN
+numTodayScores
+scoreBundle0
+scoreBundle1
+...
+scoreBundleM
+
+
+Where:
+scoreBundle = name#score#seed#move_history
+
+Note:
+--move_history is a sequence of base-49 digits (digits 0-48 of base-64 
+  encoding, each representing one of the 49 possible move locations).
+
+
+
+=== Call (params probably in POST body):
+server.php?action=post_score&name=[name]&score=[score]&seed=[seed]&move_history=[move_history_string]&hash=[hash_string]
+
+Returns: 
+Same as fetch_scores above
+
+
+Where:
+hash_string = sha1( concat( name, score, seed, move_history, secureSalt ) )
+
+secureSalt is a secret string shared by both client and server
+
+

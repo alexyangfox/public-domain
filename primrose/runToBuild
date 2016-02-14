@@ -1,0 +1,35 @@
+#!/bin/sh
+
+#
+# Modification History
+#
+# 2007-November-12    Jason Rohrer
+# Copied from Cultivation.
+#
+
+
+cd tilePlacementGames/game1
+chmod u+x ./configure
+./configure
+
+cd gameSource
+
+
+echo "Building Primrose..."
+
+make
+
+
+
+cd ../../..
+
+mkdir graphics
+mkdir settings
+
+cp tilePlacementGames/game1/gameSource/Primrose ./Primrose
+cp tilePlacementGames/game1/documentation/Readme.txt .
+cp tilePlacementGames/game1/gameSource/graphics/* ./graphics
+#no default settings files
+#cp tilePlacementGames/game1/gameSource/settings/* ./settings
+
+echo "Run Primrose to play."

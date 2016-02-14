@@ -1,0 +1,97 @@
+Version 6   2009-May-?
+
+--Further improved end game mechanism.
+  (Count-downs for color transitions at end now hidden to thwart planning.)
+
+--Factored player's moves into random generator to thwart save/restore exploit
+  that allowed players to peek ahead at future pieces.
+  Playing a different sequence of moves from the same starting state 
+  now results in a different sequence of pieces.
+
+--Migrated to a fresh online leaderboard.
+
+
+
+
+Version 5   2009-April-3
+
+--Further improved end game mechanism.
+  (Back to cycling long runs of a single color at the end.)
+
+--Tweaked scoring formula to make end game worth more.
+
+--Migrated to a fresh online leaderboard.
+
+
+
+
+Version 4   2009-March-19
+
+--Fixed to compile on 64-bit platforms.
+  Reported by Johaan Strojandogg.
+
+--Fixed bug where button presses on high score panel were being passed through
+  to the underlying menu panel (toggling color blind mode accidentally, for
+  example).
+
+--Fixed crash when a new game is started before current tile animation is over.
+  Reported by Terry McGill.
+
+--Fixed potential checkpoint exploit.
+  Reported by Scott Lawrence.
+
+--Hid grid space active markers (plus signs) during fast playback to deal with
+  annoying flickering effect.
+
+
+
+
+Version 3    2009-February-25
+
+--Rebalanced scoring formula.
+
+--Added a more robust mechanism for ending the game.
+  (Ends on an infinite run of a single color, filling board with a single
+   color ends the game.)
+
+--Migrated to a fresh online leaderboard.
+
+--Fixed a bug in game replay after app resumes.  Found by Peter Marquardt.
+
+--Improved efficiency of drawing routines.
+
+--Added a fast button for game replays.
+
+
+ 
+
+
+Version 2    2009-February-19
+
+--Added secure hashing of saved game settings files to make saved game hacking
+  more difficult.
+
+--Improved tutorial text.
+
+--Improved server logging.
+
+--Added pop-up of name editing screen on first score submission.  In v1, the 
+  default name would silently be sent.
+
+--Fixed a memory issue in DNS lookup that could cause a crash if high
+  score screen loaded and canceled repeatedly in quick succession.
+
+--Added more verbose error messages for failed network operations.
+
+--Added proper response (game exit) to a press of the window close button.
+
+--Turned off FPS print-out.
+
+--Made undo button disappear immediately after second piece placed.
+
+
+
+
+Version 1    2009-February-11
+
+--iPhone version submitted to Apple.

@@ -1,0 +1,68 @@
+#!/bin/sh
+
+#
+# Modification History
+#
+# 2007-November-12   Jason Rohrer
+# Copied from Cultivation build.
+#
+
+
+if [ $# -lt 2 ] ; then
+   echo "Usage: $0 release_name unix_platform_name"
+   exit 1
+fi
+
+
+rm -rf unix
+rm -rf windows
+
+mkdir windows
+mkdir unix
+
+
+# work on unix tree first
+mkdir unix/Primrose
+mkdir unix/Primrose/graphics
+mkdir unix/Primrose/settings
+
+
+cp ../gameSource/graphics/*.tga unix/Primrose/graphics
+#no default settings
+#cp ../gameSource/settings/*.ini unix/Primrose/settings
+cp ../documentation/Readme.txt unix/Primrose
+
+
+# duplicate unix tree so far to make windows tree
+cp -r unix/Primrose windows/
+
+cp ../gameSource/Primrose unix/Primrose/
+
+cp win32/Primrose.exe win32/*.dll windows/Primrose/
+
+cd unix
+tar cf "Primrose_$1_$2.tar" Primrose
+gzip "Primrose_$1_$2.tar"
+
+
+cd ..
+
+g++ -o unix2dos unix2dos.c 
+cp unix2dos windows
+cp unix2dosScript windows
+
+
+cd windows
+
+
+for file in Primrose/*.txt
+do
+	./unix2dosScript "$file"
+done
+
+zip -r "Primrose_$1_Windows.zip" Primrose
+
+
+
+
+

@@ -1,0 +1,22 @@
+Hi Mike, not sure if you remember me or not.  I'm the guy who made
+Passage, Gravitation, Between, and a bunch of other "art" games over the
+past year or so.  Maggie was the one who usually covered my work, but
+she's gone now, so I'm getting in touch with you instead.
+
+
+My new game Primrose is a bit of a departure for me.  Instead of setting out to make another art game, I set my sights on one of the gaints---Tetris---and tried my hand at making a game that is as compelling as that.  I came up with a completely novel puzzle mechanic (not a copycat at all) that is also really compelling and deep.  Primrose is the result.
+
+The other interesting thing about Primrose is the online leaderboard:  all posted scores have a PLAY button next to them, and you can watch instant replays of every top-scoring game, right on your iPhone (or Mac, etc.).  Thus, people can learn from each other... it's kind of a huge social experiment, and I don't think it's ever been done before, at least not in the context of a puzzle game.
+
+Primrose is $2.99 on the iPhone, but completely free to download (including source code) on the other platforms, Mac/Win/Linux.  So that's another social experiment in action---selling an open-source iPhone game.  I guess it's like a luxury tax---if you've got an iPhone, you can afford the game, but if not, you can always play the free version on the other platforms.
+
+Oh man... I almost sent this off without the link!
+
+http://primrose.sf.net
+
+
+Please drop me a line if you need any more info.  In the mean time, you can find a lot more details about Primrose in this IGN interview:
+
+http://pc.ign.com/articles/955/955949p1.html
+
+Jason

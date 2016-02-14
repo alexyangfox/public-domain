@@ -1,0 +1,2 @@
+g++ -g -o glGUITest -I/usr/X11R6/include -I../../../.. -L/usr/X11R6/lib -lGL -lglut -lGLU -lX11 -lXi -lXext -lXmu glGUITest.cpp ../../../../minorGems/graphics/openGL/ScreenGL.cpp ../../../../minorGems/io/linux/TypeIOLinux.cpp ../../../../minorGems/io/file/linux/PathLinux.cpp
+

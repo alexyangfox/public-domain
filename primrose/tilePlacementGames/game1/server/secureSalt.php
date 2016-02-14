@@ -1,0 +1,1 @@
+<?php   $secureSalt = "secret_path";   ?>

@@ -1,0 +1,56 @@
+#!/bin/sh
+
+#
+# Modification History
+#
+# 2007-November-12   Jason Rohrer
+# Copied from Cultivation build.
+#
+
+
+if [ $# -lt 3 ] ; then
+   echo "Usage: $0 release_name unix_platform_name path_to_SDL.framework"
+   exit 1
+fi
+
+
+rm -rf mac
+
+mkdir mac
+
+
+
+mkdir mac/Primrose
+mkdir mac/Primrose/graphics
+mkdir mac/Primrose/settings
+
+
+cp ../gameSource/graphics/*.tga mac/Primrose/graphics
+#no default settings
+#cp ../gameSource/settings/*.ini mac/Primrose/settings
+cp ../documentation/Readme.txt mac/Primrose
+
+
+
+
+cp -r macOSX/Primrose.app mac/Primrose/Primrose.app
+cp ../gameSource/Primrose mac/Primrose/Primrose.app/Contents/MacOS
+
+rm -r mac/Primrose/Primrose.app/CVS
+rm -r mac/Primrose/Primrose.app/Contents/CVS
+rm -r mac/Primrose/Primrose.app/Contents/MacOS/CVS
+rm -r mac/Primrose/Primrose.app/Contents/Resources/CVS
+rm -r mac/Primrose/Primrose.app/Contents/Frameworks/CVS
+
+# install SDL framework
+cp -r $3 mac/Primrose/Primrose.app/Contents/Frameworks/
+
+cd mac
+tar cf "Primrose_$1_$2.tar" Primrose
+gzip "Primrose_$1_$2.tar"
+
+
+
+
+
+

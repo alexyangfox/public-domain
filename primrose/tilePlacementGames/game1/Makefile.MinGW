@@ -1,0 +1,45 @@
+#
+# Modification History
+#
+# 2003-November-2    Jason Rohrer
+# Created.
+#
+# 2003-November-10    Jason Rohrer
+# Removed pthread flag.
+# Changed LINUX flag to WIN_32 flag.
+# Added wsock32 library flag.
+#
+
+
+##
+# The common MinGW (GNU for Win32) portion of Makefiles.
+# Should not be made manually---used by configure to build Makefiles.
+##
+
+
+PLATFORM_COMPILE_FLAGS = -DWIN_32
+
+# need various GL libraries, winmm, and portaudio
+# -mwindows tells mingw to hide the dos command window on launch
+PLATFORM_LINK_FLAGS = -lopengl32 -lglu32 -lmingw32 -lSDLmain -lSDL -mwindows -lwsock32
+
+
+# All platforms but OSX support g++ and need no linker hacks
+GXX = g++ 
+LINK_FLAGS = 
+
+
+##
+# Platform-specific minorGems file path prefixes
+##
+
+PLATFORM = Win32
+PLATFORM_PATH = win32
+
+TIME_PLATFORM = Win32
+TIME_PLATFORM_PATH = win32
+
+DIRECTORY_PLATFORM = Win32
+DIRECTORY_PLATFORM_PATH = win32
+
+

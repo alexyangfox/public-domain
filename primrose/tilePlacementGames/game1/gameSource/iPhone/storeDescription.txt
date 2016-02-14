@@ -1,0 +1,36 @@
+A captivating tile-clearing puzzle game by award-winning independent designer Jason Rohrer.
+
+If you find the crowd of copycat match-3 games to be mindless and boring...
+
+If you're looking for an elegant, deep puzzle game that's completely fresh...
+
+Then you should take a look at Primrose, which you can test for free (full version) on Mac, Windows, and GNU/Linux here:  http://primrose.sf.net
+
+Primrose's gameplay is deceptively simple:  You're given random pairs of colored tiles that you must place on a 7x7 grid.  When you surround a group of one color with another color, the surrounded group clears, scoring points.  The surrounding tiles flip to the color of the tiles that were cleared.  When tiles flip color, chain reactions are possible.  Larger groups and longer chain reactions are awarded more points.
+
+As the game progresses, more colors are added to the pool, making the grid more and more constrained.  Pressure builds until the grid finally fills up, and the game ends.
+
+Despite this mounting pressure, the game doesn't have a frantic feel, because you have as much time as you want to make each move.  Whereas games like Tetris depend on getting faster and faster to be challenging, Primrose derives deep challenge from inherent properties of its mechanics.
+
+But comparisons with Tetris aren't very helpful, because Primrose does not have you dropping tiles down a well.  Primrose also doesn't have you swapping adjacent tiles like so many match-3 games.  So what comparison is useful?  Primrose is a small bit like Go and Othello (if either of those were one-player games), a small bit like Lights Out, and a big bit like nothing you've every played before---and that big bit is a good thing.
+
+
+Primrose includes the following features:
+
+--Live, networked high score boards.  Compete against the world right from your iPhone, wherever you are.
+
+--Instant replay, move-by-move, of all games on the high score boards.  Wondering how other players got those unbelievable scores?  Just touch Play and watch how they did it.
+
+--Comprehensive instruction pages with realtime, animated examples.
+
+--Glowing, pulsating, retro graphics and analog synth-inspired sound effects.
+
+--Behaves like a proper iPhone app by auto-saving game progress during calls and other interruptions.  Take the call, then resume right where you left off after the call ends.  
+
+--Colorblind mode available.
+
+
+Press the [P] button on the main screen to access the menu.
+
+
+You can read an in-depth profile of Jason Rohrer in Esquire Magazine's December 2008 "Genius" issue.

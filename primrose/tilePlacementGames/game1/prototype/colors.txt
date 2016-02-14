@@ -1,0 +1,8 @@
+possibleColors[0] = make_color_rgb( 255, 128, 0 );
+possibleColors[1] = make_color_rgb( 128, 255, 0 );
+possibleColors[2] = make_color_rgb( 96, 0, 128 );
+possibleColors[3] = make_color_rgb( 192, 0, 0 );
+possibleColors[4] = make_color_rgb( 0, 128, 96 );
+possibleColors[5] = make_color_rgb( 255, 96, 255 );
+possibleColors[6] = make_color_rgb( 255, 255, 160 );
+possibleColors[7] = make_color_rgb( 128, 96, 0 );
