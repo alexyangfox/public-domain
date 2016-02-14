@@ -1,0 +1,78 @@
+All code for 32-bit Watcom C assumes CauseWay DOS extender.
+Most assembly-language (.asm) files require NASM.
+
+xxx - farcall would be more useful if it supported other memory models
+It needs its own structure definition; because both "union REGS"
+and "struct REGPACK" have different layouts between Turbo C and Watcom C.
+
+a20.asm         (DOS or no OS) Enables/disables A20 gate; various methods
+asm-demo.zip    10 assembly-language 'hello' programs for three OSes (DOS,
+                Windows, Linux), using four assemblers (NASM, as, TASM, WASM)
+                and five linkers (alink, tlink, ilink32, ld, wlink)
+bankblit.c      (DOS) blit() function for VBE 1.x banked framebuffer
+chkhd.c         (Turbo C) Examines partition tables for errors
+cutwav.c        (ANSI C) Copies part of PCM .WAV file to a new .WAV file
+disk.c          (Turbo C or 16-bit Watcom C) Sector-level disk I/O (CHS & LBA)
+disk32.c        (DJGPP or 32-bit Watcom C) Sector-level disk I/O (CHS & LBA)
+djint.c         (DJGPP) Interrupt demo
+dosclip.c       (Turbo C or 16-bit Watcom C) DOS access to Windows clipboard
+dosreg.c        (Turbo C) DOS access to Windows registry
+dumpavi.c       (ANSI C) Dumps .AVI files
+dumpjpeg.c      (ANSI C) Dumps .JPG files
+dumpmov.c       (ANSI C) Dumps .MOV files
+dumppng.c       (ANSI C) Dumps .PNG files
+dumpwav.c       (ANSI C) Dumps .WAV files
+edid.c          (Turbo C or 16-bit Watcom C) Uses DDC/EDID to display monitor info
+farcall.zip     (NASM; Turbo C) Similar to intr() but does far call
+fatboot.zip     (NASM; no OS) FAT12 bootsector for floppy disk w/ test program
+fonread.c       (DOS) Displays characters in .FON bitmap font files
+img2htm.c       (ANSI C) Generates HTML <IMG> tag for .GIF/.PNG/.JPG files
+index.txt       -- This file --
+kbhit.c         (UNIX) kbhit() and getch() routines for UNIX
+lzss.c          (ANSI C) LZSS data compression (Microsoft COMPRESS/EXPAND)
+motoroff.asm    (DOS or no OS) Snippet to turn off floppy drive motors
+pc-kbd.c        (DOS) PC keyboard demo
+pc-rtc.c        (DOS) PC realtime clock demo
+pc-timer.c      (DOS) PC timer demo
+pci.c           (DOS) PCI demo code
+pmode.asm       (DOS or no OS) Simple protected mode demo code
+pnpbio32.c      (DJGPP or 32-bit Watcom C) Calls 16-bit PnP BIOS (thunking)
+pollout.c       (DOS) Simple polled serial port output
+printf.c        (any) Minimal printf() function (no floating point)
+runreloc.zip    (?) Loads and runs ELF, COFF, and PE relocatable (.o) files
+serial.c        (DOS) Interrupt-driven serial port code
+setjmp.c        (various OSes) Cooperative multitasking with setjmp/longjmp
+setres.c        (Turbo C or 16-bit Watcom C) Sets VGA and VBE text video modes
+tblchk.c        (ANSI C) Checks depth of nested tables in HTML files
+tcint.c         (Turbo C) Interrupt demo
+tidycoff.c      (DJGPP) Zeroes uninitialized areas of DJGPP COFF executables
+unreal.asm      (DOS or no OS) Snippet to enable 'unreal' mode
+untran.c        (ANSI C) Turns off transparency in .GIF and .PNG files
+v86mm.zip       (DOS or no OS) Virtual-8086 mode monitor
+vbe.c           (Turbo C or 16-bit Watcom C) VBE mode-set and graphics demo
+vbe32.c         (DJGPP or 32-bit Watcom C) VBE mode-set and graphics demo
+wat16int.c      (16-bit Watcom C) Interrupt demo
+wat32int.c      (32-bit Watcom C) Interrupt demo
+
+To do:
+- Output file name should be given on command line for cutwav.c
+- Write CUTMP3.C
+- Redo PNPBIO32.C to use global variables in thunk_help, so 32-bit code
+  can call a 16-bit function with an arbitrary number of arguments.
+- UDP and TCP server and client demo code
+- DOS TCP/IP code that tunnels into Win9x WSOCK.VXD/WSOCK2.VXD
+        Needs gethostbyname(), DNS client, registry functions that
+        tunnel into VMM.VXD (to get DNS server name from registry),
+        and decent farcall()
+- Driver code for various sound boards (WSS/Crystal, ES1371, other)
+- Add comment block to GIF and JPEG (and PNG?) files
+- DOS CD player/ripper
+- Tetris. Other games?
+- RECURSE.C ?
+- MBLOAD
+- Executable file loaders
+- Graphics code with blot(), blit(), blit1(), text output,
+  various color depths
+- Set VGA video modes without using the BIOS
+- Power down monitor using DPMS
+- Spin down hard drive
