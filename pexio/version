@@ -1,0 +1,25 @@
+v0.0.7
+	Base added,
+	GDT added
+v0.0.17
+	IDT added (not ISRs)
+v0.0.18
+	Bugfix: Added call to setupIDT in main
+v0.1.0
+	Added handlers for all exceptions (although not yet correct - they
+	merely hang the machine)
+
+	Added PIT initialization code - added corresponding IRQ0 handler
+
+	Expanded print-to-screen functions
+
+	Added keyboard handler (IRQ1)
+
+	Added handler for IRQ7 - raised when IRn isn't raised high for long
+	enough during interrupt sequence (documented further in code)
+v0.1.1
+	Refactored code - separate files, header files, switch statements in
+	IRQ1 handler
+
+	Changed package to include scripts to download and configure the
+	development environment as needed (GCC cross-compiler, bochsdebug).
