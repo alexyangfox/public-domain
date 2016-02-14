@@ -1,0 +1,39 @@
+.TH PORTSCAN 1
+.SH NAME
+portscan \- port scanner
+.SH SYNOPSIS
+.B portscan
+[
+.B -n
+] [
+.B -a
+.I source address
+] [
+.B -i
+.I interval
+] [
+.B -s
+.I scan type
+] [
+.B -I
+interface
+] [
+.B -p
+.I ports
+] [
+.B -t
+.I ttl
+]
+.I host ...
+.SH DESCRIPTION
+.I Portscan
+is a port scanner.
+.SH OPTIONS
+.TP
+.B -p
+ports
+.TP
+.B -I
+network interface
+.SH EXAMPLES
+portscan -p 80 192.168.0.0/24 | awk '$4!="unknown"{print $1}'
