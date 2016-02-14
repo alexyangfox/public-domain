@@ -1,0 +1,9 @@
+Quoted from http://oregonviticulture.net/:
+
+Two versions of GDDCALC have been created, one for Microsoft Windows 
+and one for Macintosh. 
+Both are available free of charge. 
+The software is uncopyrighted and has been placed in the public domain. 
+This basically means that you can do what you want with the source 
+code and the binaries. 
+

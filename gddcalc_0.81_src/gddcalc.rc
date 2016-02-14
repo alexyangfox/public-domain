@@ -1,0 +1,374 @@
+//Microsoft resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap for the About Box
+//
+
+ABOUT BITMAP  DISCARDABLE "about.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap for the Tutorial Message
+//
+
+TUTORIAL BITMAP  DISCARDABLE "tutorial.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon for the main window title bar
+//
+
+IDI_VINE ICON DISCARDABLE "vine.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialogs
+//
+
+DIALOG1 DIALOG MOVEABLE DISCARDABLE  50, 60, 315, 160
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "One day"
+FONT 8, "Arial Bold"
+BEGIN
+    DEFPUSHBUTTON   "Start",IDC_START1,244,60,50,12
+    PUSHBUTTON      "Close",IDC_CLOSE1,244,85,50,12
+    EDITTEXT        IDC_LATITUDE1,57,19,55,12,ES_AUTOHSCROLL
+    LTEXT           "Latitude",IDC_STATIC,21,22,26,8
+    EDITTEXT        IDC_LONGITUDE1,57,34,55,12,ES_AUTOHSCROLL
+    LTEXT           "Longitude",IDC_STATIC,21,36,32,8
+    EDITTEXT        IDC_ELEV1,57,49,55,12,ES_AUTOHSCROLL
+    LTEXT           "Elevation",IDC_STATIC,21,51,32,8
+    EDITTEXT        IDC_ASPECT1,57,64,55,12,ES_AUTOHSCROLL
+    LTEXT           "Aspect",IDC_STATIC,21,65,26,8
+    EDITTEXT        IDC_TILT1,57,79,55,12,ES_AUTOHSCROLL
+    LTEXT           "Tilt",IDC_STATIC,21,80,32,8
+    EDITTEXT        IDC_DAY1,155,34,52,12,ES_AUTOHSCROLL
+    LTEXT           "Day",IDC_STATIC,131,35,14,8
+    COMBOBOX        IDC_MONTH1,155,49,52,63,CBS_DROPDOWNLIST |CBS_SIMPLE | WS_VSCROLL
+    LTEXT           "Month",IDC_STATIC,131,50,21,8
+    EDITTEXT        IDC_YEAR1,155,64,52,12,ES_AUTOHSCROLL
+    LTEXT           "Year",IDC_STATIC,131,65,16,8
+    EDITTEXT        IDC_SUNRISE1,57,115,56,12,ES_AUTOHSCROLL
+    LTEXT           "Sunrise",IDC_STATIC,28,117,24,8
+    EDITTEXT        IDC_SUNSET1,57,130,56,12,ES_AUTOHSCROLL
+    LTEXT           "Sunset",IDC_STATIC,28,132,23,8
+    EDITTEXT        IDC_FULLIRR1,152,115,53,12,ES_AUTOHSCROLL
+    LTEXT           "Irradiance",IDC_STATIC,120,116,32,8
+    EDITTEXT        IDC_GDD1,152,130,53,12,ES_AUTOHSCROLL
+    LTEXT           "GDD",IDC_STATIC,133,131,16,8
+    GROUPBOX        "Inputs",IDC_STATIC,7,7,220,93
+    GROUPBOX        "Outputs",IDC_STATIC,7,103,220,48
+END
+
+DIALOG1A DIALOG DISCARDABLE  20, 20, 120, 60
+STYLE DS_MODALFRAME | WS_POPUP |WS_CAPTION
+CAPTION "Problems ..."
+FONT 8, "Arial Bold"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,36,35,50,14
+    CTEXT           "One or more inputs is in error.",IDC_STATIC,2,10,120,10
+    CTEXT           "Please check and try again",IDC_STATIC,2,20,120,10
+END
+
+DIALOG2 DIALOG MOVEABLE DISCARDABLE  40, 40, 330, 225
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Months of sunlight"
+FONT 8, "Arial Bold"
+BEGIN
+    DEFPUSHBUTTON   "Start",IDC_START2,133,115,50,12
+    PUSHBUTTON      "Continue",IDC_CONTINUE2,193,115,50,12
+    PUSHBUTTON      "Close",IDC_CLOSE2,253,115,50,12
+    EDITTEXT        IDC_LATITUDE2,52,33,55,12,ES_AUTOHSCROLL
+    LTEXT           "latitude",IDC_STATIC,15,35,26,8
+    EDITTEXT        IDC_LONGITUDE2,52,48,55,12,ES_AUTOHSCROLL
+    LTEXT           "longitude",IDC_STATIC,16,50,32,8
+    EDITTEXT        IDC_ELEV2,52,63,55,12,ES_AUTOHSCROLL
+    LTEXT           "elevation",IDC_STATIC,16,65,30,8
+    EDITTEXT        IDC_ASPECT2,52,100,55,12,ES_AUTOHSCROLL
+    LTEXT           "aspect",IDC_STATIC,16,102,32,8
+    EDITTEXT        IDC_TILT2,52,115,55,12,ES_AUTOHSCROLL
+    LTEXT           "tilt",IDC_STATIC,16,117,32,8
+    EDITTEXT        IDC_STARTDAY2,155,33,55,12,ES_AUTOHSCROLL
+    LTEXT           "day",IDC_STATIC,130,35,20,8
+    EDITTEXT        IDC_STOPDAY2,225,33,55,12,ES_AUTOHSCROLL
+    COMBOBOX        IDC_STARTMONTH2,155,48,55,63,CBS_DROPDOWNLIST |CBS_SIMPLE | WS_VSCROLL
+    COMBOBOX        IDC_STOPMONTH2,225,48,55,63,CBS_DROPDOWNLIST |CBS_SIMPLE | WS_VSCROLL
+    LTEXT           "month",IDC_STATIC,130,50,20,8
+    EDITTEXT        IDC_YEAR2,190,63,55,12,ES_AUTOHSCROLL
+    LTEXT           "year",IDC_STATIC,165,65,20,8
+    EDITTEXT        IDC_OUTDAY2,52,170,55,12,ES_AUTOHSCROLL
+    LTEXT           "days",IDC_STATIC,16,172,20,8
+    EDITTEXT        IDC_OUTMONTH2,52,195,55,12,ES_AUTOHSCROLL
+    LTEXT           "month",IDC_STATIC,16,197,20,8
+    EDITTEXT        IDC_CORRIRR2,135,180,55,12,ES_AUTOHSCROLL
+    LTEXT           "irradiance",IDC_STATIC,205,182,38,8
+    EDITTEXT        IDC_TOTLCORRIRR2,247,180,55,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DEGDAYS2,135,195,55,12,ES_AUTOHSCROLL
+    LTEXT           "celcius",IDC_STATIC,207,193,22,8
+    LTEXT           "degree-days",IDC_STATIC,201,200,38,8
+    EDITTEXT        IDC_TOTLGDD2,247,195,55,12,ES_AUTOHSCROLL
+    GROUPBOX        "Inputs",IDC_STATIC,8,6,315,135
+    GROUPBOX        "Outputs",IDC_STATIC,8,145,315,73
+    LTEXT           "LOCATION",IDC_STATIC,60,20,40,8
+    LTEXT           "START",IDC_STATIC,170,20,40,8
+    LTEXT           "STOP",IDC_STATIC,242,20,40,8
+    LTEXT           "FIELD ORIENTATION",IDC_STATIC,47,88,100,8
+    LTEXT           "INTEGRATED QUANTITIES",IDC_STATIC,175,155,100,8
+    LTEXT           "BY MONTH",IDC_STATIC,146,168,50,8
+    LTEXT           "CUMULATIVE",IDC_STATIC,253,168,50,8
+END
+
+DIALOG2A DIALOG DISCARDABLE  20, 20, 120, 70
+STYLE DS_MODALFRAME | WS_POPUP |WS_CAPTION
+CAPTION "Problems ..."
+FONT 8, "Arial Bold"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,36,45,50,14
+    CTEXT           "Your stop time is earlier than",IDC_STATIC,2,10,120,10
+    CTEXT           "the start time.",IDC_STATIC,2,20,120,10
+    CTEXT           "Please fix it and try again.",IDC_STATIC,2,30,120,10
+END
+
+DIALOG3 DIALOG DISCARDABLE  20, 20, 300, 130
+STYLE DS_MODALFRAME | WS_POPUP |WS_CAPTION
+CAPTION "Atlanta, instantaneous (09:45:37 22 July 1999)"
+FONT 8, "Arial Bold"
+BEGIN
+    DEFPUSHBUTTON   "Start",IDC_START3,232,70,40,12
+    PUSHBUTTON      "Close",IDC_CLOSE3,232,85,40,12
+    EDITTEXT        IDC_AZIM,40,10,60,12,ES_AUTOHSCROLL
+    LTEXT           "azim",IDC_STATIC,10,12,30,8
+    EDITTEXT        IDC_COSINC,40,25,60,12,ES_AUTOHSCROLL
+    LTEXT           "cosinc",IDC_STATIC,10,27,30,8
+    EDITTEXT        IDC_ELEVREF,40,40,60,12,ES_AUTOHSCROLL
+    LTEXT           "elevref",IDC_STATIC,10,42,30,8
+    EDITTEXT        IDC_ETR,40,55,60,12,ES_AUTOHSCROLL
+    LTEXT           "etr",IDC_STATIC,10,57,30,8
+    EDITTEXT        IDC_ETRN,40,70,60,12,ES_AUTOHSCROLL
+    LTEXT           "etrn",IDC_STATIC,10,72,30,8
+    EDITTEXT        IDC_ETRTILT,40,85,60,12,ES_AUTOHSCROLL
+    LTEXT           "etrtilt",IDC_STATIC,10,87,30,8
+    EDITTEXT        IDC_PRIME,150,10,60,12,ES_AUTOHSCROLL
+    LTEXT           "prime",IDC_STATIC,120,12,30,8
+    EDITTEXT        IDC_SBCF,150,25,60,12,ES_AUTOHSCROLL
+    LTEXT           "sbcf",IDC_STATIC,120,27,30,8
+    EDITTEXT        IDC_SUNRISE,150,40,60,12,ES_AUTOHSCROLL
+    LTEXT           "sunrise",IDC_STATIC,120,42,30,8
+    EDITTEXT        IDC_SUNSET,150,55,60,12,ES_AUTOHSCROLL
+    LTEXT           "sunset",IDC_STATIC,120,57,30,8
+    EDITTEXT        IDC_UNPRIME,150,70,60,12,ES_AUTOHSCROLL
+    LTEXT           "unprime",IDC_STATIC,120,72,30,8
+    EDITTEXT        IDC_ZENREF,150,85,60,12,ES_AUTOHSCROLL
+    LTEXT           "zenref",IDC_STATIC,120,87,30,8
+    LTEXT           "Left side: calculated",IDC_STATIC,220,30,90,8
+    LTEXT           "Right side (in parens):",IDC_STATIC,220,45,90,8
+    LTEXT           "correct values",IDC_STATIC,230,54,60,8
+END
+
+DIALOG4 DIALOG MOVEABLE DISCARDABLE  50, 60, 250, 120
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Atlanta, one full day (22 July 1999)"
+FONT 8, "Arial Bold"
+BEGIN
+    DEFPUSHBUTTON   "Start",IDC_START4,66,90,50,12
+    PUSHBUTTON      "Close",IDC_CLOSE4,135,90,50,12
+    EDITTEXT        IDC_SUNRISE1,60,30,56,12,ES_AUTOHSCROLL
+    LTEXT           "Sunrise",IDC_STATIC,28,32,24,8
+    EDITTEXT        IDC_SUNSET1,60,50,56,12,ES_AUTOHSCROLL
+    LTEXT           "Sunset",IDC_STATIC,28,52,23,8
+    EDITTEXT        IDC_FULLIRR1,60,70,56,12,ES_AUTOHSCROLL
+    LTEXT           "Irradiance",IDC_STATIC,28,72,30,8
+    LTEXT           "05:47:10 (EST)",IDC_STATIC,140,32,72,8
+    LTEXT           "19:41:06 (EST)",IDC_STATIC,140,52,72,8
+    LTEXT           "21.51 mj/sqm",IDC_STATIC,140,72,72,8
+    LTEXT           "CALCULATED",IDC_STATIC,66,14,60,12
+    LTEXT           "CORRECT",IDC_STATIC,145,14,45,12
+END
+
+DIALOG5 DIALOG MOVEABLE DISCARDABLE  10, 5, 250, 270
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Eugene, Oregon: growing  season (April - October 2006)"
+FONT 8, "Arial Bold"
+BEGIN
+    EDITTEXT        IDC_APRIRR5,50,30,56,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_APRGDD5,50,42,56,12,ES_AUTOHSCROLL
+    LTEXT           "Irrradiance",IDC_STATIC,110,32,72,8
+    LTEXT           "GDD",IDC_STATIC,110,44,72,8
+    LTEXT           "April",IDC_STATIC,14,37,24,8
+    LTEXT           "561.06",IDC_STATIC,165,32,72,8
+    LTEXT           "92.14",IDC_STATIC,165,44,72,8
+    EDITTEXT        IDC_MAYIRR5,50,60,56,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_MAYGDD5,50,72,56,12,ES_AUTOHSCROLL
+    LTEXT           "Irrradiance",IDC_STATIC,110,62,72,8
+    LTEXT           "GDD",IDC_STATIC,110,74,72,8
+    LTEXT           "May",IDC_STATIC,14,67,24,8
+    LTEXT           "705.20",IDC_STATIC,165,62,72,8
+    LTEXT           "165.17",IDC_STATIC,165,74,72,8
+    EDITTEXT        IDC_JUNIRR5,50,90,56,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_JUNGDD5,50,102,56,12,ES_AUTOHSCROLL
+    LTEXT           "Irrradiance",IDC_STATIC,110,92,72,8
+    LTEXT           "GDD",IDC_STATIC,110,104,72,8
+    LTEXT           "June",IDC_STATIC,14,97,24,8
+    LTEXT           "732.48",IDC_STATIC,165,92,72,8
+    LTEXT           "196.09",IDC_STATIC,165,104,72,8
+    EDITTEXT        IDC_JULIRR5,50,120,56,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_JULGDD5,50,132,56,12,ES_AUTOHSCROLL
+    LTEXT           "Irrradiance",IDC_STATIC,110,122,72,8
+    LTEXT           "GDD",IDC_STATIC,110,134,72,8
+    LTEXT           "July",IDC_STATIC,14,127,24,8
+    LTEXT           "727.19",IDC_STATIC,165,122,72,8
+    LTEXT           "284.85",IDC_STATIC,165,134,72,8
+    EDITTEXT        IDC_AUGIRR5,50,150,56,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_AUGGDD5,50,162,56,12,ES_AUTOHSCROLL
+    LTEXT           "Irrradiance",IDC_STATIC,110,152,72,8
+    LTEXT           "GDD",IDC_STATIC,110,164,72,8
+    LTEXT           "August",IDC_STATIC,14,157,24,8
+    LTEXT           "621.00",IDC_STATIC,165,152,72,8
+    LTEXT           "289.86",IDC_STATIC,165,164,72,8
+    EDITTEXT        IDC_SEPIRR5,50,180,56,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_SEPGDD5,50,192,56,12,ES_AUTOHSCROLL
+    LTEXT           "Irrradiance",IDC_STATIC,110,182,72,8
+    LTEXT           "GDD",IDC_STATIC,110,194,72,8
+    LTEXT           "September",IDC_STATIC,14,187,34,8
+    LTEXT           "447.71",IDC_STATIC,165,182,72,8
+    LTEXT           "226.48",IDC_STATIC,165,194,72,8
+    EDITTEXT        IDC_OCTIRR5,50,210,56,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_OCTGDD5,50,222,56,12,ES_AUTOHSCROLL
+    LTEXT           "Irrradiance",IDC_STATIC,110,212,72,8
+    LTEXT           "GDD",IDC_STATIC,110,224,72,8
+    LTEXT           "October",IDC_STATIC,14,217,30,8
+    LTEXT           "291.72",IDC_STATIC,165,212,72,8
+    LTEXT           "126.36",IDC_STATIC,165,224,72,8
+    PUSHBUTTON      "Start",IDC_START5,70,250,50,12
+    PUSHBUTTON      "Close",IDC_END5,130,250,50,12
+    LTEXT           "CALCULATED",IDC_STATIC,58,14,60,12
+    LTEXT           "CORRECT",IDC_STATIC,158,14,45,12
+END
+
+DIALOG6 DIALOG MOVEABLE DISCARDABLE  50, 60, 170, 80
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Provide a pathname for the log file"
+FONT 8, "Arial Bold"
+BEGIN
+    LTEXT           "Path",IDC_STATIC,10,26,30,8
+    EDITTEXT        IDC_SAVENAME6,30,25,110,12,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "Continue",IDC_CONTINUE6,60,55,50,12
+END
+
+DIALOG7 DIALOG MOVEABLE DISCARDABLE  50, 60, 130, 130
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Set persistant descriptors"
+FONT 8, "Arial Bold"
+BEGIN
+    EDITTEXT        IDC_LATITUDE7,47,19,55,12,ES_AUTOHSCROLL
+    LTEXT           "Latitude",IDC_STATIC,11,22,26,8
+    EDITTEXT        IDC_LONGITUDE7,47,34,55,12,ES_AUTOHSCROLL
+    LTEXT           "Longitude",IDC_STATIC,11,36,32,8
+    EDITTEXT        IDC_ELEV7,47,49,55,12,ES_AUTOHSCROLL
+    LTEXT           "Elevation",IDC_STATIC,11,51,32,8
+    EDITTEXT        IDC_ASPECT7,47,64,55,12,ES_AUTOHSCROLL
+    LTEXT           "Aspect",IDC_STATIC,11,65,26,8
+    EDITTEXT        IDC_TILT7,47,79,55,12,ES_AUTOHSCROLL
+    LTEXT           "Tilt",IDC_STATIC,11,80,32,8
+    DEFPUSHBUTTON   "Close",IDC_CLOSE7,10,105,50,12
+    PUSHBUTTON      "Cancel", IDC_CANCEL7,70,105,50,12
+END
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu at top of main window
+//
+
+GDDCALC MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "Start logging", IDM_START_LOG
+        MENUITEM "Save the log", IDM_SAVE_LOG
+        MENUITEM SEPARATOR
+        MENUITEM "Locale", IDM_LOCALE
+        MENUITEM SEPARATOR
+        MENUITEM "&Exit", IDM_APP_EXIT
+    END
+    
+    POPUP "&Calculate"
+    BEGIN
+        MENUITEM "&One day", IDM_DIALOG1
+        MENUITEM "&Months", IDM_DIALOG2
+    END
+    
+    POPUP "&Test"
+    BEGIN
+        MENUITEM "One instant", IDM_DIALOG3
+        MENUITEM "One day", IDM_DIALOG4
+        MENUITEM "Growing season", IDM_DIALOG5
+    END
+
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "Tutorial", IDM_HELP
+        MENUITEM "About", IDM_ABOUT
+    END
+END
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    "ABOUTBOX", DIALOG
+    BEGIN
+        LEFTMARGIN, 10
+        RIGHTMARGIN, 70
+        TOPMARGIN, 10
+        BOTTOMMARGIN, 50
+    END
+    
+    "TUTORIALMSG", DIALOG
+    BEGIN
+        LEFTMARGIN, 10
+        RIGHTMARGIN, 70
+        TOPMARGIN, 10
+        BOTTOMMARGIN, 50
+    END
+END
+#endif    // APSTUDIO_INVOKED
