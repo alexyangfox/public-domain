@@ -1,0 +1,25 @@
+FIXME-URGENT:
+FIXME:
+*mv
+ *not possible to move between two filesystems
+TODO:
+*rm
+ *implement -r
+ *make -f non-default
+*ls
+ *refactor to better utilize malloc
+ *implement -lhiFp
+*wc
+ *implement -m
+*pwd
+ *implement -LP
+*sh
+ *globbing
+ *pipes
+ *job control
+ *variables
+ *flow control
+*kill
+ *implement -sl
+ *implement support for textual signal names
+*more

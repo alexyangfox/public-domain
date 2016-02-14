@@ -1,0 +1,27 @@
+Build with
+$ make
+
+Currently usable utils:
+cat
+touch
+echo
+true
+false
+wc
+mkdir
+tail
+dirname
+basename
+cmp
+tee
+comm
+pwd
+
+Kinda usable utils:
+rm (lacks -r)
+ls (only -1aAdf)
+mv (can't move between filesystems)
+sh (very basic)
+head (only -n)
+cksum (no arguments support)
+kill (no -sl)
