@@ -1,0 +1,71 @@
+/******************************************************************************
+ *									      *
+ *				   N O T I C E				      *
+ *									      *
+ *		      Copyright Abandoned, 1987, Fred Fish		      *
+ *									      *
+ *									      *
+ *	This previously copyrighted work has been placed into the  public     *
+ *	domain	by  the  author  and  may be freely used for any purpose,     *
+ *	private or commercial.						      *
+ *									      *
+ *	Because of the number of inquiries I was receiving about the  use     *
+ *	of this product in commercially developed works I have decided to     *
+ *	simply make it public domain to further its unrestricted use.	I     *
+ *	specifically  would  be  most happy to see this material become a     *
+ *	part of the standard Unix distributions by AT&T and the  Berkeley     *
+ *	Computer  Science  Research Group, and a standard part of the GNU     *
+ *	system from the Free Software Foundation.			      *
+ *									      *
+ *	I would appreciate it, as a courtesy, if this notice is  left  in     *
+ *	all copies and derivative works.  Thank you.			      *
+ *									      *
+ *	The author makes no warranty of any kind  with	respect  to  this     *
+ *	product  and  explicitly disclaims any implied warranties of mer-     *
+ *	chantability or fitness for any particular purpose.		      *
+ *									      *
+ ******************************************************************************
+ */
+
+
+ FILE
+
+     dbug.c	 runtime support routines for dbug package
+
+ SCCS
+
+     @(#)dbug.c	1.25	7/25/89
+
+ DESCRIPTION
+
+     These are the runtime support routines for the dbug package.
+     The dbug package has two main components; the user include
+     file containing various macro definitions, and the runtime
+     support routines which are called from the macro expansions.
+
+     Externally visible functions in the runtime support module
+     use the naming convention pattern "_db_xx...xx_", thus
+     they are unlikely to collide with user defined function names.
+
+ AUTHOR(S)
+
+     Fred Fish		(base code)
+     Enhanced Software Technologies, Tempe, AZ
+     asuvax!mcdphx!estinc!fnf
+
+     Binayak Banerjee	(profiling enhancements)
+     seismo!bpa!sjuvax!bbanerje
+
+     Michael Widenius:
+     DBUG_DUMP	- To dump a pice of memory.
+     PUSH_FLAG "O"	- To be used insted of "o" if we don't
+     		  want flushing (for slow systems)
+     PUSH_FLAG "A"	- as 'O', but we will append to the out file instead
+     		  of creating a new one.
+     Check of malloc on entry/exit (option "S")
+
+
+
+Repackaged on 2002 by Tonu Samuel <tonu@spam.ee>
+
+
