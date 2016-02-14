@@ -1,0 +1,116 @@
+#
+# For compiling a standard version on FreeBSD {2,3,4}.x
+#
+PROG	= ici
+LIBRARY	= libici4.a
+VERSION	= "`awk '{print $$1}' VERSION`"
+PREFIX	?= /usr/local
+# Keep all symbol information please.  Used by bsd.prog.mk's install target
+STRIP   =
+BINDIR  = $(PREFIX)/bin
+OPTIM   ?= -DNDEBUG -O2
+LDFLAGS = -g
+LDADD   = -lm
+DEFS    = -DCONFIG_FILE='"conf-bsd.h"' -D_THREAD_SAFE -pthread
+LDEXTRA != osv=`uname -r`; [ `expr "$osv" : "'^2'"` = 0 ] && echo ' -export-dynamic'
+LDFLAGS += $(LDEXTRA)
+CFLAGS  += $(OPTIM) -g -Wall -ansi -I. $(DEFS)
+
+SRCS    = \
+	alloc.c aplfuncs.c arith.c array.c\
+	call.c catch.c cfunc.c cfunco.c clib.c clib2.c\
+	compile.c conf.c control.c crc.c events.c exec.c exerror.c file.c\
+	findpath.c float.c forall.c\
+	func.c handle.c icimain.c init.c int.c lex.c load.c main.c mark.c mem.c\
+	method.c mkvar.c null.c object.c oofuncs.c op.c parse.c pc.c\
+	ptr.c refuncs.c regexp.c set.c\
+	sfile.c signals.c smash.c src.c sstring.c string.c\
+	struct.c syserr.c thread.c trace.c unary.c uninit.c \
+	buf.c strtol.c idb.c idb2.c profile.c
+
+OBJS	+= study.o maketables.o pcre.o
+MANDIR	= $(PREFIX)/man/man
+MAN1	= doc/man1/ici.1\
+	  doc/man1/icifuncs.1\
+	  doc/man1/icioo.1\
+	  doc/man1/iciops.1\
+	  doc/man1/icire.1\
+	  doc/man1/icistmt.1\
+	  doc/man1/icitypes.1
+
+CLEANFILES =\
+	$(LIBRARY)\
+	ici.1 ici.1.gz\
+	icifuncs.1 icifuncs.1.gz\
+	icioo.1 icioo.1.gz\
+	iciops.1 iciops.1.gz\
+	icire.1 icire.1.gz\
+	icistmt.1 icistmt.1.gz\
+	icitypes.1 icitypes.1.gz
+
+.include <bsd.prog.mk>
+
+ici.h	: $(PROG)
+	ICIPATH=. ./$(PROG) mk-ici-h.ici conf-bsd.h
+
+CLEANFILES += ici.h
+
+study.o : pcre/study.c
+	$(CC) -c -o $@ $(CFLAGS) pcre/study.c
+
+maketables.o    : pcre/maketables.c
+	$(CC) -c -o $@ $(CFLAGS) pcre/maketables.c
+
+pcre.o  : pcre/pcre.c
+	$(CC) -c -o $@ $(CFLAGS) pcre/pcre.c
+
+# Headers that are potentially used in module writing are made public
+ICIHDRS=\
+	ici.h\
+	icistr-setup.h
+
+# Useful public documentation
+DOCS=\
+	doc/ici.pdf
+
+beforeinstall: ici.h all-man
+	@echo '=========================================='
+	@echo 'Installing ici interpreter and manual page'
+	@echo '=========================================='
+
+$(LIBRARY): $(OBJS)
+	$(AR) r $(LIBRARY) $(OBJS)
+	$(RANLIB) $(LIBRARY)
+
+$(PROG) : $(LIBRARY)
+
+# Install the init file, headers and docs.
+afterinstall:
+	@echo '=========================================='
+	@echo 'Creating installation directories'
+	@echo '=========================================='
+	-mkdir -p $(PREFIX)/include
+	-mkdir -p $(PREFIX)/lib/ici4
+	-mkdir -p $(PREFIX)/share/doc/ici4
+	@echo '=========================================='
+	@echo 'Installing ici library'
+	@echo '=========================================='
+	install -c -m 444 $(LIBRARY) $(PREFIX)/lib
+	@echo '=========================================='
+	@echo 'Startup file'
+	@echo '=========================================='
+	install -c -m 444 ici4core.ici $(PREFIX)/lib/ici4/ici4core.ici
+	install -c -m 444 ici4core1.ici $(PREFIX)/lib/ici4/ici4core1.ici
+	install -c -m 444 ici4core2.ici $(PREFIX)/lib/ici4/ici4core2.ici
+	install -c -m 444 ici4core3.ici $(PREFIX)/lib/ici4/ici4core3.ici
+	@echo '=========================================='
+	@echo 'Headers'
+	@echo '=========================================='
+	install -c -m 444 $(ICIHDRS) $(PREFIX)/include
+	@echo '=========================================='
+	@echo 'Documentation'
+	@echo '=========================================='
+	install -c -m 444 $(DOCS) $(PREFIX)/share/doc/ici4
+	@echo '=========================================='
+	@echo 'Install done'
+	@echo '=========================================='

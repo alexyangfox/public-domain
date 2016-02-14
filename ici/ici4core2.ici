@@ -1,0 +1,111 @@
+/*
+ * $Id: ici4core2.ici,v 1.5 2003/02/16 02:53:23 timl Exp $
+ *
+ * Standard ICI startup file. This is parsed when the ICI interpreter is
+ * initialised and allows simple functions to be written in ICI.
+ */
+
+extern
+pathjoin(head)
+{
+    auto        vargs = [array];
+    auto        el;
+
+    forall (el in vargs)
+        head = sprintf("%s/%s", head, el);
+    return head;
+}
+
+/*
+ * dirname - return the directory portion of a pathname
+ */
+extern
+dirname(path)
+{
+    auto        s;
+
+    if (path !~ #/|\\# || !(s = path ~~ #(.*)(/|\\)([^/\\]*)$#))
+        s = ".";
+    return s;
+}
+
+/*
+ * basename - return the base portion of a pathname, minus an optional extension
+ */
+extern
+basename(path, ext)
+{
+    auto        s;
+    auto        ext = NULL;
+
+    if (!(s := path ~~ #([^/\\]*)$#))
+        s = path;
+    if (ext)
+    {
+        auto    n;
+        n = nels(ext);
+        if (n <= nels(s) && interval(s, nels(s) - n) == ext)
+            s = interval(s, 0, nels(s) - n);
+    }
+    return s;
+}
+
+/*
+ * Open a file by searching along a path. Path may be an array of
+ * directory names or a string in usual path notation.
+ */
+extern
+pfopen(path, name, mode)
+{
+    auto mode = "r", p;
+
+    if (typeof(path) == "string")
+        path = gettokens(path, ":");
+    forall (p in path)
+    {
+        try
+            return fopen(sprintf("%s/%s", p, name), mode);
+        onerror
+            /* printf(stderr, "%s\n", error) */ ;
+    }
+    fail("could not open " + name);
+}
+
+/*
+ * Load a non=autoload ICI module
+ */
+extern
+use()
+{
+    auto        vargs = [array];
+    auto        f, s;
+    auto        path;
+    auto        err = NULL;
+
+    if ((path = getenv("ICIPATH")) == NULL)
+        path = ".:/usr/local/lib/ici4";
+    scp = super(top(vstack(), -1));
+    forall (fn in vargs)
+    {
+        try
+        {
+            f = pfopen(path, fn + ".ici");
+            try
+                parse(f, scp);
+            onerror
+                err = error;
+            close(f);
+        }
+        onerror
+        {
+            f = fopen(fn + ".ici");
+            try
+                parse(f, scp);
+            onerror
+                err = error;
+            close(f);
+        }
+        if (err)
+            fail(err);
+    }
+}

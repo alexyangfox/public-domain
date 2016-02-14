@@ -1,0 +1,4 @@
+if (nels.name != "nels")
+	fail("failed to fetch name of cfunc");
+if (nels.blahblah != NULL)
+	fail("non-existent fetch of cfunc didn't give NULL");

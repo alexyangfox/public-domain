@@ -1,0 +1,115 @@
+#
+# For compiling a standard version under SCO XENIX.
+#
+FLAVOUR = sco
+
+TARGET  = ici.$(FLAVOUR)
+LIB     = lib$(FLAVOUR).a
+CONFIG  = conf-$(FLAVOUR).h
+
+#
+# For installing...
+#
+PREFIX  = /usr/local
+BINDIR  = $(PREFIX)/bin
+MANDIR  = $(PREFIX)/man/man1
+INSTALL = install -c
+
+LIBS    = -lm -lcurses
+CFLAGS  = -O -DCONFIG_FILE='"$(CONFIG)"' -I.
+LDFLAGS =
+RANLIB  = ranlib
+RM      = rm -f
+
+#
+# The remainder of this makefile is pretty well generic...
+#
+
+OBJS    = \
+	$(LIB)(alloc.o) $(LIB)(aplfuncs.o) $(LIB)(arith.o) \
+	$(LIB)(array.o) $(LIB)(call.o) \
+	$(LIB)(catch.o) $(LIB)(cfunc.o) $(LIB)(cfunco.o) \
+	$(LIB)(clib.o) $(LIB)(clib2.o) \
+	$(LIB)(compile.o) $(LIB)(conf.o) $(LIB)(control.o) \
+	$(LIB)(crc.o) $(LIB)(exec.o) \
+	$(LIB)(exerror.o) $(LIB)(file.o) $(LIB)(findpath.o) \
+	$(LIB)(float.o) $(LIB)(forall.o) $(LIB)(func.o) \
+	$(LIB)(handle.o) $(LIB)(icimain.o) $(LIB)(init.o) $(LIB)(int.o) \
+	$(LIB)(lex.o) $(LIB)(load.o) $(LIB)(main.o) \
+	$(LIB)(mark.o) $(LIB)(mem.o) $(LIB)(method.o) \
+	$(LIB)(mkvar.o) $(LIB)(null.o) \
+	$(LIB)(object.o) $(LIB)(oofuncs.o) $(LIB)(op.o) \
+	$(LIB)(parse.o) $(LIB)(pc.o) \
+	$(LIB)(ptr.o) $(LIB)(refuncs.o) $(LIB)(regexp.o) \
+	$(LIB)(set.o) $(LIB)(sfile.o) $(LIB)(signals.o)\
+	$(LIB)(smash.o) \
+	$(LIB)(src.o) $(LIB)(sstring.o) $(LIB)(string.o) \
+	$(LIB)(struct.o) $(LIB)(syserr.o) \
+	$(LIB)(thread.o) $(LIB)(trace.o) $(LIB)(unary.o) $(LIB)(uninit.o) \
+	$(LIB)(wrap.o) $(LIB)(buf.o) $(LIB)(strtol.o) \
+	$(LIB)(idb.o) $(LIB)(idb2.o)
+
+.PRECIOUS: $(LIB)
+
+$(TARGET): $(LIB)
+	$(CC) $(LDFLAGS) -o $@ $(LIB) $(LIBS)
+
+.c.a    :;
+
+$(LIB)  : $(OBJS)
+	$(CC) -c $(CFLAGS) $(?:.o=.c)
+	$(AR) r $@ $?
+	$(RANLIB) $@
+	$(RM) $?
+
+install: $(TARGET)
+	$(INSTALL) $(TARGET) $(BINDIR)/ici
+	$(INSTALL) doc/ici.1 $(MANDIR)
+
+clean:
+	$(RM) $(TARGET) $(LIB)
+
+#
+# No mention of fwd.h or alloc.h, but everything depends on it.
+#
+$(LIB)(alloc.o)        : trace.h
+$(LIB)(arith.o)        : exec.h float.h int.h op.h parse.h ptr.h str.h struct.h buf.h binop.h
+$(LIB)(array.o)        : ptr.h exec.h op.h int.h buf.h
+$(LIB)(call.o)         : buf.h exec.h func.h int.h float.h str.h null.h op.h
+$(LIB)(catch.o)        : exec.h catch.h op.h func.h
+$(LIB)(cfunc.o)        : exec.h func.h str.h int.h float.h struct.h set.h op.h ptr.h buf.h file.h re.h null.h parse.h mem.h
+$(LIB)(clib.o)         : file.h func.h op.h int.h float.h str.h buf.h exec.h
+$(LIB)(clib2.o)        : buf.h func.h
+$(LIB)(compile.o)      : parse.h array.h op.h str.h
+$(LIB)(conf.o)         : func.h
+$(LIB)(control.o)      : exec.h op.h int.h buf.h pc.h struct.h null.h forall.h catch.h
+$(LIB)(exec.o)         : exec.h op.h catch.h ptr.h func.h str.h buf.h pc.h int.h struct.h set.h parse.h float.h re.h src.h null.h forall.h trace.h binop.h
+$(LIB)(exerror.o)      : str.h buf.h
+$(LIB)(file.o)         : file.h
+$(LIB)(float.o)        : float.h
+$(LIB)(forall.o)       : exec.h struct.h set.h forall.h str.h buf.h
+$(LIB)(func.o)         : func.h exec.h ptr.h struct.h op.h pc.h str.h catch.h buf.h mark.h null.h
+$(LIB)(icimain.o)      : ptr.h exec.h file.h str.h struct.h buf.h wrap.h func.h
+$(LIB)(init.o)         : func.h buf.h struct.h
+$(LIB)(int.o)          : int.h
+$(LIB)(lex.o)          : parse.h file.h buf.h src.h array.h trace.h
+$(LIB)(mark.o)         : mark.h
+$(LIB)(mem.o)          : mem.h int.h buf.h
+$(LIB)(mkvar.o)        : exec.h struct.h
+$(LIB)(null.o)         : null.h
+$(LIB)(object.o)       : exec.h buf.h int.h str.h float.h func.h
+$(LIB)(op.o)           : op.h exec.h
+$(LIB)(parse.o)        : parse.h func.h str.h struct.h buf.h file.h op.h exec.h
+$(LIB)(pc.o)           : exec.h pc.h
+$(LIB)(ptr.o)          : exec.h ptr.h struct.h int.h op.h buf.h
+$(LIB)(regexp.o)       : str.h re.h exec.h op.h buf.h
+$(LIB)(set.o)          : object.h set.h op.h int.h buf.h null.h
+$(LIB)(sfile.o)        : file.h
+$(LIB)(smash.o)        :
+$(LIB)(src.o)          : exec.h src.h
+$(LIB)(string.o)       : str.h struct.h exec.h int.h
+$(LIB)(struct.o)       : struct.h ptr.h exec.h func.h op.h int.h buf.h str.h pc.h
+$(LIB)(syserr.o)       :
+$(LIB)(trace.o)        : func.h object.h trace.h file.h set.h struct.h array.h re.h str.h int.h float.h exec.h op.h
+$(LIB)(unary.o)        : exec.h float.h int.h op.h parse.h buf.h null.h
+$(LIB)(wrap.o)         : wrap.h

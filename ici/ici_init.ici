@@ -1,0 +1,305 @@
+/*
+ * $Id: ici_init.ici,v 1.10 2000/03/11 00:19:28 andy Exp $
+ *
+ * Standard ICI startup file. This is parsed when the ICI interpreter is
+ * initialised and allows simple functions to be written in ICI.
+ */
+
+/*
+ * Define some variables...
+ */
+extern	false	= 0;
+extern	true	= 1;
+
+/*
+ * The ici struct defines some information about the interpreter.
+ */
+extern	ici = @[struct
+    version = "2.1.4",
+    features = @[set
+	"math",
+	"waitfor",
+	"system",
+	"pipes",
+	"skt",
+	"dir",
+	"passwd",
+	"debug",
+    ],
+];
+
+/*
+ * Functions to return scope levels. These all operate with the scope of
+ * the caller, unlike scope() which operates its scope. If a parameter
+ * is passed it is assumed to be a typical scope structure.
+ */
+extern
+autos(scope)
+{
+    if (!scope)
+	scope = top(vstack(), -1);
+    return scope;
+}
+
+extern
+statics(scope)
+{
+    if (!scope)
+	scope = top(vstack(), -1);
+    return super(scope);
+}
+
+extern
+externs(scope)
+{
+    if (!scope)
+	scope = top(vstack(), -1);
+    return super(super(scope));
+}
+
+extern
+pathjoin(head)
+{
+    auto	vargs = [array];
+    auto	el;
+
+    forall (el in vargs)
+	head = sprintf("%s/%s", head, el);
+    return head;
+}
+
+/*
+ * dirname - return the directory portion of a pathname
+ */
+extern
+dirname(path)
+{
+    auto	s;
+
+    if (path !~ #/# || !(s = path ~~ #(.*)/.*$#))
+	s = ".";
+    return s;
+}
+
+/*
+ * basename - return the base portion of a pathname, minus an option extension
+ */
+extern
+basename(path, ext)
+{
+    auto	s;
+    auto	ext = NULL;
+
+    s = path ~~ #.*/(.*)#;
+    if (s == NULL)
+	s = path;
+    if (ext)
+    {
+	auto	n;
+	n = nels(ext);
+	if (n <= nels(s) && interval(s, nels(s) - n) == ext)
+	    s = interval(s, 0, nels(s) - n);
+    }
+    return s;
+}
+
+/*
+ * Open a file by searching along a path. Path may be an array of
+ * directory names or a string in usual path notation.
+ */
+extern
+pfopen(path, name, mode)
+{
+    auto mode = "r", p;
+
+    if (typeof(path) == "string")
+	path = gettokens(path, ":");
+    forall (p in path)
+    {
+	try
+	    return fopen(sprintf("%s/%s", p, name), mode);
+	onerror
+	    /* printf(stderr, "%s\n", error) */ ;
+    }
+    fail("could not open " + name);
+}
+
+/*
+ * Load a non=autoload ICI module
+ */
+extern
+use(fn)
+{
+    auto	f, s;
+    auto	path;
+    auto	err = NULL;
+
+    if ((path = getenv("ICIPATH")) == NULL)
+	path = "/usr/local/include/ici:/usr/local/lib/ici:.";
+    try
+    {
+	f = pfopen(path, fn + ".ici");
+	try
+	    parse(f, struct(struct(externs())));
+	onerror
+	    err = error;
+	close(f);
+    }
+    onerror
+    {
+	f = fopen(fn + ".ici");
+	try
+	    parse(f, struct(struct(externs())));
+	onerror
+	    err = error;
+	close(f);
+    }
+    if (err)
+	fail(err);
+}
+
+/*
+ * min - return the minimum of all parameters
+ */
+extern
+min(v)
+{
+    auto	vargs = [array];
+    auto	rc;
+
+    rc = v;
+    forall (v in vargs)
+	if (v < rc)
+	    rc = v;
+    return rc;
+}
+
+/*
+ * max - return the maximum value of all parameters
+ */
+extern
+max(v)
+{
+    auto	vargs = [array];
+    auto	rc;
+
+    rc = v;
+    forall (v in vargs)
+	if (v > rc)
+	    rc = v;
+    return rc;
+}
+
+/*
+ * Raise an error for an incorrect argument argument passed to a function.
+ * Mimics the interpreter's internal routine to do the same thing.
+ */
+static
+argerror(f, n, t)
+{
+    fail(sprintf("argument %d of %s() incorrectly supplied as %s", n, f, t));
+}
+
+/*
+ * Raise an error for an incorrect number of arguments to a function.
+ * Mimics the interpreter's internal routine.
+ */
+static
+argcount(f, n, a)
+{
+    fail(sprintf("%d arguments given to %s, but it takes %d", a, f, n));
+}
+    
+/*
+ * typecheck - validate arguments via format string
+ *
+ * Parameters:
+ *	f	A string, the name of function calling typecheck. This is
+ *		used when raising errors about too few arguments or an
+ *		argument being of incorrect type.
+ *
+ *	XXXX	This can be removed now that ICI has _funcname_. Typecheck
+ *		can all vstack() to find the caller's name, if it has
+ *		one, and issue the appropriate message. 
+ *
+ *	fmt	A format string specifying the types for the
+ *		arguments, each character represents a single
+ *		argument. If there are too few arguments or
+ *		arguments of incorrect type an error is raised.
+ *		The following characters are used,
+ *
+ *			i	int
+ *			s	string
+ *			f	float
+ *			d	struct
+ *			a	array
+ *			u	file
+ *			r	regexp
+ *
+ *	args	An array of the parameters to be validated.
+ *
+ * Returns:
+ *	A struct containing two keys, "args" - an array of the actual
+ *	validated parameters - and "vargs" - an array containing any
+ *	remaining parameters.
+ */
+extern
+typecheck(f, fmt, args)
+{
+    auto	o;
+    auto	c;
+    auto	res;
+    auto	i;
+    auto	n;
+    auto	map = [struct
+	i = "int",
+	s = "string",
+	f = "float",
+	d = "struct",
+	a = "array",
+	u = "file",
+	r = "regexp",
+    ];
+    i = 0;
+    n = nels(args);
+    res = array();
+    if (nargs(fmt) != nargs(args))
+	argcount(f, nels(fmt), i);
+    forall (c in fmt)
+    {
+	o = args[i];
+	if (!(c = map[c]))
+	    fail("invalid type specifier in typecheck() format string");
+	if ((t = typeof(o)) != c)
+	    argerror(i, f, t);
+	push(res, o);
+    }
+    return struct("args", res, "vargs", interval(args, i));
+}
+
+/*
+ * Overload assign() and del() so they work for sets as well
+ * as struct objects. This makes for more readable programs
+ * at the expense of some performance.
+ */
+extern
+assign()
+{
+    auto	vargs = [array];
+
+    if (nels(vargs) == 2 && typeof(vargs[0]) == "set")
+    {
+	vargs[0][vargs[1]] = 1;
+	return vargs[1];
+    }
+    return call($assign, vargs);
+}
+
+extern
+del(o, k)
+{
+    if (typeof(o) == "set")
+	o[k] = NULL;
+    else
+	($del)(o, k);
+}
