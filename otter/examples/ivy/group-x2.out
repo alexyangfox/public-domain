@@ -1,0 +1,192 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:31:05 2004
+The command was "../../bin/otter".  The process ID is 8575.
+
+set(auto).
+   dependent: set(auto1).
+   dependent: set(process_input).
+   dependent: clear(print_kept).
+   dependent: clear(print_new_demod).
+   dependent: clear(print_back_demod).
+   dependent: clear(print_back_sub).
+   dependent: set(control_memory).
+   dependent: assign(max_mem, 12000).
+   dependent: assign(pick_given_ratio, 4).
+   dependent: assign(stats_level, 1).
+   dependent: assign(max_seconds, 10800).
+set(build_proof_object_2).
+   dependent: set(order_history).
+clear(sigint_interact).
+assign(max_seconds,10).
+
+initial_proof_object(junk).
+(
+(1 (input) (= (F (E) V1) V1) NIL)
+(2 (input) (= (F (G V2) V2) (E)) NIL)
+(3 (input) (= (F (F V3 V4) V5) (F V3 (F V4 V5))) NIL)
+(4 (input) (= (F V6 V6) (E)) NIL)
+(5 (input) (= V7 V7) NIL)
+(6 (input) (not (= (F (SK1) (SK2)) (F (SK2) (SK1)))) NIL)
+)
+0 [] F(E,x)=x.
+0 [] F(G(x),x)=E.
+0 [] F(F(x,y),z)=F(x,F(y,z)).
+0 [] F(x,x)=E.
+0 [] x=x.
+0 [] F(SK1,SK2)!=F(SK2,SK1).
+end_of_list.
+
+SCAN INPUT: prop=0, horn=1, equality=1, symmetry=0, max_lits=1.
+
+All clauses are units, and equality is present; the
+strategy will be Knuth-Bendix with positive clauses in sos.
+
+   dependent: set(knuth_bendix).
+   dependent: set(anl_eq).
+   dependent: set(para_from).
+   dependent: set(para_into).
+   dependent: clear(para_from_right).
+   dependent: clear(para_into_right).
+   dependent: set(para_from_vars).
+   dependent: set(eq_units_both_ways).
+   dependent: set(dynamic_demod_all).
+   dependent: set(dynamic_demod).
+   dependent: set(order_eq).
+   dependent: set(back_demod).
+   dependent: set(lrpo).
+
+------------> process usable:
+** KEPT (pick-wt=7): 2 [copy,1,flip.1] F(SK2,SK1)!=F(SK1,SK2).
+
+------------> process sos:
+** KEPT (pick-wt=5): 3 [] F(E,x)=x.
+---> New Demodulator: 4 [new_demod,3] F(E,x)=x.
+** KEPT (pick-wt=6): 5 [] F(G(x),x)=E.
+---> New Demodulator: 6 [new_demod,5] F(G(x),x)=E.
+** KEPT (pick-wt=11): 7 [] F(F(x,y),z)=F(x,F(y,z)).
+---> New Demodulator: 8 [new_demod,7] F(F(x,y),z)=F(x,F(y,z)).
+** KEPT (pick-wt=5): 9 [] F(x,x)=E.
+---> New Demodulator: 10 [new_demod,9] F(x,x)=E.
+** KEPT (pick-wt=3): 11 [] x=x.
+>>>> Starting back demodulation with 4.
+>>>> Starting back demodulation with 6.
+>>>> Starting back demodulation with 8.
+>>>> Starting back demodulation with 10.
+  Following clause subsumed by 11 during input processing: 0 [copy,11,flip.1] x=x.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=5) 3 [] F(E,x)=x.
+
+given clause #2: (wt=3) 11 [] x=x.
+
+given clause #3: (wt=5) 9 [] F(x,x)=E.
+
+given clause #4: (wt=6) 5 [] F(G(x),x)=E.
+
+given clause #5: (wt=11) 7 [] F(F(x,y),z)=F(x,F(y,z)).
+
+given clause #6: (wt=7) 12 [para_into,7.1.1.1,9.1.1,demod,4,flip.1] F(x,F(x,y))=y.
+
+given clause #7: (wt=4) 22 [para_into,12.1.1.2,5.1.1,demod,19] G(x)=x.
+
+given clause #8: (wt=5) 18 [para_into,12.1.1.2,9.1.1] F(x,E)=x.
+
+given clause #9: (wt=9) 16 [para_into,7.1.1,9.1.1,flip.1] F(x,F(y,F(x,y)))=E.
+
+given clause #10: (wt=7) 26 [para_from,16.1.1,12.1.1.2,demod,19,flip.1] F(x,F(y,x))=y.
+
+-------- PROOF -------- 
+
+----> UNIT CONFLICT at   0.00 sec ----> 31 [binary,30.1,2.1] $F.
+
+Length of proof is 6.  Level of proof is 4.
+
+---------------- PROOF ----------------
+
+1 [] F(SK1,SK2)!=F(SK2,SK1).
+2 [copy,1,flip.1] F(SK2,SK1)!=F(SK1,SK2).
+4,3 [] F(E,x)=x.
+7 [] F(F(x,y),z)=F(x,F(y,z)).
+9 [] F(x,x)=E.
+12 [para_into,7.1.1.1,9.1.1,demod,4,flip.1] F(x,F(x,y))=y.
+16 [para_into,7.1.1,9.1.1,flip.1] F(x,F(y,F(x,y)))=E.
+19,18 [para_into,12.1.1.2,9.1.1] F(x,E)=x.
+26 [para_from,16.1.1,12.1.1.2,demod,19,flip.1] F(x,F(y,x))=y.
+30 [para_from,26.1.1,12.1.1.2] F(x,y)=F(y,x).
+31 [binary,30.1,2.1] $F.
+
+------------ end of proof -------------
+
+
+;; BEGINNING OF PROOF OBJECT
+(
+(1 (input) (= (F (E) V1) V1) NIL)
+(2 (input) (= (F (G V2) V2) (E)) NIL)
+(3 (input) (= (F (F V3 V4) V5) (F V3 (F V4 V5))) NIL)
+(4 (input) (= (F V6 V6) (E)) NIL)
+(5 (input) (= V7 V7) NIL)
+(6 (input) (not (= (F (SK1) (SK2)) (F (SK2) (SK1)))) NIL)
+(7 (instantiate 6 ()) (not (= (F (SK1) (SK2)) (F (SK2) (SK1)))) (1))
+(8 (flip 7 ()) (not (= (F (SK2) (SK1)) (F (SK1) (SK2)))) (2))
+(9 (instantiate 1 ((V1 . v0))) (= (F (E) v0) v0) (3))
+(10 (instantiate 3 ((V3 . v0)(V4 . v1)(V5 . v2))) (= (F (F v0 v1) v2) (F v0 (F v1 v2))) (7))
+(11 (instantiate 4 ((V6 . v0))) (= (F v0 v0) (E)) (9))
+(12 (instantiate 11 ((v0 . v65))) (= (F v65 v65) (E)) NIL)
+(13 (instantiate 10 ((v0 . v65)(v1 . v65)(v2 . v66))) (= (F (F v65 v65) v66) (F v65 (F v65 v66))) NIL)
+(14 (paramod 12 (1) 13 (1 1)) (= (F (E) v66) (F v65 (F v65 v66))) NIL)
+(15 (instantiate 9 ((v0 . v66))) (= (F (E) v66) v66) NIL)
+(16 (paramod 15 (1) 14 (1)) (= v66 (F v65 (F v65 v66))) NIL)
+(17 (flip 16 ()) (= (F v65 (F v65 v66)) v66) NIL)
+(18 (instantiate 17 ((v65 . v0)(v66 . v1))) (= (F v0 (F v0 v1)) v1) (12))
+(19 (instantiate 11 ((v0 . (F v64 v65)))) (= (F (F v64 v65) (F v64 v65)) (E)) NIL)
+(20 (instantiate 10 ((v0 . v64)(v1 . v65)(v2 . (F v64 v65)))) (= (F (F v64 v65) (F v64 v65)) (F v64 (F v65 (F v64 v65)))) NIL)
+(21 (paramod 19 (1) 20 (1)) (= (E) (F v64 (F v65 (F v64 v65)))) NIL)
+(22 (flip 21 ()) (= (F v64 (F v65 (F v64 v65))) (E)) NIL)
+(23 (instantiate 22 ((v64 . v0)(v65 . v1))) (= (F v0 (F v1 (F v0 v1))) (E)) (16))
+(24 (instantiate 11 ((v0 . v65))) (= (F v65 v65) (E)) NIL)
+(25 (instantiate 18 ((v0 . v65)(v1 . v65))) (= (F v65 (F v65 v65)) v65) NIL)
+(26 (paramod 24 (1) 25 (1 2)) (= (F v65 (E)) v65) NIL)
+(27 (instantiate 26 ((v65 . v0))) (= (F v0 (E)) v0) (18))
+(28 (instantiate 23 ((v0 . v64))) (= (F v64 (F v1 (F v64 v1))) (E)) NIL)
+(29 (instantiate 18 ((v0 . v64)(v1 . (F v1 (F v64 v1))))) (= (F v64 (F v64 (F v1 (F v64 v1)))) (F v1 (F v64 v1))) NIL)
+(30 (paramod 28 (1) 29 (1 2)) (= (F v64 (E)) (F v1 (F v64 v1))) NIL)
+(31 (instantiate 27 ((v0 . v64))) (= (F v64 (E)) v64) NIL)
+(32 (paramod 31 (1) 30 (1)) (= v64 (F v1 (F v64 v1))) NIL)
+(33 (flip 32 ()) (= (F v1 (F v64 v1)) v64) NIL)
+(34 (instantiate 33 ((v1 . v0)(v64 . v1))) (= (F v0 (F v1 v0)) v1) (26))
+(35 (instantiate 34 ((v0 . v64))) (= (F v64 (F v1 v64)) v1) NIL)
+(36 (instantiate 18 ((v0 . v64)(v1 . (F v1 v64)))) (= (F v64 (F v64 (F v1 v64))) (F v1 v64)) NIL)
+(37 (paramod 35 (1) 36 (1 2)) (= (F v64 v1) (F v1 v64)) NIL)
+(38 (instantiate 37 ((v64 . v0))) (= (F v0 v1) (F v1 v0)) (30))
+(39 (instantiate 38 ((v0 . (SK2))(v1 . (SK1)))) (= (F (SK2) (SK1)) (F (SK1) (SK2))) NIL)
+(40 (resolve 8 () 39 ()) false (31))
+
+Search stopped by max_proofs option.
+
+)
+;; END OF PROOF OBJECT
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 10
+clauses generated             76
+clauses kept                  16
+clauses forward subsumed      71
+clauses back subsumed          0
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8575 finished Mon Aug  2 15:31:05 2004

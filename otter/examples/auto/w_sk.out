@@ -1,0 +1,167 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:36 2004
+The command was "../../bin/otter".  The process ID is 8323.
+
+set(auto).
+   dependent: set(auto1).
+   dependent: set(process_input).
+   dependent: clear(print_kept).
+   dependent: clear(print_new_demod).
+   dependent: clear(print_back_demod).
+   dependent: clear(print_back_sub).
+   dependent: set(control_memory).
+   dependent: assign(max_mem, 12000).
+   dependent: assign(pick_given_ratio, 4).
+   dependent: assign(stats_level, 1).
+   dependent: assign(max_seconds, 10800).
+
+list(usable).
+0 [] x=x.
+0 [] a(a(a(S,x),y),z)=a(a(x,z),a(y,z)).
+0 [] a(a(K,x),y)=x.
+end_of_list.
+
+formula_list(usable).
+-(exists W all x y (a(a(W,x),y)=a(a(x,y),y)& -$ans(W))).
+end_of_list.
+
+-------> usable clausifies to:
+
+list(usable).
+0 [] a(a(x1,$f2(x1)),$f1(x1))!=a(a($f2(x1),$f1(x1)),$f1(x1))|$ans(x1).
+end_of_list.
+
+SCAN INPUT: prop=0, horn=1, equality=1, symmetry=0, max_lits=1.
+
+All clauses are units, and equality is present; the
+strategy will be Knuth-Bendix with positive clauses in sos.
+
+   dependent: set(knuth_bendix).
+   dependent: set(anl_eq).
+   dependent: set(para_from).
+   dependent: set(para_into).
+   dependent: clear(para_from_right).
+   dependent: clear(para_into_right).
+   dependent: set(para_from_vars).
+   dependent: set(eq_units_both_ways).
+   dependent: set(dynamic_demod_all).
+   dependent: set(dynamic_demod).
+   dependent: set(order_eq).
+   dependent: set(back_demod).
+   dependent: set(lrpo).
+
+------------> process usable:
+** KEPT (pick-wt=16): 2 [copy,1,flip.1] a(a($f2(x),$f1(x)),$f1(x))!=a(a(x,$f2(x)),$f1(x))|$ans(x).
+
+------------> process sos:
+** KEPT (pick-wt=3): 3 [] x=x.
+** KEPT (pick-wt=15): 4 [] a(a(a(S,x),y),z)=a(a(x,z),a(y,z)).
+** KEPT (pick-wt=7): 5 [] a(a(K,x),y)=x.
+---> New Demodulator: 6 [new_demod,5] a(a(K,x),y)=x.
+  Following clause subsumed by 3 during input processing: 0 [copy,3,flip.1] x=x.
+** KEPT (pick-wt=15): 7 [copy,4,flip.1] a(a(x,y),a(z,y))=a(a(a(S,x),z),y).
+>>>> Starting back demodulation with 6.
+  Following clause subsumed by 4 during input processing: 0 [copy,7,flip.1] a(a(a(S,x),y),z)=a(a(x,z),a(y,z)).
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=3) 3 [] x=x.
+
+given clause #2: (wt=7) 5 [] a(a(K,x),y)=x.
+
+given clause #3: (wt=15) 4 [] a(a(a(S,x),y),z)=a(a(x,z),a(y,z)).
+
+given clause #4: (wt=15) 7 [copy,4,flip.1] a(a(x,y),a(z,y))=a(a(a(S,x),z),y).
+
+given clause #5: (wt=9) 15 [para_into,7.1.1,5.1.1,flip.1] a(a(a(S,K),x),y)=y.
+
+given clause #6: (wt=25) 8 [para_into,7.1.1.1,7.1.1] a(a(a(a(S,x),y),z),a(u,a(y,z)))=a(a(a(S,a(x,z)),u),a(y,z)).
+
+given clause #7: (wt=11) 26 [para_into,15.1.1.1,7.1.1] a(a(a(a(S,S),x),K),y)=y.
+
+given clause #8: (wt=13) 28 [para_into,15.1.1,7.1.1] a(a(a(S,a(S,K)),x),y)=a(x,y).
+
+given clause #9: (wt=13) 62 [para_into,26.1.1.1.1,7.1.1] a(a(a(a(a(S,S),x),S),K),y)=y.
+
+given clause #10: (wt=15) 9 [para_into,7.1.1.1,5.1.1,flip.1] a(a(a(S,a(K,x)),y),z)=a(x,a(y,z)).
+
+given clause #11: (wt=23) 11 [para_into,7.1.1.1,4.1.1] a(a(a(x,y),a(z,y)),a(u,y))=a(a(a(S,a(a(S,x),z)),u),y).
+
+given clause #12: (wt=15) 13 [para_into,7.1.1.2,5.1.1] a(a(x,y),z)=a(a(a(S,x),a(K,z)),y).
+
+given clause #13: (wt=15) 21 [copy,13,flip.1] a(a(a(S,x),a(K,y)),z)=a(a(x,z),y).
+
+given clause #14: (wt=15) 64 [para_into,26.1.1,7.1.1] a(a(a(S,a(a(S,S),x)),y),K)=a(y,K).
+
+given clause #15: (wt=15) 86 [para_into,62.1.1.1.1.1,7.1.1] a(a(a(a(a(a(S,S),x),S),S),K),y)=y.
+
+given clause #16: (wt=25) 12 [para_into,7.1.1.2,7.1.1] a(a(x,a(y,z)),a(a(a(S,u),y),z))=a(a(a(S,x),a(u,z)),a(y,z)).
+
+given clause #17: (wt=15) 226 [para_from,13.1.1,26.1.1.1] a(a(a(a(S,a(S,S)),a(K,K)),x),y)=y.
+
+given clause #18: (wt=15) 248 [para_into,21.1.1.1,7.1.1] a(a(a(a(S,S),K),x),y)=a(a(x,y),x).
+
+given clause #19: (wt=15) 254 [copy,248,flip.1] a(a(x,y),x)=a(a(a(a(S,S),K),x),y).
+
+given clause #20: (wt=17) 30 [para_from,15.1.1,7.1.1.2] a(a(x,y),y)=a(a(a(S,x),a(a(S,K),z)),y).
+
+given clause #21: (wt=23) 14 [para_into,7.1.1.2,4.1.1] a(a(x,y),a(a(z,y),a(u,y)))=a(a(a(S,x),a(a(S,z),u)),y).
+
+given clause #22: (wt=17) 31 [para_from,15.1.1,7.1.1.1] a(x,a(y,x))=a(a(a(S,a(a(S,K),z)),y),x).
+
+given clause #23: (wt=15) 897 [para_into,31.1.1,5.1.1,flip.1] a(a(a(S,a(a(S,K),x)),y),a(K,z))=z.
+
+given clause #24: (wt=15) 1041 [para_into,897.1.1,7.1.1] a(a(a(S,a(S,a(a(S,K),x))),K),y)=y.
+
+given clause #25: (wt=17) 32 [copy,30,flip.1] a(a(a(S,x),a(a(S,K),y)),z)=a(a(x,z),z).
+
+-------- PROOF -------- 1157 [binary,1156.1,2.1] $ans(a(a(S,S),a(K,a(a(S,K),z)))).
+
+----> UNIT CONFLICT at   0.11 sec ----> 1157 [binary,1156.1,2.1] $ans(a(a(S,S),a(K,a(a(S,K),z)))).
+
+Length of proof is 8.  Level of proof is 6.
+
+---------------- PROOF ----------------
+
+1 [] a(a(x,$f2(x)),$f1(x))!=a(a($f2(x),$f1(x)),$f1(x))|$ans(x).
+2 [copy,1,flip.1] a(a($f2(x),$f1(x)),$f1(x))!=a(a(x,$f2(x)),$f1(x))|$ans(x).
+4 [] a(a(a(S,x),y),z)=a(a(x,z),a(y,z)).
+5 [] a(a(K,x),y)=x.
+7 [copy,4,flip.1] a(a(x,y),a(z,y))=a(a(a(S,x),z),y).
+13 [para_into,7.1.1.2,5.1.1] a(a(x,y),z)=a(a(a(S,x),a(K,z)),y).
+15 [para_into,7.1.1,5.1.1,flip.1] a(a(a(S,K),x),y)=y.
+30 [para_from,15.1.1,7.1.1.2] a(a(x,y),y)=a(a(a(S,x),a(a(S,K),z)),y).
+32 [copy,30,flip.1] a(a(a(S,x),a(a(S,K),y)),z)=a(a(x,z),z).
+1141 [para_into,32.1.1.1,13.1.1] a(a(a(a(S,S),a(K,a(a(S,K),x))),y),z)=a(a(y,z),z).
+1156 [copy,1141,flip.1] a(a(x,y),y)=a(a(a(a(S,S),a(K,a(a(S,K),z))),x),y).
+1157 [binary,1156.1,2.1] $ans(a(a(S,S),a(K,a(a(S,K),z)))).
+
+------------ end of proof -------------
+
+
+Search stopped by max_proofs option.
+
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 25
+clauses generated            922
+clauses kept                1036
+clauses forward subsumed     812
+clauses back subsumed          0
+Kbytes malloced             3906
+
+----------- times (seconds) -----------
+user CPU time          0.11          (0 hr, 0 min, 0 sec)
+system CPU time        0.01          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8323 finished Mon Aug  2 15:30:36 2004

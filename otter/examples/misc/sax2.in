@@ -1,0 +1,28 @@
+%
+% ((xy)z)(xz)' = y is a single axiom for Abelian groups in terms
+% of product and inverse.
+%
+
+set(knuth_bendix).
+assign(max_proofs, 4).
+
+clear(print_kept).
+clear(print_new_demod).
+clear(print_back_demod).
+
+assign(stats_level, 1).
+
+list(usable).
+x = x.
+end_of_list.
+
+list(passive).
+f(a,g(a)) != f(b,g(b)) | $Ans(R_inverse).
+f(a,f(b,g(b))) != a | $Ans(R_ident).
+f(f(a,b),c) != f(a,f(b,c)) | $Ans(assoc).
+f(a,b) != f(b,a) | $Ans(commute).
+end_of_list.
+
+list(sos).
+f(f(f(x,y),z),g(f(x,z))) = y.  % 421  (3.2.1)
+end_of_list.

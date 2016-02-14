@@ -1,0 +1,26 @@
+% 4.  A group where all commutators lie in the center satisfies the
+% equation h(x,y*z) = h(x,y)*h(x,z). This example illustrates the
+% lex command and the pick_given_ratio parameter.
+%
+% Contributed by John Kalman (kalman@math.auckland.ac.nz)
+
+  set(knuth_bendix).
+  clear(print_kept).  clear(print_new_demod). 
+  clear(print_back_demod).  clear(print_back_sub).
+  op(350,xf,^).
+  assign(pick_given_ratio,8).
+  assign(stats_level,1).
+  lex([a,b,c,e,_^ ,h(_,_),_*_]).
+
+  list(usable).
+    x=x.
+    (x*y)*z=x*y*z.
+    e*x=x.
+    x^ *x=e.
+  end_of_list.
+
+  list(sos).
+    h(x,y)= x*y*x^ *y^.
+    h(x,y)*z = z*h(x,y).
+    h(a,b*c)!=h(a,b)*h(a,c).
+  end_of_list.

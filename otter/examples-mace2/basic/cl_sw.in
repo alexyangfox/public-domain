@@ -1,0 +1,20 @@
+% benchmark parameters -n3 -m100000
+
+% A Problem in combinatory logic.
+% Given combinators W and s, where
+%   Wxy = xyy,
+%   Sxyz = xz(yz),
+% show that the (weak) fixed point property does not hold,
+% that is, that there is a combinator f without a fixed point.
+% F combinator f has a fixed point if for all y, fy=y.
+
+formula_list(usable).
+
+all x y (a(a(W,x),y) = a(a(x,y),y)).
+all x y z (a(a(a(S,x),y),z) = a(a(x,z),a(y,z))).
+
+% There exsists an element without a fixed point:
+
+-(all f exists y (a(f,y)=y)).
+
+end_of_list.

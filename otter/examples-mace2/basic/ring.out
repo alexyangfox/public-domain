@@ -1,0 +1,85 @@
+----- MACE 2.2f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:44:30 2004
+The command was "../../bin/mace2 -n4 -m100".
+op(450,xfx,+).
+op(400,xfx,*).
+op(350,fy,~).
+
+list(usable).
+1 [] 0+x=x.
+2 [] x+0=x.
+3 [] ~x+x=0.
+4 [] x+ ~x=0.
+5 [] (x+y)+z=x+ (y+z).
+6 [] x+y=y+x.
+7 [] (x*y)*z=x* (y*z).
+8 [] x* (y+z)=x*y+x*z.
+9 [] (y+z)*x=y*x+z*x.
+end_of_list.
+
+list(flattened_and_parted_clauses).
+1 [] 0+x=x.
+2 [] x+0=x.
+3 [] ~x!=y|y+x=0.
+4 [] ~x!=y|x+y=0.
+5 [] x+y!=z|u+z!=v|$Connect1(x,y,u,v).
+5 [] x+y!=z|z+u=v| -$Connect1(y,u,x,v).
+6 [] x+y!=z|y+x=z.
+7 [] x*y!=z|u*z!=v|$Connect2(x,y,u,v).
+7 [] x*y!=z|z*u=v| -$Connect2(y,u,x,v).
+8 [] x*y!=z|u+z!=v|$Connect4(x,y,u,v).
+8 [] x*y!=z|$Connect3(x,u,y,v)| -$Connect4(x,u,z,v).
+8 [] x+y!=z|u*z=v| -$Connect3(u,y,x,v).
+9 [] x*y!=z|u+z!=v|$Connect6(x,y,u,v).
+9 [] x*y!=z|$Connect5(u,y,x,v)| -$Connect6(u,y,z,v).
+9 [] x+y!=z|z*u=v| -$Connect5(y,u,x,v).
+end_of_list.
+
+--- Starting search for models of size 4 ---
+
+
+10612 clauses were generated; 8234 of those survived the first stage
+of unit preprocessing; there are 1696 atoms.
+
+After all unit preprocessing, 1605 atoms are still unassigned;
+8096 clauses remain; 28 of those are non-Horn (selectable);
+4930 K allocated; cpu time so far for this domain size: 0.01 sec.
+
+The 1st model has been found.
+
+The 10th model has been found.
+
+The search is complete.  The set is satisfiable (40 model(s) found).
+
+
+----- statistics for domain size 4 ----
+Input:
+    Clauses input                  8234
+    Literal occurrences input     23440
+    Greatest atom                  1696
+Unit preprocess:
+    Preprocess unit assignments      91
+    Clauses after subsumption      8096
+    Literal occ. after subsump.   23246
+    Selectable clauses               28
+Decide:
+    Splits                          110
+    Unit assignments              26183
+    Failed paths                     71
+Memory:
+    Memory malloced                48 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.01
+    DPLL                           0.01
+
+=======================================
+Total times for run (seconds):
+    user CPU time                  0.02   (0 hr, 0 min, 0 sec)
+    system CPU time                0.00   (0 hr, 0 min, 0 sec)
+    wall-clock time                0      (0 hr, 0 min, 0 sec)
+
+The search is complete.  The set is satisfiable (40 model(s) found).
+
+The job finished Mon Aug  2 15:44:30 2004

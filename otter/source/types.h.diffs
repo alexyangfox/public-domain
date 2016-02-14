@@ -1,0 +1,8 @@
+54c54
+<     struct term_ptr *terms;   /* for leaves only */
+---
+>     struct fposition position;   /* for leaves only */
+64c64
+<     struct term_ptr *terms;       /* list of terms with path */
+---
+>     struct fnode *terms;       /* terms with path */

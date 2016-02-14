@@ -1,0 +1,53 @@
+% This is a problem in the equivalential calculus (EC):   YQL -> XGF.
+% The strategy uses ancestor subsumption to find a shorter proof.
+% This input file was contributed by Larry Wos.
+
+set(hyper_res).
+
+set(ancestor_subsume).
+
+assign(max_weight,28).
+
+clear(print_kept).
+set(order_history).
+assign(max_proofs, 2).
+assign(max_mem, 1500).
+  
+list(usable).
+-P(e(x,y)) | -P(x) | P(y).  % condensed detacment
+end_of_list.
+  
+list(sos).
+% Following are all of the shortest single axioms for EC.
+P(e(e(x,y),e(e(z,y),e(x,z)))).  % P1_YQL
+% P(e(e(x,y),e(e(x,z),e(z,y)))).  % P2_YQF
+% P(e(e(x,y),e(e(z,x),e(y,z)))).  % P3_YQJ
+% P(e(e(e(x,y),z),e(y,e(z,x)))).  % P4_UM
+% P(e(x,e(e(y,e(x,z)),e(z,y)))).  % P5_XGF
+% P(e(e(x,e(y,z)),e(z,e(x,y)))).  % P7_WN
+% P(e(e(x,y),e(z,e(e(y,z),x)))).  % P8_YRM
+% P(e(e(x,y),e(z,e(e(z,y),x)))).  % P9_YRO
+% P(e(e(e(x,e(y,z)),z),e(y,x))).  % PYO
+% P(e(e(e(x,e(y,z)),y),e(z,x))).  % PYM
+% P(e(x,e(e(y,e(z,x)),e(z,y)))).  % XGK
+% P(e(x,e(e(y,z),e(e(x,z),y)))).  % XHK
+% P(e(x,e(e(y,z),e(e(z,x),y)))).  % XHN
+end_of_list.
+  
+list(passive).
+% Here are denials of the thirteen shortest single axioms for EC.
+% -P(e(e(a,b),e(e(c,b),e(a,c)))) | $ANSWER(P1_YQL).
+% -P(e(e(a,b),e(e(a,c),e(c,b)))) | $ANSWER(P2_YQF).
+% -P(e(e(a,b),e(e(c,a),e(b,c)))) | $ANSWER(P3_YQJ).
+% -P(e(e(e(a,b),c),e(b,e(c,a)))) | $ANSWER(P4_UM).
+-P(e(a,e(e(b,e(a,c)),e(c,b)))) | $ANSWER(P5_XGF).
+% -P(e(e(a,e(b,c)),e(c,e(a,b)))) | $ANSWER(P7_WN).
+% -P(e(e(a,b),e(c,e(e(b,c),a)))) | $ANSWER(P8_YRM).
+% -P(e(e(a,b),e(c,e(e(c,b),a)))) | $ANSWER(P9_YRO).
+% -P(e(e(e(a,e(b,c)),c),e(b,a))) | $ANSWER(PYO).
+% -P(e(e(e(a,e(b,c)),b),e(c,a))) | $ANSWER(PYM).
+% -P(e(a,e(e(b,e(c,a)),e(c,b)))) | $ANSWER(XGK).
+% -P(e(a,e(e(b,c),e(e(a,c),b)))) | $ANSWER(XHK).
+% -P(e(a,e(e(b,c),e(e(c,a),b)))) | $ANSWER(XHN).
+end_of_list.
+  

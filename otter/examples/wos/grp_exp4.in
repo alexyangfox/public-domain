@@ -1,0 +1,137 @@
+%  Input File for Studying Exponent 4 Groups with OTTER 3.0
+% set(ur_res).
+set(knuth_bendix).
+clear(eq_units_both_ways).
+set(process_input).
+set(index_for_back_demod).
+set(para_into_units_only).
+set(para_from_units_only).
+set(lrpo).
+lex([e,a,b,f(x,x),g(x)]).
+assign(pick_given_ratio, 3).
+assign(max_proofs, 4).
+assign(demod_limit, 500).
+assign(max_mem, 24000).
+assign(max_weight, 51).
+% assign(max_seconds, 60).
+assign(change_limit_after, 10).
+assign(new_max_weight, 41).
+clear(print_kept).
+clear(print_new_demod).
+clear(print_back_demod).
+  
+weight_list(pick_and_purge).
+%  Following are proof steps with cancellation, but not the back_demods.
+weight(f(e,f(e,f(e,f(f(f(f(x,x),f(f(f(x,x),f(x,x)),f(y,z))),f(z,f(z,z))),e))))=f(x,f(f(x,y),e)), 2).
+weight(f(e,f(e,f(e,f(f(f(x,x),f(f(x,e),e)),e))))=f(x,f(f(x,x),e)), 2).
+weight(f(e,f(e,f(e,f(x,f(f(f(x,f(x,x)),e),e)))))=e, 2).
+weight(f(e,f(e,f(f(e,f(x,f(y,f(y,y)))),y)))=x, 2).
+weight(f(e,f(e,f(f(f(x,f(f(x,x),e)),e),f(f(f(x,f(f(x,x),e)),e),f(f(x,f(f(x,x),e)),e)))))=x, 2).
+weight(f(e,f(e,f(y,f(f(f(y,f(y,y)),e),e))))=e, 2).
+weight(f(e,f(f(e,f(e,f(f(x,e),e))),y))=f(x,f(e,y)), 2).
+weight(f(e,f(f(e,f(e,f(f(x,x),f(f(f(x,x),f(x,x)),f(y,e))))),f(f(f(x,y),e),f(f(f(x,y),e),f(f(x,y),e)))))=x, 2).
+weight(f(e,f(f(e,f(e,f(x,e))),e))=x, 2).
+weight(f(e,f(f(e,f(e,f(x,y))),f(y,f(y,y))))=x, 2).
+weight(f(e,f(f(e,f(f(f(x,f(f(x,x),e)),e),f(f(f(x,f(f(x,x),e)),e),f(f(x,f(f(x,x),e)),e)))),y))=f(x,f(e,y)), 2).
+weight(f(e,f(f(f(x,f(e,f(e,y))),e),e))=f(f(e,f(f(x,e),e)),y), 2).
+weight(f(e,f(y,f(f(f(y,f(y,y)),e),e)))=e, 2).
+weight(f(f(e,f(x,f(e,y))),f(y,f(y,y)))=f(e,f(f(x,e),e)), 2).
+weight(f(f(e,f(x,f(y,f(y,y)))),y)=f(e,f(f(x,e),e)), 2).
+weight(f(f(e,x),e)=f(e,f(x,e)), 2).
+weight(f(f(e,x),f(e,y))=f(e,f(x,y)), 2).
+weight(f(f(e,x),y)=f(e,f(x,f(e,f(e,f(f(y,e),e))))), 2).
+weight(f(f(f(x,f(x,x)),e),e)=f(f(f(x,e),e),f(f(f(x,e),e),f(f(x,e),e))), 2).
+weight(f(f(f(x,x),e),f(f(f(x,e),f(f(f(x,e),e),e)),e))=e, 2).
+weight(f(f(f(x,x),f(f(f(x,x),f(x,x)),f(x,e))),e)=f(f(x,x),f(f(x,e),e)), 2).
+weight(f(f(f(x,x),f(f(x,x),f(x,x))),e)=f(x,f(f(x,e),e)), 2).
+weight(f(f(x,e),f(f(f(x,e),f(f(x,f(f(x,e),e)),e)),e))=f(f(f(x,e),f(x,e)),f(f(x,e),f(x,e))), 2).
+weight(f(f(x,e),f(f(x,x),f(f(x,e),e)))=e, 2).
+weight(f(f(x,e),f(y,e))=f(f(x,y),e), 2).
+weight(f(f(x,f(e,f(e,f(y,f(y,y))))),f(e,y))=f(f(x,e),e), 2).
+weight(f(f(x,f(e,f(e,y))),f(y,f(y,y)))=f(f(x,e),e), 2).
+weight(f(f(x,f(e,f(y,f(y,y)))),y)=f(f(x,e),e), 2).
+weight(f(f(x,f(e,y)),e)=f(f(x,e),f(e,f(y,e))), 2).
+weight(f(f(x,f(f(x,e),e)),e)=f(f(f(x,x),f(x,x)),f(f(f(x,x),e),e)), 2).
+weight(f(f(x,f(f(x,x),e)),e)=f(f(x,x),f(f(x,e),e)), 2).
+weight(f(f(x,f(x,x)),f(e,f(f(x,e),e)))=e, 2).
+weight(f(f(x,f(x,x)),f(f(x,f(x,x)),f(x,f(x,x))))=f(e,x), 2).
+weight(f(f(x,x),f(f(f(x,x),f(x,x)),e))=f(x,f(f(x,e),e)), 2).
+weight(f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,e),e),y)))=f(x,f(f(x,f(f(x,e),e)),f(e,y))), 2).
+weight(f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),f(y,u))),f(u,f(u,u))),z)))=f(x,f(y,f(e,z))), 2).
+weight(f(f(x,x),f(f(f(x,x),f(x,x)),y))=f(x,f(f(x,e),y)), 2).
+weight(f(f(x,x),f(f(x,f(f(x,e),e)),e))=e, 2).
+weight(f(f(x,x),f(f(x,f(f(x,e),e)),f(e,f(f(y,e),e))))=y, 2).
+weight(f(f(x,y),e)=f(f(x,e),f(y,e)), 2).
+weight(f(f(x,y),z)=f(f(x,e),f(y,f(f(e,f(e,f(z,u))),f(u,f(u,u))))), 2).
+weight(f(x,e)=x, 2).
+weight(f(x,f(e,f(f(y,f(y,y)),f(f(y,f(y,y)),f(y,f(y,y))))))=f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),e)),e),y))), 2).
+weight(f(x,f(f(f(x,x),f(f(f(x,x),f(x,x)),f(x,e))),e))=e, 2).
+weight(f(x,f(f(x,f(f(x,x),e)),e))=e, 2).
+weight(f(x,f(f(x,f(f(x,x),e)),f(f(f(f(y,f(y,y)),e),e),f(f(f(f(y,f(y,y)),e),e),f(f(f(y,f(y,y)),e),e)))))=y, 2).
+weight(f(x,f(f(x,f(f(x,x),e)),f(f(f(y,f(f(y,y),e)),e),f(f(f(y,f(f(y,y),e)),e),f(f(y,f(f(y,y),e)),e)))))=y, 2).
+weight(f(x,f(f(x,f(f(x,x),f(e,f(y,e)))),e))=f(e,y), 2).
+weight(f(x,f(f(x,f(f(x,x),f(y,e))),e))=y, 2).
+weight(f(x,f(f(x,f(f(x,x),f(y,f(z,f(z,z))))),f(e,z)))=y, 2).
+weight(f(x,f(f(x,f(f(x,x),y)),e))=f(e,f(e,f(e,f(y,e)))), 2).
+weight(f(x,f(f(x,f(x,f(f(x,e),e))),e))=f(f(x,x),f(x,x)), 2).
+weight(f(x,f(f(x,y),e))=f(f(x,x),f(f(f(x,x),f(x,x)),f(y,e))), 2).
+weight(f(x,f(f(x,y),f(f(z,f(z,z)),f(f(z,f(z,z)),f(z,f(z,z))))))=f(f(x,x),f(f(f(x,x),f(x,x)),f(y,z))), 2).
+weight(f(y,f(f(f(y,f(y,y)),e),e))=e, 2).
+%  Following are proof steps with cancellation, just the back_demods.
+weight(f(e,f(e,f(e,f(f(f(x,f(f(x,e),f(y,z))),f(z,f(z,z))),e))))=f(x,f(f(x,y),e)), 2).
+weight(f(e,f(e,f(e,f(f(x,e),e))))=x, 2).
+weight(f(e,f(e,f(e,x)))=x, 2).
+weight(f(e,f(e,f(f(f(x,x),f(f(x,e),e)),f(f(f(x,x),f(f(x,e),e)),f(f(x,x),f(f(x,e),e))))))=x, 2).
+weight(f(e,f(e,x))=x, 2).
+weight(f(e,f(f(e,f(e,f(x,f(f(x,e),f(y,e))))),f(f(f(x,y),e),f(f(f(x,y),e),f(f(x,y),e)))))=x, 2).
+weight(f(e,f(f(e,f(f(f(x,x),f(f(x,e),e)),f(f(f(x,x),f(f(x,e),e)),f(f(x,x),f(f(x,e),e))))),y))=f(x,f(e,y)), 2).
+weight(f(e,f(f(f(x,e),e),f(e,f(e,f(f(y,e),e)))))=f(f(e,f(f(x,e),e)),y), 2).
+weight(f(e,f(x,x))=f(x,x), 2).
+weight(f(e,y)=y, 2).
+weight(f(f(e,x),y)=f(e,f(x,f(e,f(e,y)))), 2).
+weight(f(f(x,f(f(x,e),e)),f(e,y))=f(f(x,e),f(f(f(x,e),e),y)), 2).
+weight(f(f(x,f(x,f(y,z))),f(z,f(z,z)))=f(x,f(x,y)), 2).
+weight(f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),e)),e),y)))=f(x,f(e,f(e,y))), 2).
+weight(f(f(x,x),f(f(x,e),f(f(f(x,e),e),f(f(y,e),e))))=y, 2).
+weight(f(f(x,x),f(x,f(x,y)))=y, 2).
+weight(f(f(x,x),f(x,x))=e, 2).
+weight(f(f(x,y),f(e,z))=f(f(x,e),f(y,z)), 2).
+weight(f(f(x,y),f(e,z))=f(x,f(y,z)), 2).
+weight(f(f(x,y),z)=f(x,f(y,f(e,f(e,z)))), 2).
+weight(f(f(x,y),z)=f(x,f(y,z)), 2).
+weight(f(x,f(f(x,f(f(x,x),e)),f(e,f(f(y,e),e))))=y, 2).
+weight(f(x,f(f(x,x),f(f(x,e),e)))=e, 2).
+weight(f(x,f(f(x,y),f(e,z)))=f(f(x,x),f(f(f(x,x),f(x,x)),f(y,z))), 2).
+weight(f(x,f(x,f(x,x)))=e, 2).
+end_of_list.
+  
+list(usable).
+(x = x).
+end_of_list.
+  
+% list(usable).
+% f(x,y) != f(x,z) | y = z.
+% f(y,x) != f(z,x) | y = z.
+% f(x,y) != u | f(x,z) != u | y = z.
+% f(y,x) != u | f(z,x) != u | y = z.
+% end_of_list.
+  
+list(sos).
+f(y,f(f(y,f(f(y,y),f(x,z))),f(z,f(z,z)))) = x.
+f(e,e) = e.
+end_of_list.
+  
+list(passive).
+% (f(a,f(a,f(a,a))) != f(b,f(b,f(b,b)))) | $ANS(X4_Y4).
+% (f(a,f(b,f(b,f(b,b)))) != a) | $ANS(R_ident).
+% (f(b,f(b,f(b,f(b,a)))) != a) | $ANS(L_ident_if_assoc).
+(f(f(a,b),c) != f(a,f(b,c))) | $ANS(assoc).
+(f(a,f(a,f(a,a))) != e) | $ANS(exp4).
+(f(e,a) != a) | $ANS(lid).
+(f(a,e) != a) | $ANS(rid).
+end_of_list.
+  
+list(demodulators).
+% (f(x,y) = f(x,z)) = (y = z).
+% (f(y,x) = f(z,x)) = (y = z).
+end_of_list.

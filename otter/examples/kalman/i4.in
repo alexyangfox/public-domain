@@ -1,0 +1,135 @@
+% From John Kalman
+% 
+%      (4) The input file %i4 below, which includes several
+% illustrations of list processing using Otter.
+%
+%
+%     A railroad DEF has two sidings DBA and FCA connected at A.
+% It is understood that D, E are respectively to the left of E, F;
+% D, B are respectively to the left of B, A; and A, C are respectively
+% to the left of C, F.
+% The portion of the rails at A which is common to the two sidings is
+% long enough to permit a single wagon, like P or Q, to run in or out of it,
+% but is too short to contain the whole of an engine, like R. Hence, if an
+% engine turns up one siding, such as DBA, it must come back the same way.
+% Initially, P is at B, Q is at C, and R is at E. The problem is to use
+% the engine R to interchange the wagons P and Q.
+% [W.W.R. Ball and H.S.M. Coxeter, Mathematical Recreations and Essays,
+% Univ. of Toronto Press, 12th ed., 1974, page 116.]
+ 
+set(hyper_res).
+assign(stats_level,1).
+assign(max_given,2000).
+
+list(usable).
+
+%     H(u,xA,xB,xC,xD,xE,xF), where u is a position and xA, xB, ... are lists,
+% means that it is possible to attain the configuration where the engine is
+% at position u and xA, xB, ... list the vehicles (engine, wagons) at positions
+% A, B, ... .
+
+%     In describing the allowable moves, we first consider the case where
+% (u,v) is a pair of adjacent positions each distinct from A, v is to
+% the right of u (thus  (u,v) is (C,F) or (D,B) or (D,E) or (E,F)), and
+% the engine is at position u.
+
+%     If (u,v) is such a pair of positions, K1(u,v,y,z,x1,x2,x3,x4) means
+% that it is possible to attain the configuration where y and z list the
+% vehicles at positions u and v, and x1, x2, x3, x4 list the vehicles at
+% the remaining four positions.
+
+%     The following clauses transform H-representations of attainable
+% configurations to K1-representations:
+
+-H(C,xA,xB,xC,xD,xE,xF) | K1(C,F,xC,xF,xA,xB,xD,xE).
+-H(D,xA,xB,xC,xD,xE,xF) | K1(D,B,xD,xB,xA,xC,xE,xF).
+-H(D,xA,xB,xC,xD,xE,xF) | K1(D,E,xD,xE,xA,xB,xC,xF).
+-H(E,xA,xB,xC,xD,xE,xF) | K1(E,F,xE,xF,xA,xB,xC,xD).
+
+%     Given a pair of adjacent positions (u,v) as above and an attainable
+% configuration K1(u,v, ... ), the next three clauses describe all
+% allowable moves in which the engine goes from position u to position v.
+
+%     In these clauses, K2(u,v,y,z,x1,x2,x3,x4) means that, after the move,
+% y and z are the lists of vehicles at position u and v; u, v, x1, x2, x3, x4
+% are as before the move.
+
+%     Move whole list at position u to position v (if [R] or [R,y0] or
+% [R,y0,y00] was the list at position u, this is the only allowable
+% move that takes R to position v):
+
+-K1(u,v,y,z,x1,x2,x3,x4) | K2(u,v,[],app(y,z),x1,x2,x3,x4).
+
+%     For [y0|y1] at position u, where R is a member of y1, move y1
+% to position v (if [y0,R] or [y0,R,y00] was the list at position u,
+% this is the only remaining allowable move that takes R to position v):
+
+-K1(u,v,[y0|y1],z,x1,x2,x3,x4) | -$TRUE(member(R,y1))
+                        | K2(u,v,[y0],app(y1,z),x1,x2,x3,x4).
+
+%     For [y0,y00,R] at position u, move R to position v:
+
+-K1(u,v,[y0,y00,R],[],x1,x2,x3,x4) |  K2(u,v,[y0,y00],[R],x1,x2,x3,x4).
+
+%     The following clauses transform K2-representations of attainable
+% configurations to H-representations:
+
+-K2(C,F,xC,xF,xA,xB,xD,xE) | H(F,xA,xB,xC,xD,xE,xF).
+-K2(D,B,xD,xB,xA,xC,xE,xF) | H(B,xA,xB,xC,xD,xE,xF).
+-K2(D,E,xD,xE,xA,xB,xC,xF) | H(E,xA,xB,xC,xD,xE,xF).
+-K2(E,F,xE,xF,xA,xB,xC,xD) | H(F,xA,xB,xC,xD,xE,xF).
+
+%     The case where (u,v) is a pair of adjacent positions each distinct
+% from A, v is to the left of u (thus (u,v) is (B,D) or (E,D) or (F,C) or
+% (F,E)), and the engine is at position u, may be reduced to the previous case
+% with the help of the 'reverse' function.
+
+%     Clauses to transform H-representations to K1-representations:
+
+-H(B,xA,xB,xC,xD,xE,xF) | K1(B,D,rev(xB),rev(xD),xA,xC,xE,xF).
+-H(E,xA,xB,xC,xD,xE,xF) | K1(E,D,rev(xE),rev(xD),xA,xB,xC,xF).
+-H(F,xA,xB,xC,xD,xE,xF) | K1(F,C,rev(xF),rev(xC),xA,xB,xD,xE).
+-H(F,xA,xB,xC,xD,xE,xF) | K1(F,E,rev(xF),rev(xE),xA,xB,xC,xD).
+
+%     Clauses to transform K2-representations to H-representations:
+
+-K2(B,D,xB,xD,xA,xC,xE,xF) | H(D,xA,rev(xB),xC,rev(xD),xE,xF).
+-K2(E,D,xE,xD,xA,xB,xC,xF) | H(D,xA,xB,xC,rev(xD),rev(xE),xF).
+-K2(F,C,xF,xC,xA,xB,xD,xE) | H(C,xA,xB,rev(xC),xD,xE,rev(xF)).
+-K2(F,E,xF,xE,xA,xB,xC,xD) | H(E,xA,xB,xC,xD,rev(xE),rev(xF)).
+
+%     Allowable moves between the position B (containing R) and A.
+
+-H(B,[],[R,u],xC,xD,xE,xF) | H(B,[u],[R],xC,xD,xE,xF).
+-H(B,[],[R,u,v],xC,xD,xE,xF) | H(B,[v],[R,u],xC,xD,xE,xF).
+-H(B,[],[u,R,v],xC,xD,xE,xF) | H(B,[v],[u,R],xC,xD,xE,xF).
+-H(B,[u],xB,xC,xD,xE,xF) | H(B,[],app(xB,[u]),xC,xD,xE,xF).
+  
+%     Allowable moves between the position C (containing R) and A.
+
+-H(C,[],xB,[y0|y1],xD,xE,xF) | -$TRUE(member(R,y1)) | H(C,[y0],xB,y1,xD,xE,xF).
+-H(C,[y0],xB,y1,xD,xE,xF) | H(C,[],xB,[y0|y1],xD,xE,xF). 
+  
+end_of_list.
+
+list(sos).
+  H(E,[],[P],[Q],[],[R],[]).
+end_of_list.
+
+list(passive).
+  -H(E,[],[Q],[P],[],[R],[]).
+end_of_list. 
+
+list(demodulators).
+  (member(x,[]) = $F).
+  (member(x,[u|v]) = $IF($ID(x,u),$T,member(x,v))).
+
+  (rev(x) = rev2(x,[])).
+  (rev2([],x) = x).
+  (rev2([y1|y2],z) = rev2(y2,[y1|z])).
+
+  (app([u|v],y) = [u|app(v,y)]).
+  (app([],y) = y).
+end_of_list.
+
+

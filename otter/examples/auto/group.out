@@ -1,0 +1,148 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:35 2004
+The command was "../../bin/otter".  The process ID is 8268.
+
+set(auto).
+   dependent: set(auto1).
+   dependent: set(process_input).
+   dependent: clear(print_kept).
+   dependent: clear(print_new_demod).
+   dependent: clear(print_back_demod).
+   dependent: clear(print_back_sub).
+   dependent: set(control_memory).
+   dependent: assign(max_mem, 12000).
+   dependent: assign(pick_given_ratio, 4).
+   dependent: assign(stats_level, 1).
+   dependent: assign(max_seconds, 10800).
+
+list(usable).
+0 [] x=x.
+0 [] f(e,x)=x.
+0 [] f(g(x),x)=e.
+0 [] f(f(x,y),z)=f(x,f(y,z)).
+end_of_list.
+
+SCAN INPUT: prop=0, horn=1, equality=1, symmetry=0, max_lits=1.
+
+All clauses are units, and equality is present; the
+strategy will be Knuth-Bendix with positive clauses in sos.
+
+   dependent: set(knuth_bendix).
+   dependent: set(anl_eq).
+   dependent: set(para_from).
+   dependent: set(para_into).
+   dependent: clear(para_from_right).
+   dependent: clear(para_into_right).
+   dependent: set(para_from_vars).
+   dependent: set(eq_units_both_ways).
+   dependent: set(dynamic_demod_all).
+   dependent: set(dynamic_demod).
+   dependent: set(order_eq).
+   dependent: set(back_demod).
+   dependent: set(lrpo).
+
+There is no negative clause, so all clause lists will
+be printed at the end of the search.
+
+   dependent: set(print_lists_at_end).
+
+------------> process usable:
+
+------------> process sos:
+** KEPT (pick-wt=3): 1 [] x=x.
+** KEPT (pick-wt=5): 2 [] f(e,x)=x.
+---> New Demodulator: 3 [new_demod,2] f(e,x)=x.
+** KEPT (pick-wt=6): 4 [] f(g(x),x)=e.
+---> New Demodulator: 5 [new_demod,4] f(g(x),x)=e.
+** KEPT (pick-wt=11): 6 [] f(f(x,y),z)=f(x,f(y,z)).
+---> New Demodulator: 7 [new_demod,6] f(f(x,y),z)=f(x,f(y,z)).
+  Following clause subsumed by 1 during input processing: 0 [copy,1,flip.1] x=x.
+>>>> Starting back demodulation with 3.
+>>>> Starting back demodulation with 5.
+>>>> Starting back demodulation with 7.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=3) 1 [] x=x.
+
+given clause #2: (wt=5) 2 [] f(e,x)=x.
+
+given clause #3: (wt=6) 4 [] f(g(x),x)=e.
+
+given clause #4: (wt=11) 6 [] f(f(x,y),z)=f(x,f(y,z)).
+
+given clause #5: (wt=8) 8 [para_into,6.1.1.1,4.1.1,demod,3,flip.1] f(g(x),f(x,y))=y.
+
+given clause #6: (wt=9) 10 [para_into,8.1.1.2,8.1.1] f(g(g(x)),y)=f(x,y).
+
+given clause #7: (wt=5) 14 [para_into,8.1.1.2,4.1.1,demod,11] f(x,e)=x.
+
+given clause #8: (wt=4) 24 [para_into,14.1.1,4.1.1,flip.1] g(e)=e.
+
+given clause #9: (wt=5) 22 [para_into,14.1.1,10.1.1,demod,15,flip.1] g(g(x))=x.
+
+given clause #10: (wt=6) 20 [para_into,10.1.1,4.1.1,flip.1] f(x,g(x))=e.
+
+given clause #11: (wt=12) 12 [para_into,8.1.1.2,6.1.1] f(g(f(x,y)),f(x,f(y,z)))=z.
+
+given clause #12: (wt=8) 18 [para_into,10.1.1,8.1.1,flip.1] f(x,f(g(x),y))=y.
+
+given clause #13: (wt=9) 30 [para_into,12.1.1.2.2,20.1.1,demod,15] f(g(f(x,y)),x)=g(y).
+
+given clause #14: (wt=10) 44 [para_into,30.1.1.1.1,8.1.1,flip.1] g(f(x,y))=f(g(y),g(x)).
+
+Search stopped because sos empty.
+
+
+Search stopped because sos empty.
+
+============ end of search ============
+
+list(usable).
+1 [] x=x.
+2 [] f(e,x)=x.
+4 [] f(g(x),x)=e.
+6 [] f(f(x,y),z)=f(x,f(y,z)).
+8 [para_into,6.1.1.1,4.1.1,demod,3,flip.1] f(g(x),f(x,y))=y.
+14 [para_into,8.1.1.2,4.1.1,demod,11] f(x,e)=x.
+24 [para_into,14.1.1,4.1.1,flip.1] g(e)=e.
+22 [para_into,14.1.1,10.1.1,demod,15,flip.1] g(g(x))=x.
+20 [para_into,10.1.1,4.1.1,flip.1] f(x,g(x))=e.
+18 [para_into,10.1.1,8.1.1,flip.1] f(x,f(g(x),y))=y.
+44 [para_into,30.1.1.1.1,8.1.1,flip.1] g(f(x,y))=f(g(y),g(x)).
+end_of_list.
+
+list(sos).
+end_of_list.
+
+list(demodulators).
+3 [new_demod,2] f(e,x)=x.
+5 [new_demod,4] f(g(x),x)=e.
+7 [new_demod,6] f(f(x,y),z)=f(x,f(y,z)).
+9 [new_demod,8] f(g(x),f(x,y))=y.
+15 [new_demod,14] f(x,e)=x.
+19 [new_demod,18] f(x,f(g(x),y))=y.
+21 [new_demod,20] f(x,g(x))=e.
+23 [new_demod,22] g(g(x))=x.
+25 [new_demod,24] g(e)=e.
+45 [new_demod,44] g(f(x,y))=f(g(y),g(x)).
+end_of_list.
+
+
+-------------- statistics -------------
+clauses given                 14
+clauses generated            128
+clauses kept                  23
+clauses forward subsumed     122
+clauses back subsumed          0
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8268 finished Mon Aug  2 15:30:35 2004

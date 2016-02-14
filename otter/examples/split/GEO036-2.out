@@ -1,0 +1,367 @@
+
+WARNING, with splitting, max_seconds is checked against the wall clock.
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:31:07 2004
+The command was "../../bin/otter".  The process ID is 8636.
+
+set(prolog_style_variables).
+set(auto2).
+   dependent: set(process_input).
+   dependent: clear(print_kept).
+   dependent: clear(print_new_demod).
+   dependent: clear(print_back_demod).
+   dependent: clear(print_back_sub).
+   dependent: set(control_memory).
+   dependent: assign(max_mem, 20000).
+   dependent: assign(pick_given_ratio, 4).
+   dependent: assign(stats_level, 1).
+   dependent: assign(max_seconds, 10800).
+set(tptp_eq).
+set(split_when_given).
+   dependent: set(back_unit_deletion).
+   dependent: set(unit_deletion).
+set(split_pos).
+
+list(usable).
+0 [] equal(A,A).
+0 [] equidistant(A,B,B,A).
+0 [] -equidistant(A,B,C,D)| -equidistant(A,B,E,F)|equidistant(C,D,E,F).
+0 [] -equidistant(A,B,C,C)|equal(A,B).
+0 [] between(A,B,extension(A,B,C,D)).
+0 [] equidistant(A,extension(B,A,C,D),C,D).
+0 [] -equidistant(A,B,C,D)| -equidistant(B,E,D,F)| -equidistant(A,G,C,H)| -equidistant(B,G,D,H)| -between(A,B,E)| -between(C,D,F)|equal(A,B)|equidistant(E,G,F,H).
+0 [] -between(A,B,A)|equal(A,B).
+0 [] -between(A,B,C)| -between(D,E,C)|between(B,inner_pasch(A,B,C,E,D),D).
+0 [] -between(A,B,C)| -between(D,E,C)|between(E,inner_pasch(A,B,C,E,D),A).
+0 [] -between(lower_dimension_point_1,lower_dimension_point_2,lower_dimension_point_3).
+0 [] -between(lower_dimension_point_2,lower_dimension_point_3,lower_dimension_point_1).
+0 [] -between(lower_dimension_point_3,lower_dimension_point_1,lower_dimension_point_2).
+0 [] -equidistant(A,B,A,C)| -equidistant(D,B,D,C)| -equidistant(E,B,E,C)|between(A,D,E)|between(D,E,A)|between(E,A,D)|equal(B,C).
+0 [] -between(A,B,C)| -between(D,B,E)|equal(A,B)|between(A,D,euclid1(A,D,B,E,C)).
+0 [] -between(A,B,C)| -between(D,B,E)|equal(A,B)|between(A,E,euclid2(A,D,B,E,C)).
+0 [] -between(A,B,C)| -between(D,B,E)|equal(A,B)|between(euclid1(A,D,B,E,C),C,euclid2(A,D,B,E,C)).
+0 [] -equidistant(A,B,A,C)| -equidistant(A,D,A,E)| -between(A,B,D)| -between(B,F,D)|between(C,continuous(A,B,C,F,D,E),E).
+0 [] -equidistant(A,B,A,C)| -equidistant(A,D,A,E)| -between(A,B,D)| -between(B,F,D)|equidistant(A,F,A,continuous(A,B,C,F,D,E)).
+end_of_list.
+
+list(sos).
+0 [] equal(lower_dimension_point_1,lower_dimension_point_2)|equal(lower_dimension_point_2,lower_dimension_point_3)|equal(lower_dimension_point_1,lower_dimension_point_3).
+end_of_list.
+
+Every positive clause in sos is ground (or sos is empty);
+therefore we move all positive usable clauses to sos.
+
+Properties of input clauses: prop=0, horn=0, equality=1, symmetry=0, max_lits=8.
+
+Setting hyper_res, because there are nonunits.
+   dependent: set(hyper_res).
+Setting ur_res, because this is a nonunit set containing
+either equality literals or non-Horn clauses.
+   dependent: set(ur_res).
+Setting factor and  unit_deletion, because there are non-Horn clauses.
+   dependent: set(factor).
+Equality is present, so we set the knuth_bendix flag.
+   dependent: set(knuth_bendix).
+   dependent: set(anl_eq).
+   dependent: set(para_from).
+   dependent: set(para_into).
+   dependent: clear(para_from_right).
+   dependent: clear(para_into_right).
+   dependent: set(para_from_vars).
+   dependent: set(eq_units_both_ways).
+   dependent: set(dynamic_demod_all).
+   dependent: set(dynamic_demod).
+   dependent: set(order_eq).
+   dependent: set(back_demod).
+   dependent: set(lrpo).
+As an incomplete heuristic, we paramodulate with units only.
+   dependent: set(para_from_units_only).
+   dependent: set(para_into_units_only).
+
+------------> process usable:
+** KEPT (pick-wt=15): 1 [] -equidistant(A,B,C,D)| -equidistant(A,B,E,F)|equidistant(C,D,E,F).
+** KEPT (pick-wt=8): 2 [] -equidistant(A,B,C,C)|equal(A,B).
+** KEPT (pick-wt=36): 3 [] -equidistant(A,B,C,D)| -equidistant(B,E,D,F)| -equidistant(A,G,C,H)| -equidistant(B,G,D,H)| -between(A,B,E)| -between(C,D,F)|equal(A,B)|equidistant(E,G,F,H).
+** KEPT (pick-wt=7): 4 [] -between(A,B,A)|equal(A,B).
+** KEPT (pick-wt=17): 5 [] -between(A,B,C)| -between(D,E,C)|between(B,inner_pasch(A,B,C,E,D),D).
+** KEPT (pick-wt=17): 6 [] -between(A,B,C)| -between(D,E,C)|between(E,inner_pasch(A,B,C,E,D),A).
+** KEPT (pick-wt=4): 7 [] -between(lower_dimension_point_1,lower_dimension_point_2,lower_dimension_point_3).
+** KEPT (pick-wt=4): 8 [] -between(lower_dimension_point_2,lower_dimension_point_3,lower_dimension_point_1).
+** KEPT (pick-wt=4): 9 [] -between(lower_dimension_point_3,lower_dimension_point_1,lower_dimension_point_2).
+** KEPT (pick-wt=30): 10 [] -equidistant(A,B,A,C)| -equidistant(D,B,D,C)| -equidistant(E,B,E,C)|between(A,D,E)|between(D,E,A)|between(E,A,D)|equal(B,C).
+** KEPT (pick-wt=20): 11 [] -between(A,B,C)| -between(D,B,E)|equal(A,B)|between(A,D,euclid1(A,D,B,E,C)).
+** KEPT (pick-wt=20): 12 [] -between(A,B,C)| -between(D,B,E)|equal(A,B)|between(A,E,euclid2(A,D,B,E,C)).
+** KEPT (pick-wt=25): 13 [] -between(A,B,C)| -between(D,B,E)|equal(A,B)|between(euclid1(A,D,B,E,C),C,euclid2(A,D,B,E,C)).
+** KEPT (pick-wt=28): 14 [] -equidistant(A,B,A,C)| -equidistant(A,D,A,E)| -between(A,B,D)| -between(B,F,D)|between(C,continuous(A,B,C,F,D,E),E).
+** KEPT (pick-wt=29): 15 [] -equidistant(A,B,A,C)| -equidistant(A,D,A,E)| -between(A,B,D)| -between(B,F,D)|equidistant(A,F,A,continuous(A,B,C,F,D,E)).
+>>>> Starting back unit deletion with 7.
+>>>> Starting back unit deletion with 8.
+>>>> Starting back unit deletion with 9.
+
+------------> process sos:
+** KEPT (pick-wt=9): 35 [copy,34,flip.1,flip.2,flip.3] equal(lower_dimension_point_2,lower_dimension_point_1)|equal(lower_dimension_point_3,lower_dimension_point_2)|equal(lower_dimension_point_3,lower_dimension_point_1).
+** KEPT (pick-wt=3): 36 [] equal(A,A).
+** KEPT (pick-wt=5): 37 [] equidistant(A,B,B,A).
+** KEPT (pick-wt=8): 38 [] between(A,B,extension(A,B,C,D)).
+** KEPT (pick-wt=9): 39 [] equidistant(A,extension(B,A,C,D),C,D).
+  Following clause subsumed by 36 during input processing: 0 [copy,36,flip.1] equal(A,A).
+>>>> Starting back unit deletion with 36.
+37 back subsumes 31.
+>>>> Starting back unit deletion with 37.
+0 [back_unit_del,37.1,30.3] -equidistant(E2518,F2518,E2518,F2518)| -equidistant(F2518,G2518,F2518,G2518)| -between(E2518,F2518,G2518)|equal(E2518,F2518)|equidistant(G2518,F2518,G2518,F2518).
+** KEPT (pick-wt=22): 40 [back_unit_del,37.1,30.3] -equidistant(A,B,A,B)| -equidistant(B,C,B,C)| -between(A,B,C)|equal(A,B)|equidistant(C,B,C,B).
+>>>> Starting back unit deletion with 38.
+>>>> Starting back unit deletion with 39.
+40 back subsumes 30.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=9) 35 [copy,34,flip.1,flip.2,flip.3] equal(lower_dimension_point_2,lower_dimension_point_1)|equal(lower_dimension_point_3,lower_dimension_point_2)|equal(lower_dimension_point_3,lower_dimension_point_1).
+
+Splitting on clause 35 [copy,34,flip.1,flip.2,flip.3] equal(lower_dimension_point_2,lower_dimension_point_1)|equal(lower_dimension_point_3,lower_dimension_point_2)|equal(lower_dimension_point_3,lower_dimension_point_1).
+
+Case [1]   (process 8637):
+Assumption: 41 [35,split.1] equal(lower_dimension_point_2,lower_dimension_point_1).
+
+given clause #2: (wt=3) 36 [] equal(A,A).
+
+given clause #3: (wt=3) 41 [35,split.1] equal(lower_dimension_point_2,lower_dimension_point_1).
+
+given clause #4: (wt=4) 43 [back_demod,9,demod,42] -between(lower_dimension_point_3,lower_dimension_point_1,lower_dimension_point_1).
+
+given clause #5: (wt=4) 44 [back_demod,8,demod,42] -between(lower_dimension_point_1,lower_dimension_point_3,lower_dimension_point_1).
+
+given clause #6: (wt=5) 37 [] equidistant(A,B,B,A).
+0 [back_unit_del,46.1,19.2] -equidistant(E2518,F2518,E2518,F2518)| -equidistant(E2518,H2518,E2518,I2518)| -equidistant(F2518,H2518,F2518,I2518)| -between(E2518,F2518,G2518)|equal(E2518,F2518)|equidistant(G2518,H2518,G2518,I2518).
+0 [back_unit_del,46.1,19.1] -equidistant(F2518,G2518,F2518,G2518)| -equidistant(E2518,H2518,E2518,I2518)| -equidistant(F2518,H2518,F2518,I2518)| -between(E2518,F2518,G2518)|equal(E2518,F2518)|equidistant(G2518,H2518,G2518,I2518).
+
+given clause #7: (wt=4) 45 [back_demod,7,demod,42] -between(lower_dimension_point_1,lower_dimension_point_1,lower_dimension_point_3).
+
+given clause #8: (wt=5) 46 [hyper,37,16] equidistant(A,B,A,B).
+
+given clause #9: (wt=8) 38 [] between(A,B,extension(A,B,C,D)).
+
+given clause #10: (wt=9) 39 [] equidistant(A,extension(B,A,C,D),C,D).
+
+given clause #11: (wt=19) 48 [hyper,38,29,46,46] equidistant(A,A,A,continuous(A,A,A,A,extension(A,A,B,C),extension(A,A,B,C))).
+
+given clause #12: (wt=7) 62 [hyper,39,2,flip.1] equal(extension(A,B,C,C),B).
+
+--- refuted case [1]
+
+----> UNIT CONFLICT at   0.03 sec ----> 77 [binary,76.1,43.1] $F.
+
+Length of proof is 5.  Level of proof is 3.  Case [1]
+
+---------------- PROOF ----------------
+
+2 [] -equidistant(A,B,C,C)|equal(A,B).
+9 [] -between(lower_dimension_point_3,lower_dimension_point_1,lower_dimension_point_2).
+34 [] equal(lower_dimension_point_1,lower_dimension_point_2)|equal(lower_dimension_point_2,lower_dimension_point_3)|equal(lower_dimension_point_1,lower_dimension_point_3).
+35 [copy,34,flip.1,flip.2,flip.3] equal(lower_dimension_point_2,lower_dimension_point_1)|equal(lower_dimension_point_3,lower_dimension_point_2)|equal(lower_dimension_point_3,lower_dimension_point_1).
+38 [] between(A,B,extension(A,B,C,D)).
+39 [] equidistant(A,extension(B,A,C,D),C,D).
+42,41 [35,split.1] equal(lower_dimension_point_2,lower_dimension_point_1).
+43 [back_demod,9,demod,42] -between(lower_dimension_point_3,lower_dimension_point_1,lower_dimension_point_1).
+62 [hyper,39,2,flip.1] equal(extension(A,B,C,C),B).
+76 [para_from,62.1.1,38.1.3] between(A,B,B).
+77 [binary,76.1,43.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8637) -------
+clauses given                 12
+clauses generated            321
+clauses kept                  73
+clauses forward subsumed     263
+clauses back subsumed          9
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.03          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8637 finished Mon Aug  2 15:31:07 2004
+Refuted case [1].
+
+Case [2]   (process 8638):
+Assumption: 42 [35,split.2] equal(lower_dimension_point_3,lower_dimension_point_2).
+
+given clause #2: (wt=3) 36 [] equal(A,A).
+
+given clause #3: (wt=3) 41 [35,split_neg.2] -equal(lower_dimension_point_2,lower_dimension_point_1).
+
+given clause #4: (wt=3) 42 [35,split.2] equal(lower_dimension_point_3,lower_dimension_point_2).
+
+given clause #5: (wt=4) 44 [back_demod,9,demod,43] -between(lower_dimension_point_2,lower_dimension_point_1,lower_dimension_point_2).
+
+given clause #6: (wt=5) 37 [] equidistant(A,B,B,A).
+0 [back_unit_del,48.1,19.2] -equidistant(E2518,F2518,E2518,F2518)| -equidistant(E2518,H2518,E2518,I2518)| -equidistant(F2518,H2518,F2518,I2518)| -between(E2518,F2518,G2518)|equal(E2518,F2518)|equidistant(G2518,H2518,G2518,I2518).
+0 [back_unit_del,48.1,19.1] -equidistant(F2518,G2518,F2518,G2518)| -equidistant(E2518,H2518,E2518,I2518)| -equidistant(F2518,H2518,F2518,I2518)| -between(E2518,F2518,G2518)|equal(E2518,F2518)|equidistant(G2518,H2518,G2518,I2518).
+
+given clause #7: (wt=4) 45 [back_demod,8,demod,43] -between(lower_dimension_point_2,lower_dimension_point_2,lower_dimension_point_1).
+
+given clause #8: (wt=4) 46 [back_demod,7,demod,43] -between(lower_dimension_point_1,lower_dimension_point_2,lower_dimension_point_2).
+
+given clause #9: (wt=5) 47 [ur,41,2] -equidistant(lower_dimension_point_2,lower_dimension_point_1,A,A).
+
+given clause #10: (wt=5) 48 [hyper,37,16] equidistant(A,B,A,B).
+
+given clause #11: (wt=8) 38 [] between(A,B,extension(A,B,C,D)).
+
+given clause #12: (wt=5) 50 [ur,47,1,37] -equidistant(A,A,lower_dimension_point_2,lower_dimension_point_1).
+
+given clause #13: (wt=5) 51 [ur,47,1,37] -equidistant(lower_dimension_point_1,lower_dimension_point_2,A,A).
+
+given clause #14: (wt=5) 67 [ur,51,1,48] -equidistant(A,A,lower_dimension_point_1,lower_dimension_point_2).
+
+given clause #15: (wt=9) 39 [] equidistant(A,extension(B,A,C,D),C,D).
+
+given clause #16: (wt=19) 52 [hyper,38,29,48,48] equidistant(A,A,A,continuous(A,A,A,A,extension(A,A,B,C),extension(A,A,B,C))).
+
+given clause #17: (wt=7) 73 [hyper,39,2,flip.1] equal(extension(A,B,C,C),B).
+
+--- refuted case [2]
+
+----> UNIT CONFLICT at   0.03 sec ----> 92 [binary,91.1,46.1] $F.
+
+Length of proof is 5.  Level of proof is 3.  Case [2]
+
+---------------- PROOF ----------------
+
+2 [] -equidistant(A,B,C,C)|equal(A,B).
+7 [] -between(lower_dimension_point_1,lower_dimension_point_2,lower_dimension_point_3).
+34 [] equal(lower_dimension_point_1,lower_dimension_point_2)|equal(lower_dimension_point_2,lower_dimension_point_3)|equal(lower_dimension_point_1,lower_dimension_point_3).
+35 [copy,34,flip.1,flip.2,flip.3] equal(lower_dimension_point_2,lower_dimension_point_1)|equal(lower_dimension_point_3,lower_dimension_point_2)|equal(lower_dimension_point_3,lower_dimension_point_1).
+38 [] between(A,B,extension(A,B,C,D)).
+39 [] equidistant(A,extension(B,A,C,D),C,D).
+43,42 [35,split.2] equal(lower_dimension_point_3,lower_dimension_point_2).
+46 [back_demod,7,demod,43] -between(lower_dimension_point_1,lower_dimension_point_2,lower_dimension_point_2).
+73 [hyper,39,2,flip.1] equal(extension(A,B,C,C),B).
+91 [para_from,73.1.1,38.1.3] between(A,B,B).
+92 [binary,91.1,46.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8638) -------
+clauses given                 17
+clauses generated            376
+clauses kept                  88
+clauses forward subsumed     304
+clauses back subsumed         13
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.03          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8638 finished Mon Aug  2 15:31:07 2004
+Refuted case [2].
+
+Case [3]   (process 8639):
+Assumption: 43 [35,split.3] equal(lower_dimension_point_3,lower_dimension_point_1).
+
+given clause #2: (wt=3) 36 [] equal(A,A).
+
+given clause #3: (wt=3) 41 [35,split_neg.3] -equal(lower_dimension_point_2,lower_dimension_point_1).
+
+given clause #4: (wt=3) 43 [35,split.3] equal(lower_dimension_point_3,lower_dimension_point_1).
+
+given clause #5: (wt=4) 45 [back_demod,9,demod,44] -between(lower_dimension_point_1,lower_dimension_point_1,lower_dimension_point_2).
+
+given clause #6: (wt=5) 37 [] equidistant(A,B,B,A).
+0 [back_unit_del,50.1,19.2] -equidistant(E2518,F2518,E2518,F2518)| -equidistant(E2518,H2518,E2518,I2518)| -equidistant(F2518,H2518,F2518,I2518)| -between(E2518,F2518,G2518)|equal(E2518,F2518)|equidistant(G2518,H2518,G2518,I2518).
+0 [back_unit_del,50.1,19.1] -equidistant(F2518,G2518,F2518,G2518)| -equidistant(E2518,H2518,E2518,I2518)| -equidistant(F2518,H2518,F2518,I2518)| -between(E2518,F2518,G2518)|equal(E2518,F2518)|equidistant(G2518,H2518,G2518,I2518).
+
+given clause #7: (wt=4) 46 [back_demod,8,demod,44] -between(lower_dimension_point_2,lower_dimension_point_1,lower_dimension_point_1).
+
+given clause #8: (wt=4) 47 [back_demod,7,demod,44] -between(lower_dimension_point_1,lower_dimension_point_2,lower_dimension_point_1).
+
+given clause #9: (wt=4) 48 [ur,41,4] -between(lower_dimension_point_2,lower_dimension_point_1,lower_dimension_point_2).
+
+given clause #10: (wt=5) 49 [ur,41,2] -equidistant(lower_dimension_point_2,lower_dimension_point_1,A,A).
+
+given clause #11: (wt=8) 38 [] between(A,B,extension(A,B,C,D)).
+
+given clause #12: (wt=5) 50 [hyper,37,16] equidistant(A,B,A,B).
+
+given clause #13: (wt=5) 52 [ur,49,1,37] -equidistant(A,A,lower_dimension_point_2,lower_dimension_point_1).
+
+given clause #14: (wt=5) 53 [ur,49,1,37] -equidistant(lower_dimension_point_1,lower_dimension_point_2,A,A).
+
+given clause #15: (wt=5) 69 [ur,53,1,50] -equidistant(A,A,lower_dimension_point_1,lower_dimension_point_2).
+
+given clause #16: (wt=9) 39 [] equidistant(A,extension(B,A,C,D),C,D).
+
+given clause #17: (wt=7) 75 [hyper,39,2,flip.1] equal(extension(A,B,C,C),B).
+
+--- refuted case [3]
+
+----> UNIT CONFLICT at   0.03 sec ----> 86 [binary,85.1,46.1] $F.
+
+Length of proof is 5.  Level of proof is 3.  Case [3]
+
+---------------- PROOF ----------------
+
+2 [] -equidistant(A,B,C,C)|equal(A,B).
+8 [] -between(lower_dimension_point_2,lower_dimension_point_3,lower_dimension_point_1).
+34 [] equal(lower_dimension_point_1,lower_dimension_point_2)|equal(lower_dimension_point_2,lower_dimension_point_3)|equal(lower_dimension_point_1,lower_dimension_point_3).
+35 [copy,34,flip.1,flip.2,flip.3] equal(lower_dimension_point_2,lower_dimension_point_1)|equal(lower_dimension_point_3,lower_dimension_point_2)|equal(lower_dimension_point_3,lower_dimension_point_1).
+38 [] between(A,B,extension(A,B,C,D)).
+39 [] equidistant(A,extension(B,A,C,D),C,D).
+44,43 [35,split.3] equal(lower_dimension_point_3,lower_dimension_point_1).
+46 [back_demod,8,demod,44] -between(lower_dimension_point_2,lower_dimension_point_1,lower_dimension_point_1).
+75 [hyper,39,2,flip.1] equal(extension(A,B,C,C),B).
+85 [para_from,75.1.1,38.1.3] between(A,B,B).
+86 [binary,85.1,46.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8639) -------
+clauses given                 17
+clauses generated            343
+clauses kept                  82
+clauses forward subsumed     279
+clauses back subsumed         13
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.03          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8639 finished Mon Aug  2 15:31:07 2004
+Refuted case [3].
+
+That finishes the proof of the theorem.
+
+That finishes the proof of the theorem.
+
+------- statistics (process 8636) -------
+clauses given                  1
+clauses generated             53
+clauses kept                  39
+clauses forward subsumed      25
+clauses back subsumed          2
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8636 finished Mon Aug  2 15:31:07 2004

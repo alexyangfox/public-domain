@@ -1,0 +1,25 @@
+%
+%  Boolean (xx = x) rings are commutative.
+%
+
+set(auto).
+
+list(usable).
+
+x = x.
+
+% Ring axioms
+
+j(0,x) = x.
+j(g(x),x) = 0.
+j(j(x,y),z) = j(x,j(y,z)).
+j(x,y) = j(y,x).
+f(f(x,y),z) = f(x,f(y,z)).
+f(x,j(y,z)) = j(f(x,y),f(x,z)).
+f(j(y,z),x) = j(f(y,x),f(z,x)).
+
+f(x,x) = x.        % Hypothesis
+
+f(a,b) != f(b,a).  % Denial of conclusion
+
+end_of_list.

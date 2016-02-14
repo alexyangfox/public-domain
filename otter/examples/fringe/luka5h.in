@@ -1,0 +1,142 @@
+% -------------------------------------------------------------------------
+% "Luka 5" Problem for many-valued sentential calculus.
+%
+% The five axioms
+%
+%    P(i(x,i(y,x)))                    # Axiom 1.
+%    P(i(i(x,y),i(i(y,z),i(x,z))))     # Axiom 2.
+%    P(i(i(i(x,y),y),i(i(y,x),x)))     # Axiom 3.
+%    P(i(i(i(x,y),i(y,x)),i(y,x)))     # Axiom 4.
+%    P(i(i(n(x),n(y)),i(y,x)))         # Axiom 5.
+%
+% together with the inference rule condensed detachment are known to be a
+% complete system for the many-valued sentential calculus (page 144 of [1]).
+%
+% The problem is to show that Axiom 4 is dependent on the four remaining
+% axioms.
+%
+% This experiment uses hints to check a known proof consisting of 63 steps.
+% This is done by including the 63 steps as hints and by keeping a 
+% generated clause if and only if it subsumes a hint.
+%
+% REFERENCES:
+%
+%    [1]  Lukasiewicz, J., "Investigations into the sentential calculus",
+%         pp. 131-152 in Jan Lukasiewicz: Selected Works, ed. L. Borkowski,
+%         North Holland Publishing, Amsterdam (1970).
+%
+% Contributed by Bob Veroff
+% -------------------------------------------------------------------------
+
+% general processing
+set(hyper_res).
+set(sos_queue).
+assign(max_weight, 1).       % keep nothing in general
+
+% hints 
+assign(equiv_hint_wt, 1).
+set(keep_hint_subsumers).
+
+% printing
+clear(print_kept).
+
+list(usable).
+
+   % condensed detachment
+   -P(i(x,y)) | -P(x) | P(y).
+
+end_of_list.
+
+list(sos).
+
+   % Thesis 18 (Scott)
+   P(i(x,i(y,x)))                    # label("Axiom 1").
+
+   % Thesis 1 (Scott)
+   P(i(i(x,y),i(i(y,z),i(x,z))))     # label("Axiom 2").
+
+   % Thesis 27 (Scott)
+   P(i(i(i(x,y),y),i(i(y,x),x)))     # label("Axiom 3").
+
+   % Thesis 49 (Scott)
+   P(i(i(n(x),n(y)),i(y,x)))         # label("Axiom 5").
+
+end_of_list.
+
+list(passive).
+
+   % Axiom 4 is not one of Scott's 71 theses.
+   -P(i(i(i(cx,cy),i(cy,cx)),i(cy,cx)))      | $ANS(Denial_Axiom4).
+
+end_of_list.
+
+list(hints).
+
+   % 63 steps of the known proof
+
+   P(i(x,i(y,i(z,y))))                                       # label("Step01").
+   P(i(i(i(i(x,y),i(z,y)),w),i(i(z,x),w)))                   # label("Step02").
+   P(i(x,i(i(y,z),i(i(z,w),i(y,w)))))                        # label("Step03").
+   P(i(i(i(x,y),z),i(y,z)))                                  # label("Step04").
+   P(i(i(i(i(x,y),y),z),i(i(i(y,x),x),z)))                   # label("Step05").
+   P(i(i(i(x,y),z),i(i(n(y),n(x)),z)))                       # label("Step06").
+   P(i(i(i(x,i(y,x)),z),z))                                  # label("Step07").
+   P(i(i(x,i(y,z)),i(i(w,y),i(x,i(w,z)))))                   # label("Step08").
+   P(i(i(x,y),i(i(i(x,z),w),i(i(y,z),w))))                   # label("Step09").
+   P(i(i(i(i(x,y),i(i(y,z),i(x,z))),w),w))                   # label("Step10").
+   P(i(n(x),i(x,y)))                                         # label("Step11").
+   P(i(x,i(i(x,y),y)))                                       # label("Step12").
+   P(i(i(i(x,i(y,x)),i(y,x)),i(i(i(x,y),y),x)))              # label("Step13").
+   P(i(i(n(x),n(i(y,i(z,y)))),x))                            # label("Step14").
+   P(i(i(n(x),n(i(i(y,z),i(i(z,w),i(y,w))))),x))             # label("Step15").
+   P(i(i(x,i(y,z)),i(x,i(i(z,w),i(y,w)))))                   # label("Step16").
+   P(i(i(x,y),i(n(y),i(x,z))))                               # label("Step17").
+   P(i(i(i(x,y),z),i(n(x),z)))                               # label("Step18").
+   P(i(i(x,i(y,z)),i(y,i(x,z))))                             # label("Step19").
+   P(i(i(x,y),i(i(i(y,x),x),y)))                             # label("Step20").
+   P(i(i(i(i(n(x),n(i(y,i(z,y)))),x),w),w))                  # label("Step21").
+   P(i(x,i(i(y,z),i(i(x,y),z))))                             # label("Step22").
+   P(i(i(i(n(x),i(y,z)),w),i(i(y,x),w)))                     # label("Step23").
+   P(i(n(n(x)),x))                                           # label("Step24").
+   P(i(i(x,y),i(i(z,x),i(z,y))))                             # label("Step25").
+   P(i(i(x,i(n(y),n(i(z,i(w,z))))),i(x,y)))                  # label("Step26").
+   P(i(i(i(i(x,y),i(i(z,x),y)),w),i(z,w)))                   # label("Step27").
+   P(i(i(i(n(n(x)),y),z),i(i(x,y),z)))                       # label("Step28").
+   P(i(x,n(n(x))))                                           # label("Step29").
+   P(i(i(x,n(n(y))),i(x,y)))                                 # label("Step30").
+   P(i(i(x,i(i(y,z),w)),i(x,i(z,w))))                        # label("Step31").
+   P(i(i(x,i(n(y),n(z))),i(x,i(z,y))))                       # label("Step32").
+   P(i(i(n(x),y),i(n(y),x)))                                 # label("Step33").
+   P(i(i(n(n(x)),y),i(x,y)))                                 # label("Step34").
+   P(i(i(i(x,y),n(z)),i(z,x)))                               # label("Step35").
+   P(i(i(x,y),i(n(y),n(x))))                                 # label("Step36").
+   P(i(i(x,i(n(n(y)),z)),i(x,i(y,z))))                       # label("Step37").
+   P(i(i(x,i(y,z)),i(x,i(n(z),n(y)))))                       # label("Step38").
+   P(i(n(i(x,y)),n(y)))                                      # label("Step39").
+   P(i(i(i(n(x),n(y)),z),i(i(y,x),z)))                       # label("Step40").
+   P(i(n(i(x,y)),n(i(i(y,z),n(x)))))                         # label("Step41").
+   P(i(i(i(x,y),i(z,w)),i(y,i(n(w),n(z)))))                  # label("Step42").
+   P(i(i(i(n(x),n(i(y,x))),n(i(y,x))),n(x)))                 # label("Step43").
+   P(i(i(x,i(i(n(y),n(z)),w)),i(x,i(i(z,y),w))))             # label("Step44").
+   P(i(i(i(n(x),n(y)),n(y)),i(i(x,y),n(x))))                 # label("Step45").
+   P(i(i(x,n(i(y,z))),i(x,n(i(i(z,w),n(y))))))               # label("Step46").
+   P(i(i(x,i(i(n(y),n(i(z,y))),n(i(z,y)))),i(x,n(y))))       # label("Step47").
+   P(i(n(x),i(n(n(y)),n(i(y,x)))))                           # label("Step48").
+   P(i(i(i(i(x,y),y),n(i(x,y))),n(y)))                       # label("Step49").
+   P(i(n(x),i(y,n(i(y,x)))))                                 # label("Step50").
+   P(i(i(x,i(i(i(y,z),z),n(i(y,z)))),i(x,n(z))))             # label("Step51").
+   P(i(i(i(n(x),i(y,n(i(y,x)))),z),z))                       # label("Step52").
+   P(i(i(i(i(x,y),y),n(i(y,x))),n(x)))                       # label("Step53").
+   P(i(i(x,i(i(i(y,z),z),n(i(z,y)))),i(x,n(y))))             # label("Step54").
+   P(i(i(x,y),i(i(y,n(i(y,x))),n(x))))                       # label("Step55").
+   P(i(i(i(x,n(i(x,y))),n(i(i(x,n(i(x,y))),n(y)))),n(n(y)))) # label("Step56").
+   P(i(i(i(x,n(i(x,y))),n(i(i(x,n(i(x,y))),n(y)))),y))       # label("Step57").
+   P(i(i(x,i(i(y,n(i(y,z))),n(i(i(y,n(i(y,z))),n(z))))),i(x,z)))
+                                                             # label("Step58").
+   P(i(i(i(x,n(i(x,y))),n(i(y,x))),y))                       # label("Step59").
+   P(i(i(x,i(i(y,n(i(y,z))),n(i(z,y)))),i(x,z)))             # label("Step60").
+   P(i(x,i(i(n(i(x,y)),n(i(y,x))),y)))                       # label("Step61").
+   P(i(x,i(i(i(y,x),i(x,y)),y)))                             # label("Step62").
+   P(i(i(i(x,y),i(y,x)),i(y,x)))                             # label("Step63").
+
+end_of_list.

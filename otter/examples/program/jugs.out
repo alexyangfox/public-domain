@@ -1,0 +1,132 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:31:16 2004
+The command was "../../bin/otter".  The process ID is 8985.
+
+make_evaluable(_+_,$SUM(_,_)).
+make_evaluable(_-_,$DIFF(_,_)).
+make_evaluable(_<=_,$LE(_,_)).
+make_evaluable(_>_,$GT(_,_)).
+set(auto).
+   dependent: set(auto1).
+   dependent: set(process_input).
+   dependent: clear(print_kept).
+   dependent: clear(print_new_demod).
+   dependent: clear(print_back_demod).
+   dependent: clear(print_back_sub).
+   dependent: set(control_memory).
+   dependent: assign(max_mem, 12000).
+   dependent: assign(pick_given_ratio, 4).
+   dependent: assign(stats_level, 1).
+   dependent: assign(max_seconds, 10800).
+
+list(usable).
+0 [] -j(x,y)|j(3,y).
+0 [] -j(x,y)|j(0,y).
+0 [] -j(x,y)|j(x,4).
+0 [] -j(x,y)|j(x,0).
+0 [] -j(x,y)| -(x+y<=4)|j(0,y+x).
+0 [] -j(x,y)| -(x+y>4)|j(x- (4-y),4).
+0 [] -j(x,y)| -(x+y<=3)|j(x+y,0).
+0 [] -j(x,y)| -(x+y>3)|j(3,y- (3-x)).
+0 [] j(0,0).
+0 [] -j(x,2).
+end_of_list.
+
+SCAN INPUT: prop=0, horn=1, equality=0, symmetry=0, max_lits=3.
+
+This is a Horn set without equality.  The strategy will
+be hyperresolution, with satellites in sos and nuclei
+in usable.
+
+   dependent: set(hyper_res).
+   dependent: clear(order_hyper).
+
+------------> process usable:
+** KEPT (pick-wt=6): 1 [] -j(x,y)|j(3,y).
+** KEPT (pick-wt=6): 2 [] -j(x,y)|j(0,y).
+** KEPT (pick-wt=6): 3 [] -j(x,y)|j(x,4).
+** KEPT (pick-wt=6): 4 [] -j(x,y)|j(x,0).
+** KEPT (pick-wt=13): 5 [] -j(x,y)| -(x+y<=4)|j(0,y+x).
+** KEPT (pick-wt=15): 6 [] -j(x,y)| -(x+y>4)|j(x- (4-y),4).
+** KEPT (pick-wt=13): 7 [] -j(x,y)| -(x+y<=3)|j(x+y,0).
+** KEPT (pick-wt=15): 8 [] -j(x,y)| -(x+y>3)|j(3,y- (3-x)).
+** KEPT (pick-wt=3): 9 [] -j(x,2).
+
+------------> process sos:
+** KEPT (pick-wt=3): 10 [] j(0,0).
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=3) 10 [] j(0,0).
+
+given clause #2: (wt=3) 11 [hyper,10,3] j(0,4).
+
+given clause #3: (wt=3) 12 [hyper,10,1] j(3,0).
+
+given clause #4: (wt=3) 13 [hyper,11,8,eval,demod] j(3,1).
+
+given clause #5: (wt=3) 14 [hyper,11,1] j(3,4).
+
+given clause #6: (wt=3) 15 [hyper,12,5,eval,demod] j(0,3).
+
+given clause #7: (wt=3) 16 [hyper,13,2] j(0,1).
+
+given clause #8: (wt=3) 17 [hyper,15,1] j(3,3).
+
+given clause #9: (wt=3) 18 [hyper,16,7,eval,demod] j(1,0).
+
+given clause #10: (wt=3) 19 [hyper,17,6,eval,demod] j(2,4).
+
+given clause #11: (wt=3) 20 [hyper,18,3] j(1,4).
+
+-------- PROOF -------- 
+
+----> UNIT CONFLICT at   0.00 sec ----> 23 [binary,22.1,9.1] $F.
+
+Length of proof is 6.  Level of proof is 6.
+
+---------------- PROOF ----------------
+
+2 [] -j(x,y)|j(0,y).
+3 [] -j(x,y)|j(x,4).
+7 [] -j(x,y)| -(x+y<=3)|j(x+y,0).
+8 [] -j(x,y)| -(x+y>3)|j(3,y- (3-x)).
+9 [] -j(x,2).
+10 [] j(0,0).
+11 [hyper,10,3] j(0,4).
+13 [hyper,11,8,eval,demod] j(3,1).
+16 [hyper,13,2] j(0,1).
+18 [hyper,16,7,eval,demod] j(1,0).
+20 [hyper,18,3] j(1,4).
+22 [hyper,20,8,eval,demod] j(3,2).
+23 [binary,22.1,9.1] $F.
+
+------------ end of proof -------------
+
+
+Search stopped by max_proofs option.
+
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 11
+clauses generated             61
+clauses kept                  22
+clauses forward subsumed      49
+clauses back subsumed          0
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8985 finished Mon Aug  2 15:31:16 2004

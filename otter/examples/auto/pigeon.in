@@ -1,0 +1,60 @@
+%
+% Pigeon hole problem -- 5 pigeons into 4 holes.
+%
+
+set(auto) .
+
+list(usable) .
+
+% Every pigeon flies into a hole.
+
+p00 | p01 | p02 | p03 .
+p04 | p05 | p06 | p07 .
+p08 | p09 | p10 | p11 .
+p12 | p13 | p14 | p15 .
+p16 | p17 | p18 | p19 .
+
+% Each hole holds at most one piegeon.
+
+-p00 | -p04 .
+-p00 | -p08 .
+-p00 | -p12 .
+-p00 | -p16 .
+-p04 | -p08 .
+-p04 | -p12 .
+-p04 | -p16 .
+-p08 | -p12 .
+-p08 | -p16 .
+-p12 | -p16 .
+-p01 | -p05 .
+-p01 | -p09 .
+-p01 | -p13 .
+-p01 | -p17 .
+-p05 | -p09 .
+-p05 | -p13 .
+-p05 | -p17 .
+-p09 | -p13 .
+-p09 | -p17 .
+-p13 | -p17 .
+-p02 | -p06 .
+-p02 | -p10 .
+-p02 | -p14 .
+-p02 | -p18 .
+-p06 | -p10 .
+-p06 | -p14 .
+-p06 | -p18 .
+-p10 | -p14 .
+-p10 | -p18 .
+-p14 | -p18 .
+-p03 | -p07 .
+-p03 | -p11 .
+-p03 | -p15 .
+-p03 | -p19 .
+-p07 | -p11 .
+-p07 | -p15 .
+-p07 | -p19 .
+-p11 | -p15 .
+-p11 | -p19 .
+-p15 | -p19 .
+
+end_of_list .

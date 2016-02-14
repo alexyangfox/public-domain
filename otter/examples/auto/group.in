@@ -1,0 +1,13 @@
+%
+% Search for a complete set of reductions for free groups.
+%
+
+set(auto).
+
+list(usable).
+x = x.
+f(e,x) = x.
+f(g(x),x) = e.
+f(f(x,y),z) = f(x,f(y,z)).
+end_of_list.
+

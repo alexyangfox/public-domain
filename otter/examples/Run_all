@@ -1,0 +1,18 @@
+#!/bin/csh
+
+if (-e Run_all.out) /bin/mv Run_all.out Run_all.out.$$
+
+echo "Sending output to Run_all.out ..."
+
+foreach i (auto misc kalman wos ivy split fringe program)
+	echo "Running $i examples ..."
+	./Run_group $i >> Run_all.out
+end
+
+echo "Done.  The output files are in */*.out[0-9]*"
+echo ""
+grep "times as fast as" Run_all.out
+echo ""
+awk '/Running/ {p = $2} /There is a problem/ {print "Error running " p}' Run_all.out
+echo ""
+

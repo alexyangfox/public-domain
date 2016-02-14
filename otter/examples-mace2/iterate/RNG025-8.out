@@ -1,0 +1,212 @@
+----- MACE 2.2f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:44:35 2004
+The command was "../../bin/mace2 -n2 -N6 -p".
+set(prolog_style_variables).
+set(tptp_eq).
+set(auto).
+   dependent: set(auto1).
+   dependent: set(process_input).
+   dependent: clear(print_kept).
+   dependent: clear(print_new_demod).
+   dependent: clear(print_back_demod).
+   dependent: clear(print_back_sub).
+   dependent: set(control_memory).
+   dependent: assign(max_mem, 12000).
+   dependent: assign(pick_given_ratio, 4).
+   dependent: assign(stats_level, 1).
+   dependent: assign(max_seconds, 10800).
+clear(print_given).
+
+list(usable).
+0 [] equal(X,X).
+0 [] equal(add(X,Y),add(Y,X)).
+0 [] equal(add(X,add(Y,Z)),add(add(X,Y),Z)).
+0 [] equal(add(additive_identity,X),X).
+0 [] equal(add(X,additive_identity),X).
+0 [] equal(multiply(additive_identity,X),additive_identity).
+0 [] equal(multiply(X,additive_identity),additive_identity).
+0 [] equal(add(additive_inverse(X),X),additive_identity).
+0 [] equal(add(X,additive_inverse(X)),additive_identity).
+0 [] equal(multiply(X,add(Y,Z)),add(multiply(X,Y),multiply(X,Z))).
+0 [] equal(multiply(add(X,Y),Z),add(multiply(X,Z),multiply(Y,Z))).
+0 [] equal(additive_inverse(additive_inverse(X)),X).
+0 [] equal(multiply(multiply(X,Y),Y),multiply(X,multiply(Y,Y))).
+0 [] equal(multiply(multiply(X,X),Y),multiply(X,multiply(X,Y))).
+0 [] equal(associator(X,Y,add(U,V)),add(associator(X,Y,U),associator(X,Y,V))).
+0 [] equal(associator(X,add(U,V),Y),add(associator(X,U,Y),associator(X,V,Y))).
+0 [] equal(associator(add(U,V),X,Y),add(associator(U,X,Y),associator(V,X,Y))).
+0 [] equal(commutator(X,Y),add(multiply(Y,X),additive_inverse(multiply(X,Y)))).
+end_of_list.
+
+list(sos).
+0 [] -equal(add(associator(a,b,c),associator(a,c,b)),additive_identity).
+end_of_list.
+
+list(clauses).
+1 [] equal(X,X).
+2 [] equal(add(X,Y),add(Y,X)).
+3 [] equal(add(X,add(Y,Z)),add(add(X,Y),Z)).
+4 [] equal(add(additive_identity,X),X).
+5 [] equal(add(X,additive_identity),X).
+6 [] equal(multiply(additive_identity,X),additive_identity).
+7 [] equal(multiply(X,additive_identity),additive_identity).
+8 [] equal(add(additive_inverse(X),X),additive_identity).
+9 [] equal(add(X,additive_inverse(X)),additive_identity).
+10 [] equal(multiply(X,add(Y,Z)),add(multiply(X,Y),multiply(X,Z))).
+11 [] equal(multiply(add(X,Y),Z),add(multiply(X,Z),multiply(Y,Z))).
+12 [] equal(additive_inverse(additive_inverse(X)),X).
+13 [] equal(multiply(multiply(X,Y),Y),multiply(X,multiply(Y,Y))).
+14 [] equal(multiply(multiply(X,X),Y),multiply(X,multiply(X,Y))).
+15 [] equal(associator(X,Y,add(U,V)),add(associator(X,Y,U),associator(X,Y,V))).
+16 [] equal(associator(X,add(U,V),Y),add(associator(X,U,Y),associator(X,V,Y))).
+17 [] equal(associator(add(U,V),X,Y),add(associator(U,X,Y),associator(V,X,Y))).
+18 [] equal(commutator(X,Y),add(multiply(Y,X),additive_inverse(multiply(X,Y)))).
+19 [] -equal(add(associator(a,b,c),associator(a,c,b)),additive_identity).
+end_of_list.
+
+list(flattened_and_parted_clauses).
+1 [] equal(A,A).
+2 [] -equal(add(A,B),C)|equal(add(B,A),C).
+3 [] -equal(add(A,B),C)| -equal(add(C,D),E)|$Connect1(A,B,D,E).
+3 [] -equal(add(A,B),C)|equal(add(D,C),E)| -$Connect1(D,A,B,E).
+4 [] -equal(additive_identity,A)|equal(add(A,B),B).
+5 [] -equal(additive_identity,A)|equal(add(B,A),B).
+6 [] -equal(additive_identity,A)|equal(multiply(A,B),A).
+7 [] -equal(additive_identity,A)|equal(multiply(B,A),A).
+8 [] -equal(additive_identity,A)| -equal(additive_inverse(B),C)|equal(add(C,B),A).
+9 [] -equal(additive_identity,A)| -equal(additive_inverse(B),C)|equal(add(B,C),A).
+10 [] -equal(multiply(A,B),C)| -equal(add(D,C),E)|$Connect3(A,B,D,E).
+10 [] -equal(multiply(A,B),C)|$Connect2(A,D,B,E)| -$Connect3(A,D,C,E).
+10 [] -equal(add(A,B),C)|equal(multiply(D,C),E)| -$Connect2(D,B,A,E).
+11 [] -equal(multiply(A,B),C)| -equal(add(D,C),E)|$Connect5(A,B,D,E).
+11 [] -equal(multiply(A,B),C)|$Connect4(D,B,A,E)| -$Connect5(D,B,C,E).
+11 [] -equal(add(A,B),C)|equal(multiply(C,D),E)| -$Connect4(B,D,A,E).
+12 [] -equal(additive_inverse(A),B)|equal(additive_inverse(B),A).
+13 [] -equal(multiply(A,A),B)| -equal(multiply(C,B),D)|$Connect6(A,C,D).
+13 [] -equal(multiply(A,B),C)|equal(multiply(C,B),D)| -$Connect6(B,A,D).
+14 [] -equal(multiply(A,B),C)| -equal(multiply(A,C),D)|$Connect7(A,B,D).
+14 [] -equal(multiply(A,A),B)|equal(multiply(B,C),D)| -$Connect7(A,C,D).
+15 [] -equal(associator(A,B,C),D)| -equal(associator(A,B,E),F)| -equal(add(F,D),G)| -equal(add(E,C),H)|equal(associator(A,B,H),G).
+16 [] -equal(associator(A,B,C),D)| -equal(associator(A,E,C),F)| -equal(add(F,D),G)| -equal(add(E,B),H)|equal(associator(A,H,C),G).
+17 [] -equal(associator(A,B,C),D)| -equal(associator(E,B,C),F)| -equal(add(F,D),G)| -equal(add(E,A),H)|equal(associator(H,B,C),G).
+18 [] -equal(multiply(A,B),C)| -equal(additive_inverse(C),D)|$Connect8(A,B,D).
+18 [] -equal(multiply(A,B),C)| -equal(add(C,D),E)|equal(commutator(B,A),E)| -$Connect8(B,A,D).
+19 [] -equal(additive_identity,A)| -equal(add(B,C),A)| -$Connect9(C,B).
+19 [] -equal(associator(A,B,C),D)| -equal(c,B)| -equal(b,C)| -equal(a,A)| -equal(associator(A,C,B),E)|$Connect9(D,E).
+end_of_list.
+
+--- Starting search for models of size 2 ---
+
+Applying isomorphism constraints to constants: additive_identity c b a.
+
+1279 clauses were generated; 393 of those survived the first stage
+of unit preprocessing; there are 164 atoms.
+
+After all unit preprocessing, 60 atoms are still unassigned;
+220 clauses remain; 13 of those are non-Horn (selectable);
+4886 K allocated; cpu time so far for this domain size: 0.00 sec.
+
+----- statistics for domain size 2 ----
+Input:
+    Clauses input                   393
+    Literal occurrences input      1068
+    Greatest atom                   164
+Unit preprocess:
+    Preprocess unit assignments     104
+    Clauses after subsumption       220
+    Literal occ. after subsump.     731
+    Selectable clauses               13
+Decide:
+    Splits                           29
+    Unit assignments                116
+    Failed paths                     30
+Memory:
+    Memory malloced                 4 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.00
+    DPLL                           0.00
+
+--- Starting search for models of size 3 ---
+
+Applying isomorphism constraints to constants: additive_identity c b a.
+
+22931 clauses were generated; 7164 of those survived the first stage
+of unit preprocessing; there are 687 atoms.
+
+After all unit preprocessing, 464 atoms are still unassigned;
+6842 clauses remain; 47 of those are non-Horn (selectable);
+4901 K allocated; cpu time so far for this domain size: 0.01 sec.
+
+======================= Model #1 at 0.02 seconds:
+
+ add :
+      | 0 1 2
+    --+------
+    0 | 0 1 2
+    1 | 1 2 0
+    2 | 2 0 1
+
+ additive_identity: 0
+
+ multiply :
+      | 0 1 2
+    --+------
+    0 | 0 0 0
+    1 | 0 0 0
+    2 | 0 0 0
+
+ additive_inverse :
+        0 1 2
+    ---------
+        0 2 1
+Dimension 3 table for associator not printed
+
+ commutator :
+      | 0 1 2
+    --+------
+    0 | 0 0 0
+    1 | 0 0 0
+    2 | 0 0 0
+
+ c: 1
+
+ b: 1
+
+ a: 1
+end_of_model
+
+Exit by max_models parameter.  The set is satisfiable (1 model(s) found).
+
+
+----- statistics for domain size 3 ----
+Input:
+    Clauses input                  7164
+    Literal occurrences input     28293
+    Greatest atom                   687
+Unit preprocess:
+    Preprocess unit assignments     223
+    Clauses after subsumption      6842
+    Literal occ. after subsump.   27799
+    Selectable clauses               47
+Decide:
+    Splits                           89
+    Unit assignments               1843
+    Failed paths                     78
+Memory:
+    Memory malloced                19 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.01
+    DPLL                           0.00
+
+=======================================
+Total times for run (seconds):
+    user CPU time                  0.02   (0 hr, 0 min, 0 sec)
+    system CPU time                0.00   (0 hr, 0 min, 0 sec)
+    wall-clock time                0      (0 hr, 0 min, 0 sec)
+
+Exit by max_models parameter.  The set is satisfiable (1 model(s) found).
+
+The job finished Mon Aug  2 15:44:35 2004

@@ -1,0 +1,32 @@
+% 3.  If a lattice with join operation + and meet operation *
+% satisfies the equation (x*y)+(y*z)+(z*x) = (x+y)*(y+z)*(z+x)
+% then it satisfies both the equations in ex_1. In this example
+% the inclusion of the two negative unit clauses together, and
+% the particular choice of the pick_given_ratio parameter,
+% turn out to be very helpful.
+%
+% Contributed by John Kalman (kalman@math.auckland.ac.nz)
+%
+  set(knuth_bendix).
+  clear(print_kept). clear(print_new_demod).
+  clear(print_back_demod). clear(print_back_sub).
+  assign(pick_given_ratio,10).
+  assign(max_proofs,2).
+  assign(stats_level,1).
+
+  list(usable).
+    x=x.
+    x+y=y+x.
+    x*y=y*x.
+    (x+y)+z=x+y+z. 
+    (x*y)*z=x*y*z. 
+    x+ (x*y)=x.
+    x* (x+y)=x.
+  end_of_list.
+
+  list(sos).
+    (x*y)+ (y*z)+ (z*x)= (x+y) * (y+z) * (z+x).
+    a+ (b*c)!= (a+b)* (a+c).
+    d* (e+f)!= (d*e)+ (d*f).
+  end_of_list.
+

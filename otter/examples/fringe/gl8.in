@@ -1,0 +1,37 @@
+% This is Theorem 8 from the appendix of "Automated Reasoning about Cubic
+% Curves", by R. Padmanabhan and W. McCune, to appear in _Computers and
+% Mathematics with Applications_.
+%
+% No nontrivial (gL)-algebra contains a majority function in its clone
+% of operations.  
+
+set(para_from).
+set(para_into).
+set(para_from_vars).
+% set(para_into_vars).
+set(order_eq).
+
+set(geometric_rule).
+set(geometric_rewrite_before).
+
+set(lrpo).
+lex([a,b,f(x,x,x)]).
+
+assign(max_mem, 1500).
+clear(print_kept).
+clear(print_back_sub).
+
+list(usable).
+x = x.
+end_of_list.
+
+list(sos).
+f(x,x,y)=x.
+f(x,y,x)=x.
+f(y,x,x)=x.
+end_of_list.
+
+list(passive).
+a != b.
+end_of_list.
+

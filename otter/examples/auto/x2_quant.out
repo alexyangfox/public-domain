@@ -1,0 +1,143 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:36 2004
+The command was "../../bin/otter".  The process ID is 8328.
+
+set(auto).
+   dependent: set(auto1).
+   dependent: set(process_input).
+   dependent: clear(print_kept).
+   dependent: clear(print_new_demod).
+   dependent: clear(print_back_demod).
+   dependent: clear(print_back_sub).
+   dependent: set(control_memory).
+   dependent: assign(max_mem, 12000).
+   dependent: assign(pick_given_ratio, 4).
+   dependent: assign(stats_level, 1).
+   dependent: assign(max_seconds, 10800).
+
+formula_list(usable).
+all x (x=x).
+all x y z (f(f(x,y),z)=f(x,f(y,z))).
+exists e ((all x (f(e,x)=x))& (all x exists y (f(y,x)=e))& (all x (f(x,x)=e))).
+-(all x y (f(x,y)=f(y,x))).
+end_of_list.
+
+-------> usable clausifies to:
+
+list(usable).
+0 [] x=x.
+0 [] f(f(x,y),z)=f(x,f(y,z)).
+0 [] f($c1,x)=x.
+0 [] f($f1(x1),x1)=$c1.
+0 [] f(x2,x2)=$c1.
+0 [] f($c3,$c2)!=f($c2,$c3).
+end_of_list.
+
+SCAN INPUT: prop=0, horn=1, equality=1, symmetry=0, max_lits=1.
+
+All clauses are units, and equality is present; the
+strategy will be Knuth-Bendix with positive clauses in sos.
+
+   dependent: set(knuth_bendix).
+   dependent: set(anl_eq).
+   dependent: set(para_from).
+   dependent: set(para_into).
+   dependent: clear(para_from_right).
+   dependent: clear(para_into_right).
+   dependent: set(para_from_vars).
+   dependent: set(eq_units_both_ways).
+   dependent: set(dynamic_demod_all).
+   dependent: set(dynamic_demod).
+   dependent: set(order_eq).
+   dependent: set(back_demod).
+   dependent: set(lrpo).
+
+------------> process usable:
+** KEPT (pick-wt=7): 1 [] f($c3,$c2)!=f($c2,$c3).
+
+------------> process sos:
+** KEPT (pick-wt=3): 2 [] x=x.
+** KEPT (pick-wt=11): 3 [] f(f(x,y),z)=f(x,f(y,z)).
+---> New Demodulator: 4 [new_demod,3] f(f(x,y),z)=f(x,f(y,z)).
+** KEPT (pick-wt=5): 5 [] f($c1,x)=x.
+---> New Demodulator: 6 [new_demod,5] f($c1,x)=x.
+** KEPT (pick-wt=6): 7 [] f($f1(x),x)=$c1.
+---> New Demodulator: 8 [new_demod,7] f($f1(x),x)=$c1.
+** KEPT (pick-wt=5): 9 [] f(x,x)=$c1.
+---> New Demodulator: 10 [new_demod,9] f(x,x)=$c1.
+  Following clause subsumed by 2 during input processing: 0 [copy,2,flip.1] x=x.
+>>>> Starting back demodulation with 4.
+>>>> Starting back demodulation with 6.
+>>>> Starting back demodulation with 8.
+>>>> Starting back demodulation with 10.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=3) 2 [] x=x.
+
+given clause #2: (wt=5) 5 [] f($c1,x)=x.
+
+given clause #3: (wt=5) 9 [] f(x,x)=$c1.
+
+given clause #4: (wt=6) 7 [] f($f1(x),x)=$c1.
+
+given clause #5: (wt=11) 3 [] f(f(x,y),z)=f(x,f(y,z)).
+
+given clause #6: (wt=7) 11 [para_into,3.1.1.1,9.1.1,demod,6,flip.1] f(x,f(x,y))=y.
+
+given clause #7: (wt=4) 19 [para_into,11.1.1.2,7.1.1,demod,18] $f1(x)=x.
+
+given clause #8: (wt=5) 17 [para_into,11.1.1.2,9.1.1] f(x,$c1)=x.
+
+given clause #9: (wt=9) 15 [para_into,3.1.1,9.1.1,flip.1] f(x,f(y,f(x,y)))=$c1.
+
+given clause #10: (wt=7) 25 [para_from,15.1.1,11.1.1.2,demod,18,flip.1] f(x,f(y,x))=y.
+
+-------- PROOF -------- 
+
+----> UNIT CONFLICT at   0.00 sec ----> 30 [binary,29.1,1.1] $F.
+
+Length of proof is 5.  Level of proof is 4.
+
+---------------- PROOF ----------------
+
+1 [] f($c3,$c2)!=f($c2,$c3).
+3 [] f(f(x,y),z)=f(x,f(y,z)).
+6,5 [] f($c1,x)=x.
+9 [] f(x,x)=$c1.
+11 [para_into,3.1.1.1,9.1.1,demod,6,flip.1] f(x,f(x,y))=y.
+15 [para_into,3.1.1,9.1.1,flip.1] f(x,f(y,f(x,y)))=$c1.
+18,17 [para_into,11.1.1.2,9.1.1] f(x,$c1)=x.
+25 [para_from,15.1.1,11.1.1.2,demod,18,flip.1] f(x,f(y,x))=y.
+29 [para_from,25.1.1,11.1.1.2] f(x,y)=f(y,x).
+30 [binary,29.1,1.1] $F.
+
+------------ end of proof -------------
+
+
+Search stopped by max_proofs option.
+
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 10
+clauses generated             77
+clauses kept                  16
+clauses forward subsumed      72
+clauses back subsumed          0
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8328 finished Mon Aug  2 15:30:36 2004

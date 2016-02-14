@@ -1,0 +1,214 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:31:14 2004
+The command was "../../bin/otter".  The process ID is 8912.
+
+op(400,fx,~).
+op(450,xfy,#).
+op(450,xfy,|).
+op(460,xfy,&).
+op(470,xfx,-->).
+op(480,xfx,<-->).
+make_evaluable(_>_,$LGT(_,_)).
+
+list(demodulators).
+1 [] if(x,y,z)=ite(x,ite(y,1,0),ite(z,1,0)).
+2 [] x&y=ite(x,ite(y,1,0),0).
+3 [] x|y=ite(x,1,ite(y,1,0)).
+4 [] ~x=ite(x,0,1).
+5 [] x-->y= ~x|y.
+6 [] x<-->y= (x-->y)& (y-->x).
+7 [] x#y= ~(x<-->y).
+8 [] x<-->x=1.
+9 [] x-->x=1.
+10 [] x&x=x.
+11 [] x|x=x.
+12 [] x#x=0.
+13 [] ite(x,y,y)=y.
+14 [] ite(1,x,y)=x.
+15 [] ite(0,x,y)=y.
+16 [] ite(ite(x,y,z),u,v)=ite(x,ite(y,u,v),ite(z,u,v)).
+17 [] ite(x,ite(x,y,z),w)=ite(x,y,w).
+18 [] ite(x,w,ite(x,y,z))=ite(x,w,z).
+19 [] x1>x2->ite(x1,ite(x2,y,z),w)=ite(x2,ite(x1,y,w),ite(x1,z,w)).
+20 [] x1>x2->ite(x1,w,ite(x2,y,z))=ite(x2,ite(x1,w,y),ite(x1,w,z)).
+end_of_list.
+set(demod_inf).
+clear(demod_history).
+assign(demod_limit,-1).
+set(sos_queue).
+assign(max_given,4).
+set(lex_order_vars).
+set(pretty_print).
+
+list(sos).
+21 [] 
+P1(A&B|C<--> (A&B)| (A&C)).
+22 [] 
+P2(~(~x| ~y)| ~(~x|y)<-->x).
+23 [] 
+P3(if(D,if(C,if(A,B,I),if(E,F,G)),H)).
+24 [] 
+P4(
+    <-->(
+        (a2#b2#1# (a2&b2))# (a3#b3)#1#a0#b0#1# (a0&b0),
+        if(
+            a0,
+            if(
+                a2,
+                if(a3,if(b3,1,0),if(b3,0,1)),
+                if(
+                    a3,
+                    if(b2,if(b3,1,0),if(b3,0,1)),
+                    if(b2,if(b3,0,1),if(b3,1,0))
+                )
+            ),
+            if(
+                a2,
+                if(
+                    a3,
+                    if(b0,if(b3,1,0),if(b3,0,1)),
+                    if(b0,if(b3,0,1),if(b3,1,0))
+                ),
+                if(
+                    a3,
+                    if(
+                        b0,
+                        if(b2,if(b3,1,0),if(b3,0,1)),
+                        if(b2,if(b3,0,1),if(b3,1,0))
+                    ),
+                    if(
+                        b0,
+                        if(b2,if(b3,0,1),if(b3,1,0)),
+                        if(b2,if(b3,1,0),if(b3,0,1))
+                    )
+                )
+            )
+        )
+    )
+).
+end_of_list.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+Starting on level 1, last kept clause of level 0 is 24.
+
+Starting on level 1, last kept clause of level 0 is 24.
+
+given clause #1: (wt=14) 21 [] 
+P1(A&B|C<--> (A&B)| (A&C)).
+** KEPT (pick-wt=2): 25 [21,demod] 
+P1(1).
+
+given clause #2: (wt=15) 22 [] 
+P2(~(~x| ~y)| ~(~x|y)<-->x).
+** KEPT (pick-wt=2): 26 [22,demod] 
+P2(1).
+
+given clause #3: (wt=14) 23 [] 
+P3(if(D,if(C,if(A,B,I),if(E,F,G)),H)).
+** KEPT (pick-wt=83): 27 [23,demod] 
+P3(
+    ite(
+        A,
+        ite(
+            B,
+            ite(
+                C,
+                ite(D,1,ite(H,1,0)),
+                ite(D,ite(E,ite(F,1,0),ite(G,1,0)),ite(H,1,0))
+            ),
+            ite(
+                C,
+                ite(D,0,ite(H,1,0)),
+                ite(D,ite(E,ite(F,1,0),ite(G,1,0)),ite(H,1,0))
+            )
+        ),
+        ite(
+            C,
+            ite(D,ite(I,1,0),ite(H,1,0)),
+            ite(D,ite(E,ite(F,1,0),ite(G,1,0)),ite(H,1,0))
+        )
+    )
+).
+
+given clause #4: (wt=133) 24 [] 
+P4(
+    <-->(
+        (a2#b2#1# (a2&b2))# (a3#b3)#1#a0#b0#1# (a0&b0),
+        if(
+            a0,
+            if(
+                a2,
+                if(a3,if(b3,1,0),if(b3,0,1)),
+                if(
+                    a3,
+                    if(b2,if(b3,1,0),if(b3,0,1)),
+                    if(b2,if(b3,0,1),if(b3,1,0))
+                )
+            ),
+            if(
+                a2,
+                if(
+                    a3,
+                    if(b0,if(b3,1,0),if(b3,0,1)),
+                    if(b0,if(b3,0,1),if(b3,1,0))
+                ),
+                if(
+                    a3,
+                    if(
+                        b0,
+                        if(b2,if(b3,1,0),if(b3,0,1)),
+                        if(b2,if(b3,0,1),if(b3,1,0))
+                    ),
+                    if(
+                        b0,
+                        if(b2,if(b3,0,1),if(b3,1,0)),
+                        if(b2,if(b3,1,0),if(b3,0,1))
+                    )
+                )
+            )
+        )
+    )
+).
+
+Search stopped by max_given option.
+
+** KEPT (pick-wt=2): 28 [24,demod] 
+P4(1).
+
+Search stopped by max_given option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                  4
+clauses generated              4
+  demod_inf generated          4
+demod & eval rewrites       4145
+clauses wt,lit,sk delete       0
+tautologies deleted            0
+clauses forward subsumed       0
+  (subsumed by sos)            0
+unit deletions                 0
+factor simplifications         0
+clauses kept                   4
+new demodulators               0
+empty clauses                  0
+clauses back demodulated       0
+clauses back subsumed          0
+usable size                    4
+sos size                       4
+demodulators size             20
+passive size                   0
+hot size                       0
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.03          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8912 finished Mon Aug  2 15:31:14 2004

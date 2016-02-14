@@ -1,0 +1,30 @@
+% benchmark parameters -n9 -p -x
+%
+% Orthogonal Mendelsohn Triple System (OMTS) of order 9.
+%
+% See the following, available in the MACE package.
+%
+% @techreport{ dp-quasi,
+%     author = "W. McCune",
+%     title = "A {D}avis-{P}utnam Program and its Application to
+%         Finite First-Order Model Search: Quasigroup Existence Problems",
+%     institution = "Argonne National Laboratory",
+%     year = 1994,
+%     type = "Tech. Report",
+%     number = "ANL/MCS-TM-194",
+%     address = "Argonne, IL",
+%     month = "May"}
+
+list(usable).
+f(x,x) = x.
+h(x,x) = x.
+f(x,f(y,x))=y.
+h(x,h(y,x))=y.
+f(x,y)!=u | f(z,w)!=u | h(x,y)!=v | h(z,w)!=v | x=z | y=w.
+end_of_list.
+
+list(mace_constraints).
+property(f(_,_), quasigroup).
+property(h(_,_), quasigroup).
+end_of_list.
+

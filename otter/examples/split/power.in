@@ -1,0 +1,60 @@
+% Naive set theory
+% Powerset of intersection is intersection of powersets.
+
+set(binary_res).
+set(ur_res).
+set(order_eq).
+
+set(split_when_given).
+set(split_pos).
+
+assign(pick_given_ratio, 4).
+
+% assign(max_distinct_vars, 0).
+
+clear(print_kept).
+clear(print_given).
+clear(print_new_demod).
+clear(print_back_demod).
+clear(print_back_sub).
+assign(stats_level, 1).
+
+list(usable).
+
+% Definition of intersection.
+
+-EL(z,inter(x,y)) | EL(z,x).
+-EL(z,inter(x,y)) | EL(z,y).
+EL(z,inter(x,y)) | -EL(z,x) | -EL(z,y).
+
+% Definition of subset.
+
+-SUBSET(x,y) | -EL(z,x) | EL(z,y).
+SUBSET(x,y) | EL(f17(x,y),x).
+SUBSET(x,y) | -EL(f17(x,y),y).
+
+% Definition of powerset.
+
+-EL(z,pset(x)) | SUBSET(z,x).
+EL(z,pset(x)) | -SUBSET(z,x).
+
+% Definition of equality
+
+(x = y) | -SUBSET(x,y) | -SUBSET(y,x).
+(x != y) | SUBSET(x,y).
+
+% Lemmas
+
+x = x.
+SUBSET(x,x).
+EL(x,pset(x)).
+
+-SUBSET(u,inter(x,y)) | SUBSET(u,x).
+-SUBSET(u,inter(x,y)) | SUBSET(u,y).
+SUBSET(u,inter(x,y)) | -SUBSET(u,x) | -SUBSET(u,y).
+
+end_of_list.
+
+list(sos).
+pset(inter(A,B)) != inter(pset(A),pset(B)).
+end_of_list.

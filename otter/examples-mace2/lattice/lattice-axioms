@@ -1,0 +1,80 @@
+
+% Six axioms for lattice theory (LT).
+
+x ^ y = y ^ x.                % comm of meet
+(x ^ y) ^ z = x ^ (y ^ z).    % assoc of meet
+
+x v y = y v x.                % comm of join
+(x v y) v z = x v (y v z).    % assoc of join
+
+x ^ (x v y) = x.              % absorption 1
+x v (x ^ y) = x.              % absorption 2
+
+% Idempotence lemmas (follow from lattice axioms)
+
+x ^ x = x.
+x v x = x.
+
+% Lattices don't necessarily have 0 or 1, but every FINITE lattice
+% does, and MACE deals only with finite structures, so we can include
+% the following.  (Some of these are dependent.)
+
+% Zero and One
+
+1 v x = 1.
+x v 1 = 1.
+1 ^ x = x.
+x ^ 1 = x.
+
+0 ^ x = 0.
+x ^ 0 = 0.
+0 v x = x.
+x v 0 = x.
+
+% Modularity  (M) (pick one; they are equivalent in lattice theory)
+x v (y ^ (x v z)) = (x v y) ^ (x v z).     % equational
+% x ^ y != x  |  x v (z ^ y) = (x v z) ^ y.  % implicational
+
+% (LT) + (M) gives us modular lattice theory (ML).
+
+% ========================================================================
+
+% Ortholattices (OL)
+% Include 0, 1 (if we don't already have them because of finiteness)
+% and complements.
+
+% Invertability (INVERT)
+
+c(x) v x = 1.
+c(x) ^ x = 0.
+c(c(x)) = x.
+
+% Compatibility  (COMPAT)
+
+c(x ^ y) = c(x) v c(y).
+
+% Alternate versions of compatibility
+
+% x ^ y = c(c(x) v c(y)).
+% x ^ y != x  |  c(x) ^ c(y) = c(y).   % (x <= y) -> (c(y) <= c(x))
+
+Ortholattice lemmas useful for MACE:
+
+c(0) = 1.
+c(1) = 0.
+
+% (LT) + (INVERT) + (COMPAT) gives us ortholattice theory (OL)
+
+% =====================================================================
+
+% Orthomodular lattices (OML)      (note different from modular OL).
+
+x v (c(x) ^ (x v y)) = x v y.  (OM)
+
+% Implicational form of OM
+
+% x ^ y != x |  x v (c(x) ^ y) = y.
+
+% (OL) + (OM) = (OML).
+
+end_of_list.

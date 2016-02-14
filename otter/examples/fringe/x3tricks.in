@@ -1,0 +1,252 @@
+% -------------------------------------------------------------------------
+% Lex Demo 4
+%
+% This is a more substantial problem based on the x^3 = x problem from
+% ring theory (x^3 = x implies commutativity).
+%
+% In this demo we prove only the intermediate lemma:  3xy + 3yx = E.
+%
+% In addition to lex() and special_unary(), this demo makes use of 
+% several Otter features (e.g., age factors, conditional demodulation) 
+% and representation tricks (e.g., coefficients, templates for polynomial
+% subtraction).
+%
+% Contributed by Bob Veroff.
+% -------------------------------------------------------------------------
+
+% inference rules 
+set(hyper_res).
+clear(order_hyper).
+set(para_into).
+set(para_from).
+set(para_from_left).
+clear(para_from_right).
+set(para_into_left).
+clear(para_into_right).
+
+% equality
+set(order_eq).
+set(dynamic_demod).
+assign(dynamic_demod_depth,1).
+assign(dynamic_demod_rhs,5).
+set(back_demod).
+clear(symbol_elim).
+set(lex_order_vars).
+
+% processing
+assign(demod_limit,250).
+assign(max_weight, 999).
+assign(max_literals, 1).
+
+% printing
+clear(print_kept).
+clear(print_back_sub).
+clear(print_new_demod).
+clear(print_back_demod).
+ 
+% search
+assign(age_factor,1).
+
+% lexical ordering of terms
+lex([A,B,E,MULT(x,x),INV(x),Coeff(x,x),ADD(x,x)]).
+special_unary([INV(x),Coeff(x,x)]).
+
+list(usable).
+
+   % ring axioms
+   EQ(ADD(x,y),ADD(y,x)).
+   EQ(ADD(ADD(x,y),z),ADD(x,ADD(y,z))).
+   EQ(MULT(MULT(x,y),z),MULT(x,MULT(y,z))).
+   EQ(MULT(ADD(x,y),z),ADD(MULT(x,z),MULT(y,z))).
+   EQ(MULT(x,ADD(y,z)),ADD(MULT(x,y),MULT(x,z))).
+   EQ(ADD(x,E),x).
+   EQ(ADD(E,x),x).
+   EQ(ADD(INV(x),x),E).
+   EQ(ADD(x,INV(x)),E).
+   EQ(x,x).
+
+   % key lemmas
+   EQ(MULT(INV(x),y),INV(MULT(x,y))).
+   EQ(MULT(x,INV(y)),INV(MULT(x,y))).
+   EQ(INV(ADD(x,y)),ADD(INV(x),INV(y))).
+
+   % term identification for polynomial subtraction
+
+   % identify terms without coefficients
+   TID(ADD(x,v),x,v).
+   TID(ADD(x1,ADD(x,v)),x,ADD(x1,v)).
+   TID(ADD(x1,ADD(x2,ADD(x,v))),x,ADD(x1,ADD(x2,v))).
+   TID(ADD(x1,ADD(x2,ADD(x3,ADD(x,v)))),x,
+       ADD(x1,ADD(x2,ADD(x3,v)))).
+   TID(ADD(x1,ADD(x2,ADD(x3,ADD(x4,ADD(x,v))))),x,
+       ADD(x1,ADD(x2,ADD(x3,ADD(x4,v))))).
+   TID(ADD(x1,ADD(x2,ADD(x3,ADD(x4,ADD(x5,ADD(x,v)))))),x,
+       ADD(x1,ADD(x2,ADD(x3,ADD(x4,ADD(x5,v)))))).
+   TID(ADD(x1,ADD(x2,ADD(x3,ADD(x4,ADD(x5,ADD(x6,ADD(x,v))))))),x,
+       ADD(x1,ADD(x2,ADD(x3,ADD(x4,ADD(x5,ADD(x6,v))))))).
+
+   % identify terms with coefficients
+   TID(Coeff(x,z),x,Coeff(x,$DIFF(z,1))) | $NOT($INT(z)).
+   TID(ADD(Coeff(x,z),v),x,ADD(Coeff(x,$DIFF(z,1)),v)) | $NOT($INT(z)).
+   TID(ADD(x1,ADD(Coeff(x,z),v)),x,ADD(x1,ADD(Coeff(x,$DIFF(z,1)),v))) |
+          $NOT($INT(z)).
+   TID(ADD(x1,ADD(x2,ADD(Coeff(x,z),v))),x,
+       ADD(x1,ADD(x2,ADD(Coeff(x,$DIFF(z,1)),v)))) | $NOT($INT(z)).
+   TID(ADD(x1,ADD(x2,ADD(x3,ADD(Coeff(x,z),v)))),x,
+       ADD(x1,ADD(x2,ADD(x3,ADD(Coeff(x,$DIFF(z,1)),v))))) | $NOT($INT(z)).
+   TID(ADD(x1,ADD(x2,ADD(x3,ADD(x4,ADD(Coeff(x,z),v))))),x,
+       ADD(x1,ADD(x2,ADD(x3,ADD(x4,ADD(Coeff(x,$DIFF(z,1)),v)))))) |
+          $NOT($INT(z)).
+   TID(ADD(x1,ADD(x2,ADD(x3,ADD(x4,ADD(Coeff(x,z),v))))),x,
+       ADD(x1,ADD(x2,ADD(x3,ADD(x4,ADD(Coeff(x,$DIFF(z,1)),v)))))) |
+          $NOT($INT(z)).
+
+   % subtraction templates
+   IDENT(x,x).
+   -EQ(w,v) | -TID(w,x1,w1) | -TID(v,x2,v1) |
+      -$RENAME(x1,x2) | -IDENT(x1,x2) | EQ(ADD(INV(w1),v1),E).
+   -EQ(w,E) | -EQ(v,E) | -TID(w,x1,w1) | -TID(v,x2,v1) |
+      -$RENAME(x1,x2) | -IDENT(x1,x2) | EQ(ADD(INV(w1),v1),E).
+
+   % recognize cycles
+   -EQ(Coeff(x,y),E) | EQ(IsCycle(x),y).
+
+end_of_list.
+
+list(sos).
+
+   % special hypothesis
+   EQ(MULT(x,MULT(x,x)),x).
+
+   % denial
+   -EQ(ADD(Coeff(MULT(A,B),3),Coeff(MULT(B,A),3)),E).
+
+end_of_list.
+
+list(demodulators).
+
+   % special conditional demodulator for cycles
+   $GT(x,IsCycle(z)) -> EQ(Coeff(z,x),Coeff(z,$MOD(x,IsCycle(z)))).
+
+   % special hypothesis
+   EQ(MULT(x,MULT(x,x)),x).
+
+   % commutativity of addition
+   EQ(ADD(x,y),ADD(y,x)).
+   EQ(ADD(x,ADD(y,z)),ADD(y,ADD(x,z))).
+
+   % associativity
+   EQ(ADD(ADD(x,y),z),ADD(x,ADD(y,z))).
+   EQ(MULT(MULT(x,y),z),MULT(x,MULT(y,z))).
+
+   % distributivity
+   EQ(MULT(ADD(x,y),z),ADD(MULT(x,z),MULT(y,z))).
+   EQ(MULT(x,ADD(y,z)),ADD(MULT(x,y),MULT(x,z))).
+
+   % identity
+   EQ(ADD(x,E),x).
+   EQ(ADD(E,x),x).
+   EQ(MULT(E,x),E).
+   EQ(MULT(x,E),E).
+   EQ(INV(E),E).
+
+   % INV simplification and canonicalization
+   EQ(INV(INV(x)),x).
+   EQ(MULT(x,INV(y)),INV(MULT(x,y))).
+   EQ(MULT(INV(x),y),INV(MULT(x,y))).
+   EQ(INV(ADD(x,y)),ADD(INV(x),INV(y))).
+   EQ(INV(Coeff(x,y)),Coeff(INV(x),y)).
+
+   % INV cancellation 
+   EQ(ADD(x,INV(x)),E).
+   EQ(ADD(x,ADD(INV(x),y)),y).
+
+   % coefficients
+   EQ(ADD(x,x),Coeff(x,2)).
+   $INT(y) -> EQ(ADD(x,Coeff(x,y)),Coeff(x,$SUM(y,1))).
+   $AND($INT(y),$INT(z)) -> EQ(ADD(Coeff(x,y),Coeff(x,z)),Coeff(x,$SUM(y,z))).
+
+   EQ(ADD(x,ADD(x,y)),ADD(Coeff(x,2),y)).
+   $INT(y) -> EQ(ADD(x,ADD(Coeff(x,y),z)),ADD(Coeff(x,$SUM(y,1)),z)).
+   $AND($INT(y),$INT(z)) -> EQ(ADD(Coeff(x,y),ADD(Coeff(x,z),v)),ADD(Coeff(x,$SUM(y,z)),v)).
+
+   % nested coefficients
+   $AND($INT(y),$INT(z)) -> EQ(Coeff(Coeff(x,y),z),Coeff(x,$PROD(y,z))).
+
+   % simplification and canonicalization with coefficients
+   EQ(Coeff(E,x),E).
+   EQ(Coeff(x,0),E).
+   EQ(Coeff(x,1),x).
+   EQ(MULT(x,Coeff(y,z)),Coeff(MULT(x,y),z)).
+   EQ(MULT(Coeff(x,z),y),Coeff(MULT(x,y),z)).
+   EQ(Coeff(ADD(x,y),z),ADD(Coeff(x,z),Coeff(y,z))).
+
+   % ordinary INV cancellation with coefficients
+   $INT(y) -> EQ(ADD(x,Coeff(INV(x),y)),Coeff(INV(x),$DIFF(y,1))).
+   $INT(y) -> EQ(ADD(INV(x),Coeff(x,y)),Coeff(x,$DIFF(y,1))).
+   EQ(ADD(Coeff(x,y),Coeff(INV(x),y)),E).
+   $AND($INT(y),$AND($INT(z),$GT(y,z))) ->
+      EQ(ADD(Coeff(x,y),Coeff(INV(x),z)),Coeff(x,$DIFF(y,z))).
+   $AND($INT(y),$AND($INT(z),$GT(z,y))) ->
+      EQ(ADD(Coeff(x,y),Coeff(INV(x),z)),Coeff(INV(x),$DIFF(z,y))).
+
+   $INT(y) -> EQ(ADD(x,ADD(Coeff(INV(x),y),zzz)),ADD(Coeff(INV(x),$DIFF(y,1)),zzz)).
+   $INT(y) -> EQ(ADD(INV(x),ADD(Coeff(x,y),zzz)),ADD(Coeff(x,$DIFF(y,1)),zzz)).
+   EQ(ADD(Coeff(x,y),ADD(Coeff(INV(x),y),zzz)),zzz).
+   $AND($INT(y),$AND($INT(z),$GT(y,z))) ->
+      EQ(ADD(Coeff(x,y),ADD(Coeff(INV(x),z),zzz)),ADD(Coeff(x,$DIFF(y,z)),zzz)).
+   $AND($INT(y),$AND($INT(z),$GT(z,y))) ->
+      EQ(ADD(Coeff(x,y),ADD(Coeff(INV(x),z),zzz)),ADD(Coeff(INV(x),$DIFF(z,y)),zzz)).
+
+   % ********************
+   % Literal Demodulators
+   % ********************
+
+   % subtraction by demodulation (complex terms)
+   EQ(EQ(ADD(x,y),ADD(u,v)),EQ(ADD(INV(ADD(u,v)),ADD(x,y)),E)).
+   EQ(EQ(ADD(x,y),MULT(u,v)),EQ(ADD(INV(MULT(u,v)),ADD(x,y)),E)).
+   EQ(EQ(ADD(x,y),INV(u)),EQ(ADD(u,ADD(x,y)),E)).
+   EQ(EQ(ADD(x,y),Coeff(u,v)),EQ(ADD(INV(Coeff(u,v)),ADD(x,y)),E)).
+
+   % prefer non inverse form
+   EQ(EQ(INV(x),E),EQ(x,E)).
+
+   % normalize so leftmost term non INV
+   EQ(EQ(ADD(INV(x),y),E),EQ(ADD(x,INV(y)),E)).
+   EQ(EQ(ADD(Coeff(INV(x),y),z),E),EQ(ADD(Coeff(x,y),INV(z)),E)).
+
+   % literal demodulation takes place before equality ordering
+
+   EQ(EQ(MULT(u,v),ADD(x,y)),EQ(ADD(INV(MULT(u,v)),ADD(x,y)),E)).
+   EQ(EQ(INV(u),ADD(x,y)),EQ(ADD(u,ADD(x,y)),E)).
+   EQ(EQ(Coeff(u,v),ADD(x,y)),EQ(ADD(INV(Coeff(u,v)),ADD(x,y)),E)).
+
+   EQ(EQ(E,INV(x)),EQ(x,E)).
+
+   EQ(EQ(E,ADD(INV(x),y)),EQ(ADD(x,INV(y)),E)).
+   EQ(EQ(E,ADD(Coeff(INV(x),y),z)),EQ(ADD(Coeff(x,y),INV(z)),E)).
+
+end_of_list.
+
+weight_list(pick_given).
+
+   weight(EQ(Coeff($(1),$(1)),E), -100).
+
+end_of_list.
+
+weight_list(purge_gen).
+
+   weight(MULT($(1),MULT($(1),MULT($(1),MULT($(1),$(1))))), 9999).
+   weight(ADD($(1),ADD($(1),ADD($(1),ADD($(1),ADD($(1),ADD($(1),$(1))))))), 9999).
+   
+   weight(Coeff(Coeff($(1),$(1)),$(1)),9999).
+   weight(TID($(1),$(1),$(1)),9999).
+
+end_of_list.
+
+weight_list(terms).
+
+    % for equality ordering, want polynomial = term
+    weight(ADD($(1),$(1)),+10).
+
+end_of_list.

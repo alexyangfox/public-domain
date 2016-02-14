@@ -1,0 +1,69 @@
+% The 8-queens problem.  Place 8 queens on a chessboard such that
+% none can capture any other.
+%
+% Get all solutions (don't worry about isomorphic solutions).
+%
+% board([8,5,1]) means that queens are on the first 3 rows: 
+% (row 1, col 1), (row 2, col 5), (row 3, col 8).
+%
+%      1 2 3 4 5 6 7 8
+%   1 |x| | | | | | | |
+%   2 | | | | |x| | | |
+%   3 | | | | | | | |x|
+%   4 | | | | | | | | |
+%   5 | | | | | | | | |
+%   6 | | | | | | | | |
+%   7 | | | | | | | | |
+%   8 | | | | | | | | |
+%
+% For other board sizes/number of queens, change 'pick' property and
+% the denial in the passive list.
+%
+
+make_evaluable(_-_, $DIFF(_,_)).
+make_evaluable(_+_, $SUM(_,_)).
+make_evaluable(_==_, $EQ(_,_)).
+
+set(hyper_res).
+set(prolog_style_variables).
+assign(max_proofs,-1).       % get all solutions
+set(sos_stack).              % depth-first search
+clear(print_kept).
+clear(demod_history).
+
+list(usable).
+
+-board(B) |
+     -pick(New_col) |
+     % check that new queen is consistent with all preceding rows.
+     -$TRUE(ok(B, 1, New_col)) | 
+     board([New_col|B]).
+
+pick(1). pick(2). pick(3). pick(4). pick(5).
+pick(6). pick(7). pick(8).
+
+end_of_list.
+
+list(sos).
+board([]).
+end_of_list.
+
+list(passive).
+-board([X1,X2,X3,X4,X5,X6,X7,X8]) | $Ans([X1,X2,X3,X4,X5,X6,X7,X8]).
+% -board([X1,X2,X3,X4,X5]) | $Ans([X1,X2,X3,X4,X5]).
+end_of_list.
+
+list(demodulators).
+ok([], X, Y) = $T.
+ok([H|T], Rows_back, New_col) =
+        $IF(H == New_col,
+            $F,
+            $IF(H-Rows_back == New_col,
+                $F,
+                $IF(H+Rows_back == New_col,
+                    $F,
+                    ok(T, Rows_back+1, New_col)))).
+end_of_list.
+
+
+

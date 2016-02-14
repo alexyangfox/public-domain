@@ -1,0 +1,204 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:31:09 2004
+The command was "../../bin/otter".  The process ID is 8775.
+
+set(binary_res).
+   dependent: set(factor).
+   dependent: set(unit_deletion).
+set(ur_res).
+set(order_eq).
+set(split_when_given).
+   dependent: set(back_unit_deletion).
+set(split_pos).
+assign(pick_given_ratio,4).
+clear(print_kept).
+clear(print_given).
+clear(print_new_demod).
+clear(print_back_demod).
+clear(print_back_sub).
+assign(stats_level,1).
+
+list(usable).
+1 [] -EL(z,inter(x,y))|EL(z,x).
+2 [] -EL(z,inter(x,y))|EL(z,y).
+3 [] EL(z,inter(x,y))| -EL(z,x)| -EL(z,y).
+4 [] -SUBSET(x,y)| -EL(z,x)|EL(z,y).
+5 [] SUBSET(x,y)|EL(f17(x,y),x).
+6 [] SUBSET(x,y)| -EL(f17(x,y),y).
+7 [] -EL(z,pset(x))|SUBSET(z,x).
+8 [] EL(z,pset(x))| -SUBSET(z,x).
+9 [] x=y| -SUBSET(x,y)| -SUBSET(y,x).
+10 [] x!=y|SUBSET(x,y).
+11 [] x=x.
+12 [] SUBSET(x,x).
+13 [] EL(x,pset(x)).
+14 [] -SUBSET(u,inter(x,y))|SUBSET(u,x).
+15 [] -SUBSET(u,inter(x,y))|SUBSET(u,y).
+16 [] SUBSET(u,inter(x,y))| -SUBSET(u,x)| -SUBSET(u,y).
+end_of_list.
+
+list(sos).
+17 [] pset(inter(A,B))!=inter(pset(A),pset(B)).
+end_of_list.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+Splitting on clause 126 [binary,25.1,5.1] EL(f17(pset(inter(A,B)),inter(pset(A),pset(B))),pset(inter(A,B)))|EL(f17(inter(pset(A),pset(B)),pset(inter(A,B))),inter(pset(A),pset(B))).
+
+--- refuted case [1]
+
+Case [1]   (process 8776):
+Assumption: 1869 [126,split.1] EL(f17(pset(inter(A,B)),inter(pset(A),pset(B))),pset(inter(A,B))).
+
+----> UNIT CONFLICT at   0.08 sec ----> 2034 [binary,2033.1,1992.1] $F.
+
+Length of proof is 24.  Level of proof is 11.  Case [1]
+
+---------------- PROOF ----------------
+
+1 [] -EL(z,inter(x,y))|EL(z,x).
+2 [] -EL(z,inter(x,y))|EL(z,y).
+3 [] EL(z,inter(x,y))| -EL(z,x)| -EL(z,y).
+5 [] SUBSET(x,y)|EL(f17(x,y),x).
+6 [] SUBSET(x,y)| -EL(f17(x,y),y).
+7 [] -EL(z,pset(x))|SUBSET(z,x).
+8 [] EL(z,pset(x))| -SUBSET(z,x).
+9 [] x=y| -SUBSET(x,y)| -SUBSET(y,x).
+14 [] -SUBSET(u,inter(x,y))|SUBSET(u,x).
+15 [] -SUBSET(u,inter(x,y))|SUBSET(u,y).
+16 [] SUBSET(u,inter(x,y))| -SUBSET(u,x)| -SUBSET(u,y).
+17 [] pset(inter(A,B))!=inter(pset(A),pset(B)).
+18 [binary,17.1,9.1] -SUBSET(pset(inter(A,B)),inter(pset(A),pset(B)))| -SUBSET(inter(pset(A),pset(B)),pset(inter(A,B))).
+25 [binary,18.1,5.1] -SUBSET(inter(pset(A),pset(B)),pset(inter(A,B)))|EL(f17(pset(inter(A,B)),inter(pset(A),pset(B))),pset(inter(A,B))).
+30 [binary,18.2,6.1] -SUBSET(pset(inter(A,B)),inter(pset(A),pset(B)))| -EL(f17(inter(pset(A),pset(B)),pset(inter(A,B))),pset(inter(A,B))).
+31 [binary,18.2,5.1] -SUBSET(pset(inter(A,B)),inter(pset(A),pset(B)))|EL(f17(inter(pset(A),pset(B)),pset(inter(A,B))),inter(pset(A),pset(B))).
+126 [binary,25.1,5.1] EL(f17(pset(inter(A,B)),inter(pset(A),pset(B))),pset(inter(A,B)))|EL(f17(inter(pset(A),pset(B)),pset(inter(A,B))),inter(pset(A),pset(B))).
+159 [binary,30.2,8.1] -SUBSET(pset(inter(A,B)),inter(pset(A),pset(B)))| -SUBSET(f17(inter(pset(A),pset(B)),pset(inter(A,B))),inter(A,B)).
+192 [binary,31.2,2.1] -SUBSET(pset(inter(A,B)),inter(pset(A),pset(B)))|EL(f17(inter(pset(A),pset(B)),pset(inter(A,B))),pset(B)).
+193 [binary,31.2,1.1] -SUBSET(pset(inter(A,B)),inter(pset(A),pset(B)))|EL(f17(inter(pset(A),pset(B)),pset(inter(A,B))),pset(A)).
+264 [binary,192.2,7.1] -SUBSET(pset(inter(A,B)),inter(pset(A),pset(B)))|SUBSET(f17(inter(pset(A),pset(B)),pset(inter(A,B))),B).
+272 [binary,264.1,6.1] SUBSET(f17(inter(pset(A),pset(B)),pset(inter(A,B))),B)| -EL(f17(pset(inter(A,B)),inter(pset(A),pset(B))),inter(pset(A),pset(B))).
+311 [binary,193.2,7.1] -SUBSET(pset(inter(A,B)),inter(pset(A),pset(B)))|SUBSET(f17(inter(pset(A),pset(B)),pset(inter(A,B))),A).
+319 [binary,311.1,6.1] SUBSET(f17(inter(pset(A),pset(B)),pset(inter(A,B))),A)| -EL(f17(pset(inter(A,B)),inter(pset(A),pset(B))),inter(pset(A),pset(B))).
+1049 [binary,159.2,16.1] -SUBSET(pset(inter(A,B)),inter(pset(A),pset(B)))| -SUBSET(f17(inter(pset(A),pset(B)),pset(inter(A,B))),A)| -SUBSET(f17(inter(pset(A),pset(B)),pset(inter(A,B))),B).
+1869 [126,split.1] EL(f17(pset(inter(A,B)),inter(pset(A),pset(B))),pset(inter(A,B))).
+1870 [binary,1869.1,7.1] SUBSET(f17(pset(inter(A,B)),inter(pset(A),pset(B))),inter(A,B)).
+1879 [binary,1870.1,15.1] SUBSET(f17(pset(inter(A,B)),inter(pset(A),pset(B))),B).
+1880 [binary,1870.1,14.1] SUBSET(f17(pset(inter(A,B)),inter(pset(A),pset(B))),A).
+1889 [binary,1879.1,8.2] EL(f17(pset(inter(A,B)),inter(pset(A),pset(B))),pset(B)).
+1926 [binary,1880.1,8.2] EL(f17(pset(inter(A,B)),inter(pset(A),pset(B))),pset(A)).
+1992 [ur,1926,3,1889] EL(f17(pset(inter(A,B)),inter(pset(A),pset(B))),inter(pset(A),pset(B))).
+2003 [back_unit_del,1992.1,319.2] SUBSET(f17(inter(pset(A),pset(B)),pset(inter(A,B))),A).
+2005 [back_unit_del,1992.1,272.2] SUBSET(f17(inter(pset(A),pset(B)),pset(inter(A,B))),B).
+2007 [back_unit_del,2003.1,1049.2,unit_del,2005] -SUBSET(pset(inter(A,B)),inter(pset(A),pset(B))).
+2033 [binary,2007.1,6.1] -EL(f17(pset(inter(A,B)),inter(pset(A),pset(B))),inter(pset(A),pset(B))).
+2034 [binary,2033.1,1992.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8776) -------
+clauses given                297
+clauses generated           3120
+clauses kept                2016
+clauses forward subsumed    1103
+clauses back subsumed       1797
+Kbytes malloced             3906
+
+----------- times (seconds) -----------
+user CPU time          0.08          (0 hr, 0 min, 0 sec)
+system CPU time        0.01          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8776 finished Mon Aug  2 15:31:09 2004
+Refuted case [1].
+
+--- refuted case [2]
+
+Case [2]   (process 8777):
+Assumption: 1870 [126,split.2] EL(f17(inter(pset(A),pset(B)),pset(inter(A,B))),inter(pset(A),pset(B))).
+0 [back_unit_del,1869.1,125.1] -EL(f17(inter(pset(A),pset(B)),pset(inter(A,B))),pset(inter(A,B))).
+0 [back_unit_del,1869.1,102.2] -SUBSET(inter(pset(A),pset(B)),inter(pset(inter(A,B)),v65472)).
+0 [back_unit_del,1869.1,88.2] -SUBSET(inter(pset(A),pset(B)),inter(v65472,pset(inter(A,B)))).
+0 [back_unit_del,1869.1,63.2] -EL(inter(pset(A),pset(B)),pset(pset(inter(A,B)))).
+0 [back_unit_del,1869.1,25.2] -SUBSET(inter(pset(A),pset(B)),pset(inter(A,B))).
+
+----> UNIT CONFLICT at   0.06 sec ----> 1912 [binary,1911.1,1869.1] $F.
+
+Length of proof is 18.  Level of proof is 8.  Case [2]
+
+---------------- PROOF ----------------
+
+1 [] -EL(z,inter(x,y))|EL(z,x).
+2 [] -EL(z,inter(x,y))|EL(z,y).
+5 [] SUBSET(x,y)|EL(f17(x,y),x).
+6 [] SUBSET(x,y)| -EL(f17(x,y),y).
+7 [] -EL(z,pset(x))|SUBSET(z,x).
+8 [] EL(z,pset(x))| -SUBSET(z,x).
+9 [] x=y| -SUBSET(x,y)| -SUBSET(y,x).
+16 [] SUBSET(u,inter(x,y))| -SUBSET(u,x)| -SUBSET(u,y).
+17 [] pset(inter(A,B))!=inter(pset(A),pset(B)).
+18 [binary,17.1,9.1] -SUBSET(pset(inter(A,B)),inter(pset(A),pset(B)))| -SUBSET(inter(pset(A),pset(B)),pset(inter(A,B))).
+25 [binary,18.1,5.1] -SUBSET(inter(pset(A),pset(B)),pset(inter(A,B)))|EL(f17(pset(inter(A,B)),inter(pset(A),pset(B))),pset(inter(A,B))).
+30 [binary,18.2,6.1] -SUBSET(pset(inter(A,B)),inter(pset(A),pset(B)))| -EL(f17(inter(pset(A),pset(B)),pset(inter(A,B))),pset(inter(A,B))).
+31 [binary,18.2,5.1] -SUBSET(pset(inter(A,B)),inter(pset(A),pset(B)))|EL(f17(inter(pset(A),pset(B)),pset(inter(A,B))),inter(pset(A),pset(B))).
+126 [binary,25.1,5.1] EL(f17(pset(inter(A,B)),inter(pset(A),pset(B))),pset(inter(A,B)))|EL(f17(inter(pset(A),pset(B)),pset(inter(A,B))),inter(pset(A),pset(B))).
+159 [binary,30.2,8.1] -SUBSET(pset(inter(A,B)),inter(pset(A),pset(B)))| -SUBSET(f17(inter(pset(A),pset(B)),pset(inter(A,B))),inter(A,B)).
+192 [binary,31.2,2.1] -SUBSET(pset(inter(A,B)),inter(pset(A),pset(B)))|EL(f17(inter(pset(A),pset(B)),pset(inter(A,B))),pset(B)).
+193 [binary,31.2,1.1] -SUBSET(pset(inter(A,B)),inter(pset(A),pset(B)))|EL(f17(inter(pset(A),pset(B)),pset(inter(A,B))),pset(A)).
+264 [binary,192.2,7.1] -SUBSET(pset(inter(A,B)),inter(pset(A),pset(B)))|SUBSET(f17(inter(pset(A),pset(B)),pset(inter(A,B))),B).
+273 [binary,264.1,5.1] SUBSET(f17(inter(pset(A),pset(B)),pset(inter(A,B))),B)|EL(f17(pset(inter(A,B)),inter(pset(A),pset(B))),pset(inter(A,B))).
+311 [binary,193.2,7.1] -SUBSET(pset(inter(A,B)),inter(pset(A),pset(B)))|SUBSET(f17(inter(pset(A),pset(B)),pset(inter(A,B))),A).
+320 [binary,311.1,5.1] SUBSET(f17(inter(pset(A),pset(B)),pset(inter(A,B))),A)|EL(f17(pset(inter(A,B)),inter(pset(A),pset(B))),pset(inter(A,B))).
+1049 [binary,159.2,16.1] -SUBSET(pset(inter(A,B)),inter(pset(A),pset(B)))| -SUBSET(f17(inter(pset(A),pset(B)),pset(inter(A,B))),A)| -SUBSET(f17(inter(pset(A),pset(B)),pset(inter(A,B))),B).
+1869 [126,split_neg.2] -EL(f17(pset(inter(A,B)),inter(pset(A),pset(B))),pset(inter(A,B))).
+1890 [back_unit_del,1869.1,320.2] SUBSET(f17(inter(pset(A),pset(B)),pset(inter(A,B))),A).
+1892 [back_unit_del,1869.1,273.2] SUBSET(f17(inter(pset(A),pset(B)),pset(inter(A,B))),B).
+1905 [back_unit_del,1890.1,1049.2,unit_del,1892] -SUBSET(pset(inter(A,B)),inter(pset(A),pset(B))).
+1911 [binary,1905.1,5.1] EL(f17(pset(inter(A,B)),inter(pset(A),pset(B))),pset(inter(A,B))).
+1912 [binary,1911.1,1869.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8777) -------
+clauses given                277
+clauses generated           2897
+clauses kept                1894
+clauses forward subsumed    1004
+clauses back subsumed       1698
+Kbytes malloced             3906
+
+----------- times (seconds) -----------
+user CPU time          0.06          (0 hr, 0 min, 0 sec)
+system CPU time        0.01          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8777 finished Mon Aug  2 15:31:10 2004
+Refuted case [2].
+
+That finishes the proof of the theorem.
+
+That finishes the proof of the theorem.
+
+------- statistics (process 8775) -------
+clauses given                276
+clauses generated           2854
+clauses kept                1851
+clauses forward subsumed    1002
+clauses back subsumed         29
+Kbytes malloced             3906
+
+----------- times (seconds) -----------
+user CPU time          0.29          (0 hr, 0 min, 0 sec)
+system CPU time        0.01          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8775 finished Mon Aug  2 15:31:10 2004

@@ -1,0 +1,172 @@
+% Andrews challenge
+
+-( ( (exists x (all y (p(x) <-> p(y))))
+     <->
+     ((exists u q(u)) <-> (all v p(v))) )
+   <->
+   ( (exists w (all z (q(z) <-> q(w))))
+     <->
+     ((exists x1 p(x1)) <-> (all x2 q(x2))) ) ).
+
+% Lifschitz problem
+
+-(exists x exists x1 all y exists z exists z1
+     (  ( -p(y,y) | p(x,x)   | -s(z,x)  ) &
+        ( s(x,y)  | -s(y,z)  | q(z1,z1) ) &
+        ( q(x1,y) | -q(y,z1) | s(x1,x1) )  )).
+
+% From the Steamroller
+
+(all x (Animal(x) -> ( (all y (Plant(y) -> Eats(x,y)))
+                       |
+                       (all z ((  Animal(z) &
+                                  Smaller(z,x) &
+                                  (exists u (Plant(u) & Eats(z,u))))
+                               ->
+                               Eats(x,z)))))).
+
+-(exists x exists y ( -$answer(Eats(x,y)) &
+                      Animal(x) &
+                      Animal(y) &
+                      Eats(x,y) &
+                      (all z (Grain(z) -> Eats(y,z))))).
+
+% from open house problems.
+-(
+    (
+        (
+            (p1 -> (p2 | p3))
+            &
+            (-p1 -> (p3 | p4))
+        )
+        &
+        (
+            (
+                (p3 -> -p6)
+                &
+                (-p3 -> (p4 -> p1))
+            )
+            &
+            (
+                -(p2 & p5)
+                &
+                (p2 -> p5)
+            )
+        )
+    )
+    ->
+    -(p3 -> p6)
+).
+
+
+
+% From O'Keef's induction problem
+
+(all X (list(X) <-> (
+        (X = [])
+        |
+        (exists Y exists Z ((X = [Y|Z]) & list(Z)))
+))).
+
+(
+  (
+    (all Y (list(Y) -> list(append([], Y))))
+    &
+    (all X (
+            (list(X) & (all Y (list(Y) -> list(append(X,Y)))))
+            ->
+            (all Z (all Y (list(Y) -> list(append([Z|X],Y)))))
+           )
+    )
+  )
+  ->
+  (all X (list(X) -> (all Y (list(Y) -> list(append(X,Y))))))
+).
+
+% Induction formulas for associativity of append.
+
+(
+  (all x (  (all y (LT(y,x) -> (all u all v (app(app(y,u),v) = app(y,app(u,v))))
+))
+            ->
+            (all u all v (app(app(x,u),v) = app(x,app(u,v))))))
+  ->
+  (all x all y all z (app(app(x,y),z) = app(x,app(y,z))))).
+
+(
+  (    (all y all z (app(app([],y),z) = app([],app(y,z))))
+       &
+       (all x (    (all y all z (app(app(x,y),z) = app(x,app(y,z))))
+                   ->
+                   (all u all y all z (app(app([u|x],y),z) = app([u|x],app(y,z))
+)))))
+  ->
+  (all x all y all z (app(app(x,y),z) = app(x,app(y,z))))).
+
+% Upper bound induction formula
+
+(
+  (
+       (exists z all y (mem(y,[]) -> ge(z,y)))
+       &
+       (all x (    (exists z all y (mem(y,x) -> ge(z,y)))
+                   ->
+                   (all u (exists z (-$Ans(z) & (all y (mem(y,[u|x]) -> ge(z,y))
+))))
+              )
+        )
+  )
+  ->
+  (all x exists z all y (mem(y,x) -> ge(z,y)))
+).
+
+% set theory formulas from skolem experiments.
+
+(all R (SINGVAL(R) <-> (all u all v all w ((EL(op(u,v),R) & EL(op(u,w),R)) -> (v
+ = w))))).
+
+(all F (FUNCTION(F) <-> (RELATION(F) & SINGVAL(F)))).
+
+(all z all F all G (EL(z,compose(F,G)) <-> (exists u exists v exists w ((z = op(
+u,w)) & EL(op(u,v),F) & EL(op(v,w),G))))).
+
+(all R (RELATION(R) <-> (all u (EL(u,R) -> (exists x exists y (u = op(x,y)))))))
+.
+
+
+% From ~swinker/proj/ar/yu/homom.clauses
+
+ (all G (Group_op(G) <-> ((all x all y ((Member(x,G) & Member(y,G)) ->
+Member(op(x,y),G))) & (all x all y all z ((Member(x,G) & Member(y,G) &
+Member(z,G)) -> (op(op(x,y),z) = op(x,op(y,z))))) & (exists e
+(Member(e,G) & (all x (Member(x,G) -> ((op(e,x) = x) &
+(op(x,e) = x) & (exists y (Member(y,G) & (op(y,x) = e) &
+(op(x,y) = e))))))))))).
+
+    (all X all Y (SUBSET(X,Y) <-> (all Z (MEMBER(Z,X) -> MEMBER(Z,Y))))).
+
+    (all G all H (SUBGROUP_OP(G,H) <->
+        (GROUP_OP(G) & GROUP_OP(H) & SUBSET(G,H)))).
+
+    (all N all G (NORMAL_SUBGROUP_OP(N,G) <-> (SUBGROUP_OP(N,G) &
+        (all X all Y ((MEMBER(X,N) & MEMBER(Y,G)) ->
+            MEMBER(OP(OP(Y,X),inv(Y,e(G),G)),N)))))).
+
+ (all G all H (HOMO_PHI(G,H) <-> (all X all Y ((MEMBER(X,G) & MEMBER(Y,G)) ->
+(MEMBER(PHI(X),H) & MEMBER(PHI(Y),H) &
+EQUAL(PHI(OP(X,Y)),OP1(PHI(X),PHI(Y)))))))).
+
+    (all X all G all Y (MEMBER(X,phi_inv(G,Y)) <->
+        (MEMBER(X,G) & EQUAL(phi(X),Y)))).
+
+    (all G all H ((HOMO_PHI(G,H) & GROUP_OP(G) & GROUP_OP1(H)) ->
+        EQUAL(ker_phi(G,H),phi_inv(G,e1(H))))).
+
+    (all G all H ((HOMO_PHI(G,H) & GROUP_OP(G) & GROUP_OP1(H)) ->
+        (SUBSET(ker_phi(G,H),phi_inv(G,e1(H))) &
+         SUBSET(phi_inv(G,e1(H)),ker_phi(G,H))))).
+
+    (all G all H ((GROUP_OP(G) & GROUP_OP1(H) & HOMO_PHI(G,H)) ->
+        NORMAL_SUBGROUP_OP(phi_inv(G,e1(H)),G))).
+
+

@@ -1,0 +1,163 @@
+% From John Kalman
+% 
+%      (3) The input file %i3 below, due to Mark Waddell and me, for
+% solving the cryptarithmetic puzzle ab x cd = efgh, where a, b, c, d,
+% e, f, g, and h are distinct digits.
+
+%     We wish to find all 8-tuples (a,b,c,d,e,f,g,h) of distinct digits
+% such that the product 
+%
+%                                 a b
+%
+%                                 c d
+%                             _______ 
+%
+%                             e f g h
+%                             _______
+%
+% is valid. For example, since 72 x 95 = 6840, (7,2,9,5,6,8,4,0)
+% is one such 8-tuple.
+% It is understood that a, c, and e are non-zero.
+% Since multiplication is commutative, we may as well assume that a < c;
+% for example, we do not need to find the 8-tuple (9,5,7,2,6,8,4,0)
+% as well as the 8-tuple (7,2,9,5,6,8,4,0).
+%
+%     The computation of the above product may be represented as follows:
+%
+%                                   a  b
+%
+%                                   c  d
+%                            ___________
+%
+%                               y3 y2 y1
+%
+%                            z3 z2 z1
+%                            ___________
+%
+%                             e  f  g  h
+%                            ___________
+%
+%     We use the predicate CS(u,x,y,z,v) to express that
+%
+%                                   x
+%
+%                                   y
+%                                   _
+%
+%                                   z
+%                                   _
+% 
+% is a possible column in the addition of an integer in which x
+% occurs as a digit to an integer in which y occurs as a digit;
+% u is the carryover from the previous column and v is the carryover
+% to the next column.
+% For example, CS(0,6,8,4,1) and CS(1,3,4,8,0) are true, and occur
+% in the computation of the product 72 x 95.
+% Note that, in such an addition, u is 0 or 1, and v is 0 or 1.
+%
+%    We use the predicate CP(u,x,y,z,v) to express that
+%
+%                         ...  y  ...
+%
+%                                   x
+%                         ___________
+%
+%                         ...  z  ...
+%                         ___________
+%
+% is a possible step in the multiplication of an integer in which
+% y occurs as a digit by the one-digit integer x; u is the carryover
+% from the previous step and v is the carryover to the next step.
+% For example, CP(1,5,7,6,3) is true, and represents a step in
+% the multiplication 72 x 95.
+% Note that, in such a multiplication, u and v are at most 8 (since
+% 9 x 9 = 81), or, if x and y are required to be distinct, at most 7
+% (since 9 x 8 = 72). [In fact, there is not much gain to be made from
+% using the fact that carryovers of 9 and 8 are impossible. Experimental
+% runs took 39.34 secs with L(0) to L(7), and 42.48 secs using arbitrary
+% digits.]
+
+  set(hyper_res).
+  set(print_lists_at_end).
+  assign(stats_level,1).      % Output a few important statistics
+  
+  list(usable).
+    K(0).              % Sum carryover (at most 1)
+    K(1).
+
+    L(0).              % Product carryover (at most 7 for distinct digits)
+    L(1).
+    L(2).
+    L(3).
+    L(4).
+    L(5).
+    L(6).
+    L(7).
+
+    D(0).              % Digits
+    D(1).
+    D(2).
+    D(3).
+    D(4).
+    D(5).
+    D(6).
+    D(7).
+    D(8).
+    D(9).
+  end_of_list.
+
+  list(sos).
+    -K(u) | -D(x) | -D(y) |
+      CS(u,x,y,$MOD($SUM($SUM(u,x),y),10),$DIV($SUM($SUM(u,x),y),10)).
+
+    -L(u) | -D(x) | -D(y) |
+
+      CP(u,x,y,$MOD($SUM(u,$PROD(x,y)),10),$DIV($SUM(u,$PROD(x,y)),10)).
+
+    -CP(0,xd,xb,y1,x1) | -CP(x1,xd,xa,y2,y3) |
+      -CP(0,xc,xb,z1,x2) | -CP(x2,xc,xa,z2,z3) |
+      -$LT(xa,xc) |
+      -CS(0,y1,0,xh,x3) | -CS(x3,y2,z1,xg,x4) | -CS(x4,y3,z2,xf,x5) |
+                         -CS(x5,0,z3,xe,0) | S(xa,xb,xc,xd,xe,xf,xg,xh).
+  end_of_list.
+
+  list(passive).
+
+  % The following three clauses subsume "solutions" with a = 0, c = 0, or e = 0
+  
+    S(0,xb,xc,xd,xe,xf,xg,xh).
+    S(xa,xb,0,xd,xe,xf,xg,xh).
+    S(xa,xb,xc,xd,0,xf,xg,xh).
+  
+  % The following 28 clauses subsume "solutions" in which distinct
+  % letters are represented by the same digit
+
+    S(x1,x1,x3,x4,x5,x6,x7,x8).
+    S(x1,x2,x1,x4,x5,x6,x7,x8).
+    S(x1,x2,x3,x1,x5,x6,x7,x8).
+    S(x1,x2,x3,x4,x1,x6,x7,x8).
+    S(x1,x2,x3,x4,x5,x1,x7,x8).
+    S(x1,x2,x3,x4,x5,x6,x1,x8).
+    S(x1,x2,x3,x4,x5,x6,x7,x1).
+    S(x1,x2,x2,x4,x5,x6,x7,x8).
+    S(x1,x2,x3,x2,x5,x6,x7,x8).
+    S(x1,x2,x3,x4,x2,x6,x7,x8).
+    S(x1,x2,x3,x4,x5,x2,x7,x8).
+    S(x1,x2,x3,x4,x5,x6,x2,x8).
+    S(x1,x2,x3,x4,x5,x6,x7,x2).
+    S(x1,x2,x3,x3,x5,x6,x7,x8).
+    S(x1,x2,x3,x4,x3,x6,x7,x8).
+    S(x1,x2,x3,x4,x5,x3,x7,x8).
+    S(x1,x2,x3,x4,x5,x6,x3,x8).
+    S(x1,x2,x3,x4,x5,x6,x7,x3).
+    S(x1,x2,x3,x4,x4,x6,x7,x8).
+    S(x1,x2,x3,x4,x5,x4,x7,x8).
+    S(x1,x2,x3,x4,x5,x6,x4,x8).
+    S(x1,x2,x3,x4,x5,x6,x7,x4).
+    S(x1,x2,x3,x4,x5,x5,x7,x8).
+    S(x1,x2,x3,x4,x5,x6,x5,x8).
+    S(x1,x2,x3,x4,x5,x6,x7,x5).
+    S(x1,x2,x3,x4,x5,x6,x6,x8).
+    S(x1,x2,x3,x4,x5,x6,x7,x6).
+    S(x1,x2,x3,x4,x5,x6,x7,x7).
+  end_of_list.

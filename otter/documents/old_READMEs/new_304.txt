@@ -1,0 +1,213 @@
+
+                  -------------------------
+                  What's New in Otter 3.0.4
+                  -------------------------
+
+                          W. McCune
+                        August, 1995.
+
+Here are a few notes on the Otter features that have been
+installed since version 3.0.0, that is, the ones that are not
+documented in "Otter 3.0 Reference Manual and Guide".
+
+See the file "Changelog" in the main directory for bug fixes.
+
+Special thanks to Bob Veroff, who developed many of these new
+features.  Thanks also to Larry Wos, Ken Kunen, Ingo Dahn,
+and Yuan Yu for suggestions.
+
+1. PROOFS
+
+Ordinary proofs have a bit more detail, and several new flags
+are available.
+
+Flag formula_history -- default clear.  If this flag is set,
+quantified formulas (if any) that occur in proofs will be listed
+in the proofs with their own IDs, and clauses generated from the
+formulas will have justification [clausify, <formula-id>].
+
+Flag build_proof_object -- default clear.  If set, this flag
+causes a very detailed "proof object" to be printed along with
+ordinary proofs.  The purpose is so that in independent program
+can check the proof.  We have such a program, written in the
+Boyer-Moore logic; e-mail mccune@mcs.anl.gov for details.
+
+Flag proof_weight -- default clear.  The proof weight of a clause
+is the number of occurrences of its ancestors.  (Proof length is
+the size of the set of ancestors.)  If this flag is set, proof
+weight, instead of proof length, is used for ancestor
+subsumption.  Also, the proof weight is printed along with
+proofs.  WARNING: don't set this flag if a lot of demodulation is
+expected (e.g., dynamic_demod or knuth_bendix), because the proof
+weight can be too big to count in a reasonable amount of time.
+
+2. PROCESSING INFERRED CLAUSES
+
+Parameter max_answers -- default -1.  If n >= 0, then inferred
+clauses with more than n answer literals will not be retained.
+This does not apply to input clauses, even if the flag
+process_input is set.
+
+Flag gl_rewrite_before -- default clear.  If this flag is set,
+(gL) simplification is attempted before ordinary demodulation.
+
+Flag gl_rewrite_after -- default clear.  If this flag is set,
+(gL) simplification is attempted after ordinary demodulation.
+
+The preceding two flags replace flag geometric_rewrite, which
+acted like the new flag gl_rewrite_after.
+
+Parameters dynamic_demod_depth (default -1) dynamic_demod_rhs
+(default 1).  This is an extension of the ad hoc ordering when
+deciding whether a new equality should be a demodulator.  (It is
+not used if flag lrpo is set.)  The equality is first oriented as
+described in the manual.  Let it be alpha=beta.  If wt(beta) <=
+dynamic_demod_rhs and if wt(alpha) - wt(beta) >=
+dynamic_demod_depth, then the equality can be a demodulator.
+With the default values for these parameters, Otter should behave
+as described in the manual.
+
+Parameter age_factor -- default 0.  If not 0, then the value
+(number_of_clauses_given / age_factor) is added to the pick-given
+weight of clauses.
+
+Parameter distinct_vars_factor -- default 0.  If not 0, then the
+value (number_of_distinct_variables * distinct_vars_factor) is added
+to the pick-given weight of clauses.
+
+Parameter debug_first -- default 0.  This parameter is consulted
+if the flag very_verbose is set.  Verbose output will begin when
+a clause is KEPT and given an ID of this value.
+
+Parameter debug_last -- default -1.  This parameter is consulted
+if the flag very_verbose is set.  Verbose output will end when
+a clause is KEPT and given an ID of this value.
+
+Parameter verbose_demod_skip -- default 0.  This parameter is
+consulted during demodulation if the flag very_verbose is set.
+Verbose output will not occur during the first n rewrites.
+
+Special_unary processing has been improved.  If you use this
+feature, check the code in lex_order() and lex_order_vars() to
+see how it works now.
+
+3. HINTS
+
+The main purpose of the hints mechanism is to set or adjust the
+pick-given weight of clauses.  A hint H can apply to a clause C
+in 3 ways:
+
+    H subsumes C (forward subsume, fsub),
+    C subsumes H (back subsume, bsub), and
+    H is equivalent to C (equiv, which implies fsub and bsub).
+
+Two more ways, which apply to unit clauses only, may be added later:
+
+    H and C unify
+    H anc C have the same shape, like weighting works now
+
+Another purpose of hints is to retain clauses that would
+otherwise be discarded because the purge-gen weight is too high.
+The Flag KEEP_HINT_SUBSUMERS (default clear) says to skip the
+purge-gen test on generated clauses that subsume hints (i.e.,
+bsub).
+
+The parameters are
+
+FSUB_HINT_WT    FSUB_HINT_ADD_WT  
+BSUB_HINT_WT	BSUB_HINT_ADD_WT  
+EQUIV_HINT_WT	EQUIV_HINT_ADD_WT 
+
+These can be overridden for individual hints with corresponding
+attributes (see the next section) on the hints, e.g.,
+
+p0(a,x)    # bsub_hint_wt(200)  # fsub_hint_wt(100).
+
+If the parameters (attributes) are not set, they are not used; if you
+have a list of hints with no attributes, and if you don't set any
+hint parameters, the hints won't be used for anything.
+
+If more than one parameter (attribute) might apply, equiv is tested
+first, then fsub, then bsub.  If you use both WT and ADD_WT variants
+then BOTH can apply, e.g., when the hint
+
+p  # bsub_hint_wt(200)  # bsub_hint_add_wt(20).
+
+applies to a clause, the clause gets pick-given weight 220.
+
+Parameter fsub_hint_add_wt -- default 0.
+Parameter bsub_hint_add_wt -- default 0.
+Parameter equiv_hint_add_wt -- default 0.
+
+Parameter fsub_hint_wt -- default MAX_INT.
+Parameter bsub_hint_wt -- default MAX_INT.
+Parameter equiv_hint_wt -- default MAX_INT.
+
+4. CLAUSE ATTRIBUTES
+
+Attributes can now be attached to clauses.  There are currently 7
+types of attribute, all used by the hints mechanism.  Six of
+these correspond to the 6 hints parameters, and the seventh is a
+label attribute.  The 6 hint-parameter attributes are used to
+override the ordinary hints parameters for particular clauses
+(see the preceding section).  If a hint has a label attribute,
+and if that hint causes the pick-given weight of a new clause to
+be adjusted, the label attribute is copied to the new clause.
+See the files examples/fringe/{luka5h,rob_ocd}.in for examples.
+Here are examples of label attributes on clauses:
+
+   -p(x) | q(x)  # label("This string is the label!").
+   a = b         # label(this_is_a_constant_label).
+
+See the preceding section for examples of hint-parameter attributes.
+
+5. MISCELLANY
+
+Flag dp_int_domain -- default set.  This flag is consulted when
+Otter is used as a preprocessor for MACE, a program that searches
+for small finite models.  If the flag is set, integers in clauses
+are interpreted as domain elements rather than as constants.
+This reduces the number of isomorphic models that are generated
+by MACE.  (One can also, as in the previous version, use the
+passive list to make such assignments, but that way is less
+efficient.)
+
+Parameter new_symbol_lex_position -- default MAX_INT/2.  New
+symbols can be created during the search, usually by
+$-evaluation.  With this parameter, the user can specify where
+they will occur in the lex ordering.  If there is a lex command,
+all new symbols will have a lex values between the n-th and
+(n+1)-th symbol in the lex command.  The ordering among the new
+symbols is the default ordering.  This also applies to input
+symbols not occurring in the lex command.
+
+Weighting has been extended to allow the user to specify terms
+that CONTAIN particular terms.  This is done with a new unary
+function symbol $dots(_).  If $dots(t) occurs in a weight
+template, it will match any term that contains a term that
+matches t.  This is very useful for discarding "bad" clauses.
+Here is part of an output file that illustrates $dots.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+list(sos).
+1 [] p(f(g(g(g(g(g(h(h(h(h(j(b)))))))))))).
+2 [] p(F(g(g(h(g(H(g(h(g(g(g(B)))))))))))).
+3 [] p(f3(g(h(a)),g(g(b)),h(h(c)))).
+end_of_list.
+
+weight_list(pick_given).
+weight(f($dots(j($(5)))),100).
+weight(F($dots(H($dots(B)))),1000).
+weight(f3($dots(a),$dots(b),$dots(c)),2000).
+end_of_list.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=106) 1 [] p(f(g(g(g(g(g(h(h(h(h(j(b)))))))))))).
+
+given clause #2: (wt=1001) 2 [] p(F(g(g(h(g(H(g(h(g(g(g(B)))))))))))).
+
+given clause #3: (wt=2001) 3 [] p(f3(g(h(a)),g(g(b)),h(h(c)))).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

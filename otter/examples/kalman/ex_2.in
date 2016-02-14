@@ -1,0 +1,30 @@
+% 2.  This file produces a second proof of the result of ex_1.
+% Example ex_2 illustrates the lex command and the pick_given_ratio
+% parameter.
+%
+% Contributed by John Kalman (kalman@math.auckland.ac.nz)
+
+  set(knuth_bendix).
+  clear(print_kept). clear(print_new_demod).
+  clear(print_back_demod). clear(print_back_sub).
+  assign(pick_given_ratio,1).
+  assign(max_mem,5000).
+  assign(stats_level,1).
+  lex([a,b,c,_+_,_*_]).
+
+  list(usable).
+    x=x.
+    x+y=y+x.
+    x*y=y*x.
+    (x+y)+z=x+y+z. 
+    (x*y)*z=x*y*z. 
+    x+ (x*y)=x.
+    x* (x+y)=x.
+  end_of_list.
+
+  list(sos).
+    x+ (y*z)= (x+y)* (x+z).
+    a* (b+c)!= (a*b)+ (a*c).
+  end_of_list.
+
+

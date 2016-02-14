@@ -1,0 +1,47 @@
+% benchmark parameters -N10 -p
+%
+% There is a model of size 10; it takes 275 seconds on a PIII933.
+%
+% We have an equation that holds for orthomodular lattices,
+% and we show that it does not hold for ortholattices by
+% finding an ortholattice in which the equation does not hold.
+%
+% The problem is from Norm Megill, September 1997.
+%
+% The equation is (E1) from 
+%
+% @article{ ortholattice,
+%    author = "W. McCune",
+%    title = "Automatic Proofs and Counterexamples for some
+%                  Ortholattice Identities",
+%    journal = "Information Processing Letters",
+%    year = 1998,
+%    volume = 65,
+%    pages = "285--291"}
+%
+% See http://www-unix.mcs.anl.gov/~mccune/papers/ortholattice/
+
+include("ortholattice").
+
+list(usable).
+
+% The original denial:
+%
+% c((A ^ c(B)) v c(A)) v ((A ^ c(B)) v ((c(A) ^ ((A v c(B)) ^
+% (A v B))) v (c(A) ^ c((A v c(B)) ^ (A v B))))) != A v c(A).
+
+% An equivalent denial that names subterms:  (This is necessary, because
+% MACE cannot handle big equations.)
+
+A ^ c(B) = D1.
+A v c(B) = D2.
+A v B = D3.
+c(A) = D4.
+D2 ^ D3 = D5.
+D4 ^ c(D5) = D6.
+D4 ^ D5 = D7.
+D7 v D6 = D8.
+
+c(D1 v D4) v (D1 v D8) != 1.
+
+end_of_list.

@@ -1,0 +1,471 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:36 2004
+The command was "../../bin/otter".  The process ID is 8298.
+
+set(auto).
+   dependent: set(auto1).
+   dependent: set(process_input).
+   dependent: clear(print_kept).
+   dependent: clear(print_new_demod).
+   dependent: clear(print_back_demod).
+   dependent: clear(print_back_sub).
+   dependent: set(control_memory).
+   dependent: assign(max_mem, 12000).
+   dependent: assign(pick_given_ratio, 4).
+   dependent: assign(stats_level, 1).
+   dependent: assign(max_seconds, 10800).
+
+list(usable).
+0 [] sl| -mb| -sb| -sm| -ml|sc|mc|sd|md|mm.
+0 [] -sm|mb|ml.
+0 [] -sm|mb|sl.
+0 [] -sm|sb|ml.
+0 [] -sm|sb|sl.
+0 [] -ml| -mc| -mm.
+0 [] -ml| -mc| -sm.
+0 [] -ml| -sc| -mm.
+0 [] -ml| -sc| -sm.
+0 [] -md| -ml| -mm.
+0 [] -md| -ml| -sm.
+0 [] -md| -sl| -mm.
+0 [] -md| -sl| -sm.
+0 [] -sd| -mb|mc.
+0 [] -sd| -mb|sc.
+0 [] -sd| -sb|mc.
+0 [] -sd| -sb|sc.
+0 [] -mc|md|ml.
+0 [] -mc|md|sl.
+0 [] -mc|sd|ml.
+0 [] -mc|sd|sl.
+0 [] -mb| -md|mm.
+0 [] -mb| -md|sm.
+0 [] -mb| -sd|mm.
+0 [] -mb| -sd|sm.
+0 [] sd| -md|mm.
+0 [] -sd|md|mm.
+0 [] sc| -mc|mm.
+0 [] -sc|mc|mm.
+0 [] -sl| -ml|sm.
+0 [] -sb| -mb|sm.
+0 [] sd| -md|sl.
+0 [] -sd|md|sl.
+0 [] sb| -mb|sl.
+0 [] -sb|mb|sl.
+0 [] -sc| -mc|sd.
+0 [] -sl| -ml|mc.
+0 [] -sd| -md|mc.
+0 [] sb| -mb|sc.
+0 [] -sb|mb|sc.
+0 [] -sm| -mm|mb.
+0 [] sl| -ml|sb.
+0 [] -sl|ml|sb.
+0 [] sc| -mc|sb.
+0 [] -sc|mc|sb.
+0 [] -sc| -mb| -sb| -mm.
+0 [] -sc| -mb| -sb| -sm.
+0 [] -sc|sb|mb| -mm.
+0 [] -sc|sb|mb| -sm.
+0 [] -mm| -mc| -sc| -md| -sd.
+0 [] -mm|sc|mc|sd|md.
+0 [] -sl| -mb| -sb| -md| -sd.
+0 [] -sl| -mb| -sb|sd|md.
+0 [] -sl|sb|mb| -md| -sd.
+0 [] -sb| -mc| -sc| -ml| -sl.
+0 [] -sb| -mc| -sc|sl|ml.
+0 [] sm|mm|ml.
+0 [] sc|mc|ml.
+0 [] sm|mm|md.
+0 [] sl|ml|md.
+0 [] sb|mb|sd.
+0 [] sm|mm|sc.
+0 [] sd|md|mb.
+end_of_list.
+
+SCAN INPUT: prop=1, horn=0, equality=0, symmetry=0, max_lits=10.
+
+The clause set is propositional; the strategy will be
+ordered hyperresolution with the propositional
+optimizations, with satellites in sos and nuclei in usable.
+
+   dependent: set(hyper_res).
+   dependent: set(propositional).
+   dependent: set(sort_literals).
+
+------------> process usable:
+** KEPT (pick-wt=10): 2 [copy,1,propositional] -mb| -sb| -sm| -ml|sl|sc|mc|sd|md|mm.
+** KEPT (pick-wt=3): 3 [] -sm|mb|ml.
+** KEPT (pick-wt=3): 5 [copy,4,propositional] -sm|sl|mb.
+** KEPT (pick-wt=3): 6 [] -sm|sb|ml.
+** KEPT (pick-wt=3): 8 [copy,7,propositional] -sm|sl|sb.
+** KEPT (pick-wt=3): 9 [] -ml| -mc| -mm.
+** KEPT (pick-wt=3): 11 [copy,10,propositional] -sm| -ml| -mc.
+** KEPT (pick-wt=3): 12 [] -ml| -sc| -mm.
+** KEPT (pick-wt=3): 14 [copy,13,propositional] -sm| -ml| -sc.
+** KEPT (pick-wt=3): 16 [copy,15,propositional] -ml| -md| -mm.
+** KEPT (pick-wt=3): 18 [copy,17,propositional] -sm| -ml| -md.
+** KEPT (pick-wt=3): 20 [copy,19,propositional] -sl| -md| -mm.
+** KEPT (pick-wt=3): 22 [copy,21,propositional] -sl| -sm| -md.
+** KEPT (pick-wt=3): 24 [copy,23,propositional] -mb| -sd|mc.
+** KEPT (pick-wt=3): 26 [copy,25,propositional] -mb| -sd|sc.
+** KEPT (pick-wt=3): 28 [copy,27,propositional] -sb| -sd|mc.
+** KEPT (pick-wt=3): 30 [copy,29,propositional] -sb| -sd|sc.
+** KEPT (pick-wt=3): 32 [copy,31,propositional] -mc|ml|md.
+** KEPT (pick-wt=3): 34 [copy,33,propositional] -mc|sl|md.
+** KEPT (pick-wt=3): 36 [copy,35,propositional] -mc|ml|sd.
+** KEPT (pick-wt=3): 38 [copy,37,propositional] -mc|sl|sd.
+** KEPT (pick-wt=3): 39 [] -mb| -md|mm.
+** KEPT (pick-wt=3): 40 [] -mb| -md|sm.
+** KEPT (pick-wt=3): 41 [] -mb| -sd|mm.
+** KEPT (pick-wt=3): 42 [] -mb| -sd|sm.
+** KEPT (pick-wt=3): 44 [copy,43,propositional] -md|sd|mm.
+** KEPT (pick-wt=3): 45 [] -sd|md|mm.
+** KEPT (pick-wt=3): 47 [copy,46,propositional] -mc|sc|mm.
+** KEPT (pick-wt=3): 48 [] -sc|mc|mm.
+** KEPT (pick-wt=3): 49 [] -sl| -ml|sm.
+** KEPT (pick-wt=3): 51 [copy,50,propositional] -mb| -sb|sm.
+** KEPT (pick-wt=3): 53 [copy,52,propositional] -md|sl|sd.
+** KEPT (pick-wt=3): 55 [copy,54,propositional] -sd|sl|md.
+** KEPT (pick-wt=3): 57 [copy,56,propositional] -mb|sl|sb.
+** KEPT (pick-wt=3): 59 [copy,58,propositional] -sb|sl|mb.
+** KEPT (pick-wt=3): 60 [] -sc| -mc|sd.
+** KEPT (pick-wt=3): 61 [] -sl| -ml|mc.
+** KEPT (pick-wt=3): 62 [] -sd| -md|mc.
+** KEPT (pick-wt=3): 64 [copy,63,propositional] -mb|sb|sc.
+** KEPT (pick-wt=3): 65 [] -sb|mb|sc.
+** KEPT (pick-wt=3): 66 [] -sm| -mm|mb.
+** KEPT (pick-wt=3): 68 [copy,67,propositional] -ml|sl|sb.
+** KEPT (pick-wt=3): 70 [copy,69,propositional] -sl|sb|ml.
+** KEPT (pick-wt=3): 72 [copy,71,propositional] -mc|sb|sc.
+** KEPT (pick-wt=3): 74 [copy,73,propositional] -sc|sb|mc.
+** KEPT (pick-wt=4): 76 [copy,75,propositional] -mb| -sb| -sc| -mm.
+** KEPT (pick-wt=4): 78 [copy,77,propositional] -mb| -sb| -sm| -sc.
+** KEPT (pick-wt=4): 80 [copy,79,propositional] -sc| -mm|mb|sb.
+** KEPT (pick-wt=4): 82 [copy,81,propositional] -sm| -sc|mb|sb.
+** KEPT (pick-wt=5): 84 [copy,83,propositional] -sc| -mc| -sd| -md| -mm.
+** KEPT (pick-wt=5): 85 [] -mm|sc|mc|sd|md.
+** KEPT (pick-wt=5): 87 [copy,86,propositional] -sl| -mb| -sb| -sd| -md.
+** KEPT (pick-wt=5): 88 [] -sl| -mb| -sb|sd|md.
+** KEPT (pick-wt=5): 90 [copy,89,propositional] -sl| -sd| -md|mb|sb.
+** KEPT (pick-wt=5): 92 [copy,91,propositional] -sl| -sb| -ml| -sc| -mc.
+** KEPT (pick-wt=5): 94 [copy,93,propositional] -sb| -sc| -mc|sl|ml.
+
+------------> process sos:
+** KEPT (pick-wt=3): 96 [copy,95,propositional] sm|ml|mm.
+** KEPT (pick-wt=3): 98 [copy,97,propositional] ml|sc|mc.
+** KEPT (pick-wt=3): 100 [copy,99,propositional] sm|md|mm.
+** KEPT (pick-wt=3): 101 [] sl|ml|md.
+** KEPT (pick-wt=3): 103 [copy,102,propositional] mb|sb|sd.
+** KEPT (pick-wt=3): 105 [copy,104,propositional] sm|sc|mm.
+** KEPT (pick-wt=3): 107 [copy,106,propositional] mb|sd|md.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=3) 96 [copy,95,propositional] sm|ml|mm.
+
+given clause #2: (wt=3) 98 [copy,97,propositional] ml|sc|mc.
+
+given clause #3: (wt=3) 100 [copy,99,propositional] sm|md|mm.
+
+given clause #4: (wt=3) 101 [] sl|ml|md.
+
+given clause #5: (wt=3) 103 [copy,102,propositional] mb|sb|sd.
+
+given clause #6: (wt=3) 105 [copy,104,propositional] sm|sc|mm.
+
+given clause #7: (wt=3) 107 [copy,106,propositional] mb|sd|md.
+
+given clause #8: (wt=3) 109 [hyper,96,6] sb|ml|mm.
+
+given clause #9: (wt=3) 111 [hyper,96,3] mb|ml|mm.
+
+given clause #10: (wt=3) 112 [hyper,98,74] sb|ml|mc.
+
+given clause #11: (wt=3) 113 [hyper,98,48] ml|mc|mm.
+
+given clause #12: (wt=3) 116 [hyper,101,70] sb|ml|md.
+
+given clause #13: (wt=3) 121 [hyper,107,55] sl|mb|md.
+
+given clause #14: (wt=3) 122 [hyper,107,45] mb|md|mm.
+
+given clause #15: (wt=4) 114 [hyper,100,8] sl|sb|md|mm.
+
+given clause #16: (wt=4) 119 [hyper,105,8] sl|sb|sc|mm.
+
+given clause #17: (wt=4) 120 [hyper,105,5] sl|mb|sc|mm.
+
+given clause #18: (wt=4) 123 [hyper,112,59] sl|mb|ml|mc.
+
+given clause #19: (wt=4) 124 [hyper,112,28,107] mb|ml|mc|md.
+
+given clause #20: (wt=3) 126 [hyper,124,61,121] mb|mc|md.
+
+given clause #21: (wt=4) 125 [hyper,116,65] mb|ml|sc|md.
+
+given clause #22: (wt=3) 128 [hyper,126,62,103] mb|sb|mc.
+
+given clause #23: (wt=3) 132 [hyper,126,20,123,113] mb|ml|mc.
+
+given clause #24: (wt=3) 133 [hyper,128,65] mb|sc|mc.
+
+given clause #25: (wt=3) 134 [hyper,128,59] sl|mb|mc.
+
+given clause #26: (wt=2) 136 [hyper,134,61,132] mb|mc.
+
+given clause #27: (wt=3) 137 [hyper,136,72] mb|sb|sc.
+
+given clause #28: (wt=3) 138 [hyper,136,47] mb|sc|mm.
+
+given clause #29: (wt=3) 139 [hyper,136,38] sl|mb|sd.
+
+given clause #30: (wt=3) 140 [hyper,136,36] mb|ml|sd.
+
+given clause #31: (wt=3) 141 [hyper,136,32] mb|ml|md.
+
+given clause #32: (wt=2) 146 [hyper,141,9,136,122] mb|md.
+
+given clause #33: (wt=3) 143 [hyper,137,80,111] mb|sb|ml.
+
+given clause #34: (wt=3) 144 [hyper,138,60,136] mb|sd|mm.
+
+given clause #35: (wt=3) 147 [hyper,143,65] mb|ml|sc.
+
+given clause #36: (wt=2) 149 [hyper,147,84,136,140,146,111] mb|ml.
+
+given clause #37: (wt=3) 150 [hyper,149,68] sl|mb|sb.
+
+given clause #38: (wt=2) 153 [hyper,150,90,103,146] mb|sb.
+
+given clause #39: (wt=2) 154 [hyper,153,65] mb|sc.
+
+given clause #40: (wt=2) 155 [hyper,153,59] sl|mb.
+
+given clause #41: (wt=1) 157 [hyper,155,92,153,149,154,136] mb.
+
+given clause #42: (wt=2) 160 [hyper,157,76,112,98,113] ml|mc.
+
+given clause #43: (wt=2) 161 [hyper,157,64] sb|sc.
+
+given clause #44: (wt=2) 162 [hyper,157,57] sl|sb.
+
+given clause #45: (wt=2) 164 [hyper,161,74] sb|mc.
+
+given clause #46: (wt=3) 158 [hyper,157,88,101,116] ml|sd|md.
+
+given clause #47: (wt=2) 165 [hyper,162,70] sb|ml.
+
+given clause #48: (wt=2) 166 [hyper,164,51,157] sm|mc.
+
+given clause #49: (wt=2) 170 [hyper,165,51,157] sm|ml.
+
+given clause #50: (wt=3) 168 [hyper,158,45] ml|md|mm.
+
+given clause #51: (wt=6) 167 [hyper,164,2,157,105,160] sl|sc|mc|sd|md|mm.
+
+given clause #52: (wt=3) 169 [hyper,158,26,157] ml|sc|md.
+
+given clause #53: (wt=2) 172 [hyper,169,78,157,165,170] ml|md.
+
+given clause #54: (wt=3) 173 [hyper,172,49,162] sb|sm|md.
+
+given clause #55: (wt=2) 175 [hyper,173,14,172,161] sb|md.
+
+given clause #56: (wt=5) 171 [hyper,167,88,157,164] sc|mc|sd|md|mm.
+
+given clause #57: (wt=2) 176 [hyper,175,51,157] sm|md.
+
+given clause #58: (wt=4) 178 [hyper,171,45] sc|mc|md|mm.
+
+given clause #59: (wt=3) 179 [hyper,178,78,157,175,176] mc|md|mm.
+
+given clause #60: (wt=4) 180 [hyper,179,85] sc|mc|sd|md.
+
+given clause #61: (wt=3) 182 [hyper,180,30,175] sc|mc|md.
+
+given clause #62: (wt=2) 183 [hyper,182,78,157,175,176] mc|md.
+
+given clause #63: (wt=1) 187 [hyper,183,18,166,160] mc.
+
+given clause #64: (wt=1) 193 [hyper,187,11,176,172] md.
+
+given clause #65: (wt=1) 195 [hyper,193,40,157] sm.
+
+given clause #66: (wt=2) 190 [hyper,187,38] sl|sd.
+
+given clause #67: (wt=1) 196 [hyper,193,39,157] mm.
+
+given clause #68: (wt=1) 197 [hyper,195,22,162,193] sb.
+
+given clause #69: (wt=1) 198 [hyper,190,22,195,193] sd.
+
+given clause #70: (wt=1) 199 [hyper,198,30,197] sc.
+
+-------- PROOF -------- 
+
+-----> EMPTY CLAUSE at   0.01 sec ----> 201 [hyper,199,84,187,198,193,196] $F.
+
+Length of proof is 85.  Level of proof is 31.
+
+---------------- PROOF ----------------
+
+1 [] sl| -mb| -sb| -sm| -ml|sc|mc|sd|md|mm.
+2 [copy,1,propositional] -mb| -sb| -sm| -ml|sl|sc|mc|sd|md|mm.
+3 [] -sm|mb|ml.
+9 [] -ml| -mc| -mm.
+10 [] -ml| -mc| -sm.
+11 [copy,10,propositional] -sm| -ml| -mc.
+13 [] -ml| -sc| -sm.
+14 [copy,13,propositional] -sm| -ml| -sc.
+17 [] -md| -ml| -sm.
+18 [copy,17,propositional] -sm| -ml| -md.
+19 [] -md| -sl| -mm.
+20 [copy,19,propositional] -sl| -md| -mm.
+21 [] -md| -sl| -sm.
+22 [copy,21,propositional] -sl| -sm| -md.
+25 [] -sd| -mb|sc.
+26 [copy,25,propositional] -mb| -sd|sc.
+27 [] -sd| -sb|mc.
+28 [copy,27,propositional] -sb| -sd|mc.
+29 [] -sd| -sb|sc.
+30 [copy,29,propositional] -sb| -sd|sc.
+31 [] -mc|md|ml.
+32 [copy,31,propositional] -mc|ml|md.
+35 [] -mc|sd|ml.
+36 [copy,35,propositional] -mc|ml|sd.
+37 [] -mc|sd|sl.
+38 [copy,37,propositional] -mc|sl|sd.
+39 [] -mb| -md|mm.
+40 [] -mb| -md|sm.
+45 [] -sd|md|mm.
+48 [] -sc|mc|mm.
+49 [] -sl| -ml|sm.
+50 [] -sb| -mb|sm.
+51 [copy,50,propositional] -mb| -sb|sm.
+54 [] -sd|md|sl.
+55 [copy,54,propositional] -sd|sl|md.
+56 [] sb| -mb|sl.
+57 [copy,56,propositional] -mb|sl|sb.
+58 [] -sb|mb|sl.
+59 [copy,58,propositional] -sb|sl|mb.
+61 [] -sl| -ml|mc.
+62 [] -sd| -md|mc.
+63 [] sb| -mb|sc.
+64 [copy,63,propositional] -mb|sb|sc.
+65 [] -sb|mb|sc.
+67 [] sl| -ml|sb.
+68 [copy,67,propositional] -ml|sl|sb.
+69 [] -sl|ml|sb.
+70 [copy,69,propositional] -sl|sb|ml.
+71 [] sc| -mc|sb.
+72 [copy,71,propositional] -mc|sb|sc.
+73 [] -sc|mc|sb.
+74 [copy,73,propositional] -sc|sb|mc.
+75 [] -sc| -mb| -sb| -mm.
+76 [copy,75,propositional] -mb| -sb| -sc| -mm.
+77 [] -sc| -mb| -sb| -sm.
+78 [copy,77,propositional] -mb| -sb| -sm| -sc.
+79 [] -sc|sb|mb| -mm.
+80 [copy,79,propositional] -sc| -mm|mb|sb.
+83 [] -mm| -mc| -sc| -md| -sd.
+84 [copy,83,propositional] -sc| -mc| -sd| -md| -mm.
+85 [] -mm|sc|mc|sd|md.
+88 [] -sl| -mb| -sb|sd|md.
+89 [] -sl|sb|mb| -md| -sd.
+90 [copy,89,propositional] -sl| -sd| -md|mb|sb.
+91 [] -sb| -mc| -sc| -ml| -sl.
+92 [copy,91,propositional] -sl| -sb| -ml| -sc| -mc.
+95 [] sm|mm|ml.
+96 [copy,95,propositional] sm|ml|mm.
+97 [] sc|mc|ml.
+98 [copy,97,propositional] ml|sc|mc.
+101 [] sl|ml|md.
+102 [] sb|mb|sd.
+103 [copy,102,propositional] mb|sb|sd.
+104 [] sm|mm|sc.
+105 [copy,104,propositional] sm|sc|mm.
+106 [] sd|md|mb.
+107 [copy,106,propositional] mb|sd|md.
+111 [hyper,96,3] mb|ml|mm.
+112 [hyper,98,74] sb|ml|mc.
+113 [hyper,98,48] ml|mc|mm.
+116 [hyper,101,70] sb|ml|md.
+121 [hyper,107,55] sl|mb|md.
+122 [hyper,107,45] mb|md|mm.
+123 [hyper,112,59] sl|mb|ml|mc.
+124 [hyper,112,28,107] mb|ml|mc|md.
+126 [hyper,124,61,121] mb|mc|md.
+128 [hyper,126,62,103] mb|sb|mc.
+132 [hyper,126,20,123,113] mb|ml|mc.
+134 [hyper,128,59] sl|mb|mc.
+136 [hyper,134,61,132] mb|mc.
+137 [hyper,136,72] mb|sb|sc.
+140 [hyper,136,36] mb|ml|sd.
+141 [hyper,136,32] mb|ml|md.
+143 [hyper,137,80,111] mb|sb|ml.
+146 [hyper,141,9,136,122] mb|md.
+147 [hyper,143,65] mb|ml|sc.
+149 [hyper,147,84,136,140,146,111] mb|ml.
+150 [hyper,149,68] sl|mb|sb.
+153 [hyper,150,90,103,146] mb|sb.
+154 [hyper,153,65] mb|sc.
+155 [hyper,153,59] sl|mb.
+157 [hyper,155,92,153,149,154,136] mb.
+158 [hyper,157,88,101,116] ml|sd|md.
+160 [hyper,157,76,112,98,113] ml|mc.
+161 [hyper,157,64] sb|sc.
+162 [hyper,157,57] sl|sb.
+164 [hyper,161,74] sb|mc.
+165 [hyper,162,70] sb|ml.
+166 [hyper,164,51,157] sm|mc.
+167 [hyper,164,2,157,105,160] sl|sc|mc|sd|md|mm.
+169 [hyper,158,26,157] ml|sc|md.
+170 [hyper,165,51,157] sm|ml.
+171 [hyper,167,88,157,164] sc|mc|sd|md|mm.
+172 [hyper,169,78,157,165,170] ml|md.
+173 [hyper,172,49,162] sb|sm|md.
+175 [hyper,173,14,172,161] sb|md.
+176 [hyper,175,51,157] sm|md.
+178 [hyper,171,45] sc|mc|md|mm.
+179 [hyper,178,78,157,175,176] mc|md|mm.
+180 [hyper,179,85] sc|mc|sd|md.
+182 [hyper,180,30,175] sc|mc|md.
+183 [hyper,182,78,157,175,176] mc|md.
+187 [hyper,183,18,166,160] mc.
+190 [hyper,187,38] sl|sd.
+193 [hyper,187,11,176,172] md.
+195 [hyper,193,40,157] sm.
+196 [hyper,193,39,157] mm.
+197 [hyper,195,22,162,193] sb.
+198 [hyper,190,22,195,193] sd.
+199 [hyper,198,30,197] sc.
+201 [hyper,199,84,187,198,193,196] $F.
+
+------------ end of proof -------------
+
+
+Search stopped by max_proofs option.
+
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 70
+clauses generated            796
+clauses kept                 156
+clauses forward subsumed     702
+clauses back subsumed        133
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8298 finished Mon Aug  2 15:30:36 2004

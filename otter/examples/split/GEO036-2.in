@@ -1,0 +1,144 @@
+%--------------------------------------------------------------------------
+% File     : GEO036-2 : TPTP v2.0.0. Released v1.0.0.
+% Domain   : Geometry
+% Problem  : The 3 axiom set points are distinct
+% Version  : [Quaife, 1989] axioms.
+% English  : 
+
+% Refs     : Schwabbauser W., Szmielew W., and Tarski A. (1983), 
+%            Metamathematische Methoden in der Geometrie, Springer-Verlag, 
+%            Berlin, Germany.
+%          : Quaife A. (1989), Automated Development of Tarski's Geometry, 
+%            Journal of Automated Reasoning 5(1), 97-118.
+% Source   : [TPTP]
+% Names    : 
+
+% Status   : unsatisfiable
+% Rating   : 0.33 v2.0.0
+% Syntax   : Number of clauses    :   20 (   6 non-Horn;   7 unit;  16 RR)
+%            Number of literals   :   60 (  11 equality)
+%            Maximal clause size  :    8 (   3 average)
+%            Number of predicates :    3 (   0 propositional; 2-4 arity)
+%            Number of functors   :    8 (   3 constant; 0-6 arity)
+%            Number of variables  :   72 (   3 singleton)
+%            Maximal term depth   :    2 (   1 average)
+
+% Comments : 
+%          : tptp2X: -fotter:hypothesis:[set(auto),set(tptp_eq)] -trm_equality:stfp GEO036-2.p 
+%--------------------------------------------------------------------------
+set(prolog_style_variables).
+set(auto2).
+set(tptp_eq).
+
+set(split_when_given).
+set(split_pos).
+
+list(usable).
+
+% reflexivity, axiom.
+ equal(A,A).
+
+% reflexivity_for_equidistance, axiom.
+ equidistant(A,B,B,A).
+
+% transitivity_for_equidistance, axiom.
+-equidistant(A,B,C,D) |
+-equidistant(A,B,E,F) |
+ equidistant(C,D,E,F).
+
+% identity_for_equidistance, axiom.
+-equidistant(A,B,C,C) |
+ equal(A,B).
+
+% segment_construction1, axiom.
+ between(A,B,extension(A,B,C,D)).
+
+% segment_construction2, axiom.
+ equidistant(A,extension(B,A,C,D),C,D).
+
+% outer_five_segment, axiom.
+-equidistant(A,B,C,D) |
+-equidistant(B,E,D,F) |
+-equidistant(A,G,C,H) |
+-equidistant(B,G,D,H) |
+-between(A,B,E) |
+-between(C,D,F) |
+ equal(A,B) |
+ equidistant(E,G,F,H).
+
+% identity_for_betweeness, axiom.
+-between(A,B,A) |
+ equal(A,B).
+
+% inner_pasch1, axiom.
+-between(A,B,C) |
+-between(D,E,C) |
+ between(B,inner_pasch(A,B,C,E,D),D).
+
+% inner_pasch2, axiom.
+-between(A,B,C) |
+-between(D,E,C) |
+ between(E,inner_pasch(A,B,C,E,D),A).
+
+% lower_dimension1, axiom.
+-between(lower_dimension_point_1,lower_dimension_point_2,lower_dimension_point_3).
+
+% lower_dimension2, axiom.
+-between(lower_dimension_point_2,lower_dimension_point_3,lower_dimension_point_1).
+
+% lower_dimension3, axiom.
+-between(lower_dimension_point_3,lower_dimension_point_1,lower_dimension_point_2).
+
+% upper_dimension, axiom.
+-equidistant(A,B,A,C) |
+-equidistant(D,B,D,C) |
+-equidistant(E,B,E,C) |
+ between(A,D,E) |
+ between(D,E,A) |
+ between(E,A,D) |
+ equal(B,C).
+
+% euclid1, axiom.
+-between(A,B,C) |
+-between(D,B,E) |
+ equal(A,B) |
+ between(A,D,euclid1(A,D,B,E,C)).
+
+% euclid2, axiom.
+-between(A,B,C) |
+-between(D,B,E) |
+ equal(A,B) |
+ between(A,E,euclid2(A,D,B,E,C)).
+
+% euclid3, axiom.
+-between(A,B,C) |
+-between(D,B,E) |
+ equal(A,B) |
+ between(euclid1(A,D,B,E,C),C,euclid2(A,D,B,E,C)).
+
+% continuity1, axiom.
+-equidistant(A,B,A,C) |
+-equidistant(A,D,A,E) |
+-between(A,B,D) |
+-between(B,F,D) |
+ between(C,continuous(A,B,C,F,D,E),E).
+
+% continuity2, axiom.
+-equidistant(A,B,A,C) |
+-equidistant(A,D,A,E) |
+-between(A,B,D) |
+-between(B,F,D) |
+ equidistant(A,F,A,continuous(A,B,C,F,D,E)).
+
+end_of_list.
+
+list(sos).
+
+% prove_axioms_points_are_distinct, conjecture.
+ equal(lower_dimension_point_1,lower_dimension_point_2) |
+ equal(lower_dimension_point_2,lower_dimension_point_3) |
+ equal(lower_dimension_point_1,lower_dimension_point_3).
+
+end_of_list.
+
+%--------------------------------------------------------------------------

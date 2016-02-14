@@ -1,0 +1,527 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:31:13 2004
+The command was "../../bin/otter".  The process ID is 8897.
+
+set(hyper_res).
+set(ancestor_subsume).
+assign(max_weight,28).
+clear(print_kept).
+set(order_history).
+assign(max_proofs,2).
+
+list(usable).
+1 [] -P(e(x,y))| -P(x)|P(y).
+end_of_list.
+
+list(sos).
+2 [] P(e(e(x,y),e(e(z,y),e(x,z)))).
+end_of_list.
+
+list(passive).
+3 [] -P(e(a,e(e(b,e(a,c)),e(c,b))))|$ANSWER(P5_XGF).
+end_of_list.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=12) 2 [] P(e(e(x,y),e(e(z,y),e(x,z)))).
+
+given clause #2: (wt=16) 4 [hyper,1,2,2] P(e(e(x,e(e(y,z),e(u,y))),e(e(u,z),x))).
+
+given clause #3: (wt=8) 7 [hyper,1,4,2] P(e(e(x,y),e(x,y))).
+
+given clause #4: (wt=12) 8 [hyper,1,2,7] P(e(e(x,e(y,z)),e(e(y,z),x))).
+
+given clause #5: (wt=12) 9 [hyper,1,8,8] P(e(e(e(x,y),z),e(z,e(x,y)))).
+
+given clause #6: (wt=12) 10 [hyper,1,4,8] P(e(e(x,y),e(e(x,z),e(z,y)))).
+17 back subsumes 16.
+
+given clause #7: (wt=8) 18 [hyper,1,4,10] P(e(e(x,x),e(y,y))).
+23 back subsumes 7.
+
+given clause #8: (wt=4) 23 [hyper,1,18,18] P(e(x,x)).
+26 back subsumes 9.
+26 back subsumes 8.
+
+given clause #9: (wt=8) 26 [hyper,1,10,23] P(e(e(x,y),e(y,x))).
+27 back subsumes 21.
+27 back subsumes 20.
+28 back subsumes 14.
+28 back subsumes 11.
+
+given clause #10: (wt=12) 13 [hyper,1,8,2] P(e(e(e(x,y),e(z,x)),e(z,y))).
+
+given clause #11: (wt=8) 32 [hyper,1,13,10] P(e(e(e(x,y),x),y)).
+
+given clause #12: (wt=8) 33 [hyper,1,26,32] P(e(x,e(e(y,x),y))).
+
+given clause #13: (wt=8) 38 [hyper,1,13,33] P(e(e(x,e(x,y)),y)).
+
+given clause #14: (wt=8) 43 [hyper,1,33,23] P(e(e(x,e(y,y)),x)).
+
+given clause #15: (wt=8) 50 [hyper,1,26,38] P(e(x,e(y,e(y,x)))).
+
+given clause #16: (wt=8) 51 [hyper,1,13,38] P(e(x,e(y,e(x,y)))).
+
+given clause #17: (wt=8) 56 [hyper,1,26,43] P(e(x,e(x,e(y,y)))).
+
+given clause #18: (wt=8) 63 [hyper,1,4,50] P(e(e(e(x,y),y),x)).
+
+given clause #19: (wt=8) 78 [hyper,1,26,51] P(e(e(x,e(y,x)),y)).
+
+given clause #20: (wt=8) 87 [hyper,1,51,23] P(e(x,e(e(y,y),x))).
+
+given clause #21: (wt=8) 97 [hyper,1,13,56] P(e(e(e(x,x),y),y)).
+
+given clause #22: (wt=8) 116 [hyper,1,26,63] P(e(x,e(e(x,y),y))).
+
+given clause #23: (wt=12) 17 [hyper,1,8,10] P(e(e(e(x,y),e(y,z)),e(x,z))).
+188 back subsumes 51.
+192 back subsumes 38.
+193 back subsumes 188.
+
+given clause #24: (wt=8) 192 [hyper,1,17,32] P(e(e(x,e(x,y)),y)).
+194 back subsumes 52.
+195 back subsumes 53.
+196 back subsumes 54.
+
+given clause #25: (wt=8) 193 [hyper,1,17,10] P(e(x,e(y,e(x,y)))).
+197 back subsumes 75.
+198 back subsumes 78.
+199 back subsumes 116.
+200 back subsumes 79.
+201 back subsumes 80.
+202 back subsumes 83.
+203 back subsumes 85.
+204 back subsumes 86.
+205 back subsumes 87.
+206 back subsumes 88.
+207 back subsumes 185.
+208 back subsumes 89.
+209 back subsumes 90.
+210 back subsumes 91.
+211 back subsumes 92.
+
+given clause #26: (wt=8) 198 [hyper,1,26,193] P(e(e(x,e(y,x)),y)).
+212 back subsumes 121.
+213 back subsumes 124.
+214 back subsumes 125.
+215 back subsumes 126.
+
+given clause #27: (wt=8) 199 [hyper,1,17,193] P(e(x,e(e(x,y),y))).
+216 back subsumes 157.
+217 back subsumes 160.
+218 back subsumes 159.
+219 back subsumes 162.
+220 back subsumes 63.
+221 back subsumes 163.
+222 back subsumes 164.
+223 back subsumes 167.
+224 back subsumes 170.
+225 back subsumes 173.
+226 back subsumes 165.
+227 back subsumes 169.
+228 back subsumes 172.
+229 back subsumes 174.
+230 back subsumes 175.
+231 back subsumes 176.
+232 back subsumes 97.
+233 back subsumes 177.
+234 back subsumes 182.
+235 back subsumes 178.
+236 back subsumes 179.
+237 back subsumes 180.
+238 back subsumes 181.
+
+given clause #28: (wt=8) 205 [hyper,1,193,23] P(e(x,e(e(y,y),x))).
+239 back subsumes 127.
+240 back subsumes 166.
+241 back subsumes 129.
+242 back subsumes 56.
+243 back subsumes 132.
+244 back subsumes 133.
+245 back subsumes 158.
+246 back subsumes 134.
+247 back subsumes 137.
+248 back subsumes 140.
+249 back subsumes 142.
+250 back subsumes 143.
+251 back subsumes 144.
+252 back subsumes 183.
+253 back subsumes 145.
+254 back subsumes 146.
+255 back subsumes 147.
+256 back subsumes 148.
+
+given clause #29: (wt=8) 220 [hyper,1,26,199] P(e(e(e(x,y),y),x)).
+257 back subsumes 135.
+258 back subsumes 168.
+259 back subsumes 113.
+260 back subsumes 117.
+261 back subsumes 118.
+262 back subsumes 119.
+
+given clause #30: (wt=8) 232 [hyper,1,199,23] P(e(e(e(x,x),y),y)).
+263 back subsumes 149.
+264 back subsumes 226.
+265 back subsumes 151.
+266 back subsumes 154.
+267 back subsumes 155.
+268 back subsumes 156.
+
+given clause #31: (wt=8) 242 [hyper,1,17,205] P(e(x,e(x,e(y,y)))).
+269 back subsumes 93.
+270 back subsumes 136.
+271 back subsumes 227.
+272 back subsumes 94.
+273 back subsumes 98.
+274 back subsumes 99.
+275 back subsumes 150.
+276 back subsumes 112.
+277 back subsumes 128.
+278 back subsumes 218.
+279 back subsumes 120.
+280 back subsumes 100.
+281 back subsumes 106.
+282 back subsumes 107.
+283 back subsumes 184.
+284 back subsumes 108.
+285 back subsumes 109.
+286 back subsumes 110.
+287 back subsumes 111.
+
+given clause #32: (wt=12) 24 [hyper,1,10,18] P(e(e(e(x,x),y),e(y,e(z,z)))).
+294 back subsumes 282.
+297 back subsumes 275.
+298 back subsumes 277.
+299 back subsumes 102.
+300 back subsumes 281.
+301 back subsumes 287.
+
+given clause #33: (wt=12) 25 [hyper,1,2,18] P(e(e(x,e(y,y)),e(e(z,z),x))).
+308 back subsumes 251.
+311 back subsumes 139.
+312 back subsumes 250.
+313 back subsumes 256.
+
+given clause #34: (wt=12) 27 [hyper,1,10,26] P(e(e(e(x,y),z),e(z,e(y,x)))).
+330 back subsumes 50.
+
+given clause #35: (wt=8) 330 [hyper,1,27,32] P(e(x,e(y,e(y,x)))).
+336 back subsumes 60.
+337 back subsumes 328.
+338 back subsumes 62.
+339 back subsumes 64.
+340 back subsumes 68.
+341 back subsumes 318.
+342 back subsumes 69.
+343 back subsumes 306.
+344 back subsumes 292.
+345 back subsumes 70.
+346 back subsumes 186.
+347 back subsumes 71.
+348 back subsumes 72.
+349 back subsumes 73.
+350 back subsumes 74.
+
+given clause #36: (wt=12) 28 [hyper,1,2,26] P(e(e(x,e(y,z)),e(e(z,y),x))).
+
+given clause #37: (wt=12) 34 [hyper,1,10,32] P(e(e(e(e(x,y),x),z),e(z,y))).
+375 back subsumes 220.
+379 back subsumes 249.
+380 back subsumes 105.
+392 back subsumes 43.
+
+given clause #38: (wt=8) 375 [hyper,1,34,34] P(e(e(e(x,y),y),x)).
+396 back subsumes 259.
+397 back subsumes 115.
+398 back subsumes 263.
+399 back subsumes 260.
+400 back subsumes 261.
+401 back subsumes 262.
+
+given clause #39: (wt=8) 392 [hyper,1,34,24] P(e(e(x,e(y,y)),x)).
+402 back subsumes 228.
+403 back subsumes 82.
+404 back subsumes 57.
+405 back subsumes 58.
+406 back subsumes 59.
+
+given clause #40: (wt=12) 36 [hyper,1,2,32] P(e(e(x,y),e(e(e(z,y),z),x))).
+434 back subsumes 329.
+437 back subsumes 299.
+
+given clause #41: (wt=12) 37 [hyper,1,33,33] P(e(e(x,e(y,e(e(z,y),z))),x)).
+450 back subsumes 229.
+453 back subsumes 67.
+
+given clause #42: (wt=12) 39 [hyper,1,10,33] P(e(e(x,y),e(y,e(e(z,x),z)))).
+467 back subsumes 141.
+
+given clause #43: (wt=12) 40 [hyper,1,2,33] P(e(e(x,e(e(y,z),y)),e(z,x))).
+
+given clause #44: (wt=12) 41 [hyper,1,33,32] P(e(e(x,e(e(e(y,z),y),z)),x)).
+
+given clause #45: (wt=12) 42 [hyper,1,33,26] P(e(e(x,e(e(y,z),e(z,y))),x)).
+
+given clause #46: (wt=12) 44 [hyper,1,33,18] P(e(e(x,e(e(y,y),e(z,z))),x)).
+
+given clause #47: (wt=12) 49 [hyper,1,33,38] P(e(e(x,e(e(y,e(y,z)),z)),x)).
+
+given clause #48: (wt=12) 55 [hyper,1,33,43] P(e(e(x,e(e(y,e(z,z)),y)),x)).
+616 back subsumes 65.
+625 back subsumes 471.
+626 back subsumes 506.
+
+given clause #49: (wt=12) 61 [hyper,1,33,50] P(e(e(x,e(y,e(z,e(z,y)))),x)).
+
+given clause #50: (wt=12) 66 [hyper,1,50,38] P(e(x,e(x,e(e(y,e(y,z)),z)))).
+
+given clause #51: (wt=12) 76 [hyper,1,50,51] P(e(x,e(x,e(y,e(z,e(y,z)))))).
+
+given clause #52: (wt=12) 77 [hyper,1,33,51] P(e(e(x,e(y,e(z,e(y,z)))),x)).
+755 back subsumes 723.
+758 back subsumes 717.
+759 back subsumes 715.
+760 back subsumes 724.
+772 back subsumes 678.
+
+given clause #53: (wt=12) 81 [hyper,1,51,50] P(e(x,e(e(y,e(z,e(z,y))),x))).
+
+given clause #54: (wt=12) 84 [hyper,1,51,33] P(e(x,e(e(y,e(e(z,y),z)),x))).
+
+given clause #55: (wt=12) 95 [hyper,1,50,56] P(e(x,e(x,e(y,e(y,e(z,z)))))).
+892 back subsumes 796.
+916 back subsumes 842.
+
+given clause #56: (wt=12) 96 [hyper,1,33,56] P(e(e(x,e(y,e(y,e(z,z)))),x)).
+934 back subsumes 893.
+938 back subsumes 898.
+941 back subsumes 892.
+942 back subsumes 890.
+943 back subsumes 899.
+944 back subsumes 923.
+945 back subsumes 920.
+946 back subsumes 917.
+949 back subsumes 916.
+953 back subsumes 95.
+958 back subsumes 718.
+961 back subsumes 673.
+965 back subsumes 474.
+
+given clause #57: (wt=12) 101 [hyper,1,56,50] P(e(e(x,e(y,e(y,x))),e(z,z))).
+
+given clause #58: (wt=12) 103 [hyper,1,56,38] P(e(e(e(x,e(x,y)),y),e(z,z))).
+
+given clause #59: (wt=12) 104 [hyper,1,56,33] P(e(e(x,e(e(y,x),y)),e(z,z))).
+
+given clause #60: (wt=12) 114 [hyper,1,50,63] P(e(x,e(x,e(e(e(y,z),z),y)))).
+1050 back subsumes 841.
+
+given clause #61: (wt=12) 122 [hyper,1,50,78] P(e(x,e(x,e(e(y,e(z,y)),z)))).
+1113 back subsumes 846.
+
+given clause #62: (wt=12) 123 [hyper,1,33,78] P(e(e(x,e(e(y,e(z,y)),z)),x)).
+
+-------- PROOF -------- 1162 [binary,1161.1,3.1] $ANSWER(P5_XGF).
+
+----> UNIT CONFLICT at   0.07 sec ----> 1162 [binary,1161.1,3.1] $ANSWER(P5_XGF).
+
+Length of proof is 15.  Level of proof is 13.
+
+---------------- PROOF ----------------
+
+1 [] -P(e(x,y))| -P(x)|P(y).
+2 [] P(e(e(x,y),e(e(z,y),e(x,z)))).
+3 [] -P(e(a,e(e(b,e(a,c)),e(c,b))))|$ANSWER(P5_XGF).
+4 [hyper,1,2,2] P(e(e(x,e(e(y,z),e(u,y))),e(e(u,z),x))).
+7 [hyper,1,4,2] P(e(e(x,y),e(x,y))).
+8 [hyper,1,2,7] P(e(e(x,e(y,z)),e(e(y,z),x))).
+10 [hyper,1,4,8] P(e(e(x,y),e(e(x,z),e(z,y)))).
+13 [hyper,1,8,2] P(e(e(e(x,y),e(z,x)),e(z,y))).
+18 [hyper,1,4,10] P(e(e(x,x),e(y,y))).
+23 [hyper,1,18,18] P(e(x,x)).
+26 [hyper,1,10,23] P(e(e(x,y),e(y,x))).
+32 [hyper,1,13,10] P(e(e(e(x,y),x),y)).
+33 [hyper,1,26,32] P(e(x,e(e(y,x),y))).
+38 [hyper,1,13,33] P(e(e(x,e(x,y)),y)).
+51 [hyper,1,13,38] P(e(x,e(y,e(x,y)))).
+78 [hyper,1,26,51] P(e(e(x,e(y,x)),y)).
+123 [hyper,1,33,78] P(e(e(x,e(e(y,e(z,y)),z)),x)).
+1161 [hyper,1,123,4] P(e(x,e(e(y,e(x,z)),e(z,y)))).
+1162 [binary,1161.1,3.1] $ANSWER(P5_XGF).
+
+------------ end of proof -------------
+
+1131 back subsumes 1089.
+1134 back subsumes 1085.
+1137 back subsumes 1090.
+1140 back subsumes 800.
+1141 back subsumes 1083.
+1142 back subsumes 1091.
+1152 back subsumes 897.
+1153 back subsumes 722.
+1156 back subsumes 677.
+
+given clause #63: (wt=12) 130 [hyper,1,50,87] P(e(x,e(x,e(y,e(e(z,z),y))))).
+1216 back subsumes 844.
+
+given clause #64: (wt=12) 131 [hyper,1,33,87] P(e(e(x,e(y,e(e(z,z),y))),x)).
+1234 back subsumes 1188.
+1236 back subsumes 1190.
+1239 back subsumes 1186.
+1242 back subsumes 1191.
+1245 back subsumes 798.
+1246 back subsumes 1184.
+1247 back subsumes 1192.
+1257 back subsumes 1087.
+1258 back subsumes 895.
+1259 back subsumes 720.
+1262 back subsumes 675.
+
+given clause #65: (wt=12) 138 [hyper,1,87,50] P(e(e(x,x),e(y,e(z,e(z,y))))).
+1279 back subsumes 630.
+
+given clause #66: (wt=12) 152 [hyper,1,50,97] P(e(x,e(x,e(e(e(y,y),z),z)))).
+1340 back subsumes 843.
+
+given clause #67: (wt=12) 153 [hyper,1,33,97] P(e(e(x,e(e(e(y,y),z),z)),x)).
+1358 back subsumes 1308.
+1360 back subsumes 1309.
+1362 back subsumes 1311.
+1365 back subsumes 1307.
+1368 back subsumes 1312.
+1371 back subsumes 797.
+1372 back subsumes 1305.
+1373 back subsumes 1313.
+1374 back subsumes 1347.
+1375 back subsumes 1344.
+1376 back subsumes 1341.
+1379 back subsumes 1340.
+1383 back subsumes 152.
+1388 back subsumes 1187.
+1389 back subsumes 1086.
+1390 back subsumes 894.
+1391 back subsumes 719.
+1394 back subsumes 674.
+
+given clause #68: (wt=12) 161 [hyper,1,50,116] P(e(x,e(x,e(y,e(e(y,z),z))))).
+1458 back subsumes 845.
+
+given clause #69: (wt=12) 171 [hyper,1,116,50] P(e(e(e(x,e(y,e(y,x))),z),z)).
+1489 back subsumes 969.
+1493 back subsumes 799.
+
+given clause #70: (wt=12) 194 [hyper,1,10,192] P(e(e(e(x,e(x,y)),z),e(z,y))).
+1514 back subsumes 1500.
+1523 back subsumes 248.
+1524 back subsumes 103.
+1528 back subsumes 1514.
+
+given clause #71: (wt=12) 196 [hyper,1,2,192] P(e(e(x,y),e(e(z,e(z,y)),x))).
+1568 back subsumes 793.
+1572 back subsumes 1515.
+1574 back subsumes 1508.
+1575 back subsumes 1502.
+1576 back subsumes 1503.
+1578 back subsumes 1505.
+1580 back subsumes 1511.
+1581 back subsumes 1516.
+1608 back subsumes 473.
+1614 back subsumes 656.
+
+given clause #72: (wt=12) 197 [hyper,1,193,193] P(e(x,e(e(y,e(z,e(y,z))),x))).
+1638 back subsumes 77.
+1641 back subsumes 76.
+1645 back subsumes 771.
+1646 back subsumes 1028.
+1647 back subsumes 770.
+1648 back subsumes 938.
+1649 back subsumes 1368.
+1650 back subsumes 1242.
+1651 back subsumes 1429.
+1652 back subsumes 1137.
+1655 back subsumes 755.
+1656 back subsumes 772.
+1685 back subsumes 776.
+1686 back subsumes 775.
+1689 back subsumes 774.
+1692 back subsumes 280.
+1693 back subsumes 773.
+
+given clause #73: (wt=12) 200 [hyper,1,10,193] P(e(e(x,y),e(y,e(z,e(x,z))))).
+1724 back subsumes 1081.
+1734 back subsumes 1711.
+1763 back subsumes 509.
+1766 back subsumes 363.
+1769 back subsumes 239.
+1771 back subsumes 214.
+
+given clause #74: (wt=12) 201 [hyper,1,2,193] P(e(e(x,e(y,e(z,y))),e(z,x))).
+-------- PROOF -------- 1828 [binary,1827.1,3.1] $ANSWER(P5_XGF).
+
+----> UNIT CONFLICT at   0.13 sec ----> 1828 [binary,1827.1,3.1] $ANSWER(P5_XGF).
+
+Length of proof is 9.  Level of proof is 8.
+
+---------------- PROOF ----------------
+
+1 [] -P(e(x,y))| -P(x)|P(y).
+2 [] P(e(e(x,y),e(e(z,y),e(x,z)))).
+3 [] -P(e(a,e(e(b,e(a,c)),e(c,b))))|$ANSWER(P5_XGF).
+4 [hyper,1,2,2] P(e(e(x,e(e(y,z),e(u,y))),e(e(u,z),x))).
+7 [hyper,1,4,2] P(e(e(x,y),e(x,y))).
+8 [hyper,1,2,7] P(e(e(x,e(y,z)),e(e(y,z),x))).
+10 [hyper,1,4,8] P(e(e(x,y),e(e(x,z),e(z,y)))).
+13 [hyper,1,8,2] P(e(e(e(x,y),e(z,x)),e(z,y))).
+17 [hyper,1,8,10] P(e(e(e(x,y),e(y,z)),e(x,z))).
+193 [hyper,1,17,10] P(e(x,e(y,e(x,y)))).
+201 [hyper,1,2,193] P(e(e(x,e(y,e(z,y))),e(z,x))).
+1827 [hyper,1,201,13] P(e(x,e(e(y,e(x,z)),e(z,y)))).
+1828 [binary,1827.1,3.1] $ANSWER(P5_XGF).
+
+------------ end of proof -------------
+
+
+Search stopped by max_proofs option.
+
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 74
+clauses generated           3270
+  hyper_res generated       3270
+demod & eval rewrites          0
+clauses wt,lit,sk delete       0
+tautologies deleted            0
+clauses forward subsumed    1447
+cl not subsumed due to ancestor_subsume     259
+  (subsumed by sos)          634
+unit deletions                 0
+factor simplifications         0
+clauses kept                1823
+new demodulators               0
+empty clauses                  2
+clauses back demodulated       0
+clauses back subsumed        257
+usable size                   56
+sos size                    1512
+demodulators size              0
+passive size                   1
+hot size                       0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.13          (0 hr, 0 min, 0 sec)
+system CPU time        0.01          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8897 finished Mon Aug  2 15:31:13 2004

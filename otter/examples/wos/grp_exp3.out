@@ -1,0 +1,246 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:39 2004
+The command was "../../bin/otter".  The process ID is 8507.
+
+set(knuth_bendix).
+   dependent: set(anl_eq).
+   dependent: set(para_from).
+   dependent: set(para_into).
+   dependent: clear(para_from_right).
+   dependent: clear(para_into_right).
+   dependent: set(para_from_vars).
+   dependent: set(eq_units_both_ways).
+   dependent: set(dynamic_demod_all).
+   dependent: set(dynamic_demod).
+   dependent: set(order_eq).
+   dependent: set(back_demod).
+   dependent: set(process_input).
+   dependent: set(lrpo).
+clear(eq_units_both_ways).
+WARNING: set(process_input) flag already set.
+set(process_input).
+WARNING: set(index_for_back_demod) flag already set.
+set(index_for_back_demod).
+WARNING: set(lrpo) flag already set.
+set(lrpo).
+
+lex([e,f(x,x),g(x)]).
+assign(pick_given_ratio,3).
+assign(max_proofs,4).
+assign(max_mem,12000).
+assign(max_weight,80).
+assign(demod_limit,-1).
+assign(change_limit_after,12).
+assign(new_max_weight,25).
+clear(print_kept).
+clear(print_new_demod).
+clear(print_back_demod).
+
+weight_list(pick_and_purge).
+weight(EQ(f(e,e),e),2).
+weight(EQ(f(e,f(x,f(x,f(x,e)))),e),2).
+weight(EQ(f(f(x,e),f(f(x,e),f(x,e))),e),2).
+weight(EQ(f(f(x,e),f(f(x,e),f(x,f(f(f(e,f(x,e)),y),f(y,y))))),f(x,e)),2).
+weight(EQ(f(f(x,y),e),f(x,f(y,f(z,f(z,f(z,e)))))),2).
+weight(EQ(f(f(x,y),f(e,z)),f(x,f(y,z))),2).
+weight(EQ(f(f(x,y),f(f(x,y),f(x,f(y,e)))),e),2).
+weight(EQ(f(x,e),x),2).
+weight(EQ(f(x,f(f(x,f(f(x,y),f(e,f(f(e,z),f(e,z))))),z)),y),2).
+weight(EQ(f(x,f(f(x,f(f(x,y),f(e,f(z,z)))),f(f(e,f(f(e,z),u)),f(e,f(u,u))))),y),2).
+weight(EQ(f(x,f(f(x,f(f(x,y),z)),f(f(e,z),f(e,z)))),y),2).
+weight(EQ(f(x,f(f(y,z),u)),f(f(x,y),f(f(e,z),u))),2).
+weight(EQ(f(x,f(x,f(f(x,f(y,f(z,e))),f(f(f(e,e),u),f(u,u))))),f(y,z)),2).
+weight(EQ(f(x,f(x,f(f(y,z),f(z,z)))),f(x,f(x,f(y,e)))),2).
+weight(EQ(f(x,f(x,f(x,e))),e),2).
+weight(EQ(f(x,f(x,f(x,f(y,e)))),y),2).
+weight(EQ(f(x,f(x,f(x,f(y,f(z,e))))),f(y,z)),2).
+weight(EQ(f(x,f(y,f(e,f(f(e,f(z,z)),f(e,f(z,z)))))),f(f(x,y),z)),2).
+end_of_list.
+
+list(usable).
+0 [] EQ(x,x).
+end_of_list.
+
+list(sos).
+0 [] EQ(f(x,f(f(x,f(f(x,y),z)),f(e,f(z,z)))),y).
+end_of_list.
+
+list(passive).
+1 [] -EQ(f(e,a),a)|$ANS(lid).
+2 [] -EQ(f(a,e),a)|$ANS(rid).
+3 [] -EQ(f(a,f(a,a)),e)|$ANS(exp3).
+4 [] -EQ(f(f(a,b),c),f(a,f(b,c)))|$ANS(assoc).
+end_of_list.
+
+------------> process usable:
+** KEPT (pick-wt=3): 5 [] EQ(x,x).
+
+------------> process sos:
+** KEPT (pick-wt=17): 6 [] EQ(f(x,f(f(x,f(f(x,y),z)),f(e,f(z,z)))),y).
+---> New Demodulator: 7 [new_demod,6] EQ(f(x,f(f(x,f(f(x,y),z)),f(e,f(z,z)))),y).
+>>>> Starting back demodulation with 7.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=17) 6 [] EQ(f(x,f(f(x,f(f(x,y),z)),f(e,f(z,z)))),y).
+
+given clause #2: (wt=2) 11 [para_into,6.1.1.2.1,6.1.1] EQ(f(x,f(y,f(e,f(f(e,f(z,z)),f(e,f(z,z)))))),f(f(x,y),z)).
+
+given clause #3: (wt=2) 22 [para_into,11.1.1.2.2,6.1.1,flip.1] EQ(f(f(x,y),f(e,z)),f(x,f(y,z))).
+
+given clause #4: (wt=2) 34 [para_into,22.1.1.1,22.1.1,demod,23] EQ(f(x,f(f(y,z),u)),f(f(x,y),f(f(e,z),u))).
+
+given clause #5: (wt=15) 24 [para_into,11.1.1,6.1.1,demod,23,flip.1] EQ(f(f(x,f(x,f(x,f(y,f(z,z))))),z),y).
+
+given clause #6: (wt=15) 32 [back_demod,6,demod,23] EQ(f(x,f(x,f(f(f(x,y),z),f(z,z)))),y).
+
+given clause #7: (wt=2) 79 [para_into,32.1.1.2.2,22.1.1,demod,23] EQ(f(x,f(x,f(x,f(y,e)))),y).
+
+given clause #8: (wt=2) 99 [para_into,79.1.1.2.2,22.1.1] EQ(f(f(x,y),f(f(x,y),f(x,f(y,e)))),e).
+
+-------- PROOF -------- 155 [binary,153.1,2.1] $ANS(rid).
+
+----> UNIT CONFLICT at   0.01 sec ----> 155 [binary,153.1,2.1] $ANS(rid).
+
+Length of proof is 8.  Level of proof is 6.
+
+---------------- PROOF ----------------
+
+2 [] -EQ(f(a,e),a)|$ANS(rid).
+6 [] EQ(f(x,f(f(x,f(f(x,y),z)),f(e,f(z,z)))),y).
+11 [para_into,6.1.1.2.1,6.1.1] EQ(f(x,f(y,f(e,f(f(e,f(z,z)),f(e,f(z,z)))))),f(f(x,y),z)).
+23,22 [para_into,11.1.1.2.2,6.1.1,flip.1] EQ(f(f(x,y),f(e,z)),f(x,f(y,z))).
+24 [para_into,11.1.1,6.1.1,demod,23,flip.1] EQ(f(f(x,f(x,f(x,f(y,f(z,z))))),z),y).
+32 [back_demod,6,demod,23] EQ(f(x,f(x,f(f(f(x,y),z),f(z,z)))),y).
+79 [para_into,32.1.1.2.2,22.1.1,demod,23] EQ(f(x,f(x,f(x,f(y,e)))),y).
+99 [para_into,79.1.1.2.2,22.1.1] EQ(f(f(x,y),f(f(x,y),f(x,f(y,e)))),e).
+108,107 [para_from,79.1.1,24.1.1.1.2] EQ(f(f(x,e),e),x).
+153 [para_from,99.1.1,24.1.1.1.2,demod,108] EQ(f(x,e),x).
+155 [binary,153.1,2.1] $ANS(rid).
+
+------------ end of proof -------------
+
+-------- PROOF -------- 178 [binary,176.1,3.1] $ANS(exp3).
+
+----> UNIT CONFLICT at   0.01 sec ----> 178 [binary,176.1,3.1] $ANS(exp3).
+
+Length of proof is 10.  Level of proof is 7.
+
+---------------- PROOF ----------------
+
+3 [] -EQ(f(a,f(a,a)),e)|$ANS(exp3).
+6 [] EQ(f(x,f(f(x,f(f(x,y),z)),f(e,f(z,z)))),y).
+11 [para_into,6.1.1.2.1,6.1.1] EQ(f(x,f(y,f(e,f(f(e,f(z,z)),f(e,f(z,z)))))),f(f(x,y),z)).
+23,22 [para_into,11.1.1.2.2,6.1.1,flip.1] EQ(f(f(x,y),f(e,z)),f(x,f(y,z))).
+25,24 [para_into,11.1.1,6.1.1,demod,23,flip.1] EQ(f(f(x,f(x,f(x,f(y,f(z,z))))),z),y).
+32 [back_demod,6,demod,23] EQ(f(x,f(x,f(f(f(x,y),z),f(z,z)))),y).
+79 [para_into,32.1.1.2.2,22.1.1,demod,23] EQ(f(x,f(x,f(x,f(y,e)))),y).
+99 [para_into,79.1.1.2.2,22.1.1] EQ(f(f(x,y),f(f(x,y),f(x,f(y,e)))),e).
+108,107 [para_from,79.1.1,24.1.1.1.2] EQ(f(f(x,e),e),x).
+141 [para_into,99.1.1.2.2,24.1.1] EQ(f(f(f(x,f(x,f(x,f(y,f(f(z,e),f(z,e)))))),z),f(f(f(x,f(x,f(x,f(y,f(f(z,e),f(z,e)))))),z),y)),e).
+154,153 [para_from,99.1.1,24.1.1.1.2,demod,108] EQ(f(x,e),x).
+176 [back_demod,141,demod,154,154,25,154,154,25] EQ(f(x,f(x,x)),e).
+178 [binary,176.1,3.1] $ANS(exp3).
+
+------------ end of proof -------------
+
+-------- PROOF -------- 201 [binary,199.1,1.1] $ANS(lid).
+
+----> UNIT CONFLICT at   0.01 sec ----> 201 [binary,199.1,1.1] $ANS(lid).
+
+Length of proof is 12.  Level of proof is 8.
+
+---------------- PROOF ----------------
+
+1 [] -EQ(f(e,a),a)|$ANS(lid).
+6 [] EQ(f(x,f(f(x,f(f(x,y),z)),f(e,f(z,z)))),y).
+11 [para_into,6.1.1.2.1,6.1.1] EQ(f(x,f(y,f(e,f(f(e,f(z,z)),f(e,f(z,z)))))),f(f(x,y),z)).
+23,22 [para_into,11.1.1.2.2,6.1.1,flip.1] EQ(f(f(x,y),f(e,z)),f(x,f(y,z))).
+25,24 [para_into,11.1.1,6.1.1,demod,23,flip.1] EQ(f(f(x,f(x,f(x,f(y,f(z,z))))),z),y).
+32 [back_demod,6,demod,23] EQ(f(x,f(x,f(f(f(x,y),z),f(z,z)))),y).
+79 [para_into,32.1.1.2.2,22.1.1,demod,23] EQ(f(x,f(x,f(x,f(y,e)))),y).
+99 [para_into,79.1.1.2.2,22.1.1] EQ(f(f(x,y),f(f(x,y),f(x,f(y,e)))),e).
+108,107 [para_from,79.1.1,24.1.1.1.2] EQ(f(f(x,e),e),x).
+109 [para_from,79.1.1,24.1.1.1.2.2] EQ(f(f(f(x,e),f(f(x,e),x)),f(x,e)),f(x,e)).
+141 [para_into,99.1.1.2.2,24.1.1] EQ(f(f(f(x,f(x,f(x,f(y,f(f(z,e),f(z,e)))))),z),f(f(f(x,f(x,f(x,f(y,f(f(z,e),f(z,e)))))),z),y)),e).
+154,153 [para_from,99.1.1,24.1.1.1.2,demod,108] EQ(f(x,e),x).
+177,176 [back_demod,141,demod,154,154,25,154,154,25] EQ(f(x,f(x,x)),e).
+199 [back_demod,109,demod,154,154,177,154,154] EQ(f(e,x),x).
+201 [binary,199.1,1.1] $ANS(lid).
+
+------------ end of proof -------------
+
+-------- PROOF -------- 220 [binary,218.1,4.1] $ANS(assoc).
+
+----> UNIT CONFLICT at   0.02 sec ----> 220 [binary,218.1,4.1] $ANS(assoc).
+
+Length of proof is 17.  Level of proof is 9.
+
+---------------- PROOF ----------------
+
+4 [] -EQ(f(f(a,b),c),f(a,f(b,c)))|$ANS(assoc).
+6 [] EQ(f(x,f(f(x,f(f(x,y),z)),f(e,f(z,z)))),y).
+11 [para_into,6.1.1.2.1,6.1.1] EQ(f(x,f(y,f(e,f(f(e,f(z,z)),f(e,f(z,z)))))),f(f(x,y),z)).
+23,22 [para_into,11.1.1.2.2,6.1.1,flip.1] EQ(f(f(x,y),f(e,z)),f(x,f(y,z))).
+25,24 [para_into,11.1.1,6.1.1,demod,23,flip.1] EQ(f(f(x,f(x,f(x,f(y,f(z,z))))),z),y).
+28 [back_demod,11,demod,23] EQ(f(x,f(y,f(e,f(e,f(f(z,z),f(z,z)))))),f(f(x,y),z)).
+32 [back_demod,6,demod,23] EQ(f(x,f(x,f(f(f(x,y),z),f(z,z)))),y).
+79 [para_into,32.1.1.2.2,22.1.1,demod,23] EQ(f(x,f(x,f(x,f(y,e)))),y).
+99 [para_into,79.1.1.2.2,22.1.1] EQ(f(f(x,y),f(f(x,y),f(x,f(y,e)))),e).
+108,107 [para_from,79.1.1,24.1.1.1.2] EQ(f(f(x,e),e),x).
+109 [para_from,79.1.1,24.1.1.1.2.2] EQ(f(f(f(x,e),f(f(x,e),x)),f(x,e)),f(x,e)).
+119,118 [para_from,79.1.1,32.1.1.2.2.1.1] EQ(f(x,f(x,f(f(y,z),f(z,z)))),f(x,f(x,f(y,e)))).
+130 [back_demod,28,demod,119] EQ(f(x,f(y,f(e,f(e,f(z,e))))),f(f(x,y),z)).
+141 [para_into,99.1.1.2.2,24.1.1] EQ(f(f(f(x,f(x,f(x,f(y,f(f(z,e),f(z,e)))))),z),f(f(f(x,f(x,f(x,f(y,f(f(z,e),f(z,e)))))),z),y)),e).
+154,153 [para_from,99.1.1,24.1.1.1.2,demod,108] EQ(f(x,e),x).
+177,176 [back_demod,141,demod,154,154,25,154,154,25] EQ(f(x,f(x,x)),e).
+185 [back_demod,130,demod,154,flip.1] EQ(f(f(x,y),z),f(x,f(y,f(e,f(e,z))))).
+200,199 [back_demod,109,demod,154,154,177,154,154] EQ(f(e,x),x).
+218 [back_demod,185,demod,200,200] EQ(f(f(x,y),z),f(x,f(y,z))).
+220 [binary,218.1,4.1] $ANS(assoc).
+
+------------ end of proof -------------
+
+
+Search stopped by max_proofs option.
+
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                  8
+clauses generated            124
+  para_from generated         49
+  para_into generated         75
+demod & eval rewrites       1119
+clauses wt,lit,sk delete       2
+tautologies deleted            0
+clauses forward subsumed     110
+  (subsumed by sos)            9
+unit deletions                 0
+factor simplifications         0
+clauses kept                 115
+new demodulators              97
+empty clauses                  4
+clauses back demodulated     101
+clauses back subsumed          0
+usable size                    1
+sos size                      13
+demodulators size             13
+passive size                   4
+hot size                       0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+system CPU time        0.01          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8507 finished Mon Aug  2 15:30:39 2004

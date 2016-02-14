@@ -1,0 +1,14 @@
+
+                     --------------------
+                     Otter, Version 3.0.6
+                     --------------------
+
+The only substantial change from 3.0.5 is that a new kind of proof
+object can be output: set(build_proof_object_2).  This is used
+for the Ivy project (see http://www-unix.mcs.anl.gov/~mccune/acl2/).
+
+FTP Otter 3.0.6 from ftp://info.mcs.anl.gov/pub/Otter/otter-3.0.6.tar.Z
+
+   W. McCune   (otter@mcs.anl.gov)
+   Argonne National Laboratory
+   April, 2000

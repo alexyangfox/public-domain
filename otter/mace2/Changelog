@@ -1,0 +1,155 @@
+August 16, 1995.  mace 1.2.0 released
+
+April 1996.  New print option -P, for printing in "portable format",
+	which is for reading into another program (eqp semantic para).
+
+	Result is mace-1.2.0a
+
+Sept 26, 1996.
+	1.  New option -c, for distinct constants (up to n).
+	    This should work correctly with domain elemnts in
+	    clauses and special unit assignments, but NOT with -z.
+	2.  time limit is checked during generation of prop. clauses
+	    (after processing of each FO clause).
+	3.  For printing models, "-" changed to "T" in relations.
+  
+        Result is mace-1.3
+
+July 2, 1997 (in preparation for CASC-14).
+
+	1. bug: crash if arity too great.  fixed.
+	2. It used to abend if propositional unsatisfiability was
+	   detected in add_clause (e.g., conflicting units).
+	   Now, call exit(UNSATISFIABLE_EXIT) in that case.
+	Result is mace-1.3.1
+
+Nov 4, 1997.
+	Changed MAX_CLAUSES from 100 to 500 (so we could do Dale Myers'
+	zebra problem).
+
+Dec 1, 1997.
+	Changed tp_alloc_size from 300,000 to 1,000,000 (for M. Spinks prob).
+	result it mace-1.3.2.
+
+Dec 7, 1998.  
+        1. Bug from Branden Fitelson: When printing relations,
+        the nondetermined atoms (atom_value() = 2) should be "F",
+        because the propositional engine selects positive clauses,
+        and no more positive clauses (the termination condition),
+	means that the unassigned atoms should be "F".  The error
+	was introduced in mace-1.3 above, item 3.
+
+	2. Increase default max-mem from 16MB to 48 MB.
+
+        result is mace-1.3.3.
+
+June, 1999.
+	New command-line option -I to print models in Ivy format.
+
+February, 2000.	
+
+	Release mace-1.3.4
+
+May 16, 2000.
+	Bug.  I wasn't checking for symbol table overflow.  Fixed.
+	Also, I increased the symbol table size from 50 to 100, so
+	it could handle the set problems in TPTP.  (Well, it still
+	can't handle the set problems in TPTP, because there is a
+	clause with 13 variables.  (Max is 12, and that limit is wired in.)
+
+May 16, 2000.
+	Lots of cleaning up, and some reorganization of the code.
+
+------ 2001------ 2001------ 2001------ 2001------ 2001------ 2001
+
+May, first half, 2001.  MAJOR overhaul of MACE, to make it self-contained.
+	Now, Otter code (to parse input) is loaded along with MACE.
+	This involved lots of soruce code reorganization.
+	And there were more than a few changes to the functionality.
+	A 9-page "MACE 2.0 User Manual and Guide" was written.
+	
+May 11, 2001.  Release MACE 2.0-beta as part of Otter-3.2-beta.
+
+May 14, 2001.  Added -N option: ability to iterate through domain sizes.
+	This eliminates the need for a separate maceloop program.
+	This involved substantial reorganization of the MACE code.
+	Updated manual.
+
+May 29, 2001.  Bug (reported by Johan Bos) printing with -P.
+	Comma after last printed symbol if equality relation is last.
+	Fixed print_models_portable().
+
+May 29, 2001.  Changed Ivy (-I) printing to print equality relations
+	other than "=", because "=" is the only equality built-in to Ivy.
+
+June 8, 2001.  Added constraints (when -c is not used) to reduce number
+	of isomorphic models w.r.t. constants.  I believe it is complete,
+	and it seems to work as well as -c for some examples.
+	See iso_constants() in generate.c.  mace-2-beta-4.
+
+June 11, 2001.  Bug if more than 2^16 - 1 (65535) atoms.  Fixed the
+	code that does the check.  It now abends.  mace-2-beta-5.
+
+	This is the deadline for CASC-2001 installation, so it got
+	this version.
+
+June 12, 2001.  The new iso constraints (June 8) are exponential in
+	the number of constants.  Added a new command-line switch:
+	-z n says to apply the constraints to the first n constants.
+        mace-2-beta-6.
+
+June 14, 2001.  Bug in iso constraints.  Fixed.  Also, separated
+	"theory elements" (domain elements in clause list) from
+	"constraint elements" (domain elements in mace_constraints list).
+	An element can be both theory and constraint (or neither).
+	Iso constraints ignores constraint elements when asserting clauses.
+	Also, changed -c so that it ignores constraint elements.
+        mace-2-beta-8.
+
+July 2, 2001.
+	Added option -C to split on clauses.
+	Added option -r to print order of assignments for each model.
+	mace-2-beta-11.
+
+August 13, 2001.  Release Otter 3.2 and MACE 2.0 for Unix.
+
+June 2003.  Reorganize directories in preparation for the
+	Otter 3.3/Mace 2.2 release.
+
+August 4-6, 2003.  At the model-building workshop at CADE-19, I heard
+	a talk on mace2-style model searching by Koen Claessen and
+	Niklas Sorensson.  There was good evidence that dividing
+	flattened clauses to reduce the number of variables pays off well.
+	I've known about this method for several years, but I never got
+	around to trying it myself, mostly because I've been focusing
+	on mace4 (the equational method).
+	Anyway, I tried it, and it works well enough to include
+	as default in mace2.  The new code is in part.c, and a command-line
+	switch -vn (default n=1) says to apply the method to clauses
+	with n or more variables.  This changes the searches in most
+	of the test problems, so the "official" output files were
+	rebuilt.
+
+	This new feature can be disabled with, for example, -v1000.
+
+August 12, 2003.  Bug introduced in Aug 4--6 mods: answer literals
+	not removed.  Fixed.  Second minor bug:  if set(process_input),
+	clasues don't get IDs.  Fixed.
+
+August 27, 2003.  Increased MAX_SYMBOLS in Generate.c from 100 to 500.
+
+------------------------------------
+
+August 27, 2003.  Freeze for Otter 3.3 / Mace 2.2 release.
+
+February 9, 2004. Mace2 crashes if the input contains a hints2 list.
+	Fix: minor change to read_all_mace_input.
+
+May 26, 2004.  Send to Sutcliffe for CASC testing.  mace 2.2E
+
+June 29, 2004.  Sutcliffe finds soundness bug!!  The mace2-for-casc
+        script gives parameter -N100, but there's a limit of 50
+	in the code, and out-of-range was not checked.  Fixed.
+	(Limit was also changed to 100.)
+
+ 	Mace 2.2E2 sent to Sutcliffe.

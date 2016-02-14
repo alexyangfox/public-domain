@@ -1,0 +1,623 @@
+
+WARNING, with splitting, max_seconds is checked against the wall clock.
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:31:08 2004
+The command was "../../bin/otter".  The process ID is 8651.
+
+set(prolog_style_variables).
+set(auto2).
+   dependent: set(process_input).
+   dependent: clear(print_kept).
+   dependent: clear(print_new_demod).
+   dependent: clear(print_back_demod).
+   dependent: clear(print_back_sub).
+   dependent: set(control_memory).
+   dependent: assign(max_mem, 20000).
+   dependent: assign(pick_given_ratio, 4).
+   dependent: assign(stats_level, 1).
+   dependent: assign(max_seconds, 10800).
+set(tptp_eq).
+set(split_when_given).
+   dependent: set(back_unit_deletion).
+   dependent: set(unit_deletion).
+set(split_pos).
+
+list(usable).
+0 [] equal(A,A).
+0 [] group_member(identity_for(A),A).
+0 [] product(A,identity_for(A),B,B).
+0 [] product(A,B,identity_for(A),B).
+0 [] -group_member(A,B)|group_member(inverse(B,A),B).
+0 [] product(A,inverse(A,B),B,identity_for(A)).
+0 [] product(A,B,inverse(A,B),identity_for(A)).
+0 [] -group_member(A,B)| -group_member(C,B)|product(B,A,C,multiply(B,A,C)).
+0 [] -group_member(A,B)| -group_member(C,B)|group_member(multiply(B,A,C),B).
+0 [] -product(A,B,C,D)| -product(A,B,C,E)|equal(E,D).
+0 [] -product(A,B,C,D)| -product(A,C,E,F)| -product(A,D,E,G)|product(A,B,F,G).
+0 [] -product(A,B,C,D)| -product(A,C,E,F)| -product(A,B,F,G)|product(A,D,E,G).
+end_of_list.
+
+list(sos).
+0 [] group_member(a,g1).
+0 [] group_member(b,g1).
+0 [] group_member(c,g2).
+0 [] group_member(d,g2).
+0 [] -group_member(A,g1)|equal(A,a)|equal(A,b).
+0 [] -group_member(A,g2)|equal(A,c)|equal(A,d).
+0 [] product(g1,a,a,a).
+0 [] product(g1,a,b,b).
+0 [] product(g1,b,a,b).
+0 [] product(g1,b,b,a).
+0 [] product(g2,c,c,c).
+0 [] product(g2,c,d,d).
+0 [] product(g2,d,c,d).
+0 [] product(g2,d,d,c).
+0 [] equal(an_isomorphism(a),c).
+0 [] equal(an_isomorphism(b),d).
+0 [] group_member(d1,g1).
+0 [] group_member(d2,g1).
+0 [] group_member(d3,g1).
+0 [] product(g1,d1,d2,d3).
+0 [] -product(g2,an_isomorphism(d1),an_isomorphism(d2),an_isomorphism(d3)).
+end_of_list.
+
+Every positive clause in sos is ground (or sos is empty);
+therefore we move all positive usable clauses to sos.
+
+Properties of input clauses: prop=0, horn=0, equality=1, symmetry=0, max_lits=4.
+
+Setting hyper_res, because there are nonunits.
+   dependent: set(hyper_res).
+Setting ur_res, because this is a nonunit set containing
+either equality literals or non-Horn clauses.
+   dependent: set(ur_res).
+Setting factor and  unit_deletion, because there are non-Horn clauses.
+   dependent: set(factor).
+Equality is present, so we set the knuth_bendix flag.
+   dependent: set(knuth_bendix).
+   dependent: set(anl_eq).
+   dependent: set(para_from).
+   dependent: set(para_into).
+   dependent: clear(para_from_right).
+   dependent: clear(para_into_right).
+   dependent: set(para_from_vars).
+   dependent: set(eq_units_both_ways).
+   dependent: set(dynamic_demod_all).
+   dependent: set(dynamic_demod).
+   dependent: set(order_eq).
+   dependent: set(back_demod).
+   dependent: set(lrpo).
+As an incomplete heuristic, we paramodulate with units only.
+   dependent: set(para_from_units_only).
+   dependent: set(para_into_units_only).
+
+------------> process usable:
+** KEPT (pick-wt=8): 1 [] -group_member(A,B)|group_member(inverse(B,A),B).
+** KEPT (pick-wt=14): 2 [] -group_member(A,B)| -group_member(C,B)|product(B,A,C,multiply(B,A,C)).
+** KEPT (pick-wt=12): 3 [] -group_member(A,B)| -group_member(C,B)|group_member(multiply(B,A,C),B).
+** KEPT (pick-wt=13): 4 [] -product(A,B,C,D)| -product(A,B,C,E)|equal(E,D).
+** KEPT (pick-wt=20): 5 [] -product(A,B,C,D)| -product(A,C,E,F)| -product(A,D,E,G)|product(A,B,F,G).
+** KEPT (pick-wt=20): 6 [] -product(A,B,C,D)| -product(A,C,E,F)| -product(A,B,F,G)|product(A,D,E,G).
+
+------------> process sos:
+** KEPT (pick-wt=3): 16 [] group_member(a,g1).
+** KEPT (pick-wt=3): 17 [] group_member(b,g1).
+** KEPT (pick-wt=3): 18 [] group_member(c,g2).
+** KEPT (pick-wt=3): 19 [] group_member(d,g2).
+** KEPT (pick-wt=9): 20 [] -group_member(A,g1)|equal(A,a)|equal(A,b).
+** KEPT (pick-wt=9): 21 [] -group_member(A,g2)|equal(A,c)|equal(A,d).
+** KEPT (pick-wt=5): 22 [] product(g1,a,a,a).
+** KEPT (pick-wt=5): 23 [] product(g1,a,b,b).
+** KEPT (pick-wt=5): 24 [] product(g1,b,a,b).
+** KEPT (pick-wt=5): 25 [] product(g1,b,b,a).
+** KEPT (pick-wt=5): 26 [] product(g2,c,c,c).
+** KEPT (pick-wt=5): 27 [] product(g2,c,d,d).
+** KEPT (pick-wt=5): 28 [] product(g2,d,c,d).
+** KEPT (pick-wt=5): 29 [] product(g2,d,d,c).
+** KEPT (pick-wt=4): 30 [] equal(an_isomorphism(a),c).
+---> New Demodulator: 31 [new_demod,30] equal(an_isomorphism(a),c).
+** KEPT (pick-wt=4): 32 [] equal(an_isomorphism(b),d).
+---> New Demodulator: 33 [new_demod,32] equal(an_isomorphism(b),d).
+** KEPT (pick-wt=3): 34 [] group_member(d1,g1).
+** KEPT (pick-wt=3): 35 [] group_member(d2,g1).
+** KEPT (pick-wt=3): 36 [] group_member(d3,g1).
+** KEPT (pick-wt=5): 37 [] product(g1,d1,d2,d3).
+** KEPT (pick-wt=8): 38 [] -product(g2,an_isomorphism(d1),an_isomorphism(d2),an_isomorphism(d3)).
+** KEPT (pick-wt=3): 39 [] equal(A,A).
+** KEPT (pick-wt=4): 40 [] group_member(identity_for(A),A).
+** KEPT (pick-wt=6): 41 [] product(A,identity_for(A),B,B).
+** KEPT (pick-wt=6): 42 [] product(A,B,identity_for(A),B).
+** KEPT (pick-wt=8): 43 [] product(A,inverse(A,B),B,identity_for(A)).
+** KEPT (pick-wt=8): 44 [] product(A,B,inverse(A,B),identity_for(A)).
+>>>> Starting back unit deletion with 16.
+>>>> Starting back unit deletion with 17.
+>>>> Starting back unit deletion with 18.
+>>>> Starting back unit deletion with 19.
+>>>> Starting back unit deletion with 22.
+>>>> Starting back unit deletion with 23.
+>>>> Starting back unit deletion with 24.
+>>>> Starting back unit deletion with 25.
+>>>> Starting back unit deletion with 26.
+>>>> Starting back unit deletion with 27.
+>>>> Starting back unit deletion with 28.
+>>>> Starting back unit deletion with 29.
+>>>> Starting back demodulation with 31.
+>>>> Starting back unit deletion with 30.
+>>>> Starting back demodulation with 33.
+>>>> Starting back unit deletion with 32.
+>>>> Starting back unit deletion with 34.
+>>>> Starting back unit deletion with 35.
+>>>> Starting back unit deletion with 36.
+>>>> Starting back unit deletion with 37.
+>>>> Starting back unit deletion with 38.
+  Following clause subsumed by 39 during input processing: 0 [copy,39,flip.1] equal(A,A).
+39 back subsumes 9.
+>>>> Starting back unit deletion with 39.
+>>>> Starting back unit deletion with 40.
+>>>> Starting back unit deletion with 41.
+>>>> Starting back unit deletion with 42.
+>>>> Starting back unit deletion with 43.
+>>>> Starting back unit deletion with 44.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=3) 16 [] group_member(a,g1).
+
+given clause #2: (wt=3) 17 [] group_member(b,g1).
+
+given clause #3: (wt=3) 18 [] group_member(c,g2).
+
+given clause #4: (wt=3) 19 [] group_member(d,g2).
+
+given clause #5: (wt=3) 34 [] group_member(d1,g1).
+
+given clause #6: (wt=9) 20 [] -group_member(A,g1)|equal(A,a)|equal(A,b).
+
+given clause #7: (wt=3) 35 [] group_member(d2,g1).
+
+given clause #8: (wt=3) 36 [] group_member(d3,g1).
+
+given clause #9: (wt=3) 39 [] equal(A,A).
+
+given clause #10: (wt=4) 30 [] equal(an_isomorphism(a),c).
+
+given clause #11: (wt=9) 21 [] -group_member(A,g2)|equal(A,c)|equal(A,d).
+
+given clause #12: (wt=4) 32 [] equal(an_isomorphism(b),d).
+
+given clause #13: (wt=4) 40 [] group_member(identity_for(A),A).
+
+given clause #14: (wt=5) 22 [] product(g1,a,a,a).
+
+given clause #15: (wt=5) 23 [] product(g1,a,b,b).
+
+given clause #16: (wt=5) 24 [] product(g1,b,a,b).
+
+given clause #17: (wt=5) 25 [] product(g1,b,b,a).
+
+given clause #18: (wt=5) 26 [] product(g2,c,c,c).
+
+given clause #19: (wt=5) 27 [] product(g2,c,d,d).
+
+given clause #20: (wt=5) 28 [] product(g2,d,c,d).
+
+given clause #21: (wt=5) 29 [] product(g2,d,d,c).
+
+given clause #22: (wt=5) 37 [] product(g1,d1,d2,d3).
+
+given clause #23: (wt=5) 47 [hyper,16,1] group_member(inverse(g1,a),g1).
+
+given clause #24: (wt=5) 54 [hyper,17,1] group_member(inverse(g1,b),g1).
+
+given clause #25: (wt=5) 57 [hyper,18,1] group_member(inverse(g2,c),g2).
+
+given clause #26: (wt=8) 38 [] -product(g2,an_isomorphism(d1),an_isomorphism(d2),an_isomorphism(d3)).
+
+given clause #27: (wt=5) 64 [hyper,19,1] group_member(inverse(g2,d),g2).
+
+given clause #28: (wt=5) 75 [hyper,34,1] group_member(inverse(g1,d1),g1).
+
+given clause #29: (wt=5) 92 [hyper,35,1] group_member(inverse(g1,d2),g1).
+
+given clause #30: (wt=5) 112 [hyper,36,1] group_member(inverse(g1,d3),g1).
+
+given clause #31: (wt=6) 41 [] product(A,identity_for(A),B,B).
+
+given clause #32: (wt=6) 42 [] product(A,B,identity_for(A),B).
+
+given clause #33: (wt=6) 45 [hyper,16,8] group_member(multiply(g1,a,a),g1).
+
+given clause #34: (wt=6) 48 [hyper,17,8] group_member(multiply(g1,b,b),g1).
+
+given clause #35: (wt=6) 50 [hyper,17,3,16] group_member(multiply(g1,a,b),g1).
+
+given clause #36: (wt=8) 43 [] product(A,inverse(A,B),B,identity_for(A)).
+
+given clause #37: (wt=6) 51 [hyper,17,3,16] group_member(multiply(g1,b,a),g1).
+
+given clause #38: (wt=6) 55 [hyper,18,8] group_member(multiply(g2,c,c),g2).
+
+given clause #39: (wt=6) 58 [hyper,19,8] group_member(multiply(g2,d,d),g2).
+
+given clause #40: (wt=6) 60 [hyper,19,3,18] group_member(multiply(g2,c,d),g2).
+
+given clause #41: (wt=8) 44 [] product(A,B,inverse(A,B),identity_for(A)).
+
+given clause #42: (wt=6) 61 [hyper,19,3,18] group_member(multiply(g2,d,c),g2).
+
+given clause #43: (wt=6) 65 [hyper,34,8] group_member(multiply(g1,d1,d1),g1).
+
+given clause #44: (wt=6) 67 [hyper,34,3,17] group_member(multiply(g1,b,d1),g1).
+
+given clause #45: (wt=6) 68 [hyper,34,3,16] group_member(multiply(g1,a,d1),g1).
+
+given clause #46: (wt=8) 46 [hyper,16,7] product(g1,a,a,multiply(g1,a,a)).
+
+given clause #47: (wt=6) 69 [hyper,34,3,17] group_member(multiply(g1,d1,b),g1).
+
+given clause #48: (wt=6) 70 [hyper,34,3,16] group_member(multiply(g1,d1,a),g1).
+
+given clause #49: (wt=6) 76 [hyper,20,34] equal(d1,a)|equal(d1,b).
+
+Splitting on clause 76 [hyper,20,34] equal(d1,a)|equal(d1,b).
+
+Case [1]   (process 8652):
+Assumption: 1098 [76,split.1] equal(d1,a).
+
+given clause #50: (wt=3) 1098 [76,split.1] equal(d1,a).
+
+given clause #51: (wt=8) 49 [hyper,17,7] product(g1,b,b,multiply(g1,b,b)).
+
+given clause #52: (wt=5) 1105 [back_demod,37,demod,1099] product(g1,a,d2,d3).
+
+given clause #53: (wt=5) 1121 [hyper,1105,12,22] product(g1,a,d3,d3).
+
+given clause #54: (wt=6) 77 [hyper,35,20] equal(d2,a)|equal(d2,b).
+
+Splitting on clause 77 [hyper,35,20] equal(d2,a)|equal(d2,b).
+
+Case [1.1]   (process 8653):
+Assumption: 1124 [77,split.1.1] equal(d2,a).
+
+given clause #55: (wt=3) 1124 [77,split.1.1] equal(d2,a).
+
+given clause #56: (wt=8) 52 [hyper,17,2,16] product(g1,a,b,multiply(g1,a,b)).
+
+given clause #57: (wt=5) 1126 [back_demod,1105,demod,1125] product(g1,a,a,d3).
+
+--- refuted case [1.1]
+
+----> UNIT CONFLICT at   0.00 sec ----> 1161 [binary,1160.1,529.1] $F.
+
+Length of proof is 12.  Level of proof is 6.  Case [1.1]
+
+---------------- PROOF ----------------
+
+4 [] -product(A,B,C,D)| -product(A,B,C,E)|equal(E,D).
+5 [] -product(A,B,C,D)| -product(A,C,E,F)| -product(A,D,E,G)|product(A,B,F,G).
+20 [] -group_member(A,g1)|equal(A,a)|equal(A,b).
+22 [] product(g1,a,a,a).
+26 [] product(g2,c,c,c).
+31,30 [] equal(an_isomorphism(a),c).
+34 [] group_member(d1,g1).
+35 [] group_member(d2,g1).
+37 [] product(g1,d1,d2,d3).
+38 [] -product(g2,an_isomorphism(d1),an_isomorphism(d2),an_isomorphism(d3)).
+41 [] product(A,identity_for(A),B,B).
+43 [] product(A,inverse(A,B),B,identity_for(A)).
+44 [] product(A,B,inverse(A,B),identity_for(A)).
+76 [hyper,20,34] equal(d1,a)|equal(d1,b).
+77 [hyper,35,20] equal(d2,a)|equal(d2,b).
+529 [hyper,43,5,26,41] product(g2,inverse(g2,c),c,c).
+694 [ur,44,5,41,38] -product(g2,inverse(g2,an_isomorphism(d1)),an_isomorphism(d3),an_isomorphism(d2)).
+1099,1098 [76,split.1] equal(d1,a).
+1100 [back_demod,694,demod,1099,31] -product(g2,inverse(g2,c),an_isomorphism(d3),an_isomorphism(d2)).
+1105 [back_demod,37,demod,1099] product(g1,a,d2,d3).
+1125,1124 [77,split.1.1] equal(d2,a).
+1126 [back_demod,1105,demod,1125] product(g1,a,a,d3).
+1131 [back_demod,1100,demod,1125,31] -product(g2,inverse(g2,c),an_isomorphism(d3),c).
+1159,1158 [hyper,1126,4,22] equal(d3,a).
+1160 [back_demod,1131,demod,1159,31] -product(g2,inverse(g2,c),c,c).
+1161 [binary,1160.1,529.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8653) -------
+clauses given                 57
+clauses generated           3327
+clauses kept                1151
+clauses forward subsumed    2966
+clauses back subsumed          2
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8653 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.1].
+
+Case [1.2]   (process 8654):
+Assumption: 1125 [77,split.1.2] equal(d2,b).
+
+given clause #55: (wt=3) 1125 [77,split.1.2] equal(d2,b).
+
+given clause #56: (wt=8) 52 [hyper,17,2,16] product(g1,a,b,multiply(g1,a,b)).
+
+given clause #57: (wt=3) 1127 [back_demod,1124,demod,1126] -equal(b,a).
+
+given clause #58: (wt=5) 1128 [back_demod,1105,demod,1126] product(g1,a,b,d3).
+
+--- refuted case [1.2]
+
+----> UNIT CONFLICT at   0.01 sec ----> 1170 [binary,1169.1,528.1] $F.
+
+Length of proof is 12.  Level of proof is 6.  Case [1.2]
+
+---------------- PROOF ----------------
+
+4 [] -product(A,B,C,D)| -product(A,B,C,E)|equal(E,D).
+5 [] -product(A,B,C,D)| -product(A,C,E,F)| -product(A,D,E,G)|product(A,B,F,G).
+20 [] -group_member(A,g1)|equal(A,a)|equal(A,b).
+23 [] product(g1,a,b,b).
+27 [] product(g2,c,d,d).
+31,30 [] equal(an_isomorphism(a),c).
+33,32 [] equal(an_isomorphism(b),d).
+34 [] group_member(d1,g1).
+35 [] group_member(d2,g1).
+37 [] product(g1,d1,d2,d3).
+38 [] -product(g2,an_isomorphism(d1),an_isomorphism(d2),an_isomorphism(d3)).
+41 [] product(A,identity_for(A),B,B).
+43 [] product(A,inverse(A,B),B,identity_for(A)).
+44 [] product(A,B,inverse(A,B),identity_for(A)).
+76 [hyper,20,34] equal(d1,a)|equal(d1,b).
+77 [hyper,35,20] equal(d2,a)|equal(d2,b).
+528 [hyper,43,5,27,41] product(g2,inverse(g2,c),d,d).
+694 [ur,44,5,41,38] -product(g2,inverse(g2,an_isomorphism(d1)),an_isomorphism(d3),an_isomorphism(d2)).
+1099,1098 [76,split.1] equal(d1,a).
+1100 [back_demod,694,demod,1099,31] -product(g2,inverse(g2,c),an_isomorphism(d3),an_isomorphism(d2)).
+1105 [back_demod,37,demod,1099] product(g1,a,d2,d3).
+1126,1125 [77,split.1.2] equal(d2,b).
+1128 [back_demod,1105,demod,1126] product(g1,a,b,d3).
+1133 [back_demod,1100,demod,1126,33] -product(g2,inverse(g2,c),an_isomorphism(d3),d).
+1168,1167 [hyper,1128,4,23] equal(d3,b).
+1169 [back_demod,1133,demod,1168,33] -product(g2,inverse(g2,c),d,d).
+1170 [binary,1169.1,528.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8654) -------
+clauses given                 58
+clauses generated           3326
+clauses kept                1160
+clauses forward subsumed    2957
+clauses back subsumed          2
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8654 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2].
+
+------- statistics (process 8652) -------
+clauses given                 54
+clauses generated           3244
+clauses kept                1117
+clauses forward subsumed    2763
+clauses back subsumed          2
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8652 finished Mon Aug  2 15:31:08 2004
+Refuted case [1].
+
+Case [2]   (process 8655):
+Assumption: 1099 [76,split.2] equal(d1,b).
+
+given clause #50: (wt=3) 1099 [76,split.2] equal(d1,b).
+
+given clause #51: (wt=8) 49 [hyper,17,7] product(g1,b,b,multiply(g1,b,b)).
+
+given clause #52: (wt=3) 1101 [back_demod,1098,demod,1100] -equal(b,a).
+
+given clause #53: (wt=5) 1107 [back_demod,37,demod,1100] product(g1,b,d2,d3).
+
+given clause #54: (wt=5) 1125 [ur,1101,4,24] -product(g1,b,a,a).
+
+given clause #55: (wt=5) 1126 [ur,1101,4,23] -product(g1,a,b,a).
+
+given clause #56: (wt=8) 52 [hyper,17,2,16] product(g1,a,b,multiply(g1,a,b)).
+
+given clause #57: (wt=5) 1129 [ur,1101,4,25] -product(g1,b,b,b).
+
+given clause #58: (wt=5) 1130 [ur,1101,4,22] -product(g1,a,a,b).
+
+given clause #59: (wt=5) 1131 [hyper,1107,12,23] product(g1,a,d3,d3).
+
+given clause #60: (wt=6) 77 [hyper,35,20] equal(d2,a)|equal(d2,b).
+
+Splitting on clause 77 [hyper,35,20] equal(d2,a)|equal(d2,b).
+
+Case [2.1]   (process 8656):
+Assumption: 1162 [77,split.2.1] equal(d2,a).
+
+given clause #61: (wt=8) 53 [hyper,17,2,16] product(g1,b,a,multiply(g1,b,a)).
+
+given clause #62: (wt=3) 1162 [77,split.2.1] equal(d2,a).
+
+given clause #63: (wt=5) 1164 [back_demod,1107,demod,1163] product(g1,b,a,d3).
+
+--- refuted case [2.1]
+
+----> UNIT CONFLICT at   0.01 sec ----> 1198 [binary,1197.1,527.1] $F.
+
+Length of proof is 12.  Level of proof is 6.  Case [2.1]
+
+---------------- PROOF ----------------
+
+4 [] -product(A,B,C,D)| -product(A,B,C,E)|equal(E,D).
+5 [] -product(A,B,C,D)| -product(A,C,E,F)| -product(A,D,E,G)|product(A,B,F,G).
+20 [] -group_member(A,g1)|equal(A,a)|equal(A,b).
+24 [] product(g1,b,a,b).
+28 [] product(g2,d,c,d).
+31,30 [] equal(an_isomorphism(a),c).
+33,32 [] equal(an_isomorphism(b),d).
+34 [] group_member(d1,g1).
+35 [] group_member(d2,g1).
+37 [] product(g1,d1,d2,d3).
+38 [] -product(g2,an_isomorphism(d1),an_isomorphism(d2),an_isomorphism(d3)).
+41 [] product(A,identity_for(A),B,B).
+43 [] product(A,inverse(A,B),B,identity_for(A)).
+44 [] product(A,B,inverse(A,B),identity_for(A)).
+76 [hyper,20,34] equal(d1,a)|equal(d1,b).
+77 [hyper,35,20] equal(d2,a)|equal(d2,b).
+527 [hyper,43,5,28,41] product(g2,inverse(g2,d),d,c).
+694 [ur,44,5,41,38] -product(g2,inverse(g2,an_isomorphism(d1)),an_isomorphism(d3),an_isomorphism(d2)).
+1100,1099 [76,split.2] equal(d1,b).
+1102 [back_demod,694,demod,1100,33] -product(g2,inverse(g2,d),an_isomorphism(d3),an_isomorphism(d2)).
+1107 [back_demod,37,demod,1100] product(g1,b,d2,d3).
+1163,1162 [77,split.2.1] equal(d2,a).
+1164 [back_demod,1107,demod,1163] product(g1,b,a,d3).
+1169 [back_demod,1102,demod,1163,31] -product(g2,inverse(g2,d),an_isomorphism(d3),c).
+1196,1195 [hyper,1164,4,24] equal(d3,b).
+1197 [back_demod,1169,demod,1196,33] -product(g2,inverse(g2,d),d,c).
+1198 [binary,1197.1,527.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8656) -------
+clauses given                 63
+clauses generated           3509
+clauses kept                1187
+clauses forward subsumed    3160
+clauses back subsumed          2
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8656 finished Mon Aug  2 15:31:08 2004
+Refuted case [2.1].
+
+Case [2.2]   (process 8657):
+Assumption: 1163 [77,split.2.2] equal(d2,b).
+
+given clause #61: (wt=8) 53 [hyper,17,2,16] product(g1,b,a,multiply(g1,b,a)).
+
+given clause #62: (wt=3) 1163 [77,split.2.2] equal(d2,b).
+
+given clause #63: (wt=5) 1165 [back_demod,1107,demod,1164] product(g1,b,b,d3).
+
+--- refuted case [2.2]
+
+----> UNIT CONFLICT at   0.00 sec ----> 1199 [binary,1198.1,526.1] $F.
+
+Length of proof is 12.  Level of proof is 6.  Case [2.2]
+
+---------------- PROOF ----------------
+
+4 [] -product(A,B,C,D)| -product(A,B,C,E)|equal(E,D).
+5 [] -product(A,B,C,D)| -product(A,C,E,F)| -product(A,D,E,G)|product(A,B,F,G).
+20 [] -group_member(A,g1)|equal(A,a)|equal(A,b).
+25 [] product(g1,b,b,a).
+29 [] product(g2,d,d,c).
+31,30 [] equal(an_isomorphism(a),c).
+33,32 [] equal(an_isomorphism(b),d).
+34 [] group_member(d1,g1).
+35 [] group_member(d2,g1).
+37 [] product(g1,d1,d2,d3).
+38 [] -product(g2,an_isomorphism(d1),an_isomorphism(d2),an_isomorphism(d3)).
+41 [] product(A,identity_for(A),B,B).
+43 [] product(A,inverse(A,B),B,identity_for(A)).
+44 [] product(A,B,inverse(A,B),identity_for(A)).
+76 [hyper,20,34] equal(d1,a)|equal(d1,b).
+77 [hyper,35,20] equal(d2,a)|equal(d2,b).
+526 [hyper,43,5,29,41] product(g2,inverse(g2,d),c,d).
+694 [ur,44,5,41,38] -product(g2,inverse(g2,an_isomorphism(d1)),an_isomorphism(d3),an_isomorphism(d2)).
+1100,1099 [76,split.2] equal(d1,b).
+1102 [back_demod,694,demod,1100,33] -product(g2,inverse(g2,d),an_isomorphism(d3),an_isomorphism(d2)).
+1107 [back_demod,37,demod,1100] product(g1,b,d2,d3).
+1164,1163 [77,split.2.2] equal(d2,b).
+1165 [back_demod,1107,demod,1164] product(g1,b,b,d3).
+1170 [back_demod,1102,demod,1164,33] -product(g2,inverse(g2,d),an_isomorphism(d3),d).
+1197,1196 [hyper,1165,4,25] equal(d3,a).
+1198 [back_demod,1170,demod,1197,31] -product(g2,inverse(g2,d),c,d).
+1199 [binary,1198.1,526.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8657) -------
+clauses given                 63
+clauses generated           3508
+clauses kept                1188
+clauses forward subsumed    3160
+clauses back subsumed          2
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8657 finished Mon Aug  2 15:31:08 2004
+Refuted case [2.2].
+
+------- statistics (process 8655) -------
+clauses given                 60
+clauses generated           3436
+clauses kept                1154
+clauses forward subsumed    2979
+clauses back subsumed          2
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8655 finished Mon Aug  2 15:31:08 2004
+Refuted case [2].
+
+That finishes the proof of the theorem.
+
+That finishes the proof of the theorem.
+
+------- statistics (process 8651) -------
+clauses given                 49
+clauses generated           3126
+clauses kept                1093
+clauses forward subsumed    2151
+clauses back subsumed          2
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.07          (0 hr, 0 min, 0 sec)
+system CPU time        0.01          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8651 finished Mon Aug  2 15:31:08 2004

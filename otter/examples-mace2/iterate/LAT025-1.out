@@ -1,0 +1,262 @@
+----- MACE 2.2f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:44:32 2004
+The command was "../../bin/mace2 -n2 -N6 -p".
+set(prolog_style_variables).
+set(tptp_eq).
+set(auto).
+   dependent: set(auto1).
+   dependent: set(process_input).
+   dependent: clear(print_kept).
+   dependent: clear(print_new_demod).
+   dependent: clear(print_back_demod).
+   dependent: clear(print_back_sub).
+   dependent: set(control_memory).
+   dependent: assign(max_mem, 12000).
+   dependent: assign(pick_given_ratio, 4).
+   dependent: assign(stats_level, 1).
+   dependent: assign(max_seconds, 10800).
+clear(print_given).
+
+list(usable).
+0 [] equal(X,X).
+0 [] equal(meet(X,X),X).
+0 [] equal(join(X,X),X).
+0 [] equal(meet(X,join(X,Y)),X).
+0 [] equal(join(X,meet(X,Y)),X).
+0 [] equal(meet(X,Y),meet(Y,X)).
+0 [] equal(join(X,Y),join(Y,X)).
+0 [] equal(join(X,meet(Y,meet(X,Z))),X).
+0 [] equal(meet(X,join(Y,join(X,Z))),X).
+0 [] equal(meet2(X,X),X).
+0 [] equal(meet2(X,join(X,Y)),X).
+0 [] equal(join(X,meet2(X,Y)),X).
+0 [] equal(meet2(X,Y),meet2(Y,X)).
+0 [] equal(join(X,meet2(Y,meet2(X,Z))),X).
+0 [] equal(meet2(X,join(Y,join(X,Z))),X).
+end_of_list.
+
+list(sos).
+0 [] -equal(meet(a,b),meet2(a,b)).
+end_of_list.
+
+list(clauses).
+1 [] equal(X,X).
+2 [] equal(meet(X,X),X).
+3 [] equal(join(X,X),X).
+4 [] equal(meet(X,join(X,Y)),X).
+5 [] equal(join(X,meet(X,Y)),X).
+6 [] equal(meet(X,Y),meet(Y,X)).
+7 [] equal(join(X,Y),join(Y,X)).
+8 [] equal(join(X,meet(Y,meet(X,Z))),X).
+9 [] equal(meet(X,join(Y,join(X,Z))),X).
+10 [] equal(meet2(X,X),X).
+11 [] equal(meet2(X,join(X,Y)),X).
+12 [] equal(join(X,meet2(X,Y)),X).
+13 [] equal(meet2(X,Y),meet2(Y,X)).
+14 [] equal(join(X,meet2(Y,meet2(X,Z))),X).
+15 [] equal(meet2(X,join(Y,join(X,Z))),X).
+16 [] -equal(meet(a,b),meet2(a,b)).
+end_of_list.
+
+list(flattened_and_parted_clauses).
+1 [] equal(A,A).
+2 [] equal(meet(A,A),A).
+3 [] equal(join(A,A),A).
+4 [] -equal(join(A,B),C)|equal(meet(A,C),A).
+5 [] -equal(meet(A,B),C)|equal(join(A,C),A).
+6 [] -equal(meet(A,B),C)|equal(meet(B,A),C).
+7 [] -equal(join(A,B),C)|equal(join(B,A),C).
+8 [] -equal(meet(A,B),C)|$Connect2(A,C).
+8 [] equal(join(A,B),A)| -$Connect1(C,B)| -$Connect2(A,C).
+8 [] -equal(meet(A,B),C)|$Connect1(B,C).
+9 [] -equal(join(A,B),C)|$Connect4(A,C).
+9 [] equal(meet(A,B),A)| -$Connect3(C,B)| -$Connect4(A,C).
+9 [] -equal(join(A,B),C)|$Connect3(B,C).
+10 [] equal(meet2(A,A),A).
+11 [] -equal(join(A,B),C)|equal(meet2(A,C),A).
+12 [] -equal(meet2(A,B),C)|equal(join(A,C),A).
+13 [] -equal(meet2(A,B),C)|equal(meet2(B,A),C).
+14 [] -equal(meet2(A,B),C)|$Connect6(A,C).
+14 [] equal(join(A,B),A)| -$Connect5(C,B)| -$Connect6(A,C).
+14 [] -equal(meet2(A,B),C)|$Connect5(B,C).
+15 [] -equal(join(A,B),C)|$Connect8(A,C).
+15 [] equal(meet2(A,B),A)| -$Connect7(C,B)| -$Connect8(A,C).
+15 [] -equal(join(A,B),C)|$Connect7(B,C).
+16 [] -equal(meet2(A,B),C)| -equal(b,B)| -equal(a,A)| -equal(meet(A,B),C).
+end_of_list.
+
+--- Starting search for models of size 2 ---
+
+Applying isomorphism constraints to constants: b a.
+
+201 clauses were generated; 135 of those survived the first stage
+of unit preprocessing; there are 64 atoms.
+
+After all unit preprocessing, 28 atoms are still unassigned;
+66 clauses remain; 6 of those are non-Horn (selectable);
+4883 K allocated; cpu time so far for this domain size: 0.00 sec.
+
+----- statistics for domain size 2 ----
+Input:
+    Clauses input                   135
+    Literal occurrences input       237
+    Greatest atom                    64
+Unit preprocess:
+    Preprocess unit assignments      36
+    Clauses after subsumption        66
+    Literal occ. after subsump.     134
+    Selectable clauses                6
+Decide:
+    Splits                            1
+    Unit assignments                 18
+    Failed paths                      2
+Memory:
+    Memory malloced                 1 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.00
+    DPLL                           0.00
+
+--- Starting search for models of size 3 ---
+
+Applying isomorphism constraints to constants: b a.
+
+679 clauses were generated; 516 of those survived the first stage
+of unit preprocessing; there are 168 atoms.
+
+After all unit preprocessing, 102 atoms are still unassigned;
+345 clauses remain; 18 of those are non-Horn (selectable);
+4886 K allocated; cpu time so far for this domain size: 0.00 sec.
+
+----- statistics for domain size 3 ----
+Input:
+    Clauses input                   516
+    Literal occurrences input      1017
+    Greatest atom                   168
+Unit preprocess:
+    Preprocess unit assignments      66
+    Clauses after subsumption       345
+    Literal occ. after subsump.     735
+    Selectable clauses               18
+Decide:
+    Splits                            2
+    Unit assignments                 53
+    Failed paths                      3
+Memory:
+    Memory malloced                 4 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.00
+    DPLL                           0.00
+
+--- Starting search for models of size 4 ---
+
+Applying isomorphism constraints to constants: b a.
+
+1664 clauses were generated; 1345 of those survived the first stage
+of unit preprocessing; there are 344 atoms.
+
+After all unit preprocessing, 240 atoms are still unassigned;
+1024 clauses remain; 36 of those are non-Horn (selectable);
+4891 K allocated; cpu time so far for this domain size: 0.00 sec.
+
+----- statistics for domain size 4 ----
+Input:
+    Clauses input                  1345
+    Literal occurrences input      2771
+    Greatest atom                   344
+Unit preprocess:
+    Preprocess unit assignments     104
+    Clauses after subsumption      1024
+    Literal occ. after subsump.    2220
+    Selectable clauses               36
+Decide:
+    Splits                            3
+    Unit assignments                262
+    Failed paths                      4
+Memory:
+    Memory malloced                 9 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.00
+    DPLL                           0.00
+
+--- Starting search for models of size 5 ---
+
+Applying isomorphism constraints to constants: b a.
+
+3394 clauses were generated; 2848 of those survived the first stage
+of unit preprocessing; there are 610 atoms.
+
+After all unit preprocessing, 460 atoms are still unassigned;
+2325 clauses remain; 60 of those are non-Horn (selectable);
+4899 K allocated; cpu time so far for this domain size: 0.00 sec.
+
+======================= Model #1 at 0.01 seconds:
+
+ meet :
+      | 0 1 2 3 4
+    --+----------
+    0 | 0 2 2 0 4
+    1 | 2 1 2 1 4
+    2 | 2 2 2 2 2
+    3 | 0 1 2 3 4
+    4 | 4 4 2 4 4
+
+ join :
+      | 0 1 2 3 4
+    --+----------
+    0 | 0 3 0 3 0
+    1 | 3 1 1 3 1
+    2 | 0 1 2 3 4
+    3 | 3 3 3 3 3
+    4 | 0 1 4 3 4
+
+ meet2 :
+      | 0 1 2 3 4
+    --+----------
+    0 | 0 4 2 0 4
+    1 | 4 1 2 1 4
+    2 | 2 2 2 2 2
+    3 | 0 1 2 3 4
+    4 | 4 4 2 4 4
+
+ b: 0
+
+ a: 1
+end_of_model
+
+Exit by max_models parameter.  The set is satisfiable (1 model(s) found).
+
+
+----- statistics for domain size 5 ----
+Input:
+    Clauses input                  2848
+    Literal occurrences input      5993
+    Greatest atom                   610
+Unit preprocess:
+    Preprocess unit assignments     150
+    Clauses after subsumption      2325
+    Literal occ. after subsump.    5075
+    Selectable clauses               60
+Decide:
+    Splits                            5
+    Unit assignments                476
+    Failed paths                      2
+Memory:
+    Memory malloced                17 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.00
+    DPLL                           0.00
+
+=======================================
+Total times for run (seconds):
+    user CPU time                  0.01   (0 hr, 0 min, 0 sec)
+    system CPU time                0.01   (0 hr, 0 min, 0 sec)
+    wall-clock time                0      (0 hr, 0 min, 0 sec)
+
+Exit by max_models parameter.  The set is satisfiable (1 model(s) found).
+
+The job finished Mon Aug  2 15:44:32 2004

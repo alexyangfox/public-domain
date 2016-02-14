@@ -1,0 +1,2215 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:31:11 2004
+The command was "../../bin/otter".  The process ID is 8846.
+
+set(binary_res).
+   dependent: set(factor).
+   dependent: set(unit_deletion).
+set(knuth_bendix).
+   dependent: set(anl_eq).
+   dependent: set(para_from).
+   dependent: set(para_into).
+   dependent: clear(para_from_right).
+   dependent: clear(para_into_right).
+   dependent: set(para_from_vars).
+   dependent: set(eq_units_both_ways).
+   dependent: set(dynamic_demod_all).
+   dependent: set(dynamic_demod).
+   dependent: set(order_eq).
+   dependent: set(back_demod).
+   dependent: set(process_input).
+   dependent: set(lrpo).
+set(split_when_given).
+   dependent: set(back_unit_deletion).
+clear(print_kept).
+clear(print_given).
+clear(print_new_demod).
+clear(print_back_demod).
+clear(print_back_sub).
+assign(stats_level,1).
+assign(max_distinct_vars,0).
+
+list(usable).
+0 [] x=x.
+0 [] x=1|x=2|x=3|x=4|x=5.
+end_of_list.
+
+formula_list(usable).
+all x y z u v (distinct5(x,y,z,u,v)<->x!=y&x!=z&x!=u&x!=v&y!=z&y!=u&y!=v&z!=u&z!=v&u!=v).
+all x y (successor(x,y)<->x=1&y=2|x=2&y=3|x=3&y=4|x=4&y=5).
+all x y (next_to(x,y)<->successor(x,y)|successor(y,x)).
+end_of_list.
+
+-------> usable clausifies to:
+
+list(usable).
+0 [] -distinct5(x,y,z,u,v)|x!=y.
+0 [] -distinct5(x,y,z,u,v)|x!=z.
+0 [] -distinct5(x,y,z,u,v)|x!=u.
+0 [] -distinct5(x,y,z,u,v)|x!=v.
+0 [] -distinct5(x,y,z,u,v)|y!=z.
+0 [] -distinct5(x,y,z,u,v)|y!=u.
+0 [] -distinct5(x,y,z,u,v)|y!=v.
+0 [] -distinct5(x,y,z,u,v)|z!=u.
+0 [] -distinct5(x,y,z,u,v)|z!=v.
+0 [] -distinct5(x,y,z,u,v)|u!=v.
+0 [] distinct5(x,y,z,u,v)|x=y|x=z|x=u|x=v|y=z|y=u|y=v|z=u|z=v|u=v.
+0 [] -successor(x,y)|x=1|x=2|x=3|x=4.
+0 [] -successor(x,y)|x=1|x=2|x=3|y=5.
+0 [] -successor(x,y)|x=1|x=2|y=4|x=4.
+0 [] -successor(x,y)|x=1|x=2|y=4|y=5.
+0 [] -successor(x,y)|x=1|y=3|x=3|x=4.
+0 [] -successor(x,y)|x=1|y=3|x=3|y=5.
+0 [] -successor(x,y)|x=1|y=3|y=4|x=4.
+0 [] -successor(x,y)|x=1|y=3|y=4|y=5.
+0 [] -successor(x,y)|y=2|x=2|x=3|x=4.
+0 [] -successor(x,y)|y=2|x=2|x=3|y=5.
+0 [] -successor(x,y)|y=2|x=2|y=4|x=4.
+0 [] -successor(x,y)|y=2|x=2|y=4|y=5.
+0 [] -successor(x,y)|y=2|y=3|x=3|x=4.
+0 [] -successor(x,y)|y=2|y=3|x=3|y=5.
+0 [] -successor(x,y)|y=2|y=3|y=4|x=4.
+0 [] -successor(x,y)|y=2|y=3|y=4|y=5.
+0 [] successor(x,y)|x!=1|y!=2.
+0 [] successor(x,y)|x!=2|y!=3.
+0 [] successor(x,y)|x!=3|y!=4.
+0 [] successor(x,y)|x!=4|y!=5.
+0 [] -next_to(x,y)|successor(x,y)|successor(y,x).
+0 [] next_to(x,y)| -successor(x,y).
+0 [] next_to(x,y)| -successor(y,x).
+end_of_list.
+
+list(sos).
+0 [] distinct5(1,2,3,4,5).
+0 [] distinct5(red,green,ivory,ayellow,blue).
+0 [] distinct5(eng,aspan,aukra,norw,japan).
+0 [] distinct5(dog,asnail,fox,horse,azebra).
+0 [] distinct5(coffee,atea,milk,orange,apple).
+0 [] distinct5(old,kool,chest,lucky,parli).
+0 [] eng=red.
+0 [] aspan=dog.
+0 [] coffee=green.
+0 [] aukra=atea.
+0 [] old=asnail.
+0 [] kool=ayellow.
+0 [] milk=3.
+0 [] norw=1.
+0 [] lucky=orange.
+0 [] japan=parli.
+0 [] blue=2.
+0 [] successor(ivory,green).
+0 [] next_to(kool,horse).
+0 [] next_to(chest,fox).
+end_of_list.
+
+------------> process usable:
+** KEPT (pick-wt=3): 1 [] x=x.
+** KEPT (pick-wt=15): 2 [] x=1|x=2|x=3|x=4|x=5.
+** KEPT (pick-wt=9): 3 [] -distinct5(x,y,z,u,v)|x!=y.
+** KEPT (pick-wt=9): 4 [] -distinct5(x,y,z,u,v)|x!=z.
+** KEPT (pick-wt=9): 5 [] -distinct5(x,y,z,u,v)|x!=u.
+** KEPT (pick-wt=9): 6 [] -distinct5(x,y,z,u,v)|x!=v.
+** KEPT (pick-wt=9): 7 [] -distinct5(x,y,z,u,v)|y!=z.
+** KEPT (pick-wt=9): 8 [] -distinct5(x,y,z,u,v)|y!=u.
+** KEPT (pick-wt=9): 9 [] -distinct5(x,y,z,u,v)|y!=v.
+** KEPT (pick-wt=9): 10 [] -distinct5(x,y,z,u,v)|z!=u.
+** KEPT (pick-wt=9): 11 [] -distinct5(x,y,z,u,v)|z!=v.
+** KEPT (pick-wt=9): 12 [] -distinct5(x,y,z,u,v)|u!=v.
+** KEPT (pick-wt=36): 13 [] distinct5(x,y,z,u,v)|x=y|x=z|x=u|x=v|y=z|y=u|y=v|z=u|z=v|u=v.
+** KEPT (pick-wt=15): 14 [] -successor(x,y)|x=1|x=2|x=3|x=4.
+** KEPT (pick-wt=15): 15 [] -successor(x,y)|x=1|x=2|x=3|y=5.
+** KEPT (pick-wt=15): 16 [] -successor(x,y)|x=1|x=2|y=4|x=4.
+** KEPT (pick-wt=15): 17 [] -successor(x,y)|x=1|x=2|y=4|y=5.
+** KEPT (pick-wt=15): 18 [] -successor(x,y)|x=1|y=3|x=3|x=4.
+** KEPT (pick-wt=15): 19 [] -successor(x,y)|x=1|y=3|x=3|y=5.
+** KEPT (pick-wt=15): 20 [] -successor(x,y)|x=1|y=3|y=4|x=4.
+** KEPT (pick-wt=15): 21 [] -successor(x,y)|x=1|y=3|y=4|y=5.
+** KEPT (pick-wt=15): 22 [] -successor(x,y)|y=2|x=2|x=3|x=4.
+** KEPT (pick-wt=15): 23 [] -successor(x,y)|y=2|x=2|x=3|y=5.
+** KEPT (pick-wt=15): 24 [] -successor(x,y)|y=2|x=2|y=4|x=4.
+** KEPT (pick-wt=15): 25 [] -successor(x,y)|y=2|x=2|y=4|y=5.
+** KEPT (pick-wt=15): 26 [] -successor(x,y)|y=2|y=3|x=3|x=4.
+** KEPT (pick-wt=15): 27 [] -successor(x,y)|y=2|y=3|x=3|y=5.
+** KEPT (pick-wt=15): 28 [] -successor(x,y)|y=2|y=3|y=4|x=4.
+** KEPT (pick-wt=15): 29 [] -successor(x,y)|y=2|y=3|y=4|y=5.
+** KEPT (pick-wt=9): 30 [] successor(x,y)|x!=1|y!=2.
+** KEPT (pick-wt=9): 31 [] successor(x,y)|x!=2|y!=3.
+** KEPT (pick-wt=9): 32 [] successor(x,y)|x!=3|y!=4.
+** KEPT (pick-wt=9): 33 [] successor(x,y)|x!=4|y!=5.
+** KEPT (pick-wt=9): 34 [] -next_to(x,y)|successor(x,y)|successor(y,x).
+** KEPT (pick-wt=6): 35 [] next_to(x,y)| -successor(x,y).
+** KEPT (pick-wt=6): 36 [] next_to(x,y)| -successor(y,x).
+  Following clause subsumed by 1 during input processing: 0 [copy,1,flip.1] x=x.
+>>>> Starting back unit deletion with 1.
+
+------------> process sos:
+** KEPT (pick-wt=6): 37 [] distinct5(1,2,3,4,5).
+** KEPT (pick-wt=6): 38 [] distinct5(red,green,ivory,ayellow,blue).
+** KEPT (pick-wt=6): 39 [] distinct5(eng,aspan,aukra,norw,japan).
+** KEPT (pick-wt=6): 40 [] distinct5(dog,asnail,fox,horse,azebra).
+** KEPT (pick-wt=6): 41 [] distinct5(coffee,atea,milk,orange,apple).
+** KEPT (pick-wt=6): 42 [] distinct5(old,kool,chest,lucky,parli).
+** KEPT (pick-wt=3): 44 [copy,43,flip.1] red=eng.
+---> New Demodulator: 45 [new_demod,44] red=eng.
+** KEPT (pick-wt=3): 47 [copy,46,flip.1] dog=aspan.
+---> New Demodulator: 48 [new_demod,47] dog=aspan.
+** KEPT (pick-wt=3): 50 [copy,49,flip.1] green=coffee.
+---> New Demodulator: 51 [new_demod,50] green=coffee.
+** KEPT (pick-wt=3): 52 [] aukra=atea.
+---> New Demodulator: 53 [new_demod,52] aukra=atea.
+** KEPT (pick-wt=3): 54 [] old=asnail.
+---> New Demodulator: 55 [new_demod,54] old=asnail.
+** KEPT (pick-wt=3): 56 [] kool=ayellow.
+---> New Demodulator: 57 [new_demod,56] kool=ayellow.
+** KEPT (pick-wt=3): 58 [] milk=3.
+---> New Demodulator: 59 [new_demod,58] milk=3.
+** KEPT (pick-wt=3): 60 [] norw=1.
+---> New Demodulator: 61 [new_demod,60] norw=1.
+** KEPT (pick-wt=3): 63 [copy,62,flip.1] orange=lucky.
+---> New Demodulator: 64 [new_demod,63] orange=lucky.
+** KEPT (pick-wt=3): 66 [copy,65,flip.1] parli=japan.
+---> New Demodulator: 67 [new_demod,66] parli=japan.
+** KEPT (pick-wt=3): 68 [] blue=2.
+---> New Demodulator: 69 [new_demod,68] blue=2.
+** KEPT (pick-wt=3): 71 [copy,70,demod,51] successor(ivory,coffee).
+** KEPT (pick-wt=3): 73 [copy,72,demod,57] next_to(ayellow,horse).
+** KEPT (pick-wt=3): 74 [] next_to(chest,fox).
+>>>> Starting back unit deletion with 37.
+>>>> Starting back unit deletion with 38.
+>>>> Starting back unit deletion with 39.
+>>>> Starting back unit deletion with 40.
+>>>> Starting back unit deletion with 41.
+>>>> Starting back unit deletion with 42.
+>>>> Starting back demodulation with 45.
+    >> back demodulating 38 with 45.
+>>>> Starting back unit deletion with 44.
+>>>> Starting back demodulation with 48.
+    >> back demodulating 40 with 48.
+>>>> Starting back unit deletion with 47.
+>>>> Starting back demodulation with 51.
+>>>> Starting back unit deletion with 50.
+>>>> Starting back demodulation with 53.
+    >> back demodulating 39 with 53.
+>>>> Starting back unit deletion with 52.
+>>>> Starting back demodulation with 55.
+    >> back demodulating 42 with 55.
+>>>> Starting back unit deletion with 54.
+>>>> Starting back demodulation with 57.
+>>>> Starting back unit deletion with 56.
+>>>> Starting back demodulation with 59.
+    >> back demodulating 41 with 59.
+>>>> Starting back unit deletion with 58.
+>>>> Starting back demodulation with 61.
+>>>> Starting back unit deletion with 60.
+>>>> Starting back demodulation with 64.
+>>>> Starting back unit deletion with 63.
+>>>> Starting back demodulation with 67.
+>>>> Starting back unit deletion with 66.
+>>>> Starting back demodulation with 69.
+>>>> Starting back unit deletion with 68.
+>>>> Starting back unit deletion with 71.
+>>>> Starting back unit deletion with 73.
+>>>> Starting back unit deletion with 74.
+>>>> Starting back unit deletion with 75.
+>>>> Starting back unit deletion with 76.
+>>>> Starting back unit deletion with 77.
+>>>> Starting back unit deletion with 78.
+>>>> Starting back unit deletion with 79.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+Splitting on clause 106 [binary,73.1,34.1] successor(ayellow,horse)|successor(horse,ayellow).
+
+Case [1]   (process 8847):
+Assumption: 532 [106,split.1] successor(ayellow,horse).
+
+Splitting on clause 117 [binary,74.1,34.1] successor(chest,fox)|successor(fox,chest).
+
+Case [1.1]   (process 8848):
+Assumption: 562 [117,split.1.1] successor(chest,fox).
+
+Splitting on clause 181 [back_unit_del,155.1,89.2,unit_del,157] ivory=3|ivory=4.
+
+Case [1.1.1]   (process 8849):
+Assumption: 596 [181,split.1.1.1] ivory=3.
+
+Splitting on clause 717 [back_unit_del,672.1,364.4,unit_del,691] aspan=3|aspan=4.
+
+--- refuted case [1.1.1.1]
+
+Case [1.1.1.1]   (process 8850):
+Assumption: 859 [717,split.1.1.1.1] aspan=3.
+
+----> UNIT CONFLICT at   0.00 sec ----> 894 [binary,892.1,886.1] $F.
+
+Length of proof is 128.  Level of proof is 14.  Case [1.1.1.1]
+
+---------------- PROOF ----------------
+
+1 [] x=x.
+2 [] x=1|x=2|x=3|x=4|x=5.
+3 [] -distinct5(x,y,z,u,v)|x!=y.
+4 [] -distinct5(x,y,z,u,v)|x!=z.
+5 [] -distinct5(x,y,z,u,v)|x!=u.
+6 [] -distinct5(x,y,z,u,v)|x!=v.
+7 [] -distinct5(x,y,z,u,v)|y!=z.
+8 [] -distinct5(x,y,z,u,v)|y!=u.
+9 [] -distinct5(x,y,z,u,v)|y!=v.
+10 [] -distinct5(x,y,z,u,v)|z!=u.
+11 [] -distinct5(x,y,z,u,v)|z!=v.
+12 [] -distinct5(x,y,z,u,v)|u!=v.
+14 [] -successor(x,y)|x=1|x=2|x=3|x=4.
+22 [] -successor(x,y)|y=2|x=2|x=3|x=4.
+24 [] -successor(x,y)|y=2|x=2|y=4|x=4.
+34 [] -next_to(x,y)|successor(x,y)|successor(y,x).
+37 [] distinct5(1,2,3,4,5).
+38 [] distinct5(red,green,ivory,ayellow,blue).
+39 [] distinct5(eng,aspan,aukra,norw,japan).
+40 [] distinct5(dog,asnail,fox,horse,azebra).
+41 [] distinct5(coffee,atea,milk,orange,apple).
+42 [] distinct5(old,kool,chest,lucky,parli).
+43 [] eng=red.
+45,44 [copy,43,flip.1] red=eng.
+46 [] aspan=dog.
+48,47 [copy,46,flip.1] dog=aspan.
+49 [] coffee=green.
+51,50 [copy,49,flip.1] green=coffee.
+53,52 [] aukra=atea.
+55,54 [] old=asnail.
+57,56 [] kool=ayellow.
+59,58 [] milk=3.
+61,60 [] norw=1.
+62 [] lucky=orange.
+64,63 [copy,62,flip.1] orange=lucky.
+65 [] japan=parli.
+67,66 [copy,65,flip.1] parli=japan.
+69,68 [] blue=2.
+70 [] successor(ivory,green).
+71 [copy,70,demod,51] successor(ivory,coffee).
+72 [] next_to(kool,horse).
+73 [copy,72,demod,57] next_to(ayellow,horse).
+75 [back_demod,38,demod,45,51,69] distinct5(eng,coffee,ivory,ayellow,2).
+76 [back_demod,40,demod,48] distinct5(aspan,asnail,fox,horse,azebra).
+77 [back_demod,39,demod,53,61] distinct5(eng,aspan,atea,1,japan).
+78 [back_demod,42,demod,55,57,67] distinct5(asnail,ayellow,chest,lucky,japan).
+79 [back_demod,41,demod,59,64] distinct5(coffee,atea,3,lucky,apple).
+87 [binary,71.1,24.1] coffee=2|ivory=2|coffee=4|ivory=4.
+89 [binary,71.1,22.1] coffee=2|ivory=2|ivory=3|ivory=4.
+106 [binary,73.1,34.1] successor(ayellow,horse)|successor(horse,ayellow).
+144 [binary,37.1,12.1,flip.1] 5!=4.
+145 [binary,37.1,11.1,flip.1] 5!=3.
+146 [binary,37.1,10.1,flip.1] 4!=3.
+147 [binary,37.1,9.1,flip.1] 5!=2.
+148 [binary,37.1,8.1,flip.1] 4!=2.
+149 [binary,37.1,7.1,flip.1] 3!=2.
+150 [binary,37.1,6.1,flip.1] 5!=1.
+151 [binary,37.1,5.1,flip.1] 4!=1.
+152 [binary,37.1,4.1,flip.1] 3!=1.
+153 [binary,37.1,3.1,flip.1] 2!=1.
+154 [binary,75.1,12.1] ayellow!=2.
+155 [binary,75.1,11.1] ivory!=2.
+156 [binary,75.1,10.1] ivory!=ayellow.
+157 [binary,75.1,9.1] coffee!=2.
+158 [binary,75.1,8.1] coffee!=ayellow.
+160 [binary,75.1,6.1] eng!=2.
+161 [binary,75.1,5.1] eng!=ayellow.
+162 [binary,75.1,4.1,flip.1] ivory!=eng.
+163 [binary,75.1,3.1] eng!=coffee.
+181 [back_unit_del,155.1,89.2,unit_del,157] ivory=3|ivory=4.
+183 [back_unit_del,155.1,87.2,unit_del,157] coffee=4|ivory=4.
+207 [para_into,156.1.1,2.3.1,unit_del,155,flip.1] ayellow!=3|ivory=1|ivory=4|ivory=5.
+209 [para_into,158.1.1,2.4.1,unit_del,157,flip.1] ayellow!=4|coffee=1|coffee=3|coffee=5.
+213 [para_into,161.1.1,2.5.1,unit_del,160,flip.1] ayellow!=5|eng=1|eng=3|eng=4.
+218 [para_into,162.1.1,2.3.1,unit_del,155,flip.1] eng!=3|ivory=1|ivory=4|ivory=5.
+220 [para_into,163.1.1,2.4.1,unit_del,160,flip.1] coffee!=4|eng=1|eng=3|eng=5.
+227 [binary,76.1,8.1,flip.1] horse!=asnail.
+232 [binary,76.1,3.1] aspan!=asnail.
+281 [para_into,227.1.1,2.2.1,flip.1] asnail!=2|horse=1|horse=3|horse=4|horse=5.
+305 [para_into,232.1.1,2.3.1,flip.1] asnail!=3|aspan=1|aspan=2|aspan=4|aspan=5.
+308 [binary,77.1,12.1,flip.1] japan!=1.
+309 [binary,77.1,11.1,flip.1] japan!=atea.
+310 [binary,77.1,10.1] atea!=1.
+311 [binary,77.1,9.1,flip.1] japan!=aspan.
+312 [binary,77.1,8.1] aspan!=1.
+313 [binary,77.1,7.1,flip.1] atea!=aspan.
+314 [binary,77.1,6.1,flip.1] japan!=eng.
+315 [binary,77.1,5.1] eng!=1.
+316 [binary,77.1,4.1] eng!=atea.
+317 [binary,77.1,3.1] eng!=aspan.
+319 [back_unit_del,312.1,305.2] asnail!=3|aspan=2|aspan=4|aspan=5.
+327 [back_unit_del,315.1,220.2] coffee!=4|eng=3|eng=5.
+331 [back_unit_del,315.1,213.2] ayellow!=5|eng=3|eng=4.
+359 [binary,310.1,2.1] atea=2|atea=3|atea=4|atea=5.
+362 [para_into,311.1.1,2.3.1,unit_del,308,flip.1] aspan!=3|japan=2|japan=4|japan=5.
+364 [binary,312.1,2.1] aspan=2|aspan=3|aspan=4|aspan=5.
+368 [para_into,313.1.1,2.2.1,unit_del,310,flip.1] aspan!=2|atea=3|atea=4|atea=5.
+372 [para_into,316.1.1,2.5.1,unit_del,315,160,flip.1] atea!=5|eng=3|eng=4.
+375 [para_into,317.1.1,2.5.1,unit_del,315,160,flip.1] aspan!=5|eng=3|eng=4.
+382 [binary,78.1,8.1,flip.1] lucky!=ayellow.
+384 [binary,78.1,6.1,flip.1] japan!=asnail.
+385 [binary,78.1,5.1,flip.1] lucky!=asnail.
+387 [binary,78.1,3.1,flip.1] ayellow!=asnail.
+430 [para_into,382.1.1,2.1.1,flip.1] ayellow!=1|lucky=2|lucky=3|lucky=4|lucky=5.
+436 [para_into,384.1.1,2.4.1,unit_del,308,flip.1] asnail!=4|japan=2|japan=3|japan=5.
+439 [para_into,385.1.1,2.5.1,flip.1] asnail!=5|lucky=1|lucky=2|lucky=3|lucky=4.
+452 [para_into,387.1.1,2.1.1,unit_del,154,flip.1] asnail!=1|ayellow=3|ayellow=4|ayellow=5.
+455 [binary,79.1,10.1,flip.1] lucky!=3.
+457 [binary,79.1,8.1,flip.1] lucky!=atea.
+458 [binary,79.1,7.1] atea!=3.
+460 [binary,79.1,5.1,flip.1] lucky!=coffee.
+461 [binary,79.1,4.1] coffee!=3.
+462 [binary,79.1,3.1] coffee!=atea.
+466 [back_unit_del,455.1,439.4] asnail!=5|lucky=1|lucky=2|lucky=4.
+467 [back_unit_del,455.1,430.3] ayellow!=1|lucky=2|lucky=4|lucky=5.
+481 [back_unit_del,458.1,368.2] aspan!=2|atea=4|atea=5.
+484 [back_unit_del,458.1,359.2] atea=2|atea=4|atea=5.
+488 [back_unit_del,461.1,209.3] ayellow!=4|coffee=1|coffee=5.
+531 [para_into,462.1.1,2.4.1,unit_del,157,461,flip.1] atea!=4|coffee=1|coffee=5.
+532 [106,split.1] successor(ayellow,horse).
+541 [binary,532.1,22.1,unit_del,154] horse=2|ayellow=3|ayellow=4.
+549 [binary,532.1,14.1,unit_del,154] ayellow=1|ayellow=3|ayellow=4.
+597,596 [181,split.1.1.1] ivory=3.
+609 [back_demod,218,demod,597,597,597,unit_del,152,146,145] eng!=3.
+610 [back_demod,207,demod,597,597,597,unit_del,152,146,145] ayellow!=3.
+616,615 [back_demod,183,demod,597,unit_del,146] coffee=4.
+624 [back_unit_del,609.1,375.2] aspan!=5|eng=4.
+626 [back_unit_del,609.1,372.2] atea!=5|eng=4.
+630 [back_unit_del,609.1,331.2] ayellow!=5|eng=4.
+633,632 [back_unit_del,609.1,327.2,demod,616,unit_del,1] eng=5.
+638 [back_unit_del,610.1,549.2] ayellow=1|ayellow=4.
+640 [back_unit_del,610.1,541.2] horse=2|ayellow=4.
+642 [back_unit_del,610.1,452.2] asnail!=1|ayellow=4|ayellow=5.
+651 [back_demod,531,demod,616,616,unit_del,151,144] atea!=4.
+665 [back_demod,488,demod,616,616,unit_del,151,144] ayellow!=4.
+666 [back_demod,460,demod,616] lucky!=4.
+669 [back_demod,630,demod,633,unit_del,144] ayellow!=5.
+671 [back_demod,626,demod,633,unit_del,144] atea!=5.
+672 [back_demod,624,demod,633,unit_del,144] aspan!=5.
+684 [back_demod,314,demod,633] japan!=5.
+690,689 [back_unit_del,651.1,484.2,unit_del,671] atea=2.
+691 [back_unit_del,651.1,481.2,demod,690,unit_del,147] aspan!=2.
+696 [back_unit_del,665.1,642.2,unit_del,669] asnail!=1.
+698,697 [back_unit_del,665.1,640.2] horse=2.
+700,699 [back_unit_del,665.1,638.2] ayellow=1.
+714 [back_unit_del,666.1,466.4] asnail!=5|lucky=1|lucky=2.
+717 [back_unit_del,672.1,364.4,unit_del,691] aspan=3|aspan=4.
+721 [back_unit_del,672.1,319.4,unit_del,691] asnail!=3|aspan=4.
+727 [back_unit_del,684.1,436.4] asnail!=4|japan=2|japan=3.
+734 [back_unit_del,684.1,362.4] aspan!=3|japan=2|japan=4.
+741 [back_demod,457,demod,690] lucky!=2.
+742 [back_demod,309,demod,690] japan!=2.
+753 [back_demod,281,demod,698,698,698,698,unit_del,153,149,148,147] asnail!=2.
+773,772 [back_demod,467,demod,700,unit_del,1,741,666] lucky=5.
+789 [back_unit_del,741.1,714.3,demod,773,unit_del,150] asnail!=5.
+794 [back_unit_del,742.1,734.2] aspan!=3|japan=4.
+797 [back_unit_del,742.1,727.2] asnail!=4|japan=3.
+857 [binary,696.1,2.1,unit_del,753,789] asnail=3|asnail=4.
+860,859 [717,split.1.1.1.1] aspan=3.
+868,867 [back_demod,794,demod,860,unit_del,1] japan=4.
+876 [back_demod,721,demod,860,unit_del,146] asnail!=3.
+886 [back_demod,797,demod,868,unit_del,146] asnail!=4.
+892 [back_unit_del,876.1,857.1] asnail=4.
+894 [binary,892.1,886.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8850) -------
+clauses given                122
+clauses generated          15057
+clauses kept                 857
+clauses forward subsumed     932
+clauses back subsumed        381
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8850 finished Mon Aug  2 15:31:12 2004
+Refuted case [1.1.1.1].
+
+--- refuted case [1.1.1.2]
+
+Case [1.1.1.2]   (process 8851):
+Assumption: 860 [717,split.1.1.1.2] aspan=4.
+
+-----> EMPTY CLAUSE at   0.00 sec ----> 889 [back_demod,798,demod,884,872,unit_del,1,146] $F.
+
+Length of proof is 128.  Level of proof is 14.  Case [1.1.1.2]
+
+---------------- PROOF ----------------
+
+1 [] x=x.
+2 [] x=1|x=2|x=3|x=4|x=5.
+3 [] -distinct5(x,y,z,u,v)|x!=y.
+4 [] -distinct5(x,y,z,u,v)|x!=z.
+5 [] -distinct5(x,y,z,u,v)|x!=u.
+6 [] -distinct5(x,y,z,u,v)|x!=v.
+7 [] -distinct5(x,y,z,u,v)|y!=z.
+8 [] -distinct5(x,y,z,u,v)|y!=u.
+9 [] -distinct5(x,y,z,u,v)|y!=v.
+10 [] -distinct5(x,y,z,u,v)|z!=u.
+11 [] -distinct5(x,y,z,u,v)|z!=v.
+12 [] -distinct5(x,y,z,u,v)|u!=v.
+14 [] -successor(x,y)|x=1|x=2|x=3|x=4.
+22 [] -successor(x,y)|y=2|x=2|x=3|x=4.
+24 [] -successor(x,y)|y=2|x=2|y=4|x=4.
+34 [] -next_to(x,y)|successor(x,y)|successor(y,x).
+37 [] distinct5(1,2,3,4,5).
+38 [] distinct5(red,green,ivory,ayellow,blue).
+39 [] distinct5(eng,aspan,aukra,norw,japan).
+40 [] distinct5(dog,asnail,fox,horse,azebra).
+41 [] distinct5(coffee,atea,milk,orange,apple).
+42 [] distinct5(old,kool,chest,lucky,parli).
+43 [] eng=red.
+45,44 [copy,43,flip.1] red=eng.
+46 [] aspan=dog.
+48,47 [copy,46,flip.1] dog=aspan.
+49 [] coffee=green.
+51,50 [copy,49,flip.1] green=coffee.
+53,52 [] aukra=atea.
+55,54 [] old=asnail.
+57,56 [] kool=ayellow.
+59,58 [] milk=3.
+61,60 [] norw=1.
+62 [] lucky=orange.
+64,63 [copy,62,flip.1] orange=lucky.
+65 [] japan=parli.
+67,66 [copy,65,flip.1] parli=japan.
+69,68 [] blue=2.
+70 [] successor(ivory,green).
+71 [copy,70,demod,51] successor(ivory,coffee).
+72 [] next_to(kool,horse).
+73 [copy,72,demod,57] next_to(ayellow,horse).
+75 [back_demod,38,demod,45,51,69] distinct5(eng,coffee,ivory,ayellow,2).
+76 [back_demod,40,demod,48] distinct5(aspan,asnail,fox,horse,azebra).
+77 [back_demod,39,demod,53,61] distinct5(eng,aspan,atea,1,japan).
+78 [back_demod,42,demod,55,57,67] distinct5(asnail,ayellow,chest,lucky,japan).
+79 [back_demod,41,demod,59,64] distinct5(coffee,atea,3,lucky,apple).
+87 [binary,71.1,24.1] coffee=2|ivory=2|coffee=4|ivory=4.
+89 [binary,71.1,22.1] coffee=2|ivory=2|ivory=3|ivory=4.
+106 [binary,73.1,34.1] successor(ayellow,horse)|successor(horse,ayellow).
+144 [binary,37.1,12.1,flip.1] 5!=4.
+145 [binary,37.1,11.1,flip.1] 5!=3.
+146 [binary,37.1,10.1,flip.1] 4!=3.
+147 [binary,37.1,9.1,flip.1] 5!=2.
+148 [binary,37.1,8.1,flip.1] 4!=2.
+149 [binary,37.1,7.1,flip.1] 3!=2.
+150 [binary,37.1,6.1,flip.1] 5!=1.
+151 [binary,37.1,5.1,flip.1] 4!=1.
+152 [binary,37.1,4.1,flip.1] 3!=1.
+153 [binary,37.1,3.1,flip.1] 2!=1.
+154 [binary,75.1,12.1] ayellow!=2.
+155 [binary,75.1,11.1] ivory!=2.
+156 [binary,75.1,10.1] ivory!=ayellow.
+157 [binary,75.1,9.1] coffee!=2.
+158 [binary,75.1,8.1] coffee!=ayellow.
+160 [binary,75.1,6.1] eng!=2.
+161 [binary,75.1,5.1] eng!=ayellow.
+162 [binary,75.1,4.1,flip.1] ivory!=eng.
+163 [binary,75.1,3.1] eng!=coffee.
+181 [back_unit_del,155.1,89.2,unit_del,157] ivory=3|ivory=4.
+183 [back_unit_del,155.1,87.2,unit_del,157] coffee=4|ivory=4.
+207 [para_into,156.1.1,2.3.1,unit_del,155,flip.1] ayellow!=3|ivory=1|ivory=4|ivory=5.
+209 [para_into,158.1.1,2.4.1,unit_del,157,flip.1] ayellow!=4|coffee=1|coffee=3|coffee=5.
+213 [para_into,161.1.1,2.5.1,unit_del,160,flip.1] ayellow!=5|eng=1|eng=3|eng=4.
+218 [para_into,162.1.1,2.3.1,unit_del,155,flip.1] eng!=3|ivory=1|ivory=4|ivory=5.
+220 [para_into,163.1.1,2.4.1,unit_del,160,flip.1] coffee!=4|eng=1|eng=3|eng=5.
+227 [binary,76.1,8.1,flip.1] horse!=asnail.
+232 [binary,76.1,3.1] aspan!=asnail.
+281 [para_into,227.1.1,2.2.1,flip.1] asnail!=2|horse=1|horse=3|horse=4|horse=5.
+304 [para_into,232.1.1,2.4.1,flip.1] asnail!=4|aspan=1|aspan=2|aspan=3|aspan=5.
+308 [binary,77.1,12.1,flip.1] japan!=1.
+309 [binary,77.1,11.1,flip.1] japan!=atea.
+310 [binary,77.1,10.1] atea!=1.
+311 [binary,77.1,9.1,flip.1] japan!=aspan.
+312 [binary,77.1,8.1] aspan!=1.
+313 [binary,77.1,7.1,flip.1] atea!=aspan.
+314 [binary,77.1,6.1,flip.1] japan!=eng.
+315 [binary,77.1,5.1] eng!=1.
+316 [binary,77.1,4.1] eng!=atea.
+317 [binary,77.1,3.1] eng!=aspan.
+320 [back_unit_del,312.1,304.2] asnail!=4|aspan=2|aspan=3|aspan=5.
+327 [back_unit_del,315.1,220.2] coffee!=4|eng=3|eng=5.
+331 [back_unit_del,315.1,213.2] ayellow!=5|eng=3|eng=4.
+359 [binary,310.1,2.1] atea=2|atea=3|atea=4|atea=5.
+361 [para_into,311.1.1,2.4.1,unit_del,308,flip.1] aspan!=4|japan=2|japan=3|japan=5.
+364 [binary,312.1,2.1] aspan=2|aspan=3|aspan=4|aspan=5.
+368 [para_into,313.1.1,2.2.1,unit_del,310,flip.1] aspan!=2|atea=3|atea=4|atea=5.
+372 [para_into,316.1.1,2.5.1,unit_del,315,160,flip.1] atea!=5|eng=3|eng=4.
+375 [para_into,317.1.1,2.5.1,unit_del,315,160,flip.1] aspan!=5|eng=3|eng=4.
+382 [binary,78.1,8.1,flip.1] lucky!=ayellow.
+384 [binary,78.1,6.1,flip.1] japan!=asnail.
+385 [binary,78.1,5.1,flip.1] lucky!=asnail.
+387 [binary,78.1,3.1,flip.1] ayellow!=asnail.
+430 [para_into,382.1.1,2.1.1,flip.1] ayellow!=1|lucky=2|lucky=3|lucky=4|lucky=5.
+437 [para_into,384.1.1,2.3.1,unit_del,308,flip.1] asnail!=3|japan=2|japan=4|japan=5.
+439 [para_into,385.1.1,2.5.1,flip.1] asnail!=5|lucky=1|lucky=2|lucky=3|lucky=4.
+452 [para_into,387.1.1,2.1.1,unit_del,154,flip.1] asnail!=1|ayellow=3|ayellow=4|ayellow=5.
+455 [binary,79.1,10.1,flip.1] lucky!=3.
+457 [binary,79.1,8.1,flip.1] lucky!=atea.
+458 [binary,79.1,7.1] atea!=3.
+460 [binary,79.1,5.1,flip.1] lucky!=coffee.
+461 [binary,79.1,4.1] coffee!=3.
+462 [binary,79.1,3.1] coffee!=atea.
+466 [back_unit_del,455.1,439.4] asnail!=5|lucky=1|lucky=2|lucky=4.
+467 [back_unit_del,455.1,430.3] ayellow!=1|lucky=2|lucky=4|lucky=5.
+481 [back_unit_del,458.1,368.2] aspan!=2|atea=4|atea=5.
+484 [back_unit_del,458.1,359.2] atea=2|atea=4|atea=5.
+488 [back_unit_del,461.1,209.3] ayellow!=4|coffee=1|coffee=5.
+531 [para_into,462.1.1,2.4.1,unit_del,157,461,flip.1] atea!=4|coffee=1|coffee=5.
+532 [106,split.1] successor(ayellow,horse).
+541 [binary,532.1,22.1,unit_del,154] horse=2|ayellow=3|ayellow=4.
+549 [binary,532.1,14.1,unit_del,154] ayellow=1|ayellow=3|ayellow=4.
+597,596 [181,split.1.1.1] ivory=3.
+609 [back_demod,218,demod,597,597,597,unit_del,152,146,145] eng!=3.
+610 [back_demod,207,demod,597,597,597,unit_del,152,146,145] ayellow!=3.
+616,615 [back_demod,183,demod,597,unit_del,146] coffee=4.
+624 [back_unit_del,609.1,375.2] aspan!=5|eng=4.
+626 [back_unit_del,609.1,372.2] atea!=5|eng=4.
+630 [back_unit_del,609.1,331.2] ayellow!=5|eng=4.
+633,632 [back_unit_del,609.1,327.2,demod,616,unit_del,1] eng=5.
+638 [back_unit_del,610.1,549.2] ayellow=1|ayellow=4.
+640 [back_unit_del,610.1,541.2] horse=2|ayellow=4.
+642 [back_unit_del,610.1,452.2] asnail!=1|ayellow=4|ayellow=5.
+651 [back_demod,531,demod,616,616,unit_del,151,144] atea!=4.
+665 [back_demod,488,demod,616,616,unit_del,151,144] ayellow!=4.
+666 [back_demod,460,demod,616] lucky!=4.
+669 [back_demod,630,demod,633,unit_del,144] ayellow!=5.
+671 [back_demod,626,demod,633,unit_del,144] atea!=5.
+672 [back_demod,624,demod,633,unit_del,144] aspan!=5.
+684 [back_demod,314,demod,633] japan!=5.
+690,689 [back_unit_del,651.1,484.2,unit_del,671] atea=2.
+691 [back_unit_del,651.1,481.2,demod,690,unit_del,147] aspan!=2.
+696 [back_unit_del,665.1,642.2,unit_del,669] asnail!=1.
+698,697 [back_unit_del,665.1,640.2] horse=2.
+700,699 [back_unit_del,665.1,638.2] ayellow=1.
+714 [back_unit_del,666.1,466.4] asnail!=5|lucky=1|lucky=2.
+717 [back_unit_del,672.1,364.4,unit_del,691] aspan=3|aspan=4.
+720 [back_unit_del,672.1,320.4,unit_del,691] asnail!=4|aspan=3.
+726 [back_unit_del,684.1,437.4] asnail!=3|japan=2|japan=4.
+735 [back_unit_del,684.1,361.4] aspan!=4|japan=2|japan=3.
+741 [back_demod,457,demod,690] lucky!=2.
+742 [back_demod,309,demod,690] japan!=2.
+753 [back_demod,281,demod,698,698,698,698,unit_del,153,149,148,147] asnail!=2.
+773,772 [back_demod,467,demod,700,unit_del,1,741,666] lucky=5.
+789 [back_unit_del,741.1,714.3,demod,773,unit_del,150] asnail!=5.
+793 [back_unit_del,742.1,735.2] aspan!=4|japan=3.
+798 [back_unit_del,742.1,726.2] asnail!=3|japan=4.
+857 [binary,696.1,2.1,unit_del,753,789] asnail=3|asnail=4.
+859 [717,split_neg.1.1.1.2] aspan!=3.
+861,860 [717,split.1.1.1.2] aspan=4.
+863 [back_unit_del,859.1,720.2] asnail!=4.
+872,871 [back_demod,793,demod,861,unit_del,1] japan=3.
+884,883 [back_unit_del,863.1,857.2] asnail=3.
+889 [back_demod,798,demod,884,872,unit_del,1,146] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8851) -------
+clauses given                122
+clauses generated          15060
+clauses kept                 853
+clauses forward subsumed     925
+clauses back subsumed        385
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8851 finished Mon Aug  2 15:31:12 2004
+Refuted case [1.1.1.2].
+
+------- statistics (process 8849) -------
+clauses given                122
+clauses generated          15055
+clauses kept                 827
+clauses forward subsumed     905
+clauses back subsumed        373
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.23          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8849 finished Mon Aug  2 15:31:12 2004
+Refuted case [1.1.1].
+
+Case [1.1.2]   (process 8852):
+Assumption: 597 [181,split.1.1.2] ivory=4.
+
+Splitting on clause 678 [back_unit_del,625.1,521.3] apple!=2|atea=4.
+
+Case [1.1.2.1]   (process 8853):
+Assumption: 851 [678,split.1.1.2.1] apple!=2.
+
+Splitting on clause 679 [back_unit_del,625.1,520.3] apple!=4|atea=2.
+
+Case [1.1.2.1.1]   (process 8854):
+Assumption: 855 [679,split.1.1.2.1.1] apple!=4.
+
+Splitting on clause 680 [back_unit_del,625.1,484.3] atea=2|atea=4.
+
+--- refuted case [1.1.2.1.1.1]
+
+Case [1.1.2.1.1.1]   (process 8855):
+Assumption: 863 [680,split.1.1.2.1.1.1] atea=2.
+
+-----> EMPTY CLAUSE at   0.01 sec ----> 946 [back_demod,911,demod,924,unit_del,936,149] $F.
+
+Length of proof is 137.  Level of proof is 16.  Case [1.1.2.1.1.1]
+
+---------------- PROOF ----------------
+
+1 [] x=x.
+2 [] x=1|x=2|x=3|x=4|x=5.
+3 [] -distinct5(x,y,z,u,v)|x!=y.
+4 [] -distinct5(x,y,z,u,v)|x!=z.
+5 [] -distinct5(x,y,z,u,v)|x!=u.
+6 [] -distinct5(x,y,z,u,v)|x!=v.
+7 [] -distinct5(x,y,z,u,v)|y!=z.
+8 [] -distinct5(x,y,z,u,v)|y!=u.
+9 [] -distinct5(x,y,z,u,v)|y!=v.
+10 [] -distinct5(x,y,z,u,v)|z!=u.
+11 [] -distinct5(x,y,z,u,v)|z!=v.
+12 [] -distinct5(x,y,z,u,v)|u!=v.
+14 [] -successor(x,y)|x=1|x=2|x=3|x=4.
+22 [] -successor(x,y)|y=2|x=2|x=3|x=4.
+23 [] -successor(x,y)|y=2|x=2|x=3|y=5.
+26 [] -successor(x,y)|y=2|y=3|x=3|x=4.
+34 [] -next_to(x,y)|successor(x,y)|successor(y,x).
+37 [] distinct5(1,2,3,4,5).
+38 [] distinct5(red,green,ivory,ayellow,blue).
+39 [] distinct5(eng,aspan,aukra,norw,japan).
+40 [] distinct5(dog,asnail,fox,horse,azebra).
+41 [] distinct5(coffee,atea,milk,orange,apple).
+42 [] distinct5(old,kool,chest,lucky,parli).
+43 [] eng=red.
+45,44 [copy,43,flip.1] red=eng.
+46 [] aspan=dog.
+48,47 [copy,46,flip.1] dog=aspan.
+49 [] coffee=green.
+51,50 [copy,49,flip.1] green=coffee.
+53,52 [] aukra=atea.
+55,54 [] old=asnail.
+57,56 [] kool=ayellow.
+59,58 [] milk=3.
+61,60 [] norw=1.
+62 [] lucky=orange.
+64,63 [copy,62,flip.1] orange=lucky.
+65 [] japan=parli.
+67,66 [copy,65,flip.1] parli=japan.
+69,68 [] blue=2.
+70 [] successor(ivory,green).
+71 [copy,70,demod,51] successor(ivory,coffee).
+72 [] next_to(kool,horse).
+73 [copy,72,demod,57] next_to(ayellow,horse).
+74 [] next_to(chest,fox).
+75 [back_demod,38,demod,45,51,69] distinct5(eng,coffee,ivory,ayellow,2).
+76 [back_demod,40,demod,48] distinct5(aspan,asnail,fox,horse,azebra).
+77 [back_demod,39,demod,53,61] distinct5(eng,aspan,atea,1,japan).
+78 [back_demod,42,demod,55,57,67] distinct5(asnail,ayellow,chest,lucky,japan).
+79 [back_demod,41,demod,59,64] distinct5(coffee,atea,3,lucky,apple).
+88 [binary,71.1,23.1] coffee=2|ivory=2|ivory=3|coffee=5.
+89 [binary,71.1,22.1] coffee=2|ivory=2|ivory=3|ivory=4.
+106 [binary,73.1,34.1] successor(ayellow,horse)|successor(horse,ayellow).
+117 [binary,74.1,34.1] successor(chest,fox)|successor(fox,chest).
+144 [binary,37.1,12.1,flip.1] 5!=4.
+145 [binary,37.1,11.1,flip.1] 5!=3.
+147 [binary,37.1,9.1,flip.1] 5!=2.
+148 [binary,37.1,8.1,flip.1] 4!=2.
+149 [binary,37.1,7.1,flip.1] 3!=2.
+150 [binary,37.1,6.1,flip.1] 5!=1.
+151 [binary,37.1,5.1,flip.1] 4!=1.
+153 [binary,37.1,3.1,flip.1] 2!=1.
+154 [binary,75.1,12.1] ayellow!=2.
+155 [binary,75.1,11.1] ivory!=2.
+156 [binary,75.1,10.1] ivory!=ayellow.
+157 [binary,75.1,9.1] coffee!=2.
+158 [binary,75.1,8.1] coffee!=ayellow.
+159 [binary,75.1,7.1,flip.1] ivory!=coffee.
+160 [binary,75.1,6.1] eng!=2.
+161 [binary,75.1,5.1] eng!=ayellow.
+162 [binary,75.1,4.1,flip.1] ivory!=eng.
+163 [binary,75.1,3.1] eng!=coffee.
+181 [back_unit_del,155.1,89.2,unit_del,157] ivory=3|ivory=4.
+182 [back_unit_del,155.1,88.2,unit_del,157] ivory=3|coffee=5.
+206 [para_into,156.1.1,2.4.1,unit_del,155,flip.1] ayellow!=4|ivory=1|ivory=3|ivory=5.
+208 [para_into,158.1.1,2.5.1,unit_del,157,flip.1] ayellow!=5|coffee=1|coffee=3|coffee=4.
+210 [para_into,159.1.1,2.4.1,unit_del,155,flip.1] coffee!=4|ivory=1|ivory=3|ivory=5.
+215 [para_into,161.1.1,2.3.1,unit_del,160,flip.1] ayellow!=3|eng=1|eng=4|eng=5.
+217 [para_into,162.1.1,2.4.1,unit_del,155,flip.1] eng!=4|ivory=1|ivory=3|ivory=5.
+219 [para_into,163.1.1,2.5.1,unit_del,160,flip.1] coffee!=5|eng=1|eng=3|eng=4.
+225 [binary,76.1,10.1,flip.1] horse!=fox.
+227 [binary,76.1,8.1,flip.1] horse!=asnail.
+228 [binary,76.1,7.1,flip.1] fox!=asnail.
+271 [para_into,225.1.1,2.2.1,flip.1] fox!=2|horse=1|horse=3|horse=4|horse=5.
+281 [para_into,227.1.1,2.2.1,flip.1] asnail!=2|horse=1|horse=3|horse=4|horse=5.
+308 [binary,77.1,12.1,flip.1] japan!=1.
+309 [binary,77.1,11.1,flip.1] japan!=atea.
+310 [binary,77.1,10.1] atea!=1.
+314 [binary,77.1,6.1,flip.1] japan!=eng.
+315 [binary,77.1,5.1] eng!=1.
+328 [back_unit_del,315.1,219.2] coffee!=5|eng=3|eng=4.
+329 [back_unit_del,315.1,215.2] ayellow!=3|eng=4|eng=5.
+359 [binary,310.1,2.1] atea=2|atea=3|atea=4|atea=5.
+378 [binary,78.1,12.1] lucky!=japan.
+379 [binary,78.1,11.1,flip.1] japan!=chest.
+380 [binary,78.1,10.1,flip.1] lucky!=chest.
+382 [binary,78.1,8.1,flip.1] lucky!=ayellow.
+383 [binary,78.1,7.1,flip.1] chest!=ayellow.
+384 [binary,78.1,6.1,flip.1] japan!=asnail.
+385 [binary,78.1,5.1,flip.1] lucky!=asnail.
+386 [binary,78.1,4.1,flip.1] chest!=asnail.
+387 [binary,78.1,3.1,flip.1] ayellow!=asnail.
+412 [para_into,378.1.1,2.4.1,flip.1] japan!=4|lucky=1|lucky=2|lucky=3|lucky=5.
+415 [para_into,379.1.1,2.5.1,unit_del,308,flip.1] chest!=5|japan=2|japan=3|japan=4.
+420 [para_into,380.1.1,2.4.1,flip.1] chest!=4|lucky=1|lucky=2|lucky=3|lucky=5.
+435 [para_into,384.1.1,2.5.1,unit_del,308,flip.1] asnail!=5|japan=2|japan=3|japan=4.
+440 [para_into,385.1.1,2.4.1,flip.1] asnail!=4|lucky=1|lucky=2|lucky=3|lucky=5.
+446 [para_into,386.1.1,2.3.1,flip.1] asnail!=3|chest=1|chest=2|chest=4|chest=5.
+452 [para_into,387.1.1,2.1.1,unit_del,154,flip.1] asnail!=1|ayellow=3|ayellow=4|ayellow=5.
+455 [binary,79.1,10.1,flip.1] lucky!=3.
+457 [binary,79.1,8.1,flip.1] lucky!=atea.
+458 [binary,79.1,7.1] atea!=3.
+460 [binary,79.1,5.1,flip.1] lucky!=coffee.
+461 [binary,79.1,4.1] coffee!=3.
+462 [binary,79.1,3.1] coffee!=atea.
+465 [back_unit_del,455.1,440.4] asnail!=4|lucky=1|lucky=2|lucky=5.
+472 [back_unit_del,455.1,420.4] chest!=4|lucky=1|lucky=2|lucky=5.
+475 [back_unit_del,455.1,412.4] japan!=4|lucky=1|lucky=2|lucky=5.
+484 [back_unit_del,458.1,359.2] atea=2|atea=4|atea=5.
+489 [back_unit_del,461.1,208.3] ayellow!=5|coffee=1|coffee=4.
+524 [para_into,457.1.1,2.2.1,unit_del,455,flip.1] atea!=2|lucky=1|lucky=4|lucky=5.
+530 [para_into,462.1.1,2.5.1,unit_del,157,461,flip.1] atea!=5|coffee=1|coffee=4.
+532 [106,split.1] successor(ayellow,horse).
+541 [binary,532.1,22.1,unit_del,154] horse=2|ayellow=3|ayellow=4.
+549 [binary,532.1,14.1,unit_del,154] ayellow=1|ayellow=3|ayellow=4.
+562 [117,split.1.1] successor(chest,fox).
+567 [binary,562.1,26.1] fox=2|fox=3|chest=3|chest=4.
+596 [181,split_neg.1.1.2] ivory!=3.
+598,597 [181,split.1.1.2] ivory=4.
+599 [back_unit_del,596.1,217.3,demod,598,598,unit_del,151,144] eng!=4.
+600 [back_unit_del,596.1,210.3,demod,598,598,unit_del,151,144] coffee!=4.
+601 [back_unit_del,596.1,206.3,demod,598,598,unit_del,151,144] ayellow!=4.
+604,603 [back_unit_del,596.1,182.1] coffee=5.
+622 [back_unit_del,599.1,329.2] ayellow!=3|eng=5.
+624,623 [back_unit_del,599.1,328.3,demod,604,unit_del,1] eng=3.
+625 [back_unit_del,600.1,530.3,demod,604,unit_del,150] atea!=5.
+628 [back_unit_del,600.1,489.3,demod,604,unit_del,150] ayellow!=5.
+633 [back_unit_del,601.1,549.3] ayellow=1|ayellow=3.
+635 [back_unit_del,601.1,541.3] horse=2|ayellow=3.
+655 [back_demod,460,demod,604] lucky!=5.
+658 [back_demod,622,demod,624,unit_del,145] ayellow!=3.
+675 [back_demod,314,demod,624] japan!=3.
+680 [back_unit_del,625.1,484.3] atea=2|atea=4.
+688 [back_unit_del,628.1,452.4,unit_del,658,601] asnail!=1.
+697 [back_unit_del,655.1,524.4] atea!=2|lucky=1|lucky=4.
+705 [back_unit_del,655.1,475.4] japan!=4|lucky=1|lucky=2.
+707 [back_unit_del,655.1,472.4] chest!=4|lucky=1|lucky=2.
+711 [back_unit_del,655.1,465.4] asnail!=4|lucky=1|lucky=2.
+714,713 [back_unit_del,658.1,635.2] horse=2.
+716,715 [back_unit_del,658.1,633.2] ayellow=1.
+731 [back_unit_del,675.1,435.3] asnail!=5|japan=2|japan=4.
+734 [back_unit_del,675.1,415.3] chest!=5|japan=2|japan=4.
+753 [back_demod,281,demod,714,714,714,714,unit_del,153,149,148,147] asnail!=2.
+754 [back_demod,271,demod,714,714,714,714,unit_del,153,149,148,147] fox!=2.
+781 [back_demod,383,demod,716] chest!=1.
+782 [back_demod,382,demod,716] lucky!=1.
+802 [back_unit_del,754.1,567.1] fox=3|chest=3|chest=4.
+831 [back_unit_del,781.1,446.2] asnail!=3|chest=2|chest=4|chest=5.
+838 [back_unit_del,782.1,711.2] asnail!=4|lucky=2.
+840 [back_unit_del,782.1,707.2] chest!=4|lucky=2.
+842 [back_unit_del,782.1,705.2] japan!=4|lucky=2.
+846 [back_unit_del,782.1,697.2] atea!=2|lucky=4.
+849 [binary,688.1,2.1,unit_del,753] asnail=3|asnail=4|asnail=5.
+864,863 [680,split.1.1.2.1.1.1] atea=2.
+869,868 [back_demod,846,demod,864,unit_del,1] lucky=4.
+876 [back_demod,309,demod,864] japan!=2.
+880 [back_demod,842,demod,869,unit_del,148] japan!=4.
+881 [back_demod,840,demod,869,unit_del,148] chest!=4.
+882 [back_demod,838,demod,869,unit_del,148] asnail!=4.
+899 [back_unit_del,876.1,734.2,unit_del,880] chest!=5.
+900 [back_unit_del,876.1,731.2,unit_del,880] asnail!=5.
+911 [back_unit_del,881.1,802.3] fox=3|chest=3.
+915,914 [back_unit_del,882.1,849.2,unit_del,900] asnail=3.
+924,923 [back_unit_del,899.1,831.4,demod,915,unit_del,1,881] chest=2.
+936 [back_demod,228,demod,915] fox!=3.
+946 [back_demod,911,demod,924,unit_del,936,149] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8855) -------
+clauses given                123
+clauses generated          15329
+clauses kept                 907
+clauses forward subsumed     932
+clauses back subsumed        448
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8855 finished Mon Aug  2 15:31:12 2004
+Refuted case [1.1.2.1.1.1].
+
+--- refuted case [1.1.2.1.1.2]
+
+Case [1.1.2.1.1.2]   (process 8856):
+Assumption: 864 [680,split.1.1.2.1.1.2] atea=4.
+
+-----> EMPTY CLAUSE at   0.00 sec ----> 901 [back_unit_del,878.1,740.3,demod,882,unit_del,1,886] $F.
+
+Length of proof is 110.  Level of proof is 13.  Case [1.1.2.1.1.2]
+
+---------------- PROOF ----------------
+
+1 [] x=x.
+2 [] x=1|x=2|x=3|x=4|x=5.
+3 [] -distinct5(x,y,z,u,v)|x!=y.
+4 [] -distinct5(x,y,z,u,v)|x!=z.
+5 [] -distinct5(x,y,z,u,v)|x!=u.
+6 [] -distinct5(x,y,z,u,v)|x!=v.
+7 [] -distinct5(x,y,z,u,v)|y!=z.
+8 [] -distinct5(x,y,z,u,v)|y!=u.
+9 [] -distinct5(x,y,z,u,v)|y!=v.
+10 [] -distinct5(x,y,z,u,v)|z!=u.
+11 [] -distinct5(x,y,z,u,v)|z!=v.
+12 [] -distinct5(x,y,z,u,v)|u!=v.
+14 [] -successor(x,y)|x=1|x=2|x=3|x=4.
+22 [] -successor(x,y)|y=2|x=2|x=3|x=4.
+23 [] -successor(x,y)|y=2|x=2|x=3|y=5.
+34 [] -next_to(x,y)|successor(x,y)|successor(y,x).
+37 [] distinct5(1,2,3,4,5).
+38 [] distinct5(red,green,ivory,ayellow,blue).
+39 [] distinct5(eng,aspan,aukra,norw,japan).
+40 [] distinct5(dog,asnail,fox,horse,azebra).
+41 [] distinct5(coffee,atea,milk,orange,apple).
+42 [] distinct5(old,kool,chest,lucky,parli).
+43 [] eng=red.
+45,44 [copy,43,flip.1] red=eng.
+46 [] aspan=dog.
+48,47 [copy,46,flip.1] dog=aspan.
+49 [] coffee=green.
+51,50 [copy,49,flip.1] green=coffee.
+53,52 [] aukra=atea.
+55,54 [] old=asnail.
+57,56 [] kool=ayellow.
+59,58 [] milk=3.
+61,60 [] norw=1.
+62 [] lucky=orange.
+64,63 [copy,62,flip.1] orange=lucky.
+65 [] japan=parli.
+67,66 [copy,65,flip.1] parli=japan.
+69,68 [] blue=2.
+70 [] successor(ivory,green).
+71 [copy,70,demod,51] successor(ivory,coffee).
+72 [] next_to(kool,horse).
+73 [copy,72,demod,57] next_to(ayellow,horse).
+75 [back_demod,38,demod,45,51,69] distinct5(eng,coffee,ivory,ayellow,2).
+76 [back_demod,40,demod,48] distinct5(aspan,asnail,fox,horse,azebra).
+77 [back_demod,39,demod,53,61] distinct5(eng,aspan,atea,1,japan).
+78 [back_demod,42,demod,55,57,67] distinct5(asnail,ayellow,chest,lucky,japan).
+79 [back_demod,41,demod,59,64] distinct5(coffee,atea,3,lucky,apple).
+88 [binary,71.1,23.1] coffee=2|ivory=2|ivory=3|coffee=5.
+89 [binary,71.1,22.1] coffee=2|ivory=2|ivory=3|ivory=4.
+106 [binary,73.1,34.1] successor(ayellow,horse)|successor(horse,ayellow).
+144 [binary,37.1,12.1,flip.1] 5!=4.
+145 [binary,37.1,11.1,flip.1] 5!=3.
+147 [binary,37.1,9.1,flip.1] 5!=2.
+148 [binary,37.1,8.1,flip.1] 4!=2.
+149 [binary,37.1,7.1,flip.1] 3!=2.
+150 [binary,37.1,6.1,flip.1] 5!=1.
+151 [binary,37.1,5.1,flip.1] 4!=1.
+153 [binary,37.1,3.1,flip.1] 2!=1.
+154 [binary,75.1,12.1] ayellow!=2.
+155 [binary,75.1,11.1] ivory!=2.
+156 [binary,75.1,10.1] ivory!=ayellow.
+157 [binary,75.1,9.1] coffee!=2.
+159 [binary,75.1,7.1,flip.1] ivory!=coffee.
+160 [binary,75.1,6.1] eng!=2.
+161 [binary,75.1,5.1] eng!=ayellow.
+162 [binary,75.1,4.1,flip.1] ivory!=eng.
+163 [binary,75.1,3.1] eng!=coffee.
+181 [back_unit_del,155.1,89.2,unit_del,157] ivory=3|ivory=4.
+182 [back_unit_del,155.1,88.2,unit_del,157] ivory=3|coffee=5.
+206 [para_into,156.1.1,2.4.1,unit_del,155,flip.1] ayellow!=4|ivory=1|ivory=3|ivory=5.
+210 [para_into,159.1.1,2.4.1,unit_del,155,flip.1] coffee!=4|ivory=1|ivory=3|ivory=5.
+215 [para_into,161.1.1,2.3.1,unit_del,160,flip.1] ayellow!=3|eng=1|eng=4|eng=5.
+217 [para_into,162.1.1,2.4.1,unit_del,155,flip.1] eng!=4|ivory=1|ivory=3|ivory=5.
+219 [para_into,163.1.1,2.5.1,unit_del,160,flip.1] coffee!=5|eng=1|eng=3|eng=4.
+230 [binary,76.1,5.1,flip.1] horse!=aspan.
+296 [para_into,230.1.1,2.2.1,flip.1] aspan!=2|horse=1|horse=3|horse=4|horse=5.
+308 [binary,77.1,12.1,flip.1] japan!=1.
+309 [binary,77.1,11.1,flip.1] japan!=atea.
+310 [binary,77.1,10.1] atea!=1.
+311 [binary,77.1,9.1,flip.1] japan!=aspan.
+312 [binary,77.1,8.1] aspan!=1.
+313 [binary,77.1,7.1,flip.1] atea!=aspan.
+314 [binary,77.1,6.1,flip.1] japan!=eng.
+315 [binary,77.1,5.1] eng!=1.
+317 [binary,77.1,3.1] eng!=aspan.
+328 [back_unit_del,315.1,219.2] coffee!=5|eng=3|eng=4.
+329 [back_unit_del,315.1,215.2] ayellow!=3|eng=4|eng=5.
+359 [binary,310.1,2.1] atea=2|atea=3|atea=4|atea=5.
+360 [para_into,311.1.1,2.5.1,unit_del,308,flip.1] aspan!=5|japan=2|japan=3|japan=4.
+364 [binary,312.1,2.1] aspan=2|aspan=3|aspan=4|aspan=5.
+366 [para_into,313.1.1,2.4.1,unit_del,310,flip.1] aspan!=4|atea=2|atea=3|atea=5.
+377 [para_into,317.1.1,2.3.1,unit_del,315,160,flip.1] aspan!=3|eng=4|eng=5.
+378 [binary,78.1,12.1] lucky!=japan.
+382 [binary,78.1,8.1,flip.1] lucky!=ayellow.
+414 [para_into,378.1.1,2.2.1,flip.1] japan!=2|lucky=1|lucky=3|lucky=4|lucky=5.
+455 [binary,79.1,10.1,flip.1] lucky!=3.
+457 [binary,79.1,8.1,flip.1] lucky!=atea.
+458 [binary,79.1,7.1] atea!=3.
+460 [binary,79.1,5.1,flip.1] lucky!=coffee.
+461 [binary,79.1,4.1] coffee!=3.
+462 [binary,79.1,3.1] coffee!=atea.
+474 [back_unit_del,455.1,414.3] japan!=2|lucky=1|lucky=4|lucky=5.
+482 [back_unit_del,458.1,366.3] aspan!=4|atea=2|atea=5.
+484 [back_unit_del,458.1,359.2] atea=2|atea=4|atea=5.
+523 [para_into,457.1.1,2.4.1,unit_del,455,flip.1] atea!=4|lucky=1|lucky=2|lucky=5.
+530 [para_into,462.1.1,2.5.1,unit_del,157,461,flip.1] atea!=5|coffee=1|coffee=4.
+532 [106,split.1] successor(ayellow,horse).
+541 [binary,532.1,22.1,unit_del,154] horse=2|ayellow=3|ayellow=4.
+549 [binary,532.1,14.1,unit_del,154] ayellow=1|ayellow=3|ayellow=4.
+596 [181,split_neg.1.1.2] ivory!=3.
+598,597 [181,split.1.1.2] ivory=4.
+599 [back_unit_del,596.1,217.3,demod,598,598,unit_del,151,144] eng!=4.
+600 [back_unit_del,596.1,210.3,demod,598,598,unit_del,151,144] coffee!=4.
+601 [back_unit_del,596.1,206.3,demod,598,598,unit_del,151,144] ayellow!=4.
+604,603 [back_unit_del,596.1,182.1] coffee=5.
+615 [back_unit_del,599.1,377.2] aspan!=3|eng=5.
+622 [back_unit_del,599.1,329.2] ayellow!=3|eng=5.
+624,623 [back_unit_del,599.1,328.3,demod,604,unit_del,1] eng=3.
+625 [back_unit_del,600.1,530.3,demod,604,unit_del,150] atea!=5.
+633 [back_unit_del,601.1,549.3] ayellow=1|ayellow=3.
+635 [back_unit_del,601.1,541.3] horse=2|ayellow=3.
+655 [back_demod,460,demod,604] lucky!=5.
+658 [back_demod,622,demod,624,unit_del,145] ayellow!=3.
+660 [back_demod,615,demod,624,unit_del,145] aspan!=3.
+675 [back_demod,314,demod,624] japan!=3.
+680 [back_unit_del,625.1,484.3] atea=2|atea=4.
+681 [back_unit_del,625.1,482.3] aspan!=4|atea=2.
+698 [back_unit_del,655.1,523.4] atea!=4|lucky=1|lucky=2.
+706 [back_unit_del,655.1,474.4] japan!=2|lucky=1|lucky=4.
+714,713 [back_unit_del,658.1,635.2] horse=2.
+716,715 [back_unit_del,658.1,633.2] ayellow=1.
+719 [back_unit_del,660.1,364.2] aspan=2|aspan=4|aspan=5.
+740 [back_unit_del,675.1,360.3] aspan!=5|japan=2|japan=4.
+752 [back_demod,296,demod,714,714,714,714,unit_del,153,149,148,147] aspan!=2.
+782 [back_demod,382,demod,716] lucky!=1.
+789 [back_unit_del,752.1,719.1] aspan=4|aspan=5.
+841 [back_unit_del,782.1,706.2] japan!=2|lucky=4.
+845 [back_unit_del,782.1,698.2] atea!=4|lucky=2.
+863 [680,split_neg.1.1.2.1.1.2] atea!=2.
+865,864 [680,split.1.1.2.1.1.2] atea=4.
+867 [back_unit_del,863.1,681.2] aspan!=4.
+872,871 [back_demod,845,demod,865,unit_del,1] lucky=2.
+878 [back_demod,309,demod,865] japan!=4.
+882,881 [back_unit_del,867.1,789.1] aspan=5.
+886 [back_demod,841,demod,872,unit_del,148] japan!=2.
+901 [back_unit_del,878.1,740.3,demod,882,unit_del,1,886] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8856) -------
+clauses given                123
+clauses generated          15290
+clauses kept                 868
+clauses forward subsumed     866
+clauses back subsumed        414
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8856 finished Mon Aug  2 15:31:12 2004
+Refuted case [1.1.2.1.1.2].
+
+------- statistics (process 8854) -------
+clauses given                123
+clauses generated          15281
+clauses kept                 835
+clauses forward subsumed     837
+clauses back subsumed        406
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8854 finished Mon Aug  2 15:31:12 2004
+Refuted case [1.1.2.1.1].
+
+The Assumption for case [1.1.2.1.1] was not used;
+therefore we skip case:  [1.1.2.1.2].
+
+------- statistics (process 8853) -------
+clauses given                121
+clauses generated          15187
+clauses kept                 828
+clauses forward subsumed     821
+clauses back subsumed        404
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8853 finished Mon Aug  2 15:31:12 2004
+Refuted case [1.1.2.1].
+
+The Assumption for case [1.1.2.1] was not used;
+therefore we skip case:  [1.1.2.2].
+
+------- statistics (process 8852) -------
+clauses given                119
+clauses generated          15078
+clauses kept                 824
+clauses forward subsumed     815
+clauses back subsumed        399
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.23          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8852 finished Mon Aug  2 15:31:12 2004
+Refuted case [1.1.2].
+
+------- statistics (process 8848) -------
+clauses given                 89
+clauses generated          10717
+clauses kept                 577
+clauses forward subsumed     337
+clauses back subsumed        163
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8848 finished Mon Aug  2 15:31:12 2004
+Refuted case [1.1].
+
+Case [1.2]   (process 8857):
+Assumption: 563 [117,split.1.2] successor(fox,chest).
+
+Splitting on clause 181 [back_unit_del,155.1,89.2,unit_del,157] ivory=3|ivory=4.
+
+Case [1.2.1]   (process 8858):
+Assumption: 611 [181,split.1.2.1] ivory=3.
+
+Splitting on clause 564 [binary,562.1,33.1] chest!=4|fox!=5.
+
+Case [1.2.1.1]   (process 8859):
+Assumption: 869 [564,split.1.2.1.1] chest!=4.
+
+Splitting on clause 732 [back_unit_del,687.1,364.4,unit_del,706] aspan=3|aspan=4.
+
+--- refuted case [1.2.1.1.1]
+
+Case [1.2.1.1.1]   (process 8860):
+Assumption: 900 [732,split.1.2.1.1.1] aspan=3.
+
+----> UNIT CONFLICT at   0.00 sec ----> 926 [binary,924.1,920.1] $F.
+
+Length of proof is 128.  Level of proof is 14.  Case [1.2.1.1.1]
+
+---------------- PROOF ----------------
+
+1 [] x=x.
+2 [] x=1|x=2|x=3|x=4|x=5.
+3 [] -distinct5(x,y,z,u,v)|x!=y.
+4 [] -distinct5(x,y,z,u,v)|x!=z.
+5 [] -distinct5(x,y,z,u,v)|x!=u.
+6 [] -distinct5(x,y,z,u,v)|x!=v.
+7 [] -distinct5(x,y,z,u,v)|y!=z.
+8 [] -distinct5(x,y,z,u,v)|y!=u.
+9 [] -distinct5(x,y,z,u,v)|y!=v.
+10 [] -distinct5(x,y,z,u,v)|z!=u.
+11 [] -distinct5(x,y,z,u,v)|z!=v.
+12 [] -distinct5(x,y,z,u,v)|u!=v.
+14 [] -successor(x,y)|x=1|x=2|x=3|x=4.
+22 [] -successor(x,y)|y=2|x=2|x=3|x=4.
+24 [] -successor(x,y)|y=2|x=2|y=4|x=4.
+34 [] -next_to(x,y)|successor(x,y)|successor(y,x).
+37 [] distinct5(1,2,3,4,5).
+38 [] distinct5(red,green,ivory,ayellow,blue).
+39 [] distinct5(eng,aspan,aukra,norw,japan).
+40 [] distinct5(dog,asnail,fox,horse,azebra).
+41 [] distinct5(coffee,atea,milk,orange,apple).
+42 [] distinct5(old,kool,chest,lucky,parli).
+43 [] eng=red.
+45,44 [copy,43,flip.1] red=eng.
+46 [] aspan=dog.
+48,47 [copy,46,flip.1] dog=aspan.
+49 [] coffee=green.
+51,50 [copy,49,flip.1] green=coffee.
+53,52 [] aukra=atea.
+55,54 [] old=asnail.
+57,56 [] kool=ayellow.
+59,58 [] milk=3.
+61,60 [] norw=1.
+62 [] lucky=orange.
+64,63 [copy,62,flip.1] orange=lucky.
+65 [] japan=parli.
+67,66 [copy,65,flip.1] parli=japan.
+69,68 [] blue=2.
+70 [] successor(ivory,green).
+71 [copy,70,demod,51] successor(ivory,coffee).
+72 [] next_to(kool,horse).
+73 [copy,72,demod,57] next_to(ayellow,horse).
+75 [back_demod,38,demod,45,51,69] distinct5(eng,coffee,ivory,ayellow,2).
+76 [back_demod,40,demod,48] distinct5(aspan,asnail,fox,horse,azebra).
+77 [back_demod,39,demod,53,61] distinct5(eng,aspan,atea,1,japan).
+78 [back_demod,42,demod,55,57,67] distinct5(asnail,ayellow,chest,lucky,japan).
+79 [back_demod,41,demod,59,64] distinct5(coffee,atea,3,lucky,apple).
+87 [binary,71.1,24.1] coffee=2|ivory=2|coffee=4|ivory=4.
+89 [binary,71.1,22.1] coffee=2|ivory=2|ivory=3|ivory=4.
+106 [binary,73.1,34.1] successor(ayellow,horse)|successor(horse,ayellow).
+144 [binary,37.1,12.1,flip.1] 5!=4.
+145 [binary,37.1,11.1,flip.1] 5!=3.
+146 [binary,37.1,10.1,flip.1] 4!=3.
+147 [binary,37.1,9.1,flip.1] 5!=2.
+148 [binary,37.1,8.1,flip.1] 4!=2.
+149 [binary,37.1,7.1,flip.1] 3!=2.
+150 [binary,37.1,6.1,flip.1] 5!=1.
+151 [binary,37.1,5.1,flip.1] 4!=1.
+152 [binary,37.1,4.1,flip.1] 3!=1.
+153 [binary,37.1,3.1,flip.1] 2!=1.
+154 [binary,75.1,12.1] ayellow!=2.
+155 [binary,75.1,11.1] ivory!=2.
+156 [binary,75.1,10.1] ivory!=ayellow.
+157 [binary,75.1,9.1] coffee!=2.
+158 [binary,75.1,8.1] coffee!=ayellow.
+160 [binary,75.1,6.1] eng!=2.
+161 [binary,75.1,5.1] eng!=ayellow.
+162 [binary,75.1,4.1,flip.1] ivory!=eng.
+163 [binary,75.1,3.1] eng!=coffee.
+181 [back_unit_del,155.1,89.2,unit_del,157] ivory=3|ivory=4.
+183 [back_unit_del,155.1,87.2,unit_del,157] coffee=4|ivory=4.
+207 [para_into,156.1.1,2.3.1,unit_del,155,flip.1] ayellow!=3|ivory=1|ivory=4|ivory=5.
+209 [para_into,158.1.1,2.4.1,unit_del,157,flip.1] ayellow!=4|coffee=1|coffee=3|coffee=5.
+213 [para_into,161.1.1,2.5.1,unit_del,160,flip.1] ayellow!=5|eng=1|eng=3|eng=4.
+218 [para_into,162.1.1,2.3.1,unit_del,155,flip.1] eng!=3|ivory=1|ivory=4|ivory=5.
+220 [para_into,163.1.1,2.4.1,unit_del,160,flip.1] coffee!=4|eng=1|eng=3|eng=5.
+227 [binary,76.1,8.1,flip.1] horse!=asnail.
+232 [binary,76.1,3.1] aspan!=asnail.
+281 [para_into,227.1.1,2.2.1,flip.1] asnail!=2|horse=1|horse=3|horse=4|horse=5.
+305 [para_into,232.1.1,2.3.1,flip.1] asnail!=3|aspan=1|aspan=2|aspan=4|aspan=5.
+308 [binary,77.1,12.1,flip.1] japan!=1.
+309 [binary,77.1,11.1,flip.1] japan!=atea.
+310 [binary,77.1,10.1] atea!=1.
+311 [binary,77.1,9.1,flip.1] japan!=aspan.
+312 [binary,77.1,8.1] aspan!=1.
+313 [binary,77.1,7.1,flip.1] atea!=aspan.
+314 [binary,77.1,6.1,flip.1] japan!=eng.
+315 [binary,77.1,5.1] eng!=1.
+316 [binary,77.1,4.1] eng!=atea.
+317 [binary,77.1,3.1] eng!=aspan.
+319 [back_unit_del,312.1,305.2] asnail!=3|aspan=2|aspan=4|aspan=5.
+327 [back_unit_del,315.1,220.2] coffee!=4|eng=3|eng=5.
+331 [back_unit_del,315.1,213.2] ayellow!=5|eng=3|eng=4.
+359 [binary,310.1,2.1] atea=2|atea=3|atea=4|atea=5.
+362 [para_into,311.1.1,2.3.1,unit_del,308,flip.1] aspan!=3|japan=2|japan=4|japan=5.
+364 [binary,312.1,2.1] aspan=2|aspan=3|aspan=4|aspan=5.
+368 [para_into,313.1.1,2.2.1,unit_del,310,flip.1] aspan!=2|atea=3|atea=4|atea=5.
+372 [para_into,316.1.1,2.5.1,unit_del,315,160,flip.1] atea!=5|eng=3|eng=4.
+375 [para_into,317.1.1,2.5.1,unit_del,315,160,flip.1] aspan!=5|eng=3|eng=4.
+382 [binary,78.1,8.1,flip.1] lucky!=ayellow.
+384 [binary,78.1,6.1,flip.1] japan!=asnail.
+385 [binary,78.1,5.1,flip.1] lucky!=asnail.
+387 [binary,78.1,3.1,flip.1] ayellow!=asnail.
+430 [para_into,382.1.1,2.1.1,flip.1] ayellow!=1|lucky=2|lucky=3|lucky=4|lucky=5.
+436 [para_into,384.1.1,2.4.1,unit_del,308,flip.1] asnail!=4|japan=2|japan=3|japan=5.
+439 [para_into,385.1.1,2.5.1,flip.1] asnail!=5|lucky=1|lucky=2|lucky=3|lucky=4.
+452 [para_into,387.1.1,2.1.1,unit_del,154,flip.1] asnail!=1|ayellow=3|ayellow=4|ayellow=5.
+455 [binary,79.1,10.1,flip.1] lucky!=3.
+457 [binary,79.1,8.1,flip.1] lucky!=atea.
+458 [binary,79.1,7.1] atea!=3.
+460 [binary,79.1,5.1,flip.1] lucky!=coffee.
+461 [binary,79.1,4.1] coffee!=3.
+462 [binary,79.1,3.1] coffee!=atea.
+466 [back_unit_del,455.1,439.4] asnail!=5|lucky=1|lucky=2|lucky=4.
+467 [back_unit_del,455.1,430.3] ayellow!=1|lucky=2|lucky=4|lucky=5.
+481 [back_unit_del,458.1,368.2] aspan!=2|atea=4|atea=5.
+484 [back_unit_del,458.1,359.2] atea=2|atea=4|atea=5.
+488 [back_unit_del,461.1,209.3] ayellow!=4|coffee=1|coffee=5.
+531 [para_into,462.1.1,2.4.1,unit_del,157,461,flip.1] atea!=4|coffee=1|coffee=5.
+532 [106,split.1] successor(ayellow,horse).
+541 [binary,532.1,22.1,unit_del,154] horse=2|ayellow=3|ayellow=4.
+549 [binary,532.1,14.1,unit_del,154] ayellow=1|ayellow=3|ayellow=4.
+612,611 [181,split.1.2.1] ivory=3.
+624 [back_demod,218,demod,612,612,612,unit_del,152,146,145] eng!=3.
+625 [back_demod,207,demod,612,612,612,unit_del,152,146,145] ayellow!=3.
+631,630 [back_demod,183,demod,612,unit_del,146] coffee=4.
+639 [back_unit_del,624.1,375.2] aspan!=5|eng=4.
+641 [back_unit_del,624.1,372.2] atea!=5|eng=4.
+645 [back_unit_del,624.1,331.2] ayellow!=5|eng=4.
+648,647 [back_unit_del,624.1,327.2,demod,631,unit_del,1] eng=5.
+653 [back_unit_del,625.1,549.2] ayellow=1|ayellow=4.
+655 [back_unit_del,625.1,541.2] horse=2|ayellow=4.
+657 [back_unit_del,625.1,452.2] asnail!=1|ayellow=4|ayellow=5.
+666 [back_demod,531,demod,631,631,unit_del,151,144] atea!=4.
+680 [back_demod,488,demod,631,631,unit_del,151,144] ayellow!=4.
+681 [back_demod,460,demod,631] lucky!=4.
+684 [back_demod,645,demod,648,unit_del,144] ayellow!=5.
+686 [back_demod,641,demod,648,unit_del,144] atea!=5.
+687 [back_demod,639,demod,648,unit_del,144] aspan!=5.
+699 [back_demod,314,demod,648] japan!=5.
+705,704 [back_unit_del,666.1,484.2,unit_del,686] atea=2.
+706 [back_unit_del,666.1,481.2,demod,705,unit_del,147] aspan!=2.
+711 [back_unit_del,680.1,657.2,unit_del,684] asnail!=1.
+713,712 [back_unit_del,680.1,655.2] horse=2.
+715,714 [back_unit_del,680.1,653.2] ayellow=1.
+729 [back_unit_del,681.1,466.4] asnail!=5|lucky=1|lucky=2.
+732 [back_unit_del,687.1,364.4,unit_del,706] aspan=3|aspan=4.
+736 [back_unit_del,687.1,319.4,unit_del,706] asnail!=3|aspan=4.
+742 [back_unit_del,699.1,436.4] asnail!=4|japan=2|japan=3.
+749 [back_unit_del,699.1,362.4] aspan!=3|japan=2|japan=4.
+756 [back_demod,457,demod,705] lucky!=2.
+757 [back_demod,309,demod,705] japan!=2.
+768 [back_demod,281,demod,713,713,713,713,unit_del,153,149,148,147] asnail!=2.
+788,787 [back_demod,467,demod,715,unit_del,1,756,681] lucky=5.
+804 [back_unit_del,756.1,729.3,demod,788,unit_del,150] asnail!=5.
+809 [back_unit_del,757.1,749.2] aspan!=3|japan=4.
+812 [back_unit_del,757.1,742.2] asnail!=4|japan=3.
+867 [binary,711.1,2.1,unit_del,768,804] asnail=3|asnail=4.
+901,900 [732,split.1.2.1.1.1] aspan=3.
+911,910 [back_demod,809,demod,901,unit_del,1] japan=4.
+913 [back_demod,736,demod,901,unit_del,146] asnail!=3.
+920 [back_demod,812,demod,911,unit_del,146] asnail!=4.
+924 [back_unit_del,913.1,867.1] asnail=4.
+926 [binary,924.1,920.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8860) -------
+clauses given                128
+clauses generated          15693
+clauses kept                 887
+clauses forward subsumed    1027
+clauses back subsumed        406
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8860 finished Mon Aug  2 15:31:12 2004
+Refuted case [1.2.1.1.1].
+
+--- refuted case [1.2.1.1.2]
+
+Case [1.2.1.1.2]   (process 8861):
+Assumption: 901 [732,split.1.2.1.1.2] aspan=4.
+
+-----> EMPTY CLAUSE at   0.00 sec ----> 922 [back_demod,813,demod,921,914,unit_del,1,146] $F.
+
+Length of proof is 128.  Level of proof is 14.  Case [1.2.1.1.2]
+
+---------------- PROOF ----------------
+
+1 [] x=x.
+2 [] x=1|x=2|x=3|x=4|x=5.
+3 [] -distinct5(x,y,z,u,v)|x!=y.
+4 [] -distinct5(x,y,z,u,v)|x!=z.
+5 [] -distinct5(x,y,z,u,v)|x!=u.
+6 [] -distinct5(x,y,z,u,v)|x!=v.
+7 [] -distinct5(x,y,z,u,v)|y!=z.
+8 [] -distinct5(x,y,z,u,v)|y!=u.
+9 [] -distinct5(x,y,z,u,v)|y!=v.
+10 [] -distinct5(x,y,z,u,v)|z!=u.
+11 [] -distinct5(x,y,z,u,v)|z!=v.
+12 [] -distinct5(x,y,z,u,v)|u!=v.
+14 [] -successor(x,y)|x=1|x=2|x=3|x=4.
+22 [] -successor(x,y)|y=2|x=2|x=3|x=4.
+24 [] -successor(x,y)|y=2|x=2|y=4|x=4.
+34 [] -next_to(x,y)|successor(x,y)|successor(y,x).
+37 [] distinct5(1,2,3,4,5).
+38 [] distinct5(red,green,ivory,ayellow,blue).
+39 [] distinct5(eng,aspan,aukra,norw,japan).
+40 [] distinct5(dog,asnail,fox,horse,azebra).
+41 [] distinct5(coffee,atea,milk,orange,apple).
+42 [] distinct5(old,kool,chest,lucky,parli).
+43 [] eng=red.
+45,44 [copy,43,flip.1] red=eng.
+46 [] aspan=dog.
+48,47 [copy,46,flip.1] dog=aspan.
+49 [] coffee=green.
+51,50 [copy,49,flip.1] green=coffee.
+53,52 [] aukra=atea.
+55,54 [] old=asnail.
+57,56 [] kool=ayellow.
+59,58 [] milk=3.
+61,60 [] norw=1.
+62 [] lucky=orange.
+64,63 [copy,62,flip.1] orange=lucky.
+65 [] japan=parli.
+67,66 [copy,65,flip.1] parli=japan.
+69,68 [] blue=2.
+70 [] successor(ivory,green).
+71 [copy,70,demod,51] successor(ivory,coffee).
+72 [] next_to(kool,horse).
+73 [copy,72,demod,57] next_to(ayellow,horse).
+75 [back_demod,38,demod,45,51,69] distinct5(eng,coffee,ivory,ayellow,2).
+76 [back_demod,40,demod,48] distinct5(aspan,asnail,fox,horse,azebra).
+77 [back_demod,39,demod,53,61] distinct5(eng,aspan,atea,1,japan).
+78 [back_demod,42,demod,55,57,67] distinct5(asnail,ayellow,chest,lucky,japan).
+79 [back_demod,41,demod,59,64] distinct5(coffee,atea,3,lucky,apple).
+87 [binary,71.1,24.1] coffee=2|ivory=2|coffee=4|ivory=4.
+89 [binary,71.1,22.1] coffee=2|ivory=2|ivory=3|ivory=4.
+106 [binary,73.1,34.1] successor(ayellow,horse)|successor(horse,ayellow).
+144 [binary,37.1,12.1,flip.1] 5!=4.
+145 [binary,37.1,11.1,flip.1] 5!=3.
+146 [binary,37.1,10.1,flip.1] 4!=3.
+147 [binary,37.1,9.1,flip.1] 5!=2.
+148 [binary,37.1,8.1,flip.1] 4!=2.
+149 [binary,37.1,7.1,flip.1] 3!=2.
+150 [binary,37.1,6.1,flip.1] 5!=1.
+151 [binary,37.1,5.1,flip.1] 4!=1.
+152 [binary,37.1,4.1,flip.1] 3!=1.
+153 [binary,37.1,3.1,flip.1] 2!=1.
+154 [binary,75.1,12.1] ayellow!=2.
+155 [binary,75.1,11.1] ivory!=2.
+156 [binary,75.1,10.1] ivory!=ayellow.
+157 [binary,75.1,9.1] coffee!=2.
+158 [binary,75.1,8.1] coffee!=ayellow.
+160 [binary,75.1,6.1] eng!=2.
+161 [binary,75.1,5.1] eng!=ayellow.
+162 [binary,75.1,4.1,flip.1] ivory!=eng.
+163 [binary,75.1,3.1] eng!=coffee.
+181 [back_unit_del,155.1,89.2,unit_del,157] ivory=3|ivory=4.
+183 [back_unit_del,155.1,87.2,unit_del,157] coffee=4|ivory=4.
+207 [para_into,156.1.1,2.3.1,unit_del,155,flip.1] ayellow!=3|ivory=1|ivory=4|ivory=5.
+209 [para_into,158.1.1,2.4.1,unit_del,157,flip.1] ayellow!=4|coffee=1|coffee=3|coffee=5.
+213 [para_into,161.1.1,2.5.1,unit_del,160,flip.1] ayellow!=5|eng=1|eng=3|eng=4.
+218 [para_into,162.1.1,2.3.1,unit_del,155,flip.1] eng!=3|ivory=1|ivory=4|ivory=5.
+220 [para_into,163.1.1,2.4.1,unit_del,160,flip.1] coffee!=4|eng=1|eng=3|eng=5.
+227 [binary,76.1,8.1,flip.1] horse!=asnail.
+232 [binary,76.1,3.1] aspan!=asnail.
+281 [para_into,227.1.1,2.2.1,flip.1] asnail!=2|horse=1|horse=3|horse=4|horse=5.
+304 [para_into,232.1.1,2.4.1,flip.1] asnail!=4|aspan=1|aspan=2|aspan=3|aspan=5.
+308 [binary,77.1,12.1,flip.1] japan!=1.
+309 [binary,77.1,11.1,flip.1] japan!=atea.
+310 [binary,77.1,10.1] atea!=1.
+311 [binary,77.1,9.1,flip.1] japan!=aspan.
+312 [binary,77.1,8.1] aspan!=1.
+313 [binary,77.1,7.1,flip.1] atea!=aspan.
+314 [binary,77.1,6.1,flip.1] japan!=eng.
+315 [binary,77.1,5.1] eng!=1.
+316 [binary,77.1,4.1] eng!=atea.
+317 [binary,77.1,3.1] eng!=aspan.
+320 [back_unit_del,312.1,304.2] asnail!=4|aspan=2|aspan=3|aspan=5.
+327 [back_unit_del,315.1,220.2] coffee!=4|eng=3|eng=5.
+331 [back_unit_del,315.1,213.2] ayellow!=5|eng=3|eng=4.
+359 [binary,310.1,2.1] atea=2|atea=3|atea=4|atea=5.
+361 [para_into,311.1.1,2.4.1,unit_del,308,flip.1] aspan!=4|japan=2|japan=3|japan=5.
+364 [binary,312.1,2.1] aspan=2|aspan=3|aspan=4|aspan=5.
+368 [para_into,313.1.1,2.2.1,unit_del,310,flip.1] aspan!=2|atea=3|atea=4|atea=5.
+372 [para_into,316.1.1,2.5.1,unit_del,315,160,flip.1] atea!=5|eng=3|eng=4.
+375 [para_into,317.1.1,2.5.1,unit_del,315,160,flip.1] aspan!=5|eng=3|eng=4.
+382 [binary,78.1,8.1,flip.1] lucky!=ayellow.
+384 [binary,78.1,6.1,flip.1] japan!=asnail.
+385 [binary,78.1,5.1,flip.1] lucky!=asnail.
+387 [binary,78.1,3.1,flip.1] ayellow!=asnail.
+430 [para_into,382.1.1,2.1.1,flip.1] ayellow!=1|lucky=2|lucky=3|lucky=4|lucky=5.
+437 [para_into,384.1.1,2.3.1,unit_del,308,flip.1] asnail!=3|japan=2|japan=4|japan=5.
+439 [para_into,385.1.1,2.5.1,flip.1] asnail!=5|lucky=1|lucky=2|lucky=3|lucky=4.
+452 [para_into,387.1.1,2.1.1,unit_del,154,flip.1] asnail!=1|ayellow=3|ayellow=4|ayellow=5.
+455 [binary,79.1,10.1,flip.1] lucky!=3.
+457 [binary,79.1,8.1,flip.1] lucky!=atea.
+458 [binary,79.1,7.1] atea!=3.
+460 [binary,79.1,5.1,flip.1] lucky!=coffee.
+461 [binary,79.1,4.1] coffee!=3.
+462 [binary,79.1,3.1] coffee!=atea.
+466 [back_unit_del,455.1,439.4] asnail!=5|lucky=1|lucky=2|lucky=4.
+467 [back_unit_del,455.1,430.3] ayellow!=1|lucky=2|lucky=4|lucky=5.
+481 [back_unit_del,458.1,368.2] aspan!=2|atea=4|atea=5.
+484 [back_unit_del,458.1,359.2] atea=2|atea=4|atea=5.
+488 [back_unit_del,461.1,209.3] ayellow!=4|coffee=1|coffee=5.
+531 [para_into,462.1.1,2.4.1,unit_del,157,461,flip.1] atea!=4|coffee=1|coffee=5.
+532 [106,split.1] successor(ayellow,horse).
+541 [binary,532.1,22.1,unit_del,154] horse=2|ayellow=3|ayellow=4.
+549 [binary,532.1,14.1,unit_del,154] ayellow=1|ayellow=3|ayellow=4.
+612,611 [181,split.1.2.1] ivory=3.
+624 [back_demod,218,demod,612,612,612,unit_del,152,146,145] eng!=3.
+625 [back_demod,207,demod,612,612,612,unit_del,152,146,145] ayellow!=3.
+631,630 [back_demod,183,demod,612,unit_del,146] coffee=4.
+639 [back_unit_del,624.1,375.2] aspan!=5|eng=4.
+641 [back_unit_del,624.1,372.2] atea!=5|eng=4.
+645 [back_unit_del,624.1,331.2] ayellow!=5|eng=4.
+648,647 [back_unit_del,624.1,327.2,demod,631,unit_del,1] eng=5.
+653 [back_unit_del,625.1,549.2] ayellow=1|ayellow=4.
+655 [back_unit_del,625.1,541.2] horse=2|ayellow=4.
+657 [back_unit_del,625.1,452.2] asnail!=1|ayellow=4|ayellow=5.
+666 [back_demod,531,demod,631,631,unit_del,151,144] atea!=4.
+680 [back_demod,488,demod,631,631,unit_del,151,144] ayellow!=4.
+681 [back_demod,460,demod,631] lucky!=4.
+684 [back_demod,645,demod,648,unit_del,144] ayellow!=5.
+686 [back_demod,641,demod,648,unit_del,144] atea!=5.
+687 [back_demod,639,demod,648,unit_del,144] aspan!=5.
+699 [back_demod,314,demod,648] japan!=5.
+705,704 [back_unit_del,666.1,484.2,unit_del,686] atea=2.
+706 [back_unit_del,666.1,481.2,demod,705,unit_del,147] aspan!=2.
+711 [back_unit_del,680.1,657.2,unit_del,684] asnail!=1.
+713,712 [back_unit_del,680.1,655.2] horse=2.
+715,714 [back_unit_del,680.1,653.2] ayellow=1.
+729 [back_unit_del,681.1,466.4] asnail!=5|lucky=1|lucky=2.
+732 [back_unit_del,687.1,364.4,unit_del,706] aspan=3|aspan=4.
+735 [back_unit_del,687.1,320.4,unit_del,706] asnail!=4|aspan=3.
+741 [back_unit_del,699.1,437.4] asnail!=3|japan=2|japan=4.
+750 [back_unit_del,699.1,361.4] aspan!=4|japan=2|japan=3.
+756 [back_demod,457,demod,705] lucky!=2.
+757 [back_demod,309,demod,705] japan!=2.
+768 [back_demod,281,demod,713,713,713,713,unit_del,153,149,148,147] asnail!=2.
+788,787 [back_demod,467,demod,715,unit_del,1,756,681] lucky=5.
+804 [back_unit_del,756.1,729.3,demod,788,unit_del,150] asnail!=5.
+808 [back_unit_del,757.1,750.2] aspan!=4|japan=3.
+813 [back_unit_del,757.1,741.2] asnail!=3|japan=4.
+867 [binary,711.1,2.1,unit_del,768,804] asnail=3|asnail=4.
+900 [732,split_neg.1.2.1.1.2] aspan!=3.
+902,901 [732,split.1.2.1.1.2] aspan=4.
+905 [back_unit_del,900.1,735.2] asnail!=4.
+914,913 [back_demod,808,demod,902,unit_del,1] japan=3.
+921,920 [back_unit_del,905.1,867.2] asnail=3.
+922 [back_demod,813,demod,921,914,unit_del,1,146] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8861) -------
+clauses given                128
+clauses generated          15696
+clauses kept                 884
+clauses forward subsumed    1026
+clauses back subsumed        409
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8861 finished Mon Aug  2 15:31:12 2004
+Refuted case [1.2.1.1.2].
+
+------- statistics (process 8859) -------
+clauses given                128
+clauses generated          15691
+clauses kept                 866
+clauses forward subsumed    1004
+clauses back subsumed        404
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.07          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8859 finished Mon Aug  2 15:31:12 2004
+Refuted case [1.2.1.1].
+
+The Assumption for case [1.2.1.1] was not used;
+therefore we skip case:  [1.2.1.2].
+
+------- statistics (process 8858) -------
+clauses given                121
+clauses generated          14422
+clauses kept                 837
+clauses forward subsumed     854
+clauses back subsumed        392
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.19          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8858 finished Mon Aug  2 15:31:12 2004
+Refuted case [1.2.1].
+
+Case [1.2.2]   (process 8862):
+Assumption: 612 [181,split.1.2.2] ivory=4.
+
+Splitting on clause 564 [binary,562.1,33.1] chest!=4|fox!=5.
+
+Case [1.2.2.1]   (process 8863):
+Assumption: 870 [564,split.1.2.2.1] chest!=4.
+
+Splitting on clause 565 [binary,562.1,32.1] chest!=3|fox!=4.
+
+Case [1.2.2.1.1]   (process 8864):
+Assumption: 886 [565,split.1.2.2.1.1] chest!=3.
+
+Splitting on clause 566 [binary,562.1,31.1] chest!=2|fox!=3.
+
+Case [1.2.2.1.1.1]   (process 8865):
+Assumption: 898 [566,split.1.2.2.1.1.1] chest!=2.
+
+Splitting on clause 693 [back_unit_del,640.1,521.3] apple!=2|atea=4.
+
+Case [1.2.2.1.1.1.1]   (process 8866):
+Assumption: 966 [693,split.1.2.2.1.1.1.1] apple!=2.
+
+Splitting on clause 694 [back_unit_del,640.1,520.3] apple!=4|atea=2.
+
+Case [1.2.2.1.1.1.1.1]   (process 8867):
+Assumption: 970 [694,split.1.2.2.1.1.1.1.1] apple!=4.
+
+Splitting on clause 695 [back_unit_del,640.1,484.3] atea=2|atea=4.
+
+--- refuted case [1.2.2.1.1.1.1.1.1]
+
+Case [1.2.2.1.1.1.1.1.1]   (process 8868):
+Assumption: 978 [695,split.1.2.2.1.1.1.1.1.1] atea=2.
+
+-----> EMPTY CLAUSE at   0.00 sec ----> 994 [back_demod,861,demod,987,990,unit_del,1,148] $F.
+
+Length of proof is 107.  Level of proof is 16.  Case [1.2.2.1.1.1.1.1.1]
+
+---------------- PROOF ----------------
+
+1 [] x=x.
+2 [] x=1|x=2|x=3|x=4|x=5.
+3 [] -distinct5(x,y,z,u,v)|x!=y.
+4 [] -distinct5(x,y,z,u,v)|x!=z.
+5 [] -distinct5(x,y,z,u,v)|x!=u.
+6 [] -distinct5(x,y,z,u,v)|x!=v.
+7 [] -distinct5(x,y,z,u,v)|y!=z.
+8 [] -distinct5(x,y,z,u,v)|y!=u.
+9 [] -distinct5(x,y,z,u,v)|y!=v.
+10 [] -distinct5(x,y,z,u,v)|z!=u.
+11 [] -distinct5(x,y,z,u,v)|z!=v.
+12 [] -distinct5(x,y,z,u,v)|u!=v.
+14 [] -successor(x,y)|x=1|x=2|x=3|x=4.
+22 [] -successor(x,y)|y=2|x=2|x=3|x=4.
+23 [] -successor(x,y)|y=2|x=2|x=3|y=5.
+25 [] -successor(x,y)|y=2|x=2|y=4|y=5.
+31 [] successor(x,y)|x!=2|y!=3.
+33 [] successor(x,y)|x!=4|y!=5.
+34 [] -next_to(x,y)|successor(x,y)|successor(y,x).
+37 [] distinct5(1,2,3,4,5).
+38 [] distinct5(red,green,ivory,ayellow,blue).
+39 [] distinct5(eng,aspan,aukra,norw,japan).
+40 [] distinct5(dog,asnail,fox,horse,azebra).
+41 [] distinct5(coffee,atea,milk,orange,apple).
+42 [] distinct5(old,kool,chest,lucky,parli).
+43 [] eng=red.
+45,44 [copy,43,flip.1] red=eng.
+46 [] aspan=dog.
+48,47 [copy,46,flip.1] dog=aspan.
+49 [] coffee=green.
+51,50 [copy,49,flip.1] green=coffee.
+53,52 [] aukra=atea.
+55,54 [] old=asnail.
+57,56 [] kool=ayellow.
+59,58 [] milk=3.
+61,60 [] norw=1.
+62 [] lucky=orange.
+64,63 [copy,62,flip.1] orange=lucky.
+65 [] japan=parli.
+67,66 [copy,65,flip.1] parli=japan.
+69,68 [] blue=2.
+70 [] successor(ivory,green).
+71 [copy,70,demod,51] successor(ivory,coffee).
+72 [] next_to(kool,horse).
+73 [copy,72,demod,57] next_to(ayellow,horse).
+74 [] next_to(chest,fox).
+75 [back_demod,38,demod,45,51,69] distinct5(eng,coffee,ivory,ayellow,2).
+76 [back_demod,40,demod,48] distinct5(aspan,asnail,fox,horse,azebra).
+77 [back_demod,39,demod,53,61] distinct5(eng,aspan,atea,1,japan).
+78 [back_demod,42,demod,55,57,67] distinct5(asnail,ayellow,chest,lucky,japan).
+79 [back_demod,41,demod,59,64] distinct5(coffee,atea,3,lucky,apple).
+88 [binary,71.1,23.1] coffee=2|ivory=2|ivory=3|coffee=5.
+89 [binary,71.1,22.1] coffee=2|ivory=2|ivory=3|ivory=4.
+106 [binary,73.1,34.1] successor(ayellow,horse)|successor(horse,ayellow).
+117 [binary,74.1,34.1] successor(chest,fox)|successor(fox,chest).
+144 [binary,37.1,12.1,flip.1] 5!=4.
+145 [binary,37.1,11.1,flip.1] 5!=3.
+147 [binary,37.1,9.1,flip.1] 5!=2.
+148 [binary,37.1,8.1,flip.1] 4!=2.
+149 [binary,37.1,7.1,flip.1] 3!=2.
+150 [binary,37.1,6.1,flip.1] 5!=1.
+151 [binary,37.1,5.1,flip.1] 4!=1.
+153 [binary,37.1,3.1,flip.1] 2!=1.
+154 [binary,75.1,12.1] ayellow!=2.
+155 [binary,75.1,11.1] ivory!=2.
+156 [binary,75.1,10.1] ivory!=ayellow.
+157 [binary,75.1,9.1] coffee!=2.
+159 [binary,75.1,7.1,flip.1] ivory!=coffee.
+160 [binary,75.1,6.1] eng!=2.
+161 [binary,75.1,5.1] eng!=ayellow.
+162 [binary,75.1,4.1,flip.1] ivory!=eng.
+163 [binary,75.1,3.1] eng!=coffee.
+181 [back_unit_del,155.1,89.2,unit_del,157] ivory=3|ivory=4.
+182 [back_unit_del,155.1,88.2,unit_del,157] ivory=3|coffee=5.
+206 [para_into,156.1.1,2.4.1,unit_del,155,flip.1] ayellow!=4|ivory=1|ivory=3|ivory=5.
+210 [para_into,159.1.1,2.4.1,unit_del,155,flip.1] coffee!=4|ivory=1|ivory=3|ivory=5.
+215 [para_into,161.1.1,2.3.1,unit_del,160,flip.1] ayellow!=3|eng=1|eng=4|eng=5.
+217 [para_into,162.1.1,2.4.1,unit_del,155,flip.1] eng!=4|ivory=1|ivory=3|ivory=5.
+219 [para_into,163.1.1,2.5.1,unit_del,160,flip.1] coffee!=5|eng=1|eng=3|eng=4.
+225 [binary,76.1,10.1,flip.1] horse!=fox.
+271 [para_into,225.1.1,2.2.1,flip.1] fox!=2|horse=1|horse=3|horse=4|horse=5.
+308 [binary,77.1,12.1,flip.1] japan!=1.
+309 [binary,77.1,11.1,flip.1] japan!=atea.
+310 [binary,77.1,10.1] atea!=1.
+314 [binary,77.1,6.1,flip.1] japan!=eng.
+315 [binary,77.1,5.1] eng!=1.
+328 [back_unit_del,315.1,219.2] coffee!=5|eng=3|eng=4.
+329 [back_unit_del,315.1,215.2] ayellow!=3|eng=4|eng=5.
+358 [para_into,309.1.1,2.2.1,unit_del,308,flip.1] atea!=2|japan=3|japan=4|japan=5.
+359 [binary,310.1,2.1] atea=2|atea=3|atea=4|atea=5.
+378 [binary,78.1,12.1] lucky!=japan.
+379 [binary,78.1,11.1,flip.1] japan!=chest.
+382 [binary,78.1,8.1,flip.1] lucky!=ayellow.
+412 [para_into,378.1.1,2.4.1,flip.1] japan!=4|lucky=1|lucky=2|lucky=3|lucky=5.
+455 [binary,79.1,10.1,flip.1] lucky!=3.
+457 [binary,79.1,8.1,flip.1] lucky!=atea.
+458 [binary,79.1,7.1] atea!=3.
+460 [binary,79.1,5.1,flip.1] lucky!=coffee.
+461 [binary,79.1,4.1] coffee!=3.
+462 [binary,79.1,3.1] coffee!=atea.
+475 [back_unit_del,455.1,412.4] japan!=4|lucky=1|lucky=2|lucky=5.
+484 [back_unit_del,458.1,359.2] atea=2|atea=4|atea=5.
+524 [para_into,457.1.1,2.2.1,unit_del,455,flip.1] atea!=2|lucky=1|lucky=4|lucky=5.
+530 [para_into,462.1.1,2.5.1,unit_del,157,461,flip.1] atea!=5|coffee=1|coffee=4.
+532 [106,split.1] successor(ayellow,horse).
+541 [binary,532.1,22.1,unit_del,154] horse=2|ayellow=3|ayellow=4.
+549 [binary,532.1,14.1,unit_del,154] ayellow=1|ayellow=3|ayellow=4.
+562 [117,split_neg.1.2] -successor(chest,fox).
+563 [117,split.1.2] successor(fox,chest).
+564 [binary,562.1,33.1] chest!=4|fox!=5.
+566 [binary,562.1,31.1] chest!=2|fox!=3.
+583 [binary,563.1,25.1] chest=2|fox=2|chest=4|chest=5.
+611 [181,split_neg.1.2.2] ivory!=3.
+613,612 [181,split.1.2.2] ivory=4.
+614 [back_unit_del,611.1,217.3,demod,613,613,unit_del,151,144] eng!=4.
+615 [back_unit_del,611.1,210.3,demod,613,613,unit_del,151,144] coffee!=4.
+616 [back_unit_del,611.1,206.3,demod,613,613,unit_del,151,144] ayellow!=4.
+619,618 [back_unit_del,611.1,182.1] coffee=5.
+637 [back_unit_del,614.1,329.2] ayellow!=3|eng=5.
+639,638 [back_unit_del,614.1,328.3,demod,619,unit_del,1] eng=3.
+640 [back_unit_del,615.1,530.3,demod,619,unit_del,150] atea!=5.
+648 [back_unit_del,616.1,549.3] ayellow=1|ayellow=3.
+650 [back_unit_del,616.1,541.3] horse=2|ayellow=3.
+670 [back_demod,460,demod,619] lucky!=5.
+673 [back_demod,637,demod,639,unit_del,145] ayellow!=3.
+690 [back_demod,314,demod,639] japan!=3.
+695 [back_unit_del,640.1,484.3] atea=2|atea=4.
+712 [back_unit_del,670.1,524.4] atea!=2|lucky=1|lucky=4.
+720 [back_unit_del,670.1,475.4] japan!=4|lucky=1|lucky=2.
+729,728 [back_unit_del,673.1,650.2] horse=2.
+731,730 [back_unit_del,673.1,648.2] ayellow=1.
+756 [back_unit_del,690.1,358.2] atea!=2|japan=4|japan=5.
+769 [back_demod,271,demod,729,729,729,729,unit_del,153,149,148,147] fox!=2.
+797 [back_demod,382,demod,731] lucky!=1.
+820 [back_unit_del,769.1,583.2] chest=2|chest=4|chest=5.
+861 [back_unit_del,797.1,720.2] japan!=4|lucky=2.
+865 [back_unit_del,797.1,712.2] atea!=2|lucky=4.
+870 [564,split.1.2.2.1] chest!=4.
+882 [back_unit_del,870.1,820.2] chest=2|chest=5.
+898 [566,split.1.2.2.1.1.1] chest!=2.
+908,907 [back_unit_del,898.1,882.1] chest=5.
+935 [back_demod,379,demod,908] japan!=5.
+947 [back_unit_del,935.1,756.3] atea!=2|japan=4.
+979,978 [695,split.1.2.2.1.1.1.1.1.1] atea=2.
+987,986 [back_demod,947,demod,979,unit_del,1] japan=4.
+990,989 [back_demod,865,demod,979,unit_del,1] lucky=4.
+994 [back_demod,861,demod,987,990,unit_del,1,148] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8868) -------
+clauses given                137
+clauses generated          16218
+clauses kept                 955
+clauses forward subsumed     985
+clauses back subsumed        496
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        2             (0 hr, 0 min, 2 sec)
+
+Process 8868 finished Mon Aug  2 15:31:13 2004
+Refuted case [1.2.2.1.1.1.1.1.1].
+
+--- refuted case [1.2.2.1.1.1.1.1.2]
+
+Case [1.2.2.1.1.1.1.1.2]   (process 8869):
+Assumption: 979 [695,split.1.2.2.1.1.1.1.1.2] atea=4.
+
+-----> EMPTY CLAUSE at   0.00 sec ----> 993 [back_demod,860,demod,987,989,unit_del,1,148] $F.
+
+Length of proof is 107.  Level of proof is 16.  Case [1.2.2.1.1.1.1.1.2]
+
+---------------- PROOF ----------------
+
+1 [] x=x.
+2 [] x=1|x=2|x=3|x=4|x=5.
+3 [] -distinct5(x,y,z,u,v)|x!=y.
+4 [] -distinct5(x,y,z,u,v)|x!=z.
+5 [] -distinct5(x,y,z,u,v)|x!=u.
+6 [] -distinct5(x,y,z,u,v)|x!=v.
+7 [] -distinct5(x,y,z,u,v)|y!=z.
+8 [] -distinct5(x,y,z,u,v)|y!=u.
+9 [] -distinct5(x,y,z,u,v)|y!=v.
+10 [] -distinct5(x,y,z,u,v)|z!=u.
+11 [] -distinct5(x,y,z,u,v)|z!=v.
+12 [] -distinct5(x,y,z,u,v)|u!=v.
+14 [] -successor(x,y)|x=1|x=2|x=3|x=4.
+22 [] -successor(x,y)|y=2|x=2|x=3|x=4.
+23 [] -successor(x,y)|y=2|x=2|x=3|y=5.
+25 [] -successor(x,y)|y=2|x=2|y=4|y=5.
+31 [] successor(x,y)|x!=2|y!=3.
+33 [] successor(x,y)|x!=4|y!=5.
+34 [] -next_to(x,y)|successor(x,y)|successor(y,x).
+37 [] distinct5(1,2,3,4,5).
+38 [] distinct5(red,green,ivory,ayellow,blue).
+39 [] distinct5(eng,aspan,aukra,norw,japan).
+40 [] distinct5(dog,asnail,fox,horse,azebra).
+41 [] distinct5(coffee,atea,milk,orange,apple).
+42 [] distinct5(old,kool,chest,lucky,parli).
+43 [] eng=red.
+45,44 [copy,43,flip.1] red=eng.
+46 [] aspan=dog.
+48,47 [copy,46,flip.1] dog=aspan.
+49 [] coffee=green.
+51,50 [copy,49,flip.1] green=coffee.
+53,52 [] aukra=atea.
+55,54 [] old=asnail.
+57,56 [] kool=ayellow.
+59,58 [] milk=3.
+61,60 [] norw=1.
+62 [] lucky=orange.
+64,63 [copy,62,flip.1] orange=lucky.
+65 [] japan=parli.
+67,66 [copy,65,flip.1] parli=japan.
+69,68 [] blue=2.
+70 [] successor(ivory,green).
+71 [copy,70,demod,51] successor(ivory,coffee).
+72 [] next_to(kool,horse).
+73 [copy,72,demod,57] next_to(ayellow,horse).
+74 [] next_to(chest,fox).
+75 [back_demod,38,demod,45,51,69] distinct5(eng,coffee,ivory,ayellow,2).
+76 [back_demod,40,demod,48] distinct5(aspan,asnail,fox,horse,azebra).
+77 [back_demod,39,demod,53,61] distinct5(eng,aspan,atea,1,japan).
+78 [back_demod,42,demod,55,57,67] distinct5(asnail,ayellow,chest,lucky,japan).
+79 [back_demod,41,demod,59,64] distinct5(coffee,atea,3,lucky,apple).
+88 [binary,71.1,23.1] coffee=2|ivory=2|ivory=3|coffee=5.
+89 [binary,71.1,22.1] coffee=2|ivory=2|ivory=3|ivory=4.
+106 [binary,73.1,34.1] successor(ayellow,horse)|successor(horse,ayellow).
+117 [binary,74.1,34.1] successor(chest,fox)|successor(fox,chest).
+144 [binary,37.1,12.1,flip.1] 5!=4.
+145 [binary,37.1,11.1,flip.1] 5!=3.
+147 [binary,37.1,9.1,flip.1] 5!=2.
+148 [binary,37.1,8.1,flip.1] 4!=2.
+149 [binary,37.1,7.1,flip.1] 3!=2.
+150 [binary,37.1,6.1,flip.1] 5!=1.
+151 [binary,37.1,5.1,flip.1] 4!=1.
+153 [binary,37.1,3.1,flip.1] 2!=1.
+154 [binary,75.1,12.1] ayellow!=2.
+155 [binary,75.1,11.1] ivory!=2.
+156 [binary,75.1,10.1] ivory!=ayellow.
+157 [binary,75.1,9.1] coffee!=2.
+159 [binary,75.1,7.1,flip.1] ivory!=coffee.
+160 [binary,75.1,6.1] eng!=2.
+161 [binary,75.1,5.1] eng!=ayellow.
+162 [binary,75.1,4.1,flip.1] ivory!=eng.
+163 [binary,75.1,3.1] eng!=coffee.
+181 [back_unit_del,155.1,89.2,unit_del,157] ivory=3|ivory=4.
+182 [back_unit_del,155.1,88.2,unit_del,157] ivory=3|coffee=5.
+206 [para_into,156.1.1,2.4.1,unit_del,155,flip.1] ayellow!=4|ivory=1|ivory=3|ivory=5.
+210 [para_into,159.1.1,2.4.1,unit_del,155,flip.1] coffee!=4|ivory=1|ivory=3|ivory=5.
+215 [para_into,161.1.1,2.3.1,unit_del,160,flip.1] ayellow!=3|eng=1|eng=4|eng=5.
+217 [para_into,162.1.1,2.4.1,unit_del,155,flip.1] eng!=4|ivory=1|ivory=3|ivory=5.
+219 [para_into,163.1.1,2.5.1,unit_del,160,flip.1] coffee!=5|eng=1|eng=3|eng=4.
+225 [binary,76.1,10.1,flip.1] horse!=fox.
+271 [para_into,225.1.1,2.2.1,flip.1] fox!=2|horse=1|horse=3|horse=4|horse=5.
+308 [binary,77.1,12.1,flip.1] japan!=1.
+309 [binary,77.1,11.1,flip.1] japan!=atea.
+310 [binary,77.1,10.1] atea!=1.
+314 [binary,77.1,6.1,flip.1] japan!=eng.
+315 [binary,77.1,5.1] eng!=1.
+328 [back_unit_del,315.1,219.2] coffee!=5|eng=3|eng=4.
+329 [back_unit_del,315.1,215.2] ayellow!=3|eng=4|eng=5.
+356 [para_into,309.1.1,2.4.1,unit_del,308,flip.1] atea!=4|japan=2|japan=3|japan=5.
+359 [binary,310.1,2.1] atea=2|atea=3|atea=4|atea=5.
+378 [binary,78.1,12.1] lucky!=japan.
+379 [binary,78.1,11.1,flip.1] japan!=chest.
+382 [binary,78.1,8.1,flip.1] lucky!=ayellow.
+414 [para_into,378.1.1,2.2.1,flip.1] japan!=2|lucky=1|lucky=3|lucky=4|lucky=5.
+455 [binary,79.1,10.1,flip.1] lucky!=3.
+457 [binary,79.1,8.1,flip.1] lucky!=atea.
+458 [binary,79.1,7.1] atea!=3.
+460 [binary,79.1,5.1,flip.1] lucky!=coffee.
+461 [binary,79.1,4.1] coffee!=3.
+462 [binary,79.1,3.1] coffee!=atea.
+474 [back_unit_del,455.1,414.3] japan!=2|lucky=1|lucky=4|lucky=5.
+484 [back_unit_del,458.1,359.2] atea=2|atea=4|atea=5.
+523 [para_into,457.1.1,2.4.1,unit_del,455,flip.1] atea!=4|lucky=1|lucky=2|lucky=5.
+530 [para_into,462.1.1,2.5.1,unit_del,157,461,flip.1] atea!=5|coffee=1|coffee=4.
+532 [106,split.1] successor(ayellow,horse).
+541 [binary,532.1,22.1,unit_del,154] horse=2|ayellow=3|ayellow=4.
+549 [binary,532.1,14.1,unit_del,154] ayellow=1|ayellow=3|ayellow=4.
+562 [117,split_neg.1.2] -successor(chest,fox).
+563 [117,split.1.2] successor(fox,chest).
+564 [binary,562.1,33.1] chest!=4|fox!=5.
+566 [binary,562.1,31.1] chest!=2|fox!=3.
+583 [binary,563.1,25.1] chest=2|fox=2|chest=4|chest=5.
+611 [181,split_neg.1.2.2] ivory!=3.
+613,612 [181,split.1.2.2] ivory=4.
+614 [back_unit_del,611.1,217.3,demod,613,613,unit_del,151,144] eng!=4.
+615 [back_unit_del,611.1,210.3,demod,613,613,unit_del,151,144] coffee!=4.
+616 [back_unit_del,611.1,206.3,demod,613,613,unit_del,151,144] ayellow!=4.
+619,618 [back_unit_del,611.1,182.1] coffee=5.
+637 [back_unit_del,614.1,329.2] ayellow!=3|eng=5.
+639,638 [back_unit_del,614.1,328.3,demod,619,unit_del,1] eng=3.
+640 [back_unit_del,615.1,530.3,demod,619,unit_del,150] atea!=5.
+648 [back_unit_del,616.1,549.3] ayellow=1|ayellow=3.
+650 [back_unit_del,616.1,541.3] horse=2|ayellow=3.
+670 [back_demod,460,demod,619] lucky!=5.
+673 [back_demod,637,demod,639,unit_del,145] ayellow!=3.
+690 [back_demod,314,demod,639] japan!=3.
+695 [back_unit_del,640.1,484.3] atea=2|atea=4.
+713 [back_unit_del,670.1,523.4] atea!=4|lucky=1|lucky=2.
+721 [back_unit_del,670.1,474.4] japan!=2|lucky=1|lucky=4.
+729,728 [back_unit_del,673.1,650.2] horse=2.
+731,730 [back_unit_del,673.1,648.2] ayellow=1.
+757 [back_unit_del,690.1,356.3] atea!=4|japan=2|japan=5.
+769 [back_demod,271,demod,729,729,729,729,unit_del,153,149,148,147] fox!=2.
+797 [back_demod,382,demod,731] lucky!=1.
+820 [back_unit_del,769.1,583.2] chest=2|chest=4|chest=5.
+860 [back_unit_del,797.1,721.2] japan!=2|lucky=4.
+864 [back_unit_del,797.1,713.2] atea!=4|lucky=2.
+870 [564,split.1.2.2.1] chest!=4.
+882 [back_unit_del,870.1,820.2] chest=2|chest=5.
+898 [566,split.1.2.2.1.1.1] chest!=2.
+908,907 [back_unit_del,898.1,882.1] chest=5.
+935 [back_demod,379,demod,908] japan!=5.
+946 [back_unit_del,935.1,757.3] atea!=4|japan=2.
+980,979 [695,split.1.2.2.1.1.1.1.1.2] atea=4.
+987,986 [back_demod,946,demod,980,unit_del,1] japan=2.
+989,988 [back_demod,864,demod,980,unit_del,1] lucky=2.
+993 [back_demod,860,demod,987,989,unit_del,1,148] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8869) -------
+clauses given                137
+clauses generated          16220
+clauses kept                 954
+clauses forward subsumed     988
+clauses back subsumed        498
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        2             (0 hr, 0 min, 2 sec)
+
+Process 8869 finished Mon Aug  2 15:31:13 2004
+Refuted case [1.2.2.1.1.1.1.1.2].
+
+------- statistics (process 8867) -------
+clauses given                137
+clauses generated          16218
+clauses kept                 943
+clauses forward subsumed     966
+clauses back subsumed        496
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        2             (0 hr, 0 min, 2 sec)
+
+Process 8867 finished Mon Aug  2 15:31:13 2004
+Refuted case [1.2.2.1.1.1.1.1].
+
+The Assumption for case [1.2.2.1.1.1.1.1] was not used;
+therefore we skip case:  [1.2.2.1.1.1.1.2].
+
+------- statistics (process 8866) -------
+clauses given                135
+clauses generated          16124
+clauses kept                 936
+clauses forward subsumed     950
+clauses back subsumed        494
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        2             (0 hr, 0 min, 2 sec)
+
+Process 8866 finished Mon Aug  2 15:31:13 2004
+Refuted case [1.2.2.1.1.1.1].
+
+The Assumption for case [1.2.2.1.1.1.1] was not used;
+therefore we skip case:  [1.2.2.1.1.1.2].
+
+------- statistics (process 8865) -------
+clauses given                133
+clauses generated          16015
+clauses kept                 932
+clauses forward subsumed     944
+clauses back subsumed        489
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.09          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        2             (0 hr, 0 min, 2 sec)
+
+Process 8865 finished Mon Aug  2 15:31:13 2004
+Refuted case [1.2.2.1.1.1].
+
+Possible model detected on branch [1.2.2.1.1.2].
+
+Case [1.2.2.1.1.2]   (process 8870):
+Assumption: 900 [566,split.1.2.2.1.1.2] fox!=3.
+
+Possible model detected on branch [1.2.2.1.1.2].
+
+Here are the clauses in Usable and SoS.  It seems that no more
+inferences or splitting can be done.  If the search strategy is
+complete, these clauses should lead to a model of the input.
+
+list(usable).
+1 [] x=x.
+2 [] x=1|x=2|x=3|x=4|x=5.
+3 [] -distinct5(x,y,z,u,v)|x!=y.
+4 [] -distinct5(x,y,z,u,v)|x!=z.
+5 [] -distinct5(x,y,z,u,v)|x!=u.
+6 [] -distinct5(x,y,z,u,v)|x!=v.
+7 [] -distinct5(x,y,z,u,v)|y!=z.
+8 [] -distinct5(x,y,z,u,v)|y!=u.
+9 [] -distinct5(x,y,z,u,v)|y!=v.
+10 [] -distinct5(x,y,z,u,v)|z!=u.
+11 [] -distinct5(x,y,z,u,v)|z!=v.
+12 [] -distinct5(x,y,z,u,v)|u!=v.
+13 [] distinct5(x,y,z,u,v)|x=y|x=z|x=u|x=v|y=z|y=u|y=v|z=u|z=v|u=v.
+14 [] -successor(x,y)|x=1|x=2|x=3|x=4.
+15 [] -successor(x,y)|x=1|x=2|x=3|y=5.
+16 [] -successor(x,y)|x=1|x=2|y=4|x=4.
+17 [] -successor(x,y)|x=1|x=2|y=4|y=5.
+18 [] -successor(x,y)|x=1|y=3|x=3|x=4.
+19 [] -successor(x,y)|x=1|y=3|x=3|y=5.
+20 [] -successor(x,y)|x=1|y=3|y=4|x=4.
+21 [] -successor(x,y)|x=1|y=3|y=4|y=5.
+22 [] -successor(x,y)|y=2|x=2|x=3|x=4.
+23 [] -successor(x,y)|y=2|x=2|x=3|y=5.
+24 [] -successor(x,y)|y=2|x=2|y=4|x=4.
+25 [] -successor(x,y)|y=2|x=2|y=4|y=5.
+26 [] -successor(x,y)|y=2|y=3|x=3|x=4.
+27 [] -successor(x,y)|y=2|y=3|x=3|y=5.
+28 [] -successor(x,y)|y=2|y=3|y=4|x=4.
+29 [] -successor(x,y)|y=2|y=3|y=4|y=5.
+30 [] successor(x,y)|x!=1|y!=2.
+31 [] successor(x,y)|x!=2|y!=3.
+32 [] successor(x,y)|x!=3|y!=4.
+33 [] successor(x,y)|x!=4|y!=5.
+34 [] -next_to(x,y)|successor(x,y)|successor(y,x).
+35 [] next_to(x,y)| -successor(x,y).
+36 [] next_to(x,y)| -successor(y,x).
+58 [] milk=3.
+60 [] norw=1.
+68 [] blue=2.
+37 [] distinct5(1,2,3,4,5).
+144 [binary,37.1,12.1,flip.1] 5!=4.
+145 [binary,37.1,11.1,flip.1] 5!=3.
+146 [binary,37.1,10.1,flip.1] 4!=3.
+147 [binary,37.1,9.1,flip.1] 5!=2.
+148 [binary,37.1,8.1,flip.1] 4!=2.
+149 [binary,37.1,7.1,flip.1] 3!=2.
+150 [binary,37.1,6.1,flip.1] 5!=1.
+151 [binary,37.1,5.1,flip.1] 4!=1.
+152 [binary,37.1,4.1,flip.1] 3!=1.
+153 [binary,37.1,3.1,flip.1] 2!=1.
+612 [181,split.1.2.2] ivory=4.
+618 [back_unit_del,611.1,182.1] coffee=5.
+620 [back_unit_del,611.1,176.3,demod,619,613,613,unit_del,151,144] successor(4,5).
+621 [back_unit_del,611.1,173.3,demod,619,613,613,unit_del,151,144] next_to(5,4).
+622 [back_unit_del,611.1,170.3,demod,619,613,613,unit_del,151,144] next_to(4,5).
+638 [back_unit_del,614.1,328.3,demod,619,unit_del,1] eng=3.
+671 [back_demod,50,demod,619] green=5.
+691 [back_demod,44,demod,639] red=3.
+728 [back_unit_del,673.1,650.2] horse=2.
+730 [back_unit_del,673.1,648.2] ayellow=1.
+732 [back_unit_del,673.1,646.2,demod,729] successor(1,2).
+733 [back_unit_del,673.1,644.2,demod,729] next_to(2,1).
+766 [back_demod,708,demod,729] next_to(1,2).
+798 [back_demod,56,demod,731] kool=1.
+898 [566,split_neg.1.2.2.1.1.2] chest=2.
+906 [back_demod,884,demod,899,unit_del,147] fox=1.
+908 [back_demod,858,demod,899,unit_del,1] lucky=4.
+911 [back_demod,821,demod,899,907,907,907,unit_del,152,151,150] -successor(2,1).
+941 [back_demod,63,demod,909] orange=4.
+953 [back_unit_del,932.1,695.2] atea=2.
+957 [back_unit_del,933.1,698.3,unit_del,955] apple=1.
+959 [back_unit_del,934.1,918.1] japan=5.
+966 [back_unit_del,935.1,868.2,unit_del,947] asnail=3.
+970 [back_unit_del,945.1,804.2] aspan=4.
+973 [back_demod,52,demod,954] aukra=2.
+975 [back_demod,66,demod,960] parli=5.
+981 [back_demod,54,demod,967] old=3.
+983 [back_demod,952,demod,971,unit_del,1,980] azebra=5.
+985 [back_demod,47,demod,971] dog=4.
+678 [back_demod,627,demod,639,unit_del,673,643] distinct5(3,5,4,1,2).
+964 [back_unit_del,935.1,914.2,demod,960,unit_del,947] distinct5(3,1,2,4,5).
+969 [back_unit_del,945.1,806.2,demod,954,960] distinct5(3,4,2,1,5).
+972 [back_demod,940,demod,954,958,unit_del,153] distinct5(5,2,3,4,1).
+987 [back_unit_del,980.1,979.2,demod,984,unit_del,144] distinct5(4,3,1,2,5).
+end_of_list.
+
+list(sos).
+end_of_list.
+
+------- statistics (process 8870) -------
+clauses given                141
+clauses generated          17799
+clauses kept                 947
+clauses forward subsumed    1158
+clauses back subsumed        482
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.17          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        2             (0 hr, 0 min, 2 sec)
+
+Process 8870 finished Mon Aug  2 15:31:13 2004
+
+------- statistics (process 8864) -------
+clauses given                121
+clauses generated          14267
+clauses kept                 871
+clauses forward subsumed     721
+clauses back subsumed        456
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        2             (0 hr, 0 min, 2 sec)
+
+Process 8864 finished Mon Aug  2 15:31:13 2004
+
+------- statistics (process 8863) -------
+clauses given                119
+clauses generated          14150
+clauses kept                 859
+clauses forward subsumed     715
+clauses back subsumed        445
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        2             (0 hr, 0 min, 2 sec)
+
+Process 8863 finished Mon Aug  2 15:31:13 2004
+
+------- statistics (process 8862) -------
+clauses given                117
+clauses generated          14029
+clauses kept                 843
+clauses forward subsumed     709
+clauses back subsumed        411
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.17          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        2             (0 hr, 0 min, 2 sec)
+
+Process 8862 finished Mon Aug  2 15:31:13 2004
+
+------- statistics (process 8857) -------
+clauses given                 90
+clauses generated          10881
+clauses kept                 592
+clauses forward subsumed     339
+clauses back subsumed        166
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.03          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        2             (0 hr, 0 min, 2 sec)
+
+Process 8857 finished Mon Aug  2 15:31:13 2004
+
+------- statistics (process 8847) -------
+clauses given                 86
+clauses generated          10382
+clauses kept                 543
+clauses forward subsumed     331
+clauses back subsumed        155
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        2             (0 hr, 0 min, 2 sec)
+
+Process 8847 finished Mon Aug  2 15:31:13 2004
+
+------- statistics (process 8846) -------
+clauses given                 83
+clauses generated          10047
+clauses kept                 513
+clauses forward subsumed     321
+clauses back subsumed        131
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.60          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        2             (0 hr, 0 min, 2 sec)
+
+Process 8846 finished Mon Aug  2 15:31:13 2004

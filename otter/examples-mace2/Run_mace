@@ -1,0 +1,73 @@
+#!/bin/csh
+#
+#  Run a set of MACE jobs and compare the
+#  results to previous results.
+#
+#  If $2 is given, it is assumed to be the MACE use.
+#  If $3 is given, it is the filename extension for new output files.
+#  If $4 is given, it is the filename extension for old output files.
+#
+
+if ($#argv == 0) then
+    echo "usage: Run_mace directory [mace | mace new | mace new old]"
+    exit 1
+endif
+
+if ($#argv >= 2) then
+   set MACE=$2
+else
+   set MACE=../../bin/mace2
+endif
+
+if ($#argv >= 3) then
+   set NEW_OUT=$3
+else
+   set NEW_OUT=out$$
+endif
+
+if ($#argv >= 4) then
+   set BASE_OUT=$4
+else
+   set BASE_OUT=out
+endif
+
+if ($1 == propositional || $1 == sorted) then
+  echo "This script is for unsorted first-order problems only."
+  exit 1
+endif
+
+cd $1
+set errors=0
+foreach i (*.in)
+  echo "Running $1/$i ..."
+  set parms=`grep "benchmark parameters" $i | sed 's/.*ters//'`
+  $MACE $parms < $i >& $i:r.$NEW_OUT
+  if (-e $i:r.$BASE_OUT) then
+    set unit_old=`grep "Unit assign" $i:r.$BASE_OUT | awk '{print $3}' | tail -1`
+    set unit_new=`grep "Unit assign" $i:r.$NEW_OUT | awk '{print $3}' | tail -1`
+    if ($unit_new != $unit_old) then
+      echo "There is a problem: $NEW_OUT assigned $unit_new, $BASE_OUT assigned $unit_old"
+      set errors=1
+    else
+      echo "Okay, it seems to have run correctly."
+    endif
+  else
+    echo "Okay, but there's no file for comparison."
+    set errors=1
+  endif
+end
+
+echo ""
+
+if (! $errors) then
+  set time_old=`cat *.$BASE_OUT | grep "CPU time" | awk '{sum += $4} END {print sum}'`
+  set time_new=`cat *.$NEW_OUT  | grep "CPU time"| awk '{sum += $4} END {print sum}'`
+  set speedup=`awk "END {print $time_old / $time_new}" /dev/null`
+  echo "time_new=$time_new, time_old=$time_old."
+  echo "The $NEW_OUT times are about $speedup times as fast as the $BASE_OUT times."
+endif
+
+echo "The output files have been left in $1/*.$NEW_OUT."
+echo ""
+
+cd ..

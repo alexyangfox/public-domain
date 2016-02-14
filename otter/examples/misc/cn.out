@@ -1,0 +1,349 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:36 2004
+The command was "../../bin/otter".  The process ID is 8366.
+
+set(hyper_res).
+clear(back_sub).
+assign(pick_given_ratio,3).
+assign(max_proofs,3).
+assign(max_weight,16).
+clear(print_kept).
+set(order_history).
+op(800,yfx,->).
+
+list(usable).
+1 [] -P(x->y)| -P(x)|P(y).
+end_of_list.
+
+list(sos).
+2 [] P(x->y-> (y->z-> (x->z))).
+3 [] P(-x->x->x).
+4 [] P(x-> (-x->y)).
+end_of_list.
+
+list(passive).
+5 [] -P(a->a)|$Ans(CN_16).
+6 [] -P(b-> (a->b))|$Ans(CN_18).
+7 [] -P(a->b->c-> (b->c))|$Ans(CN_19).
+end_of_list.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=12) 2 [] P(x->y-> (y->z-> (x->z))).
+
+given clause #2: (wt=7) 3 [] P(-x->x->x).
+
+given clause #3: (wt=7) 4 [] P(x-> (-x->y)).
+
+given clause #4: (wt=10) 10 [hyper,1,4,4] P(-(x-> (-x->y))->z).
+
+given clause #5: (wt=16) 8 [hyper,1,2,2] P(x->y-> (z->y)->u-> (z->x->u)).
+
+given clause #6: (wt=10) 12 [hyper,1,4,3] P(-(-x->x->x)->y).
+
+given clause #7: (wt=11) 9 [hyper,1,2,3] P(x->y-> (-x->x->y)).
+
+given clause #8: (wt=10) 24 [hyper,1,9,4] P(-x->x-> (-x->y)).
+
+given clause #9: (wt=11) 11 [hyper,1,2,4] P(-x->y->z-> (x->z)).
+
+-------- PROOF -------- 35 [binary,34.1,5.1] $Ans(CN_16).
+
+----> UNIT CONFLICT at   0.00 sec ----> 35 [binary,34.1,5.1] $Ans(CN_16).
+
+Length of proof is 2.  Level of proof is 2.
+
+---------------- PROOF ----------------
+
+1 [] -P(x->y)| -P(x)|P(y).
+2 [] P(x->y-> (y->z-> (x->z))).
+3 [] P(-x->x->x).
+4 [] P(x-> (-x->y)).
+5 [] -P(a->a)|$Ans(CN_16).
+11 [hyper,1,2,4] P(-x->y->z-> (x->z)).
+34 [hyper,1,11,3] P(x->x).
+35 [binary,34.1,5.1] $Ans(CN_16).
+
+------------ end of proof -------------
+
+
+given clause #10: (wt=4) 34 [hyper,1,11,3] P(x->x).
+
+given clause #11: (wt=7) 37 [hyper,1,4,34] P(-(x->x)->y).
+
+given clause #12: (wt=10) 33 [hyper,1,11,4] P(x-> (-(-x->y)->z)).
+
+given clause #13: (wt=15) 13 [hyper,1,4,2] P(-(x->y-> (y->z-> (x->z)))->u).
+
+given clause #14: (wt=10) 39 [hyper,1,4,37] P(-(-(x->x)->y)->z).
+
+given clause #15: (wt=11) 29 [hyper,1,8,11] P(x-> -y-> (y-> (x->z))).
+
+given clause #16: (wt=9) 52 [hyper,1,11,29] P(x-> (y-> (-x->z))).
+
+given clause #17: (wt=13) 14 [hyper,1,4,10] P(-(-(x-> (-x->y))->z)->u).
+
+given clause #18: (wt=9) 56 [hyper,1,29,37] P(x-> (-(y->y)->z)).
+
+given clause #19: (wt=11) 32 [hyper,1,11,9] P(x-> (-(-x)-> -x->y)).
+
+given clause #20: (wt=11) 36 [hyper,1,11,2] P(x-> (y->z-> (-x->z))).
+
+given clause #21: (wt=14) 15 [hyper,1,2,10] P(x->y-> (-(z-> (-z->u))->y)).
+
+given clause #22: (wt=11) 40 [hyper,1,2,37] P(x->y-> (-(z->z)->y)).
+
+given clause #23: (wt=12) 55 [hyper,1,29,39] P(x-> (-(-(y->y)->z)->u)).
+
+given clause #24: (wt=12) 57 [hyper,1,29,12] P(x-> (-(-y->y->y)->z)).
+
+given clause #25: (wt=16) 16 [hyper,1,8,8] P(x-> (y->z)-> (u->y-> (x-> (u->z)))).
+
+given clause #26: (wt=12) 58 [hyper,1,29,10] P(x-> (-(y-> (-y->z))->u)).
+
+given clause #27: (wt=12) 61 [hyper,1,11,52] P(x-> (y-> (-(-x->z)->u))).
+
+given clause #28: (wt=12) 62 [hyper,1,9,52] P(-x->x-> (y-> (-x->z))).
+
+given clause #29: (wt=15) 17 [hyper,1,8,4] P(x->y-> (-(y->z-> (x->z))->u)).
+
+given clause #30: (wt=12) 63 [hyper,1,4,52] P(-(x-> (y-> (-x->z)))->u).
+
+given clause #31: (wt=12) 75 [hyper,1,4,56] P(-(x-> (-(y->y)->z))->u).
+
+given clause #32: (wt=13) 19 [hyper,1,4,12] P(-(-(-x->x->x)->y)->z).
+
+given clause #33: (wt=16) 18 [hyper,1,8,2] P(x->y-> (x->z->u-> (y->z->u))).
+
+given clause #34: (wt=13) 25 [hyper,1,9,3] P(-(-x->x)-> (-x->x)->x).
+
+given clause #35: (wt=13) 27 [hyper,1,4,24] P(-(-x->x-> (-x->y))->z).
+
+given clause #36: (wt=13) 38 [hyper,1,9,37] P(-(-(x->x))-> -(x->x)->y).
+
+given clause #37: (wt=14) 20 [hyper,1,2,12] P(x->y-> (-(-z->z->z)->y)).
+
+given clause #38: (wt=13) 42 [hyper,1,11,33] P(x-> (-(-(-x->y)->z)->u)).
+
+given clause #39: (wt=13) 43 [hyper,1,9,33] P(-x->x-> (-(-x->y)->z)).
+
+given clause #40: (wt=13) 44 [hyper,1,4,33] P(-(x-> (-(-x->y)->z))->u).
+
+given clause #41: (wt=16) 21 [hyper,1,9,9] P(-(x->y)-> (x->y)-> (-x->x->y)).
+
+given clause #42: (wt=13) 46 [hyper,1,33,37] P(-(-(-(x->x)->y)->z)->u).
+
+given clause #43: (wt=13) 64 [hyper,1,2,52] P(x-> (-y->z)->u-> (y->u)).
+
+given clause #44: (wt=12) 122 [hyper,1,64,4] P(x-> (-(y-> (-x->z))->u)).
+
+given clause #45: (wt=14) 22 [hyper,1,4,9] P(-(x->y-> (-x->x->y))->z).
+
+given clause #46: (wt=13) 76 [hyper,1,2,56] P(-(x->x)->y->z-> (u->z)).
+
+given clause #47: (wt=6) 132 [hyper,1,76,3] P(x-> (y->y)).
+
+given clause #48: (wt=9) 131 [hyper,1,76,21] P(x-> (-y->y->y)).
+
+given clause #49: (wt=15) 23 [hyper,1,2,9] P(-x->x->y->z-> (x->y->z)).
+
+given clause #50: (wt=9) 141 [hyper,1,4,132] P(-(x-> (y->y))->z).
+
+given clause #51: (wt=10) 140 [hyper,1,16,132] P(x->y-> (z-> (x->y))).
+
+given clause #52: (wt=8) 162 [hyper,1,140,132] P(x-> (y-> (z->z))).
+
+given clause #53: (wt=16) 26 [hyper,1,9,24] P(-(-x->x)-> (-x->x)-> (-x->y)).
+
+given clause #54: (wt=9) 181 [hyper,1,140,4] P(x-> (y-> (-y->z))).
+
+given clause #55: (wt=10) 142 [hyper,1,2,132] P(x->x->y-> (z->y)).
+
+given clause #56: (wt=10) 183 [hyper,1,140,162] P(x-> (y-> (z-> (u->u)))).
+
+given clause #57: (wt=14) 28 [hyper,1,2,24] P(-x->y->z-> (-x->x->z)).
+
+given clause #58: (wt=11) 129 [hyper,1,76,62] P(x-> (y-> (-(z->z)->u))).
+
+given clause #59: (wt=11) 135 [hyper,1,52,132] P(x-> (-(y-> (z->z))->u)).
+
+given clause #60: (wt=11) 154 [hyper,1,64,140] P(x-> (y-> (z-> (-x->u)))).
+
+given clause #61: (wt=14) 30 [hyper,1,4,11] P(-(-x->y->z-> (x->z))->u).
+
+given clause #62: (wt=11) 163 [hyper,1,140,131] P(x-> (y-> (-z->z->z))).
+
+given clause #63: (wt=11) 171 [hyper,1,140,52] P(x-> (y-> (z-> (-y->u)))).
+
+given clause #64: (wt=11) 190 [hyper,1,4,162] P(-(x-> (y-> (z->z)))->u).
+
+given clause #65: (wt=15) 31 [hyper,1,2,11] P(x->y->z-> (-x->u->y->z)).
+
+given clause #66: (wt=10) 249 [hyper,1,31,3] P(-(-x)->y->x->x).
+
+given clause #67: (wt=11) 192 [hyper,1,140,181] P(x-> (y-> (z-> (-z->u)))).
+
+given clause #68: (wt=12) 137 [hyper,1,33,132] P(-(-(x-> (y->y))->z)->u).
+
+given clause #69: (wt=16) 41 [hyper,1,33,33] P(-(-(x-> (-(-x->y)->z))->u)->v).
+
+given clause #70: (wt=12) 147 [hyper,1,4,131] P(-(x-> (-y->y->y))->z).
+
+given clause #71: (wt=12) 153 [hyper,1,140,140] P(x-> (y->z-> (u-> (y->z)))).
+
+given clause #72: (wt=12) 174 [hyper,1,140,33] P(x-> (y-> (-(-y->z)->u))).
+
+given clause #73: (wt=14) 45 [hyper,1,2,33] P(-(-x->y)->z->u-> (x->u)).
+
+given clause #74: (wt=12) 178 [hyper,1,140,24] P(x-> (-y->y-> (-y->z))).
+
+given clause #75: (wt=12) 191 [hyper,1,2,162] P(x-> (y->y)->z-> (u->z)).
+
+given clause #76: (wt=12) 197 [hyper,1,4,181] P(-(x-> (y-> (-y->z)))->u).
+
+given clause #77: (wt=16) 47 [hyper,1,33,24] P(-(-(-x->x-> (-x->y))->z)->u).
+
+given clause #78: (wt=12) 199 [hyper,1,140,142] P(x-> (y->y->z-> (u->z))).
+
+given clause #79: (wt=12) 202 [hyper,1,140,183] P(x-> (y-> (z-> (u-> (v->v))))).
+
+given clause #80: (wt=12) 251 [hyper,1,140,249] P(x-> (-(-y)->z->y->y)).
+
+given clause #81: (wt=16) 48 [hyper,1,33,12] P(-(-(-(-x->x->x)->y)->z)->u).
+
+given clause #82: (wt=12) 256 [hyper,1,8,249] P(x-> -(-(x->y))-> (x->y)).
+
+given clause #83: (wt=13) 87 [hyper,1,16,56] P(x-> -(y->y)-> (z-> (x->u))).
+
+given clause #84: (wt=13) 89 [hyper,1,16,52] P(x->y-> (z-> (x-> (-z->u)))).
+
+given clause #85: (wt=16) 49 [hyper,1,33,10] P(-(-(-(x-> (-x->y))->z)->u)->v).
+
+given clause #86: (wt=13) 121 [hyper,1,64,16] P(x-> (y-> -x-> (z-> (y->u)))).
+
+given clause #87: (wt=13) 123 [hyper,1,64,2] P(x-> (-x->y->z-> (u->z))).
+
+given clause #88: (wt=13) 139 [hyper,1,17,132] P(-(x->x->y-> (z->y))->u).
+
+given clause #89: (wt=16) 50 [hyper,1,33,39] P(-(-(-(-(x->x)->y)->z)->u)->v).
+
+given clause #90: (wt=13) 146 [hyper,1,16,131] P(x-> (-y->y)-> (z-> (x->y))).
+
+given clause #91: (wt=8) 308 [hyper,1,64,146] P(x-> (y-> (z->x))).
+
+given clause #92: (wt=8) 322 [hyper,1,146,308] P(x-> (y-> (z->y))).
+-------- PROOF -------- 361 [binary,360.1,6.1] $Ans(CN_18).
+
+----> UNIT CONFLICT at   0.04 sec ----> 361 [binary,360.1,6.1] $Ans(CN_18).
+
+Length of proof is 17.  Level of proof is 10.
+
+---------------- PROOF ----------------
+
+1 [] -P(x->y)| -P(x)|P(y).
+2 [] P(x->y-> (y->z-> (x->z))).
+3 [] P(-x->x->x).
+4 [] P(x-> (-x->y)).
+6 [] -P(b-> (a->b))|$Ans(CN_18).
+8 [hyper,1,2,2] P(x->y-> (z->y)->u-> (z->x->u)).
+9 [hyper,1,2,3] P(x->y-> (-x->x->y)).
+11 [hyper,1,2,4] P(-x->y->z-> (x->z)).
+16 [hyper,1,8,8] P(x-> (y->z)-> (u->y-> (x-> (u->z)))).
+21 [hyper,1,9,9] P(-(x->y)-> (x->y)-> (-x->x->y)).
+29 [hyper,1,8,11] P(x-> -y-> (y-> (x->z))).
+34 [hyper,1,11,3] P(x->x).
+37 [hyper,1,4,34] P(-(x->x)->y).
+52 [hyper,1,11,29] P(x-> (y-> (-x->z))).
+56 [hyper,1,29,37] P(x-> (-(y->y)->z)).
+64 [hyper,1,2,52] P(x-> (-y->z)->u-> (y->u)).
+76 [hyper,1,2,56] P(-(x->x)->y->z-> (u->z)).
+131 [hyper,1,76,21] P(x-> (-y->y->y)).
+146 [hyper,1,16,131] P(x-> (-y->y)-> (z-> (x->y))).
+308 [hyper,1,64,146] P(x-> (y-> (z->x))).
+322 [hyper,1,146,308] P(x-> (y-> (z->y))).
+360 [hyper,1,322,322] P(x-> (y->x)).
+361 [binary,360.1,6.1] $Ans(CN_18).
+
+------------ end of proof -------------
+
+
+given clause #93: (wt=14) 51 [hyper,1,2,39] P(x->y-> (-(-(z->z)->u)->y)).
+
+given clause #94: (wt=6) 360 [hyper,1,322,322] P(x-> (y->x)).
+-------- PROOF -------- 387 [binary,386.1,7.1] $Ans(CN_19).
+
+----> UNIT CONFLICT at   0.05 sec ----> 387 [binary,386.1,7.1] $Ans(CN_19).
+
+Length of proof is 18.  Level of proof is 11.
+
+---------------- PROOF ----------------
+
+1 [] -P(x->y)| -P(x)|P(y).
+2 [] P(x->y-> (y->z-> (x->z))).
+3 [] P(-x->x->x).
+4 [] P(x-> (-x->y)).
+7 [] -P(a->b->c-> (b->c))|$Ans(CN_19).
+8 [hyper,1,2,2] P(x->y-> (z->y)->u-> (z->x->u)).
+9 [hyper,1,2,3] P(x->y-> (-x->x->y)).
+11 [hyper,1,2,4] P(-x->y->z-> (x->z)).
+16 [hyper,1,8,8] P(x-> (y->z)-> (u->y-> (x-> (u->z)))).
+21 [hyper,1,9,9] P(-(x->y)-> (x->y)-> (-x->x->y)).
+29 [hyper,1,8,11] P(x-> -y-> (y-> (x->z))).
+34 [hyper,1,11,3] P(x->x).
+37 [hyper,1,4,34] P(-(x->x)->y).
+52 [hyper,1,11,29] P(x-> (y-> (-x->z))).
+56 [hyper,1,29,37] P(x-> (-(y->y)->z)).
+64 [hyper,1,2,52] P(x-> (-y->z)->u-> (y->u)).
+76 [hyper,1,2,56] P(-(x->x)->y->z-> (u->z)).
+131 [hyper,1,76,21] P(x-> (-y->y->y)).
+146 [hyper,1,16,131] P(x-> (-y->y)-> (z-> (x->y))).
+308 [hyper,1,64,146] P(x-> (y-> (z->x))).
+322 [hyper,1,146,308] P(x-> (y-> (z->y))).
+360 [hyper,1,322,322] P(x-> (y->x)).
+386 [hyper,1,2,360] P(x->y->z-> (y->z)).
+387 [binary,386.1,7.1] $Ans(CN_19).
+
+------------ end of proof -------------
+
+
+Search stopped by max_proofs option.
+
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 94
+clauses generated           5345
+  hyper_res generated       5345
+demod & eval rewrites          0
+clauses wt,lit,sk delete    1477
+tautologies deleted            0
+clauses forward subsumed    3491
+  (subsumed by sos)          447
+unit deletions                 0
+factor simplifications         0
+clauses kept                 377
+new demodulators               0
+empty clauses                  3
+clauses back demodulated       0
+clauses back subsumed          0
+usable size                   95
+sos size                     286
+demodulators size              0
+passive size                   3
+hot size                       0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.05          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8366 finished Mon Aug  2 15:30:36 2004

@@ -1,0 +1,7 @@
+    set(auto).
+    list(usable).
+      e * x = x.                  % left identity
+      g(x) * x = e.               % left inverse
+      (x * y) * z = x * (y * z).  % associativity
+      a * b != b * a.             % denial of commutativity
+    end_of_list.

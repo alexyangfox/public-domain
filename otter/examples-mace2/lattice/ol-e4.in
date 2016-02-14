@@ -1,0 +1,49 @@
+% benchmark parameters -N10 -p
+
+include("ortholattice").
+
+list(usable).
+
+% This is the denial in which ground terms are "named".
+
+c(A) = d2.
+B v d2 = d3.
+B ^ d2 = d4.
+c(d3) = d5.
+d2 ^ c(B) = d8.
+d3 ^ A = d9.
+d8 v d4 = d10.
+d10 v d9 = d11.
+d11 ^ d2 = d12.
+d11 v d2 = d13.
+c(d11) ^ d2 = d14.
+d13 ^ A = d16.
+d14 v d12 = d17.
+d17 v d16 = d18.
+d5 ^ d18 = d19.
+c(d18) ^ d5 = d20.
+d18 v d5 = d21.
+d21 ^ d3 = d22.
+d19 v d22 = d23.
+d23 v d20 != 1.
+
+end_of_list.
+
+% list(usable).  % Original denial.
+%     ( ( c( c(A) v B ) ^ ( ( ( c(A) ^ ( ( ( c(A) ^ B
+%     ) v ( c(A) ^ c(B) ) ) v ( A ^ ( c(A) v B ) ) ) ) v ( c(A)
+%     ^ c( ( ( c(A) ^ B ) v ( c(A) ^ c(B) ) ) v ( A ^ ( c(A) v
+%     B ) ) ) ) ) v ( A ^ ( c(A) v ( ( ( c(A) ^ B ) v ( c(A) ^
+%     c(B) ) ) v ( A ^ ( c(A) v B ) ) ) ) ) ) ) v ( c( c(A) v B
+%     ) ^ c( ( ( c(A) ^ ( ( ( c(A) ^ B ) v ( c(A) ^ c(B) ) ) v
+%     ( A ^ ( c(A) v B ) ) ) ) v ( c(A) ^ c( ( ( c(A) ^ B ) v
+%     ( c(A) ^ c(B) ) ) v ( A ^ ( c(A) v B ) ) ) ) ) v ( A ^ (
+%     c(A) v ( ( ( c(A) ^ B ) v ( c(A) ^ c(B) ) ) v ( A ^ ( c(A)
+%     v B ) ) ) ) ) ) ) ) v ( ( c(A) v B ) ^ ( c( c(A) v B )
+%     v ( ( ( c(A) ^ ( ( ( c(A) ^ B ) v ( c(A) ^ c(B) ) ) v ( A
+%     ^ ( c(A) v B ) ) ) ) v ( c(A) ^ c( ( ( c(A) ^ B ) v ( c(A)
+%     ^ c(B) ) ) v ( A ^ ( c(A) v B ) ) ) ) ) v ( A ^ ( c(A)
+%     v ( ( ( c(A) ^ B ) v ( c(A) ^ c(B) ) ) v ( A ^ ( c(A) v B
+%     ) ) ) ) ) ) ) ) != 1.
+% end_of_list.
+

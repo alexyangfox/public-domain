@@ -1,0 +1,20 @@
+% If a group has relations ab=c, bc=d, cd=h, dh=a, ha=b, it is
+% cyclic with order 11.  The following input will not cause a proof,
+% but the result follows easily from examination of the lists near the
+% end of the output.
+
+set(auto).
+
+list(usable).
+x = x.
+
+f(e,x) = x.
+f(g(x),x) = e.
+f(f(x,y),z) = f(x,f(y,z)).
+
+f(a,b) = c.
+f(b,c) = d.
+f(c,d) = h.
+f(d,h) = a.
+f(h,a) = b.
+end_of_list.

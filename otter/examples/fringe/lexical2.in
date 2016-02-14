@@ -1,0 +1,63 @@
+% -------------------------------------------------------------------------
+% Lex Demo 2
+%
+% Demonstrate lex() and special_unary().
+%
+% Include other demodulators, such as cancellation.
+%
+% Contributed by Bob Veroff.
+% -------------------------------------------------------------------------
+
+% inference rule
+set(binary_res).
+
+% include variables in lexical ordering
+set(lex_order_vars).
+
+% processing
+assign(max_given, 1).
+
+% lexical ordering of terms
+lex([0,a,b,c,d,e,add(x,x)]).
+special_unary([neg(x)]).
+
+list(usable).
+
+   % negated complex terms
+   -dum | P1(neg(add(c,add(neg(add(a,neg(b))),add(e,neg(d)))))).
+
+   % simple cancellation
+   -dum | P2(add(add(neg(a),b),add(neg(b),add(add(b,neg(b)),add(a,b))))).
+
+   % combine previous two examples
+   -dum | P3(add(add(neg(a),b),neg(add(neg(b),add(add(b,neg(b)),add(a,b)))))).
+
+end_of_list.
+
+list(sos).
+   dum.
+end_of_list.
+
+list(demodulators).
+
+   % commutativity
+   EQ(add(x,y),add(y,x)).
+   EQ(add(x,add(y,z)),add(y,add(x,z))).
+
+   % associativity
+   EQ(add(add(x,y),z),add(x,add(y,z))).
+
+   % move negation inside
+   EQ(neg(add(x,y)),add(neg(x),neg(y))).
+
+   % identity
+   EQ(add(0,x),x).
+
+   % simplification
+   EQ(neg(neg(x)),x).
+
+   % cancellation (we can assume neg(x) is to the right of x)
+   EQ(add(x,neg(x)),0).
+   EQ(add(x,add(neg(x),y)),y).
+
+end_of_list.

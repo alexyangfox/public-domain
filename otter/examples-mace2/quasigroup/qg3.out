@@ -1,0 +1,68 @@
+----- MACE 2.2f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:44:37 2004
+The command was "../../bin/mace2 -n8 -x -m1000".
+
+list(usable).
+1 [] f(x,x)=x.
+2 [] f(f(x,y),f(y,x))=x.
+end_of_list.
+
+list(mace_constraints).
+0 [] property(f(_,_),quasigroup).
+end_of_list.
+
+list(flattened_and_parted_clauses).
+1 [] f(x,x)=x.
+2 [] f(x,y)!=z|f(y,x)!=u|f(u,z)=y.
+end_of_list.
+
+--- Starting search for models of size 8 ---
+
+Adding basic QG constraints on last column of f.
+function f quasigroup.
+
+9757 clauses were generated; 5744 of those survived the first stage
+of unit preprocessing; there are 576 atoms.
+
+After all unit preprocessing, 298 atoms are still unassigned;
+3830 clauses remain; 162 of those are non-Horn (selectable);
+4898 K allocated; cpu time so far for this domain size: 0.00 sec.
+
+The 1st model has been found.
+
+The 10th model has been found.
+
+The search is complete.  The set is satisfiable (18 model(s) found).
+
+
+----- statistics for domain size 8 ----
+Input:
+    Clauses input                  5744
+    Literal occurrences input     13396
+    Greatest atom                   576
+Unit preprocess:
+    Preprocess unit assignments     278
+    Clauses after subsumption      3830
+    Literal occ. after subsump.    9623
+    Selectable clauses              162
+Decide:
+    Splits                         1017
+    Unit assignments              60656
+    Failed paths                   1000
+Memory:
+    Memory malloced                16 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.00
+    DPLL                           0.04
+
+=======================================
+Total times for run (seconds):
+    user CPU time                  0.04   (0 hr, 0 min, 0 sec)
+    system CPU time                0.00   (0 hr, 0 min, 0 sec)
+    wall-clock time                0      (0 hr, 0 min, 0 sec)
+
+The search is complete.  The set is satisfiable (18 model(s) found).
+
+The job finished Mon Aug  2 15:44:37 2004

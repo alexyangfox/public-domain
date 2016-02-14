@@ -1,0 +1,68 @@
+----- MACE 2.2f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:44:30 2004
+The command was "../../bin/mace2 -n6 -m1000".
+
+list(usable).
+1 [] f(e,x)=x.
+2 [] f(g(x),x)=e.
+3 [] f(f(x,y),z)=f(x,f(y,z)).
+4 [] f(a,b)!=f(b,a).
+end_of_list.
+
+list(flattened_and_parted_clauses).
+1 [] e!=x|f(x,y)=y.
+2 [] e!=x|g(y)!=z|f(z,y)=x.
+3 [] f(x,y)!=z|f(u,z)!=v|$Connect1(x,y,u,v).
+3 [] f(x,y)!=z|f(z,u)=v| -$Connect1(y,u,x,v).
+4 [] f(x,y)!=z|b!=x|a!=y|f(y,x)!=z.
+end_of_list.
+
+--- Starting search for models of size 6 ---
+
+Applying isomorphism constraints to constants: e b a.
+
+16780 clauses were generated; 13181 of those survived the first stage
+of unit preprocessing; there are 1602 atoms.
+
+After all unit preprocessing, 1483 atoms are still unassigned;
+12987 clauses remain; 41 of those are non-Horn (selectable);
+4927 K allocated; cpu time so far for this domain size: 0.01 sec.
+
+The 1st model has been found.
+
+The 10th model has been found.
+
+The search is complete.  The set is satisfiable (18 model(s) found).
+
+
+----- statistics for domain size 6 ----
+Input:
+    Clauses input                 13181
+    Literal occurrences input     37418
+    Greatest atom                  1602
+Unit preprocess:
+    Preprocess unit assignments     119
+    Clauses after subsumption     12987
+    Literal occ. after subsump.   37149
+    Selectable clauses               41
+Decide:
+    Splits                          413
+    Unit assignments             110216
+    Failed paths                    396
+Memory:
+    Memory malloced                45 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.01
+    DPLL                           0.09
+
+=======================================
+Total times for run (seconds):
+    user CPU time                  0.10   (0 hr, 0 min, 0 sec)
+    system CPU time                0.01   (0 hr, 0 min, 0 sec)
+    wall-clock time                0      (0 hr, 0 min, 0 sec)
+
+The search is complete.  The set is satisfiable (18 model(s) found).
+
+The job finished Mon Aug  2 15:44:30 2004

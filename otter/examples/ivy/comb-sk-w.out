@@ -1,0 +1,207 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:31:05 2004
+The command was "../../bin/otter".  The process ID is 8565.
+
+set(auto).
+   dependent: set(auto1).
+   dependent: set(process_input).
+   dependent: clear(print_kept).
+   dependent: clear(print_new_demod).
+   dependent: clear(print_back_demod).
+   dependent: clear(print_back_sub).
+   dependent: set(control_memory).
+   dependent: assign(max_mem, 12000).
+   dependent: assign(pick_given_ratio, 4).
+   dependent: assign(stats_level, 1).
+   dependent: assign(max_seconds, 10800).
+set(build_proof_object_2).
+   dependent: set(order_history).
+clear(sigint_interact).
+assign(max_seconds,10).
+
+initial_proof_object(junk).
+(
+(1 (input) (= V1 V1) NIL)
+(2 (input) (= (A (A (A (S) V2) V3) V4) (A (A V2 V4) (A V3 V4))) NIL)
+(3 (input) (= (A (A (K) V5) V6) V5) NIL)
+(4 (input) (not (= (A (A V7 (SK1 V7)) (SK2 V7)) (A (A (SK1 V7) (SK2 V7)) (SK2 V7)))) NIL)
+)
+0 [] x=x.
+0 [] A(A(A(S,x),y),z)=A(A(x,z),A(y,z)).
+0 [] A(A(K,x),y)=x.
+0 [] A(A(x,SK1(x)),SK2(x))!=A(A(SK1(x),SK2(x)),SK2(x)).
+end_of_list.
+
+SCAN INPUT: prop=0, horn=1, equality=1, symmetry=0, max_lits=1.
+
+All clauses are units, and equality is present; the
+strategy will be Knuth-Bendix with positive clauses in sos.
+
+   dependent: set(knuth_bendix).
+   dependent: set(anl_eq).
+   dependent: set(para_from).
+   dependent: set(para_into).
+   dependent: clear(para_from_right).
+   dependent: clear(para_into_right).
+   dependent: set(para_from_vars).
+   dependent: set(eq_units_both_ways).
+   dependent: set(dynamic_demod_all).
+   dependent: set(dynamic_demod).
+   dependent: set(order_eq).
+   dependent: set(back_demod).
+   dependent: set(lrpo).
+
+------------> process usable:
+** KEPT (pick-wt=16): 2 [copy,1,flip.1] A(A(SK1(x),SK2(x)),SK2(x))!=A(A(x,SK1(x)),SK2(x)).
+
+------------> process sos:
+** KEPT (pick-wt=3): 3 [] x=x.
+** KEPT (pick-wt=15): 4 [] A(A(A(S,x),y),z)=A(A(x,z),A(y,z)).
+** KEPT (pick-wt=7): 5 [] A(A(K,x),y)=x.
+---> New Demodulator: 6 [new_demod,5] A(A(K,x),y)=x.
+  Following clause subsumed by 3 during input processing: 0 [copy,3,flip.1] x=x.
+** KEPT (pick-wt=15): 7 [copy,4,flip.1] A(A(x,y),A(z,y))=A(A(A(S,x),z),y).
+>>>> Starting back demodulation with 6.
+  Following clause subsumed by 4 during input processing: 0 [copy,7,flip.1] A(A(A(S,x),y),z)=A(A(x,z),A(y,z)).
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=3) 3 [] x=x.
+
+given clause #2: (wt=7) 5 [] A(A(K,x),y)=x.
+
+given clause #3: (wt=15) 4 [] A(A(A(S,x),y),z)=A(A(x,z),A(y,z)).
+
+given clause #4: (wt=15) 7 [copy,4,flip.1] A(A(x,y),A(z,y))=A(A(A(S,x),z),y).
+
+given clause #5: (wt=9) 15 [para_into,7.1.1,5.1.1,flip.1] A(A(A(S,K),x),y)=y.
+
+given clause #6: (wt=25) 8 [para_into,7.1.1.1,7.1.1] A(A(A(A(S,x),y),z),A(u,A(y,z)))=A(A(A(S,A(x,z)),u),A(y,z)).
+
+given clause #7: (wt=11) 26 [para_into,15.1.1.1,7.1.1] A(A(A(A(S,S),x),K),y)=y.
+
+given clause #8: (wt=13) 28 [para_into,15.1.1,7.1.1] A(A(A(S,A(S,K)),x),y)=A(x,y).
+
+given clause #9: (wt=13) 62 [para_into,26.1.1.1.1,7.1.1] A(A(A(A(A(S,S),x),S),K),y)=y.
+
+given clause #10: (wt=15) 9 [para_into,7.1.1.1,5.1.1,flip.1] A(A(A(S,A(K,x)),y),z)=A(x,A(y,z)).
+
+given clause #11: (wt=23) 11 [para_into,7.1.1.1,4.1.1] A(A(A(x,y),A(z,y)),A(u,y))=A(A(A(S,A(A(S,x),z)),u),y).
+
+given clause #12: (wt=15) 13 [para_into,7.1.1.2,5.1.1] A(A(x,y),z)=A(A(A(S,x),A(K,z)),y).
+
+given clause #13: (wt=15) 21 [copy,13,flip.1] A(A(A(S,x),A(K,y)),z)=A(A(x,z),y).
+
+given clause #14: (wt=15) 64 [para_into,26.1.1,7.1.1] A(A(A(S,A(A(S,S),x)),y),K)=A(y,K).
+
+given clause #15: (wt=15) 86 [para_into,62.1.1.1.1.1,7.1.1] A(A(A(A(A(A(S,S),x),S),S),K),y)=y.
+
+given clause #16: (wt=25) 12 [para_into,7.1.1.2,7.1.1] A(A(x,A(y,z)),A(A(A(S,u),y),z))=A(A(A(S,x),A(u,z)),A(y,z)).
+
+given clause #17: (wt=15) 226 [para_from,13.1.1,26.1.1.1] A(A(A(A(S,A(S,S)),A(K,K)),x),y)=y.
+
+given clause #18: (wt=15) 248 [para_into,21.1.1.1,7.1.1] A(A(A(A(S,S),K),x),y)=A(A(x,y),x).
+
+given clause #19: (wt=15) 254 [copy,248,flip.1] A(A(x,y),x)=A(A(A(A(S,S),K),x),y).
+
+given clause #20: (wt=17) 30 [para_from,15.1.1,7.1.1.2] A(A(x,y),y)=A(A(A(S,x),A(A(S,K),z)),y).
+
+given clause #21: (wt=23) 14 [para_into,7.1.1.2,4.1.1] A(A(x,y),A(A(z,y),A(u,y)))=A(A(A(S,x),A(A(S,z),u)),y).
+
+given clause #22: (wt=17) 31 [para_from,15.1.1,7.1.1.1] A(x,A(y,x))=A(A(A(S,A(A(S,K),z)),y),x).
+
+given clause #23: (wt=15) 897 [para_into,31.1.1,5.1.1,flip.1] A(A(A(S,A(A(S,K),x)),y),A(K,z))=z.
+
+given clause #24: (wt=15) 1041 [para_into,897.1.1,7.1.1] A(A(A(S,A(S,A(A(S,K),x))),K),y)=y.
+
+given clause #25: (wt=17) 32 [copy,30,flip.1] A(A(A(S,x),A(A(S,K),y)),z)=A(A(x,z),z).
+
+-------- PROOF -------- 
+
+----> UNIT CONFLICT at   0.11 sec ----> 1157 [binary,1156.1,2.1] $F.
+
+Length of proof is 8.  Level of proof is 6.
+
+---------------- PROOF ----------------
+
+1 [] A(A(x,SK1(x)),SK2(x))!=A(A(SK1(x),SK2(x)),SK2(x)).
+2 [copy,1,flip.1] A(A(SK1(x),SK2(x)),SK2(x))!=A(A(x,SK1(x)),SK2(x)).
+4 [] A(A(A(S,x),y),z)=A(A(x,z),A(y,z)).
+5 [] A(A(K,x),y)=x.
+7 [copy,4,flip.1] A(A(x,y),A(z,y))=A(A(A(S,x),z),y).
+13 [para_into,7.1.1.2,5.1.1] A(A(x,y),z)=A(A(A(S,x),A(K,z)),y).
+15 [para_into,7.1.1,5.1.1,flip.1] A(A(A(S,K),x),y)=y.
+30 [para_from,15.1.1,7.1.1.2] A(A(x,y),y)=A(A(A(S,x),A(A(S,K),z)),y).
+32 [copy,30,flip.1] A(A(A(S,x),A(A(S,K),y)),z)=A(A(x,z),z).
+1141 [para_into,32.1.1.1,13.1.1] A(A(A(A(S,S),A(K,A(A(S,K),x))),y),z)=A(A(y,z),z).
+1156 [copy,1141,flip.1] A(A(x,y),y)=A(A(A(A(S,S),A(K,A(A(S,K),z))),x),y).
+1157 [binary,1156.1,2.1] $F.
+
+------------ end of proof -------------
+
+
+;; BEGINNING OF PROOF OBJECT
+(
+(1 (input) (= V1 V1) NIL)
+(2 (input) (= (A (A (A (S) V2) V3) V4) (A (A V2 V4) (A V3 V4))) NIL)
+(3 (input) (= (A (A (K) V5) V6) V5) NIL)
+(4 (input) (not (= (A (A V7 (SK1 V7)) (SK2 V7)) (A (A (SK1 V7) (SK2 V7)) (SK2 V7)))) NIL)
+(5 (instantiate 4 ((V7 . v0))) (not (= (A (A v0 (SK1 v0)) (SK2 v0)) (A (A (SK1 v0) (SK2 v0)) (SK2 v0)))) (1))
+(6 (flip 5 ()) (not (= (A (A (SK1 v0) (SK2 v0)) (SK2 v0)) (A (A v0 (SK1 v0)) (SK2 v0)))) (2))
+(7 (instantiate 2 ((V2 . v0)(V3 . v1)(V4 . v2))) (= (A (A (A (S) v0) v1) v2) (A (A v0 v2) (A v1 v2))) (4))
+(8 (instantiate 3 ((V5 . v0)(V6 . v1))) (= (A (A (K) v0) v1) v0) (5))
+(9 (flip 7 ()) (= (A (A v0 v2) (A v1 v2)) (A (A (A (S) v0) v1) v2)) NIL)
+(10 (instantiate 9 ((v1 . v2)(v2 . v1))) (= (A (A v0 v1) (A v2 v1)) (A (A (A (S) v0) v2) v1)) (7))
+(11 (instantiate 8 ((v1 . v65))) (= (A (A (K) v0) v65) v0) NIL)
+(12 (instantiate 10 ((v0 . v64)(v1 . v65)(v2 . (A (K) v0)))) (= (A (A v64 v65) (A (A (K) v0) v65)) (A (A (A (S) v64) (A (K) v0)) v65)) NIL)
+(13 (paramod 11 (1) 12 (1 2)) (= (A (A v64 v65) v0) (A (A (A (S) v64) (A (K) v0)) v65)) NIL)
+(14 (instantiate 13 ((v0 . v2)(v64 . v0)(v65 . v1))) (= (A (A v0 v1) v2) (A (A (A (S) v0) (A (K) v2)) v1)) (13))
+(15 (instantiate 8 ((v0 . v65)(v1 . (A v66 v65)))) (= (A (A (K) v65) (A v66 v65)) v65) NIL)
+(16 (instantiate 10 ((v0 . (K))(v1 . v65)(v2 . v66))) (= (A (A (K) v65) (A v66 v65)) (A (A (A (S) (K)) v66) v65)) NIL)
+(17 (paramod 15 (1) 16 (1)) (= v65 (A (A (A (S) (K)) v66) v65)) NIL)
+(18 (flip 17 ()) (= (A (A (A (S) (K)) v66) v65) v65) NIL)
+(19 (instantiate 18 ((v65 . v1)(v66 . v0))) (= (A (A (A (S) (K)) v0) v1) v1) (15))
+(20 (instantiate 19 ((v1 . v65))) (= (A (A (A (S) (K)) v0) v65) v65) NIL)
+(21 (instantiate 10 ((v0 . v64)(v1 . v65)(v2 . (A (A (S) (K)) v0)))) (= (A (A v64 v65) (A (A (A (S) (K)) v0) v65)) (A (A (A (S) v64) (A (A (S) (K)) v0)) v65)) NIL)
+(22 (paramod 20 (1) 21 (1 2)) (= (A (A v64 v65) v65) (A (A (A (S) v64) (A (A (S) (K)) v0)) v65)) NIL)
+(23 (instantiate 22 ((v0 . v2)(v64 . v0)(v65 . v1))) (= (A (A v0 v1) v1) (A (A (A (S) v0) (A (A (S) (K)) v2)) v1)) (30))
+(24 (flip 23 ()) (= (A (A (A (S) v0) (A (A (S) (K)) v2)) v1) (A (A v0 v1) v1)) NIL)
+(25 (instantiate 24 ((v1 . v2)(v2 . v1))) (= (A (A (A (S) v0) (A (A (S) (K)) v1)) v2) (A (A v0 v2) v2)) (32))
+(26 (instantiate 14 ((v0 . (S))(v1 . v64)(v2 . (A (A (S) (K)) v65)))) (= (A (A (S) v64) (A (A (S) (K)) v65)) (A (A (A (S) (S)) (A (K) (A (A (S) (K)) v65))) v64)) NIL)
+(27 (instantiate 25 ((v0 . v64)(v1 . v65)(v2 . v66))) (= (A (A (A (S) v64) (A (A (S) (K)) v65)) v66) (A (A v64 v66) v66)) NIL)
+(28 (paramod 26 (1) 27 (1 1)) (= (A (A (A (A (S) (S)) (A (K) (A (A (S) (K)) v65))) v64) v66) (A (A v64 v66) v66)) NIL)
+(29 (instantiate 28 ((v64 . v1)(v65 . v0)(v66 . v2))) (= (A (A (A (A (S) (S)) (A (K) (A (A (S) (K)) v0))) v1) v2) (A (A v1 v2) v2)) (1141))
+(30 (flip 29 ()) (= (A (A v1 v2) v2) (A (A (A (A (S) (S)) (A (K) (A (A (S) (K)) v0))) v1) v2)) NIL)
+(31 (instantiate 30 ((v0 . v2)(v1 . v0)(v2 . v1))) (= (A (A v0 v1) v1) (A (A (A (A (S) (S)) (A (K) (A (A (S) (K)) v2))) v0) v1)) (1156))
+(32 (instantiate 6 ((v0 . (A (A (S) (S)) (A (K) (A (A (S) (K)) v66)))))) (not (= (A (A (SK1 (A (A (S) (S)) (A (K) (A (A (S) (K)) v66)))) (SK2 (A (A (S) (S)) (A (K) (A (A (S) (K)) v66))))) (SK2 (A (A (S) (S)) (A (K) (A (A (S) (K)) v66))))) (A (A (A (A (S) (S)) (A (K) (A (A (S) (K)) v66))) (SK1 (A (A (S) (S)) (A (K) (A (A (S) (K)) v66))))) (SK2 (A (A (S) (S)) (A (K) (A (A (S) (K)) v66))))))) NIL)
+(33 (instantiate 31 ((v0 . (SK1 (A (A (S) (S)) (A (K) (A (A (S) (K)) v66)))))(v1 . (SK2 (A (A (S) (S)) (A (K) (A (A (S) (K)) v66)))))(v2 . v66))) (= (A (A (SK1 (A (A (S) (S)) (A (K) (A (A (S) (K)) v66)))) (SK2 (A (A (S) (S)) (A (K) (A (A (S) (K)) v66))))) (SK2 (A (A (S) (S)) (A (K) (A (A (S) (K)) v66))))) (A (A (A (A (S) (S)) (A (K) (A (A (S) (K)) v66))) (SK1 (A (A (S) (S)) (A (K) (A (A (S) (K)) v66))))) (SK2 (A (A (S) (S)) (A (K) (A (A (S) (K)) v66)))))) NIL)
+(34 (resolve 32 () 33 ()) false (1157))
+
+Search stopped by max_proofs option.
+
+)
+;; END OF PROOF OBJECT
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 25
+clauses generated            922
+clauses kept                1036
+clauses forward subsumed     812
+clauses back subsumed          0
+Kbytes malloced             3906
+
+----------- times (seconds) -----------
+user CPU time          0.12          (0 hr, 0 min, 0 sec)
+system CPU time        0.01          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8565 finished Mon Aug  2 15:31:05 2004

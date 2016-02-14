@@ -1,0 +1,35 @@
+% This is Theorem 4 from the appendix of "Automated Reasoning about Cubic
+% Curves", by R. Padmanabhan and W. McCune, to appear in _Computers and
+% Mathematics with Applications_.
+
+ set(para_from).
+ set(para_into).
+% set(para_from_vars).
+% set(para_into_vars).
+ set(order_eq).
+
+set(geometric_rule).
+set(geometric_rewrite_before).
+
+set(lrpo).
+lex([A,B,C,D,E,F,e,f(x,x),g(x)]).
+
+assign(pick_given_ratio, 1).
+assign(max_weight, 17).
+
+clear(print_kept).
+
+list(usable).
+x = x.
+end_of_list.
+
+list(sos).
+% f(e,e)=e.
+f(x,f(e,x)) = e.
+% f(f(x,e),x) = e.
+end_of_list.
+
+list(passive).
+f(f(A,B),f(C,D)) != f(f(A,C),f(B,D)).
+end_of_list.
+

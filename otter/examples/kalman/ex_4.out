@@ -1,0 +1,247 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:38 2004
+The command was "../../bin/otter".  The process ID is 8454.
+
+set(knuth_bendix).
+   dependent: set(anl_eq).
+   dependent: set(para_from).
+   dependent: set(para_into).
+   dependent: clear(para_from_right).
+   dependent: clear(para_into_right).
+   dependent: set(para_from_vars).
+   dependent: set(eq_units_both_ways).
+   dependent: set(dynamic_demod_all).
+   dependent: set(dynamic_demod).
+   dependent: set(order_eq).
+   dependent: set(back_demod).
+   dependent: set(process_input).
+   dependent: set(lrpo).
+clear(print_kept).
+clear(print_new_demod).
+clear(print_back_demod).
+clear(print_back_sub).
+op(350,xf,^).
+assign(pick_given_ratio,8).
+assign(stats_level,1).
+
+lex([a,b,c,e,_^ ,h(_,_),_*_]).
+
+list(usable).
+0 [] x=x.
+0 [] (x*y)*z=x*y*z.
+0 [] e*x=x.
+0 [] x^ *x=e.
+end_of_list.
+
+list(sos).
+0 [] h(x,y)=x*y*x^ *y^ .
+0 [] h(x,y)*z=z*h(x,y).
+0 [] h(a,b*c)!=h(a,b)*h(a,c).
+end_of_list.
+
+------------> process usable:
+** KEPT (pick-wt=3): 1 [] x=x.
+** KEPT (pick-wt=11): 2 [] (x*y)*z=x*y*z.
+---> New Demodulator: 3 [new_demod,2] (x*y)*z=x*y*z.
+** KEPT (pick-wt=5): 4 [] e*x=x.
+---> New Demodulator: 5 [new_demod,4] e*x=x.
+** KEPT (pick-wt=6): 6 [] x^ *x=e.
+---> New Demodulator: 7 [new_demod,6] x^ *x=e.
+  Following clause subsumed by 1 during input processing: 0 [copy,1,flip.1] x=x.
+>>>> Starting back demodulation with 3.
+>>>> Starting back demodulation with 5.
+>>>> Starting back demodulation with 7.
+
+------------> process sos:
+** KEPT (pick-wt=13): 9 [copy,8,flip.1] x*y*x^ *y^ =h(x,y).
+---> New Demodulator: 10 [new_demod,9] x*y*x^ *y^ =h(x,y).
+** KEPT (pick-wt=11): 11 [] h(x,y)*z=z*h(x,y).
+** KEPT (pick-wt=13): 13 [copy,12,flip.1] h(a,b)*h(a,c)!=h(a,b*c).
+>>>> Starting back demodulation with 10.
+** KEPT (pick-wt=11): 14 [copy,11,flip.1] x*h(y,z)=h(y,z)*x.
+  Following clause subsumed by 11 during input processing: 0 [copy,14,flip.1] h(x,y)*z=z*h(x,y).
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=13) 9 [copy,8,flip.1] x*y*x^ *y^ =h(x,y).
+
+given clause #2: (wt=11) 15 [para_into,9.1.1.2.2,6.1.1] x^ *x*e=h(x^ ,x).
+
+given clause #3: (wt=6) 32 [para_into,15.1.1.2,4.1.1,demod,7,flip.1] h(e^ ,e)=e.
+
+given clause #4: (wt=11) 17 [para_into,9.1.1.2,4.1.1] x*x^ *e^ =h(x,e).
+
+given clause #5: (wt=9) 38 [para_into,17.1.1,4.1.1] e^ *e^ =h(e,e).
+
+given clause #6: (wt=11) 21 [para_into,9.1.1,4.1.1] x*e^ *x^ =h(e,x).
+
+given clause #7: (wt=12) 30 [para_into,15.1.1.2,6.1.1] (e^ )^ *e=h((e^ )^ ,e^ ).
+
+given clause #8: (wt=14) 46 [para_from,30.1.1,2.1.1.1,demod,26,37,5] (e^ )^ *e^ *x= (e^ )^ *x.
+
+given clause #9: (wt=9) 48 [para_into,46.1.1.2,38.1.1,demod,7] (e^ )^ *h(e,e)=e.
+
+given clause #10: (wt=19) 19 [para_into,9.1.1.2,2.1.1] x*y*z*x^ * (y*z)^ =h(x,y*z).
+
+given clause #11: (wt=4) 70 [back_demod,38,demod,67,65] e^ =e.
+
+given clause #12: (wt=5) 64 [back_demod,48,demod,57] h(e,e)=e.
+
+given clause #13: (wt=8) 74 [back_demod,60,demod,71] x*x^ =h(e,x).
+
+given clause #14: (wt=10) 78 [back_demod,17,demod,71] x*x^ *e=h(x,e).
+
+given clause #15: (wt=14) 72 [back_demod,42,demod,71,5] x*y* (x*y)^ =h(e,x*y).
+
+given clause #16: (wt=6) 112 [para_into,72.1.1.2.2.1,6.1.1,demod,71,16,7,65] h(x^ ,x)=e.
+
+given clause #17: (wt=8) 120 [back_demod,15,demod,113] x^ *x*e=e.
+
+given clause #18: (wt=8) 126 [para_from,120.1.1,2.1.1.1,demod,5,3,5,flip.1] x^ *x*y=y.
+
+given clause #19: (wt=19) 23 [para_into,9.1.1,2.1.1] x*y*z* (x*y)^ *z^ =h(x*y,z).
+
+given clause #20: (wt=5) 137 [para_into,126.1.1.2,6.1.1,demod,129] x*e=x.
+
+given clause #21: (wt=7) 148 [back_demod,78,demod,138,75] h(e,x)=h(x,e).
+
+given clause #22: (wt=7) 151 [copy,148,flip.1] h(x,e)=h(e,x).
+
+given clause #23: (wt=9) 128 [para_into,126.1.1.2,126.1.1] (x^ )^ *y=x*y.
+
+given clause #24: (wt=5) 188 [para_into,128.1.1,137.1.1,demod,138] (x^ )^ =x.
+
+given clause #25: (wt=5) 192 [para_into,128.1.1,6.1.1,demod,75,flip.1] h(e,x)=e.
+
+given clause #26: (wt=5) 196 [back_demod,154,demod,189,75,193,189,flip.1] h(x,x)=e.
+
+given clause #27: (wt=5) 205 [back_demod,96,demod,193,71,138,191,75,193,193,flip.1] h(x,e)=e.
+
+given clause #28: (wt=17) 25 [para_from,9.1.1,2.1.1.1,demod,3,3] h(x,y)*z=x*y*x^ *y^ *z.
+
+given clause #29: (wt=6) 207 [back_demod,94,demod,193,138,75,193,flip.1] h(x,x^ )=e.
+
+given clause #30: (wt=6) 219 [back_demod,74,demod,193] x*x^ =e.
+
+given clause #31: (wt=8) 190 [para_into,128.1.1,126.1.1,flip.1] x*x^ *y=y.
+
+given clause #32: (wt=9) 199 [back_demod,122,demod,193,138,75,193,flip.1] h(x,x^ *x^ )=e.
+
+given clause #33: (wt=8) 244 [para_into,199.1.1.2.1,188.1.1,demod,189] h(x^ ,x*x)=e.
+
+given clause #34: (wt=9) 209 [back_demod,143,demod,193,138] x* (y*x)^ =y^ .
+
+given clause #35: (wt=9) 250 [para_into,209.1.1.2.1,209.1.1,demod,189] (x*y)^ *x=y^ .
+
+given clause #36: (wt=10) 262 [para_from,209.1.1,190.1.1.2] x*y^ = (y*x^ )^ .
+
+given clause #37: (wt=17) 27 [back_demod,14,demod,26] x*h(y,z)=y*z*y^ *z^ *x.
+
+given clause #38: (wt=8) 298 [para_from,262.1.1,244.1.1.2,demod,189,189] h(x,(x*x)^ )=e.
+
+given clause #39: (wt=9) 308 [back_demod,221,demod,303] h(x,y*x)=h(x,y).
+
+given clause #40: (wt=10) 263 [para_from,209.1.1,19.1.1.2.2.2,demod,10,flip.1] h(x,y*x^ )=h(x,y).
+
+given clause #41: (wt=10) 267 [para_from,209.1.1,126.1.1.2] x^ *y^ = (y*x)^ .
+
+given clause #42: (wt=8) 370 [back_demod,325,demod,369,369,369,189,369,189,324] h(x,y)=h(y,x)^ .
+
+given clause #43: (wt=8) 390 [copy,370,flip.1] h(x,y)^ =h(y,x).
+
+given clause #44: (wt=7) 423 [para_from,390.1.1,9.1.1.2.2.1,demod,26,320,26,420,flip.1] h(h(x,y),z)=e.
+
+given clause #45: (wt=7) 440 [para_from,423.1.1,390.1.1.1,demod,71,flip.1] h(x,h(y,z))=e.
+
+given clause #46: (wt=19) 28 [back_demod,13,demod,26] a*b*a^ *b^ *h(a,c)!=h(a,b*c).
+
+given clause #47: (wt=8) 434 [para_into,423.1.1.1,370.1.1] h(h(x,y)^ ,z)=e.
+
+given clause #48: (wt=8) 458 [para_into,440.1.1.2,370.1.1] h(x,h(y,z)^ )=e.
+
+given clause #49: (wt=10) 270 [copy,262,flip.1] (x*y^ )^ =y*x^ .
+
+given clause #50: (wt=10) 271 [copy,267,flip.1] (x*y)^ =y^ *x^ .
+
+-------- PROOF -------- 
+
+----> UNIT CONFLICT at   0.03 sec ----> 492 [binary,490.1,463.1] $F.
+
+Length of proof is 37.  Level of proof is 18.
+
+---------------- PROOF ----------------
+
+3,2 [] (x*y)*z=x*y*z.
+5,4 [] e*x=x.
+7,6 [] x^ *x=e.
+8 [] h(x,y)=x*y*x^ *y^ .
+9 [copy,8,flip.1] x*y*x^ *y^ =h(x,y).
+11 [] h(x,y)*z=z*h(x,y).
+12 [] h(a,b*c)!=h(a,b)*h(a,c).
+13 [copy,12,flip.1] h(a,b)*h(a,c)!=h(a,b*c).
+14 [copy,11,flip.1] x*h(y,z)=h(y,z)*x.
+16,15 [para_into,9.1.1.2.2,6.1.1] x^ *x*e=h(x^ ,x).
+17 [para_into,9.1.1.2,4.1.1] x*x^ *e^ =h(x,e).
+19 [para_into,9.1.1.2,2.1.1] x*y*z*x^ * (y*z)^ =h(x,y*z).
+21 [para_into,9.1.1,4.1.1] x*e^ *x^ =h(e,x).
+26,25 [para_from,9.1.1,2.1.1.1,demod,3,3] h(x,y)*z=x*y*x^ *y^ *z.
+27 [back_demod,14,demod,26] x*h(y,z)=y*z*y^ *z^ *x.
+28 [back_demod,13,demod,26] a*b*a^ *b^ *h(a,c)!=h(a,b*c).
+30 [para_into,15.1.1.2,6.1.1] (e^ )^ *e=h((e^ )^ ,e^ ).
+37,36 [para_from,15.1.1,2.1.1.1,demod,26,3,5] x^ *x* (x^ )^ *x^ *y=x^ *x*y.
+38 [para_into,17.1.1,4.1.1] e^ *e^ =h(e,e).
+42 [para_into,21.1.1,2.1.1] x*y*e^ * (x*y)^ =h(e,x*y).
+47,46 [para_from,30.1.1,2.1.1.1,demod,26,37,5] (e^ )^ *e^ *x= (e^ )^ *x.
+48 [para_into,46.1.1.2,38.1.1,demod,7] (e^ )^ *h(e,e)=e.
+52 [para_into,46.1.1.2,9.1.1,flip.1] (e^ )^ *x* (e^ )^ *x^ = (e^ )^ *h(e^ ,x).
+57,56 [para_from,48.1.1,2.1.1.1,demod,5,26,5,5,47,47,flip.1] (e^ )^ *x=x.
+60 [back_demod,52,demod,57,57,57] x*x^ =h(e^ ,x).
+65,64 [back_demod,48,demod,57] h(e,e)=e.
+67,66 [back_demod,46,demod,57,57] e^ *x=x.
+71,70 [back_demod,38,demod,67,65] e^ =e.
+72 [back_demod,42,demod,71,5] x*y* (x*y)^ =h(e,x*y).
+75,74 [back_demod,60,demod,71] x*x^ =h(e,x).
+113,112 [para_into,72.1.1.2.2.1,6.1.1,demod,71,16,7,65] h(x^ ,x)=e.
+120 [back_demod,15,demod,113] x^ *x*e=e.
+127,126 [para_from,120.1.1,2.1.1.1,demod,5,3,5,flip.1] x^ *x*y=y.
+129,128 [para_into,126.1.1.2,126.1.1] (x^ )^ *y=x*y.
+134 [para_into,126.1.1.2,72.1.1] x^ *h(e,x*y)=y* (x*y)^ .
+138,137 [para_into,126.1.1.2,6.1.1,demod,129] x*e=x.
+143 [copy,134,flip.1] x* (y*x)^ =y^ *h(e,y*x).
+193,192 [para_into,128.1.1,6.1.1,demod,75,flip.1] h(e,x)=e.
+209 [back_demod,143,demod,193,138] x* (y*x)^ =y^ .
+267 [para_from,209.1.1,126.1.1.2] x^ *y^ = (y*x)^ .
+271 [copy,267,flip.1] (x*y)^ =y^ *x^ .
+463 [para_into,28.1.1.2.2.2,27.1.1,demod,127] a*b*c*a^ *c^ *b^ !=h(a,b*c).
+490 [para_from,271.1.1,19.1.1.2.2.2.2] x*y*z*x^ *z^ *y^ =h(x,y*z).
+492 [binary,490.1,463.1] $F.
+
+------------ end of proof -------------
+
+
+Search stopped by max_proofs option.
+
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 50
+clauses generated            740
+clauses kept                 282
+clauses forward subsumed     674
+clauses back subsumed          2
+Kbytes malloced             2929
+
+----------- times (seconds) -----------
+user CPU time          0.03          (0 hr, 0 min, 0 sec)
+system CPU time        0.01          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8454 finished Mon Aug  2 15:30:38 2004

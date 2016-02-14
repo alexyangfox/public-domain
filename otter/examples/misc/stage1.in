@@ -1,0 +1,70 @@
+%
+% This is Stage 1 of the Kernel Method.
+% Wos & McCune, "Searching for Fixed Point Combinators ...", ANL-88-10.
+%
+% Stage 1 searches for kernels (reducible fixed points of an
+% arbitrary combinator).
+% Stage 2 attempts to expand a kernel into a fixed point combinator.
+%
+
+set(para_into).
+clear(para_from_left).
+clear(para_into_left).
+set(para_ones_rule).
+
+clear(back_sub).
+clear(print_proofs).
+
+assign(max_proofs, -1).
+assign(max_given, 30).
+
+% set(para_into_vars).
+% set(para_from_vars).
+
+list(usable).
+x = x.
+
+% regular isolators (including replicators)
+
+ a(a(a(B,x),y),z) = a(x,a(y,z)).
+% a(a(L,x),y) = a(x,a(y,y)).
+% a(I,x) = x.
+% a(a(K,x),y) = x.
+% a(a(a(Q1,x),y),z) = a(x,a(z,y)).
+
+% irregular isolators (including replicators)
+
+% a(M,x) = a(x,x).
+% a(a(O,x),y) = a(y,a(x,y)).
+% a(a(T,x),y) = a(y,x).
+% a(a(a(Q,x),y),z) = a(y,a(x,z)).
+
+% regular replicators (non-isolating)
+
+ a(a(W,x),y) = a(a(x,y),y).
+% a(a(a(N,x),y),z) = a(a(a(x,z),y),z).
+% a(a(a(H,x),y),z) = a(a(a(x,y),z),y).
+% a(a(a(S,x),y),z) = a(a(x,z),a(y,z)).
+
+% irregular replicators (non-isolating)
+
+% a(a(W1,x),y) = a(a(y,x),x).
+
+% others (non-isolating non-replicating)
+
+% a(a(a(C,x),y),z) = a(a(x,z),y).
+% a(a(a(R,x),y),z) = a(a(y,z),x).
+
+end_of_list.
+
+list(sos).
+y != a(f,y) | $Ans(y).  % denial of the weak fixed point property
+end_of_list.
+
+% The following discards ground clauses.
+
+assign(max_weight, 1).
+
+weight_list(purge_gen).
+weight(x, -1000).
+end_of_list.

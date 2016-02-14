@@ -1,0 +1,603 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:37 2004
+The command was "../../bin/otter".  The process ID is 8381.
+
+set(knuth_bendix).
+   dependent: set(anl_eq).
+   dependent: set(para_from).
+   dependent: set(para_into).
+   dependent: clear(para_from_right).
+   dependent: clear(para_into_right).
+   dependent: set(para_from_vars).
+   dependent: set(eq_units_both_ways).
+   dependent: set(dynamic_demod_all).
+   dependent: set(dynamic_demod).
+   dependent: set(order_eq).
+   dependent: set(back_demod).
+   dependent: set(process_input).
+   dependent: set(lrpo).
+set(print_lists_at_end).
+set(really_delete_clauses).
+clear(print_kept).
+clear(print_new_demod).
+clear(print_back_demod).
+set(para_skip_skolem).
+
+skolem([g1(x),g2(x),g3(x),g4(x),g5(x),g6(x),g7(x),g8(x)]).
+
+lex([e1,e2,e3,e4,e5,e6,e7,e8,f(x,x),g1(x),g2(x),g3(x),g4(x),g5(x),g6(x),g7(x),g8(x)]).
+
+list(usable).
+0 [] x=x.
+end_of_list.
+
+list(sos).
+0 [] f(f(x,y),z)=f(x,f(y,z)).
+0 [] f(e1,x)=x.
+0 [] f(e2,x)=x.
+0 [] f(e3,x)=x.
+0 [] f(e4,x)=x.
+0 [] f(e5,x)=x.
+0 [] f(e6,x)=x.
+0 [] f(e7,x)=x.
+0 [] f(e8,x)=x.
+0 [] f(x,g1(x))=e1.
+0 [] f(x,g2(x))=e2.
+0 [] f(x,g3(x))=e3.
+0 [] f(x,g4(x))=e4.
+0 [] f(x,g5(x))=e5.
+0 [] f(x,g6(x))=e6.
+0 [] f(x,g7(x))=e7.
+0 [] f(x,g8(x))=e8.
+end_of_list.
+
+------------> process usable:
+** KEPT (pick-wt=3): 1 [] x=x.
+  Following clause subsumed by 1 during input processing: 0 [copy,1,flip.1] x=x.
+
+------------> process sos:
+** KEPT (pick-wt=11): 2 [] f(f(x,y),z)=f(x,f(y,z)).
+---> New Demodulator: 3 [new_demod,2] f(f(x,y),z)=f(x,f(y,z)).
+** KEPT (pick-wt=5): 4 [] f(e1,x)=x.
+---> New Demodulator: 5 [new_demod,4] f(e1,x)=x.
+** KEPT (pick-wt=5): 6 [] f(e2,x)=x.
+---> New Demodulator: 7 [new_demod,6] f(e2,x)=x.
+** KEPT (pick-wt=5): 8 [] f(e3,x)=x.
+---> New Demodulator: 9 [new_demod,8] f(e3,x)=x.
+** KEPT (pick-wt=5): 10 [] f(e4,x)=x.
+---> New Demodulator: 11 [new_demod,10] f(e4,x)=x.
+** KEPT (pick-wt=5): 12 [] f(e5,x)=x.
+---> New Demodulator: 13 [new_demod,12] f(e5,x)=x.
+** KEPT (pick-wt=5): 14 [] f(e6,x)=x.
+---> New Demodulator: 15 [new_demod,14] f(e6,x)=x.
+** KEPT (pick-wt=5): 16 [] f(e7,x)=x.
+---> New Demodulator: 17 [new_demod,16] f(e7,x)=x.
+** KEPT (pick-wt=5): 18 [] f(e8,x)=x.
+---> New Demodulator: 19 [new_demod,18] f(e8,x)=x.
+** KEPT (pick-wt=6): 20 [] f(x,g1(x))=e1.
+---> New Demodulator: 21 [new_demod,20] f(x,g1(x))=e1.
+** KEPT (pick-wt=6): 22 [] f(x,g2(x))=e2.
+---> New Demodulator: 23 [new_demod,22] f(x,g2(x))=e2.
+** KEPT (pick-wt=6): 24 [] f(x,g3(x))=e3.
+---> New Demodulator: 25 [new_demod,24] f(x,g3(x))=e3.
+** KEPT (pick-wt=6): 26 [] f(x,g4(x))=e4.
+---> New Demodulator: 27 [new_demod,26] f(x,g4(x))=e4.
+** KEPT (pick-wt=6): 28 [] f(x,g5(x))=e5.
+---> New Demodulator: 29 [new_demod,28] f(x,g5(x))=e5.
+** KEPT (pick-wt=6): 30 [] f(x,g6(x))=e6.
+---> New Demodulator: 31 [new_demod,30] f(x,g6(x))=e6.
+** KEPT (pick-wt=6): 32 [] f(x,g7(x))=e7.
+---> New Demodulator: 33 [new_demod,32] f(x,g7(x))=e7.
+** KEPT (pick-wt=6): 34 [] f(x,g8(x))=e8.
+---> New Demodulator: 35 [new_demod,34] f(x,g8(x))=e8.
+>>>> Starting back demodulation with 3.
+>>>> Starting back demodulation with 5.
+>>>> Starting back demodulation with 7.
+>>>> Starting back demodulation with 9.
+>>>> Starting back demodulation with 11.
+>>>> Starting back demodulation with 13.
+>>>> Starting back demodulation with 15.
+>>>> Starting back demodulation with 17.
+>>>> Starting back demodulation with 19.
+>>>> Starting back demodulation with 21.
+>>>> Starting back demodulation with 23.
+>>>> Starting back demodulation with 25.
+>>>> Starting back demodulation with 27.
+>>>> Starting back demodulation with 29.
+>>>> Starting back demodulation with 31.
+>>>> Starting back demodulation with 33.
+>>>> Starting back demodulation with 35.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=5) 4 [] f(e1,x)=x.
+
+given clause #2: (wt=5) 6 [] f(e2,x)=x.
+
+given clause #3: (wt=5) 8 [] f(e3,x)=x.
+
+given clause #4: (wt=5) 10 [] f(e4,x)=x.
+
+given clause #5: (wt=5) 12 [] f(e5,x)=x.
+
+given clause #6: (wt=5) 14 [] f(e6,x)=x.
+
+given clause #7: (wt=5) 16 [] f(e7,x)=x.
+
+given clause #8: (wt=5) 18 [] f(e8,x)=x.
+
+given clause #9: (wt=6) 20 [] f(x,g1(x))=e1.
+
+given clause #10: (wt=4) 36 [para_into,20.1.1,18.1.1] g1(e8)=e1.
+
+given clause #11: (wt=4) 38 [para_into,20.1.1,16.1.1] g1(e7)=e1.
+
+given clause #12: (wt=4) 40 [para_into,20.1.1,14.1.1] g1(e6)=e1.
+
+given clause #13: (wt=4) 42 [para_into,20.1.1,12.1.1] g1(e5)=e1.
+
+given clause #14: (wt=4) 44 [para_into,20.1.1,10.1.1] g1(e4)=e1.
+
+given clause #15: (wt=4) 46 [para_into,20.1.1,8.1.1] g1(e3)=e1.
+
+given clause #16: (wt=4) 48 [para_into,20.1.1,6.1.1] g1(e2)=e1.
+
+given clause #17: (wt=4) 50 [para_into,20.1.1,4.1.1] g1(e1)=e1.
+
+given clause #18: (wt=6) 22 [] f(x,g2(x))=e2.
+
+given clause #19: (wt=4) 52 [para_into,22.1.1,18.1.1] g2(e8)=e2.
+
+given clause #20: (wt=4) 54 [para_into,22.1.1,16.1.1] g2(e7)=e2.
+
+given clause #21: (wt=4) 56 [para_into,22.1.1,14.1.1] g2(e6)=e2.
+
+given clause #22: (wt=4) 58 [para_into,22.1.1,12.1.1] g2(e5)=e2.
+
+given clause #23: (wt=4) 60 [para_into,22.1.1,10.1.1] g2(e4)=e2.
+
+given clause #24: (wt=4) 62 [para_into,22.1.1,8.1.1] g2(e3)=e2.
+
+given clause #25: (wt=4) 64 [para_into,22.1.1,6.1.1] g2(e2)=e2.
+
+given clause #26: (wt=4) 66 [para_into,22.1.1,4.1.1] g2(e1)=e2.
+
+given clause #27: (wt=6) 24 [] f(x,g3(x))=e3.
+
+given clause #28: (wt=4) 68 [para_into,24.1.1,18.1.1] g3(e8)=e3.
+
+given clause #29: (wt=4) 70 [para_into,24.1.1,16.1.1] g3(e7)=e3.
+
+given clause #30: (wt=4) 72 [para_into,24.1.1,14.1.1] g3(e6)=e3.
+
+given clause #31: (wt=4) 74 [para_into,24.1.1,12.1.1] g3(e5)=e3.
+
+given clause #32: (wt=4) 76 [para_into,24.1.1,10.1.1] g3(e4)=e3.
+
+given clause #33: (wt=4) 78 [para_into,24.1.1,8.1.1] g3(e3)=e3.
+
+given clause #34: (wt=4) 80 [para_into,24.1.1,6.1.1] g3(e2)=e3.
+
+given clause #35: (wt=4) 82 [para_into,24.1.1,4.1.1] g3(e1)=e3.
+
+given clause #36: (wt=6) 26 [] f(x,g4(x))=e4.
+
+given clause #37: (wt=4) 84 [para_into,26.1.1,18.1.1] g4(e8)=e4.
+
+given clause #38: (wt=4) 86 [para_into,26.1.1,16.1.1] g4(e7)=e4.
+
+given clause #39: (wt=4) 88 [para_into,26.1.1,14.1.1] g4(e6)=e4.
+
+given clause #40: (wt=4) 90 [para_into,26.1.1,12.1.1] g4(e5)=e4.
+
+given clause #41: (wt=4) 92 [para_into,26.1.1,10.1.1] g4(e4)=e4.
+
+given clause #42: (wt=4) 94 [para_into,26.1.1,8.1.1] g4(e3)=e4.
+
+given clause #43: (wt=4) 96 [para_into,26.1.1,6.1.1] g4(e2)=e4.
+
+given clause #44: (wt=4) 98 [para_into,26.1.1,4.1.1] g4(e1)=e4.
+
+given clause #45: (wt=6) 28 [] f(x,g5(x))=e5.
+
+given clause #46: (wt=4) 100 [para_into,28.1.1,18.1.1] g5(e8)=e5.
+
+given clause #47: (wt=4) 102 [para_into,28.1.1,16.1.1] g5(e7)=e5.
+
+given clause #48: (wt=4) 104 [para_into,28.1.1,14.1.1] g5(e6)=e5.
+
+given clause #49: (wt=4) 106 [para_into,28.1.1,12.1.1] g5(e5)=e5.
+
+given clause #50: (wt=4) 108 [para_into,28.1.1,10.1.1] g5(e4)=e5.
+
+given clause #51: (wt=4) 110 [para_into,28.1.1,8.1.1] g5(e3)=e5.
+
+given clause #52: (wt=4) 112 [para_into,28.1.1,6.1.1] g5(e2)=e5.
+
+given clause #53: (wt=4) 114 [para_into,28.1.1,4.1.1] g5(e1)=e5.
+
+given clause #54: (wt=6) 30 [] f(x,g6(x))=e6.
+
+given clause #55: (wt=4) 116 [para_into,30.1.1,18.1.1] g6(e8)=e6.
+
+given clause #56: (wt=4) 118 [para_into,30.1.1,16.1.1] g6(e7)=e6.
+
+given clause #57: (wt=4) 120 [para_into,30.1.1,14.1.1] g6(e6)=e6.
+
+given clause #58: (wt=4) 122 [para_into,30.1.1,12.1.1] g6(e5)=e6.
+
+given clause #59: (wt=4) 124 [para_into,30.1.1,10.1.1] g6(e4)=e6.
+
+given clause #60: (wt=4) 126 [para_into,30.1.1,8.1.1] g6(e3)=e6.
+
+given clause #61: (wt=4) 128 [para_into,30.1.1,6.1.1] g6(e2)=e6.
+
+given clause #62: (wt=4) 130 [para_into,30.1.1,4.1.1] g6(e1)=e6.
+
+given clause #63: (wt=6) 32 [] f(x,g7(x))=e7.
+
+given clause #64: (wt=4) 132 [para_into,32.1.1,18.1.1] g7(e8)=e7.
+
+given clause #65: (wt=4) 134 [para_into,32.1.1,16.1.1] g7(e7)=e7.
+
+given clause #66: (wt=4) 136 [para_into,32.1.1,14.1.1] g7(e6)=e7.
+
+given clause #67: (wt=4) 138 [para_into,32.1.1,12.1.1] g7(e5)=e7.
+
+given clause #68: (wt=4) 140 [para_into,32.1.1,10.1.1] g7(e4)=e7.
+
+given clause #69: (wt=4) 142 [para_into,32.1.1,8.1.1] g7(e3)=e7.
+
+given clause #70: (wt=4) 144 [para_into,32.1.1,6.1.1] g7(e2)=e7.
+
+given clause #71: (wt=4) 146 [para_into,32.1.1,4.1.1] g7(e1)=e7.
+
+given clause #72: (wt=6) 34 [] f(x,g8(x))=e8.
+
+given clause #73: (wt=4) 148 [para_into,34.1.1,18.1.1] g8(e8)=e8.
+
+given clause #74: (wt=4) 150 [para_into,34.1.1,16.1.1] g8(e7)=e8.
+
+given clause #75: (wt=4) 152 [para_into,34.1.1,14.1.1] g8(e6)=e8.
+
+given clause #76: (wt=4) 154 [para_into,34.1.1,12.1.1] g8(e5)=e8.
+
+given clause #77: (wt=4) 156 [para_into,34.1.1,10.1.1] g8(e4)=e8.
+
+given clause #78: (wt=4) 158 [para_into,34.1.1,8.1.1] g8(e3)=e8.
+
+given clause #79: (wt=4) 160 [para_into,34.1.1,6.1.1] g8(e2)=e8.
+
+given clause #80: (wt=4) 162 [para_into,34.1.1,4.1.1] g8(e1)=e8.
+
+given clause #81: (wt=11) 2 [] f(f(x,y),z)=f(x,f(y,z)).
+
+given clause #82: (wt=8) 164 [para_into,2.1.1.1,34.1.1,demod,19,flip.1] f(x,f(g8(x),y))=y.
+
+given clause #83: (wt=7) 198 [para_into,164.1.1.2,34.1.1,flip.1] g8(g8(x))=f(x,e8).
+
+given clause #84: (wt=7) 200 [para_into,164.1.1.2,32.1.1,flip.1] g7(g8(x))=f(x,e7).
+
+given clause #85: (wt=7) 202 [para_into,164.1.1.2,30.1.1,flip.1] g6(g8(x))=f(x,e6).
+
+given clause #86: (wt=7) 204 [para_into,164.1.1.2,28.1.1,flip.1] g5(g8(x))=f(x,e5).
+
+given clause #87: (wt=7) 206 [para_into,164.1.1.2,26.1.1,flip.1] g4(g8(x))=f(x,e4).
+
+given clause #88: (wt=7) 208 [para_into,164.1.1.2,24.1.1,flip.1] g3(g8(x))=f(x,e3).
+
+given clause #89: (wt=7) 210 [para_into,164.1.1.2,22.1.1,flip.1] g2(g8(x))=f(x,e2).
+
+given clause #90: (wt=7) 212 [para_into,164.1.1.2,20.1.1,flip.1] g1(g8(x))=f(x,e1).
+
+given clause #91: (wt=8) 166 [para_into,2.1.1.1,32.1.1,demod,17,flip.1] f(x,f(g7(x),y))=y.
+
+given clause #92: (wt=7) 222 [para_into,166.1.1.2,34.1.1,flip.1] g8(g7(x))=f(x,e8).
+
+given clause #93: (wt=7) 224 [para_into,166.1.1.2,32.1.1,flip.1] g7(g7(x))=f(x,e7).
+
+given clause #94: (wt=7) 226 [para_into,166.1.1.2,30.1.1,flip.1] g6(g7(x))=f(x,e6).
+
+given clause #95: (wt=7) 228 [para_into,166.1.1.2,28.1.1,flip.1] g5(g7(x))=f(x,e5).
+
+given clause #96: (wt=7) 230 [para_into,166.1.1.2,26.1.1,flip.1] g4(g7(x))=f(x,e4).
+
+given clause #97: (wt=7) 232 [para_into,166.1.1.2,24.1.1,flip.1] g3(g7(x))=f(x,e3).
+
+given clause #98: (wt=7) 234 [para_into,166.1.1.2,22.1.1,flip.1] g2(g7(x))=f(x,e2).
+
+given clause #99: (wt=7) 236 [para_into,166.1.1.2,20.1.1,flip.1] g1(g7(x))=f(x,e1).
+
+given clause #100: (wt=8) 168 [para_into,2.1.1.1,30.1.1,demod,15,flip.1] f(x,f(g6(x),y))=y.
+
+given clause #101: (wt=7) 248 [para_into,168.1.1.2,34.1.1,flip.1] g8(g6(x))=f(x,e8).
+
+given clause #102: (wt=7) 250 [para_into,168.1.1.2,32.1.1,flip.1] g7(g6(x))=f(x,e7).
+
+given clause #103: (wt=7) 252 [para_into,168.1.1.2,30.1.1,flip.1] g6(g6(x))=f(x,e6).
+
+given clause #104: (wt=7) 254 [para_into,168.1.1.2,28.1.1,flip.1] g5(g6(x))=f(x,e5).
+
+given clause #105: (wt=7) 256 [para_into,168.1.1.2,26.1.1,flip.1] g4(g6(x))=f(x,e4).
+
+given clause #106: (wt=7) 258 [para_into,168.1.1.2,24.1.1,flip.1] g3(g6(x))=f(x,e3).
+
+given clause #107: (wt=7) 260 [para_into,168.1.1.2,22.1.1,flip.1] g2(g6(x))=f(x,e2).
+
+given clause #108: (wt=7) 262 [para_into,168.1.1.2,20.1.1,flip.1] g1(g6(x))=f(x,e1).
+
+given clause #109: (wt=8) 170 [para_into,2.1.1.1,28.1.1,demod,13,flip.1] f(x,f(g5(x),y))=y.
+
+given clause #110: (wt=7) 276 [para_into,170.1.1.2,34.1.1,flip.1] g8(g5(x))=f(x,e8).
+
+given clause #111: (wt=7) 278 [para_into,170.1.1.2,32.1.1,flip.1] g7(g5(x))=f(x,e7).
+
+given clause #112: (wt=7) 280 [para_into,170.1.1.2,30.1.1,flip.1] g6(g5(x))=f(x,e6).
+
+given clause #113: (wt=7) 282 [para_into,170.1.1.2,28.1.1,flip.1] g5(g5(x))=f(x,e5).
+
+given clause #114: (wt=7) 284 [para_into,170.1.1.2,26.1.1,flip.1] g4(g5(x))=f(x,e4).
+
+given clause #115: (wt=7) 286 [para_into,170.1.1.2,24.1.1,flip.1] g3(g5(x))=f(x,e3).
+
+given clause #116: (wt=7) 288 [para_into,170.1.1.2,22.1.1,flip.1] g2(g5(x))=f(x,e2).
+
+given clause #117: (wt=7) 290 [para_into,170.1.1.2,20.1.1,flip.1] g1(g5(x))=f(x,e1).
+
+given clause #118: (wt=8) 172 [para_into,2.1.1.1,26.1.1,demod,11,flip.1] f(x,f(g4(x),y))=y.
+
+given clause #119: (wt=7) 306 [para_into,172.1.1.2,34.1.1,flip.1] g8(g4(x))=f(x,e8).
+
+given clause #120: (wt=7) 308 [para_into,172.1.1.2,32.1.1,flip.1] g7(g4(x))=f(x,e7).
+
+given clause #121: (wt=7) 310 [para_into,172.1.1.2,30.1.1,flip.1] g6(g4(x))=f(x,e6).
+
+given clause #122: (wt=7) 312 [para_into,172.1.1.2,28.1.1,flip.1] g5(g4(x))=f(x,e5).
+
+given clause #123: (wt=7) 314 [para_into,172.1.1.2,26.1.1,flip.1] g4(g4(x))=f(x,e4).
+
+given clause #124: (wt=7) 316 [para_into,172.1.1.2,24.1.1,flip.1] g3(g4(x))=f(x,e3).
+
+given clause #125: (wt=7) 318 [para_into,172.1.1.2,22.1.1,flip.1] g2(g4(x))=f(x,e2).
+
+given clause #126: (wt=7) 320 [para_into,172.1.1.2,20.1.1,flip.1] g1(g4(x))=f(x,e1).
+
+given clause #127: (wt=8) 174 [para_into,2.1.1.1,24.1.1,demod,9,flip.1] f(x,f(g3(x),y))=y.
+
+given clause #128: (wt=7) 338 [para_into,174.1.1.2,34.1.1,flip.1] g8(g3(x))=f(x,e8).
+
+given clause #129: (wt=7) 340 [para_into,174.1.1.2,32.1.1,flip.1] g7(g3(x))=f(x,e7).
+
+given clause #130: (wt=7) 342 [para_into,174.1.1.2,30.1.1,flip.1] g6(g3(x))=f(x,e6).
+
+given clause #131: (wt=7) 344 [para_into,174.1.1.2,28.1.1,flip.1] g5(g3(x))=f(x,e5).
+
+given clause #132: (wt=7) 346 [para_into,174.1.1.2,26.1.1,flip.1] g4(g3(x))=f(x,e4).
+
+given clause #133: (wt=7) 348 [para_into,174.1.1.2,24.1.1,flip.1] g3(g3(x))=f(x,e3).
+
+given clause #134: (wt=7) 350 [para_into,174.1.1.2,22.1.1,flip.1] g2(g3(x))=f(x,e2).
+
+given clause #135: (wt=7) 352 [para_into,174.1.1.2,20.1.1,flip.1] g1(g3(x))=f(x,e1).
+
+given clause #136: (wt=8) 176 [para_into,2.1.1.1,22.1.1,demod,7,flip.1] f(x,f(g2(x),y))=y.
+
+given clause #137: (wt=7) 372 [para_into,176.1.1.2,34.1.1,flip.1] g8(g2(x))=f(x,e8).
+
+given clause #138: (wt=7) 374 [para_into,176.1.1.2,32.1.1,flip.1] g7(g2(x))=f(x,e7).
+
+given clause #139: (wt=7) 376 [para_into,176.1.1.2,30.1.1,flip.1] g6(g2(x))=f(x,e6).
+
+given clause #140: (wt=7) 378 [para_into,176.1.1.2,28.1.1,flip.1] g5(g2(x))=f(x,e5).
+
+given clause #141: (wt=7) 380 [para_into,176.1.1.2,26.1.1,flip.1] g4(g2(x))=f(x,e4).
+
+given clause #142: (wt=7) 382 [para_into,176.1.1.2,24.1.1,flip.1] g3(g2(x))=f(x,e3).
+
+given clause #143: (wt=7) 384 [para_into,176.1.1.2,22.1.1,flip.1] g2(g2(x))=f(x,e2).
+
+given clause #144: (wt=7) 386 [para_into,176.1.1.2,20.1.1,flip.1] g1(g2(x))=f(x,e1).
+
+given clause #145: (wt=8) 178 [para_into,2.1.1.1,20.1.1,demod,5,flip.1] f(x,f(g1(x),y))=y.
+
+given clause #146: (wt=7) 408 [para_into,178.1.1.2,34.1.1,flip.1] g8(g1(x))=f(x,e8).
+
+given clause #147: (wt=7) 410 [para_into,178.1.1.2,32.1.1,flip.1] g7(g1(x))=f(x,e7).
+
+given clause #148: (wt=7) 412 [para_into,178.1.1.2,30.1.1,flip.1] g6(g1(x))=f(x,e6).
+
+given clause #149: (wt=7) 414 [para_into,178.1.1.2,28.1.1,flip.1] g5(g1(x))=f(x,e5).
+
+given clause #150: (wt=7) 416 [para_into,178.1.1.2,26.1.1,flip.1] g4(g1(x))=f(x,e4).
+
+given clause #151: (wt=7) 418 [para_into,178.1.1.2,24.1.1,flip.1] g3(g1(x))=f(x,e3).
+
+given clause #152: (wt=7) 420 [para_into,178.1.1.2,22.1.1,flip.1] g2(g1(x))=f(x,e2).
+
+given clause #153: (wt=7) 422 [para_into,178.1.1.2,20.1.1,flip.1] g1(g1(x))=f(x,e1).
+
+given clause #154: (wt=8) 216 [para_from,198.1.1,164.1.1.2.1,demod,3,19] f(g8(x),f(x,y))=y.
+
+given clause #155: (wt=7) 442 [para_into,216.1.1.2,34.1.1,demod,429,flip.1] g8(x)=f(g1(x),e8).
+
+given clause #156: (wt=7) 444 [para_into,216.1.1.2,32.1.1,demod,443,3,19,flip.1] g7(x)=f(g1(x),e7).
+
+given clause #157: (wt=7) 446 [para_into,216.1.1.2,30.1.1,demod,443,3,19,flip.1] g6(x)=f(g1(x),e6).
+
+given clause #158: (wt=7) 448 [para_into,216.1.1.2,28.1.1,demod,443,3,19,flip.1] g5(x)=f(g1(x),e5).
+
+given clause #159: (wt=7) 450 [para_into,216.1.1.2,26.1.1,demod,443,3,19,flip.1] g4(x)=f(g1(x),e4).
+
+given clause #160: (wt=7) 452 [para_into,216.1.1.2,24.1.1,demod,443,3,19,flip.1] g3(x)=f(g1(x),e3).
+
+given clause #161: (wt=7) 454 [para_into,216.1.1.2,22.1.1,demod,443,3,19,flip.1] g2(x)=f(g1(x),e2).
+
+given clause #162: (wt=7) 456 [para_into,216.1.1.2,20.1.1,demod,443,3,19] f(g1(x),e1)=g1(x).
+
+given clause #163: (wt=8) 426 [para_from,408.1.1,164.1.1.2.1,demod,3,19] f(g1(x),f(x,y))=y.
+
+given clause #164: (wt=9) 472 [back_demod,212,demod,443] g1(f(g1(x),e8))=f(x,e1).
+
+given clause #165: (wt=9) 484 [back_demod,236,demod,445] g1(f(g1(x),e7))=f(x,e1).
+
+given clause #166: (wt=9) 494 [back_demod,262,demod,447] g1(f(g1(x),e6))=f(x,e1).
+
+given clause #167: (wt=9) 502 [back_demod,290,demod,449] g1(f(g1(x),e5))=f(x,e1).
+
+given clause #168: (wt=9) 508 [back_demod,320,demod,451] g1(f(g1(x),e4))=f(x,e1).
+
+given clause #169: (wt=9) 512 [back_demod,352,demod,453] g1(f(g1(x),e3))=f(x,e1).
+
+given clause #170: (wt=9) 514 [back_demod,386,demod,455] g1(f(g1(x),e2))=f(x,e1).
+
+given clause #171: (wt=10) 194 [para_into,2.1.1,20.1.1,flip.1] f(x,f(y,g1(f(x,y))))=e1.
+
+given clause #172: (wt=7) 534 [para_into,194.1.1,426.1.1] g1(f(g1(x),x))=e1.
+
+given clause #173: (wt=8) 516 [para_into,194.1.1.2,18.1.1] f(x,g1(f(x,e8)))=e1.
+
+given clause #174: (wt=7) 542 [para_from,516.1.1,426.1.1.2,demod,457,flip.1] g1(f(x,e8))=g1(x).
+
+given clause #175: (wt=8) 518 [para_into,194.1.1.2,16.1.1] f(x,g1(f(x,e7)))=e1.
+
+given clause #176: (wt=7) 546 [para_from,518.1.1,426.1.1.2,demod,457,flip.1] g1(f(x,e7))=g1(x).
+
+given clause #177: (wt=8) 520 [para_into,194.1.1.2,14.1.1] f(x,g1(f(x,e6)))=e1.
+
+given clause #178: (wt=7) 550 [para_from,520.1.1,426.1.1.2,demod,457,flip.1] g1(f(x,e6))=g1(x).
+
+given clause #179: (wt=8) 522 [para_into,194.1.1.2,12.1.1] f(x,g1(f(x,e5)))=e1.
+
+given clause #180: (wt=7) 554 [para_from,522.1.1,426.1.1.2,demod,457,flip.1] g1(f(x,e5))=g1(x).
+
+given clause #181: (wt=8) 524 [para_into,194.1.1.2,10.1.1] f(x,g1(f(x,e4)))=e1.
+
+given clause #182: (wt=7) 558 [para_from,524.1.1,426.1.1.2,demod,457,flip.1] g1(f(x,e4))=g1(x).
+
+given clause #183: (wt=8) 526 [para_into,194.1.1.2,8.1.1] f(x,g1(f(x,e3)))=e1.
+
+given clause #184: (wt=7) 562 [para_from,526.1.1,426.1.1.2,demod,457,flip.1] g1(f(x,e3))=g1(x).
+
+given clause #185: (wt=8) 528 [para_into,194.1.1.2,6.1.1] f(x,g1(f(x,e2)))=e1.
+
+given clause #186: (wt=7) 566 [para_from,528.1.1,426.1.1.2,demod,457,flip.1] g1(f(x,e2))=g1(x).
+
+given clause #187: (wt=8) 530 [para_into,194.1.1.2,4.1.1] f(x,g1(f(x,e1)))=e1.
+
+given clause #188: (wt=7) 570 [para_from,530.1.1,426.1.1.2,demod,457,flip.1] g1(f(x,e1))=g1(x).
+
+given clause #189: (wt=9) 538 [para_from,194.1.1,426.1.1.2,demod,457,flip.1] f(x,g1(f(y,x)))=g1(y).
+
+given clause #190: (wt=10) 576 [para_from,538.1.1,426.1.1.2,flip.1] g1(f(x,y))=f(g1(y),g1(x)).
+
+Search stopped because sos empty.
+
+
+Search stopped because sos empty.
+
+============ end of search ============
+
+list(usable).
+1 [] x=x.
+4 [] f(e1,x)=x.
+6 [] f(e2,x)=x.
+8 [] f(e3,x)=x.
+10 [] f(e4,x)=x.
+12 [] f(e5,x)=x.
+14 [] f(e6,x)=x.
+16 [] f(e7,x)=x.
+18 [] f(e8,x)=x.
+20 [] f(x,g1(x))=e1.
+36 [para_into,20.1.1,18.1.1] g1(e8)=e1.
+38 [para_into,20.1.1,16.1.1] g1(e7)=e1.
+40 [para_into,20.1.1,14.1.1] g1(e6)=e1.
+42 [para_into,20.1.1,12.1.1] g1(e5)=e1.
+44 [para_into,20.1.1,10.1.1] g1(e4)=e1.
+46 [para_into,20.1.1,8.1.1] g1(e3)=e1.
+48 [para_into,20.1.1,6.1.1] g1(e2)=e1.
+50 [para_into,20.1.1,4.1.1] g1(e1)=e1.
+2 [] f(f(x,y),z)=f(x,f(y,z)).
+178 [para_into,2.1.1.1,20.1.1,demod,5,flip.1] f(x,f(g1(x),y))=y.
+422 [para_into,178.1.1.2,20.1.1,flip.1] g1(g1(x))=f(x,e1).
+442 [para_into,216.1.1.2,34.1.1,demod,429,flip.1] g8(x)=f(g1(x),e8).
+444 [para_into,216.1.1.2,32.1.1,demod,443,3,19,flip.1] g7(x)=f(g1(x),e7).
+446 [para_into,216.1.1.2,30.1.1,demod,443,3,19,flip.1] g6(x)=f(g1(x),e6).
+448 [para_into,216.1.1.2,28.1.1,demod,443,3,19,flip.1] g5(x)=f(g1(x),e5).
+450 [para_into,216.1.1.2,26.1.1,demod,443,3,19,flip.1] g4(x)=f(g1(x),e4).
+452 [para_into,216.1.1.2,24.1.1,demod,443,3,19,flip.1] g3(x)=f(g1(x),e3).
+454 [para_into,216.1.1.2,22.1.1,demod,443,3,19,flip.1] g2(x)=f(g1(x),e2).
+456 [para_into,216.1.1.2,20.1.1,demod,443,3,19] f(g1(x),e1)=g1(x).
+426 [para_from,408.1.1,164.1.1.2.1,demod,3,19] f(g1(x),f(x,y))=y.
+576 [para_from,538.1.1,426.1.1.2,flip.1] g1(f(x,y))=f(g1(y),g1(x)).
+end_of_list.
+
+list(sos).
+end_of_list.
+
+list(demodulators).
+3 [new_demod,2] f(f(x,y),z)=f(x,f(y,z)).
+5 [new_demod,4] f(e1,x)=x.
+7 [new_demod,6] f(e2,x)=x.
+9 [new_demod,8] f(e3,x)=x.
+11 [new_demod,10] f(e4,x)=x.
+13 [new_demod,12] f(e5,x)=x.
+15 [new_demod,14] f(e6,x)=x.
+17 [new_demod,16] f(e7,x)=x.
+19 [new_demod,18] f(e8,x)=x.
+21 [new_demod,20] f(x,g1(x))=e1.
+37 [new_demod,36] g1(e8)=e1.
+39 [new_demod,38] g1(e7)=e1.
+41 [new_demod,40] g1(e6)=e1.
+43 [new_demod,42] g1(e5)=e1.
+45 [new_demod,44] g1(e4)=e1.
+47 [new_demod,46] g1(e3)=e1.
+49 [new_demod,48] g1(e2)=e1.
+51 [new_demod,50] g1(e1)=e1.
+179 [new_demod,178] f(x,f(g1(x),y))=y.
+423 [new_demod,422] g1(g1(x))=f(x,e1).
+427 [new_demod,426] f(g1(x),f(x,y))=y.
+443 [new_demod,442] g8(x)=f(g1(x),e8).
+445 [new_demod,444] g7(x)=f(g1(x),e7).
+447 [new_demod,446] g6(x)=f(g1(x),e6).
+449 [new_demod,448] g5(x)=f(g1(x),e5).
+451 [new_demod,450] g4(x)=f(g1(x),e4).
+453 [new_demod,452] g3(x)=f(g1(x),e3).
+455 [new_demod,454] g2(x)=f(g1(x),e2).
+457 [new_demod,456] f(g1(x),e1)=g1(x).
+577 [new_demod,576] g1(f(x,y))=f(g1(y),g1(x)).
+end_of_list.
+
+
+-------------- statistics -------------
+clauses given                190
+clauses generated           1515
+  para_from generated        752
+  para_into generated        763
+demod & eval rewrites       2625
+clauses wt,lit,sk delete       0
+tautologies deleted            0
+clauses forward subsumed    1503
+  (subsumed by sos)            0
+unit deletions                 0
+factor simplifications         0
+clauses kept                 289
+new demodulators             288
+empty clauses                  0
+clauses back demodulated     258
+clauses back subsumed          0
+usable size                   31
+sos size                       0
+demodulators size             30
+passive size                   0
+hot size                       0
+Kbytes malloced             2929
+
+----------- times (seconds) -----------
+user CPU time          0.03          (0 hr, 0 min, 0 sec)
+system CPU time        0.01          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8381 finished Mon Aug  2 15:30:37 2004

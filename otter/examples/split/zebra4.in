@@ -1,0 +1,71 @@
+% This is the zebra puzzle with Dale Myers' representation, with
+% definitions added to make it more natural.  Unfortunately, the
+% definitions make it run much slower.
+% The set of clauses is satisfiable, and a model is an answer.
+
+set(binary_res).
+set(knuth_bendix).
+
+set(split_when_given).
+
+clear(print_kept).
+clear(print_given).
+clear(print_new_demod).
+clear(print_back_demod).
+clear(print_back_sub).
+assign(stats_level, 1).
+
+assign(max_distinct_vars, 0).  % Keep ground clauses only.
+
+list(usable).
+
+x=x.
+
+% The domain consists of at most 5 elements, named 1,2,3,4,5.
+% In the following clause, it is important that the variables
+% are on the left-hand sides of the equations, because ground
+% equations are oriented with the heavy side on the left, and
+% integers are lighter than the other constants.  The lexicographic
+% ASCII ordering is used to compare symbols.)  Don't worry about
+% any ground literals---Otter will flip the backward ones.
+
+x=1 | x=2 | x=3 | x=4 | x=5.
+
+end_of_list.
+
+formula_list(usable).
+
+% Definitions of distinct5, successor, and next_to.
+
+all x y z u v (distinct5(x,y,z,u,v) <->
+ (x!=y & x!=z & x!=u & x!=v & y!=z & y!=u & y!=v & z!=u & z!=v & u!=v)).
+
+all x y (successor(x,y) <->
+			(x=1 & y=2) |
+			(x=2 & y=3) |
+			(x=3 & y=4) |
+			(x=4 & y=5)   ).
+
+all x y (next_to(x,y) <-> successor(x,y) | successor(y,x)).
+
+end_of_list.
+
+list(sos).
+
+distinct5(1, 2, 3, 4, 5).
+distinct5(red, green, ivory, ayellow, blue).
+distinct5(eng, aspan, aukra, norw, japan).
+distinct5(dog, asnail, fox, horse, azebra).
+distinct5(coffee, atea, milk, orange, apple).
+distinct5(old, kool, chest, lucky, parli).
+
+% Here are the clues.
+
+eng=red. aspan=dog. coffee=green. aukra=atea. old=asnail. kool=ayellow.
+milk=3. norw=1. lucky=orange. japan=parli. blue=2.
+
+successor(ivory, green).
+next_to(kool, horse).
+next_to(chest, fox).
+
+end_of_list.

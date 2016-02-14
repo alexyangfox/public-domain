@@ -1,0 +1,441 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:31:14 2004
+The command was "../../bin/otter".  The process ID is 8932.
+
+set(hyper_res).
+set(sos_queue).
+assign(max_weight,1).
+assign(equiv_hint_wt,1).
+set(keep_hint_subsumers).
+clear(print_kept).
+
+list(usable).
+1 [] -P(i(x,y))| -P(x)|P(y).
+end_of_list.
+
+list(sos).
+2 [] P(i(x,i(y,x)))   # label("Axiom 1").
+3 [] P(i(i(x,y),i(i(y,z),i(x,z))))   # label("Axiom 2").
+4 [] P(i(i(i(x,y),y),i(i(y,x),x)))   # label("Axiom 3").
+5 [] P(i(i(n(x),n(y)),i(y,x)))   # label("Axiom 5").
+end_of_list.
+
+list(passive).
+6 [] -P(i(i(i(cx,cy),i(cy,cx)),i(cy,cx)))|$ANS(Denial_Axiom4).
+end_of_list.
+
+list(hints).
+7 [] P(i(x,i(y,i(z,y))))   # label("Step01").
+8 [] P(i(i(i(i(x,y),i(z,y)),w),i(i(z,x),w)))   # label("Step02").
+9 [] P(i(x,i(i(y,z),i(i(z,w),i(y,w)))))   # label("Step03").
+10 [] P(i(i(i(x,y),z),i(y,z)))   # label("Step04").
+11 [] P(i(i(i(i(x,y),y),z),i(i(i(y,x),x),z)))   # label("Step05").
+12 [] P(i(i(i(x,y),z),i(i(n(y),n(x)),z)))   # label("Step06").
+13 [] P(i(i(i(x,i(y,x)),z),z))   # label("Step07").
+14 [] P(i(i(x,i(y,z)),i(i(w,y),i(x,i(w,z)))))   # label("Step08").
+15 [] P(i(i(x,y),i(i(i(x,z),w),i(i(y,z),w))))   # label("Step09").
+16 [] P(i(i(i(i(x,y),i(i(y,z),i(x,z))),w),w))   # label("Step10").
+17 [] P(i(n(x),i(x,y)))   # label("Step11").
+18 [] P(i(x,i(i(x,y),y)))   # label("Step12").
+19 [] P(i(i(i(x,i(y,x)),i(y,x)),i(i(i(x,y),y),x)))   # label("Step13").
+20 [] P(i(i(n(x),n(i(y,i(z,y)))),x))   # label("Step14").
+21 [] P(i(i(n(x),n(i(i(y,z),i(i(z,w),i(y,w))))),x))   # label("Step15").
+22 [] P(i(i(x,i(y,z)),i(x,i(i(z,w),i(y,w)))))   # label("Step16").
+23 [] P(i(i(x,y),i(n(y),i(x,z))))   # label("Step17").
+24 [] P(i(i(i(x,y),z),i(n(x),z)))   # label("Step18").
+25 [] P(i(i(x,i(y,z)),i(y,i(x,z))))   # label("Step19").
+26 [] P(i(i(x,y),i(i(i(y,x),x),y)))   # label("Step20").
+27 [] P(i(i(i(i(n(x),n(i(y,i(z,y)))),x),w),w))   # label("Step21").
+28 [] P(i(x,i(i(y,z),i(i(x,y),z))))   # label("Step22").
+29 [] P(i(i(i(n(x),i(y,z)),w),i(i(y,x),w)))   # label("Step23").
+30 [] P(i(n(n(x)),x))   # label("Step24").
+31 [] P(i(i(x,y),i(i(z,x),i(z,y))))   # label("Step25").
+32 [] P(i(i(x,i(n(y),n(i(z,i(w,z))))),i(x,y)))   # label("Step26").
+33 [] P(i(i(i(i(x,y),i(i(z,x),y)),w),i(z,w)))   # label("Step27").
+34 [] P(i(i(i(n(n(x)),y),z),i(i(x,y),z)))   # label("Step28").
+35 [] P(i(x,n(n(x))))   # label("Step29").
+36 [] P(i(i(x,n(n(y))),i(x,y)))   # label("Step30").
+37 [] P(i(i(x,i(i(y,z),w)),i(x,i(z,w))))   # label("Step31").
+38 [] P(i(i(x,i(n(y),n(z))),i(x,i(z,y))))   # label("Step32").
+39 [] P(i(i(n(x),y),i(n(y),x)))   # label("Step33").
+40 [] P(i(i(n(n(x)),y),i(x,y)))   # label("Step34").
+41 [] P(i(i(i(x,y),n(z)),i(z,x)))   # label("Step35").
+42 [] P(i(i(x,y),i(n(y),n(x))))   # label("Step36").
+43 [] P(i(i(x,i(n(n(y)),z)),i(x,i(y,z))))   # label("Step37").
+44 [] P(i(i(x,i(y,z)),i(x,i(n(z),n(y)))))   # label("Step38").
+45 [] P(i(n(i(x,y)),n(y)))   # label("Step39").
+46 [] P(i(i(i(n(x),n(y)),z),i(i(y,x),z)))   # label("Step40").
+47 [] P(i(n(i(x,y)),n(i(i(y,z),n(x)))))   # label("Step41").
+48 [] P(i(i(i(x,y),i(z,w)),i(y,i(n(w),n(z)))))   # label("Step42").
+49 [] P(i(i(i(n(x),n(i(y,x))),n(i(y,x))),n(x)))   # label("Step43").
+50 [] P(i(i(x,i(i(n(y),n(z)),w)),i(x,i(i(z,y),w))))   # label("Step44").
+51 [] P(i(i(i(n(x),n(y)),n(y)),i(i(x,y),n(x))))   # label("Step45").
+52 [] P(i(i(x,n(i(y,z))),i(x,n(i(i(z,w),n(y))))))   # label("Step46").
+53 [] P(i(i(x,i(i(n(y),n(i(z,y))),n(i(z,y)))),i(x,n(y))))   # label("Step47").
+54 [] P(i(n(x),i(n(n(y)),n(i(y,x)))))   # label("Step48").
+55 [] P(i(i(i(i(x,y),y),n(i(x,y))),n(y)))   # label("Step49").
+56 [] P(i(n(x),i(y,n(i(y,x)))))   # label("Step50").
+57 [] P(i(i(x,i(i(i(y,z),z),n(i(y,z)))),i(x,n(z))))   # label("Step51").
+58 [] P(i(i(i(n(x),i(y,n(i(y,x)))),z),z))   # label("Step52").
+59 [] P(i(i(i(i(x,y),y),n(i(y,x))),n(x)))   # label("Step53").
+60 [] P(i(i(x,i(i(i(y,z),z),n(i(z,y)))),i(x,n(y))))   # label("Step54").
+61 [] P(i(i(x,y),i(i(y,n(i(y,x))),n(x))))   # label("Step55").
+62 [] P(i(i(i(x,n(i(x,y))),n(i(i(x,n(i(x,y))),n(y)))),n(n(y))))   # label("Step56").
+63 [] P(i(i(i(x,n(i(x,y))),n(i(i(x,n(i(x,y))),n(y)))),y))   # label("Step57").
+64 [] P(i(i(x,i(i(y,n(i(y,z))),n(i(i(y,n(i(y,z))),n(z))))),i(x,z)))   # label("Step58").
+65 [] P(i(i(i(x,n(i(x,y))),n(i(y,x))),y))   # label("Step59").
+66 [] P(i(i(x,i(i(y,n(i(y,z))),n(i(z,y)))),i(x,z)))   # label("Step60").
+67 [] P(i(x,i(i(n(i(x,y)),n(i(y,x))),y)))   # label("Step61").
+68 [] P(i(x,i(i(i(y,x),i(x,y)),y)))   # label("Step62").
+69 [] P(i(i(i(x,y),i(y,x)),i(y,x)))   # label("Step63").
+end_of_list.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+Starting on level 1, last kept clause of level 0 is 69.
+
+Starting on level 1, last kept clause of level 0 is 69.
+
+given clause #1: (wt=6) 2 [] P(i(x,i(y,x)))   # label("Axiom 1").
+
+given clause #2: (wt=12) 3 [] P(i(i(x,y),i(i(y,z),i(x,z))))   # label("Axiom 2").
+
+given clause #3: (wt=12) 4 [] P(i(i(i(x,y),y),i(i(y,x),x)))   # label("Axiom 3").
+
+given clause #4: (wt=10) 5 [] P(i(i(n(x),n(y)),i(y,x)))   # label("Axiom 5").
+
+Starting on level 2, last kept clause of level 1 is 75.
+
+Starting on level 2, last kept clause of level 1 is 75.
+
+given clause #5: (wt=1) 70 [hyper,2,1,2] P(i(x,i(y,i(z,y))))   # label("Step01").
+
+given clause #6: (wt=1) 71 [hyper,3,1,3] P(i(i(i(i(x,y),i(z,y)),u),i(i(z,x),u)))   # label("Step02").
+
+given clause #7: (wt=1) 72 [hyper,3,1,2] P(i(x,i(i(y,z),i(i(z,u),i(y,u)))))   # label("Step03").
+
+given clause #8: (wt=1) 73 [hyper,3,1,2] P(i(i(i(x,y),z),i(y,z)))   # label("Step04").
+
+given clause #9: (wt=1) 74 [hyper,4,1,3] P(i(i(i(i(x,y),y),z),i(i(i(y,x),x),z)))   # label("Step05").
+
+given clause #10: (wt=1) 75 [hyper,5,1,3] P(i(i(i(x,y),z),i(i(n(y),n(x)),z)))   # label("Step06").
+
+Starting on level 3, last kept clause of level 2 is 82.
+
+Starting on level 3, last kept clause of level 2 is 82.
+
+given clause #11: (wt=1) 76 [hyper,70,1,4] P(i(i(i(x,i(y,x)),z),z))   # label("Step07").
+
+given clause #12: (wt=1) 77 [hyper,71,1,71] P(i(i(x,i(y,z)),i(i(u,y),i(x,i(u,z)))))   # label("Step08").
+
+given clause #13: (wt=1) 78 [hyper,71,1,3] P(i(i(x,y),i(i(i(x,z),u),i(i(y,z),u))))   # label("Step09").
+
+given clause #14: (wt=1) 79 [hyper,72,1,4] P(i(i(i(i(x,y),i(i(y,z),i(x,z))),u),u))   # label("Step10").
+
+given clause #15: (wt=1) 80 [hyper,73,1,5] P(i(n(x),i(x,y)))   # label("Step11").
+
+given clause #16: (wt=1) 81 [hyper,73,1,4] P(i(x,i(i(x,y),y)))   # label("Step12").
+
+given clause #17: (wt=1) 82 [hyper,74,1,74] P(i(i(i(x,i(y,x)),i(y,x)),i(i(i(x,y),y),x)))   # label("Step13").
+
+Starting on level 4, last kept clause of level 3 is 89.
+
+Starting on level 4, last kept clause of level 3 is 89.
+
+given clause #18: (wt=1) 83 [hyper,76,1,75] P(i(i(n(x),n(i(y,i(z,y)))),x))   # label("Step14").
+
+given clause #19: (wt=1) 84 [hyper,79,1,75] P(i(i(n(x),n(i(i(y,z),i(i(z,u),i(y,u))))),x))   # label("Step15").
+
+given clause #20: (wt=1) 85 [hyper,79,1,71] P(i(i(x,i(y,z)),i(x,i(i(z,u),i(y,u)))))   # label("Step16").
+
+given clause #21: (wt=1) 86 [hyper,80,1,77] P(i(i(x,y),i(n(y),i(x,z))))   # label("Step17").
+
+given clause #22: (wt=1) 87 [hyper,80,1,3] P(i(i(i(x,y),z),i(n(x),z)))   # label("Step18").
+
+given clause #23: (wt=1) 88 [hyper,81,1,77] P(i(i(x,i(y,z)),i(y,i(x,z))))   # label("Step19").
+
+given clause #24: (wt=1) 89 [hyper,82,1,73] P(i(i(x,y),i(i(i(y,x),x),y)))   # label("Step20").
+
+Starting on level 5, last kept clause of level 4 is 94.
+
+Starting on level 5, last kept clause of level 4 is 94.
+
+given clause #25: (wt=1) 90 [hyper,83,1,81] P(i(i(i(i(n(x),n(i(y,i(z,y)))),x),u),u))   # label("Step21").
+
+given clause #26: (wt=1) 91 [hyper,85,1,81] P(i(x,i(i(y,z),i(i(x,y),z))))   # label("Step22").
+
+given clause #27: (wt=1) 92 [hyper,86,1,3] P(i(i(i(n(x),i(y,z)),u),i(i(y,x),u)))   # label("Step23").
+
+given clause #28: (wt=1) 93 [hyper,87,1,84] P(i(n(n(x)),x))   # label("Step24").
+
+given clause #29: (wt=1) 94 [hyper,88,1,79] P(i(i(x,y),i(i(z,x),i(z,y))))   # label("Step25").
+
+Starting on level 6, last kept clause of level 5 is 101.
+
+Starting on level 6, last kept clause of level 5 is 101.
+
+given clause #30: (wt=1) 95 [hyper,90,1,71] P(i(i(x,i(n(y),n(i(z,i(u,z))))),i(x,y)))   # label("Step26").
+
+given clause #31: (wt=1) 96 [hyper,91,1,3] P(i(i(i(i(x,y),i(i(z,x),y)),u),i(z,u)))   # label("Step27").
+
+given clause #32: (wt=1) 97 [hyper,93,1,78] P(i(i(i(n(n(x)),y),z),i(i(x,y),z)))   # label("Step28").
+
+given clause #33: (wt=1) 98 [hyper,93,1,5] P(i(x,n(n(x))))   # label("Step29").
+
+given clause #34: (wt=1) 99 [hyper,94,1,93] P(i(i(x,n(n(y))),i(x,y)))   # label("Step30").
+
+given clause #35: (wt=1) 100 [hyper,94,1,73] P(i(i(x,i(i(y,z),u)),i(x,i(z,u))))   # label("Step31").
+
+given clause #36: (wt=1) 101 [hyper,94,1,5] P(i(i(x,i(n(y),n(z))),i(x,i(z,y))))   # label("Step32").
+
+Starting on level 7, last kept clause of level 6 is 104.
+
+Starting on level 7, last kept clause of level 6 is 104.
+
+given clause #37: (wt=1) 102 [hyper,95,1,92] P(i(i(n(x),y),i(n(y),x)))   # label("Step33").
+
+given clause #38: (wt=1) 103 [hyper,98,1,3] P(i(i(n(n(x)),y),i(x,y)))   # label("Step34").
+
+given clause #39: (wt=1) 104 [hyper,101,1,87] P(i(i(i(x,y),n(z)),i(z,x)))   # label("Step35").
+
+Starting on level 8, last kept clause of level 7 is 106.
+
+Starting on level 8, last kept clause of level 7 is 106.
+
+given clause #40: (wt=1) 105 [hyper,102,1,97] P(i(i(x,y),i(n(y),n(x))))   # label("Step36").
+
+given clause #41: (wt=1) 106 [hyper,103,1,94] P(i(i(x,i(n(n(y)),z)),i(x,i(y,z))))   # label("Step37").
+
+Starting on level 9, last kept clause of level 8 is 110.
+
+Starting on level 9, last kept clause of level 8 is 110.
+
+given clause #42: (wt=1) 107 [hyper,105,1,94] P(i(i(x,i(y,z)),i(x,i(n(z),n(y)))))   # label("Step38").
+
+given clause #43: (wt=1) 108 [hyper,105,1,76] P(i(n(i(x,y)),n(y)))   # label("Step39").
+
+given clause #44: (wt=1) 109 [hyper,105,1,3] P(i(i(i(n(x),n(y)),z),i(i(y,x),z)))   # label("Step40").
+
+given clause #45: (wt=1) 110 [hyper,105,1,104] P(i(n(i(x,y)),n(i(i(y,z),n(x)))))   # label("Step41").
+
+Starting on level 10, last kept clause of level 9 is 115.
+
+Starting on level 10, last kept clause of level 9 is 115.
+
+given clause #46: (wt=1) 111 [hyper,107,1,100] P(i(i(i(x,y),i(z,u)),i(y,i(n(u),n(z)))))   # label("Step42").
+
+given clause #47: (wt=1) 112 [hyper,108,1,89] P(i(i(i(n(x),n(i(y,x))),n(i(y,x))),n(x)))   # label("Step43").
+
+given clause #48: (wt=1) 113 [hyper,109,1,94] P(i(i(x,i(i(n(y),n(z)),u)),i(x,i(i(z,y),u))))   # label("Step44").
+
+given clause #49: (wt=1) 114 [hyper,109,1,74] P(i(i(i(n(x),n(y)),n(y)),i(i(x,y),n(x))))   # label("Step45").
+
+given clause #50: (wt=1) 115 [hyper,110,1,94] P(i(i(x,n(i(y,z))),i(x,n(i(i(z,u),n(y))))))   # label("Step46").
+
+Starting on level 11, last kept clause of level 10 is 117.
+
+Starting on level 11, last kept clause of level 10 is 117.
+
+given clause #51: (wt=1) 116 [hyper,112,1,94] P(i(i(x,i(i(n(y),n(i(z,y))),n(i(z,y)))),i(x,n(y))))   # label("Step47").
+
+given clause #52: (wt=1) 117 [hyper,114,1,111] P(i(n(x),i(n(n(y)),n(i(y,x)))))   # label("Step48").
+
+Starting on level 12, last kept clause of level 11 is 119.
+
+Starting on level 12, last kept clause of level 11 is 119.
+
+given clause #53: (wt=1) 118 [hyper,116,1,75] P(i(i(i(i(x,y),y),n(i(x,y))),n(y)))   # label("Step49").
+
+given clause #54: (wt=1) 119 [hyper,117,1,106] P(i(n(x),i(y,n(i(y,x)))))   # label("Step50").
+
+Starting on level 13, last kept clause of level 12 is 121.
+
+Starting on level 13, last kept clause of level 12 is 121.
+
+given clause #55: (wt=1) 120 [hyper,118,1,94] P(i(i(x,i(i(i(y,z),z),n(i(y,z)))),i(x,n(z))))   # label("Step51").
+
+given clause #56: (wt=1) 121 [hyper,119,1,81] P(i(i(i(n(x),i(y,n(i(y,x)))),z),z))   # label("Step52").
+
+Starting on level 14, last kept clause of level 13 is 122.
+
+Starting on level 14, last kept clause of level 13 is 122.
+
+given clause #57: (wt=1) 122 [hyper,120,1,74] P(i(i(i(i(x,y),y),n(i(y,x))),n(x)))   # label("Step53").
+
+Starting on level 15, last kept clause of level 14 is 123.
+
+Starting on level 15, last kept clause of level 14 is 123.
+
+given clause #58: (wt=1) 123 [hyper,122,1,94] P(i(i(x,i(i(i(y,z),z),n(i(z,y)))),i(x,n(y))))   # label("Step54").
+
+Starting on level 16, last kept clause of level 15 is 124.
+
+Starting on level 16, last kept clause of level 15 is 124.
+
+given clause #59: (wt=1) 124 [hyper,123,1,96] P(i(i(x,y),i(i(y,n(i(y,x))),n(x))))   # label("Step55").
+
+Starting on level 17, last kept clause of level 16 is 125.
+
+Starting on level 17, last kept clause of level 16 is 125.
+
+given clause #60: (wt=1) 125 [hyper,124,1,121] P(i(i(i(x,n(i(x,y))),n(i(i(x,n(i(x,y))),n(y)))),n(n(y))))   # label("Step56").
+
+Starting on level 18, last kept clause of level 17 is 126.
+
+Starting on level 18, last kept clause of level 17 is 126.
+
+given clause #61: (wt=1) 126 [hyper,125,1,99] P(i(i(i(x,n(i(x,y))),n(i(i(x,n(i(x,y))),n(y)))),y))   # label("Step57").
+
+Starting on level 19, last kept clause of level 18 is 127.
+
+Starting on level 19, last kept clause of level 18 is 127.
+
+given clause #62: (wt=1) 127 [hyper,126,1,94] P(i(i(x,i(i(y,n(i(y,z))),n(i(i(y,n(i(y,z))),n(z))))),i(x,z)))   # label("Step58").
+
+Starting on level 20, last kept clause of level 19 is 128.
+
+Starting on level 20, last kept clause of level 19 is 128.
+
+given clause #63: (wt=1) 128 [hyper,127,1,115] P(i(i(i(x,n(i(x,y))),n(i(y,x))),y))   # label("Step59").
+
+Starting on level 21, last kept clause of level 20 is 129.
+
+Starting on level 21, last kept clause of level 20 is 129.
+
+given clause #64: (wt=1) 129 [hyper,128,1,94] P(i(i(x,i(i(y,n(i(y,z))),n(i(z,y)))),i(x,z)))   # label("Step60").
+
+Starting on level 22, last kept clause of level 21 is 130.
+
+Starting on level 22, last kept clause of level 21 is 130.
+
+given clause #65: (wt=1) 130 [hyper,129,1,96] P(i(x,i(i(n(i(x,y)),n(i(y,x))),y)))   # label("Step61").
+
+Starting on level 23, last kept clause of level 22 is 131.
+
+Starting on level 23, last kept clause of level 22 is 131.
+
+given clause #66: (wt=1) 131 [hyper,130,1,113] P(i(x,i(i(i(y,x),i(x,y)),y)))   # label("Step62").
+
+-------- PROOF -------- 133 [binary,132.1,6.1] $ANS(Denial_Axiom4).
+
+----> UNIT CONFLICT at   0.08 sec ----> 133 [binary,132.1,6.1] $ANS(Denial_Axiom4).
+
+Length of proof is 63.  Level of proof is 23.
+
+---------------- PROOF ----------------
+
+1 [] -P(i(x,y))| -P(x)|P(y).
+2 [] P(i(x,i(y,x)))   # label("Axiom 1").
+3 [] P(i(i(x,y),i(i(y,z),i(x,z))))   # label("Axiom 2").
+4 [] P(i(i(i(x,y),y),i(i(y,x),x)))   # label("Axiom 3").
+5 [] P(i(i(n(x),n(y)),i(y,x)))   # label("Axiom 5").
+6 [] -P(i(i(i(cx,cy),i(cy,cx)),i(cy,cx)))|$ANS(Denial_Axiom4).
+70 [hyper,2,1,2] P(i(x,i(y,i(z,y))))   # label("Step01").
+71 [hyper,3,1,3] P(i(i(i(i(x,y),i(z,y)),u),i(i(z,x),u)))   # label("Step02").
+72 [hyper,3,1,2] P(i(x,i(i(y,z),i(i(z,u),i(y,u)))))   # label("Step03").
+73 [hyper,3,1,2] P(i(i(i(x,y),z),i(y,z)))   # label("Step04").
+74 [hyper,4,1,3] P(i(i(i(i(x,y),y),z),i(i(i(y,x),x),z)))   # label("Step05").
+75 [hyper,5,1,3] P(i(i(i(x,y),z),i(i(n(y),n(x)),z)))   # label("Step06").
+76 [hyper,70,1,4] P(i(i(i(x,i(y,x)),z),z))   # label("Step07").
+77 [hyper,71,1,71] P(i(i(x,i(y,z)),i(i(u,y),i(x,i(u,z)))))   # label("Step08").
+78 [hyper,71,1,3] P(i(i(x,y),i(i(i(x,z),u),i(i(y,z),u))))   # label("Step09").
+79 [hyper,72,1,4] P(i(i(i(i(x,y),i(i(y,z),i(x,z))),u),u))   # label("Step10").
+80 [hyper,73,1,5] P(i(n(x),i(x,y)))   # label("Step11").
+81 [hyper,73,1,4] P(i(x,i(i(x,y),y)))   # label("Step12").
+82 [hyper,74,1,74] P(i(i(i(x,i(y,x)),i(y,x)),i(i(i(x,y),y),x)))   # label("Step13").
+83 [hyper,76,1,75] P(i(i(n(x),n(i(y,i(z,y)))),x))   # label("Step14").
+84 [hyper,79,1,75] P(i(i(n(x),n(i(i(y,z),i(i(z,u),i(y,u))))),x))   # label("Step15").
+85 [hyper,79,1,71] P(i(i(x,i(y,z)),i(x,i(i(z,u),i(y,u)))))   # label("Step16").
+86 [hyper,80,1,77] P(i(i(x,y),i(n(y),i(x,z))))   # label("Step17").
+87 [hyper,80,1,3] P(i(i(i(x,y),z),i(n(x),z)))   # label("Step18").
+88 [hyper,81,1,77] P(i(i(x,i(y,z)),i(y,i(x,z))))   # label("Step19").
+89 [hyper,82,1,73] P(i(i(x,y),i(i(i(y,x),x),y)))   # label("Step20").
+90 [hyper,83,1,81] P(i(i(i(i(n(x),n(i(y,i(z,y)))),x),u),u))   # label("Step21").
+91 [hyper,85,1,81] P(i(x,i(i(y,z),i(i(x,y),z))))   # label("Step22").
+92 [hyper,86,1,3] P(i(i(i(n(x),i(y,z)),u),i(i(y,x),u)))   # label("Step23").
+93 [hyper,87,1,84] P(i(n(n(x)),x))   # label("Step24").
+94 [hyper,88,1,79] P(i(i(x,y),i(i(z,x),i(z,y))))   # label("Step25").
+95 [hyper,90,1,71] P(i(i(x,i(n(y),n(i(z,i(u,z))))),i(x,y)))   # label("Step26").
+96 [hyper,91,1,3] P(i(i(i(i(x,y),i(i(z,x),y)),u),i(z,u)))   # label("Step27").
+97 [hyper,93,1,78] P(i(i(i(n(n(x)),y),z),i(i(x,y),z)))   # label("Step28").
+98 [hyper,93,1,5] P(i(x,n(n(x))))   # label("Step29").
+99 [hyper,94,1,93] P(i(i(x,n(n(y))),i(x,y)))   # label("Step30").
+100 [hyper,94,1,73] P(i(i(x,i(i(y,z),u)),i(x,i(z,u))))   # label("Step31").
+101 [hyper,94,1,5] P(i(i(x,i(n(y),n(z))),i(x,i(z,y))))   # label("Step32").
+102 [hyper,95,1,92] P(i(i(n(x),y),i(n(y),x)))   # label("Step33").
+103 [hyper,98,1,3] P(i(i(n(n(x)),y),i(x,y)))   # label("Step34").
+104 [hyper,101,1,87] P(i(i(i(x,y),n(z)),i(z,x)))   # label("Step35").
+105 [hyper,102,1,97] P(i(i(x,y),i(n(y),n(x))))   # label("Step36").
+106 [hyper,103,1,94] P(i(i(x,i(n(n(y)),z)),i(x,i(y,z))))   # label("Step37").
+107 [hyper,105,1,94] P(i(i(x,i(y,z)),i(x,i(n(z),n(y)))))   # label("Step38").
+108 [hyper,105,1,76] P(i(n(i(x,y)),n(y)))   # label("Step39").
+109 [hyper,105,1,3] P(i(i(i(n(x),n(y)),z),i(i(y,x),z)))   # label("Step40").
+110 [hyper,105,1,104] P(i(n(i(x,y)),n(i(i(y,z),n(x)))))   # label("Step41").
+111 [hyper,107,1,100] P(i(i(i(x,y),i(z,u)),i(y,i(n(u),n(z)))))   # label("Step42").
+112 [hyper,108,1,89] P(i(i(i(n(x),n(i(y,x))),n(i(y,x))),n(x)))   # label("Step43").
+113 [hyper,109,1,94] P(i(i(x,i(i(n(y),n(z)),u)),i(x,i(i(z,y),u))))   # label("Step44").
+114 [hyper,109,1,74] P(i(i(i(n(x),n(y)),n(y)),i(i(x,y),n(x))))   # label("Step45").
+115 [hyper,110,1,94] P(i(i(x,n(i(y,z))),i(x,n(i(i(z,u),n(y))))))   # label("Step46").
+116 [hyper,112,1,94] P(i(i(x,i(i(n(y),n(i(z,y))),n(i(z,y)))),i(x,n(y))))   # label("Step47").
+117 [hyper,114,1,111] P(i(n(x),i(n(n(y)),n(i(y,x)))))   # label("Step48").
+118 [hyper,116,1,75] P(i(i(i(i(x,y),y),n(i(x,y))),n(y)))   # label("Step49").
+119 [hyper,117,1,106] P(i(n(x),i(y,n(i(y,x)))))   # label("Step50").
+120 [hyper,118,1,94] P(i(i(x,i(i(i(y,z),z),n(i(y,z)))),i(x,n(z))))   # label("Step51").
+121 [hyper,119,1,81] P(i(i(i(n(x),i(y,n(i(y,x)))),z),z))   # label("Step52").
+122 [hyper,120,1,74] P(i(i(i(i(x,y),y),n(i(y,x))),n(x)))   # label("Step53").
+123 [hyper,122,1,94] P(i(i(x,i(i(i(y,z),z),n(i(z,y)))),i(x,n(y))))   # label("Step54").
+124 [hyper,123,1,96] P(i(i(x,y),i(i(y,n(i(y,x))),n(x))))   # label("Step55").
+125 [hyper,124,1,121] P(i(i(i(x,n(i(x,y))),n(i(i(x,n(i(x,y))),n(y)))),n(n(y))))   # label("Step56").
+126 [hyper,125,1,99] P(i(i(i(x,n(i(x,y))),n(i(i(x,n(i(x,y))),n(y)))),y))   # label("Step57").
+127 [hyper,126,1,94] P(i(i(x,i(i(y,n(i(y,z))),n(i(i(y,n(i(y,z))),n(z))))),i(x,z)))   # label("Step58").
+128 [hyper,127,1,115] P(i(i(i(x,n(i(x,y))),n(i(y,x))),y))   # label("Step59").
+129 [hyper,128,1,94] P(i(i(x,i(i(y,n(i(y,z))),n(i(z,y)))),i(x,z)))   # label("Step60").
+130 [hyper,129,1,96] P(i(x,i(i(n(i(x,y)),n(i(y,x))),y)))   # label("Step61").
+131 [hyper,130,1,113] P(i(x,i(i(i(y,x),i(x,y)),y)))   # label("Step62").
+132 [hyper,131,1,88] P(i(i(i(x,y),i(y,x)),i(y,x)))   # label("Step63").
+133 [binary,132.1,6.1] $ANS(Denial_Axiom4).
+
+------------ end of proof -------------
+
+
+Search stopped by max_proofs option.
+
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 66
+clauses generated           2234
+  hyper_res generated       2234
+demod & eval rewrites          0
+clauses wt,lit,sk delete    2081
+tautologies deleted            0
+clauses forward subsumed      90
+  (subsumed by sos)           14
+unit deletions                 0
+factor simplifications         0
+clauses kept                  63
+new demodulators               0
+empty clauses                  1
+clauses back demodulated       0
+clauses back subsumed          0
+usable size                   67
+sos size                       1
+demodulators size              0
+passive size                   1
+hot size                       0
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.08          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8932 finished Mon Aug  2 15:31:14 2004

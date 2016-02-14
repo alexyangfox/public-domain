@@ -1,0 +1,20 @@
+This directory contains an example of a Perl program that
+calls MACE.
+
+File Sheffer-mgi-without-mirrors contains Boolean algebra
+identities alpha=x in terms of the Sheffer stroke.  Every such,
+identity of length <= 15, or its mirror image, is subsumed by a
+member of that file.
+
+The Perl program commute4_filter goes through a file of
+equations (one equation per line) and calls MACE for each,
+looking for a noncommutative model of size <= 4.  If none
+exist, the equation is printed.
+
+The command
+
+   commute4_filter < Sheffer-mgi-without-mirrors > candidates
+
+should produce 25 candidates.
+
+NOTE: You might have to edit commute4_filter to point it at the mace2 binary.

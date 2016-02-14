@@ -1,0 +1,85 @@
+
+                  -------------------------
+                  What's New in Otter 3.0.5
+                  -------------------------
+
+                          W. McCune
+                       February, 1998.
+
+Here are a few notes on changes since version 3.0.4.  See the file
+New_304.txt for changes from 3.0.0 to 3.0.4.
+
+No major bugs have been discovered in 3.0.4, so there is probably
+no need to upgrade to 3.0.5 unless you need one of the new features.
+
+See the file "Changelog" in the main directory for bug fixes.
+
+There are two major new features in Otter 3.0.5.  The first is a new
+autonomous mode, obtained with set(auto2).  The old autonomous mode is
+still available with set(auto).  The second is an experimental case
+splitting rule.  See the file split.txt.
+
+As I write this, Otter 3.0.5 has not been compiled for Microsoft
+or Macintosh (I no longer try to manage those ports---any volunteers?).
+Check the Otter web page http://www.mcs.anl.gov/home/mccune/ar/otter/
+for current information.
+
+Because there are only a few other new features and changes, I'll
+describe those first, then I'll describe the new autonomous mode.
+
+MISCELLANOUS NEW FEATURES
+
+1. New flag set(tptp_eq).  Ordinarily, a predicate symbol is
+recognized as equality for paramodulation and demodulation if it is
+"=", or if it starts with "EQ", "eq", or "Eq".  If tptp_eq is set,
+a predicate symbol is equality iff it is "equal".  This flag makes
+Otter compatible with TPTP, because TPTP's one and only equality
+predicate is "equal".  In particular, TPTP has nonequality predicate
+symbols that start with "eq".
+
+2. Two new parameters: warn_mem and warn_mem_max_weight.  These are
+used together to reset the max_weight (to warn_mem_max_weight),
+when a specified amount of memory (warn_mem) has been used.  For
+example, if you wish to reset the max_weight to 10 after 90
+megabytes of memory has been used, include the following in your
+input file.
+
+    assign(warn_mem, 90000).
+    assign(warn_mem_max_weight, 10).
+
+3. New heuristic flag set(discard_non_oriented_eq).  This will, if
+order_eq is set, discard nonorientable positive equality units.
+
+4. New heuristic flag set(discard_xx_resolvable).  This causes
+nonunit clauses containing a literal that can be resolved with x=x
+to be deleted.
+
+5. New flag set(back_unit_deletion) which causes all new units to
+be used for unit deletion with all existing clauses.  This is analogous
+to back demodulation.  (This can be an expensive operation.)
+
+CHANGES TO PROOF OBJECTS
+
+I changed the format of proof objects.  (Proof objects are the very
+detailed proofs that you get with set(build_proof_object)).  I
+added a new field <other-id> to lines in proof objects.  If the new
+field is not empty, it gives the ID number of the corresponding
+(equivalent) line in the ordinary Otter proof.
+
+   Old form:  (<id> <justification> <clause>)
+   New form:  (<id> <justification> <clause> <other-id>)
+
+NEW AUTONOMOUS MODE
+
+The important changes in the new autonomous mode (auto2) are
+
+  1. Paramodulation is from and into units only.  This is
+     incomplete, but probably more useful in practice.
+  2. UR resolution is used (along with hyperresolution) for
+     nonunit sets containing either non-Horn clauses or
+     equality literals.
+
+The OLD autonomous mode is available with set(auto1) or set(auto).
+The NEW autonomous mode is available with set(auto2).  (Think of
+set(auto) as a symbolic link to the "official" auto mode.)
+

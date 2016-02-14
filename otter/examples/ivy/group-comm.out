@@ -1,0 +1,377 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:31:05 2004
+The command was "../../bin/otter".  The process ID is 8570.
+
+set(auto).
+   dependent: set(auto1).
+   dependent: set(process_input).
+   dependent: clear(print_kept).
+   dependent: clear(print_new_demod).
+   dependent: clear(print_back_demod).
+   dependent: clear(print_back_sub).
+   dependent: set(control_memory).
+   dependent: assign(max_mem, 12000).
+   dependent: assign(pick_given_ratio, 4).
+   dependent: assign(stats_level, 1).
+   dependent: assign(max_seconds, 10800).
+set(build_proof_object_2).
+   dependent: set(order_history).
+clear(sigint_interact).
+assign(max_seconds,10).
+
+initial_proof_object(junk).
+(
+(1 (input) (= (F (E) V1) V1) NIL)
+(2 (input) (= (F (G V2) V2) (E)) NIL)
+(3 (input) (= (F (F V3 V4) V5) (F V3 (F V4 V5))) NIL)
+(4 (input) (= (H V6 V7) (F V6 (F V7 (F (G V6) (G V7))))) NIL)
+(5 (input) (= (F V8 (F V8 V8)) (E)) NIL)
+(6 (input) (= V9 V9) NIL)
+(7 (input) (not (= (H (H (SK1) (SK2)) (SK2)) (E))) NIL)
+)
+0 [] F(E,x)=x.
+0 [] F(G(x),x)=E.
+0 [] F(F(x,y),z)=F(x,F(y,z)).
+0 [] H(x,y)=F(x,F(y,F(G(x),G(y)))).
+0 [] F(x,F(x,x))=E.
+0 [] x=x.
+0 [] H(H(SK1,SK2),SK2)!=E.
+end_of_list.
+
+SCAN INPUT: prop=0, horn=1, equality=1, symmetry=0, max_lits=1.
+
+All clauses are units, and equality is present; the
+strategy will be Knuth-Bendix with positive clauses in sos.
+
+   dependent: set(knuth_bendix).
+   dependent: set(anl_eq).
+   dependent: set(para_from).
+   dependent: set(para_into).
+   dependent: clear(para_from_right).
+   dependent: clear(para_into_right).
+   dependent: set(para_from_vars).
+   dependent: set(eq_units_both_ways).
+   dependent: set(dynamic_demod_all).
+   dependent: set(dynamic_demod).
+   dependent: set(order_eq).
+   dependent: set(back_demod).
+   dependent: set(lrpo).
+
+------------> process usable:
+** KEPT (pick-wt=7): 1 [] H(H(SK1,SK2),SK2)!=E.
+
+------------> process sos:
+** KEPT (pick-wt=5): 2 [] F(E,x)=x.
+---> New Demodulator: 3 [new_demod,2] F(E,x)=x.
+** KEPT (pick-wt=6): 4 [] F(G(x),x)=E.
+---> New Demodulator: 5 [new_demod,4] F(G(x),x)=E.
+** KEPT (pick-wt=11): 6 [] F(F(x,y),z)=F(x,F(y,z)).
+---> New Demodulator: 7 [new_demod,6] F(F(x,y),z)=F(x,F(y,z)).
+** KEPT (pick-wt=13): 8 [] H(x,y)=F(x,F(y,F(G(x),G(y)))).
+** KEPT (pick-wt=7): 9 [] F(x,F(x,x))=E.
+---> New Demodulator: 10 [new_demod,9] F(x,F(x,x))=E.
+** KEPT (pick-wt=3): 11 [] x=x.
+>>>> Starting back demodulation with 3.
+>>>> Starting back demodulation with 5.
+>>>> Starting back demodulation with 7.
+** KEPT (pick-wt=13): 12 [copy,8,flip.1] F(x,F(y,F(G(x),G(y))))=H(x,y).
+>>>> Starting back demodulation with 10.
+  Following clause subsumed by 11 during input processing: 0 [copy,11,flip.1] x=x.
+  Following clause subsumed by 8 during input processing: 0 [copy,12,flip.1] H(x,y)=F(x,F(y,F(G(x),G(y)))).
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=5) 2 [] F(E,x)=x.
+
+given clause #2: (wt=3) 11 [] x=x.
+
+given clause #3: (wt=6) 4 [] F(G(x),x)=E.
+
+given clause #4: (wt=7) 9 [] F(x,F(x,x))=E.
+
+given clause #5: (wt=11) 6 [] F(F(x,y),z)=F(x,F(y,z)).
+
+given clause #6: (wt=13) 8 [] H(x,y)=F(x,F(y,F(G(x),G(y)))).
+
+given clause #7: (wt=8) 15 [para_into,6.1.1.1,4.1.1,demod,3,flip.1] F(G(x),F(x,y))=y.
+
+given clause #8: (wt=6) 29 [para_into,15.1.1.2,2.1.1] F(G(E),x)=x.
+
+given clause #9: (wt=7) 27 [para_into,15.1.1.2,4.1.1,demod,24] F(G(x),G(x))=x.
+
+given clause #10: (wt=5) 35 [back_demod,27,demod,34,34,7,10] F(x,E)=x.
+
+given clause #11: (wt=9) 13 [para_into,6.1.1.1,9.1.1,demod,3,7,flip.1] F(x,F(x,F(x,y)))=y.
+
+given clause #12: (wt=6) 33 [para_from,27.1.1,15.1.1.2,demod,22,flip.1] G(x)=F(x,x).
+
+given clause #13: (wt=13) 17 [para_into,6.1.1,9.1.1,demod,7,flip.1] F(x,F(y,F(x,F(y,F(x,y)))))=E.
+
+given clause #14: (wt=13) 46 [para_from,17.1.1,13.1.1.2.2,demod,36,flip.1] F(x,F(y,F(x,F(y,x))))=F(y,y).
+
+given clause #15: (wt=15) 41 [back_demod,12,demod,34,34,7,flip.1] H(x,y)=F(x,F(y,F(x,F(x,F(y,y))))).
+
+given clause #16: (wt=25) 43 [back_demod,40,demod,42,42,42,7,7,7,7,7,10,36,7,7,7,7,7,7,7,7,7,7,14,14] F(SK1,F(SK2,F(SK2,F(SK1,F(SK1,F(SK2,F(SK2,F(SK1,F(SK2,F(SK1,F(SK1,SK2)))))))))))!=E.
+
+given clause #17: (wt=15) 50 [para_from,46.1.1,13.1.1.2.2] F(x,F(x,F(y,y)))=F(y,F(x,F(y,x))).
+
+given clause #18: (wt=15) 53 [copy,50,flip.1] F(x,F(y,F(x,y)))=F(y,F(y,F(x,x))).
+
+given clause #19: (wt=17) 51 [para_from,46.1.1,6.1.1.1,demod,7,7,7,7,flip.1] F(x,F(y,F(x,F(y,F(x,z)))))=F(y,F(y,z)).
+
+given clause #20: (wt=17) 64 [para_from,53.1.1,13.1.1.2.2] F(x,F(x,F(y,F(y,F(x,x)))))=F(y,F(x,y)).
+
+given clause #21: (wt=21) 48 [para_into,46.1.1.2.2.2,6.1.1,demod,7,7] F(x,F(y,F(z,F(x,F(y,F(z,x))))))=F(y,F(z,F(y,z))).
+
+given clause #22: (wt=17) 65 [copy,64,flip.1] F(x,F(y,x))=F(y,F(y,F(x,F(x,F(y,y))))).
+
+given clause #23: (wt=19) 58 [para_from,50.1.1,6.1.1.1,demod,7,7,7,7,7] F(x,F(y,F(x,F(y,z))))=F(y,F(y,F(x,F(x,z)))).
+
+-------- PROOF -------- 
+
+----> UNIT CONFLICT at   0.01 sec ----> 159 [binary,158.1,11.1] $F.
+
+Length of proof is 19.  Level of proof is 9.
+
+---------------- PROOF ----------------
+
+1 [] H(H(SK1,SK2),SK2)!=E.
+3,2 [] F(E,x)=x.
+4 [] F(G(x),x)=E.
+7,6 [] F(F(x,y),z)=F(x,F(y,z)).
+8 [] H(x,y)=F(x,F(y,F(G(x),G(y)))).
+10,9 [] F(x,F(x,x))=E.
+11 [] x=x.
+12 [copy,8,flip.1] F(x,F(y,F(G(x),G(y))))=H(x,y).
+14,13 [para_into,6.1.1.1,9.1.1,demod,3,7,flip.1] F(x,F(x,F(x,y)))=y.
+15 [para_into,6.1.1.1,4.1.1,demod,3,flip.1] F(G(x),F(x,y))=y.
+17 [para_into,6.1.1,9.1.1,demod,7,flip.1] F(x,F(y,F(x,F(y,F(x,y)))))=E.
+19 [para_from,8.1.1,1.1.1] F(H(SK1,SK2),F(SK2,F(G(H(SK1,SK2)),G(SK2))))!=E.
+22,21 [para_into,15.1.1.2,15.1.1] F(G(G(x)),y)=F(x,y).
+24,23 [para_into,15.1.1.2,9.1.1] F(G(x),E)=F(x,x).
+27 [para_into,15.1.1.2,4.1.1,demod,24] F(G(x),G(x))=x.
+34,33 [para_from,27.1.1,15.1.1.2,demod,22,flip.1] G(x)=F(x,x).
+36,35 [back_demod,27,demod,34,34,7,10] F(x,E)=x.
+40 [back_demod,19,demod,34,34,7] F(H(SK1,SK2),F(SK2,F(H(SK1,SK2),F(H(SK1,SK2),F(SK2,SK2)))))!=E.
+42,41 [back_demod,12,demod,34,34,7,flip.1] H(x,y)=F(x,F(y,F(x,F(x,F(y,y))))).
+43 [back_demod,40,demod,42,42,42,7,7,7,7,7,10,36,7,7,7,7,7,7,7,7,7,7,14,14] F(SK1,F(SK2,F(SK2,F(SK1,F(SK1,F(SK2,F(SK2,F(SK1,F(SK2,F(SK1,F(SK1,SK2)))))))))))!=E.
+47,46 [para_from,17.1.1,13.1.1.2.2,demod,36,flip.1] F(x,F(y,F(x,F(y,x))))=F(y,y).
+50 [para_from,46.1.1,13.1.1.2.2] F(x,F(x,F(y,y)))=F(y,F(x,F(y,x))).
+51 [para_from,46.1.1,6.1.1.1,demod,7,7,7,7,flip.1] F(x,F(y,F(x,F(y,F(x,z)))))=F(y,F(y,z)).
+58 [para_from,50.1.1,6.1.1.1,demod,7,7,7,7,7] F(x,F(y,F(x,F(y,z))))=F(y,F(y,F(x,F(x,z)))).
+73,72 [para_into,51.1.1.2.2.2,6.1.1,demod,7,7,7] F(x,F(y,F(z,F(x,F(y,F(z,F(x,u)))))))=F(y,F(z,F(y,F(z,u)))).
+158 [para_from,58.1.1,43.1.1.2.2.2.2.2.2,demod,73,14,47,10] E!=E.
+159 [binary,158.1,11.1] $F.
+
+------------ end of proof -------------
+
+
+;; BEGINNING OF PROOF OBJECT
+(
+(1 (input) (= (F (E) V1) V1) NIL)
+(2 (input) (= (F (G V2) V2) (E)) NIL)
+(3 (input) (= (F (F V3 V4) V5) (F V3 (F V4 V5))) NIL)
+(4 (input) (= (H V6 V7) (F V6 (F V7 (F (G V6) (G V7))))) NIL)
+(5 (input) (= (F V8 (F V8 V8)) (E)) NIL)
+(6 (input) (= V9 V9) NIL)
+(7 (input) (not (= (H (H (SK1) (SK2)) (SK2)) (E))) NIL)
+(8 (instantiate 7 ()) (not (= (H (H (SK1) (SK2)) (SK2)) (E))) (1))
+(9 (instantiate 1 ((V1 . v0))) (= (F (E) v0) v0) (2))
+(10 (instantiate 2 ((V2 . v0))) (= (F (G v0) v0) (E)) (4))
+(11 (instantiate 3 ((V3 . v0)(V4 . v1)(V5 . v2))) (= (F (F v0 v1) v2) (F v0 (F v1 v2))) (6))
+(12 (instantiate 4 ((V6 . v0)(V7 . v1))) (= (H v0 v1) (F v0 (F v1 (F (G v0) (G v1))))) (8))
+(13 (instantiate 5 ((V8 . v0))) (= (F v0 (F v0 v0)) (E)) (9))
+(14 (instantiate 6 ((V9 . v0))) (= v0 v0) (11))
+(15 (flip 12 ()) (= (F v0 (F v1 (F (G v0) (G v1)))) (H v0 v1)) (12))
+(16 (instantiate 13 ((v0 . v64))) (= (F v64 (F v64 v64)) (E)) NIL)
+(17 (instantiate 11 ((v0 . v64)(v1 . (F v64 v64))(v2 . v66))) (= (F (F v64 (F v64 v64)) v66) (F v64 (F (F v64 v64) v66))) NIL)
+(18 (paramod 16 (1) 17 (1 1)) (= (F (E) v66) (F v64 (F (F v64 v64) v66))) NIL)
+(19 (instantiate 9 ((v0 . v66))) (= (F (E) v66) v66) NIL)
+(20 (paramod 19 (1) 18 (1)) (= v66 (F v64 (F (F v64 v64) v66))) NIL)
+(21 (instantiate 11 ((v0 . v64)(v1 . v64)(v2 . v66))) (= (F (F v64 v64) v66) (F v64 (F v64 v66))) NIL)
+(22 (paramod 21 (1) 20 (2 2)) (= v66 (F v64 (F v64 (F v64 v66)))) NIL)
+(23 (flip 22 ()) (= (F v64 (F v64 (F v64 v66))) v66) NIL)
+(24 (instantiate 23 ((v64 . v0)(v66 . v1))) (= (F v0 (F v0 (F v0 v1))) v1) (13))
+(25 (instantiate 10 ((v0 . v65))) (= (F (G v65) v65) (E)) NIL)
+(26 (instantiate 11 ((v0 . (G v65))(v1 . v65)(v2 . v66))) (= (F (F (G v65) v65) v66) (F (G v65) (F v65 v66))) NIL)
+(27 (paramod 25 (1) 26 (1 1)) (= (F (E) v66) (F (G v65) (F v65 v66))) NIL)
+(28 (instantiate 9 ((v0 . v66))) (= (F (E) v66) v66) NIL)
+(29 (paramod 28 (1) 27 (1)) (= v66 (F (G v65) (F v65 v66))) NIL)
+(30 (flip 29 ()) (= (F (G v65) (F v65 v66)) v66) NIL)
+(31 (instantiate 30 ((v65 . v0)(v66 . v1))) (= (F (G v0) (F v0 v1)) v1) (15))
+(32 (instantiate 13 ((v0 . (F v64 v65)))) (= (F (F v64 v65) (F (F v64 v65) (F v64 v65))) (E)) NIL)
+(33 (instantiate 11 ((v0 . v64)(v1 . v65)(v2 . (F (F v64 v65) (F v64 v65))))) (= (F (F v64 v65) (F (F v64 v65) (F v64 v65))) (F v64 (F v65 (F (F v64 v65) (F v64 v65))))) NIL)
+(34 (paramod 32 (1) 33 (1)) (= (E) (F v64 (F v65 (F (F v64 v65) (F v64 v65))))) NIL)
+(35 (instantiate 11 ((v0 . v64)(v1 . v65)(v2 . (F v64 v65)))) (= (F (F v64 v65) (F v64 v65)) (F v64 (F v65 (F v64 v65)))) NIL)
+(36 (paramod 35 (1) 34 (2 2 2)) (= (E) (F v64 (F v65 (F v64 (F v65 (F v64 v65)))))) NIL)
+(37 (flip 36 ()) (= (F v64 (F v65 (F v64 (F v65 (F v64 v65))))) (E)) NIL)
+(38 (instantiate 37 ((v64 . v0)(v65 . v1))) (= (F v0 (F v1 (F v0 (F v1 (F v0 v1))))) (E)) (17))
+(39 (instantiate 12 ((v0 . (H (SK1) (SK2)))(v1 . (SK2)))) (= (H (H (SK1) (SK2)) (SK2)) (F (H (SK1) (SK2)) (F (SK2) (F (G (H (SK1) (SK2))) (G (SK2)))))) NIL)
+(40 (paramod 39 (1) 8 (1 1)) (not (= (F (H (SK1) (SK2)) (F (SK2) (F (G (H (SK1) (SK2))) (G (SK2))))) (E))) (19))
+(41 (instantiate 31 ((v0 . (G v0))(v1 . (F v0 v1)))) (= (F (G (G v0)) (F (G v0) (F v0 v1))) (F v0 v1)) NIL)
+(42 (paramod 31 (1) 41 (1 2)) (= (F (G (G v0)) v1) (F v0 v1)) (21))
+(43 (instantiate 13 ((v0 . v64))) (= (F v64 (F v64 v64)) (E)) NIL)
+(44 (instantiate 31 ((v0 . v64)(v1 . (F v64 v64)))) (= (F (G v64) (F v64 (F v64 v64))) (F v64 v64)) NIL)
+(45 (paramod 43 (1) 44 (1 2)) (= (F (G v64) (E)) (F v64 v64)) NIL)
+(46 (instantiate 45 ((v64 . v0))) (= (F (G v0) (E)) (F v0 v0)) (23))
+(47 (instantiate 10 ((v0 . v65))) (= (F (G v65) v65) (E)) NIL)
+(48 (instantiate 31 ((v0 . (G v65))(v1 . v65))) (= (F (G (G v65)) (F (G v65) v65)) v65) NIL)
+(49 (paramod 47 (1) 48 (1 2)) (= (F (G (G v65)) (E)) v65) NIL)
+(50 (instantiate 46 ((v0 . (G v65)))) (= (F (G (G v65)) (E)) (F (G v65) (G v65))) NIL)
+(51 (paramod 50 (1) 49 (1)) (= (F (G v65) (G v65)) v65) NIL)
+(52 (instantiate 51 ((v65 . v0))) (= (F (G v0) (G v0)) v0) (27))
+(53 (instantiate 31 ((v0 . (G v0))(v1 . (G v0)))) (= (F (G (G v0)) (F (G v0) (G v0))) (G v0)) NIL)
+(54 (paramod 52 (1) 53 (1 2)) (= (F (G (G v0)) v0) (G v0)) NIL)
+(55 (instantiate 42 ((v0 . v0)(v1 . v0))) (= (F (G (G v0)) v0) (F v0 v0)) NIL)
+(56 (paramod 55 (1) 54 (1)) (= (F v0 v0) (G v0)) NIL)
+(57 (flip 56 ()) (= (G v0) (F v0 v0)) (33))
+(58 (paramod 57 (1) 52 (1 1)) (= (F (F v0 v0) (G v0)) v0) NIL)
+(59 (paramod 57 (1) 58 (1 2)) (= (F (F v0 v0) (F v0 v0)) v0) NIL)
+(60 (instantiate 11 ((v0 . v0)(v1 . v0)(v2 . (F v0 v0)))) (= (F (F v0 v0) (F v0 v0)) (F v0 (F v0 (F v0 v0)))) NIL)
+(61 (paramod 60 (1) 59 (1)) (= (F v0 (F v0 (F v0 v0))) v0) NIL)
+(62 (paramod 13 (1) 61 (1 2)) (= (F v0 (E)) v0) (35))
+(63 (instantiate 57 ((v0 . (H (SK1) (SK2))))) (= (G (H (SK1) (SK2))) (F (H (SK1) (SK2)) (H (SK1) (SK2)))) NIL)
+(64 (paramod 63 (1) 40 (1 1 2 2 1)) (not (= (F (H (SK1) (SK2)) (F (SK2) (F (F (H (SK1) (SK2)) (H (SK1) (SK2))) (G (SK2))))) (E))) NIL)
+(65 (instantiate 57 ((v0 . (SK2)))) (= (G (SK2)) (F (SK2) (SK2))) NIL)
+(66 (paramod 65 (1) 64 (1 1 2 2 2)) (not (= (F (H (SK1) (SK2)) (F (SK2) (F (F (H (SK1) (SK2)) (H (SK1) (SK2))) (F (SK2) (SK2))))) (E))) NIL)
+(67 (instantiate 11 ((v0 . (H (SK1) (SK2)))(v1 . (H (SK1) (SK2)))(v2 . (F (SK2) (SK2))))) (= (F (F (H (SK1) (SK2)) (H (SK1) (SK2))) (F (SK2) (SK2))) (F (H (SK1) (SK2)) (F (H (SK1) (SK2)) (F (SK2) (SK2))))) NIL)
+(68 (paramod 67 (1) 66 (1 1 2 2)) (not (= (F (H (SK1) (SK2)) (F (SK2) (F (H (SK1) (SK2)) (F (H (SK1) (SK2)) (F (SK2) (SK2)))))) (E))) (40))
+(69 (paramod 57 (1) 15 (1 2 2 1)) (= (F v0 (F v1 (F (F v0 v0) (G v1)))) (H v0 v1)) NIL)
+(70 (instantiate 57 ((v0 . v1))) (= (G v1) (F v1 v1)) NIL)
+(71 (paramod 70 (1) 69 (1 2 2 2)) (= (F v0 (F v1 (F (F v0 v0) (F v1 v1)))) (H v0 v1)) NIL)
+(72 (instantiate 11 ((v0 . v0)(v1 . v0)(v2 . (F v1 v1)))) (= (F (F v0 v0) (F v1 v1)) (F v0 (F v0 (F v1 v1)))) NIL)
+(73 (paramod 72 (1) 71 (1 2 2)) (= (F v0 (F v1 (F v0 (F v0 (F v1 v1))))) (H v0 v1)) NIL)
+(74 (flip 73 ()) (= (H v0 v1) (F v0 (F v1 (F v0 (F v0 (F v1 v1)))))) (41))
+(75 (instantiate 74 ((v0 . (SK1))(v1 . (SK2)))) (= (H (SK1) (SK2)) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2))))))) NIL)
+(76 (paramod 75 (1) 68 (1 1 1)) (not (= (F (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2)))))) (F (SK2) (F (H (SK1) (SK2)) (F (H (SK1) (SK2)) (F (SK2) (SK2)))))) (E))) NIL)
+(77 (instantiate 74 ((v0 . (SK1))(v1 . (SK2)))) (= (H (SK1) (SK2)) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2))))))) NIL)
+(78 (paramod 77 (1) 76 (1 1 2 2 1)) (not (= (F (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2)))))) (F (SK2) (F (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2)))))) (F (H (SK1) (SK2)) (F (SK2) (SK2)))))) (E))) NIL)
+(79 (instantiate 74 ((v0 . (SK1))(v1 . (SK2)))) (= (H (SK1) (SK2)) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2))))))) NIL)
+(80 (paramod 79 (1) 78 (1 1 2 2 2 1)) (not (= (F (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2)))))) (F (SK2) (F (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2)))))) (F (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2)))))) (F (SK2) (SK2)))))) (E))) NIL)
+(81 (instantiate 11 ((v0 . (SK1))(v1 . (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2))))))(v2 . (F (SK2) (SK2))))) (= (F (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2)))))) (F (SK2) (SK2))) (F (SK1) (F (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2))))) (F (SK2) (SK2))))) NIL)
+(82 (paramod 81 (1) 80 (1 1 2 2 2)) (not (= (F (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2)))))) (F (SK2) (F (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2)))))) (F (SK1) (F (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2))))) (F (SK2) (SK2))))))) (E))) NIL)
+(83 (instantiate 11 ((v0 . (SK2))(v1 . (F (SK1) (F (SK1) (F (SK2) (SK2)))))(v2 . (F (SK2) (SK2))))) (= (F (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2))))) (F (SK2) (SK2))) (F (SK2) (F (F (SK1) (F (SK1) (F (SK2) (SK2)))) (F (SK2) (SK2))))) NIL)
+(84 (paramod 83 (1) 82 (1 1 2 2 2 2)) (not (= (F (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2)))))) (F (SK2) (F (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2)))))) (F (SK1) (F (SK2) (F (F (SK1) (F (SK1) (F (SK2) (SK2)))) (F (SK2) (SK2)))))))) (E))) NIL)
+(85 (instantiate 11 ((v0 . (SK1))(v1 . (F (SK1) (F (SK2) (SK2))))(v2 . (F (SK2) (SK2))))) (= (F (F (SK1) (F (SK1) (F (SK2) (SK2)))) (F (SK2) (SK2))) (F (SK1) (F (F (SK1) (F (SK2) (SK2))) (F (SK2) (SK2))))) NIL)
+(86 (paramod 85 (1) 84 (1 1 2 2 2 2 2)) (not (= (F (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2)))))) (F (SK2) (F (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2)))))) (F (SK1) (F (SK2) (F (SK1) (F (F (SK1) (F (SK2) (SK2))) (F (SK2) (SK2))))))))) (E))) NIL)
+(87 (instantiate 11 ((v0 . (SK1))(v1 . (F (SK2) (SK2)))(v2 . (F (SK2) (SK2))))) (= (F (F (SK1) (F (SK2) (SK2))) (F (SK2) (SK2))) (F (SK1) (F (F (SK2) (SK2)) (F (SK2) (SK2))))) NIL)
+(88 (paramod 87 (1) 86 (1 1 2 2 2 2 2 2)) (not (= (F (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2)))))) (F (SK2) (F (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2)))))) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (F (SK2) (SK2)) (F (SK2) (SK2)))))))))) (E))) NIL)
+(89 (instantiate 11 ((v0 . (SK2))(v1 . (SK2))(v2 . (F (SK2) (SK2))))) (= (F (F (SK2) (SK2)) (F (SK2) (SK2))) (F (SK2) (F (SK2) (F (SK2) (SK2))))) NIL)
+(90 (paramod 89 (1) 88 (1 1 2 2 2 2 2 2 2)) (not (= (F (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2)))))) (F (SK2) (F (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2)))))) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK2) (SK2))))))))))) (E))) NIL)
+(91 (instantiate 13 ((v0 . (SK2)))) (= (F (SK2) (F (SK2) (SK2))) (E)) NIL)
+(92 (paramod 91 (1) 90 (1 1 2 2 2 2 2 2 2 2)) (not (= (F (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2)))))) (F (SK2) (F (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2)))))) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (E))))))))) (E))) NIL)
+(93 (instantiate 62 ((v0 . (SK2)))) (= (F (SK2) (E)) (SK2)) NIL)
+(94 (paramod 93 (1) 92 (1 1 2 2 2 2 2 2 2)) (not (= (F (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2)))))) (F (SK2) (F (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2)))))) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2)))))))) (E))) NIL)
+(95 (instantiate 11 ((v0 . (SK1))(v1 . (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2))))))(v2 . (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2)))))))) (= (F (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2)))))) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2)))))) (F (SK1) (F (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2))))) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2)))))))) NIL)
+(96 (paramod 95 (1) 94 (1 1 2 2)) (not (= (F (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2)))))) (F (SK2) (F (SK1) (F (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2))))) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2))))))))) (E))) NIL)
+(97 (instantiate 11 ((v0 . (SK2))(v1 . (F (SK1) (F (SK1) (F (SK2) (SK2)))))(v2 . (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2)))))))) (= (F (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2))))) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2)))))) (F (SK2) (F (F (SK1) (F (SK1) (F (SK2) (SK2)))) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2)))))))) NIL)
+(98 (paramod 97 (1) 96 (1 1 2 2 2)) (not (= (F (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2)))))) (F (SK2) (F (SK1) (F (SK2) (F (F (SK1) (F (SK1) (F (SK2) (SK2)))) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2)))))))))) (E))) NIL)
+(99 (instantiate 11 ((v0 . (SK1))(v1 . (F (SK1) (F (SK2) (SK2))))(v2 . (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2)))))))) (= (F (F (SK1) (F (SK1) (F (SK2) (SK2)))) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2)))))) (F (SK1) (F (F (SK1) (F (SK2) (SK2))) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2)))))))) NIL)
+(100 (paramod 99 (1) 98 (1 1 2 2 2 2)) (not (= (F (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2)))))) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (F (SK1) (F (SK2) (SK2))) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2))))))))))) (E))) NIL)
+(101 (instantiate 11 ((v0 . (SK1))(v1 . (F (SK2) (SK2)))(v2 . (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2)))))))) (= (F (F (SK1) (F (SK2) (SK2))) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2)))))) (F (SK1) (F (F (SK2) (SK2)) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2)))))))) NIL)
+(102 (paramod 101 (1) 100 (1 1 2 2 2 2 2)) (not (= (F (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2)))))) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (F (SK2) (SK2)) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2)))))))))))) (E))) NIL)
+(103 (instantiate 11 ((v0 . (SK2))(v1 . (SK2))(v2 . (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2)))))))) (= (F (F (SK2) (SK2)) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2)))))) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2)))))))) NIL)
+(104 (paramod 103 (1) 102 (1 1 2 2 2 2 2 2)) (not (= (F (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2)))))) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2))))))))))))) (E))) NIL)
+(105 (instantiate 11 ((v0 . (SK1))(v1 . (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2))))))(v2 . (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2))))))))))))))) (= (F (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2)))))) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2))))))))))))) (F (SK1) (F (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2))))) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2))))))))))))))) NIL)
+(106 (paramod 105 (1) 104 (1 1)) (not (= (F (SK1) (F (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2))))) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2)))))))))))))) (E))) NIL)
+(107 (instantiate 11 ((v0 . (SK2))(v1 . (F (SK1) (F (SK1) (F (SK2) (SK2)))))(v2 . (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2))))))))))))))) (= (F (F (SK2) (F (SK1) (F (SK1) (F (SK2) (SK2))))) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2))))))))))))) (F (SK2) (F (F (SK1) (F (SK1) (F (SK2) (SK2)))) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2))))))))))))))) NIL)
+(108 (paramod 107 (1) 106 (1 1 2)) (not (= (F (SK1) (F (SK2) (F (F (SK1) (F (SK1) (F (SK2) (SK2)))) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2))))))))))))))) (E))) NIL)
+(109 (instantiate 11 ((v0 . (SK1))(v1 . (F (SK1) (F (SK2) (SK2))))(v2 . (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2))))))))))))))) (= (F (F (SK1) (F (SK1) (F (SK2) (SK2)))) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2))))))))))))) (F (SK1) (F (F (SK1) (F (SK2) (SK2))) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2))))))))))))))) NIL)
+(110 (paramod 109 (1) 108 (1 1 2 2)) (not (= (F (SK1) (F (SK2) (F (SK1) (F (F (SK1) (F (SK2) (SK2))) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2)))))))))))))))) (E))) NIL)
+(111 (instantiate 11 ((v0 . (SK1))(v1 . (F (SK2) (SK2)))(v2 . (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2))))))))))))))) (= (F (F (SK1) (F (SK2) (SK2))) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2))))))))))))) (F (SK1) (F (F (SK2) (SK2)) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2))))))))))))))) NIL)
+(112 (paramod 111 (1) 110 (1 1 2 2 2)) (not (= (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (F (SK2) (SK2)) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2))))))))))))))))) (E))) NIL)
+(113 (instantiate 11 ((v0 . (SK2))(v1 . (SK2))(v2 . (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2))))))))))))))) (= (F (F (SK2) (SK2)) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2))))))))))))) (F (SK2) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2))))))))))))))) NIL)
+(114 (paramod 113 (1) 112 (1 1 2 2 2 2)) (not (= (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2)))))))))))))))))) (E))) NIL)
+(115 (instantiate 24 ((v0 . (SK2))(v1 . (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2)))))))))))))) (= (F (SK2) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2)))))))))))))) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2)))))))))))) NIL)
+(116 (paramod 115 (1) 114 (1 1 2 2 2 2)) (not (= (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2))))))))))))))) (E))) NIL)
+(117 (instantiate 24 ((v0 . (SK1))(v1 . (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2))))))))))))) (= (F (SK1) (F (SK1) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2))))))))))))) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2))))))))))) NIL)
+(118 (paramod 117 (1) 116 (1 1 2 2)) (not (= (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2)))))))))))) (E))) (43))
+(119 (instantiate 38 ((v0 . v64))) (= (F v64 (F v1 (F v64 (F v1 (F v64 v1))))) (E)) NIL)
+(120 (instantiate 24 ((v0 . v64)(v1 . (F v1 (F v64 (F v1 (F v64 v1))))))) (= (F v64 (F v64 (F v64 (F v1 (F v64 (F v1 (F v64 v1))))))) (F v1 (F v64 (F v1 (F v64 v1))))) NIL)
+(121 (paramod 119 (1) 120 (1 2 2)) (= (F v64 (F v64 (E))) (F v1 (F v64 (F v1 (F v64 v1))))) NIL)
+(122 (instantiate 62 ((v0 . v64))) (= (F v64 (E)) v64) NIL)
+(123 (paramod 122 (1) 121 (1 2)) (= (F v64 v64) (F v1 (F v64 (F v1 (F v64 v1))))) NIL)
+(124 (flip 123 ()) (= (F v1 (F v64 (F v1 (F v64 v1)))) (F v64 v64)) NIL)
+(125 (instantiate 124 ((v1 . v0)(v64 . v1))) (= (F v0 (F v1 (F v0 (F v1 v0)))) (F v1 v1)) (46))
+(126 (instantiate 125 ((v0 . v64))) (= (F v64 (F v1 (F v64 (F v1 v64)))) (F v1 v1)) NIL)
+(127 (instantiate 24 ((v0 . v64)(v1 . (F v1 (F v64 (F v1 v64)))))) (= (F v64 (F v64 (F v64 (F v1 (F v64 (F v1 v64)))))) (F v1 (F v64 (F v1 v64)))) NIL)
+(128 (paramod 126 (1) 127 (1 2 2)) (= (F v64 (F v64 (F v1 v1))) (F v1 (F v64 (F v1 v64)))) NIL)
+(129 (instantiate 128 ((v64 . v0))) (= (F v0 (F v0 (F v1 v1))) (F v1 (F v0 (F v1 v0)))) (50))
+(130 (instantiate 125 ((v0 . v64))) (= (F v64 (F v1 (F v64 (F v1 v64)))) (F v1 v1)) NIL)
+(131 (instantiate 11 ((v0 . v64)(v1 . (F v1 (F v64 (F v1 v64))))(v2 . v66))) (= (F (F v64 (F v1 (F v64 (F v1 v64)))) v66) (F v64 (F (F v1 (F v64 (F v1 v64))) v66))) NIL)
+(132 (paramod 130 (1) 131 (1 1)) (= (F (F v1 v1) v66) (F v64 (F (F v1 (F v64 (F v1 v64))) v66))) NIL)
+(133 (instantiate 11 ((v0 . v1)(v1 . v1)(v2 . v66))) (= (F (F v1 v1) v66) (F v1 (F v1 v66))) NIL)
+(134 (paramod 133 (1) 132 (1)) (= (F v1 (F v1 v66)) (F v64 (F (F v1 (F v64 (F v1 v64))) v66))) NIL)
+(135 (instantiate 11 ((v0 . v1)(v1 . (F v64 (F v1 v64)))(v2 . v66))) (= (F (F v1 (F v64 (F v1 v64))) v66) (F v1 (F (F v64 (F v1 v64)) v66))) NIL)
+(136 (paramod 135 (1) 134 (2 2)) (= (F v1 (F v1 v66)) (F v64 (F v1 (F (F v64 (F v1 v64)) v66)))) NIL)
+(137 (instantiate 11 ((v0 . v64)(v1 . (F v1 v64))(v2 . v66))) (= (F (F v64 (F v1 v64)) v66) (F v64 (F (F v1 v64) v66))) NIL)
+(138 (paramod 137 (1) 136 (2 2 2)) (= (F v1 (F v1 v66)) (F v64 (F v1 (F v64 (F (F v1 v64) v66))))) NIL)
+(139 (instantiate 11 ((v0 . v1)(v1 . v64)(v2 . v66))) (= (F (F v1 v64) v66) (F v1 (F v64 v66))) NIL)
+(140 (paramod 139 (1) 138 (2 2 2 2)) (= (F v1 (F v1 v66)) (F v64 (F v1 (F v64 (F v1 (F v64 v66)))))) NIL)
+(141 (flip 140 ()) (= (F v64 (F v1 (F v64 (F v1 (F v64 v66))))) (F v1 (F v1 v66))) NIL)
+(142 (instantiate 141 ((v64 . v0)(v66 . v2))) (= (F v0 (F v1 (F v0 (F v1 (F v0 v2))))) (F v1 (F v1 v2))) (51))
+(143 (instantiate 129 ((v0 . v64))) (= (F v64 (F v64 (F v1 v1))) (F v1 (F v64 (F v1 v64)))) NIL)
+(144 (instantiate 11 ((v0 . v64)(v1 . (F v64 (F v1 v1)))(v2 . v66))) (= (F (F v64 (F v64 (F v1 v1))) v66) (F v64 (F (F v64 (F v1 v1)) v66))) NIL)
+(145 (paramod 143 (1) 144 (1 1)) (= (F (F v1 (F v64 (F v1 v64))) v66) (F v64 (F (F v64 (F v1 v1)) v66))) NIL)
+(146 (instantiate 11 ((v0 . v1)(v1 . (F v64 (F v1 v64)))(v2 . v66))) (= (F (F v1 (F v64 (F v1 v64))) v66) (F v1 (F (F v64 (F v1 v64)) v66))) NIL)
+(147 (paramod 146 (1) 145 (1)) (= (F v1 (F (F v64 (F v1 v64)) v66)) (F v64 (F (F v64 (F v1 v1)) v66))) NIL)
+(148 (instantiate 11 ((v0 . v64)(v1 . (F v1 v64))(v2 . v66))) (= (F (F v64 (F v1 v64)) v66) (F v64 (F (F v1 v64) v66))) NIL)
+(149 (paramod 148 (1) 147 (1 2)) (= (F v1 (F v64 (F (F v1 v64) v66))) (F v64 (F (F v64 (F v1 v1)) v66))) NIL)
+(150 (instantiate 11 ((v0 . v1)(v1 . v64)(v2 . v66))) (= (F (F v1 v64) v66) (F v1 (F v64 v66))) NIL)
+(151 (paramod 150 (1) 149 (1 2 2)) (= (F v1 (F v64 (F v1 (F v64 v66)))) (F v64 (F (F v64 (F v1 v1)) v66))) NIL)
+(152 (instantiate 11 ((v0 . v64)(v1 . (F v1 v1))(v2 . v66))) (= (F (F v64 (F v1 v1)) v66) (F v64 (F (F v1 v1) v66))) NIL)
+(153 (paramod 152 (1) 151 (2 2)) (= (F v1 (F v64 (F v1 (F v64 v66)))) (F v64 (F v64 (F (F v1 v1) v66)))) NIL)
+(154 (instantiate 11 ((v0 . v1)(v1 . v1)(v2 . v66))) (= (F (F v1 v1) v66) (F v1 (F v1 v66))) NIL)
+(155 (paramod 154 (1) 153 (2 2 2)) (= (F v1 (F v64 (F v1 (F v64 v66)))) (F v64 (F v64 (F v1 (F v1 v66))))) NIL)
+(156 (instantiate 155 ((v1 . v0)(v64 . v1)(v66 . v2))) (= (F v0 (F v1 (F v0 (F v1 v2)))) (F v1 (F v1 (F v0 (F v0 v2))))) (58))
+(157 (instantiate 11 ((v2 . (F v64 v66)))) (= (F (F v0 v1) (F v64 v66)) (F v0 (F v1 (F v64 v66)))) NIL)
+(158 (instantiate 142 ((v0 . v64)(v1 . (F v0 v1))(v2 . v66))) (= (F v64 (F (F v0 v1) (F v64 (F (F v0 v1) (F v64 v66))))) (F (F v0 v1) (F (F v0 v1) v66))) NIL)
+(159 (paramod 157 (1) 158 (1 2 2 2)) (= (F v64 (F (F v0 v1) (F v64 (F v0 (F v1 (F v64 v66)))))) (F (F v0 v1) (F (F v0 v1) v66))) NIL)
+(160 (instantiate 11 ((v0 . v0)(v1 . v1)(v2 . (F v64 (F v0 (F v1 (F v64 v66))))))) (= (F (F v0 v1) (F v64 (F v0 (F v1 (F v64 v66))))) (F v0 (F v1 (F v64 (F v0 (F v1 (F v64 v66))))))) NIL)
+(161 (paramod 160 (1) 159 (1 2)) (= (F v64 (F v0 (F v1 (F v64 (F v0 (F v1 (F v64 v66))))))) (F (F v0 v1) (F (F v0 v1) v66))) NIL)
+(162 (instantiate 11 ((v0 . v0)(v1 . v1)(v2 . v66))) (= (F (F v0 v1) v66) (F v0 (F v1 v66))) NIL)
+(163 (paramod 162 (1) 161 (2 2)) (= (F v64 (F v0 (F v1 (F v64 (F v0 (F v1 (F v64 v66))))))) (F (F v0 v1) (F v0 (F v1 v66)))) NIL)
+(164 (instantiate 11 ((v0 . v0)(v1 . v1)(v2 . (F v0 (F v1 v66))))) (= (F (F v0 v1) (F v0 (F v1 v66))) (F v0 (F v1 (F v0 (F v1 v66))))) NIL)
+(165 (paramod 164 (1) 163 (2)) (= (F v64 (F v0 (F v1 (F v64 (F v0 (F v1 (F v64 v66))))))) (F v0 (F v1 (F v0 (F v1 v66))))) NIL)
+(166 (instantiate 165 ((v0 . v1)(v1 . v2)(v64 . v0)(v66 . v3))) (= (F v0 (F v1 (F v2 (F v0 (F v1 (F v2 (F v0 v3))))))) (F v1 (F v2 (F v1 (F v2 v3))))) (72))
+(167 (instantiate 156 ((v0 . (SK2))(v1 . (SK1))(v2 . (F (SK1) (SK2))))) (= (F (SK2) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (SK2)))))) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (SK2))))))) NIL)
+(168 (paramod 167 (1) 118 (1 1 2 2 2 2 2 2)) (not (= (F (SK1) (F (SK2) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (SK2)))))))))))) (E))) NIL)
+(169 (instantiate 166 ((v0 . (SK2))(v1 . (SK1))(v2 . (SK1))(v3 . (F (SK2) (F (SK1) (SK2)))))) (= (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK2) (F (SK2) (F (SK1) (SK2)))))))))) (F (SK1) (F (SK1) (F (SK1) (F (SK1) (F (SK2) (F (SK1) (SK2)))))))) NIL)
+(170 (paramod 169 (1) 168 (1 1 2 2)) (not (= (F (SK1) (F (SK2) (F (SK1) (F (SK1) (F (SK1) (F (SK1) (F (SK2) (F (SK1) (SK2))))))))) (E))) NIL)
+(171 (instantiate 24 ((v0 . (SK1))(v1 . (F (SK2) (F (SK1) (SK2)))))) (= (F (SK1) (F (SK1) (F (SK1) (F (SK2) (F (SK1) (SK2)))))) (F (SK2) (F (SK1) (SK2)))) NIL)
+(172 (paramod 171 (1) 170 (1 1 2 2 2)) (not (= (F (SK1) (F (SK2) (F (SK1) (F (SK2) (F (SK1) (SK2)))))) (E))) NIL)
+(173 (instantiate 125 ((v0 . (SK2))(v1 . (SK1)))) (= (F (SK2) (F (SK1) (F (SK2) (F (SK1) (SK2))))) (F (SK1) (SK1))) NIL)
+(174 (paramod 173 (1) 172 (1 1 2)) (not (= (F (SK1) (F (SK1) (SK1))) (E))) NIL)
+(175 (instantiate 13 ((v0 . (SK1)))) (= (F (SK1) (F (SK1) (SK1))) (E)) NIL)
+(176 (paramod 175 (1) 174 (1 1)) (not (= (E) (E))) (158))
+(177 (instantiate 14 ((v0 . (E)))) (= (E) (E)) NIL)
+(178 (resolve 176 () 177 ()) false (159))
+
+Search stopped by max_proofs option.
+
+)
+;; END OF PROOF OBJECT
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 23
+clauses generated            419
+clauses kept                 118
+clauses forward subsumed     399
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+system CPU time        0.01          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8570 finished Mon Aug  2 15:31:05 2004

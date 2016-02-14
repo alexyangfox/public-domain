@@ -1,0 +1,446 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:31:13 2004
+The command was "../../bin/otter".  The process ID is 8892.
+
+op(400,fx,~).
+op(450,xfy,#).
+op(450,xfy,|).
+op(460,xfy,&).
+op(470,xfx,-->).
+op(480,xfx,<-->).
+make_evaluable(_>_,$LGT(_,_)).
+set(lex_order_vars).
+
+lex([0,1,A,B,C,cin,a0,b0,a1,b1,a2,b2,a3,b3,_&_,_#_]).
+
+list(demodulators).
+1 [] x|y=x#y# (x&y).
+2 [] ~x=1#x.
+3 [] x-->y= ~x|y.
+4 [] x<-->y= (x-->y)& (y-->x).
+5 [] if(x,y,z)= (x-->y)& (~x-->z).
+6 [] 0#x=x.
+7 [] x#0=x.
+8 [] x#x=0.
+9 [] x#x#y=y.
+10 [] 0&x=0.
+11 [] x&0=0.
+12 [] 1&x=x.
+13 [] x&1=x.
+14 [] x&x=x.
+15 [] x&x&y=x&y.
+16 [] x&y#z= (x&y)# (x&z).
+17 [] x#y=y#x.
+18 [] x#y#z=y#x#z.
+19 [] x&y=y&x.
+20 [] y&x&z=x&y&z.
+end_of_list.
+set(demod_inf).
+clear(demod_history).
+assign(demod_limit,-1).
+set(sos_queue).
+assign(max_given,3).
+
+list(sos).
+21 [] P1(A&B|C<--> (A&B)| (A&C)).
+22 [] P2(~(~x| ~y)| ~(~x|y)<-->x).
+23 [] P3((a2#b2#1# (a2&b2))# (a3#b3)#1# (a0#b0#1# (a0&b0)&1# (a0&b0)&a1#b1#1# (a1&b1)&1# (a1&b1)&a2#b2#1# (a2&b2)&1# (a2&b2)&cin#1)# (a0#b0#1# (a0&b0)&1# (a0&b0)&a1#b1#1# (a1&b1)&1# (a1&b1)&1# (a2&b2)&cin#1)# (a0#b0#1# (a0&b0)&1# (a0&b0)&1# (a1&b1)&a2#b2#1# (a2&b2)&1# (a2&b2)&cin#1)# (a0#b0#1# (a0&b0)&1# (a0&b0)&1# (a1&b1)&1# (a2&b2)&cin#1)# (a0#b0#1# (a0&b0)&a1#b1#1# (a1&b1)&1# (a1&b1)&1# (a2&b2))# (a0#b0#1# (a0&b0)&a1#b1#1# (a1&b1)&1# (a1&b1)&a2#b2#1# (a2&b2)&1# (a2&b2))# (a0#b0#1# (a0&b0)&1# (a1&b1)&1# (a2&b2))# (a0#b0#1# (a0&b0)&1# (a1&b1)&a2#b2#1# (a2&b2)&1# (a2&b2))# (1# (a0&b0)&a1#b1#1# (a1&b1)&1# (a1&b1)&a2#b2#1# (a2&b2)&1# (a2&b2)&cin#1)# (1# (a0&b0)&a1#b1#1# (a1&b1)&1# (a1&b1)&1# (a2&b2)&cin#1)# (1# (a0&b0)&1# (a1&b1)&a2#b2#1# (a2&b2)&1# (a2&b2)&cin#1)# (1# (a0&b0)&1# (a1&b1)&1# (a2&b2)&cin#1)# (a1#b1#1# (a1&b1)&1# (a2&b2))# (a1#b1#1# (a1&b1)&a2#b2#1# (a2&b2)&1# (a2&b2))).
+end_of_list.
+set(pretty_print).
+lex dependent demodulator: 17 [] 
+x#y=y#x.
+lex dependent demodulator: 18 [] 
+x#y#z=y#x#z.
+lex dependent demodulator: 19 [] 
+x&y=y&x.
+lex dependent demodulator: 20 [] 
+y&x&z=x&y&z.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+Starting on level 1, last kept clause of level 0 is 23.
+
+Starting on level 1, last kept clause of level 0 is 23.
+
+given clause #1: (wt=14) 21 [] 
+P1(A&B|C<--> (A&B)| (A&C)).
+** KEPT (pick-wt=2): 24 [21,demod] 
+P1(1).
+
+given clause #2: (wt=15) 22 [] 
+P2(~(~x| ~y)| ~(~x|y)<-->x).
+** KEPT (pick-wt=2): 25 [22,demod] 
+P2(1).
+
+given clause #3: (wt=482) 23 [] 
+P3(
+    #(
+        a2#b2#1# (a2&b2),
+        #(
+            a3#b3,
+            #(
+                1,
+                #(
+                    &(
+                        a0#b0#1# (a0&b0),
+                        &(
+                            1# (a0&b0),
+                            &(
+                                a1#b1#1# (a1&b1),
+                                1# (a1&b1)&a2#b2#1# (a2&b2)&1# (a2&b2)&cin#1
+                            )
+                        )
+                    ),
+                    #(
+                        &(
+                            a0#b0#1# (a0&b0),
+                            &(
+                                1# (a0&b0),
+                                a1#b1#1# (a1&b1)&1# (a1&b1)&1# (a2&b2)&cin#1
+                            )
+                        ),
+                        #(
+                            &(
+                                a0#b0#1# (a0&b0),
+                                &(
+                                    1# (a0&b0),
+                                    &(
+                                        1# (a1&b1),
+                                        a2#b2#1# (a2&b2)&1# (a2&b2)&cin#1
+                                    )
+                                )
+                            ),
+                            #(
+                                &(
+                                    a0#b0#1# (a0&b0),
+                                    1# (a0&b0)&1# (a1&b1)&1# (a2&b2)&cin#1
+                                ),
+                                #(
+                                    &(
+                                        a0#b0#1# (a0&b0),
+                                        a1#b1#1# (a1&b1)&1# (a1&b1)&1# (a2&b2)
+                                    ),
+                                    #(
+                                        &(
+                                            a0#b0#1# (a0&b0),
+                                            &(
+                                                a1#b1#1# (a1&b1),
+                                                &(
+                                                    1# (a1&b1),
+                                                    a2#b2#1# (a2&b2)&1# (a2&b2)
+                                                )
+                                            )
+                                        ),
+                                        #(
+                                            &(
+                                                a0#b0#1# (a0&b0),
+                                                1# (a1&b1)&1# (a2&b2)
+                                            ),
+                                            #(
+                                                &(
+                                                    a0#b0#1# (a0&b0),
+                                                    &(
+                                                        1# (a1&b1),
+                                                        &(
+                                                            a2#b2#1# (a2&b2),
+                                                            1# (a2&b2)
+                                                        )
+                                                    )
+                                                ),
+                                                #(
+                                                    &(
+                                                        1# (a0&b0),
+                                                        &(
+                                                            a1#b1#1# (a1&b1),
+                                                            &(
+                                                                1# (a1&b1),
+                                                                &(
+                                                                    #(
+                                                                        a2,
+                                                                        #(
+                                                                            b2,
+                                                                            #(
+                                                                                1,
+                                                                                &(
+                                                                                    a2,
+                                                                                    b2
+                                                                                )
+                                                                            )
+                                                                        )
+                                                                    ),
+                                                                    &(
+                                                                        #(
+                                                                            1,
+                                                                            &(
+                                                                                a2,
+                                                                                b2
+                                                                            )
+                                                                        ),
+                                                                        cin#1
+                                                                    )
+                                                                )
+                                                            )
+                                                        )
+                                                    ),
+                                                    #(
+                                                        &(
+                                                            1# (a0&b0),
+                                                            &(
+                                                                #(
+                                                                    a1,
+                                                                    #(
+                                                                        b1,
+                                                                        #(
+                                                                            1,
+                                                                            &(
+                                                                                a1,
+                                                                                b1
+                                                                            )
+                                                                        )
+                                                                    )
+                                                                ),
+                                                                &(
+                                                                    1# (a1&b1),
+                                                                    &(
+                                                                        #(
+                                                                            1,
+                                                                            &(
+                                                                                a2,
+                                                                                b2
+                                                                            )
+                                                                        ),
+                                                                        cin#1
+                                                                    )
+                                                                )
+                                                            )
+                                                        ),
+                                                        #(
+                                                            &(
+                                                                1# (a0&b0),
+                                                                &(
+                                                                    1# (a1&b1),
+                                                                    &(
+                                                                        #(
+                                                                            a2,
+                                                                            #(
+                                                                                b2,
+                                                                                #(
+                                                                                    1,
+                                                                                    &(
+                                                                                        a2,
+                                                                                        b2
+                                                                                    )
+                                                                                )
+                                                                            )
+                                                                        ),
+                                                                        &(
+                                                                            #(
+                                                                                1,
+                                                                                &(
+                                                                                    a2,
+                                                                                    b2
+                                                                                )
+                                                                            ),
+                                                                            #(
+                                                                                cin,
+                                                                                1
+                                                                            )
+                                                                        )
+                                                                    )
+                                                                )
+                                                            ),
+                                                            #(
+                                                                &(
+                                                                    1# (a0&b0),
+                                                                    &(
+                                                                        #(
+                                                                            1,
+                                                                            &(
+                                                                                a1,
+                                                                                b1
+                                                                            )
+                                                                        ),
+                                                                        &(
+                                                                            #(
+                                                                                1,
+                                                                                &(
+                                                                                    a2,
+                                                                                    b2
+                                                                                )
+                                                                            ),
+                                                                            #(
+                                                                                cin,
+                                                                                1
+                                                                            )
+                                                                        )
+                                                                    )
+                                                                ),
+                                                                #(
+                                                                    &(
+                                                                        #(
+                                                                            a1,
+                                                                            #(
+                                                                                b1,
+                                                                                #(
+                                                                                    1,
+                                                                                    &(
+                                                                                        a1,
+                                                                                        b1
+                                                                                    )
+                                                                                )
+                                                                            )
+                                                                        ),
+                                                                        #(
+                                                                            1,
+                                                                            &(
+                                                                                a2,
+                                                                                b2
+                                                                            )
+                                                                        )
+                                                                    ),
+                                                                    &(
+                                                                        #(
+                                                                            a1,
+                                                                            #(
+                                                                                b1,
+                                                                                #(
+                                                                                    1,
+                                                                                    &(
+                                                                                        a1,
+                                                                                        b1
+                                                                                    )
+                                                                                )
+                                                                            )
+                                                                        ),
+                                                                        &(
+                                                                            #(
+                                                                                a2,
+                                                                                #(
+                                                                                    b2,
+                                                                                    #(
+                                                                                        1,
+                                                                                        &(
+                                                                                            a2,
+                                                                                            b2
+                                                                                        )
+                                                                                    )
+                                                                                )
+                                                                            ),
+                                                                            #(
+                                                                                1,
+                                                                                &(
+                                                                                    a2,
+                                                                                    b2
+                                                                                )
+                                                                            )
+                                                                        )
+                                                                    )
+                                                                )
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    )
+).
+
+Search stopped by max_given option.
+
+** KEPT (pick-wt=116): 26 [23,demod] 
+P3(
+    #(
+        a3,
+        #(
+            b3,
+            #(
+                cin&a0&a1&a2,
+                #(
+                    cin&a0&a1&b2,
+                    #(
+                        cin&a0&b1&a2,
+                        #(
+                            cin&a0&b1&b2,
+                            #(
+                                cin&b0&a1&a2,
+                                #(
+                                    cin&b0&a1&b2,
+                                    #(
+                                        cin&b0&b1&a2,
+                                        #(
+                                            cin&b0&b1&b2,
+                                            #(
+                                                a0&b0&a1&a2,
+                                                #(
+                                                    a0&b0&a1&b2,
+                                                    #(
+                                                        a0&b0&b1&a2,
+                                                        #(
+                                                            a0&b0&b1&b2,
+                                                            #(
+                                                                a1&b1&a2,
+                                                                #(
+                                                                    a1&b1&b2,
+                                                                    a2&b2
+                                                                )
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    )
+).
+
+Search stopped by max_given option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                  3
+clauses generated              3
+  demod_inf generated          3
+demod & eval rewrites      45084
+clauses wt,lit,sk delete       0
+tautologies deleted            0
+clauses forward subsumed       0
+  (subsumed by sos)            0
+unit deletions                 0
+factor simplifications         0
+clauses kept                   3
+new demodulators               0
+empty clauses                  0
+clauses back demodulated       0
+clauses back subsumed          0
+usable size                    3
+sos size                       3
+demodulators size             20
+passive size                   0
+hot size                       0
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.17          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8892 finished Mon Aug  2 15:31:13 2004

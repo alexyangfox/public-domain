@@ -1,0 +1,32 @@
+#!/usr/local/bin/perl5 -w
+
+if ($#ARGV != 0) { die "Need one arg: input file, candidates on stdin.\n"; }
+$input = $ARGV[0];
+if (! -e $input) { die "input $input not found"; }
+
+$otter = "../../bin/otter";
+if (! -x $otter) { die "binary $otter not found"; }
+
+$host=`hostname`; chop($host);
+$date=`date`;     chop($date);
+print "Started otter-ploop $date on $host.\n";
+
+print "\nHere is the fixed part of the input (file $input).\n";
+print "============================\n";
+print `cat $input`;
+print "============================\n";
+
+$i = 0;
+while ($equation = <STDIN>) {
+    $i++;
+    chop $equation;
+    $command = "$otter -s '$equation' < $input  2> /dev/null | egrep '(ERROR|UNIT|EMPTY|^Search stopped|user CPU|clauses kept)'";
+    @output = `$command`;
+    print "\n$equation  % Job $i\n";
+    print @output;
+}
+
+$date=`date`; chop($date);
+
+print "\nFinished otter-ploop $date on $host\n";
+

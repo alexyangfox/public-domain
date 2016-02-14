@@ -1,0 +1,84 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:31:14 2004
+The command was "../../bin/otter".  The process ID is 8922.
+
+set(binary_res).
+   dependent: set(factor).
+   dependent: set(unit_deletion).
+set(lex_order_vars).
+assign(max_given,1).
+
+lex([0,a,b,c,d,e,add(x,x)]).
+
+special_unary([neg(x)]).
+
+list(usable).
+1 [] -dum|P1(neg(add(c,add(neg(add(a,neg(b))),add(e,neg(d)))))).
+2 [] -dum|P2(add(add(neg(a),b),add(neg(b),add(add(b,neg(b)),add(a,b))))).
+3 [] -dum|P3(add(add(neg(a),b),neg(add(neg(b),add(add(b,neg(b)),add(a,b)))))).
+end_of_list.
+
+list(sos).
+4 [] dum.
+end_of_list.
+
+list(demodulators).
+5 [] EQ(add(x,y),add(y,x)).
+6 [] EQ(add(x,add(y,z)),add(y,add(x,z))).
+7 [] EQ(add(add(x,y),z),add(x,add(y,z))).
+8 [] EQ(neg(add(x,y)),add(neg(x),neg(y))).
+9 [] EQ(add(0,x),x).
+10 [] EQ(neg(neg(x)),x).
+11 [] EQ(add(x,neg(x)),0).
+12 [] EQ(add(x,add(neg(x),y)),y).
+end_of_list.
+lex dependent demodulator: 5 [] EQ(add(x,y),add(y,x)).
+lex dependent demodulator: 6 [] EQ(add(x,add(y,z)),add(y,add(x,z))).
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=1) 4 [] dum.
+
+Search stopped by max_given option.
+
+** KEPT (pick-wt=8): 13 [binary,4.1,3.1,demod,11,9,6,5,11,5,9,5] P3(add(neg(a),add(neg(a),b))).
+** KEPT (pick-wt=2): 14 [binary,4.1,2.1,demod,11,9,6,5,11,5,9,5,12] P2(b).
+** KEPT (pick-wt=13): 15 [binary,4.1,1.1,demod,8,10,5,6,5,6,5,6,6,6,6,8,10,8,8,8,10] P1(add(a,add(neg(b),add(neg(c),add(d,neg(e)))))).
+
+Search stopped by max_given option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                  1
+clauses generated              3
+  binary_res generated         3
+  factors generated            0
+demod & eval rewrites         34
+clauses wt,lit,sk delete       0
+tautologies deleted            0
+clauses forward subsumed       0
+  (subsumed by sos)            0
+unit deletions                 0
+factor simplifications         0
+clauses kept                   3
+new demodulators               0
+empty clauses                  0
+clauses back demodulated       0
+clauses back subsumed          0
+usable size                    4
+sos size                       3
+demodulators size              8
+passive size                   0
+hot size                       0
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8922 finished Mon Aug  2 15:31:14 2004

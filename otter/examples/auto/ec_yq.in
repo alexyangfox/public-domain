@@ -1,0 +1,12 @@
+%
+%  Equivalential calculus (EC): YQF -> YQL  (both are single axioms)
+%
+
+set(auto).
+
+list(usable).
+-P(e(x,y)) | -P(x) | P(y).  % condensed detachment
+P(e(e(x,y),e(e(x,z),e(z,y)))).   % YQF
+-P(e(e(a,b),e(e(c,b),e(a,c)))).  % YQL
+end_of_list.
+

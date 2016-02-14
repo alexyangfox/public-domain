@@ -1,0 +1,75 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:31:14 2004
+The command was "../../bin/otter".  The process ID is 8927.
+
+set(binary_res).
+   dependent: set(factor).
+   dependent: set(unit_deletion).
+set(lex_order_vars).
+assign(max_given,1).
+
+lex([a,b,c,d,e,C1,C2,C3,C4,C5,C6,neg(x),coeff(x,x),add(x,x)]).
+
+special_unary([neg(x),coeff(x,x)]).
+
+list(usable).
+1 [] -dum|P(add(a,add(b,add(coeff(neg(c),C6),add(neg(a),add(neg(b),add(coeff(c,C5),add(coeff(a,C1),add(coeff(b,C2),add(neg(c),add(coeff(neg(a),C3),add(coeff(neg(b),C4),add(c,coeff(neg(a),C2)))))))))))))).
+end_of_list.
+
+list(sos).
+2 [] dum.
+end_of_list.
+
+list(demodulators).
+3 [] EQ(add(x,y),add(y,x)).
+4 [] EQ(add(x,add(y,z)),add(y,add(x,z))).
+5 [] EQ(add(add(x,y),z),add(x,add(y,z))).
+end_of_list.
+lex dependent demodulator: 3 [] EQ(add(x,y),add(y,x)).
+lex dependent demodulator: 4 [] EQ(add(x,add(y,z)),add(y,add(x,z))).
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=1) 2 [] dum.
+
+Search stopped by max_given option.
+
+** KEPT (pick-wt=47): 6 [binary,2.1,1.1,demod,3,4,4,4,4,4,3,4,4,4,4,4,4,4,4,3,4,4,4,4,4,4,4,4,4,4,4,4,3,4,4,4,4] P(add(a,add(neg(a),add(coeff(a,C1),add(coeff(neg(a),C2),add(coeff(neg(a),C3),add(b,add(neg(b),add(coeff(b,C2),add(coeff(neg(b),C4),add(c,add(neg(c),add(coeff(c,C5),coeff(neg(c),C6)))))))))))))).
+
+Search stopped by max_given option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                  1
+clauses generated              1
+  binary_res generated         1
+  factors generated            0
+demod & eval rewrites         33
+clauses wt,lit,sk delete       0
+tautologies deleted            0
+clauses forward subsumed       0
+  (subsumed by sos)            0
+unit deletions                 0
+factor simplifications         0
+clauses kept                   1
+new demodulators               0
+empty clauses                  0
+clauses back demodulated       0
+clauses back subsumed          0
+usable size                    2
+sos size                       1
+demodulators size              3
+passive size                   0
+hot size                       0
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8927 finished Mon Aug  2 15:31:14 2004

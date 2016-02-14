@@ -1,0 +1,217 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:37 2004
+The command was "../../bin/otter".  The process ID is 8376.
+
+set(hyper_res).
+assign(pick_given_ratio,3).
+clear(back_sub).
+assign(max_proofs,2).
+assign(max_weight,16).
+clear(print_kept).
+set(order_history).
+
+list(usable).
+1 [] -P(e(x,y))| -P(x)|P(y).
+end_of_list.
+
+list(sos).
+2 [] P(e(e(x,y),e(e(z,y),e(x,z)))).
+end_of_list.
+
+list(passive).
+3 [] -P(e(e(e(a,b),e(c,a)),e(b,c)))|$Ans(EC_1).
+4 [] -P(e(e(a,e(b,c)),e(e(a,b),c)))|$Ans(EC_2).
+end_of_list.
+
+list(demodulators).
+5 [] e(e(x,x),y)=junk.
+6 [] e(y,e(x,x))=junk.
+7 [] e(x,junk)=junk.
+8 [] e(junk,x)=junk.
+9 [] P(junk)=$T.
+end_of_list.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=12) 2 [] P(e(e(x,y),e(e(z,y),e(x,z)))).
+
+given clause #2: (wt=16) 10 [hyper,1,2,2] P(e(e(x,e(e(y,z),e(u,y))),e(e(u,z),x))).
+
+given clause #3: (wt=8) 12 [hyper,1,10,2] P(e(e(x,y),e(x,y))).
+
+given clause #4: (wt=12) 13 [hyper,1,2,12] P(e(e(x,e(y,z)),e(e(y,z),x))).
+
+given clause #5: (wt=16) 11 [hyper,1,10,10] P(e(e(x,y),e(e(x,z),e(e(u,y),e(z,u))))).
+
+given clause #6: (wt=12) 14 [hyper,1,13,13] P(e(e(e(x,y),z),e(z,e(x,y)))).
+
+given clause #7: (wt=12) 15 [hyper,1,10,13] P(e(e(x,y),e(e(x,z),e(z,y)))).
+
+given clause #8: (wt=12) 18 [hyper,1,13,2] P(e(e(e(x,y),e(z,x)),e(z,y))).
+
+given clause #9: (wt=16) 16 [hyper,1,2,13] P(e(e(x,e(e(y,z),u)),e(e(u,e(y,z)),x))).
+
+given clause #10: (wt=4) 32 [hyper,1,18,14] P(e(x,x)).
+
+given clause #11: (wt=8) 31 [hyper,1,18,15] P(e(e(e(x,y),x),y)).
+
+given clause #12: (wt=8) 39 [hyper,1,15,32] P(e(e(x,y),e(y,x))).
+
+given clause #13: (wt=16) 17 [hyper,1,13,10] P(e(e(e(x,y),z),e(z,e(e(u,y),e(x,u))))).
+
+given clause #14: (wt=8) 43 [hyper,1,14,31] P(e(x,e(e(y,x),y))).
+
+given clause #15: (wt=8) 55 [hyper,1,18,43] P(e(e(x,e(x,y)),y)).
+
+given clause #16: (wt=8) 66 [hyper,1,39,55] P(e(x,e(y,e(y,x)))).
+
+given clause #17: (wt=16) 19 [hyper,1,13,11] P(e(e(e(x,y),e(e(z,u),e(y,z))),e(x,u))).
+
+given clause #18: (wt=8) 67 [hyper,1,18,55] P(e(x,e(y,e(x,y)))).
+
+given clause #19: (wt=8) 79 [hyper,1,10,66] P(e(e(e(x,y),y),x)).
+
+given clause #20: (wt=8) 94 [hyper,1,39,67] P(e(e(x,e(y,x)),y)).
+
+given clause #21: (wt=12) 20 [hyper,1,10,11] P(e(e(e(x,y),z),e(e(z,x),y))).
+
+given clause #22: (wt=8) 110 [hyper,1,39,79] P(e(x,e(e(x,y),y))).
+
+given clause #23: (wt=12) 24 [hyper,1,14,15] P(e(e(e(x,y),e(y,z)),e(x,z))).
+
+given clause #24: (wt=12) 33 [hyper,1,18,11] P(e(e(e(e(x,y),e(z,x)),z),y)).
+
+given clause #25: (wt=16) 21 [hyper,1,11,12] P(e(e(e(x,y),z),e(e(u,e(x,y)),e(z,u)))).
+
+given clause #26: (wt=12) 40 [hyper,1,11,32] P(e(e(x,y),e(e(z,x),e(y,z)))).
+
+-------- PROOF -------- 197 [binary,196.1,3.1] $Ans(EC_1).
+
+----> UNIT CONFLICT at   0.01 sec ----> 197 [binary,196.1,3.1] $Ans(EC_1).
+
+Length of proof is 11.  Level of proof is 7.
+
+---------------- PROOF ----------------
+
+1 [] -P(e(x,y))| -P(x)|P(y).
+2 [] P(e(e(x,y),e(e(z,y),e(x,z)))).
+3 [] -P(e(e(e(a,b),e(c,a)),e(b,c)))|$Ans(EC_1).
+10 [hyper,1,2,2] P(e(e(x,e(e(y,z),e(u,y))),e(e(u,z),x))).
+11 [hyper,1,10,10] P(e(e(x,y),e(e(x,z),e(e(u,y),e(z,u))))).
+12 [hyper,1,10,2] P(e(e(x,y),e(x,y))).
+13 [hyper,1,2,12] P(e(e(x,e(y,z)),e(e(y,z),x))).
+14 [hyper,1,13,13] P(e(e(e(x,y),z),e(z,e(x,y)))).
+15 [hyper,1,10,13] P(e(e(x,y),e(e(x,z),e(z,y)))).
+18 [hyper,1,13,2] P(e(e(e(x,y),e(z,x)),e(z,y))).
+32 [hyper,1,18,14] P(e(x,x)).
+39 [hyper,1,15,32] P(e(e(x,y),e(y,x))).
+40 [hyper,1,11,32] P(e(e(x,y),e(e(z,x),e(y,z)))).
+196 [hyper,1,39,40] P(e(e(e(x,y),e(z,x)),e(y,z))).
+197 [binary,196.1,3.1] $Ans(EC_1).
+
+------------ end of proof -------------
+
+
+given clause #27: (wt=12) 42 [hyper,1,15,31] P(e(e(e(e(x,y),x),z),e(z,y))).
+
+given clause #28: (wt=12) 46 [hyper,1,2,31] P(e(e(x,y),e(e(e(z,y),z),x))).
+
+given clause #29: (wt=16) 22 [hyper,1,2,14] P(e(e(x,e(y,e(z,u))),e(e(e(z,u),y),x))).
+
+given clause #30: (wt=12) 47 [hyper,1,15,39] P(e(e(e(x,y),z),e(z,e(y,x)))).
+
+given clause #31: (wt=12) 49 [hyper,1,2,39] P(e(e(x,e(y,z)),e(e(z,y),x))).
+
+given clause #32: (wt=12) 51 [hyper,1,17,31] P(e(x,e(e(y,z),e(e(z,x),y)))).
+
+given clause #33: (wt=16) 23 [hyper,1,15,15] P(e(e(e(x,y),z),e(z,e(e(x,u),e(u,y))))).
+
+given clause #34: (wt=12) 54 [hyper,1,43,43] P(e(e(x,e(y,e(e(z,y),z))),x)).
+
+given clause #35: (wt=12) 57 [hyper,1,15,43] P(e(e(x,y),e(y,e(e(z,x),z)))).
+
+given clause #36: (wt=12) 59 [hyper,1,2,43] P(e(e(x,e(e(y,z),y)),e(z,x))).
+
+given clause #37: (wt=16) 25 [hyper,1,2,15] P(e(e(x,e(e(y,z),e(z,u))),e(e(y,u),x))).
+
+given clause #38: (wt=12) 60 [hyper,1,43,39] P(e(e(x,e(e(y,z),e(z,y))),x)).
+
+given clause #39: (wt=12) 61 [hyper,1,43,31] P(e(e(x,e(e(e(y,z),y),z)),x)).
+
+given clause #40: (wt=12) 65 [hyper,1,43,55] P(e(e(x,e(e(y,e(y,z)),z)),x)).
+
+given clause #41: (wt=16) 26 [hyper,1,15,14] P(e(e(e(e(x,y),z),u),e(u,e(z,e(x,y))))).
+
+given clause #42: (wt=12) 68 [hyper,1,17,55] P(e(x,e(e(y,e(z,x)),e(z,y)))).
+
+given clause #43: (wt=12) 70 [hyper,1,15,55] P(e(e(e(x,e(x,y)),z),e(z,y))).
+
+given clause #44: (wt=12) 73 [hyper,1,2,55] P(e(e(x,y),e(e(z,e(z,y)),x))).
+-------- PROOF -------- 550 [binary,549.1,4.1] $Ans(EC_2).
+
+----> UNIT CONFLICT at   0.03 sec ----> 550 [binary,549.1,4.1] $Ans(EC_2).
+
+Length of proof is 11.  Level of proof is 9.
+
+---------------- PROOF ----------------
+
+1 [] -P(e(x,y))| -P(x)|P(y).
+2 [] P(e(e(x,y),e(e(z,y),e(x,z)))).
+4 [] -P(e(e(a,e(b,c)),e(e(a,b),c)))|$Ans(EC_2).
+10 [hyper,1,2,2] P(e(e(x,e(e(y,z),e(u,y))),e(e(u,z),x))).
+12 [hyper,1,10,2] P(e(e(x,y),e(x,y))).
+13 [hyper,1,2,12] P(e(e(x,e(y,z)),e(e(y,z),x))).
+14 [hyper,1,13,13] P(e(e(e(x,y),z),e(z,e(x,y)))).
+15 [hyper,1,10,13] P(e(e(x,y),e(e(x,z),e(z,y)))).
+18 [hyper,1,13,2] P(e(e(e(x,y),e(z,x)),e(z,y))).
+31 [hyper,1,18,15] P(e(e(e(x,y),x),y)).
+43 [hyper,1,14,31] P(e(x,e(e(y,x),y))).
+55 [hyper,1,18,43] P(e(e(x,e(x,y)),y)).
+73 [hyper,1,2,55] P(e(e(x,y),e(e(z,e(z,y)),x))).
+549 [hyper,1,10,73] P(e(e(x,e(y,z)),e(e(x,y),z))).
+550 [binary,549.1,4.1] $Ans(EC_2).
+
+------------ end of proof -------------
+
+
+Search stopped by max_proofs option.
+
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 44
+clauses generated           1663
+  hyper_res generated       1663
+demod & eval rewrites         62
+clauses wt,lit,sk delete     270
+tautologies deleted           22
+clauses forward subsumed     832
+  (subsumed by sos)          372
+unit deletions                 0
+factor simplifications         0
+clauses kept                 539
+new demodulators               0
+empty clauses                  2
+clauses back demodulated       0
+clauses back subsumed          0
+usable size                   45
+sos size                     496
+demodulators size              5
+passive size                   2
+hot size                       0
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.03          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8376 finished Mon Aug  2 15:30:37 2004

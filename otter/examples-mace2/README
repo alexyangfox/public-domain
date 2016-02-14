@@ -1,0 +1,4 @@
+On a UNIX system, you should be able to run all of the tests
+with the following command.
+
+  % ./Run_all

@@ -1,0 +1,38 @@
+
+                     Otter, Version 3.0.2
+                     --------------------
+
+Summary of changes from 3.0.0.  See Changelog for details.
+
+1. Several bugs related to answer literals have been fixed.
+
+2. Forward subsumption on nonunits has been made a bit faster.
+
+3. FormEd string parsing has been fixed.
+
+4. Otter can output its input clauses in a form suitable for ANL-DP,
+   a program that searches for small models.  If the flag dp_transform
+   is set, Otter will translate the input clauses then exit without
+   searching for a proof.  See the report anl-dp, which can be FTPed
+   from info.mcs.anl.gov in pub/Otter/papers.  ANL-DP will be distributed
+   later.
+
+5. Otter can output proofs in a very detailed form with
+   set(build_proof_object).  This produces a proof object (an s-expression)
+   containing all the substitutions and positions for the inferences
+   so that a very simple independent program can check the proofs
+   (without having to know about unification or matching).  E-mail
+   mccune@mcs.anl.gov for more information.
+
+6. Otter prints its ordinary proofs in a bit more detail than before.
+   (As a result, Sec. 15, "Output and Exit Codes", of the manual is
+    out of date.)
+
+FTP Otter 3.0.2 from info.mcs.anl.gov in pub/Otter/otter-3.0.2.tar.Z .
+
+See pub/Otter/README for information on DOS (3.0.1) and Mac (3.0.0) versions.
+
+   W. McCune   (otter@mcs.anl.gov)
+   Argonne National Laboratory
+   June 16, 1994
+   	

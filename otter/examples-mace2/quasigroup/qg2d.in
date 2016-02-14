@@ -1,0 +1,16 @@
+% benchmark parameters -n7 -x -m1000
+
+list(usable).
+f(x,x) = x.
+
+% (3,1,2)-COLS
+% f(x,y)!=u | f(z,w)!=u | f(v,x)!=y | f(v,z)!= w | x=z.
+% f(x,y)!=u | f(z,w)!=u | f(v,x)!=y | f(v,z)!= w | y=w.
+
+f(x,y)!=u | f(z,w)!=u | f(v,x)!=y | f(v,z)!= w | x=z | y=w.
+
+end_of_list.
+
+list(mace_constraints).
+property(f(_,_), quasigroup).
+end_of_list.

@@ -1,0 +1,25 @@
+README.first      quick start info
+README            general information
+README.make       info on compiling
+README.Win32      info for Microsoft users
+README.Ivy        info on checking proofs
+
+index.html        HTML summary of this package
+
+documents/        reference manuals
+
+Makefile          top-level makefile
+source/           Otter ource code
+mace2/            Mace2 source code (uses Otter source)
+
+examples/         Otter examples
+examples-mace2/   Mace2 examples
+
+bin/              this should be initially empty
+bin-Darwin/       pre-compiled binaries for Macintosh OS X
+bin-Linux/        pre-compiled binaries for Linux
+
+Changelog         list of changes to Otter
+Legal             copyright, licence, disclaimer
+Contents          this file
+

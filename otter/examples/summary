@@ -1,0 +1,15 @@
+#
+if ($#argv != 2) then
+    echo "need 2 args: directory extension"
+    exit 1
+endif
+
+foreach i ($1/*.out)
+    echo "doing $i"
+    if ( $1 == split ) then
+        awk '/Otter/,/end of input/ {print} /clauses generated/ {print} /Process.*finished/ {print}' $i > $i:r.$2
+    else
+        awk '/Otter/,/end of input/ {print} /statistics/,/Process.*finished/ {print}' $i > $i:r.$2
+    endif
+   /bin/rm $i
+end

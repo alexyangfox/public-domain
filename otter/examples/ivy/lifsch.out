@@ -1,0 +1,309 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:31:05 2004
+The command was "../../bin/otter".  The process ID is 8585.
+
+set(auto).
+   dependent: set(auto1).
+   dependent: set(process_input).
+   dependent: clear(print_kept).
+   dependent: clear(print_new_demod).
+   dependent: clear(print_back_demod).
+   dependent: clear(print_back_sub).
+   dependent: set(control_memory).
+   dependent: assign(max_mem, 12000).
+   dependent: assign(pick_given_ratio, 4).
+   dependent: assign(stats_level, 1).
+   dependent: assign(max_seconds, 10800).
+set(build_proof_object_2).
+   dependent: set(order_history).
+clear(sigint_interact).
+assign(max_seconds,10).
+
+initial_proof_object(junk).
+(
+(1 (input) (or (P (SK1 V2 V3) (SK1 V2 V3)) (or (not (S V2 (SK1 V2 V3))) (not (Q V3 (SK1 V2 V3))))) NIL)
+(2 (input) (or (P (SK1 V2 V3) (SK1 V2 V3)) (or (not (S V2 (SK1 V2 V3))) (Q (SK1 V2 V3) V6))) NIL)
+(3 (input) (or (P (SK1 V2 V3) (SK1 V2 V3)) (or (not (S V2 (SK1 V2 V3))) (not (S V3 V3)))) NIL)
+(4 (input) (or (P (SK1 V2 V3) (SK1 V2 V3)) (or (S (SK1 V2 V3) V5) (not (Q V3 (SK1 V2 V3))))) NIL)
+(5 (input) (or (P (SK1 V2 V3) (SK1 V2 V3)) (or (S (SK1 V2 V3) V5) (Q (SK1 V2 V3) V6))) NIL)
+(6 (input) (or (P (SK1 V2 V3) (SK1 V2 V3)) (or (S (SK1 V2 V3) V5) (not (S V3 V3)))) NIL)
+(7 (input) (or (P (SK1 V2 V3) (SK1 V2 V3)) (or (not (Q V6 V6)) (not (Q V3 (SK1 V2 V3))))) NIL)
+(8 (input) (or (P (SK1 V2 V3) (SK1 V2 V3)) (or (not (Q V6 V6)) (Q (SK1 V2 V3) V6))) NIL)
+(9 (input) (or (P (SK1 V2 V3) (SK1 V2 V3)) (or (not (Q V6 V6)) (not (S V3 V3)))) NIL)
+(10 (input) (or (not (P V2 V2)) (or (not (S V2 (SK1 V2 V3))) (not (Q V3 (SK1 V2 V3))))) NIL)
+(11 (input) (or (not (P V2 V2)) (or (not (S V2 (SK1 V2 V3))) (Q (SK1 V2 V3) V6))) NIL)
+(12 (input) (or (not (P V2 V2)) (or (not (S V2 (SK1 V2 V3))) (not (S V3 V3)))) NIL)
+(13 (input) (or (not (P V2 V2)) (or (S (SK1 V2 V3) V5) (not (Q V3 (SK1 V2 V3))))) NIL)
+(14 (input) (or (not (P V2 V2)) (or (S (SK1 V2 V3) V5) (Q (SK1 V2 V3) V6))) NIL)
+(15 (input) (or (not (P V2 V2)) (or (S (SK1 V2 V3) V5) (not (S V3 V3)))) NIL)
+(16 (input) (or (not (P V2 V2)) (or (not (Q V6 V6)) (not (Q V3 (SK1 V2 V3))))) NIL)
+(17 (input) (or (not (P V2 V2)) (or (not (Q V6 V6)) (Q (SK1 V2 V3) V6))) NIL)
+(18 (input) (or (not (P V2 V2)) (or (not (Q V6 V6)) (not (S V3 V3)))) NIL)
+(19 (input) (or (S V5 V2) (or (not (S V2 (SK1 V2 V3))) (not (Q V3 (SK1 V2 V3))))) NIL)
+(20 (input) (or (S V5 V2) (or (not (S V2 (SK1 V2 V3))) (Q (SK1 V2 V3) V6))) NIL)
+(21 (input) (or (S V5 V2) (or (not (S V2 (SK1 V2 V3))) (not (S V3 V3)))) NIL)
+(22 (input) (or (S V5 V2) (or (S (SK1 V2 V3) V5) (not (Q V3 (SK1 V2 V3))))) NIL)
+(23 (input) (or (S V5 V2) (or (S (SK1 V2 V3) V5) (Q (SK1 V2 V3) V6))) NIL)
+(24 (input) (or (S V5 V2) (or (S (SK1 V2 V3) V5) (not (S V3 V3)))) NIL)
+(25 (input) (or (S V5 V2) (or (not (Q V6 V6)) (not (Q V3 (SK1 V2 V3))))) NIL)
+(26 (input) (or (S V5 V2) (or (not (Q V6 V6)) (Q (SK1 V2 V3) V6))) NIL)
+(27 (input) (or (S V5 V2) (or (not (Q V6 V6)) (not (S V3 V3)))) NIL)
+)
+0 [] P(SK1(x,y),SK1(x,y))| -S(x,SK1(x,y))| -Q(y,SK1(x,y)).
+0 [] P(SK1(x,y),SK1(x,y))| -S(x,SK1(x,y))|Q(SK1(x,y),z).
+0 [] P(SK1(x,y),SK1(x,y))| -S(x,SK1(x,y))| -S(y,y).
+0 [] P(SK1(x,y),SK1(x,y))|S(SK1(x,y),z)| -Q(y,SK1(x,y)).
+0 [] P(SK1(x,y),SK1(x,y))|S(SK1(x,y),z)|Q(SK1(x,y),u).
+0 [] P(SK1(x,y),SK1(x,y))|S(SK1(x,y),z)| -S(y,y).
+0 [] P(SK1(x,y),SK1(x,y))| -Q(z,z)| -Q(y,SK1(x,y)).
+0 [] P(SK1(x,y),SK1(x,y))| -Q(z,z)|Q(SK1(x,y),z).
+0 [] P(SK1(x,y),SK1(x,y))| -Q(z,z)| -S(y,y).
+0 [] -P(x,x)| -S(x,SK1(x,y))| -Q(y,SK1(x,y)).
+0 [] -P(x,x)| -S(x,SK1(x,y))|Q(SK1(x,y),z).
+0 [] -P(x,x)| -S(x,SK1(x,y))| -S(y,y).
+0 [] -P(x,x)|S(SK1(x,y),z)| -Q(y,SK1(x,y)).
+0 [] -P(x,x)|S(SK1(x,y),z)|Q(SK1(x,y),u).
+0 [] -P(x,x)|S(SK1(x,y),z)| -S(y,y).
+0 [] -P(x,x)| -Q(y,y)| -Q(z,SK1(x,z)).
+0 [] -P(x,x)| -Q(y,y)|Q(SK1(x,z),y).
+0 [] -P(x,x)| -Q(y,y)| -S(z,z).
+0 [] S(x,y)| -S(y,SK1(y,z))| -Q(z,SK1(y,z)).
+0 [] S(x,y)| -S(y,SK1(y,z))|Q(SK1(y,z),u).
+0 [] S(x,y)| -S(y,SK1(y,z))| -S(z,z).
+0 [] S(x,y)|S(SK1(y,z),x)| -Q(z,SK1(y,z)).
+0 [] S(x,y)|S(SK1(y,z),x)|Q(SK1(y,z),u).
+0 [] S(x,y)|S(SK1(y,z),x)| -S(z,z).
+0 [] S(x,y)| -Q(z,z)| -Q(u,SK1(y,u)).
+0 [] S(x,y)| -Q(z,z)|Q(SK1(y,u),z).
+0 [] S(x,y)| -Q(z,z)| -S(u,u).
+end_of_list.
+
+SCAN INPUT: prop=0, horn=0, equality=0, symmetry=0, max_lits=3.
+
+This is a non-Horn set without equality.  The strategy will
+be ordered hyper_res, unit deletion, and factoring, with
+satellites in sos and with nuclei in usable.
+
+   dependent: set(hyper_res).
+   dependent: set(factor).
+   dependent: set(unit_deletion).
+
+------------> process usable:
+** KEPT (pick-wt=17): 1 [] P(SK1(x,y),SK1(x,y))| -S(x,SK1(x,y))| -Q(y,SK1(x,y)).
+** KEPT (pick-wt=17): 2 [] P(SK1(x,y),SK1(x,y))| -S(x,SK1(x,y))|Q(SK1(x,y),z).
+** KEPT (pick-wt=15): 3 [] P(SK1(x,y),SK1(x,y))| -S(x,SK1(x,y))| -S(y,y).
+** KEPT (pick-wt=17): 4 [] P(SK1(x,y),SK1(x,y))|S(SK1(x,y),z)| -Q(y,SK1(x,y)).
+** KEPT (pick-wt=15): 5 [] P(SK1(x,y),SK1(x,y))|S(SK1(x,y),z)| -S(y,y).
+** KEPT (pick-wt=15): 6 [] P(SK1(x,y),SK1(x,y))| -Q(z,z)| -Q(y,SK1(x,y)).
+** KEPT (pick-wt=15): 7 [] P(SK1(x,y),SK1(x,y))| -Q(z,z)|Q(SK1(x,y),z).
+** KEPT (pick-wt=13): 8 [] P(SK1(x,y),SK1(x,y))| -Q(z,z)| -S(y,y).
+** KEPT (pick-wt=13): 9 [] -P(x,x)| -S(x,SK1(x,y))| -Q(y,SK1(x,y)).
+** KEPT (pick-wt=13): 10 [] -P(x,x)| -S(x,SK1(x,y))|Q(SK1(x,y),z).
+** KEPT (pick-wt=11): 11 [] -P(x,x)| -S(x,SK1(x,y))| -S(y,y).
+** KEPT (pick-wt=13): 12 [] -P(x,x)|S(SK1(x,y),z)| -Q(y,SK1(x,y)).
+** KEPT (pick-wt=13): 13 [] -P(x,x)|S(SK1(x,y),z)|Q(SK1(x,y),u).
+** KEPT (pick-wt=11): 14 [] -P(x,x)|S(SK1(x,y),z)| -S(y,y).
+** KEPT (pick-wt=11): 15 [] -P(x,x)| -Q(y,y)| -Q(z,SK1(x,z)).
+** KEPT (pick-wt=11): 16 [] -P(x,x)| -Q(y,y)|Q(SK1(x,z),y).
+** KEPT (pick-wt=9): 17 [] -P(x,x)| -Q(y,y)| -S(z,z).
+** KEPT (pick-wt=13): 18 [] S(x,y)| -S(y,SK1(y,z))| -Q(z,SK1(y,z)).
+** KEPT (pick-wt=13): 19 [] S(x,y)| -S(y,SK1(y,z))|Q(SK1(y,z),u).
+** KEPT (pick-wt=11): 20 [] S(x,y)| -S(y,SK1(y,z))| -S(z,z).
+** KEPT (pick-wt=13): 21 [] S(x,y)|S(SK1(y,z),x)| -Q(z,SK1(y,z)).
+** KEPT (pick-wt=11): 22 [] S(x,y)|S(SK1(y,z),x)| -S(z,z).
+** KEPT (pick-wt=11): 23 [] S(x,y)| -Q(z,z)| -Q(u,SK1(y,u)).
+** KEPT (pick-wt=11): 24 [] S(x,y)| -Q(z,z)|Q(SK1(y,u),z).
+** KEPT (pick-wt=9): 25 [] S(x,y)| -Q(z,z)| -S(u,u).
+
+------------> process sos:
+** KEPT (pick-wt=17): 26 [] P(SK1(x,y),SK1(x,y))|S(SK1(x,y),z)|Q(SK1(x,y),u).
+** KEPT (pick-wt=13): 27 [] S(x,y)|S(SK1(y,z),x)|Q(SK1(y,z),u).
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=17) 26 [] P(SK1(x,y),SK1(x,y))|S(SK1(x,y),z)|Q(SK1(x,y),u).
+
+given clause #2: (wt=13) 27 [] S(x,y)|S(SK1(y,z),x)|Q(SK1(y,z),u).
+
+given clause #3: (wt=17) 29 [hyper,20,26.2,26.2,factor_simp,factor_simp] P(SK1(x,y),SK1(x,y))|Q(SK1(x,y),z)|S(u,SK1(x,y)).
+
+given clause #4: (wt=12) 60 [hyper,2,29.3,factor_simp,factor_simp] P(SK1(x,y),SK1(x,y))|Q(SK1(x,y),z).
+
+given clause #5: (wt=10) 63 [hyper,23,60.2,60.2,factor_simp] P(SK1(x,y),SK1(x,y))|S(z,u).
+
+given clause #6: (wt=18) 34 [hyper,22,27.1] S(SK1(x,y),x)|Q(SK1(x,y),z)|S(u,v)|S(SK1(v,x),u).
+
+given clause #7: (wt=7) 65 [hyper,8,60.2,63.2,factor_simp,factor_simp] P(SK1(x,y),SK1(x,y)).
+
+given clause #8: (wt=14) 111 [hyper,13,65.1] S(SK1(SK1(x,y),z),u)|Q(SK1(SK1(x,y),z),v).
+
+given clause #9: (wt=7) 117 [hyper,11,65.1,111.1,111.1,factor_simp] Q(SK1(SK1(x,y),z),u).
+
+-------- PROOF -------- 
+
+-----> EMPTY CLAUSE at   0.03 sec ----> 122 [hyper,15,65.1,117.1,117.1] $F.
+
+Length of proof is 6.  Level of proof is 6.
+
+---------------- PROOF ----------------
+
+2 [] P(SK1(x,y),SK1(x,y))| -S(x,SK1(x,y))|Q(SK1(x,y),z).
+8 [] P(SK1(x,y),SK1(x,y))| -Q(z,z)| -S(y,y).
+11 [] -P(x,x)| -S(x,SK1(x,y))| -S(y,y).
+13 [] -P(x,x)|S(SK1(x,y),z)|Q(SK1(x,y),u).
+15 [] -P(x,x)| -Q(y,y)| -Q(z,SK1(x,z)).
+20 [] S(x,y)| -S(y,SK1(y,z))| -S(z,z).
+23 [] S(x,y)| -Q(z,z)| -Q(u,SK1(y,u)).
+26 [] P(SK1(x,y),SK1(x,y))|S(SK1(x,y),z)|Q(SK1(x,y),u).
+29 [hyper,20,26.2,26.2,factor_simp,factor_simp] P(SK1(x,y),SK1(x,y))|Q(SK1(x,y),z)|S(u,SK1(x,y)).
+60 [hyper,2,29.3,factor_simp,factor_simp] P(SK1(x,y),SK1(x,y))|Q(SK1(x,y),z).
+63 [hyper,23,60.2,60.2,factor_simp] P(SK1(x,y),SK1(x,y))|S(z,u).
+65 [hyper,8,60.2,63.2,factor_simp,factor_simp] P(SK1(x,y),SK1(x,y)).
+111 [hyper,13,65.1] S(SK1(SK1(x,y),z),u)|Q(SK1(SK1(x,y),z),v).
+117 [hyper,11,65.1,111.1,111.1,factor_simp] Q(SK1(SK1(x,y),z),u).
+122 [hyper,15,65.1,117.1,117.1] $F.
+
+------------ end of proof -------------
+
+
+;; BEGINNING OF PROOF OBJECT
+(
+(1 (input) (or (P (SK1 V2 V3) (SK1 V2 V3)) (or (not (S V2 (SK1 V2 V3))) (not (Q V3 (SK1 V2 V3))))) NIL)
+(2 (input) (or (P (SK1 V2 V3) (SK1 V2 V3)) (or (not (S V2 (SK1 V2 V3))) (Q (SK1 V2 V3) V6))) NIL)
+(3 (input) (or (P (SK1 V2 V3) (SK1 V2 V3)) (or (not (S V2 (SK1 V2 V3))) (not (S V3 V3)))) NIL)
+(4 (input) (or (P (SK1 V2 V3) (SK1 V2 V3)) (or (S (SK1 V2 V3) V5) (not (Q V3 (SK1 V2 V3))))) NIL)
+(5 (input) (or (P (SK1 V2 V3) (SK1 V2 V3)) (or (S (SK1 V2 V3) V5) (Q (SK1 V2 V3) V6))) NIL)
+(6 (input) (or (P (SK1 V2 V3) (SK1 V2 V3)) (or (S (SK1 V2 V3) V5) (not (S V3 V3)))) NIL)
+(7 (input) (or (P (SK1 V2 V3) (SK1 V2 V3)) (or (not (Q V6 V6)) (not (Q V3 (SK1 V2 V3))))) NIL)
+(8 (input) (or (P (SK1 V2 V3) (SK1 V2 V3)) (or (not (Q V6 V6)) (Q (SK1 V2 V3) V6))) NIL)
+(9 (input) (or (P (SK1 V2 V3) (SK1 V2 V3)) (or (not (Q V6 V6)) (not (S V3 V3)))) NIL)
+(10 (input) (or (not (P V2 V2)) (or (not (S V2 (SK1 V2 V3))) (not (Q V3 (SK1 V2 V3))))) NIL)
+(11 (input) (or (not (P V2 V2)) (or (not (S V2 (SK1 V2 V3))) (Q (SK1 V2 V3) V6))) NIL)
+(12 (input) (or (not (P V2 V2)) (or (not (S V2 (SK1 V2 V3))) (not (S V3 V3)))) NIL)
+(13 (input) (or (not (P V2 V2)) (or (S (SK1 V2 V3) V5) (not (Q V3 (SK1 V2 V3))))) NIL)
+(14 (input) (or (not (P V2 V2)) (or (S (SK1 V2 V3) V5) (Q (SK1 V2 V3) V6))) NIL)
+(15 (input) (or (not (P V2 V2)) (or (S (SK1 V2 V3) V5) (not (S V3 V3)))) NIL)
+(16 (input) (or (not (P V2 V2)) (or (not (Q V6 V6)) (not (Q V3 (SK1 V2 V3))))) NIL)
+(17 (input) (or (not (P V2 V2)) (or (not (Q V6 V6)) (Q (SK1 V2 V3) V6))) NIL)
+(18 (input) (or (not (P V2 V2)) (or (not (Q V6 V6)) (not (S V3 V3)))) NIL)
+(19 (input) (or (S V5 V2) (or (not (S V2 (SK1 V2 V3))) (not (Q V3 (SK1 V2 V3))))) NIL)
+(20 (input) (or (S V5 V2) (or (not (S V2 (SK1 V2 V3))) (Q (SK1 V2 V3) V6))) NIL)
+(21 (input) (or (S V5 V2) (or (not (S V2 (SK1 V2 V3))) (not (S V3 V3)))) NIL)
+(22 (input) (or (S V5 V2) (or (S (SK1 V2 V3) V5) (not (Q V3 (SK1 V2 V3))))) NIL)
+(23 (input) (or (S V5 V2) (or (S (SK1 V2 V3) V5) (Q (SK1 V2 V3) V6))) NIL)
+(24 (input) (or (S V5 V2) (or (S (SK1 V2 V3) V5) (not (S V3 V3)))) NIL)
+(25 (input) (or (S V5 V2) (or (not (Q V6 V6)) (not (Q V3 (SK1 V2 V3))))) NIL)
+(26 (input) (or (S V5 V2) (or (not (Q V6 V6)) (Q (SK1 V2 V3) V6))) NIL)
+(27 (input) (or (S V5 V2) (or (not (Q V6 V6)) (not (S V3 V3)))) NIL)
+(28 (instantiate 2 ((V2 . v0)(V3 . v1)(V6 . v2))) (or (P (SK1 v0 v1) (SK1 v0 v1)) (or (not (S v0 (SK1 v0 v1))) (Q (SK1 v0 v1) v2))) (2))
+(29 (instantiate 9 ((V2 . v0)(V3 . v1)(V6 . v2))) (or (P (SK1 v0 v1) (SK1 v0 v1)) (or (not (Q v2 v2)) (not (S v1 v1)))) (8))
+(30 (instantiate 12 ((V2 . v0)(V3 . v1))) (or (not (P v0 v0)) (or (not (S v0 (SK1 v0 v1))) (not (S v1 v1)))) (11))
+(31 (instantiate 14 ((V2 . v0)(V3 . v1)(V5 . v2)(V6 . v3))) (or (not (P v0 v0)) (or (S (SK1 v0 v1) v2) (Q (SK1 v0 v1) v3))) (13))
+(32 (instantiate 16 ((V2 . v0)(V6 . v1)(V3 . v2))) (or (not (P v0 v0)) (or (not (Q v1 v1)) (not (Q v2 (SK1 v0 v2))))) (15))
+(33 (instantiate 21 ((V5 . v0)(V2 . v1)(V3 . v2))) (or (S v0 v1) (or (not (S v1 (SK1 v1 v2))) (not (S v2 v2)))) (20))
+(34 (instantiate 25 ((V5 . v0)(V2 . v1)(V6 . v2)(V3 . v3))) (or (S v0 v1) (or (not (Q v2 v2)) (not (Q v3 (SK1 v1 v3))))) (23))
+(35 (instantiate 5 ((V2 . v0)(V3 . v1)(V5 . v2)(V6 . v3))) (or (P (SK1 v0 v1) (SK1 v0 v1)) (or (S (SK1 v0 v1) v2) (Q (SK1 v0 v1) v3))) (26))
+(36 (instantiate 33 ((v1 . (SK1 v64 v65)))) (or (S v0 (SK1 v64 v65)) (or (not (S (SK1 v64 v65) (SK1 (SK1 v64 v65) v2))) (not (S v2 v2)))) NIL)
+(37 (instantiate 35 ((v0 . v64)(v1 . v65)(v2 . (SK1 (SK1 v64 v65) v2))(v3 . v67))) (or (P (SK1 v64 v65) (SK1 v64 v65)) (or (S (SK1 v64 v65) (SK1 (SK1 v64 v65) v2)) (Q (SK1 v64 v65) v67))) NIL)
+(38 (resolve 36 (2 1) 37 (2 1)) (or (S v0 (SK1 v64 v65)) (or (not (S v2 v2)) (or (P (SK1 v64 v65) (SK1 v64 v65)) (Q (SK1 v64 v65) v67)))) NIL)
+(39 (instantiate 38 ((v2 . v3)(v64 . v1)(v65 . v2)(v67 . v4))) (or (S v0 (SK1 v1 v2)) (or (not (S v3 v3)) (or (P (SK1 v1 v2) (SK1 v1 v2)) (Q (SK1 v1 v2) v4)))) NIL)
+(40 (instantiate 39 ((v3 . (SK1 v64 v65)))) (or (S v0 (SK1 v1 v2)) (or (not (S (SK1 v64 v65) (SK1 v64 v65))) (or (P (SK1 v1 v2) (SK1 v1 v2)) (Q (SK1 v1 v2) v4)))) NIL)
+(41 (instantiate 35 ((v0 . v64)(v1 . v65)(v2 . (SK1 v64 v65))(v3 . v67))) (or (P (SK1 v64 v65) (SK1 v64 v65)) (or (S (SK1 v64 v65) (SK1 v64 v65)) (Q (SK1 v64 v65) v67))) NIL)
+(42 (resolve 40 (2 1) 41 (2 1)) (or (S v0 (SK1 v1 v2)) (or (P (SK1 v1 v2) (SK1 v1 v2)) (or (Q (SK1 v1 v2) v4) (or (P (SK1 v64 v65) (SK1 v64 v65)) (Q (SK1 v64 v65) v67))))) NIL)
+(43 (instantiate 42 ((v4 . v3)(v64 . v4)(v65 . v5)(v67 . v6))) (or (S v0 (SK1 v1 v2)) (or (P (SK1 v1 v2) (SK1 v1 v2)) (or (Q (SK1 v1 v2) v3) (or (P (SK1 v4 v5) (SK1 v4 v5)) (Q (SK1 v4 v5) v6))))) NIL)
+(44 (instantiate 43 ((v1 . v4)(v2 . v5))) (or (S v0 (SK1 v4 v5)) (or (P (SK1 v4 v5) (SK1 v4 v5)) (or (Q (SK1 v4 v5) v3) (or (P (SK1 v4 v5) (SK1 v4 v5)) (Q (SK1 v4 v5) v6))))) NIL)
+(45 (propositional 44) (or (S v0 (SK1 v4 v5)) (or (P (SK1 v4 v5) (SK1 v4 v5)) (or (Q (SK1 v4 v5) v3) (Q (SK1 v4 v5) v6)))) NIL)
+(46 (instantiate 45 ((v3 . v6))) (or (S v0 (SK1 v4 v5)) (or (P (SK1 v4 v5) (SK1 v4 v5)) (or (Q (SK1 v4 v5) v6) (Q (SK1 v4 v5) v6)))) NIL)
+(47 (propositional 46) (or (S v0 (SK1 v4 v5)) (or (P (SK1 v4 v5) (SK1 v4 v5)) (Q (SK1 v4 v5) v6))) NIL)
+(48 (instantiate 47 ((v4 . v1)(v5 . v2)(v6 . v3))) (or (S v0 (SK1 v1 v2)) (or (P (SK1 v1 v2) (SK1 v1 v2)) (Q (SK1 v1 v2) v3))) (29))
+(49 (instantiate 28 ((v0 . v65)(v1 . v66))) (or (P (SK1 v65 v66) (SK1 v65 v66)) (or (not (S v65 (SK1 v65 v66))) (Q (SK1 v65 v66) v2))) NIL)
+(50 (instantiate 48 ((v0 . v65)(v1 . v65)(v2 . v66)(v3 . v67))) (or (S v65 (SK1 v65 v66)) (or (P (SK1 v65 v66) (SK1 v65 v66)) (Q (SK1 v65 v66) v67))) NIL)
+(51 (resolve 49 (2 1) 50 (1)) (or (P (SK1 v65 v66) (SK1 v65 v66)) (or (Q (SK1 v65 v66) v2) (or (P (SK1 v65 v66) (SK1 v65 v66)) (Q (SK1 v65 v66) v67)))) NIL)
+(52 (instantiate 51 ((v65 . v0)(v66 . v1)(v67 . v3))) (or (P (SK1 v0 v1) (SK1 v0 v1)) (or (Q (SK1 v0 v1) v2) (or (P (SK1 v0 v1) (SK1 v0 v1)) (Q (SK1 v0 v1) v3)))) NIL)
+(53 (propositional 52) (or (P (SK1 v0 v1) (SK1 v0 v1)) (or (Q (SK1 v0 v1) v2) (Q (SK1 v0 v1) v3))) NIL)
+(54 (instantiate 53 ((v2 . v3))) (or (P (SK1 v0 v1) (SK1 v0 v1)) (or (Q (SK1 v0 v1) v3) (Q (SK1 v0 v1) v3))) NIL)
+(55 (propositional 54) (or (P (SK1 v0 v1) (SK1 v0 v1)) (Q (SK1 v0 v1) v3)) NIL)
+(56 (instantiate 55 ((v3 . v2))) (or (P (SK1 v0 v1) (SK1 v0 v1)) (Q (SK1 v0 v1) v2)) (60))
+(57 (instantiate 34 ((v2 . (SK1 v64 v65)))) (or (S v0 v1) (or (not (Q (SK1 v64 v65) (SK1 v64 v65))) (not (Q v3 (SK1 v1 v3))))) NIL)
+(58 (instantiate 56 ((v0 . v64)(v1 . v65)(v2 . (SK1 v64 v65)))) (or (P (SK1 v64 v65) (SK1 v64 v65)) (Q (SK1 v64 v65) (SK1 v64 v65))) NIL)
+(59 (resolve 57 (2 1) 58 (2)) (or (S v0 v1) (or (not (Q v3 (SK1 v1 v3))) (P (SK1 v64 v65) (SK1 v64 v65)))) NIL)
+(60 (instantiate 59 ((v3 . v2)(v64 . v3)(v65 . v4))) (or (S v0 v1) (or (not (Q v2 (SK1 v1 v2))) (P (SK1 v3 v4) (SK1 v3 v4)))) NIL)
+(61 (instantiate 60 ((v2 . (SK1 v64 v65)))) (or (S v0 v1) (or (not (Q (SK1 v64 v65) (SK1 v1 (SK1 v64 v65)))) (P (SK1 v3 v4) (SK1 v3 v4)))) NIL)
+(62 (instantiate 56 ((v0 . v64)(v1 . v65)(v2 . (SK1 v1 (SK1 v64 v65))))) (or (P (SK1 v64 v65) (SK1 v64 v65)) (Q (SK1 v64 v65) (SK1 v1 (SK1 v64 v65)))) NIL)
+(63 (resolve 61 (2 1) 62 (2)) (or (S v0 v1) (or (P (SK1 v3 v4) (SK1 v3 v4)) (P (SK1 v64 v65) (SK1 v64 v65)))) NIL)
+(64 (instantiate 63 ((v3 . v2)(v4 . v3)(v64 . v4)(v65 . v5))) (or (S v0 v1) (or (P (SK1 v2 v3) (SK1 v2 v3)) (P (SK1 v4 v5) (SK1 v4 v5)))) NIL)
+(65 (instantiate 64 ((v2 . v4)(v3 . v5))) (or (S v0 v1) (or (P (SK1 v4 v5) (SK1 v4 v5)) (P (SK1 v4 v5) (SK1 v4 v5)))) NIL)
+(66 (propositional 65) (or (S v0 v1) (P (SK1 v4 v5) (SK1 v4 v5))) NIL)
+(67 (instantiate 66 ((v4 . v2)(v5 . v3))) (or (S v0 v1) (P (SK1 v2 v3) (SK1 v2 v3))) (63))
+(68 (instantiate 29 ((v2 . (SK1 v64 v65)))) (or (P (SK1 v0 v1) (SK1 v0 v1)) (or (not (Q (SK1 v64 v65) (SK1 v64 v65))) (not (S v1 v1)))) NIL)
+(69 (instantiate 56 ((v0 . v64)(v1 . v65)(v2 . (SK1 v64 v65)))) (or (P (SK1 v64 v65) (SK1 v64 v65)) (Q (SK1 v64 v65) (SK1 v64 v65))) NIL)
+(70 (resolve 68 (2 1) 69 (2)) (or (P (SK1 v0 v1) (SK1 v0 v1)) (or (not (S v1 v1)) (P (SK1 v64 v65) (SK1 v64 v65)))) NIL)
+(71 (instantiate 70 ((v64 . v2)(v65 . v3))) (or (P (SK1 v0 v1) (SK1 v0 v1)) (or (not (S v1 v1)) (P (SK1 v2 v3) (SK1 v2 v3)))) NIL)
+(72 (instantiate 71 ((v1 . v65))) (or (P (SK1 v0 v65) (SK1 v0 v65)) (or (not (S v65 v65)) (P (SK1 v2 v3) (SK1 v2 v3)))) NIL)
+(73 (instantiate 67 ((v0 . v65)(v1 . v65)(v2 . v66)(v3 . v67))) (or (S v65 v65) (P (SK1 v66 v67) (SK1 v66 v67))) NIL)
+(74 (resolve 72 (2 1) 73 (1)) (or (P (SK1 v0 v65) (SK1 v0 v65)) (or (P (SK1 v2 v3) (SK1 v2 v3)) (P (SK1 v66 v67) (SK1 v66 v67)))) NIL)
+(75 (instantiate 74 ((v65 . v1)(v66 . v4)(v67 . v5))) (or (P (SK1 v0 v1) (SK1 v0 v1)) (or (P (SK1 v2 v3) (SK1 v2 v3)) (P (SK1 v4 v5) (SK1 v4 v5)))) NIL)
+(76 (instantiate 75 ((v0 . v2)(v1 . v3))) (or (P (SK1 v2 v3) (SK1 v2 v3)) (or (P (SK1 v2 v3) (SK1 v2 v3)) (P (SK1 v4 v5) (SK1 v4 v5)))) NIL)
+(77 (propositional 76) (or (P (SK1 v2 v3) (SK1 v2 v3)) (P (SK1 v4 v5) (SK1 v4 v5))) NIL)
+(78 (instantiate 77 ((v2 . v4)(v3 . v5))) (or (P (SK1 v4 v5) (SK1 v4 v5)) (P (SK1 v4 v5) (SK1 v4 v5))) NIL)
+(79 (propositional 78) (P (SK1 v4 v5) (SK1 v4 v5)) NIL)
+(80 (instantiate 79 ((v4 . v0)(v5 . v1))) (P (SK1 v0 v1) (SK1 v0 v1)) (65))
+(81 (instantiate 31 ((v0 . (SK1 v64 v65)))) (or (not (P (SK1 v64 v65) (SK1 v64 v65))) (or (S (SK1 (SK1 v64 v65) v1) v2) (Q (SK1 (SK1 v64 v65) v1) v3))) NIL)
+(82 (instantiate 80 ((v0 . v64)(v1 . v65))) (P (SK1 v64 v65) (SK1 v64 v65)) NIL)
+(83 (resolve 81 (1) 82 ()) (or (S (SK1 (SK1 v64 v65) v1) v2) (Q (SK1 (SK1 v64 v65) v1) v3)) NIL)
+(84 (instantiate 83 ((v1 . v2)(v2 . v3)(v3 . v4)(v64 . v0)(v65 . v1))) (or (S (SK1 (SK1 v0 v1) v2) v3) (Q (SK1 (SK1 v0 v1) v2) v4)) (111))
+(85 (instantiate 30 ((v0 . (SK1 v64 v65)))) (or (not (P (SK1 v64 v65) (SK1 v64 v65))) (or (not (S (SK1 v64 v65) (SK1 (SK1 v64 v65) v1))) (not (S v1 v1)))) NIL)
+(86 (instantiate 80 ((v0 . v64)(v1 . v65))) (P (SK1 v64 v65) (SK1 v64 v65)) NIL)
+(87 (resolve 85 (1) 86 ()) (or (not (S (SK1 v64 v65) (SK1 (SK1 v64 v65) v1))) (not (S v1 v1))) NIL)
+(88 (instantiate 87 ((v1 . v2)(v64 . v0)(v65 . v1))) (or (not (S (SK1 v0 v1) (SK1 (SK1 v0 v1) v2))) (not (S v2 v2))) NIL)
+(89 (instantiate 88 ((v0 . (SK1 v64 v65))(v1 . v66))) (or (not (S (SK1 (SK1 v64 v65) v66) (SK1 (SK1 (SK1 v64 v65) v66) v2))) (not (S v2 v2))) NIL)
+(90 (instantiate 84 ((v0 . v64)(v1 . v65)(v2 . v66)(v3 . (SK1 (SK1 (SK1 v64 v65) v66) v2))(v4 . v68))) (or (S (SK1 (SK1 v64 v65) v66) (SK1 (SK1 (SK1 v64 v65) v66) v2)) (Q (SK1 (SK1 v64 v65) v66) v68)) NIL)
+(91 (resolve 89 (1) 90 (1)) (or (not (S v2 v2)) (Q (SK1 (SK1 v64 v65) v66) v68)) NIL)
+(92 (instantiate 91 ((v2 . v0)(v64 . v1)(v65 . v2)(v66 . v3)(v68 . v4))) (or (not (S v0 v0)) (Q (SK1 (SK1 v1 v2) v3) v4)) NIL)
+(93 (instantiate 92 ((v0 . (SK1 (SK1 v64 v65) v66)))) (or (not (S (SK1 (SK1 v64 v65) v66) (SK1 (SK1 v64 v65) v66))) (Q (SK1 (SK1 v1 v2) v3) v4)) NIL)
+(94 (instantiate 84 ((v0 . v64)(v1 . v65)(v2 . v66)(v3 . (SK1 (SK1 v64 v65) v66))(v4 . v68))) (or (S (SK1 (SK1 v64 v65) v66) (SK1 (SK1 v64 v65) v66)) (Q (SK1 (SK1 v64 v65) v66) v68)) NIL)
+(95 (resolve 93 (1) 94 (1)) (or (Q (SK1 (SK1 v1 v2) v3) v4) (Q (SK1 (SK1 v64 v65) v66) v68)) NIL)
+(96 (instantiate 95 ((v1 . v0)(v2 . v1)(v3 . v2)(v4 . v3)(v64 . v4)(v65 . v5)(v66 . v6)(v68 . v7))) (or (Q (SK1 (SK1 v0 v1) v2) v3) (Q (SK1 (SK1 v4 v5) v6) v7)) NIL)
+(97 (instantiate 96 ((v0 . v4)(v1 . v5)(v2 . v6)(v3 . v7))) (or (Q (SK1 (SK1 v4 v5) v6) v7) (Q (SK1 (SK1 v4 v5) v6) v7)) NIL)
+(98 (propositional 97) (Q (SK1 (SK1 v4 v5) v6) v7) NIL)
+(99 (instantiate 98 ((v4 . v0)(v5 . v1)(v6 . v2)(v7 . v3))) (Q (SK1 (SK1 v0 v1) v2) v3) (117))
+(100 (instantiate 32 ((v0 . (SK1 v64 v65)))) (or (not (P (SK1 v64 v65) (SK1 v64 v65))) (or (not (Q v1 v1)) (not (Q v2 (SK1 (SK1 v64 v65) v2))))) NIL)
+(101 (instantiate 80 ((v0 . v64)(v1 . v65))) (P (SK1 v64 v65) (SK1 v64 v65)) NIL)
+(102 (resolve 100 (1) 101 ()) (or (not (Q v1 v1)) (not (Q v2 (SK1 (SK1 v64 v65) v2)))) NIL)
+(103 (instantiate 102 ((v1 . v0)(v2 . v1)(v64 . v2)(v65 . v3))) (or (not (Q v0 v0)) (not (Q v1 (SK1 (SK1 v2 v3) v1)))) NIL)
+(104 (instantiate 103 ((v0 . (SK1 (SK1 v64 v65) v66)))) (or (not (Q (SK1 (SK1 v64 v65) v66) (SK1 (SK1 v64 v65) v66))) (not (Q v1 (SK1 (SK1 v2 v3) v1)))) NIL)
+(105 (instantiate 99 ((v0 . v64)(v1 . v65)(v2 . v66)(v3 . (SK1 (SK1 v64 v65) v66)))) (Q (SK1 (SK1 v64 v65) v66) (SK1 (SK1 v64 v65) v66)) NIL)
+(106 (resolve 104 (1) 105 ()) (not (Q v1 (SK1 (SK1 v2 v3) v1))) NIL)
+(107 (instantiate 106 ((v1 . v0)(v2 . v1)(v3 . v2))) (not (Q v0 (SK1 (SK1 v1 v2) v0))) NIL)
+(108 (instantiate 107 ((v0 . (SK1 (SK1 v64 v65) v66)))) (not (Q (SK1 (SK1 v64 v65) v66) (SK1 (SK1 v1 v2) (SK1 (SK1 v64 v65) v66)))) NIL)
+(109 (instantiate 99 ((v0 . v64)(v1 . v65)(v2 . v66)(v3 . (SK1 (SK1 v1 v2) (SK1 (SK1 v64 v65) v66))))) (Q (SK1 (SK1 v64 v65) v66) (SK1 (SK1 v1 v2) (SK1 (SK1 v64 v65) v66))) NIL)
+(110 (resolve 108 () 109 ()) false (122))
+
+Search stopped by max_proofs option.
+
+)
+;; END OF PROOF OBJECT
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                  9
+clauses generated            283
+clauses kept                 121
+clauses forward subsumed     188
+clauses back subsumed         83
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.03          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8585 finished Mon Aug  2 15:31:05 2004

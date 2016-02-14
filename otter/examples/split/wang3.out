@@ -1,0 +1,2236 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:31:10 2004
+The command was "../../bin/otter".  The process ID is 8782.
+
+set(knuth_bendix).
+   dependent: set(anl_eq).
+   dependent: set(para_from).
+   dependent: set(para_into).
+   dependent: clear(para_from_right).
+   dependent: clear(para_into_right).
+   dependent: set(para_from_vars).
+   dependent: set(eq_units_both_ways).
+   dependent: set(dynamic_demod_all).
+   dependent: set(dynamic_demod).
+   dependent: set(order_eq).
+   dependent: set(back_demod).
+   dependent: set(process_input).
+   dependent: set(lrpo).
+set(binary_res).
+   dependent: set(factor).
+   dependent: set(unit_deletion).
+set(split_when_given).
+   dependent: set(back_unit_deletion).
+set(split_pos).
+clear(print_kept).
+clear(print_given).
+clear(print_new_demod).
+clear(print_back_demod).
+clear(print_back_sub).
+assign(stats_level,1).
+
+list(sos).
+0 [] m!=b.
+0 [] y=j| -p(y,j)|y=k.
+0 [] k=j|p(k,j).
+end_of_list.
+
+list(usable).
+0 [] y=m|p(y,m)|v1=m|v1=y| -p(y,v1)| -p(v1,y).
+0 [] y=b| -p(y,b)|v=b|v=y| -p(y,v)| -p(v,y).
+0 [] y=k|y=m|y=b| -p(y,k).
+0 [] y=m| -p(y,m)|f(y)!=m.
+0 [] y=m| -p(y,m)|f(y)!=y.
+0 [] y=m| -p(y,m)|p(y,f(y)).
+0 [] y=m| -p(y,m)|p(f(y),y).
+0 [] y=b|p(y,b)|g(y)!=b.
+0 [] y=b|p(y,b)|g(y)!=y.
+0 [] y=b|p(y,b)|p(y,g(y)).
+0 [] y=b|p(y,b)|p(g(y),y).
+0 [] m=k|p(m,k).
+0 [] b=k|p(b,k).
+0 [] x=x.
+end_of_list.
+
+------------> process usable:
+** KEPT (pick-wt=18): 1 [] x=m|p(x,m)|y=m|y=x| -p(x,y)| -p(y,x).
+** KEPT (pick-wt=18): 2 [] x=b| -p(x,b)|y=b|y=x| -p(x,y)| -p(y,x).
+** KEPT (pick-wt=12): 3 [] x=k|x=m|x=b| -p(x,k).
+** KEPT (pick-wt=10): 4 [] x=m| -p(x,m)|f(x)!=m.
+** KEPT (pick-wt=10): 5 [] x=m| -p(x,m)|f(x)!=x.
+** KEPT (pick-wt=10): 6 [] x=m| -p(x,m)|p(x,f(x)).
+** KEPT (pick-wt=10): 7 [] x=m| -p(x,m)|p(f(x),x).
+** KEPT (pick-wt=10): 8 [] x=b|p(x,b)|g(x)!=b.
+** KEPT (pick-wt=10): 9 [] x=b|p(x,b)|g(x)!=x.
+** KEPT (pick-wt=10): 10 [] x=b|p(x,b)|p(x,g(x)).
+** KEPT (pick-wt=10): 11 [] x=b|p(x,b)|p(g(x),x).
+** KEPT (pick-wt=6): 12 [] m=k|p(m,k).
+** KEPT (pick-wt=6): 14 [copy,13,flip.1] k=b|p(b,k).
+** KEPT (pick-wt=3): 15 [] x=x.
+  Following clause subsumed by 15 during input processing: 0 [copy,15,flip.1] x=x.
+>>>> Starting back unit deletion with 15.
+
+------------> process sos:
+** KEPT (pick-wt=3): 16 [] m!=b.
+** KEPT (pick-wt=9): 17 [] x=j| -p(x,j)|x=k.
+** KEPT (pick-wt=6): 18 [] k=j|p(k,j).
+>>>> Starting back unit deletion with 16.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+Splitting on clause 18 [] k=j|p(k,j).
+
+Case [1]   (process 8783):
+Assumption: 26 [18,split.1] k=j.
+
+Splitting on clause 30 [back_demod,14,demod,27,27] j=b|p(b,j).
+
+--- refuted case [1.1]
+
+Case [1.1]   (process 8784):
+Assumption: 93 [30,split.1.1] j=b.
+
+-----> EMPTY CLAUSE at   0.00 sec ----> 117 [back_demod,56,demod,94,94,unit_del,16,15] $F.
+
+Length of proof is 8.  Level of proof is 3.  Case [1.1]
+
+---------------- PROOF ----------------
+
+12 [] m=k|p(m,k).
+13 [] b=k|p(b,k).
+14 [copy,13,flip.1] k=b|p(b,k).
+15 [] x=x.
+16 [] m!=b.
+17 [] x=j| -p(x,j)|x=k.
+18 [] k=j|p(k,j).
+25 [para_into,16.1.1,12.1.1] k!=b|p(m,k).
+27,26 [18,split.1] k=j.
+28 [back_demod,25,demod,27,27] j!=b|p(m,j).
+29 [back_demod,17,demod,27,factor_simp] x=j| -p(x,j).
+30 [back_demod,14,demod,27,27] j=b|p(b,j).
+56 [binary,29.2,28.2] m=j|j!=b.
+94,93 [30,split.1.1] j=b.
+117 [back_demod,56,demod,94,94,unit_del,16,15] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8784) -------
+clauses given                  6
+clauses generated            206
+clauses kept                 113
+clauses forward subsumed     136
+clauses back subsumed          2
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8784 finished Mon Aug  2 15:31:10 2004
+Refuted case [1.1].
+
+--- refuted case [1.2]
+
+Case [1.2]   (process 8785):
+Assumption: 94 [30,split.1.2] p(b,j).
+
+----> UNIT CONFLICT at   0.00 sec ----> 112 [binary,110.1,93.1] $F.
+
+Length of proof is 7.  Level of proof is 4.  Case [1.2]
+
+---------------- PROOF ----------------
+
+13 [] b=k|p(b,k).
+14 [copy,13,flip.1] k=b|p(b,k).
+17 [] x=j| -p(x,j)|x=k.
+18 [] k=j|p(k,j).
+27,26 [18,split.1] k=j.
+29 [back_demod,17,demod,27,factor_simp] x=j| -p(x,j).
+30 [back_demod,14,demod,27,27] j=b|p(b,j).
+93 [30,split_neg.1.2] j!=b.
+94 [30,split.1.2] p(b,j).
+110 [binary,94.1,29.2,flip.1] j=b.
+112 [binary,110.1,93.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8785) -------
+clauses given                  8
+clauses generated            252
+clauses kept                 108
+clauses forward subsumed     152
+clauses back subsumed         36
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8785 finished Mon Aug  2 15:31:10 2004
+Refuted case [1.2].
+
+------- statistics (process 8783) -------
+clauses given                  6
+clauses generated            206
+clauses kept                  90
+clauses forward subsumed     123
+clauses back subsumed          2
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8783 finished Mon Aug  2 15:31:10 2004
+Refuted case [1].
+
+Case [2]   (process 8786):
+Assumption: 27 [18,split.2] p(k,j).
+
+Splitting on clause 47 [para_into,27.1.1,14.1.1] p(b,j)|p(b,k).
+
+Case [2.1]   (process 8787):
+Assumption: 129 [47,split.2.1] p(b,j).
+
+Splitting on clause 80 [binary,25.1,14.1] p(m,k)|p(b,k).
+
+Case [2.1.1]   (process 8788):
+Assumption: 157 [80,split.2.1.1] p(m,k).
+
+Splitting on clause 161 [para_into,157.1.2,14.1.1] p(m,b)|p(b,k).
+
+Case [2.1.1.1]   (process 8789):
+Assumption: 176 [161,split.2.1.1.1] p(m,b).
+
+Splitting on clause 188 [binary,17.2,129.1,flip.1,flip.2] j=b|k=b.
+
+Case [2.1.1.1.1]   (process 8790):
+Assumption: 266 [188,split.2.1.1.1.1] j=b.
+0 [back_unit_del,273.1,14.1] p(b,k).
+
+Splitting on clause 304 [back_demod,190,demod,267,267,267,289,267,267,289,unit_del,273,290] f(b)=b|f(b)=k.
+
+--- refuted case [2.1.1.1.1.1]
+
+Case [2.1.1.1.1.1]   (process 8791):
+Assumption: 319 [304,split.2.1.1.1.1.1] f(b)=b.
+
+-----> EMPTY CLAUSE at   0.00 sec ----> 321 [back_demod,305,demod,320,320,unit_del,291,273] $F.
+
+Length of proof is 24.  Level of proof is 9.  Case [2.1.1.1.1.1]
+
+---------------- PROOF ----------------
+
+5 [] x=m| -p(x,m)|f(x)!=x.
+7 [] x=m| -p(x,m)|p(f(x),x).
+12 [] m=k|p(m,k).
+13 [] b=k|p(b,k).
+14 [copy,13,flip.1] k=b|p(b,k).
+15 [] x=x.
+16 [] m!=b.
+17 [] x=j| -p(x,j)|x=k.
+18 [] k=j|p(k,j).
+25 [para_into,16.1.1,12.1.1] k!=b|p(m,k).
+27 [18,split.2] p(k,j).
+47 [para_into,27.1.1,14.1.1] p(b,j)|p(b,k).
+80 [binary,25.1,14.1] p(m,k)|p(b,k).
+129 [47,split.2.1] p(b,j).
+157 [80,split.2.1.1] p(m,k).
+161 [para_into,157.1.2,14.1.1] p(m,b)|p(b,k).
+176 [161,split.2.1.1.1] p(m,b).
+187 [binary,17.1,5.3,flip.3] -p(f(j),j)|f(j)=k|m=j| -p(j,m).
+188 [binary,17.2,129.1,flip.1,flip.2] j=b|k=b.
+190 [binary,17.2,7.3,flip.3] f(j)=j|f(j)=k|m=j| -p(j,m).
+221 [para_from,17.1.1,129.1.1,unit_del,129,flip.2] p(j,j)|k=b.
+223 [para_from,17.1.1,14.2.1,unit_del,129,factor_simp] k=b|p(j,k).
+231 [para_from,17.1.1,16.1.1] j!=b| -p(m,j)|m=k.
+252 [para_from,17.3.1,16.1.1] k!=b|m=j| -p(m,j).
+267,266 [188,split.2.1.1.1.1] j=b.
+273 [back_demod,252,demod,267,267,unit_del,16,176] k!=b.
+289,288 [back_demod,231,demod,267,267,unit_del,15,176] m=k.
+290 [back_demod,223,demod,267,unit_del,273] p(b,k).
+291 [back_demod,221,demod,267,267,unit_del,273] p(b,b).
+304 [back_demod,190,demod,267,267,267,289,267,267,289,unit_del,273,290] f(b)=b|f(b)=k.
+305 [back_demod,187,demod,267,267,267,289,267,267,289,unit_del,273,290] -p(f(b),b)|f(b)=k.
+320,319 [304,split.2.1.1.1.1.1] f(b)=b.
+321 [back_demod,305,demod,320,320,unit_del,291,273] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8791) -------
+clauses given                 22
+clauses generated            754
+clauses kept                 316
+clauses forward subsumed     615
+clauses back subsumed         67
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8791 finished Mon Aug  2 15:31:10 2004
+Refuted case [2.1.1.1.1.1].
+
+--- refuted case [2.1.1.1.1.2]
+
+Case [2.1.1.1.1.2]   (process 8792):
+Assumption: 320 [304,split.2.1.1.1.1.2] f(b)=k.
+
+-----> EMPTY CLAUSE at   0.01 sec ----> 376 [binary,316.2,290.1,demod,321,unit_del,273,15] $F.
+
+Length of proof is 23.  Level of proof is 9.  Case [2.1.1.1.1.2]
+
+---------------- PROOF ----------------
+
+4 [] x=m| -p(x,m)|f(x)!=m.
+7 [] x=m| -p(x,m)|p(f(x),x).
+12 [] m=k|p(m,k).
+13 [] b=k|p(b,k).
+14 [copy,13,flip.1] k=b|p(b,k).
+15 [] x=x.
+16 [] m!=b.
+17 [] x=j| -p(x,j)|x=k.
+18 [] k=j|p(k,j).
+25 [para_into,16.1.1,12.1.1] k!=b|p(m,k).
+27 [18,split.2] p(k,j).
+47 [para_into,27.1.1,14.1.1] p(b,j)|p(b,k).
+80 [binary,25.1,14.1] p(m,k)|p(b,k).
+129 [47,split.2.1] p(b,j).
+157 [80,split.2.1.1] p(m,k).
+161 [para_into,157.1.2,14.1.1] p(m,b)|p(b,k).
+176 [161,split.2.1.1.1] p(m,b).
+188 [binary,17.2,129.1,flip.1,flip.2] j=b|k=b.
+190 [binary,17.2,7.3,flip.3] f(j)=j|f(j)=k|m=j| -p(j,m).
+223 [para_from,17.1.1,14.2.1,unit_del,129,factor_simp] k=b|p(j,k).
+231 [para_from,17.1.1,16.1.1] j!=b| -p(m,j)|m=k.
+252 [para_from,17.3.1,16.1.1] k!=b|m=j| -p(m,j).
+256 [para_from,17.3.1,4.2.2] x=m| -p(x,k)|f(x)!=m|m=j| -p(m,j).
+267,266 [188,split.2.1.1.1.1] j=b.
+269 [back_demod,256,demod,267,267,unit_del,16,176] x=m| -p(x,k)|f(x)!=m.
+273 [back_demod,252,demod,267,267,unit_del,16,176] k!=b.
+289,288 [back_demod,231,demod,267,267,unit_del,15,176] m=k.
+290 [back_demod,223,demod,267,unit_del,273] p(b,k).
+304 [back_demod,190,demod,267,267,267,289,267,267,289,unit_del,273,290] f(b)=b|f(b)=k.
+316 [back_demod,269,demod,289,289] x=k| -p(x,k)|f(x)!=k.
+321,320 [304,split.2.1.1.1.1.2] f(b)=k.
+376 [binary,316.2,290.1,demod,321,unit_del,273,15] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8792) -------
+clauses given                 29
+clauses generated           1142
+clauses kept                 371
+clauses forward subsumed     944
+clauses back subsumed         67
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8792 finished Mon Aug  2 15:31:10 2004
+Refuted case [2.1.1.1.1.2].
+
+------- statistics (process 8790) -------
+clauses given                 22
+clauses generated            754
+clauses kept                 315
+clauses forward subsumed     615
+clauses back subsumed         67
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8790 finished Mon Aug  2 15:31:10 2004
+Refuted case [2.1.1.1.1].
+
+Case [2.1.1.1.2]   (process 8793):
+Assumption: 267 [188,split.2.1.1.1.2] k=b.
+
+Splitting on clause 273 [back_unit_del,266.1,261.1,demod,268] p(j,b)|p(j,g(j)).
+
+--- refuted case [2.1.1.1.2.1]
+
+Case [2.1.1.1.2.1]   (process 8794):
+Assumption: 427 [273,split.2.1.1.1.2.1] p(j,b).
+0 [back_unit_del,427.1,308.2] m=j.
+0 [back_unit_del,427.1,280.2] p(b,m).
+
+-----> EMPTY CLAUSE at   0.01 sec ----> 462 [binary,448.1,436.1,unit_del,441,438] $F.
+
+Length of proof is 33.  Level of proof is 9.  Case [2.1.1.1.2.1]
+
+---------------- PROOF ----------------
+
+1 [] x=m|p(x,m)|y=m|y=x| -p(x,y)| -p(y,x).
+3 [] x=k|x=m|x=b| -p(x,k).
+4 [] x=m| -p(x,m)|f(x)!=m.
+5 [] x=m| -p(x,m)|f(x)!=x.
+7 [] x=m| -p(x,m)|p(f(x),x).
+10 [] x=b|p(x,b)|p(x,g(x)).
+12 [] m=k|p(m,k).
+13 [] b=k|p(b,k).
+14 [copy,13,flip.1] k=b|p(b,k).
+16 [] m!=b.
+17 [] x=j| -p(x,j)|x=k.
+18 [] k=j|p(k,j).
+25 [para_into,16.1.1,12.1.1] k!=b|p(m,k).
+26 [18,split_neg.2] k!=j.
+27 [18,split.2] p(k,j).
+47 [para_into,27.1.1,14.1.1] p(b,j)|p(b,k).
+80 [binary,25.1,14.1] p(m,k)|p(b,k).
+129 [47,split.2.1] p(b,j).
+154 [para_into,129.1.2,1.3.1] p(b,m)|x=m|p(x,m)|j=x| -p(x,j)| -p(j,x).
+156 [factor,154.1.3,unit_del,16,129] p(b,m)|j=b| -p(j,b).
+157 [80,split.2.1.1] p(m,k).
+161 [para_into,157.1.2,14.1.1] p(m,b)|p(b,k).
+176 [161,split.2.1.1.1] p(m,b).
+188 [binary,17.2,129.1,flip.1,flip.2] j=b|k=b.
+201 [para_into,17.2.2,3.3.1,unit_del,26,flip.4] x=j| -p(x,b)|x=k|m=j| -p(j,k).
+210 [factor,201.1.4,unit_del,176] m=j|m=k| -p(j,k).
+246 [para_from,17.3.1,10.2.2,unit_del,129,flip.4] x=b|p(x,k)|p(x,g(x))|j=b.
+261 [factor,246.1.4] j=b|p(j,k)|p(j,g(j)).
+266 [188,split_neg.2.1.1.1.2] j!=b.
+268,267 [188,split.2.1.1.1.2] k=b.
+273 [back_unit_del,266.1,261.1,demod,268] p(j,b)|p(j,g(j)).
+280 [back_unit_del,266.1,156.2] p(b,m)| -p(j,b).
+308 [back_demod,210,demod,268,268,unit_del,16] m=j| -p(j,b).
+328 [back_demod,3,demod,268,268,factor_simp] x=b|x=m| -p(x,b).
+335 [binary,280.1,7.2,unit_del,16] -p(j,b)|p(f(b),b).
+337 [binary,280.1,5.2,unit_del,16] -p(j,b)|f(b)!=b.
+338 [binary,280.1,4.2,unit_del,16] -p(j,b)|f(b)!=m.
+427 [273,split.2.1.1.1.2.1] p(j,b).
+435 [back_unit_del,427.1,338.1] f(b)!=m.
+436 [back_unit_del,427.1,337.1] f(b)!=b.
+438 [back_unit_del,427.1,335.1] p(f(b),b).
+440,439 [back_unit_del,427.1,308.2] m=j.
+441 [back_demod,435,demod,440] f(b)!=j.
+448 [back_demod,328,demod,440] x=b|x=j| -p(x,b).
+462 [binary,448.1,436.1,unit_del,441,438] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8794) -------
+clauses given                 32
+clauses generated           1471
+clauses kept                 458
+clauses forward subsumed    1156
+clauses back subsumed        205
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8794 finished Mon Aug  2 15:31:10 2004
+Refuted case [2.1.1.1.2.1].
+
+--- refuted case [2.1.1.1.2.2]
+
+Case [2.1.1.1.2.2]   (process 8795):
+Assumption: 428 [273,split.2.1.1.1.2.2] p(j,g(j)).
+0 [back_unit_del,427.1,299.1] -p(m,j).
+0 [back_unit_del,427.1,272.1] g(j)!=j.
+0 [back_unit_del,427.1,271.1] g(j)!=b.
+
+----> UNIT CONFLICT at   0.00 sec ----> 479 [binary,477.1,475.1] $F.
+
+Length of proof is 23.  Level of proof is 9.  Case [2.1.1.1.2.2]
+
+---------------- PROOF ----------------
+
+8 [] x=b|p(x,b)|g(x)!=b.
+9 [] x=b|p(x,b)|g(x)!=x.
+10 [] x=b|p(x,b)|p(x,g(x)).
+11 [] x=b|p(x,b)|p(g(x),x).
+13 [] b=k|p(b,k).
+14 [copy,13,flip.1] k=b|p(b,k).
+17 [] x=j| -p(x,j)|x=k.
+18 [] k=j|p(k,j).
+27 [18,split.2] p(k,j).
+47 [para_into,27.1.1,14.1.1] p(b,j)|p(b,k).
+129 [47,split.2.1] p(b,j).
+186 [binary,17.1,9.3] -p(g(j),j)|g(j)=k|j=b|p(j,b).
+188 [binary,17.2,129.1,flip.1,flip.2] j=b|k=b.
+245 [para_from,17.3.1,11.2.2,unit_del,129,flip.4] x=b|p(x,k)|p(g(x),x)|j=b.
+246 [para_from,17.3.1,10.2.2,unit_del,129,flip.4] x=b|p(x,k)|p(x,g(x))|j=b.
+248 [para_from,17.3.1,8.2.2,unit_del,129,flip.4] x=b|p(x,k)|g(x)!=b|j=b.
+260 [factor,245.1.4] j=b|p(j,k)|p(g(j),j).
+261 [factor,246.1.4] j=b|p(j,k)|p(j,g(j)).
+263 [factor,248.1.4] j=b|p(j,k)|g(j)!=b.
+266 [188,split_neg.2.1.1.1.2] j!=b.
+268,267 [188,split.2.1.1.1.2] k=b.
+271 [back_unit_del,266.1,263.1,demod,268] p(j,b)|g(j)!=b.
+273 [back_unit_del,266.1,261.1,demod,268] p(j,b)|p(j,g(j)).
+274 [back_unit_del,266.1,260.1,demod,268] p(j,b)|p(g(j),j).
+279 [back_unit_del,266.1,186.3,demod,268] -p(g(j),j)|g(j)=b|p(j,b).
+427 [273,split_neg.2.1.1.1.2.2] -p(j,b).
+471 [back_unit_del,427.1,279.3] -p(g(j),j)|g(j)=b.
+473 [back_unit_del,427.1,274.1] p(g(j),j).
+475 [back_unit_del,427.1,271.1] g(j)!=b.
+477 [back_unit_del,473.1,471.1] g(j)=b.
+479 [binary,477.1,475.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8795) -------
+clauses given                 24
+clauses generated           1313
+clauses kept                 475
+clauses forward subsumed     928
+clauses back subsumed        201
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8795 finished Mon Aug  2 15:31:10 2004
+Refuted case [2.1.1.1.2.2].
+
+------- statistics (process 8793) -------
+clauses given                 24
+clauses generated           1241
+clauses kept                 424
+clauses forward subsumed     905
+clauses back subsumed        122
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.04          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8793 finished Mon Aug  2 15:31:10 2004
+Refuted case [2.1.1.1.2].
+
+------- statistics (process 8789) -------
+clauses given                 14
+clauses generated            622
+clauses kept                 264
+clauses forward subsumed     347
+clauses back subsumed         55
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8789 finished Mon Aug  2 15:31:10 2004
+Refuted case [2.1.1.1].
+
+Case [2.1.1.2]   (process 8796):
+Assumption: 177 [161,split.2.1.1.2] p(b,k).
+
+Splitting on clause 182 [back_unit_del,176.1,163.1] p(k,b)|p(k,g(k)).
+
+Case [2.1.1.2.1]   (process 8797):
+Assumption: 411 [182,split.2.1.1.2.1] p(k,b).
+
+Splitting on clause 414 [back_unit_del,411.1,208.3] p(b,m)|k=b.
+
+--- refuted case [2.1.1.2.1.1]
+
+Case [2.1.1.2.1.1]   (process 8798):
+Assumption: 430 [414,split.2.1.1.2.1.1] p(b,m).
+
+-----> EMPTY CLAUSE at   0.13 sec ----> 906 [back_demod,882,demod,897,897,unit_del,432,434] $F.
+
+Length of proof is 39.  Level of proof is 14.  Case [2.1.1.2.1.1]
+
+---------------- PROOF ----------------
+
+1 [] x=m|p(x,m)|y=m|y=x| -p(x,y)| -p(y,x).
+2 [] x=b| -p(x,b)|y=b|y=x| -p(x,y)| -p(y,x).
+3 [] x=k|x=m|x=b| -p(x,k).
+4 [] x=m| -p(x,m)|f(x)!=m.
+5 [] x=m| -p(x,m)|f(x)!=x.
+6 [] x=m| -p(x,m)|p(x,f(x)).
+7 [] x=m| -p(x,m)|p(f(x),x).
+8 [] x=b|p(x,b)|g(x)!=b.
+9 [] x=b|p(x,b)|g(x)!=x.
+10 [] x=b|p(x,b)|p(x,g(x)).
+11 [] x=b|p(x,b)|p(g(x),x).
+12 [] m=k|p(m,k).
+13 [] b=k|p(b,k).
+14 [copy,13,flip.1] k=b|p(b,k).
+16 [] m!=b.
+17 [] x=j| -p(x,j)|x=k.
+18 [] k=j|p(k,j).
+19 [binary,16.1,11.1] p(m,b)|p(g(m),m).
+20 [binary,16.1,10.1] p(m,b)|p(m,g(m)).
+21 [binary,16.1,9.1] p(m,b)|g(m)!=m.
+22 [binary,16.1,8.1] p(m,b)|g(m)!=b.
+25 [para_into,16.1.1,12.1.1] k!=b|p(m,k).
+27 [18,split.2] p(k,j).
+47 [para_into,27.1.1,14.1.1] p(b,j)|p(b,k).
+80 [binary,25.1,14.1] p(m,k)|p(b,k).
+129 [47,split.2.1] p(b,j).
+157 [80,split.2.1.1] p(m,k).
+161 [para_into,157.1.2,14.1.1] p(m,b)|p(b,k).
+163 [para_into,157.1.2,10.1.1] p(m,b)|p(k,b)|p(k,g(k)).
+176 [161,split_neg.2.1.1.2] -p(m,b).
+177 [161,split.2.1.1.2] p(b,k).
+182 [back_unit_del,176.1,163.1] p(k,b)|p(k,g(k)).
+184 [back_unit_del,176.1,22.1] g(m)!=b.
+185 [back_unit_del,176.1,21.1] g(m)!=m.
+186 [back_unit_del,176.1,20.1] p(m,g(m)).
+187 [back_unit_del,176.1,19.1] p(g(m),m).
+206 [para_into,177.1.2,1.3.1] p(b,m)|x=m|p(x,m)|k=x| -p(x,k)| -p(k,x).
+208 [factor,206.1.3,unit_del,16,177] p(b,m)|k=b| -p(k,b).
+226 [binary,186.1,2.6,unit_del,184,16,185,187] -p(g(m),b).
+238 [para_into,226.1.2,7.1.1,unit_del,187] -p(b,m)|p(f(b),b).
+239 [para_into,226.1.2,6.1.1,unit_del,187] -p(b,m)|p(b,f(b)).
+240 [para_into,226.1.2,5.1.1,unit_del,187] -p(b,m)|f(b)!=b.
+241 [para_into,226.1.2,4.1.1,unit_del,187] -p(b,m)|f(b)!=m.
+411 [182,split.2.1.1.2.1] p(k,b).
+414 [back_unit_del,411.1,208.3] p(b,m)|k=b.
+430 [414,split.2.1.1.2.1.1] p(b,m).
+431 [back_unit_del,430.1,241.1] f(b)!=m.
+432 [back_unit_del,430.1,240.1] f(b)!=b.
+433 [back_unit_del,430.1,239.1] p(b,f(b)).
+434 [back_unit_del,430.1,238.1] p(f(b),b).
+449 [binary,433.1,1.6,unit_del,431,16,432,434] p(f(b),m).
+457 [binary,449.1,2.5,unit_del,432,434,16,431] -p(m,f(b)).
+461 [para_into,457.1.2,3.1.1,unit_del,157,431,432] -p(f(b),k).
+882 [para_from,17.3.1,457.1.2,unit_del,157] f(b)=j| -p(f(b),j).
+897,896 [para_from,17.3.1,434.1.2,unit_del,461,129,flip.1] j=b.
+906 [back_demod,882,demod,897,897,unit_del,432,434] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8798) -------
+clauses given                 62
+clauses generated           4523
+clauses kept                 902
+clauses forward subsumed    3498
+clauses back subsumed        350
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.13          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8798 finished Mon Aug  2 15:31:10 2004
+Refuted case [2.1.1.2.1.1].
+
+--- refuted case [2.1.1.2.1.2]
+
+Case [2.1.1.2.1.2]   (process 8799):
+Assumption: 431 [414,split.2.1.1.2.1.2] k=b.
+
+----> UNIT CONFLICT at   0.00 sec ----> 448 [binary,447.1,176.1] $F.
+
+Length of proof is 15.  Level of proof is 10.  Case [2.1.1.2.1.2]
+
+---------------- PROOF ----------------
+
+1 [] x=m|p(x,m)|y=m|y=x| -p(x,y)| -p(y,x).
+10 [] x=b|p(x,b)|p(x,g(x)).
+12 [] m=k|p(m,k).
+13 [] b=k|p(b,k).
+14 [copy,13,flip.1] k=b|p(b,k).
+16 [] m!=b.
+25 [para_into,16.1.1,12.1.1] k!=b|p(m,k).
+80 [binary,25.1,14.1] p(m,k)|p(b,k).
+157 [80,split.2.1.1] p(m,k).
+161 [para_into,157.1.2,14.1.1] p(m,b)|p(b,k).
+163 [para_into,157.1.2,10.1.1] p(m,b)|p(k,b)|p(k,g(k)).
+176 [161,split_neg.2.1.1.2] -p(m,b).
+177 [161,split.2.1.1.2] p(b,k).
+182 [back_unit_del,176.1,163.1] p(k,b)|p(k,g(k)).
+206 [para_into,177.1.2,1.3.1] p(b,m)|x=m|p(x,m)|k=x| -p(x,k)| -p(k,x).
+208 [factor,206.1.3,unit_del,16,177] p(b,m)|k=b| -p(k,b).
+411 [182,split.2.1.1.2.1] p(k,b).
+414 [back_unit_del,411.1,208.3] p(b,m)|k=b.
+432,431 [414,split.2.1.1.2.1.2] k=b.
+447 [back_demod,157,demod,432] p(m,b).
+448 [binary,447.1,176.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8799) -------
+clauses given                 36
+clauses generated           2012
+clauses kept                 445
+clauses forward subsumed    1527
+clauses back subsumed        270
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8799 finished Mon Aug  2 15:31:10 2004
+Refuted case [2.1.1.2.1.2].
+
+------- statistics (process 8797) -------
+clauses given                 36
+clauses generated           2002
+clauses kept                 428
+clauses forward subsumed    1506
+clauses back subsumed        266
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8797 finished Mon Aug  2 15:31:10 2004
+Refuted case [2.1.1.2.1].
+
+--- refuted case [2.1.1.2.2]
+
+Case [2.1.1.2.2]   (process 8800):
+Assumption: 412 [182,split.2.1.1.2.2] p(k,g(k)).
+0 [back_unit_del,411.1,181.1] g(k)!=k.
+0 [back_unit_del,411.1,180.1] g(k)!=b.
+
+----> UNIT CONFLICT at   0.01 sec ----> 496 [binary,495.1,411.1] $F.
+
+Length of proof is 31.  Level of proof is 13.  Case [2.1.1.2.2]
+
+---------------- PROOF ----------------
+
+3 [] x=k|x=m|x=b| -p(x,k).
+4 [] x=m| -p(x,m)|f(x)!=m.
+5 [] x=m| -p(x,m)|f(x)!=x.
+6 [] x=m| -p(x,m)|p(x,f(x)).
+7 [] x=m| -p(x,m)|p(f(x),x).
+8 [] x=b|p(x,b)|g(x)!=b.
+9 [] x=b|p(x,b)|g(x)!=x.
+10 [] x=b|p(x,b)|p(x,g(x)).
+11 [] x=b|p(x,b)|p(g(x),x).
+12 [] m=k|p(m,k).
+13 [] b=k|p(b,k).
+14 [copy,13,flip.1] k=b|p(b,k).
+16 [] m!=b.
+25 [para_into,16.1.1,12.1.1] k!=b|p(m,k).
+80 [binary,25.1,14.1] p(m,k)|p(b,k).
+157 [80,split.2.1.1] p(m,k).
+161 [para_into,157.1.2,14.1.1] p(m,b)|p(b,k).
+162 [para_into,157.1.2,11.1.1] p(m,b)|p(k,b)|p(g(k),k).
+163 [para_into,157.1.2,10.1.1] p(m,b)|p(k,b)|p(k,g(k)).
+164 [para_into,157.1.2,9.1.1] p(m,b)|p(k,b)|g(k)!=k.
+165 [para_into,157.1.2,8.1.1] p(m,b)|p(k,b)|g(k)!=b.
+176 [161,split_neg.2.1.1.2] -p(m,b).
+180 [back_unit_del,176.1,165.1] p(k,b)|g(k)!=b.
+181 [back_unit_del,176.1,164.1] p(k,b)|g(k)!=k.
+182 [back_unit_del,176.1,163.1] p(k,b)|p(k,g(k)).
+183 [back_unit_del,176.1,162.1] p(k,b)|p(g(k),k).
+365 [binary,180.2,3.3] p(k,b)|g(k)=k|g(k)=m| -p(g(k),k).
+406 [para_into,181.2.1,3.2.1] p(k,b)|m!=k|g(k)=k|g(k)=b| -p(g(k),k).
+411 [182,split_neg.2.1.1.2.2] -p(k,b).
+412 [182,split.2.1.1.2.2] p(k,g(k)).
+417 [back_unit_del,411.1,406.1] m!=k|g(k)=k|g(k)=b| -p(g(k),k).
+438 [back_unit_del,411.1,365.1] g(k)=k|g(k)=m| -p(g(k),k).
+443 [back_unit_del,411.1,183.1] p(g(k),k).
+444 [back_unit_del,411.1,181.1] g(k)!=k.
+455,454 [back_unit_del,443.1,438.3,unit_del,444] g(k)=m.
+456 [back_unit_del,444.1,417.2,demod,455,455,unit_del,16,157] m!=k.
+457 [back_demod,412,demod,455] p(k,m).
+487 [binary,457.1,7.2,unit_del,456] p(f(k),k).
+488 [binary,457.1,6.2,unit_del,456] p(k,f(k)).
+489 [binary,457.1,5.2,unit_del,456] f(k)!=k.
+490 [binary,457.1,4.2,unit_del,456] f(k)!=m.
+493,492 [binary,487.1,3.4,unit_del,489,490] f(k)=b.
+495 [back_demod,488,demod,493] p(k,b).
+496 [binary,495.1,411.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8800) -------
+clauses given                 38
+clauses generated           2152
+clauses kept                 492
+clauses forward subsumed    1617
+clauses back subsumed        305
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8800 finished Mon Aug  2 15:31:10 2004
+Refuted case [2.1.1.2.2].
+
+------- statistics (process 8796) -------
+clauses given                 33
+clauses generated           1896
+clauses kept                 409
+clauses forward subsumed    1421
+clauses back subsumed        140
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.05          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8796 finished Mon Aug  2 15:31:10 2004
+Refuted case [2.1.1.2].
+
+------- statistics (process 8788) -------
+clauses given                 11
+clauses generated            386
+clauses kept                 174
+clauses forward subsumed     210
+clauses back subsumed         38
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8788 finished Mon Aug  2 15:31:10 2004
+Refuted case [2.1.1].
+
+Case [2.1.2]   (process 8801):
+Assumption: 158 [80,split.2.1.2] p(b,k).
+0 [back_unit_del,157.1,25.2] k!=b.
+0 [back_unit_del,157.1,12.2] m=k.
+
+Splitting on clause 169 [back_unit_del,157.1,82.1] p(k,b)|p(k,g(k)).
+
+--- refuted case [2.1.2.1]
+
+Case [2.1.2.1]   (process 8802):
+Assumption: 215 [169,split.2.1.2.1] p(k,b).
+
+----> UNIT CONFLICT at   0.04 sec ----> 391 [binary,389.1,382.1] $F.
+
+Length of proof is 30.  Level of proof is 9.  Case [2.1.2.1]
+
+---------------- PROOF ----------------
+
+3 [] x=k|x=m|x=b| -p(x,k).
+4 [] x=m| -p(x,m)|f(x)!=m.
+5 [] x=m| -p(x,m)|f(x)!=x.
+7 [] x=m| -p(x,m)|p(f(x),x).
+12 [] m=k|p(m,k).
+13 [] b=k|p(b,k).
+14 [copy,13,flip.1] k=b|p(b,k).
+16 [] m!=b.
+17 [] x=j| -p(x,j)|x=k.
+18 [] k=j|p(k,j).
+25 [para_into,16.1.1,12.1.1] k!=b|p(m,k).
+26 [18,split_neg.2] k!=j.
+27 [18,split.2] p(k,j).
+30 [para_into,26.1.1,14.1.1,flip.1] j!=b|p(b,k).
+47 [para_into,27.1.1,14.1.1] p(b,j)|p(b,k).
+66 [para_into,27.1.2,7.1.1] p(k,m)| -p(j,m)|p(f(j),j).
+68 [para_into,27.1.2,5.1.1] p(k,m)| -p(j,m)|f(j)!=j.
+72 [para_into,27.1.2,3.1.1,flip.2] p(k,k)|m=j|j=b| -p(j,k).
+80 [binary,25.1,14.1] p(m,k)|p(b,k).
+116 [para_into,30.2.1,4.1.1] j!=b|p(m,k)| -p(b,m)|f(b)!=m.
+129 [47,split.2.1] p(b,j).
+157 [80,split_neg.2.1.2] -p(m,k).
+158 [80,split.2.1.2] p(b,k).
+161 [back_unit_del,157.1,116.2] j!=b| -p(b,m)|f(b)!=m.
+171 [back_unit_del,157.1,25.2] k!=b.
+173,172 [back_unit_del,157.1,12.2] m=k.
+182 [back_demod,161,demod,173,173,unit_del,158] j!=b|f(b)!=k.
+184 [back_demod,157,demod,173] -p(k,k).
+192 [back_demod,72,demod,173,unit_del,184,26] j=b| -p(j,k).
+195 [back_demod,68,demod,173,173,unit_del,184] -p(j,k)|f(j)!=j.
+197 [back_demod,66,demod,173,173,unit_del,184] -p(j,k)|p(f(j),j).
+243 [binary,182.1,192.1] f(b)!=k| -p(j,k).
+297 [para_into,197.2.2,192.1.1,factor_simp] -p(j,k)|p(f(j),b).
+340 [binary,17.1,195.2] -p(f(j),j)|f(j)=k| -p(j,k).
+345,344 [binary,17.2,129.1,unit_del,171,flip.1] j=b.
+348 [back_demod,340,demod,345,345,345,345,unit_del,158] -p(f(b),b)|f(b)=k.
+370 [back_demod,297,demod,345,345,unit_del,158] p(f(b),b).
+382 [back_demod,243,demod,345,unit_del,158] f(b)!=k.
+389 [back_unit_del,370.1,348.1] f(b)=k.
+391 [binary,389.1,382.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8802) -------
+clauses given                 36
+clauses generated           1338
+clauses kept                 386
+clauses forward subsumed    1138
+clauses back subsumed        101
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.04          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8802 finished Mon Aug  2 15:31:10 2004
+Refuted case [2.1.2.1].
+
+The Assumption for case [2.1.2.1] was not used;
+therefore we skip case:  [2.1.2.2].
+
+------- statistics (process 8801) -------
+clauses given                 17
+clauses generated            579
+clauses kept                 212
+clauses forward subsumed     422
+clauses back subsumed         69
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8801 finished Mon Aug  2 15:31:10 2004
+Refuted case [2.1.2].
+
+------- statistics (process 8787) -------
+clauses given                  9
+clauses generated            335
+clauses kept                 155
+clauses forward subsumed     180
+clauses back subsumed          9
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8787 finished Mon Aug  2 15:31:10 2004
+Refuted case [2.1].
+
+Case [2.2]   (process 8803):
+Assumption: 130 [47,split.2.2] p(b,k).
+
+Splitting on clause 19 [binary,16.1,11.1] p(m,b)|p(g(m),m).
+
+Case [2.2.1]   (process 8804):
+Assumption: 180 [19,split.2.2.1] p(m,b).
+
+Splitting on clause 182 [para_into,180.1.1,12.1.1] p(k,b)|p(m,k).
+
+Case [2.2.1.1]   (process 8805):
+Assumption: 190 [182,split.2.2.1.1] p(k,b).
+
+Splitting on clause 191 [back_unit_del,190.1,179.3] p(b,m)|k=b.
+
+Case [2.2.1.1.1]   (process 8806):
+Assumption: 203 [191,split.2.2.1.1.1] p(b,m).
+
+Splitting on clause 255 [para_into,234.1.2,12.1.1] p(f(b),k)|p(m,k).
+
+--- refuted case [2.2.1.1.1.1]
+
+Case [2.2.1.1.1.1]   (process 8807):
+Assumption: 475 [255,split.2.2.1.1.1.1] p(f(b),k).
+
+----> UNIT CONFLICT at   0.00 sec ----> 491 [binary,490.1,487.1] $F.
+
+Length of proof is 25.  Level of proof is 12.  Case [2.2.1.1.1.1]
+
+---------------- PROOF ----------------
+
+1 [] x=m|p(x,m)|y=m|y=x| -p(x,y)| -p(y,x).
+2 [] x=b| -p(x,b)|y=b|y=x| -p(x,y)| -p(y,x).
+3 [] x=k|x=m|x=b| -p(x,k).
+4 [] x=m| -p(x,m)|f(x)!=m.
+5 [] x=m| -p(x,m)|f(x)!=x.
+6 [] x=m| -p(x,m)|p(x,f(x)).
+7 [] x=m| -p(x,m)|p(f(x),x).
+11 [] x=b|p(x,b)|p(g(x),x).
+12 [] m=k|p(m,k).
+13 [] b=k|p(b,k).
+14 [copy,13,flip.1] k=b|p(b,k).
+16 [] m!=b.
+18 [] k=j|p(k,j).
+19 [binary,16.1,11.1] p(m,b)|p(g(m),m).
+27 [18,split.2] p(k,j).
+47 [para_into,27.1.1,14.1.1] p(b,j)|p(b,k).
+130 [47,split.2.2] p(b,k).
+177 [para_into,130.1.2,1.3.1] p(b,m)|x=m|p(x,m)|k=x| -p(x,k)| -p(k,x).
+179 [factor,177.1.3,unit_del,16,130] p(b,m)|k=b| -p(k,b).
+180 [19,split.2.2.1] p(m,b).
+182 [para_into,180.1.1,12.1.1] p(k,b)|p(m,k).
+190 [182,split.2.2.1.1] p(k,b).
+191 [back_unit_del,190.1,179.3] p(b,m)|k=b.
+203 [191,split.2.2.1.1.1] p(b,m).
+227 [binary,203.1,7.2,unit_del,16] p(f(b),b).
+228 [binary,203.1,6.2,unit_del,16] p(b,f(b)).
+229 [binary,203.1,5.2,unit_del,16] f(b)!=b.
+230 [binary,203.1,4.2,unit_del,16] f(b)!=m.
+234 [binary,227.1,1.5,unit_del,230,16,229,228] p(f(b),m).
+248 [binary,230.1,2.4,unit_del,16,180,229,234] -p(m,f(b)).
+250 [para_into,230.1.1,3.1.1,unit_del,230,229,flip.1] m!=k| -p(f(b),k).
+255 [para_into,234.1.2,12.1.1] p(f(b),k)|p(m,k).
+259 [para_into,248.1.2,3.1.1,unit_del,230,229] -p(m,k)| -p(f(b),k).
+450 [binary,250.1,12.1] -p(f(b),k)|p(m,k).
+475 [255,split.2.2.1.1.1.1] p(f(b),k).
+487 [back_unit_del,475.1,450.1] p(m,k).
+490 [back_unit_del,475.1,259.2] -p(m,k).
+491 [binary,490.1,487.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8807) -------
+clauses given                 34
+clauses generated           1896
+clauses kept                 487
+clauses forward subsumed    1348
+clauses back subsumed        179
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8807 finished Mon Aug  2 15:31:10 2004
+Refuted case [2.2.1.1.1.1].
+
+Case [2.2.1.1.1.2]   (process 8808):
+Assumption: 476 [255,split.2.2.1.1.1.2] p(m,k).
+
+Splitting on clause 776 [para_into,773.1.2,11.1.1,unit_del,180] p(j,b)|p(g(j),j).
+
+Case [2.2.1.1.1.2.1]   (process 8809):
+Assumption: 790 [776,split.2.2.1.1.1.2.1] p(j,b).
+
+Splitting on clause 192 [back_unit_del,190.1,162.4] m=k|p(k,m)|k=b.
+
+--- refuted case [2.2.1.1.1.2.1.1]
+
+Case [2.2.1.1.1.2.1.1]   (process 8810):
+Assumption: 806 [192,split.2.2.1.1.1.2.1.1] m=k.
+
+----> UNIT CONFLICT at   0.00 sec ----> 815 [binary,814.1,27.1] $F.
+
+Length of proof is 26.  Level of proof is 13.  Case [2.2.1.1.1.2.1.1]
+
+---------------- PROOF ----------------
+
+1 [] x=m|p(x,m)|y=m|y=x| -p(x,y)| -p(y,x).
+4 [] x=m| -p(x,m)|f(x)!=m.
+5 [] x=m| -p(x,m)|f(x)!=x.
+6 [] x=m| -p(x,m)|p(x,f(x)).
+7 [] x=m| -p(x,m)|p(f(x),x).
+11 [] x=b|p(x,b)|p(g(x),x).
+12 [] m=k|p(m,k).
+13 [] b=k|p(b,k).
+14 [copy,13,flip.1] k=b|p(b,k).
+16 [] m!=b.
+17 [] x=j| -p(x,j)|x=k.
+18 [] k=j|p(k,j).
+19 [binary,16.1,11.1] p(m,b)|p(g(m),m).
+27 [18,split.2] p(k,j).
+47 [para_into,27.1.1,14.1.1] p(b,j)|p(b,k).
+129 [47,split_neg.2.2] -p(b,j).
+130 [47,split.2.2] p(b,k).
+162 [binary,130.1,1.6,unit_del,16,flip.1,flip.3] m=k|p(k,m)|k=b| -p(k,b).
+177 [para_into,130.1.2,1.3.1] p(b,m)|x=m|p(x,m)|k=x| -p(x,k)| -p(k,x).
+179 [factor,177.1.3,unit_del,16,130] p(b,m)|k=b| -p(k,b).
+180 [19,split.2.2.1] p(m,b).
+182 [para_into,180.1.1,12.1.1] p(k,b)|p(m,k).
+190 [182,split.2.2.1.1] p(k,b).
+191 [back_unit_del,190.1,179.3] p(b,m)|k=b.
+192 [back_unit_del,190.1,162.4] m=k|p(k,m)|k=b.
+203 [191,split.2.2.1.1.1] p(b,m).
+227 [binary,203.1,7.2,unit_del,16] p(f(b),b).
+228 [binary,203.1,6.2,unit_del,16] p(b,f(b)).
+229 [binary,203.1,5.2,unit_del,16] f(b)!=b.
+230 [binary,203.1,4.2,unit_del,16] f(b)!=m.
+234 [binary,227.1,1.5,unit_del,230,16,229,228] p(f(b),m).
+255 [para_into,234.1.2,12.1.1] p(f(b),k)|p(m,k).
+475 [255,split_neg.2.2.1.1.1.2] -p(f(b),k).
+734 [para_from,17.1.1,203.1.2,unit_del,129] -p(m,j)|m=k.
+773 [para_from,734.2.1,234.1.2,unit_del,475] -p(m,j).
+807,806 [192,split.2.2.1.1.1.2.1.1] m=k.
+814 [back_demod,773,demod,807] -p(k,j).
+815 [binary,814.1,27.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8810) -------
+clauses given                 58
+clauses generated           4010
+clauses kept                 811
+clauses forward subsumed    3101
+clauses back subsumed        556
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8810 finished Mon Aug  2 15:31:10 2004
+Refuted case [2.2.1.1.1.2.1.1].
+
+--- refuted case [2.2.1.1.1.2.1.2]
+
+Case [2.2.1.1.1.2.1.2]   (process 8811):
+Assumption: 807 [192,split.2.2.1.1.1.2.1.2] p(k,m).
+
+-----> EMPTY CLAUSE at   0.00 sec ----> 825 [back_unit_del,807.1,617.1,demod,824,824,824,824,824,unit_del,229,229,227] $F.
+
+Length of proof is 28.  Level of proof is 13.  Case [2.2.1.1.1.2.1.2]
+
+---------------- PROOF ----------------
+
+1 [] x=m|p(x,m)|y=m|y=x| -p(x,y)| -p(y,x).
+2 [] x=b| -p(x,b)|y=b|y=x| -p(x,y)| -p(y,x).
+3 [] x=k|x=m|x=b| -p(x,k).
+4 [] x=m| -p(x,m)|f(x)!=m.
+5 [] x=m| -p(x,m)|f(x)!=x.
+6 [] x=m| -p(x,m)|p(x,f(x)).
+7 [] x=m| -p(x,m)|p(f(x),x).
+11 [] x=b|p(x,b)|p(g(x),x).
+12 [] m=k|p(m,k).
+13 [] b=k|p(b,k).
+14 [copy,13,flip.1] k=b|p(b,k).
+16 [] m!=b.
+18 [] k=j|p(k,j).
+19 [binary,16.1,11.1] p(m,b)|p(g(m),m).
+27 [18,split.2] p(k,j).
+47 [para_into,27.1.1,14.1.1] p(b,j)|p(b,k).
+130 [47,split.2.2] p(b,k).
+162 [binary,130.1,1.6,unit_del,16,flip.1,flip.3] m=k|p(k,m)|k=b| -p(k,b).
+177 [para_into,130.1.2,1.3.1] p(b,m)|x=m|p(x,m)|k=x| -p(x,k)| -p(k,x).
+179 [factor,177.1.3,unit_del,16,130] p(b,m)|k=b| -p(k,b).
+180 [19,split.2.2.1] p(m,b).
+182 [para_into,180.1.1,12.1.1] p(k,b)|p(m,k).
+190 [182,split.2.2.1.1] p(k,b).
+191 [back_unit_del,190.1,179.3] p(b,m)|k=b.
+192 [back_unit_del,190.1,162.4] m=k|p(k,m)|k=b.
+203 [191,split.2.2.1.1.1] p(b,m).
+227 [binary,203.1,7.2,unit_del,16] p(f(b),b).
+228 [binary,203.1,6.2,unit_del,16] p(b,f(b)).
+229 [binary,203.1,5.2,unit_del,16] f(b)!=b.
+230 [binary,203.1,4.2,unit_del,16] f(b)!=m.
+234 [binary,227.1,1.5,unit_del,230,16,229,228] p(f(b),m).
+255 [para_into,234.1.2,12.1.1] p(f(b),k)|p(m,k).
+475 [255,split_neg.2.2.1.1.1.2] -p(f(b),k).
+476 [255,split.2.2.1.1.1.2] p(m,k).
+477 [binary,476.1,2.6,unit_del,190,16] k=b|m=k| -p(k,m).
+490 [para_into,475.1.2,4.1.1,unit_del,234] -p(k,m)|f(k)!=m.
+617 [binary,490.2,3.2] -p(k,m)|f(k)=k|f(k)=b| -p(f(k),k).
+806 [192,split_neg.2.2.1.1.1.2.1.2] m!=k.
+807 [192,split.2.2.1.1.1.2.1.2] p(k,m).
+824,823 [back_unit_del,806.1,477.2,unit_del,807] k=b.
+825 [back_unit_del,807.1,617.1,demod,824,824,824,824,824,unit_del,229,229,227] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8811) -------
+clauses given                 58
+clauses generated           4040
+clauses kept                 821
+clauses forward subsumed    3108
+clauses back subsumed        558
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8811 finished Mon Aug  2 15:31:10 2004
+Refuted case [2.2.1.1.1.2.1.2].
+
+--- refuted case [2.2.1.1.1.2.1.3]
+
+Case [2.2.1.1.1.2.1.3]   (process 8812):
+Assumption: 808 [192,split.2.2.1.1.1.2.1.3] k=b.
+
+----> UNIT CONFLICT at   0.00 sec ----> 812 [binary,811.1,203.1] $F.
+
+Length of proof is 17.  Level of proof is 7.  Case [2.2.1.1.1.2.1.3]
+
+---------------- PROOF ----------------
+
+1 [] x=m|p(x,m)|y=m|y=x| -p(x,y)| -p(y,x).
+11 [] x=b|p(x,b)|p(g(x),x).
+12 [] m=k|p(m,k).
+13 [] b=k|p(b,k).
+14 [copy,13,flip.1] k=b|p(b,k).
+16 [] m!=b.
+18 [] k=j|p(k,j).
+19 [binary,16.1,11.1] p(m,b)|p(g(m),m).
+27 [18,split.2] p(k,j).
+47 [para_into,27.1.1,14.1.1] p(b,j)|p(b,k).
+130 [47,split.2.2] p(b,k).
+162 [binary,130.1,1.6,unit_del,16,flip.1,flip.3] m=k|p(k,m)|k=b| -p(k,b).
+177 [para_into,130.1.2,1.3.1] p(b,m)|x=m|p(x,m)|k=x| -p(x,k)| -p(k,x).
+179 [factor,177.1.3,unit_del,16,130] p(b,m)|k=b| -p(k,b).
+180 [19,split.2.2.1] p(m,b).
+182 [para_into,180.1.1,12.1.1] p(k,b)|p(m,k).
+190 [182,split.2.2.1.1] p(k,b).
+191 [back_unit_del,190.1,179.3] p(b,m)|k=b.
+192 [back_unit_del,190.1,162.4] m=k|p(k,m)|k=b.
+203 [191,split.2.2.1.1.1] p(b,m).
+807 [192,split_neg.2.2.1.1.1.2.1.3] -p(k,m).
+809,808 [192,split.2.2.1.1.1.2.1.3] k=b.
+811 [back_demod,807,demod,809] -p(b,m).
+812 [binary,811.1,203.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8812) -------
+clauses given                 58
+clauses generated           4031
+clauses kept                 808
+clauses forward subsumed    3115
+clauses back subsumed        610
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8812 finished Mon Aug  2 15:31:10 2004
+Refuted case [2.2.1.1.1.2.1.3].
+
+------- statistics (process 8809) -------
+clauses given                 58
+clauses generated           4010
+clauses kept                 803
+clauses forward subsumed    3097
+clauses back subsumed        556
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8809 finished Mon Aug  2 15:31:10 2004
+Refuted case [2.2.1.1.1.2.1].
+
+The Assumption for case [2.2.1.1.1.2.1] was not used;
+therefore we skip case:  [2.2.1.1.1.2.2].
+
+------- statistics (process 8808) -------
+clauses given                 54
+clauses generated           3784
+clauses kept                 787
+clauses forward subsumed    2887
+clauses back subsumed        538
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.17          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8808 finished Mon Aug  2 15:31:10 2004
+Refuted case [2.2.1.1.1.2].
+
+------- statistics (process 8806) -------
+clauses given                 34
+clauses generated           1881
+clauses kept                 472
+clauses forward subsumed    1347
+clauses back subsumed        179
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.07          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8806 finished Mon Aug  2 15:31:10 2004
+Refuted case [2.2.1.1.1].
+
+--- refuted case [2.2.1.1.2]
+
+Case [2.2.1.1.2]   (process 8813):
+Assumption: 204 [191,split.2.2.1.1.2] k=b.
+
+----> UNIT CONFLICT at   0.00 sec ----> 224 [binary,223.1,129.1] $F.
+
+Length of proof is 14.  Level of proof is 8.  Case [2.2.1.1.2]
+
+---------------- PROOF ----------------
+
+1 [] x=m|p(x,m)|y=m|y=x| -p(x,y)| -p(y,x).
+11 [] x=b|p(x,b)|p(g(x),x).
+12 [] m=k|p(m,k).
+13 [] b=k|p(b,k).
+14 [copy,13,flip.1] k=b|p(b,k).
+16 [] m!=b.
+18 [] k=j|p(k,j).
+19 [binary,16.1,11.1] p(m,b)|p(g(m),m).
+27 [18,split.2] p(k,j).
+47 [para_into,27.1.1,14.1.1] p(b,j)|p(b,k).
+129 [47,split_neg.2.2] -p(b,j).
+130 [47,split.2.2] p(b,k).
+177 [para_into,130.1.2,1.3.1] p(b,m)|x=m|p(x,m)|k=x| -p(x,k)| -p(k,x).
+179 [factor,177.1.3,unit_del,16,130] p(b,m)|k=b| -p(k,b).
+180 [19,split.2.2.1] p(m,b).
+182 [para_into,180.1.1,12.1.1] p(k,b)|p(m,k).
+190 [182,split.2.2.1.1] p(k,b).
+191 [back_unit_del,190.1,179.3] p(b,m)|k=b.
+205,204 [191,split.2.2.1.1.2] k=b.
+223 [back_demod,27,demod,205] p(b,j).
+224 [binary,223.1,129.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8813) -------
+clauses given                 14
+clauses generated            495
+clauses kept                 221
+clauses forward subsumed     327
+clauses back subsumed        102
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8813 finished Mon Aug  2 15:31:10 2004
+Refuted case [2.2.1.1.2].
+
+------- statistics (process 8805) -------
+clauses given                 14
+clauses generated            485
+clauses kept                 201
+clauses forward subsumed     282
+clauses back subsumed         79
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8805 finished Mon Aug  2 15:31:10 2004
+Refuted case [2.2.1.1].
+
+--- refuted case [2.2.1.2]
+
+Case [2.2.1.2]   (process 8814):
+Assumption: 191 [182,split.2.2.1.2] p(m,k).
+
+----> UNIT CONFLICT at   0.00 sec ----> 247 [binary,246.1,243.1] $F.
+
+Length of proof is 29.  Level of proof is 9.  Case [2.2.1.2]
+
+---------------- PROOF ----------------
+
+2 [] x=b| -p(x,b)|y=b|y=x| -p(x,y)| -p(y,x).
+3 [] x=k|x=m|x=b| -p(x,k).
+8 [] x=b|p(x,b)|g(x)!=b.
+9 [] x=b|p(x,b)|g(x)!=x.
+10 [] x=b|p(x,b)|p(x,g(x)).
+11 [] x=b|p(x,b)|p(g(x),x).
+12 [] m=k|p(m,k).
+13 [] b=k|p(b,k).
+14 [copy,13,flip.1] k=b|p(b,k).
+16 [] m!=b.
+18 [] k=j|p(k,j).
+19 [binary,16.1,11.1] p(m,b)|p(g(m),m).
+27 [18,split.2] p(k,j).
+47 [para_into,27.1.1,14.1.1] p(b,j)|p(b,k).
+48 [para_into,27.1.1,11.1.1] p(b,j)|p(k,b)|p(g(k),k).
+49 [para_into,27.1.1,10.1.1] p(b,j)|p(k,b)|p(k,g(k)).
+50 [para_into,27.1.1,9.1.1] p(b,j)|p(k,b)|g(k)!=k.
+51 [para_into,27.1.1,8.1.1] p(b,j)|p(k,b)|g(k)!=b.
+129 [47,split_neg.2.2] -p(b,j).
+130 [47,split.2.2] p(b,k).
+133 [back_unit_del,129.1,51.1] p(k,b)|g(k)!=b.
+134 [back_unit_del,129.1,50.1] p(k,b)|g(k)!=k.
+135 [back_unit_del,129.1,49.1] p(k,b)|p(k,g(k)).
+136 [back_unit_del,129.1,48.1] p(k,b)|p(g(k),k).
+180 [19,split.2.2.1] p(m,b).
+182 [para_into,180.1.1,12.1.1] p(k,b)|p(m,k).
+190 [182,split_neg.2.2.1.2] -p(k,b).
+191 [182,split.2.2.1.2] p(m,k).
+192 [back_unit_del,190.1,136.1] p(g(k),k).
+193 [back_unit_del,190.1,135.1] p(k,g(k)).
+194 [back_unit_del,190.1,134.1] g(k)!=k.
+195 [back_unit_del,190.1,133.1] g(k)!=b.
+218 [binary,191.1,2.5,unit_del,16,180,flip.2] k=b|m=k| -p(k,m).
+222,221 [binary,192.1,3.4,unit_del,194,195] g(k)=m.
+223 [back_demod,194,demod,222] m!=k.
+224 [back_demod,193,demod,222] p(k,m).
+227,226 [back_unit_del,223.1,218.2,unit_del,224] k=b.
+243 [back_demod,190,demod,227] -p(b,b).
+246 [back_demod,130,demod,227] p(b,b).
+247 [binary,246.1,243.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8814) -------
+clauses given                 15
+clauses generated            563
+clauses kept                 242
+clauses forward subsumed     345
+clauses back subsumed        134
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8814 finished Mon Aug  2 15:31:10 2004
+Refuted case [2.2.1.2].
+
+------- statistics (process 8804) -------
+clauses given                 12
+clauses generated            436
+clauses kept                 188
+clauses forward subsumed     246
+clauses back subsumed         63
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8804 finished Mon Aug  2 15:31:10 2004
+Refuted case [2.2.1].
+
+Case [2.2.2]   (process 8815):
+Assumption: 181 [19,split.2.2.2] p(g(m),m).
+
+Splitting on clause 135 [back_unit_del,129.1,49.1] p(k,b)|p(k,g(k)).
+
+Case [2.2.2.1]   (process 8816):
+Assumption: 435 [135,split.2.2.2.1] p(k,b).
+0 [back_unit_del,435.1,185.1] p(m,k).
+
+Splitting on clause 438 [back_unit_del,435.1,273.1] p(b,m)|m=k.
+
+Case [2.2.2.1.1]   (process 8817):
+Assumption: 465 [438,split.2.2.2.1.1] p(b,m).
+0 [back_unit_del,1167.1,767.1] -p(j,k).
+
+Splitting on clause 1175 [back_unit_del,1167.1,823.1] p(j,b)|p(j,g(j)).
+
+Case [2.2.2.1.1.1]   (process 8818):
+Assumption: 1214 [1175,split.2.2.2.1.1.1] p(j,b).
+
+Splitting on clause 437 [back_unit_del,435.1,274.1] p(m,m)|p(k,m)|k=b.
+
+Case [2.2.2.1.1.1.1]   (process 8819):
+Assumption: 1242 [437,split.2.2.2.1.1.1.1] p(m,m).
+
+Splitting on clause 1253 [back_unit_del,1249.1,451.2] m=k|k=b.
+
+--- refuted case [2.2.2.1.1.1.1.1]
+
+Case [2.2.2.1.1.1.1.1]   (process 8820):
+Assumption: 1255 [1253,split.2.2.2.1.1.1.1.1] m=k.
+
+----> UNIT CONFLICT at   0.00 sec ----> 1263 [binary,1262.1,1261.1] $F.
+
+Length of proof is 64.  Level of proof is 18.  Case [2.2.2.1.1.1.1.1]
+
+---------------- PROOF ----------------
+
+1 [] x=m|p(x,m)|y=m|y=x| -p(x,y)| -p(y,x).
+2 [] x=b| -p(x,b)|y=b|y=x| -p(x,y)| -p(y,x).
+3 [] x=k|x=m|x=b| -p(x,k).
+4 [] x=m| -p(x,m)|f(x)!=m.
+5 [] x=m| -p(x,m)|f(x)!=x.
+6 [] x=m| -p(x,m)|p(x,f(x)).
+7 [] x=m| -p(x,m)|p(f(x),x).
+8 [] x=b|p(x,b)|g(x)!=b.
+9 [] x=b|p(x,b)|g(x)!=x.
+10 [] x=b|p(x,b)|p(x,g(x)).
+11 [] x=b|p(x,b)|p(g(x),x).
+12 [] m=k|p(m,k).
+13 [] b=k|p(b,k).
+14 [copy,13,flip.1] k=b|p(b,k).
+16 [] m!=b.
+17 [] x=j| -p(x,j)|x=k.
+18 [] k=j|p(k,j).
+19 [binary,16.1,11.1] p(m,b)|p(g(m),m).
+20 [binary,16.1,10.1] p(m,b)|p(m,g(m)).
+21 [binary,16.1,9.1] p(m,b)|g(m)!=m.
+22 [binary,16.1,8.1] p(m,b)|g(m)!=b.
+26 [18,split_neg.2] k!=j.
+27 [18,split.2] p(k,j).
+47 [para_into,27.1.1,14.1.1] p(b,j)|p(b,k).
+49 [para_into,27.1.1,10.1.1] p(b,j)|p(k,b)|p(k,g(k)).
+129 [47,split_neg.2.2] -p(b,j).
+130 [47,split.2.2] p(b,k).
+135 [back_unit_del,129.1,49.1] p(k,b)|p(k,g(k)).
+149 [para_into,129.1.2,7.1.1] -p(b,m)| -p(j,m)|p(f(j),j).
+154 [para_into,129.1.2,3.2.1,unit_del,26] -p(b,m)|j=b| -p(j,k).
+162 [binary,130.1,1.6,unit_del,16,flip.1,flip.3] m=k|p(k,m)|k=b| -p(k,b).
+180 [19,split_neg.2.2.2] -p(m,b).
+181 [19,split.2.2.2] p(g(m),m).
+182 [back_unit_del,180.1,22.1] g(m)!=b.
+183 [back_unit_del,180.1,21.1] g(m)!=m.
+184 [back_unit_del,180.1,20.1] p(m,g(m)).
+185 [para_into,180.1.1,12.1.1] -p(k,b)|p(m,k).
+198 [binary,181.1,2.5,unit_del,182,16,183,184] -p(g(m),b).
+229 [para_into,198.1.2,7.1.1,unit_del,181] -p(b,m)|p(f(b),b).
+230 [para_into,198.1.2,6.1.1,unit_del,181] -p(b,m)|p(b,f(b)).
+231 [para_into,198.1.2,5.1.1,unit_del,181] -p(b,m)|f(b)!=b.
+232 [para_into,198.1.2,4.1.1,unit_del,181] -p(b,m)|f(b)!=m.
+262 [binary,185.2,2.6,unit_del,16,factor_simp] -p(k,b)|k=b|m=k| -p(k,m).
+270 [para_into,185.2.2,1.4.1,flip.5] -p(k,b)|p(m,x)|x=m|p(x,m)|m=k| -p(x,k)| -p(k,x).
+272 [para_into,185.2.2,1.1.1] -p(k,b)|p(m,m)|p(k,m)|x=m|x=k| -p(k,x)| -p(x,k).
+273 [factor,270.1.7,unit_del,180,16,130] -p(k,b)|p(b,m)|m=k.
+274 [factor,272.1.6,unit_del,16,130,flip.4] -p(k,b)|p(m,m)|p(k,m)|k=b.
+435 [135,split.2.2.2.1] p(k,b).
+437 [back_unit_del,435.1,274.1] p(m,m)|p(k,m)|k=b.
+438 [back_unit_del,435.1,273.1] p(b,m)|m=k.
+447 [back_unit_del,435.1,262.1] k=b|m=k| -p(k,m).
+449 [back_unit_del,435.1,185.1] p(m,k).
+451 [back_unit_del,435.1,162.4] m=k|p(k,m)|k=b.
+465 [438,split.2.2.2.1.1] p(b,m).
+466 [back_unit_del,465.1,232.1] f(b)!=m.
+467 [back_unit_del,465.1,231.1] f(b)!=b.
+468 [back_unit_del,465.1,230.1] p(b,f(b)).
+469 [back_unit_del,465.1,229.1] p(f(b),b).
+472 [back_unit_del,465.1,154.1] j=b| -p(j,k).
+476 [back_unit_del,465.1,149.1] -p(j,m)|p(f(j),j).
+491 [binary,468.1,1.6,unit_del,466,16,467,469] p(f(b),m).
+499 [binary,491.1,2.5,unit_del,467,469,16,466] -p(m,f(b)).
+503 [para_into,499.1.2,3.1.1,unit_del,449,466,467] -p(f(b),k).
+682 [para_into,476.1.1,472.1.1,unit_del,465] p(f(j),j)| -p(j,k).
+767 [para_into,682.1.1.1,472.1.1,factor_simp] p(f(b),j)| -p(j,k).
+823 [para_into,767.2.1,10.1.1,unit_del,130] p(f(b),j)|p(j,b)|p(j,g(j)).
+1033 [para_from,17.1.1,468.1.2,unit_del,129] -p(f(b),j)|f(b)=k.
+1087 [para_from,17.1.1,465.1.2,unit_del,129] -p(m,j)|m=k.
+1149 [para_from,1087.2.1,491.1.2,unit_del,503] -p(m,j).
+1167 [para_from,1033.2.1,499.1.2,unit_del,449] -p(f(b),j).
+1175 [back_unit_del,1167.1,823.1] p(j,b)|p(j,g(j)).
+1177 [back_unit_del,1167.1,767.1] -p(j,k).
+1214 [1175,split.2.2.2.1.1.1] p(j,b).
+1242 [437,split.2.2.2.1.1.1.1] p(m,m).
+1246 [para_from,447.1.1,1177.1.2,unit_del,1214] m=k| -p(k,m).
+1249 [para_from,1246.1.1,1149.1.1,unit_del,27] -p(k,m).
+1253 [back_unit_del,1249.1,451.2] m=k|k=b.
+1256,1255 [1253,split.2.2.2.1.1.1.1.1] m=k.
+1261 [back_demod,1249,demod,1256] -p(k,k).
+1262 [back_demod,1242,demod,1256,1256] p(k,k).
+1263 [binary,1262.1,1261.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8820) -------
+clauses given                 92
+clauses generated           7392
+clauses kept                1259
+clauses forward subsumed    5909
+clauses back subsumed        889
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8820 finished Mon Aug  2 15:31:11 2004
+Refuted case [2.2.2.1.1.1.1.1].
+
+--- refuted case [2.2.2.1.1.1.1.2]
+
+Case [2.2.2.1.1.1.1.2]   (process 8821):
+Assumption: 1256 [1253,split.2.2.2.1.1.1.1.2] k=b.
+
+----> UNIT CONFLICT at   0.00 sec ----> 1261 [binary,1260.1,465.1] $F.
+
+Length of proof is 59.  Level of proof is 18.  Case [2.2.2.1.1.1.1.2]
+
+---------------- PROOF ----------------
+
+1 [] x=m|p(x,m)|y=m|y=x| -p(x,y)| -p(y,x).
+2 [] x=b| -p(x,b)|y=b|y=x| -p(x,y)| -p(y,x).
+3 [] x=k|x=m|x=b| -p(x,k).
+4 [] x=m| -p(x,m)|f(x)!=m.
+5 [] x=m| -p(x,m)|f(x)!=x.
+6 [] x=m| -p(x,m)|p(x,f(x)).
+7 [] x=m| -p(x,m)|p(f(x),x).
+8 [] x=b|p(x,b)|g(x)!=b.
+9 [] x=b|p(x,b)|g(x)!=x.
+10 [] x=b|p(x,b)|p(x,g(x)).
+11 [] x=b|p(x,b)|p(g(x),x).
+12 [] m=k|p(m,k).
+13 [] b=k|p(b,k).
+14 [copy,13,flip.1] k=b|p(b,k).
+16 [] m!=b.
+17 [] x=j| -p(x,j)|x=k.
+18 [] k=j|p(k,j).
+19 [binary,16.1,11.1] p(m,b)|p(g(m),m).
+20 [binary,16.1,10.1] p(m,b)|p(m,g(m)).
+21 [binary,16.1,9.1] p(m,b)|g(m)!=m.
+22 [binary,16.1,8.1] p(m,b)|g(m)!=b.
+26 [18,split_neg.2] k!=j.
+27 [18,split.2] p(k,j).
+47 [para_into,27.1.1,14.1.1] p(b,j)|p(b,k).
+49 [para_into,27.1.1,10.1.1] p(b,j)|p(k,b)|p(k,g(k)).
+129 [47,split_neg.2.2] -p(b,j).
+130 [47,split.2.2] p(b,k).
+135 [back_unit_del,129.1,49.1] p(k,b)|p(k,g(k)).
+149 [para_into,129.1.2,7.1.1] -p(b,m)| -p(j,m)|p(f(j),j).
+154 [para_into,129.1.2,3.2.1,unit_del,26] -p(b,m)|j=b| -p(j,k).
+162 [binary,130.1,1.6,unit_del,16,flip.1,flip.3] m=k|p(k,m)|k=b| -p(k,b).
+180 [19,split_neg.2.2.2] -p(m,b).
+181 [19,split.2.2.2] p(g(m),m).
+182 [back_unit_del,180.1,22.1] g(m)!=b.
+183 [back_unit_del,180.1,21.1] g(m)!=m.
+184 [back_unit_del,180.1,20.1] p(m,g(m)).
+185 [para_into,180.1.1,12.1.1] -p(k,b)|p(m,k).
+198 [binary,181.1,2.5,unit_del,182,16,183,184] -p(g(m),b).
+229 [para_into,198.1.2,7.1.1,unit_del,181] -p(b,m)|p(f(b),b).
+230 [para_into,198.1.2,6.1.1,unit_del,181] -p(b,m)|p(b,f(b)).
+231 [para_into,198.1.2,5.1.1,unit_del,181] -p(b,m)|f(b)!=b.
+232 [para_into,198.1.2,4.1.1,unit_del,181] -p(b,m)|f(b)!=m.
+262 [binary,185.2,2.6,unit_del,16,factor_simp] -p(k,b)|k=b|m=k| -p(k,m).
+270 [para_into,185.2.2,1.4.1,flip.5] -p(k,b)|p(m,x)|x=m|p(x,m)|m=k| -p(x,k)| -p(k,x).
+273 [factor,270.1.7,unit_del,180,16,130] -p(k,b)|p(b,m)|m=k.
+435 [135,split.2.2.2.1] p(k,b).
+438 [back_unit_del,435.1,273.1] p(b,m)|m=k.
+447 [back_unit_del,435.1,262.1] k=b|m=k| -p(k,m).
+449 [back_unit_del,435.1,185.1] p(m,k).
+451 [back_unit_del,435.1,162.4] m=k|p(k,m)|k=b.
+465 [438,split.2.2.2.1.1] p(b,m).
+466 [back_unit_del,465.1,232.1] f(b)!=m.
+467 [back_unit_del,465.1,231.1] f(b)!=b.
+468 [back_unit_del,465.1,230.1] p(b,f(b)).
+469 [back_unit_del,465.1,229.1] p(f(b),b).
+472 [back_unit_del,465.1,154.1] j=b| -p(j,k).
+476 [back_unit_del,465.1,149.1] -p(j,m)|p(f(j),j).
+491 [binary,468.1,1.6,unit_del,466,16,467,469] p(f(b),m).
+499 [binary,491.1,2.5,unit_del,467,469,16,466] -p(m,f(b)).
+503 [para_into,499.1.2,3.1.1,unit_del,449,466,467] -p(f(b),k).
+682 [para_into,476.1.1,472.1.1,unit_del,465] p(f(j),j)| -p(j,k).
+767 [para_into,682.1.1.1,472.1.1,factor_simp] p(f(b),j)| -p(j,k).
+823 [para_into,767.2.1,10.1.1,unit_del,130] p(f(b),j)|p(j,b)|p(j,g(j)).
+1033 [para_from,17.1.1,468.1.2,unit_del,129] -p(f(b),j)|f(b)=k.
+1087 [para_from,17.1.1,465.1.2,unit_del,129] -p(m,j)|m=k.
+1149 [para_from,1087.2.1,491.1.2,unit_del,503] -p(m,j).
+1167 [para_from,1033.2.1,499.1.2,unit_del,449] -p(f(b),j).
+1175 [back_unit_del,1167.1,823.1] p(j,b)|p(j,g(j)).
+1177 [back_unit_del,1167.1,767.1] -p(j,k).
+1214 [1175,split.2.2.2.1.1.1] p(j,b).
+1246 [para_from,447.1.1,1177.1.2,unit_del,1214] m=k| -p(k,m).
+1249 [para_from,1246.1.1,1149.1.1,unit_del,27] -p(k,m).
+1253 [back_unit_del,1249.1,451.2] m=k|k=b.
+1257,1256 [1253,split.2.2.2.1.1.1.1.2] k=b.
+1260 [back_demod,1249,demod,1257] -p(b,m).
+1261 [binary,1260.1,465.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8821) -------
+clauses given                 92
+clauses generated           7400
+clauses kept                1257
+clauses forward subsumed    5917
+clauses back subsumed        892
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8821 finished Mon Aug  2 15:31:11 2004
+Refuted case [2.2.2.1.1.1.1.2].
+
+------- statistics (process 8819) -------
+clauses given                 92
+clauses generated           7392
+clauses kept                1252
+clauses forward subsumed    5909
+clauses back subsumed        889
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.03          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8819 finished Mon Aug  2 15:31:11 2004
+Refuted case [2.2.2.1.1.1.1].
+
+--- refuted case [2.2.2.1.1.1.2]
+
+Case [2.2.2.1.1.1.2]   (process 8822):
+Assumption: 1243 [437,split.2.2.2.1.1.1.2] p(k,m).
+0 [back_unit_del,1243.1,458.1] f(k)!=m.
+0 [back_unit_del,1243.1,457.1] f(k)!=k.
+0 [back_unit_del,1243.1,456.1] p(k,f(k)).
+0 [back_unit_del,1243.1,455.1] p(f(k),k).
+
+----> UNIT CONFLICT at   0.02 sec ----> 1306 [binary,1305.1,1304.1] $F.
+
+Length of proof is 33.  Level of proof is 12.  Case [2.2.2.1.1.1.2]
+
+---------------- PROOF ----------------
+
+1 [] x=m|p(x,m)|y=m|y=x| -p(x,y)| -p(y,x).
+2 [] x=b| -p(x,b)|y=b|y=x| -p(x,y)| -p(y,x).
+3 [] x=k|x=m|x=b| -p(x,k).
+4 [] x=m| -p(x,m)|f(x)!=m.
+5 [] x=m| -p(x,m)|f(x)!=x.
+7 [] x=m| -p(x,m)|p(f(x),x).
+10 [] x=b|p(x,b)|p(x,g(x)).
+11 [] x=b|p(x,b)|p(g(x),x).
+12 [] m=k|p(m,k).
+13 [] b=k|p(b,k).
+14 [copy,13,flip.1] k=b|p(b,k).
+16 [] m!=b.
+18 [] k=j|p(k,j).
+19 [binary,16.1,11.1] p(m,b)|p(g(m),m).
+27 [18,split.2] p(k,j).
+47 [para_into,27.1.1,14.1.1] p(b,j)|p(b,k).
+49 [para_into,27.1.1,10.1.1] p(b,j)|p(k,b)|p(k,g(k)).
+129 [47,split_neg.2.2] -p(b,j).
+130 [47,split.2.2] p(b,k).
+135 [back_unit_del,129.1,49.1] p(k,b)|p(k,g(k)).
+180 [19,split_neg.2.2.2] -p(m,b).
+185 [para_into,180.1.1,12.1.1] -p(k,b)|p(m,k).
+262 [binary,185.2,2.6,unit_del,16,factor_simp] -p(k,b)|k=b|m=k| -p(k,m).
+272 [para_into,185.2.2,1.1.1] -p(k,b)|p(m,m)|p(k,m)|x=m|x=k| -p(k,x)| -p(x,k).
+274 [factor,272.1.6,unit_del,16,130,flip.4] -p(k,b)|p(m,m)|p(k,m)|k=b.
+435 [135,split.2.2.2.1] p(k,b).
+437 [back_unit_del,435.1,274.1] p(m,m)|p(k,m)|k=b.
+447 [back_unit_del,435.1,262.1] k=b|m=k| -p(k,m).
+455 [para_into,435.1.1,7.1.1,unit_del,180] -p(k,m)|p(f(k),k).
+457 [para_into,435.1.1,5.1.1,unit_del,180] -p(k,m)|f(k)!=k.
+458 [para_into,435.1.1,4.1.1,unit_del,180] -p(k,m)|f(k)!=m.
+531 [binary,455.2,3.4] -p(k,m)|f(k)=k|f(k)=m|f(k)=b.
+567 [para_into,457.2.1,3.3.1,flip.2] -p(k,m)|k!=b|f(k)=k|f(k)=m| -p(f(k),k).
+1242 [437,split_neg.2.2.2.1.1.1.2] -p(m,m).
+1243 [437,split.2.2.2.1.1.1.2] p(k,m).
+1260 [back_unit_del,1243.1,567.1] k!=b|f(k)=k|f(k)=m| -p(f(k),k).
+1284 [back_unit_del,1243.1,531.1] f(k)=k|f(k)=m|f(k)=b.
+1285 [back_unit_del,1243.1,458.1] f(k)!=m.
+1286 [back_unit_del,1243.1,457.1] f(k)!=k.
+1289 [back_unit_del,1243.1,447.3] k=b|m=k.
+1291,1290 [back_unit_del,1285.1,1284.2,unit_del,1286] f(k)=b.
+1292 [back_unit_del,1286.1,1260.2,demod,1291,1291,unit_del,16,130] k!=b.
+1295,1294 [back_unit_del,1292.1,1289.1] m=k.
+1304 [back_demod,1243,demod,1295] p(k,k).
+1305 [back_demod,1242,demod,1295,1295] -p(k,k).
+1306 [binary,1305.1,1304.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8822) -------
+clauses given                 87
+clauses generated           7119
+clauses kept                1301
+clauses forward subsumed    5650
+clauses back subsumed        878
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+system CPU time        0.01          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8822 finished Mon Aug  2 15:31:11 2004
+Refuted case [2.2.2.1.1.1.2].
+
+--- refuted case [2.2.2.1.1.1.3]
+
+Case [2.2.2.1.1.1.3]   (process 8823):
+Assumption: 1244 [437,split.2.2.2.1.1.1.3] k=b.
+
+----> UNIT CONFLICT at   0.00 sec ----> 1250 [binary,1249.1,465.1] $F.
+
+Length of proof is 21.  Level of proof is 8.  Case [2.2.2.1.1.1.3]
+
+---------------- PROOF ----------------
+
+1 [] x=m|p(x,m)|y=m|y=x| -p(x,y)| -p(y,x).
+10 [] x=b|p(x,b)|p(x,g(x)).
+11 [] x=b|p(x,b)|p(g(x),x).
+12 [] m=k|p(m,k).
+13 [] b=k|p(b,k).
+14 [copy,13,flip.1] k=b|p(b,k).
+16 [] m!=b.
+18 [] k=j|p(k,j).
+19 [binary,16.1,11.1] p(m,b)|p(g(m),m).
+27 [18,split.2] p(k,j).
+47 [para_into,27.1.1,14.1.1] p(b,j)|p(b,k).
+49 [para_into,27.1.1,10.1.1] p(b,j)|p(k,b)|p(k,g(k)).
+129 [47,split_neg.2.2] -p(b,j).
+130 [47,split.2.2] p(b,k).
+135 [back_unit_del,129.1,49.1] p(k,b)|p(k,g(k)).
+180 [19,split_neg.2.2.2] -p(m,b).
+185 [para_into,180.1.1,12.1.1] -p(k,b)|p(m,k).
+270 [para_into,185.2.2,1.4.1,flip.5] -p(k,b)|p(m,x)|x=m|p(x,m)|m=k| -p(x,k)| -p(k,x).
+272 [para_into,185.2.2,1.1.1] -p(k,b)|p(m,m)|p(k,m)|x=m|x=k| -p(k,x)| -p(x,k).
+273 [factor,270.1.7,unit_del,180,16,130] -p(k,b)|p(b,m)|m=k.
+274 [factor,272.1.6,unit_del,16,130,flip.4] -p(k,b)|p(m,m)|p(k,m)|k=b.
+435 [135,split.2.2.2.1] p(k,b).
+437 [back_unit_del,435.1,274.1] p(m,m)|p(k,m)|k=b.
+438 [back_unit_del,435.1,273.1] p(b,m)|m=k.
+465 [438,split.2.2.2.1.1] p(b,m).
+1243 [437,split_neg.2.2.2.1.1.1.3] -p(k,m).
+1245,1244 [437,split.2.2.2.1.1.1.3] k=b.
+1249 [back_demod,1243,demod,1245] -p(b,m).
+1250 [binary,1249.1,465.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8823) -------
+clauses given                 87
+clauses generated           7004
+clauses kept                1246
+clauses forward subsumed    5554
+clauses back subsumed        860
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8823 finished Mon Aug  2 15:31:11 2004
+Refuted case [2.2.2.1.1.1.3].
+
+------- statistics (process 8818) -------
+clauses given                 87
+clauses generated           7000
+clauses kept                1239
+clauses forward subsumed    5553
+clauses back subsumed        814
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8818 finished Mon Aug  2 15:31:11 2004
+Refuted case [2.2.2.1.1.1].
+
+--- refuted case [2.2.2.1.1.2]
+
+Case [2.2.2.1.1.2]   (process 8824):
+Assumption: 1215 [1175,split.2.2.2.1.1.2] p(j,g(j)).
+0 [back_unit_del,1214.1,1174.1] g(j)!=j.
+0 [back_unit_del,1214.1,1173.1] g(j)!=b.
+
+----> UNIT CONFLICT at   0.01 sec ----> 1274 [binary,1273.1,1177.1] $F.
+
+Length of proof is 57.  Level of proof is 16.  Case [2.2.2.1.1.2]
+
+---------------- PROOF ----------------
+
+1 [] x=m|p(x,m)|y=m|y=x| -p(x,y)| -p(y,x).
+2 [] x=b| -p(x,b)|y=b|y=x| -p(x,y)| -p(y,x).
+3 [] x=k|x=m|x=b| -p(x,k).
+4 [] x=m| -p(x,m)|f(x)!=m.
+5 [] x=m| -p(x,m)|f(x)!=x.
+6 [] x=m| -p(x,m)|p(x,f(x)).
+7 [] x=m| -p(x,m)|p(f(x),x).
+8 [] x=b|p(x,b)|g(x)!=b.
+9 [] x=b|p(x,b)|g(x)!=x.
+10 [] x=b|p(x,b)|p(x,g(x)).
+11 [] x=b|p(x,b)|p(g(x),x).
+12 [] m=k|p(m,k).
+13 [] b=k|p(b,k).
+14 [copy,13,flip.1] k=b|p(b,k).
+16 [] m!=b.
+17 [] x=j| -p(x,j)|x=k.
+18 [] k=j|p(k,j).
+19 [binary,16.1,11.1] p(m,b)|p(g(m),m).
+20 [binary,16.1,10.1] p(m,b)|p(m,g(m)).
+21 [binary,16.1,9.1] p(m,b)|g(m)!=m.
+22 [binary,16.1,8.1] p(m,b)|g(m)!=b.
+26 [18,split_neg.2] k!=j.
+27 [18,split.2] p(k,j).
+47 [para_into,27.1.1,14.1.1] p(b,j)|p(b,k).
+49 [para_into,27.1.1,10.1.1] p(b,j)|p(k,b)|p(k,g(k)).
+129 [47,split_neg.2.2] -p(b,j).
+130 [47,split.2.2] p(b,k).
+135 [back_unit_del,129.1,49.1] p(k,b)|p(k,g(k)).
+149 [para_into,129.1.2,7.1.1] -p(b,m)| -p(j,m)|p(f(j),j).
+154 [para_into,129.1.2,3.2.1,unit_del,26] -p(b,m)|j=b| -p(j,k).
+180 [19,split_neg.2.2.2] -p(m,b).
+181 [19,split.2.2.2] p(g(m),m).
+182 [back_unit_del,180.1,22.1] g(m)!=b.
+183 [back_unit_del,180.1,21.1] g(m)!=m.
+184 [back_unit_del,180.1,20.1] p(m,g(m)).
+185 [para_into,180.1.1,12.1.1] -p(k,b)|p(m,k).
+198 [binary,181.1,2.5,unit_del,182,16,183,184] -p(g(m),b).
+229 [para_into,198.1.2,7.1.1,unit_del,181] -p(b,m)|p(f(b),b).
+230 [para_into,198.1.2,6.1.1,unit_del,181] -p(b,m)|p(b,f(b)).
+231 [para_into,198.1.2,5.1.1,unit_del,181] -p(b,m)|f(b)!=b.
+232 [para_into,198.1.2,4.1.1,unit_del,181] -p(b,m)|f(b)!=m.
+270 [para_into,185.2.2,1.4.1,flip.5] -p(k,b)|p(m,x)|x=m|p(x,m)|m=k| -p(x,k)| -p(k,x).
+273 [factor,270.1.7,unit_del,180,16,130] -p(k,b)|p(b,m)|m=k.
+435 [135,split.2.2.2.1] p(k,b).
+438 [back_unit_del,435.1,273.1] p(b,m)|m=k.
+449 [back_unit_del,435.1,185.1] p(m,k).
+465 [438,split.2.2.2.1.1] p(b,m).
+466 [back_unit_del,465.1,232.1] f(b)!=m.
+467 [back_unit_del,465.1,231.1] f(b)!=b.
+468 [back_unit_del,465.1,230.1] p(b,f(b)).
+469 [back_unit_del,465.1,229.1] p(f(b),b).
+472 [back_unit_del,465.1,154.1] j=b| -p(j,k).
+476 [back_unit_del,465.1,149.1] -p(j,m)|p(f(j),j).
+491 [binary,468.1,1.6,unit_del,466,16,467,469] p(f(b),m).
+499 [binary,491.1,2.5,unit_del,467,469,16,466] -p(m,f(b)).
+682 [para_into,476.1.1,472.1.1,unit_del,465] p(f(j),j)| -p(j,k).
+767 [para_into,682.1.1.1,472.1.1,factor_simp] p(f(b),j)| -p(j,k).
+822 [para_into,767.2.1,11.1.1,unit_del,130] p(f(b),j)|p(j,b)|p(g(j),j).
+823 [para_into,767.2.1,10.1.1,unit_del,130] p(f(b),j)|p(j,b)|p(j,g(j)).
+824 [para_into,767.2.1,9.1.1,unit_del,130] p(f(b),j)|p(j,b)|g(j)!=j.
+1033 [para_from,17.1.1,468.1.2,unit_del,129] -p(f(b),j)|f(b)=k.
+1167 [para_from,1033.2.1,499.1.2,unit_del,449] -p(f(b),j).
+1174 [back_unit_del,1167.1,824.1] p(j,b)|g(j)!=j.
+1175 [back_unit_del,1167.1,823.1] p(j,b)|p(j,g(j)).
+1176 [back_unit_del,1167.1,822.1] p(j,b)|p(g(j),j).
+1177 [back_unit_del,1167.1,767.1] -p(j,k).
+1200 [binary,1174.2,17.1] p(j,b)| -p(g(j),j)|g(j)=k.
+1214 [1175,split_neg.2.2.2.1.1.2] -p(j,b).
+1215 [1175,split.2.2.2.1.1.2] p(j,g(j)).
+1228 [back_unit_del,1214.1,1200.1] -p(g(j),j)|g(j)=k.
+1241 [back_unit_del,1214.1,1176.1] p(g(j),j).
+1248,1247 [back_unit_del,1241.1,1228.1] g(j)=k.
+1273 [back_demod,1215,demod,1248] p(j,k).
+1274 [binary,1273.1,1177.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8824) -------
+clauses given                 83
+clauses generated           6824
+clauses kept                1270
+clauses forward subsumed    5378
+clauses back subsumed        779
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8824 finished Mon Aug  2 15:31:11 2004
+Refuted case [2.2.2.1.1.2].
+
+------- statistics (process 8817) -------
+clauses given                 83
+clauses generated           6747
+clauses kept                1211
+clauses forward subsumed    5334
+clauses back subsumed        726
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.36          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8817 finished Mon Aug  2 15:31:11 2004
+Refuted case [2.2.2.1.1].
+
+--- refuted case [2.2.2.1.2]
+
+Case [2.2.2.1.2]   (process 8825):
+Assumption: 466 [438,split.2.2.2.1.2] m=k.
+
+----> UNIT CONFLICT at   0.00 sec ----> 475 [binary,474.1,472.1] $F.
+
+Length of proof is 23.  Level of proof is 9.  Case [2.2.2.1.2]
+
+---------------- PROOF ----------------
+
+1 [] x=m|p(x,m)|y=m|y=x| -p(x,y)| -p(y,x).
+10 [] x=b|p(x,b)|p(x,g(x)).
+11 [] x=b|p(x,b)|p(g(x),x).
+12 [] m=k|p(m,k).
+13 [] b=k|p(b,k).
+14 [copy,13,flip.1] k=b|p(b,k).
+16 [] m!=b.
+18 [] k=j|p(k,j).
+19 [binary,16.1,11.1] p(m,b)|p(g(m),m).
+27 [18,split.2] p(k,j).
+47 [para_into,27.1.1,14.1.1] p(b,j)|p(b,k).
+49 [para_into,27.1.1,10.1.1] p(b,j)|p(k,b)|p(k,g(k)).
+129 [47,split_neg.2.2] -p(b,j).
+130 [47,split.2.2] p(b,k).
+135 [back_unit_del,129.1,49.1] p(k,b)|p(k,g(k)).
+177 [para_into,130.1.2,1.3.1] p(b,m)|x=m|p(x,m)|k=x| -p(x,k)| -p(k,x).
+179 [factor,177.1.3,unit_del,16,130] p(b,m)|k=b| -p(k,b).
+180 [19,split_neg.2.2.2] -p(m,b).
+185 [para_into,180.1.1,12.1.1] -p(k,b)|p(m,k).
+270 [para_into,185.2.2,1.4.1,flip.5] -p(k,b)|p(m,x)|x=m|p(x,m)|m=k| -p(x,k)| -p(k,x).
+273 [factor,270.1.7,unit_del,180,16,130] -p(k,b)|p(b,m)|m=k.
+435 [135,split.2.2.2.1] p(k,b).
+438 [back_unit_del,435.1,273.1] p(b,m)|m=k.
+449 [back_unit_del,435.1,185.1] p(m,k).
+450 [back_unit_del,435.1,179.3] p(b,m)|k=b.
+465 [438,split_neg.2.2.2.1.2] -p(b,m).
+467,466 [438,split.2.2.2.1.2] m=k.
+469,468 [back_unit_del,465.1,450.1] k=b.
+472 [back_demod,465,demod,467,469] -p(b,b).
+474 [back_demod,449,demod,467,469,469] p(b,b).
+475 [binary,474.1,472.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8825) -------
+clauses given                 35
+clauses generated           2080
+clauses kept                 471
+clauses forward subsumed    1549
+clauses back subsumed        313
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8825 finished Mon Aug  2 15:31:11 2004
+Refuted case [2.2.2.1.2].
+
+------- statistics (process 8816) -------
+clauses given                 35
+clauses generated           2077
+clauses kept                 463
+clauses forward subsumed    1541
+clauses back subsumed        302
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8816 finished Mon Aug  2 15:31:11 2004
+Refuted case [2.2.2.1].
+
+--- refuted case [2.2.2.2]
+
+Case [2.2.2.2]   (process 8826):
+Assumption: 436 [135,split.2.2.2.2] p(k,g(k)).
+0 [back_unit_del,435.1,134.1] g(k)!=k.
+0 [back_unit_del,435.1,133.1] g(k)!=b.
+0 [back_unit_del,481.1,12.1] p(m,k).
+
+----> UNIT CONFLICT at   0.01 sec ----> 528 [binary,527.1,435.1] $F.
+
+Length of proof is 27.  Level of proof is 11.  Case [2.2.2.2]
+
+---------------- PROOF ----------------
+
+3 [] x=k|x=m|x=b| -p(x,k).
+4 [] x=m| -p(x,m)|f(x)!=m.
+5 [] x=m| -p(x,m)|f(x)!=x.
+6 [] x=m| -p(x,m)|p(x,f(x)).
+7 [] x=m| -p(x,m)|p(f(x),x).
+8 [] x=b|p(x,b)|g(x)!=b.
+9 [] x=b|p(x,b)|g(x)!=x.
+10 [] x=b|p(x,b)|p(x,g(x)).
+11 [] x=b|p(x,b)|p(g(x),x).
+13 [] b=k|p(b,k).
+14 [copy,13,flip.1] k=b|p(b,k).
+18 [] k=j|p(k,j).
+27 [18,split.2] p(k,j).
+47 [para_into,27.1.1,14.1.1] p(b,j)|p(b,k).
+48 [para_into,27.1.1,11.1.1] p(b,j)|p(k,b)|p(g(k),k).
+49 [para_into,27.1.1,10.1.1] p(b,j)|p(k,b)|p(k,g(k)).
+50 [para_into,27.1.1,9.1.1] p(b,j)|p(k,b)|g(k)!=k.
+51 [para_into,27.1.1,8.1.1] p(b,j)|p(k,b)|g(k)!=b.
+129 [47,split_neg.2.2] -p(b,j).
+133 [back_unit_del,129.1,51.1] p(k,b)|g(k)!=b.
+134 [back_unit_del,129.1,50.1] p(k,b)|g(k)!=k.
+135 [back_unit_del,129.1,49.1] p(k,b)|p(k,g(k)).
+136 [back_unit_del,129.1,48.1] p(k,b)|p(g(k),k).
+388 [binary,133.2,3.3] p(k,b)|g(k)=k|g(k)=m| -p(g(k),k).
+435 [135,split_neg.2.2.2.2] -p(k,b).
+436 [135,split.2.2.2.2] p(k,g(k)).
+462 [back_unit_del,435.1,388.1] g(k)=k|g(k)=m| -p(g(k),k).
+467 [back_unit_del,435.1,136.1] p(g(k),k).
+468 [back_unit_del,435.1,134.1] g(k)!=k.
+479,478 [back_unit_del,467.1,462.3,unit_del,468] g(k)=m.
+481 [back_demod,468,demod,479] m!=k.
+483 [back_demod,436,demod,479] p(k,m).
+519 [binary,483.1,7.2,unit_del,481] p(f(k),k).
+520 [binary,483.1,6.2,unit_del,481] p(k,f(k)).
+521 [binary,483.1,5.2,unit_del,481] f(k)!=k.
+522 [binary,483.1,4.2,unit_del,481] f(k)!=m.
+525,524 [binary,519.1,3.4,unit_del,521,522] f(k)=b.
+527 [back_demod,520,demod,525] p(k,b).
+528 [binary,527.1,435.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8826) -------
+clauses given                 38
+clauses generated           2252
+clauses kept                 524
+clauses forward subsumed    1697
+clauses back subsumed        320
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8826 finished Mon Aug  2 15:31:11 2004
+Refuted case [2.2.2.2].
+
+------- statistics (process 8815) -------
+clauses given                 32
+clauses generated           1952
+clauses kept                 433
+clauses forward subsumed    1448
+clauses back subsumed        126
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.05          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8815 finished Mon Aug  2 15:31:11 2004
+Refuted case [2.2.2].
+
+------- statistics (process 8803) -------
+clauses given                 10
+clauses generated            389
+clauses kept                 178
+clauses forward subsumed     212
+clauses back subsumed         59
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8803 finished Mon Aug  2 15:31:11 2004
+Refuted case [2.2].
+
+------- statistics (process 8786) -------
+clauses given                  7
+clauses generated            284
+clauses kept                 127
+clauses forward subsumed     156
+clauses back subsumed          1
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8786 finished Mon Aug  2 15:31:11 2004
+Refuted case [2].
+
+That finishes the proof of the theorem.
+
+That finishes the proof of the theorem.
+
+------- statistics (process 8782) -------
+clauses given                  2
+clauses generated             40
+clauses kept                  24
+clauses forward subsumed      29
+clauses back subsumed          0
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8782 finished Mon Aug  2 15:31:11 2004

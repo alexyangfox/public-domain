@@ -1,0 +1,832 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:56 2004
+The command was "../../bin/otter".  The process ID is 8522.
+
+set(hyper_res).
+assign(max_mem,8000).
+assign(max_weight,80).
+assign(max_proofs,-1).
+set(input_sos_first).
+set(order_history).
+
+weight_list(pick_and_purge).
+weight(P(rew($(0),$(0)),$(1)),99).
+end_of_list.
+
+list(usable).
+1 [] -P(u,i(x,y))| -P(v,x)|P(rew(u,v),y).
+2 [] -P(x,i(q,i(p,q)))| -P(y,i(i(p,i(q,r)),i(i(p,q),i(p,r))))| -P(z,i(i(n(p),n(q)),i(q,p)))|$ANSWER(step_allBEH_Church_FL_18_35_49).
+3 [] -P(x,i(q,i(p,q)))| -P(y,i(i(p,i(q,r)),i(i(p,q),i(p,r))))| -P(z,i(n(n(p)),p))| -P(u,i(p,n(n(p))))| -P(v,i(i(p,q),i(n(q),n(p))))| -P(w,i(i(p,i(q,r)),i(q,i(p,r))))|$ANSWER(step_allFrege_18_35_39_40_46_21).
+4 [] -P(x,i(q,i(p,q)))| -P(y,i(i(p,i(q,r)),i(q,i(p,r))))| -P(z,i(i(q,r),i(i(p,q),i(p,r))))| -P(u,i(p,i(n(p),q)))| -P(v,i(i(p,q),i(i(n(p),q),q)))| -P(w,i(i(p,i(p,q)),i(p,q)))|$ANSWER(step_allHilbert_18_21_22_3_54_30).
+5 [] -P(x,i(i(i(p,q),r),i(q,r)))| -P(y,i(i(i(p,q),r),i(n(p),r)))| -P(z,i(i(n(p),r),i(i(q,r),i(i(p,q),r))))|$ANSWER(step_allLuka_x_19_37_59).
+6 [] -P(x,i(i(i(p,q),r),i(q,r)))| -P(y,i(i(i(p,q),r),i(n(p),r)))| -P(z,i(i(s,i(n(p),r)),i(s,i(i(q,r),i(i(p,q),r)))))|$ANSWER(step_allWos_x_19_37_60).
+end_of_list.
+
+list(sos).
+7 [] P(c1,i(i(x,y),i(i(y,z),i(x,z)))).
+8 [] P(c2,i(i(n(x),x),x)).
+9 [] P(c3,i(x,i(n(x),y))).
+end_of_list.
+
+list(passive).
+end_of_list.
+
+list(demodulators).
+10 [] EQ(rew(c1,c1),c4).
+11 [] EQ(rew(c4,c4),c5).
+12 [] EQ(rew(c4,c1),c6).
+13 [] EQ(rew(c5,c6),c7).
+14 [] EQ(rew(c7,c1),c8).
+15 [] EQ(rew(c1,c3),c9).
+16 [] EQ(rew(c9,c6),c10).
+17 [] EQ(rew(c10,c2),c10a).
+18 [] EQ(rew(c10a,c2),c11).
+19 [] EQ(rew(c9,c11),c12).
+20 [] EQ(rew(c7,c12),c13).
+21 [] EQ(rew(c1,c13),c14).
+22 [] EQ(rew(c14,c2),c15).
+23 [] EQ(rew(c9,c2),c16).
+24 [] EQ(rew(c9,c15),c17).
+25 [] EQ(rew(c5,c17),c17a).
+26 [] EQ(rew(c17a,c3),c18).
+27 [] EQ(rew(c1,c18),c19).
+28 [] EQ(rew(c19,c15),c20).
+29 [] EQ(rew(c5,c20),c21).
+30 [] EQ(rew(c21,c1),c22).
+31 [] EQ(rew(c1,c21),c23).
+32 [] EQ(rew(c23,c15),c24a).
+33 [] EQ(rew(c24a,c3),c24).
+34 [] EQ(rew(c21,c6),c25).
+35 [] EQ(rew(c25,c24),c26).
+36 [] EQ(rew(c1,c26),c28).
+37 [] EQ(rew(c28,c26),c29).
+38 [] EQ(rew(c29,c16),c30).
+39 [] EQ(rew(c7,c29),c31).
+40 [] EQ(rew(c21,c31),c32).
+41 [] EQ(rew(c32,c18),c33).
+42 [] EQ(rew(c21,c33),c34).
+43 [] EQ(rew(c34,c22),c35).
+44 [] EQ(rew(c21,c3),c36).
+45 [] EQ(rew(c1,c36),c37).
+46 [] EQ(rew(c26,c2),c38).
+47 [] EQ(rew(c37,c2),c39).
+48 [] EQ(rew(c9,c38),c40).
+49 [] EQ(rew(c1,c39),c41).
+50 [] EQ(rew(c1,c41),c42).
+51 [] EQ(rew(c42,c15),c43).
+52 [] EQ(rew(c5,c43),c44).
+53 [] EQ(rew(c5,c15),c45).
+54 [] EQ(rew(c44,c36),c46).
+55 [] EQ(rew(c44,c3),c47).
+56 [] EQ(rew(c45,c36),c48).
+57 [] EQ(rew(c45,c3),c49).
+58 [] EQ(rew(c1,c48),c50).
+59 [] EQ(rew(c22,c46),c51).
+60 [] EQ(rew(c22,c47),c52).
+61 [] EQ(rew(c50,c15),c53).
+62 [] EQ(rew(c21,c53),c54).
+63 [] EQ(rew(c44,c47),c55).
+64 [] EQ(rew(c1,c53),c56).
+65 [] EQ(rew(c56,c32),c57).
+66 [] EQ(rew(c1,c57),c58).
+67 [] EQ(rew(c58,c21),c59).
+68 [] EQ(rew(c22,c59),c60).
+69 [] EQ(rew(c60,c41),c61).
+70 [] EQ(rew(c1,c40),c62).
+71 [] EQ(rew(c21,c18),c63).
+72 [] EQ(rew(c48,c63),c64).
+73 [] EQ(rew(c61,c16),c64a).
+74 [] EQ(rew(c64a,c64),c65).
+75 [] EQ(rew(c48,c36),c66).
+76 [] EQ(rew(c46,c18),c67).
+77 [] EQ(rew(c48,c18),c68).
+78 [] EQ(rew(c51,c20),c69).
+79 [] EQ(rew(c52,c20),c70).
+80 [] EQ(rew(c70,c16),c70a).
+81 [] EQ(rew(c70a,c16),c71).
+end_of_list.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=-2147483647) 7 [] P(c1,i(i(x,y),i(i(y,z),i(x,z)))).
+** KEPT (pick-wt=17): 82 [hyper,1,7,7,demod,10] P(c4,i(i(i(i(x,y),i(z,y)),u),i(i(z,x),u))).
+
+given clause #2: (wt=-2147483647) 8 [] P(c2,i(i(n(x),x),x)).
+
+given clause #3: (wt=-2147483647) 9 [] P(c3,i(x,i(n(x),y))).
+** KEPT (pick-wt=12): 83 [hyper,1,7,9,demod,15] P(c9,i(i(i(n(x),y),z),i(x,z))).
+
+given clause #4: (wt=12) 83 [hyper,1,7,9,demod,15] P(c9,i(i(i(n(x),y),z),i(x,z))).
+** KEPT (pick-wt=5): 84 [hyper,1,83,8,demod,23] P(c16,i(x,x)).
+
+given clause #5: (wt=5) 84 [hyper,1,83,8,demod,23] P(c16,i(x,x)).
+
+given clause #6: (wt=17) 82 [hyper,1,7,7,demod,10] P(c4,i(i(i(i(x,y),i(z,y)),u),i(i(z,x),u))).
+** KEPT (pick-wt=17): 85 [hyper,1,82,82,demod,11] P(c5,i(i(x,i(y,z)),i(i(u,y),i(x,i(u,z))))).
+** KEPT (pick-wt=17): 86 [hyper,1,82,7,demod,12] P(c6,i(i(x,y),i(i(i(x,z),u),i(i(y,z),u)))).
+
+given clause #7: (wt=17) 85 [hyper,1,82,82,demod,11] P(c5,i(i(x,i(y,z)),i(i(u,y),i(x,i(u,z))))).
+
+given clause #8: (wt=17) 86 [hyper,1,82,7,demod,12] P(c6,i(i(x,y),i(i(i(x,z),u),i(i(y,z),u)))).
+** KEPT (pick-wt=21): 87 [hyper,1,85,86,demod,13] P(c7,i(i(x,i(i(y,z),u)),i(i(y,v),i(x,i(i(v,z),u))))).
+** KEPT (pick-wt=16): 88 [hyper,1,83,86,demod,16] P(c10,i(x,i(i(i(n(x),y),z),i(i(u,y),z)))).
+
+given clause #9: (wt=16) 88 [hyper,1,83,86,demod,16] P(c10,i(x,i(i(i(n(x),y),z),i(i(u,y),z)))).
+** KEPT (pick-wt=19): 89 [hyper,1,88,8,demod,17] P(c10a,i(i(i(n(i(i(n(x),x),x)),y),z),i(i(u,y),z))).
+
+given clause #10: (wt=19) 89 [hyper,1,88,8,demod,17] P(c10a,i(i(i(n(i(i(n(x),x),x)),y),z),i(i(u,y),z))).
+** KEPT (pick-wt=17): 90 [hyper,1,89,8,demod,18] P(c11,i(i(x,i(i(n(y),y),y)),i(i(n(y),y),y))).
+
+given clause #11: (wt=17) 90 [hyper,1,89,8,demod,18] P(c11,i(i(x,i(i(n(y),y),y)),i(i(n(y),y),y))).
+** KEPT (pick-wt=10): 91 [hyper,1,83,90,demod,19] P(c12,i(x,i(i(n(y),y),y))).
+
+given clause #12: (wt=10) 91 [hyper,1,83,90,demod,19] P(c12,i(x,i(i(n(y),y),y))).
+
+given clause #13: (wt=21) 87 [hyper,1,85,86,demod,13] P(c7,i(i(x,i(i(y,z),u)),i(i(y,v),i(x,i(i(v,z),u))))).
+** KEPT (pick-wt=14): 92 [hyper,1,87,91,demod,20] P(c13,i(i(n(x),y),i(z,i(i(y,x),x)))).
+** KEPT (pick-wt=17): 93 [hyper,1,87,7,demod,14] P(c8,i(i(x,y),i(i(z,x),i(i(y,u),i(z,u))))).
+
+given clause #14: (wt=14) 92 [hyper,1,87,91,demod,20] P(c13,i(i(n(x),y),i(z,i(i(y,x),x)))).
+** KEPT (pick-wt=18): 94 [hyper,1,7,92,demod,21] P(c14,i(i(i(x,i(i(y,z),z)),u),i(i(n(z),y),u))).
+
+given clause #15: (wt=17) 93 [hyper,1,87,7,demod,14] P(c8,i(i(x,y),i(i(z,x),i(i(y,u),i(z,u))))).
+
+given clause #16: (wt=18) 94 [hyper,1,7,92,demod,21] P(c14,i(i(i(x,i(i(y,z),z)),u),i(i(n(z),y),u))).
+** KEPT (pick-wt=12): 95 [hyper,1,94,8,demod,22] P(c15,i(i(n(x),y),i(i(y,x),x))).
+
+given clause #17: (wt=12) 95 [hyper,1,94,8,demod,22] P(c15,i(i(n(x),y),i(i(y,x),x))).
+** KEPT (pick-wt=16): 96 [hyper,1,85,95,demod,53] P(c45,i(i(x,i(y,z)),i(i(n(z),y),i(x,z)))).
+** KEPT (pick-wt=9): 97 [hyper,1,83,95,demod,24] P(c17,i(x,i(i(y,x),x))).
+
+given clause #18: (wt=9) 97 [hyper,1,83,95,demod,24] P(c17,i(x,i(i(y,x),x))).
+** KEPT (pick-wt=13): 98 [hyper,1,85,97,demod,25] P(c17a,i(i(x,i(y,z)),i(z,i(x,z)))).
+
+given clause #19: (wt=13) 98 [hyper,1,85,97,demod,25] P(c17a,i(i(x,i(y,z)),i(z,i(x,z)))).
+** KEPT (pick-wt=7): 99 [hyper,1,98,9,demod,26] P(c18,i(x,i(y,x))).
+
+given clause #20: (wt=7) 99 [hyper,1,98,9,demod,26] P(c18,i(x,i(y,x))).
+** KEPT (pick-wt=11): 100 [hyper,1,7,99,demod,27] P(c19,i(i(i(x,y),z),i(y,z))).
+
+given clause #21: (wt=11) 100 [hyper,1,7,99,demod,27] P(c19,i(i(i(x,y),z),i(y,z))).
+** KEPT (pick-wt=9): 101 [hyper,1,100,95,demod,28] P(c20,i(x,i(i(x,y),y))).
+
+given clause #22: (wt=9) 101 [hyper,1,100,95,demod,28] P(c20,i(x,i(i(x,y),y))).
+** KEPT (pick-wt=13): 102 [hyper,1,85,101,demod,29] P(c21,i(i(x,i(y,z)),i(y,i(x,z)))).
+
+given clause #23: (wt=13) 102 [hyper,1,85,101,demod,29] P(c21,i(i(x,i(y,z)),i(y,i(x,z)))).
+** KEPT (pick-wt=17): 103 [hyper,1,7,102,demod,31] P(c23,i(i(i(x,i(y,z)),u),i(i(y,i(x,z)),u))).
+** KEPT (pick-wt=7): 104 [hyper,1,102,99,demod,71] P(c63,i(x,i(y,y))).
+** KEPT (pick-wt=17): 105 [hyper,1,102,86,demod,34] P(c25,i(i(i(x,y),z),i(i(x,u),i(i(u,y),z)))).
+** KEPT (pick-wt=8): 106 [hyper,1,102,9,demod,44] P(c36,i(n(x),i(x,y))).
+** KEPT (pick-wt=13): 107 [hyper,1,102,7,demod,30] P(c22,i(i(x,y),i(i(z,x),i(z,y)))).
+
+given clause #24: (wt=7) 104 [hyper,1,102,99,demod,71] P(c63,i(x,i(y,y))).
+
+given clause #25: (wt=8) 106 [hyper,1,102,9,demod,44] P(c36,i(n(x),i(x,y))).
+** KEPT (pick-wt=12): 108 [hyper,1,7,106,demod,45] P(c37,i(i(i(x,y),z),i(n(x),z))).
+
+given clause #26: (wt=12) 108 [hyper,1,7,106,demod,45] P(c37,i(i(i(x,y),z),i(n(x),z))).
+** KEPT (pick-wt=7): 109 [hyper,1,108,8,demod,47] P(c39,i(n(n(x)),x)).
+
+given clause #27: (wt=7) 109 [hyper,1,108,8,demod,47] P(c39,i(n(n(x)),x)).
+** KEPT (pick-wt=11): 110 [hyper,1,7,109,demod,49] P(c41,i(i(x,y),i(n(n(x)),y))).
+
+given clause #28: (wt=11) 110 [hyper,1,7,109,demod,49] P(c41,i(i(x,y),i(n(n(x)),y))).
+** KEPT (pick-wt=15): 111 [hyper,1,7,110,demod,50] P(c42,i(i(i(n(n(x)),y),z),i(i(x,y),z))).
+
+given clause #29: (wt=13) 107 [hyper,1,102,7,demod,30] P(c22,i(i(x,y),i(i(z,x),i(z,y)))).
+
+given clause #30: (wt=15) 111 [hyper,1,7,110,demod,50] P(c42,i(i(i(n(n(x)),y),z),i(i(x,y),z))).
+** KEPT (pick-wt=13): 112 [hyper,1,111,95,demod,51] P(c43,i(i(x,y),i(i(y,n(x)),n(x)))).
+
+given clause #31: (wt=13) 112 [hyper,1,111,95,demod,51] P(c43,i(i(x,y),i(i(y,n(x)),n(x)))).
+** KEPT (pick-wt=17): 113 [hyper,1,85,112,demod,52] P(c44,i(i(x,i(y,n(z))),i(i(z,y),i(x,n(z))))).
+
+given clause #32: (wt=16) 96 [hyper,1,85,95,demod,53] P(c45,i(i(x,i(y,z)),i(i(n(z),y),i(x,z)))).
+** KEPT (pick-wt=11): 114 [hyper,1,96,106,demod,56] P(c48,i(i(n(x),y),i(n(y),x))).
+** KEPT (pick-wt=11): 115 [hyper,1,96,9,demod,57] P(c49,i(i(n(x),n(y)),i(y,x))).
+
+given clause #33: (wt=11) 114 [hyper,1,96,106,demod,56] P(c48,i(i(n(x),y),i(n(y),x))).
+** KEPT (pick-wt=15): 116 [hyper,1,7,114,demod,58] P(c50,i(i(i(n(x),y),z),i(i(n(y),x),z))).
+** KEPT (pick-wt=8): 117 [hyper,1,114,106,demod,75] P(c66,i(n(i(x,y)),x)).
+** KEPT (pick-wt=8): 118 [hyper,1,114,104,demod,72] P(c64,i(n(i(x,x)),y)).
+** KEPT (pick-wt=9): 119 [hyper,1,114,99,demod,77] P(c68,i(n(i(x,n(y))),y)).
+
+given clause #34: (wt=8) 117 [hyper,1,114,106,demod,75] P(c66,i(n(i(x,y)),x)).
+
+given clause #35: (wt=8) 118 [hyper,1,114,104,demod,72] P(c64,i(n(i(x,x)),y)).
+
+given clause #36: (wt=9) 119 [hyper,1,114,99,demod,77] P(c68,i(n(i(x,n(y))),y)).
+
+given clause #37: (wt=11) 115 [hyper,1,96,9,demod,57] P(c49,i(i(n(x),n(y)),i(y,x))).
+
+given clause #38: (wt=15) 116 [hyper,1,7,114,demod,58] P(c50,i(i(i(n(x),y),z),i(i(n(y),x),z))).
+** KEPT (pick-wt=12): 120 [hyper,1,116,95,demod,61] P(c53,i(i(n(x),y),i(i(x,y),y))).
+
+given clause #39: (wt=12) 120 [hyper,1,116,95,demod,61] P(c53,i(i(n(x),y),i(i(x,y),y))).
+** KEPT (pick-wt=12): 121 [hyper,1,102,120,demod,62] P(c54,i(i(x,y),i(i(n(x),y),y))).
+** KEPT (pick-wt=16): 122 [hyper,1,7,120,demod,64] P(c56,i(i(i(i(x,y),y),z),i(i(n(x),y),z))).
+
+given clause #40: (wt=12) 121 [hyper,1,102,120,demod,62] P(c54,i(i(x,y),i(i(n(x),y),y))).
+
+given clause #41: (wt=16) 122 [hyper,1,7,120,demod,64] P(c56,i(i(i(i(x,y),y),z),i(i(n(x),y),z))).
+
+given clause #42: (wt=17) 103 [hyper,1,7,102,demod,31] P(c23,i(i(i(x,i(y,z)),u),i(i(y,i(x,z)),u))).
+** KEPT (pick-wt=16): 123 [hyper,1,103,95,demod,32] P(c24a,i(i(x,i(n(y),z)),i(i(i(x,z),y),y))).
+
+given clause #43: (wt=16) 123 [hyper,1,103,95,demod,32] P(c24a,i(i(x,i(n(y),z)),i(i(i(x,z),y),y))).
+** KEPT (pick-wt=9): 124 [hyper,1,123,9,demod,33] P(c24,i(i(i(x,y),x),x)).
+
+given clause #44: (wt=9) 124 [hyper,1,123,9,demod,33] P(c24,i(i(i(x,y),x),x)).
+
+given clause #45: (wt=17) 105 [hyper,1,102,86,demod,34] P(c25,i(i(i(x,y),z),i(i(x,u),i(i(u,y),z)))).
+** KEPT (pick-wt=13): 125 [hyper,1,105,124,demod,35] P(c26,i(i(i(x,y),z),i(i(z,x),x))).
+
+given clause #46: (wt=13) 125 [hyper,1,105,124,demod,35] P(c26,i(i(i(x,y),z),i(i(z,x),x))).
+** KEPT (pick-wt=17): 126 [hyper,1,7,125,demod,36] P(c28,i(i(i(i(x,y),y),z),i(i(i(y,u),x),z))).
+** KEPT (pick-wt=9): 127 [hyper,1,125,8,demod,46] P(c38,i(i(x,n(x)),n(x))).
+
+given clause #47: (wt=9) 127 [hyper,1,125,8,demod,46] P(c38,i(i(x,n(x)),n(x))).
+** KEPT (pick-wt=7): 128 [hyper,1,83,127,demod,48] P(c40,i(x,n(n(x)))).
+
+given clause #48: (wt=7) 128 [hyper,1,83,127,demod,48] P(c40,i(x,n(n(x)))).
+** KEPT (pick-wt=11): 129 [hyper,1,7,128,demod,70] P(c62,i(i(n(n(x)),y),i(x,y))).
+
+given clause #49: (wt=11) 129 [hyper,1,7,128,demod,70] P(c62,i(i(n(n(x)),y),i(x,y))).
+
+given clause #50: (wt=17) 113 [hyper,1,85,112,demod,52] P(c44,i(i(x,i(y,n(z))),i(i(z,y),i(x,n(z))))).
+** KEPT (pick-wt=11): 130 [hyper,1,113,106,demod,54] P(c46,i(i(x,y),i(n(y),n(x)))).
+** KEPT (pick-wt=11): 131 [hyper,1,113,9,demod,55] P(c47,i(i(x,n(y)),i(y,n(x)))).
+
+given clause #51: (wt=11) 130 [hyper,1,113,106,demod,54] P(c46,i(i(x,y),i(n(y),n(x)))).
+** KEPT (pick-wt=15): 132 [hyper,1,107,130,demod,59] P(c51,i(i(x,i(y,z)),i(x,i(n(z),n(y))))).
+** KEPT (pick-wt=9): 133 [hyper,1,130,99,demod,76] P(c67,i(n(i(x,y)),n(y))).
+
+given clause #52: (wt=9) 133 [hyper,1,130,99,demod,76] P(c67,i(n(i(x,y)),n(y))).
+
+given clause #53: (wt=11) 131 [hyper,1,113,9,demod,55] P(c47,i(i(x,n(y)),i(y,n(x)))).
+** KEPT (pick-wt=13): 134 [hyper,1,113,131,demod,63] P(c55,i(i(x,y),i(i(x,n(y)),n(x)))).
+** KEPT (pick-wt=15): 135 [hyper,1,107,131,demod,60] P(c52,i(i(x,i(y,n(z))),i(x,i(z,n(y))))).
+
+given clause #54: (wt=13) 134 [hyper,1,113,131,demod,63] P(c55,i(i(x,y),i(i(x,n(y)),n(x)))).
+
+given clause #55: (wt=15) 132 [hyper,1,107,130,demod,59] P(c51,i(i(x,i(y,z)),i(x,i(n(z),n(y))))).
+** KEPT (pick-wt=11): 136 [hyper,1,132,101,demod,78] P(c69,i(x,i(n(y),n(i(x,y))))).
+
+given clause #56: (wt=11) 136 [hyper,1,132,101,demod,78] P(c69,i(x,i(n(y),n(i(x,y))))).
+
+given clause #57: (wt=15) 135 [hyper,1,107,131,demod,60] P(c52,i(i(x,i(y,n(z))),i(x,i(z,n(y))))).
+** KEPT (pick-wt=11): 137 [hyper,1,135,101,demod,79] P(c70,i(x,i(y,n(i(x,n(y)))))).
+
+given clause #58: (wt=11) 137 [hyper,1,135,101,demod,79] P(c70,i(x,i(y,n(i(x,n(y)))))).
+** KEPT (pick-wt=11): 138 [hyper,1,137,84,demod,80] P(c70a,i(x,n(i(i(y,y),n(x))))).
+
+given clause #59: (wt=11) 138 [hyper,1,137,84,demod,80] P(c70a,i(x,n(i(i(y,y),n(x))))).
+** KEPT (pick-wt=11): 139 [hyper,1,138,84,demod,81] P(c71,n(i(i(x,x),n(i(y,y))))).
+
+given clause #60: (wt=11) 139 [hyper,1,138,84,demod,81] P(c71,n(i(i(x,x),n(i(y,y))))).
+
+given clause #61: (wt=17) 126 [hyper,1,7,125,demod,36] P(c28,i(i(i(i(x,y),y),z),i(i(i(y,u),x),z))).
+** KEPT (pick-wt=13): 140 [hyper,1,126,125,demod,37] P(c29,i(i(i(x,y),z),i(i(x,z),z))).
+
+given clause #62: (wt=13) 140 [hyper,1,126,125,demod,37] P(c29,i(i(i(x,y),z),i(i(x,z),z))).
+** KEPT (pick-wt=17): 141 [hyper,1,87,140,demod,39] P(c31,i(i(x,y),i(i(i(x,z),u),i(i(y,u),u)))).
+** KEPT (pick-wt=11): 142 [hyper,1,140,84,demod,38] P(c30,i(i(x,i(x,y)),i(x,y))).
+
+given clause #63: (wt=11) 142 [hyper,1,140,84,demod,38] P(c30,i(i(x,i(x,y)),i(x,y))).
+
+-------- PROOF -------- 143 [hyper,4,99,102,107,9,121,142] $ANSWER(step_allHilbert_18_21_22_3_54_30).
+** KEPT (pick-wt=0): 143 [hyper,4,99,102,107,9,121,142] $ANSWER(step_allHilbert_18_21_22_3_54_30).
+
+-----> EMPTY CLAUSE at   0.04 sec ----> 143 [hyper,4,99,102,107,9,121,142] $ANSWER(step_allHilbert_18_21_22_3_54_30).
+
+Length of proof is 34.  Level of proof is 22.
+
+---------------- PROOF ----------------
+
+1 [] -P(u,i(x,y))| -P(v,x)|P(rew(u,v),y).
+4 [] -P(x,i(q,i(p,q)))| -P(y,i(i(p,i(q,r)),i(q,i(p,r))))| -P(z,i(i(q,r),i(i(p,q),i(p,r))))| -P(u,i(p,i(n(p),q)))| -P(v,i(i(p,q),i(i(n(p),q),q)))| -P(w,i(i(p,i(p,q)),i(p,q)))|$ANSWER(step_allHilbert_18_21_22_3_54_30).
+7 [] P(c1,i(i(x,y),i(i(y,z),i(x,z)))).
+8 [] P(c2,i(i(n(x),x),x)).
+9 [] P(c3,i(x,i(n(x),y))).
+10 [] EQ(rew(c1,c1),c4).
+11 [] EQ(rew(c4,c4),c5).
+12 [] EQ(rew(c4,c1),c6).
+13 [] EQ(rew(c5,c6),c7).
+15 [] EQ(rew(c1,c3),c9).
+16 [] EQ(rew(c9,c6),c10).
+17 [] EQ(rew(c10,c2),c10a).
+18 [] EQ(rew(c10a,c2),c11).
+19 [] EQ(rew(c9,c11),c12).
+20 [] EQ(rew(c7,c12),c13).
+21 [] EQ(rew(c1,c13),c14).
+22 [] EQ(rew(c14,c2),c15).
+23 [] EQ(rew(c9,c2),c16).
+24 [] EQ(rew(c9,c15),c17).
+25 [] EQ(rew(c5,c17),c17a).
+26 [] EQ(rew(c17a,c3),c18).
+27 [] EQ(rew(c1,c18),c19).
+28 [] EQ(rew(c19,c15),c20).
+29 [] EQ(rew(c5,c20),c21).
+30 [] EQ(rew(c21,c1),c22).
+31 [] EQ(rew(c1,c21),c23).
+32 [] EQ(rew(c23,c15),c24a).
+33 [] EQ(rew(c24a,c3),c24).
+34 [] EQ(rew(c21,c6),c25).
+35 [] EQ(rew(c25,c24),c26).
+36 [] EQ(rew(c1,c26),c28).
+37 [] EQ(rew(c28,c26),c29).
+38 [] EQ(rew(c29,c16),c30).
+44 [] EQ(rew(c21,c3),c36).
+53 [] EQ(rew(c5,c15),c45).
+56 [] EQ(rew(c45,c36),c48).
+58 [] EQ(rew(c1,c48),c50).
+61 [] EQ(rew(c50,c15),c53).
+62 [] EQ(rew(c21,c53),c54).
+82 [hyper,1,7,7,demod,10] P(c4,i(i(i(i(x,y),i(z,y)),u),i(i(z,x),u))).
+83 [hyper,1,7,9,demod,15] P(c9,i(i(i(n(x),y),z),i(x,z))).
+84 [hyper,1,83,8,demod,23] P(c16,i(x,x)).
+85 [hyper,1,82,82,demod,11] P(c5,i(i(x,i(y,z)),i(i(u,y),i(x,i(u,z))))).
+86 [hyper,1,82,7,demod,12] P(c6,i(i(x,y),i(i(i(x,z),u),i(i(y,z),u)))).
+87 [hyper,1,85,86,demod,13] P(c7,i(i(x,i(i(y,z),u)),i(i(y,v),i(x,i(i(v,z),u))))).
+88 [hyper,1,83,86,demod,16] P(c10,i(x,i(i(i(n(x),y),z),i(i(u,y),z)))).
+89 [hyper,1,88,8,demod,17] P(c10a,i(i(i(n(i(i(n(x),x),x)),y),z),i(i(u,y),z))).
+90 [hyper,1,89,8,demod,18] P(c11,i(i(x,i(i(n(y),y),y)),i(i(n(y),y),y))).
+91 [hyper,1,83,90,demod,19] P(c12,i(x,i(i(n(y),y),y))).
+92 [hyper,1,87,91,demod,20] P(c13,i(i(n(x),y),i(z,i(i(y,x),x)))).
+94 [hyper,1,7,92,demod,21] P(c14,i(i(i(x,i(i(y,z),z)),u),i(i(n(z),y),u))).
+95 [hyper,1,94,8,demod,22] P(c15,i(i(n(x),y),i(i(y,x),x))).
+96 [hyper,1,85,95,demod,53] P(c45,i(i(x,i(y,z)),i(i(n(z),y),i(x,z)))).
+97 [hyper,1,83,95,demod,24] P(c17,i(x,i(i(y,x),x))).
+98 [hyper,1,85,97,demod,25] P(c17a,i(i(x,i(y,z)),i(z,i(x,z)))).
+99 [hyper,1,98,9,demod,26] P(c18,i(x,i(y,x))).
+100 [hyper,1,7,99,demod,27] P(c19,i(i(i(x,y),z),i(y,z))).
+101 [hyper,1,100,95,demod,28] P(c20,i(x,i(i(x,y),y))).
+102 [hyper,1,85,101,demod,29] P(c21,i(i(x,i(y,z)),i(y,i(x,z)))).
+103 [hyper,1,7,102,demod,31] P(c23,i(i(i(x,i(y,z)),u),i(i(y,i(x,z)),u))).
+105 [hyper,1,102,86,demod,34] P(c25,i(i(i(x,y),z),i(i(x,u),i(i(u,y),z)))).
+106 [hyper,1,102,9,demod,44] P(c36,i(n(x),i(x,y))).
+107 [hyper,1,102,7,demod,30] P(c22,i(i(x,y),i(i(z,x),i(z,y)))).
+114 [hyper,1,96,106,demod,56] P(c48,i(i(n(x),y),i(n(y),x))).
+116 [hyper,1,7,114,demod,58] P(c50,i(i(i(n(x),y),z),i(i(n(y),x),z))).
+120 [hyper,1,116,95,demod,61] P(c53,i(i(n(x),y),i(i(x,y),y))).
+121 [hyper,1,102,120,demod,62] P(c54,i(i(x,y),i(i(n(x),y),y))).
+123 [hyper,1,103,95,demod,32] P(c24a,i(i(x,i(n(y),z)),i(i(i(x,z),y),y))).
+124 [hyper,1,123,9,demod,33] P(c24,i(i(i(x,y),x),x)).
+125 [hyper,1,105,124,demod,35] P(c26,i(i(i(x,y),z),i(i(z,x),x))).
+126 [hyper,1,7,125,demod,36] P(c28,i(i(i(i(x,y),y),z),i(i(i(y,u),x),z))).
+140 [hyper,1,126,125,demod,37] P(c29,i(i(i(x,y),z),i(i(x,z),z))).
+142 [hyper,1,140,84,demod,38] P(c30,i(i(x,i(x,y)),i(x,y))).
+143 [hyper,4,99,102,107,9,121,142] $ANSWER(step_allHilbert_18_21_22_3_54_30).
+
+------------ end of proof -------------
+
+
+given clause #64: (wt=17) 141 [hyper,1,87,140,demod,39] P(c31,i(i(x,y),i(i(i(x,z),u),i(i(y,u),u)))).
+** KEPT (pick-wt=17): 144 [hyper,1,102,141,demod,40] P(c32,i(i(i(x,y),z),i(i(x,u),i(i(u,z),z)))).
+
+given clause #65: (wt=17) 144 [hyper,1,102,141,demod,40] P(c32,i(i(i(x,y),z),i(i(x,u),i(i(u,z),z)))).
+** KEPT (pick-wt=16): 145 [hyper,1,122,144,demod,65] P(c57,i(i(n(x),y),i(i(x,z),i(i(z,y),y)))).
+** KEPT (pick-wt=19): 146 [hyper,1,144,99,demod,41] P(c33,i(i(x,y),i(i(y,i(z,i(x,u))),i(z,i(x,u))))).
+
+given clause #66: (wt=16) 145 [hyper,1,122,144,demod,65] P(c57,i(i(n(x),y),i(i(x,z),i(i(z,y),y)))).
+** KEPT (pick-wt=20): 147 [hyper,1,7,145,demod,66] P(c58,i(i(i(i(x,y),i(i(y,z),z)),u),i(i(n(x),z),u))).
+
+given clause #67: (wt=19) 146 [hyper,1,144,99,demod,41] P(c33,i(i(x,y),i(i(y,i(z,i(x,u))),i(z,i(x,u))))).
+** KEPT (pick-wt=19): 148 [hyper,1,102,146,demod,42] P(c34,i(i(x,i(y,i(z,u))),i(i(z,x),i(y,i(z,u))))).
+
+given clause #68: (wt=19) 148 [hyper,1,102,146,demod,42] P(c34,i(i(x,i(y,i(z,u))),i(i(z,x),i(y,i(z,u))))).
+** KEPT (pick-wt=15): 149 [hyper,1,148,107,demod,43] P(c35,i(i(x,i(y,z)),i(i(x,y),i(x,z)))).
+
+given clause #69: (wt=15) 149 [hyper,1,148,107,demod,43] P(c35,i(i(x,i(y,z)),i(i(x,y),i(x,z)))).
+-------- PROOF -------- 150 [hyper,3,99,149,109,128,130,102] $ANSWER(step_allFrege_18_35_39_40_46_21).
+** KEPT (pick-wt=0): 150 [hyper,3,99,149,109,128,130,102] $ANSWER(step_allFrege_18_35_39_40_46_21).
+
+-----> EMPTY CLAUSE at   0.04 sec ----> 150 [hyper,3,99,149,109,128,130,102] $ANSWER(step_allFrege_18_35_39_40_46_21).
+
+Length of proof is 41.  Level of proof is 26.
+
+---------------- PROOF ----------------
+
+1 [] -P(u,i(x,y))| -P(v,x)|P(rew(u,v),y).
+3 [] -P(x,i(q,i(p,q)))| -P(y,i(i(p,i(q,r)),i(i(p,q),i(p,r))))| -P(z,i(n(n(p)),p))| -P(u,i(p,n(n(p))))| -P(v,i(i(p,q),i(n(q),n(p))))| -P(w,i(i(p,i(q,r)),i(q,i(p,r))))|$ANSWER(step_allFrege_18_35_39_40_46_21).
+7 [] P(c1,i(i(x,y),i(i(y,z),i(x,z)))).
+8 [] P(c2,i(i(n(x),x),x)).
+9 [] P(c3,i(x,i(n(x),y))).
+10 [] EQ(rew(c1,c1),c4).
+11 [] EQ(rew(c4,c4),c5).
+12 [] EQ(rew(c4,c1),c6).
+13 [] EQ(rew(c5,c6),c7).
+15 [] EQ(rew(c1,c3),c9).
+16 [] EQ(rew(c9,c6),c10).
+17 [] EQ(rew(c10,c2),c10a).
+18 [] EQ(rew(c10a,c2),c11).
+19 [] EQ(rew(c9,c11),c12).
+20 [] EQ(rew(c7,c12),c13).
+21 [] EQ(rew(c1,c13),c14).
+22 [] EQ(rew(c14,c2),c15).
+24 [] EQ(rew(c9,c15),c17).
+25 [] EQ(rew(c5,c17),c17a).
+26 [] EQ(rew(c17a,c3),c18).
+27 [] EQ(rew(c1,c18),c19).
+28 [] EQ(rew(c19,c15),c20).
+29 [] EQ(rew(c5,c20),c21).
+30 [] EQ(rew(c21,c1),c22).
+31 [] EQ(rew(c1,c21),c23).
+32 [] EQ(rew(c23,c15),c24a).
+33 [] EQ(rew(c24a,c3),c24).
+34 [] EQ(rew(c21,c6),c25).
+35 [] EQ(rew(c25,c24),c26).
+36 [] EQ(rew(c1,c26),c28).
+37 [] EQ(rew(c28,c26),c29).
+39 [] EQ(rew(c7,c29),c31).
+40 [] EQ(rew(c21,c31),c32).
+41 [] EQ(rew(c32,c18),c33).
+42 [] EQ(rew(c21,c33),c34).
+43 [] EQ(rew(c34,c22),c35).
+44 [] EQ(rew(c21,c3),c36).
+45 [] EQ(rew(c1,c36),c37).
+46 [] EQ(rew(c26,c2),c38).
+47 [] EQ(rew(c37,c2),c39).
+48 [] EQ(rew(c9,c38),c40).
+49 [] EQ(rew(c1,c39),c41).
+50 [] EQ(rew(c1,c41),c42).
+51 [] EQ(rew(c42,c15),c43).
+52 [] EQ(rew(c5,c43),c44).
+54 [] EQ(rew(c44,c36),c46).
+82 [hyper,1,7,7,demod,10] P(c4,i(i(i(i(x,y),i(z,y)),u),i(i(z,x),u))).
+83 [hyper,1,7,9,demod,15] P(c9,i(i(i(n(x),y),z),i(x,z))).
+85 [hyper,1,82,82,demod,11] P(c5,i(i(x,i(y,z)),i(i(u,y),i(x,i(u,z))))).
+86 [hyper,1,82,7,demod,12] P(c6,i(i(x,y),i(i(i(x,z),u),i(i(y,z),u)))).
+87 [hyper,1,85,86,demod,13] P(c7,i(i(x,i(i(y,z),u)),i(i(y,v),i(x,i(i(v,z),u))))).
+88 [hyper,1,83,86,demod,16] P(c10,i(x,i(i(i(n(x),y),z),i(i(u,y),z)))).
+89 [hyper,1,88,8,demod,17] P(c10a,i(i(i(n(i(i(n(x),x),x)),y),z),i(i(u,y),z))).
+90 [hyper,1,89,8,demod,18] P(c11,i(i(x,i(i(n(y),y),y)),i(i(n(y),y),y))).
+91 [hyper,1,83,90,demod,19] P(c12,i(x,i(i(n(y),y),y))).
+92 [hyper,1,87,91,demod,20] P(c13,i(i(n(x),y),i(z,i(i(y,x),x)))).
+94 [hyper,1,7,92,demod,21] P(c14,i(i(i(x,i(i(y,z),z)),u),i(i(n(z),y),u))).
+95 [hyper,1,94,8,demod,22] P(c15,i(i(n(x),y),i(i(y,x),x))).
+97 [hyper,1,83,95,demod,24] P(c17,i(x,i(i(y,x),x))).
+98 [hyper,1,85,97,demod,25] P(c17a,i(i(x,i(y,z)),i(z,i(x,z)))).
+99 [hyper,1,98,9,demod,26] P(c18,i(x,i(y,x))).
+100 [hyper,1,7,99,demod,27] P(c19,i(i(i(x,y),z),i(y,z))).
+101 [hyper,1,100,95,demod,28] P(c20,i(x,i(i(x,y),y))).
+102 [hyper,1,85,101,demod,29] P(c21,i(i(x,i(y,z)),i(y,i(x,z)))).
+103 [hyper,1,7,102,demod,31] P(c23,i(i(i(x,i(y,z)),u),i(i(y,i(x,z)),u))).
+105 [hyper,1,102,86,demod,34] P(c25,i(i(i(x,y),z),i(i(x,u),i(i(u,y),z)))).
+106 [hyper,1,102,9,demod,44] P(c36,i(n(x),i(x,y))).
+107 [hyper,1,102,7,demod,30] P(c22,i(i(x,y),i(i(z,x),i(z,y)))).
+108 [hyper,1,7,106,demod,45] P(c37,i(i(i(x,y),z),i(n(x),z))).
+109 [hyper,1,108,8,demod,47] P(c39,i(n(n(x)),x)).
+110 [hyper,1,7,109,demod,49] P(c41,i(i(x,y),i(n(n(x)),y))).
+111 [hyper,1,7,110,demod,50] P(c42,i(i(i(n(n(x)),y),z),i(i(x,y),z))).
+112 [hyper,1,111,95,demod,51] P(c43,i(i(x,y),i(i(y,n(x)),n(x)))).
+113 [hyper,1,85,112,demod,52] P(c44,i(i(x,i(y,n(z))),i(i(z,y),i(x,n(z))))).
+123 [hyper,1,103,95,demod,32] P(c24a,i(i(x,i(n(y),z)),i(i(i(x,z),y),y))).
+124 [hyper,1,123,9,demod,33] P(c24,i(i(i(x,y),x),x)).
+125 [hyper,1,105,124,demod,35] P(c26,i(i(i(x,y),z),i(i(z,x),x))).
+126 [hyper,1,7,125,demod,36] P(c28,i(i(i(i(x,y),y),z),i(i(i(y,u),x),z))).
+127 [hyper,1,125,8,demod,46] P(c38,i(i(x,n(x)),n(x))).
+128 [hyper,1,83,127,demod,48] P(c40,i(x,n(n(x)))).
+130 [hyper,1,113,106,demod,54] P(c46,i(i(x,y),i(n(y),n(x)))).
+140 [hyper,1,126,125,demod,37] P(c29,i(i(i(x,y),z),i(i(x,z),z))).
+141 [hyper,1,87,140,demod,39] P(c31,i(i(x,y),i(i(i(x,z),u),i(i(y,u),u)))).
+144 [hyper,1,102,141,demod,40] P(c32,i(i(i(x,y),z),i(i(x,u),i(i(u,z),z)))).
+146 [hyper,1,144,99,demod,41] P(c33,i(i(x,y),i(i(y,i(z,i(x,u))),i(z,i(x,u))))).
+148 [hyper,1,102,146,demod,42] P(c34,i(i(x,i(y,i(z,u))),i(i(z,x),i(y,i(z,u))))).
+149 [hyper,1,148,107,demod,43] P(c35,i(i(x,i(y,z)),i(i(x,y),i(x,z)))).
+150 [hyper,3,99,149,109,128,130,102] $ANSWER(step_allFrege_18_35_39_40_46_21).
+
+------------ end of proof -------------
+
+-------- PROOF -------- 151 [hyper,2,99,149,115] $ANSWER(step_allBEH_Church_FL_18_35_49).
+** KEPT (pick-wt=0): 151 [hyper,2,99,149,115] $ANSWER(step_allBEH_Church_FL_18_35_49).
+
+-----> EMPTY CLAUSE at   0.04 sec ----> 151 [hyper,2,99,149,115] $ANSWER(step_allBEH_Church_FL_18_35_49).
+
+Length of proof is 33.  Level of proof is 26.
+
+---------------- PROOF ----------------
+
+1 [] -P(u,i(x,y))| -P(v,x)|P(rew(u,v),y).
+2 [] -P(x,i(q,i(p,q)))| -P(y,i(i(p,i(q,r)),i(i(p,q),i(p,r))))| -P(z,i(i(n(p),n(q)),i(q,p)))|$ANSWER(step_allBEH_Church_FL_18_35_49).
+7 [] P(c1,i(i(x,y),i(i(y,z),i(x,z)))).
+8 [] P(c2,i(i(n(x),x),x)).
+9 [] P(c3,i(x,i(n(x),y))).
+10 [] EQ(rew(c1,c1),c4).
+11 [] EQ(rew(c4,c4),c5).
+12 [] EQ(rew(c4,c1),c6).
+13 [] EQ(rew(c5,c6),c7).
+15 [] EQ(rew(c1,c3),c9).
+16 [] EQ(rew(c9,c6),c10).
+17 [] EQ(rew(c10,c2),c10a).
+18 [] EQ(rew(c10a,c2),c11).
+19 [] EQ(rew(c9,c11),c12).
+20 [] EQ(rew(c7,c12),c13).
+21 [] EQ(rew(c1,c13),c14).
+22 [] EQ(rew(c14,c2),c15).
+24 [] EQ(rew(c9,c15),c17).
+25 [] EQ(rew(c5,c17),c17a).
+26 [] EQ(rew(c17a,c3),c18).
+27 [] EQ(rew(c1,c18),c19).
+28 [] EQ(rew(c19,c15),c20).
+29 [] EQ(rew(c5,c20),c21).
+30 [] EQ(rew(c21,c1),c22).
+31 [] EQ(rew(c1,c21),c23).
+32 [] EQ(rew(c23,c15),c24a).
+33 [] EQ(rew(c24a,c3),c24).
+34 [] EQ(rew(c21,c6),c25).
+35 [] EQ(rew(c25,c24),c26).
+36 [] EQ(rew(c1,c26),c28).
+37 [] EQ(rew(c28,c26),c29).
+39 [] EQ(rew(c7,c29),c31).
+40 [] EQ(rew(c21,c31),c32).
+41 [] EQ(rew(c32,c18),c33).
+42 [] EQ(rew(c21,c33),c34).
+43 [] EQ(rew(c34,c22),c35).
+53 [] EQ(rew(c5,c15),c45).
+57 [] EQ(rew(c45,c3),c49).
+82 [hyper,1,7,7,demod,10] P(c4,i(i(i(i(x,y),i(z,y)),u),i(i(z,x),u))).
+83 [hyper,1,7,9,demod,15] P(c9,i(i(i(n(x),y),z),i(x,z))).
+85 [hyper,1,82,82,demod,11] P(c5,i(i(x,i(y,z)),i(i(u,y),i(x,i(u,z))))).
+86 [hyper,1,82,7,demod,12] P(c6,i(i(x,y),i(i(i(x,z),u),i(i(y,z),u)))).
+87 [hyper,1,85,86,demod,13] P(c7,i(i(x,i(i(y,z),u)),i(i(y,v),i(x,i(i(v,z),u))))).
+88 [hyper,1,83,86,demod,16] P(c10,i(x,i(i(i(n(x),y),z),i(i(u,y),z)))).
+89 [hyper,1,88,8,demod,17] P(c10a,i(i(i(n(i(i(n(x),x),x)),y),z),i(i(u,y),z))).
+90 [hyper,1,89,8,demod,18] P(c11,i(i(x,i(i(n(y),y),y)),i(i(n(y),y),y))).
+91 [hyper,1,83,90,demod,19] P(c12,i(x,i(i(n(y),y),y))).
+92 [hyper,1,87,91,demod,20] P(c13,i(i(n(x),y),i(z,i(i(y,x),x)))).
+94 [hyper,1,7,92,demod,21] P(c14,i(i(i(x,i(i(y,z),z)),u),i(i(n(z),y),u))).
+95 [hyper,1,94,8,demod,22] P(c15,i(i(n(x),y),i(i(y,x),x))).
+96 [hyper,1,85,95,demod,53] P(c45,i(i(x,i(y,z)),i(i(n(z),y),i(x,z)))).
+97 [hyper,1,83,95,demod,24] P(c17,i(x,i(i(y,x),x))).
+98 [hyper,1,85,97,demod,25] P(c17a,i(i(x,i(y,z)),i(z,i(x,z)))).
+99 [hyper,1,98,9,demod,26] P(c18,i(x,i(y,x))).
+100 [hyper,1,7,99,demod,27] P(c19,i(i(i(x,y),z),i(y,z))).
+101 [hyper,1,100,95,demod,28] P(c20,i(x,i(i(x,y),y))).
+102 [hyper,1,85,101,demod,29] P(c21,i(i(x,i(y,z)),i(y,i(x,z)))).
+103 [hyper,1,7,102,demod,31] P(c23,i(i(i(x,i(y,z)),u),i(i(y,i(x,z)),u))).
+105 [hyper,1,102,86,demod,34] P(c25,i(i(i(x,y),z),i(i(x,u),i(i(u,y),z)))).
+107 [hyper,1,102,7,demod,30] P(c22,i(i(x,y),i(i(z,x),i(z,y)))).
+115 [hyper,1,96,9,demod,57] P(c49,i(i(n(x),n(y)),i(y,x))).
+123 [hyper,1,103,95,demod,32] P(c24a,i(i(x,i(n(y),z)),i(i(i(x,z),y),y))).
+124 [hyper,1,123,9,demod,33] P(c24,i(i(i(x,y),x),x)).
+125 [hyper,1,105,124,demod,35] P(c26,i(i(i(x,y),z),i(i(z,x),x))).
+126 [hyper,1,7,125,demod,36] P(c28,i(i(i(i(x,y),y),z),i(i(i(y,u),x),z))).
+140 [hyper,1,126,125,demod,37] P(c29,i(i(i(x,y),z),i(i(x,z),z))).
+141 [hyper,1,87,140,demod,39] P(c31,i(i(x,y),i(i(i(x,z),u),i(i(y,u),u)))).
+144 [hyper,1,102,141,demod,40] P(c32,i(i(i(x,y),z),i(i(x,u),i(i(u,z),z)))).
+146 [hyper,1,144,99,demod,41] P(c33,i(i(x,y),i(i(y,i(z,i(x,u))),i(z,i(x,u))))).
+148 [hyper,1,102,146,demod,42] P(c34,i(i(x,i(y,i(z,u))),i(i(z,x),i(y,i(z,u))))).
+149 [hyper,1,148,107,demod,43] P(c35,i(i(x,i(y,z)),i(i(x,y),i(x,z)))).
+151 [hyper,2,99,149,115] $ANSWER(step_allBEH_Church_FL_18_35_49).
+
+------------ end of proof -------------
+
+
+given clause #70: (wt=20) 147 [hyper,1,7,145,demod,66] P(c58,i(i(i(i(x,y),i(i(y,z),z)),u),i(i(n(x),z),u))).
+** KEPT (pick-wt=16): 152 [hyper,1,147,102,demod,67] P(c59,i(i(n(x),y),i(i(z,y),i(i(x,z),y)))).
+
+given clause #71: (wt=16) 152 [hyper,1,147,102,demod,67] P(c59,i(i(n(x),y),i(i(z,y),i(i(x,z),y)))).
+-------- PROOF -------- 153 [hyper,5,100,108,152] $ANSWER(step_allLuka_x_19_37_59).
+** KEPT (pick-wt=0): 153 [hyper,5,100,108,152] $ANSWER(step_allLuka_x_19_37_59).
+
+-----> EMPTY CLAUSE at   0.05 sec ----> 153 [hyper,5,100,108,152] $ANSWER(step_allLuka_x_19_37_59).
+
+Length of proof is 37.  Level of proof is 26.
+
+---------------- PROOF ----------------
+
+1 [] -P(u,i(x,y))| -P(v,x)|P(rew(u,v),y).
+5 [] -P(x,i(i(i(p,q),r),i(q,r)))| -P(y,i(i(i(p,q),r),i(n(p),r)))| -P(z,i(i(n(p),r),i(i(q,r),i(i(p,q),r))))|$ANSWER(step_allLuka_x_19_37_59).
+7 [] P(c1,i(i(x,y),i(i(y,z),i(x,z)))).
+8 [] P(c2,i(i(n(x),x),x)).
+9 [] P(c3,i(x,i(n(x),y))).
+10 [] EQ(rew(c1,c1),c4).
+11 [] EQ(rew(c4,c4),c5).
+12 [] EQ(rew(c4,c1),c6).
+13 [] EQ(rew(c5,c6),c7).
+15 [] EQ(rew(c1,c3),c9).
+16 [] EQ(rew(c9,c6),c10).
+17 [] EQ(rew(c10,c2),c10a).
+18 [] EQ(rew(c10a,c2),c11).
+19 [] EQ(rew(c9,c11),c12).
+20 [] EQ(rew(c7,c12),c13).
+21 [] EQ(rew(c1,c13),c14).
+22 [] EQ(rew(c14,c2),c15).
+24 [] EQ(rew(c9,c15),c17).
+25 [] EQ(rew(c5,c17),c17a).
+26 [] EQ(rew(c17a,c3),c18).
+27 [] EQ(rew(c1,c18),c19).
+28 [] EQ(rew(c19,c15),c20).
+29 [] EQ(rew(c5,c20),c21).
+31 [] EQ(rew(c1,c21),c23).
+32 [] EQ(rew(c23,c15),c24a).
+33 [] EQ(rew(c24a,c3),c24).
+34 [] EQ(rew(c21,c6),c25).
+35 [] EQ(rew(c25,c24),c26).
+36 [] EQ(rew(c1,c26),c28).
+37 [] EQ(rew(c28,c26),c29).
+39 [] EQ(rew(c7,c29),c31).
+40 [] EQ(rew(c21,c31),c32).
+44 [] EQ(rew(c21,c3),c36).
+45 [] EQ(rew(c1,c36),c37).
+53 [] EQ(rew(c5,c15),c45).
+56 [] EQ(rew(c45,c36),c48).
+58 [] EQ(rew(c1,c48),c50).
+61 [] EQ(rew(c50,c15),c53).
+64 [] EQ(rew(c1,c53),c56).
+65 [] EQ(rew(c56,c32),c57).
+66 [] EQ(rew(c1,c57),c58).
+67 [] EQ(rew(c58,c21),c59).
+82 [hyper,1,7,7,demod,10] P(c4,i(i(i(i(x,y),i(z,y)),u),i(i(z,x),u))).
+83 [hyper,1,7,9,demod,15] P(c9,i(i(i(n(x),y),z),i(x,z))).
+85 [hyper,1,82,82,demod,11] P(c5,i(i(x,i(y,z)),i(i(u,y),i(x,i(u,z))))).
+86 [hyper,1,82,7,demod,12] P(c6,i(i(x,y),i(i(i(x,z),u),i(i(y,z),u)))).
+87 [hyper,1,85,86,demod,13] P(c7,i(i(x,i(i(y,z),u)),i(i(y,v),i(x,i(i(v,z),u))))).
+88 [hyper,1,83,86,demod,16] P(c10,i(x,i(i(i(n(x),y),z),i(i(u,y),z)))).
+89 [hyper,1,88,8,demod,17] P(c10a,i(i(i(n(i(i(n(x),x),x)),y),z),i(i(u,y),z))).
+90 [hyper,1,89,8,demod,18] P(c11,i(i(x,i(i(n(y),y),y)),i(i(n(y),y),y))).
+91 [hyper,1,83,90,demod,19] P(c12,i(x,i(i(n(y),y),y))).
+92 [hyper,1,87,91,demod,20] P(c13,i(i(n(x),y),i(z,i(i(y,x),x)))).
+94 [hyper,1,7,92,demod,21] P(c14,i(i(i(x,i(i(y,z),z)),u),i(i(n(z),y),u))).
+95 [hyper,1,94,8,demod,22] P(c15,i(i(n(x),y),i(i(y,x),x))).
+96 [hyper,1,85,95,demod,53] P(c45,i(i(x,i(y,z)),i(i(n(z),y),i(x,z)))).
+97 [hyper,1,83,95,demod,24] P(c17,i(x,i(i(y,x),x))).
+98 [hyper,1,85,97,demod,25] P(c17a,i(i(x,i(y,z)),i(z,i(x,z)))).
+99 [hyper,1,98,9,demod,26] P(c18,i(x,i(y,x))).
+100 [hyper,1,7,99,demod,27] P(c19,i(i(i(x,y),z),i(y,z))).
+101 [hyper,1,100,95,demod,28] P(c20,i(x,i(i(x,y),y))).
+102 [hyper,1,85,101,demod,29] P(c21,i(i(x,i(y,z)),i(y,i(x,z)))).
+103 [hyper,1,7,102,demod,31] P(c23,i(i(i(x,i(y,z)),u),i(i(y,i(x,z)),u))).
+105 [hyper,1,102,86,demod,34] P(c25,i(i(i(x,y),z),i(i(x,u),i(i(u,y),z)))).
+106 [hyper,1,102,9,demod,44] P(c36,i(n(x),i(x,y))).
+108 [hyper,1,7,106,demod,45] P(c37,i(i(i(x,y),z),i(n(x),z))).
+114 [hyper,1,96,106,demod,56] P(c48,i(i(n(x),y),i(n(y),x))).
+116 [hyper,1,7,114,demod,58] P(c50,i(i(i(n(x),y),z),i(i(n(y),x),z))).
+120 [hyper,1,116,95,demod,61] P(c53,i(i(n(x),y),i(i(x,y),y))).
+122 [hyper,1,7,120,demod,64] P(c56,i(i(i(i(x,y),y),z),i(i(n(x),y),z))).
+123 [hyper,1,103,95,demod,32] P(c24a,i(i(x,i(n(y),z)),i(i(i(x,z),y),y))).
+124 [hyper,1,123,9,demod,33] P(c24,i(i(i(x,y),x),x)).
+125 [hyper,1,105,124,demod,35] P(c26,i(i(i(x,y),z),i(i(z,x),x))).
+126 [hyper,1,7,125,demod,36] P(c28,i(i(i(i(x,y),y),z),i(i(i(y,u),x),z))).
+140 [hyper,1,126,125,demod,37] P(c29,i(i(i(x,y),z),i(i(x,z),z))).
+141 [hyper,1,87,140,demod,39] P(c31,i(i(x,y),i(i(i(x,z),u),i(i(y,u),u)))).
+144 [hyper,1,102,141,demod,40] P(c32,i(i(i(x,y),z),i(i(x,u),i(i(u,z),z)))).
+145 [hyper,1,122,144,demod,65] P(c57,i(i(n(x),y),i(i(x,z),i(i(z,y),y)))).
+147 [hyper,1,7,145,demod,66] P(c58,i(i(i(i(x,y),i(i(y,z),z)),u),i(i(n(x),z),u))).
+152 [hyper,1,147,102,demod,67] P(c59,i(i(n(x),y),i(i(z,y),i(i(x,z),y)))).
+153 [hyper,5,100,108,152] $ANSWER(step_allLuka_x_19_37_59).
+
+------------ end of proof -------------
+
+** KEPT (pick-wt=20): 154 [hyper,1,107,152,demod,68] P(c60,i(i(x,i(n(y),z)),i(x,i(i(u,z),i(i(y,u),z))))).
+
+given clause #72: (wt=20) 154 [hyper,1,107,152,demod,68] P(c60,i(i(x,i(n(y),z)),i(x,i(i(u,z),i(i(y,u),z))))).
+-------- PROOF -------- 155 [hyper,6,100,108,154] $ANSWER(step_allWos_x_19_37_60).
+** KEPT (pick-wt=0): 155 [hyper,6,100,108,154] $ANSWER(step_allWos_x_19_37_60).
+
+-----> EMPTY CLAUSE at   0.05 sec ----> 155 [hyper,6,100,108,154] $ANSWER(step_allWos_x_19_37_60).
+
+Length of proof is 39.  Level of proof is 27.
+
+---------------- PROOF ----------------
+
+1 [] -P(u,i(x,y))| -P(v,x)|P(rew(u,v),y).
+6 [] -P(x,i(i(i(p,q),r),i(q,r)))| -P(y,i(i(i(p,q),r),i(n(p),r)))| -P(z,i(i(s,i(n(p),r)),i(s,i(i(q,r),i(i(p,q),r)))))|$ANSWER(step_allWos_x_19_37_60).
+7 [] P(c1,i(i(x,y),i(i(y,z),i(x,z)))).
+8 [] P(c2,i(i(n(x),x),x)).
+9 [] P(c3,i(x,i(n(x),y))).
+10 [] EQ(rew(c1,c1),c4).
+11 [] EQ(rew(c4,c4),c5).
+12 [] EQ(rew(c4,c1),c6).
+13 [] EQ(rew(c5,c6),c7).
+15 [] EQ(rew(c1,c3),c9).
+16 [] EQ(rew(c9,c6),c10).
+17 [] EQ(rew(c10,c2),c10a).
+18 [] EQ(rew(c10a,c2),c11).
+19 [] EQ(rew(c9,c11),c12).
+20 [] EQ(rew(c7,c12),c13).
+21 [] EQ(rew(c1,c13),c14).
+22 [] EQ(rew(c14,c2),c15).
+24 [] EQ(rew(c9,c15),c17).
+25 [] EQ(rew(c5,c17),c17a).
+26 [] EQ(rew(c17a,c3),c18).
+27 [] EQ(rew(c1,c18),c19).
+28 [] EQ(rew(c19,c15),c20).
+29 [] EQ(rew(c5,c20),c21).
+30 [] EQ(rew(c21,c1),c22).
+31 [] EQ(rew(c1,c21),c23).
+32 [] EQ(rew(c23,c15),c24a).
+33 [] EQ(rew(c24a,c3),c24).
+34 [] EQ(rew(c21,c6),c25).
+35 [] EQ(rew(c25,c24),c26).
+36 [] EQ(rew(c1,c26),c28).
+37 [] EQ(rew(c28,c26),c29).
+39 [] EQ(rew(c7,c29),c31).
+40 [] EQ(rew(c21,c31),c32).
+44 [] EQ(rew(c21,c3),c36).
+45 [] EQ(rew(c1,c36),c37).
+53 [] EQ(rew(c5,c15),c45).
+56 [] EQ(rew(c45,c36),c48).
+58 [] EQ(rew(c1,c48),c50).
+61 [] EQ(rew(c50,c15),c53).
+64 [] EQ(rew(c1,c53),c56).
+65 [] EQ(rew(c56,c32),c57).
+66 [] EQ(rew(c1,c57),c58).
+67 [] EQ(rew(c58,c21),c59).
+68 [] EQ(rew(c22,c59),c60).
+82 [hyper,1,7,7,demod,10] P(c4,i(i(i(i(x,y),i(z,y)),u),i(i(z,x),u))).
+83 [hyper,1,7,9,demod,15] P(c9,i(i(i(n(x),y),z),i(x,z))).
+85 [hyper,1,82,82,demod,11] P(c5,i(i(x,i(y,z)),i(i(u,y),i(x,i(u,z))))).
+86 [hyper,1,82,7,demod,12] P(c6,i(i(x,y),i(i(i(x,z),u),i(i(y,z),u)))).
+87 [hyper,1,85,86,demod,13] P(c7,i(i(x,i(i(y,z),u)),i(i(y,v),i(x,i(i(v,z),u))))).
+88 [hyper,1,83,86,demod,16] P(c10,i(x,i(i(i(n(x),y),z),i(i(u,y),z)))).
+89 [hyper,1,88,8,demod,17] P(c10a,i(i(i(n(i(i(n(x),x),x)),y),z),i(i(u,y),z))).
+90 [hyper,1,89,8,demod,18] P(c11,i(i(x,i(i(n(y),y),y)),i(i(n(y),y),y))).
+91 [hyper,1,83,90,demod,19] P(c12,i(x,i(i(n(y),y),y))).
+92 [hyper,1,87,91,demod,20] P(c13,i(i(n(x),y),i(z,i(i(y,x),x)))).
+94 [hyper,1,7,92,demod,21] P(c14,i(i(i(x,i(i(y,z),z)),u),i(i(n(z),y),u))).
+95 [hyper,1,94,8,demod,22] P(c15,i(i(n(x),y),i(i(y,x),x))).
+96 [hyper,1,85,95,demod,53] P(c45,i(i(x,i(y,z)),i(i(n(z),y),i(x,z)))).
+97 [hyper,1,83,95,demod,24] P(c17,i(x,i(i(y,x),x))).
+98 [hyper,1,85,97,demod,25] P(c17a,i(i(x,i(y,z)),i(z,i(x,z)))).
+99 [hyper,1,98,9,demod,26] P(c18,i(x,i(y,x))).
+100 [hyper,1,7,99,demod,27] P(c19,i(i(i(x,y),z),i(y,z))).
+101 [hyper,1,100,95,demod,28] P(c20,i(x,i(i(x,y),y))).
+102 [hyper,1,85,101,demod,29] P(c21,i(i(x,i(y,z)),i(y,i(x,z)))).
+103 [hyper,1,7,102,demod,31] P(c23,i(i(i(x,i(y,z)),u),i(i(y,i(x,z)),u))).
+105 [hyper,1,102,86,demod,34] P(c25,i(i(i(x,y),z),i(i(x,u),i(i(u,y),z)))).
+106 [hyper,1,102,9,demod,44] P(c36,i(n(x),i(x,y))).
+107 [hyper,1,102,7,demod,30] P(c22,i(i(x,y),i(i(z,x),i(z,y)))).
+108 [hyper,1,7,106,demod,45] P(c37,i(i(i(x,y),z),i(n(x),z))).
+114 [hyper,1,96,106,demod,56] P(c48,i(i(n(x),y),i(n(y),x))).
+116 [hyper,1,7,114,demod,58] P(c50,i(i(i(n(x),y),z),i(i(n(y),x),z))).
+120 [hyper,1,116,95,demod,61] P(c53,i(i(n(x),y),i(i(x,y),y))).
+122 [hyper,1,7,120,demod,64] P(c56,i(i(i(i(x,y),y),z),i(i(n(x),y),z))).
+123 [hyper,1,103,95,demod,32] P(c24a,i(i(x,i(n(y),z)),i(i(i(x,z),y),y))).
+124 [hyper,1,123,9,demod,33] P(c24,i(i(i(x,y),x),x)).
+125 [hyper,1,105,124,demod,35] P(c26,i(i(i(x,y),z),i(i(z,x),x))).
+126 [hyper,1,7,125,demod,36] P(c28,i(i(i(i(x,y),y),z),i(i(i(y,u),x),z))).
+140 [hyper,1,126,125,demod,37] P(c29,i(i(i(x,y),z),i(i(x,z),z))).
+141 [hyper,1,87,140,demod,39] P(c31,i(i(x,y),i(i(i(x,z),u),i(i(y,u),u)))).
+144 [hyper,1,102,141,demod,40] P(c32,i(i(i(x,y),z),i(i(x,u),i(i(u,z),z)))).
+145 [hyper,1,122,144,demod,65] P(c57,i(i(n(x),y),i(i(x,z),i(i(z,y),y)))).
+147 [hyper,1,7,145,demod,66] P(c58,i(i(i(i(x,y),i(i(y,z),z)),u),i(i(n(x),z),u))).
+152 [hyper,1,147,102,demod,67] P(c59,i(i(n(x),y),i(i(z,y),i(i(x,z),y)))).
+154 [hyper,1,107,152,demod,68] P(c60,i(i(x,i(n(y),z)),i(x,i(i(u,z),i(i(y,u),z))))).
+155 [hyper,6,100,108,154] $ANSWER(step_allWos_x_19_37_60).
+
+------------ end of proof -------------
+
+** KEPT (pick-wt=16): 156 [hyper,1,154,110,demod,69] P(c61,i(i(x,y),i(i(z,y),i(i(n(x),z),y)))).
+
+given clause #73: (wt=16) 156 [hyper,1,154,110,demod,69] P(c61,i(i(x,y),i(i(z,y),i(i(n(x),z),y)))).
+** KEPT (pick-wt=12): 157 [hyper,1,156,84,demod,73] P(c64a,i(i(x,y),i(i(n(y),x),y))).
+
+given clause #74: (wt=12) 157 [hyper,1,156,84,demod,73] P(c64a,i(i(x,y),i(i(n(y),x),y))).
+** KEPT (pick-wt=11): 158 [hyper,1,157,118,demod,74] P(c65,i(i(n(x),n(i(y,y))),x)).
+
+given clause #75: (wt=11) 158 [hyper,1,157,118,demod,74] P(c65,i(i(n(x),n(i(y,y))),x)).
+
+Search stopped because sos empty.
+
+
+Search stopped because sos empty.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 75
+clauses generated           3790
+  hyper_res generated       3790
+demod & eval rewrites         74
+clauses wt,lit,sk delete    3711
+tautologies deleted            0
+clauses forward subsumed       2
+  (subsumed by sos)            2
+unit deletions                 0
+factor simplifications         0
+clauses kept                  72
+new demodulators               0
+empty clauses                  5
+clauses back demodulated       0
+clauses back subsumed          0
+usable size                   81
+sos size                       0
+demodulators size             72
+passive size                   0
+hot size                       0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.05          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8522 finished Mon Aug  2 15:30:56 2004

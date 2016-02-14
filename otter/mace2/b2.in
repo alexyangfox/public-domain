@@ -1,0 +1,17 @@
+set(prolog_style_variables).
+set(tptp_eq).
+set(auto).
+clear(print_given).
+
+list(usable).
+
+equal(A,A).
+
+-equal(d,A)| -equal(b,B)|equal(a,B)|equal(c,A).
+-equal(d,A)| -equal(c,B)|equal(a,B)|equal(b,A).
+
+-equal(d,A)| -equal(a,A).
+-equal(c,A)| -equal(b,A).
+
+end_of_list.
+

@@ -1,0 +1,108 @@
+% This is the zebra puzzle with Dale Myers' representation.
+% The set of clauses is satisfiable, and a model is an answer.
+
+set(binary_res).
+set(knuth_bendix).
+
+set(split_when_given).
+
+clear(print_kept).
+clear(print_given).
+clear(print_new_demod).
+clear(print_back_demod).
+clear(print_back_sub).
+assign(stats_level, 1).
+
+list(usable).
+
+x=x.
+
+% The domain consists of exactly 5 elements, named 1,2,3,4,5.
+% In the following clause, it is important that the variables
+% are on the left-hand sides of the equations, because ground
+% equations are oriented with the heavy side on the left, and
+% integers are lighter than the other constants.  The lexicographic
+% ASCII ordering is used to compare symbols.)  Don't worry about
+% any ground literals---Otter will flip the backward ones.
+
+x=1 | x=2 | x=3 | x=4 | x=5.
+1!=2. 1!=3. 1!=4. 1!=5. 2!=3. 2!=4. 2!=5. 3!=4. 3!=5. 4!=5.
+
+% There are 5 different colors.
+
+red!=green. red!=ivory. red!=ayellow. red!=blue. green!=ivory.
+green!=ayellow. green!=blue. ivory!=ayellow. ivory!=blue. ayellow!=blue.
+
+% There are 5 different nationalities.
+
+eng!=aspan. eng!=aukra. eng!=norw. eng!=japan. aspan!=aukra.
+aspan!=norw. aspan!=japan. aukra!=norw. aukra!=japan. norw!=japan.
+
+% There are 5 different pets.
+
+dog!=asnail. dog!=fox. dog!=horse. dog!=azebra. asnail!=fox.
+asnail!=horse. asnail!=azebra. fox!=horse. fox!=azebra. horse!=azebra.
+
+% There are 5 different drinks.
+
+coffee!=atea. coffee!=milk. coffee!=orange. coffee!=apple. atea!=milk.
+atea!=orange. atea!=apple. milk!=orange. milk!=apple. orange!=apple.
+
+% There are 5 different smokes.
+
+old!=kool. old!=chest. old!=lucky. old!=parli. kool!=chest.
+kool!=lucky. kool!=parli. chest!=lucky. chest!=parli. lucky!=parli.
+
+end_of_list.
+
+list(sos).
+
+% Here are the clues.
+
+% Simple clues.
+
+eng=red. aspan=dog. coffee=green. aukra=atea. old=asnail. kool=ayellow.
+milk=3. norw=1. lucky=orange. japan=parli. blue=2.
+
+% Conditional clues.
+
+% ivory is to the left of green.
+
+ivory!=5.           % missing from 3.0.5 version
+green!=1.           % missing from 3.0.5 version
+ivory!=1 | green=2.
+ivory!=2 | green=3.
+ivory!=3 | green=4.
+ivory!=4 | green=5.
+ivory=1 | green!=2.
+ivory=2 | green!=3.
+ivory=3 | green!=4.
+ivory=4 | green!=5.
+
+% kool is next to horse.
+
+kool!=1 | horse=2.
+kool!=2 | horse=1 | horse=3.
+kool!=3 | horse=2 | horse=4.
+kool!=4 | horse=3 | horse=5.
+kool!=5 | horse=4.
+horse!=1 | kool=2.
+horse!=2 | kool=1 | kool=3.
+horse!=3 | kool=2 | kool=4.
+horse!=4 | kool=3 | kool=5.
+horse!=5 | kool=4.
+
+% chest is next to fox.
+
+chest!=1 | fox=2.
+chest!=2 | fox=1 | fox=3.
+chest!=3 | fox=2 | fox=4.
+chest!=4 | fox=3 | fox=5.
+chest!=5 | fox=4.
+fox!=1 | chest=2.
+fox!=2 | chest=1 | chest=3.
+fox!=3 | chest=2 | chest=4.
+fox!=4 | chest=3 | chest=5.
+fox!=5 | chest=4.
+
+end_of_list.

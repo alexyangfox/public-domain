@@ -1,0 +1,2528 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:31:08 2004
+The command was "../../bin/otter".  The process ID is 8662.
+
+set(knuth_bendix).
+   dependent: set(anl_eq).
+   dependent: set(para_from).
+   dependent: set(para_into).
+   dependent: clear(para_from_right).
+   dependent: clear(para_into_right).
+   dependent: set(para_from_vars).
+   dependent: set(eq_units_both_ways).
+   dependent: set(dynamic_demod_all).
+   dependent: set(dynamic_demod).
+   dependent: set(order_eq).
+   dependent: set(back_demod).
+   dependent: set(process_input).
+   dependent: set(lrpo).
+set(split_when_given).
+   dependent: set(back_unit_deletion).
+   dependent: set(unit_deletion).
+clear(print_kept).
+clear(print_given).
+clear(print_new_demod).
+clear(print_back_demod).
+clear(print_proofs).
+assign(stats_level,1).
+
+list(usable).
+0 [] x=x.
+end_of_list.
+
+list(sos).
+0 [] 0!=1.
+0 [] 0!=2.
+0 [] 0!=3.
+0 [] 0!=4.
+0 [] 0!=5.
+0 [] 1!=2.
+0 [] 1!=3.
+0 [] 1!=4.
+0 [] 1!=5.
+0 [] 2!=3.
+0 [] 2!=4.
+0 [] 2!=5.
+0 [] 3!=4.
+0 [] 3!=5.
+0 [] 4!=5.
+0 [] e=0.
+0 [] f(1,2)!=f(2,1).
+0 [] f(e,0)=0.
+0 [] f(e,1)=1.
+0 [] f(e,2)=2.
+0 [] f(e,3)=3.
+0 [] f(e,4)=4.
+0 [] f(e,5)=5.
+0 [] f(g(0),0)=e.
+0 [] f(g(1),1)=e.
+0 [] f(g(2),2)=e.
+0 [] f(g(3),3)=e.
+0 [] f(g(4),4)=e.
+0 [] f(g(5),5)=e.
+0 [] f(f(0,0),0)=f(0,f(0,0)).
+0 [] f(f(1,1),1)=f(1,f(1,1)).
+0 [] f(f(1,0),1)=f(1,f(0,1)).
+0 [] f(f(0,1),1)=f(0,f(1,1)).
+0 [] f(f(0,0),1)=f(0,f(0,1)).
+0 [] f(f(1,1),0)=f(1,f(1,0)).
+0 [] f(f(0,1),0)=f(0,f(1,0)).
+0 [] f(f(1,0),0)=f(1,f(0,0)).
+0 [] f(f(2,2),2)=f(2,f(2,2)).
+0 [] f(f(2,1),2)=f(2,f(1,2)).
+0 [] f(f(2,0),2)=f(2,f(0,2)).
+0 [] f(f(1,2),2)=f(1,f(2,2)).
+0 [] f(f(1,1),2)=f(1,f(1,2)).
+0 [] f(f(1,0),2)=f(1,f(0,2)).
+0 [] f(f(0,2),2)=f(0,f(2,2)).
+0 [] f(f(0,1),2)=f(0,f(1,2)).
+0 [] f(f(0,0),2)=f(0,f(0,2)).
+0 [] f(f(2,2),1)=f(2,f(2,1)).
+0 [] f(f(2,2),0)=f(2,f(2,0)).
+0 [] f(f(1,2),1)=f(1,f(2,1)).
+0 [] f(f(1,2),0)=f(1,f(2,0)).
+0 [] f(f(0,2),1)=f(0,f(2,1)).
+0 [] f(f(0,2),0)=f(0,f(2,0)).
+0 [] f(f(2,1),1)=f(2,f(1,1)).
+0 [] f(f(2,1),0)=f(2,f(1,0)).
+0 [] f(f(2,0),1)=f(2,f(0,1)).
+0 [] f(f(2,0),0)=f(2,f(0,0)).
+0 [] f(f(3,3),3)=f(3,f(3,3)).
+0 [] f(f(3,2),3)=f(3,f(2,3)).
+0 [] f(f(3,1),3)=f(3,f(1,3)).
+0 [] f(f(3,0),3)=f(3,f(0,3)).
+0 [] f(f(2,3),3)=f(2,f(3,3)).
+0 [] f(f(2,2),3)=f(2,f(2,3)).
+0 [] f(f(2,1),3)=f(2,f(1,3)).
+0 [] f(f(2,0),3)=f(2,f(0,3)).
+0 [] f(f(1,3),3)=f(1,f(3,3)).
+0 [] f(f(1,2),3)=f(1,f(2,3)).
+0 [] f(f(1,1),3)=f(1,f(1,3)).
+0 [] f(f(1,0),3)=f(1,f(0,3)).
+0 [] f(f(0,3),3)=f(0,f(3,3)).
+0 [] f(f(0,2),3)=f(0,f(2,3)).
+0 [] f(f(0,1),3)=f(0,f(1,3)).
+0 [] f(f(0,0),3)=f(0,f(0,3)).
+0 [] f(f(3,3),2)=f(3,f(3,2)).
+0 [] f(f(3,3),1)=f(3,f(3,1)).
+0 [] f(f(3,3),0)=f(3,f(3,0)).
+0 [] f(f(2,3),2)=f(2,f(3,2)).
+0 [] f(f(2,3),1)=f(2,f(3,1)).
+0 [] f(f(2,3),0)=f(2,f(3,0)).
+0 [] f(f(1,3),2)=f(1,f(3,2)).
+0 [] f(f(1,3),1)=f(1,f(3,1)).
+0 [] f(f(1,3),0)=f(1,f(3,0)).
+0 [] f(f(0,3),2)=f(0,f(3,2)).
+0 [] f(f(0,3),1)=f(0,f(3,1)).
+0 [] f(f(0,3),0)=f(0,f(3,0)).
+0 [] f(f(3,2),2)=f(3,f(2,2)).
+0 [] f(f(3,2),1)=f(3,f(2,1)).
+0 [] f(f(3,2),0)=f(3,f(2,0)).
+0 [] f(f(3,1),2)=f(3,f(1,2)).
+0 [] f(f(3,1),1)=f(3,f(1,1)).
+0 [] f(f(3,1),0)=f(3,f(1,0)).
+0 [] f(f(3,0),2)=f(3,f(0,2)).
+0 [] f(f(3,0),1)=f(3,f(0,1)).
+0 [] f(f(3,0),0)=f(3,f(0,0)).
+0 [] f(f(4,4),4)=f(4,f(4,4)).
+0 [] f(f(4,3),4)=f(4,f(3,4)).
+0 [] f(f(4,2),4)=f(4,f(2,4)).
+0 [] f(f(4,1),4)=f(4,f(1,4)).
+0 [] f(f(4,0),4)=f(4,f(0,4)).
+0 [] f(f(3,4),4)=f(3,f(4,4)).
+0 [] f(f(3,3),4)=f(3,f(3,4)).
+0 [] f(f(3,2),4)=f(3,f(2,4)).
+0 [] f(f(3,1),4)=f(3,f(1,4)).
+0 [] f(f(3,0),4)=f(3,f(0,4)).
+0 [] f(f(2,4),4)=f(2,f(4,4)).
+0 [] f(f(2,3),4)=f(2,f(3,4)).
+0 [] f(f(2,2),4)=f(2,f(2,4)).
+0 [] f(f(2,1),4)=f(2,f(1,4)).
+0 [] f(f(2,0),4)=f(2,f(0,4)).
+0 [] f(f(1,4),4)=f(1,f(4,4)).
+0 [] f(f(1,3),4)=f(1,f(3,4)).
+0 [] f(f(1,2),4)=f(1,f(2,4)).
+0 [] f(f(1,1),4)=f(1,f(1,4)).
+0 [] f(f(1,0),4)=f(1,f(0,4)).
+0 [] f(f(0,4),4)=f(0,f(4,4)).
+0 [] f(f(0,3),4)=f(0,f(3,4)).
+0 [] f(f(0,2),4)=f(0,f(2,4)).
+0 [] f(f(0,1),4)=f(0,f(1,4)).
+0 [] f(f(0,0),4)=f(0,f(0,4)).
+0 [] f(f(4,4),3)=f(4,f(4,3)).
+0 [] f(f(4,4),2)=f(4,f(4,2)).
+0 [] f(f(4,4),1)=f(4,f(4,1)).
+0 [] f(f(4,4),0)=f(4,f(4,0)).
+0 [] f(f(3,4),3)=f(3,f(4,3)).
+0 [] f(f(3,4),2)=f(3,f(4,2)).
+0 [] f(f(3,4),1)=f(3,f(4,1)).
+0 [] f(f(3,4),0)=f(3,f(4,0)).
+0 [] f(f(2,4),3)=f(2,f(4,3)).
+0 [] f(f(2,4),2)=f(2,f(4,2)).
+0 [] f(f(2,4),1)=f(2,f(4,1)).
+0 [] f(f(2,4),0)=f(2,f(4,0)).
+0 [] f(f(1,4),3)=f(1,f(4,3)).
+0 [] f(f(1,4),2)=f(1,f(4,2)).
+0 [] f(f(1,4),1)=f(1,f(4,1)).
+0 [] f(f(1,4),0)=f(1,f(4,0)).
+0 [] f(f(0,4),3)=f(0,f(4,3)).
+0 [] f(f(0,4),2)=f(0,f(4,2)).
+0 [] f(f(0,4),1)=f(0,f(4,1)).
+0 [] f(f(0,4),0)=f(0,f(4,0)).
+0 [] f(f(4,3),3)=f(4,f(3,3)).
+0 [] f(f(4,3),2)=f(4,f(3,2)).
+0 [] f(f(4,3),1)=f(4,f(3,1)).
+0 [] f(f(4,3),0)=f(4,f(3,0)).
+0 [] f(f(4,2),3)=f(4,f(2,3)).
+0 [] f(f(4,2),2)=f(4,f(2,2)).
+0 [] f(f(4,2),1)=f(4,f(2,1)).
+0 [] f(f(4,2),0)=f(4,f(2,0)).
+0 [] f(f(4,1),3)=f(4,f(1,3)).
+0 [] f(f(4,1),2)=f(4,f(1,2)).
+0 [] f(f(4,1),1)=f(4,f(1,1)).
+0 [] f(f(4,1),0)=f(4,f(1,0)).
+0 [] f(f(4,0),3)=f(4,f(0,3)).
+0 [] f(f(4,0),2)=f(4,f(0,2)).
+0 [] f(f(4,0),1)=f(4,f(0,1)).
+0 [] f(f(4,0),0)=f(4,f(0,0)).
+0 [] f(f(5,5),5)=f(5,f(5,5)).
+0 [] f(f(5,4),5)=f(5,f(4,5)).
+0 [] f(f(5,3),5)=f(5,f(3,5)).
+0 [] f(f(5,2),5)=f(5,f(2,5)).
+0 [] f(f(5,1),5)=f(5,f(1,5)).
+0 [] f(f(5,0),5)=f(5,f(0,5)).
+0 [] f(f(4,5),5)=f(4,f(5,5)).
+0 [] f(f(4,4),5)=f(4,f(4,5)).
+0 [] f(f(4,3),5)=f(4,f(3,5)).
+0 [] f(f(4,2),5)=f(4,f(2,5)).
+0 [] f(f(4,1),5)=f(4,f(1,5)).
+0 [] f(f(4,0),5)=f(4,f(0,5)).
+0 [] f(f(3,5),5)=f(3,f(5,5)).
+0 [] f(f(3,4),5)=f(3,f(4,5)).
+0 [] f(f(3,3),5)=f(3,f(3,5)).
+0 [] f(f(3,2),5)=f(3,f(2,5)).
+0 [] f(f(3,1),5)=f(3,f(1,5)).
+0 [] f(f(3,0),5)=f(3,f(0,5)).
+0 [] f(f(2,5),5)=f(2,f(5,5)).
+0 [] f(f(2,4),5)=f(2,f(4,5)).
+0 [] f(f(2,3),5)=f(2,f(3,5)).
+0 [] f(f(2,2),5)=f(2,f(2,5)).
+0 [] f(f(2,1),5)=f(2,f(1,5)).
+0 [] f(f(2,0),5)=f(2,f(0,5)).
+0 [] f(f(1,5),5)=f(1,f(5,5)).
+0 [] f(f(1,4),5)=f(1,f(4,5)).
+0 [] f(f(1,3),5)=f(1,f(3,5)).
+0 [] f(f(1,2),5)=f(1,f(2,5)).
+0 [] f(f(1,1),5)=f(1,f(1,5)).
+0 [] f(f(1,0),5)=f(1,f(0,5)).
+0 [] f(f(0,5),5)=f(0,f(5,5)).
+0 [] f(f(0,4),5)=f(0,f(4,5)).
+0 [] f(f(0,3),5)=f(0,f(3,5)).
+0 [] f(f(0,2),5)=f(0,f(2,5)).
+0 [] f(f(0,1),5)=f(0,f(1,5)).
+0 [] f(f(0,0),5)=f(0,f(0,5)).
+0 [] f(f(5,5),4)=f(5,f(5,4)).
+0 [] f(f(5,5),3)=f(5,f(5,3)).
+0 [] f(f(5,5),2)=f(5,f(5,2)).
+0 [] f(f(5,5),1)=f(5,f(5,1)).
+0 [] f(f(5,5),0)=f(5,f(5,0)).
+0 [] f(f(4,5),4)=f(4,f(5,4)).
+0 [] f(f(4,5),3)=f(4,f(5,3)).
+0 [] f(f(4,5),2)=f(4,f(5,2)).
+0 [] f(f(4,5),1)=f(4,f(5,1)).
+0 [] f(f(4,5),0)=f(4,f(5,0)).
+0 [] f(f(3,5),4)=f(3,f(5,4)).
+0 [] f(f(3,5),3)=f(3,f(5,3)).
+0 [] f(f(3,5),2)=f(3,f(5,2)).
+0 [] f(f(3,5),1)=f(3,f(5,1)).
+0 [] f(f(3,5),0)=f(3,f(5,0)).
+0 [] f(f(2,5),4)=f(2,f(5,4)).
+0 [] f(f(2,5),3)=f(2,f(5,3)).
+0 [] f(f(2,5),2)=f(2,f(5,2)).
+0 [] f(f(2,5),1)=f(2,f(5,1)).
+0 [] f(f(2,5),0)=f(2,f(5,0)).
+0 [] f(f(1,5),4)=f(1,f(5,4)).
+0 [] f(f(1,5),3)=f(1,f(5,3)).
+0 [] f(f(1,5),2)=f(1,f(5,2)).
+0 [] f(f(1,5),1)=f(1,f(5,1)).
+0 [] f(f(1,5),0)=f(1,f(5,0)).
+0 [] f(f(0,5),4)=f(0,f(5,4)).
+0 [] f(f(0,5),3)=f(0,f(5,3)).
+0 [] f(f(0,5),2)=f(0,f(5,2)).
+0 [] f(f(0,5),1)=f(0,f(5,1)).
+0 [] f(f(0,5),0)=f(0,f(5,0)).
+0 [] f(f(5,4),4)=f(5,f(4,4)).
+0 [] f(f(5,4),3)=f(5,f(4,3)).
+0 [] f(f(5,4),2)=f(5,f(4,2)).
+0 [] f(f(5,4),1)=f(5,f(4,1)).
+0 [] f(f(5,4),0)=f(5,f(4,0)).
+0 [] f(f(5,3),4)=f(5,f(3,4)).
+0 [] f(f(5,3),3)=f(5,f(3,3)).
+0 [] f(f(5,3),2)=f(5,f(3,2)).
+0 [] f(f(5,3),1)=f(5,f(3,1)).
+0 [] f(f(5,3),0)=f(5,f(3,0)).
+0 [] f(f(5,2),4)=f(5,f(2,4)).
+0 [] f(f(5,2),3)=f(5,f(2,3)).
+0 [] f(f(5,2),2)=f(5,f(2,2)).
+0 [] f(f(5,2),1)=f(5,f(2,1)).
+0 [] f(f(5,2),0)=f(5,f(2,0)).
+0 [] f(f(5,1),4)=f(5,f(1,4)).
+0 [] f(f(5,1),3)=f(5,f(1,3)).
+0 [] f(f(5,1),2)=f(5,f(1,2)).
+0 [] f(f(5,1),1)=f(5,f(1,1)).
+0 [] f(f(5,1),0)=f(5,f(1,0)).
+0 [] f(f(5,0),4)=f(5,f(0,4)).
+0 [] f(f(5,0),3)=f(5,f(0,3)).
+0 [] f(f(5,0),2)=f(5,f(0,2)).
+0 [] f(f(5,0),1)=f(5,f(0,1)).
+0 [] f(f(5,0),0)=f(5,f(0,0)).
+0 [] g(0)=0|g(0)=1|g(0)=2|g(0)=3|g(0)=4|g(0)=5.
+0 [] g(1)=0|g(1)=1|g(1)=2|g(1)=3|g(1)=4|g(1)=5.
+0 [] g(2)=0|g(2)=1|g(2)=2|g(2)=3|g(2)=4|g(2)=5.
+0 [] g(3)=0|g(3)=1|g(3)=2|g(3)=3|g(3)=4|g(3)=5.
+0 [] g(4)=0|g(4)=1|g(4)=2|g(4)=3|g(4)=4|g(4)=5.
+0 [] g(5)=0|g(5)=1|g(5)=2|g(5)=3|g(5)=4|g(5)=5.
+0 [] f(0,0)=0|f(0,0)=1|f(0,0)=2|f(0,0)=3|f(0,0)=4|f(0,0)=5.
+0 [] f(1,1)=0|f(1,1)=1|f(1,1)=2|f(1,1)=3|f(1,1)=4|f(1,1)=5.
+0 [] f(0,1)=0|f(0,1)=1|f(0,1)=2|f(0,1)=3|f(0,1)=4|f(0,1)=5.
+0 [] f(1,0)=0|f(1,0)=1|f(1,0)=2|f(1,0)=3|f(1,0)=4|f(1,0)=5.
+0 [] f(2,2)=0|f(2,2)=1|f(2,2)=2|f(2,2)=3|f(2,2)=4|f(2,2)=5.
+0 [] f(1,2)=0|f(1,2)=1|f(1,2)=2|f(1,2)=3|f(1,2)=4|f(1,2)=5.
+0 [] f(0,2)=0|f(0,2)=1|f(0,2)=2|f(0,2)=3|f(0,2)=4|f(0,2)=5.
+0 [] f(2,1)=0|f(2,1)=1|f(2,1)=2|f(2,1)=3|f(2,1)=4|f(2,1)=5.
+0 [] f(2,0)=0|f(2,0)=1|f(2,0)=2|f(2,0)=3|f(2,0)=4|f(2,0)=5.
+0 [] f(3,3)=0|f(3,3)=1|f(3,3)=2|f(3,3)=3|f(3,3)=4|f(3,3)=5.
+0 [] f(2,3)=0|f(2,3)=1|f(2,3)=2|f(2,3)=3|f(2,3)=4|f(2,3)=5.
+0 [] f(1,3)=0|f(1,3)=1|f(1,3)=2|f(1,3)=3|f(1,3)=4|f(1,3)=5.
+0 [] f(0,3)=0|f(0,3)=1|f(0,3)=2|f(0,3)=3|f(0,3)=4|f(0,3)=5.
+0 [] f(3,2)=0|f(3,2)=1|f(3,2)=2|f(3,2)=3|f(3,2)=4|f(3,2)=5.
+0 [] f(3,1)=0|f(3,1)=1|f(3,1)=2|f(3,1)=3|f(3,1)=4|f(3,1)=5.
+0 [] f(3,0)=0|f(3,0)=1|f(3,0)=2|f(3,0)=3|f(3,0)=4|f(3,0)=5.
+0 [] f(4,4)=0|f(4,4)=1|f(4,4)=2|f(4,4)=3|f(4,4)=4|f(4,4)=5.
+0 [] f(3,4)=0|f(3,4)=1|f(3,4)=2|f(3,4)=3|f(3,4)=4|f(3,4)=5.
+0 [] f(2,4)=0|f(2,4)=1|f(2,4)=2|f(2,4)=3|f(2,4)=4|f(2,4)=5.
+0 [] f(1,4)=0|f(1,4)=1|f(1,4)=2|f(1,4)=3|f(1,4)=4|f(1,4)=5.
+0 [] f(0,4)=0|f(0,4)=1|f(0,4)=2|f(0,4)=3|f(0,4)=4|f(0,4)=5.
+0 [] f(4,3)=0|f(4,3)=1|f(4,3)=2|f(4,3)=3|f(4,3)=4|f(4,3)=5.
+0 [] f(4,2)=0|f(4,2)=1|f(4,2)=2|f(4,2)=3|f(4,2)=4|f(4,2)=5.
+0 [] f(4,1)=0|f(4,1)=1|f(4,1)=2|f(4,1)=3|f(4,1)=4|f(4,1)=5.
+0 [] f(4,0)=0|f(4,0)=1|f(4,0)=2|f(4,0)=3|f(4,0)=4|f(4,0)=5.
+0 [] f(5,5)=0|f(5,5)=1|f(5,5)=2|f(5,5)=3|f(5,5)=4|f(5,5)=5.
+0 [] f(4,5)=0|f(4,5)=1|f(4,5)=2|f(4,5)=3|f(4,5)=4|f(4,5)=5.
+0 [] f(3,5)=0|f(3,5)=1|f(3,5)=2|f(3,5)=3|f(3,5)=4|f(3,5)=5.
+0 [] f(2,5)=0|f(2,5)=1|f(2,5)=2|f(2,5)=3|f(2,5)=4|f(2,5)=5.
+0 [] f(1,5)=0|f(1,5)=1|f(1,5)=2|f(1,5)=3|f(1,5)=4|f(1,5)=5.
+0 [] f(0,5)=0|f(0,5)=1|f(0,5)=2|f(0,5)=3|f(0,5)=4|f(0,5)=5.
+0 [] f(5,4)=0|f(5,4)=1|f(5,4)=2|f(5,4)=3|f(5,4)=4|f(5,4)=5.
+0 [] f(5,3)=0|f(5,3)=1|f(5,3)=2|f(5,3)=3|f(5,3)=4|f(5,3)=5.
+0 [] f(5,2)=0|f(5,2)=1|f(5,2)=2|f(5,2)=3|f(5,2)=4|f(5,2)=5.
+0 [] f(5,1)=0|f(5,1)=1|f(5,1)=2|f(5,1)=3|f(5,1)=4|f(5,1)=5.
+0 [] f(5,0)=0|f(5,0)=1|f(5,0)=2|f(5,0)=3|f(5,0)=4|f(5,0)=5.
+end_of_list.
+
+------------> process usable:
+** KEPT (pick-wt=3): 1 [] x=x.
+  Following clause subsumed by 1 during input processing: 0 [copy,1,flip.1] x=x.
+>>>> Starting back unit deletion with 1.
+
+------------> process sos:
+** KEPT (pick-wt=3): 3 [copy,2,flip.1] 1!=0.
+** KEPT (pick-wt=3): 5 [copy,4,flip.1] 2!=0.
+** KEPT (pick-wt=3): 7 [copy,6,flip.1] 3!=0.
+** KEPT (pick-wt=3): 9 [copy,8,flip.1] 4!=0.
+** KEPT (pick-wt=3): 11 [copy,10,flip.1] 5!=0.
+** KEPT (pick-wt=3): 13 [copy,12,flip.1] 2!=1.
+** KEPT (pick-wt=3): 15 [copy,14,flip.1] 3!=1.
+** KEPT (pick-wt=3): 17 [copy,16,flip.1] 4!=1.
+** KEPT (pick-wt=3): 19 [copy,18,flip.1] 5!=1.
+** KEPT (pick-wt=3): 21 [copy,20,flip.1] 3!=2.
+** KEPT (pick-wt=3): 23 [copy,22,flip.1] 4!=2.
+** KEPT (pick-wt=3): 25 [copy,24,flip.1] 5!=2.
+** KEPT (pick-wt=3): 27 [copy,26,flip.1] 4!=3.
+** KEPT (pick-wt=3): 29 [copy,28,flip.1] 5!=3.
+** KEPT (pick-wt=3): 31 [copy,30,flip.1] 5!=4.
+** KEPT (pick-wt=3): 32 [] e=0.
+---> New Demodulator: 33 [new_demod,32] e=0.
+** KEPT (pick-wt=7): 35 [copy,34,flip.1] f(2,1)!=f(1,2).
+** KEPT (pick-wt=5): 37 [copy,36,demod,33] f(0,0)=0.
+---> New Demodulator: 38 [new_demod,37] f(0,0)=0.
+** KEPT (pick-wt=5): 40 [copy,39,demod,33] f(0,1)=1.
+---> New Demodulator: 41 [new_demod,40] f(0,1)=1.
+** KEPT (pick-wt=5): 43 [copy,42,demod,33] f(0,2)=2.
+---> New Demodulator: 44 [new_demod,43] f(0,2)=2.
+** KEPT (pick-wt=5): 46 [copy,45,demod,33] f(0,3)=3.
+---> New Demodulator: 47 [new_demod,46] f(0,3)=3.
+** KEPT (pick-wt=5): 49 [copy,48,demod,33] f(0,4)=4.
+---> New Demodulator: 50 [new_demod,49] f(0,4)=4.
+** KEPT (pick-wt=5): 52 [copy,51,demod,33] f(0,5)=5.
+---> New Demodulator: 53 [new_demod,52] f(0,5)=5.
+** KEPT (pick-wt=6): 55 [copy,54,demod,33] f(g(0),0)=0.
+---> New Demodulator: 56 [new_demod,55] f(g(0),0)=0.
+** KEPT (pick-wt=6): 58 [copy,57,demod,33] f(g(1),1)=0.
+---> New Demodulator: 59 [new_demod,58] f(g(1),1)=0.
+** KEPT (pick-wt=6): 61 [copy,60,demod,33] f(g(2),2)=0.
+---> New Demodulator: 62 [new_demod,61] f(g(2),2)=0.
+** KEPT (pick-wt=6): 64 [copy,63,demod,33] f(g(3),3)=0.
+---> New Demodulator: 65 [new_demod,64] f(g(3),3)=0.
+** KEPT (pick-wt=6): 67 [copy,66,demod,33] f(g(4),4)=0.
+---> New Demodulator: 68 [new_demod,67] f(g(4),4)=0.
+** KEPT (pick-wt=6): 70 [copy,69,demod,33] f(g(5),5)=0.
+---> New Demodulator: 71 [new_demod,70] f(g(5),5)=0.
+  Following clause subsumed by 1 during input processing: 0 [demod,38,38,38,38] 0=0.
+** KEPT (pick-wt=11): 72 [] f(f(1,1),1)=f(1,f(1,1)).
+---> New Demodulator: 73 [new_demod,72] f(f(1,1),1)=f(1,f(1,1)).
+** KEPT (pick-wt=9): 75 [copy,74,demod,41] f(f(1,0),1)=f(1,1).
+---> New Demodulator: 76 [new_demod,75] f(f(1,0),1)=f(1,1).
+** KEPT (pick-wt=9): 78 [copy,77,demod,41,flip.1] f(0,f(1,1))=f(1,1).
+---> New Demodulator: 79 [new_demod,78] f(0,f(1,1))=f(1,1).
+  Following clause subsumed by 1 during input processing: 0 [demod,38,41,41,41] 1=1.
+** KEPT (pick-wt=11): 80 [] f(f(1,1),0)=f(1,f(1,0)).
+---> New Demodulator: 81 [new_demod,80] f(f(1,1),0)=f(1,f(1,0)).
+** KEPT (pick-wt=9): 83 [copy,82,demod,41,flip.1] f(0,f(1,0))=f(1,0).
+---> New Demodulator: 84 [new_demod,83] f(0,f(1,0))=f(1,0).
+** KEPT (pick-wt=9): 86 [copy,85,demod,38] f(f(1,0),0)=f(1,0).
+---> New Demodulator: 87 [new_demod,86] f(f(1,0),0)=f(1,0).
+** KEPT (pick-wt=11): 88 [] f(f(2,2),2)=f(2,f(2,2)).
+---> New Demodulator: 89 [new_demod,88] f(f(2,2),2)=f(2,f(2,2)).
+** KEPT (pick-wt=11): 90 [] f(f(2,1),2)=f(2,f(1,2)).
+---> New Demodulator: 91 [new_demod,90] f(f(2,1),2)=f(2,f(1,2)).
+** KEPT (pick-wt=9): 93 [copy,92,demod,44] f(f(2,0),2)=f(2,2).
+---> New Demodulator: 94 [new_demod,93] f(f(2,0),2)=f(2,2).
+** KEPT (pick-wt=11): 95 [] f(f(1,2),2)=f(1,f(2,2)).
+---> New Demodulator: 96 [new_demod,95] f(f(1,2),2)=f(1,f(2,2)).
+** KEPT (pick-wt=11): 97 [] f(f(1,1),2)=f(1,f(1,2)).
+---> New Demodulator: 98 [new_demod,97] f(f(1,1),2)=f(1,f(1,2)).
+** KEPT (pick-wt=9): 100 [copy,99,demod,44] f(f(1,0),2)=f(1,2).
+---> New Demodulator: 101 [new_demod,100] f(f(1,0),2)=f(1,2).
+** KEPT (pick-wt=9): 103 [copy,102,demod,44,flip.1] f(0,f(2,2))=f(2,2).
+---> New Demodulator: 104 [new_demod,103] f(0,f(2,2))=f(2,2).
+** KEPT (pick-wt=9): 106 [copy,105,demod,41,flip.1] f(0,f(1,2))=f(1,2).
+---> New Demodulator: 107 [new_demod,106] f(0,f(1,2))=f(1,2).
+  Following clause subsumed by 1 during input processing: 0 [demod,38,44,44,44] 2=2.
+** KEPT (pick-wt=11): 108 [] f(f(2,2),1)=f(2,f(2,1)).
+---> New Demodulator: 109 [new_demod,108] f(f(2,2),1)=f(2,f(2,1)).
+** KEPT (pick-wt=11): 110 [] f(f(2,2),0)=f(2,f(2,0)).
+---> New Demodulator: 111 [new_demod,110] f(f(2,2),0)=f(2,f(2,0)).
+** KEPT (pick-wt=11): 112 [] f(f(1,2),1)=f(1,f(2,1)).
+---> New Demodulator: 113 [new_demod,112] f(f(1,2),1)=f(1,f(2,1)).
+** KEPT (pick-wt=11): 114 [] f(f(1,2),0)=f(1,f(2,0)).
+---> New Demodulator: 115 [new_demod,114] f(f(1,2),0)=f(1,f(2,0)).
+** KEPT (pick-wt=9): 117 [copy,116,demod,44,flip.1] f(0,f(2,1))=f(2,1).
+---> New Demodulator: 118 [new_demod,117] f(0,f(2,1))=f(2,1).
+** KEPT (pick-wt=9): 120 [copy,119,demod,44,flip.1] f(0,f(2,0))=f(2,0).
+---> New Demodulator: 121 [new_demod,120] f(0,f(2,0))=f(2,0).
+** KEPT (pick-wt=11): 122 [] f(f(2,1),1)=f(2,f(1,1)).
+---> New Demodulator: 123 [new_demod,122] f(f(2,1),1)=f(2,f(1,1)).
+** KEPT (pick-wt=11): 124 [] f(f(2,1),0)=f(2,f(1,0)).
+---> New Demodulator: 125 [new_demod,124] f(f(2,1),0)=f(2,f(1,0)).
+** KEPT (pick-wt=9): 127 [copy,126,demod,41] f(f(2,0),1)=f(2,1).
+---> New Demodulator: 128 [new_demod,127] f(f(2,0),1)=f(2,1).
+** KEPT (pick-wt=9): 130 [copy,129,demod,38] f(f(2,0),0)=f(2,0).
+---> New Demodulator: 131 [new_demod,130] f(f(2,0),0)=f(2,0).
+** KEPT (pick-wt=11): 132 [] f(f(3,3),3)=f(3,f(3,3)).
+---> New Demodulator: 133 [new_demod,132] f(f(3,3),3)=f(3,f(3,3)).
+** KEPT (pick-wt=11): 134 [] f(f(3,2),3)=f(3,f(2,3)).
+---> New Demodulator: 135 [new_demod,134] f(f(3,2),3)=f(3,f(2,3)).
+** KEPT (pick-wt=11): 136 [] f(f(3,1),3)=f(3,f(1,3)).
+---> New Demodulator: 137 [new_demod,136] f(f(3,1),3)=f(3,f(1,3)).
+** KEPT (pick-wt=9): 139 [copy,138,demod,47] f(f(3,0),3)=f(3,3).
+---> New Demodulator: 140 [new_demod,139] f(f(3,0),3)=f(3,3).
+** KEPT (pick-wt=11): 141 [] f(f(2,3),3)=f(2,f(3,3)).
+---> New Demodulator: 142 [new_demod,141] f(f(2,3),3)=f(2,f(3,3)).
+** KEPT (pick-wt=11): 143 [] f(f(2,2),3)=f(2,f(2,3)).
+---> New Demodulator: 144 [new_demod,143] f(f(2,2),3)=f(2,f(2,3)).
+** KEPT (pick-wt=11): 145 [] f(f(2,1),3)=f(2,f(1,3)).
+---> New Demodulator: 146 [new_demod,145] f(f(2,1),3)=f(2,f(1,3)).
+** KEPT (pick-wt=9): 148 [copy,147,demod,47] f(f(2,0),3)=f(2,3).
+---> New Demodulator: 149 [new_demod,148] f(f(2,0),3)=f(2,3).
+** KEPT (pick-wt=11): 150 [] f(f(1,3),3)=f(1,f(3,3)).
+---> New Demodulator: 151 [new_demod,150] f(f(1,3),3)=f(1,f(3,3)).
+** KEPT (pick-wt=11): 152 [] f(f(1,2),3)=f(1,f(2,3)).
+---> New Demodulator: 153 [new_demod,152] f(f(1,2),3)=f(1,f(2,3)).
+** KEPT (pick-wt=11): 154 [] f(f(1,1),3)=f(1,f(1,3)).
+---> New Demodulator: 155 [new_demod,154] f(f(1,1),3)=f(1,f(1,3)).
+** KEPT (pick-wt=9): 157 [copy,156,demod,47] f(f(1,0),3)=f(1,3).
+---> New Demodulator: 158 [new_demod,157] f(f(1,0),3)=f(1,3).
+** KEPT (pick-wt=9): 160 [copy,159,demod,47,flip.1] f(0,f(3,3))=f(3,3).
+---> New Demodulator: 161 [new_demod,160] f(0,f(3,3))=f(3,3).
+** KEPT (pick-wt=9): 163 [copy,162,demod,44,flip.1] f(0,f(2,3))=f(2,3).
+---> New Demodulator: 164 [new_demod,163] f(0,f(2,3))=f(2,3).
+** KEPT (pick-wt=9): 166 [copy,165,demod,41,flip.1] f(0,f(1,3))=f(1,3).
+---> New Demodulator: 167 [new_demod,166] f(0,f(1,3))=f(1,3).
+  Following clause subsumed by 1 during input processing: 0 [demod,38,47,47,47] 3=3.
+** KEPT (pick-wt=11): 168 [] f(f(3,3),2)=f(3,f(3,2)).
+---> New Demodulator: 169 [new_demod,168] f(f(3,3),2)=f(3,f(3,2)).
+** KEPT (pick-wt=11): 170 [] f(f(3,3),1)=f(3,f(3,1)).
+---> New Demodulator: 171 [new_demod,170] f(f(3,3),1)=f(3,f(3,1)).
+** KEPT (pick-wt=11): 172 [] f(f(3,3),0)=f(3,f(3,0)).
+---> New Demodulator: 173 [new_demod,172] f(f(3,3),0)=f(3,f(3,0)).
+** KEPT (pick-wt=11): 174 [] f(f(2,3),2)=f(2,f(3,2)).
+---> New Demodulator: 175 [new_demod,174] f(f(2,3),2)=f(2,f(3,2)).
+** KEPT (pick-wt=11): 176 [] f(f(2,3),1)=f(2,f(3,1)).
+---> New Demodulator: 177 [new_demod,176] f(f(2,3),1)=f(2,f(3,1)).
+** KEPT (pick-wt=11): 178 [] f(f(2,3),0)=f(2,f(3,0)).
+---> New Demodulator: 179 [new_demod,178] f(f(2,3),0)=f(2,f(3,0)).
+** KEPT (pick-wt=11): 180 [] f(f(1,3),2)=f(1,f(3,2)).
+---> New Demodulator: 181 [new_demod,180] f(f(1,3),2)=f(1,f(3,2)).
+** KEPT (pick-wt=11): 182 [] f(f(1,3),1)=f(1,f(3,1)).
+---> New Demodulator: 183 [new_demod,182] f(f(1,3),1)=f(1,f(3,1)).
+** KEPT (pick-wt=11): 184 [] f(f(1,3),0)=f(1,f(3,0)).
+---> New Demodulator: 185 [new_demod,184] f(f(1,3),0)=f(1,f(3,0)).
+** KEPT (pick-wt=9): 187 [copy,186,demod,47,flip.1] f(0,f(3,2))=f(3,2).
+---> New Demodulator: 188 [new_demod,187] f(0,f(3,2))=f(3,2).
+** KEPT (pick-wt=9): 190 [copy,189,demod,47,flip.1] f(0,f(3,1))=f(3,1).
+---> New Demodulator: 191 [new_demod,190] f(0,f(3,1))=f(3,1).
+** KEPT (pick-wt=9): 193 [copy,192,demod,47,flip.1] f(0,f(3,0))=f(3,0).
+---> New Demodulator: 194 [new_demod,193] f(0,f(3,0))=f(3,0).
+** KEPT (pick-wt=11): 195 [] f(f(3,2),2)=f(3,f(2,2)).
+---> New Demodulator: 196 [new_demod,195] f(f(3,2),2)=f(3,f(2,2)).
+** KEPT (pick-wt=11): 197 [] f(f(3,2),1)=f(3,f(2,1)).
+---> New Demodulator: 198 [new_demod,197] f(f(3,2),1)=f(3,f(2,1)).
+** KEPT (pick-wt=11): 199 [] f(f(3,2),0)=f(3,f(2,0)).
+---> New Demodulator: 200 [new_demod,199] f(f(3,2),0)=f(3,f(2,0)).
+** KEPT (pick-wt=11): 201 [] f(f(3,1),2)=f(3,f(1,2)).
+---> New Demodulator: 202 [new_demod,201] f(f(3,1),2)=f(3,f(1,2)).
+** KEPT (pick-wt=11): 203 [] f(f(3,1),1)=f(3,f(1,1)).
+---> New Demodulator: 204 [new_demod,203] f(f(3,1),1)=f(3,f(1,1)).
+** KEPT (pick-wt=11): 205 [] f(f(3,1),0)=f(3,f(1,0)).
+---> New Demodulator: 206 [new_demod,205] f(f(3,1),0)=f(3,f(1,0)).
+** KEPT (pick-wt=9): 208 [copy,207,demod,44] f(f(3,0),2)=f(3,2).
+---> New Demodulator: 209 [new_demod,208] f(f(3,0),2)=f(3,2).
+** KEPT (pick-wt=9): 211 [copy,210,demod,41] f(f(3,0),1)=f(3,1).
+---> New Demodulator: 212 [new_demod,211] f(f(3,0),1)=f(3,1).
+** KEPT (pick-wt=9): 214 [copy,213,demod,38] f(f(3,0),0)=f(3,0).
+---> New Demodulator: 215 [new_demod,214] f(f(3,0),0)=f(3,0).
+** KEPT (pick-wt=11): 216 [] f(f(4,4),4)=f(4,f(4,4)).
+---> New Demodulator: 217 [new_demod,216] f(f(4,4),4)=f(4,f(4,4)).
+** KEPT (pick-wt=11): 218 [] f(f(4,3),4)=f(4,f(3,4)).
+---> New Demodulator: 219 [new_demod,218] f(f(4,3),4)=f(4,f(3,4)).
+** KEPT (pick-wt=11): 220 [] f(f(4,2),4)=f(4,f(2,4)).
+---> New Demodulator: 221 [new_demod,220] f(f(4,2),4)=f(4,f(2,4)).
+** KEPT (pick-wt=11): 222 [] f(f(4,1),4)=f(4,f(1,4)).
+---> New Demodulator: 223 [new_demod,222] f(f(4,1),4)=f(4,f(1,4)).
+** KEPT (pick-wt=9): 225 [copy,224,demod,50] f(f(4,0),4)=f(4,4).
+---> New Demodulator: 226 [new_demod,225] f(f(4,0),4)=f(4,4).
+** KEPT (pick-wt=11): 227 [] f(f(3,4),4)=f(3,f(4,4)).
+---> New Demodulator: 228 [new_demod,227] f(f(3,4),4)=f(3,f(4,4)).
+** KEPT (pick-wt=11): 229 [] f(f(3,3),4)=f(3,f(3,4)).
+---> New Demodulator: 230 [new_demod,229] f(f(3,3),4)=f(3,f(3,4)).
+** KEPT (pick-wt=11): 231 [] f(f(3,2),4)=f(3,f(2,4)).
+---> New Demodulator: 232 [new_demod,231] f(f(3,2),4)=f(3,f(2,4)).
+** KEPT (pick-wt=11): 233 [] f(f(3,1),4)=f(3,f(1,4)).
+---> New Demodulator: 234 [new_demod,233] f(f(3,1),4)=f(3,f(1,4)).
+** KEPT (pick-wt=9): 236 [copy,235,demod,50] f(f(3,0),4)=f(3,4).
+---> New Demodulator: 237 [new_demod,236] f(f(3,0),4)=f(3,4).
+** KEPT (pick-wt=11): 238 [] f(f(2,4),4)=f(2,f(4,4)).
+---> New Demodulator: 239 [new_demod,238] f(f(2,4),4)=f(2,f(4,4)).
+** KEPT (pick-wt=11): 240 [] f(f(2,3),4)=f(2,f(3,4)).
+---> New Demodulator: 241 [new_demod,240] f(f(2,3),4)=f(2,f(3,4)).
+** KEPT (pick-wt=11): 242 [] f(f(2,2),4)=f(2,f(2,4)).
+---> New Demodulator: 243 [new_demod,242] f(f(2,2),4)=f(2,f(2,4)).
+** KEPT (pick-wt=11): 244 [] f(f(2,1),4)=f(2,f(1,4)).
+---> New Demodulator: 245 [new_demod,244] f(f(2,1),4)=f(2,f(1,4)).
+** KEPT (pick-wt=9): 247 [copy,246,demod,50] f(f(2,0),4)=f(2,4).
+---> New Demodulator: 248 [new_demod,247] f(f(2,0),4)=f(2,4).
+** KEPT (pick-wt=11): 249 [] f(f(1,4),4)=f(1,f(4,4)).
+---> New Demodulator: 250 [new_demod,249] f(f(1,4),4)=f(1,f(4,4)).
+** KEPT (pick-wt=11): 251 [] f(f(1,3),4)=f(1,f(3,4)).
+---> New Demodulator: 252 [new_demod,251] f(f(1,3),4)=f(1,f(3,4)).
+** KEPT (pick-wt=11): 253 [] f(f(1,2),4)=f(1,f(2,4)).
+---> New Demodulator: 254 [new_demod,253] f(f(1,2),4)=f(1,f(2,4)).
+** KEPT (pick-wt=11): 255 [] f(f(1,1),4)=f(1,f(1,4)).
+---> New Demodulator: 256 [new_demod,255] f(f(1,1),4)=f(1,f(1,4)).
+** KEPT (pick-wt=9): 258 [copy,257,demod,50] f(f(1,0),4)=f(1,4).
+---> New Demodulator: 259 [new_demod,258] f(f(1,0),4)=f(1,4).
+** KEPT (pick-wt=9): 261 [copy,260,demod,50,flip.1] f(0,f(4,4))=f(4,4).
+---> New Demodulator: 262 [new_demod,261] f(0,f(4,4))=f(4,4).
+** KEPT (pick-wt=9): 264 [copy,263,demod,47,flip.1] f(0,f(3,4))=f(3,4).
+---> New Demodulator: 265 [new_demod,264] f(0,f(3,4))=f(3,4).
+** KEPT (pick-wt=9): 267 [copy,266,demod,44,flip.1] f(0,f(2,4))=f(2,4).
+---> New Demodulator: 268 [new_demod,267] f(0,f(2,4))=f(2,4).
+** KEPT (pick-wt=9): 270 [copy,269,demod,41,flip.1] f(0,f(1,4))=f(1,4).
+---> New Demodulator: 271 [new_demod,270] f(0,f(1,4))=f(1,4).
+  Following clause subsumed by 1 during input processing: 0 [demod,38,50,50,50] 4=4.
+** KEPT (pick-wt=11): 272 [] f(f(4,4),3)=f(4,f(4,3)).
+---> New Demodulator: 273 [new_demod,272] f(f(4,4),3)=f(4,f(4,3)).
+** KEPT (pick-wt=11): 274 [] f(f(4,4),2)=f(4,f(4,2)).
+---> New Demodulator: 275 [new_demod,274] f(f(4,4),2)=f(4,f(4,2)).
+** KEPT (pick-wt=11): 276 [] f(f(4,4),1)=f(4,f(4,1)).
+---> New Demodulator: 277 [new_demod,276] f(f(4,4),1)=f(4,f(4,1)).
+** KEPT (pick-wt=11): 278 [] f(f(4,4),0)=f(4,f(4,0)).
+---> New Demodulator: 279 [new_demod,278] f(f(4,4),0)=f(4,f(4,0)).
+** KEPT (pick-wt=11): 280 [] f(f(3,4),3)=f(3,f(4,3)).
+---> New Demodulator: 281 [new_demod,280] f(f(3,4),3)=f(3,f(4,3)).
+** KEPT (pick-wt=11): 282 [] f(f(3,4),2)=f(3,f(4,2)).
+---> New Demodulator: 283 [new_demod,282] f(f(3,4),2)=f(3,f(4,2)).
+** KEPT (pick-wt=11): 284 [] f(f(3,4),1)=f(3,f(4,1)).
+---> New Demodulator: 285 [new_demod,284] f(f(3,4),1)=f(3,f(4,1)).
+** KEPT (pick-wt=11): 286 [] f(f(3,4),0)=f(3,f(4,0)).
+---> New Demodulator: 287 [new_demod,286] f(f(3,4),0)=f(3,f(4,0)).
+** KEPT (pick-wt=11): 288 [] f(f(2,4),3)=f(2,f(4,3)).
+---> New Demodulator: 289 [new_demod,288] f(f(2,4),3)=f(2,f(4,3)).
+** KEPT (pick-wt=11): 290 [] f(f(2,4),2)=f(2,f(4,2)).
+---> New Demodulator: 291 [new_demod,290] f(f(2,4),2)=f(2,f(4,2)).
+** KEPT (pick-wt=11): 292 [] f(f(2,4),1)=f(2,f(4,1)).
+---> New Demodulator: 293 [new_demod,292] f(f(2,4),1)=f(2,f(4,1)).
+** KEPT (pick-wt=11): 294 [] f(f(2,4),0)=f(2,f(4,0)).
+---> New Demodulator: 295 [new_demod,294] f(f(2,4),0)=f(2,f(4,0)).
+** KEPT (pick-wt=11): 296 [] f(f(1,4),3)=f(1,f(4,3)).
+---> New Demodulator: 297 [new_demod,296] f(f(1,4),3)=f(1,f(4,3)).
+** KEPT (pick-wt=11): 298 [] f(f(1,4),2)=f(1,f(4,2)).
+---> New Demodulator: 299 [new_demod,298] f(f(1,4),2)=f(1,f(4,2)).
+** KEPT (pick-wt=11): 300 [] f(f(1,4),1)=f(1,f(4,1)).
+---> New Demodulator: 301 [new_demod,300] f(f(1,4),1)=f(1,f(4,1)).
+** KEPT (pick-wt=11): 302 [] f(f(1,4),0)=f(1,f(4,0)).
+---> New Demodulator: 303 [new_demod,302] f(f(1,4),0)=f(1,f(4,0)).
+** KEPT (pick-wt=9): 305 [copy,304,demod,50,flip.1] f(0,f(4,3))=f(4,3).
+---> New Demodulator: 306 [new_demod,305] f(0,f(4,3))=f(4,3).
+** KEPT (pick-wt=9): 308 [copy,307,demod,50,flip.1] f(0,f(4,2))=f(4,2).
+---> New Demodulator: 309 [new_demod,308] f(0,f(4,2))=f(4,2).
+** KEPT (pick-wt=9): 311 [copy,310,demod,50,flip.1] f(0,f(4,1))=f(4,1).
+---> New Demodulator: 312 [new_demod,311] f(0,f(4,1))=f(4,1).
+** KEPT (pick-wt=9): 314 [copy,313,demod,50,flip.1] f(0,f(4,0))=f(4,0).
+---> New Demodulator: 315 [new_demod,314] f(0,f(4,0))=f(4,0).
+** KEPT (pick-wt=11): 316 [] f(f(4,3),3)=f(4,f(3,3)).
+---> New Demodulator: 317 [new_demod,316] f(f(4,3),3)=f(4,f(3,3)).
+** KEPT (pick-wt=11): 318 [] f(f(4,3),2)=f(4,f(3,2)).
+---> New Demodulator: 319 [new_demod,318] f(f(4,3),2)=f(4,f(3,2)).
+** KEPT (pick-wt=11): 320 [] f(f(4,3),1)=f(4,f(3,1)).
+---> New Demodulator: 321 [new_demod,320] f(f(4,3),1)=f(4,f(3,1)).
+** KEPT (pick-wt=11): 322 [] f(f(4,3),0)=f(4,f(3,0)).
+---> New Demodulator: 323 [new_demod,322] f(f(4,3),0)=f(4,f(3,0)).
+** KEPT (pick-wt=11): 324 [] f(f(4,2),3)=f(4,f(2,3)).
+---> New Demodulator: 325 [new_demod,324] f(f(4,2),3)=f(4,f(2,3)).
+** KEPT (pick-wt=11): 326 [] f(f(4,2),2)=f(4,f(2,2)).
+---> New Demodulator: 327 [new_demod,326] f(f(4,2),2)=f(4,f(2,2)).
+** KEPT (pick-wt=11): 328 [] f(f(4,2),1)=f(4,f(2,1)).
+---> New Demodulator: 329 [new_demod,328] f(f(4,2),1)=f(4,f(2,1)).
+** KEPT (pick-wt=11): 330 [] f(f(4,2),0)=f(4,f(2,0)).
+---> New Demodulator: 331 [new_demod,330] f(f(4,2),0)=f(4,f(2,0)).
+** KEPT (pick-wt=11): 332 [] f(f(4,1),3)=f(4,f(1,3)).
+---> New Demodulator: 333 [new_demod,332] f(f(4,1),3)=f(4,f(1,3)).
+** KEPT (pick-wt=11): 334 [] f(f(4,1),2)=f(4,f(1,2)).
+---> New Demodulator: 335 [new_demod,334] f(f(4,1),2)=f(4,f(1,2)).
+** KEPT (pick-wt=11): 336 [] f(f(4,1),1)=f(4,f(1,1)).
+---> New Demodulator: 337 [new_demod,336] f(f(4,1),1)=f(4,f(1,1)).
+** KEPT (pick-wt=11): 338 [] f(f(4,1),0)=f(4,f(1,0)).
+---> New Demodulator: 339 [new_demod,338] f(f(4,1),0)=f(4,f(1,0)).
+** KEPT (pick-wt=9): 341 [copy,340,demod,47] f(f(4,0),3)=f(4,3).
+---> New Demodulator: 342 [new_demod,341] f(f(4,0),3)=f(4,3).
+** KEPT (pick-wt=9): 344 [copy,343,demod,44] f(f(4,0),2)=f(4,2).
+---> New Demodulator: 345 [new_demod,344] f(f(4,0),2)=f(4,2).
+** KEPT (pick-wt=9): 347 [copy,346,demod,41] f(f(4,0),1)=f(4,1).
+---> New Demodulator: 348 [new_demod,347] f(f(4,0),1)=f(4,1).
+** KEPT (pick-wt=9): 350 [copy,349,demod,38] f(f(4,0),0)=f(4,0).
+---> New Demodulator: 351 [new_demod,350] f(f(4,0),0)=f(4,0).
+** KEPT (pick-wt=11): 352 [] f(f(5,5),5)=f(5,f(5,5)).
+---> New Demodulator: 353 [new_demod,352] f(f(5,5),5)=f(5,f(5,5)).
+** KEPT (pick-wt=11): 354 [] f(f(5,4),5)=f(5,f(4,5)).
+---> New Demodulator: 355 [new_demod,354] f(f(5,4),5)=f(5,f(4,5)).
+** KEPT (pick-wt=11): 356 [] f(f(5,3),5)=f(5,f(3,5)).
+---> New Demodulator: 357 [new_demod,356] f(f(5,3),5)=f(5,f(3,5)).
+** KEPT (pick-wt=11): 358 [] f(f(5,2),5)=f(5,f(2,5)).
+---> New Demodulator: 359 [new_demod,358] f(f(5,2),5)=f(5,f(2,5)).
+** KEPT (pick-wt=11): 360 [] f(f(5,1),5)=f(5,f(1,5)).
+---> New Demodulator: 361 [new_demod,360] f(f(5,1),5)=f(5,f(1,5)).
+** KEPT (pick-wt=9): 363 [copy,362,demod,53] f(f(5,0),5)=f(5,5).
+---> New Demodulator: 364 [new_demod,363] f(f(5,0),5)=f(5,5).
+** KEPT (pick-wt=11): 365 [] f(f(4,5),5)=f(4,f(5,5)).
+---> New Demodulator: 366 [new_demod,365] f(f(4,5),5)=f(4,f(5,5)).
+** KEPT (pick-wt=11): 367 [] f(f(4,4),5)=f(4,f(4,5)).
+---> New Demodulator: 368 [new_demod,367] f(f(4,4),5)=f(4,f(4,5)).
+** KEPT (pick-wt=11): 369 [] f(f(4,3),5)=f(4,f(3,5)).
+---> New Demodulator: 370 [new_demod,369] f(f(4,3),5)=f(4,f(3,5)).
+** KEPT (pick-wt=11): 371 [] f(f(4,2),5)=f(4,f(2,5)).
+---> New Demodulator: 372 [new_demod,371] f(f(4,2),5)=f(4,f(2,5)).
+** KEPT (pick-wt=11): 373 [] f(f(4,1),5)=f(4,f(1,5)).
+---> New Demodulator: 374 [new_demod,373] f(f(4,1),5)=f(4,f(1,5)).
+** KEPT (pick-wt=9): 376 [copy,375,demod,53] f(f(4,0),5)=f(4,5).
+---> New Demodulator: 377 [new_demod,376] f(f(4,0),5)=f(4,5).
+** KEPT (pick-wt=11): 378 [] f(f(3,5),5)=f(3,f(5,5)).
+---> New Demodulator: 379 [new_demod,378] f(f(3,5),5)=f(3,f(5,5)).
+** KEPT (pick-wt=11): 380 [] f(f(3,4),5)=f(3,f(4,5)).
+---> New Demodulator: 381 [new_demod,380] f(f(3,4),5)=f(3,f(4,5)).
+** KEPT (pick-wt=11): 382 [] f(f(3,3),5)=f(3,f(3,5)).
+---> New Demodulator: 383 [new_demod,382] f(f(3,3),5)=f(3,f(3,5)).
+** KEPT (pick-wt=11): 384 [] f(f(3,2),5)=f(3,f(2,5)).
+---> New Demodulator: 385 [new_demod,384] f(f(3,2),5)=f(3,f(2,5)).
+** KEPT (pick-wt=11): 386 [] f(f(3,1),5)=f(3,f(1,5)).
+---> New Demodulator: 387 [new_demod,386] f(f(3,1),5)=f(3,f(1,5)).
+** KEPT (pick-wt=9): 389 [copy,388,demod,53] f(f(3,0),5)=f(3,5).
+---> New Demodulator: 390 [new_demod,389] f(f(3,0),5)=f(3,5).
+** KEPT (pick-wt=11): 391 [] f(f(2,5),5)=f(2,f(5,5)).
+---> New Demodulator: 392 [new_demod,391] f(f(2,5),5)=f(2,f(5,5)).
+** KEPT (pick-wt=11): 393 [] f(f(2,4),5)=f(2,f(4,5)).
+---> New Demodulator: 394 [new_demod,393] f(f(2,4),5)=f(2,f(4,5)).
+** KEPT (pick-wt=11): 395 [] f(f(2,3),5)=f(2,f(3,5)).
+---> New Demodulator: 396 [new_demod,395] f(f(2,3),5)=f(2,f(3,5)).
+** KEPT (pick-wt=11): 397 [] f(f(2,2),5)=f(2,f(2,5)).
+---> New Demodulator: 398 [new_demod,397] f(f(2,2),5)=f(2,f(2,5)).
+** KEPT (pick-wt=11): 399 [] f(f(2,1),5)=f(2,f(1,5)).
+---> New Demodulator: 400 [new_demod,399] f(f(2,1),5)=f(2,f(1,5)).
+** KEPT (pick-wt=9): 402 [copy,401,demod,53] f(f(2,0),5)=f(2,5).
+---> New Demodulator: 403 [new_demod,402] f(f(2,0),5)=f(2,5).
+** KEPT (pick-wt=11): 404 [] f(f(1,5),5)=f(1,f(5,5)).
+---> New Demodulator: 405 [new_demod,404] f(f(1,5),5)=f(1,f(5,5)).
+** KEPT (pick-wt=11): 406 [] f(f(1,4),5)=f(1,f(4,5)).
+---> New Demodulator: 407 [new_demod,406] f(f(1,4),5)=f(1,f(4,5)).
+** KEPT (pick-wt=11): 408 [] f(f(1,3),5)=f(1,f(3,5)).
+---> New Demodulator: 409 [new_demod,408] f(f(1,3),5)=f(1,f(3,5)).
+** KEPT (pick-wt=11): 410 [] f(f(1,2),5)=f(1,f(2,5)).
+---> New Demodulator: 411 [new_demod,410] f(f(1,2),5)=f(1,f(2,5)).
+** KEPT (pick-wt=11): 412 [] f(f(1,1),5)=f(1,f(1,5)).
+---> New Demodulator: 413 [new_demod,412] f(f(1,1),5)=f(1,f(1,5)).
+** KEPT (pick-wt=9): 415 [copy,414,demod,53] f(f(1,0),5)=f(1,5).
+---> New Demodulator: 416 [new_demod,415] f(f(1,0),5)=f(1,5).
+** KEPT (pick-wt=9): 418 [copy,417,demod,53,flip.1] f(0,f(5,5))=f(5,5).
+---> New Demodulator: 419 [new_demod,418] f(0,f(5,5))=f(5,5).
+** KEPT (pick-wt=9): 421 [copy,420,demod,50,flip.1] f(0,f(4,5))=f(4,5).
+---> New Demodulator: 422 [new_demod,421] f(0,f(4,5))=f(4,5).
+** KEPT (pick-wt=9): 424 [copy,423,demod,47,flip.1] f(0,f(3,5))=f(3,5).
+---> New Demodulator: 425 [new_demod,424] f(0,f(3,5))=f(3,5).
+** KEPT (pick-wt=9): 427 [copy,426,demod,44,flip.1] f(0,f(2,5))=f(2,5).
+---> New Demodulator: 428 [new_demod,427] f(0,f(2,5))=f(2,5).
+** KEPT (pick-wt=9): 430 [copy,429,demod,41,flip.1] f(0,f(1,5))=f(1,5).
+---> New Demodulator: 431 [new_demod,430] f(0,f(1,5))=f(1,5).
+  Following clause subsumed by 1 during input processing: 0 [demod,38,53,53,53] 5=5.
+** KEPT (pick-wt=11): 432 [] f(f(5,5),4)=f(5,f(5,4)).
+---> New Demodulator: 433 [new_demod,432] f(f(5,5),4)=f(5,f(5,4)).
+** KEPT (pick-wt=11): 434 [] f(f(5,5),3)=f(5,f(5,3)).
+---> New Demodulator: 435 [new_demod,434] f(f(5,5),3)=f(5,f(5,3)).
+** KEPT (pick-wt=11): 436 [] f(f(5,5),2)=f(5,f(5,2)).
+---> New Demodulator: 437 [new_demod,436] f(f(5,5),2)=f(5,f(5,2)).
+** KEPT (pick-wt=11): 438 [] f(f(5,5),1)=f(5,f(5,1)).
+---> New Demodulator: 439 [new_demod,438] f(f(5,5),1)=f(5,f(5,1)).
+** KEPT (pick-wt=11): 440 [] f(f(5,5),0)=f(5,f(5,0)).
+---> New Demodulator: 441 [new_demod,440] f(f(5,5),0)=f(5,f(5,0)).
+** KEPT (pick-wt=11): 442 [] f(f(4,5),4)=f(4,f(5,4)).
+---> New Demodulator: 443 [new_demod,442] f(f(4,5),4)=f(4,f(5,4)).
+** KEPT (pick-wt=11): 444 [] f(f(4,5),3)=f(4,f(5,3)).
+---> New Demodulator: 445 [new_demod,444] f(f(4,5),3)=f(4,f(5,3)).
+** KEPT (pick-wt=11): 446 [] f(f(4,5),2)=f(4,f(5,2)).
+---> New Demodulator: 447 [new_demod,446] f(f(4,5),2)=f(4,f(5,2)).
+** KEPT (pick-wt=11): 448 [] f(f(4,5),1)=f(4,f(5,1)).
+---> New Demodulator: 449 [new_demod,448] f(f(4,5),1)=f(4,f(5,1)).
+** KEPT (pick-wt=11): 450 [] f(f(4,5),0)=f(4,f(5,0)).
+---> New Demodulator: 451 [new_demod,450] f(f(4,5),0)=f(4,f(5,0)).
+** KEPT (pick-wt=11): 452 [] f(f(3,5),4)=f(3,f(5,4)).
+---> New Demodulator: 453 [new_demod,452] f(f(3,5),4)=f(3,f(5,4)).
+** KEPT (pick-wt=11): 454 [] f(f(3,5),3)=f(3,f(5,3)).
+---> New Demodulator: 455 [new_demod,454] f(f(3,5),3)=f(3,f(5,3)).
+** KEPT (pick-wt=11): 456 [] f(f(3,5),2)=f(3,f(5,2)).
+---> New Demodulator: 457 [new_demod,456] f(f(3,5),2)=f(3,f(5,2)).
+** KEPT (pick-wt=11): 458 [] f(f(3,5),1)=f(3,f(5,1)).
+---> New Demodulator: 459 [new_demod,458] f(f(3,5),1)=f(3,f(5,1)).
+** KEPT (pick-wt=11): 460 [] f(f(3,5),0)=f(3,f(5,0)).
+---> New Demodulator: 461 [new_demod,460] f(f(3,5),0)=f(3,f(5,0)).
+** KEPT (pick-wt=11): 462 [] f(f(2,5),4)=f(2,f(5,4)).
+---> New Demodulator: 463 [new_demod,462] f(f(2,5),4)=f(2,f(5,4)).
+** KEPT (pick-wt=11): 464 [] f(f(2,5),3)=f(2,f(5,3)).
+---> New Demodulator: 465 [new_demod,464] f(f(2,5),3)=f(2,f(5,3)).
+** KEPT (pick-wt=11): 466 [] f(f(2,5),2)=f(2,f(5,2)).
+---> New Demodulator: 467 [new_demod,466] f(f(2,5),2)=f(2,f(5,2)).
+** KEPT (pick-wt=11): 468 [] f(f(2,5),1)=f(2,f(5,1)).
+---> New Demodulator: 469 [new_demod,468] f(f(2,5),1)=f(2,f(5,1)).
+** KEPT (pick-wt=11): 470 [] f(f(2,5),0)=f(2,f(5,0)).
+---> New Demodulator: 471 [new_demod,470] f(f(2,5),0)=f(2,f(5,0)).
+** KEPT (pick-wt=11): 472 [] f(f(1,5),4)=f(1,f(5,4)).
+---> New Demodulator: 473 [new_demod,472] f(f(1,5),4)=f(1,f(5,4)).
+** KEPT (pick-wt=11): 474 [] f(f(1,5),3)=f(1,f(5,3)).
+---> New Demodulator: 475 [new_demod,474] f(f(1,5),3)=f(1,f(5,3)).
+** KEPT (pick-wt=11): 476 [] f(f(1,5),2)=f(1,f(5,2)).
+---> New Demodulator: 477 [new_demod,476] f(f(1,5),2)=f(1,f(5,2)).
+** KEPT (pick-wt=11): 478 [] f(f(1,5),1)=f(1,f(5,1)).
+---> New Demodulator: 479 [new_demod,478] f(f(1,5),1)=f(1,f(5,1)).
+** KEPT (pick-wt=11): 480 [] f(f(1,5),0)=f(1,f(5,0)).
+---> New Demodulator: 481 [new_demod,480] f(f(1,5),0)=f(1,f(5,0)).
+** KEPT (pick-wt=9): 483 [copy,482,demod,53,flip.1] f(0,f(5,4))=f(5,4).
+---> New Demodulator: 484 [new_demod,483] f(0,f(5,4))=f(5,4).
+** KEPT (pick-wt=9): 486 [copy,485,demod,53,flip.1] f(0,f(5,3))=f(5,3).
+---> New Demodulator: 487 [new_demod,486] f(0,f(5,3))=f(5,3).
+** KEPT (pick-wt=9): 489 [copy,488,demod,53,flip.1] f(0,f(5,2))=f(5,2).
+---> New Demodulator: 490 [new_demod,489] f(0,f(5,2))=f(5,2).
+** KEPT (pick-wt=9): 492 [copy,491,demod,53,flip.1] f(0,f(5,1))=f(5,1).
+---> New Demodulator: 493 [new_demod,492] f(0,f(5,1))=f(5,1).
+** KEPT (pick-wt=9): 495 [copy,494,demod,53,flip.1] f(0,f(5,0))=f(5,0).
+---> New Demodulator: 496 [new_demod,495] f(0,f(5,0))=f(5,0).
+** KEPT (pick-wt=11): 497 [] f(f(5,4),4)=f(5,f(4,4)).
+---> New Demodulator: 498 [new_demod,497] f(f(5,4),4)=f(5,f(4,4)).
+** KEPT (pick-wt=11): 499 [] f(f(5,4),3)=f(5,f(4,3)).
+---> New Demodulator: 500 [new_demod,499] f(f(5,4),3)=f(5,f(4,3)).
+** KEPT (pick-wt=11): 501 [] f(f(5,4),2)=f(5,f(4,2)).
+---> New Demodulator: 502 [new_demod,501] f(f(5,4),2)=f(5,f(4,2)).
+** KEPT (pick-wt=11): 503 [] f(f(5,4),1)=f(5,f(4,1)).
+---> New Demodulator: 504 [new_demod,503] f(f(5,4),1)=f(5,f(4,1)).
+** KEPT (pick-wt=11): 505 [] f(f(5,4),0)=f(5,f(4,0)).
+---> New Demodulator: 506 [new_demod,505] f(f(5,4),0)=f(5,f(4,0)).
+** KEPT (pick-wt=11): 507 [] f(f(5,3),4)=f(5,f(3,4)).
+---> New Demodulator: 508 [new_demod,507] f(f(5,3),4)=f(5,f(3,4)).
+** KEPT (pick-wt=11): 509 [] f(f(5,3),3)=f(5,f(3,3)).
+---> New Demodulator: 510 [new_demod,509] f(f(5,3),3)=f(5,f(3,3)).
+** KEPT (pick-wt=11): 511 [] f(f(5,3),2)=f(5,f(3,2)).
+---> New Demodulator: 512 [new_demod,511] f(f(5,3),2)=f(5,f(3,2)).
+** KEPT (pick-wt=11): 513 [] f(f(5,3),1)=f(5,f(3,1)).
+---> New Demodulator: 514 [new_demod,513] f(f(5,3),1)=f(5,f(3,1)).
+** KEPT (pick-wt=11): 515 [] f(f(5,3),0)=f(5,f(3,0)).
+---> New Demodulator: 516 [new_demod,515] f(f(5,3),0)=f(5,f(3,0)).
+** KEPT (pick-wt=11): 517 [] f(f(5,2),4)=f(5,f(2,4)).
+---> New Demodulator: 518 [new_demod,517] f(f(5,2),4)=f(5,f(2,4)).
+** KEPT (pick-wt=11): 519 [] f(f(5,2),3)=f(5,f(2,3)).
+---> New Demodulator: 520 [new_demod,519] f(f(5,2),3)=f(5,f(2,3)).
+** KEPT (pick-wt=11): 521 [] f(f(5,2),2)=f(5,f(2,2)).
+---> New Demodulator: 522 [new_demod,521] f(f(5,2),2)=f(5,f(2,2)).
+** KEPT (pick-wt=11): 523 [] f(f(5,2),1)=f(5,f(2,1)).
+---> New Demodulator: 524 [new_demod,523] f(f(5,2),1)=f(5,f(2,1)).
+** KEPT (pick-wt=11): 525 [] f(f(5,2),0)=f(5,f(2,0)).
+---> New Demodulator: 526 [new_demod,525] f(f(5,2),0)=f(5,f(2,0)).
+** KEPT (pick-wt=11): 527 [] f(f(5,1),4)=f(5,f(1,4)).
+---> New Demodulator: 528 [new_demod,527] f(f(5,1),4)=f(5,f(1,4)).
+** KEPT (pick-wt=11): 529 [] f(f(5,1),3)=f(5,f(1,3)).
+---> New Demodulator: 530 [new_demod,529] f(f(5,1),3)=f(5,f(1,3)).
+** KEPT (pick-wt=11): 531 [] f(f(5,1),2)=f(5,f(1,2)).
+---> New Demodulator: 532 [new_demod,531] f(f(5,1),2)=f(5,f(1,2)).
+** KEPT (pick-wt=11): 533 [] f(f(5,1),1)=f(5,f(1,1)).
+---> New Demodulator: 534 [new_demod,533] f(f(5,1),1)=f(5,f(1,1)).
+** KEPT (pick-wt=11): 535 [] f(f(5,1),0)=f(5,f(1,0)).
+---> New Demodulator: 536 [new_demod,535] f(f(5,1),0)=f(5,f(1,0)).
+** KEPT (pick-wt=9): 538 [copy,537,demod,50] f(f(5,0),4)=f(5,4).
+---> New Demodulator: 539 [new_demod,538] f(f(5,0),4)=f(5,4).
+** KEPT (pick-wt=9): 541 [copy,540,demod,47] f(f(5,0),3)=f(5,3).
+---> New Demodulator: 542 [new_demod,541] f(f(5,0),3)=f(5,3).
+** KEPT (pick-wt=9): 544 [copy,543,demod,44] f(f(5,0),2)=f(5,2).
+---> New Demodulator: 545 [new_demod,544] f(f(5,0),2)=f(5,2).
+** KEPT (pick-wt=9): 547 [copy,546,demod,41] f(f(5,0),1)=f(5,1).
+---> New Demodulator: 548 [new_demod,547] f(f(5,0),1)=f(5,1).
+** KEPT (pick-wt=9): 550 [copy,549,demod,38] f(f(5,0),0)=f(5,0).
+---> New Demodulator: 551 [new_demod,550] f(f(5,0),0)=f(5,0).
+** KEPT (pick-wt=24): 552 [] g(0)=0|g(0)=1|g(0)=2|g(0)=3|g(0)=4|g(0)=5.
+** KEPT (pick-wt=24): 553 [] g(1)=0|g(1)=1|g(1)=2|g(1)=3|g(1)=4|g(1)=5.
+** KEPT (pick-wt=24): 554 [] g(2)=0|g(2)=1|g(2)=2|g(2)=3|g(2)=4|g(2)=5.
+** KEPT (pick-wt=24): 555 [] g(3)=0|g(3)=1|g(3)=2|g(3)=3|g(3)=4|g(3)=5.
+** KEPT (pick-wt=24): 556 [] g(4)=0|g(4)=1|g(4)=2|g(4)=3|g(4)=4|g(4)=5.
+** KEPT (pick-wt=24): 557 [] g(5)=0|g(5)=1|g(5)=2|g(5)=3|g(5)=4|g(5)=5.
+  Following clause subsumed by 1 during input processing: 0 [demod,38,38,38,38,38,38,unit_del,3,5,7,9,11] 0=0.
+** KEPT (pick-wt=30): 558 [] f(1,1)=0|f(1,1)=1|f(1,1)=2|f(1,1)=3|f(1,1)=4|f(1,1)=5.
+  Following clause subsumed by 1 during input processing: 0 [demod,41,41,41,41,41,41,unit_del,3,13,15,17,19] 1=1.
+** KEPT (pick-wt=30): 559 [] f(1,0)=0|f(1,0)=1|f(1,0)=2|f(1,0)=3|f(1,0)=4|f(1,0)=5.
+** KEPT (pick-wt=30): 560 [] f(2,2)=0|f(2,2)=1|f(2,2)=2|f(2,2)=3|f(2,2)=4|f(2,2)=5.
+** KEPT (pick-wt=30): 561 [] f(1,2)=0|f(1,2)=1|f(1,2)=2|f(1,2)=3|f(1,2)=4|f(1,2)=5.
+  Following clause subsumed by 1 during input processing: 0 [demod,44,44,44,44,44,44,unit_del,5,13,21,23,25] 2=2.
+** KEPT (pick-wt=30): 562 [] f(2,1)=0|f(2,1)=1|f(2,1)=2|f(2,1)=3|f(2,1)=4|f(2,1)=5.
+** KEPT (pick-wt=30): 563 [] f(2,0)=0|f(2,0)=1|f(2,0)=2|f(2,0)=3|f(2,0)=4|f(2,0)=5.
+** KEPT (pick-wt=30): 564 [] f(3,3)=0|f(3,3)=1|f(3,3)=2|f(3,3)=3|f(3,3)=4|f(3,3)=5.
+** KEPT (pick-wt=30): 565 [] f(2,3)=0|f(2,3)=1|f(2,3)=2|f(2,3)=3|f(2,3)=4|f(2,3)=5.
+** KEPT (pick-wt=30): 566 [] f(1,3)=0|f(1,3)=1|f(1,3)=2|f(1,3)=3|f(1,3)=4|f(1,3)=5.
+  Following clause subsumed by 1 during input processing: 0 [demod,47,47,47,47,47,47,unit_del,7,15,21,27,29] 3=3.
+** KEPT (pick-wt=30): 567 [] f(3,2)=0|f(3,2)=1|f(3,2)=2|f(3,2)=3|f(3,2)=4|f(3,2)=5.
+** KEPT (pick-wt=30): 568 [] f(3,1)=0|f(3,1)=1|f(3,1)=2|f(3,1)=3|f(3,1)=4|f(3,1)=5.
+** KEPT (pick-wt=30): 569 [] f(3,0)=0|f(3,0)=1|f(3,0)=2|f(3,0)=3|f(3,0)=4|f(3,0)=5.
+** KEPT (pick-wt=30): 570 [] f(4,4)=0|f(4,4)=1|f(4,4)=2|f(4,4)=3|f(4,4)=4|f(4,4)=5.
+** KEPT (pick-wt=30): 571 [] f(3,4)=0|f(3,4)=1|f(3,4)=2|f(3,4)=3|f(3,4)=4|f(3,4)=5.
+** KEPT (pick-wt=30): 572 [] f(2,4)=0|f(2,4)=1|f(2,4)=2|f(2,4)=3|f(2,4)=4|f(2,4)=5.
+** KEPT (pick-wt=30): 573 [] f(1,4)=0|f(1,4)=1|f(1,4)=2|f(1,4)=3|f(1,4)=4|f(1,4)=5.
+  Following clause subsumed by 1 during input processing: 0 [demod,50,50,50,50,50,50,unit_del,9,17,23,27,31] 4=4.
+** KEPT (pick-wt=30): 574 [] f(4,3)=0|f(4,3)=1|f(4,3)=2|f(4,3)=3|f(4,3)=4|f(4,3)=5.
+** KEPT (pick-wt=30): 575 [] f(4,2)=0|f(4,2)=1|f(4,2)=2|f(4,2)=3|f(4,2)=4|f(4,2)=5.
+** KEPT (pick-wt=30): 576 [] f(4,1)=0|f(4,1)=1|f(4,1)=2|f(4,1)=3|f(4,1)=4|f(4,1)=5.
+** KEPT (pick-wt=30): 577 [] f(4,0)=0|f(4,0)=1|f(4,0)=2|f(4,0)=3|f(4,0)=4|f(4,0)=5.
+** KEPT (pick-wt=30): 578 [] f(5,5)=0|f(5,5)=1|f(5,5)=2|f(5,5)=3|f(5,5)=4|f(5,5)=5.
+** KEPT (pick-wt=30): 579 [] f(4,5)=0|f(4,5)=1|f(4,5)=2|f(4,5)=3|f(4,5)=4|f(4,5)=5.
+** KEPT (pick-wt=30): 580 [] f(3,5)=0|f(3,5)=1|f(3,5)=2|f(3,5)=3|f(3,5)=4|f(3,5)=5.
+** KEPT (pick-wt=30): 581 [] f(2,5)=0|f(2,5)=1|f(2,5)=2|f(2,5)=3|f(2,5)=4|f(2,5)=5.
+** KEPT (pick-wt=30): 582 [] f(1,5)=0|f(1,5)=1|f(1,5)=2|f(1,5)=3|f(1,5)=4|f(1,5)=5.
+  Following clause subsumed by 1 during input processing: 0 [demod,53,53,53,53,53,53,unit_del,11,19,25,29,31] 5=5.
+** KEPT (pick-wt=30): 583 [] f(5,4)=0|f(5,4)=1|f(5,4)=2|f(5,4)=3|f(5,4)=4|f(5,4)=5.
+** KEPT (pick-wt=30): 584 [] f(5,3)=0|f(5,3)=1|f(5,3)=2|f(5,3)=3|f(5,3)=4|f(5,3)=5.
+** KEPT (pick-wt=30): 585 [] f(5,2)=0|f(5,2)=1|f(5,2)=2|f(5,2)=3|f(5,2)=4|f(5,2)=5.
+** KEPT (pick-wt=30): 586 [] f(5,1)=0|f(5,1)=1|f(5,1)=2|f(5,1)=3|f(5,1)=4|f(5,1)=5.
+** KEPT (pick-wt=30): 587 [] f(5,0)=0|f(5,0)=1|f(5,0)=2|f(5,0)=3|f(5,0)=4|f(5,0)=5.
+>>>> Starting back unit deletion with 3.
+>>>> Starting back unit deletion with 5.
+>>>> Starting back unit deletion with 7.
+>>>> Starting back unit deletion with 9.
+>>>> Starting back unit deletion with 11.
+>>>> Starting back unit deletion with 13.
+>>>> Starting back unit deletion with 15.
+>>>> Starting back unit deletion with 17.
+>>>> Starting back unit deletion with 19.
+>>>> Starting back unit deletion with 21.
+>>>> Starting back unit deletion with 23.
+>>>> Starting back unit deletion with 25.
+>>>> Starting back unit deletion with 27.
+>>>> Starting back unit deletion with 29.
+>>>> Starting back unit deletion with 31.
+>>>> Starting back demodulation with 33.
+>>>> Starting back unit deletion with 32.
+>>>> Starting back unit deletion with 35.
+>>>> Starting back demodulation with 38.
+>>>> Starting back unit deletion with 37.
+>>>> Starting back demodulation with 41.
+>>>> Starting back unit deletion with 40.
+>>>> Starting back demodulation with 44.
+>>>> Starting back unit deletion with 43.
+>>>> Starting back demodulation with 47.
+>>>> Starting back unit deletion with 46.
+>>>> Starting back demodulation with 50.
+>>>> Starting back unit deletion with 49.
+>>>> Starting back demodulation with 53.
+>>>> Starting back unit deletion with 52.
+>>>> Starting back demodulation with 56.
+>>>> Starting back unit deletion with 55.
+>>>> Starting back demodulation with 59.
+>>>> Starting back unit deletion with 58.
+>>>> Starting back demodulation with 62.
+>>>> Starting back unit deletion with 61.
+>>>> Starting back demodulation with 65.
+>>>> Starting back unit deletion with 64.
+>>>> Starting back demodulation with 68.
+>>>> Starting back unit deletion with 67.
+>>>> Starting back demodulation with 71.
+>>>> Starting back unit deletion with 70.
+>>>> Starting back demodulation with 73.
+>>>> Starting back unit deletion with 72.
+>>>> Starting back demodulation with 76.
+>>>> Starting back unit deletion with 75.
+>>>> Starting back demodulation with 79.
+>>>> Starting back unit deletion with 78.
+>>>> Starting back demodulation with 81.
+>>>> Starting back unit deletion with 80.
+>>>> Starting back demodulation with 84.
+>>>> Starting back unit deletion with 83.
+>>>> Starting back demodulation with 87.
+>>>> Starting back unit deletion with 86.
+>>>> Starting back demodulation with 89.
+>>>> Starting back unit deletion with 88.
+>>>> Starting back demodulation with 91.
+>>>> Starting back unit deletion with 90.
+>>>> Starting back demodulation with 94.
+>>>> Starting back unit deletion with 93.
+>>>> Starting back demodulation with 96.
+>>>> Starting back unit deletion with 95.
+>>>> Starting back demodulation with 98.
+>>>> Starting back unit deletion with 97.
+>>>> Starting back demodulation with 101.
+>>>> Starting back unit deletion with 100.
+>>>> Starting back demodulation with 104.
+>>>> Starting back unit deletion with 103.
+>>>> Starting back demodulation with 107.
+>>>> Starting back unit deletion with 106.
+>>>> Starting back demodulation with 109.
+>>>> Starting back unit deletion with 108.
+>>>> Starting back demodulation with 111.
+>>>> Starting back unit deletion with 110.
+>>>> Starting back demodulation with 113.
+>>>> Starting back unit deletion with 112.
+>>>> Starting back demodulation with 115.
+>>>> Starting back unit deletion with 114.
+>>>> Starting back demodulation with 118.
+>>>> Starting back unit deletion with 117.
+>>>> Starting back demodulation with 121.
+>>>> Starting back unit deletion with 120.
+>>>> Starting back demodulation with 123.
+>>>> Starting back unit deletion with 122.
+>>>> Starting back demodulation with 125.
+>>>> Starting back unit deletion with 124.
+>>>> Starting back demodulation with 128.
+>>>> Starting back unit deletion with 127.
+>>>> Starting back demodulation with 131.
+>>>> Starting back unit deletion with 130.
+>>>> Starting back demodulation with 133.
+>>>> Starting back unit deletion with 132.
+>>>> Starting back demodulation with 135.
+>>>> Starting back unit deletion with 134.
+>>>> Starting back demodulation with 137.
+>>>> Starting back unit deletion with 136.
+>>>> Starting back demodulation with 140.
+>>>> Starting back unit deletion with 139.
+>>>> Starting back demodulation with 142.
+>>>> Starting back unit deletion with 141.
+>>>> Starting back demodulation with 144.
+>>>> Starting back unit deletion with 143.
+>>>> Starting back demodulation with 146.
+>>>> Starting back unit deletion with 145.
+>>>> Starting back demodulation with 149.
+>>>> Starting back unit deletion with 148.
+>>>> Starting back demodulation with 151.
+>>>> Starting back unit deletion with 150.
+>>>> Starting back demodulation with 153.
+>>>> Starting back unit deletion with 152.
+>>>> Starting back demodulation with 155.
+>>>> Starting back unit deletion with 154.
+>>>> Starting back demodulation with 158.
+>>>> Starting back unit deletion with 157.
+>>>> Starting back demodulation with 161.
+>>>> Starting back unit deletion with 160.
+>>>> Starting back demodulation with 164.
+>>>> Starting back unit deletion with 163.
+>>>> Starting back demodulation with 167.
+>>>> Starting back unit deletion with 166.
+>>>> Starting back demodulation with 169.
+>>>> Starting back unit deletion with 168.
+>>>> Starting back demodulation with 171.
+>>>> Starting back unit deletion with 170.
+>>>> Starting back demodulation with 173.
+>>>> Starting back unit deletion with 172.
+>>>> Starting back demodulation with 175.
+>>>> Starting back unit deletion with 174.
+>>>> Starting back demodulation with 177.
+>>>> Starting back unit deletion with 176.
+>>>> Starting back demodulation with 179.
+>>>> Starting back unit deletion with 178.
+>>>> Starting back demodulation with 181.
+>>>> Starting back unit deletion with 180.
+>>>> Starting back demodulation with 183.
+>>>> Starting back unit deletion with 182.
+>>>> Starting back demodulation with 185.
+>>>> Starting back unit deletion with 184.
+>>>> Starting back demodulation with 188.
+>>>> Starting back unit deletion with 187.
+>>>> Starting back demodulation with 191.
+>>>> Starting back unit deletion with 190.
+>>>> Starting back demodulation with 194.
+>>>> Starting back unit deletion with 193.
+>>>> Starting back demodulation with 196.
+>>>> Starting back unit deletion with 195.
+>>>> Starting back demodulation with 198.
+>>>> Starting back unit deletion with 197.
+>>>> Starting back demodulation with 200.
+>>>> Starting back unit deletion with 199.
+>>>> Starting back demodulation with 202.
+>>>> Starting back unit deletion with 201.
+>>>> Starting back demodulation with 204.
+>>>> Starting back unit deletion with 203.
+>>>> Starting back demodulation with 206.
+>>>> Starting back unit deletion with 205.
+>>>> Starting back demodulation with 209.
+>>>> Starting back unit deletion with 208.
+>>>> Starting back demodulation with 212.
+>>>> Starting back unit deletion with 211.
+>>>> Starting back demodulation with 215.
+>>>> Starting back unit deletion with 214.
+>>>> Starting back demodulation with 217.
+>>>> Starting back unit deletion with 216.
+>>>> Starting back demodulation with 219.
+>>>> Starting back unit deletion with 218.
+>>>> Starting back demodulation with 221.
+>>>> Starting back unit deletion with 220.
+>>>> Starting back demodulation with 223.
+>>>> Starting back unit deletion with 222.
+>>>> Starting back demodulation with 226.
+>>>> Starting back unit deletion with 225.
+>>>> Starting back demodulation with 228.
+>>>> Starting back unit deletion with 227.
+>>>> Starting back demodulation with 230.
+>>>> Starting back unit deletion with 229.
+>>>> Starting back demodulation with 232.
+>>>> Starting back unit deletion with 231.
+>>>> Starting back demodulation with 234.
+>>>> Starting back unit deletion with 233.
+>>>> Starting back demodulation with 237.
+>>>> Starting back unit deletion with 236.
+>>>> Starting back demodulation with 239.
+>>>> Starting back unit deletion with 238.
+>>>> Starting back demodulation with 241.
+>>>> Starting back unit deletion with 240.
+>>>> Starting back demodulation with 243.
+>>>> Starting back unit deletion with 242.
+>>>> Starting back demodulation with 245.
+>>>> Starting back unit deletion with 244.
+>>>> Starting back demodulation with 248.
+>>>> Starting back unit deletion with 247.
+>>>> Starting back demodulation with 250.
+>>>> Starting back unit deletion with 249.
+>>>> Starting back demodulation with 252.
+>>>> Starting back unit deletion with 251.
+>>>> Starting back demodulation with 254.
+>>>> Starting back unit deletion with 253.
+>>>> Starting back demodulation with 256.
+>>>> Starting back unit deletion with 255.
+>>>> Starting back demodulation with 259.
+>>>> Starting back unit deletion with 258.
+>>>> Starting back demodulation with 262.
+>>>> Starting back unit deletion with 261.
+>>>> Starting back demodulation with 265.
+>>>> Starting back unit deletion with 264.
+>>>> Starting back demodulation with 268.
+>>>> Starting back unit deletion with 267.
+>>>> Starting back demodulation with 271.
+>>>> Starting back unit deletion with 270.
+>>>> Starting back demodulation with 273.
+>>>> Starting back unit deletion with 272.
+>>>> Starting back demodulation with 275.
+>>>> Starting back unit deletion with 274.
+>>>> Starting back demodulation with 277.
+>>>> Starting back unit deletion with 276.
+>>>> Starting back demodulation with 279.
+>>>> Starting back unit deletion with 278.
+>>>> Starting back demodulation with 281.
+>>>> Starting back unit deletion with 280.
+>>>> Starting back demodulation with 283.
+>>>> Starting back unit deletion with 282.
+>>>> Starting back demodulation with 285.
+>>>> Starting back unit deletion with 284.
+>>>> Starting back demodulation with 287.
+>>>> Starting back unit deletion with 286.
+>>>> Starting back demodulation with 289.
+>>>> Starting back unit deletion with 288.
+>>>> Starting back demodulation with 291.
+>>>> Starting back unit deletion with 290.
+>>>> Starting back demodulation with 293.
+>>>> Starting back unit deletion with 292.
+>>>> Starting back demodulation with 295.
+>>>> Starting back unit deletion with 294.
+>>>> Starting back demodulation with 297.
+>>>> Starting back unit deletion with 296.
+>>>> Starting back demodulation with 299.
+>>>> Starting back unit deletion with 298.
+>>>> Starting back demodulation with 301.
+>>>> Starting back unit deletion with 300.
+>>>> Starting back demodulation with 303.
+>>>> Starting back unit deletion with 302.
+>>>> Starting back demodulation with 306.
+>>>> Starting back unit deletion with 305.
+>>>> Starting back demodulation with 309.
+>>>> Starting back unit deletion with 308.
+>>>> Starting back demodulation with 312.
+>>>> Starting back unit deletion with 311.
+>>>> Starting back demodulation with 315.
+>>>> Starting back unit deletion with 314.
+>>>> Starting back demodulation with 317.
+>>>> Starting back unit deletion with 316.
+>>>> Starting back demodulation with 319.
+>>>> Starting back unit deletion with 318.
+>>>> Starting back demodulation with 321.
+>>>> Starting back unit deletion with 320.
+>>>> Starting back demodulation with 323.
+>>>> Starting back unit deletion with 322.
+>>>> Starting back demodulation with 325.
+>>>> Starting back unit deletion with 324.
+>>>> Starting back demodulation with 327.
+>>>> Starting back unit deletion with 326.
+>>>> Starting back demodulation with 329.
+>>>> Starting back unit deletion with 328.
+>>>> Starting back demodulation with 331.
+>>>> Starting back unit deletion with 330.
+>>>> Starting back demodulation with 333.
+>>>> Starting back unit deletion with 332.
+>>>> Starting back demodulation with 335.
+>>>> Starting back unit deletion with 334.
+>>>> Starting back demodulation with 337.
+>>>> Starting back unit deletion with 336.
+>>>> Starting back demodulation with 339.
+>>>> Starting back unit deletion with 338.
+>>>> Starting back demodulation with 342.
+>>>> Starting back unit deletion with 341.
+>>>> Starting back demodulation with 345.
+>>>> Starting back unit deletion with 344.
+>>>> Starting back demodulation with 348.
+>>>> Starting back unit deletion with 347.
+>>>> Starting back demodulation with 351.
+>>>> Starting back unit deletion with 350.
+>>>> Starting back demodulation with 353.
+>>>> Starting back unit deletion with 352.
+>>>> Starting back demodulation with 355.
+>>>> Starting back unit deletion with 354.
+>>>> Starting back demodulation with 357.
+>>>> Starting back unit deletion with 356.
+>>>> Starting back demodulation with 359.
+>>>> Starting back unit deletion with 358.
+>>>> Starting back demodulation with 361.
+>>>> Starting back unit deletion with 360.
+>>>> Starting back demodulation with 364.
+>>>> Starting back unit deletion with 363.
+>>>> Starting back demodulation with 366.
+>>>> Starting back unit deletion with 365.
+>>>> Starting back demodulation with 368.
+>>>> Starting back unit deletion with 367.
+>>>> Starting back demodulation with 370.
+>>>> Starting back unit deletion with 369.
+>>>> Starting back demodulation with 372.
+>>>> Starting back unit deletion with 371.
+>>>> Starting back demodulation with 374.
+>>>> Starting back unit deletion with 373.
+>>>> Starting back demodulation with 377.
+>>>> Starting back unit deletion with 376.
+>>>> Starting back demodulation with 379.
+>>>> Starting back unit deletion with 378.
+>>>> Starting back demodulation with 381.
+>>>> Starting back unit deletion with 380.
+>>>> Starting back demodulation with 383.
+>>>> Starting back unit deletion with 382.
+>>>> Starting back demodulation with 385.
+>>>> Starting back unit deletion with 384.
+>>>> Starting back demodulation with 387.
+>>>> Starting back unit deletion with 386.
+>>>> Starting back demodulation with 390.
+>>>> Starting back unit deletion with 389.
+>>>> Starting back demodulation with 392.
+>>>> Starting back unit deletion with 391.
+>>>> Starting back demodulation with 394.
+>>>> Starting back unit deletion with 393.
+>>>> Starting back demodulation with 396.
+>>>> Starting back unit deletion with 395.
+>>>> Starting back demodulation with 398.
+>>>> Starting back unit deletion with 397.
+>>>> Starting back demodulation with 400.
+>>>> Starting back unit deletion with 399.
+>>>> Starting back demodulation with 403.
+>>>> Starting back unit deletion with 402.
+>>>> Starting back demodulation with 405.
+>>>> Starting back unit deletion with 404.
+>>>> Starting back demodulation with 407.
+>>>> Starting back unit deletion with 406.
+>>>> Starting back demodulation with 409.
+>>>> Starting back unit deletion with 408.
+>>>> Starting back demodulation with 411.
+>>>> Starting back unit deletion with 410.
+>>>> Starting back demodulation with 413.
+>>>> Starting back unit deletion with 412.
+>>>> Starting back demodulation with 416.
+>>>> Starting back unit deletion with 415.
+>>>> Starting back demodulation with 419.
+>>>> Starting back unit deletion with 418.
+>>>> Starting back demodulation with 422.
+>>>> Starting back unit deletion with 421.
+>>>> Starting back demodulation with 425.
+>>>> Starting back unit deletion with 424.
+>>>> Starting back demodulation with 428.
+>>>> Starting back unit deletion with 427.
+>>>> Starting back demodulation with 431.
+>>>> Starting back unit deletion with 430.
+>>>> Starting back demodulation with 433.
+>>>> Starting back unit deletion with 432.
+>>>> Starting back demodulation with 435.
+>>>> Starting back unit deletion with 434.
+>>>> Starting back demodulation with 437.
+>>>> Starting back unit deletion with 436.
+>>>> Starting back demodulation with 439.
+>>>> Starting back unit deletion with 438.
+>>>> Starting back demodulation with 441.
+>>>> Starting back unit deletion with 440.
+>>>> Starting back demodulation with 443.
+>>>> Starting back unit deletion with 442.
+>>>> Starting back demodulation with 445.
+>>>> Starting back unit deletion with 444.
+>>>> Starting back demodulation with 447.
+>>>> Starting back unit deletion with 446.
+>>>> Starting back demodulation with 449.
+>>>> Starting back unit deletion with 448.
+>>>> Starting back demodulation with 451.
+>>>> Starting back unit deletion with 450.
+>>>> Starting back demodulation with 453.
+>>>> Starting back unit deletion with 452.
+>>>> Starting back demodulation with 455.
+>>>> Starting back unit deletion with 454.
+>>>> Starting back demodulation with 457.
+>>>> Starting back unit deletion with 456.
+>>>> Starting back demodulation with 459.
+>>>> Starting back unit deletion with 458.
+>>>> Starting back demodulation with 461.
+>>>> Starting back unit deletion with 460.
+>>>> Starting back demodulation with 463.
+>>>> Starting back unit deletion with 462.
+>>>> Starting back demodulation with 465.
+>>>> Starting back unit deletion with 464.
+>>>> Starting back demodulation with 467.
+>>>> Starting back unit deletion with 466.
+>>>> Starting back demodulation with 469.
+>>>> Starting back unit deletion with 468.
+>>>> Starting back demodulation with 471.
+>>>> Starting back unit deletion with 470.
+>>>> Starting back demodulation with 473.
+>>>> Starting back unit deletion with 472.
+>>>> Starting back demodulation with 475.
+>>>> Starting back unit deletion with 474.
+>>>> Starting back demodulation with 477.
+>>>> Starting back unit deletion with 476.
+>>>> Starting back demodulation with 479.
+>>>> Starting back unit deletion with 478.
+>>>> Starting back demodulation with 481.
+>>>> Starting back unit deletion with 480.
+>>>> Starting back demodulation with 484.
+>>>> Starting back unit deletion with 483.
+>>>> Starting back demodulation with 487.
+>>>> Starting back unit deletion with 486.
+>>>> Starting back demodulation with 490.
+>>>> Starting back unit deletion with 489.
+>>>> Starting back demodulation with 493.
+>>>> Starting back unit deletion with 492.
+>>>> Starting back demodulation with 496.
+>>>> Starting back unit deletion with 495.
+>>>> Starting back demodulation with 498.
+>>>> Starting back unit deletion with 497.
+>>>> Starting back demodulation with 500.
+>>>> Starting back unit deletion with 499.
+>>>> Starting back demodulation with 502.
+>>>> Starting back unit deletion with 501.
+>>>> Starting back demodulation with 504.
+>>>> Starting back unit deletion with 503.
+>>>> Starting back demodulation with 506.
+>>>> Starting back unit deletion with 505.
+>>>> Starting back demodulation with 508.
+>>>> Starting back unit deletion with 507.
+>>>> Starting back demodulation with 510.
+>>>> Starting back unit deletion with 509.
+>>>> Starting back demodulation with 512.
+>>>> Starting back unit deletion with 511.
+>>>> Starting back demodulation with 514.
+>>>> Starting back unit deletion with 513.
+>>>> Starting back demodulation with 516.
+>>>> Starting back unit deletion with 515.
+>>>> Starting back demodulation with 518.
+>>>> Starting back unit deletion with 517.
+>>>> Starting back demodulation with 520.
+>>>> Starting back unit deletion with 519.
+>>>> Starting back demodulation with 522.
+>>>> Starting back unit deletion with 521.
+>>>> Starting back demodulation with 524.
+>>>> Starting back unit deletion with 523.
+>>>> Starting back demodulation with 526.
+>>>> Starting back unit deletion with 525.
+>>>> Starting back demodulation with 528.
+>>>> Starting back unit deletion with 527.
+>>>> Starting back demodulation with 530.
+>>>> Starting back unit deletion with 529.
+>>>> Starting back demodulation with 532.
+>>>> Starting back unit deletion with 531.
+>>>> Starting back demodulation with 534.
+>>>> Starting back unit deletion with 533.
+>>>> Starting back demodulation with 536.
+>>>> Starting back unit deletion with 535.
+>>>> Starting back demodulation with 539.
+>>>> Starting back unit deletion with 538.
+>>>> Starting back demodulation with 542.
+>>>> Starting back unit deletion with 541.
+>>>> Starting back demodulation with 545.
+>>>> Starting back unit deletion with 544.
+>>>> Starting back demodulation with 548.
+>>>> Starting back unit deletion with 547.
+>>>> Starting back demodulation with 551.
+>>>> Starting back unit deletion with 550.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+Splitting on clause 552 [] g(0)=0|g(0)=1|g(0)=2|g(0)=3|g(0)=4|g(0)=5.
+
+Case [1]   (process 8663):
+Assumption: 588 [552,split.1] g(0)=0.
+
+Splitting on clause 553 [] g(1)=0|g(1)=1|g(1)=2|g(1)=3|g(1)=4|g(1)=5.
+
+Case [1.1]   (process 8664):
+Assumption: 590 [553,split.1.1] g(1)=0.
+
+----> UNIT CONFLICT at   0.00 sec ----> 594 [binary,592.1,3.1] $F.
+
+
+
+
+------- statistics (process 8664) -------
+clauses given                242
+clauses generated            448
+clauses kept                 279
+clauses forward subsumed     462
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8664 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.1].
+
+Case [1.2]   (process 8665):
+Assumption: 591 [553,split.1.2] g(1)=1.
+
+Splitting on clause 554 [] g(2)=0|g(2)=1|g(2)=2|g(2)=3|g(2)=4|g(2)=5.
+
+Case [1.2.1]   (process 8666):
+Assumption: 625 [554,split.1.2.1] g(2)=0.
+
+----> UNIT CONFLICT at   0.00 sec ----> 629 [binary,627.1,5.1] $F.
+
+
+
+
+------- statistics (process 8666) -------
+clauses given                258
+clauses generated            478
+clauses kept                 297
+clauses forward subsumed     504
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8666 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.1].
+
+Case [1.2.2]   (process 8667):
+Assumption: 626 [554,split.1.2.2] g(2)=1.
+
+----> UNIT CONFLICT at   0.00 sec ----> 632 [binary,630.1,13.1] $F.
+
+
+
+
+------- statistics (process 8667) -------
+clauses given                258
+clauses generated            478
+clauses kept                 299
+clauses forward subsumed     505
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8667 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.2].
+
+Case [1.2.3]   (process 8668):
+Assumption: 627 [554,split.1.2.3] g(2)=2.
+
+Splitting on clause 555 [] g(3)=0|g(3)=1|g(3)=2|g(3)=3|g(3)=4|g(3)=5.
+
+Case [1.2.3.1]   (process 8669):
+Assumption: 663 [555,split.1.2.3.1] g(3)=0.
+
+----> UNIT CONFLICT at   0.00 sec ----> 667 [binary,665.1,7.1] $F.
+
+
+
+
+------- statistics (process 8669) -------
+clauses given                275
+clauses generated            510
+clauses kept                 317
+clauses forward subsumed     549
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8669 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.1].
+
+Case [1.2.3.2]   (process 8670):
+Assumption: 664 [555,split.1.2.3.2] g(3)=1.
+
+----> UNIT CONFLICT at   0.00 sec ----> 670 [binary,668.1,15.1] $F.
+
+
+
+
+------- statistics (process 8670) -------
+clauses given                275
+clauses generated            510
+clauses kept                 319
+clauses forward subsumed     550
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8670 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.2].
+
+Case [1.2.3.3]   (process 8671):
+Assumption: 665 [555,split.1.2.3.3] g(3)=2.
+
+----> UNIT CONFLICT at   0.00 sec ----> 671 [binary,669.1,21.1] $F.
+
+
+
+
+------- statistics (process 8671) -------
+clauses given                275
+clauses generated            510
+clauses kept                 320
+clauses forward subsumed     551
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8671 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.3].
+
+Case [1.2.3.4]   (process 8672):
+Assumption: 666 [555,split.1.2.3.4] g(3)=3.
+
+Splitting on clause 556 [] g(4)=0|g(4)=1|g(4)=2|g(4)=3|g(4)=4|g(4)=5.
+
+Case [1.2.3.4.1]   (process 8673):
+Assumption: 704 [556,split.1.2.3.4.1] g(4)=0.
+
+----> UNIT CONFLICT at   0.00 sec ----> 708 [binary,706.1,9.1] $F.
+
+
+
+
+------- statistics (process 8673) -------
+clauses given                293
+clauses generated            544
+clauses kept                 339
+clauses forward subsumed     597
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8673 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.1].
+
+Case [1.2.3.4.2]   (process 8674):
+Assumption: 705 [556,split.1.2.3.4.2] g(4)=1.
+
+----> UNIT CONFLICT at   0.00 sec ----> 711 [binary,709.1,17.1] $F.
+
+
+
+
+------- statistics (process 8674) -------
+clauses given                293
+clauses generated            544
+clauses kept                 341
+clauses forward subsumed     598
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8674 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.2].
+
+Case [1.2.3.4.3]   (process 8675):
+Assumption: 706 [556,split.1.2.3.4.3] g(4)=2.
+
+----> UNIT CONFLICT at   0.00 sec ----> 712 [binary,710.1,23.1] $F.
+
+
+
+
+------- statistics (process 8675) -------
+clauses given                293
+clauses generated            544
+clauses kept                 342
+clauses forward subsumed     599
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8675 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.3].
+
+Case [1.2.3.4.4]   (process 8676):
+Assumption: 707 [556,split.1.2.3.4.4] g(4)=3.
+
+----> UNIT CONFLICT at   0.00 sec ----> 713 [binary,711.1,27.1] $F.
+
+
+
+
+------- statistics (process 8676) -------
+clauses given                293
+clauses generated            544
+clauses kept                 343
+clauses forward subsumed     600
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8676 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.4].
+
+Case [1.2.3.4.5]   (process 8677):
+Assumption: 708 [556,split.1.2.3.4.5] g(4)=4.
+
+Splitting on clause 557 [] g(5)=0|g(5)=1|g(5)=2|g(5)=3|g(5)=4|g(5)=5.
+
+Case [1.2.3.4.5.1]   (process 8678):
+Assumption: 748 [557,split.1.2.3.4.5.1] g(5)=0.
+
+----> UNIT CONFLICT at   0.00 sec ----> 752 [binary,750.1,11.1] $F.
+
+
+
+
+------- statistics (process 8678) -------
+clauses given                312
+clauses generated            580
+clauses kept                 363
+clauses forward subsumed     648
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8678 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.5.1].
+
+Case [1.2.3.4.5.2]   (process 8679):
+Assumption: 749 [557,split.1.2.3.4.5.2] g(5)=1.
+
+----> UNIT CONFLICT at   0.00 sec ----> 755 [binary,753.1,19.1] $F.
+
+
+
+
+------- statistics (process 8679) -------
+clauses given                312
+clauses generated            580
+clauses kept                 365
+clauses forward subsumed     649
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8679 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.5.2].
+
+Case [1.2.3.4.5.3]   (process 8680):
+Assumption: 750 [557,split.1.2.3.4.5.3] g(5)=2.
+
+----> UNIT CONFLICT at   0.00 sec ----> 756 [binary,754.1,25.1] $F.
+
+
+
+
+------- statistics (process 8680) -------
+clauses given                312
+clauses generated            580
+clauses kept                 366
+clauses forward subsumed     650
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8680 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.5.3].
+
+Case [1.2.3.4.5.4]   (process 8681):
+Assumption: 751 [557,split.1.2.3.4.5.4] g(5)=3.
+
+----> UNIT CONFLICT at   0.00 sec ----> 757 [binary,755.1,29.1] $F.
+
+
+
+
+------- statistics (process 8681) -------
+clauses given                312
+clauses generated            580
+clauses kept                 367
+clauses forward subsumed     651
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8681 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.5.4].
+
+Case [1.2.3.4.5.5]   (process 8682):
+Assumption: 752 [557,split.1.2.3.4.5.5] g(5)=4.
+
+----> UNIT CONFLICT at   0.00 sec ----> 758 [binary,756.1,31.1] $F.
+
+
+
+
+------- statistics (process 8682) -------
+clauses given                312
+clauses generated            580
+clauses kept                 368
+clauses forward subsumed     652
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8682 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.5.5].
+
+Case [1.2.3.4.5.6]   (process 8683):
+Assumption: 753 [557,split.1.2.3.4.5.6] g(5)=5.
+
+Splitting on clause 561 [] f(1,2)=0|f(1,2)=1|f(1,2)=2|f(1,2)=3|f(1,2)=4|f(1,2)=5.
+
+Case [1.2.3.4.5.6.1]   (process 8684):
+Assumption: 795 [561,split.1.2.3.4.5.6.1] f(1,2)=0.
+
+----> UNIT CONFLICT at   0.00 sec ----> 799 [binary,797.1,13.1] $F.
+
+
+
+
+------- statistics (process 8684) -------
+clauses given                332
+clauses generated            618
+clauses kept                 389
+clauses forward subsumed     703
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8684 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.5.6.1].
+
+Case [1.2.3.4.5.6.2]   (process 8685):
+Assumption: 796 [561,split.1.2.3.4.5.6.2] f(1,2)=1.
+
+----> UNIT CONFLICT at   0.00 sec ----> 800 [binary,798.1,5.1] $F.
+
+
+
+
+------- statistics (process 8685) -------
+clauses given                332
+clauses generated            618
+clauses kept                 390
+clauses forward subsumed     705
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8685 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.5.6.2].
+
+Case [1.2.3.4.5.6.3]   (process 8686):
+Assumption: 797 [561,split.1.2.3.4.5.6.3] f(1,2)=2.
+
+----> UNIT CONFLICT at   0.00 sec ----> 801 [binary,799.1,3.1] $F.
+
+
+
+
+------- statistics (process 8686) -------
+clauses given                332
+clauses generated            618
+clauses kept                 391
+clauses forward subsumed     705
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8686 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.5.6.3].
+
+Case [1.2.3.4.5.6.4]   (process 8687):
+Assumption: 798 [561,split.1.2.3.4.5.6.4] f(1,2)=3.
+
+----> UNIT CONFLICT at   0.00 sec ----> 849 [binary,847.1,820.1] $F.
+
+
+
+
+------- statistics (process 8687) -------
+clauses given                332
+clauses generated            618
+clauses kept                 416
+clauses forward subsumed     715
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8687 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.5.6.4].
+
+Case [1.2.3.4.5.6.5]   (process 8688):
+Assumption: 799 [561,split.1.2.3.4.5.6.5] f(1,2)=4.
+
+----> UNIT CONFLICT at   0.00 sec ----> 846 [binary,844.1,821.1] $F.
+
+
+
+
+------- statistics (process 8688) -------
+clauses given                332
+clauses generated            618
+clauses kept                 415
+clauses forward subsumed     716
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8688 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.5.6.5].
+
+Case [1.2.3.4.5.6.6]   (process 8689):
+Assumption: 800 [561,split.1.2.3.4.5.6.6] f(1,2)=5.
+
+----> UNIT CONFLICT at   0.00 sec ----> 843 [binary,841.1,822.1] $F.
+
+
+
+
+------- statistics (process 8689) -------
+clauses given                332
+clauses generated            618
+clauses kept                 414
+clauses forward subsumed     717
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8689 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.5.6.6].
+
+------- statistics (process 8683) -------
+clauses given                332
+clauses generated            618
+clauses kept                 387
+clauses forward subsumed     702
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8683 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.5.6].
+
+------- statistics (process 8677) -------
+clauses given                312
+clauses generated            580
+clauses kept                 361
+clauses forward subsumed     648
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8677 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.5].
+
+Case [1.2.3.4.6]   (process 8690):
+Assumption: 709 [556,split.1.2.3.4.6] g(4)=5.
+
+Splitting on clause 557 [] g(5)=0|g(5)=1|g(5)=2|g(5)=3|g(5)=4|g(5)=5.
+
+Case [1.2.3.4.6.1]   (process 8691):
+Assumption: 737 [557,split.1.2.3.4.6.1] g(5)=0.
+
+----> UNIT CONFLICT at   0.00 sec ----> 741 [binary,739.1,11.1] $F.
+
+
+
+
+------- statistics (process 8691) -------
+clauses given                308
+clauses generated            572
+clauses kept                 358
+clauses forward subsumed     632
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8691 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.6.1].
+
+Case [1.2.3.4.6.2]   (process 8692):
+Assumption: 738 [557,split.1.2.3.4.6.2] g(5)=1.
+
+----> UNIT CONFLICT at   0.00 sec ----> 744 [binary,742.1,17.1] $F.
+
+
+
+
+------- statistics (process 8692) -------
+clauses given                308
+clauses generated            572
+clauses kept                 360
+clauses forward subsumed     633
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8692 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.6.2].
+
+Case [1.2.3.4.6.3]   (process 8693):
+Assumption: 739 [557,split.1.2.3.4.6.3] g(5)=2.
+
+----> UNIT CONFLICT at   0.00 sec ----> 745 [binary,743.1,23.1] $F.
+
+
+
+
+------- statistics (process 8693) -------
+clauses given                308
+clauses generated            572
+clauses kept                 361
+clauses forward subsumed     634
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8693 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.6.3].
+
+Case [1.2.3.4.6.4]   (process 8694):
+Assumption: 740 [557,split.1.2.3.4.6.4] g(5)=3.
+
+----> UNIT CONFLICT at   0.00 sec ----> 746 [binary,744.1,27.1] $F.
+
+
+
+
+------- statistics (process 8694) -------
+clauses given                308
+clauses generated            572
+clauses kept                 362
+clauses forward subsumed     635
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8694 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.6.4].
+
+Case [1.2.3.4.6.5]   (process 8695):
+Assumption: 741 [557,split.1.2.3.4.6.5] g(5)=4.
+
+Splitting on clause 561 [] f(1,2)=0|f(1,2)=1|f(1,2)=2|f(1,2)=3|f(1,2)=4|f(1,2)=5.
+
+Case [1.2.3.4.6.5.1]   (process 8696):
+Assumption: 795 [561,split.1.2.3.4.6.5.1] f(1,2)=0.
+
+----> UNIT CONFLICT at   0.00 sec ----> 799 [binary,797.1,13.1] $F.
+
+
+
+
+------- statistics (process 8696) -------
+clauses given                336
+clauses generated            626
+clauses kept                 389
+clauses forward subsumed     711
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8696 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.6.5.1].
+
+Case [1.2.3.4.6.5.2]   (process 8697):
+Assumption: 796 [561,split.1.2.3.4.6.5.2] f(1,2)=1.
+
+----> UNIT CONFLICT at   0.00 sec ----> 800 [binary,798.1,5.1] $F.
+
+
+
+
+------- statistics (process 8697) -------
+clauses given                336
+clauses generated            626
+clauses kept                 390
+clauses forward subsumed     713
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8697 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.6.5.2].
+
+Case [1.2.3.4.6.5.3]   (process 8698):
+Assumption: 797 [561,split.1.2.3.4.6.5.3] f(1,2)=2.
+
+----> UNIT CONFLICT at   0.00 sec ----> 801 [binary,799.1,3.1] $F.
+
+
+
+
+------- statistics (process 8698) -------
+clauses given                336
+clauses generated            626
+clauses kept                 391
+clauses forward subsumed     713
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8698 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.6.5.3].
+
+Case [1.2.3.4.6.5.4]   (process 8699):
+Assumption: 798 [561,split.1.2.3.4.6.5.4] f(1,2)=3.
+
+----> UNIT CONFLICT at   0.00 sec ----> 849 [binary,847.1,820.1] $F.
+
+
+
+
+------- statistics (process 8699) -------
+clauses given                336
+clauses generated            626
+clauses kept                 416
+clauses forward subsumed     723
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8699 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.6.5.4].
+
+Case [1.2.3.4.6.5.5]   (process 8700):
+Assumption: 799 [561,split.1.2.3.4.6.5.5] f(1,2)=4.
+913 back subsumes 562.
+
+Splitting on clause 565 [] f(2,3)=0|f(2,3)=1|f(2,3)=2|f(2,3)=3|f(2,3)=4|f(2,3)=5.
+
+Case [1.2.3.4.6.5.5.1]   (process 8701):
+Assumption: 1010 [565,split.1.2.3.4.6.5.5.1] f(2,3)=0.
+
+----> UNIT CONFLICT at   0.00 sec ----> 1028 [binary,1026.1,21.1] $F.
+
+
+
+
+------- statistics (process 8701) -------
+clauses given                413
+clauses generated            779
+clauses kept                 509
+clauses forward subsumed     919
+clauses back subsumed          1
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8701 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.6.5.5.1].
+
+Case [1.2.3.4.6.5.5.2]   (process 8702):
+Assumption: 1011 [565,split.1.2.3.4.6.5.5.2] f(2,3)=1.
+
+----> UNIT CONFLICT at   0.00 sec ----> 1029 [binary,1027.1,29.1] $F.
+
+
+
+
+------- statistics (process 8702) -------
+clauses given                413
+clauses generated            779
+clauses kept                 510
+clauses forward subsumed     920
+clauses back subsumed          1
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8702 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.6.5.5.2].
+
+Case [1.2.3.4.6.5.5.3]   (process 8703):
+Assumption: 1012 [565,split.1.2.3.4.6.5.5.3] f(2,3)=2.
+
+----> UNIT CONFLICT at   0.00 sec ----> 1030 [binary,1028.1,7.1] $F.
+
+
+
+
+------- statistics (process 8703) -------
+clauses given                413
+clauses generated            779
+clauses kept                 511
+clauses forward subsumed     921
+clauses back subsumed          1
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8703 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.6.5.5.3].
+
+Case [1.2.3.4.6.5.5.4]   (process 8704):
+Assumption: 1013 [565,split.1.2.3.4.6.5.5.4] f(2,3)=3.
+
+----> UNIT CONFLICT at   0.00 sec ----> 1031 [binary,1029.1,17.1] $F.
+
+
+
+
+------- statistics (process 8704) -------
+clauses given                413
+clauses generated            779
+clauses kept                 512
+clauses forward subsumed     923
+clauses back subsumed          1
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8704 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.6.5.5.4].
+
+Case [1.2.3.4.6.5.5.5]   (process 8705):
+Assumption: 1014 [565,split.1.2.3.4.6.5.5.5] f(2,3)=4.
+
+Splitting on clause 566 [] f(1,3)=0|f(1,3)=1|f(1,3)=2|f(1,3)=3|f(1,3)=4|f(1,3)=5.
+
+Case [1.2.3.4.6.5.5.5.1]   (process 8706):
+Assumption: 1104 [566,split.1.2.3.4.6.5.5.5.1] f(1,3)=0.
+
+----> UNIT CONFLICT at   0.00 sec ----> 1112 [binary,1110.1,15.1] $F.
+
+
+
+
+------- statistics (process 8706) -------
+clauses given                441
+clauses generated            833
+clauses kept                 553
+clauses forward subsumed    1041
+clauses back subsumed          1
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8706 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.6.5.5.5.1].
+
+Case [1.2.3.4.6.5.5.5.2]   (process 8707):
+Assumption: 1105 [566,split.1.2.3.4.6.5.5.5.2] f(1,3)=1.
+
+----> UNIT CONFLICT at   0.00 sec ----> 1117 [binary,1115.1,23.1] $F.
+
+
+
+
+------- statistics (process 8707) -------
+clauses given                441
+clauses generated            833
+clauses kept                 556
+clauses forward subsumed    1042
+clauses back subsumed          1
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8707 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.6.5.5.5.2].
+
+Case [1.2.3.4.6.5.5.5.3]   (process 8708):
+Assumption: 1106 [566,split.1.2.3.4.6.5.5.5.3] f(1,3)=2.
+
+----> UNIT CONFLICT at   0.00 sec ----> 1114 [binary,1112.1,29.1] $F.
+
+
+
+
+------- statistics (process 8708) -------
+clauses given                441
+clauses generated            833
+clauses kept                 555
+clauses forward subsumed    1043
+clauses back subsumed          1
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8708 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.6.5.5.5.3].
+
+Case [1.2.3.4.6.5.5.5.4]   (process 8709):
+Assumption: 1107 [566,split.1.2.3.4.6.5.5.5.4] f(1,3)=3.
+
+----> UNIT CONFLICT at   0.00 sec ----> 1115 [binary,1113.1,7.1] $F.
+
+
+
+
+------- statistics (process 8709) -------
+clauses given                441
+clauses generated            833
+clauses kept                 556
+clauses forward subsumed    1044
+clauses back subsumed          1
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8709 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.6.5.5.5.4].
+
+Case [1.2.3.4.6.5.5.5.5]   (process 8710):
+Assumption: 1108 [566,split.1.2.3.4.6.5.5.5.5] f(1,3)=4.
+
+----> UNIT CONFLICT at   0.00 sec ----> 1116 [binary,1114.1,21.1] $F.
+
+
+
+
+------- statistics (process 8710) -------
+clauses given                441
+clauses generated            833
+clauses kept                 557
+clauses forward subsumed    1045
+clauses back subsumed          1
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8710 finished Mon Aug  2 15:31:08 2004
+Refuted case [1.2.3.4.6.5.5.5.5].
+
+Possible model detected on branch [1.2.3.4.6.5.5.5.6].
+
+Case [1.2.3.4.6.5.5.5.6]   (process 8711):
+Assumption: 1109 [566,split.1.2.3.4.6.5.5.5.6] f(1,3)=5.
+
+Possible model detected on branch [1.2.3.4.6.5.5.5.6].
+
+Here are the clauses in Usable and SoS.  It seems that no more
+inferences or splitting can be done.  If the search strategy is
+complete, these clauses should lead to a model of the input.
+
+list(usable).
+1 [] x=x.
+3 [copy,2,flip.1] 1!=0.
+5 [copy,4,flip.1] 2!=0.
+7 [copy,6,flip.1] 3!=0.
+9 [copy,8,flip.1] 4!=0.
+11 [copy,10,flip.1] 5!=0.
+13 [copy,12,flip.1] 2!=1.
+15 [copy,14,flip.1] 3!=1.
+17 [copy,16,flip.1] 4!=1.
+19 [copy,18,flip.1] 5!=1.
+21 [copy,20,flip.1] 3!=2.
+23 [copy,22,flip.1] 4!=2.
+25 [copy,24,flip.1] 5!=2.
+27 [copy,26,flip.1] 4!=3.
+29 [copy,28,flip.1] 5!=3.
+31 [copy,30,flip.1] 5!=4.
+32 [] e=0.
+37 [copy,36,demod,33] f(0,0)=0.
+40 [copy,39,demod,33] f(0,1)=1.
+43 [copy,42,demod,33] f(0,2)=2.
+46 [copy,45,demod,33] f(0,3)=3.
+49 [copy,48,demod,33] f(0,4)=4.
+52 [copy,51,demod,33] f(0,5)=5.
+588 [552,split.1] g(0)=0.
+591 [553,split.1.2] g(1)=1.
+593 [back_demod,58,demod,592] f(1,1)=0.
+615 [back_demod,72,demod,594,41,594,flip.1] f(1,0)=1.
+627 [554,split.1.2.3] g(2)=2.
+629 [back_demod,61,demod,628] f(2,2)=0.
+651 [back_demod,88,demod,630,44,630,flip.1] f(2,0)=2.
+666 [555,split.1.2.3.4] g(3)=3.
+668 [back_demod,64,demod,667] f(3,3)=0.
+690 [back_demod,132,demod,669,47,669,flip.1] f(3,0)=3.
+709 [556,split.1.2.3.4.6] g(4)=5.
+711 [back_demod,67,demod,710] f(5,4)=0.
+741 [557,split.1.2.3.4.6.5] g(5)=4.
+743 [back_demod,70,demod,742] f(4,5)=0.
+745 [back_demod,735,demod,744] f(5,0)=5.
+747 [back_demod,731,demod,744,50,flip.1] f(4,0)=4.
+799 [561,split.1.2.3.4.6.5.5] f(1,2)=4.
+801 [back_demod,647,demod,800] f(4,2)=1.
+803 [back_demod,609,demod,800] f(1,4)=2.
+822 [back_demod,719,demod,802] f(5,1)=2.
+838 [back_demod,755,demod,804] f(2,5)=1.
+914 [back_demod,771,demod,823] f(2,1)=5.
+1014 [565,split.1.2.3.4.6.5.5.5] f(2,3)=4.
+1030 [back_demod,877,demod,1015,804,841] f(2,4)=3.
+1032 [back_demod,815,demod,1015,804] f(4,3)=2.
+1048 [back_demod,956,demod,1031] f(3,2)=5.
+1068 [back_demod,840,demod,1031] f(5,2)=3.
+1072 [back_demod,757,demod,1031] f(3,5)=2.
+1109 [566,split.1.2.3.4.6.5.5.5.6] f(1,3)=5.
+1115 [back_demod,1096,demod,1110,839] f(1,5)=3.
+1117 [back_demod,1070,demod,1110] f(4,4)=5.
+1119 [back_demod,1064,demod,1110,839] f(3,4)=1.
+1121 [back_demod,962,demod,1110,839] f(5,3)=1.
+1123 [back_demod,1052,demod,1116,1015] f(3,1)=4.
+1125 [back_demod,958,demod,1116] f(4,1)=3.
+1127 [back_demod,932,demod,1116,1015] f(5,5)=4.
+end_of_list.
+
+list(sos).
+end_of_list.
+
+------- statistics (process 8711) -------
+clauses given                449
+clauses generated            849
+clauses kept                 564
+clauses forward subsumed    1106
+clauses back subsumed          1
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8711 finished Mon Aug  2 15:31:08 2004
+
+------- statistics (process 8705) -------
+clauses given                441
+clauses generated            833
+clauses kept                 549
+clauses forward subsumed    1041
+clauses back subsumed          1
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.01          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8705 finished Mon Aug  2 15:31:08 2004
+
+------- statistics (process 8700) -------
+clauses given                413
+clauses generated            779
+clauses kept                 500
+clauses forward subsumed     915
+clauses back subsumed          1
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8700 finished Mon Aug  2 15:31:08 2004
+
+------- statistics (process 8695) -------
+clauses given                336
+clauses generated            626
+clauses kept                 387
+clauses forward subsumed     710
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8695 finished Mon Aug  2 15:31:08 2004
+
+------- statistics (process 8690) -------
+clauses given                308
+clauses generated            572
+clauses kept                 356
+clauses forward subsumed     632
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8690 finished Mon Aug  2 15:31:08 2004
+
+------- statistics (process 8672) -------
+clauses given                293
+clauses generated            544
+clauses kept                 337
+clauses forward subsumed     597
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8672 finished Mon Aug  2 15:31:08 2004
+
+------- statistics (process 8668) -------
+clauses given                275
+clauses generated            510
+clauses kept                 315
+clauses forward subsumed     549
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8668 finished Mon Aug  2 15:31:08 2004
+
+------- statistics (process 8665) -------
+clauses given                258
+clauses generated            478
+clauses kept                 295
+clauses forward subsumed     504
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.01          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8665 finished Mon Aug  2 15:31:08 2004
+
+------- statistics (process 8663) -------
+clauses given                242
+clauses generated            448
+clauses kept                 277
+clauses forward subsumed     462
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8663 finished Mon Aug  2 15:31:08 2004
+
+------- statistics (process 8662) -------
+clauses given                240
+clauses generated            446
+clauses kept                 276
+clauses forward subsumed     459
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.04          (0 hr, 0 min, 0 sec)
+system CPU time        0.01          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8662 finished Mon Aug  2 15:31:08 2004

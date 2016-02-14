@@ -1,0 +1,268 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:36 2004
+The command was "../../bin/otter".  The process ID is 8318.
+
+set(auto).
+   dependent: set(auto1).
+   dependent: set(process_input).
+   dependent: clear(print_kept).
+   dependent: clear(print_new_demod).
+   dependent: clear(print_back_demod).
+   dependent: clear(print_back_sub).
+   dependent: set(control_memory).
+   dependent: assign(max_mem, 12000).
+   dependent: assign(pick_given_ratio, 4).
+   dependent: assign(stats_level, 1).
+   dependent: assign(max_seconds, 10800).
+
+list(usable).
+0 [] y=m|p(y,m)|v1=m|v1=y| -p(y,v1)| -p(v1,y).
+0 [] y=b| -p(y,b)|v=b|v=y| -p(y,v)| -p(v,y).
+0 [] y=k|y=m|y=b| -p(y,k).
+0 [] y=m| -p(y,m)|f(y)!=m.
+0 [] y=m| -p(y,m)|f(y)!=y.
+0 [] y=m| -p(y,m)|p(y,f(y)).
+0 [] y=m| -p(y,m)|p(f(y),y).
+0 [] y=b|p(y,b)|g(y)!=b.
+0 [] y=b|p(y,b)|g(y)!=y.
+0 [] y=b|p(y,b)|p(y,g(y)).
+0 [] y=b|p(y,b)|p(g(y),y).
+0 [] y=k|y!=m|p(y,k).
+0 [] y=k|y!=b|p(y,k).
+0 [] x=x.
+0 [] x!=y|y=x.
+0 [] x!=y|y!=z|x=z.
+0 [] x!=y| -p(x,z)|p(y,z).
+0 [] x!=y| -p(z,x)|p(z,y).
+0 [] x!=y|f(x)=f(y).
+0 [] x!=y|g(x)=g(y).
+0 [] m!=b.
+0 [] b!=k.
+0 [] k!=m.
+end_of_list.
+
+SCAN INPUT: prop=0, horn=0, equality=1, symmetry=1, max_lits=6.
+
+This ia a non-Horn set with equality.  The strategy will be
+Knuth-Bendix, ordered hyper_res, factoring, and unit
+deletion, with positive clauses in sos and nonpositive
+clauses in usable.
+
+   dependent: set(knuth_bendix).
+   dependent: set(anl_eq).
+   dependent: set(para_from).
+   dependent: set(para_into).
+   dependent: clear(para_from_right).
+   dependent: clear(para_into_right).
+   dependent: set(para_from_vars).
+   dependent: set(eq_units_both_ways).
+   dependent: set(dynamic_demod_all).
+   dependent: set(dynamic_demod).
+   dependent: set(order_eq).
+   dependent: set(back_demod).
+   dependent: set(lrpo).
+   dependent: set(hyper_res).
+   dependent: set(unit_deletion).
+   dependent: set(factor).
+
+There is a clause for symmetry of equality, so it is
+assumed that equality is fully axiomatized; therefore,
+paramodulation is disabled.
+
+   dependent: clear(para_from).
+   dependent: clear(para_into).
+
+------------> process usable:
+** KEPT (pick-wt=18): 1 [] x=m|p(x,m)|y=m|y=x| -p(x,y)| -p(y,x).
+** KEPT (pick-wt=18): 2 [] x=b| -p(x,b)|y=b|y=x| -p(x,y)| -p(y,x).
+** KEPT (pick-wt=12): 3 [] x=k|x=m|x=b| -p(x,k).
+** KEPT (pick-wt=10): 4 [] x=m| -p(x,m)|f(x)!=m.
+** KEPT (pick-wt=10): 5 [] x=m| -p(x,m)|f(x)!=x.
+** KEPT (pick-wt=10): 6 [] x=m| -p(x,m)|p(x,f(x)).
+** KEPT (pick-wt=10): 7 [] x=m| -p(x,m)|p(f(x),x).
+** KEPT (pick-wt=10): 8 [] x=b|p(x,b)|g(x)!=b.
+** KEPT (pick-wt=10): 9 [] x=b|p(x,b)|g(x)!=x.
+** KEPT (pick-wt=9): 10 [] x=k|x!=m|p(x,k).
+** KEPT (pick-wt=9): 11 [] x=k|x!=b|p(x,k).
+** KEPT (pick-wt=6): 12 [] x!=y|y=x.
+** KEPT (pick-wt=9): 13 [] x!=y|y!=z|x=z.
+** KEPT (pick-wt=9): 14 [] x!=y| -p(x,z)|p(y,z).
+** KEPT (pick-wt=9): 15 [] x!=y| -p(z,x)|p(z,y).
+** KEPT (pick-wt=8): 16 [] x!=y|f(x)=f(y).
+** KEPT (pick-wt=8): 17 [] x!=y|g(x)=g(y).
+** KEPT (pick-wt=3): 18 [] m!=b.
+** KEPT (pick-wt=3): 20 [copy,19,flip.1] k!=b.
+** KEPT (pick-wt=3): 22 [copy,21,flip.1] m!=k.
+
+------------> process sos:
+** KEPT (pick-wt=10): 28 [] x=b|p(x,b)|p(x,g(x)).
+** KEPT (pick-wt=10): 29 [] x=b|p(x,b)|p(g(x),x).
+** KEPT (pick-wt=3): 30 [] x=x.
+  Following clause subsumed by 30 during input processing: 0 [copy,30,flip.1] x=x.
+30 back subsumes 27.
+30 back subsumes 26.
+30 back subsumes 25.
+30 back subsumes 24.
+30 back subsumes 23.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=10) 28 [] x=b|p(x,b)|p(x,g(x)).
+
+given clause #2: (wt=3) 30 [] x=x.
+
+given clause #3: (wt=3) 31 [hyper,30,11,unit_del,20] p(b,k).
+
+given clause #4: (wt=3) 32 [hyper,30,10,unit_del,22] p(m,k).
+
+given clause #5: (wt=7) 33 [hyper,31,1,28,unit_del,22,18,20,20] p(k,m)|p(k,g(k)).
+
+given clause #6: (wt=10) 29 [] x=b|p(x,b)|p(g(x),x).
+
+given clause #7: (wt=4) 38 [hyper,33,2,28,32,unit_del,20,18,22,20,factor_simp] p(k,g(k)).
+
+given clause #8: (wt=7) 40 [hyper,29,1,31,unit_del,20,18,22,20] p(g(k),k)|p(b,m).
+
+given clause #9: (wt=7) 41 [hyper,29,1,31,unit_del,20,22,18,20] p(g(k),k)|p(k,m).
+
+given clause #10: (wt=4) 68 [hyper,41,2,29,32,unit_del,20,18,22,20,factor_simp] p(g(k),k).
+
+given clause #11: (wt=20) 39 [hyper,29,2,29,28,factor_simp,factor_simp,factor_simp,factor_simp] g(x)=b|p(g(g(x)),g(x))|x=b|g(x)=x|p(x,b).
+
+given clause #12: (wt=11) 63 [hyper,41,1,38,unit_del,22,factor_simp] p(k,m)|g(k)=m|g(k)=k.
+
+given clause #13: (wt=12) 69 [hyper,68,3] g(k)=k|g(k)=m|g(k)=b.
+
+given clause #14: (wt=11) 83 [hyper,69,15,38] g(k)=m|g(k)=b|p(k,k).
+
+given clause #15: (wt=11) 88 [hyper,69,9,unit_del,20] g(k)=m|g(k)=b|p(k,b).
+
+given clause #16: (wt=13) 42 [hyper,29,7,unit_del,18] p(m,b)|g(m)=m|p(f(g(m)),g(m)).
+
+given clause #17: (wt=11) 92 [hyper,69,15,38] g(k)=k|g(k)=b|p(k,m).
+
+given clause #18: (wt=11) 97 [hyper,69,15,38] g(k)=k|g(k)=m|p(k,b).
+
+given clause #19: (wt=8) 107 [hyper,97,2,63,32,unit_del,20,18,22,factor_simp,factor_simp] g(k)=k|g(k)=m.
+
+given clause #20: (wt=7) 110 [hyper,107,15,38] g(k)=m|p(k,k).
+
+given clause #21: (wt=13) 43 [hyper,29,6,unit_del,18] p(m,b)|g(m)=m|p(g(m),f(g(m))).
+
+given clause #22: (wt=7) 111 [hyper,107,9,unit_del,20] g(k)=m|p(k,b).
+
+given clause #23: (wt=7) 114 [hyper,107,15,38] g(k)=k|p(k,m).
+
+given clause #24: (wt=7) 123 [hyper,111,1,31,unit_del,18,22,20] g(k)=m|p(b,m).
+
+given clause #25: (wt=7) 124 [hyper,111,1,31,unit_del,22,18,20] g(k)=m|p(k,m).
+
+given clause #26: (wt=20) 45 [hyper,29,2,28,28,factor_simp,factor_simp,factor_simp,factor_simp] x=b|p(x,b)|g(x)=b|g(x)=x|p(g(x),g(g(x))).
+
+given clause #27: (wt=3) 150 [back_demod,114,demod,142,unit_del,22] p(k,m).
+
+given clause #28: (wt=4) 141 [hyper,124,2,111,32,unit_del,20,18,22,factor_simp] g(k)=m.
+
+given clause #29: (wt=4) 143 [back_demod,131,demod,142,unit_del,22] p(m,g(m)).
+
+given clause #30: (wt=4) 144 [back_demod,130,demod,142,unit_del,22] p(g(m),m).
+
+given clause #31: (wt=20) 46 [hyper,29,1,28,factor_simp,factor_simp] x=b|p(x,b)|x=m|p(x,m)|g(x)=m|g(x)=x.
+
+given clause #32: (wt=4) 148 [back_demod,126,demod,142,unit_del,22] p(k,f(k)).
+
+given clause #33: (wt=4) 149 [back_demod,125,demod,142,unit_del,22] p(f(k),k).
+
+given clause #34: (wt=10) 146 [back_demod,128,demod,142,unit_del,22] g(m)=m|p(f(g(m)),g(m)).
+
+given clause #35: (wt=10) 147 [back_demod,127,demod,142,unit_del,22] g(m)=m|p(g(m),f(g(m))).
+
+given clause #36: (wt=21) 47 [hyper,29,1,28,factor_simp,factor_simp] x=b|p(x,b)|g(x)=m|p(g(x),m)|x=m|g(x)=x.
+
+given clause #37: (wt=12) 165 [hyper,149,3] f(k)=k|f(k)=m|f(k)=b.
+
+given clause #38: (wt=8) 192 [hyper,165,5,150,unit_del,22] f(k)=m|f(k)=b.
+
+given clause #39: (wt=3) 211 [hyper,192,15,148,demod,210,unit_del,18] p(k,b).
+
+-------- PROOF -------- 
+
+-----> EMPTY CLAUSE at   0.11 sec ----> 213 [hyper,211,2,150,32,unit_del,20,18,22] $F.
+
+Length of proof is 25.  Level of proof is 15.
+
+---------------- PROOF ----------------
+
+1 [] x=m|p(x,m)|y=m|y=x| -p(x,y)| -p(y,x).
+2 [] x=b| -p(x,b)|y=b|y=x| -p(x,y)| -p(y,x).
+3 [] x=k|x=m|x=b| -p(x,k).
+4 [] x=m| -p(x,m)|f(x)!=m.
+5 [] x=m| -p(x,m)|f(x)!=x.
+6 [] x=m| -p(x,m)|p(x,f(x)).
+7 [] x=m| -p(x,m)|p(f(x),x).
+9 [] x=b|p(x,b)|g(x)!=x.
+10 [] x=k|x!=m|p(x,k).
+11 [] x=k|x!=b|p(x,k).
+15 [] x!=y| -p(z,x)|p(z,y).
+18 [] m!=b.
+19 [] b!=k.
+20 [copy,19,flip.1] k!=b.
+21 [] k!=m.
+22 [copy,21,flip.1] m!=k.
+28 [] x=b|p(x,b)|p(x,g(x)).
+29 [] x=b|p(x,b)|p(g(x),x).
+30 [] x=x.
+31 [hyper,30,11,unit_del,20] p(b,k).
+32 [hyper,30,10,unit_del,22] p(m,k).
+33 [hyper,31,1,28,unit_del,22,18,20,20] p(k,m)|p(k,g(k)).
+38 [hyper,33,2,28,32,unit_del,20,18,22,20,factor_simp] p(k,g(k)).
+41 [hyper,29,1,31,unit_del,20,22,18,20] p(g(k),k)|p(k,m).
+63 [hyper,41,1,38,unit_del,22,factor_simp] p(k,m)|g(k)=m|g(k)=k.
+68 [hyper,41,2,29,32,unit_del,20,18,22,20,factor_simp] p(g(k),k).
+69 [hyper,68,3] g(k)=k|g(k)=m|g(k)=b.
+97 [hyper,69,15,38] g(k)=k|g(k)=m|p(k,b).
+107 [hyper,97,2,63,32,unit_del,20,18,22,factor_simp,factor_simp] g(k)=k|g(k)=m.
+111 [hyper,107,9,unit_del,20] g(k)=m|p(k,b).
+114 [hyper,107,15,38] g(k)=k|p(k,m).
+124 [hyper,111,1,31,unit_del,22,18,20] g(k)=m|p(k,m).
+125 [hyper,114,7,unit_del,22] g(k)=k|p(f(k),k).
+126 [hyper,114,6,unit_del,22] g(k)=k|p(k,f(k)).
+142,141 [hyper,124,2,111,32,unit_del,20,18,22,factor_simp] g(k)=m.
+148 [back_demod,126,demod,142,unit_del,22] p(k,f(k)).
+149 [back_demod,125,demod,142,unit_del,22] p(f(k),k).
+150 [back_demod,114,demod,142,unit_del,22] p(k,m).
+165 [hyper,149,3] f(k)=k|f(k)=m|f(k)=b.
+192 [hyper,165,5,150,unit_del,22] f(k)=m|f(k)=b.
+210,209 [hyper,192,4,150,unit_del,22] f(k)=b.
+211 [hyper,192,15,148,demod,210,unit_del,18] p(k,b).
+213 [hyper,211,2,150,32,unit_del,20,18,22] $F.
+
+------------ end of proof -------------
+
+
+Search stopped by max_proofs option.
+
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 39
+clauses generated           1494
+clauses kept                 208
+clauses forward subsumed    1356
+clauses back subsumed         95
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.11          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8318 finished Mon Aug  2 15:30:36 2004

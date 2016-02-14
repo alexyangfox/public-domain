@@ -1,0 +1,27 @@
+%
+% is a single axiom for groups in terms
+% of product and inverse.
+%
+
+set(knuth_bendix).
+assign(max_proofs, 3).
+
+clear(print_kept).
+clear(print_new_demod).
+clear(print_back_demod).
+
+assign(stats_level, 1).
+
+list(usable).
+x = x.
+end_of_list.
+
+list(passive).
+f(a,g(a)) != f(b,g(b)) | $Ans(R_inverse).
+f(a,f(b,g(b))) != a | $Ans(R_ident).
+f(f(a,b),c) != f(a,f(b,c)) | $Ans(assoc).
+end_of_list.
+
+list(sos).
+f(x,g(f(y,f(f(f(z,g(z)),g(f(u,y))),x)))) = u.  % (3.1.1)
+end_of_list.

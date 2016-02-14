@@ -1,0 +1,261 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:31:07 2004
+The command was "../../bin/otter".  The process ID is 8644.
+
+set(knuth_bendix).
+   dependent: set(anl_eq).
+   dependent: set(para_from).
+   dependent: set(para_into).
+   dependent: clear(para_from_right).
+   dependent: clear(para_into_right).
+   dependent: set(para_from_vars).
+   dependent: set(eq_units_both_ways).
+   dependent: set(dynamic_demod_all).
+   dependent: set(dynamic_demod).
+   dependent: set(order_eq).
+   dependent: set(back_demod).
+   dependent: set(process_input).
+   dependent: set(lrpo).
+set(hyper_res).
+set(split_when_given).
+   dependent: set(back_unit_deletion).
+   dependent: set(unit_deletion).
+set(split_pos).
+assign(pick_given_ratio,4).
+clear(print_kept).
+clear(print_given).
+clear(print_new_demod).
+clear(print_back_demod).
+clear(print_back_sub).
+assign(stats_level,1).
+
+list(usable).
+0 [] x=x.
+end_of_list.
+
+list(sos).
+0 [] e*x=x.
+0 [] x*e=x.
+0 [] i(x)*x=e.
+0 [] x*i(x)=e.
+0 [] (x*y)*z=x*y*z.
+0 [] i(e)=e.
+0 [] i(i(x))=x.
+0 [] i(x*y)=i(y)*i(x).
+0 [] i(x)*x*y=y.
+0 [] x*i(x)*y=y.
+0 [] x=a1|x=a2.
+0 [] c*b!=b*c.
+end_of_list.
+
+------------> process usable:
+** KEPT (pick-wt=3): 1 [] x=x.
+  Following clause subsumed by 1 during input processing: 0 [copy,1,flip.1] x=x.
+>>>> Starting back unit deletion with 1.
+
+------------> process sos:
+** KEPT (pick-wt=5): 2 [] e*x=x.
+---> New Demodulator: 3 [new_demod,2] e*x=x.
+** KEPT (pick-wt=5): 4 [] x*e=x.
+---> New Demodulator: 5 [new_demod,4] x*e=x.
+** KEPT (pick-wt=6): 6 [] i(x)*x=e.
+---> New Demodulator: 7 [new_demod,6] i(x)*x=e.
+** KEPT (pick-wt=6): 8 [] x*i(x)=e.
+---> New Demodulator: 9 [new_demod,8] x*i(x)=e.
+** KEPT (pick-wt=11): 10 [] (x*y)*z=x*y*z.
+---> New Demodulator: 11 [new_demod,10] (x*y)*z=x*y*z.
+** KEPT (pick-wt=4): 12 [] i(e)=e.
+---> New Demodulator: 13 [new_demod,12] i(e)=e.
+** KEPT (pick-wt=5): 14 [] i(i(x))=x.
+---> New Demodulator: 15 [new_demod,14] i(i(x))=x.
+** KEPT (pick-wt=10): 16 [] i(x*y)=i(y)*i(x).
+---> New Demodulator: 17 [new_demod,16] i(x*y)=i(y)*i(x).
+** KEPT (pick-wt=8): 18 [] i(x)*x*y=y.
+---> New Demodulator: 19 [new_demod,18] i(x)*x*y=y.
+** KEPT (pick-wt=8): 20 [] x*i(x)*y=y.
+---> New Demodulator: 21 [new_demod,20] x*i(x)*y=y.
+** KEPT (pick-wt=6): 22 [] x=a1|x=a2.
+** KEPT (pick-wt=7): 23 [] c*b!=b*c.
+>>>> Starting back demodulation with 3.
+>>>> Starting back unit deletion with 2.
+>>>> Starting back demodulation with 5.
+>>>> Starting back unit deletion with 4.
+>>>> Starting back demodulation with 7.
+>>>> Starting back unit deletion with 6.
+>>>> Starting back demodulation with 9.
+>>>> Starting back unit deletion with 8.
+>>>> Starting back demodulation with 11.
+>>>> Starting back unit deletion with 10.
+>>>> Starting back demodulation with 13.
+>>>> Starting back unit deletion with 12.
+>>>> Starting back demodulation with 15.
+>>>> Starting back unit deletion with 14.
+>>>> Starting back demodulation with 17.
+>>>> Starting back unit deletion with 16.
+>>>> Starting back demodulation with 19.
+>>>> Starting back unit deletion with 18.
+>>>> Starting back demodulation with 21.
+>>>> Starting back unit deletion with 20.
+>>>> Starting back unit deletion with 23.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+Splitting on clause 28 [para_from,22.1.1,12.1.1.1] i(a1)=e|e=a2.
+
+--- refuted case [1]
+
+Case [1]   (process 8645):
+Assumption: 55 [28,split.1] i(a1)=e.
+
+----> UNIT CONFLICT at   0.14 sec ----> 553 [binary,552.1,1.1] $F.
+
+Length of proof is 25.  Level of proof is 12.  Case [1]
+
+---------------- PROOF ----------------
+
+1 [] x=x.
+2 [] e*x=x.
+4 [] x*e=x.
+13,12 [] i(e)=e.
+15,14 [] i(i(x))=x.
+22 [] x=a1|x=a2.
+23 [] c*b!=b*c.
+24 [para_from,22.1.1,14.1.1,demod,15] a1=x|x=a2.
+28 [para_from,22.1.1,12.1.1.1] i(a1)=e|e=a2.
+31 [para_from,22.2.1,14.1.1,demod,15] a2=x|x=a1.
+40 [para_into,31.1.1,31.1.1] x=y|y=a1|x=a1.
+49 [para_into,23.1.1.1,31.2.1,flip.1,flip.2] b*c!=a1*b|c=a2.
+51 [para_into,23.1.1.2,31.2.1,flip.2] c*a1!=b*c|b=a2.
+55 [28,split.1] i(a1)=e.
+61,60 [para_from,55.1.1,14.1.1.1,demod,13] e=a1.
+80,79 [back_demod,4,demod,61] x*a1=x.
+82,81 [back_demod,2,demod,61] a1*x=x.
+84 [back_demod,51,demod,80,flip.1] b*c!=c|b=a2.
+85 [back_demod,49,demod,82] b*c!=b|c=a2.
+90 [para_into,79.1.1.2,24.1.1] x*y=x|y=a2.
+92 [para_into,81.1.1.1,24.1.1] x*y=y|x=a2.
+211,210 [para_into,84.1.1.1,31.2.1,demod,82,unit_del,1] b=a2.
+228 [back_demod,85,demod,211,211] a2*c!=a2|c=a2.
+233 [back_demod,23,demod,211,211] c*a2!=a2*c.
+260 [hyper,40,233] a2*c=a1|c*a2=a1.
+313 [para_from,90.2.1,233.1.1.1,flip.1] a2*c!=a2*a2|x*c=x.
+364 [para_from,92.2.1,233.1.1.1,flip.1] a2*c!=a2*a2|c*x=x.
+537,536 [hyper,228,90] c=a2.
+542,541 [back_demod,364,demod,537,537,unit_del,1] a2*x=x.
+545,544 [back_demod,313,demod,537,542,542,537,unit_del,1] x*a2=x.
+548,547 [back_demod,260,demod,537,545,537,545] a2=a1.
+552 [back_demod,233,demod,537,548,548,80,548,537,548,80] a1!=a1.
+553 [binary,552.1,1.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8645) -------
+clauses given                 48
+clauses generated           2026
+clauses kept                 529
+clauses forward subsumed    1590
+clauses back subsumed         40
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.14          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8645 finished Mon Aug  2 15:31:08 2004
+Refuted case [1].
+
+--- refuted case [2]
+
+Case [2]   (process 8646):
+Assumption: 56 [28,split.2] e=a2.
+
+-----> EMPTY CLAUSE at   0.16 sec ----> 572 [back_demod,567,demod,571,100,571,unit_del,1,1] $F.
+
+Length of proof is 28.  Level of proof is 11.  Case [2]
+
+---------------- PROOF ----------------
+
+1 [] x=x.
+2 [] e*x=x.
+4 [] x*e=x.
+8 [] x*i(x)=e.
+12 [] i(e)=e.
+15,14 [] i(i(x))=x.
+22 [] x=a1|x=a2.
+23 [] c*b!=b*c.
+24 [para_from,22.1.1,14.1.1,demod,15] a1=x|x=a2.
+28 [para_from,22.1.1,12.1.1.1] i(a1)=e|e=a2.
+31 [para_from,22.2.1,14.1.1,demod,15] a2=x|x=a1.
+39 [para_from,24.2.1,14.1.1,demod,15] a2=x|a1=x.
+50 [para_into,23.1.1.1,24.2.1,flip.1,flip.2] b*c!=a2*b|c=a1.
+52 [para_into,23.1.1.2,24.2.1,flip.2] c*a2!=b*c|b=a1.
+55 [28,split_neg.2] i(a1)!=e.
+57,56 [28,split.2] e=a2.
+58 [back_demod,55,demod,57] i(a1)!=a2.
+68 [back_demod,8,demod,57] x*i(x)=a2.
+73,72 [back_demod,4,demod,57] x*a2=x.
+75,74 [back_demod,2,demod,57] a2*x=x.
+78 [back_demod,52,demod,73,flip.1] b*c!=c|b=a1.
+79 [back_demod,50,demod,75] b*c!=b|c=a1.
+82,81 [hyper,58,24,flip.1] i(a1)=a1.
+83 [back_demod,58,demod,82,flip.1] a2!=a1.
+87 [para_into,83.1.1,39.1.1] x!=a1|a1=x.
+90 [para_into,72.1.1.2,31.1.1] x*y=x|y=a1.
+100,99 [para_into,68.1.1.2,81.1.1] a1*a1=a2.
+113 [para_from,87.2.1,99.1.1.1] x*a1=a2|x!=a1.
+114 [para_from,87.2.1,81.1.1.1] i(x)=a1|x!=a1.
+187 [para_into,114.1.1,14.1.1] x=a1|i(x)!=a1.
+192 [para_from,187.1.1,23.1.1.2] c*a1!=b*c|i(b)!=a1.
+259,258 [para_into,78.1.1.1,24.2.1,demod,75,unit_del,1] b=a1.
+270 [back_demod,192,demod,259,259,82,unit_del,1] c*a1!=a1*c.
+284 [back_demod,79,demod,259,259] a1*c!=a1|c=a1.
+567 [para_from,113.1.1,270.1.1,flip.1] a1*c!=a2|c!=a1.
+571,570 [hyper,284,90] c=a1.
+572 [back_demod,567,demod,571,100,571,unit_del,1,1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8646) -------
+clauses given                 54
+clauses generated           2392
+clauses kept                 550
+clauses forward subsumed    1907
+clauses back subsumed         16
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.16          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8646 finished Mon Aug  2 15:31:08 2004
+Refuted case [2].
+
+That finishes the proof of the theorem.
+
+That finishes the proof of the theorem.
+
+------- statistics (process 8644) -------
+clauses given                 13
+clauses generated            135
+clauses kept                  44
+clauses forward subsumed     105
+clauses back subsumed          0
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8644 finished Mon Aug  2 15:31:08 2004

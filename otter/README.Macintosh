@@ -1,0 +1,14 @@
+When this package was originally released in September 2003,
+there was nothing special for the Macintosh (OS X).
+
+In December I realized that there was a problem, because the
+installation and test procedures use the "make" command,
+which is not part of the basic Mac OS X configutation.
+
+(The "make" command is part of the "developer's tools", which
+contains compilers, etc.)
+
+In January 2004 I updated the installation procedure, including
+a few scripts to replace the "make" commands.  See README in
+this directory.
+

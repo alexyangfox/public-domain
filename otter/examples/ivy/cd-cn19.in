@@ -1,0 +1,6 @@
+set(auto).set(build_proof_object_2).clear(sigint_interact).assign(max_seconds, 10).initial_proof_object(junk).
+((1 (INPUT) (OR (NOT (P (I V1 V2))) (OR (NOT (P V1)) (P V2))))
+ (2 (INPUT) (P (I (I V3 V4) (I (I V4 V5) (I V3 V5)))))
+ (3 (INPUT) (P (I (I (N V6) V6) V6)))
+ (4 (INPUT) (P (I V7 (I (N V7) V8))))
+ (5 (INPUT) (NOT (P (I (I (I (SK1) (SK2)) (SK3)) (I (SK2) (SK3))))))) 

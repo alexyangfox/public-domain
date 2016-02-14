@@ -1,0 +1,84 @@
+The Hints2 Mechanism
+
+W. McCune
+April 2003
+
+The original hints code has been in Otter for a long time.  Bob
+Veroff first put a version into his own copy of Otter, then we
+installed a similar version in the official Otter in 1995.
+
+See documents/new_304.txt for documentation on the original hints.
+
+The problem with that version of hints is that it does not use
+indexing to find hints that match a clause, so it can be very
+slow.  I finally got around to installing indexed hints late in
+2002.  The new mechanism is called hints2.
+
+Hints2 is not as general as the original hints code.  It is
+independent of the original hints (except that both cannot be
+used at the same time).  To get the new mechanism use
+
+    list(hints2).
+
+and to use the old code, use
+
+    list(hints).
+
+For now, I'll call the original hints code hints1.
+
+Differences between hints1 and hints2.
+
+1.  Hints2 does bsub matching only.  That is, a clause matches a
+hint iff it subsumes the hint.  Hints1 also does fsub matching (a
+clause matches a hint if it is subsumed by the hint) and
+equiv matching (the clause is equivalent to the hint).
+The parameters bsub_hint_wt and bsub_hint_add_wt apply to hints2.
+
+    bsub_hint_wt (default MAX_INT, meaning don't use it) is the 
+    pick-given weight given to a clause that subsumes a hint.
+
+    bsub_hint_add_wt (default 0) is the amount added to the ordinary
+    pick-given weight of a clause that subsumes a hint.  This is
+    usually negative, which gives preference to clauses that match hints.
+
+2.  Hints2 are back demodulated, but the undemodulated copy is also kept.
+
+3.  Hints2 has Veroff's "hint degradation option", which is enabled with
+
+    set(degrade_hints2).
+
+    If this option is enabled, the hint becomes less important (the
+    bsub_add_wt is cut in half) each time it matches a clause.  For this
+    to make sense, the bsub_hint_add_wt should start out as a large
+    negative number (usually -1000).
+
+Similarities of hints1 and hints2.
+
+1.  Both can have labels attributes attached to hints, and when a clause
+    matches a labeled hint, the clause gets a copy of the label.
+
+2.  In both, the bsub_hint_wt and bsub_hint_add_wt can be given as
+    attributes on hints as well as ordinary program parameters
+    (with attributes overriding parameters).
+    This allows some hints to be more or less important than others.
+
+The ordinary way to use hints2 is
+
+    assign(bsub_hint_add_wt,-1000).
+    set(keep_hint_subsumers).
+    set(degrade_hints2).
+    list(hints2).
+    ...
+    end_of_list.
+
+For example input files, see examples/fringe/*hints*.in
+
+References
+
+R. Veroff,``Using hints to increase the effectiveness of an
+automated reasoning program: Case studies'', \emph{J. Automated
+Reasoning} 16(3), 1996.
+
+R. Veroff, ``Solving open questions and other challenge problems
+using proof sketches'', \emph{J. Automated Reasoning}, 27(2),
+2001.

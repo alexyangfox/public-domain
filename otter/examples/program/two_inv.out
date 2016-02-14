@@ -1,0 +1,132 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:31:17 2004
+The command was "../../bin/otter".  The process ID is 9000.
+
+set(hyper_res).
+clear(back_sub).
+clear(demod_history).
+clear(print_kept).
+clear(print_given).
+assign(max_mem,9000).
+assign(min_bit_width,8).
+
+list(usable).
+1 [] -P(x,v)| -P(y,v)|P($BIT_AND(x,y),v).
+2 [] -P(x,v)| -P(y,v)|P($BIT_OR(x,y),v).
+3 [] -P(x,v)|P($BIT_AND(11111111,$BIT_NOT(x)),append_inversion(v,x)).
+end_of_list.
+
+list(sos).
+4 [] P(00001111,v).
+5 [] P(00110011,v).
+6 [] P(01010101,v).
+end_of_list.
+
+list(usable).
+7 [] -P(11110000,v)| -P(11001100,v)| -P(10101010,v).
+end_of_list.
+
+list(demodulators).
+8 [] append_inversion([x1|x2],y)=[x1|append_inversion(x2,y)].
+9 [] $VAR(x)->append_inversion(x,y)=[y|x].
+end_of_list.
+
+list(passive).
+10 [] P(x,[y1,y2,y3|y4]).
+end_of_list.
+
+weight_list(pick_given).
+weight(P(11110000,$(1)),-50).
+weight(P(11001100,$(1)),-50).
+weight(P(10101010,$(1)),-50).
+end_of_list.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+-- HEY mccune, WE HAVE A PROOF!! -- 
+
+-----> EMPTY CLAUSE at  67.17 sec ----> 20227 [hyper,20222,7,20203,20178] $F.
+
+Length of proof is 26.  Level of proof is 9.
+
+---------------- PROOF ----------------
+
+1 [] -P(x,v)| -P(y,v)|P($BIT_AND(x,y),v).
+2 [] -P(x,v)| -P(y,v)|P($BIT_OR(x,y),v).
+3 [] -P(x,v)|P($BIT_AND(11111111,$BIT_NOT(x)),append_inversion(v,x)).
+4 [] P(00001111,v).
+5 [] P(00110011,v).
+6 [] P(01010101,v).
+7 [] -P(11110000,v)| -P(11001100,v)| -P(10101010,v).
+16 [hyper,5,2,4,demod] P(00111111,x).
+18 [hyper,5,1,4,demod] P(00000011,x).
+26 [hyper,6,2,5,demod] P(01110111,x).
+27 [hyper,6,2,4,demod] P(01011111,x).
+30 [hyper,6,1,5,demod] P(00010001,x).
+31 [hyper,6,1,4,demod] P(00000101,x).
+40 [hyper,16,2,6,demod] P(01111111,x).
+42 [hyper,16,1,6,demod] P(00010101,x).
+47 [hyper,18,1,6,demod] P(00000001,x).
+66 [hyper,42,2,18,demod] P(00010111,x).
+73 [hyper,66,3,demod] P(11101000,[00010111|x]).
+334 [hyper,73,2,47,demod] P(11101001,[00010111|x]).
+336 [hyper,73,2,31,demod] P(11101101,[00010111|x]).
+337 [hyper,73,2,30,demod] P(11111001,[00010111|x]).
+338 [hyper,73,2,18,demod] P(11101011,[00010111|x]).
+344 [hyper,73,1,27,demod] P(01001000,[00010111|x]).
+345 [hyper,73,1,26,demod] P(01100000,[00010111|x]).
+346 [hyper,73,1,16,demod] P(00101000,[00010111|x]).
+754 [hyper,334,1,40,demod] P(01101001,[00010111|x]).
+991 [hyper,754,3,demod] P(10010110,[00010111,01101001|x]).
+8477 [hyper,991,2,346,demod] P(10111110,[00010111,01101001|x]).
+8478 [hyper,991,2,345,demod] P(11110110,[00010111,01101001|x]).
+8479 [hyper,991,2,344,demod] P(11011110,[00010111,01101001|x]).
+20178 [hyper,8477,1,338,demod] P(10101010,[00010111,01101001|x]).
+20203 [hyper,8478,1,337,demod] P(11110000,[00010111,01101001|x]).
+20222 [hyper,8479,1,336,demod] P(11001100,[00010111,01101001|x]).
+20227 [hyper,20222,7,20203,20178] $F.
+
+------------ end of proof -------------
+
+
+Search stopped by max_proofs option.
+
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given               8642
+clauses generated        2069334
+  hyper_res generated    2069334
+demod & eval rewrites    2103338
+clauses wt,lit,sk delete       0
+tautologies deleted            0
+clauses forward subsumed 2049117
+  (subsumed by sos)       314773
+unit deletions                 0
+factor simplifications         0
+clauses kept               20216
+new demodulators               0
+empty clauses                  1
+clauses back demodulated       0
+clauses back subsumed          0
+usable size                 8646
+sos size                   11577
+demodulators size              2
+passive size                   1
+hot size                       0
+Kbytes malloced             6835
+
+----------- times (seconds) -----------
+user CPU time         67.17          (0 hr, 1 min, 7 sec)
+system CPU time        0.06          (0 hr, 0 min, 0 sec)
+wall-clock time       67             (0 hr, 1 min, 7 sec)
+
+That finishes the proof of the theorem.
+
+Process 9000 finished Mon Aug  2 15:32:24 2004

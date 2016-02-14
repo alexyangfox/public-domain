@@ -1,0 +1,102 @@
+----- MACE 2.2f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:44:36 2004
+The command was "../../bin/mace2 -n9 -p -x".
+
+list(usable).
+1 [] f(x,x)=x.
+2 [] h(x,x)=x.
+3 [] f(x,f(y,x))=y.
+4 [] h(x,h(y,x))=y.
+5 [] f(x,y)!=u|f(z,w)!=u|h(x,y)!=v|h(z,w)!=v|x=z|y=w.
+end_of_list.
+
+list(mace_constraints).
+0 [] property(f(_,_),quasigroup).
+0 [] property(h(_,_),quasigroup).
+end_of_list.
+
+list(flattened_and_parted_clauses).
+1 [] f(x,x)=x.
+2 [] h(x,x)=x.
+3 [] f(x,y)!=z|f(y,z)=x.
+4 [] h(x,y)!=z|h(y,z)=x.
+5 [] f(x,y)!=z|f(u,v)!=z|x=u|y=v| -$Connect1(x,y,u,v).
+5 [] h(x,y)!=z|h(u,v)!=z|$Connect1(x,y,u,v).
+end_of_list.
+
+--- Starting search for models of size 9 ---
+
+Adding basic QG constraints on last column of f.
+function f quasigroup.
+function h quasigroup.
+
+137665 clauses were generated; 60281 of those survived the first stage
+of unit preprocessing; there are 8100 atoms.
+
+After all unit preprocessing, 7402 atoms are still unassigned;
+49564 clauses remain; 414 of those are non-Horn (selectable);
+5113 K allocated; cpu time so far for this domain size: 0.06 sec.
+
+======================= Model #1 at 0.76 seconds:
+
+ f :
+      | 0 1 2 3 4 5 6 7 8
+    --+------------------
+    0 | 0 8 5 2 7 4 3 6 1
+    1 | 8 1 7 6 3 2 5 4 0
+    2 | 3 5 2 8 6 0 4 1 7
+    3 | 6 4 0 3 8 7 1 5 2
+    4 | 5 7 6 1 4 8 2 0 3
+    5 | 2 6 1 7 0 5 8 3 4
+    6 | 7 3 4 0 2 1 6 8 5
+    7 | 4 2 8 5 1 3 0 7 6
+    8 | 1 0 3 4 5 6 7 2 8
+
+ h :
+      | 0 1 2 3 4 5 6 7 8
+    --+------------------
+    0 | 0 2 6 4 3 1 8 5 7
+    1 | 5 1 0 8 2 3 7 6 4
+    2 | 1 4 2 6 7 8 0 3 5
+    3 | 4 5 7 3 0 6 2 8 1
+    4 | 3 8 1 0 4 7 5 2 6
+    5 | 7 0 8 1 6 5 3 4 2
+    6 | 2 7 3 5 8 4 6 1 0
+    7 | 8 6 4 2 5 0 1 7 3
+    8 | 6 3 5 7 1 2 4 0 8
+end_of_model
+
+Exit by max_models parameter.  The set is satisfiable (1 model(s) found).
+
+
+----- statistics for domain size 9 ----
+Input:
+    Clauses input                 60281
+    Literal occurrences input    165950
+    Greatest atom                  8100
+Unit preprocess:
+    Preprocess unit assignments     698
+    Clauses after subsumption     49564
+    Literal occ. after subsump.  140030
+    Selectable clauses              414
+Decide:
+    Splits                         2350
+    Unit assignments             366412
+    Failed paths                   2339
+Memory:
+    Memory malloced               231 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.05
+    DPLL                           0.71
+
+=======================================
+Total times for run (seconds):
+    user CPU time                  0.76   (0 hr, 0 min, 0 sec)
+    system CPU time                0.01   (0 hr, 0 min, 0 sec)
+    wall-clock time                0      (0 hr, 0 min, 0 sec)
+
+Exit by max_models parameter.  The set is satisfiable (1 model(s) found).
+
+The job finished Mon Aug  2 15:44:36 2004

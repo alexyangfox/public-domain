@@ -1,0 +1,45 @@
+% A group with at most 2 elemets must be commutative.
+
+set(knuth_bendix).
+set(hyper_res).
+
+set(split_when_given).
+set(split_pos).
+
+assign(pick_given_ratio, 4).
+
+clear(print_kept).
+clear(print_given).
+clear(print_new_demod).
+clear(print_back_demod).
+clear(print_back_sub).
+assign(stats_level, 1).
+
+list(usable).
+x=x.
+end_of_list.
+
+list(sos).
+
+% group axioms
+
+e * x = x.
+x * e = x.
+i(x) * x = e.
+x * i(x) = e.
+(x * y) * z = x * (y * z).
+i(e) = e.
+i(i(x)) = x.
+i(x * y) = i(y) * i(x).
+i(x) * (x * y) = y.
+x * (i(x) * y) = y.
+
+% There are at most 2 elements
+x = a1 | x = a2.
+
+% Denial of commutativity.
+
+c * b != b * c.
+
+end_of_list.
+

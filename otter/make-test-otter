@@ -1,0 +1,5 @@
+#!/bin/csh
+
+bin/otter < examples/auto/steam.in | awk '/PROOF/,/end of proof/'
+echo "If you see 'end of proof', the test was successful."
+echo "Now try './make-test-mace2'."

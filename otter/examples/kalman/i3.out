@@ -1,0 +1,4240 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:38 2004
+The command was "../../bin/otter".  The process ID is 8469.
+
+set(hyper_res).
+set(print_lists_at_end).
+assign(stats_level,1).
+
+list(usable).
+1 [] K(0).
+2 [] K(1).
+3 [] L(0).
+4 [] L(1).
+5 [] L(2).
+6 [] L(3).
+7 [] L(4).
+8 [] L(5).
+9 [] L(6).
+10 [] L(7).
+11 [] D(0).
+12 [] D(1).
+13 [] D(2).
+14 [] D(3).
+15 [] D(4).
+16 [] D(5).
+17 [] D(6).
+18 [] D(7).
+19 [] D(8).
+20 [] D(9).
+end_of_list.
+
+list(sos).
+21 [] -K(u)| -D(x)| -D(y)|CS(u,x,y,$MOD($SUM($SUM(u,x),y),10),$DIV($SUM($SUM(u,x),y),10)).
+22 [] -L(u)| -D(x)| -D(y)|CP(u,x,y,$MOD($SUM(u,$PROD(x,y)),10),$DIV($SUM(u,$PROD(x,y)),10)).
+23 [] -CP(0,xd,xb,y1,x1)| -CP(x1,xd,xa,y2,y3)| -CP(0,xc,xb,z1,x2)| -CP(x2,xc,xa,z2,z3)| -$LT(xa,xc)| -CS(0,y1,0,xh,x3)| -CS(x3,y2,z1,xg,x4)| -CS(x4,y3,z2,xf,x5)| -CS(x5,0,z3,xe,0)|S(xa,xb,xc,xd,xe,xf,xg,xh).
+end_of_list.
+
+list(passive).
+24 [] S(0,xb,xc,xd,xe,xf,xg,xh).
+25 [] S(xa,xb,0,xd,xe,xf,xg,xh).
+26 [] S(xa,xb,xc,xd,0,xf,xg,xh).
+27 [] S(x1,x1,x3,x4,x5,x6,x7,x8).
+28 [] S(x1,x2,x1,x4,x5,x6,x7,x8).
+29 [] S(x1,x2,x3,x1,x5,x6,x7,x8).
+30 [] S(x1,x2,x3,x4,x1,x6,x7,x8).
+31 [] S(x1,x2,x3,x4,x5,x1,x7,x8).
+32 [] S(x1,x2,x3,x4,x5,x6,x1,x8).
+33 [] S(x1,x2,x3,x4,x5,x6,x7,x1).
+34 [] S(x1,x2,x2,x4,x5,x6,x7,x8).
+35 [] S(x1,x2,x3,x2,x5,x6,x7,x8).
+36 [] S(x1,x2,x3,x4,x2,x6,x7,x8).
+37 [] S(x1,x2,x3,x4,x5,x2,x7,x8).
+38 [] S(x1,x2,x3,x4,x5,x6,x2,x8).
+39 [] S(x1,x2,x3,x4,x5,x6,x7,x2).
+40 [] S(x1,x2,x3,x3,x5,x6,x7,x8).
+41 [] S(x1,x2,x3,x4,x3,x6,x7,x8).
+42 [] S(x1,x2,x3,x4,x5,x3,x7,x8).
+43 [] S(x1,x2,x3,x4,x5,x6,x3,x8).
+44 [] S(x1,x2,x3,x4,x5,x6,x7,x3).
+45 [] S(x1,x2,x3,x4,x4,x6,x7,x8).
+46 [] S(x1,x2,x3,x4,x5,x4,x7,x8).
+47 [] S(x1,x2,x3,x4,x5,x6,x4,x8).
+48 [] S(x1,x2,x3,x4,x5,x6,x7,x4).
+49 [] S(x1,x2,x3,x4,x5,x5,x7,x8).
+50 [] S(x1,x2,x3,x4,x5,x6,x5,x8).
+51 [] S(x1,x2,x3,x4,x5,x6,x7,x5).
+52 [] S(x1,x2,x3,x4,x5,x6,x6,x8).
+53 [] S(x1,x2,x3,x4,x5,x6,x7,x6).
+54 [] S(x1,x2,x3,x4,x5,x6,x7,x7).
+end_of_list.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=24) 21 [] -K(u)| -D(x)| -D(y)|CS(u,x,y,$MOD($SUM($SUM(u,x),y),10),$DIV($SUM($SUM(u,x),y),10)).
+** KEPT (pick-wt=6): 55 [hyper,21,2,20,20,demod] CS(1,9,9,9,1).
+** KEPT (pick-wt=6): 56 [hyper,21,2,20,19,demod] CS(1,9,8,8,1).
+** KEPT (pick-wt=6): 57 [hyper,21,2,20,18,demod] CS(1,9,7,7,1).
+** KEPT (pick-wt=6): 58 [hyper,21,2,20,17,demod] CS(1,9,6,6,1).
+** KEPT (pick-wt=6): 59 [hyper,21,2,20,16,demod] CS(1,9,5,5,1).
+** KEPT (pick-wt=6): 60 [hyper,21,2,20,15,demod] CS(1,9,4,4,1).
+** KEPT (pick-wt=6): 61 [hyper,21,2,20,14,demod] CS(1,9,3,3,1).
+** KEPT (pick-wt=6): 62 [hyper,21,2,20,13,demod] CS(1,9,2,2,1).
+** KEPT (pick-wt=6): 63 [hyper,21,2,20,12,demod] CS(1,9,1,1,1).
+** KEPT (pick-wt=6): 64 [hyper,21,2,20,11,demod] CS(1,9,0,0,1).
+** KEPT (pick-wt=6): 65 [hyper,21,2,19,20,demod] CS(1,8,9,8,1).
+** KEPT (pick-wt=6): 66 [hyper,21,2,19,19,demod] CS(1,8,8,7,1).
+** KEPT (pick-wt=6): 67 [hyper,21,2,19,18,demod] CS(1,8,7,6,1).
+** KEPT (pick-wt=6): 68 [hyper,21,2,19,17,demod] CS(1,8,6,5,1).
+** KEPT (pick-wt=6): 69 [hyper,21,2,19,16,demod] CS(1,8,5,4,1).
+** KEPT (pick-wt=6): 70 [hyper,21,2,19,15,demod] CS(1,8,4,3,1).
+** KEPT (pick-wt=6): 71 [hyper,21,2,19,14,demod] CS(1,8,3,2,1).
+** KEPT (pick-wt=6): 72 [hyper,21,2,19,13,demod] CS(1,8,2,1,1).
+** KEPT (pick-wt=6): 73 [hyper,21,2,19,12,demod] CS(1,8,1,0,1).
+** KEPT (pick-wt=6): 74 [hyper,21,2,19,11,demod] CS(1,8,0,9,0).
+** KEPT (pick-wt=6): 75 [hyper,21,2,18,20,demod] CS(1,7,9,7,1).
+** KEPT (pick-wt=6): 76 [hyper,21,2,18,19,demod] CS(1,7,8,6,1).
+** KEPT (pick-wt=6): 77 [hyper,21,2,18,18,demod] CS(1,7,7,5,1).
+** KEPT (pick-wt=6): 78 [hyper,21,2,18,17,demod] CS(1,7,6,4,1).
+** KEPT (pick-wt=6): 79 [hyper,21,2,18,16,demod] CS(1,7,5,3,1).
+** KEPT (pick-wt=6): 80 [hyper,21,2,18,15,demod] CS(1,7,4,2,1).
+** KEPT (pick-wt=6): 81 [hyper,21,2,18,14,demod] CS(1,7,3,1,1).
+** KEPT (pick-wt=6): 82 [hyper,21,2,18,13,demod] CS(1,7,2,0,1).
+** KEPT (pick-wt=6): 83 [hyper,21,2,18,12,demod] CS(1,7,1,9,0).
+** KEPT (pick-wt=6): 84 [hyper,21,2,18,11,demod] CS(1,7,0,8,0).
+** KEPT (pick-wt=6): 85 [hyper,21,2,17,20,demod] CS(1,6,9,6,1).
+** KEPT (pick-wt=6): 86 [hyper,21,2,17,19,demod] CS(1,6,8,5,1).
+** KEPT (pick-wt=6): 87 [hyper,21,2,17,18,demod] CS(1,6,7,4,1).
+** KEPT (pick-wt=6): 88 [hyper,21,2,17,17,demod] CS(1,6,6,3,1).
+** KEPT (pick-wt=6): 89 [hyper,21,2,17,16,demod] CS(1,6,5,2,1).
+** KEPT (pick-wt=6): 90 [hyper,21,2,17,15,demod] CS(1,6,4,1,1).
+** KEPT (pick-wt=6): 91 [hyper,21,2,17,14,demod] CS(1,6,3,0,1).
+** KEPT (pick-wt=6): 92 [hyper,21,2,17,13,demod] CS(1,6,2,9,0).
+** KEPT (pick-wt=6): 93 [hyper,21,2,17,12,demod] CS(1,6,1,8,0).
+** KEPT (pick-wt=6): 94 [hyper,21,2,17,11,demod] CS(1,6,0,7,0).
+** KEPT (pick-wt=6): 95 [hyper,21,2,16,20,demod] CS(1,5,9,5,1).
+** KEPT (pick-wt=6): 96 [hyper,21,2,16,19,demod] CS(1,5,8,4,1).
+** KEPT (pick-wt=6): 97 [hyper,21,2,16,18,demod] CS(1,5,7,3,1).
+** KEPT (pick-wt=6): 98 [hyper,21,2,16,17,demod] CS(1,5,6,2,1).
+** KEPT (pick-wt=6): 99 [hyper,21,2,16,16,demod] CS(1,5,5,1,1).
+** KEPT (pick-wt=6): 100 [hyper,21,2,16,15,demod] CS(1,5,4,0,1).
+** KEPT (pick-wt=6): 101 [hyper,21,2,16,14,demod] CS(1,5,3,9,0).
+** KEPT (pick-wt=6): 102 [hyper,21,2,16,13,demod] CS(1,5,2,8,0).
+** KEPT (pick-wt=6): 103 [hyper,21,2,16,12,demod] CS(1,5,1,7,0).
+** KEPT (pick-wt=6): 104 [hyper,21,2,16,11,demod] CS(1,5,0,6,0).
+** KEPT (pick-wt=6): 105 [hyper,21,2,15,20,demod] CS(1,4,9,4,1).
+** KEPT (pick-wt=6): 106 [hyper,21,2,15,19,demod] CS(1,4,8,3,1).
+** KEPT (pick-wt=6): 107 [hyper,21,2,15,18,demod] CS(1,4,7,2,1).
+** KEPT (pick-wt=6): 108 [hyper,21,2,15,17,demod] CS(1,4,6,1,1).
+** KEPT (pick-wt=6): 109 [hyper,21,2,15,16,demod] CS(1,4,5,0,1).
+** KEPT (pick-wt=6): 110 [hyper,21,2,15,15,demod] CS(1,4,4,9,0).
+** KEPT (pick-wt=6): 111 [hyper,21,2,15,14,demod] CS(1,4,3,8,0).
+** KEPT (pick-wt=6): 112 [hyper,21,2,15,13,demod] CS(1,4,2,7,0).
+** KEPT (pick-wt=6): 113 [hyper,21,2,15,12,demod] CS(1,4,1,6,0).
+** KEPT (pick-wt=6): 114 [hyper,21,2,15,11,demod] CS(1,4,0,5,0).
+** KEPT (pick-wt=6): 115 [hyper,21,2,14,20,demod] CS(1,3,9,3,1).
+** KEPT (pick-wt=6): 116 [hyper,21,2,14,19,demod] CS(1,3,8,2,1).
+** KEPT (pick-wt=6): 117 [hyper,21,2,14,18,demod] CS(1,3,7,1,1).
+** KEPT (pick-wt=6): 118 [hyper,21,2,14,17,demod] CS(1,3,6,0,1).
+** KEPT (pick-wt=6): 119 [hyper,21,2,14,16,demod] CS(1,3,5,9,0).
+** KEPT (pick-wt=6): 120 [hyper,21,2,14,15,demod] CS(1,3,4,8,0).
+** KEPT (pick-wt=6): 121 [hyper,21,2,14,14,demod] CS(1,3,3,7,0).
+** KEPT (pick-wt=6): 122 [hyper,21,2,14,13,demod] CS(1,3,2,6,0).
+** KEPT (pick-wt=6): 123 [hyper,21,2,14,12,demod] CS(1,3,1,5,0).
+** KEPT (pick-wt=6): 124 [hyper,21,2,14,11,demod] CS(1,3,0,4,0).
+** KEPT (pick-wt=6): 125 [hyper,21,2,13,20,demod] CS(1,2,9,2,1).
+** KEPT (pick-wt=6): 126 [hyper,21,2,13,19,demod] CS(1,2,8,1,1).
+** KEPT (pick-wt=6): 127 [hyper,21,2,13,18,demod] CS(1,2,7,0,1).
+** KEPT (pick-wt=6): 128 [hyper,21,2,13,17,demod] CS(1,2,6,9,0).
+** KEPT (pick-wt=6): 129 [hyper,21,2,13,16,demod] CS(1,2,5,8,0).
+** KEPT (pick-wt=6): 130 [hyper,21,2,13,15,demod] CS(1,2,4,7,0).
+** KEPT (pick-wt=6): 131 [hyper,21,2,13,14,demod] CS(1,2,3,6,0).
+** KEPT (pick-wt=6): 132 [hyper,21,2,13,13,demod] CS(1,2,2,5,0).
+** KEPT (pick-wt=6): 133 [hyper,21,2,13,12,demod] CS(1,2,1,4,0).
+** KEPT (pick-wt=6): 134 [hyper,21,2,13,11,demod] CS(1,2,0,3,0).
+** KEPT (pick-wt=6): 135 [hyper,21,2,12,20,demod] CS(1,1,9,1,1).
+** KEPT (pick-wt=6): 136 [hyper,21,2,12,19,demod] CS(1,1,8,0,1).
+** KEPT (pick-wt=6): 137 [hyper,21,2,12,18,demod] CS(1,1,7,9,0).
+** KEPT (pick-wt=6): 138 [hyper,21,2,12,17,demod] CS(1,1,6,8,0).
+** KEPT (pick-wt=6): 139 [hyper,21,2,12,16,demod] CS(1,1,5,7,0).
+** KEPT (pick-wt=6): 140 [hyper,21,2,12,15,demod] CS(1,1,4,6,0).
+** KEPT (pick-wt=6): 141 [hyper,21,2,12,14,demod] CS(1,1,3,5,0).
+** KEPT (pick-wt=6): 142 [hyper,21,2,12,13,demod] CS(1,1,2,4,0).
+** KEPT (pick-wt=6): 143 [hyper,21,2,12,12,demod] CS(1,1,1,3,0).
+** KEPT (pick-wt=6): 144 [hyper,21,2,12,11,demod] CS(1,1,0,2,0).
+** KEPT (pick-wt=6): 145 [hyper,21,2,11,20,demod] CS(1,0,9,0,1).
+** KEPT (pick-wt=6): 146 [hyper,21,2,11,19,demod] CS(1,0,8,9,0).
+** KEPT (pick-wt=6): 147 [hyper,21,2,11,18,demod] CS(1,0,7,8,0).
+** KEPT (pick-wt=6): 148 [hyper,21,2,11,17,demod] CS(1,0,6,7,0).
+** KEPT (pick-wt=6): 149 [hyper,21,2,11,16,demod] CS(1,0,5,6,0).
+** KEPT (pick-wt=6): 150 [hyper,21,2,11,15,demod] CS(1,0,4,5,0).
+** KEPT (pick-wt=6): 151 [hyper,21,2,11,14,demod] CS(1,0,3,4,0).
+** KEPT (pick-wt=6): 152 [hyper,21,2,11,13,demod] CS(1,0,2,3,0).
+** KEPT (pick-wt=6): 153 [hyper,21,2,11,12,demod] CS(1,0,1,2,0).
+** KEPT (pick-wt=6): 154 [hyper,21,2,11,11,demod] CS(1,0,0,1,0).
+** KEPT (pick-wt=6): 155 [hyper,21,1,20,20,demod] CS(0,9,9,8,1).
+** KEPT (pick-wt=6): 156 [hyper,21,1,20,19,demod] CS(0,9,8,7,1).
+** KEPT (pick-wt=6): 157 [hyper,21,1,20,18,demod] CS(0,9,7,6,1).
+** KEPT (pick-wt=6): 158 [hyper,21,1,20,17,demod] CS(0,9,6,5,1).
+** KEPT (pick-wt=6): 159 [hyper,21,1,20,16,demod] CS(0,9,5,4,1).
+** KEPT (pick-wt=6): 160 [hyper,21,1,20,15,demod] CS(0,9,4,3,1).
+** KEPT (pick-wt=6): 161 [hyper,21,1,20,14,demod] CS(0,9,3,2,1).
+** KEPT (pick-wt=6): 162 [hyper,21,1,20,13,demod] CS(0,9,2,1,1).
+** KEPT (pick-wt=6): 163 [hyper,21,1,20,12,demod] CS(0,9,1,0,1).
+** KEPT (pick-wt=6): 164 [hyper,21,1,20,11,demod] CS(0,9,0,9,0).
+** KEPT (pick-wt=6): 165 [hyper,21,1,19,20,demod] CS(0,8,9,7,1).
+** KEPT (pick-wt=6): 166 [hyper,21,1,19,19,demod] CS(0,8,8,6,1).
+** KEPT (pick-wt=6): 167 [hyper,21,1,19,18,demod] CS(0,8,7,5,1).
+** KEPT (pick-wt=6): 168 [hyper,21,1,19,17,demod] CS(0,8,6,4,1).
+** KEPT (pick-wt=6): 169 [hyper,21,1,19,16,demod] CS(0,8,5,3,1).
+** KEPT (pick-wt=6): 170 [hyper,21,1,19,15,demod] CS(0,8,4,2,1).
+** KEPT (pick-wt=6): 171 [hyper,21,1,19,14,demod] CS(0,8,3,1,1).
+** KEPT (pick-wt=6): 172 [hyper,21,1,19,13,demod] CS(0,8,2,0,1).
+** KEPT (pick-wt=6): 173 [hyper,21,1,19,12,demod] CS(0,8,1,9,0).
+** KEPT (pick-wt=6): 174 [hyper,21,1,19,11,demod] CS(0,8,0,8,0).
+** KEPT (pick-wt=6): 175 [hyper,21,1,18,20,demod] CS(0,7,9,6,1).
+** KEPT (pick-wt=6): 176 [hyper,21,1,18,19,demod] CS(0,7,8,5,1).
+** KEPT (pick-wt=6): 177 [hyper,21,1,18,18,demod] CS(0,7,7,4,1).
+** KEPT (pick-wt=6): 178 [hyper,21,1,18,17,demod] CS(0,7,6,3,1).
+** KEPT (pick-wt=6): 179 [hyper,21,1,18,16,demod] CS(0,7,5,2,1).
+** KEPT (pick-wt=6): 180 [hyper,21,1,18,15,demod] CS(0,7,4,1,1).
+** KEPT (pick-wt=6): 181 [hyper,21,1,18,14,demod] CS(0,7,3,0,1).
+** KEPT (pick-wt=6): 182 [hyper,21,1,18,13,demod] CS(0,7,2,9,0).
+** KEPT (pick-wt=6): 183 [hyper,21,1,18,12,demod] CS(0,7,1,8,0).
+** KEPT (pick-wt=6): 184 [hyper,21,1,18,11,demod] CS(0,7,0,7,0).
+** KEPT (pick-wt=6): 185 [hyper,21,1,17,20,demod] CS(0,6,9,5,1).
+** KEPT (pick-wt=6): 186 [hyper,21,1,17,19,demod] CS(0,6,8,4,1).
+** KEPT (pick-wt=6): 187 [hyper,21,1,17,18,demod] CS(0,6,7,3,1).
+** KEPT (pick-wt=6): 188 [hyper,21,1,17,17,demod] CS(0,6,6,2,1).
+** KEPT (pick-wt=6): 189 [hyper,21,1,17,16,demod] CS(0,6,5,1,1).
+** KEPT (pick-wt=6): 190 [hyper,21,1,17,15,demod] CS(0,6,4,0,1).
+** KEPT (pick-wt=6): 191 [hyper,21,1,17,14,demod] CS(0,6,3,9,0).
+** KEPT (pick-wt=6): 192 [hyper,21,1,17,13,demod] CS(0,6,2,8,0).
+** KEPT (pick-wt=6): 193 [hyper,21,1,17,12,demod] CS(0,6,1,7,0).
+** KEPT (pick-wt=6): 194 [hyper,21,1,17,11,demod] CS(0,6,0,6,0).
+** KEPT (pick-wt=6): 195 [hyper,21,1,16,20,demod] CS(0,5,9,4,1).
+** KEPT (pick-wt=6): 196 [hyper,21,1,16,19,demod] CS(0,5,8,3,1).
+** KEPT (pick-wt=6): 197 [hyper,21,1,16,18,demod] CS(0,5,7,2,1).
+** KEPT (pick-wt=6): 198 [hyper,21,1,16,17,demod] CS(0,5,6,1,1).
+** KEPT (pick-wt=6): 199 [hyper,21,1,16,16,demod] CS(0,5,5,0,1).
+** KEPT (pick-wt=6): 200 [hyper,21,1,16,15,demod] CS(0,5,4,9,0).
+** KEPT (pick-wt=6): 201 [hyper,21,1,16,14,demod] CS(0,5,3,8,0).
+** KEPT (pick-wt=6): 202 [hyper,21,1,16,13,demod] CS(0,5,2,7,0).
+** KEPT (pick-wt=6): 203 [hyper,21,1,16,12,demod] CS(0,5,1,6,0).
+** KEPT (pick-wt=6): 204 [hyper,21,1,16,11,demod] CS(0,5,0,5,0).
+** KEPT (pick-wt=6): 205 [hyper,21,1,15,20,demod] CS(0,4,9,3,1).
+** KEPT (pick-wt=6): 206 [hyper,21,1,15,19,demod] CS(0,4,8,2,1).
+** KEPT (pick-wt=6): 207 [hyper,21,1,15,18,demod] CS(0,4,7,1,1).
+** KEPT (pick-wt=6): 208 [hyper,21,1,15,17,demod] CS(0,4,6,0,1).
+** KEPT (pick-wt=6): 209 [hyper,21,1,15,16,demod] CS(0,4,5,9,0).
+** KEPT (pick-wt=6): 210 [hyper,21,1,15,15,demod] CS(0,4,4,8,0).
+** KEPT (pick-wt=6): 211 [hyper,21,1,15,14,demod] CS(0,4,3,7,0).
+** KEPT (pick-wt=6): 212 [hyper,21,1,15,13,demod] CS(0,4,2,6,0).
+** KEPT (pick-wt=6): 213 [hyper,21,1,15,12,demod] CS(0,4,1,5,0).
+** KEPT (pick-wt=6): 214 [hyper,21,1,15,11,demod] CS(0,4,0,4,0).
+** KEPT (pick-wt=6): 215 [hyper,21,1,14,20,demod] CS(0,3,9,2,1).
+** KEPT (pick-wt=6): 216 [hyper,21,1,14,19,demod] CS(0,3,8,1,1).
+** KEPT (pick-wt=6): 217 [hyper,21,1,14,18,demod] CS(0,3,7,0,1).
+** KEPT (pick-wt=6): 218 [hyper,21,1,14,17,demod] CS(0,3,6,9,0).
+** KEPT (pick-wt=6): 219 [hyper,21,1,14,16,demod] CS(0,3,5,8,0).
+** KEPT (pick-wt=6): 220 [hyper,21,1,14,15,demod] CS(0,3,4,7,0).
+** KEPT (pick-wt=6): 221 [hyper,21,1,14,14,demod] CS(0,3,3,6,0).
+** KEPT (pick-wt=6): 222 [hyper,21,1,14,13,demod] CS(0,3,2,5,0).
+** KEPT (pick-wt=6): 223 [hyper,21,1,14,12,demod] CS(0,3,1,4,0).
+** KEPT (pick-wt=6): 224 [hyper,21,1,14,11,demod] CS(0,3,0,3,0).
+** KEPT (pick-wt=6): 225 [hyper,21,1,13,20,demod] CS(0,2,9,1,1).
+** KEPT (pick-wt=6): 226 [hyper,21,1,13,19,demod] CS(0,2,8,0,1).
+** KEPT (pick-wt=6): 227 [hyper,21,1,13,18,demod] CS(0,2,7,9,0).
+** KEPT (pick-wt=6): 228 [hyper,21,1,13,17,demod] CS(0,2,6,8,0).
+** KEPT (pick-wt=6): 229 [hyper,21,1,13,16,demod] CS(0,2,5,7,0).
+** KEPT (pick-wt=6): 230 [hyper,21,1,13,15,demod] CS(0,2,4,6,0).
+** KEPT (pick-wt=6): 231 [hyper,21,1,13,14,demod] CS(0,2,3,5,0).
+** KEPT (pick-wt=6): 232 [hyper,21,1,13,13,demod] CS(0,2,2,4,0).
+** KEPT (pick-wt=6): 233 [hyper,21,1,13,12,demod] CS(0,2,1,3,0).
+** KEPT (pick-wt=6): 234 [hyper,21,1,13,11,demod] CS(0,2,0,2,0).
+** KEPT (pick-wt=6): 235 [hyper,21,1,12,20,demod] CS(0,1,9,0,1).
+** KEPT (pick-wt=6): 236 [hyper,21,1,12,19,demod] CS(0,1,8,9,0).
+** KEPT (pick-wt=6): 237 [hyper,21,1,12,18,demod] CS(0,1,7,8,0).
+** KEPT (pick-wt=6): 238 [hyper,21,1,12,17,demod] CS(0,1,6,7,0).
+** KEPT (pick-wt=6): 239 [hyper,21,1,12,16,demod] CS(0,1,5,6,0).
+** KEPT (pick-wt=6): 240 [hyper,21,1,12,15,demod] CS(0,1,4,5,0).
+** KEPT (pick-wt=6): 241 [hyper,21,1,12,14,demod] CS(0,1,3,4,0).
+** KEPT (pick-wt=6): 242 [hyper,21,1,12,13,demod] CS(0,1,2,3,0).
+** KEPT (pick-wt=6): 243 [hyper,21,1,12,12,demod] CS(0,1,1,2,0).
+** KEPT (pick-wt=6): 244 [hyper,21,1,12,11,demod] CS(0,1,0,1,0).
+** KEPT (pick-wt=6): 245 [hyper,21,1,11,20,demod] CS(0,0,9,9,0).
+** KEPT (pick-wt=6): 246 [hyper,21,1,11,19,demod] CS(0,0,8,8,0).
+** KEPT (pick-wt=6): 247 [hyper,21,1,11,18,demod] CS(0,0,7,7,0).
+** KEPT (pick-wt=6): 248 [hyper,21,1,11,17,demod] CS(0,0,6,6,0).
+** KEPT (pick-wt=6): 249 [hyper,21,1,11,16,demod] CS(0,0,5,5,0).
+** KEPT (pick-wt=6): 250 [hyper,21,1,11,15,demod] CS(0,0,4,4,0).
+** KEPT (pick-wt=6): 251 [hyper,21,1,11,14,demod] CS(0,0,3,3,0).
+** KEPT (pick-wt=6): 252 [hyper,21,1,11,13,demod] CS(0,0,2,2,0).
+** KEPT (pick-wt=6): 253 [hyper,21,1,11,12,demod] CS(0,0,1,1,0).
+** KEPT (pick-wt=6): 254 [hyper,21,1,11,11,demod] CS(0,0,0,0,0).
+
+given clause #2: (wt=6) 55 [hyper,21,2,20,20,demod] CS(1,9,9,9,1).
+
+given clause #3: (wt=6) 56 [hyper,21,2,20,19,demod] CS(1,9,8,8,1).
+
+given clause #4: (wt=6) 57 [hyper,21,2,20,18,demod] CS(1,9,7,7,1).
+
+given clause #5: (wt=6) 58 [hyper,21,2,20,17,demod] CS(1,9,6,6,1).
+
+given clause #6: (wt=6) 59 [hyper,21,2,20,16,demod] CS(1,9,5,5,1).
+
+given clause #7: (wt=6) 60 [hyper,21,2,20,15,demod] CS(1,9,4,4,1).
+
+given clause #8: (wt=6) 61 [hyper,21,2,20,14,demod] CS(1,9,3,3,1).
+
+given clause #9: (wt=6) 62 [hyper,21,2,20,13,demod] CS(1,9,2,2,1).
+
+given clause #10: (wt=6) 63 [hyper,21,2,20,12,demod] CS(1,9,1,1,1).
+
+given clause #11: (wt=6) 64 [hyper,21,2,20,11,demod] CS(1,9,0,0,1).
+
+given clause #12: (wt=6) 65 [hyper,21,2,19,20,demod] CS(1,8,9,8,1).
+
+given clause #13: (wt=6) 66 [hyper,21,2,19,19,demod] CS(1,8,8,7,1).
+
+given clause #14: (wt=6) 67 [hyper,21,2,19,18,demod] CS(1,8,7,6,1).
+
+given clause #15: (wt=6) 68 [hyper,21,2,19,17,demod] CS(1,8,6,5,1).
+
+given clause #16: (wt=6) 69 [hyper,21,2,19,16,demod] CS(1,8,5,4,1).
+
+given clause #17: (wt=6) 70 [hyper,21,2,19,15,demod] CS(1,8,4,3,1).
+
+given clause #18: (wt=6) 71 [hyper,21,2,19,14,demod] CS(1,8,3,2,1).
+
+given clause #19: (wt=6) 72 [hyper,21,2,19,13,demod] CS(1,8,2,1,1).
+
+given clause #20: (wt=6) 73 [hyper,21,2,19,12,demod] CS(1,8,1,0,1).
+
+given clause #21: (wt=6) 74 [hyper,21,2,19,11,demod] CS(1,8,0,9,0).
+
+given clause #22: (wt=6) 75 [hyper,21,2,18,20,demod] CS(1,7,9,7,1).
+
+given clause #23: (wt=6) 76 [hyper,21,2,18,19,demod] CS(1,7,8,6,1).
+
+given clause #24: (wt=6) 77 [hyper,21,2,18,18,demod] CS(1,7,7,5,1).
+
+given clause #25: (wt=6) 78 [hyper,21,2,18,17,demod] CS(1,7,6,4,1).
+
+given clause #26: (wt=6) 79 [hyper,21,2,18,16,demod] CS(1,7,5,3,1).
+
+given clause #27: (wt=6) 80 [hyper,21,2,18,15,demod] CS(1,7,4,2,1).
+
+given clause #28: (wt=6) 81 [hyper,21,2,18,14,demod] CS(1,7,3,1,1).
+
+given clause #29: (wt=6) 82 [hyper,21,2,18,13,demod] CS(1,7,2,0,1).
+
+given clause #30: (wt=6) 83 [hyper,21,2,18,12,demod] CS(1,7,1,9,0).
+
+given clause #31: (wt=6) 84 [hyper,21,2,18,11,demod] CS(1,7,0,8,0).
+
+given clause #32: (wt=6) 85 [hyper,21,2,17,20,demod] CS(1,6,9,6,1).
+
+given clause #33: (wt=6) 86 [hyper,21,2,17,19,demod] CS(1,6,8,5,1).
+
+given clause #34: (wt=6) 87 [hyper,21,2,17,18,demod] CS(1,6,7,4,1).
+
+given clause #35: (wt=6) 88 [hyper,21,2,17,17,demod] CS(1,6,6,3,1).
+
+given clause #36: (wt=6) 89 [hyper,21,2,17,16,demod] CS(1,6,5,2,1).
+
+given clause #37: (wt=6) 90 [hyper,21,2,17,15,demod] CS(1,6,4,1,1).
+
+given clause #38: (wt=6) 91 [hyper,21,2,17,14,demod] CS(1,6,3,0,1).
+
+given clause #39: (wt=6) 92 [hyper,21,2,17,13,demod] CS(1,6,2,9,0).
+
+given clause #40: (wt=6) 93 [hyper,21,2,17,12,demod] CS(1,6,1,8,0).
+
+given clause #41: (wt=6) 94 [hyper,21,2,17,11,demod] CS(1,6,0,7,0).
+
+given clause #42: (wt=6) 95 [hyper,21,2,16,20,demod] CS(1,5,9,5,1).
+
+given clause #43: (wt=6) 96 [hyper,21,2,16,19,demod] CS(1,5,8,4,1).
+
+given clause #44: (wt=6) 97 [hyper,21,2,16,18,demod] CS(1,5,7,3,1).
+
+given clause #45: (wt=6) 98 [hyper,21,2,16,17,demod] CS(1,5,6,2,1).
+
+given clause #46: (wt=6) 99 [hyper,21,2,16,16,demod] CS(1,5,5,1,1).
+
+given clause #47: (wt=6) 100 [hyper,21,2,16,15,demod] CS(1,5,4,0,1).
+
+given clause #48: (wt=6) 101 [hyper,21,2,16,14,demod] CS(1,5,3,9,0).
+
+given clause #49: (wt=6) 102 [hyper,21,2,16,13,demod] CS(1,5,2,8,0).
+
+given clause #50: (wt=6) 103 [hyper,21,2,16,12,demod] CS(1,5,1,7,0).
+
+given clause #51: (wt=6) 104 [hyper,21,2,16,11,demod] CS(1,5,0,6,0).
+
+given clause #52: (wt=6) 105 [hyper,21,2,15,20,demod] CS(1,4,9,4,1).
+
+given clause #53: (wt=6) 106 [hyper,21,2,15,19,demod] CS(1,4,8,3,1).
+
+given clause #54: (wt=6) 107 [hyper,21,2,15,18,demod] CS(1,4,7,2,1).
+
+given clause #55: (wt=6) 108 [hyper,21,2,15,17,demod] CS(1,4,6,1,1).
+
+given clause #56: (wt=6) 109 [hyper,21,2,15,16,demod] CS(1,4,5,0,1).
+
+given clause #57: (wt=6) 110 [hyper,21,2,15,15,demod] CS(1,4,4,9,0).
+
+given clause #58: (wt=6) 111 [hyper,21,2,15,14,demod] CS(1,4,3,8,0).
+
+given clause #59: (wt=6) 112 [hyper,21,2,15,13,demod] CS(1,4,2,7,0).
+
+given clause #60: (wt=6) 113 [hyper,21,2,15,12,demod] CS(1,4,1,6,0).
+
+given clause #61: (wt=6) 114 [hyper,21,2,15,11,demod] CS(1,4,0,5,0).
+
+given clause #62: (wt=6) 115 [hyper,21,2,14,20,demod] CS(1,3,9,3,1).
+
+given clause #63: (wt=6) 116 [hyper,21,2,14,19,demod] CS(1,3,8,2,1).
+
+given clause #64: (wt=6) 117 [hyper,21,2,14,18,demod] CS(1,3,7,1,1).
+
+given clause #65: (wt=6) 118 [hyper,21,2,14,17,demod] CS(1,3,6,0,1).
+
+given clause #66: (wt=6) 119 [hyper,21,2,14,16,demod] CS(1,3,5,9,0).
+
+given clause #67: (wt=6) 120 [hyper,21,2,14,15,demod] CS(1,3,4,8,0).
+
+given clause #68: (wt=6) 121 [hyper,21,2,14,14,demod] CS(1,3,3,7,0).
+
+given clause #69: (wt=6) 122 [hyper,21,2,14,13,demod] CS(1,3,2,6,0).
+
+given clause #70: (wt=6) 123 [hyper,21,2,14,12,demod] CS(1,3,1,5,0).
+
+given clause #71: (wt=6) 124 [hyper,21,2,14,11,demod] CS(1,3,0,4,0).
+
+given clause #72: (wt=6) 125 [hyper,21,2,13,20,demod] CS(1,2,9,2,1).
+
+given clause #73: (wt=6) 126 [hyper,21,2,13,19,demod] CS(1,2,8,1,1).
+
+given clause #74: (wt=6) 127 [hyper,21,2,13,18,demod] CS(1,2,7,0,1).
+
+given clause #75: (wt=6) 128 [hyper,21,2,13,17,demod] CS(1,2,6,9,0).
+
+given clause #76: (wt=6) 129 [hyper,21,2,13,16,demod] CS(1,2,5,8,0).
+
+given clause #77: (wt=6) 130 [hyper,21,2,13,15,demod] CS(1,2,4,7,0).
+
+given clause #78: (wt=6) 131 [hyper,21,2,13,14,demod] CS(1,2,3,6,0).
+
+given clause #79: (wt=6) 132 [hyper,21,2,13,13,demod] CS(1,2,2,5,0).
+
+given clause #80: (wt=6) 133 [hyper,21,2,13,12,demod] CS(1,2,1,4,0).
+
+given clause #81: (wt=6) 134 [hyper,21,2,13,11,demod] CS(1,2,0,3,0).
+
+given clause #82: (wt=6) 135 [hyper,21,2,12,20,demod] CS(1,1,9,1,1).
+
+given clause #83: (wt=6) 136 [hyper,21,2,12,19,demod] CS(1,1,8,0,1).
+
+given clause #84: (wt=6) 137 [hyper,21,2,12,18,demod] CS(1,1,7,9,0).
+
+given clause #85: (wt=6) 138 [hyper,21,2,12,17,demod] CS(1,1,6,8,0).
+
+given clause #86: (wt=6) 139 [hyper,21,2,12,16,demod] CS(1,1,5,7,0).
+
+given clause #87: (wt=6) 140 [hyper,21,2,12,15,demod] CS(1,1,4,6,0).
+
+given clause #88: (wt=6) 141 [hyper,21,2,12,14,demod] CS(1,1,3,5,0).
+
+given clause #89: (wt=6) 142 [hyper,21,2,12,13,demod] CS(1,1,2,4,0).
+
+given clause #90: (wt=6) 143 [hyper,21,2,12,12,demod] CS(1,1,1,3,0).
+
+given clause #91: (wt=6) 144 [hyper,21,2,12,11,demod] CS(1,1,0,2,0).
+
+given clause #92: (wt=6) 145 [hyper,21,2,11,20,demod] CS(1,0,9,0,1).
+
+given clause #93: (wt=6) 146 [hyper,21,2,11,19,demod] CS(1,0,8,9,0).
+
+given clause #94: (wt=6) 147 [hyper,21,2,11,18,demod] CS(1,0,7,8,0).
+
+given clause #95: (wt=6) 148 [hyper,21,2,11,17,demod] CS(1,0,6,7,0).
+
+given clause #96: (wt=6) 149 [hyper,21,2,11,16,demod] CS(1,0,5,6,0).
+
+given clause #97: (wt=6) 150 [hyper,21,2,11,15,demod] CS(1,0,4,5,0).
+
+given clause #98: (wt=6) 151 [hyper,21,2,11,14,demod] CS(1,0,3,4,0).
+
+given clause #99: (wt=6) 152 [hyper,21,2,11,13,demod] CS(1,0,2,3,0).
+
+given clause #100: (wt=6) 153 [hyper,21,2,11,12,demod] CS(1,0,1,2,0).
+
+given clause #101: (wt=6) 154 [hyper,21,2,11,11,demod] CS(1,0,0,1,0).
+
+given clause #102: (wt=6) 155 [hyper,21,1,20,20,demod] CS(0,9,9,8,1).
+
+given clause #103: (wt=6) 156 [hyper,21,1,20,19,demod] CS(0,9,8,7,1).
+
+given clause #104: (wt=6) 157 [hyper,21,1,20,18,demod] CS(0,9,7,6,1).
+
+given clause #105: (wt=6) 158 [hyper,21,1,20,17,demod] CS(0,9,6,5,1).
+
+given clause #106: (wt=6) 159 [hyper,21,1,20,16,demod] CS(0,9,5,4,1).
+
+given clause #107: (wt=6) 160 [hyper,21,1,20,15,demod] CS(0,9,4,3,1).
+
+given clause #108: (wt=6) 161 [hyper,21,1,20,14,demod] CS(0,9,3,2,1).
+
+given clause #109: (wt=6) 162 [hyper,21,1,20,13,demod] CS(0,9,2,1,1).
+
+given clause #110: (wt=6) 163 [hyper,21,1,20,12,demod] CS(0,9,1,0,1).
+
+given clause #111: (wt=6) 164 [hyper,21,1,20,11,demod] CS(0,9,0,9,0).
+
+given clause #112: (wt=6) 165 [hyper,21,1,19,20,demod] CS(0,8,9,7,1).
+
+given clause #113: (wt=6) 166 [hyper,21,1,19,19,demod] CS(0,8,8,6,1).
+
+given clause #114: (wt=6) 167 [hyper,21,1,19,18,demod] CS(0,8,7,5,1).
+
+given clause #115: (wt=6) 168 [hyper,21,1,19,17,demod] CS(0,8,6,4,1).
+
+given clause #116: (wt=6) 169 [hyper,21,1,19,16,demod] CS(0,8,5,3,1).
+
+given clause #117: (wt=6) 170 [hyper,21,1,19,15,demod] CS(0,8,4,2,1).
+
+given clause #118: (wt=6) 171 [hyper,21,1,19,14,demod] CS(0,8,3,1,1).
+
+given clause #119: (wt=6) 172 [hyper,21,1,19,13,demod] CS(0,8,2,0,1).
+
+given clause #120: (wt=6) 173 [hyper,21,1,19,12,demod] CS(0,8,1,9,0).
+
+given clause #121: (wt=6) 174 [hyper,21,1,19,11,demod] CS(0,8,0,8,0).
+
+given clause #122: (wt=6) 175 [hyper,21,1,18,20,demod] CS(0,7,9,6,1).
+
+given clause #123: (wt=6) 176 [hyper,21,1,18,19,demod] CS(0,7,8,5,1).
+
+given clause #124: (wt=6) 177 [hyper,21,1,18,18,demod] CS(0,7,7,4,1).
+
+given clause #125: (wt=6) 178 [hyper,21,1,18,17,demod] CS(0,7,6,3,1).
+
+given clause #126: (wt=6) 179 [hyper,21,1,18,16,demod] CS(0,7,5,2,1).
+
+given clause #127: (wt=6) 180 [hyper,21,1,18,15,demod] CS(0,7,4,1,1).
+
+given clause #128: (wt=6) 181 [hyper,21,1,18,14,demod] CS(0,7,3,0,1).
+
+given clause #129: (wt=6) 182 [hyper,21,1,18,13,demod] CS(0,7,2,9,0).
+
+given clause #130: (wt=6) 183 [hyper,21,1,18,12,demod] CS(0,7,1,8,0).
+
+given clause #131: (wt=6) 184 [hyper,21,1,18,11,demod] CS(0,7,0,7,0).
+
+given clause #132: (wt=6) 185 [hyper,21,1,17,20,demod] CS(0,6,9,5,1).
+
+given clause #133: (wt=6) 186 [hyper,21,1,17,19,demod] CS(0,6,8,4,1).
+
+given clause #134: (wt=6) 187 [hyper,21,1,17,18,demod] CS(0,6,7,3,1).
+
+given clause #135: (wt=6) 188 [hyper,21,1,17,17,demod] CS(0,6,6,2,1).
+
+given clause #136: (wt=6) 189 [hyper,21,1,17,16,demod] CS(0,6,5,1,1).
+
+given clause #137: (wt=6) 190 [hyper,21,1,17,15,demod] CS(0,6,4,0,1).
+
+given clause #138: (wt=6) 191 [hyper,21,1,17,14,demod] CS(0,6,3,9,0).
+
+given clause #139: (wt=6) 192 [hyper,21,1,17,13,demod] CS(0,6,2,8,0).
+
+given clause #140: (wt=6) 193 [hyper,21,1,17,12,demod] CS(0,6,1,7,0).
+
+given clause #141: (wt=6) 194 [hyper,21,1,17,11,demod] CS(0,6,0,6,0).
+
+given clause #142: (wt=6) 195 [hyper,21,1,16,20,demod] CS(0,5,9,4,1).
+
+given clause #143: (wt=6) 196 [hyper,21,1,16,19,demod] CS(0,5,8,3,1).
+
+given clause #144: (wt=6) 197 [hyper,21,1,16,18,demod] CS(0,5,7,2,1).
+
+given clause #145: (wt=6) 198 [hyper,21,1,16,17,demod] CS(0,5,6,1,1).
+
+given clause #146: (wt=6) 199 [hyper,21,1,16,16,demod] CS(0,5,5,0,1).
+
+given clause #147: (wt=6) 200 [hyper,21,1,16,15,demod] CS(0,5,4,9,0).
+
+given clause #148: (wt=6) 201 [hyper,21,1,16,14,demod] CS(0,5,3,8,0).
+
+given clause #149: (wt=6) 202 [hyper,21,1,16,13,demod] CS(0,5,2,7,0).
+
+given clause #150: (wt=6) 203 [hyper,21,1,16,12,demod] CS(0,5,1,6,0).
+
+given clause #151: (wt=6) 204 [hyper,21,1,16,11,demod] CS(0,5,0,5,0).
+
+given clause #152: (wt=6) 205 [hyper,21,1,15,20,demod] CS(0,4,9,3,1).
+
+given clause #153: (wt=6) 206 [hyper,21,1,15,19,demod] CS(0,4,8,2,1).
+
+given clause #154: (wt=6) 207 [hyper,21,1,15,18,demod] CS(0,4,7,1,1).
+
+given clause #155: (wt=6) 208 [hyper,21,1,15,17,demod] CS(0,4,6,0,1).
+
+given clause #156: (wt=6) 209 [hyper,21,1,15,16,demod] CS(0,4,5,9,0).
+
+given clause #157: (wt=6) 210 [hyper,21,1,15,15,demod] CS(0,4,4,8,0).
+
+given clause #158: (wt=6) 211 [hyper,21,1,15,14,demod] CS(0,4,3,7,0).
+
+given clause #159: (wt=6) 212 [hyper,21,1,15,13,demod] CS(0,4,2,6,0).
+
+given clause #160: (wt=6) 213 [hyper,21,1,15,12,demod] CS(0,4,1,5,0).
+
+given clause #161: (wt=6) 214 [hyper,21,1,15,11,demod] CS(0,4,0,4,0).
+
+given clause #162: (wt=6) 215 [hyper,21,1,14,20,demod] CS(0,3,9,2,1).
+
+given clause #163: (wt=6) 216 [hyper,21,1,14,19,demod] CS(0,3,8,1,1).
+
+given clause #164: (wt=6) 217 [hyper,21,1,14,18,demod] CS(0,3,7,0,1).
+
+given clause #165: (wt=6) 218 [hyper,21,1,14,17,demod] CS(0,3,6,9,0).
+
+given clause #166: (wt=6) 219 [hyper,21,1,14,16,demod] CS(0,3,5,8,0).
+
+given clause #167: (wt=6) 220 [hyper,21,1,14,15,demod] CS(0,3,4,7,0).
+
+given clause #168: (wt=6) 221 [hyper,21,1,14,14,demod] CS(0,3,3,6,0).
+
+given clause #169: (wt=6) 222 [hyper,21,1,14,13,demod] CS(0,3,2,5,0).
+
+given clause #170: (wt=6) 223 [hyper,21,1,14,12,demod] CS(0,3,1,4,0).
+
+given clause #171: (wt=6) 224 [hyper,21,1,14,11,demod] CS(0,3,0,3,0).
+
+given clause #172: (wt=6) 225 [hyper,21,1,13,20,demod] CS(0,2,9,1,1).
+
+given clause #173: (wt=6) 226 [hyper,21,1,13,19,demod] CS(0,2,8,0,1).
+
+given clause #174: (wt=6) 227 [hyper,21,1,13,18,demod] CS(0,2,7,9,0).
+
+given clause #175: (wt=6) 228 [hyper,21,1,13,17,demod] CS(0,2,6,8,0).
+
+given clause #176: (wt=6) 229 [hyper,21,1,13,16,demod] CS(0,2,5,7,0).
+
+given clause #177: (wt=6) 230 [hyper,21,1,13,15,demod] CS(0,2,4,6,0).
+
+given clause #178: (wt=6) 231 [hyper,21,1,13,14,demod] CS(0,2,3,5,0).
+
+given clause #179: (wt=6) 232 [hyper,21,1,13,13,demod] CS(0,2,2,4,0).
+
+given clause #180: (wt=6) 233 [hyper,21,1,13,12,demod] CS(0,2,1,3,0).
+
+given clause #181: (wt=6) 234 [hyper,21,1,13,11,demod] CS(0,2,0,2,0).
+
+given clause #182: (wt=6) 235 [hyper,21,1,12,20,demod] CS(0,1,9,0,1).
+
+given clause #183: (wt=6) 236 [hyper,21,1,12,19,demod] CS(0,1,8,9,0).
+
+given clause #184: (wt=6) 237 [hyper,21,1,12,18,demod] CS(0,1,7,8,0).
+
+given clause #185: (wt=6) 238 [hyper,21,1,12,17,demod] CS(0,1,6,7,0).
+
+given clause #186: (wt=6) 239 [hyper,21,1,12,16,demod] CS(0,1,5,6,0).
+
+given clause #187: (wt=6) 240 [hyper,21,1,12,15,demod] CS(0,1,4,5,0).
+
+given clause #188: (wt=6) 241 [hyper,21,1,12,14,demod] CS(0,1,3,4,0).
+
+given clause #189: (wt=6) 242 [hyper,21,1,12,13,demod] CS(0,1,2,3,0).
+
+given clause #190: (wt=6) 243 [hyper,21,1,12,12,demod] CS(0,1,1,2,0).
+
+given clause #191: (wt=6) 244 [hyper,21,1,12,11,demod] CS(0,1,0,1,0).
+
+given clause #192: (wt=6) 245 [hyper,21,1,11,20,demod] CS(0,0,9,9,0).
+
+given clause #193: (wt=6) 246 [hyper,21,1,11,19,demod] CS(0,0,8,8,0).
+
+given clause #194: (wt=6) 247 [hyper,21,1,11,18,demod] CS(0,0,7,7,0).
+
+given clause #195: (wt=6) 248 [hyper,21,1,11,17,demod] CS(0,0,6,6,0).
+
+given clause #196: (wt=6) 249 [hyper,21,1,11,16,demod] CS(0,0,5,5,0).
+
+given clause #197: (wt=6) 250 [hyper,21,1,11,15,demod] CS(0,0,4,4,0).
+
+given clause #198: (wt=6) 251 [hyper,21,1,11,14,demod] CS(0,0,3,3,0).
+
+given clause #199: (wt=6) 252 [hyper,21,1,11,13,demod] CS(0,0,2,2,0).
+
+given clause #200: (wt=6) 253 [hyper,21,1,11,12,demod] CS(0,0,1,1,0).
+
+given clause #201: (wt=6) 254 [hyper,21,1,11,11,demod] CS(0,0,0,0,0).
+
+given clause #202: (wt=24) 22 [] -L(u)| -D(x)| -D(y)|CP(u,x,y,$MOD($SUM(u,$PROD(x,y)),10),$DIV($SUM(u,$PROD(x,y)),10)).
+** KEPT (pick-wt=6): 255 [hyper,22,10,20,20,demod] CP(7,9,9,8,8).
+** KEPT (pick-wt=6): 256 [hyper,22,10,20,19,demod] CP(7,9,8,9,7).
+** KEPT (pick-wt=6): 257 [hyper,22,10,20,18,demod] CP(7,9,7,0,7).
+** KEPT (pick-wt=6): 258 [hyper,22,10,20,17,demod] CP(7,9,6,1,6).
+** KEPT (pick-wt=6): 259 [hyper,22,10,20,16,demod] CP(7,9,5,2,5).
+** KEPT (pick-wt=6): 260 [hyper,22,10,20,15,demod] CP(7,9,4,3,4).
+** KEPT (pick-wt=6): 261 [hyper,22,10,20,14,demod] CP(7,9,3,4,3).
+** KEPT (pick-wt=6): 262 [hyper,22,10,20,13,demod] CP(7,9,2,5,2).
+** KEPT (pick-wt=6): 263 [hyper,22,10,20,12,demod] CP(7,9,1,6,1).
+** KEPT (pick-wt=6): 264 [hyper,22,10,20,11,demod] CP(7,9,0,7,0).
+** KEPT (pick-wt=6): 265 [hyper,22,10,19,20,demod] CP(7,8,9,9,7).
+** KEPT (pick-wt=6): 266 [hyper,22,10,19,19,demod] CP(7,8,8,1,7).
+** KEPT (pick-wt=6): 267 [hyper,22,10,19,18,demod] CP(7,8,7,3,6).
+** KEPT (pick-wt=6): 268 [hyper,22,10,19,17,demod] CP(7,8,6,5,5).
+** KEPT (pick-wt=6): 269 [hyper,22,10,19,16,demod] CP(7,8,5,7,4).
+** KEPT (pick-wt=6): 270 [hyper,22,10,19,15,demod] CP(7,8,4,9,3).
+** KEPT (pick-wt=6): 271 [hyper,22,10,19,14,demod] CP(7,8,3,1,3).
+** KEPT (pick-wt=6): 272 [hyper,22,10,19,13,demod] CP(7,8,2,3,2).
+** KEPT (pick-wt=6): 273 [hyper,22,10,19,12,demod] CP(7,8,1,5,1).
+** KEPT (pick-wt=6): 274 [hyper,22,10,19,11,demod] CP(7,8,0,7,0).
+** KEPT (pick-wt=6): 275 [hyper,22,10,18,20,demod] CP(7,7,9,0,7).
+** KEPT (pick-wt=6): 276 [hyper,22,10,18,19,demod] CP(7,7,8,3,6).
+** KEPT (pick-wt=6): 277 [hyper,22,10,18,18,demod] CP(7,7,7,6,5).
+** KEPT (pick-wt=6): 278 [hyper,22,10,18,17,demod] CP(7,7,6,9,4).
+** KEPT (pick-wt=6): 279 [hyper,22,10,18,16,demod] CP(7,7,5,2,4).
+** KEPT (pick-wt=6): 280 [hyper,22,10,18,15,demod] CP(7,7,4,5,3).
+** KEPT (pick-wt=6): 281 [hyper,22,10,18,14,demod] CP(7,7,3,8,2).
+** KEPT (pick-wt=6): 282 [hyper,22,10,18,13,demod] CP(7,7,2,1,2).
+** KEPT (pick-wt=6): 283 [hyper,22,10,18,12,demod] CP(7,7,1,4,1).
+** KEPT (pick-wt=6): 284 [hyper,22,10,18,11,demod] CP(7,7,0,7,0).
+** KEPT (pick-wt=6): 285 [hyper,22,10,17,20,demod] CP(7,6,9,1,6).
+** KEPT (pick-wt=6): 286 [hyper,22,10,17,19,demod] CP(7,6,8,5,5).
+** KEPT (pick-wt=6): 287 [hyper,22,10,17,18,demod] CP(7,6,7,9,4).
+** KEPT (pick-wt=6): 288 [hyper,22,10,17,17,demod] CP(7,6,6,3,4).
+** KEPT (pick-wt=6): 289 [hyper,22,10,17,16,demod] CP(7,6,5,7,3).
+** KEPT (pick-wt=6): 290 [hyper,22,10,17,15,demod] CP(7,6,4,1,3).
+** KEPT (pick-wt=6): 291 [hyper,22,10,17,14,demod] CP(7,6,3,5,2).
+** KEPT (pick-wt=6): 292 [hyper,22,10,17,13,demod] CP(7,6,2,9,1).
+** KEPT (pick-wt=6): 293 [hyper,22,10,17,12,demod] CP(7,6,1,3,1).
+** KEPT (pick-wt=6): 294 [hyper,22,10,17,11,demod] CP(7,6,0,7,0).
+** KEPT (pick-wt=6): 295 [hyper,22,10,16,20,demod] CP(7,5,9,2,5).
+** KEPT (pick-wt=6): 296 [hyper,22,10,16,19,demod] CP(7,5,8,7,4).
+** KEPT (pick-wt=6): 297 [hyper,22,10,16,18,demod] CP(7,5,7,2,4).
+** KEPT (pick-wt=6): 298 [hyper,22,10,16,17,demod] CP(7,5,6,7,3).
+** KEPT (pick-wt=6): 299 [hyper,22,10,16,16,demod] CP(7,5,5,2,3).
+** KEPT (pick-wt=6): 300 [hyper,22,10,16,15,demod] CP(7,5,4,7,2).
+** KEPT (pick-wt=6): 301 [hyper,22,10,16,14,demod] CP(7,5,3,2,2).
+** KEPT (pick-wt=6): 302 [hyper,22,10,16,13,demod] CP(7,5,2,7,1).
+** KEPT (pick-wt=6): 303 [hyper,22,10,16,12,demod] CP(7,5,1,2,1).
+** KEPT (pick-wt=6): 304 [hyper,22,10,16,11,demod] CP(7,5,0,7,0).
+** KEPT (pick-wt=6): 305 [hyper,22,10,15,20,demod] CP(7,4,9,3,4).
+** KEPT (pick-wt=6): 306 [hyper,22,10,15,19,demod] CP(7,4,8,9,3).
+** KEPT (pick-wt=6): 307 [hyper,22,10,15,18,demod] CP(7,4,7,5,3).
+** KEPT (pick-wt=6): 308 [hyper,22,10,15,17,demod] CP(7,4,6,1,3).
+** KEPT (pick-wt=6): 309 [hyper,22,10,15,16,demod] CP(7,4,5,7,2).
+** KEPT (pick-wt=6): 310 [hyper,22,10,15,15,demod] CP(7,4,4,3,2).
+** KEPT (pick-wt=6): 311 [hyper,22,10,15,14,demod] CP(7,4,3,9,1).
+** KEPT (pick-wt=6): 312 [hyper,22,10,15,13,demod] CP(7,4,2,5,1).
+** KEPT (pick-wt=6): 313 [hyper,22,10,15,12,demod] CP(7,4,1,1,1).
+** KEPT (pick-wt=6): 314 [hyper,22,10,15,11,demod] CP(7,4,0,7,0).
+** KEPT (pick-wt=6): 315 [hyper,22,10,14,20,demod] CP(7,3,9,4,3).
+** KEPT (pick-wt=6): 316 [hyper,22,10,14,19,demod] CP(7,3,8,1,3).
+** KEPT (pick-wt=6): 317 [hyper,22,10,14,18,demod] CP(7,3,7,8,2).
+** KEPT (pick-wt=6): 318 [hyper,22,10,14,17,demod] CP(7,3,6,5,2).
+** KEPT (pick-wt=6): 319 [hyper,22,10,14,16,demod] CP(7,3,5,2,2).
+** KEPT (pick-wt=6): 320 [hyper,22,10,14,15,demod] CP(7,3,4,9,1).
+** KEPT (pick-wt=6): 321 [hyper,22,10,14,14,demod] CP(7,3,3,6,1).
+** KEPT (pick-wt=6): 322 [hyper,22,10,14,13,demod] CP(7,3,2,3,1).
+** KEPT (pick-wt=6): 323 [hyper,22,10,14,12,demod] CP(7,3,1,0,1).
+** KEPT (pick-wt=6): 324 [hyper,22,10,14,11,demod] CP(7,3,0,7,0).
+** KEPT (pick-wt=6): 325 [hyper,22,10,13,20,demod] CP(7,2,9,5,2).
+** KEPT (pick-wt=6): 326 [hyper,22,10,13,19,demod] CP(7,2,8,3,2).
+** KEPT (pick-wt=6): 327 [hyper,22,10,13,18,demod] CP(7,2,7,1,2).
+** KEPT (pick-wt=6): 328 [hyper,22,10,13,17,demod] CP(7,2,6,9,1).
+** KEPT (pick-wt=6): 329 [hyper,22,10,13,16,demod] CP(7,2,5,7,1).
+** KEPT (pick-wt=6): 330 [hyper,22,10,13,15,demod] CP(7,2,4,5,1).
+** KEPT (pick-wt=6): 331 [hyper,22,10,13,14,demod] CP(7,2,3,3,1).
+** KEPT (pick-wt=6): 332 [hyper,22,10,13,13,demod] CP(7,2,2,1,1).
+** KEPT (pick-wt=6): 333 [hyper,22,10,13,12,demod] CP(7,2,1,9,0).
+** KEPT (pick-wt=6): 334 [hyper,22,10,13,11,demod] CP(7,2,0,7,0).
+** KEPT (pick-wt=6): 335 [hyper,22,10,12,20,demod] CP(7,1,9,6,1).
+** KEPT (pick-wt=6): 336 [hyper,22,10,12,19,demod] CP(7,1,8,5,1).
+** KEPT (pick-wt=6): 337 [hyper,22,10,12,18,demod] CP(7,1,7,4,1).
+** KEPT (pick-wt=6): 338 [hyper,22,10,12,17,demod] CP(7,1,6,3,1).
+** KEPT (pick-wt=6): 339 [hyper,22,10,12,16,demod] CP(7,1,5,2,1).
+** KEPT (pick-wt=6): 340 [hyper,22,10,12,15,demod] CP(7,1,4,1,1).
+** KEPT (pick-wt=6): 341 [hyper,22,10,12,14,demod] CP(7,1,3,0,1).
+** KEPT (pick-wt=6): 342 [hyper,22,10,12,13,demod] CP(7,1,2,9,0).
+** KEPT (pick-wt=6): 343 [hyper,22,10,12,12,demod] CP(7,1,1,8,0).
+** KEPT (pick-wt=6): 344 [hyper,22,10,12,11,demod] CP(7,1,0,7,0).
+** KEPT (pick-wt=6): 345 [hyper,22,10,11,20,demod] CP(7,0,9,7,0).
+** KEPT (pick-wt=6): 346 [hyper,22,10,11,19,demod] CP(7,0,8,7,0).
+** KEPT (pick-wt=6): 347 [hyper,22,10,11,18,demod] CP(7,0,7,7,0).
+** KEPT (pick-wt=6): 348 [hyper,22,10,11,17,demod] CP(7,0,6,7,0).
+** KEPT (pick-wt=6): 349 [hyper,22,10,11,16,demod] CP(7,0,5,7,0).
+** KEPT (pick-wt=6): 350 [hyper,22,10,11,15,demod] CP(7,0,4,7,0).
+** KEPT (pick-wt=6): 351 [hyper,22,10,11,14,demod] CP(7,0,3,7,0).
+** KEPT (pick-wt=6): 352 [hyper,22,10,11,13,demod] CP(7,0,2,7,0).
+** KEPT (pick-wt=6): 353 [hyper,22,10,11,12,demod] CP(7,0,1,7,0).
+** KEPT (pick-wt=6): 354 [hyper,22,10,11,11,demod] CP(7,0,0,7,0).
+** KEPT (pick-wt=6): 355 [hyper,22,9,20,20,demod] CP(6,9,9,7,8).
+** KEPT (pick-wt=6): 356 [hyper,22,9,20,19,demod] CP(6,9,8,8,7).
+** KEPT (pick-wt=6): 357 [hyper,22,9,20,18,demod] CP(6,9,7,9,6).
+** KEPT (pick-wt=6): 358 [hyper,22,9,20,17,demod] CP(6,9,6,0,6).
+** KEPT (pick-wt=6): 359 [hyper,22,9,20,16,demod] CP(6,9,5,1,5).
+** KEPT (pick-wt=6): 360 [hyper,22,9,20,15,demod] CP(6,9,4,2,4).
+** KEPT (pick-wt=6): 361 [hyper,22,9,20,14,demod] CP(6,9,3,3,3).
+** KEPT (pick-wt=6): 362 [hyper,22,9,20,13,demod] CP(6,9,2,4,2).
+** KEPT (pick-wt=6): 363 [hyper,22,9,20,12,demod] CP(6,9,1,5,1).
+** KEPT (pick-wt=6): 364 [hyper,22,9,20,11,demod] CP(6,9,0,6,0).
+** KEPT (pick-wt=6): 365 [hyper,22,9,19,20,demod] CP(6,8,9,8,7).
+** KEPT (pick-wt=6): 366 [hyper,22,9,19,19,demod] CP(6,8,8,0,7).
+** KEPT (pick-wt=6): 367 [hyper,22,9,19,18,demod] CP(6,8,7,2,6).
+** KEPT (pick-wt=6): 368 [hyper,22,9,19,17,demod] CP(6,8,6,4,5).
+** KEPT (pick-wt=6): 369 [hyper,22,9,19,16,demod] CP(6,8,5,6,4).
+** KEPT (pick-wt=6): 370 [hyper,22,9,19,15,demod] CP(6,8,4,8,3).
+** KEPT (pick-wt=6): 371 [hyper,22,9,19,14,demod] CP(6,8,3,0,3).
+** KEPT (pick-wt=6): 372 [hyper,22,9,19,13,demod] CP(6,8,2,2,2).
+** KEPT (pick-wt=6): 373 [hyper,22,9,19,12,demod] CP(6,8,1,4,1).
+** KEPT (pick-wt=6): 374 [hyper,22,9,19,11,demod] CP(6,8,0,6,0).
+** KEPT (pick-wt=6): 375 [hyper,22,9,18,20,demod] CP(6,7,9,9,6).
+** KEPT (pick-wt=6): 376 [hyper,22,9,18,19,demod] CP(6,7,8,2,6).
+** KEPT (pick-wt=6): 377 [hyper,22,9,18,18,demod] CP(6,7,7,5,5).
+** KEPT (pick-wt=6): 378 [hyper,22,9,18,17,demod] CP(6,7,6,8,4).
+** KEPT (pick-wt=6): 379 [hyper,22,9,18,16,demod] CP(6,7,5,1,4).
+** KEPT (pick-wt=6): 380 [hyper,22,9,18,15,demod] CP(6,7,4,4,3).
+** KEPT (pick-wt=6): 381 [hyper,22,9,18,14,demod] CP(6,7,3,7,2).
+** KEPT (pick-wt=6): 382 [hyper,22,9,18,13,demod] CP(6,7,2,0,2).
+** KEPT (pick-wt=6): 383 [hyper,22,9,18,12,demod] CP(6,7,1,3,1).
+** KEPT (pick-wt=6): 384 [hyper,22,9,18,11,demod] CP(6,7,0,6,0).
+** KEPT (pick-wt=6): 385 [hyper,22,9,17,20,demod] CP(6,6,9,0,6).
+** KEPT (pick-wt=6): 386 [hyper,22,9,17,19,demod] CP(6,6,8,4,5).
+** KEPT (pick-wt=6): 387 [hyper,22,9,17,18,demod] CP(6,6,7,8,4).
+** KEPT (pick-wt=6): 388 [hyper,22,9,17,17,demod] CP(6,6,6,2,4).
+** KEPT (pick-wt=6): 389 [hyper,22,9,17,16,demod] CP(6,6,5,6,3).
+** KEPT (pick-wt=6): 390 [hyper,22,9,17,15,demod] CP(6,6,4,0,3).
+** KEPT (pick-wt=6): 391 [hyper,22,9,17,14,demod] CP(6,6,3,4,2).
+** KEPT (pick-wt=6): 392 [hyper,22,9,17,13,demod] CP(6,6,2,8,1).
+** KEPT (pick-wt=6): 393 [hyper,22,9,17,12,demod] CP(6,6,1,2,1).
+** KEPT (pick-wt=6): 394 [hyper,22,9,17,11,demod] CP(6,6,0,6,0).
+** KEPT (pick-wt=6): 395 [hyper,22,9,16,20,demod] CP(6,5,9,1,5).
+** KEPT (pick-wt=6): 396 [hyper,22,9,16,19,demod] CP(6,5,8,6,4).
+** KEPT (pick-wt=6): 397 [hyper,22,9,16,18,demod] CP(6,5,7,1,4).
+** KEPT (pick-wt=6): 398 [hyper,22,9,16,17,demod] CP(6,5,6,6,3).
+** KEPT (pick-wt=6): 399 [hyper,22,9,16,16,demod] CP(6,5,5,1,3).
+** KEPT (pick-wt=6): 400 [hyper,22,9,16,15,demod] CP(6,5,4,6,2).
+** KEPT (pick-wt=6): 401 [hyper,22,9,16,14,demod] CP(6,5,3,1,2).
+** KEPT (pick-wt=6): 402 [hyper,22,9,16,13,demod] CP(6,5,2,6,1).
+** KEPT (pick-wt=6): 403 [hyper,22,9,16,12,demod] CP(6,5,1,1,1).
+** KEPT (pick-wt=6): 404 [hyper,22,9,16,11,demod] CP(6,5,0,6,0).
+** KEPT (pick-wt=6): 405 [hyper,22,9,15,20,demod] CP(6,4,9,2,4).
+** KEPT (pick-wt=6): 406 [hyper,22,9,15,19,demod] CP(6,4,8,8,3).
+** KEPT (pick-wt=6): 407 [hyper,22,9,15,18,demod] CP(6,4,7,4,3).
+** KEPT (pick-wt=6): 408 [hyper,22,9,15,17,demod] CP(6,4,6,0,3).
+** KEPT (pick-wt=6): 409 [hyper,22,9,15,16,demod] CP(6,4,5,6,2).
+** KEPT (pick-wt=6): 410 [hyper,22,9,15,15,demod] CP(6,4,4,2,2).
+** KEPT (pick-wt=6): 411 [hyper,22,9,15,14,demod] CP(6,4,3,8,1).
+** KEPT (pick-wt=6): 412 [hyper,22,9,15,13,demod] CP(6,4,2,4,1).
+** KEPT (pick-wt=6): 413 [hyper,22,9,15,12,demod] CP(6,4,1,0,1).
+** KEPT (pick-wt=6): 414 [hyper,22,9,15,11,demod] CP(6,4,0,6,0).
+** KEPT (pick-wt=6): 415 [hyper,22,9,14,20,demod] CP(6,3,9,3,3).
+** KEPT (pick-wt=6): 416 [hyper,22,9,14,19,demod] CP(6,3,8,0,3).
+** KEPT (pick-wt=6): 417 [hyper,22,9,14,18,demod] CP(6,3,7,7,2).
+** KEPT (pick-wt=6): 418 [hyper,22,9,14,17,demod] CP(6,3,6,4,2).
+** KEPT (pick-wt=6): 419 [hyper,22,9,14,16,demod] CP(6,3,5,1,2).
+** KEPT (pick-wt=6): 420 [hyper,22,9,14,15,demod] CP(6,3,4,8,1).
+** KEPT (pick-wt=6): 421 [hyper,22,9,14,14,demod] CP(6,3,3,5,1).
+** KEPT (pick-wt=6): 422 [hyper,22,9,14,13,demod] CP(6,3,2,2,1).
+** KEPT (pick-wt=6): 423 [hyper,22,9,14,12,demod] CP(6,3,1,9,0).
+** KEPT (pick-wt=6): 424 [hyper,22,9,14,11,demod] CP(6,3,0,6,0).
+** KEPT (pick-wt=6): 425 [hyper,22,9,13,20,demod] CP(6,2,9,4,2).
+** KEPT (pick-wt=6): 426 [hyper,22,9,13,19,demod] CP(6,2,8,2,2).
+** KEPT (pick-wt=6): 427 [hyper,22,9,13,18,demod] CP(6,2,7,0,2).
+** KEPT (pick-wt=6): 428 [hyper,22,9,13,17,demod] CP(6,2,6,8,1).
+** KEPT (pick-wt=6): 429 [hyper,22,9,13,16,demod] CP(6,2,5,6,1).
+** KEPT (pick-wt=6): 430 [hyper,22,9,13,15,demod] CP(6,2,4,4,1).
+** KEPT (pick-wt=6): 431 [hyper,22,9,13,14,demod] CP(6,2,3,2,1).
+** KEPT (pick-wt=6): 432 [hyper,22,9,13,13,demod] CP(6,2,2,0,1).
+** KEPT (pick-wt=6): 433 [hyper,22,9,13,12,demod] CP(6,2,1,8,0).
+** KEPT (pick-wt=6): 434 [hyper,22,9,13,11,demod] CP(6,2,0,6,0).
+** KEPT (pick-wt=6): 435 [hyper,22,9,12,20,demod] CP(6,1,9,5,1).
+** KEPT (pick-wt=6): 436 [hyper,22,9,12,19,demod] CP(6,1,8,4,1).
+** KEPT (pick-wt=6): 437 [hyper,22,9,12,18,demod] CP(6,1,7,3,1).
+** KEPT (pick-wt=6): 438 [hyper,22,9,12,17,demod] CP(6,1,6,2,1).
+** KEPT (pick-wt=6): 439 [hyper,22,9,12,16,demod] CP(6,1,5,1,1).
+** KEPT (pick-wt=6): 440 [hyper,22,9,12,15,demod] CP(6,1,4,0,1).
+** KEPT (pick-wt=6): 441 [hyper,22,9,12,14,demod] CP(6,1,3,9,0).
+** KEPT (pick-wt=6): 442 [hyper,22,9,12,13,demod] CP(6,1,2,8,0).
+** KEPT (pick-wt=6): 443 [hyper,22,9,12,12,demod] CP(6,1,1,7,0).
+** KEPT (pick-wt=6): 444 [hyper,22,9,12,11,demod] CP(6,1,0,6,0).
+** KEPT (pick-wt=6): 445 [hyper,22,9,11,20,demod] CP(6,0,9,6,0).
+** KEPT (pick-wt=6): 446 [hyper,22,9,11,19,demod] CP(6,0,8,6,0).
+** KEPT (pick-wt=6): 447 [hyper,22,9,11,18,demod] CP(6,0,7,6,0).
+** KEPT (pick-wt=6): 448 [hyper,22,9,11,17,demod] CP(6,0,6,6,0).
+** KEPT (pick-wt=6): 449 [hyper,22,9,11,16,demod] CP(6,0,5,6,0).
+** KEPT (pick-wt=6): 450 [hyper,22,9,11,15,demod] CP(6,0,4,6,0).
+** KEPT (pick-wt=6): 451 [hyper,22,9,11,14,demod] CP(6,0,3,6,0).
+** KEPT (pick-wt=6): 452 [hyper,22,9,11,13,demod] CP(6,0,2,6,0).
+** KEPT (pick-wt=6): 453 [hyper,22,9,11,12,demod] CP(6,0,1,6,0).
+** KEPT (pick-wt=6): 454 [hyper,22,9,11,11,demod] CP(6,0,0,6,0).
+** KEPT (pick-wt=6): 455 [hyper,22,8,20,20,demod] CP(5,9,9,6,8).
+** KEPT (pick-wt=6): 456 [hyper,22,8,20,19,demod] CP(5,9,8,7,7).
+** KEPT (pick-wt=6): 457 [hyper,22,8,20,18,demod] CP(5,9,7,8,6).
+** KEPT (pick-wt=6): 458 [hyper,22,8,20,17,demod] CP(5,9,6,9,5).
+** KEPT (pick-wt=6): 459 [hyper,22,8,20,16,demod] CP(5,9,5,0,5).
+** KEPT (pick-wt=6): 460 [hyper,22,8,20,15,demod] CP(5,9,4,1,4).
+** KEPT (pick-wt=6): 461 [hyper,22,8,20,14,demod] CP(5,9,3,2,3).
+** KEPT (pick-wt=6): 462 [hyper,22,8,20,13,demod] CP(5,9,2,3,2).
+** KEPT (pick-wt=6): 463 [hyper,22,8,20,12,demod] CP(5,9,1,4,1).
+** KEPT (pick-wt=6): 464 [hyper,22,8,20,11,demod] CP(5,9,0,5,0).
+** KEPT (pick-wt=6): 465 [hyper,22,8,19,20,demod] CP(5,8,9,7,7).
+** KEPT (pick-wt=6): 466 [hyper,22,8,19,19,demod] CP(5,8,8,9,6).
+** KEPT (pick-wt=6): 467 [hyper,22,8,19,18,demod] CP(5,8,7,1,6).
+** KEPT (pick-wt=6): 468 [hyper,22,8,19,17,demod] CP(5,8,6,3,5).
+** KEPT (pick-wt=6): 469 [hyper,22,8,19,16,demod] CP(5,8,5,5,4).
+** KEPT (pick-wt=6): 470 [hyper,22,8,19,15,demod] CP(5,8,4,7,3).
+** KEPT (pick-wt=6): 471 [hyper,22,8,19,14,demod] CP(5,8,3,9,2).
+** KEPT (pick-wt=6): 472 [hyper,22,8,19,13,demod] CP(5,8,2,1,2).
+** KEPT (pick-wt=6): 473 [hyper,22,8,19,12,demod] CP(5,8,1,3,1).
+** KEPT (pick-wt=6): 474 [hyper,22,8,19,11,demod] CP(5,8,0,5,0).
+** KEPT (pick-wt=6): 475 [hyper,22,8,18,20,demod] CP(5,7,9,8,6).
+** KEPT (pick-wt=6): 476 [hyper,22,8,18,19,demod] CP(5,7,8,1,6).
+** KEPT (pick-wt=6): 477 [hyper,22,8,18,18,demod] CP(5,7,7,4,5).
+** KEPT (pick-wt=6): 478 [hyper,22,8,18,17,demod] CP(5,7,6,7,4).
+** KEPT (pick-wt=6): 479 [hyper,22,8,18,16,demod] CP(5,7,5,0,4).
+** KEPT (pick-wt=6): 480 [hyper,22,8,18,15,demod] CP(5,7,4,3,3).
+** KEPT (pick-wt=6): 481 [hyper,22,8,18,14,demod] CP(5,7,3,6,2).
+** KEPT (pick-wt=6): 482 [hyper,22,8,18,13,demod] CP(5,7,2,9,1).
+** KEPT (pick-wt=6): 483 [hyper,22,8,18,12,demod] CP(5,7,1,2,1).
+** KEPT (pick-wt=6): 484 [hyper,22,8,18,11,demod] CP(5,7,0,5,0).
+** KEPT (pick-wt=6): 485 [hyper,22,8,17,20,demod] CP(5,6,9,9,5).
+** KEPT (pick-wt=6): 486 [hyper,22,8,17,19,demod] CP(5,6,8,3,5).
+** KEPT (pick-wt=6): 487 [hyper,22,8,17,18,demod] CP(5,6,7,7,4).
+** KEPT (pick-wt=6): 488 [hyper,22,8,17,17,demod] CP(5,6,6,1,4).
+** KEPT (pick-wt=6): 489 [hyper,22,8,17,16,demod] CP(5,6,5,5,3).
+** KEPT (pick-wt=6): 490 [hyper,22,8,17,15,demod] CP(5,6,4,9,2).
+** KEPT (pick-wt=6): 491 [hyper,22,8,17,14,demod] CP(5,6,3,3,2).
+** KEPT (pick-wt=6): 492 [hyper,22,8,17,13,demod] CP(5,6,2,7,1).
+** KEPT (pick-wt=6): 493 [hyper,22,8,17,12,demod] CP(5,6,1,1,1).
+** KEPT (pick-wt=6): 494 [hyper,22,8,17,11,demod] CP(5,6,0,5,0).
+** KEPT (pick-wt=6): 495 [hyper,22,8,16,20,demod] CP(5,5,9,0,5).
+** KEPT (pick-wt=6): 496 [hyper,22,8,16,19,demod] CP(5,5,8,5,4).
+** KEPT (pick-wt=6): 497 [hyper,22,8,16,18,demod] CP(5,5,7,0,4).
+** KEPT (pick-wt=6): 498 [hyper,22,8,16,17,demod] CP(5,5,6,5,3).
+** KEPT (pick-wt=6): 499 [hyper,22,8,16,16,demod] CP(5,5,5,0,3).
+** KEPT (pick-wt=6): 500 [hyper,22,8,16,15,demod] CP(5,5,4,5,2).
+** KEPT (pick-wt=6): 501 [hyper,22,8,16,14,demod] CP(5,5,3,0,2).
+** KEPT (pick-wt=6): 502 [hyper,22,8,16,13,demod] CP(5,5,2,5,1).
+** KEPT (pick-wt=6): 503 [hyper,22,8,16,12,demod] CP(5,5,1,0,1).
+** KEPT (pick-wt=6): 504 [hyper,22,8,16,11,demod] CP(5,5,0,5,0).
+** KEPT (pick-wt=6): 505 [hyper,22,8,15,20,demod] CP(5,4,9,1,4).
+** KEPT (pick-wt=6): 506 [hyper,22,8,15,19,demod] CP(5,4,8,7,3).
+** KEPT (pick-wt=6): 507 [hyper,22,8,15,18,demod] CP(5,4,7,3,3).
+** KEPT (pick-wt=6): 508 [hyper,22,8,15,17,demod] CP(5,4,6,9,2).
+** KEPT (pick-wt=6): 509 [hyper,22,8,15,16,demod] CP(5,4,5,5,2).
+** KEPT (pick-wt=6): 510 [hyper,22,8,15,15,demod] CP(5,4,4,1,2).
+** KEPT (pick-wt=6): 511 [hyper,22,8,15,14,demod] CP(5,4,3,7,1).
+** KEPT (pick-wt=6): 512 [hyper,22,8,15,13,demod] CP(5,4,2,3,1).
+** KEPT (pick-wt=6): 513 [hyper,22,8,15,12,demod] CP(5,4,1,9,0).
+** KEPT (pick-wt=6): 514 [hyper,22,8,15,11,demod] CP(5,4,0,5,0).
+** KEPT (pick-wt=6): 515 [hyper,22,8,14,20,demod] CP(5,3,9,2,3).
+** KEPT (pick-wt=6): 516 [hyper,22,8,14,19,demod] CP(5,3,8,9,2).
+** KEPT (pick-wt=6): 517 [hyper,22,8,14,18,demod] CP(5,3,7,6,2).
+** KEPT (pick-wt=6): 518 [hyper,22,8,14,17,demod] CP(5,3,6,3,2).
+** KEPT (pick-wt=6): 519 [hyper,22,8,14,16,demod] CP(5,3,5,0,2).
+** KEPT (pick-wt=6): 520 [hyper,22,8,14,15,demod] CP(5,3,4,7,1).
+** KEPT (pick-wt=6): 521 [hyper,22,8,14,14,demod] CP(5,3,3,4,1).
+** KEPT (pick-wt=6): 522 [hyper,22,8,14,13,demod] CP(5,3,2,1,1).
+** KEPT (pick-wt=6): 523 [hyper,22,8,14,12,demod] CP(5,3,1,8,0).
+** KEPT (pick-wt=6): 524 [hyper,22,8,14,11,demod] CP(5,3,0,5,0).
+** KEPT (pick-wt=6): 525 [hyper,22,8,13,20,demod] CP(5,2,9,3,2).
+** KEPT (pick-wt=6): 526 [hyper,22,8,13,19,demod] CP(5,2,8,1,2).
+** KEPT (pick-wt=6): 527 [hyper,22,8,13,18,demod] CP(5,2,7,9,1).
+** KEPT (pick-wt=6): 528 [hyper,22,8,13,17,demod] CP(5,2,6,7,1).
+** KEPT (pick-wt=6): 529 [hyper,22,8,13,16,demod] CP(5,2,5,5,1).
+** KEPT (pick-wt=6): 530 [hyper,22,8,13,15,demod] CP(5,2,4,3,1).
+** KEPT (pick-wt=6): 531 [hyper,22,8,13,14,demod] CP(5,2,3,1,1).
+** KEPT (pick-wt=6): 532 [hyper,22,8,13,13,demod] CP(5,2,2,9,0).
+** KEPT (pick-wt=6): 533 [hyper,22,8,13,12,demod] CP(5,2,1,7,0).
+** KEPT (pick-wt=6): 534 [hyper,22,8,13,11,demod] CP(5,2,0,5,0).
+** KEPT (pick-wt=6): 535 [hyper,22,8,12,20,demod] CP(5,1,9,4,1).
+** KEPT (pick-wt=6): 536 [hyper,22,8,12,19,demod] CP(5,1,8,3,1).
+** KEPT (pick-wt=6): 537 [hyper,22,8,12,18,demod] CP(5,1,7,2,1).
+** KEPT (pick-wt=6): 538 [hyper,22,8,12,17,demod] CP(5,1,6,1,1).
+** KEPT (pick-wt=6): 539 [hyper,22,8,12,16,demod] CP(5,1,5,0,1).
+** KEPT (pick-wt=6): 540 [hyper,22,8,12,15,demod] CP(5,1,4,9,0).
+** KEPT (pick-wt=6): 541 [hyper,22,8,12,14,demod] CP(5,1,3,8,0).
+** KEPT (pick-wt=6): 542 [hyper,22,8,12,13,demod] CP(5,1,2,7,0).
+** KEPT (pick-wt=6): 543 [hyper,22,8,12,12,demod] CP(5,1,1,6,0).
+** KEPT (pick-wt=6): 544 [hyper,22,8,12,11,demod] CP(5,1,0,5,0).
+** KEPT (pick-wt=6): 545 [hyper,22,8,11,20,demod] CP(5,0,9,5,0).
+** KEPT (pick-wt=6): 546 [hyper,22,8,11,19,demod] CP(5,0,8,5,0).
+** KEPT (pick-wt=6): 547 [hyper,22,8,11,18,demod] CP(5,0,7,5,0).
+** KEPT (pick-wt=6): 548 [hyper,22,8,11,17,demod] CP(5,0,6,5,0).
+** KEPT (pick-wt=6): 549 [hyper,22,8,11,16,demod] CP(5,0,5,5,0).
+** KEPT (pick-wt=6): 550 [hyper,22,8,11,15,demod] CP(5,0,4,5,0).
+** KEPT (pick-wt=6): 551 [hyper,22,8,11,14,demod] CP(5,0,3,5,0).
+** KEPT (pick-wt=6): 552 [hyper,22,8,11,13,demod] CP(5,0,2,5,0).
+** KEPT (pick-wt=6): 553 [hyper,22,8,11,12,demod] CP(5,0,1,5,0).
+** KEPT (pick-wt=6): 554 [hyper,22,8,11,11,demod] CP(5,0,0,5,0).
+** KEPT (pick-wt=6): 555 [hyper,22,7,20,20,demod] CP(4,9,9,5,8).
+** KEPT (pick-wt=6): 556 [hyper,22,7,20,19,demod] CP(4,9,8,6,7).
+** KEPT (pick-wt=6): 557 [hyper,22,7,20,18,demod] CP(4,9,7,7,6).
+** KEPT (pick-wt=6): 558 [hyper,22,7,20,17,demod] CP(4,9,6,8,5).
+** KEPT (pick-wt=6): 559 [hyper,22,7,20,16,demod] CP(4,9,5,9,4).
+** KEPT (pick-wt=6): 560 [hyper,22,7,20,15,demod] CP(4,9,4,0,4).
+** KEPT (pick-wt=6): 561 [hyper,22,7,20,14,demod] CP(4,9,3,1,3).
+** KEPT (pick-wt=6): 562 [hyper,22,7,20,13,demod] CP(4,9,2,2,2).
+** KEPT (pick-wt=6): 563 [hyper,22,7,20,12,demod] CP(4,9,1,3,1).
+** KEPT (pick-wt=6): 564 [hyper,22,7,20,11,demod] CP(4,9,0,4,0).
+** KEPT (pick-wt=6): 565 [hyper,22,7,19,20,demod] CP(4,8,9,6,7).
+** KEPT (pick-wt=6): 566 [hyper,22,7,19,19,demod] CP(4,8,8,8,6).
+** KEPT (pick-wt=6): 567 [hyper,22,7,19,18,demod] CP(4,8,7,0,6).
+** KEPT (pick-wt=6): 568 [hyper,22,7,19,17,demod] CP(4,8,6,2,5).
+** KEPT (pick-wt=6): 569 [hyper,22,7,19,16,demod] CP(4,8,5,4,4).
+** KEPT (pick-wt=6): 570 [hyper,22,7,19,15,demod] CP(4,8,4,6,3).
+** KEPT (pick-wt=6): 571 [hyper,22,7,19,14,demod] CP(4,8,3,8,2).
+** KEPT (pick-wt=6): 572 [hyper,22,7,19,13,demod] CP(4,8,2,0,2).
+** KEPT (pick-wt=6): 573 [hyper,22,7,19,12,demod] CP(4,8,1,2,1).
+** KEPT (pick-wt=6): 574 [hyper,22,7,19,11,demod] CP(4,8,0,4,0).
+** KEPT (pick-wt=6): 575 [hyper,22,7,18,20,demod] CP(4,7,9,7,6).
+** KEPT (pick-wt=6): 576 [hyper,22,7,18,19,demod] CP(4,7,8,0,6).
+** KEPT (pick-wt=6): 577 [hyper,22,7,18,18,demod] CP(4,7,7,3,5).
+** KEPT (pick-wt=6): 578 [hyper,22,7,18,17,demod] CP(4,7,6,6,4).
+** KEPT (pick-wt=6): 579 [hyper,22,7,18,16,demod] CP(4,7,5,9,3).
+** KEPT (pick-wt=6): 580 [hyper,22,7,18,15,demod] CP(4,7,4,2,3).
+** KEPT (pick-wt=6): 581 [hyper,22,7,18,14,demod] CP(4,7,3,5,2).
+** KEPT (pick-wt=6): 582 [hyper,22,7,18,13,demod] CP(4,7,2,8,1).
+** KEPT (pick-wt=6): 583 [hyper,22,7,18,12,demod] CP(4,7,1,1,1).
+** KEPT (pick-wt=6): 584 [hyper,22,7,18,11,demod] CP(4,7,0,4,0).
+** KEPT (pick-wt=6): 585 [hyper,22,7,17,20,demod] CP(4,6,9,8,5).
+** KEPT (pick-wt=6): 586 [hyper,22,7,17,19,demod] CP(4,6,8,2,5).
+** KEPT (pick-wt=6): 587 [hyper,22,7,17,18,demod] CP(4,6,7,6,4).
+** KEPT (pick-wt=6): 588 [hyper,22,7,17,17,demod] CP(4,6,6,0,4).
+** KEPT (pick-wt=6): 589 [hyper,22,7,17,16,demod] CP(4,6,5,4,3).
+** KEPT (pick-wt=6): 590 [hyper,22,7,17,15,demod] CP(4,6,4,8,2).
+** KEPT (pick-wt=6): 591 [hyper,22,7,17,14,demod] CP(4,6,3,2,2).
+** KEPT (pick-wt=6): 592 [hyper,22,7,17,13,demod] CP(4,6,2,6,1).
+** KEPT (pick-wt=6): 593 [hyper,22,7,17,12,demod] CP(4,6,1,0,1).
+** KEPT (pick-wt=6): 594 [hyper,22,7,17,11,demod] CP(4,6,0,4,0).
+** KEPT (pick-wt=6): 595 [hyper,22,7,16,20,demod] CP(4,5,9,9,4).
+** KEPT (pick-wt=6): 596 [hyper,22,7,16,19,demod] CP(4,5,8,4,4).
+** KEPT (pick-wt=6): 597 [hyper,22,7,16,18,demod] CP(4,5,7,9,3).
+** KEPT (pick-wt=6): 598 [hyper,22,7,16,17,demod] CP(4,5,6,4,3).
+** KEPT (pick-wt=6): 599 [hyper,22,7,16,16,demod] CP(4,5,5,9,2).
+** KEPT (pick-wt=6): 600 [hyper,22,7,16,15,demod] CP(4,5,4,4,2).
+** KEPT (pick-wt=6): 601 [hyper,22,7,16,14,demod] CP(4,5,3,9,1).
+** KEPT (pick-wt=6): 602 [hyper,22,7,16,13,demod] CP(4,5,2,4,1).
+** KEPT (pick-wt=6): 603 [hyper,22,7,16,12,demod] CP(4,5,1,9,0).
+** KEPT (pick-wt=6): 604 [hyper,22,7,16,11,demod] CP(4,5,0,4,0).
+** KEPT (pick-wt=6): 605 [hyper,22,7,15,20,demod] CP(4,4,9,0,4).
+** KEPT (pick-wt=6): 606 [hyper,22,7,15,19,demod] CP(4,4,8,6,3).
+** KEPT (pick-wt=6): 607 [hyper,22,7,15,18,demod] CP(4,4,7,2,3).
+** KEPT (pick-wt=6): 608 [hyper,22,7,15,17,demod] CP(4,4,6,8,2).
+** KEPT (pick-wt=6): 609 [hyper,22,7,15,16,demod] CP(4,4,5,4,2).
+** KEPT (pick-wt=6): 610 [hyper,22,7,15,15,demod] CP(4,4,4,0,2).
+** KEPT (pick-wt=6): 611 [hyper,22,7,15,14,demod] CP(4,4,3,6,1).
+** KEPT (pick-wt=6): 612 [hyper,22,7,15,13,demod] CP(4,4,2,2,1).
+** KEPT (pick-wt=6): 613 [hyper,22,7,15,12,demod] CP(4,4,1,8,0).
+** KEPT (pick-wt=6): 614 [hyper,22,7,15,11,demod] CP(4,4,0,4,0).
+** KEPT (pick-wt=6): 615 [hyper,22,7,14,20,demod] CP(4,3,9,1,3).
+** KEPT (pick-wt=6): 616 [hyper,22,7,14,19,demod] CP(4,3,8,8,2).
+** KEPT (pick-wt=6): 617 [hyper,22,7,14,18,demod] CP(4,3,7,5,2).
+** KEPT (pick-wt=6): 618 [hyper,22,7,14,17,demod] CP(4,3,6,2,2).
+** KEPT (pick-wt=6): 619 [hyper,22,7,14,16,demod] CP(4,3,5,9,1).
+** KEPT (pick-wt=6): 620 [hyper,22,7,14,15,demod] CP(4,3,4,6,1).
+** KEPT (pick-wt=6): 621 [hyper,22,7,14,14,demod] CP(4,3,3,3,1).
+** KEPT (pick-wt=6): 622 [hyper,22,7,14,13,demod] CP(4,3,2,0,1).
+** KEPT (pick-wt=6): 623 [hyper,22,7,14,12,demod] CP(4,3,1,7,0).
+** KEPT (pick-wt=6): 624 [hyper,22,7,14,11,demod] CP(4,3,0,4,0).
+** KEPT (pick-wt=6): 625 [hyper,22,7,13,20,demod] CP(4,2,9,2,2).
+** KEPT (pick-wt=6): 626 [hyper,22,7,13,19,demod] CP(4,2,8,0,2).
+** KEPT (pick-wt=6): 627 [hyper,22,7,13,18,demod] CP(4,2,7,8,1).
+** KEPT (pick-wt=6): 628 [hyper,22,7,13,17,demod] CP(4,2,6,6,1).
+** KEPT (pick-wt=6): 629 [hyper,22,7,13,16,demod] CP(4,2,5,4,1).
+** KEPT (pick-wt=6): 630 [hyper,22,7,13,15,demod] CP(4,2,4,2,1).
+** KEPT (pick-wt=6): 631 [hyper,22,7,13,14,demod] CP(4,2,3,0,1).
+** KEPT (pick-wt=6): 632 [hyper,22,7,13,13,demod] CP(4,2,2,8,0).
+** KEPT (pick-wt=6): 633 [hyper,22,7,13,12,demod] CP(4,2,1,6,0).
+** KEPT (pick-wt=6): 634 [hyper,22,7,13,11,demod] CP(4,2,0,4,0).
+** KEPT (pick-wt=6): 635 [hyper,22,7,12,20,demod] CP(4,1,9,3,1).
+** KEPT (pick-wt=6): 636 [hyper,22,7,12,19,demod] CP(4,1,8,2,1).
+** KEPT (pick-wt=6): 637 [hyper,22,7,12,18,demod] CP(4,1,7,1,1).
+** KEPT (pick-wt=6): 638 [hyper,22,7,12,17,demod] CP(4,1,6,0,1).
+** KEPT (pick-wt=6): 639 [hyper,22,7,12,16,demod] CP(4,1,5,9,0).
+** KEPT (pick-wt=6): 640 [hyper,22,7,12,15,demod] CP(4,1,4,8,0).
+** KEPT (pick-wt=6): 641 [hyper,22,7,12,14,demod] CP(4,1,3,7,0).
+** KEPT (pick-wt=6): 642 [hyper,22,7,12,13,demod] CP(4,1,2,6,0).
+** KEPT (pick-wt=6): 643 [hyper,22,7,12,12,demod] CP(4,1,1,5,0).
+** KEPT (pick-wt=6): 644 [hyper,22,7,12,11,demod] CP(4,1,0,4,0).
+** KEPT (pick-wt=6): 645 [hyper,22,7,11,20,demod] CP(4,0,9,4,0).
+** KEPT (pick-wt=6): 646 [hyper,22,7,11,19,demod] CP(4,0,8,4,0).
+** KEPT (pick-wt=6): 647 [hyper,22,7,11,18,demod] CP(4,0,7,4,0).
+** KEPT (pick-wt=6): 648 [hyper,22,7,11,17,demod] CP(4,0,6,4,0).
+** KEPT (pick-wt=6): 649 [hyper,22,7,11,16,demod] CP(4,0,5,4,0).
+** KEPT (pick-wt=6): 650 [hyper,22,7,11,15,demod] CP(4,0,4,4,0).
+** KEPT (pick-wt=6): 651 [hyper,22,7,11,14,demod] CP(4,0,3,4,0).
+** KEPT (pick-wt=6): 652 [hyper,22,7,11,13,demod] CP(4,0,2,4,0).
+** KEPT (pick-wt=6): 653 [hyper,22,7,11,12,demod] CP(4,0,1,4,0).
+** KEPT (pick-wt=6): 654 [hyper,22,7,11,11,demod] CP(4,0,0,4,0).
+** KEPT (pick-wt=6): 655 [hyper,22,6,20,20,demod] CP(3,9,9,4,8).
+** KEPT (pick-wt=6): 656 [hyper,22,6,20,19,demod] CP(3,9,8,5,7).
+** KEPT (pick-wt=6): 657 [hyper,22,6,20,18,demod] CP(3,9,7,6,6).
+** KEPT (pick-wt=6): 658 [hyper,22,6,20,17,demod] CP(3,9,6,7,5).
+** KEPT (pick-wt=6): 659 [hyper,22,6,20,16,demod] CP(3,9,5,8,4).
+** KEPT (pick-wt=6): 660 [hyper,22,6,20,15,demod] CP(3,9,4,9,3).
+** KEPT (pick-wt=6): 661 [hyper,22,6,20,14,demod] CP(3,9,3,0,3).
+** KEPT (pick-wt=6): 662 [hyper,22,6,20,13,demod] CP(3,9,2,1,2).
+** KEPT (pick-wt=6): 663 [hyper,22,6,20,12,demod] CP(3,9,1,2,1).
+** KEPT (pick-wt=6): 664 [hyper,22,6,20,11,demod] CP(3,9,0,3,0).
+** KEPT (pick-wt=6): 665 [hyper,22,6,19,20,demod] CP(3,8,9,5,7).
+** KEPT (pick-wt=6): 666 [hyper,22,6,19,19,demod] CP(3,8,8,7,6).
+** KEPT (pick-wt=6): 667 [hyper,22,6,19,18,demod] CP(3,8,7,9,5).
+** KEPT (pick-wt=6): 668 [hyper,22,6,19,17,demod] CP(3,8,6,1,5).
+** KEPT (pick-wt=6): 669 [hyper,22,6,19,16,demod] CP(3,8,5,3,4).
+** KEPT (pick-wt=6): 670 [hyper,22,6,19,15,demod] CP(3,8,4,5,3).
+** KEPT (pick-wt=6): 671 [hyper,22,6,19,14,demod] CP(3,8,3,7,2).
+** KEPT (pick-wt=6): 672 [hyper,22,6,19,13,demod] CP(3,8,2,9,1).
+** KEPT (pick-wt=6): 673 [hyper,22,6,19,12,demod] CP(3,8,1,1,1).
+** KEPT (pick-wt=6): 674 [hyper,22,6,19,11,demod] CP(3,8,0,3,0).
+** KEPT (pick-wt=6): 675 [hyper,22,6,18,20,demod] CP(3,7,9,6,6).
+** KEPT (pick-wt=6): 676 [hyper,22,6,18,19,demod] CP(3,7,8,9,5).
+** KEPT (pick-wt=6): 677 [hyper,22,6,18,18,demod] CP(3,7,7,2,5).
+** KEPT (pick-wt=6): 678 [hyper,22,6,18,17,demod] CP(3,7,6,5,4).
+** KEPT (pick-wt=6): 679 [hyper,22,6,18,16,demod] CP(3,7,5,8,3).
+** KEPT (pick-wt=6): 680 [hyper,22,6,18,15,demod] CP(3,7,4,1,3).
+** KEPT (pick-wt=6): 681 [hyper,22,6,18,14,demod] CP(3,7,3,4,2).
+** KEPT (pick-wt=6): 682 [hyper,22,6,18,13,demod] CP(3,7,2,7,1).
+** KEPT (pick-wt=6): 683 [hyper,22,6,18,12,demod] CP(3,7,1,0,1).
+** KEPT (pick-wt=6): 684 [hyper,22,6,18,11,demod] CP(3,7,0,3,0).
+** KEPT (pick-wt=6): 685 [hyper,22,6,17,20,demod] CP(3,6,9,7,5).
+** KEPT (pick-wt=6): 686 [hyper,22,6,17,19,demod] CP(3,6,8,1,5).
+** KEPT (pick-wt=6): 687 [hyper,22,6,17,18,demod] CP(3,6,7,5,4).
+** KEPT (pick-wt=6): 688 [hyper,22,6,17,17,demod] CP(3,6,6,9,3).
+** KEPT (pick-wt=6): 689 [hyper,22,6,17,16,demod] CP(3,6,5,3,3).
+** KEPT (pick-wt=6): 690 [hyper,22,6,17,15,demod] CP(3,6,4,7,2).
+** KEPT (pick-wt=6): 691 [hyper,22,6,17,14,demod] CP(3,6,3,1,2).
+** KEPT (pick-wt=6): 692 [hyper,22,6,17,13,demod] CP(3,6,2,5,1).
+** KEPT (pick-wt=6): 693 [hyper,22,6,17,12,demod] CP(3,6,1,9,0).
+** KEPT (pick-wt=6): 694 [hyper,22,6,17,11,demod] CP(3,6,0,3,0).
+** KEPT (pick-wt=6): 695 [hyper,22,6,16,20,demod] CP(3,5,9,8,4).
+** KEPT (pick-wt=6): 696 [hyper,22,6,16,19,demod] CP(3,5,8,3,4).
+** KEPT (pick-wt=6): 697 [hyper,22,6,16,18,demod] CP(3,5,7,8,3).
+** KEPT (pick-wt=6): 698 [hyper,22,6,16,17,demod] CP(3,5,6,3,3).
+** KEPT (pick-wt=6): 699 [hyper,22,6,16,16,demod] CP(3,5,5,8,2).
+** KEPT (pick-wt=6): 700 [hyper,22,6,16,15,demod] CP(3,5,4,3,2).
+** KEPT (pick-wt=6): 701 [hyper,22,6,16,14,demod] CP(3,5,3,8,1).
+** KEPT (pick-wt=6): 702 [hyper,22,6,16,13,demod] CP(3,5,2,3,1).
+** KEPT (pick-wt=6): 703 [hyper,22,6,16,12,demod] CP(3,5,1,8,0).
+** KEPT (pick-wt=6): 704 [hyper,22,6,16,11,demod] CP(3,5,0,3,0).
+** KEPT (pick-wt=6): 705 [hyper,22,6,15,20,demod] CP(3,4,9,9,3).
+** KEPT (pick-wt=6): 706 [hyper,22,6,15,19,demod] CP(3,4,8,5,3).
+** KEPT (pick-wt=6): 707 [hyper,22,6,15,18,demod] CP(3,4,7,1,3).
+** KEPT (pick-wt=6): 708 [hyper,22,6,15,17,demod] CP(3,4,6,7,2).
+** KEPT (pick-wt=6): 709 [hyper,22,6,15,16,demod] CP(3,4,5,3,2).
+** KEPT (pick-wt=6): 710 [hyper,22,6,15,15,demod] CP(3,4,4,9,1).
+** KEPT (pick-wt=6): 711 [hyper,22,6,15,14,demod] CP(3,4,3,5,1).
+** KEPT (pick-wt=6): 712 [hyper,22,6,15,13,demod] CP(3,4,2,1,1).
+** KEPT (pick-wt=6): 713 [hyper,22,6,15,12,demod] CP(3,4,1,7,0).
+** KEPT (pick-wt=6): 714 [hyper,22,6,15,11,demod] CP(3,4,0,3,0).
+** KEPT (pick-wt=6): 715 [hyper,22,6,14,20,demod] CP(3,3,9,0,3).
+** KEPT (pick-wt=6): 716 [hyper,22,6,14,19,demod] CP(3,3,8,7,2).
+** KEPT (pick-wt=6): 717 [hyper,22,6,14,18,demod] CP(3,3,7,4,2).
+** KEPT (pick-wt=6): 718 [hyper,22,6,14,17,demod] CP(3,3,6,1,2).
+** KEPT (pick-wt=6): 719 [hyper,22,6,14,16,demod] CP(3,3,5,8,1).
+** KEPT (pick-wt=6): 720 [hyper,22,6,14,15,demod] CP(3,3,4,5,1).
+** KEPT (pick-wt=6): 721 [hyper,22,6,14,14,demod] CP(3,3,3,2,1).
+** KEPT (pick-wt=6): 722 [hyper,22,6,14,13,demod] CP(3,3,2,9,0).
+** KEPT (pick-wt=6): 723 [hyper,22,6,14,12,demod] CP(3,3,1,6,0).
+** KEPT (pick-wt=6): 724 [hyper,22,6,14,11,demod] CP(3,3,0,3,0).
+** KEPT (pick-wt=6): 725 [hyper,22,6,13,20,demod] CP(3,2,9,1,2).
+** KEPT (pick-wt=6): 726 [hyper,22,6,13,19,demod] CP(3,2,8,9,1).
+** KEPT (pick-wt=6): 727 [hyper,22,6,13,18,demod] CP(3,2,7,7,1).
+** KEPT (pick-wt=6): 728 [hyper,22,6,13,17,demod] CP(3,2,6,5,1).
+** KEPT (pick-wt=6): 729 [hyper,22,6,13,16,demod] CP(3,2,5,3,1).
+** KEPT (pick-wt=6): 730 [hyper,22,6,13,15,demod] CP(3,2,4,1,1).
+** KEPT (pick-wt=6): 731 [hyper,22,6,13,14,demod] CP(3,2,3,9,0).
+** KEPT (pick-wt=6): 732 [hyper,22,6,13,13,demod] CP(3,2,2,7,0).
+** KEPT (pick-wt=6): 733 [hyper,22,6,13,12,demod] CP(3,2,1,5,0).
+** KEPT (pick-wt=6): 734 [hyper,22,6,13,11,demod] CP(3,2,0,3,0).
+** KEPT (pick-wt=6): 735 [hyper,22,6,12,20,demod] CP(3,1,9,2,1).
+** KEPT (pick-wt=6): 736 [hyper,22,6,12,19,demod] CP(3,1,8,1,1).
+** KEPT (pick-wt=6): 737 [hyper,22,6,12,18,demod] CP(3,1,7,0,1).
+** KEPT (pick-wt=6): 738 [hyper,22,6,12,17,demod] CP(3,1,6,9,0).
+** KEPT (pick-wt=6): 739 [hyper,22,6,12,16,demod] CP(3,1,5,8,0).
+** KEPT (pick-wt=6): 740 [hyper,22,6,12,15,demod] CP(3,1,4,7,0).
+** KEPT (pick-wt=6): 741 [hyper,22,6,12,14,demod] CP(3,1,3,6,0).
+** KEPT (pick-wt=6): 742 [hyper,22,6,12,13,demod] CP(3,1,2,5,0).
+** KEPT (pick-wt=6): 743 [hyper,22,6,12,12,demod] CP(3,1,1,4,0).
+** KEPT (pick-wt=6): 744 [hyper,22,6,12,11,demod] CP(3,1,0,3,0).
+** KEPT (pick-wt=6): 745 [hyper,22,6,11,20,demod] CP(3,0,9,3,0).
+** KEPT (pick-wt=6): 746 [hyper,22,6,11,19,demod] CP(3,0,8,3,0).
+** KEPT (pick-wt=6): 747 [hyper,22,6,11,18,demod] CP(3,0,7,3,0).
+** KEPT (pick-wt=6): 748 [hyper,22,6,11,17,demod] CP(3,0,6,3,0).
+** KEPT (pick-wt=6): 749 [hyper,22,6,11,16,demod] CP(3,0,5,3,0).
+** KEPT (pick-wt=6): 750 [hyper,22,6,11,15,demod] CP(3,0,4,3,0).
+** KEPT (pick-wt=6): 751 [hyper,22,6,11,14,demod] CP(3,0,3,3,0).
+** KEPT (pick-wt=6): 752 [hyper,22,6,11,13,demod] CP(3,0,2,3,0).
+** KEPT (pick-wt=6): 753 [hyper,22,6,11,12,demod] CP(3,0,1,3,0).
+** KEPT (pick-wt=6): 754 [hyper,22,6,11,11,demod] CP(3,0,0,3,0).
+** KEPT (pick-wt=6): 755 [hyper,22,5,20,20,demod] CP(2,9,9,3,8).
+** KEPT (pick-wt=6): 756 [hyper,22,5,20,19,demod] CP(2,9,8,4,7).
+** KEPT (pick-wt=6): 757 [hyper,22,5,20,18,demod] CP(2,9,7,5,6).
+** KEPT (pick-wt=6): 758 [hyper,22,5,20,17,demod] CP(2,9,6,6,5).
+** KEPT (pick-wt=6): 759 [hyper,22,5,20,16,demod] CP(2,9,5,7,4).
+** KEPT (pick-wt=6): 760 [hyper,22,5,20,15,demod] CP(2,9,4,8,3).
+** KEPT (pick-wt=6): 761 [hyper,22,5,20,14,demod] CP(2,9,3,9,2).
+** KEPT (pick-wt=6): 762 [hyper,22,5,20,13,demod] CP(2,9,2,0,2).
+** KEPT (pick-wt=6): 763 [hyper,22,5,20,12,demod] CP(2,9,1,1,1).
+** KEPT (pick-wt=6): 764 [hyper,22,5,20,11,demod] CP(2,9,0,2,0).
+** KEPT (pick-wt=6): 765 [hyper,22,5,19,20,demod] CP(2,8,9,4,7).
+** KEPT (pick-wt=6): 766 [hyper,22,5,19,19,demod] CP(2,8,8,6,6).
+** KEPT (pick-wt=6): 767 [hyper,22,5,19,18,demod] CP(2,8,7,8,5).
+** KEPT (pick-wt=6): 768 [hyper,22,5,19,17,demod] CP(2,8,6,0,5).
+** KEPT (pick-wt=6): 769 [hyper,22,5,19,16,demod] CP(2,8,5,2,4).
+** KEPT (pick-wt=6): 770 [hyper,22,5,19,15,demod] CP(2,8,4,4,3).
+** KEPT (pick-wt=6): 771 [hyper,22,5,19,14,demod] CP(2,8,3,6,2).
+** KEPT (pick-wt=6): 772 [hyper,22,5,19,13,demod] CP(2,8,2,8,1).
+** KEPT (pick-wt=6): 773 [hyper,22,5,19,12,demod] CP(2,8,1,0,1).
+** KEPT (pick-wt=6): 774 [hyper,22,5,19,11,demod] CP(2,8,0,2,0).
+** KEPT (pick-wt=6): 775 [hyper,22,5,18,20,demod] CP(2,7,9,5,6).
+** KEPT (pick-wt=6): 776 [hyper,22,5,18,19,demod] CP(2,7,8,8,5).
+** KEPT (pick-wt=6): 777 [hyper,22,5,18,18,demod] CP(2,7,7,1,5).
+** KEPT (pick-wt=6): 778 [hyper,22,5,18,17,demod] CP(2,7,6,4,4).
+** KEPT (pick-wt=6): 779 [hyper,22,5,18,16,demod] CP(2,7,5,7,3).
+** KEPT (pick-wt=6): 780 [hyper,22,5,18,15,demod] CP(2,7,4,0,3).
+** KEPT (pick-wt=6): 781 [hyper,22,5,18,14,demod] CP(2,7,3,3,2).
+** KEPT (pick-wt=6): 782 [hyper,22,5,18,13,demod] CP(2,7,2,6,1).
+** KEPT (pick-wt=6): 783 [hyper,22,5,18,12,demod] CP(2,7,1,9,0).
+** KEPT (pick-wt=6): 784 [hyper,22,5,18,11,demod] CP(2,7,0,2,0).
+** KEPT (pick-wt=6): 785 [hyper,22,5,17,20,demod] CP(2,6,9,6,5).
+** KEPT (pick-wt=6): 786 [hyper,22,5,17,19,demod] CP(2,6,8,0,5).
+** KEPT (pick-wt=6): 787 [hyper,22,5,17,18,demod] CP(2,6,7,4,4).
+** KEPT (pick-wt=6): 788 [hyper,22,5,17,17,demod] CP(2,6,6,8,3).
+** KEPT (pick-wt=6): 789 [hyper,22,5,17,16,demod] CP(2,6,5,2,3).
+** KEPT (pick-wt=6): 790 [hyper,22,5,17,15,demod] CP(2,6,4,6,2).
+** KEPT (pick-wt=6): 791 [hyper,22,5,17,14,demod] CP(2,6,3,0,2).
+** KEPT (pick-wt=6): 792 [hyper,22,5,17,13,demod] CP(2,6,2,4,1).
+** KEPT (pick-wt=6): 793 [hyper,22,5,17,12,demod] CP(2,6,1,8,0).
+** KEPT (pick-wt=6): 794 [hyper,22,5,17,11,demod] CP(2,6,0,2,0).
+** KEPT (pick-wt=6): 795 [hyper,22,5,16,20,demod] CP(2,5,9,7,4).
+** KEPT (pick-wt=6): 796 [hyper,22,5,16,19,demod] CP(2,5,8,2,4).
+** KEPT (pick-wt=6): 797 [hyper,22,5,16,18,demod] CP(2,5,7,7,3).
+** KEPT (pick-wt=6): 798 [hyper,22,5,16,17,demod] CP(2,5,6,2,3).
+** KEPT (pick-wt=6): 799 [hyper,22,5,16,16,demod] CP(2,5,5,7,2).
+** KEPT (pick-wt=6): 800 [hyper,22,5,16,15,demod] CP(2,5,4,2,2).
+** KEPT (pick-wt=6): 801 [hyper,22,5,16,14,demod] CP(2,5,3,7,1).
+** KEPT (pick-wt=6): 802 [hyper,22,5,16,13,demod] CP(2,5,2,2,1).
+** KEPT (pick-wt=6): 803 [hyper,22,5,16,12,demod] CP(2,5,1,7,0).
+** KEPT (pick-wt=6): 804 [hyper,22,5,16,11,demod] CP(2,5,0,2,0).
+** KEPT (pick-wt=6): 805 [hyper,22,5,15,20,demod] CP(2,4,9,8,3).
+** KEPT (pick-wt=6): 806 [hyper,22,5,15,19,demod] CP(2,4,8,4,3).
+** KEPT (pick-wt=6): 807 [hyper,22,5,15,18,demod] CP(2,4,7,0,3).
+** KEPT (pick-wt=6): 808 [hyper,22,5,15,17,demod] CP(2,4,6,6,2).
+** KEPT (pick-wt=6): 809 [hyper,22,5,15,16,demod] CP(2,4,5,2,2).
+** KEPT (pick-wt=6): 810 [hyper,22,5,15,15,demod] CP(2,4,4,8,1).
+** KEPT (pick-wt=6): 811 [hyper,22,5,15,14,demod] CP(2,4,3,4,1).
+** KEPT (pick-wt=6): 812 [hyper,22,5,15,13,demod] CP(2,4,2,0,1).
+** KEPT (pick-wt=6): 813 [hyper,22,5,15,12,demod] CP(2,4,1,6,0).
+** KEPT (pick-wt=6): 814 [hyper,22,5,15,11,demod] CP(2,4,0,2,0).
+** KEPT (pick-wt=6): 815 [hyper,22,5,14,20,demod] CP(2,3,9,9,2).
+** KEPT (pick-wt=6): 816 [hyper,22,5,14,19,demod] CP(2,3,8,6,2).
+** KEPT (pick-wt=6): 817 [hyper,22,5,14,18,demod] CP(2,3,7,3,2).
+** KEPT (pick-wt=6): 818 [hyper,22,5,14,17,demod] CP(2,3,6,0,2).
+** KEPT (pick-wt=6): 819 [hyper,22,5,14,16,demod] CP(2,3,5,7,1).
+** KEPT (pick-wt=6): 820 [hyper,22,5,14,15,demod] CP(2,3,4,4,1).
+** KEPT (pick-wt=6): 821 [hyper,22,5,14,14,demod] CP(2,3,3,1,1).
+** KEPT (pick-wt=6): 822 [hyper,22,5,14,13,demod] CP(2,3,2,8,0).
+** KEPT (pick-wt=6): 823 [hyper,22,5,14,12,demod] CP(2,3,1,5,0).
+** KEPT (pick-wt=6): 824 [hyper,22,5,14,11,demod] CP(2,3,0,2,0).
+** KEPT (pick-wt=6): 825 [hyper,22,5,13,20,demod] CP(2,2,9,0,2).
+** KEPT (pick-wt=6): 826 [hyper,22,5,13,19,demod] CP(2,2,8,8,1).
+** KEPT (pick-wt=6): 827 [hyper,22,5,13,18,demod] CP(2,2,7,6,1).
+** KEPT (pick-wt=6): 828 [hyper,22,5,13,17,demod] CP(2,2,6,4,1).
+** KEPT (pick-wt=6): 829 [hyper,22,5,13,16,demod] CP(2,2,5,2,1).
+** KEPT (pick-wt=6): 830 [hyper,22,5,13,15,demod] CP(2,2,4,0,1).
+** KEPT (pick-wt=6): 831 [hyper,22,5,13,14,demod] CP(2,2,3,8,0).
+** KEPT (pick-wt=6): 832 [hyper,22,5,13,13,demod] CP(2,2,2,6,0).
+** KEPT (pick-wt=6): 833 [hyper,22,5,13,12,demod] CP(2,2,1,4,0).
+** KEPT (pick-wt=6): 834 [hyper,22,5,13,11,demod] CP(2,2,0,2,0).
+** KEPT (pick-wt=6): 835 [hyper,22,5,12,20,demod] CP(2,1,9,1,1).
+** KEPT (pick-wt=6): 836 [hyper,22,5,12,19,demod] CP(2,1,8,0,1).
+** KEPT (pick-wt=6): 837 [hyper,22,5,12,18,demod] CP(2,1,7,9,0).
+** KEPT (pick-wt=6): 838 [hyper,22,5,12,17,demod] CP(2,1,6,8,0).
+** KEPT (pick-wt=6): 839 [hyper,22,5,12,16,demod] CP(2,1,5,7,0).
+** KEPT (pick-wt=6): 840 [hyper,22,5,12,15,demod] CP(2,1,4,6,0).
+** KEPT (pick-wt=6): 841 [hyper,22,5,12,14,demod] CP(2,1,3,5,0).
+** KEPT (pick-wt=6): 842 [hyper,22,5,12,13,demod] CP(2,1,2,4,0).
+** KEPT (pick-wt=6): 843 [hyper,22,5,12,12,demod] CP(2,1,1,3,0).
+** KEPT (pick-wt=6): 844 [hyper,22,5,12,11,demod] CP(2,1,0,2,0).
+** KEPT (pick-wt=6): 845 [hyper,22,5,11,20,demod] CP(2,0,9,2,0).
+** KEPT (pick-wt=6): 846 [hyper,22,5,11,19,demod] CP(2,0,8,2,0).
+** KEPT (pick-wt=6): 847 [hyper,22,5,11,18,demod] CP(2,0,7,2,0).
+** KEPT (pick-wt=6): 848 [hyper,22,5,11,17,demod] CP(2,0,6,2,0).
+** KEPT (pick-wt=6): 849 [hyper,22,5,11,16,demod] CP(2,0,5,2,0).
+** KEPT (pick-wt=6): 850 [hyper,22,5,11,15,demod] CP(2,0,4,2,0).
+** KEPT (pick-wt=6): 851 [hyper,22,5,11,14,demod] CP(2,0,3,2,0).
+** KEPT (pick-wt=6): 852 [hyper,22,5,11,13,demod] CP(2,0,2,2,0).
+** KEPT (pick-wt=6): 853 [hyper,22,5,11,12,demod] CP(2,0,1,2,0).
+** KEPT (pick-wt=6): 854 [hyper,22,5,11,11,demod] CP(2,0,0,2,0).
+** KEPT (pick-wt=6): 855 [hyper,22,4,20,20,demod] CP(1,9,9,2,8).
+** KEPT (pick-wt=6): 856 [hyper,22,4,20,19,demod] CP(1,9,8,3,7).
+** KEPT (pick-wt=6): 857 [hyper,22,4,20,18,demod] CP(1,9,7,4,6).
+** KEPT (pick-wt=6): 858 [hyper,22,4,20,17,demod] CP(1,9,6,5,5).
+** KEPT (pick-wt=6): 859 [hyper,22,4,20,16,demod] CP(1,9,5,6,4).
+** KEPT (pick-wt=6): 860 [hyper,22,4,20,15,demod] CP(1,9,4,7,3).
+** KEPT (pick-wt=6): 861 [hyper,22,4,20,14,demod] CP(1,9,3,8,2).
+** KEPT (pick-wt=6): 862 [hyper,22,4,20,13,demod] CP(1,9,2,9,1).
+** KEPT (pick-wt=6): 863 [hyper,22,4,20,12,demod] CP(1,9,1,0,1).
+** KEPT (pick-wt=6): 864 [hyper,22,4,20,11,demod] CP(1,9,0,1,0).
+** KEPT (pick-wt=6): 865 [hyper,22,4,19,20,demod] CP(1,8,9,3,7).
+** KEPT (pick-wt=6): 866 [hyper,22,4,19,19,demod] CP(1,8,8,5,6).
+** KEPT (pick-wt=6): 867 [hyper,22,4,19,18,demod] CP(1,8,7,7,5).
+** KEPT (pick-wt=6): 868 [hyper,22,4,19,17,demod] CP(1,8,6,9,4).
+** KEPT (pick-wt=6): 869 [hyper,22,4,19,16,demod] CP(1,8,5,1,4).
+** KEPT (pick-wt=6): 870 [hyper,22,4,19,15,demod] CP(1,8,4,3,3).
+** KEPT (pick-wt=6): 871 [hyper,22,4,19,14,demod] CP(1,8,3,5,2).
+** KEPT (pick-wt=6): 872 [hyper,22,4,19,13,demod] CP(1,8,2,7,1).
+** KEPT (pick-wt=6): 873 [hyper,22,4,19,12,demod] CP(1,8,1,9,0).
+** KEPT (pick-wt=6): 874 [hyper,22,4,19,11,demod] CP(1,8,0,1,0).
+** KEPT (pick-wt=6): 875 [hyper,22,4,18,20,demod] CP(1,7,9,4,6).
+** KEPT (pick-wt=6): 876 [hyper,22,4,18,19,demod] CP(1,7,8,7,5).
+** KEPT (pick-wt=6): 877 [hyper,22,4,18,18,demod] CP(1,7,7,0,5).
+** KEPT (pick-wt=6): 878 [hyper,22,4,18,17,demod] CP(1,7,6,3,4).
+** KEPT (pick-wt=6): 879 [hyper,22,4,18,16,demod] CP(1,7,5,6,3).
+** KEPT (pick-wt=6): 880 [hyper,22,4,18,15,demod] CP(1,7,4,9,2).
+** KEPT (pick-wt=6): 881 [hyper,22,4,18,14,demod] CP(1,7,3,2,2).
+** KEPT (pick-wt=6): 882 [hyper,22,4,18,13,demod] CP(1,7,2,5,1).
+** KEPT (pick-wt=6): 883 [hyper,22,4,18,12,demod] CP(1,7,1,8,0).
+** KEPT (pick-wt=6): 884 [hyper,22,4,18,11,demod] CP(1,7,0,1,0).
+** KEPT (pick-wt=6): 885 [hyper,22,4,17,20,demod] CP(1,6,9,5,5).
+** KEPT (pick-wt=6): 886 [hyper,22,4,17,19,demod] CP(1,6,8,9,4).
+** KEPT (pick-wt=6): 887 [hyper,22,4,17,18,demod] CP(1,6,7,3,4).
+** KEPT (pick-wt=6): 888 [hyper,22,4,17,17,demod] CP(1,6,6,7,3).
+** KEPT (pick-wt=6): 889 [hyper,22,4,17,16,demod] CP(1,6,5,1,3).
+** KEPT (pick-wt=6): 890 [hyper,22,4,17,15,demod] CP(1,6,4,5,2).
+** KEPT (pick-wt=6): 891 [hyper,22,4,17,14,demod] CP(1,6,3,9,1).
+** KEPT (pick-wt=6): 892 [hyper,22,4,17,13,demod] CP(1,6,2,3,1).
+** KEPT (pick-wt=6): 893 [hyper,22,4,17,12,demod] CP(1,6,1,7,0).
+** KEPT (pick-wt=6): 894 [hyper,22,4,17,11,demod] CP(1,6,0,1,0).
+** KEPT (pick-wt=6): 895 [hyper,22,4,16,20,demod] CP(1,5,9,6,4).
+** KEPT (pick-wt=6): 896 [hyper,22,4,16,19,demod] CP(1,5,8,1,4).
+** KEPT (pick-wt=6): 897 [hyper,22,4,16,18,demod] CP(1,5,7,6,3).
+** KEPT (pick-wt=6): 898 [hyper,22,4,16,17,demod] CP(1,5,6,1,3).
+** KEPT (pick-wt=6): 899 [hyper,22,4,16,16,demod] CP(1,5,5,6,2).
+** KEPT (pick-wt=6): 900 [hyper,22,4,16,15,demod] CP(1,5,4,1,2).
+** KEPT (pick-wt=6): 901 [hyper,22,4,16,14,demod] CP(1,5,3,6,1).
+** KEPT (pick-wt=6): 902 [hyper,22,4,16,13,demod] CP(1,5,2,1,1).
+** KEPT (pick-wt=6): 903 [hyper,22,4,16,12,demod] CP(1,5,1,6,0).
+** KEPT (pick-wt=6): 904 [hyper,22,4,16,11,demod] CP(1,5,0,1,0).
+** KEPT (pick-wt=6): 905 [hyper,22,4,15,20,demod] CP(1,4,9,7,3).
+** KEPT (pick-wt=6): 906 [hyper,22,4,15,19,demod] CP(1,4,8,3,3).
+** KEPT (pick-wt=6): 907 [hyper,22,4,15,18,demod] CP(1,4,7,9,2).
+** KEPT (pick-wt=6): 908 [hyper,22,4,15,17,demod] CP(1,4,6,5,2).
+** KEPT (pick-wt=6): 909 [hyper,22,4,15,16,demod] CP(1,4,5,1,2).
+** KEPT (pick-wt=6): 910 [hyper,22,4,15,15,demod] CP(1,4,4,7,1).
+** KEPT (pick-wt=6): 911 [hyper,22,4,15,14,demod] CP(1,4,3,3,1).
+** KEPT (pick-wt=6): 912 [hyper,22,4,15,13,demod] CP(1,4,2,9,0).
+** KEPT (pick-wt=6): 913 [hyper,22,4,15,12,demod] CP(1,4,1,5,0).
+** KEPT (pick-wt=6): 914 [hyper,22,4,15,11,demod] CP(1,4,0,1,0).
+** KEPT (pick-wt=6): 915 [hyper,22,4,14,20,demod] CP(1,3,9,8,2).
+** KEPT (pick-wt=6): 916 [hyper,22,4,14,19,demod] CP(1,3,8,5,2).
+** KEPT (pick-wt=6): 917 [hyper,22,4,14,18,demod] CP(1,3,7,2,2).
+** KEPT (pick-wt=6): 918 [hyper,22,4,14,17,demod] CP(1,3,6,9,1).
+** KEPT (pick-wt=6): 919 [hyper,22,4,14,16,demod] CP(1,3,5,6,1).
+** KEPT (pick-wt=6): 920 [hyper,22,4,14,15,demod] CP(1,3,4,3,1).
+** KEPT (pick-wt=6): 921 [hyper,22,4,14,14,demod] CP(1,3,3,0,1).
+** KEPT (pick-wt=6): 922 [hyper,22,4,14,13,demod] CP(1,3,2,7,0).
+** KEPT (pick-wt=6): 923 [hyper,22,4,14,12,demod] CP(1,3,1,4,0).
+** KEPT (pick-wt=6): 924 [hyper,22,4,14,11,demod] CP(1,3,0,1,0).
+** KEPT (pick-wt=6): 925 [hyper,22,4,13,20,demod] CP(1,2,9,9,1).
+** KEPT (pick-wt=6): 926 [hyper,22,4,13,19,demod] CP(1,2,8,7,1).
+** KEPT (pick-wt=6): 927 [hyper,22,4,13,18,demod] CP(1,2,7,5,1).
+** KEPT (pick-wt=6): 928 [hyper,22,4,13,17,demod] CP(1,2,6,3,1).
+** KEPT (pick-wt=6): 929 [hyper,22,4,13,16,demod] CP(1,2,5,1,1).
+** KEPT (pick-wt=6): 930 [hyper,22,4,13,15,demod] CP(1,2,4,9,0).
+** KEPT (pick-wt=6): 931 [hyper,22,4,13,14,demod] CP(1,2,3,7,0).
+** KEPT (pick-wt=6): 932 [hyper,22,4,13,13,demod] CP(1,2,2,5,0).
+** KEPT (pick-wt=6): 933 [hyper,22,4,13,12,demod] CP(1,2,1,3,0).
+** KEPT (pick-wt=6): 934 [hyper,22,4,13,11,demod] CP(1,2,0,1,0).
+** KEPT (pick-wt=6): 935 [hyper,22,4,12,20,demod] CP(1,1,9,0,1).
+** KEPT (pick-wt=6): 936 [hyper,22,4,12,19,demod] CP(1,1,8,9,0).
+** KEPT (pick-wt=6): 937 [hyper,22,4,12,18,demod] CP(1,1,7,8,0).
+** KEPT (pick-wt=6): 938 [hyper,22,4,12,17,demod] CP(1,1,6,7,0).
+** KEPT (pick-wt=6): 939 [hyper,22,4,12,16,demod] CP(1,1,5,6,0).
+** KEPT (pick-wt=6): 940 [hyper,22,4,12,15,demod] CP(1,1,4,5,0).
+** KEPT (pick-wt=6): 941 [hyper,22,4,12,14,demod] CP(1,1,3,4,0).
+** KEPT (pick-wt=6): 942 [hyper,22,4,12,13,demod] CP(1,1,2,3,0).
+** KEPT (pick-wt=6): 943 [hyper,22,4,12,12,demod] CP(1,1,1,2,0).
+** KEPT (pick-wt=6): 944 [hyper,22,4,12,11,demod] CP(1,1,0,1,0).
+** KEPT (pick-wt=6): 945 [hyper,22,4,11,20,demod] CP(1,0,9,1,0).
+** KEPT (pick-wt=6): 946 [hyper,22,4,11,19,demod] CP(1,0,8,1,0).
+** KEPT (pick-wt=6): 947 [hyper,22,4,11,18,demod] CP(1,0,7,1,0).
+** KEPT (pick-wt=6): 948 [hyper,22,4,11,17,demod] CP(1,0,6,1,0).
+** KEPT (pick-wt=6): 949 [hyper,22,4,11,16,demod] CP(1,0,5,1,0).
+** KEPT (pick-wt=6): 950 [hyper,22,4,11,15,demod] CP(1,0,4,1,0).
+** KEPT (pick-wt=6): 951 [hyper,22,4,11,14,demod] CP(1,0,3,1,0).
+** KEPT (pick-wt=6): 952 [hyper,22,4,11,13,demod] CP(1,0,2,1,0).
+** KEPT (pick-wt=6): 953 [hyper,22,4,11,12,demod] CP(1,0,1,1,0).
+** KEPT (pick-wt=6): 954 [hyper,22,4,11,11,demod] CP(1,0,0,1,0).
+** KEPT (pick-wt=6): 955 [hyper,22,3,20,20,demod] CP(0,9,9,1,8).
+** KEPT (pick-wt=6): 956 [hyper,22,3,20,19,demod] CP(0,9,8,2,7).
+** KEPT (pick-wt=6): 957 [hyper,22,3,20,18,demod] CP(0,9,7,3,6).
+** KEPT (pick-wt=6): 958 [hyper,22,3,20,17,demod] CP(0,9,6,4,5).
+** KEPT (pick-wt=6): 959 [hyper,22,3,20,16,demod] CP(0,9,5,5,4).
+** KEPT (pick-wt=6): 960 [hyper,22,3,20,15,demod] CP(0,9,4,6,3).
+** KEPT (pick-wt=6): 961 [hyper,22,3,20,14,demod] CP(0,9,3,7,2).
+** KEPT (pick-wt=6): 962 [hyper,22,3,20,13,demod] CP(0,9,2,8,1).
+** KEPT (pick-wt=6): 963 [hyper,22,3,20,12,demod] CP(0,9,1,9,0).
+** KEPT (pick-wt=6): 964 [hyper,22,3,20,11,demod] CP(0,9,0,0,0).
+** KEPT (pick-wt=6): 965 [hyper,22,3,19,20,demod] CP(0,8,9,2,7).
+** KEPT (pick-wt=6): 966 [hyper,22,3,19,19,demod] CP(0,8,8,4,6).
+** KEPT (pick-wt=6): 967 [hyper,22,3,19,18,demod] CP(0,8,7,6,5).
+** KEPT (pick-wt=6): 968 [hyper,22,3,19,17,demod] CP(0,8,6,8,4).
+** KEPT (pick-wt=6): 969 [hyper,22,3,19,16,demod] CP(0,8,5,0,4).
+** KEPT (pick-wt=6): 970 [hyper,22,3,19,15,demod] CP(0,8,4,2,3).
+** KEPT (pick-wt=6): 971 [hyper,22,3,19,14,demod] CP(0,8,3,4,2).
+** KEPT (pick-wt=6): 972 [hyper,22,3,19,13,demod] CP(0,8,2,6,1).
+** KEPT (pick-wt=6): 973 [hyper,22,3,19,12,demod] CP(0,8,1,8,0).
+** KEPT (pick-wt=6): 974 [hyper,22,3,19,11,demod] CP(0,8,0,0,0).
+** KEPT (pick-wt=6): 975 [hyper,22,3,18,20,demod] CP(0,7,9,3,6).
+** KEPT (pick-wt=6): 976 [hyper,22,3,18,19,demod] CP(0,7,8,6,5).
+** KEPT (pick-wt=6): 977 [hyper,22,3,18,18,demod] CP(0,7,7,9,4).
+** KEPT (pick-wt=6): 978 [hyper,22,3,18,17,demod] CP(0,7,6,2,4).
+** KEPT (pick-wt=6): 979 [hyper,22,3,18,16,demod] CP(0,7,5,5,3).
+** KEPT (pick-wt=6): 980 [hyper,22,3,18,15,demod] CP(0,7,4,8,2).
+** KEPT (pick-wt=6): 981 [hyper,22,3,18,14,demod] CP(0,7,3,1,2).
+** KEPT (pick-wt=6): 982 [hyper,22,3,18,13,demod] CP(0,7,2,4,1).
+** KEPT (pick-wt=6): 983 [hyper,22,3,18,12,demod] CP(0,7,1,7,0).
+** KEPT (pick-wt=6): 984 [hyper,22,3,18,11,demod] CP(0,7,0,0,0).
+** KEPT (pick-wt=6): 985 [hyper,22,3,17,20,demod] CP(0,6,9,4,5).
+** KEPT (pick-wt=6): 986 [hyper,22,3,17,19,demod] CP(0,6,8,8,4).
+** KEPT (pick-wt=6): 987 [hyper,22,3,17,18,demod] CP(0,6,7,2,4).
+** KEPT (pick-wt=6): 988 [hyper,22,3,17,17,demod] CP(0,6,6,6,3).
+** KEPT (pick-wt=6): 989 [hyper,22,3,17,16,demod] CP(0,6,5,0,3).
+** KEPT (pick-wt=6): 990 [hyper,22,3,17,15,demod] CP(0,6,4,4,2).
+** KEPT (pick-wt=6): 991 [hyper,22,3,17,14,demod] CP(0,6,3,8,1).
+** KEPT (pick-wt=6): 992 [hyper,22,3,17,13,demod] CP(0,6,2,2,1).
+** KEPT (pick-wt=6): 993 [hyper,22,3,17,12,demod] CP(0,6,1,6,0).
+** KEPT (pick-wt=6): 994 [hyper,22,3,17,11,demod] CP(0,6,0,0,0).
+** KEPT (pick-wt=6): 995 [hyper,22,3,16,20,demod] CP(0,5,9,5,4).
+** KEPT (pick-wt=6): 996 [hyper,22,3,16,19,demod] CP(0,5,8,0,4).
+** KEPT (pick-wt=6): 997 [hyper,22,3,16,18,demod] CP(0,5,7,5,3).
+** KEPT (pick-wt=6): 998 [hyper,22,3,16,17,demod] CP(0,5,6,0,3).
+** KEPT (pick-wt=6): 999 [hyper,22,3,16,16,demod] CP(0,5,5,5,2).
+** KEPT (pick-wt=6): 1000 [hyper,22,3,16,15,demod] CP(0,5,4,0,2).
+** KEPT (pick-wt=6): 1001 [hyper,22,3,16,14,demod] CP(0,5,3,5,1).
+** KEPT (pick-wt=6): 1002 [hyper,22,3,16,13,demod] CP(0,5,2,0,1).
+** KEPT (pick-wt=6): 1003 [hyper,22,3,16,12,demod] CP(0,5,1,5,0).
+** KEPT (pick-wt=6): 1004 [hyper,22,3,16,11,demod] CP(0,5,0,0,0).
+** KEPT (pick-wt=6): 1005 [hyper,22,3,15,20,demod] CP(0,4,9,6,3).
+** KEPT (pick-wt=6): 1006 [hyper,22,3,15,19,demod] CP(0,4,8,2,3).
+** KEPT (pick-wt=6): 1007 [hyper,22,3,15,18,demod] CP(0,4,7,8,2).
+** KEPT (pick-wt=6): 1008 [hyper,22,3,15,17,demod] CP(0,4,6,4,2).
+** KEPT (pick-wt=6): 1009 [hyper,22,3,15,16,demod] CP(0,4,5,0,2).
+** KEPT (pick-wt=6): 1010 [hyper,22,3,15,15,demod] CP(0,4,4,6,1).
+** KEPT (pick-wt=6): 1011 [hyper,22,3,15,14,demod] CP(0,4,3,2,1).
+** KEPT (pick-wt=6): 1012 [hyper,22,3,15,13,demod] CP(0,4,2,8,0).
+** KEPT (pick-wt=6): 1013 [hyper,22,3,15,12,demod] CP(0,4,1,4,0).
+** KEPT (pick-wt=6): 1014 [hyper,22,3,15,11,demod] CP(0,4,0,0,0).
+** KEPT (pick-wt=6): 1015 [hyper,22,3,14,20,demod] CP(0,3,9,7,2).
+** KEPT (pick-wt=6): 1016 [hyper,22,3,14,19,demod] CP(0,3,8,4,2).
+** KEPT (pick-wt=6): 1017 [hyper,22,3,14,18,demod] CP(0,3,7,1,2).
+** KEPT (pick-wt=6): 1018 [hyper,22,3,14,17,demod] CP(0,3,6,8,1).
+** KEPT (pick-wt=6): 1019 [hyper,22,3,14,16,demod] CP(0,3,5,5,1).
+** KEPT (pick-wt=6): 1020 [hyper,22,3,14,15,demod] CP(0,3,4,2,1).
+** KEPT (pick-wt=6): 1021 [hyper,22,3,14,14,demod] CP(0,3,3,9,0).
+** KEPT (pick-wt=6): 1022 [hyper,22,3,14,13,demod] CP(0,3,2,6,0).
+** KEPT (pick-wt=6): 1023 [hyper,22,3,14,12,demod] CP(0,3,1,3,0).
+** KEPT (pick-wt=6): 1024 [hyper,22,3,14,11,demod] CP(0,3,0,0,0).
+** KEPT (pick-wt=6): 1025 [hyper,22,3,13,20,demod] CP(0,2,9,8,1).
+** KEPT (pick-wt=6): 1026 [hyper,22,3,13,19,demod] CP(0,2,8,6,1).
+** KEPT (pick-wt=6): 1027 [hyper,22,3,13,18,demod] CP(0,2,7,4,1).
+** KEPT (pick-wt=6): 1028 [hyper,22,3,13,17,demod] CP(0,2,6,2,1).
+** KEPT (pick-wt=6): 1029 [hyper,22,3,13,16,demod] CP(0,2,5,0,1).
+** KEPT (pick-wt=6): 1030 [hyper,22,3,13,15,demod] CP(0,2,4,8,0).
+** KEPT (pick-wt=6): 1031 [hyper,22,3,13,14,demod] CP(0,2,3,6,0).
+** KEPT (pick-wt=6): 1032 [hyper,22,3,13,13,demod] CP(0,2,2,4,0).
+** KEPT (pick-wt=6): 1033 [hyper,22,3,13,12,demod] CP(0,2,1,2,0).
+** KEPT (pick-wt=6): 1034 [hyper,22,3,13,11,demod] CP(0,2,0,0,0).
+** KEPT (pick-wt=6): 1035 [hyper,22,3,12,20,demod] CP(0,1,9,9,0).
+** KEPT (pick-wt=6): 1036 [hyper,22,3,12,19,demod] CP(0,1,8,8,0).
+** KEPT (pick-wt=6): 1037 [hyper,22,3,12,18,demod] CP(0,1,7,7,0).
+** KEPT (pick-wt=6): 1038 [hyper,22,3,12,17,demod] CP(0,1,6,6,0).
+** KEPT (pick-wt=6): 1039 [hyper,22,3,12,16,demod] CP(0,1,5,5,0).
+** KEPT (pick-wt=6): 1040 [hyper,22,3,12,15,demod] CP(0,1,4,4,0).
+** KEPT (pick-wt=6): 1041 [hyper,22,3,12,14,demod] CP(0,1,3,3,0).
+** KEPT (pick-wt=6): 1042 [hyper,22,3,12,13,demod] CP(0,1,2,2,0).
+** KEPT (pick-wt=6): 1043 [hyper,22,3,12,12,demod] CP(0,1,1,1,0).
+** KEPT (pick-wt=6): 1044 [hyper,22,3,12,11,demod] CP(0,1,0,0,0).
+** KEPT (pick-wt=6): 1045 [hyper,22,3,11,20,demod] CP(0,0,9,0,0).
+** KEPT (pick-wt=6): 1046 [hyper,22,3,11,19,demod] CP(0,0,8,0,0).
+** KEPT (pick-wt=6): 1047 [hyper,22,3,11,18,demod] CP(0,0,7,0,0).
+** KEPT (pick-wt=6): 1048 [hyper,22,3,11,17,demod] CP(0,0,6,0,0).
+** KEPT (pick-wt=6): 1049 [hyper,22,3,11,16,demod] CP(0,0,5,0,0).
+** KEPT (pick-wt=6): 1050 [hyper,22,3,11,15,demod] CP(0,0,4,0,0).
+** KEPT (pick-wt=6): 1051 [hyper,22,3,11,14,demod] CP(0,0,3,0,0).
+** KEPT (pick-wt=6): 1052 [hyper,22,3,11,13,demod] CP(0,0,2,0,0).
+** KEPT (pick-wt=6): 1053 [hyper,22,3,11,12,demod] CP(0,0,1,0,0).
+** KEPT (pick-wt=6): 1054 [hyper,22,3,11,11,demod] CP(0,0,0,0,0).
+
+given clause #203: (wt=6) 255 [hyper,22,10,20,20,demod] CP(7,9,9,8,8).
+
+given clause #204: (wt=6) 256 [hyper,22,10,20,19,demod] CP(7,9,8,9,7).
+
+given clause #205: (wt=6) 257 [hyper,22,10,20,18,demod] CP(7,9,7,0,7).
+
+given clause #206: (wt=6) 258 [hyper,22,10,20,17,demod] CP(7,9,6,1,6).
+
+given clause #207: (wt=6) 259 [hyper,22,10,20,16,demod] CP(7,9,5,2,5).
+
+given clause #208: (wt=6) 260 [hyper,22,10,20,15,demod] CP(7,9,4,3,4).
+
+given clause #209: (wt=6) 261 [hyper,22,10,20,14,demod] CP(7,9,3,4,3).
+
+given clause #210: (wt=6) 262 [hyper,22,10,20,13,demod] CP(7,9,2,5,2).
+
+given clause #211: (wt=6) 263 [hyper,22,10,20,12,demod] CP(7,9,1,6,1).
+
+given clause #212: (wt=6) 264 [hyper,22,10,20,11,demod] CP(7,9,0,7,0).
+
+given clause #213: (wt=6) 265 [hyper,22,10,19,20,demod] CP(7,8,9,9,7).
+
+given clause #214: (wt=6) 266 [hyper,22,10,19,19,demod] CP(7,8,8,1,7).
+
+given clause #215: (wt=6) 267 [hyper,22,10,19,18,demod] CP(7,8,7,3,6).
+
+given clause #216: (wt=6) 268 [hyper,22,10,19,17,demod] CP(7,8,6,5,5).
+
+given clause #217: (wt=6) 269 [hyper,22,10,19,16,demod] CP(7,8,5,7,4).
+
+given clause #218: (wt=6) 270 [hyper,22,10,19,15,demod] CP(7,8,4,9,3).
+
+given clause #219: (wt=6) 271 [hyper,22,10,19,14,demod] CP(7,8,3,1,3).
+
+given clause #220: (wt=6) 272 [hyper,22,10,19,13,demod] CP(7,8,2,3,2).
+
+given clause #221: (wt=6) 273 [hyper,22,10,19,12,demod] CP(7,8,1,5,1).
+
+given clause #222: (wt=6) 274 [hyper,22,10,19,11,demod] CP(7,8,0,7,0).
+
+given clause #223: (wt=6) 275 [hyper,22,10,18,20,demod] CP(7,7,9,0,7).
+
+given clause #224: (wt=6) 276 [hyper,22,10,18,19,demod] CP(7,7,8,3,6).
+
+given clause #225: (wt=6) 277 [hyper,22,10,18,18,demod] CP(7,7,7,6,5).
+
+given clause #226: (wt=6) 278 [hyper,22,10,18,17,demod] CP(7,7,6,9,4).
+
+given clause #227: (wt=6) 279 [hyper,22,10,18,16,demod] CP(7,7,5,2,4).
+
+given clause #228: (wt=6) 280 [hyper,22,10,18,15,demod] CP(7,7,4,5,3).
+
+given clause #229: (wt=6) 281 [hyper,22,10,18,14,demod] CP(7,7,3,8,2).
+
+given clause #230: (wt=6) 282 [hyper,22,10,18,13,demod] CP(7,7,2,1,2).
+
+given clause #231: (wt=6) 283 [hyper,22,10,18,12,demod] CP(7,7,1,4,1).
+
+given clause #232: (wt=6) 284 [hyper,22,10,18,11,demod] CP(7,7,0,7,0).
+
+given clause #233: (wt=6) 285 [hyper,22,10,17,20,demod] CP(7,6,9,1,6).
+
+given clause #234: (wt=6) 286 [hyper,22,10,17,19,demod] CP(7,6,8,5,5).
+
+given clause #235: (wt=6) 287 [hyper,22,10,17,18,demod] CP(7,6,7,9,4).
+
+given clause #236: (wt=6) 288 [hyper,22,10,17,17,demod] CP(7,6,6,3,4).
+
+given clause #237: (wt=6) 289 [hyper,22,10,17,16,demod] CP(7,6,5,7,3).
+
+given clause #238: (wt=6) 290 [hyper,22,10,17,15,demod] CP(7,6,4,1,3).
+
+given clause #239: (wt=6) 291 [hyper,22,10,17,14,demod] CP(7,6,3,5,2).
+
+given clause #240: (wt=6) 292 [hyper,22,10,17,13,demod] CP(7,6,2,9,1).
+
+given clause #241: (wt=6) 293 [hyper,22,10,17,12,demod] CP(7,6,1,3,1).
+
+given clause #242: (wt=6) 294 [hyper,22,10,17,11,demod] CP(7,6,0,7,0).
+
+given clause #243: (wt=6) 295 [hyper,22,10,16,20,demod] CP(7,5,9,2,5).
+
+given clause #244: (wt=6) 296 [hyper,22,10,16,19,demod] CP(7,5,8,7,4).
+
+given clause #245: (wt=6) 297 [hyper,22,10,16,18,demod] CP(7,5,7,2,4).
+
+given clause #246: (wt=6) 298 [hyper,22,10,16,17,demod] CP(7,5,6,7,3).
+
+given clause #247: (wt=6) 299 [hyper,22,10,16,16,demod] CP(7,5,5,2,3).
+
+given clause #248: (wt=6) 300 [hyper,22,10,16,15,demod] CP(7,5,4,7,2).
+
+given clause #249: (wt=6) 301 [hyper,22,10,16,14,demod] CP(7,5,3,2,2).
+
+given clause #250: (wt=6) 302 [hyper,22,10,16,13,demod] CP(7,5,2,7,1).
+
+given clause #251: (wt=6) 303 [hyper,22,10,16,12,demod] CP(7,5,1,2,1).
+
+given clause #252: (wt=6) 304 [hyper,22,10,16,11,demod] CP(7,5,0,7,0).
+
+given clause #253: (wt=6) 305 [hyper,22,10,15,20,demod] CP(7,4,9,3,4).
+
+given clause #254: (wt=6) 306 [hyper,22,10,15,19,demod] CP(7,4,8,9,3).
+
+given clause #255: (wt=6) 307 [hyper,22,10,15,18,demod] CP(7,4,7,5,3).
+
+given clause #256: (wt=6) 308 [hyper,22,10,15,17,demod] CP(7,4,6,1,3).
+
+given clause #257: (wt=6) 309 [hyper,22,10,15,16,demod] CP(7,4,5,7,2).
+
+given clause #258: (wt=6) 310 [hyper,22,10,15,15,demod] CP(7,4,4,3,2).
+
+given clause #259: (wt=6) 311 [hyper,22,10,15,14,demod] CP(7,4,3,9,1).
+
+given clause #260: (wt=6) 312 [hyper,22,10,15,13,demod] CP(7,4,2,5,1).
+
+given clause #261: (wt=6) 313 [hyper,22,10,15,12,demod] CP(7,4,1,1,1).
+
+given clause #262: (wt=6) 314 [hyper,22,10,15,11,demod] CP(7,4,0,7,0).
+
+given clause #263: (wt=6) 315 [hyper,22,10,14,20,demod] CP(7,3,9,4,3).
+
+given clause #264: (wt=6) 316 [hyper,22,10,14,19,demod] CP(7,3,8,1,3).
+
+given clause #265: (wt=6) 317 [hyper,22,10,14,18,demod] CP(7,3,7,8,2).
+
+given clause #266: (wt=6) 318 [hyper,22,10,14,17,demod] CP(7,3,6,5,2).
+
+given clause #267: (wt=6) 319 [hyper,22,10,14,16,demod] CP(7,3,5,2,2).
+
+given clause #268: (wt=6) 320 [hyper,22,10,14,15,demod] CP(7,3,4,9,1).
+
+given clause #269: (wt=6) 321 [hyper,22,10,14,14,demod] CP(7,3,3,6,1).
+
+given clause #270: (wt=6) 322 [hyper,22,10,14,13,demod] CP(7,3,2,3,1).
+
+given clause #271: (wt=6) 323 [hyper,22,10,14,12,demod] CP(7,3,1,0,1).
+
+given clause #272: (wt=6) 324 [hyper,22,10,14,11,demod] CP(7,3,0,7,0).
+
+given clause #273: (wt=6) 325 [hyper,22,10,13,20,demod] CP(7,2,9,5,2).
+
+given clause #274: (wt=6) 326 [hyper,22,10,13,19,demod] CP(7,2,8,3,2).
+
+given clause #275: (wt=6) 327 [hyper,22,10,13,18,demod] CP(7,2,7,1,2).
+
+given clause #276: (wt=6) 328 [hyper,22,10,13,17,demod] CP(7,2,6,9,1).
+
+given clause #277: (wt=6) 329 [hyper,22,10,13,16,demod] CP(7,2,5,7,1).
+
+given clause #278: (wt=6) 330 [hyper,22,10,13,15,demod] CP(7,2,4,5,1).
+
+given clause #279: (wt=6) 331 [hyper,22,10,13,14,demod] CP(7,2,3,3,1).
+
+given clause #280: (wt=6) 332 [hyper,22,10,13,13,demod] CP(7,2,2,1,1).
+
+given clause #281: (wt=6) 333 [hyper,22,10,13,12,demod] CP(7,2,1,9,0).
+
+given clause #282: (wt=6) 334 [hyper,22,10,13,11,demod] CP(7,2,0,7,0).
+
+given clause #283: (wt=6) 335 [hyper,22,10,12,20,demod] CP(7,1,9,6,1).
+
+given clause #284: (wt=6) 336 [hyper,22,10,12,19,demod] CP(7,1,8,5,1).
+
+given clause #285: (wt=6) 337 [hyper,22,10,12,18,demod] CP(7,1,7,4,1).
+
+given clause #286: (wt=6) 338 [hyper,22,10,12,17,demod] CP(7,1,6,3,1).
+
+given clause #287: (wt=6) 339 [hyper,22,10,12,16,demod] CP(7,1,5,2,1).
+
+given clause #288: (wt=6) 340 [hyper,22,10,12,15,demod] CP(7,1,4,1,1).
+
+given clause #289: (wt=6) 341 [hyper,22,10,12,14,demod] CP(7,1,3,0,1).
+
+given clause #290: (wt=6) 342 [hyper,22,10,12,13,demod] CP(7,1,2,9,0).
+
+given clause #291: (wt=6) 343 [hyper,22,10,12,12,demod] CP(7,1,1,8,0).
+
+given clause #292: (wt=6) 344 [hyper,22,10,12,11,demod] CP(7,1,0,7,0).
+
+given clause #293: (wt=6) 345 [hyper,22,10,11,20,demod] CP(7,0,9,7,0).
+
+given clause #294: (wt=6) 346 [hyper,22,10,11,19,demod] CP(7,0,8,7,0).
+
+given clause #295: (wt=6) 347 [hyper,22,10,11,18,demod] CP(7,0,7,7,0).
+
+given clause #296: (wt=6) 348 [hyper,22,10,11,17,demod] CP(7,0,6,7,0).
+
+given clause #297: (wt=6) 349 [hyper,22,10,11,16,demod] CP(7,0,5,7,0).
+
+given clause #298: (wt=6) 350 [hyper,22,10,11,15,demod] CP(7,0,4,7,0).
+
+given clause #299: (wt=6) 351 [hyper,22,10,11,14,demod] CP(7,0,3,7,0).
+
+given clause #300: (wt=6) 352 [hyper,22,10,11,13,demod] CP(7,0,2,7,0).
+
+given clause #301: (wt=6) 353 [hyper,22,10,11,12,demod] CP(7,0,1,7,0).
+
+given clause #302: (wt=6) 354 [hyper,22,10,11,11,demod] CP(7,0,0,7,0).
+
+given clause #303: (wt=6) 355 [hyper,22,9,20,20,demod] CP(6,9,9,7,8).
+
+given clause #304: (wt=6) 356 [hyper,22,9,20,19,demod] CP(6,9,8,8,7).
+
+given clause #305: (wt=6) 357 [hyper,22,9,20,18,demod] CP(6,9,7,9,6).
+
+given clause #306: (wt=6) 358 [hyper,22,9,20,17,demod] CP(6,9,6,0,6).
+
+given clause #307: (wt=6) 359 [hyper,22,9,20,16,demod] CP(6,9,5,1,5).
+
+given clause #308: (wt=6) 360 [hyper,22,9,20,15,demod] CP(6,9,4,2,4).
+
+given clause #309: (wt=6) 361 [hyper,22,9,20,14,demod] CP(6,9,3,3,3).
+
+given clause #310: (wt=6) 362 [hyper,22,9,20,13,demod] CP(6,9,2,4,2).
+
+given clause #311: (wt=6) 363 [hyper,22,9,20,12,demod] CP(6,9,1,5,1).
+
+given clause #312: (wt=6) 364 [hyper,22,9,20,11,demod] CP(6,9,0,6,0).
+
+given clause #313: (wt=6) 365 [hyper,22,9,19,20,demod] CP(6,8,9,8,7).
+
+given clause #314: (wt=6) 366 [hyper,22,9,19,19,demod] CP(6,8,8,0,7).
+
+given clause #315: (wt=6) 367 [hyper,22,9,19,18,demod] CP(6,8,7,2,6).
+
+given clause #316: (wt=6) 368 [hyper,22,9,19,17,demod] CP(6,8,6,4,5).
+
+given clause #317: (wt=6) 369 [hyper,22,9,19,16,demod] CP(6,8,5,6,4).
+
+given clause #318: (wt=6) 370 [hyper,22,9,19,15,demod] CP(6,8,4,8,3).
+
+given clause #319: (wt=6) 371 [hyper,22,9,19,14,demod] CP(6,8,3,0,3).
+
+given clause #320: (wt=6) 372 [hyper,22,9,19,13,demod] CP(6,8,2,2,2).
+
+given clause #321: (wt=6) 373 [hyper,22,9,19,12,demod] CP(6,8,1,4,1).
+
+given clause #322: (wt=6) 374 [hyper,22,9,19,11,demod] CP(6,8,0,6,0).
+
+given clause #323: (wt=6) 375 [hyper,22,9,18,20,demod] CP(6,7,9,9,6).
+
+given clause #324: (wt=6) 376 [hyper,22,9,18,19,demod] CP(6,7,8,2,6).
+
+given clause #325: (wt=6) 377 [hyper,22,9,18,18,demod] CP(6,7,7,5,5).
+
+given clause #326: (wt=6) 378 [hyper,22,9,18,17,demod] CP(6,7,6,8,4).
+
+given clause #327: (wt=6) 379 [hyper,22,9,18,16,demod] CP(6,7,5,1,4).
+
+given clause #328: (wt=6) 380 [hyper,22,9,18,15,demod] CP(6,7,4,4,3).
+
+given clause #329: (wt=6) 381 [hyper,22,9,18,14,demod] CP(6,7,3,7,2).
+
+given clause #330: (wt=6) 382 [hyper,22,9,18,13,demod] CP(6,7,2,0,2).
+
+given clause #331: (wt=6) 383 [hyper,22,9,18,12,demod] CP(6,7,1,3,1).
+
+given clause #332: (wt=6) 384 [hyper,22,9,18,11,demod] CP(6,7,0,6,0).
+
+given clause #333: (wt=6) 385 [hyper,22,9,17,20,demod] CP(6,6,9,0,6).
+
+given clause #334: (wt=6) 386 [hyper,22,9,17,19,demod] CP(6,6,8,4,5).
+
+given clause #335: (wt=6) 387 [hyper,22,9,17,18,demod] CP(6,6,7,8,4).
+
+given clause #336: (wt=6) 388 [hyper,22,9,17,17,demod] CP(6,6,6,2,4).
+
+given clause #337: (wt=6) 389 [hyper,22,9,17,16,demod] CP(6,6,5,6,3).
+
+given clause #338: (wt=6) 390 [hyper,22,9,17,15,demod] CP(6,6,4,0,3).
+
+given clause #339: (wt=6) 391 [hyper,22,9,17,14,demod] CP(6,6,3,4,2).
+
+given clause #340: (wt=6) 392 [hyper,22,9,17,13,demod] CP(6,6,2,8,1).
+
+given clause #341: (wt=6) 393 [hyper,22,9,17,12,demod] CP(6,6,1,2,1).
+
+given clause #342: (wt=6) 394 [hyper,22,9,17,11,demod] CP(6,6,0,6,0).
+
+given clause #343: (wt=6) 395 [hyper,22,9,16,20,demod] CP(6,5,9,1,5).
+
+given clause #344: (wt=6) 396 [hyper,22,9,16,19,demod] CP(6,5,8,6,4).
+
+given clause #345: (wt=6) 397 [hyper,22,9,16,18,demod] CP(6,5,7,1,4).
+
+given clause #346: (wt=6) 398 [hyper,22,9,16,17,demod] CP(6,5,6,6,3).
+
+given clause #347: (wt=6) 399 [hyper,22,9,16,16,demod] CP(6,5,5,1,3).
+
+given clause #348: (wt=6) 400 [hyper,22,9,16,15,demod] CP(6,5,4,6,2).
+
+given clause #349: (wt=6) 401 [hyper,22,9,16,14,demod] CP(6,5,3,1,2).
+
+given clause #350: (wt=6) 402 [hyper,22,9,16,13,demod] CP(6,5,2,6,1).
+
+given clause #351: (wt=6) 403 [hyper,22,9,16,12,demod] CP(6,5,1,1,1).
+
+given clause #352: (wt=6) 404 [hyper,22,9,16,11,demod] CP(6,5,0,6,0).
+
+given clause #353: (wt=6) 405 [hyper,22,9,15,20,demod] CP(6,4,9,2,4).
+
+given clause #354: (wt=6) 406 [hyper,22,9,15,19,demod] CP(6,4,8,8,3).
+
+given clause #355: (wt=6) 407 [hyper,22,9,15,18,demod] CP(6,4,7,4,3).
+
+given clause #356: (wt=6) 408 [hyper,22,9,15,17,demod] CP(6,4,6,0,3).
+
+given clause #357: (wt=6) 409 [hyper,22,9,15,16,demod] CP(6,4,5,6,2).
+
+given clause #358: (wt=6) 410 [hyper,22,9,15,15,demod] CP(6,4,4,2,2).
+
+given clause #359: (wt=6) 411 [hyper,22,9,15,14,demod] CP(6,4,3,8,1).
+
+given clause #360: (wt=6) 412 [hyper,22,9,15,13,demod] CP(6,4,2,4,1).
+
+given clause #361: (wt=6) 413 [hyper,22,9,15,12,demod] CP(6,4,1,0,1).
+
+given clause #362: (wt=6) 414 [hyper,22,9,15,11,demod] CP(6,4,0,6,0).
+
+given clause #363: (wt=6) 415 [hyper,22,9,14,20,demod] CP(6,3,9,3,3).
+
+given clause #364: (wt=6) 416 [hyper,22,9,14,19,demod] CP(6,3,8,0,3).
+
+given clause #365: (wt=6) 417 [hyper,22,9,14,18,demod] CP(6,3,7,7,2).
+
+given clause #366: (wt=6) 418 [hyper,22,9,14,17,demod] CP(6,3,6,4,2).
+
+given clause #367: (wt=6) 419 [hyper,22,9,14,16,demod] CP(6,3,5,1,2).
+
+given clause #368: (wt=6) 420 [hyper,22,9,14,15,demod] CP(6,3,4,8,1).
+
+given clause #369: (wt=6) 421 [hyper,22,9,14,14,demod] CP(6,3,3,5,1).
+
+given clause #370: (wt=6) 422 [hyper,22,9,14,13,demod] CP(6,3,2,2,1).
+
+given clause #371: (wt=6) 423 [hyper,22,9,14,12,demod] CP(6,3,1,9,0).
+
+given clause #372: (wt=6) 424 [hyper,22,9,14,11,demod] CP(6,3,0,6,0).
+
+given clause #373: (wt=6) 425 [hyper,22,9,13,20,demod] CP(6,2,9,4,2).
+
+given clause #374: (wt=6) 426 [hyper,22,9,13,19,demod] CP(6,2,8,2,2).
+
+given clause #375: (wt=6) 427 [hyper,22,9,13,18,demod] CP(6,2,7,0,2).
+
+given clause #376: (wt=6) 428 [hyper,22,9,13,17,demod] CP(6,2,6,8,1).
+
+given clause #377: (wt=6) 429 [hyper,22,9,13,16,demod] CP(6,2,5,6,1).
+
+given clause #378: (wt=6) 430 [hyper,22,9,13,15,demod] CP(6,2,4,4,1).
+
+given clause #379: (wt=6) 431 [hyper,22,9,13,14,demod] CP(6,2,3,2,1).
+
+given clause #380: (wt=6) 432 [hyper,22,9,13,13,demod] CP(6,2,2,0,1).
+
+given clause #381: (wt=6) 433 [hyper,22,9,13,12,demod] CP(6,2,1,8,0).
+
+given clause #382: (wt=6) 434 [hyper,22,9,13,11,demod] CP(6,2,0,6,0).
+
+given clause #383: (wt=6) 435 [hyper,22,9,12,20,demod] CP(6,1,9,5,1).
+
+given clause #384: (wt=6) 436 [hyper,22,9,12,19,demod] CP(6,1,8,4,1).
+
+given clause #385: (wt=6) 437 [hyper,22,9,12,18,demod] CP(6,1,7,3,1).
+
+given clause #386: (wt=6) 438 [hyper,22,9,12,17,demod] CP(6,1,6,2,1).
+
+given clause #387: (wt=6) 439 [hyper,22,9,12,16,demod] CP(6,1,5,1,1).
+
+given clause #388: (wt=6) 440 [hyper,22,9,12,15,demod] CP(6,1,4,0,1).
+
+given clause #389: (wt=6) 441 [hyper,22,9,12,14,demod] CP(6,1,3,9,0).
+
+given clause #390: (wt=6) 442 [hyper,22,9,12,13,demod] CP(6,1,2,8,0).
+
+given clause #391: (wt=6) 443 [hyper,22,9,12,12,demod] CP(6,1,1,7,0).
+
+given clause #392: (wt=6) 444 [hyper,22,9,12,11,demod] CP(6,1,0,6,0).
+
+given clause #393: (wt=6) 445 [hyper,22,9,11,20,demod] CP(6,0,9,6,0).
+
+given clause #394: (wt=6) 446 [hyper,22,9,11,19,demod] CP(6,0,8,6,0).
+
+given clause #395: (wt=6) 447 [hyper,22,9,11,18,demod] CP(6,0,7,6,0).
+
+given clause #396: (wt=6) 448 [hyper,22,9,11,17,demod] CP(6,0,6,6,0).
+
+given clause #397: (wt=6) 449 [hyper,22,9,11,16,demod] CP(6,0,5,6,0).
+
+given clause #398: (wt=6) 450 [hyper,22,9,11,15,demod] CP(6,0,4,6,0).
+
+given clause #399: (wt=6) 451 [hyper,22,9,11,14,demod] CP(6,0,3,6,0).
+
+given clause #400: (wt=6) 452 [hyper,22,9,11,13,demod] CP(6,0,2,6,0).
+
+given clause #401: (wt=6) 453 [hyper,22,9,11,12,demod] CP(6,0,1,6,0).
+
+given clause #402: (wt=6) 454 [hyper,22,9,11,11,demod] CP(6,0,0,6,0).
+
+given clause #403: (wt=6) 455 [hyper,22,8,20,20,demod] CP(5,9,9,6,8).
+
+given clause #404: (wt=6) 456 [hyper,22,8,20,19,demod] CP(5,9,8,7,7).
+
+given clause #405: (wt=6) 457 [hyper,22,8,20,18,demod] CP(5,9,7,8,6).
+
+given clause #406: (wt=6) 458 [hyper,22,8,20,17,demod] CP(5,9,6,9,5).
+
+given clause #407: (wt=6) 459 [hyper,22,8,20,16,demod] CP(5,9,5,0,5).
+
+given clause #408: (wt=6) 460 [hyper,22,8,20,15,demod] CP(5,9,4,1,4).
+
+given clause #409: (wt=6) 461 [hyper,22,8,20,14,demod] CP(5,9,3,2,3).
+
+given clause #410: (wt=6) 462 [hyper,22,8,20,13,demod] CP(5,9,2,3,2).
+
+given clause #411: (wt=6) 463 [hyper,22,8,20,12,demod] CP(5,9,1,4,1).
+
+given clause #412: (wt=6) 464 [hyper,22,8,20,11,demod] CP(5,9,0,5,0).
+
+given clause #413: (wt=6) 465 [hyper,22,8,19,20,demod] CP(5,8,9,7,7).
+
+given clause #414: (wt=6) 466 [hyper,22,8,19,19,demod] CP(5,8,8,9,6).
+
+given clause #415: (wt=6) 467 [hyper,22,8,19,18,demod] CP(5,8,7,1,6).
+
+given clause #416: (wt=6) 468 [hyper,22,8,19,17,demod] CP(5,8,6,3,5).
+
+given clause #417: (wt=6) 469 [hyper,22,8,19,16,demod] CP(5,8,5,5,4).
+
+given clause #418: (wt=6) 470 [hyper,22,8,19,15,demod] CP(5,8,4,7,3).
+
+given clause #419: (wt=6) 471 [hyper,22,8,19,14,demod] CP(5,8,3,9,2).
+
+given clause #420: (wt=6) 472 [hyper,22,8,19,13,demod] CP(5,8,2,1,2).
+
+given clause #421: (wt=6) 473 [hyper,22,8,19,12,demod] CP(5,8,1,3,1).
+
+given clause #422: (wt=6) 474 [hyper,22,8,19,11,demod] CP(5,8,0,5,0).
+
+given clause #423: (wt=6) 475 [hyper,22,8,18,20,demod] CP(5,7,9,8,6).
+
+given clause #424: (wt=6) 476 [hyper,22,8,18,19,demod] CP(5,7,8,1,6).
+
+given clause #425: (wt=6) 477 [hyper,22,8,18,18,demod] CP(5,7,7,4,5).
+
+given clause #426: (wt=6) 478 [hyper,22,8,18,17,demod] CP(5,7,6,7,4).
+
+given clause #427: (wt=6) 479 [hyper,22,8,18,16,demod] CP(5,7,5,0,4).
+
+given clause #428: (wt=6) 480 [hyper,22,8,18,15,demod] CP(5,7,4,3,3).
+
+given clause #429: (wt=6) 481 [hyper,22,8,18,14,demod] CP(5,7,3,6,2).
+
+given clause #430: (wt=6) 482 [hyper,22,8,18,13,demod] CP(5,7,2,9,1).
+
+given clause #431: (wt=6) 483 [hyper,22,8,18,12,demod] CP(5,7,1,2,1).
+
+given clause #432: (wt=6) 484 [hyper,22,8,18,11,demod] CP(5,7,0,5,0).
+
+given clause #433: (wt=6) 485 [hyper,22,8,17,20,demod] CP(5,6,9,9,5).
+
+given clause #434: (wt=6) 486 [hyper,22,8,17,19,demod] CP(5,6,8,3,5).
+
+given clause #435: (wt=6) 487 [hyper,22,8,17,18,demod] CP(5,6,7,7,4).
+
+given clause #436: (wt=6) 488 [hyper,22,8,17,17,demod] CP(5,6,6,1,4).
+
+given clause #437: (wt=6) 489 [hyper,22,8,17,16,demod] CP(5,6,5,5,3).
+
+given clause #438: (wt=6) 490 [hyper,22,8,17,15,demod] CP(5,6,4,9,2).
+
+given clause #439: (wt=6) 491 [hyper,22,8,17,14,demod] CP(5,6,3,3,2).
+
+given clause #440: (wt=6) 492 [hyper,22,8,17,13,demod] CP(5,6,2,7,1).
+
+given clause #441: (wt=6) 493 [hyper,22,8,17,12,demod] CP(5,6,1,1,1).
+
+given clause #442: (wt=6) 494 [hyper,22,8,17,11,demod] CP(5,6,0,5,0).
+
+given clause #443: (wt=6) 495 [hyper,22,8,16,20,demod] CP(5,5,9,0,5).
+
+given clause #444: (wt=6) 496 [hyper,22,8,16,19,demod] CP(5,5,8,5,4).
+
+given clause #445: (wt=6) 497 [hyper,22,8,16,18,demod] CP(5,5,7,0,4).
+
+given clause #446: (wt=6) 498 [hyper,22,8,16,17,demod] CP(5,5,6,5,3).
+
+given clause #447: (wt=6) 499 [hyper,22,8,16,16,demod] CP(5,5,5,0,3).
+
+given clause #448: (wt=6) 500 [hyper,22,8,16,15,demod] CP(5,5,4,5,2).
+
+given clause #449: (wt=6) 501 [hyper,22,8,16,14,demod] CP(5,5,3,0,2).
+
+given clause #450: (wt=6) 502 [hyper,22,8,16,13,demod] CP(5,5,2,5,1).
+
+given clause #451: (wt=6) 503 [hyper,22,8,16,12,demod] CP(5,5,1,0,1).
+
+given clause #452: (wt=6) 504 [hyper,22,8,16,11,demod] CP(5,5,0,5,0).
+
+given clause #453: (wt=6) 505 [hyper,22,8,15,20,demod] CP(5,4,9,1,4).
+
+given clause #454: (wt=6) 506 [hyper,22,8,15,19,demod] CP(5,4,8,7,3).
+
+given clause #455: (wt=6) 507 [hyper,22,8,15,18,demod] CP(5,4,7,3,3).
+
+given clause #456: (wt=6) 508 [hyper,22,8,15,17,demod] CP(5,4,6,9,2).
+
+given clause #457: (wt=6) 509 [hyper,22,8,15,16,demod] CP(5,4,5,5,2).
+
+given clause #458: (wt=6) 510 [hyper,22,8,15,15,demod] CP(5,4,4,1,2).
+
+given clause #459: (wt=6) 511 [hyper,22,8,15,14,demod] CP(5,4,3,7,1).
+
+given clause #460: (wt=6) 512 [hyper,22,8,15,13,demod] CP(5,4,2,3,1).
+
+given clause #461: (wt=6) 513 [hyper,22,8,15,12,demod] CP(5,4,1,9,0).
+
+given clause #462: (wt=6) 514 [hyper,22,8,15,11,demod] CP(5,4,0,5,0).
+
+given clause #463: (wt=6) 515 [hyper,22,8,14,20,demod] CP(5,3,9,2,3).
+
+given clause #464: (wt=6) 516 [hyper,22,8,14,19,demod] CP(5,3,8,9,2).
+
+given clause #465: (wt=6) 517 [hyper,22,8,14,18,demod] CP(5,3,7,6,2).
+
+given clause #466: (wt=6) 518 [hyper,22,8,14,17,demod] CP(5,3,6,3,2).
+
+given clause #467: (wt=6) 519 [hyper,22,8,14,16,demod] CP(5,3,5,0,2).
+
+given clause #468: (wt=6) 520 [hyper,22,8,14,15,demod] CP(5,3,4,7,1).
+
+given clause #469: (wt=6) 521 [hyper,22,8,14,14,demod] CP(5,3,3,4,1).
+
+given clause #470: (wt=6) 522 [hyper,22,8,14,13,demod] CP(5,3,2,1,1).
+
+given clause #471: (wt=6) 523 [hyper,22,8,14,12,demod] CP(5,3,1,8,0).
+
+given clause #472: (wt=6) 524 [hyper,22,8,14,11,demod] CP(5,3,0,5,0).
+
+given clause #473: (wt=6) 525 [hyper,22,8,13,20,demod] CP(5,2,9,3,2).
+
+given clause #474: (wt=6) 526 [hyper,22,8,13,19,demod] CP(5,2,8,1,2).
+
+given clause #475: (wt=6) 527 [hyper,22,8,13,18,demod] CP(5,2,7,9,1).
+
+given clause #476: (wt=6) 528 [hyper,22,8,13,17,demod] CP(5,2,6,7,1).
+
+given clause #477: (wt=6) 529 [hyper,22,8,13,16,demod] CP(5,2,5,5,1).
+
+given clause #478: (wt=6) 530 [hyper,22,8,13,15,demod] CP(5,2,4,3,1).
+
+given clause #479: (wt=6) 531 [hyper,22,8,13,14,demod] CP(5,2,3,1,1).
+
+given clause #480: (wt=6) 532 [hyper,22,8,13,13,demod] CP(5,2,2,9,0).
+
+given clause #481: (wt=6) 533 [hyper,22,8,13,12,demod] CP(5,2,1,7,0).
+
+given clause #482: (wt=6) 534 [hyper,22,8,13,11,demod] CP(5,2,0,5,0).
+
+given clause #483: (wt=6) 535 [hyper,22,8,12,20,demod] CP(5,1,9,4,1).
+
+given clause #484: (wt=6) 536 [hyper,22,8,12,19,demod] CP(5,1,8,3,1).
+
+given clause #485: (wt=6) 537 [hyper,22,8,12,18,demod] CP(5,1,7,2,1).
+
+given clause #486: (wt=6) 538 [hyper,22,8,12,17,demod] CP(5,1,6,1,1).
+
+given clause #487: (wt=6) 539 [hyper,22,8,12,16,demod] CP(5,1,5,0,1).
+
+given clause #488: (wt=6) 540 [hyper,22,8,12,15,demod] CP(5,1,4,9,0).
+
+given clause #489: (wt=6) 541 [hyper,22,8,12,14,demod] CP(5,1,3,8,0).
+
+given clause #490: (wt=6) 542 [hyper,22,8,12,13,demod] CP(5,1,2,7,0).
+
+given clause #491: (wt=6) 543 [hyper,22,8,12,12,demod] CP(5,1,1,6,0).
+
+given clause #492: (wt=6) 544 [hyper,22,8,12,11,demod] CP(5,1,0,5,0).
+
+given clause #493: (wt=6) 545 [hyper,22,8,11,20,demod] CP(5,0,9,5,0).
+
+given clause #494: (wt=6) 546 [hyper,22,8,11,19,demod] CP(5,0,8,5,0).
+
+given clause #495: (wt=6) 547 [hyper,22,8,11,18,demod] CP(5,0,7,5,0).
+
+given clause #496: (wt=6) 548 [hyper,22,8,11,17,demod] CP(5,0,6,5,0).
+
+given clause #497: (wt=6) 549 [hyper,22,8,11,16,demod] CP(5,0,5,5,0).
+
+given clause #498: (wt=6) 550 [hyper,22,8,11,15,demod] CP(5,0,4,5,0).
+
+given clause #499: (wt=6) 551 [hyper,22,8,11,14,demod] CP(5,0,3,5,0).
+
+given clause #500: (wt=6) 552 [hyper,22,8,11,13,demod] CP(5,0,2,5,0).
+
+given clause #501: (wt=6) 553 [hyper,22,8,11,12,demod] CP(5,0,1,5,0).
+
+given clause #502: (wt=6) 554 [hyper,22,8,11,11,demod] CP(5,0,0,5,0).
+
+given clause #503: (wt=6) 555 [hyper,22,7,20,20,demod] CP(4,9,9,5,8).
+
+given clause #504: (wt=6) 556 [hyper,22,7,20,19,demod] CP(4,9,8,6,7).
+
+given clause #505: (wt=6) 557 [hyper,22,7,20,18,demod] CP(4,9,7,7,6).
+
+given clause #506: (wt=6) 558 [hyper,22,7,20,17,demod] CP(4,9,6,8,5).
+
+given clause #507: (wt=6) 559 [hyper,22,7,20,16,demod] CP(4,9,5,9,4).
+
+given clause #508: (wt=6) 560 [hyper,22,7,20,15,demod] CP(4,9,4,0,4).
+
+given clause #509: (wt=6) 561 [hyper,22,7,20,14,demod] CP(4,9,3,1,3).
+
+given clause #510: (wt=6) 562 [hyper,22,7,20,13,demod] CP(4,9,2,2,2).
+
+given clause #511: (wt=6) 563 [hyper,22,7,20,12,demod] CP(4,9,1,3,1).
+
+given clause #512: (wt=6) 564 [hyper,22,7,20,11,demod] CP(4,9,0,4,0).
+
+given clause #513: (wt=6) 565 [hyper,22,7,19,20,demod] CP(4,8,9,6,7).
+
+given clause #514: (wt=6) 566 [hyper,22,7,19,19,demod] CP(4,8,8,8,6).
+
+given clause #515: (wt=6) 567 [hyper,22,7,19,18,demod] CP(4,8,7,0,6).
+
+given clause #516: (wt=6) 568 [hyper,22,7,19,17,demod] CP(4,8,6,2,5).
+
+given clause #517: (wt=6) 569 [hyper,22,7,19,16,demod] CP(4,8,5,4,4).
+
+given clause #518: (wt=6) 570 [hyper,22,7,19,15,demod] CP(4,8,4,6,3).
+
+given clause #519: (wt=6) 571 [hyper,22,7,19,14,demod] CP(4,8,3,8,2).
+
+given clause #520: (wt=6) 572 [hyper,22,7,19,13,demod] CP(4,8,2,0,2).
+
+given clause #521: (wt=6) 573 [hyper,22,7,19,12,demod] CP(4,8,1,2,1).
+
+given clause #522: (wt=6) 574 [hyper,22,7,19,11,demod] CP(4,8,0,4,0).
+
+given clause #523: (wt=6) 575 [hyper,22,7,18,20,demod] CP(4,7,9,7,6).
+
+given clause #524: (wt=6) 576 [hyper,22,7,18,19,demod] CP(4,7,8,0,6).
+
+given clause #525: (wt=6) 577 [hyper,22,7,18,18,demod] CP(4,7,7,3,5).
+
+given clause #526: (wt=6) 578 [hyper,22,7,18,17,demod] CP(4,7,6,6,4).
+
+given clause #527: (wt=6) 579 [hyper,22,7,18,16,demod] CP(4,7,5,9,3).
+
+given clause #528: (wt=6) 580 [hyper,22,7,18,15,demod] CP(4,7,4,2,3).
+
+given clause #529: (wt=6) 581 [hyper,22,7,18,14,demod] CP(4,7,3,5,2).
+
+given clause #530: (wt=6) 582 [hyper,22,7,18,13,demod] CP(4,7,2,8,1).
+
+given clause #531: (wt=6) 583 [hyper,22,7,18,12,demod] CP(4,7,1,1,1).
+
+given clause #532: (wt=6) 584 [hyper,22,7,18,11,demod] CP(4,7,0,4,0).
+
+given clause #533: (wt=6) 585 [hyper,22,7,17,20,demod] CP(4,6,9,8,5).
+
+given clause #534: (wt=6) 586 [hyper,22,7,17,19,demod] CP(4,6,8,2,5).
+
+given clause #535: (wt=6) 587 [hyper,22,7,17,18,demod] CP(4,6,7,6,4).
+
+given clause #536: (wt=6) 588 [hyper,22,7,17,17,demod] CP(4,6,6,0,4).
+
+given clause #537: (wt=6) 589 [hyper,22,7,17,16,demod] CP(4,6,5,4,3).
+
+given clause #538: (wt=6) 590 [hyper,22,7,17,15,demod] CP(4,6,4,8,2).
+
+given clause #539: (wt=6) 591 [hyper,22,7,17,14,demod] CP(4,6,3,2,2).
+
+given clause #540: (wt=6) 592 [hyper,22,7,17,13,demod] CP(4,6,2,6,1).
+
+given clause #541: (wt=6) 593 [hyper,22,7,17,12,demod] CP(4,6,1,0,1).
+
+given clause #542: (wt=6) 594 [hyper,22,7,17,11,demod] CP(4,6,0,4,0).
+
+given clause #543: (wt=6) 595 [hyper,22,7,16,20,demod] CP(4,5,9,9,4).
+
+given clause #544: (wt=6) 596 [hyper,22,7,16,19,demod] CP(4,5,8,4,4).
+
+given clause #545: (wt=6) 597 [hyper,22,7,16,18,demod] CP(4,5,7,9,3).
+
+given clause #546: (wt=6) 598 [hyper,22,7,16,17,demod] CP(4,5,6,4,3).
+
+given clause #547: (wt=6) 599 [hyper,22,7,16,16,demod] CP(4,5,5,9,2).
+
+given clause #548: (wt=6) 600 [hyper,22,7,16,15,demod] CP(4,5,4,4,2).
+
+given clause #549: (wt=6) 601 [hyper,22,7,16,14,demod] CP(4,5,3,9,1).
+
+given clause #550: (wt=6) 602 [hyper,22,7,16,13,demod] CP(4,5,2,4,1).
+
+given clause #551: (wt=6) 603 [hyper,22,7,16,12,demod] CP(4,5,1,9,0).
+
+given clause #552: (wt=6) 604 [hyper,22,7,16,11,demod] CP(4,5,0,4,0).
+
+given clause #553: (wt=6) 605 [hyper,22,7,15,20,demod] CP(4,4,9,0,4).
+
+given clause #554: (wt=6) 606 [hyper,22,7,15,19,demod] CP(4,4,8,6,3).
+
+given clause #555: (wt=6) 607 [hyper,22,7,15,18,demod] CP(4,4,7,2,3).
+
+given clause #556: (wt=6) 608 [hyper,22,7,15,17,demod] CP(4,4,6,8,2).
+
+given clause #557: (wt=6) 609 [hyper,22,7,15,16,demod] CP(4,4,5,4,2).
+
+given clause #558: (wt=6) 610 [hyper,22,7,15,15,demod] CP(4,4,4,0,2).
+
+given clause #559: (wt=6) 611 [hyper,22,7,15,14,demod] CP(4,4,3,6,1).
+
+given clause #560: (wt=6) 612 [hyper,22,7,15,13,demod] CP(4,4,2,2,1).
+
+given clause #561: (wt=6) 613 [hyper,22,7,15,12,demod] CP(4,4,1,8,0).
+
+given clause #562: (wt=6) 614 [hyper,22,7,15,11,demod] CP(4,4,0,4,0).
+
+given clause #563: (wt=6) 615 [hyper,22,7,14,20,demod] CP(4,3,9,1,3).
+
+given clause #564: (wt=6) 616 [hyper,22,7,14,19,demod] CP(4,3,8,8,2).
+
+given clause #565: (wt=6) 617 [hyper,22,7,14,18,demod] CP(4,3,7,5,2).
+
+given clause #566: (wt=6) 618 [hyper,22,7,14,17,demod] CP(4,3,6,2,2).
+
+given clause #567: (wt=6) 619 [hyper,22,7,14,16,demod] CP(4,3,5,9,1).
+
+given clause #568: (wt=6) 620 [hyper,22,7,14,15,demod] CP(4,3,4,6,1).
+
+given clause #569: (wt=6) 621 [hyper,22,7,14,14,demod] CP(4,3,3,3,1).
+
+given clause #570: (wt=6) 622 [hyper,22,7,14,13,demod] CP(4,3,2,0,1).
+
+given clause #571: (wt=6) 623 [hyper,22,7,14,12,demod] CP(4,3,1,7,0).
+
+given clause #572: (wt=6) 624 [hyper,22,7,14,11,demod] CP(4,3,0,4,0).
+
+given clause #573: (wt=6) 625 [hyper,22,7,13,20,demod] CP(4,2,9,2,2).
+
+given clause #574: (wt=6) 626 [hyper,22,7,13,19,demod] CP(4,2,8,0,2).
+
+given clause #575: (wt=6) 627 [hyper,22,7,13,18,demod] CP(4,2,7,8,1).
+
+given clause #576: (wt=6) 628 [hyper,22,7,13,17,demod] CP(4,2,6,6,1).
+
+given clause #577: (wt=6) 629 [hyper,22,7,13,16,demod] CP(4,2,5,4,1).
+
+given clause #578: (wt=6) 630 [hyper,22,7,13,15,demod] CP(4,2,4,2,1).
+
+given clause #579: (wt=6) 631 [hyper,22,7,13,14,demod] CP(4,2,3,0,1).
+
+given clause #580: (wt=6) 632 [hyper,22,7,13,13,demod] CP(4,2,2,8,0).
+
+given clause #581: (wt=6) 633 [hyper,22,7,13,12,demod] CP(4,2,1,6,0).
+
+given clause #582: (wt=6) 634 [hyper,22,7,13,11,demod] CP(4,2,0,4,0).
+
+given clause #583: (wt=6) 635 [hyper,22,7,12,20,demod] CP(4,1,9,3,1).
+
+given clause #584: (wt=6) 636 [hyper,22,7,12,19,demod] CP(4,1,8,2,1).
+
+given clause #585: (wt=6) 637 [hyper,22,7,12,18,demod] CP(4,1,7,1,1).
+
+given clause #586: (wt=6) 638 [hyper,22,7,12,17,demod] CP(4,1,6,0,1).
+
+given clause #587: (wt=6) 639 [hyper,22,7,12,16,demod] CP(4,1,5,9,0).
+
+given clause #588: (wt=6) 640 [hyper,22,7,12,15,demod] CP(4,1,4,8,0).
+
+given clause #589: (wt=6) 641 [hyper,22,7,12,14,demod] CP(4,1,3,7,0).
+
+given clause #590: (wt=6) 642 [hyper,22,7,12,13,demod] CP(4,1,2,6,0).
+
+given clause #591: (wt=6) 643 [hyper,22,7,12,12,demod] CP(4,1,1,5,0).
+
+given clause #592: (wt=6) 644 [hyper,22,7,12,11,demod] CP(4,1,0,4,0).
+
+given clause #593: (wt=6) 645 [hyper,22,7,11,20,demod] CP(4,0,9,4,0).
+
+given clause #594: (wt=6) 646 [hyper,22,7,11,19,demod] CP(4,0,8,4,0).
+
+given clause #595: (wt=6) 647 [hyper,22,7,11,18,demod] CP(4,0,7,4,0).
+
+given clause #596: (wt=6) 648 [hyper,22,7,11,17,demod] CP(4,0,6,4,0).
+
+given clause #597: (wt=6) 649 [hyper,22,7,11,16,demod] CP(4,0,5,4,0).
+
+given clause #598: (wt=6) 650 [hyper,22,7,11,15,demod] CP(4,0,4,4,0).
+
+given clause #599: (wt=6) 651 [hyper,22,7,11,14,demod] CP(4,0,3,4,0).
+
+given clause #600: (wt=6) 652 [hyper,22,7,11,13,demod] CP(4,0,2,4,0).
+
+given clause #601: (wt=6) 653 [hyper,22,7,11,12,demod] CP(4,0,1,4,0).
+
+given clause #602: (wt=6) 654 [hyper,22,7,11,11,demod] CP(4,0,0,4,0).
+
+given clause #603: (wt=6) 655 [hyper,22,6,20,20,demod] CP(3,9,9,4,8).
+
+given clause #604: (wt=6) 656 [hyper,22,6,20,19,demod] CP(3,9,8,5,7).
+
+given clause #605: (wt=6) 657 [hyper,22,6,20,18,demod] CP(3,9,7,6,6).
+
+given clause #606: (wt=6) 658 [hyper,22,6,20,17,demod] CP(3,9,6,7,5).
+
+given clause #607: (wt=6) 659 [hyper,22,6,20,16,demod] CP(3,9,5,8,4).
+
+given clause #608: (wt=6) 660 [hyper,22,6,20,15,demod] CP(3,9,4,9,3).
+
+given clause #609: (wt=6) 661 [hyper,22,6,20,14,demod] CP(3,9,3,0,3).
+
+given clause #610: (wt=6) 662 [hyper,22,6,20,13,demod] CP(3,9,2,1,2).
+
+given clause #611: (wt=6) 663 [hyper,22,6,20,12,demod] CP(3,9,1,2,1).
+
+given clause #612: (wt=6) 664 [hyper,22,6,20,11,demod] CP(3,9,0,3,0).
+
+given clause #613: (wt=6) 665 [hyper,22,6,19,20,demod] CP(3,8,9,5,7).
+
+given clause #614: (wt=6) 666 [hyper,22,6,19,19,demod] CP(3,8,8,7,6).
+
+given clause #615: (wt=6) 667 [hyper,22,6,19,18,demod] CP(3,8,7,9,5).
+
+given clause #616: (wt=6) 668 [hyper,22,6,19,17,demod] CP(3,8,6,1,5).
+
+given clause #617: (wt=6) 669 [hyper,22,6,19,16,demod] CP(3,8,5,3,4).
+
+given clause #618: (wt=6) 670 [hyper,22,6,19,15,demod] CP(3,8,4,5,3).
+
+given clause #619: (wt=6) 671 [hyper,22,6,19,14,demod] CP(3,8,3,7,2).
+
+given clause #620: (wt=6) 672 [hyper,22,6,19,13,demod] CP(3,8,2,9,1).
+
+given clause #621: (wt=6) 673 [hyper,22,6,19,12,demod] CP(3,8,1,1,1).
+
+given clause #622: (wt=6) 674 [hyper,22,6,19,11,demod] CP(3,8,0,3,0).
+
+given clause #623: (wt=6) 675 [hyper,22,6,18,20,demod] CP(3,7,9,6,6).
+
+given clause #624: (wt=6) 676 [hyper,22,6,18,19,demod] CP(3,7,8,9,5).
+
+given clause #625: (wt=6) 677 [hyper,22,6,18,18,demod] CP(3,7,7,2,5).
+
+given clause #626: (wt=6) 678 [hyper,22,6,18,17,demod] CP(3,7,6,5,4).
+
+given clause #627: (wt=6) 679 [hyper,22,6,18,16,demod] CP(3,7,5,8,3).
+
+given clause #628: (wt=6) 680 [hyper,22,6,18,15,demod] CP(3,7,4,1,3).
+
+given clause #629: (wt=6) 681 [hyper,22,6,18,14,demod] CP(3,7,3,4,2).
+
+given clause #630: (wt=6) 682 [hyper,22,6,18,13,demod] CP(3,7,2,7,1).
+
+given clause #631: (wt=6) 683 [hyper,22,6,18,12,demod] CP(3,7,1,0,1).
+
+given clause #632: (wt=6) 684 [hyper,22,6,18,11,demod] CP(3,7,0,3,0).
+
+given clause #633: (wt=6) 685 [hyper,22,6,17,20,demod] CP(3,6,9,7,5).
+
+given clause #634: (wt=6) 686 [hyper,22,6,17,19,demod] CP(3,6,8,1,5).
+
+given clause #635: (wt=6) 687 [hyper,22,6,17,18,demod] CP(3,6,7,5,4).
+
+given clause #636: (wt=6) 688 [hyper,22,6,17,17,demod] CP(3,6,6,9,3).
+
+given clause #637: (wt=6) 689 [hyper,22,6,17,16,demod] CP(3,6,5,3,3).
+
+given clause #638: (wt=6) 690 [hyper,22,6,17,15,demod] CP(3,6,4,7,2).
+
+given clause #639: (wt=6) 691 [hyper,22,6,17,14,demod] CP(3,6,3,1,2).
+
+given clause #640: (wt=6) 692 [hyper,22,6,17,13,demod] CP(3,6,2,5,1).
+
+given clause #641: (wt=6) 693 [hyper,22,6,17,12,demod] CP(3,6,1,9,0).
+
+given clause #642: (wt=6) 694 [hyper,22,6,17,11,demod] CP(3,6,0,3,0).
+
+given clause #643: (wt=6) 695 [hyper,22,6,16,20,demod] CP(3,5,9,8,4).
+
+given clause #644: (wt=6) 696 [hyper,22,6,16,19,demod] CP(3,5,8,3,4).
+
+given clause #645: (wt=6) 697 [hyper,22,6,16,18,demod] CP(3,5,7,8,3).
+
+given clause #646: (wt=6) 698 [hyper,22,6,16,17,demod] CP(3,5,6,3,3).
+
+given clause #647: (wt=6) 699 [hyper,22,6,16,16,demod] CP(3,5,5,8,2).
+
+given clause #648: (wt=6) 700 [hyper,22,6,16,15,demod] CP(3,5,4,3,2).
+
+given clause #649: (wt=6) 701 [hyper,22,6,16,14,demod] CP(3,5,3,8,1).
+
+given clause #650: (wt=6) 702 [hyper,22,6,16,13,demod] CP(3,5,2,3,1).
+
+given clause #651: (wt=6) 703 [hyper,22,6,16,12,demod] CP(3,5,1,8,0).
+
+given clause #652: (wt=6) 704 [hyper,22,6,16,11,demod] CP(3,5,0,3,0).
+
+given clause #653: (wt=6) 705 [hyper,22,6,15,20,demod] CP(3,4,9,9,3).
+
+given clause #654: (wt=6) 706 [hyper,22,6,15,19,demod] CP(3,4,8,5,3).
+
+given clause #655: (wt=6) 707 [hyper,22,6,15,18,demod] CP(3,4,7,1,3).
+
+given clause #656: (wt=6) 708 [hyper,22,6,15,17,demod] CP(3,4,6,7,2).
+
+given clause #657: (wt=6) 709 [hyper,22,6,15,16,demod] CP(3,4,5,3,2).
+
+given clause #658: (wt=6) 710 [hyper,22,6,15,15,demod] CP(3,4,4,9,1).
+
+given clause #659: (wt=6) 711 [hyper,22,6,15,14,demod] CP(3,4,3,5,1).
+
+given clause #660: (wt=6) 712 [hyper,22,6,15,13,demod] CP(3,4,2,1,1).
+
+given clause #661: (wt=6) 713 [hyper,22,6,15,12,demod] CP(3,4,1,7,0).
+
+given clause #662: (wt=6) 714 [hyper,22,6,15,11,demod] CP(3,4,0,3,0).
+
+given clause #663: (wt=6) 715 [hyper,22,6,14,20,demod] CP(3,3,9,0,3).
+
+given clause #664: (wt=6) 716 [hyper,22,6,14,19,demod] CP(3,3,8,7,2).
+
+given clause #665: (wt=6) 717 [hyper,22,6,14,18,demod] CP(3,3,7,4,2).
+
+given clause #666: (wt=6) 718 [hyper,22,6,14,17,demod] CP(3,3,6,1,2).
+
+given clause #667: (wt=6) 719 [hyper,22,6,14,16,demod] CP(3,3,5,8,1).
+
+given clause #668: (wt=6) 720 [hyper,22,6,14,15,demod] CP(3,3,4,5,1).
+
+given clause #669: (wt=6) 721 [hyper,22,6,14,14,demod] CP(3,3,3,2,1).
+
+given clause #670: (wt=6) 722 [hyper,22,6,14,13,demod] CP(3,3,2,9,0).
+
+given clause #671: (wt=6) 723 [hyper,22,6,14,12,demod] CP(3,3,1,6,0).
+
+given clause #672: (wt=6) 724 [hyper,22,6,14,11,demod] CP(3,3,0,3,0).
+
+given clause #673: (wt=6) 725 [hyper,22,6,13,20,demod] CP(3,2,9,1,2).
+
+given clause #674: (wt=6) 726 [hyper,22,6,13,19,demod] CP(3,2,8,9,1).
+
+given clause #675: (wt=6) 727 [hyper,22,6,13,18,demod] CP(3,2,7,7,1).
+
+given clause #676: (wt=6) 728 [hyper,22,6,13,17,demod] CP(3,2,6,5,1).
+
+given clause #677: (wt=6) 729 [hyper,22,6,13,16,demod] CP(3,2,5,3,1).
+
+given clause #678: (wt=6) 730 [hyper,22,6,13,15,demod] CP(3,2,4,1,1).
+
+given clause #679: (wt=6) 731 [hyper,22,6,13,14,demod] CP(3,2,3,9,0).
+
+given clause #680: (wt=6) 732 [hyper,22,6,13,13,demod] CP(3,2,2,7,0).
+
+given clause #681: (wt=6) 733 [hyper,22,6,13,12,demod] CP(3,2,1,5,0).
+
+given clause #682: (wt=6) 734 [hyper,22,6,13,11,demod] CP(3,2,0,3,0).
+
+given clause #683: (wt=6) 735 [hyper,22,6,12,20,demod] CP(3,1,9,2,1).
+
+given clause #684: (wt=6) 736 [hyper,22,6,12,19,demod] CP(3,1,8,1,1).
+
+given clause #685: (wt=6) 737 [hyper,22,6,12,18,demod] CP(3,1,7,0,1).
+
+given clause #686: (wt=6) 738 [hyper,22,6,12,17,demod] CP(3,1,6,9,0).
+
+given clause #687: (wt=6) 739 [hyper,22,6,12,16,demod] CP(3,1,5,8,0).
+
+given clause #688: (wt=6) 740 [hyper,22,6,12,15,demod] CP(3,1,4,7,0).
+
+given clause #689: (wt=6) 741 [hyper,22,6,12,14,demod] CP(3,1,3,6,0).
+
+given clause #690: (wt=6) 742 [hyper,22,6,12,13,demod] CP(3,1,2,5,0).
+
+given clause #691: (wt=6) 743 [hyper,22,6,12,12,demod] CP(3,1,1,4,0).
+
+given clause #692: (wt=6) 744 [hyper,22,6,12,11,demod] CP(3,1,0,3,0).
+
+given clause #693: (wt=6) 745 [hyper,22,6,11,20,demod] CP(3,0,9,3,0).
+
+given clause #694: (wt=6) 746 [hyper,22,6,11,19,demod] CP(3,0,8,3,0).
+
+given clause #695: (wt=6) 747 [hyper,22,6,11,18,demod] CP(3,0,7,3,0).
+
+given clause #696: (wt=6) 748 [hyper,22,6,11,17,demod] CP(3,0,6,3,0).
+
+given clause #697: (wt=6) 749 [hyper,22,6,11,16,demod] CP(3,0,5,3,0).
+
+given clause #698: (wt=6) 750 [hyper,22,6,11,15,demod] CP(3,0,4,3,0).
+
+given clause #699: (wt=6) 751 [hyper,22,6,11,14,demod] CP(3,0,3,3,0).
+
+given clause #700: (wt=6) 752 [hyper,22,6,11,13,demod] CP(3,0,2,3,0).
+
+given clause #701: (wt=6) 753 [hyper,22,6,11,12,demod] CP(3,0,1,3,0).
+
+given clause #702: (wt=6) 754 [hyper,22,6,11,11,demod] CP(3,0,0,3,0).
+
+given clause #703: (wt=6) 755 [hyper,22,5,20,20,demod] CP(2,9,9,3,8).
+
+given clause #704: (wt=6) 756 [hyper,22,5,20,19,demod] CP(2,9,8,4,7).
+
+given clause #705: (wt=6) 757 [hyper,22,5,20,18,demod] CP(2,9,7,5,6).
+
+given clause #706: (wt=6) 758 [hyper,22,5,20,17,demod] CP(2,9,6,6,5).
+
+given clause #707: (wt=6) 759 [hyper,22,5,20,16,demod] CP(2,9,5,7,4).
+
+given clause #708: (wt=6) 760 [hyper,22,5,20,15,demod] CP(2,9,4,8,3).
+
+given clause #709: (wt=6) 761 [hyper,22,5,20,14,demod] CP(2,9,3,9,2).
+
+given clause #710: (wt=6) 762 [hyper,22,5,20,13,demod] CP(2,9,2,0,2).
+
+given clause #711: (wt=6) 763 [hyper,22,5,20,12,demod] CP(2,9,1,1,1).
+
+given clause #712: (wt=6) 764 [hyper,22,5,20,11,demod] CP(2,9,0,2,0).
+
+given clause #713: (wt=6) 765 [hyper,22,5,19,20,demod] CP(2,8,9,4,7).
+
+given clause #714: (wt=6) 766 [hyper,22,5,19,19,demod] CP(2,8,8,6,6).
+
+given clause #715: (wt=6) 767 [hyper,22,5,19,18,demod] CP(2,8,7,8,5).
+
+given clause #716: (wt=6) 768 [hyper,22,5,19,17,demod] CP(2,8,6,0,5).
+
+given clause #717: (wt=6) 769 [hyper,22,5,19,16,demod] CP(2,8,5,2,4).
+
+given clause #718: (wt=6) 770 [hyper,22,5,19,15,demod] CP(2,8,4,4,3).
+
+given clause #719: (wt=6) 771 [hyper,22,5,19,14,demod] CP(2,8,3,6,2).
+
+given clause #720: (wt=6) 772 [hyper,22,5,19,13,demod] CP(2,8,2,8,1).
+
+given clause #721: (wt=6) 773 [hyper,22,5,19,12,demod] CP(2,8,1,0,1).
+
+given clause #722: (wt=6) 774 [hyper,22,5,19,11,demod] CP(2,8,0,2,0).
+
+given clause #723: (wt=6) 775 [hyper,22,5,18,20,demod] CP(2,7,9,5,6).
+
+given clause #724: (wt=6) 776 [hyper,22,5,18,19,demod] CP(2,7,8,8,5).
+
+given clause #725: (wt=6) 777 [hyper,22,5,18,18,demod] CP(2,7,7,1,5).
+
+given clause #726: (wt=6) 778 [hyper,22,5,18,17,demod] CP(2,7,6,4,4).
+
+given clause #727: (wt=6) 779 [hyper,22,5,18,16,demod] CP(2,7,5,7,3).
+
+given clause #728: (wt=6) 780 [hyper,22,5,18,15,demod] CP(2,7,4,0,3).
+
+given clause #729: (wt=6) 781 [hyper,22,5,18,14,demod] CP(2,7,3,3,2).
+
+given clause #730: (wt=6) 782 [hyper,22,5,18,13,demod] CP(2,7,2,6,1).
+
+given clause #731: (wt=6) 783 [hyper,22,5,18,12,demod] CP(2,7,1,9,0).
+
+given clause #732: (wt=6) 784 [hyper,22,5,18,11,demod] CP(2,7,0,2,0).
+
+given clause #733: (wt=6) 785 [hyper,22,5,17,20,demod] CP(2,6,9,6,5).
+
+given clause #734: (wt=6) 786 [hyper,22,5,17,19,demod] CP(2,6,8,0,5).
+
+given clause #735: (wt=6) 787 [hyper,22,5,17,18,demod] CP(2,6,7,4,4).
+
+given clause #736: (wt=6) 788 [hyper,22,5,17,17,demod] CP(2,6,6,8,3).
+
+given clause #737: (wt=6) 789 [hyper,22,5,17,16,demod] CP(2,6,5,2,3).
+
+given clause #738: (wt=6) 790 [hyper,22,5,17,15,demod] CP(2,6,4,6,2).
+
+given clause #739: (wt=6) 791 [hyper,22,5,17,14,demod] CP(2,6,3,0,2).
+
+given clause #740: (wt=6) 792 [hyper,22,5,17,13,demod] CP(2,6,2,4,1).
+
+given clause #741: (wt=6) 793 [hyper,22,5,17,12,demod] CP(2,6,1,8,0).
+
+given clause #742: (wt=6) 794 [hyper,22,5,17,11,demod] CP(2,6,0,2,0).
+
+given clause #743: (wt=6) 795 [hyper,22,5,16,20,demod] CP(2,5,9,7,4).
+
+given clause #744: (wt=6) 796 [hyper,22,5,16,19,demod] CP(2,5,8,2,4).
+
+given clause #745: (wt=6) 797 [hyper,22,5,16,18,demod] CP(2,5,7,7,3).
+
+given clause #746: (wt=6) 798 [hyper,22,5,16,17,demod] CP(2,5,6,2,3).
+
+given clause #747: (wt=6) 799 [hyper,22,5,16,16,demod] CP(2,5,5,7,2).
+
+given clause #748: (wt=6) 800 [hyper,22,5,16,15,demod] CP(2,5,4,2,2).
+
+given clause #749: (wt=6) 801 [hyper,22,5,16,14,demod] CP(2,5,3,7,1).
+
+given clause #750: (wt=6) 802 [hyper,22,5,16,13,demod] CP(2,5,2,2,1).
+
+given clause #751: (wt=6) 803 [hyper,22,5,16,12,demod] CP(2,5,1,7,0).
+
+given clause #752: (wt=6) 804 [hyper,22,5,16,11,demod] CP(2,5,0,2,0).
+
+given clause #753: (wt=6) 805 [hyper,22,5,15,20,demod] CP(2,4,9,8,3).
+
+given clause #754: (wt=6) 806 [hyper,22,5,15,19,demod] CP(2,4,8,4,3).
+
+given clause #755: (wt=6) 807 [hyper,22,5,15,18,demod] CP(2,4,7,0,3).
+
+given clause #756: (wt=6) 808 [hyper,22,5,15,17,demod] CP(2,4,6,6,2).
+
+given clause #757: (wt=6) 809 [hyper,22,5,15,16,demod] CP(2,4,5,2,2).
+
+given clause #758: (wt=6) 810 [hyper,22,5,15,15,demod] CP(2,4,4,8,1).
+
+given clause #759: (wt=6) 811 [hyper,22,5,15,14,demod] CP(2,4,3,4,1).
+
+given clause #760: (wt=6) 812 [hyper,22,5,15,13,demod] CP(2,4,2,0,1).
+
+given clause #761: (wt=6) 813 [hyper,22,5,15,12,demod] CP(2,4,1,6,0).
+
+given clause #762: (wt=6) 814 [hyper,22,5,15,11,demod] CP(2,4,0,2,0).
+
+given clause #763: (wt=6) 815 [hyper,22,5,14,20,demod] CP(2,3,9,9,2).
+
+given clause #764: (wt=6) 816 [hyper,22,5,14,19,demod] CP(2,3,8,6,2).
+
+given clause #765: (wt=6) 817 [hyper,22,5,14,18,demod] CP(2,3,7,3,2).
+
+given clause #766: (wt=6) 818 [hyper,22,5,14,17,demod] CP(2,3,6,0,2).
+
+given clause #767: (wt=6) 819 [hyper,22,5,14,16,demod] CP(2,3,5,7,1).
+
+given clause #768: (wt=6) 820 [hyper,22,5,14,15,demod] CP(2,3,4,4,1).
+
+given clause #769: (wt=6) 821 [hyper,22,5,14,14,demod] CP(2,3,3,1,1).
+
+given clause #770: (wt=6) 822 [hyper,22,5,14,13,demod] CP(2,3,2,8,0).
+
+given clause #771: (wt=6) 823 [hyper,22,5,14,12,demod] CP(2,3,1,5,0).
+
+given clause #772: (wt=6) 824 [hyper,22,5,14,11,demod] CP(2,3,0,2,0).
+
+given clause #773: (wt=6) 825 [hyper,22,5,13,20,demod] CP(2,2,9,0,2).
+
+given clause #774: (wt=6) 826 [hyper,22,5,13,19,demod] CP(2,2,8,8,1).
+
+given clause #775: (wt=6) 827 [hyper,22,5,13,18,demod] CP(2,2,7,6,1).
+
+given clause #776: (wt=6) 828 [hyper,22,5,13,17,demod] CP(2,2,6,4,1).
+
+given clause #777: (wt=6) 829 [hyper,22,5,13,16,demod] CP(2,2,5,2,1).
+
+given clause #778: (wt=6) 830 [hyper,22,5,13,15,demod] CP(2,2,4,0,1).
+
+given clause #779: (wt=6) 831 [hyper,22,5,13,14,demod] CP(2,2,3,8,0).
+
+given clause #780: (wt=6) 832 [hyper,22,5,13,13,demod] CP(2,2,2,6,0).
+
+given clause #781: (wt=6) 833 [hyper,22,5,13,12,demod] CP(2,2,1,4,0).
+
+given clause #782: (wt=6) 834 [hyper,22,5,13,11,demod] CP(2,2,0,2,0).
+
+given clause #783: (wt=6) 835 [hyper,22,5,12,20,demod] CP(2,1,9,1,1).
+
+given clause #784: (wt=6) 836 [hyper,22,5,12,19,demod] CP(2,1,8,0,1).
+
+given clause #785: (wt=6) 837 [hyper,22,5,12,18,demod] CP(2,1,7,9,0).
+
+given clause #786: (wt=6) 838 [hyper,22,5,12,17,demod] CP(2,1,6,8,0).
+
+given clause #787: (wt=6) 839 [hyper,22,5,12,16,demod] CP(2,1,5,7,0).
+
+given clause #788: (wt=6) 840 [hyper,22,5,12,15,demod] CP(2,1,4,6,0).
+
+given clause #789: (wt=6) 841 [hyper,22,5,12,14,demod] CP(2,1,3,5,0).
+
+given clause #790: (wt=6) 842 [hyper,22,5,12,13,demod] CP(2,1,2,4,0).
+
+given clause #791: (wt=6) 843 [hyper,22,5,12,12,demod] CP(2,1,1,3,0).
+
+given clause #792: (wt=6) 844 [hyper,22,5,12,11,demod] CP(2,1,0,2,0).
+
+given clause #793: (wt=6) 845 [hyper,22,5,11,20,demod] CP(2,0,9,2,0).
+
+given clause #794: (wt=6) 846 [hyper,22,5,11,19,demod] CP(2,0,8,2,0).
+
+given clause #795: (wt=6) 847 [hyper,22,5,11,18,demod] CP(2,0,7,2,0).
+
+given clause #796: (wt=6) 848 [hyper,22,5,11,17,demod] CP(2,0,6,2,0).
+
+given clause #797: (wt=6) 849 [hyper,22,5,11,16,demod] CP(2,0,5,2,0).
+
+given clause #798: (wt=6) 850 [hyper,22,5,11,15,demod] CP(2,0,4,2,0).
+
+given clause #799: (wt=6) 851 [hyper,22,5,11,14,demod] CP(2,0,3,2,0).
+
+given clause #800: (wt=6) 852 [hyper,22,5,11,13,demod] CP(2,0,2,2,0).
+
+given clause #801: (wt=6) 853 [hyper,22,5,11,12,demod] CP(2,0,1,2,0).
+
+given clause #802: (wt=6) 854 [hyper,22,5,11,11,demod] CP(2,0,0,2,0).
+
+given clause #803: (wt=6) 855 [hyper,22,4,20,20,demod] CP(1,9,9,2,8).
+
+given clause #804: (wt=6) 856 [hyper,22,4,20,19,demod] CP(1,9,8,3,7).
+
+given clause #805: (wt=6) 857 [hyper,22,4,20,18,demod] CP(1,9,7,4,6).
+
+given clause #806: (wt=6) 858 [hyper,22,4,20,17,demod] CP(1,9,6,5,5).
+
+given clause #807: (wt=6) 859 [hyper,22,4,20,16,demod] CP(1,9,5,6,4).
+
+given clause #808: (wt=6) 860 [hyper,22,4,20,15,demod] CP(1,9,4,7,3).
+
+given clause #809: (wt=6) 861 [hyper,22,4,20,14,demod] CP(1,9,3,8,2).
+
+given clause #810: (wt=6) 862 [hyper,22,4,20,13,demod] CP(1,9,2,9,1).
+
+given clause #811: (wt=6) 863 [hyper,22,4,20,12,demod] CP(1,9,1,0,1).
+
+given clause #812: (wt=6) 864 [hyper,22,4,20,11,demod] CP(1,9,0,1,0).
+
+given clause #813: (wt=6) 865 [hyper,22,4,19,20,demod] CP(1,8,9,3,7).
+
+given clause #814: (wt=6) 866 [hyper,22,4,19,19,demod] CP(1,8,8,5,6).
+
+given clause #815: (wt=6) 867 [hyper,22,4,19,18,demod] CP(1,8,7,7,5).
+
+given clause #816: (wt=6) 868 [hyper,22,4,19,17,demod] CP(1,8,6,9,4).
+
+given clause #817: (wt=6) 869 [hyper,22,4,19,16,demod] CP(1,8,5,1,4).
+
+given clause #818: (wt=6) 870 [hyper,22,4,19,15,demod] CP(1,8,4,3,3).
+
+given clause #819: (wt=6) 871 [hyper,22,4,19,14,demod] CP(1,8,3,5,2).
+
+given clause #820: (wt=6) 872 [hyper,22,4,19,13,demod] CP(1,8,2,7,1).
+
+given clause #821: (wt=6) 873 [hyper,22,4,19,12,demod] CP(1,8,1,9,0).
+
+given clause #822: (wt=6) 874 [hyper,22,4,19,11,demod] CP(1,8,0,1,0).
+
+given clause #823: (wt=6) 875 [hyper,22,4,18,20,demod] CP(1,7,9,4,6).
+
+given clause #824: (wt=6) 876 [hyper,22,4,18,19,demod] CP(1,7,8,7,5).
+
+given clause #825: (wt=6) 877 [hyper,22,4,18,18,demod] CP(1,7,7,0,5).
+
+given clause #826: (wt=6) 878 [hyper,22,4,18,17,demod] CP(1,7,6,3,4).
+
+given clause #827: (wt=6) 879 [hyper,22,4,18,16,demod] CP(1,7,5,6,3).
+
+given clause #828: (wt=6) 880 [hyper,22,4,18,15,demod] CP(1,7,4,9,2).
+
+given clause #829: (wt=6) 881 [hyper,22,4,18,14,demod] CP(1,7,3,2,2).
+
+given clause #830: (wt=6) 882 [hyper,22,4,18,13,demod] CP(1,7,2,5,1).
+
+given clause #831: (wt=6) 883 [hyper,22,4,18,12,demod] CP(1,7,1,8,0).
+
+given clause #832: (wt=6) 884 [hyper,22,4,18,11,demod] CP(1,7,0,1,0).
+
+given clause #833: (wt=6) 885 [hyper,22,4,17,20,demod] CP(1,6,9,5,5).
+
+given clause #834: (wt=6) 886 [hyper,22,4,17,19,demod] CP(1,6,8,9,4).
+
+given clause #835: (wt=6) 887 [hyper,22,4,17,18,demod] CP(1,6,7,3,4).
+
+given clause #836: (wt=6) 888 [hyper,22,4,17,17,demod] CP(1,6,6,7,3).
+
+given clause #837: (wt=6) 889 [hyper,22,4,17,16,demod] CP(1,6,5,1,3).
+
+given clause #838: (wt=6) 890 [hyper,22,4,17,15,demod] CP(1,6,4,5,2).
+
+given clause #839: (wt=6) 891 [hyper,22,4,17,14,demod] CP(1,6,3,9,1).
+
+given clause #840: (wt=6) 892 [hyper,22,4,17,13,demod] CP(1,6,2,3,1).
+
+given clause #841: (wt=6) 893 [hyper,22,4,17,12,demod] CP(1,6,1,7,0).
+
+given clause #842: (wt=6) 894 [hyper,22,4,17,11,demod] CP(1,6,0,1,0).
+
+given clause #843: (wt=6) 895 [hyper,22,4,16,20,demod] CP(1,5,9,6,4).
+
+given clause #844: (wt=6) 896 [hyper,22,4,16,19,demod] CP(1,5,8,1,4).
+
+given clause #845: (wt=6) 897 [hyper,22,4,16,18,demod] CP(1,5,7,6,3).
+
+given clause #846: (wt=6) 898 [hyper,22,4,16,17,demod] CP(1,5,6,1,3).
+
+given clause #847: (wt=6) 899 [hyper,22,4,16,16,demod] CP(1,5,5,6,2).
+
+given clause #848: (wt=6) 900 [hyper,22,4,16,15,demod] CP(1,5,4,1,2).
+
+given clause #849: (wt=6) 901 [hyper,22,4,16,14,demod] CP(1,5,3,6,1).
+
+given clause #850: (wt=6) 902 [hyper,22,4,16,13,demod] CP(1,5,2,1,1).
+
+given clause #851: (wt=6) 903 [hyper,22,4,16,12,demod] CP(1,5,1,6,0).
+
+given clause #852: (wt=6) 904 [hyper,22,4,16,11,demod] CP(1,5,0,1,0).
+
+given clause #853: (wt=6) 905 [hyper,22,4,15,20,demod] CP(1,4,9,7,3).
+
+given clause #854: (wt=6) 906 [hyper,22,4,15,19,demod] CP(1,4,8,3,3).
+
+given clause #855: (wt=6) 907 [hyper,22,4,15,18,demod] CP(1,4,7,9,2).
+
+given clause #856: (wt=6) 908 [hyper,22,4,15,17,demod] CP(1,4,6,5,2).
+
+given clause #857: (wt=6) 909 [hyper,22,4,15,16,demod] CP(1,4,5,1,2).
+
+given clause #858: (wt=6) 910 [hyper,22,4,15,15,demod] CP(1,4,4,7,1).
+
+given clause #859: (wt=6) 911 [hyper,22,4,15,14,demod] CP(1,4,3,3,1).
+
+given clause #860: (wt=6) 912 [hyper,22,4,15,13,demod] CP(1,4,2,9,0).
+
+given clause #861: (wt=6) 913 [hyper,22,4,15,12,demod] CP(1,4,1,5,0).
+
+given clause #862: (wt=6) 914 [hyper,22,4,15,11,demod] CP(1,4,0,1,0).
+
+given clause #863: (wt=6) 915 [hyper,22,4,14,20,demod] CP(1,3,9,8,2).
+
+given clause #864: (wt=6) 916 [hyper,22,4,14,19,demod] CP(1,3,8,5,2).
+
+given clause #865: (wt=6) 917 [hyper,22,4,14,18,demod] CP(1,3,7,2,2).
+
+given clause #866: (wt=6) 918 [hyper,22,4,14,17,demod] CP(1,3,6,9,1).
+
+given clause #867: (wt=6) 919 [hyper,22,4,14,16,demod] CP(1,3,5,6,1).
+
+given clause #868: (wt=6) 920 [hyper,22,4,14,15,demod] CP(1,3,4,3,1).
+
+given clause #869: (wt=6) 921 [hyper,22,4,14,14,demod] CP(1,3,3,0,1).
+
+given clause #870: (wt=6) 922 [hyper,22,4,14,13,demod] CP(1,3,2,7,0).
+
+given clause #871: (wt=6) 923 [hyper,22,4,14,12,demod] CP(1,3,1,4,0).
+
+given clause #872: (wt=6) 924 [hyper,22,4,14,11,demod] CP(1,3,0,1,0).
+
+given clause #873: (wt=6) 925 [hyper,22,4,13,20,demod] CP(1,2,9,9,1).
+
+given clause #874: (wt=6) 926 [hyper,22,4,13,19,demod] CP(1,2,8,7,1).
+
+given clause #875: (wt=6) 927 [hyper,22,4,13,18,demod] CP(1,2,7,5,1).
+
+given clause #876: (wt=6) 928 [hyper,22,4,13,17,demod] CP(1,2,6,3,1).
+
+given clause #877: (wt=6) 929 [hyper,22,4,13,16,demod] CP(1,2,5,1,1).
+
+given clause #878: (wt=6) 930 [hyper,22,4,13,15,demod] CP(1,2,4,9,0).
+
+given clause #879: (wt=6) 931 [hyper,22,4,13,14,demod] CP(1,2,3,7,0).
+
+given clause #880: (wt=6) 932 [hyper,22,4,13,13,demod] CP(1,2,2,5,0).
+
+given clause #881: (wt=6) 933 [hyper,22,4,13,12,demod] CP(1,2,1,3,0).
+
+given clause #882: (wt=6) 934 [hyper,22,4,13,11,demod] CP(1,2,0,1,0).
+
+given clause #883: (wt=6) 935 [hyper,22,4,12,20,demod] CP(1,1,9,0,1).
+
+given clause #884: (wt=6) 936 [hyper,22,4,12,19,demod] CP(1,1,8,9,0).
+
+given clause #885: (wt=6) 937 [hyper,22,4,12,18,demod] CP(1,1,7,8,0).
+
+given clause #886: (wt=6) 938 [hyper,22,4,12,17,demod] CP(1,1,6,7,0).
+
+given clause #887: (wt=6) 939 [hyper,22,4,12,16,demod] CP(1,1,5,6,0).
+
+given clause #888: (wt=6) 940 [hyper,22,4,12,15,demod] CP(1,1,4,5,0).
+
+given clause #889: (wt=6) 941 [hyper,22,4,12,14,demod] CP(1,1,3,4,0).
+
+given clause #890: (wt=6) 942 [hyper,22,4,12,13,demod] CP(1,1,2,3,0).
+
+given clause #891: (wt=6) 943 [hyper,22,4,12,12,demod] CP(1,1,1,2,0).
+
+given clause #892: (wt=6) 944 [hyper,22,4,12,11,demod] CP(1,1,0,1,0).
+
+given clause #893: (wt=6) 945 [hyper,22,4,11,20,demod] CP(1,0,9,1,0).
+
+given clause #894: (wt=6) 946 [hyper,22,4,11,19,demod] CP(1,0,8,1,0).
+
+given clause #895: (wt=6) 947 [hyper,22,4,11,18,demod] CP(1,0,7,1,0).
+
+given clause #896: (wt=6) 948 [hyper,22,4,11,17,demod] CP(1,0,6,1,0).
+
+given clause #897: (wt=6) 949 [hyper,22,4,11,16,demod] CP(1,0,5,1,0).
+
+given clause #898: (wt=6) 950 [hyper,22,4,11,15,demod] CP(1,0,4,1,0).
+
+given clause #899: (wt=6) 951 [hyper,22,4,11,14,demod] CP(1,0,3,1,0).
+
+given clause #900: (wt=6) 952 [hyper,22,4,11,13,demod] CP(1,0,2,1,0).
+
+given clause #901: (wt=6) 953 [hyper,22,4,11,12,demod] CP(1,0,1,1,0).
+
+given clause #902: (wt=6) 954 [hyper,22,4,11,11,demod] CP(1,0,0,1,0).
+
+given clause #903: (wt=6) 955 [hyper,22,3,20,20,demod] CP(0,9,9,1,8).
+
+given clause #904: (wt=6) 956 [hyper,22,3,20,19,demod] CP(0,9,8,2,7).
+
+given clause #905: (wt=6) 957 [hyper,22,3,20,18,demod] CP(0,9,7,3,6).
+
+given clause #906: (wt=6) 958 [hyper,22,3,20,17,demod] CP(0,9,6,4,5).
+
+given clause #907: (wt=6) 959 [hyper,22,3,20,16,demod] CP(0,9,5,5,4).
+
+given clause #908: (wt=6) 960 [hyper,22,3,20,15,demod] CP(0,9,4,6,3).
+
+given clause #909: (wt=6) 961 [hyper,22,3,20,14,demod] CP(0,9,3,7,2).
+
+given clause #910: (wt=6) 962 [hyper,22,3,20,13,demod] CP(0,9,2,8,1).
+
+given clause #911: (wt=6) 963 [hyper,22,3,20,12,demod] CP(0,9,1,9,0).
+
+given clause #912: (wt=6) 964 [hyper,22,3,20,11,demod] CP(0,9,0,0,0).
+
+given clause #913: (wt=6) 965 [hyper,22,3,19,20,demod] CP(0,8,9,2,7).
+
+given clause #914: (wt=6) 966 [hyper,22,3,19,19,demod] CP(0,8,8,4,6).
+
+given clause #915: (wt=6) 967 [hyper,22,3,19,18,demod] CP(0,8,7,6,5).
+
+given clause #916: (wt=6) 968 [hyper,22,3,19,17,demod] CP(0,8,6,8,4).
+
+given clause #917: (wt=6) 969 [hyper,22,3,19,16,demod] CP(0,8,5,0,4).
+
+given clause #918: (wt=6) 970 [hyper,22,3,19,15,demod] CP(0,8,4,2,3).
+
+given clause #919: (wt=6) 971 [hyper,22,3,19,14,demod] CP(0,8,3,4,2).
+
+given clause #920: (wt=6) 972 [hyper,22,3,19,13,demod] CP(0,8,2,6,1).
+
+given clause #921: (wt=6) 973 [hyper,22,3,19,12,demod] CP(0,8,1,8,0).
+
+given clause #922: (wt=6) 974 [hyper,22,3,19,11,demod] CP(0,8,0,0,0).
+
+given clause #923: (wt=6) 975 [hyper,22,3,18,20,demod] CP(0,7,9,3,6).
+
+given clause #924: (wt=6) 976 [hyper,22,3,18,19,demod] CP(0,7,8,6,5).
+
+given clause #925: (wt=6) 977 [hyper,22,3,18,18,demod] CP(0,7,7,9,4).
+
+given clause #926: (wt=6) 978 [hyper,22,3,18,17,demod] CP(0,7,6,2,4).
+
+given clause #927: (wt=6) 979 [hyper,22,3,18,16,demod] CP(0,7,5,5,3).
+
+given clause #928: (wt=6) 980 [hyper,22,3,18,15,demod] CP(0,7,4,8,2).
+
+given clause #929: (wt=6) 981 [hyper,22,3,18,14,demod] CP(0,7,3,1,2).
+
+given clause #930: (wt=6) 982 [hyper,22,3,18,13,demod] CP(0,7,2,4,1).
+
+given clause #931: (wt=6) 983 [hyper,22,3,18,12,demod] CP(0,7,1,7,0).
+
+given clause #932: (wt=6) 984 [hyper,22,3,18,11,demod] CP(0,7,0,0,0).
+
+given clause #933: (wt=6) 985 [hyper,22,3,17,20,demod] CP(0,6,9,4,5).
+
+given clause #934: (wt=6) 986 [hyper,22,3,17,19,demod] CP(0,6,8,8,4).
+
+given clause #935: (wt=6) 987 [hyper,22,3,17,18,demod] CP(0,6,7,2,4).
+
+given clause #936: (wt=6) 988 [hyper,22,3,17,17,demod] CP(0,6,6,6,3).
+
+given clause #937: (wt=6) 989 [hyper,22,3,17,16,demod] CP(0,6,5,0,3).
+
+given clause #938: (wt=6) 990 [hyper,22,3,17,15,demod] CP(0,6,4,4,2).
+
+given clause #939: (wt=6) 991 [hyper,22,3,17,14,demod] CP(0,6,3,8,1).
+
+given clause #940: (wt=6) 992 [hyper,22,3,17,13,demod] CP(0,6,2,2,1).
+
+given clause #941: (wt=6) 993 [hyper,22,3,17,12,demod] CP(0,6,1,6,0).
+
+given clause #942: (wt=6) 994 [hyper,22,3,17,11,demod] CP(0,6,0,0,0).
+
+given clause #943: (wt=6) 995 [hyper,22,3,16,20,demod] CP(0,5,9,5,4).
+
+given clause #944: (wt=6) 996 [hyper,22,3,16,19,demod] CP(0,5,8,0,4).
+
+given clause #945: (wt=6) 997 [hyper,22,3,16,18,demod] CP(0,5,7,5,3).
+
+given clause #946: (wt=6) 998 [hyper,22,3,16,17,demod] CP(0,5,6,0,3).
+
+given clause #947: (wt=6) 999 [hyper,22,3,16,16,demod] CP(0,5,5,5,2).
+
+given clause #948: (wt=6) 1000 [hyper,22,3,16,15,demod] CP(0,5,4,0,2).
+
+given clause #949: (wt=6) 1001 [hyper,22,3,16,14,demod] CP(0,5,3,5,1).
+
+given clause #950: (wt=6) 1002 [hyper,22,3,16,13,demod] CP(0,5,2,0,1).
+
+given clause #951: (wt=6) 1003 [hyper,22,3,16,12,demod] CP(0,5,1,5,0).
+
+given clause #952: (wt=6) 1004 [hyper,22,3,16,11,demod] CP(0,5,0,0,0).
+
+given clause #953: (wt=6) 1005 [hyper,22,3,15,20,demod] CP(0,4,9,6,3).
+
+given clause #954: (wt=6) 1006 [hyper,22,3,15,19,demod] CP(0,4,8,2,3).
+
+given clause #955: (wt=6) 1007 [hyper,22,3,15,18,demod] CP(0,4,7,8,2).
+
+given clause #956: (wt=6) 1008 [hyper,22,3,15,17,demod] CP(0,4,6,4,2).
+
+given clause #957: (wt=6) 1009 [hyper,22,3,15,16,demod] CP(0,4,5,0,2).
+
+given clause #958: (wt=6) 1010 [hyper,22,3,15,15,demod] CP(0,4,4,6,1).
+
+given clause #959: (wt=6) 1011 [hyper,22,3,15,14,demod] CP(0,4,3,2,1).
+
+given clause #960: (wt=6) 1012 [hyper,22,3,15,13,demod] CP(0,4,2,8,0).
+
+given clause #961: (wt=6) 1013 [hyper,22,3,15,12,demod] CP(0,4,1,4,0).
+
+given clause #962: (wt=6) 1014 [hyper,22,3,15,11,demod] CP(0,4,0,0,0).
+
+given clause #963: (wt=6) 1015 [hyper,22,3,14,20,demod] CP(0,3,9,7,2).
+
+given clause #964: (wt=6) 1016 [hyper,22,3,14,19,demod] CP(0,3,8,4,2).
+
+given clause #965: (wt=6) 1017 [hyper,22,3,14,18,demod] CP(0,3,7,1,2).
+
+given clause #966: (wt=6) 1018 [hyper,22,3,14,17,demod] CP(0,3,6,8,1).
+
+given clause #967: (wt=6) 1019 [hyper,22,3,14,16,demod] CP(0,3,5,5,1).
+
+given clause #968: (wt=6) 1020 [hyper,22,3,14,15,demod] CP(0,3,4,2,1).
+
+given clause #969: (wt=6) 1021 [hyper,22,3,14,14,demod] CP(0,3,3,9,0).
+
+given clause #970: (wt=6) 1022 [hyper,22,3,14,13,demod] CP(0,3,2,6,0).
+
+given clause #971: (wt=6) 1023 [hyper,22,3,14,12,demod] CP(0,3,1,3,0).
+
+given clause #972: (wt=6) 1024 [hyper,22,3,14,11,demod] CP(0,3,0,0,0).
+
+given clause #973: (wt=6) 1025 [hyper,22,3,13,20,demod] CP(0,2,9,8,1).
+
+given clause #974: (wt=6) 1026 [hyper,22,3,13,19,demod] CP(0,2,8,6,1).
+
+given clause #975: (wt=6) 1027 [hyper,22,3,13,18,demod] CP(0,2,7,4,1).
+
+given clause #976: (wt=6) 1028 [hyper,22,3,13,17,demod] CP(0,2,6,2,1).
+
+given clause #977: (wt=6) 1029 [hyper,22,3,13,16,demod] CP(0,2,5,0,1).
+
+given clause #978: (wt=6) 1030 [hyper,22,3,13,15,demod] CP(0,2,4,8,0).
+
+given clause #979: (wt=6) 1031 [hyper,22,3,13,14,demod] CP(0,2,3,6,0).
+
+given clause #980: (wt=6) 1032 [hyper,22,3,13,13,demod] CP(0,2,2,4,0).
+
+given clause #981: (wt=6) 1033 [hyper,22,3,13,12,demod] CP(0,2,1,2,0).
+
+given clause #982: (wt=6) 1034 [hyper,22,3,13,11,demod] CP(0,2,0,0,0).
+
+given clause #983: (wt=6) 1035 [hyper,22,3,12,20,demod] CP(0,1,9,9,0).
+
+given clause #984: (wt=6) 1036 [hyper,22,3,12,19,demod] CP(0,1,8,8,0).
+
+given clause #985: (wt=6) 1037 [hyper,22,3,12,18,demod] CP(0,1,7,7,0).
+
+given clause #986: (wt=6) 1038 [hyper,22,3,12,17,demod] CP(0,1,6,6,0).
+
+given clause #987: (wt=6) 1039 [hyper,22,3,12,16,demod] CP(0,1,5,5,0).
+
+given clause #988: (wt=6) 1040 [hyper,22,3,12,15,demod] CP(0,1,4,4,0).
+
+given clause #989: (wt=6) 1041 [hyper,22,3,12,14,demod] CP(0,1,3,3,0).
+
+given clause #990: (wt=6) 1042 [hyper,22,3,12,13,demod] CP(0,1,2,2,0).
+
+given clause #991: (wt=6) 1043 [hyper,22,3,12,12,demod] CP(0,1,1,1,0).
+
+given clause #992: (wt=6) 1044 [hyper,22,3,12,11,demod] CP(0,1,0,0,0).
+
+given clause #993: (wt=6) 1045 [hyper,22,3,11,20,demod] CP(0,0,9,0,0).
+
+given clause #994: (wt=6) 1046 [hyper,22,3,11,19,demod] CP(0,0,8,0,0).
+
+given clause #995: (wt=6) 1047 [hyper,22,3,11,18,demod] CP(0,0,7,0,0).
+
+given clause #996: (wt=6) 1048 [hyper,22,3,11,17,demod] CP(0,0,6,0,0).
+
+given clause #997: (wt=6) 1049 [hyper,22,3,11,16,demod] CP(0,0,5,0,0).
+
+given clause #998: (wt=6) 1050 [hyper,22,3,11,15,demod] CP(0,0,4,0,0).
+
+given clause #999: (wt=6) 1051 [hyper,22,3,11,14,demod] CP(0,0,3,0,0).
+
+given clause #1000: (wt=6) 1052 [hyper,22,3,11,13,demod] CP(0,0,2,0,0).
+
+given clause #1001: (wt=6) 1053 [hyper,22,3,11,12,demod] CP(0,0,1,0,0).
+
+given clause #1002: (wt=6) 1054 [hyper,22,3,11,11,demod] CP(0,0,0,0,0).
+
+given clause #1003: (wt=60) 23 [] -CP(0,xd,xb,y1,x1)| -CP(x1,xd,xa,y2,y3)| -CP(0,xc,xb,z1,x2)| -CP(x2,xc,xa,z2,z3)| -$LT(xa,xc)| -CS(0,y1,0,xh,x3)| -CS(x3,y2,z1,xg,x4)| -CS(x4,y3,z2,xf,x5)| -CS(x5,0,z3,xe,0)|S(xa,xb,xc,xd,xe,xf,xg,xh).
+** KEPT (pick-wt=9): 1055 [hyper,23,1031,1029,961,759,eval,194,247,237,250] S(5,3,9,2,4,8,7,6).
+** KEPT (pick-wt=9): 1056 [hyper,23,1030,1031,1000,801,eval,174,194,247,253] S(3,4,5,2,1,7,6,8).
+** KEPT (pick-wt=9): 1057 [hyper,23,1029,930,969,570,eval,254,164,248,251] S(4,5,8,2,3,6,9,0).
+** KEPT (pick-wt=9): 1058 [hyper,23,1026,931,1006,711,eval,194,182,249,253] S(3,8,4,2,1,5,9,6).
+** KEPT (pick-wt=9): 1059 [hyper,23,1026,931,996,601,eval,194,184,245,253] S(3,8,5,2,1,9,7,6).
+** KEPT (pick-wt=9): 1060 [hyper,23,1006,709,986,589,eval,234,216,130,251] S(5,8,6,4,3,7,1,2).
+** KEPT (pick-wt=9): 1061 [hyper,23,1006,708,976,478,eval,234,178,127,150] S(6,8,7,4,5,0,3,2).
+** KEPT (pick-wt=9): 1062 [hyper,23,1005,711,995,601,eval,194,199,135,153] S(3,9,5,4,2,1,0,6).
+** KEPT (pick-wt=9): 1063 [hyper,23,1002,897,962,857,eval,254,186,120,248] S(7,2,9,5,6,8,4,0).
+** KEPT (pick-wt=9): 1064 [hyper,23,1000,797,970,667,eval,254,182,215,149] S(7,4,8,5,6,2,9,0).
+** KEPT (pick-wt=9): 1065 [hyper,23,998,700,968,570,eval,254,216,128,251] S(4,6,8,5,3,9,1,0).
+** KEPT (pick-wt=9): 1066 [hyper,23,996,601,986,591,eval,254,156,142,252] S(3,8,6,5,2,4,7,0).
+** KEPT (pick-wt=9): 1067 [hyper,23,996,600,986,590,eval,254,206,126,152] S(4,8,6,5,3,1,2,0).
+** KEPT (pick-wt=9): 1068 [hyper,23,991,892,1011,912,eval,174,222,235,154] S(2,3,4,6,1,0,5,8).
+** KEPT (pick-wt=9): 1069 [hyper,23,991,889,981,779,eval,174,243,217,151] S(5,3,7,6,4,0,2,8).
+** KEPT (pick-wt=9): 1070 [hyper,23,987,589,967,469,eval,234,208,119,250] S(5,7,8,6,4,9,0,2).
+** KEPT (pick-wt=9): 1071 [hyper,23,985,491,995,601,eval,214,219,225,153] S(3,9,5,6,2,1,8,4).
+** KEPT (pick-wt=9): 1072 [hyper,23,982,878,972,868,eval,214,218,205,150] S(6,2,8,7,5,3,9,4).
+** KEPT (pick-wt=9): 1073 [hyper,23,980,782,1000,802,eval,174,194,242,253] S(2,4,5,7,1,3,6,8).
+** KEPT (pick-wt=9): 1074 [hyper,23,970,671,1000,801,eval,234,184,227,253] S(3,4,5,8,1,9,7,2).
+** KEPT (pick-wt=9): 1075 [hyper,23,967,471,997,701,eval,194,159,126,153] S(3,7,5,8,2,1,4,6).
+** KEPT (pick-wt=9): 1076 [hyper,23,965,269,985,489,eval,234,180,109,151] S(5,9,6,8,4,0,1,2).
+** KEPT (pick-wt=9): 1077 [hyper,23,965,269,975,379,eval,234,181,113,250] S(5,9,7,8,4,6,0,2).
+** KEPT (pick-wt=9): 1078 [hyper,23,962,861,1012,1011,eval,174,166,132,253] S(3,2,4,9,1,5,6,8).
+** KEPT (pick-wt=9): 1079 [hyper,23,962,859,982,879,eval,174,190,108,151] S(5,2,7,9,4,1,0,8).
+** KEPT (pick-wt=9): 1080 [hyper,23,961,762,991,892,eval,184,246,231,253] S(2,3,6,9,1,5,8,7).
+
+given clause #1004: (wt=9) 1055 [hyper,23,1031,1029,961,759,eval,194,247,237,250] S(5,3,9,2,4,8,7,6).
+
+given clause #1005: (wt=9) 1056 [hyper,23,1030,1031,1000,801,eval,174,194,247,253] S(3,4,5,2,1,7,6,8).
+
+given clause #1006: (wt=9) 1057 [hyper,23,1029,930,969,570,eval,254,164,248,251] S(4,5,8,2,3,6,9,0).
+
+given clause #1007: (wt=9) 1058 [hyper,23,1026,931,1006,711,eval,194,182,249,253] S(3,8,4,2,1,5,9,6).
+
+given clause #1008: (wt=9) 1059 [hyper,23,1026,931,996,601,eval,194,184,245,253] S(3,8,5,2,1,9,7,6).
+
+given clause #1009: (wt=9) 1060 [hyper,23,1006,709,986,589,eval,234,216,130,251] S(5,8,6,4,3,7,1,2).
+
+given clause #1010: (wt=9) 1061 [hyper,23,1006,708,976,478,eval,234,178,127,150] S(6,8,7,4,5,0,3,2).
+
+given clause #1011: (wt=9) 1062 [hyper,23,1005,711,995,601,eval,194,199,135,153] S(3,9,5,4,2,1,0,6).
+
+given clause #1012: (wt=9) 1063 [hyper,23,1002,897,962,857,eval,254,186,120,248] S(7,2,9,5,6,8,4,0).
+
+given clause #1013: (wt=9) 1064 [hyper,23,1000,797,970,667,eval,254,182,215,149] S(7,4,8,5,6,2,9,0).
+
+given clause #1014: (wt=9) 1065 [hyper,23,998,700,968,570,eval,254,216,128,251] S(4,6,8,5,3,9,1,0).
+
+given clause #1015: (wt=9) 1066 [hyper,23,996,601,986,591,eval,254,156,142,252] S(3,8,6,5,2,4,7,0).
+
+given clause #1016: (wt=9) 1067 [hyper,23,996,600,986,590,eval,254,206,126,152] S(4,8,6,5,3,1,2,0).
+
+given clause #1017: (wt=9) 1068 [hyper,23,991,892,1011,912,eval,174,222,235,154] S(2,3,4,6,1,0,5,8).
+
+given clause #1018: (wt=9) 1069 [hyper,23,991,889,981,779,eval,174,243,217,151] S(5,3,7,6,4,0,2,8).
+
+given clause #1019: (wt=9) 1070 [hyper,23,987,589,967,469,eval,234,208,119,250] S(5,7,8,6,4,9,0,2).
+
+given clause #1020: (wt=9) 1071 [hyper,23,985,491,995,601,eval,214,219,225,153] S(3,9,5,6,2,1,8,4).
+
+given clause #1021: (wt=9) 1072 [hyper,23,982,878,972,868,eval,214,218,205,150] S(6,2,8,7,5,3,9,4).
+
+given clause #1022: (wt=9) 1073 [hyper,23,980,782,1000,802,eval,174,194,242,253] S(2,4,5,7,1,3,6,8).
+
+given clause #1023: (wt=9) 1074 [hyper,23,970,671,1000,801,eval,234,184,227,253] S(3,4,5,8,1,9,7,2).
+
+given clause #1024: (wt=9) 1075 [hyper,23,967,471,997,701,eval,194,159,126,153] S(3,7,5,8,2,1,4,6).
+
+given clause #1025: (wt=9) 1076 [hyper,23,965,269,985,489,eval,234,180,109,151] S(5,9,6,8,4,0,1,2).
+
+given clause #1026: (wt=9) 1077 [hyper,23,965,269,975,379,eval,234,181,113,250] S(5,9,7,8,4,6,0,2).
+
+given clause #1027: (wt=9) 1078 [hyper,23,962,861,1012,1011,eval,174,166,132,253] S(3,2,4,9,1,5,6,8).
+
+given clause #1028: (wt=9) 1079 [hyper,23,962,859,982,879,eval,174,190,108,151] S(5,2,7,9,4,1,0,8).
+
+given clause #1029: (wt=9) 1080 [hyper,23,961,762,991,892,eval,184,246,231,253] S(2,3,6,9,1,5,8,7).
+
+Search stopped because sos empty.
+
+
+Search stopped because sos empty.
+
+============ end of search ============
+
+list(usable).
+1 [] K(0).
+2 [] K(1).
+3 [] L(0).
+4 [] L(1).
+5 [] L(2).
+6 [] L(3).
+7 [] L(4).
+8 [] L(5).
+9 [] L(6).
+10 [] L(7).
+11 [] D(0).
+12 [] D(1).
+13 [] D(2).
+14 [] D(3).
+15 [] D(4).
+16 [] D(5).
+17 [] D(6).
+18 [] D(7).
+19 [] D(8).
+20 [] D(9).
+21 [] -K(u)| -D(x)| -D(y)|CS(u,x,y,$MOD($SUM($SUM(u,x),y),10),$DIV($SUM($SUM(u,x),y),10)).
+55 [hyper,21,2,20,20,demod] CS(1,9,9,9,1).
+56 [hyper,21,2,20,19,demod] CS(1,9,8,8,1).
+57 [hyper,21,2,20,18,demod] CS(1,9,7,7,1).
+58 [hyper,21,2,20,17,demod] CS(1,9,6,6,1).
+59 [hyper,21,2,20,16,demod] CS(1,9,5,5,1).
+60 [hyper,21,2,20,15,demod] CS(1,9,4,4,1).
+61 [hyper,21,2,20,14,demod] CS(1,9,3,3,1).
+62 [hyper,21,2,20,13,demod] CS(1,9,2,2,1).
+63 [hyper,21,2,20,12,demod] CS(1,9,1,1,1).
+64 [hyper,21,2,20,11,demod] CS(1,9,0,0,1).
+65 [hyper,21,2,19,20,demod] CS(1,8,9,8,1).
+66 [hyper,21,2,19,19,demod] CS(1,8,8,7,1).
+67 [hyper,21,2,19,18,demod] CS(1,8,7,6,1).
+68 [hyper,21,2,19,17,demod] CS(1,8,6,5,1).
+69 [hyper,21,2,19,16,demod] CS(1,8,5,4,1).
+70 [hyper,21,2,19,15,demod] CS(1,8,4,3,1).
+71 [hyper,21,2,19,14,demod] CS(1,8,3,2,1).
+72 [hyper,21,2,19,13,demod] CS(1,8,2,1,1).
+73 [hyper,21,2,19,12,demod] CS(1,8,1,0,1).
+74 [hyper,21,2,19,11,demod] CS(1,8,0,9,0).
+75 [hyper,21,2,18,20,demod] CS(1,7,9,7,1).
+76 [hyper,21,2,18,19,demod] CS(1,7,8,6,1).
+77 [hyper,21,2,18,18,demod] CS(1,7,7,5,1).
+78 [hyper,21,2,18,17,demod] CS(1,7,6,4,1).
+79 [hyper,21,2,18,16,demod] CS(1,7,5,3,1).
+80 [hyper,21,2,18,15,demod] CS(1,7,4,2,1).
+81 [hyper,21,2,18,14,demod] CS(1,7,3,1,1).
+82 [hyper,21,2,18,13,demod] CS(1,7,2,0,1).
+83 [hyper,21,2,18,12,demod] CS(1,7,1,9,0).
+84 [hyper,21,2,18,11,demod] CS(1,7,0,8,0).
+85 [hyper,21,2,17,20,demod] CS(1,6,9,6,1).
+86 [hyper,21,2,17,19,demod] CS(1,6,8,5,1).
+87 [hyper,21,2,17,18,demod] CS(1,6,7,4,1).
+88 [hyper,21,2,17,17,demod] CS(1,6,6,3,1).
+89 [hyper,21,2,17,16,demod] CS(1,6,5,2,1).
+90 [hyper,21,2,17,15,demod] CS(1,6,4,1,1).
+91 [hyper,21,2,17,14,demod] CS(1,6,3,0,1).
+92 [hyper,21,2,17,13,demod] CS(1,6,2,9,0).
+93 [hyper,21,2,17,12,demod] CS(1,6,1,8,0).
+94 [hyper,21,2,17,11,demod] CS(1,6,0,7,0).
+95 [hyper,21,2,16,20,demod] CS(1,5,9,5,1).
+96 [hyper,21,2,16,19,demod] CS(1,5,8,4,1).
+97 [hyper,21,2,16,18,demod] CS(1,5,7,3,1).
+98 [hyper,21,2,16,17,demod] CS(1,5,6,2,1).
+99 [hyper,21,2,16,16,demod] CS(1,5,5,1,1).
+100 [hyper,21,2,16,15,demod] CS(1,5,4,0,1).
+101 [hyper,21,2,16,14,demod] CS(1,5,3,9,0).
+102 [hyper,21,2,16,13,demod] CS(1,5,2,8,0).
+103 [hyper,21,2,16,12,demod] CS(1,5,1,7,0).
+104 [hyper,21,2,16,11,demod] CS(1,5,0,6,0).
+105 [hyper,21,2,15,20,demod] CS(1,4,9,4,1).
+106 [hyper,21,2,15,19,demod] CS(1,4,8,3,1).
+107 [hyper,21,2,15,18,demod] CS(1,4,7,2,1).
+108 [hyper,21,2,15,17,demod] CS(1,4,6,1,1).
+109 [hyper,21,2,15,16,demod] CS(1,4,5,0,1).
+110 [hyper,21,2,15,15,demod] CS(1,4,4,9,0).
+111 [hyper,21,2,15,14,demod] CS(1,4,3,8,0).
+112 [hyper,21,2,15,13,demod] CS(1,4,2,7,0).
+113 [hyper,21,2,15,12,demod] CS(1,4,1,6,0).
+114 [hyper,21,2,15,11,demod] CS(1,4,0,5,0).
+115 [hyper,21,2,14,20,demod] CS(1,3,9,3,1).
+116 [hyper,21,2,14,19,demod] CS(1,3,8,2,1).
+117 [hyper,21,2,14,18,demod] CS(1,3,7,1,1).
+118 [hyper,21,2,14,17,demod] CS(1,3,6,0,1).
+119 [hyper,21,2,14,16,demod] CS(1,3,5,9,0).
+120 [hyper,21,2,14,15,demod] CS(1,3,4,8,0).
+121 [hyper,21,2,14,14,demod] CS(1,3,3,7,0).
+122 [hyper,21,2,14,13,demod] CS(1,3,2,6,0).
+123 [hyper,21,2,14,12,demod] CS(1,3,1,5,0).
+124 [hyper,21,2,14,11,demod] CS(1,3,0,4,0).
+125 [hyper,21,2,13,20,demod] CS(1,2,9,2,1).
+126 [hyper,21,2,13,19,demod] CS(1,2,8,1,1).
+127 [hyper,21,2,13,18,demod] CS(1,2,7,0,1).
+128 [hyper,21,2,13,17,demod] CS(1,2,6,9,0).
+129 [hyper,21,2,13,16,demod] CS(1,2,5,8,0).
+130 [hyper,21,2,13,15,demod] CS(1,2,4,7,0).
+131 [hyper,21,2,13,14,demod] CS(1,2,3,6,0).
+132 [hyper,21,2,13,13,demod] CS(1,2,2,5,0).
+133 [hyper,21,2,13,12,demod] CS(1,2,1,4,0).
+134 [hyper,21,2,13,11,demod] CS(1,2,0,3,0).
+135 [hyper,21,2,12,20,demod] CS(1,1,9,1,1).
+136 [hyper,21,2,12,19,demod] CS(1,1,8,0,1).
+137 [hyper,21,2,12,18,demod] CS(1,1,7,9,0).
+138 [hyper,21,2,12,17,demod] CS(1,1,6,8,0).
+139 [hyper,21,2,12,16,demod] CS(1,1,5,7,0).
+140 [hyper,21,2,12,15,demod] CS(1,1,4,6,0).
+141 [hyper,21,2,12,14,demod] CS(1,1,3,5,0).
+142 [hyper,21,2,12,13,demod] CS(1,1,2,4,0).
+143 [hyper,21,2,12,12,demod] CS(1,1,1,3,0).
+144 [hyper,21,2,12,11,demod] CS(1,1,0,2,0).
+145 [hyper,21,2,11,20,demod] CS(1,0,9,0,1).
+146 [hyper,21,2,11,19,demod] CS(1,0,8,9,0).
+147 [hyper,21,2,11,18,demod] CS(1,0,7,8,0).
+148 [hyper,21,2,11,17,demod] CS(1,0,6,7,0).
+149 [hyper,21,2,11,16,demod] CS(1,0,5,6,0).
+150 [hyper,21,2,11,15,demod] CS(1,0,4,5,0).
+151 [hyper,21,2,11,14,demod] CS(1,0,3,4,0).
+152 [hyper,21,2,11,13,demod] CS(1,0,2,3,0).
+153 [hyper,21,2,11,12,demod] CS(1,0,1,2,0).
+154 [hyper,21,2,11,11,demod] CS(1,0,0,1,0).
+155 [hyper,21,1,20,20,demod] CS(0,9,9,8,1).
+156 [hyper,21,1,20,19,demod] CS(0,9,8,7,1).
+157 [hyper,21,1,20,18,demod] CS(0,9,7,6,1).
+158 [hyper,21,1,20,17,demod] CS(0,9,6,5,1).
+159 [hyper,21,1,20,16,demod] CS(0,9,5,4,1).
+160 [hyper,21,1,20,15,demod] CS(0,9,4,3,1).
+161 [hyper,21,1,20,14,demod] CS(0,9,3,2,1).
+162 [hyper,21,1,20,13,demod] CS(0,9,2,1,1).
+163 [hyper,21,1,20,12,demod] CS(0,9,1,0,1).
+164 [hyper,21,1,20,11,demod] CS(0,9,0,9,0).
+165 [hyper,21,1,19,20,demod] CS(0,8,9,7,1).
+166 [hyper,21,1,19,19,demod] CS(0,8,8,6,1).
+167 [hyper,21,1,19,18,demod] CS(0,8,7,5,1).
+168 [hyper,21,1,19,17,demod] CS(0,8,6,4,1).
+169 [hyper,21,1,19,16,demod] CS(0,8,5,3,1).
+170 [hyper,21,1,19,15,demod] CS(0,8,4,2,1).
+171 [hyper,21,1,19,14,demod] CS(0,8,3,1,1).
+172 [hyper,21,1,19,13,demod] CS(0,8,2,0,1).
+173 [hyper,21,1,19,12,demod] CS(0,8,1,9,0).
+174 [hyper,21,1,19,11,demod] CS(0,8,0,8,0).
+175 [hyper,21,1,18,20,demod] CS(0,7,9,6,1).
+176 [hyper,21,1,18,19,demod] CS(0,7,8,5,1).
+177 [hyper,21,1,18,18,demod] CS(0,7,7,4,1).
+178 [hyper,21,1,18,17,demod] CS(0,7,6,3,1).
+179 [hyper,21,1,18,16,demod] CS(0,7,5,2,1).
+180 [hyper,21,1,18,15,demod] CS(0,7,4,1,1).
+181 [hyper,21,1,18,14,demod] CS(0,7,3,0,1).
+182 [hyper,21,1,18,13,demod] CS(0,7,2,9,0).
+183 [hyper,21,1,18,12,demod] CS(0,7,1,8,0).
+184 [hyper,21,1,18,11,demod] CS(0,7,0,7,0).
+185 [hyper,21,1,17,20,demod] CS(0,6,9,5,1).
+186 [hyper,21,1,17,19,demod] CS(0,6,8,4,1).
+187 [hyper,21,1,17,18,demod] CS(0,6,7,3,1).
+188 [hyper,21,1,17,17,demod] CS(0,6,6,2,1).
+189 [hyper,21,1,17,16,demod] CS(0,6,5,1,1).
+190 [hyper,21,1,17,15,demod] CS(0,6,4,0,1).
+191 [hyper,21,1,17,14,demod] CS(0,6,3,9,0).
+192 [hyper,21,1,17,13,demod] CS(0,6,2,8,0).
+193 [hyper,21,1,17,12,demod] CS(0,6,1,7,0).
+194 [hyper,21,1,17,11,demod] CS(0,6,0,6,0).
+195 [hyper,21,1,16,20,demod] CS(0,5,9,4,1).
+196 [hyper,21,1,16,19,demod] CS(0,5,8,3,1).
+197 [hyper,21,1,16,18,demod] CS(0,5,7,2,1).
+198 [hyper,21,1,16,17,demod] CS(0,5,6,1,1).
+199 [hyper,21,1,16,16,demod] CS(0,5,5,0,1).
+200 [hyper,21,1,16,15,demod] CS(0,5,4,9,0).
+201 [hyper,21,1,16,14,demod] CS(0,5,3,8,0).
+202 [hyper,21,1,16,13,demod] CS(0,5,2,7,0).
+203 [hyper,21,1,16,12,demod] CS(0,5,1,6,0).
+204 [hyper,21,1,16,11,demod] CS(0,5,0,5,0).
+205 [hyper,21,1,15,20,demod] CS(0,4,9,3,1).
+206 [hyper,21,1,15,19,demod] CS(0,4,8,2,1).
+207 [hyper,21,1,15,18,demod] CS(0,4,7,1,1).
+208 [hyper,21,1,15,17,demod] CS(0,4,6,0,1).
+209 [hyper,21,1,15,16,demod] CS(0,4,5,9,0).
+210 [hyper,21,1,15,15,demod] CS(0,4,4,8,0).
+211 [hyper,21,1,15,14,demod] CS(0,4,3,7,0).
+212 [hyper,21,1,15,13,demod] CS(0,4,2,6,0).
+213 [hyper,21,1,15,12,demod] CS(0,4,1,5,0).
+214 [hyper,21,1,15,11,demod] CS(0,4,0,4,0).
+215 [hyper,21,1,14,20,demod] CS(0,3,9,2,1).
+216 [hyper,21,1,14,19,demod] CS(0,3,8,1,1).
+217 [hyper,21,1,14,18,demod] CS(0,3,7,0,1).
+218 [hyper,21,1,14,17,demod] CS(0,3,6,9,0).
+219 [hyper,21,1,14,16,demod] CS(0,3,5,8,0).
+220 [hyper,21,1,14,15,demod] CS(0,3,4,7,0).
+221 [hyper,21,1,14,14,demod] CS(0,3,3,6,0).
+222 [hyper,21,1,14,13,demod] CS(0,3,2,5,0).
+223 [hyper,21,1,14,12,demod] CS(0,3,1,4,0).
+224 [hyper,21,1,14,11,demod] CS(0,3,0,3,0).
+225 [hyper,21,1,13,20,demod] CS(0,2,9,1,1).
+226 [hyper,21,1,13,19,demod] CS(0,2,8,0,1).
+227 [hyper,21,1,13,18,demod] CS(0,2,7,9,0).
+228 [hyper,21,1,13,17,demod] CS(0,2,6,8,0).
+229 [hyper,21,1,13,16,demod] CS(0,2,5,7,0).
+230 [hyper,21,1,13,15,demod] CS(0,2,4,6,0).
+231 [hyper,21,1,13,14,demod] CS(0,2,3,5,0).
+232 [hyper,21,1,13,13,demod] CS(0,2,2,4,0).
+233 [hyper,21,1,13,12,demod] CS(0,2,1,3,0).
+234 [hyper,21,1,13,11,demod] CS(0,2,0,2,0).
+235 [hyper,21,1,12,20,demod] CS(0,1,9,0,1).
+236 [hyper,21,1,12,19,demod] CS(0,1,8,9,0).
+237 [hyper,21,1,12,18,demod] CS(0,1,7,8,0).
+238 [hyper,21,1,12,17,demod] CS(0,1,6,7,0).
+239 [hyper,21,1,12,16,demod] CS(0,1,5,6,0).
+240 [hyper,21,1,12,15,demod] CS(0,1,4,5,0).
+241 [hyper,21,1,12,14,demod] CS(0,1,3,4,0).
+242 [hyper,21,1,12,13,demod] CS(0,1,2,3,0).
+243 [hyper,21,1,12,12,demod] CS(0,1,1,2,0).
+244 [hyper,21,1,12,11,demod] CS(0,1,0,1,0).
+245 [hyper,21,1,11,20,demod] CS(0,0,9,9,0).
+246 [hyper,21,1,11,19,demod] CS(0,0,8,8,0).
+247 [hyper,21,1,11,18,demod] CS(0,0,7,7,0).
+248 [hyper,21,1,11,17,demod] CS(0,0,6,6,0).
+249 [hyper,21,1,11,16,demod] CS(0,0,5,5,0).
+250 [hyper,21,1,11,15,demod] CS(0,0,4,4,0).
+251 [hyper,21,1,11,14,demod] CS(0,0,3,3,0).
+252 [hyper,21,1,11,13,demod] CS(0,0,2,2,0).
+253 [hyper,21,1,11,12,demod] CS(0,0,1,1,0).
+254 [hyper,21,1,11,11,demod] CS(0,0,0,0,0).
+22 [] -L(u)| -D(x)| -D(y)|CP(u,x,y,$MOD($SUM(u,$PROD(x,y)),10),$DIV($SUM(u,$PROD(x,y)),10)).
+255 [hyper,22,10,20,20,demod] CP(7,9,9,8,8).
+256 [hyper,22,10,20,19,demod] CP(7,9,8,9,7).
+257 [hyper,22,10,20,18,demod] CP(7,9,7,0,7).
+258 [hyper,22,10,20,17,demod] CP(7,9,6,1,6).
+259 [hyper,22,10,20,16,demod] CP(7,9,5,2,5).
+260 [hyper,22,10,20,15,demod] CP(7,9,4,3,4).
+261 [hyper,22,10,20,14,demod] CP(7,9,3,4,3).
+262 [hyper,22,10,20,13,demod] CP(7,9,2,5,2).
+263 [hyper,22,10,20,12,demod] CP(7,9,1,6,1).
+264 [hyper,22,10,20,11,demod] CP(7,9,0,7,0).
+265 [hyper,22,10,19,20,demod] CP(7,8,9,9,7).
+266 [hyper,22,10,19,19,demod] CP(7,8,8,1,7).
+267 [hyper,22,10,19,18,demod] CP(7,8,7,3,6).
+268 [hyper,22,10,19,17,demod] CP(7,8,6,5,5).
+269 [hyper,22,10,19,16,demod] CP(7,8,5,7,4).
+270 [hyper,22,10,19,15,demod] CP(7,8,4,9,3).
+271 [hyper,22,10,19,14,demod] CP(7,8,3,1,3).
+272 [hyper,22,10,19,13,demod] CP(7,8,2,3,2).
+273 [hyper,22,10,19,12,demod] CP(7,8,1,5,1).
+274 [hyper,22,10,19,11,demod] CP(7,8,0,7,0).
+275 [hyper,22,10,18,20,demod] CP(7,7,9,0,7).
+276 [hyper,22,10,18,19,demod] CP(7,7,8,3,6).
+277 [hyper,22,10,18,18,demod] CP(7,7,7,6,5).
+278 [hyper,22,10,18,17,demod] CP(7,7,6,9,4).
+279 [hyper,22,10,18,16,demod] CP(7,7,5,2,4).
+280 [hyper,22,10,18,15,demod] CP(7,7,4,5,3).
+281 [hyper,22,10,18,14,demod] CP(7,7,3,8,2).
+282 [hyper,22,10,18,13,demod] CP(7,7,2,1,2).
+283 [hyper,22,10,18,12,demod] CP(7,7,1,4,1).
+284 [hyper,22,10,18,11,demod] CP(7,7,0,7,0).
+285 [hyper,22,10,17,20,demod] CP(7,6,9,1,6).
+286 [hyper,22,10,17,19,demod] CP(7,6,8,5,5).
+287 [hyper,22,10,17,18,demod] CP(7,6,7,9,4).
+288 [hyper,22,10,17,17,demod] CP(7,6,6,3,4).
+289 [hyper,22,10,17,16,demod] CP(7,6,5,7,3).
+290 [hyper,22,10,17,15,demod] CP(7,6,4,1,3).
+291 [hyper,22,10,17,14,demod] CP(7,6,3,5,2).
+292 [hyper,22,10,17,13,demod] CP(7,6,2,9,1).
+293 [hyper,22,10,17,12,demod] CP(7,6,1,3,1).
+294 [hyper,22,10,17,11,demod] CP(7,6,0,7,0).
+295 [hyper,22,10,16,20,demod] CP(7,5,9,2,5).
+296 [hyper,22,10,16,19,demod] CP(7,5,8,7,4).
+297 [hyper,22,10,16,18,demod] CP(7,5,7,2,4).
+298 [hyper,22,10,16,17,demod] CP(7,5,6,7,3).
+299 [hyper,22,10,16,16,demod] CP(7,5,5,2,3).
+300 [hyper,22,10,16,15,demod] CP(7,5,4,7,2).
+301 [hyper,22,10,16,14,demod] CP(7,5,3,2,2).
+302 [hyper,22,10,16,13,demod] CP(7,5,2,7,1).
+303 [hyper,22,10,16,12,demod] CP(7,5,1,2,1).
+304 [hyper,22,10,16,11,demod] CP(7,5,0,7,0).
+305 [hyper,22,10,15,20,demod] CP(7,4,9,3,4).
+306 [hyper,22,10,15,19,demod] CP(7,4,8,9,3).
+307 [hyper,22,10,15,18,demod] CP(7,4,7,5,3).
+308 [hyper,22,10,15,17,demod] CP(7,4,6,1,3).
+309 [hyper,22,10,15,16,demod] CP(7,4,5,7,2).
+310 [hyper,22,10,15,15,demod] CP(7,4,4,3,2).
+311 [hyper,22,10,15,14,demod] CP(7,4,3,9,1).
+312 [hyper,22,10,15,13,demod] CP(7,4,2,5,1).
+313 [hyper,22,10,15,12,demod] CP(7,4,1,1,1).
+314 [hyper,22,10,15,11,demod] CP(7,4,0,7,0).
+315 [hyper,22,10,14,20,demod] CP(7,3,9,4,3).
+316 [hyper,22,10,14,19,demod] CP(7,3,8,1,3).
+317 [hyper,22,10,14,18,demod] CP(7,3,7,8,2).
+318 [hyper,22,10,14,17,demod] CP(7,3,6,5,2).
+319 [hyper,22,10,14,16,demod] CP(7,3,5,2,2).
+320 [hyper,22,10,14,15,demod] CP(7,3,4,9,1).
+321 [hyper,22,10,14,14,demod] CP(7,3,3,6,1).
+322 [hyper,22,10,14,13,demod] CP(7,3,2,3,1).
+323 [hyper,22,10,14,12,demod] CP(7,3,1,0,1).
+324 [hyper,22,10,14,11,demod] CP(7,3,0,7,0).
+325 [hyper,22,10,13,20,demod] CP(7,2,9,5,2).
+326 [hyper,22,10,13,19,demod] CP(7,2,8,3,2).
+327 [hyper,22,10,13,18,demod] CP(7,2,7,1,2).
+328 [hyper,22,10,13,17,demod] CP(7,2,6,9,1).
+329 [hyper,22,10,13,16,demod] CP(7,2,5,7,1).
+330 [hyper,22,10,13,15,demod] CP(7,2,4,5,1).
+331 [hyper,22,10,13,14,demod] CP(7,2,3,3,1).
+332 [hyper,22,10,13,13,demod] CP(7,2,2,1,1).
+333 [hyper,22,10,13,12,demod] CP(7,2,1,9,0).
+334 [hyper,22,10,13,11,demod] CP(7,2,0,7,0).
+335 [hyper,22,10,12,20,demod] CP(7,1,9,6,1).
+336 [hyper,22,10,12,19,demod] CP(7,1,8,5,1).
+337 [hyper,22,10,12,18,demod] CP(7,1,7,4,1).
+338 [hyper,22,10,12,17,demod] CP(7,1,6,3,1).
+339 [hyper,22,10,12,16,demod] CP(7,1,5,2,1).
+340 [hyper,22,10,12,15,demod] CP(7,1,4,1,1).
+341 [hyper,22,10,12,14,demod] CP(7,1,3,0,1).
+342 [hyper,22,10,12,13,demod] CP(7,1,2,9,0).
+343 [hyper,22,10,12,12,demod] CP(7,1,1,8,0).
+344 [hyper,22,10,12,11,demod] CP(7,1,0,7,0).
+345 [hyper,22,10,11,20,demod] CP(7,0,9,7,0).
+346 [hyper,22,10,11,19,demod] CP(7,0,8,7,0).
+347 [hyper,22,10,11,18,demod] CP(7,0,7,7,0).
+348 [hyper,22,10,11,17,demod] CP(7,0,6,7,0).
+349 [hyper,22,10,11,16,demod] CP(7,0,5,7,0).
+350 [hyper,22,10,11,15,demod] CP(7,0,4,7,0).
+351 [hyper,22,10,11,14,demod] CP(7,0,3,7,0).
+352 [hyper,22,10,11,13,demod] CP(7,0,2,7,0).
+353 [hyper,22,10,11,12,demod] CP(7,0,1,7,0).
+354 [hyper,22,10,11,11,demod] CP(7,0,0,7,0).
+355 [hyper,22,9,20,20,demod] CP(6,9,9,7,8).
+356 [hyper,22,9,20,19,demod] CP(6,9,8,8,7).
+357 [hyper,22,9,20,18,demod] CP(6,9,7,9,6).
+358 [hyper,22,9,20,17,demod] CP(6,9,6,0,6).
+359 [hyper,22,9,20,16,demod] CP(6,9,5,1,5).
+360 [hyper,22,9,20,15,demod] CP(6,9,4,2,4).
+361 [hyper,22,9,20,14,demod] CP(6,9,3,3,3).
+362 [hyper,22,9,20,13,demod] CP(6,9,2,4,2).
+363 [hyper,22,9,20,12,demod] CP(6,9,1,5,1).
+364 [hyper,22,9,20,11,demod] CP(6,9,0,6,0).
+365 [hyper,22,9,19,20,demod] CP(6,8,9,8,7).
+366 [hyper,22,9,19,19,demod] CP(6,8,8,0,7).
+367 [hyper,22,9,19,18,demod] CP(6,8,7,2,6).
+368 [hyper,22,9,19,17,demod] CP(6,8,6,4,5).
+369 [hyper,22,9,19,16,demod] CP(6,8,5,6,4).
+370 [hyper,22,9,19,15,demod] CP(6,8,4,8,3).
+371 [hyper,22,9,19,14,demod] CP(6,8,3,0,3).
+372 [hyper,22,9,19,13,demod] CP(6,8,2,2,2).
+373 [hyper,22,9,19,12,demod] CP(6,8,1,4,1).
+374 [hyper,22,9,19,11,demod] CP(6,8,0,6,0).
+375 [hyper,22,9,18,20,demod] CP(6,7,9,9,6).
+376 [hyper,22,9,18,19,demod] CP(6,7,8,2,6).
+377 [hyper,22,9,18,18,demod] CP(6,7,7,5,5).
+378 [hyper,22,9,18,17,demod] CP(6,7,6,8,4).
+379 [hyper,22,9,18,16,demod] CP(6,7,5,1,4).
+380 [hyper,22,9,18,15,demod] CP(6,7,4,4,3).
+381 [hyper,22,9,18,14,demod] CP(6,7,3,7,2).
+382 [hyper,22,9,18,13,demod] CP(6,7,2,0,2).
+383 [hyper,22,9,18,12,demod] CP(6,7,1,3,1).
+384 [hyper,22,9,18,11,demod] CP(6,7,0,6,0).
+385 [hyper,22,9,17,20,demod] CP(6,6,9,0,6).
+386 [hyper,22,9,17,19,demod] CP(6,6,8,4,5).
+387 [hyper,22,9,17,18,demod] CP(6,6,7,8,4).
+388 [hyper,22,9,17,17,demod] CP(6,6,6,2,4).
+389 [hyper,22,9,17,16,demod] CP(6,6,5,6,3).
+390 [hyper,22,9,17,15,demod] CP(6,6,4,0,3).
+391 [hyper,22,9,17,14,demod] CP(6,6,3,4,2).
+392 [hyper,22,9,17,13,demod] CP(6,6,2,8,1).
+393 [hyper,22,9,17,12,demod] CP(6,6,1,2,1).
+394 [hyper,22,9,17,11,demod] CP(6,6,0,6,0).
+395 [hyper,22,9,16,20,demod] CP(6,5,9,1,5).
+396 [hyper,22,9,16,19,demod] CP(6,5,8,6,4).
+397 [hyper,22,9,16,18,demod] CP(6,5,7,1,4).
+398 [hyper,22,9,16,17,demod] CP(6,5,6,6,3).
+399 [hyper,22,9,16,16,demod] CP(6,5,5,1,3).
+400 [hyper,22,9,16,15,demod] CP(6,5,4,6,2).
+401 [hyper,22,9,16,14,demod] CP(6,5,3,1,2).
+402 [hyper,22,9,16,13,demod] CP(6,5,2,6,1).
+403 [hyper,22,9,16,12,demod] CP(6,5,1,1,1).
+404 [hyper,22,9,16,11,demod] CP(6,5,0,6,0).
+405 [hyper,22,9,15,20,demod] CP(6,4,9,2,4).
+406 [hyper,22,9,15,19,demod] CP(6,4,8,8,3).
+407 [hyper,22,9,15,18,demod] CP(6,4,7,4,3).
+408 [hyper,22,9,15,17,demod] CP(6,4,6,0,3).
+409 [hyper,22,9,15,16,demod] CP(6,4,5,6,2).
+410 [hyper,22,9,15,15,demod] CP(6,4,4,2,2).
+411 [hyper,22,9,15,14,demod] CP(6,4,3,8,1).
+412 [hyper,22,9,15,13,demod] CP(6,4,2,4,1).
+413 [hyper,22,9,15,12,demod] CP(6,4,1,0,1).
+414 [hyper,22,9,15,11,demod] CP(6,4,0,6,0).
+415 [hyper,22,9,14,20,demod] CP(6,3,9,3,3).
+416 [hyper,22,9,14,19,demod] CP(6,3,8,0,3).
+417 [hyper,22,9,14,18,demod] CP(6,3,7,7,2).
+418 [hyper,22,9,14,17,demod] CP(6,3,6,4,2).
+419 [hyper,22,9,14,16,demod] CP(6,3,5,1,2).
+420 [hyper,22,9,14,15,demod] CP(6,3,4,8,1).
+421 [hyper,22,9,14,14,demod] CP(6,3,3,5,1).
+422 [hyper,22,9,14,13,demod] CP(6,3,2,2,1).
+423 [hyper,22,9,14,12,demod] CP(6,3,1,9,0).
+424 [hyper,22,9,14,11,demod] CP(6,3,0,6,0).
+425 [hyper,22,9,13,20,demod] CP(6,2,9,4,2).
+426 [hyper,22,9,13,19,demod] CP(6,2,8,2,2).
+427 [hyper,22,9,13,18,demod] CP(6,2,7,0,2).
+428 [hyper,22,9,13,17,demod] CP(6,2,6,8,1).
+429 [hyper,22,9,13,16,demod] CP(6,2,5,6,1).
+430 [hyper,22,9,13,15,demod] CP(6,2,4,4,1).
+431 [hyper,22,9,13,14,demod] CP(6,2,3,2,1).
+432 [hyper,22,9,13,13,demod] CP(6,2,2,0,1).
+433 [hyper,22,9,13,12,demod] CP(6,2,1,8,0).
+434 [hyper,22,9,13,11,demod] CP(6,2,0,6,0).
+435 [hyper,22,9,12,20,demod] CP(6,1,9,5,1).
+436 [hyper,22,9,12,19,demod] CP(6,1,8,4,1).
+437 [hyper,22,9,12,18,demod] CP(6,1,7,3,1).
+438 [hyper,22,9,12,17,demod] CP(6,1,6,2,1).
+439 [hyper,22,9,12,16,demod] CP(6,1,5,1,1).
+440 [hyper,22,9,12,15,demod] CP(6,1,4,0,1).
+441 [hyper,22,9,12,14,demod] CP(6,1,3,9,0).
+442 [hyper,22,9,12,13,demod] CP(6,1,2,8,0).
+443 [hyper,22,9,12,12,demod] CP(6,1,1,7,0).
+444 [hyper,22,9,12,11,demod] CP(6,1,0,6,0).
+445 [hyper,22,9,11,20,demod] CP(6,0,9,6,0).
+446 [hyper,22,9,11,19,demod] CP(6,0,8,6,0).
+447 [hyper,22,9,11,18,demod] CP(6,0,7,6,0).
+448 [hyper,22,9,11,17,demod] CP(6,0,6,6,0).
+449 [hyper,22,9,11,16,demod] CP(6,0,5,6,0).
+450 [hyper,22,9,11,15,demod] CP(6,0,4,6,0).
+451 [hyper,22,9,11,14,demod] CP(6,0,3,6,0).
+452 [hyper,22,9,11,13,demod] CP(6,0,2,6,0).
+453 [hyper,22,9,11,12,demod] CP(6,0,1,6,0).
+454 [hyper,22,9,11,11,demod] CP(6,0,0,6,0).
+455 [hyper,22,8,20,20,demod] CP(5,9,9,6,8).
+456 [hyper,22,8,20,19,demod] CP(5,9,8,7,7).
+457 [hyper,22,8,20,18,demod] CP(5,9,7,8,6).
+458 [hyper,22,8,20,17,demod] CP(5,9,6,9,5).
+459 [hyper,22,8,20,16,demod] CP(5,9,5,0,5).
+460 [hyper,22,8,20,15,demod] CP(5,9,4,1,4).
+461 [hyper,22,8,20,14,demod] CP(5,9,3,2,3).
+462 [hyper,22,8,20,13,demod] CP(5,9,2,3,2).
+463 [hyper,22,8,20,12,demod] CP(5,9,1,4,1).
+464 [hyper,22,8,20,11,demod] CP(5,9,0,5,0).
+465 [hyper,22,8,19,20,demod] CP(5,8,9,7,7).
+466 [hyper,22,8,19,19,demod] CP(5,8,8,9,6).
+467 [hyper,22,8,19,18,demod] CP(5,8,7,1,6).
+468 [hyper,22,8,19,17,demod] CP(5,8,6,3,5).
+469 [hyper,22,8,19,16,demod] CP(5,8,5,5,4).
+470 [hyper,22,8,19,15,demod] CP(5,8,4,7,3).
+471 [hyper,22,8,19,14,demod] CP(5,8,3,9,2).
+472 [hyper,22,8,19,13,demod] CP(5,8,2,1,2).
+473 [hyper,22,8,19,12,demod] CP(5,8,1,3,1).
+474 [hyper,22,8,19,11,demod] CP(5,8,0,5,0).
+475 [hyper,22,8,18,20,demod] CP(5,7,9,8,6).
+476 [hyper,22,8,18,19,demod] CP(5,7,8,1,6).
+477 [hyper,22,8,18,18,demod] CP(5,7,7,4,5).
+478 [hyper,22,8,18,17,demod] CP(5,7,6,7,4).
+479 [hyper,22,8,18,16,demod] CP(5,7,5,0,4).
+480 [hyper,22,8,18,15,demod] CP(5,7,4,3,3).
+481 [hyper,22,8,18,14,demod] CP(5,7,3,6,2).
+482 [hyper,22,8,18,13,demod] CP(5,7,2,9,1).
+483 [hyper,22,8,18,12,demod] CP(5,7,1,2,1).
+484 [hyper,22,8,18,11,demod] CP(5,7,0,5,0).
+485 [hyper,22,8,17,20,demod] CP(5,6,9,9,5).
+486 [hyper,22,8,17,19,demod] CP(5,6,8,3,5).
+487 [hyper,22,8,17,18,demod] CP(5,6,7,7,4).
+488 [hyper,22,8,17,17,demod] CP(5,6,6,1,4).
+489 [hyper,22,8,17,16,demod] CP(5,6,5,5,3).
+490 [hyper,22,8,17,15,demod] CP(5,6,4,9,2).
+491 [hyper,22,8,17,14,demod] CP(5,6,3,3,2).
+492 [hyper,22,8,17,13,demod] CP(5,6,2,7,1).
+493 [hyper,22,8,17,12,demod] CP(5,6,1,1,1).
+494 [hyper,22,8,17,11,demod] CP(5,6,0,5,0).
+495 [hyper,22,8,16,20,demod] CP(5,5,9,0,5).
+496 [hyper,22,8,16,19,demod] CP(5,5,8,5,4).
+497 [hyper,22,8,16,18,demod] CP(5,5,7,0,4).
+498 [hyper,22,8,16,17,demod] CP(5,5,6,5,3).
+499 [hyper,22,8,16,16,demod] CP(5,5,5,0,3).
+500 [hyper,22,8,16,15,demod] CP(5,5,4,5,2).
+501 [hyper,22,8,16,14,demod] CP(5,5,3,0,2).
+502 [hyper,22,8,16,13,demod] CP(5,5,2,5,1).
+503 [hyper,22,8,16,12,demod] CP(5,5,1,0,1).
+504 [hyper,22,8,16,11,demod] CP(5,5,0,5,0).
+505 [hyper,22,8,15,20,demod] CP(5,4,9,1,4).
+506 [hyper,22,8,15,19,demod] CP(5,4,8,7,3).
+507 [hyper,22,8,15,18,demod] CP(5,4,7,3,3).
+508 [hyper,22,8,15,17,demod] CP(5,4,6,9,2).
+509 [hyper,22,8,15,16,demod] CP(5,4,5,5,2).
+510 [hyper,22,8,15,15,demod] CP(5,4,4,1,2).
+511 [hyper,22,8,15,14,demod] CP(5,4,3,7,1).
+512 [hyper,22,8,15,13,demod] CP(5,4,2,3,1).
+513 [hyper,22,8,15,12,demod] CP(5,4,1,9,0).
+514 [hyper,22,8,15,11,demod] CP(5,4,0,5,0).
+515 [hyper,22,8,14,20,demod] CP(5,3,9,2,3).
+516 [hyper,22,8,14,19,demod] CP(5,3,8,9,2).
+517 [hyper,22,8,14,18,demod] CP(5,3,7,6,2).
+518 [hyper,22,8,14,17,demod] CP(5,3,6,3,2).
+519 [hyper,22,8,14,16,demod] CP(5,3,5,0,2).
+520 [hyper,22,8,14,15,demod] CP(5,3,4,7,1).
+521 [hyper,22,8,14,14,demod] CP(5,3,3,4,1).
+522 [hyper,22,8,14,13,demod] CP(5,3,2,1,1).
+523 [hyper,22,8,14,12,demod] CP(5,3,1,8,0).
+524 [hyper,22,8,14,11,demod] CP(5,3,0,5,0).
+525 [hyper,22,8,13,20,demod] CP(5,2,9,3,2).
+526 [hyper,22,8,13,19,demod] CP(5,2,8,1,2).
+527 [hyper,22,8,13,18,demod] CP(5,2,7,9,1).
+528 [hyper,22,8,13,17,demod] CP(5,2,6,7,1).
+529 [hyper,22,8,13,16,demod] CP(5,2,5,5,1).
+530 [hyper,22,8,13,15,demod] CP(5,2,4,3,1).
+531 [hyper,22,8,13,14,demod] CP(5,2,3,1,1).
+532 [hyper,22,8,13,13,demod] CP(5,2,2,9,0).
+533 [hyper,22,8,13,12,demod] CP(5,2,1,7,0).
+534 [hyper,22,8,13,11,demod] CP(5,2,0,5,0).
+535 [hyper,22,8,12,20,demod] CP(5,1,9,4,1).
+536 [hyper,22,8,12,19,demod] CP(5,1,8,3,1).
+537 [hyper,22,8,12,18,demod] CP(5,1,7,2,1).
+538 [hyper,22,8,12,17,demod] CP(5,1,6,1,1).
+539 [hyper,22,8,12,16,demod] CP(5,1,5,0,1).
+540 [hyper,22,8,12,15,demod] CP(5,1,4,9,0).
+541 [hyper,22,8,12,14,demod] CP(5,1,3,8,0).
+542 [hyper,22,8,12,13,demod] CP(5,1,2,7,0).
+543 [hyper,22,8,12,12,demod] CP(5,1,1,6,0).
+544 [hyper,22,8,12,11,demod] CP(5,1,0,5,0).
+545 [hyper,22,8,11,20,demod] CP(5,0,9,5,0).
+546 [hyper,22,8,11,19,demod] CP(5,0,8,5,0).
+547 [hyper,22,8,11,18,demod] CP(5,0,7,5,0).
+548 [hyper,22,8,11,17,demod] CP(5,0,6,5,0).
+549 [hyper,22,8,11,16,demod] CP(5,0,5,5,0).
+550 [hyper,22,8,11,15,demod] CP(5,0,4,5,0).
+551 [hyper,22,8,11,14,demod] CP(5,0,3,5,0).
+552 [hyper,22,8,11,13,demod] CP(5,0,2,5,0).
+553 [hyper,22,8,11,12,demod] CP(5,0,1,5,0).
+554 [hyper,22,8,11,11,demod] CP(5,0,0,5,0).
+555 [hyper,22,7,20,20,demod] CP(4,9,9,5,8).
+556 [hyper,22,7,20,19,demod] CP(4,9,8,6,7).
+557 [hyper,22,7,20,18,demod] CP(4,9,7,7,6).
+558 [hyper,22,7,20,17,demod] CP(4,9,6,8,5).
+559 [hyper,22,7,20,16,demod] CP(4,9,5,9,4).
+560 [hyper,22,7,20,15,demod] CP(4,9,4,0,4).
+561 [hyper,22,7,20,14,demod] CP(4,9,3,1,3).
+562 [hyper,22,7,20,13,demod] CP(4,9,2,2,2).
+563 [hyper,22,7,20,12,demod] CP(4,9,1,3,1).
+564 [hyper,22,7,20,11,demod] CP(4,9,0,4,0).
+565 [hyper,22,7,19,20,demod] CP(4,8,9,6,7).
+566 [hyper,22,7,19,19,demod] CP(4,8,8,8,6).
+567 [hyper,22,7,19,18,demod] CP(4,8,7,0,6).
+568 [hyper,22,7,19,17,demod] CP(4,8,6,2,5).
+569 [hyper,22,7,19,16,demod] CP(4,8,5,4,4).
+570 [hyper,22,7,19,15,demod] CP(4,8,4,6,3).
+571 [hyper,22,7,19,14,demod] CP(4,8,3,8,2).
+572 [hyper,22,7,19,13,demod] CP(4,8,2,0,2).
+573 [hyper,22,7,19,12,demod] CP(4,8,1,2,1).
+574 [hyper,22,7,19,11,demod] CP(4,8,0,4,0).
+575 [hyper,22,7,18,20,demod] CP(4,7,9,7,6).
+576 [hyper,22,7,18,19,demod] CP(4,7,8,0,6).
+577 [hyper,22,7,18,18,demod] CP(4,7,7,3,5).
+578 [hyper,22,7,18,17,demod] CP(4,7,6,6,4).
+579 [hyper,22,7,18,16,demod] CP(4,7,5,9,3).
+580 [hyper,22,7,18,15,demod] CP(4,7,4,2,3).
+581 [hyper,22,7,18,14,demod] CP(4,7,3,5,2).
+582 [hyper,22,7,18,13,demod] CP(4,7,2,8,1).
+583 [hyper,22,7,18,12,demod] CP(4,7,1,1,1).
+584 [hyper,22,7,18,11,demod] CP(4,7,0,4,0).
+585 [hyper,22,7,17,20,demod] CP(4,6,9,8,5).
+586 [hyper,22,7,17,19,demod] CP(4,6,8,2,5).
+587 [hyper,22,7,17,18,demod] CP(4,6,7,6,4).
+588 [hyper,22,7,17,17,demod] CP(4,6,6,0,4).
+589 [hyper,22,7,17,16,demod] CP(4,6,5,4,3).
+590 [hyper,22,7,17,15,demod] CP(4,6,4,8,2).
+591 [hyper,22,7,17,14,demod] CP(4,6,3,2,2).
+592 [hyper,22,7,17,13,demod] CP(4,6,2,6,1).
+593 [hyper,22,7,17,12,demod] CP(4,6,1,0,1).
+594 [hyper,22,7,17,11,demod] CP(4,6,0,4,0).
+595 [hyper,22,7,16,20,demod] CP(4,5,9,9,4).
+596 [hyper,22,7,16,19,demod] CP(4,5,8,4,4).
+597 [hyper,22,7,16,18,demod] CP(4,5,7,9,3).
+598 [hyper,22,7,16,17,demod] CP(4,5,6,4,3).
+599 [hyper,22,7,16,16,demod] CP(4,5,5,9,2).
+600 [hyper,22,7,16,15,demod] CP(4,5,4,4,2).
+601 [hyper,22,7,16,14,demod] CP(4,5,3,9,1).
+602 [hyper,22,7,16,13,demod] CP(4,5,2,4,1).
+603 [hyper,22,7,16,12,demod] CP(4,5,1,9,0).
+604 [hyper,22,7,16,11,demod] CP(4,5,0,4,0).
+605 [hyper,22,7,15,20,demod] CP(4,4,9,0,4).
+606 [hyper,22,7,15,19,demod] CP(4,4,8,6,3).
+607 [hyper,22,7,15,18,demod] CP(4,4,7,2,3).
+608 [hyper,22,7,15,17,demod] CP(4,4,6,8,2).
+609 [hyper,22,7,15,16,demod] CP(4,4,5,4,2).
+610 [hyper,22,7,15,15,demod] CP(4,4,4,0,2).
+611 [hyper,22,7,15,14,demod] CP(4,4,3,6,1).
+612 [hyper,22,7,15,13,demod] CP(4,4,2,2,1).
+613 [hyper,22,7,15,12,demod] CP(4,4,1,8,0).
+614 [hyper,22,7,15,11,demod] CP(4,4,0,4,0).
+615 [hyper,22,7,14,20,demod] CP(4,3,9,1,3).
+616 [hyper,22,7,14,19,demod] CP(4,3,8,8,2).
+617 [hyper,22,7,14,18,demod] CP(4,3,7,5,2).
+618 [hyper,22,7,14,17,demod] CP(4,3,6,2,2).
+619 [hyper,22,7,14,16,demod] CP(4,3,5,9,1).
+620 [hyper,22,7,14,15,demod] CP(4,3,4,6,1).
+621 [hyper,22,7,14,14,demod] CP(4,3,3,3,1).
+622 [hyper,22,7,14,13,demod] CP(4,3,2,0,1).
+623 [hyper,22,7,14,12,demod] CP(4,3,1,7,0).
+624 [hyper,22,7,14,11,demod] CP(4,3,0,4,0).
+625 [hyper,22,7,13,20,demod] CP(4,2,9,2,2).
+626 [hyper,22,7,13,19,demod] CP(4,2,8,0,2).
+627 [hyper,22,7,13,18,demod] CP(4,2,7,8,1).
+628 [hyper,22,7,13,17,demod] CP(4,2,6,6,1).
+629 [hyper,22,7,13,16,demod] CP(4,2,5,4,1).
+630 [hyper,22,7,13,15,demod] CP(4,2,4,2,1).
+631 [hyper,22,7,13,14,demod] CP(4,2,3,0,1).
+632 [hyper,22,7,13,13,demod] CP(4,2,2,8,0).
+633 [hyper,22,7,13,12,demod] CP(4,2,1,6,0).
+634 [hyper,22,7,13,11,demod] CP(4,2,0,4,0).
+635 [hyper,22,7,12,20,demod] CP(4,1,9,3,1).
+636 [hyper,22,7,12,19,demod] CP(4,1,8,2,1).
+637 [hyper,22,7,12,18,demod] CP(4,1,7,1,1).
+638 [hyper,22,7,12,17,demod] CP(4,1,6,0,1).
+639 [hyper,22,7,12,16,demod] CP(4,1,5,9,0).
+640 [hyper,22,7,12,15,demod] CP(4,1,4,8,0).
+641 [hyper,22,7,12,14,demod] CP(4,1,3,7,0).
+642 [hyper,22,7,12,13,demod] CP(4,1,2,6,0).
+643 [hyper,22,7,12,12,demod] CP(4,1,1,5,0).
+644 [hyper,22,7,12,11,demod] CP(4,1,0,4,0).
+645 [hyper,22,7,11,20,demod] CP(4,0,9,4,0).
+646 [hyper,22,7,11,19,demod] CP(4,0,8,4,0).
+647 [hyper,22,7,11,18,demod] CP(4,0,7,4,0).
+648 [hyper,22,7,11,17,demod] CP(4,0,6,4,0).
+649 [hyper,22,7,11,16,demod] CP(4,0,5,4,0).
+650 [hyper,22,7,11,15,demod] CP(4,0,4,4,0).
+651 [hyper,22,7,11,14,demod] CP(4,0,3,4,0).
+652 [hyper,22,7,11,13,demod] CP(4,0,2,4,0).
+653 [hyper,22,7,11,12,demod] CP(4,0,1,4,0).
+654 [hyper,22,7,11,11,demod] CP(4,0,0,4,0).
+655 [hyper,22,6,20,20,demod] CP(3,9,9,4,8).
+656 [hyper,22,6,20,19,demod] CP(3,9,8,5,7).
+657 [hyper,22,6,20,18,demod] CP(3,9,7,6,6).
+658 [hyper,22,6,20,17,demod] CP(3,9,6,7,5).
+659 [hyper,22,6,20,16,demod] CP(3,9,5,8,4).
+660 [hyper,22,6,20,15,demod] CP(3,9,4,9,3).
+661 [hyper,22,6,20,14,demod] CP(3,9,3,0,3).
+662 [hyper,22,6,20,13,demod] CP(3,9,2,1,2).
+663 [hyper,22,6,20,12,demod] CP(3,9,1,2,1).
+664 [hyper,22,6,20,11,demod] CP(3,9,0,3,0).
+665 [hyper,22,6,19,20,demod] CP(3,8,9,5,7).
+666 [hyper,22,6,19,19,demod] CP(3,8,8,7,6).
+667 [hyper,22,6,19,18,demod] CP(3,8,7,9,5).
+668 [hyper,22,6,19,17,demod] CP(3,8,6,1,5).
+669 [hyper,22,6,19,16,demod] CP(3,8,5,3,4).
+670 [hyper,22,6,19,15,demod] CP(3,8,4,5,3).
+671 [hyper,22,6,19,14,demod] CP(3,8,3,7,2).
+672 [hyper,22,6,19,13,demod] CP(3,8,2,9,1).
+673 [hyper,22,6,19,12,demod] CP(3,8,1,1,1).
+674 [hyper,22,6,19,11,demod] CP(3,8,0,3,0).
+675 [hyper,22,6,18,20,demod] CP(3,7,9,6,6).
+676 [hyper,22,6,18,19,demod] CP(3,7,8,9,5).
+677 [hyper,22,6,18,18,demod] CP(3,7,7,2,5).
+678 [hyper,22,6,18,17,demod] CP(3,7,6,5,4).
+679 [hyper,22,6,18,16,demod] CP(3,7,5,8,3).
+680 [hyper,22,6,18,15,demod] CP(3,7,4,1,3).
+681 [hyper,22,6,18,14,demod] CP(3,7,3,4,2).
+682 [hyper,22,6,18,13,demod] CP(3,7,2,7,1).
+683 [hyper,22,6,18,12,demod] CP(3,7,1,0,1).
+684 [hyper,22,6,18,11,demod] CP(3,7,0,3,0).
+685 [hyper,22,6,17,20,demod] CP(3,6,9,7,5).
+686 [hyper,22,6,17,19,demod] CP(3,6,8,1,5).
+687 [hyper,22,6,17,18,demod] CP(3,6,7,5,4).
+688 [hyper,22,6,17,17,demod] CP(3,6,6,9,3).
+689 [hyper,22,6,17,16,demod] CP(3,6,5,3,3).
+690 [hyper,22,6,17,15,demod] CP(3,6,4,7,2).
+691 [hyper,22,6,17,14,demod] CP(3,6,3,1,2).
+692 [hyper,22,6,17,13,demod] CP(3,6,2,5,1).
+693 [hyper,22,6,17,12,demod] CP(3,6,1,9,0).
+694 [hyper,22,6,17,11,demod] CP(3,6,0,3,0).
+695 [hyper,22,6,16,20,demod] CP(3,5,9,8,4).
+696 [hyper,22,6,16,19,demod] CP(3,5,8,3,4).
+697 [hyper,22,6,16,18,demod] CP(3,5,7,8,3).
+698 [hyper,22,6,16,17,demod] CP(3,5,6,3,3).
+699 [hyper,22,6,16,16,demod] CP(3,5,5,8,2).
+700 [hyper,22,6,16,15,demod] CP(3,5,4,3,2).
+701 [hyper,22,6,16,14,demod] CP(3,5,3,8,1).
+702 [hyper,22,6,16,13,demod] CP(3,5,2,3,1).
+703 [hyper,22,6,16,12,demod] CP(3,5,1,8,0).
+704 [hyper,22,6,16,11,demod] CP(3,5,0,3,0).
+705 [hyper,22,6,15,20,demod] CP(3,4,9,9,3).
+706 [hyper,22,6,15,19,demod] CP(3,4,8,5,3).
+707 [hyper,22,6,15,18,demod] CP(3,4,7,1,3).
+708 [hyper,22,6,15,17,demod] CP(3,4,6,7,2).
+709 [hyper,22,6,15,16,demod] CP(3,4,5,3,2).
+710 [hyper,22,6,15,15,demod] CP(3,4,4,9,1).
+711 [hyper,22,6,15,14,demod] CP(3,4,3,5,1).
+712 [hyper,22,6,15,13,demod] CP(3,4,2,1,1).
+713 [hyper,22,6,15,12,demod] CP(3,4,1,7,0).
+714 [hyper,22,6,15,11,demod] CP(3,4,0,3,0).
+715 [hyper,22,6,14,20,demod] CP(3,3,9,0,3).
+716 [hyper,22,6,14,19,demod] CP(3,3,8,7,2).
+717 [hyper,22,6,14,18,demod] CP(3,3,7,4,2).
+718 [hyper,22,6,14,17,demod] CP(3,3,6,1,2).
+719 [hyper,22,6,14,16,demod] CP(3,3,5,8,1).
+720 [hyper,22,6,14,15,demod] CP(3,3,4,5,1).
+721 [hyper,22,6,14,14,demod] CP(3,3,3,2,1).
+722 [hyper,22,6,14,13,demod] CP(3,3,2,9,0).
+723 [hyper,22,6,14,12,demod] CP(3,3,1,6,0).
+724 [hyper,22,6,14,11,demod] CP(3,3,0,3,0).
+725 [hyper,22,6,13,20,demod] CP(3,2,9,1,2).
+726 [hyper,22,6,13,19,demod] CP(3,2,8,9,1).
+727 [hyper,22,6,13,18,demod] CP(3,2,7,7,1).
+728 [hyper,22,6,13,17,demod] CP(3,2,6,5,1).
+729 [hyper,22,6,13,16,demod] CP(3,2,5,3,1).
+730 [hyper,22,6,13,15,demod] CP(3,2,4,1,1).
+731 [hyper,22,6,13,14,demod] CP(3,2,3,9,0).
+732 [hyper,22,6,13,13,demod] CP(3,2,2,7,0).
+733 [hyper,22,6,13,12,demod] CP(3,2,1,5,0).
+734 [hyper,22,6,13,11,demod] CP(3,2,0,3,0).
+735 [hyper,22,6,12,20,demod] CP(3,1,9,2,1).
+736 [hyper,22,6,12,19,demod] CP(3,1,8,1,1).
+737 [hyper,22,6,12,18,demod] CP(3,1,7,0,1).
+738 [hyper,22,6,12,17,demod] CP(3,1,6,9,0).
+739 [hyper,22,6,12,16,demod] CP(3,1,5,8,0).
+740 [hyper,22,6,12,15,demod] CP(3,1,4,7,0).
+741 [hyper,22,6,12,14,demod] CP(3,1,3,6,0).
+742 [hyper,22,6,12,13,demod] CP(3,1,2,5,0).
+743 [hyper,22,6,12,12,demod] CP(3,1,1,4,0).
+744 [hyper,22,6,12,11,demod] CP(3,1,0,3,0).
+745 [hyper,22,6,11,20,demod] CP(3,0,9,3,0).
+746 [hyper,22,6,11,19,demod] CP(3,0,8,3,0).
+747 [hyper,22,6,11,18,demod] CP(3,0,7,3,0).
+748 [hyper,22,6,11,17,demod] CP(3,0,6,3,0).
+749 [hyper,22,6,11,16,demod] CP(3,0,5,3,0).
+750 [hyper,22,6,11,15,demod] CP(3,0,4,3,0).
+751 [hyper,22,6,11,14,demod] CP(3,0,3,3,0).
+752 [hyper,22,6,11,13,demod] CP(3,0,2,3,0).
+753 [hyper,22,6,11,12,demod] CP(3,0,1,3,0).
+754 [hyper,22,6,11,11,demod] CP(3,0,0,3,0).
+755 [hyper,22,5,20,20,demod] CP(2,9,9,3,8).
+756 [hyper,22,5,20,19,demod] CP(2,9,8,4,7).
+757 [hyper,22,5,20,18,demod] CP(2,9,7,5,6).
+758 [hyper,22,5,20,17,demod] CP(2,9,6,6,5).
+759 [hyper,22,5,20,16,demod] CP(2,9,5,7,4).
+760 [hyper,22,5,20,15,demod] CP(2,9,4,8,3).
+761 [hyper,22,5,20,14,demod] CP(2,9,3,9,2).
+762 [hyper,22,5,20,13,demod] CP(2,9,2,0,2).
+763 [hyper,22,5,20,12,demod] CP(2,9,1,1,1).
+764 [hyper,22,5,20,11,demod] CP(2,9,0,2,0).
+765 [hyper,22,5,19,20,demod] CP(2,8,9,4,7).
+766 [hyper,22,5,19,19,demod] CP(2,8,8,6,6).
+767 [hyper,22,5,19,18,demod] CP(2,8,7,8,5).
+768 [hyper,22,5,19,17,demod] CP(2,8,6,0,5).
+769 [hyper,22,5,19,16,demod] CP(2,8,5,2,4).
+770 [hyper,22,5,19,15,demod] CP(2,8,4,4,3).
+771 [hyper,22,5,19,14,demod] CP(2,8,3,6,2).
+772 [hyper,22,5,19,13,demod] CP(2,8,2,8,1).
+773 [hyper,22,5,19,12,demod] CP(2,8,1,0,1).
+774 [hyper,22,5,19,11,demod] CP(2,8,0,2,0).
+775 [hyper,22,5,18,20,demod] CP(2,7,9,5,6).
+776 [hyper,22,5,18,19,demod] CP(2,7,8,8,5).
+777 [hyper,22,5,18,18,demod] CP(2,7,7,1,5).
+778 [hyper,22,5,18,17,demod] CP(2,7,6,4,4).
+779 [hyper,22,5,18,16,demod] CP(2,7,5,7,3).
+780 [hyper,22,5,18,15,demod] CP(2,7,4,0,3).
+781 [hyper,22,5,18,14,demod] CP(2,7,3,3,2).
+782 [hyper,22,5,18,13,demod] CP(2,7,2,6,1).
+783 [hyper,22,5,18,12,demod] CP(2,7,1,9,0).
+784 [hyper,22,5,18,11,demod] CP(2,7,0,2,0).
+785 [hyper,22,5,17,20,demod] CP(2,6,9,6,5).
+786 [hyper,22,5,17,19,demod] CP(2,6,8,0,5).
+787 [hyper,22,5,17,18,demod] CP(2,6,7,4,4).
+788 [hyper,22,5,17,17,demod] CP(2,6,6,8,3).
+789 [hyper,22,5,17,16,demod] CP(2,6,5,2,3).
+790 [hyper,22,5,17,15,demod] CP(2,6,4,6,2).
+791 [hyper,22,5,17,14,demod] CP(2,6,3,0,2).
+792 [hyper,22,5,17,13,demod] CP(2,6,2,4,1).
+793 [hyper,22,5,17,12,demod] CP(2,6,1,8,0).
+794 [hyper,22,5,17,11,demod] CP(2,6,0,2,0).
+795 [hyper,22,5,16,20,demod] CP(2,5,9,7,4).
+796 [hyper,22,5,16,19,demod] CP(2,5,8,2,4).
+797 [hyper,22,5,16,18,demod] CP(2,5,7,7,3).
+798 [hyper,22,5,16,17,demod] CP(2,5,6,2,3).
+799 [hyper,22,5,16,16,demod] CP(2,5,5,7,2).
+800 [hyper,22,5,16,15,demod] CP(2,5,4,2,2).
+801 [hyper,22,5,16,14,demod] CP(2,5,3,7,1).
+802 [hyper,22,5,16,13,demod] CP(2,5,2,2,1).
+803 [hyper,22,5,16,12,demod] CP(2,5,1,7,0).
+804 [hyper,22,5,16,11,demod] CP(2,5,0,2,0).
+805 [hyper,22,5,15,20,demod] CP(2,4,9,8,3).
+806 [hyper,22,5,15,19,demod] CP(2,4,8,4,3).
+807 [hyper,22,5,15,18,demod] CP(2,4,7,0,3).
+808 [hyper,22,5,15,17,demod] CP(2,4,6,6,2).
+809 [hyper,22,5,15,16,demod] CP(2,4,5,2,2).
+810 [hyper,22,5,15,15,demod] CP(2,4,4,8,1).
+811 [hyper,22,5,15,14,demod] CP(2,4,3,4,1).
+812 [hyper,22,5,15,13,demod] CP(2,4,2,0,1).
+813 [hyper,22,5,15,12,demod] CP(2,4,1,6,0).
+814 [hyper,22,5,15,11,demod] CP(2,4,0,2,0).
+815 [hyper,22,5,14,20,demod] CP(2,3,9,9,2).
+816 [hyper,22,5,14,19,demod] CP(2,3,8,6,2).
+817 [hyper,22,5,14,18,demod] CP(2,3,7,3,2).
+818 [hyper,22,5,14,17,demod] CP(2,3,6,0,2).
+819 [hyper,22,5,14,16,demod] CP(2,3,5,7,1).
+820 [hyper,22,5,14,15,demod] CP(2,3,4,4,1).
+821 [hyper,22,5,14,14,demod] CP(2,3,3,1,1).
+822 [hyper,22,5,14,13,demod] CP(2,3,2,8,0).
+823 [hyper,22,5,14,12,demod] CP(2,3,1,5,0).
+824 [hyper,22,5,14,11,demod] CP(2,3,0,2,0).
+825 [hyper,22,5,13,20,demod] CP(2,2,9,0,2).
+826 [hyper,22,5,13,19,demod] CP(2,2,8,8,1).
+827 [hyper,22,5,13,18,demod] CP(2,2,7,6,1).
+828 [hyper,22,5,13,17,demod] CP(2,2,6,4,1).
+829 [hyper,22,5,13,16,demod] CP(2,2,5,2,1).
+830 [hyper,22,5,13,15,demod] CP(2,2,4,0,1).
+831 [hyper,22,5,13,14,demod] CP(2,2,3,8,0).
+832 [hyper,22,5,13,13,demod] CP(2,2,2,6,0).
+833 [hyper,22,5,13,12,demod] CP(2,2,1,4,0).
+834 [hyper,22,5,13,11,demod] CP(2,2,0,2,0).
+835 [hyper,22,5,12,20,demod] CP(2,1,9,1,1).
+836 [hyper,22,5,12,19,demod] CP(2,1,8,0,1).
+837 [hyper,22,5,12,18,demod] CP(2,1,7,9,0).
+838 [hyper,22,5,12,17,demod] CP(2,1,6,8,0).
+839 [hyper,22,5,12,16,demod] CP(2,1,5,7,0).
+840 [hyper,22,5,12,15,demod] CP(2,1,4,6,0).
+841 [hyper,22,5,12,14,demod] CP(2,1,3,5,0).
+842 [hyper,22,5,12,13,demod] CP(2,1,2,4,0).
+843 [hyper,22,5,12,12,demod] CP(2,1,1,3,0).
+844 [hyper,22,5,12,11,demod] CP(2,1,0,2,0).
+845 [hyper,22,5,11,20,demod] CP(2,0,9,2,0).
+846 [hyper,22,5,11,19,demod] CP(2,0,8,2,0).
+847 [hyper,22,5,11,18,demod] CP(2,0,7,2,0).
+848 [hyper,22,5,11,17,demod] CP(2,0,6,2,0).
+849 [hyper,22,5,11,16,demod] CP(2,0,5,2,0).
+850 [hyper,22,5,11,15,demod] CP(2,0,4,2,0).
+851 [hyper,22,5,11,14,demod] CP(2,0,3,2,0).
+852 [hyper,22,5,11,13,demod] CP(2,0,2,2,0).
+853 [hyper,22,5,11,12,demod] CP(2,0,1,2,0).
+854 [hyper,22,5,11,11,demod] CP(2,0,0,2,0).
+855 [hyper,22,4,20,20,demod] CP(1,9,9,2,8).
+856 [hyper,22,4,20,19,demod] CP(1,9,8,3,7).
+857 [hyper,22,4,20,18,demod] CP(1,9,7,4,6).
+858 [hyper,22,4,20,17,demod] CP(1,9,6,5,5).
+859 [hyper,22,4,20,16,demod] CP(1,9,5,6,4).
+860 [hyper,22,4,20,15,demod] CP(1,9,4,7,3).
+861 [hyper,22,4,20,14,demod] CP(1,9,3,8,2).
+862 [hyper,22,4,20,13,demod] CP(1,9,2,9,1).
+863 [hyper,22,4,20,12,demod] CP(1,9,1,0,1).
+864 [hyper,22,4,20,11,demod] CP(1,9,0,1,0).
+865 [hyper,22,4,19,20,demod] CP(1,8,9,3,7).
+866 [hyper,22,4,19,19,demod] CP(1,8,8,5,6).
+867 [hyper,22,4,19,18,demod] CP(1,8,7,7,5).
+868 [hyper,22,4,19,17,demod] CP(1,8,6,9,4).
+869 [hyper,22,4,19,16,demod] CP(1,8,5,1,4).
+870 [hyper,22,4,19,15,demod] CP(1,8,4,3,3).
+871 [hyper,22,4,19,14,demod] CP(1,8,3,5,2).
+872 [hyper,22,4,19,13,demod] CP(1,8,2,7,1).
+873 [hyper,22,4,19,12,demod] CP(1,8,1,9,0).
+874 [hyper,22,4,19,11,demod] CP(1,8,0,1,0).
+875 [hyper,22,4,18,20,demod] CP(1,7,9,4,6).
+876 [hyper,22,4,18,19,demod] CP(1,7,8,7,5).
+877 [hyper,22,4,18,18,demod] CP(1,7,7,0,5).
+878 [hyper,22,4,18,17,demod] CP(1,7,6,3,4).
+879 [hyper,22,4,18,16,demod] CP(1,7,5,6,3).
+880 [hyper,22,4,18,15,demod] CP(1,7,4,9,2).
+881 [hyper,22,4,18,14,demod] CP(1,7,3,2,2).
+882 [hyper,22,4,18,13,demod] CP(1,7,2,5,1).
+883 [hyper,22,4,18,12,demod] CP(1,7,1,8,0).
+884 [hyper,22,4,18,11,demod] CP(1,7,0,1,0).
+885 [hyper,22,4,17,20,demod] CP(1,6,9,5,5).
+886 [hyper,22,4,17,19,demod] CP(1,6,8,9,4).
+887 [hyper,22,4,17,18,demod] CP(1,6,7,3,4).
+888 [hyper,22,4,17,17,demod] CP(1,6,6,7,3).
+889 [hyper,22,4,17,16,demod] CP(1,6,5,1,3).
+890 [hyper,22,4,17,15,demod] CP(1,6,4,5,2).
+891 [hyper,22,4,17,14,demod] CP(1,6,3,9,1).
+892 [hyper,22,4,17,13,demod] CP(1,6,2,3,1).
+893 [hyper,22,4,17,12,demod] CP(1,6,1,7,0).
+894 [hyper,22,4,17,11,demod] CP(1,6,0,1,0).
+895 [hyper,22,4,16,20,demod] CP(1,5,9,6,4).
+896 [hyper,22,4,16,19,demod] CP(1,5,8,1,4).
+897 [hyper,22,4,16,18,demod] CP(1,5,7,6,3).
+898 [hyper,22,4,16,17,demod] CP(1,5,6,1,3).
+899 [hyper,22,4,16,16,demod] CP(1,5,5,6,2).
+900 [hyper,22,4,16,15,demod] CP(1,5,4,1,2).
+901 [hyper,22,4,16,14,demod] CP(1,5,3,6,1).
+902 [hyper,22,4,16,13,demod] CP(1,5,2,1,1).
+903 [hyper,22,4,16,12,demod] CP(1,5,1,6,0).
+904 [hyper,22,4,16,11,demod] CP(1,5,0,1,0).
+905 [hyper,22,4,15,20,demod] CP(1,4,9,7,3).
+906 [hyper,22,4,15,19,demod] CP(1,4,8,3,3).
+907 [hyper,22,4,15,18,demod] CP(1,4,7,9,2).
+908 [hyper,22,4,15,17,demod] CP(1,4,6,5,2).
+909 [hyper,22,4,15,16,demod] CP(1,4,5,1,2).
+910 [hyper,22,4,15,15,demod] CP(1,4,4,7,1).
+911 [hyper,22,4,15,14,demod] CP(1,4,3,3,1).
+912 [hyper,22,4,15,13,demod] CP(1,4,2,9,0).
+913 [hyper,22,4,15,12,demod] CP(1,4,1,5,0).
+914 [hyper,22,4,15,11,demod] CP(1,4,0,1,0).
+915 [hyper,22,4,14,20,demod] CP(1,3,9,8,2).
+916 [hyper,22,4,14,19,demod] CP(1,3,8,5,2).
+917 [hyper,22,4,14,18,demod] CP(1,3,7,2,2).
+918 [hyper,22,4,14,17,demod] CP(1,3,6,9,1).
+919 [hyper,22,4,14,16,demod] CP(1,3,5,6,1).
+920 [hyper,22,4,14,15,demod] CP(1,3,4,3,1).
+921 [hyper,22,4,14,14,demod] CP(1,3,3,0,1).
+922 [hyper,22,4,14,13,demod] CP(1,3,2,7,0).
+923 [hyper,22,4,14,12,demod] CP(1,3,1,4,0).
+924 [hyper,22,4,14,11,demod] CP(1,3,0,1,0).
+925 [hyper,22,4,13,20,demod] CP(1,2,9,9,1).
+926 [hyper,22,4,13,19,demod] CP(1,2,8,7,1).
+927 [hyper,22,4,13,18,demod] CP(1,2,7,5,1).
+928 [hyper,22,4,13,17,demod] CP(1,2,6,3,1).
+929 [hyper,22,4,13,16,demod] CP(1,2,5,1,1).
+930 [hyper,22,4,13,15,demod] CP(1,2,4,9,0).
+931 [hyper,22,4,13,14,demod] CP(1,2,3,7,0).
+932 [hyper,22,4,13,13,demod] CP(1,2,2,5,0).
+933 [hyper,22,4,13,12,demod] CP(1,2,1,3,0).
+934 [hyper,22,4,13,11,demod] CP(1,2,0,1,0).
+935 [hyper,22,4,12,20,demod] CP(1,1,9,0,1).
+936 [hyper,22,4,12,19,demod] CP(1,1,8,9,0).
+937 [hyper,22,4,12,18,demod] CP(1,1,7,8,0).
+938 [hyper,22,4,12,17,demod] CP(1,1,6,7,0).
+939 [hyper,22,4,12,16,demod] CP(1,1,5,6,0).
+940 [hyper,22,4,12,15,demod] CP(1,1,4,5,0).
+941 [hyper,22,4,12,14,demod] CP(1,1,3,4,0).
+942 [hyper,22,4,12,13,demod] CP(1,1,2,3,0).
+943 [hyper,22,4,12,12,demod] CP(1,1,1,2,0).
+944 [hyper,22,4,12,11,demod] CP(1,1,0,1,0).
+945 [hyper,22,4,11,20,demod] CP(1,0,9,1,0).
+946 [hyper,22,4,11,19,demod] CP(1,0,8,1,0).
+947 [hyper,22,4,11,18,demod] CP(1,0,7,1,0).
+948 [hyper,22,4,11,17,demod] CP(1,0,6,1,0).
+949 [hyper,22,4,11,16,demod] CP(1,0,5,1,0).
+950 [hyper,22,4,11,15,demod] CP(1,0,4,1,0).
+951 [hyper,22,4,11,14,demod] CP(1,0,3,1,0).
+952 [hyper,22,4,11,13,demod] CP(1,0,2,1,0).
+953 [hyper,22,4,11,12,demod] CP(1,0,1,1,0).
+954 [hyper,22,4,11,11,demod] CP(1,0,0,1,0).
+955 [hyper,22,3,20,20,demod] CP(0,9,9,1,8).
+956 [hyper,22,3,20,19,demod] CP(0,9,8,2,7).
+957 [hyper,22,3,20,18,demod] CP(0,9,7,3,6).
+958 [hyper,22,3,20,17,demod] CP(0,9,6,4,5).
+959 [hyper,22,3,20,16,demod] CP(0,9,5,5,4).
+960 [hyper,22,3,20,15,demod] CP(0,9,4,6,3).
+961 [hyper,22,3,20,14,demod] CP(0,9,3,7,2).
+962 [hyper,22,3,20,13,demod] CP(0,9,2,8,1).
+963 [hyper,22,3,20,12,demod] CP(0,9,1,9,0).
+964 [hyper,22,3,20,11,demod] CP(0,9,0,0,0).
+965 [hyper,22,3,19,20,demod] CP(0,8,9,2,7).
+966 [hyper,22,3,19,19,demod] CP(0,8,8,4,6).
+967 [hyper,22,3,19,18,demod] CP(0,8,7,6,5).
+968 [hyper,22,3,19,17,demod] CP(0,8,6,8,4).
+969 [hyper,22,3,19,16,demod] CP(0,8,5,0,4).
+970 [hyper,22,3,19,15,demod] CP(0,8,4,2,3).
+971 [hyper,22,3,19,14,demod] CP(0,8,3,4,2).
+972 [hyper,22,3,19,13,demod] CP(0,8,2,6,1).
+973 [hyper,22,3,19,12,demod] CP(0,8,1,8,0).
+974 [hyper,22,3,19,11,demod] CP(0,8,0,0,0).
+975 [hyper,22,3,18,20,demod] CP(0,7,9,3,6).
+976 [hyper,22,3,18,19,demod] CP(0,7,8,6,5).
+977 [hyper,22,3,18,18,demod] CP(0,7,7,9,4).
+978 [hyper,22,3,18,17,demod] CP(0,7,6,2,4).
+979 [hyper,22,3,18,16,demod] CP(0,7,5,5,3).
+980 [hyper,22,3,18,15,demod] CP(0,7,4,8,2).
+981 [hyper,22,3,18,14,demod] CP(0,7,3,1,2).
+982 [hyper,22,3,18,13,demod] CP(0,7,2,4,1).
+983 [hyper,22,3,18,12,demod] CP(0,7,1,7,0).
+984 [hyper,22,3,18,11,demod] CP(0,7,0,0,0).
+985 [hyper,22,3,17,20,demod] CP(0,6,9,4,5).
+986 [hyper,22,3,17,19,demod] CP(0,6,8,8,4).
+987 [hyper,22,3,17,18,demod] CP(0,6,7,2,4).
+988 [hyper,22,3,17,17,demod] CP(0,6,6,6,3).
+989 [hyper,22,3,17,16,demod] CP(0,6,5,0,3).
+990 [hyper,22,3,17,15,demod] CP(0,6,4,4,2).
+991 [hyper,22,3,17,14,demod] CP(0,6,3,8,1).
+992 [hyper,22,3,17,13,demod] CP(0,6,2,2,1).
+993 [hyper,22,3,17,12,demod] CP(0,6,1,6,0).
+994 [hyper,22,3,17,11,demod] CP(0,6,0,0,0).
+995 [hyper,22,3,16,20,demod] CP(0,5,9,5,4).
+996 [hyper,22,3,16,19,demod] CP(0,5,8,0,4).
+997 [hyper,22,3,16,18,demod] CP(0,5,7,5,3).
+998 [hyper,22,3,16,17,demod] CP(0,5,6,0,3).
+999 [hyper,22,3,16,16,demod] CP(0,5,5,5,2).
+1000 [hyper,22,3,16,15,demod] CP(0,5,4,0,2).
+1001 [hyper,22,3,16,14,demod] CP(0,5,3,5,1).
+1002 [hyper,22,3,16,13,demod] CP(0,5,2,0,1).
+1003 [hyper,22,3,16,12,demod] CP(0,5,1,5,0).
+1004 [hyper,22,3,16,11,demod] CP(0,5,0,0,0).
+1005 [hyper,22,3,15,20,demod] CP(0,4,9,6,3).
+1006 [hyper,22,3,15,19,demod] CP(0,4,8,2,3).
+1007 [hyper,22,3,15,18,demod] CP(0,4,7,8,2).
+1008 [hyper,22,3,15,17,demod] CP(0,4,6,4,2).
+1009 [hyper,22,3,15,16,demod] CP(0,4,5,0,2).
+1010 [hyper,22,3,15,15,demod] CP(0,4,4,6,1).
+1011 [hyper,22,3,15,14,demod] CP(0,4,3,2,1).
+1012 [hyper,22,3,15,13,demod] CP(0,4,2,8,0).
+1013 [hyper,22,3,15,12,demod] CP(0,4,1,4,0).
+1014 [hyper,22,3,15,11,demod] CP(0,4,0,0,0).
+1015 [hyper,22,3,14,20,demod] CP(0,3,9,7,2).
+1016 [hyper,22,3,14,19,demod] CP(0,3,8,4,2).
+1017 [hyper,22,3,14,18,demod] CP(0,3,7,1,2).
+1018 [hyper,22,3,14,17,demod] CP(0,3,6,8,1).
+1019 [hyper,22,3,14,16,demod] CP(0,3,5,5,1).
+1020 [hyper,22,3,14,15,demod] CP(0,3,4,2,1).
+1021 [hyper,22,3,14,14,demod] CP(0,3,3,9,0).
+1022 [hyper,22,3,14,13,demod] CP(0,3,2,6,0).
+1023 [hyper,22,3,14,12,demod] CP(0,3,1,3,0).
+1024 [hyper,22,3,14,11,demod] CP(0,3,0,0,0).
+1025 [hyper,22,3,13,20,demod] CP(0,2,9,8,1).
+1026 [hyper,22,3,13,19,demod] CP(0,2,8,6,1).
+1027 [hyper,22,3,13,18,demod] CP(0,2,7,4,1).
+1028 [hyper,22,3,13,17,demod] CP(0,2,6,2,1).
+1029 [hyper,22,3,13,16,demod] CP(0,2,5,0,1).
+1030 [hyper,22,3,13,15,demod] CP(0,2,4,8,0).
+1031 [hyper,22,3,13,14,demod] CP(0,2,3,6,0).
+1032 [hyper,22,3,13,13,demod] CP(0,2,2,4,0).
+1033 [hyper,22,3,13,12,demod] CP(0,2,1,2,0).
+1034 [hyper,22,3,13,11,demod] CP(0,2,0,0,0).
+1035 [hyper,22,3,12,20,demod] CP(0,1,9,9,0).
+1036 [hyper,22,3,12,19,demod] CP(0,1,8,8,0).
+1037 [hyper,22,3,12,18,demod] CP(0,1,7,7,0).
+1038 [hyper,22,3,12,17,demod] CP(0,1,6,6,0).
+1039 [hyper,22,3,12,16,demod] CP(0,1,5,5,0).
+1040 [hyper,22,3,12,15,demod] CP(0,1,4,4,0).
+1041 [hyper,22,3,12,14,demod] CP(0,1,3,3,0).
+1042 [hyper,22,3,12,13,demod] CP(0,1,2,2,0).
+1043 [hyper,22,3,12,12,demod] CP(0,1,1,1,0).
+1044 [hyper,22,3,12,11,demod] CP(0,1,0,0,0).
+1045 [hyper,22,3,11,20,demod] CP(0,0,9,0,0).
+1046 [hyper,22,3,11,19,demod] CP(0,0,8,0,0).
+1047 [hyper,22,3,11,18,demod] CP(0,0,7,0,0).
+1048 [hyper,22,3,11,17,demod] CP(0,0,6,0,0).
+1049 [hyper,22,3,11,16,demod] CP(0,0,5,0,0).
+1050 [hyper,22,3,11,15,demod] CP(0,0,4,0,0).
+1051 [hyper,22,3,11,14,demod] CP(0,0,3,0,0).
+1052 [hyper,22,3,11,13,demod] CP(0,0,2,0,0).
+1053 [hyper,22,3,11,12,demod] CP(0,0,1,0,0).
+1054 [hyper,22,3,11,11,demod] CP(0,0,0,0,0).
+23 [] -CP(0,xd,xb,y1,x1)| -CP(x1,xd,xa,y2,y3)| -CP(0,xc,xb,z1,x2)| -CP(x2,xc,xa,z2,z3)| -$LT(xa,xc)| -CS(0,y1,0,xh,x3)| -CS(x3,y2,z1,xg,x4)| -CS(x4,y3,z2,xf,x5)| -CS(x5,0,z3,xe,0)|S(xa,xb,xc,xd,xe,xf,xg,xh).
+1055 [hyper,23,1031,1029,961,759,eval,194,247,237,250] S(5,3,9,2,4,8,7,6).
+1056 [hyper,23,1030,1031,1000,801,eval,174,194,247,253] S(3,4,5,2,1,7,6,8).
+1057 [hyper,23,1029,930,969,570,eval,254,164,248,251] S(4,5,8,2,3,6,9,0).
+1058 [hyper,23,1026,931,1006,711,eval,194,182,249,253] S(3,8,4,2,1,5,9,6).
+1059 [hyper,23,1026,931,996,601,eval,194,184,245,253] S(3,8,5,2,1,9,7,6).
+1060 [hyper,23,1006,709,986,589,eval,234,216,130,251] S(5,8,6,4,3,7,1,2).
+1061 [hyper,23,1006,708,976,478,eval,234,178,127,150] S(6,8,7,4,5,0,3,2).
+1062 [hyper,23,1005,711,995,601,eval,194,199,135,153] S(3,9,5,4,2,1,0,6).
+1063 [hyper,23,1002,897,962,857,eval,254,186,120,248] S(7,2,9,5,6,8,4,0).
+1064 [hyper,23,1000,797,970,667,eval,254,182,215,149] S(7,4,8,5,6,2,9,0).
+1065 [hyper,23,998,700,968,570,eval,254,216,128,251] S(4,6,8,5,3,9,1,0).
+1066 [hyper,23,996,601,986,591,eval,254,156,142,252] S(3,8,6,5,2,4,7,0).
+1067 [hyper,23,996,600,986,590,eval,254,206,126,152] S(4,8,6,5,3,1,2,0).
+1068 [hyper,23,991,892,1011,912,eval,174,222,235,154] S(2,3,4,6,1,0,5,8).
+1069 [hyper,23,991,889,981,779,eval,174,243,217,151] S(5,3,7,6,4,0,2,8).
+1070 [hyper,23,987,589,967,469,eval,234,208,119,250] S(5,7,8,6,4,9,0,2).
+1071 [hyper,23,985,491,995,601,eval,214,219,225,153] S(3,9,5,6,2,1,8,4).
+1072 [hyper,23,982,878,972,868,eval,214,218,205,150] S(6,2,8,7,5,3,9,4).
+1073 [hyper,23,980,782,1000,802,eval,174,194,242,253] S(2,4,5,7,1,3,6,8).
+1074 [hyper,23,970,671,1000,801,eval,234,184,227,253] S(3,4,5,8,1,9,7,2).
+1075 [hyper,23,967,471,997,701,eval,194,159,126,153] S(3,7,5,8,2,1,4,6).
+1076 [hyper,23,965,269,985,489,eval,234,180,109,151] S(5,9,6,8,4,0,1,2).
+1077 [hyper,23,965,269,975,379,eval,234,181,113,250] S(5,9,7,8,4,6,0,2).
+1078 [hyper,23,962,861,1012,1011,eval,174,166,132,253] S(3,2,4,9,1,5,6,8).
+1079 [hyper,23,962,859,982,879,eval,174,190,108,151] S(5,2,7,9,4,1,0,8).
+1080 [hyper,23,961,762,991,892,eval,184,246,231,253] S(2,3,6,9,1,5,8,7).
+end_of_list.
+
+list(sos).
+end_of_list.
+
+list(demodulators).
+end_of_list.
+
+
+-------------- statistics -------------
+clauses given               1029
+clauses generated           5374
+clauses kept                1026
+clauses forward subsumed    4348
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.38          (0 hr, 0 min, 0 sec)
+system CPU time        0.01          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8469 finished Mon Aug  2 15:30:38 2004

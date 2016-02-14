@@ -1,0 +1,109 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:31:16 2004
+The command was "../../bin/otter".  The process ID is 8980.
+
+set(rewriter).
+   dependent: set(demod_inf).
+   dependent: assign(max_levels, 1).
+   dependent: set(sos_queue).
+   dependent: clear(for_sub).
+   dependent: clear(back_sub).
+   dependent: assign(stats_level, 0).
+clear(demod_history).
+set(prolog_style_variables).
+make_evaluable(_-_,$DIFF(_,_)).
+make_evaluable(_<_,$LT(_,_)).
+make_evaluable(_*_,$PROD(_,_)).
+make_evaluable(_==_,$EQ(_,_)).
+make_evaluable(_&_,$AND(_,_)).
+op(700,xfx,@<).
+op(700,xfx,@<=).
+op(700,xfx,@>).
+op(700,xfx,@>=).
+make_evaluable(_@<_,$LLT(_,_)).
+make_evaluable(_@<=_,$LLE(_,_)).
+make_evaluable(_@>_,$LGT(_,_)).
+make_evaluable(_@>=_,$LGE(_,_)).
+
+lex([a,b,c,d,e,f,g]).
+
+list(demodulators).
+1 [] factorial(N)=$IF(N==0,1,N*factorial(N-1)).
+2 [] gcd(X,Y)=$IF(X==0,Y,$IF(Y==0,X,$IF(X<Y,gcd(X,Y-X),gcd(Y,X-Y)))).
+3 [] member(X,[])=$F.
+4 [] member(X,[H|T])=$IF($ID(X,H),$T,member(X,T)).
+5 [] subset([],L)=$T.
+6 [] subset([H|T],L)= (member(H,L)&subset(T,L)).
+7 [] intersect([],L)=[].
+8 [] intersect([H|T],L)=$IF(member(H,L),[H|intersect(T,L)],intersect(T,L)).
+9 [] union([],L)=L.
+10 [] union([H|T],L)=$IF(member(H,L),union(T,L),[H|union(T,L)]).
+11 [] append([],L)=L.
+12 [] append([H|T],L)=[H|append(T,L)].
+13 [] reverse(L)=rev2(L,[]).
+14 [] rev2([],L)=L.
+15 [] rev2([H|T],L)=rev2(T,[H|L]).
+16 [] quick_sort([])=[].
+17 [] quick_sort([H|T])=append(quick_sort(le_list(H,T)),[H|quick_sort(gt_list(H,T))]).
+18 [] le_list(X,[])=[].
+19 [] le_list(X,[H|T])=$IF(H@<=X,[H|le_list(X,T)],le_list(X,T)).
+20 [] gt_list(X,[])=[].
+21 [] gt_list(X,[H|T])=$IF(H@>X,[H|gt_list(X,T)],gt_list(X,T)).
+end_of_list.
+
+list(sos).
+22 [] p(factorial(8)).
+23 [] p(gcd(13004,5176)).
+24 [] p(member(d,[a,b,c])).
+25 [] p(subset([b,d],[a,b,c,d])).
+26 [] p(intersect([b,d],[a,b,c,d])).
+27 [] p(union([b,e],[a,b,c,d])).
+28 [] p(reverse([a,b,c,d,e,f,g])).
+29 [] p(quick_sort([c,a,b,f,c,c,e,d,b])).
+30 [] p($FSUM("1.4e-3","3.222")).
+end_of_list.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+Starting on level 1, last kept clause of level 0 is 30.
+
+Starting on level 1, last kept clause of level 0 is 30.
+
+given clause #1: (wt=3) 22 [] p(factorial(8)).
+** KEPT (pick-wt=2): 31 [22,demod] p(40320).
+
+given clause #2: (wt=4) 23 [] p(gcd(13004,5176)).
+** KEPT (pick-wt=2): 32 [23,demod] p(4).
+
+given clause #3: (wt=10) 24 [] p(member(d,[a,b,c])).
+** KEPT (pick-wt=2): 33 [24,demod] p($F).
+
+given clause #4: (wt=16) 25 [] p(subset([b,d],[a,b,c,d])).
+** KEPT (pick-wt=2): 34 [25,demod] p($T).
+
+given clause #5: (wt=16) 26 [] p(intersect([b,d],[a,b,c,d])).
+** KEPT (pick-wt=6): 35 [26,demod] p([b,d]).
+
+given clause #6: (wt=16) 27 [] p(union([b,e],[a,b,c,d])).
+** KEPT (pick-wt=12): 36 [27,demod] p([e,a,b,c,d]).
+
+given clause #7: (wt=17) 28 [] p(reverse([a,b,c,d,e,f,g])).
+** KEPT (pick-wt=16): 37 [28,demod] p([g,f,e,d,c,b,a]).
+
+given clause #8: (wt=21) 29 [] p(quick_sort([c,a,b,f,c,c,e,d,b])).
+** KEPT (pick-wt=20): 38 [29,demod] p([a,b,b,c,c,c,d,e,f]).
+
+given clause #9: (wt=4) 30 [] p($FSUM("1.4e-3","3.222")).
+
+Search stopped by max_levels option.
+
+** KEPT (pick-wt=2): 39 [30,demod] p("3.223400000000").
+
+Search stopped by max_levels option.
+
+============ end of search ============
+
+Process 8980 finished Mon Aug  2 15:31:16 2004

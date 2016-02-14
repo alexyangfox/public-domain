@@ -1,0 +1,146 @@
+----- MACE 2.2f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:44:32 2004
+The command was "../../bin/mace2 -n2 -N6 -p".
+
+list(usable).
+1 [] -P(e(x,y))| -P(x)|P(y).
+2 [] P(e(e(x,y),e(e(y,z),e(z,x)))).
+3 [] -P(e(a,a)).
+end_of_list.
+
+list(flattened_and_parted_clauses).
+1 [] e(x,y)!=z| -P(z)| -P(x)|P(y).
+2 [] e(x,y)!=z|e(u,x)!=v|$Connect2(y,z,u,v).
+2 [] e(x,y)!=z|$Connect1(u,v,z)| -$Connect2(u,y,v,x).
+2 [] e(x,y)!=z| -$Connect1(x,y,u)|$Connect3(z,u).
+2 [] e(x,y)!=z|P(z)| -$Connect3(x,y).
+3 [] a!=x|e(x,x)!=y| -P(y).
+end_of_list.
+
+--- Starting search for models of size 2 ---
+
+Applying isomorphism constraints to constants: a.
+
+115 clauses were generated; 106 of those survived the first stage
+of unit preprocessing; there are 44 atoms.
+
+After all unit preprocessing, 38 atoms are still unassigned;
+100 clauses remain; 4 of those are non-Horn (selectable);
+4883 K allocated; cpu time so far for this domain size: 0.00 sec.
+
+----- statistics for domain size 2 ----
+Input:
+    Clauses input                   106
+    Literal occurrences input       292
+    Greatest atom                    44
+Unit preprocess:
+    Preprocess unit assignments       6
+    Clauses after subsumption       100
+    Literal occ. after subsump.     286
+    Selectable clauses                4
+Decide:
+    Splits                            3
+    Unit assignments                 46
+    Failed paths                      4
+Memory:
+    Memory malloced                 1 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.00
+    DPLL                           0.00
+
+--- Starting search for models of size 3 ---
+
+Applying isomorphism constraints to constants: a.
+
+680 clauses were generated; 657 of those survived the first stage
+of unit preprocessing; there are 159 atoms.
+
+After all unit preprocessing, 147 atoms are still unassigned;
+645 clauses remain; 9 of those are non-Horn (selectable);
+4886 K allocated; cpu time so far for this domain size: 0.00 sec.
+
+----- statistics for domain size 3 ----
+Input:
+    Clauses input                   657
+    Literal occurrences input      1914
+    Greatest atom                   159
+Unit preprocess:
+    Preprocess unit assignments      12
+    Clauses after subsumption       645
+    Literal occ. after subsump.    1902
+    Selectable clauses                9
+Decide:
+    Splits                           91
+    Unit assignments               1982
+    Failed paths                     92
+Memory:
+    Memory malloced                 4 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.00
+    DPLL                           0.00
+
+--- Starting search for models of size 4 ---
+
+Applying isomorphism constraints to constants: a.
+
+2584 clauses were generated; 2540 of those survived the first stage
+of unit preprocessing; there are 424 atoms.
+
+After all unit preprocessing, 404 atoms are still unassigned;
+2520 clauses remain; 16 of those are non-Horn (selectable);
+4894 K allocated; cpu time so far for this domain size: 0.00 sec.
+
+======================= Model #1 at 0.02 seconds:
+
+ e :
+      | 0 1 2 3
+    --+--------
+    0 | 1 2 0 3
+    1 | 0 3 1 2
+    2 | 3 0 2 1
+    3 | 2 1 3 0
+
+ P :
+        0 1 2 3
+    -----------
+        F F T F
+
+ a: 0
+end_of_model
+
+Exit by max_models parameter.  The set is satisfiable (1 model(s) found).
+
+
+----- statistics for domain size 4 ----
+Input:
+    Clauses input                  2540
+    Literal occurrences input      7504
+    Greatest atom                   424
+Unit preprocess:
+    Preprocess unit assignments      20
+    Clauses after subsumption      2520
+    Literal occ. after subsump.    7484
+    Selectable clauses               16
+Decide:
+    Splits                         1156
+    Unit assignments              37799
+    Failed paths                   1151
+Memory:
+    Memory malloced                12 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.00
+    DPLL                           0.02
+
+=======================================
+Total times for run (seconds):
+    user CPU time                  0.02   (0 hr, 0 min, 0 sec)
+    system CPU time                0.01   (0 hr, 0 min, 0 sec)
+    wall-clock time                0      (0 hr, 0 min, 0 sec)
+
+Exit by max_models parameter.  The set is satisfiable (1 model(s) found).
+
+The job finished Mon Aug  2 15:44:32 2004

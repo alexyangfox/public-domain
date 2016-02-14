@@ -1,0 +1,33 @@
+% We have a 3-gallon jug and a 4-gallon jug, both empty, and a well.
+% Our goal is to have exactly 2 gallons in the 4-gallon jug.  We
+% can fill a jug from the well, empty a jug onto the ground, and
+% carefully pour water from one jug into the other.
+%
+% j(m, n) is the state in which the 3-gallon jug contains m gallons,
+% and the 4-gallon jug contains n gallons.
+
+make_evaluable(_+_, $SUM(_,_)).
+make_evaluable(_-_, $DIFF(_,_)).
+make_evaluable(_<=_, $LE(_,_)).
+make_evaluable(_>_, $GT(_,_)).
+
+set(auto).
+
+list(usable).
+-j(x, y) | j(3, y).  % fill the 3-gallon jug
+-j(x, y) | j(0, y).  % empty the 3-gallon jug
+-j(x, y) | j(x, 4).  % fill the 4-gallon jug
+-j(x, y) | j(x, 0).  % empty the 4-gallon jug
+-j(x, y) | -(x+y <= 4) | j(0, y+x).  % empty the small jug into the big jug
+-j(x, y) | -(x+y >  4) | j(x - (4-y), 4).  % small -> big, until full
+-j(x, y) | -(x+y <= 3) | j(x+y, 0).  % empty the big jug into the small jug
+-j(x, y) | -(x+y >  3) | j(3, y - (3-x)).  % big -> small, until full
+
+
+j(0, 0).   % initial state --- both jugs empty
+
+-j(x, 2).  % goal state --- 4-gallon jug containing 2 gallons
+
+end_of_list.
+
+

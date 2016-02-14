@@ -1,0 +1,310 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:56 2004
+The command was "../../bin/otter".  The process ID is 8527.
+
+set(knuth_bendix).
+   dependent: set(anl_eq).
+   dependent: set(para_from).
+   dependent: set(para_into).
+   dependent: clear(para_from_right).
+   dependent: clear(para_into_right).
+   dependent: set(para_from_vars).
+   dependent: set(eq_units_both_ways).
+   dependent: set(dynamic_demod_all).
+   dependent: set(dynamic_demod).
+   dependent: set(order_eq).
+   dependent: set(back_demod).
+   dependent: set(process_input).
+   dependent: set(lrpo).
+clear(eq_units_both_ways).
+WARNING: set(index_for_back_demod) flag already set.
+set(index_for_back_demod).
+set(dynamic_demod_lex_dep).
+WARNING: set(lrpo) flag already set.
+set(lrpo).
+WARNING: set(process_input) flag already set.
+set(process_input).
+set(display_terms).
+clear(print_kept).
+clear(print_new_demod).
+clear(print_back_demod).
+assign(max_weight,20).
+assign(max_mem,8000).
+
+lex($cons(A,$cons(B,$cons(C,$cons(D,$cons(E,$cons(F,$cons(g(x),$cons(n(x),$cons(+(x,x),$nil)))))))))).
+
+weight_list(pick_and_purge).
+weight(EQ(+(C,C),C),2).
+weight(EQ(+(C,+(C,x)),+(C,x)),2).
+weight(EQ(+(C,+(x,C)),+(C,x)),2).
+weight(EQ(+(C,+(x,+(y,C))),+(C,+(x,y))),2).
+weight(EQ(+(C,+(x,+(C,y))),+(C,+(x,y))),2).
+weight(EQ(n(+(n(+(C,x)),n(+(C,n(+(x,C)))))),C),2).
+weight(EQ(n(+(n(+(C,x)),n(+(C,n(+(C,x)))))),C),2).
+weight(EQ(n(+(n(C),n(+(C,n(C))))),C),2).
+weight(EQ(n(+(n(+(x,y)),n(+(y,n(x))))),y),2).
+weight(EQ(n(+(n(+(x,y)),n(+(n(y),x)))),x),2).
+weight(EQ(n(+(C,n(+(n(C),+(C,n(C)))))),n(C)),2).
+weight(EQ(+(C,+(x,y)),+(C,+(y,x))),2).
+weight(EQ(n(+(n(+(C,+(x,y))),n(+(C,n(+(y,x)))))),C),2).
+weight(EQ(n(+(n(+(C,x)),n(+(n(C),+(x,C))))),+(x,C)),2).
+weight(EQ(n(+(n(+(x,+(y,z))),n(+(z,n(+(x,y)))))),z),2).
+weight(EQ(n(+(n(+(x,y)),n(+(n(x),y)))),y),2).
+weight(EQ(n(+(n(+(x,n(y))),n(+(y,x)))),x),2).
+weight(EQ(n(+(n(+(n(x),y)),n(+(y,x)))),y),2).
+weight(EQ(n(+(n(+(x,+(y,z))),n(+(n(+(x,y)),z)))),z),2).
+weight(EQ(n(+(n(+(x,C)),n(+(C,n(+(C,x)))))),C),2).
+weight(EQ(n(+(C,n(+(C,+(n(+(C,x)),n(+(x,C))))))),n(+(x,C))),2).
+weight(EQ(n(+(n(C),n(+(C,+(n(C),n(+(C,n(C)))))))),C),2).
+weight(EQ(n(+(n(+(x,+(y,z))),n(+(y,n(+(x,z)))))),y),2).
+weight(EQ(n(+(n(C),n(+(n(C),+(C,n(C)))))),C),2).
+weight(EQ(n(+(n(C),+(C,n(C)))),n(+(C,n(C)))),2).
+weight(EQ(n(+(C,n(+(C,n(C))))),n(C)),2).
+weight(EQ(n(+(n(+(x,+(y,z))),n(+(n(+(x,z)),y)))),y),2).
+weight(EQ(n(+(x,C)),n(+(C,x))),2).
+weight(EQ(n(+(x,+(y,C))),n(+(C,+(x,y)))),2).
+weight(EQ(n(+(n(+(C,x)),n(+(C,+(n(C),x))))),+(x,C)),2).
+weight(EQ(n(+(n(+(C,x)),n(+(n(C),+(x,n(+(C,n(C)))))))),x),2).
+weight(EQ(+(C,n(+(C,n(C)))),C),2).
+weight(EQ(+(C,+(x,n(+(C,n(C))))),+(C,x)),2).
+weight(EQ(+(x,n(+(C,n(C)))),x),2).
+weight(EQ(+(n(+(C,n(C))),x),x),2).
+weight(EQ(n(+(n(x),n(+(C,+(x,n(C)))))),x),2).
+weight(EQ(n(+(n(x),n(n(x)))),n(+(C,n(C)))),2).
+weight(EQ(n(+(x,n(x))),n(+(C,n(C)))),2).
+weight(EQ(n(n(+(x,n(n(x))))),n(n(x))),2).
+weight(EQ(n(n(x)),x),2).
+weight(EQ(+(n(+(y,x)),n(+(n(y),x))),n(x)),2).
+end_of_list.
+
+list(usable).
+0 [] EQ(x,x).
+0 [] EQ(+(x,y),+(y,x)).
+0 [] EQ(+(+(x,y),z),+(x,+(y,z))).
+end_of_list.
+
+list(sos).
+0 [] EQ(n(+(n(+(x,y)),n(+(x,n(y))))),x).
+0 [] EQ(+(C,C),C).
+0 [] -(EQ(+(n(+(A,n(B))),n(+(n(A),n(B)))),B)).
+end_of_list.
+
+------------> process usable:
+** KEPT (pick-wt=3): 1 [] EQ(x,x).
+** KEPT (pick-wt=7): 2 [] EQ(+(x,y),+(y,x)).
+---> New Demodulator: (lex-dependent) 3 [new_demod,2] EQ(+(x,y),+(y,x)).
+** KEPT (pick-wt=11): 4 [] EQ(+(+(x,y),z),+(x,+(y,z))).
+---> New Demodulator: 5 [new_demod,4] EQ(+(+(x,y),z),+(x,+(y,z))).
+>>>> Starting back demodulation with 3.
+>>>> Starting back demodulation with 5.
+
+------------> process sos:
+** KEPT (pick-wt=2): 6 [] EQ(n(+(n(+(x,y)),n(+(x,n(y))))),x).
+---> New Demodulator: 7 [new_demod,6] EQ(n(+(n(+(x,y)),n(+(x,n(y))))),x).
+** KEPT (pick-wt=2): 8 [] EQ(+(C,C),C).
+---> New Demodulator: 9 [new_demod,8] EQ(+(C,C),C).
+** KEPT (pick-wt=14): 10 [] -(EQ(+(n(+(A,n(B))),n(+(n(A),n(B)))),B)).
+>>>> Starting back demodulation with 7.
+>>>> Starting back demodulation with 9.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=2) 6 [] EQ(n(+(n(+(x,y)),n(+(x,n(y))))),x).
+
+given clause #2: (wt=2) 8 [] EQ(+(C,C),C).
+
+given clause #3: (wt=2) 13 [para_into,6.1.1.1.1.1,2.1.1] EQ(n(+(n(+(x,y)),n(+(y,n(x))))),y).
+
+given clause #4: (wt=2) 17 [para_into,6.1.1.1.2.1,2.1.1] EQ(n(+(n(+(x,y)),n(+(n(y),x)))),x).
+
+given clause #5: (wt=2) 21 [para_from,8.1.1,6.1.1.1.1.1] EQ(n(+(n(C),n(+(C,n(C))))),C).
+
+given clause #6: (wt=2) 23 [para_from,8.1.1,4.1.1.1,flip.1] EQ(+(C,+(C,x)),+(C,x)).
+
+given clause #7: (wt=2) 25 [para_into,13.1.1.1.1.1,4.1.1] EQ(n(+(n(+(x,+(y,z))),n(+(z,n(+(x,y)))))),z).
+
+given clause #8: (wt=2) 29 [para_into,13.1.1.1.2.1,2.1.1] EQ(n(+(n(+(x,y)),n(+(n(x),y)))),y).
+
+given clause #9: (wt=2) 33 [para_into,13.1.1.1,2.1.1] EQ(n(+(n(+(x,n(y))),n(+(y,x)))),x).
+
+given clause #10: (wt=2) 51 [para_into,17.1.1.1,2.1.1] EQ(n(+(n(+(n(x),y)),n(+(y,x)))),y).
+
+given clause #11: (wt=2) 61 [para_from,21.1.1,13.1.1.1.2,demod,3,3] EQ(n(+(C,n(+(n(C),+(C,n(C)))))),n(C)).
+
+given clause #12: (wt=2) 73 [para_into,23.1.1.2,2.1.1] EQ(+(C,+(x,C)),+(C,x)).
+
+given clause #13: (wt=2) 75 [para_from,23.1.1,17.1.1.1.1.1,demod,3] EQ(n(+(n(+(C,x)),n(+(C,n(+(C,x)))))),C).
+
+given clause #14: (wt=2) 81 [para_into,25.1.1.1.1.1.2,2.1.1] EQ(n(+(n(+(x,+(y,z))),n(+(y,n(+(x,z)))))),y).
+
+given clause #15: (wt=2) 83 [para_into,25.1.1.1.1.1,2.1.1,demod,5] EQ(n(+(n(+(x,+(y,z))),n(+(y,n(+(z,x)))))),y).
+
+given clause #16: (wt=2) 85 [para_into,25.1.1.1.2.1.2.1,2.1.1] EQ(n(+(n(+(x,+(y,z))),n(+(z,n(+(y,x)))))),z).
+
+given clause #17: (wt=2) 87 [para_into,25.1.1.1.2.1,2.1.1] EQ(n(+(n(+(x,+(y,z))),n(+(n(+(x,y)),z)))),z).
+
+given clause #18: (wt=2) 123 [para_from,61.1.1,29.1.1.1.1,demod,120,3,flip.1] EQ(n(+(n(C),+(C,n(C)))),n(+(C,n(C)))).
+
+given clause #19: (wt=2) 129 [back_demod,61,demod,124] EQ(n(+(C,n(+(C,n(C))))),n(C)).
+
+given clause #20: (wt=2) 131 [para_into,73.1.1.2,4.1.1] EQ(+(C,+(x,+(y,C))),+(C,+(x,y))).
+
+given clause #21: (wt=2) 133 [para_from,73.1.1,51.1.1.1.2.1,demod,3,3] EQ(n(+(n(+(C,x)),n(+(C,n(+(x,C)))))),C).
+
+given clause #22: (wt=2) 135 [para_from,73.1.1,33.1.1.1.2.1,demod,3,3] EQ(n(+(n(+(C,x)),n(+(n(C),+(x,C))))),+(x,C)).
+
+given clause #23: (wt=2) 139 [para_from,73.1.1,4.1.1.1,demod,5,5,flip.1] EQ(+(C,+(x,+(C,y))),+(C,+(x,y))).
+
+given clause #24: (wt=2) 143 [para_into,75.1.1.1.1.1,2.1.1] EQ(n(+(n(+(x,C)),n(+(C,n(+(C,x)))))),C).
+
+given clause #25: (wt=2) 153 [para_into,81.1.1.1.1.1,2.1.1,demod,5] EQ(n(+(n(+(x,+(y,z))),n(+(x,n(+(z,y)))))),x).
+
+given clause #26: (wt=2) 157 [para_into,81.1.1.1.2.1,2.1.1] EQ(n(+(n(+(x,+(y,z))),n(+(n(+(x,z)),y)))),y).
+
+given clause #27: (wt=2) 167 [para_into,83.1.1.1.2.1,2.1.1] EQ(n(+(n(+(x,+(y,z))),n(+(n(+(z,x)),y)))),y).
+
+given clause #28: (wt=2) 173 [para_into,85.1.1.1.2.1,2.1.1] EQ(n(+(n(+(x,+(y,z))),n(+(n(+(y,x)),z)))),z).
+
+given clause #29: (wt=2) 199 [para_into,131.1.1.2,2.1.1,demod,5,140] EQ(+(C,+(x,y)),+(C,+(y,x))).
+
+given clause #30: (wt=2) 227 [para_into,153.1.1.1.2.1,2.1.1] EQ(n(+(n(+(x,+(y,z))),n(+(n(+(z,y)),x)))),x).
+
+given clause #31: (wt=2) 233 [para_into,157.1.1.1.2.1.1,21.1.1,demod,3] EQ(n(+(n(+(C,x)),n(+(n(C),+(x,n(+(C,n(C)))))))),x).
+
+given clause #32: (wt=9) 221 [para_from,143.1.1,85.1.1.1.2,demod,3,212] EQ(n(+(C,x)),n(+(x,C))).
+
+given clause #33: (wt=13) 261 [para_into,221.1.1.1,199.1.1,demod,3] EQ(n(+(C,+(x,y))),n(+(C,+(y,x)))).
+
+given clause #34: (wt=14) 10 [] -(EQ(+(n(+(A,n(B))),n(+(n(A),n(B)))),B)).
+
+given clause #35: (wt=14) 89 [para_into,25.1.1.1.2,21.1.1,demod,3] EQ(n(+(C,n(+(C,+(n(C),n(C)))))),n(C)).
+
+given clause #36: (wt=14) 267 [para_from,89.1.1,33.1.1.1.2,demod,3,142,flip.1] EQ(n(+(C,+(n(C),n(C)))),n(+(C,n(C)))).
+
+given clause #37: (wt=15) 79 [para_into,25.1.1.1.1.1.2,8.1.1] EQ(n(+(n(+(x,C)),n(+(C,n(+(x,C)))))),C).
+
+given clause #38: (wt=15) 127 [para_from,61.1.1,17.1.1.1.1,demod,124,3] EQ(n(+(n(C),n(+(C,n(n(+(C,n(C)))))))),C).
+
+given clause #39: (wt=15) 219 [para_into,143.1.1.1,2.1.1] EQ(n(+(n(+(C,n(+(C,x)))),n(+(x,C)))),C).
+
+given clause #40: (wt=15) 247 [para_into,199.1.1.2,4.1.1] EQ(+(C,+(x,+(y,z))),+(C,+(z,+(x,y)))).
+
+given clause #41: (wt=15) 249 [para_from,199.1.1,139.1.1.2.2,demod,140] EQ(+(C,+(x,+(y,z))),+(C,+(x,+(z,y)))).
+
+given clause #42: (wt=15) 255 [para_from,199.1.1,4.1.1.1,demod,5,5,5] EQ(+(C,+(x,+(y,z))),+(C,+(y,+(x,z)))).
+
+given clause #43: (wt=15) 283 [para_into,247.1.1.2.2,199.1.1,demod,140,5,198] EQ(+(C,+(x,+(y,z))),+(C,+(z,+(y,x)))).
+
+given clause #44: (wt=15) 285 [para_into,247.1.1.2.2,139.1.1,demod,140,5,5,132,140] EQ(+(C,+(x,+(y,z))),+(C,+(y,+(z,x)))).
+
+given clause #45: (wt=16) 69 [para_from,21.1.1,17.1.1.1.1,demod,3] EQ(n(+(C,n(+(n(C),n(n(+(C,n(C)))))))),n(C)).
+
+given clause #46: (wt=17) 77 [para_from,23.1.1,13.1.1.1.1.1,demod,3] EQ(n(+(n(+(C,x)),n(+(n(C),+(C,x))))),+(C,x)).
+
+given clause #47: (wt=2) 337 [para_into,77.1.1.1.1,129.1.1,demod,260,flip.1] EQ(+(C,n(+(C,n(C)))),C).
+
+given clause #48: (wt=2) 339 [para_from,337.1.1,139.1.1.2.2,demod,74,flip.1] EQ(+(C,+(x,n(+(C,n(C))))),+(C,x)).
+
+given clause #49: (wt=2) 351 [para_from,339.1.1,33.1.1.1.2.1,demod,3,3,234,flip.1] EQ(+(x,n(+(C,n(C)))),x).
+
+given clause #50: (wt=2) 365 [para_into,351.1.1,2.1.1] EQ(+(n(+(C,n(C))),x),x).
+
+given clause #51: (wt=2) 379 [para_from,351.1.1,81.1.1.1.2.1,demod,3] EQ(n(+(n(x),n(+(C,+(x,n(C)))))),x).
+
+given clause #52: (wt=2) 385 [para_from,351.1.1,33.1.1.1.2.1,demod,366,3] EQ(n(+(n(x),n(n(x)))),n(+(C,n(C)))).
+
+given clause #53: (wt=2) 403 [para_into,385.1.1.1.1,379.1.1,demod,380] EQ(n(+(x,n(x))),n(+(C,n(C)))).
+
+given clause #54: (wt=2) 451 [para_from,403.1.1,51.1.1.1.1,demod,3,366,448,flip.1] EQ(n(n(x)),x).
+
+-------- PROOF -------- 
+
+----> UNIT CONFLICT at   0.14 sec ----> 519 [binary,518.1,1.1] $F.
+
+Length of proof is 30.  Level of proof is 16.
+
+---------------- PROOF ----------------
+
+1 [] EQ(x,x).
+3,2 [] EQ(+(x,y),+(y,x)).
+5,4 [] EQ(+(+(x,y),z),+(x,+(y,z))).
+6 [] EQ(n(+(n(+(x,y)),n(+(x,n(y))))),x).
+8 [] EQ(+(C,C),C).
+10 [] -(EQ(+(n(+(A,n(B))),n(+(n(A),n(B)))),B)).
+13 [para_into,6.1.1.1.1.1,2.1.1] EQ(n(+(n(+(x,y)),n(+(y,n(x))))),y).
+17 [para_into,6.1.1.1.2.1,2.1.1] EQ(n(+(n(+(x,y)),n(+(n(y),x)))),x).
+21 [para_from,8.1.1,6.1.1.1.1.1] EQ(n(+(n(C),n(+(C,n(C))))),C).
+24,23 [para_from,8.1.1,4.1.1.1,flip.1] EQ(+(C,+(C,x)),+(C,x)).
+25 [para_into,13.1.1.1.1.1,4.1.1] EQ(n(+(n(+(x,+(y,z))),n(+(z,n(+(x,y)))))),z).
+29 [para_into,13.1.1.1.2.1,2.1.1] EQ(n(+(n(+(x,y)),n(+(n(x),y)))),y).
+33 [para_into,13.1.1.1,2.1.1] EQ(n(+(n(+(x,n(y))),n(+(y,x)))),x).
+51 [para_into,17.1.1.1,2.1.1] EQ(n(+(n(+(n(x),y)),n(+(y,x)))),y).
+61 [para_from,21.1.1,13.1.1.1.2,demod,3,3] EQ(n(+(C,n(+(n(C),+(C,n(C)))))),n(C)).
+74,73 [para_into,23.1.1.2,2.1.1] EQ(+(C,+(x,C)),+(C,x)).
+77 [para_from,23.1.1,13.1.1.1.1.1,demod,3] EQ(n(+(n(+(C,x)),n(+(n(C),+(C,x))))),+(C,x)).
+81 [para_into,25.1.1.1.1.1.2,2.1.1] EQ(n(+(n(+(x,+(y,z))),n(+(y,n(+(x,z)))))),y).
+120,119 [para_from,61.1.1,25.1.1.1.2,demod,3,24,3] EQ(n(+(n(C),n(+(n(C),+(C,n(C)))))),C).
+124,123 [para_from,61.1.1,29.1.1.1.1,demod,120,3,flip.1] EQ(n(+(n(C),+(C,n(C)))),n(+(C,n(C)))).
+129 [back_demod,61,demod,124] EQ(n(+(C,n(+(C,n(C))))),n(C)).
+139 [para_from,73.1.1,4.1.1.1,demod,5,5,flip.1] EQ(+(C,+(x,+(C,y))),+(C,+(x,y))).
+157 [para_into,81.1.1.1.2.1,2.1.1] EQ(n(+(n(+(x,+(y,z))),n(+(n(+(x,z)),y)))),y).
+234,233 [para_into,157.1.1.1.2.1.1,21.1.1,demod,3] EQ(n(+(n(+(C,x)),n(+(n(C),+(x,n(+(C,n(C)))))))),x).
+260,259 [para_into,233.1.1.1.1.1,8.1.1] EQ(n(+(n(C),n(+(n(C),+(C,n(+(C,n(C)))))))),C).
+337 [para_into,77.1.1.1.1,129.1.1,demod,260,flip.1] EQ(+(C,n(+(C,n(C)))),C).
+339 [para_from,337.1.1,139.1.1.2.2,demod,74,flip.1] EQ(+(C,+(x,n(+(C,n(C))))),+(C,x)).
+352,351 [para_from,339.1.1,33.1.1.1.2.1,demod,3,3,234,flip.1] EQ(+(x,n(+(C,n(C)))),x).
+366,365 [para_into,351.1.1,2.1.1] EQ(+(n(+(C,n(C))),x),x).
+380,379 [para_from,351.1.1,81.1.1.1.2.1,demod,3] EQ(n(+(n(x),n(+(C,+(x,n(C)))))),x).
+385 [para_from,351.1.1,33.1.1.1.2.1,demod,366,3] EQ(n(+(n(x),n(n(x)))),n(+(C,n(C)))).
+403 [para_into,385.1.1.1.1,379.1.1,demod,380] EQ(n(+(x,n(x))),n(+(C,n(C)))).
+448,447 [para_from,403.1.1,51.1.1.1.2,demod,3,352] EQ(n(n(+(x,n(n(x))))),x).
+452,451 [para_from,403.1.1,51.1.1.1.1,demod,3,366,448,flip.1] EQ(n(n(x)),x).
+509,508 [para_into,451.1.1.1,29.1.1,flip.1] EQ(+(n(+(x,y)),n(+(n(x),y))),n(y)).
+518 [back_demod,10,demod,509,452] -(EQ(B,B)).
+519 [binary,518.1,1.1] $F.
+
+------------ end of proof -------------
+
+
+Search stopped by max_proofs option.
+
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 54
+clauses generated           3114
+  para_from generated       1853
+  para_into generated       1261
+demod & eval rewrites       4872
+clauses wt,lit,sk delete    1340
+tautologies deleted            0
+clauses forward subsumed    1635
+  (subsumed by sos)           95
+unit deletions                 0
+factor simplifications         0
+clauses kept                 261
+new demodulators             257
+empty clauses                  1
+clauses back demodulated     116
+clauses back subsumed          0
+usable size                   23
+sos size                     122
+demodulators size            142
+passive size                   0
+hot size                       0
+Kbytes malloced             2929
+
+----------- times (seconds) -----------
+user CPU time          0.14          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8527 finished Mon Aug  2 15:30:56 2004

@@ -1,0 +1,37 @@
+% This is the Wang 3 problem.
+
+set(knuth_bendix).
+set(binary_res).
+
+set(split_when_given).
+set(split_pos).
+
+clear(print_kept).
+clear(print_given).
+clear(print_new_demod).
+clear(print_back_demod).
+clear(print_back_sub).
+assign(stats_level, 1).
+
+list(sos).
+ (m != b).
+ (y = j) | -p(y,j) | (y = k).
+ (k = j) | p(k,j).
+end_of_list.
+
+list(usable).
+ (y = m) | p(y,m) | (v1 = m) | (v1 = y) | -p(y,v1) | -p(v1,y).
+ (y = b) | -p(y,b) | (v = b) | (v = y) | -p(y,v) | -p(v,y).
+ (y = k) | (y = m) | (y = b) | -p(y,k).
+ (y = m) | -p(y,m) | (f(y) != m).
+ (y = m) | -p(y,m) | (f(y) != y).
+ (y = m) | -p(y,m) | p(y,f(y)).
+ (y = m) | -p(y,m) | p(f(y),y).
+ (y = b) | p(y,b) | (g(y) != b).
+ (y = b) | p(y,b) | (g(y) != y).
+ (y = b) | p(y,b) | p(y,g(y)).
+ (y = b) | p(y,b) | p(g(y),y).
+ (m = k) | p(m,k).
+ (b = k) | p(b,k).
+ (x = x).
+end_of_list.

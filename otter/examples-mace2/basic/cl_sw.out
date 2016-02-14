@@ -1,0 +1,79 @@
+----- MACE 2.2f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:44:30 2004
+The command was "../../bin/mace2 -n3 -m100000".
+
+formula_list(usable).
+all x y (a(a(W,x),y)=a(a(x,y),y)).
+all x y z (a(a(a(S,x),y),z)=a(a(x,z),a(y,z))).
+-(all f exists y (a(f,y)=y)).
+end_of_list.
+
+-------> usable clausifies to:
+
+list(usable).
+1 [] a(a(W,x),y)=a(a(x,y),y).
+2 [] a(a(a(S,x),y),z)=a(a(x,z),a(y,z)).
+3 [] a($c1,y)!=y.
+end_of_list.
+
+list(flattened_and_parted_clauses).
+1 [] a(x,y)!=z|a(z,y)!=u|$Connect2(x,y,u).
+1 [] a(x,y)=z| -$Connect1(u,x)| -$Connect2(u,y,z).
+1 [] W!=x|a(x,y)!=z|$Connect1(y,z).
+2 [] a(x,y)!=z|a(u,z)!=v|$Connect5(x,y,u,v).
+2 [] a(x,y)!=z|$Connect4(u,y,x,v)| -$Connect5(u,y,z,v).
+2 [] a(x,y)=z| -$Connect3(u,v,x)| -$Connect4(u,y,v,z).
+2 [] S!=x|a(x,y)!=z|$Connect6(y,z).
+2 [] a(x,y)!=z|$Connect3(y,u,z)| -$Connect6(u,x).
+3 [] $c1!=x|a(x,y)!=y.
+end_of_list.
+
+--- Starting search for models of size 3 ---
+
+Applying isomorphism constraints to constants: W S $c1.
+
+1095 clauses were generated; 1075 of those survived the first stage
+of unit preprocessing; there are 279 atoms.
+
+After all unit preprocessing, 267 atoms are still unassigned;
+1063 clauses remain; 13 of those are non-Horn (selectable);
+4889 K allocated; cpu time so far for this domain size: 0.00 sec.
+
+The 1st model has been found.
+
+The 10th model has been found.
+
+The search is complete.  The set is satisfiable (20 model(s) found).
+
+
+----- statistics for domain size 3 ----
+Input:
+    Clauses input                  1075
+    Literal occurrences input      3131
+    Greatest atom                   279
+Unit preprocess:
+    Preprocess unit assignments      12
+    Clauses after subsumption      1063
+    Literal occ. after subsump.    3119
+    Selectable clauses               13
+Decide:
+    Splits                          111
+    Unit assignments               6537
+    Failed paths                     92
+Memory:
+    Memory malloced                 7 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.00
+    DPLL                           0.00
+
+=======================================
+Total times for run (seconds):
+    user CPU time                  0.01   (0 hr, 0 min, 0 sec)
+    system CPU time                0.00   (0 hr, 0 min, 0 sec)
+    wall-clock time                0      (0 hr, 0 min, 0 sec)
+
+The search is complete.  The set is satisfiable (20 model(s) found).
+
+The job finished Mon Aug  2 15:44:30 2004

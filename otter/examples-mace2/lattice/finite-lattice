@@ -1,0 +1,39 @@
+op(400, xfx, [^,v]).  % infix operators
+
+list(usable).  % Lattice Theory (LT)
+
+% Six axioms for a lattice.
+
+x ^ y = y ^ x.                % comm of meet
+(x ^ y) ^ z = x ^ (y ^ z).    % assoc of meet
+
+x v y = y v x.                % comm of join
+(x v y) v z = x v (y v z).    % assoc of join
+
+x ^ (x v y) = x.              % absorption 1
+x v (x ^ y) = x.              % absorption 2
+
+% Idempotence lemmas (follow from lattice axioms)
+
+x ^ x = x.
+x v x = x.
+
+% Lattices don't necessarily have 0 or 1, but every FINITE lattice does,
+% and MACE deals only with finite structures, so we can include the following.
+% (Some of these are dependent.)
+
+% Zero and One
+
+1 v x = 1.
+x v 1 = 1.
+1 ^ x = x.
+x ^ 1 = x.
+
+0 ^ x = 0.
+x ^ 0 = 0.
+0 v x = x.
+x v 0 = x.
+
+end_of_list.  % end of finite lattice axioms
+
+

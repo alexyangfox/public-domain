@@ -1,0 +1,36 @@
+op(400, infix, [^,v]).  % infix operators
+
+list(usable).
+
+% Axioms for an ortholattice.
+
+x ^ y = y ^ x.              % dependent on other axioms
+% (x ^ y) ^ z = x ^ (y ^ z).  % dependent on other axioms
+
+x v y = y v x.
+(x v y) v z = x v (y v z).
+
+c(c(x)) = x.
+%  x v (y v c(y)) = y v c(y).  % follows from lemmas below
+x v (x ^ y) = x.
+x ^ y = c(c(x) v c(y)).
+
+% Ortholattice lemmas.
+
+x ^ x = x.
+x v x = x.
+c(x) v x = 1.
+c(x) ^ x = 0.
+
+1 v x = 1.
+x v 1 = 1.
+1 ^ x = x.
+x ^ 1 = x.
+
+0 ^ x = 0.
+x ^ 0 = 0.
+0 v x = x.
+x v 0 = x.
+
+end_of_list.
+

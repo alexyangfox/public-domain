@@ -1,0 +1,28 @@
+#!/bin/csh
+
+if (-e Run_all.out) /bin/mv Run_all.out Run_all.out.$$
+
+echo "Sending output to Run_all.out."
+echo "This should take about a minute on a 2 GHz P4."
+
+echo "Run_mace basic ..."
+./Run_mace basic            > Run_all.out
+
+echo "Run_mace iterate ..."
+./Run_mace iterate         >> Run_all.out
+
+echo "Run_mace quasigroup ..."
+./Run_mace quasigroup      >> Run_all.out
+
+echo "Run_mace lattice ..."
+./Run_mace lattice         >> Run_all.out
+
+echo "Run_anldp propositional ..."
+./Run_anldp propositional  >> Run_all.out
+
+echo "Done.  The output files are in */*.out[0-9]*"
+echo ""
+grep "times as fast as" Run_all.out
+echo ""
+awk '/Running/ {p = $2} /There is a problem/ {print "Error running " p}' Run_all.out
+echo ""

@@ -1,0 +1,64 @@
+----- MACE 2.2f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:44:37 2004
+The command was "../../bin/mace2 -n11 -x -m1000".
+
+list(usable).
+1 [] f(x,x)=x.
+2 [] f(f(x,y),y)=f(x,f(x,y)).
+end_of_list.
+
+list(mace_constraints).
+0 [] property(f(_,_),quasigroup).
+end_of_list.
+
+list(flattened_and_parted_clauses).
+1 [] f(x,x)=x.
+2 [] f(x,y)!=z|f(x,u)!=y|f(y,u)=z.
+end_of_list.
+
+--- Starting search for models of size 11 ---
+
+Adding basic QG constraints on last column of f.
+function f quasigroup.
+
+35146 clauses were generated; 23686 of those survived the first stage
+of unit preprocessing; there are 1452 atoms.
+
+After all unit preprocessing, 871 atoms are still unassigned;
+17055 clauses remain; 318 of those are non-Horn (selectable);
+4924 K allocated; cpu time so far for this domain size: 0.02 sec.
+
+The search is complete.  No models were found.
+
+
+----- statistics for domain size 11 ----
+Input:
+    Clauses input                 23686
+    Literal occurrences input     56374
+    Greatest atom                  1452
+Unit preprocess:
+    Preprocess unit assignments     581
+    Clauses after subsumption     17055
+    Literal occ. after subsump.   42605
+    Selectable clauses              318
+Decide:
+    Splits                          665
+    Unit assignments              84100
+    Failed paths                    666
+Memory:
+    Memory malloced                42 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.01
+    DPLL                           0.08
+
+=======================================
+Total times for run (seconds):
+    user CPU time                  0.09   (0 hr, 0 min, 0 sec)
+    system CPU time                0.00   (0 hr, 0 min, 0 sec)
+    wall-clock time                0      (0 hr, 0 min, 0 sec)
+
+The search is complete.  No models were found.
+
+The job finished Mon Aug  2 15:44:37 2004

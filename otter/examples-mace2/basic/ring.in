@@ -1,0 +1,34 @@
+% benchmark parameters -n4 -m100
+
+% Generate some rings (not necessarily with unit).
+
+op(450, xfx, +). % sum
+op(400, xfx, *). % product
+op(350, fy, ~).  % minus
+
+list(usable).
+
+0+x=x.
+x+0=x.
+~x+x=0.
+x+ ~x=0.
+(x+y)+z=x+ (y+z).
+x+y=y+x.
+
+% Product is associative:
+
+(x*y)*z=x* (y*z).
+
+% Left and right distributivity:
+
+x* (y+z)=x*y+x*z.
+(y+z)*x=y*x+z*x.
+
+% Here are alternate forms of distributivity which include
+% auxiliary 3-place functions.  These use much less memory
+% than the ordinary forms of distributivity.
+
+% x* (y+z) = h(x,y,z). h(x,y,z) = x*y+x*z.
+% (y+z)*x  = f(x,y,z). f(x,y,z) = y*x+z*x.
+
+end_of_list.

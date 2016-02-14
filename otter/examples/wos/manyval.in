@@ -1,0 +1,66 @@
+%  Input File for Studying Many-Valued Sentential Calculus with OTTER 3.0
+  
+set(hyper_res).
+assign(max_weight, 22).
+assign(change_limit_after, 1000).
+assign(new_max_weight, 16).
+%  The following is set to 4 rather than 5, for MV5 is very difficult to prove.
+assign(max_proofs, 4).
+clear(print_kept).
+clear(back_sub).
+assign(max_mem, 24000).
+% assign(report, 900).
+assign(max_distinct_vars, 4).
+assign(pick_given_ratio, 3).
+set(order_history).
+set(input_sos_first).
+
+weight_list(pick_given).
+%  Following are four lemmas to prove.
+weight(P(i(n(n(x)),x)), 2).
+weight(P(i(x,n(n(x)))), 2).
+weight(P(i(i(x,y),i(i(z,x),i(z,y)))), 2).
+weight(P(i(i(x,y),i(n(y),n(x)))), 2).
+%  The following is a difficult theorem to prove.
+weight(P(i(i(i(x,y),i(y,x)),i(y,x))), 2).
+%  Following are the axioms for many-valued.
+weight(P(i(x,i(y,x))), 2).
+weight(P(i(i(x,y),i(i(y,z),i(x,z)))), 2).
+weight(P(i(i(i(x,y),y),i(i(y,x),x))), 2).
+weight(P(i(i(n(x),n(y)),i(y,x))), 2).
+%  Following is for recursive tail strategy.
+weight(i($(1),$(2)),1).
+end_of_list.
+
+list(usable).
+-P(i(x,y)) | -P(x) | P(y).
+end_of_list.
+
+list(sos).
+P(i(x,i(y,x))).
+P(i(i(x,y),i(i(y,z),i(x,z)))).
+P(i(i(i(x,y),y),i(i(y,x),x))).
+P(i(i(n(x),n(y)),i(y,x))).
+end_of_list.
+
+list(passive).
+%  The following four clauses are negations of four lemmas to prove.
+-P(i(n(n(a)),a)) | $ANS(lemma_24).
+-P(i(a,n(n(a)))) | $ANS(lemma_29).
+-P(i(i(a,b),i(i(c,a),i(c,b)))) | $ANS(lemma_25).
+-P(i(i(a,b),i(n(b),n(a)))) | $ANS(lemma_36).
+%  The following clause is the negation of a difficult theorem to prove.
+-P(i(i(i(a,b),i(b,a)),i(b,a))) | $ANS(thm_MV5).
+end_of_list.
+
+list(demodulators).
+(n(n(n(x))) = junk).
+(i(i(x,x),y) = junk).
+(i(y,i(x,x)) = junk).
+(i(n(i(x,x)),y) = junk).
+(i(y,n(i(x,x))) = junk).
+(i(junk,x) = junk).
+(i(x,junk) = junk).
+(n(junk) = junk).
+(P(junk) = $T).
+end_of_list.

@@ -1,0 +1,18 @@
+
+                     --------------------
+                     Otter, Version 3.0.5
+                     --------------------
+
+It has been more than two years since the release of Otter 3.0.4.  I
+haven't done a lot of work on Otter since then, but there have been a
+few small bug fixes, and a few new features.  See document/New_305.txt
+for a summary and Changelog for more complete details.
+
+If you're happy with version 3.0.4, there shouldn't be any hurry to
+upgrade to 3.0.5.
+
+FTP Otter 3.0.5 from ftp://info.mcs.anl.gov/pub/Otter/otter-3.0.5.tar.Z .
+
+   W. McCune   (otter@mcs.anl.gov)
+   Argonne National Laboratory
+   February 18, 1998

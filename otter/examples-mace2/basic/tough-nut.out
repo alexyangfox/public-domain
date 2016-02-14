@@ -1,0 +1,135 @@
+----- MACE 2.2f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:44:30 2004
+The command was "../../bin/mace2 -n8".
+
+formula_list(usable).
+all x y (G5(x,y)<->x=0&y=0|x=7&y=7).
+end_of_list.
+
+-------> usable clausifies to:
+
+list(usable).
+1 [] -G5(x,y)|x=0|x=7.
+2 [] -G5(x,y)|x=0|y=7.
+3 [] -G5(x,y)|y=0|x=7.
+4 [] -G5(x,y)|y=0|y=7.
+5 [] G5(x,y)|x!=0|y!=0.
+6 [] G5(x,y)|x!=7|y!=7.
+end_of_list.
+
+list(usable).
+7 [] -G3(0,y).
+8 [] -G4(x,0).
+9 [] -G1(7,y).
+10 [] -G2(x,7).
+11 [] S(0,1).
+12 [] S(1,2).
+13 [] S(2,3).
+14 [] S(3,4).
+15 [] S(4,5).
+16 [] S(5,6).
+17 [] S(6,7).
+18 [] -S(x,y)|L(x,y).
+19 [] -L(x,y)| -L(y,z)|L(x,z).
+20 [] -L(x,y)| -L(y,z)| -S(x,z).
+21 [] -L(x,y)|x!=y.
+22 [] G1(x,y)|G2(x,y)|G3(x,y)|G4(x,y)|G5(x,y).
+23 [] -G1(x,y)| -G2(x,y).
+24 [] -G1(x,y)| -G3(x,y).
+25 [] -G1(x,y)| -G4(x,y).
+26 [] -G1(x,y)| -G5(x,y).
+27 [] -G2(x,y)| -G3(x,y).
+28 [] -G2(x,y)| -G4(x,y).
+29 [] -G2(x,y)| -G5(x,y).
+30 [] -G3(x,y)| -G4(x,y).
+31 [] -G3(x,y)| -G5(x,y).
+32 [] -G4(x,y)| -G5(x,y).
+33 [] -S(x1,x2)| -G1(x1,y)|G3(x2,y).
+34 [] -S(x1,x2)|G1(x1,y)| -G3(x2,y).
+35 [] -S(y1,y2)| -G2(x,y1)|G4(x,y2).
+36 [] -S(y1,y2)|G2(x,y1)| -G4(x,y2).
+end_of_list.
+
+list(flattened_and_parted_clauses).
+1 [] -G5(x,y)|x=0|x=7.
+2 [] -G5(x,y)|x=0|y=7.
+3 [] -G5(x,y)|y=0|x=7.
+4 [] -G5(x,y)|y=0|y=7.
+5 [] G5(x,y)|x!=0|y!=0.
+6 [] G5(x,y)|x!=7|y!=7.
+7 [] -G3(0,x).
+8 [] -G4(x,0).
+9 [] -G1(7,x).
+10 [] -G2(x,7).
+11 [] S(0,1).
+12 [] S(1,2).
+13 [] S(2,3).
+14 [] S(3,4).
+15 [] S(4,5).
+16 [] S(5,6).
+17 [] S(6,7).
+18 [] -S(x,y)|L(x,y).
+19 [] -L(x,y)| -L(y,z)|L(x,z).
+20 [] -L(x,y)| -L(y,z)| -S(x,z).
+21 [] -L(x,y)|x!=y.
+22 [] G1(x,y)|G2(x,y)|G3(x,y)|G4(x,y)|G5(x,y).
+23 [] -G1(x,y)| -G2(x,y).
+24 [] -G1(x,y)| -G3(x,y).
+25 [] -G1(x,y)| -G4(x,y).
+26 [] -G1(x,y)| -G5(x,y).
+27 [] -G2(x,y)| -G3(x,y).
+28 [] -G2(x,y)| -G4(x,y).
+29 [] -G2(x,y)| -G5(x,y).
+30 [] -G3(x,y)| -G4(x,y).
+31 [] -G3(x,y)| -G5(x,y).
+32 [] -G4(x,y)| -G5(x,y).
+33 [] -S(x,y)| -G1(x,z)|G3(y,z).
+34 [] -S(x,y)|G1(x,z)| -G3(y,z).
+35 [] -S(x,y)| -G2(z,x)|G4(z,y).
+36 [] -S(x,y)|G2(z,x)| -G4(z,y).
+end_of_list.
+
+--- Starting search for models of size 8 ---
+
+
+4391 clauses were generated; 2042 of those survived the first stage
+of unit preprocessing; there are 512 atoms.
+
+After all unit preprocessing, 216 atoms are still unassigned;
+560 clauses remain; 62 of those are non-Horn (selectable);
+4896 K allocated; cpu time so far for this domain size: 0.01 sec.
+
+The search is complete.  No models were found.
+
+
+----- statistics for domain size 8 ----
+Input:
+    Clauses input                  2042
+    Literal occurrences input      4600
+    Greatest atom                   512
+Unit preprocess:
+    Preprocess unit assignments     296
+    Clauses after subsumption       560
+    Literal occ. after subsump.    1216
+    Selectable clauses               62
+Decide:
+    Splits                       145269
+    Unit assignments            5540344
+    Failed paths                 145270
+Memory:
+    Memory malloced                14 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.01
+    DPLL                           1.52
+
+=======================================
+Total times for run (seconds):
+    user CPU time                  1.53   (0 hr, 0 min, 1 sec)
+    system CPU time                0.01   (0 hr, 0 min, 0 sec)
+    wall-clock time                2      (0 hr, 0 min, 2 sec)
+
+The search is complete.  No models were found.
+
+The job finished Mon Aug  2 15:44:32 2004

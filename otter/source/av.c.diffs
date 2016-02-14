@@ -1,0 +1,6 @@
+371c371
+<   p->terms = NULL;
+---
+>   p->position = (struct fposition) {NULL, 0};
+1403a1404
+>   fprint_flist_mem(fp, 0);

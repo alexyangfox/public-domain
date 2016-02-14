@@ -1,0 +1,646 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:35 2004
+The command was "../../bin/otter".  The process ID is 8283.
+
+set(auto).
+   dependent: set(auto1).
+   dependent: set(process_input).
+   dependent: clear(print_kept).
+   dependent: clear(print_new_demod).
+   dependent: clear(print_back_demod).
+   dependent: clear(print_back_sub).
+   dependent: set(control_memory).
+   dependent: assign(max_mem, 12000).
+   dependent: assign(pick_given_ratio, 4).
+   dependent: assign(stats_level, 1).
+   dependent: assign(max_seconds, 10800).
+
+list(usable).
+0 [] p00|p01|p02|p03.
+0 [] p04|p05|p06|p07.
+0 [] p08|p09|p10|p11.
+0 [] p12|p13|p14|p15.
+0 [] p16|p17|p18|p19.
+0 [] -p00| -p04.
+0 [] -p00| -p08.
+0 [] -p00| -p12.
+0 [] -p00| -p16.
+0 [] -p04| -p08.
+0 [] -p04| -p12.
+0 [] -p04| -p16.
+0 [] -p08| -p12.
+0 [] -p08| -p16.
+0 [] -p12| -p16.
+0 [] -p01| -p05.
+0 [] -p01| -p09.
+0 [] -p01| -p13.
+0 [] -p01| -p17.
+0 [] -p05| -p09.
+0 [] -p05| -p13.
+0 [] -p05| -p17.
+0 [] -p09| -p13.
+0 [] -p09| -p17.
+0 [] -p13| -p17.
+0 [] -p02| -p06.
+0 [] -p02| -p10.
+0 [] -p02| -p14.
+0 [] -p02| -p18.
+0 [] -p06| -p10.
+0 [] -p06| -p14.
+0 [] -p06| -p18.
+0 [] -p10| -p14.
+0 [] -p10| -p18.
+0 [] -p14| -p18.
+0 [] -p03| -p07.
+0 [] -p03| -p11.
+0 [] -p03| -p15.
+0 [] -p03| -p19.
+0 [] -p07| -p11.
+0 [] -p07| -p15.
+0 [] -p07| -p19.
+0 [] -p11| -p15.
+0 [] -p11| -p19.
+0 [] -p15| -p19.
+end_of_list.
+
+SCAN INPUT: prop=1, horn=0, equality=0, symmetry=0, max_lits=4.
+
+The clause set is propositional; the strategy will be
+ordered hyperresolution with the propositional
+optimizations, with satellites in sos and nuclei in usable.
+
+   dependent: set(hyper_res).
+   dependent: set(propositional).
+   dependent: set(sort_literals).
+
+------------> process usable:
+** KEPT (pick-wt=2): 1 [] -p00| -p04.
+** KEPT (pick-wt=2): 2 [] -p00| -p08.
+** KEPT (pick-wt=2): 3 [] -p00| -p12.
+** KEPT (pick-wt=2): 4 [] -p00| -p16.
+** KEPT (pick-wt=2): 5 [] -p04| -p08.
+** KEPT (pick-wt=2): 6 [] -p04| -p12.
+** KEPT (pick-wt=2): 7 [] -p04| -p16.
+** KEPT (pick-wt=2): 8 [] -p08| -p12.
+** KEPT (pick-wt=2): 9 [] -p08| -p16.
+** KEPT (pick-wt=2): 10 [] -p12| -p16.
+** KEPT (pick-wt=2): 11 [] -p01| -p05.
+** KEPT (pick-wt=2): 12 [] -p01| -p09.
+** KEPT (pick-wt=2): 13 [] -p01| -p13.
+** KEPT (pick-wt=2): 14 [] -p01| -p17.
+** KEPT (pick-wt=2): 15 [] -p05| -p09.
+** KEPT (pick-wt=2): 16 [] -p05| -p13.
+** KEPT (pick-wt=2): 17 [] -p05| -p17.
+** KEPT (pick-wt=2): 18 [] -p09| -p13.
+** KEPT (pick-wt=2): 19 [] -p09| -p17.
+** KEPT (pick-wt=2): 20 [] -p13| -p17.
+** KEPT (pick-wt=2): 21 [] -p02| -p06.
+** KEPT (pick-wt=2): 22 [] -p02| -p10.
+** KEPT (pick-wt=2): 23 [] -p02| -p14.
+** KEPT (pick-wt=2): 24 [] -p02| -p18.
+** KEPT (pick-wt=2): 25 [] -p06| -p10.
+** KEPT (pick-wt=2): 26 [] -p06| -p14.
+** KEPT (pick-wt=2): 27 [] -p06| -p18.
+** KEPT (pick-wt=2): 28 [] -p10| -p14.
+** KEPT (pick-wt=2): 29 [] -p10| -p18.
+** KEPT (pick-wt=2): 30 [] -p14| -p18.
+** KEPT (pick-wt=2): 31 [] -p03| -p07.
+** KEPT (pick-wt=2): 32 [] -p03| -p11.
+** KEPT (pick-wt=2): 33 [] -p03| -p15.
+** KEPT (pick-wt=2): 34 [] -p03| -p19.
+** KEPT (pick-wt=2): 35 [] -p07| -p11.
+** KEPT (pick-wt=2): 36 [] -p07| -p15.
+** KEPT (pick-wt=2): 37 [] -p07| -p19.
+** KEPT (pick-wt=2): 38 [] -p11| -p15.
+** KEPT (pick-wt=2): 39 [] -p11| -p19.
+** KEPT (pick-wt=2): 40 [] -p15| -p19.
+
+------------> process sos:
+** KEPT (pick-wt=4): 41 [] p00|p01|p02|p03.
+** KEPT (pick-wt=4): 42 [] p04|p05|p06|p07.
+** KEPT (pick-wt=4): 43 [] p08|p09|p10|p11.
+** KEPT (pick-wt=4): 44 [] p12|p13|p14|p15.
+** KEPT (pick-wt=4): 45 [] p16|p17|p18|p19.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=4) 41 [] p00|p01|p02|p03.
+
+given clause #2: (wt=4) 42 [] p04|p05|p06|p07.
+
+given clause #3: (wt=4) 43 [] p08|p09|p10|p11.
+
+given clause #4: (wt=4) 44 [] p12|p13|p14|p15.
+
+given clause #5: (wt=4) 45 [] p16|p17|p18|p19.
+
+given clause #6: (wt=6) 46 [hyper,42,31,41] p00|p01|p02|p04|p05|p06.
+
+given clause #7: (wt=6) 47 [hyper,43,35,42] p04|p05|p06|p08|p09|p10.
+
+given clause #8: (wt=6) 48 [hyper,43,32,41] p00|p01|p02|p08|p09|p10.
+
+given clause #9: (wt=6) 49 [hyper,44,38,43] p08|p09|p10|p12|p13|p14.
+
+given clause #10: (wt=6) 50 [hyper,44,36,42] p04|p05|p06|p12|p13|p14.
+
+given clause #11: (wt=6) 51 [hyper,44,33,41] p00|p01|p02|p12|p13|p14.
+
+given clause #12: (wt=6) 52 [hyper,45,40,44] p12|p13|p14|p16|p17|p18.
+
+given clause #13: (wt=6) 53 [hyper,45,39,43] p08|p09|p10|p16|p17|p18.
+
+given clause #14: (wt=6) 54 [hyper,45,37,42] p04|p05|p06|p16|p17|p18.
+
+given clause #15: (wt=6) 55 [hyper,45,34,41] p00|p01|p02|p16|p17|p18.
+
+given clause #16: (wt=7) 56 [hyper,48,25,46] p00|p01|p02|p04|p05|p08|p09.
+
+given clause #17: (wt=7) 57 [hyper,50,28,47] p04|p05|p06|p08|p09|p12|p13.
+
+given clause #18: (wt=7) 58 [hyper,51,28,48] p00|p01|p02|p08|p09|p12|p13.
+
+given clause #19: (wt=7) 59 [hyper,51,26,46] p00|p01|p02|p04|p05|p12|p13.
+
+given clause #20: (wt=7) 60 [hyper,53,30,49] p08|p09|p10|p12|p13|p16|p17.
+
+given clause #21: (wt=7) 61 [hyper,54,30,50] p04|p05|p06|p12|p13|p16|p17.
+
+given clause #22: (wt=7) 62 [hyper,54,29,47] p04|p05|p06|p08|p09|p16|p17.
+
+given clause #23: (wt=7) 63 [hyper,55,30,51] p00|p01|p02|p12|p13|p16|p17.
+
+given clause #24: (wt=7) 64 [hyper,55,29,48] p00|p01|p02|p08|p09|p16|p17.
+
+given clause #25: (wt=7) 65 [hyper,55,27,46] p00|p01|p02|p04|p05|p16|p17.
+
+given clause #26: (wt=7) 66 [hyper,59,18,56] p00|p01|p02|p04|p05|p08|p12.
+
+given clause #27: (wt=7) 67 [hyper,62,20,57] p04|p05|p06|p08|p09|p12|p16.
+
+given clause #28: (wt=7) 68 [hyper,64,20,58] p00|p01|p02|p08|p09|p12|p16.
+
+given clause #29: (wt=7) 69 [hyper,65,20,59] p00|p01|p02|p04|p05|p12|p16.
+
+given clause #30: (wt=7) 70 [hyper,65,19,56] p00|p01|p02|p04|p05|p08|p16.
+
+given clause #31: (wt=6) 71 [hyper,70,10,66] p00|p01|p02|p04|p05|p08.
+
+given clause #32: (wt=6) 72 [hyper,71,9,69] p00|p01|p02|p04|p05|p12.
+
+given clause #33: (wt=5) 73 [hyper,72,8,71] p00|p01|p02|p04|p05.
+
+given clause #34: (wt=7) 74 [hyper,73,17,64] p00|p01|p02|p04|p08|p09|p16.
+
+given clause #35: (wt=7) 75 [hyper,73,17,63] p00|p01|p02|p04|p12|p13|p16.
+
+given clause #36: (wt=7) 76 [hyper,73,16,58] p00|p01|p02|p04|p08|p09|p12.
+
+given clause #37: (wt=6) 77 [hyper,76,10,74] p00|p01|p02|p04|p08|p09.
+
+given clause #38: (wt=5) 78 [hyper,77,15,73] p00|p01|p02|p04|p08.
+
+given clause #39: (wt=6) 79 [hyper,78,9,75] p00|p01|p02|p04|p12|p13.
+
+given clause #40: (wt=5) 80 [hyper,79,16,73] p00|p01|p02|p04|p12.
+
+given clause #41: (wt=4) 81 [hyper,80,8,78] p00|p01|p02|p04.
+
+given clause #42: (wt=6) 82 [hyper,81,7,68] p00|p01|p02|p08|p09|p12.
+
+given clause #43: (wt=5) 83 [hyper,82,6,81] p00|p01|p02|p08|p09.
+
+given clause #44: (wt=7) 84 [hyper,83,19,63] p00|p01|p02|p08|p12|p13|p16.
+
+given clause #45: (wt=6) 85 [hyper,84,7,81] p00|p01|p02|p08|p12|p13.
+
+given clause #46: (wt=5) 86 [hyper,85,18,83] p00|p01|p02|p08|p12.
+
+given clause #47: (wt=4) 87 [hyper,86,6,81] p00|p01|p02|p08.
+
+given clause #48: (wt=3) 88 [hyper,87,5,81] p00|p01|p02.
+
+given clause #49: (wt=7) 89 [hyper,88,24,54] p00|p01|p04|p05|p06|p16|p17.
+
+given clause #50: (wt=7) 90 [hyper,88,24,53] p00|p01|p08|p09|p10|p16|p17.
+
+given clause #51: (wt=7) 91 [hyper,88,24,52] p00|p01|p12|p13|p14|p16|p17.
+
+given clause #52: (wt=7) 92 [hyper,88,23,50] p00|p01|p04|p05|p06|p12|p13.
+
+given clause #53: (wt=7) 93 [hyper,88,23,49] p00|p01|p08|p09|p10|p12|p13.
+
+given clause #54: (wt=7) 94 [hyper,88,22,47] p00|p01|p04|p05|p06|p08|p09.
+
+given clause #55: (wt=7) 95 [hyper,92,20,89] p00|p01|p04|p05|p06|p12|p16.
+
+given clause #56: (wt=7) 96 [hyper,93,20,90] p00|p01|p08|p09|p10|p12|p16.
+
+given clause #57: (wt=7) 97 [hyper,94,19,89] p00|p01|p04|p05|p06|p08|p16.
+
+given clause #58: (wt=7) 98 [hyper,94,18,92] p00|p01|p04|p05|p06|p08|p12.
+
+given clause #59: (wt=6) 99 [hyper,98,10,97] p00|p01|p04|p05|p06|p08.
+
+given clause #60: (wt=6) 100 [hyper,99,9,95] p00|p01|p04|p05|p06|p12.
+
+given clause #61: (wt=5) 101 [hyper,100,8,99] p00|p01|p04|p05|p06.
+
+given clause #62: (wt=4) 102 [hyper,101,21,88] p00|p01|p04|p05.
+
+given clause #63: (wt=7) 103 [hyper,102,17,91] p00|p01|p04|p12|p13|p14|p16.
+
+given clause #64: (wt=7) 104 [hyper,102,17,90] p00|p01|p04|p08|p09|p10|p16.
+
+given clause #65: (wt=7) 105 [hyper,102,16,93] p00|p01|p04|p08|p09|p10|p12.
+
+given clause #66: (wt=6) 106 [hyper,105,10,104] p00|p01|p04|p08|p09|p10.
+
+given clause #67: (wt=5) 107 [hyper,106,22,88] p00|p01|p04|p08|p09.
+
+given clause #68: (wt=4) 108 [hyper,107,15,102] p00|p01|p04|p08.
+
+given clause #69: (wt=6) 109 [hyper,108,9,103] p00|p01|p04|p12|p13|p14.
+
+given clause #70: (wt=5) 110 [hyper,109,23,88] p00|p01|p04|p12|p13.
+
+given clause #71: (wt=4) 111 [hyper,110,16,102] p00|p01|p04|p12.
+
+given clause #72: (wt=3) 112 [hyper,111,8,108] p00|p01|p04.
+
+given clause #73: (wt=6) 113 [hyper,112,7,96] p00|p01|p08|p09|p10|p12.
+
+given clause #74: (wt=5) 114 [hyper,113,6,112] p00|p01|p08|p09|p10.
+
+given clause #75: (wt=4) 115 [hyper,114,22,88] p00|p01|p08|p09.
+
+given clause #76: (wt=7) 116 [hyper,115,19,91] p00|p01|p08|p12|p13|p14|p16.
+
+given clause #77: (wt=6) 117 [hyper,116,7,112] p00|p01|p08|p12|p13|p14.
+
+given clause #78: (wt=5) 118 [hyper,117,23,88] p00|p01|p08|p12|p13.
+
+given clause #79: (wt=4) 119 [hyper,118,18,115] p00|p01|p08|p12.
+
+given clause #80: (wt=3) 120 [hyper,119,6,112] p00|p01|p08.
+
+given clause #81: (wt=2) 121 [hyper,120,5,112] p00|p01.
+
+given clause #82: (wt=7) 122 [hyper,121,14,62] p00|p04|p05|p06|p08|p09|p16.
+
+given clause #83: (wt=7) 123 [hyper,121,14,61] p00|p04|p05|p06|p12|p13|p16.
+
+given clause #84: (wt=7) 124 [hyper,121,14,60] p00|p08|p09|p10|p12|p13|p16.
+
+given clause #85: (wt=7) 125 [hyper,121,13,57] p00|p04|p05|p06|p08|p09|p12.
+
+given clause #86: (wt=6) 126 [hyper,125,10,122] p00|p04|p05|p06|p08|p09.
+
+given clause #87: (wt=5) 127 [hyper,126,12,121] p00|p04|p05|p06|p08.
+
+given clause #88: (wt=6) 128 [hyper,127,9,123] p00|p04|p05|p06|p12|p13.
+
+given clause #89: (wt=5) 129 [hyper,128,13,121] p00|p04|p05|p06|p12.
+
+given clause #90: (wt=4) 130 [hyper,129,8,127] p00|p04|p05|p06.
+
+given clause #91: (wt=8) 131 [hyper,130,27,53] p00|p04|p05|p08|p09|p10|p16|p17.
+
+given clause #92: (wt=7) 134 [hyper,131,14,121] p00|p04|p05|p08|p09|p10|p16.
+
+given clause #93: (wt=8) 132 [hyper,130,27,52] p00|p04|p05|p12|p13|p14|p16|p17.
+
+given clause #94: (wt=7) 135 [hyper,132,14,121] p00|p04|p05|p12|p13|p14|p16.
+
+given clause #95: (wt=8) 133 [hyper,130,26,49] p00|p04|p05|p08|p09|p10|p12|p13.
+
+given clause #96: (wt=7) 136 [hyper,133,13,121] p00|p04|p05|p08|p09|p10|p12.
+
+given clause #97: (wt=6) 137 [hyper,136,10,134] p00|p04|p05|p08|p09|p10.
+
+given clause #98: (wt=5) 138 [hyper,137,25,130] p00|p04|p05|p08|p09.
+
+given clause #99: (wt=4) 139 [hyper,138,12,121] p00|p04|p05|p08.
+
+given clause #100: (wt=6) 140 [hyper,139,9,135] p00|p04|p05|p12|p13|p14.
+
+given clause #101: (wt=5) 141 [hyper,140,26,130] p00|p04|p05|p12|p13.
+
+given clause #102: (wt=4) 142 [hyper,141,13,121] p00|p04|p05|p12.
+
+given clause #103: (wt=3) 143 [hyper,142,8,139] p00|p04|p05.
+
+given clause #104: (wt=2) 144 [hyper,143,11,121] p00|p04.
+
+given clause #105: (wt=6) 145 [hyper,144,7,124] p00|p08|p09|p10|p12|p13.
+
+given clause #106: (wt=5) 146 [hyper,145,13,121] p00|p08|p09|p10|p12.
+
+given clause #107: (wt=4) 147 [hyper,146,6,144] p00|p08|p09|p10.
+
+given clause #108: (wt=8) 148 [hyper,147,29,52] p00|p08|p09|p12|p13|p14|p16|p17.
+
+given clause #109: (wt=7) 149 [hyper,148,14,121] p00|p08|p09|p12|p13|p14|p16.
+
+given clause #110: (wt=6) 150 [hyper,149,7,144] p00|p08|p09|p12|p13|p14.
+
+given clause #111: (wt=5) 151 [hyper,150,28,147] p00|p08|p09|p12|p13.
+
+given clause #112: (wt=4) 152 [hyper,151,13,121] p00|p08|p09|p12.
+
+given clause #113: (wt=3) 153 [hyper,152,6,144] p00|p08|p09.
+
+given clause #114: (wt=2) 154 [hyper,153,12,121] p00|p08.
+
+given clause #115: (wt=1) 155 [hyper,154,5,144] p00.
+
+given clause #116: (wt=6) 156 [hyper,155,4,67] p04|p05|p06|p08|p09|p12.
+
+given clause #117: (wt=5) 157 [hyper,156,3,155] p04|p05|p06|p08|p09.
+
+given clause #118: (wt=7) 158 [hyper,157,19,61] p04|p05|p06|p08|p12|p13|p16.
+
+given clause #119: (wt=6) 159 [hyper,158,4,155] p04|p05|p06|p08|p12|p13.
+
+given clause #120: (wt=5) 160 [hyper,159,18,157] p04|p05|p06|p08|p12.
+
+given clause #121: (wt=4) 161 [hyper,160,3,155] p04|p05|p06|p08.
+
+given clause #122: (wt=3) 162 [hyper,161,2,155] p04|p05|p06.
+
+given clause #123: (wt=7) 163 [hyper,162,27,53] p04|p05|p08|p09|p10|p16|p17.
+
+given clause #124: (wt=7) 164 [hyper,162,27,52] p04|p05|p12|p13|p14|p16|p17.
+
+given clause #125: (wt=7) 165 [hyper,162,26,49] p04|p05|p08|p09|p10|p12|p13.
+
+given clause #126: (wt=7) 166 [hyper,165,20,163] p04|p05|p08|p09|p10|p12|p16.
+
+given clause #127: (wt=6) 167 [hyper,166,4,155] p04|p05|p08|p09|p10|p12.
+
+given clause #128: (wt=5) 168 [hyper,167,3,155] p04|p05|p08|p09|p10.
+
+given clause #129: (wt=4) 169 [hyper,168,25,162] p04|p05|p08|p09.
+
+given clause #130: (wt=7) 170 [hyper,169,19,164] p04|p05|p08|p12|p13|p14|p16.
+
+given clause #131: (wt=6) 171 [hyper,170,4,155] p04|p05|p08|p12|p13|p14.
+
+given clause #132: (wt=5) 172 [hyper,171,26,162] p04|p05|p08|p12|p13.
+
+given clause #133: (wt=4) 173 [hyper,172,18,169] p04|p05|p08|p12.
+
+given clause #134: (wt=3) 174 [hyper,173,3,155] p04|p05|p08.
+
+given clause #135: (wt=2) 175 [hyper,174,2,155] p04|p05.
+
+given clause #136: (wt=7) 176 [hyper,175,17,60] p04|p08|p09|p10|p12|p13|p16.
+
+given clause #137: (wt=6) 177 [hyper,176,4,155] p04|p08|p09|p10|p12|p13.
+
+given clause #138: (wt=5) 178 [hyper,177,16,175] p04|p08|p09|p10|p12.
+
+given clause #139: (wt=4) 179 [hyper,178,3,155] p04|p08|p09|p10.
+
+given clause #140: (wt=8) 180 [hyper,179,29,52] p04|p08|p09|p12|p13|p14|p16|p17.
+
+given clause #141: (wt=7) 181 [hyper,180,17,175] p04|p08|p09|p12|p13|p14|p16.
+
+given clause #142: (wt=6) 182 [hyper,181,4,155] p04|p08|p09|p12|p13|p14.
+
+given clause #143: (wt=5) 183 [hyper,182,28,179] p04|p08|p09|p12|p13.
+
+given clause #144: (wt=4) 184 [hyper,183,16,175] p04|p08|p09|p12.
+
+given clause #145: (wt=3) 185 [hyper,184,3,155] p04|p08|p09.
+
+given clause #146: (wt=2) 186 [hyper,185,15,175] p04|p08.
+
+given clause #147: (wt=1) 187 [hyper,186,2,155] p04.
+
+-------- PROOF -------- 
+
+-----> EMPTY CLAUSE at   0.01 sec ----> 188 [hyper,187,1,155] $F.
+
+Length of proof is 142.  Level of proof is 99.
+
+---------------- PROOF ----------------
+
+1 [] -p00| -p04.
+2 [] -p00| -p08.
+3 [] -p00| -p12.
+4 [] -p00| -p16.
+5 [] -p04| -p08.
+6 [] -p04| -p12.
+7 [] -p04| -p16.
+8 [] -p08| -p12.
+9 [] -p08| -p16.
+10 [] -p12| -p16.
+11 [] -p01| -p05.
+12 [] -p01| -p09.
+13 [] -p01| -p13.
+14 [] -p01| -p17.
+15 [] -p05| -p09.
+16 [] -p05| -p13.
+17 [] -p05| -p17.
+18 [] -p09| -p13.
+19 [] -p09| -p17.
+20 [] -p13| -p17.
+21 [] -p02| -p06.
+22 [] -p02| -p10.
+23 [] -p02| -p14.
+24 [] -p02| -p18.
+25 [] -p06| -p10.
+26 [] -p06| -p14.
+27 [] -p06| -p18.
+28 [] -p10| -p14.
+29 [] -p10| -p18.
+30 [] -p14| -p18.
+31 [] -p03| -p07.
+32 [] -p03| -p11.
+33 [] -p03| -p15.
+34 [] -p03| -p19.
+35 [] -p07| -p11.
+36 [] -p07| -p15.
+37 [] -p07| -p19.
+38 [] -p11| -p15.
+39 [] -p11| -p19.
+40 [] -p15| -p19.
+41 [] p00|p01|p02|p03.
+42 [] p04|p05|p06|p07.
+43 [] p08|p09|p10|p11.
+44 [] p12|p13|p14|p15.
+45 [] p16|p17|p18|p19.
+46 [hyper,42,31,41] p00|p01|p02|p04|p05|p06.
+47 [hyper,43,35,42] p04|p05|p06|p08|p09|p10.
+48 [hyper,43,32,41] p00|p01|p02|p08|p09|p10.
+49 [hyper,44,38,43] p08|p09|p10|p12|p13|p14.
+50 [hyper,44,36,42] p04|p05|p06|p12|p13|p14.
+51 [hyper,44,33,41] p00|p01|p02|p12|p13|p14.
+52 [hyper,45,40,44] p12|p13|p14|p16|p17|p18.
+53 [hyper,45,39,43] p08|p09|p10|p16|p17|p18.
+54 [hyper,45,37,42] p04|p05|p06|p16|p17|p18.
+55 [hyper,45,34,41] p00|p01|p02|p16|p17|p18.
+56 [hyper,48,25,46] p00|p01|p02|p04|p05|p08|p09.
+57 [hyper,50,28,47] p04|p05|p06|p08|p09|p12|p13.
+58 [hyper,51,28,48] p00|p01|p02|p08|p09|p12|p13.
+59 [hyper,51,26,46] p00|p01|p02|p04|p05|p12|p13.
+60 [hyper,53,30,49] p08|p09|p10|p12|p13|p16|p17.
+61 [hyper,54,30,50] p04|p05|p06|p12|p13|p16|p17.
+62 [hyper,54,29,47] p04|p05|p06|p08|p09|p16|p17.
+63 [hyper,55,30,51] p00|p01|p02|p12|p13|p16|p17.
+64 [hyper,55,29,48] p00|p01|p02|p08|p09|p16|p17.
+65 [hyper,55,27,46] p00|p01|p02|p04|p05|p16|p17.
+66 [hyper,59,18,56] p00|p01|p02|p04|p05|p08|p12.
+67 [hyper,62,20,57] p04|p05|p06|p08|p09|p12|p16.
+68 [hyper,64,20,58] p00|p01|p02|p08|p09|p12|p16.
+69 [hyper,65,20,59] p00|p01|p02|p04|p05|p12|p16.
+70 [hyper,65,19,56] p00|p01|p02|p04|p05|p08|p16.
+71 [hyper,70,10,66] p00|p01|p02|p04|p05|p08.
+72 [hyper,71,9,69] p00|p01|p02|p04|p05|p12.
+73 [hyper,72,8,71] p00|p01|p02|p04|p05.
+74 [hyper,73,17,64] p00|p01|p02|p04|p08|p09|p16.
+75 [hyper,73,17,63] p00|p01|p02|p04|p12|p13|p16.
+76 [hyper,73,16,58] p00|p01|p02|p04|p08|p09|p12.
+77 [hyper,76,10,74] p00|p01|p02|p04|p08|p09.
+78 [hyper,77,15,73] p00|p01|p02|p04|p08.
+79 [hyper,78,9,75] p00|p01|p02|p04|p12|p13.
+80 [hyper,79,16,73] p00|p01|p02|p04|p12.
+81 [hyper,80,8,78] p00|p01|p02|p04.
+82 [hyper,81,7,68] p00|p01|p02|p08|p09|p12.
+83 [hyper,82,6,81] p00|p01|p02|p08|p09.
+84 [hyper,83,19,63] p00|p01|p02|p08|p12|p13|p16.
+85 [hyper,84,7,81] p00|p01|p02|p08|p12|p13.
+86 [hyper,85,18,83] p00|p01|p02|p08|p12.
+87 [hyper,86,6,81] p00|p01|p02|p08.
+88 [hyper,87,5,81] p00|p01|p02.
+89 [hyper,88,24,54] p00|p01|p04|p05|p06|p16|p17.
+90 [hyper,88,24,53] p00|p01|p08|p09|p10|p16|p17.
+91 [hyper,88,24,52] p00|p01|p12|p13|p14|p16|p17.
+92 [hyper,88,23,50] p00|p01|p04|p05|p06|p12|p13.
+93 [hyper,88,23,49] p00|p01|p08|p09|p10|p12|p13.
+94 [hyper,88,22,47] p00|p01|p04|p05|p06|p08|p09.
+95 [hyper,92,20,89] p00|p01|p04|p05|p06|p12|p16.
+96 [hyper,93,20,90] p00|p01|p08|p09|p10|p12|p16.
+97 [hyper,94,19,89] p00|p01|p04|p05|p06|p08|p16.
+98 [hyper,94,18,92] p00|p01|p04|p05|p06|p08|p12.
+99 [hyper,98,10,97] p00|p01|p04|p05|p06|p08.
+100 [hyper,99,9,95] p00|p01|p04|p05|p06|p12.
+101 [hyper,100,8,99] p00|p01|p04|p05|p06.
+102 [hyper,101,21,88] p00|p01|p04|p05.
+103 [hyper,102,17,91] p00|p01|p04|p12|p13|p14|p16.
+104 [hyper,102,17,90] p00|p01|p04|p08|p09|p10|p16.
+105 [hyper,102,16,93] p00|p01|p04|p08|p09|p10|p12.
+106 [hyper,105,10,104] p00|p01|p04|p08|p09|p10.
+107 [hyper,106,22,88] p00|p01|p04|p08|p09.
+108 [hyper,107,15,102] p00|p01|p04|p08.
+109 [hyper,108,9,103] p00|p01|p04|p12|p13|p14.
+110 [hyper,109,23,88] p00|p01|p04|p12|p13.
+111 [hyper,110,16,102] p00|p01|p04|p12.
+112 [hyper,111,8,108] p00|p01|p04.
+113 [hyper,112,7,96] p00|p01|p08|p09|p10|p12.
+114 [hyper,113,6,112] p00|p01|p08|p09|p10.
+115 [hyper,114,22,88] p00|p01|p08|p09.
+116 [hyper,115,19,91] p00|p01|p08|p12|p13|p14|p16.
+117 [hyper,116,7,112] p00|p01|p08|p12|p13|p14.
+118 [hyper,117,23,88] p00|p01|p08|p12|p13.
+119 [hyper,118,18,115] p00|p01|p08|p12.
+120 [hyper,119,6,112] p00|p01|p08.
+121 [hyper,120,5,112] p00|p01.
+122 [hyper,121,14,62] p00|p04|p05|p06|p08|p09|p16.
+123 [hyper,121,14,61] p00|p04|p05|p06|p12|p13|p16.
+124 [hyper,121,14,60] p00|p08|p09|p10|p12|p13|p16.
+125 [hyper,121,13,57] p00|p04|p05|p06|p08|p09|p12.
+126 [hyper,125,10,122] p00|p04|p05|p06|p08|p09.
+127 [hyper,126,12,121] p00|p04|p05|p06|p08.
+128 [hyper,127,9,123] p00|p04|p05|p06|p12|p13.
+129 [hyper,128,13,121] p00|p04|p05|p06|p12.
+130 [hyper,129,8,127] p00|p04|p05|p06.
+131 [hyper,130,27,53] p00|p04|p05|p08|p09|p10|p16|p17.
+132 [hyper,130,27,52] p00|p04|p05|p12|p13|p14|p16|p17.
+133 [hyper,130,26,49] p00|p04|p05|p08|p09|p10|p12|p13.
+134 [hyper,131,14,121] p00|p04|p05|p08|p09|p10|p16.
+135 [hyper,132,14,121] p00|p04|p05|p12|p13|p14|p16.
+136 [hyper,133,13,121] p00|p04|p05|p08|p09|p10|p12.
+137 [hyper,136,10,134] p00|p04|p05|p08|p09|p10.
+138 [hyper,137,25,130] p00|p04|p05|p08|p09.
+139 [hyper,138,12,121] p00|p04|p05|p08.
+140 [hyper,139,9,135] p00|p04|p05|p12|p13|p14.
+141 [hyper,140,26,130] p00|p04|p05|p12|p13.
+142 [hyper,141,13,121] p00|p04|p05|p12.
+143 [hyper,142,8,139] p00|p04|p05.
+144 [hyper,143,11,121] p00|p04.
+145 [hyper,144,7,124] p00|p08|p09|p10|p12|p13.
+146 [hyper,145,13,121] p00|p08|p09|p10|p12.
+147 [hyper,146,6,144] p00|p08|p09|p10.
+148 [hyper,147,29,52] p00|p08|p09|p12|p13|p14|p16|p17.
+149 [hyper,148,14,121] p00|p08|p09|p12|p13|p14|p16.
+150 [hyper,149,7,144] p00|p08|p09|p12|p13|p14.
+151 [hyper,150,28,147] p00|p08|p09|p12|p13.
+152 [hyper,151,13,121] p00|p08|p09|p12.
+153 [hyper,152,6,144] p00|p08|p09.
+154 [hyper,153,12,121] p00|p08.
+155 [hyper,154,5,144] p00.
+156 [hyper,155,4,67] p04|p05|p06|p08|p09|p12.
+157 [hyper,156,3,155] p04|p05|p06|p08|p09.
+158 [hyper,157,19,61] p04|p05|p06|p08|p12|p13|p16.
+159 [hyper,158,4,155] p04|p05|p06|p08|p12|p13.
+160 [hyper,159,18,157] p04|p05|p06|p08|p12.
+161 [hyper,160,3,155] p04|p05|p06|p08.
+162 [hyper,161,2,155] p04|p05|p06.
+163 [hyper,162,27,53] p04|p05|p08|p09|p10|p16|p17.
+164 [hyper,162,27,52] p04|p05|p12|p13|p14|p16|p17.
+165 [hyper,162,26,49] p04|p05|p08|p09|p10|p12|p13.
+166 [hyper,165,20,163] p04|p05|p08|p09|p10|p12|p16.
+167 [hyper,166,4,155] p04|p05|p08|p09|p10|p12.
+168 [hyper,167,3,155] p04|p05|p08|p09|p10.
+169 [hyper,168,25,162] p04|p05|p08|p09.
+170 [hyper,169,19,164] p04|p05|p08|p12|p13|p14|p16.
+171 [hyper,170,4,155] p04|p05|p08|p12|p13|p14.
+172 [hyper,171,26,162] p04|p05|p08|p12|p13.
+173 [hyper,172,18,169] p04|p05|p08|p12.
+174 [hyper,173,3,155] p04|p05|p08.
+175 [hyper,174,2,155] p04|p05.
+176 [hyper,175,17,60] p04|p08|p09|p10|p12|p13|p16.
+177 [hyper,176,4,155] p04|p08|p09|p10|p12|p13.
+178 [hyper,177,16,175] p04|p08|p09|p10|p12.
+179 [hyper,178,3,155] p04|p08|p09|p10.
+180 [hyper,179,29,52] p04|p08|p09|p12|p13|p14|p16|p17.
+181 [hyper,180,17,175] p04|p08|p09|p12|p13|p14|p16.
+182 [hyper,181,4,155] p04|p08|p09|p12|p13|p14.
+183 [hyper,182,28,179] p04|p08|p09|p12|p13.
+184 [hyper,183,16,175] p04|p08|p09|p12.
+185 [hyper,184,3,155] p04|p08|p09.
+186 [hyper,185,15,175] p04|p08.
+187 [hyper,186,2,155] p04.
+188 [hyper,187,1,155] $F.
+
+------------ end of proof -------------
+
+
+Search stopped by max_proofs option.
+
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                147
+clauses generated            410
+clauses kept                 187
+clauses forward subsumed     267
+clauses back subsumed        138
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8283 finished Mon Aug  2 15:30:35 2004

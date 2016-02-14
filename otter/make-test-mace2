@@ -1,0 +1,5 @@
+#!/bin/csh
+
+bin/mace2 -n6 -p < examples-mace2/basic/noncommutative_group.in | \
+	awk '/Model/,/end_of_model/'
+echo "If you see a group table, the test was successful."

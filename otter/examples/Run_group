@@ -1,0 +1,70 @@
+#!/bin/csh
+
+#
+#  Run a set of otter jobs ($1/*.in) and compare the
+#  results existing outputs.
+#
+#  If $2 is given, it is assumed to be the Otter binary to use.
+#
+#  If $3 is given, it is the filename extension for output files.
+#
+
+set base=out
+
+if ($#argv == 0) then
+    echo "usage: Run_all directory [otter] [extension]"
+    exit 1
+endif
+
+if ($#argv >= 2) then
+   set OTTER=$2
+else
+   set OTTER=../../bin/otter
+endif
+
+if ($#argv >= 3) then
+   set OUT=$3
+else
+   set OUT=out$$
+endif
+
+cd $1
+set errors=0
+foreach i (*.in)
+  echo "Running $1/$i ..."
+  $OTTER < $i >& $i:r.$OUT
+  if (-e $i:r.$base) then
+    set genold=`grep "clauses generated" $i:r.$base | awk '{gen+=$3} END {print gen}'`
+    set gennew=`grep "clauses generated" $i:r.$OUT | awk '{gen+=$3} END {print gen}'`
+    if ($gennew != $genold) then
+      echo "There is a problem: your computer generated $gennew, $OUT generated $genold"
+      set errors=1
+    else
+      echo "Okay, it seems to have run correctly."
+    endif
+  else
+    echo "Okay, but there's no file for comparison."
+    set errors=1
+  endif
+end
+
+echo ""
+
+if (! $errors && $1 != split) then
+  set timeold=`grep "CPU time" *.$base | awk '{sum += $4} END {print sum}'`
+  set timenew=`grep "CPU time" *.$OUT | awk '{sum += $4} END {print sum}'`
+  set speedup=`awk "END {print $timeold / $timenew}" /dev/null`
+  echo "timenew=$timenew, timeold=$timeold."
+  echo "The new ($OUT) times are about $speedup times as fast as the old ($base) times."
+  set too_slow=`awk "END {if ($speedup < .1) print 1}" /dev/null`
+  if ($too_slow) then
+    echo "If this seems way too slow, edit source/Makefile,"
+    echo "including -DTP_NO_CLOCKS on the DFLAGS line,"
+    echo "then make clean; make otter."
+  endif
+endif
+
+echo "The output files have been left in $1/*.$OUT."
+echo ""
+
+cd ..

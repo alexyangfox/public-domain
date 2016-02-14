@@ -1,0 +1,85 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:36 2004
+The command was "../../bin/otter".  The process ID is 8371.
+
+op(500,xfy,#).
+op(400,xfy,*).
+
+lex([0,1,cin,a0,b0,a1,b1,a2,b2,a3,b3,_*_,_#_]).
+set(demod_inf).
+clear(demod_history).
+assign(demod_limit,-1).
+assign(max_given,1).
+clear(for_sub).
+clear(back_sub).
+
+list(demodulators).
+1 [] 0#x=x.
+2 [] x#0=x.
+3 [] x#x=0.
+4 [] x#x#y=y.
+5 [] x#y=y#x.
+6 [] y#x#z=x#y#z.
+7 [] 0*x=0.
+8 [] x*0=0.
+9 [] 1*x=x.
+10 [] x*1=x.
+11 [] x*x=x.
+12 [] x*x*y=x*y.
+13 [] x*y=y*x.
+14 [] y*x*z=x*y*z.
+15 [] x* (y#z)=x*y#x*z.
+end_of_list.
+
+list(sos).
+16 [] p((a2#b2#1#a2*b2)# (a3#b3)#1# (a0#b0#1#a0*b0)* (1#a0*b0)* (a1#b1#1#a1*b1)* (1#a1*b1)* (a2#b2#1#a2*b2)* (1#a2*b2)* (cin#1)# (a0#b0#1#a0*b0)* (1#a0*b0)* (a1#b1#1#a1*b1)* (1#a1*b1)* (1#a2*b2)* (cin#1)# (a0#b0#1#a0*b0)* (1#a0*b0)* (1#a1*b1)* (a2#b2#1#a2*b2)* (1#a2*b2)* (cin#1)# (a0#b0#1#a0*b0)* (1#a0*b0)* (1#a1*b1)* (1#a2*b2)* (cin#1)# (a0#b0#1#a0*b0)* (a1#b1#1#a1*b1)* (1#a1*b1)* (1#a2*b2)# (a0#b0#1#a0*b0)* (a1#b1#1#a1*b1)* (1#a1*b1)* (a2#b2#1#a2*b2)* (1#a2*b2)# (a0#b0#1#a0*b0)* (1#a1*b1)* (1#a2*b2)# (a0#b0#1#a0*b0)* (1#a1*b1)* (a2#b2#1#a2*b2)* (1#a2*b2)# (1#a0*b0)* (a1#b1#1#a1*b1)* (1#a1*b1)* (a2#b2#1#a2*b2)* (1#a2*b2)* (cin#1)# (1#a0*b0)* (a1#b1#1#a1*b1)* (1#a1*b1)* (1#a2*b2)* (cin#1)# (1#a0*b0)* (1#a1*b1)* (a2#b2#1#a2*b2)* (1#a2*b2)* (cin#1)# (1#a0*b0)* (1#a1*b1)* (1#a2*b2)* (cin#1)# (a1#b1#1#a1*b1)* (1#a2*b2)# (a1#b1#1#a1*b1)* (a2#b2#1#a2*b2)* (1#a2*b2)).
+end_of_list.
+lex dependent demodulator: 5 [] x#y=y#x.
+lex dependent demodulator: 6 [] y#x#z=x#y#z.
+lex dependent demodulator: 13 [] x*y=y*x.
+lex dependent demodulator: 14 [] y*x*z=x*y*z.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=482) 16 [] p((a2#b2#1#a2*b2)# (a3#b3)#1# (a0#b0#1#a0*b0)* (1#a0*b0)* (a1#b1#1#a1*b1)* (1#a1*b1)* (a2#b2#1#a2*b2)* (1#a2*b2)* (cin#1)# (a0#b0#1#a0*b0)* (1#a0*b0)* (a1#b1#1#a1*b1)* (1#a1*b1)* (1#a2*b2)* (cin#1)# (a0#b0#1#a0*b0)* (1#a0*b0)* (1#a1*b1)* (a2#b2#1#a2*b2)* (1#a2*b2)* (cin#1)# (a0#b0#1#a0*b0)* (1#a0*b0)* (1#a1*b1)* (1#a2*b2)* (cin#1)# (a0#b0#1#a0*b0)* (a1#b1#1#a1*b1)* (1#a1*b1)* (1#a2*b2)# (a0#b0#1#a0*b0)* (a1#b1#1#a1*b1)* (1#a1*b1)* (a2#b2#1#a2*b2)* (1#a2*b2)# (a0#b0#1#a0*b0)* (1#a1*b1)* (1#a2*b2)# (a0#b0#1#a0*b0)* (1#a1*b1)* (a2#b2#1#a2*b2)* (1#a2*b2)# (1#a0*b0)* (a1#b1#1#a1*b1)* (1#a1*b1)* (a2#b2#1#a2*b2)* (1#a2*b2)* (cin#1)# (1#a0*b0)* (a1#b1#1#a1*b1)* (1#a1*b1)* (1#a2*b2)* (cin#1)# (1#a0*b0)* (1#a1*b1)* (a2#b2#1#a2*b2)* (1#a2*b2)* (cin#1)# (1#a0*b0)* (1#a1*b1)* (1#a2*b2)* (cin#1)# (a1#b1#1#a1*b1)* (1#a2*b2)# (a1#b1#1#a1*b1)* (a2#b2#1#a2*b2)* (1#a2*b2)).
+
+Search stopped by max_given option.
+
+** KEPT (pick-wt=116): 17 [16,demod] p(a3#b3#cin*a0*a1*a2#cin*a0*a1*b2#cin*a0*b1*a2#cin*a0*b1*b2#cin*b0*a1*a2#cin*b0*a1*b2#cin*b0*b1*a2#cin*b0*b1*b2#a0*b0*a1*a2#a0*b0*a1*b2#a0*b0*b1*a2#a0*b0*b1*b2#a1*b1*a2#a1*b1*b2#a2*b2).
+
+Search stopped by max_given option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                  1
+clauses generated              1
+  demod_inf generated          1
+demod & eval rewrites      44775
+clauses wt,lit,sk delete       0
+tautologies deleted            0
+clauses forward subsumed       0
+  (subsumed by sos)            0
+unit deletions                 0
+factor simplifications         0
+clauses kept                   1
+new demodulators               0
+empty clauses                  0
+clauses back demodulated       0
+clauses back subsumed          0
+usable size                    1
+sos size                       1
+demodulators size             15
+passive size                   0
+hot size                       0
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.15          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8371 finished Mon Aug  2 15:30:37 2004

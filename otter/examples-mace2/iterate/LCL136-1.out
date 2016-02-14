@@ -1,0 +1,160 @@
+----- MACE 2.2f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:44:32 2004
+The command was "../../bin/mace2 -n2 -N6 -p".
+set(prolog_style_variables).
+set(tptp_eq).
+set(auto).
+   dependent: set(auto1).
+   dependent: set(process_input).
+   dependent: clear(print_kept).
+   dependent: clear(print_new_demod).
+   dependent: clear(print_back_demod).
+   dependent: clear(print_back_sub).
+   dependent: set(control_memory).
+   dependent: assign(max_mem, 12000).
+   dependent: assign(pick_given_ratio, 4).
+   dependent: assign(stats_level, 1).
+   dependent: assign(max_seconds, 10800).
+clear(print_given).
+
+list(usable).
+0 [] equal(X,X).
+0 [] equal(implies(true,X),X).
+0 [] equal(implies(implies(X,Y),implies(implies(Y,Z),implies(X,Z))),true).
+0 [] equal(implies(implies(X,Y),Y),implies(implies(Y,X),X)).
+0 [] equal(implies(implies(not(X),not(Y)),implies(Y,X)),true).
+end_of_list.
+
+list(sos).
+0 [] equal(implies(x,y),implies(y,z)).
+0 [] -equal(implies(x,z),true).
+end_of_list.
+
+list(clauses).
+1 [] equal(X,X).
+2 [] equal(implies(true,X),X).
+3 [] equal(implies(implies(X,Y),implies(implies(Y,Z),implies(X,Z))),true).
+4 [] equal(implies(implies(X,Y),Y),implies(implies(Y,X),X)).
+5 [] equal(implies(implies(not(X),not(Y)),implies(Y,X)),true).
+6 [] equal(implies(x,y),implies(y,z)).
+7 [] -equal(implies(x,z),true).
+end_of_list.
+
+list(flattened_and_parted_clauses).
+1 [] equal(A,A).
+2 [] -equal(true,A)|equal(implies(A,B),B).
+3 [] -equal(true,A)|equal(implies(B,C),A)| -$Connect2(C,B).
+3 [] -equal(implies(A,B),C)| -$Connect1(B,A,D)|$Connect2(C,D).
+3 [] -equal(implies(A,B),C)| -equal(implies(D,B),E)|$Connect3(A,C,D,E).
+3 [] -equal(implies(A,B),C)|$Connect1(D,E,C)| -$Connect3(A,D,B,E).
+4 [] -equal(implies(A,B),C)| -equal(implies(C,B),D)|$Connect4(A,B,D).
+4 [] -equal(implies(A,B),C)|equal(implies(C,B),D)| -$Connect4(B,A,D).
+5 [] -equal(true,A)|equal(implies(B,C),A)| -$Connect6(C,B).
+5 [] -equal(implies(A,B),C)| -$Connect5(A,B,D)|$Connect6(C,D).
+5 [] -equal(not(A),B)| -equal(implies(C,B),D)|$Connect7(A,C,D).
+5 [] -equal(not(A),B)|$Connect5(C,A,D)| -$Connect7(C,B,D).
+6 [] -equal(z,A)| -equal(implies(B,A),C)| -equal(y,B)|$Connect8(B,C).
+6 [] -equal(x,A)|equal(implies(A,B),C)| -$Connect8(B,C).
+7 [] -equal(true,A)| -equal(z,B)| -equal(x,C)| -equal(implies(C,B),A).
+end_of_list.
+
+--- Starting search for models of size 2 ---
+
+Applying isomorphism constraints to constants: true z y x.
+
+231 clauses were generated; 153 of those survived the first stage
+of unit preprocessing; there are 84 atoms.
+
+After all unit preprocessing, 40 atoms are still unassigned;
+54 clauses remain; 5 of those are non-Horn (selectable);
+4884 K allocated; cpu time so far for this domain size: 0.00 sec.
+
+----- statistics for domain size 2 ----
+Input:
+    Clauses input                   153
+    Literal occurrences input       353
+    Greatest atom                    84
+Unit preprocess:
+    Preprocess unit assignments      44
+    Clauses after subsumption        54
+    Literal occ. after subsump.     140
+    Selectable clauses                5
+Decide:
+    Splits                            2
+    Unit assignments                 27
+    Failed paths                      3
+Memory:
+    Memory malloced                 2 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.00
+    DPLL                           0.00
+
+--- Starting search for models of size 3 ---
+
+Applying isomorphism constraints to constants: true z y x.
+
+1196 clauses were generated; 834 of those survived the first stage
+of unit preprocessing; there are 273 atoms.
+
+After all unit preprocessing, 198 atoms are still unassigned;
+488 clauses remain; 13 of those are non-Horn (selectable);
+4889 K allocated; cpu time so far for this domain size: 0.00 sec.
+
+======================= Model #1 at 0.00 seconds:
+
+ true: 0
+
+ implies :
+      | 0 1 2
+    --+------
+    0 | 0 1 2
+    1 | 0 0 0
+    2 | 0 2 0
+
+ not :
+        0 1 2
+    ---------
+        1 0 2
+
+ z: 1
+
+ y: 2
+
+ x: 0
+end_of_model
+
+Exit by max_models parameter.  The set is satisfiable (1 model(s) found).
+
+
+----- statistics for domain size 3 ----
+Input:
+    Clauses input                   834
+    Literal occurrences input      2201
+    Greatest atom                   273
+Unit preprocess:
+    Preprocess unit assignments      75
+    Clauses after subsumption       488
+    Literal occ. after subsump.    1329
+    Selectable clauses               13
+Decide:
+    Splits                            8
+    Unit assignments                163
+    Failed paths                      4
+Memory:
+    Memory malloced                 7 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.00
+    DPLL                           0.00
+
+=======================================
+Total times for run (seconds):
+    user CPU time                  0.00   (0 hr, 0 min, 0 sec)
+    system CPU time                0.00   (0 hr, 0 min, 0 sec)
+    wall-clock time                0      (0 hr, 0 min, 0 sec)
+
+Exit by max_models parameter.  The set is satisfiable (1 model(s) found).
+
+The job finished Mon Aug  2 15:44:32 2004

@@ -1,0 +1,67 @@
+----- MACE 2.2f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:44:30 2004
+The command was "../../bin/mace2 -n3 -m10000".
+
+list(usable).
+1 [] f(f(v,w,x),y,f(v,w,z))=f(v,w,f(x,y,z)).
+2 [] f(x,x,y)=x.
+3 [] f(g(y),y,x)=x.
+4 [] f(x,y,g(y))=x.
+5 [] f(a,b,b)!=b.
+end_of_list.
+
+list(flattened_and_parted_clauses).
+1 [] f(x,y,z)!=u|f(v,w,u)!=v6|f(v,w,z)!=v7|f(v,w,x)!=v8|f(v8,y,v7)=v6.
+2 [] f(x,x,y)=x.
+3 [] g(x)!=y|f(y,x,z)=z.
+4 [] g(x)!=y|f(z,x,y)=z.
+5 [] b!=x|a!=y|f(y,x,x)!=x.
+end_of_list.
+
+--- Starting search for models of size 3 ---
+
+Applying isomorphism constraints to constants: b a.
+
+19894 clauses were generated; 7103 of those survived the first stage
+of unit preprocessing; there are 105 atoms.
+
+After all unit preprocessing, 22 atoms are still unassigned;
+653 clauses remain; 10 of those are non-Horn (selectable);
+4885 K allocated; cpu time so far for this domain size: 0.01 sec.
+
+The 1st model has been found.
+
+The search is complete.  The set is satisfiable (6 model(s) found).
+
+
+----- statistics for domain size 3 ----
+Input:
+    Clauses input                  7103
+    Literal occurrences input     28460
+    Greatest atom                   105
+Unit preprocess:
+    Preprocess unit assignments      83
+    Clauses after subsumption       653
+    Literal occ. after subsump.    2482
+    Selectable clauses               10
+Decide:
+    Splits                            5
+    Unit assignments                 58
+    Failed paths                      0
+Memory:
+    Memory malloced                 3 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.01
+    DPLL                           0.00
+
+=======================================
+Total times for run (seconds):
+    user CPU time                  0.01   (0 hr, 0 min, 0 sec)
+    system CPU time                0.00   (0 hr, 0 min, 0 sec)
+    wall-clock time                0      (0 hr, 0 min, 0 sec)
+
+The search is complete.  The set is satisfiable (6 model(s) found).
+
+The job finished Mon Aug  2 15:44:30 2004

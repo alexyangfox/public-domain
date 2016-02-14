@@ -1,0 +1,68 @@
+%  Input File for Studying Exponent 3 Groups with OTTER 3.0
+set(knuth_bendix).
+clear(eq_units_both_ways).
+set(process_input).
+set(index_for_back_demod).
+% Following 8 are knuth-bendix options
+% set(dynamic_demod_all).
+% clear(para_from_right).
+% set(back_demod).
+% set(para_from).
+% set(para_into).
+% clear(para_into_right).
+% set(dynamic_demod).
+% set(order_eq).
+set(lrpo).
+lex([e,f(x,x),g(x)]).
+%  lrpo_lr_status([f(x,x)]).
+assign(pick_given_ratio, 3).
+assign(max_proofs, 4).
+assign(max_mem, 12000).
+% set(control_memory).
+% set(sos_queue).
+assign(max_weight, 80).
+% assign(max_seconds, 3600).
+% assign(report, 300).
+assign(demod_limit, -1).
+assign(change_limit_after, 12).
+assign(new_max_weight, 25).
+clear(print_kept).
+clear(print_new_demod).
+clear(print_back_demod).
+  
+weight_list(pick_and_purge).
+%  following is the union of proof steps for exp3.
+weight(EQ(f(e,e),e), 2).
+weight(EQ(f(e,f(x,f(x,f(x,e)))),e), 2).
+weight(EQ(f(f(x,e),f(f(x,e),f(x,e))),e), 2).
+weight(EQ(f(f(x,e),f(f(x,e),f(x,f(f(f(e,f(x,e)),y),f(y,y))))),f(x,e)), 2).
+weight(EQ(f(f(x,y),e),f(x,f(y,f(z,f(z,f(z,e)))))), 2).
+weight(EQ(f(f(x,y),f(e,z)),f(x,f(y,z))), 2).
+weight(EQ(f(f(x,y),f(f(x,y),f(x,f(y,e)))),e), 2).
+weight(EQ(f(x,e),x), 2).
+weight(EQ(f(x,f(f(x,f(f(x,y),f(e,f(f(e,z),f(e,z))))),z)),y), 2).
+weight(EQ(f(x,f(f(x,f(f(x,y),f(e,f(z,z)))),f(f(e,f(f(e,z),u)),f(e,f(u,u))))),y), 2).
+weight(EQ(f(x,f(f(x,f(f(x,y),z)),f(f(e,z),f(e,z)))),y), 2).
+weight(EQ(f(x,f(f(y,z),u)),f(f(x,y),f(f(e,z),u))), 2).
+weight(EQ(f(x,f(x,f(f(x,f(y,f(z,e))),f(f(f(e,e),u),f(u,u))))),f(y,z)), 2).
+weight(EQ(f(x,f(x,f(f(y,z),f(z,z)))),f(x,f(x,f(y,e)))), 2).
+weight(EQ(f(x,f(x,f(x,e))),e), 2).
+weight(EQ(f(x,f(x,f(x,f(y,e)))),y), 2).
+weight(EQ(f(x,f(x,f(x,f(y,f(z,e))))),f(y,z)), 2).
+weight(EQ(f(x,f(y,f(e,f(f(e,f(z,z)),f(e,f(z,z)))))),f(f(x,y),z)), 2).
+end_of_list.
+  
+list(usable).
+EQ(x,x).
+end_of_list.
+  
+list(sos).
+EQ(f(x,f(f(x,f(f(x,y),z)),f(e,f(z,z)))),y).
+end_of_list.
+  
+list(passive).
+-EQ(f(e,a),a) | $ANS(lid).
+-EQ(f(a,e),a) | $ANS(rid).
+-EQ(f(a,f(a,a)),e) |  $ANS(exp3).
+-EQ(f(f(a,b),c), f(a,f(b,c))) | $ANS(assoc).
+end_of_list.

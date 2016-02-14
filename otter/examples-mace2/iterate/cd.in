@@ -1,0 +1,26 @@
+% benchmark parameters -n2 -N6 -p
+
+% The formulas below are theorems of the equivalential calculus.
+% We can show that neither is a single axiom, because e(x,x) does not
+% follow.
+
+list(usable).
+
+-P(e(x,y)) | -P(x) | P(y).
+
+% P(e(e(x,y),e(e(y,z),e(x,z)))).     % easier
+P(e(e(x,y),e(e(y,z),e(z,x)))).     % harder
+
+-P(e(a,a)).
+
+% The following can speed up finding models for CD problems.
+% It says that the all values for which P is false come before
+% any of the values for which P is true.
+% But it can be incomplete if you use -c or if you DON'T use
+% -z 0.  In this case it works, because a gets assigned 0,
+% and there is a model in which P(a) is false.
+
+% -P(x) | -(x < y) | P(y). 
+
+end_of_list.
+

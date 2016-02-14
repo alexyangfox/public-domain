@@ -1,0 +1,10 @@
+set(auto).
+assign(max_seconds, 10).
+assign(max_weight, 50).
+
+list(usable).
+x = x.
+f(a,b) != f(b,a) | $Ans(commute).
+end_of_list.
+
+% sos to be given on command line

@@ -1,0 +1,516 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:31:15 2004
+The command was "../../bin/otter".  The process ID is 8947.
+
+op(400,xfx,+).
+clear(print_kept).
+clear(print_new_demod).
+clear(print_back_demod).
+assign(pick_given_ratio,4).
+assign(max_mem,20000).
+set(knuth_bendix).
+   dependent: set(anl_eq).
+   dependent: set(para_from).
+   dependent: set(para_into).
+   dependent: clear(para_from_right).
+   dependent: clear(para_into_right).
+   dependent: set(para_from_vars).
+   dependent: set(eq_units_both_ways).
+   dependent: set(dynamic_demod_all).
+   dependent: set(dynamic_demod).
+   dependent: set(order_eq).
+   dependent: set(back_demod).
+   dependent: set(process_input).
+   dependent: set(lrpo).
+set(build_proof_object_2).
+   dependent: set(order_history).
+set(dynamic_demod_lex_dep).
+assign(max_weight,30).
+
+lex([A,B,E,c,d,e,f,g(x),n(x),x+x]).
+
+list(usable).
+0 [] x=x.
+0 [] x+y=y+x.
+0 [] (x+y)+z=x+ (y+z).
+0 [] x+ (y+z)=y+ (x+z).
+end_of_list.
+
+list(sos).
+0 [] n(n(x+y)+n(x+n(y)))=x.
+0 [] c+d=c.
+0 [] n(A+n(B))+n(n(A)+n(B))!=B.
+end_of_list.
+assign(bsub_hint_wt,-20).
+
+list(hints).
+1 [] n(n(x+ (y+z))+n(y+n(x+z)))=y   # label(step_1).
+2 [] n(n(x+y)+n(y+n(x)))=y   # label(step_2).
+3 [] n(n(x+y)+n(x+ (n(y+z)+n(y+n(z)))))=x   # label(step_3).
+4 [] n(n(x+y)+n(n(y)+x))=x   # label(step_4).
+5 [] c+ (d+x)=c+x   # label(step_5).
+6 [] n(n(x+c)+n(c+n(x+d)))=c   # label(step_6).
+7 [] n(n(x+ (y+z))+n(z+n(x+y)))=z   # label(step_7).
+8 [] n(n(x+ (y+z))+n(y+n(z+x)))=y   # label(step_8).
+9 [] n(n(c)+n(d+n(c)))=d   # label(step_9).
+10 [] n(n(x+y)+n(n(x)+y))=y   # label(step_10).
+11 [] n(n(x+n(y))+n(y+x))=x   # label(step_11).
+12 [] n(n(x+ (n(y+z)+n(z+n(y))))+n(z+x))=x   # label(step_12).
+13 [] n(n(x+c)+n(c+n(d+x)))=c   # label(step_13).
+14 [] n(n(x+ (c+y))+n(d+ (y+n(x+c))))=d+y   # label(step_14).
+15 [] n(n(x+ (y+z))+n(z+n(y+x)))=z   # label(step_15).
+16 [] n(n(x+ (y+z))+n(n(z+x)+y))=y   # label(step_16).
+17 [] n(d+n(c+n(d+n(c))))=n(d+n(c))   # label(step_17).
+18 [] n(d+n(n(c)+ (n(n(d+n(c))+x)+n(n(d+n(c))+n(x)))))=n(c)   # label(step_18).
+19 [] n(x+n(y+ (x+n(n(y)+x))))=n(n(y)+x)   # label(step_19).
+20 [] n(n(x+ (y+n(z)))+n(x+ (z+y)))=x+y   # label(step_20).
+21 [] n(n(x+n(y+n(z)))+n(x+ (y+n(z+ (y+n(y+n(z)))))))=x   # label(step_21).
+22 [] n(n(c)+n(d+ (n(x+c)+n(c+n(x)))))=d   # label(step_22).
+23 [] n(n(d+n(c))+n(c+n(d+n(c))))=d   # label(step_23).
+24 [] n(n(c+n(d+n(c)))+n(c+n(c+n(d+n(c)))))=c   # label(step_24).
+25 [] n(d+n(d+ (n(c)+n(c+n(d+n(c))))))=n(c)   # label(step_25).
+26 [] n(c+n(d+n(c)))=n(c)   # label(step_26).
+27 [] n(n(c)+n(c+n(c)))=c   # label(step_27).
+28 [] n(c+n(c+ (n(c)+n(c+ (c+n(c+n(c)))))))=n(c)   # label(step_28).
+29 [] n(n(c+n(c))+n(c+ (c+n(c+n(c)))))=c   # label(step_29).
+30 [] n(c+ (c+n(c+n(c))))=n(c)   # label(step_30).
+31 [] d+n(c+n(c))=d   # label(step_31).
+32 [] n(n(x+d)+n(x+ (n(d)+n(c+n(c)))))=x+n(c+n(c))   # label(step_32).
+33 [] x+n(c+n(c))=x   # label(step_33).
+end_of_list.
+
+------------> process usable:
+** KEPT (pick-wt=3): 34 [] x=x.
+** KEPT (pick-wt=7): 35 [] x+y=y+x.
+---> New Demodulator: (lex-dependent) 36 [new_demod,35] x+y=y+x.
+** KEPT (pick-wt=11): 37 [] (x+y)+z=x+ (y+z).
+---> New Demodulator: 38 [new_demod,37] (x+y)+z=x+ (y+z).
+** KEPT (pick-wt=11): 39 [] x+ (y+z)=y+ (x+z).
+---> New Demodulator: (lex-dependent) 40 [new_demod,39] x+ (y+z)=y+ (x+z).
+  Following clause subsumed by 34 during input processing: 0 [copy,34,flip.1] x=x.
+  Following clause subsumed by 35 during input processing: 0 [copy,35,flip.1] x+y=y+x.
+>>>> Starting back demodulation with 36.
+>>>> Starting back demodulation with 38.
+  Following clause subsumed by 39 during input processing: 0 [copy,39,flip.1] x+ (y+z)=y+ (x+z).
+>>>> Starting back demodulation with 40.
+
+------------> process sos:
+** KEPT (pick-wt=13): 41 [] n(n(x+y)+n(x+n(y)))=x.
+---> New Demodulator: 42 [new_demod,41] n(n(x+y)+n(x+n(y)))=x.
+** KEPT (pick-wt=5): 43 [] c+d=c.
+---> New Demodulator: 44 [new_demod,43] c+d=c.
+** KEPT (pick-wt=14): 45 [] n(A+n(B))+n(n(A)+n(B))!=B.
+>>>> Starting back demodulation with 42.
+>>>> Starting back demodulation with 44.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=13) 41 [] n(n(x+y)+n(x+n(y)))=x.
+
+given clause #2: (wt=-20) 46 [para_into,41.1.1.1.1.1,39.1.1] n(n(x+ (y+z))+n(y+n(x+z)))=y   # label(step_1).
+
+given clause #3: (wt=-20) 50 [para_into,41.1.1.1.1.1,35.1.1] n(n(x+y)+n(y+n(x)))=y   # label(step_2).
+
+given clause #4: (wt=-20) 54 [para_into,41.1.1.1.2.1.2,41.1.1,demod,36] n(n(x+y)+n(x+ (n(y+z)+n(y+n(z)))))=x   # label(step_3).
+
+given clause #5: (wt=-20) 56 [para_into,41.1.1.1.2.1,35.1.1] n(n(x+y)+n(n(y)+x))=x   # label(step_4).
+
+given clause #6: (wt=5) 43 [] c+d=c.
+
+given clause #7: (wt=-20) 64 [para_into,46.1.1.1.1.1.2,35.1.1] n(n(x+ (y+z))+n(z+n(x+y)))=z   # label(step_7).
+
+given clause #8: (wt=-20) 70 [para_into,46.1.1.1.2.1.2.1,35.1.1] n(n(x+ (y+z))+n(y+n(z+x)))=y   # label(step_8).
+
+given clause #9: (wt=-20) 102 [para_into,50.1.1.1.2.1,35.1.1] n(n(x+y)+n(n(x)+y))=y   # label(step_10).
+
+given clause #10: (wt=-20) 106 [para_into,50.1.1.1,35.1.1] n(n(x+n(y))+n(y+x))=x   # label(step_11).
+
+given clause #11: (wt=14) 45 [] n(A+n(B))+n(n(A)+n(B))!=B.
+
+given clause #12: (wt=-20) 158 [para_into,56.1.1.1.2.1.1,50.1.1] n(n(x+ (n(y+z)+n(z+n(y))))+n(z+x))=x   # label(step_12).
+
+given clause #13: (wt=-20) 196 [para_from,43.1.1,46.1.1.1.1.1.2] n(n(x+c)+n(c+n(x+d)))=c   # label(step_6).
+
+given clause #14: (wt=-20) 204 [para_from,43.1.1,50.1.1.1.1.1] n(n(c)+n(d+n(c)))=d   # label(step_9).
+
+given clause #15: (wt=-20) 206 [para_from,43.1.1,37.1.1.1,flip.1] c+ (d+x)=c+x   # label(step_5).
+
+given clause #16: (wt=19) 48 [para_into,41.1.1.1.1.1,37.1.1,demod,38] n(n(x+ (y+z))+n(x+ (y+n(z))))=x+y.
+
+given clause #17: (wt=-20) 214 [para_into,64.1.1.1.1.1,39.1.1] n(n(x+ (y+z))+n(z+n(y+x)))=z   # label(step_15).
+
+given clause #18: (wt=-20) 244 [para_into,70.1.1.1.1.1.2,43.1.1] n(n(x+c)+n(c+n(d+x)))=c   # label(step_13).
+
+given clause #19: (wt=-20) 272 [para_into,70.1.1.1.2.1,35.1.1] n(n(x+ (y+z))+n(n(z+x)+y))=y   # label(step_16).
+
+given clause #20: (wt=-20) 338 [para_into,102.1.1.1.2,102.1.1,demod,38,36] n(x+n(y+ (x+n(n(y)+x))))=n(n(y)+x)   # label(step_19).
+
+given clause #21: (wt=20) 52 [para_into,41.1.1.1.1,41.1.1] n(x+n(n(x+y)+n(n(x+n(y)))))=n(x+y).
+896 back subsumes 860.
+896 back subsumes 824.
+
+given clause #22: (wt=-20) 376 [para_into,106.1.1.1.2.1,39.1.1,demod,38] n(n(x+ (y+n(z)))+n(x+ (z+y)))=x+y   # label(step_20).
+
+given clause #23: (wt=-20) 378 [para_from,106.1.1,54.1.1.1.2.1.2.2,demod,40,36,36] n(n(x+n(y+n(z)))+n(x+ (y+n(z+ (y+n(y+n(z)))))))=x   # label(step_21).
+
+given clause #24: (wt=-20) 432 [para_into,158.1.1.1.2.1,43.1.1,demod,36] n(n(c)+n(d+ (n(x+c)+n(c+n(x)))))=d   # label(step_22).
+
+given clause #25: (wt=-20) 496 [para_from,204.1.1,102.1.1.1.2,demod,36] n(d+n(c+n(d+n(c))))=n(d+n(c))   # label(step_17).
+
+given clause #26: (wt=18) 58 [para_into,41.1.1.1.2,41.1.1,demod,40,36,36] n(x+n(x+ (n(y)+n(x+y))))=n(x+y).
+
+given clause #27: (wt=-20) 528 [para_from,204.1.1,54.1.1.1.1] n(d+n(n(c)+ (n(n(d+n(c))+x)+n(n(d+n(c))+n(x)))))=n(c)   # label(step_18).
+
+given clause #28: (wt=-20) 548 [para_from,206.1.1,64.1.1.1.1.1.2,demod,38] n(n(x+ (c+y))+n(d+ (y+n(x+c))))=d+y   # label(step_14).
+
+given clause #29: (wt=-20) 832 [para_into,338.1.1.1.2.1.2.2,204.1.1,demod,36,207,205] n(n(d+n(c))+n(c+n(d+n(c))))=d   # label(step_23).
+
+given clause #30: (wt=-20) 1278 [para_from,832.1.1,272.1.1.1.2,demod,36,40,36,1043,flip.1] n(c+n(d+n(c)))=n(c)   # label(step_26).
+
+given clause #31: (wt=21) 60 [para_into,46.1.1.1.1.1.2,39.1.1] n(n(x+ (y+ (z+u)))+n(z+n(x+ (y+u))))=z.
+
+given clause #32: (wt=-20) 1298 [back_demod,1112,demod,1279,1279] n(n(c)+n(c+n(c)))=c   # label(step_27).
+
+given clause #33: (wt=-20) 1404 [para_from,1298.1.1,378.1.1.1.1,demod,40] n(c+n(c+ (n(c)+n(c+ (c+n(c+n(c)))))))=n(c)   # label(step_28).
+
+given clause #34: (wt=-20) 1420 [para_from,1298.1.1,338.1.1.1.2.1.2.2,demod,36,1299] n(n(c+n(c))+n(c+ (c+n(c+n(c)))))=c   # label(step_29).
+
+given clause #35: (wt=-20) 1482 [para_from,1420.1.1,272.1.1.1.2,demod,36,40,36,1405,flip.1] n(c+ (c+n(c+n(c))))=n(c)   # label(step_30).
+
+given clause #36: (wt=23) 62 [para_into,46.1.1.1.1.1.2,37.1.1,demod,38] n(n(x+ (y+ (z+u)))+n(y+ (z+n(x+u))))=y+z.
+
+given clause #37: (wt=-20) 1520 [para_from,1482.1.1,548.1.1.1.1,demod,36,433,flip.1] d+n(c+n(c))=d   # label(step_31).
+
+given clause #38: (wt=-20) 1642 [para_from,1520.1.1,54.1.1.1.2.1.2.2.1,demod,40,207,36,1629] x+n(c+n(c))=x   # label(step_31).
+
+given clause #39: (wt=5) 1646 [para_from,1520.1.1,46.1.1.1.2.1,demod,207,36,1643] n(n(d))=d.
+
+given clause #40: (wt=5) 1682 [back_demod,1522,demod,1643,1643,1643] n(n(c))=c.
+
+given clause #41: (wt=17) 66 [para_into,46.1.1.1.1.1,35.1.1,demod,38] n(n(x+ (y+z))+n(x+n(z+y)))=x.
+
+given clause #42: (wt=7) 1684 [back_demod,1482,demod,1643] n(c+c)=n(c).
+
+given clause #43: (wt=9) 198 [para_from,43.1.1,39.1.1.2,flip.1] c+ (x+d)=x+c.
+
+given clause #44: (wt=9) 896 [para_into,52.1.1.1.2.1.1.1,35.1.1,demod,113] n(x+y)=n(y+x).
+
+given clause #45: (wt=9) 1698 [para_into,1642.1.1,35.1.1] n(c+n(c))+x=x.
+
+given clause #46: (wt=21) 68 [para_into,46.1.1.1.2.1.2.1,39.1.1] n(n(x+ (y+ (z+u)))+n(y+n(z+ (x+u))))=y.
+
+given clause #47: (wt=7) 1961 [para_from,1698.1.1,52.1.1.1,demod,1699,1699,1753,1699] n(n(n(x)))=n(x).
+
+given clause #48: (wt=5) 2031 [para_into,1961.1.1.1.1,378.1.1,demod,379] n(n(x))=x.
+
+-------- PROOF -------- 
+
+----> UNIT CONFLICT at   0.47 sec ----> 2174 [binary,2173.1,34.1] $F.
+
+Length of proof is 37.  Level of proof is 17.
+
+---------------- PROOF ----------------
+
+34 [] x=x.
+36,35 [] x+y=y+x.
+38,37 [] (x+y)+z=x+ (y+z).
+40,39 [] x+ (y+z)=y+ (x+z).
+41 [] n(n(x+y)+n(x+n(y)))=x.
+43 [] c+d=c.
+45 [] n(A+n(B))+n(n(A)+n(B))!=B.
+46 [para_into,41.1.1.1.1.1,39.1.1] n(n(x+ (y+z))+n(y+n(x+z)))=y   # label(step_1).
+50 [para_into,41.1.1.1.1.1,35.1.1] n(n(x+y)+n(y+n(x)))=y   # label(step_2).
+52 [para_into,41.1.1.1.1,41.1.1] n(x+n(n(x+y)+n(n(x+n(y)))))=n(x+y).
+54 [para_into,41.1.1.1.2.1.2,41.1.1,demod,36] n(n(x+y)+n(x+ (n(y+z)+n(y+n(z)))))=x   # label(step_3).
+56 [para_into,41.1.1.1.2.1,35.1.1] n(n(x+y)+n(n(y)+x))=x   # label(step_4).
+64 [para_into,46.1.1.1.1.1.2,35.1.1] n(n(x+ (y+z))+n(z+n(x+y)))=z   # label(step_7).
+70 [para_into,46.1.1.1.2.1.2.1,35.1.1] n(n(x+ (y+z))+n(y+n(z+x)))=y   # label(step_8).
+102 [para_into,50.1.1.1.2.1,35.1.1] n(n(x+y)+n(n(x)+y))=y   # label(step_10).
+106 [para_into,50.1.1.1,35.1.1] n(n(x+n(y))+n(y+x))=x   # label(step_11).
+158 [para_into,56.1.1.1.2.1.1,50.1.1] n(n(x+ (n(y+z)+n(z+n(y))))+n(z+x))=x   # label(step_12).
+205,204 [para_from,43.1.1,50.1.1.1.1.1] n(n(c)+n(d+n(c)))=d   # label(step_9).
+207,206 [para_from,43.1.1,37.1.1.1,flip.1] c+ (d+x)=c+x   # label(step_5).
+244 [para_into,70.1.1.1.1.1.2,43.1.1] n(n(x+c)+n(c+n(d+x)))=c   # label(step_13).
+272 [para_into,70.1.1.1.2.1,35.1.1] n(n(x+ (y+z))+n(n(z+x)+y))=y   # label(step_16).
+338 [para_into,102.1.1.1.2,102.1.1,demod,38,36] n(x+n(y+ (x+n(n(y)+x))))=n(n(y)+x)   # label(step_19).
+376 [para_into,106.1.1.1.2.1,39.1.1,demod,38] n(n(x+ (y+n(z)))+n(x+ (z+y)))=x+y   # label(step_20).
+379,378 [para_from,106.1.1,54.1.1.1.2.1.2.2,demod,40,36,36] n(n(x+n(y+n(z)))+n(x+ (y+n(z+ (y+n(y+n(z)))))))=x   # label(step_21).
+433,432 [para_into,158.1.1.1.2.1,43.1.1,demod,36] n(n(c)+n(d+ (n(x+c)+n(c+n(x)))))=d   # label(step_22).
+496 [para_from,204.1.1,102.1.1.1.2,demod,36] n(d+n(c+n(d+n(c))))=n(d+n(c))   # label(step_17).
+548 [para_from,206.1.1,64.1.1.1.1.1.2,demod,38] n(n(x+ (c+y))+n(d+ (y+n(x+c))))=d+y   # label(step_14).
+832 [para_into,338.1.1.1.2.1.2.2,204.1.1,demod,36,207,205] n(n(d+n(c))+n(c+n(d+n(c))))=d   # label(step_23).
+1043,1042 [para_into,378.1.1.1.1,204.1.1,demod,207,40] n(d+n(d+ (n(c)+n(c+n(d+n(c))))))=n(c)   # label(step_25).
+1112 [para_from,496.1.1,244.1.1.1.2.1.2,demod,36,36] n(n(c+n(d+n(c)))+n(c+n(c+n(d+n(c)))))=c   # label(step_24).
+1279,1278 [para_from,832.1.1,272.1.1.1.2,demod,36,40,36,1043,flip.1] n(c+n(d+n(c)))=n(c)   # label(step_26).
+1299,1298 [back_demod,1112,demod,1279,1279] n(n(c)+n(c+n(c)))=c   # label(step_27).
+1405,1404 [para_from,1298.1.1,378.1.1.1.1,demod,40] n(c+n(c+ (n(c)+n(c+ (c+n(c+n(c)))))))=n(c)   # label(step_28).
+1420 [para_from,1298.1.1,338.1.1.1.2.1.2.2,demod,36,1299] n(n(c+n(c))+n(c+ (c+n(c+n(c)))))=c   # label(step_29).
+1482 [para_from,1420.1.1,272.1.1.1.2,demod,36,40,36,1405,flip.1] n(c+ (c+n(c+n(c))))=n(c)   # label(step_30).
+1520 [para_from,1482.1.1,548.1.1.1.1,demod,36,433,flip.1] d+n(c+n(c))=d   # label(step_31).
+1629,1628 [para_from,1520.1.1,376.1.1.1.2.1.2,demod,36,36] n(n(x+d)+n(x+ (n(d)+n(c+n(c)))))=x+n(c+n(c))   # label(step_32).
+1643,1642 [para_from,1520.1.1,54.1.1.1.2.1.2.2.1,demod,40,207,36,1629] x+n(c+n(c))=x   # label(step_31).
+1699,1698 [para_into,1642.1.1,35.1.1] n(c+n(c))+x=x.
+1753,1752 [para_from,1642.1.1,338.1.1.1.2.1.2.2.1,demod,1699,1699,1643] n(n(x+n(n(x))))=n(n(x)).
+1961 [para_from,1698.1.1,52.1.1.1,demod,1699,1699,1753,1699] n(n(n(x)))=n(x).
+2032,2031 [para_into,1961.1.1.1.1,378.1.1,demod,379] n(n(x))=x.
+2144,2143 [para_into,2031.1.1.1,102.1.1,flip.1] n(x+y)+n(n(x)+y)=n(y).
+2173 [back_demod,45,demod,2144,2032] B!=B.
+2174 [binary,2173.1,34.1] $F.
+
+------------ end of proof -------------
+
+
+;; BEGINNING OF PROOF OBJECT
+(
+(1 (input) (= v0 v0) (34))
+(2 (input) (= (+ v0 v1) (+ v1 v0)) (35))
+(3 (input) (= (+ (+ v0 v1) v2) (+ v0 (+ v1 v2))) (37))
+(4 (input) (= (+ v0 (+ v1 v2)) (+ v1 (+ v0 v2))) (39))
+(5 (input) (= (n (+ (n (+ v0 v1)) (n (+ v0 (n v1))))) v0) (41))
+(6 (input) (= (+ (c) (d)) (c)) (43))
+(7 (input) (not (= (+ (n (+ (A) (n (B)))) (n (+ (n (A)) (n (B))))) (B))) (45))
+(8 (instantiate 4 ((v0 . v64))) (= (+ v64 (+ v1 v2)) (+ v1 (+ v64 v2))) NIL)
+(9 (instantiate 5 ((v0 . v64)(v1 . (+ v1 v2)))) (= (n (+ (n (+ v64 (+ v1 v2))) (n (+ v64 (n (+ v1 v2)))))) v64) NIL)
+(10 (paramod 8 (1) 9 (1 1 1 1)) (= (n (+ (n (+ v1 (+ v64 v2))) (n (+ v64 (n (+ v1 v2)))))) v64) NIL)
+(11 (instantiate 10 ((v1 . v0)(v64 . v1))) (= (n (+ (n (+ v0 (+ v1 v2))) (n (+ v1 (n (+ v0 v2)))))) v1) (46))
+(12 (instantiate 2 ((v0 . v64)(v1 . v65))) (= (+ v64 v65) (+ v65 v64)) NIL)
+(13 (instantiate 5 ((v0 . v64)(v1 . v65))) (= (n (+ (n (+ v64 v65)) (n (+ v64 (n v65))))) v64) NIL)
+(14 (paramod 12 (1) 13 (1 1 1 1)) (= (n (+ (n (+ v65 v64)) (n (+ v64 (n v65))))) v64) NIL)
+(15 (instantiate 14 ((v64 . v1)(v65 . v0))) (= (n (+ (n (+ v0 v1)) (n (+ v1 (n v0))))) v1) (50))
+(16 (instantiate 5 ((v0 . (n (+ v0 v1)))(v1 . (n (+ v0 (n v1)))))) (= (n (+ (n (+ (n (+ v0 v1)) (n (+ v0 (n v1))))) (n (+ (n (+ v0 v1)) (n (n (+ v0 (n v1)))))))) (n (+ v0 v1))) NIL)
+(17 (paramod 5 (1) 16 (1 1 1)) (= (n (+ v0 (n (+ (n (+ v0 v1)) (n (n (+ v0 (n v1)))))))) (n (+ v0 v1))) (52))
+(18 (instantiate 5 ((v0 . v64)(v1 . (+ (n (+ v0 v1)) (n (+ v0 (n v1))))))) (= (n (+ (n (+ v64 (+ (n (+ v0 v1)) (n (+ v0 (n v1)))))) (n (+ v64 (n (+ (n (+ v0 v1)) (n (+ v0 (n v1))))))))) v64) NIL)
+(19 (paramod 5 (1) 18 (1 1 2 1 2)) (= (n (+ (n (+ v64 (+ (n (+ v0 v1)) (n (+ v0 (n v1)))))) (n (+ v64 v0)))) v64) NIL)
+(20 (instantiate 2 ((v0 . (n (+ v64 (+ (n (+ v0 v1)) (n (+ v0 (n v1)))))))(v1 . (n (+ v64 v0))))) (= (+ (n (+ v64 (+ (n (+ v0 v1)) (n (+ v0 (n v1)))))) (n (+ v64 v0))) (+ (n (+ v64 v0)) (n (+ v64 (+ (n (+ v0 v1)) (n (+ v0 (n v1)))))))) NIL)
+(21 (paramod 20 (1) 19 (1 1)) (= (n (+ (n (+ v64 v0)) (n (+ v64 (+ (n (+ v0 v1)) (n (+ v0 (n v1)))))))) v64) NIL)
+(22 (instantiate 21 ((v0 . v1)(v1 . v2)(v64 . v0))) (= (n (+ (n (+ v0 v1)) (n (+ v0 (+ (n (+ v1 v2)) (n (+ v1 (n v2)))))))) v0) (54))
+(23 (instantiate 2 ((v0 . v64)(v1 . (n v65)))) (= (+ v64 (n v65)) (+ (n v65) v64)) NIL)
+(24 (instantiate 5 ((v0 . v64)(v1 . v65))) (= (n (+ (n (+ v64 v65)) (n (+ v64 (n v65))))) v64) NIL)
+(25 (paramod 23 (1) 24 (1 1 2 1)) (= (n (+ (n (+ v64 v65)) (n (+ (n v65) v64)))) v64) NIL)
+(26 (instantiate 25 ((v64 . v0)(v65 . v1))) (= (n (+ (n (+ v0 v1)) (n (+ (n v1) v0)))) v0) (56))
+(27 (instantiate 2 ((v0 . v65)(v1 . v66))) (= (+ v65 v66) (+ v66 v65)) NIL)
+(28 (instantiate 11 ((v0 . v64)(v1 . v65)(v2 . v66))) (= (n (+ (n (+ v64 (+ v65 v66))) (n (+ v65 (n (+ v64 v66)))))) v65) NIL)
+(29 (paramod 27 (1) 28 (1 1 1 1 2)) (= (n (+ (n (+ v64 (+ v66 v65))) (n (+ v65 (n (+ v64 v66)))))) v65) NIL)
+(30 (instantiate 29 ((v64 . v0)(v65 . v2)(v66 . v1))) (= (n (+ (n (+ v0 (+ v1 v2))) (n (+ v2 (n (+ v0 v1)))))) v2) (64))
+(31 (instantiate 2 ((v0 . v64)(v1 . v66))) (= (+ v64 v66) (+ v66 v64)) NIL)
+(32 (instantiate 11 ((v0 . v64)(v1 . v65)(v2 . v66))) (= (n (+ (n (+ v64 (+ v65 v66))) (n (+ v65 (n (+ v64 v66)))))) v65) NIL)
+(33 (paramod 31 (1) 32 (1 1 2 1 2 1)) (= (n (+ (n (+ v64 (+ v65 v66))) (n (+ v65 (n (+ v66 v64)))))) v65) NIL)
+(34 (instantiate 33 ((v64 . v0)(v65 . v1)(v66 . v2))) (= (n (+ (n (+ v0 (+ v1 v2))) (n (+ v1 (n (+ v2 v0)))))) v1) (70))
+(35 (instantiate 2 ((v0 . v65)(v1 . (n v64)))) (= (+ v65 (n v64)) (+ (n v64) v65)) NIL)
+(36 (instantiate 15 ((v0 . v64)(v1 . v65))) (= (n (+ (n (+ v64 v65)) (n (+ v65 (n v64))))) v65) NIL)
+(37 (paramod 35 (1) 36 (1 1 2 1)) (= (n (+ (n (+ v64 v65)) (n (+ (n v64) v65)))) v65) NIL)
+(38 (instantiate 37 ((v64 . v0)(v65 . v1))) (= (n (+ (n (+ v0 v1)) (n (+ (n v0) v1)))) v1) (102))
+(39 (instantiate 2 ((v0 . (n (+ v64 v65)))(v1 . (n (+ v65 (n v64)))))) (= (+ (n (+ v64 v65)) (n (+ v65 (n v64)))) (+ (n (+ v65 (n v64))) (n (+ v64 v65)))) NIL)
+(40 (instantiate 15 ((v0 . v64)(v1 . v65))) (= (n (+ (n (+ v64 v65)) (n (+ v65 (n v64))))) v65) NIL)
+(41 (paramod 39 (1) 40 (1 1)) (= (n (+ (n (+ v65 (n v64))) (n (+ v64 v65)))) v65) NIL)
+(42 (instantiate 41 ((v64 . v1)(v65 . v0))) (= (n (+ (n (+ v0 (n v1))) (n (+ v1 v0)))) v0) (106))
+(43 (instantiate 26 ((v0 . v64)(v1 . (+ (n (+ v0 v1)) (n (+ v1 (n v0))))))) (= (n (+ (n (+ v64 (+ (n (+ v0 v1)) (n (+ v1 (n v0)))))) (n (+ (n (+ (n (+ v0 v1)) (n (+ v1 (n v0))))) v64)))) v64) NIL)
+(44 (paramod 15 (1) 43 (1 1 2 1 1)) (= (n (+ (n (+ v64 (+ (n (+ v0 v1)) (n (+ v1 (n v0)))))) (n (+ v1 v64)))) v64) NIL)
+(45 (instantiate 44 ((v0 . v1)(v1 . v2)(v64 . v0))) (= (n (+ (n (+ v0 (+ (n (+ v1 v2)) (n (+ v2 (n v1)))))) (n (+ v2 v0)))) v0) (158))
+(46 (instantiate 15 ((v0 . (c))(v1 . (d)))) (= (n (+ (n (+ (c) (d))) (n (+ (d) (n (c)))))) (d)) NIL)
+(47 (paramod 6 (1) 46 (1 1 1 1)) (= (n (+ (n (c)) (n (+ (d) (n (c)))))) (d)) (204))
+(48 (instantiate 3 ((v0 . (c))(v1 . (d))(v2 . v66))) (= (+ (+ (c) (d)) v66) (+ (c) (+ (d) v66))) NIL)
+(49 (paramod 6 (1) 48 (1 1)) (= (+ (c) v66) (+ (c) (+ (d) v66))) NIL)
+(50 (flip 49 ()) (= (+ (c) (+ (d) v66)) (+ (c) v66)) NIL)
+(51 (instantiate 50 ((v66 . v0))) (= (+ (c) (+ (d) v0)) (+ (c) v0)) (206))
+(52 (instantiate 34 ((v0 . v64)(v1 . (c))(v2 . (d)))) (= (n (+ (n (+ v64 (+ (c) (d)))) (n (+ (c) (n (+ (d) v64)))))) (c)) NIL)
+(53 (paramod 6 (1) 52 (1 1 1 1 2)) (= (n (+ (n (+ v64 (c))) (n (+ (c) (n (+ (d) v64)))))) (c)) NIL)
+(54 (instantiate 53 ((v64 . v0))) (= (n (+ (n (+ v0 (c))) (n (+ (c) (n (+ (d) v0)))))) (c)) (244))
+(55 (instantiate 2 ((v0 . v65)(v1 . (n (+ v66 v64))))) (= (+ v65 (n (+ v66 v64))) (+ (n (+ v66 v64)) v65)) NIL)
+(56 (instantiate 34 ((v0 . v64)(v1 . v65)(v2 . v66))) (= (n (+ (n (+ v64 (+ v65 v66))) (n (+ v65 (n (+ v66 v64)))))) v65) NIL)
+(57 (paramod 55 (1) 56 (1 1 2 1)) (= (n (+ (n (+ v64 (+ v65 v66))) (n (+ (n (+ v66 v64)) v65)))) v65) NIL)
+(58 (instantiate 57 ((v64 . v0)(v65 . v1)(v66 . v2))) (= (n (+ (n (+ v0 (+ v1 v2))) (n (+ (n (+ v2 v0)) v1)))) v1) (272))
+(59 (instantiate 38 ((v0 . (+ v0 v1))(v1 . (n (+ (n v0) v1))))) (= (n (+ (n (+ (+ v0 v1) (n (+ (n v0) v1)))) (n (+ (n (+ v0 v1)) (n (+ (n v0) v1)))))) (n (+ (n v0) v1))) NIL)
+(60 (paramod 38 (1) 59 (1 1 2)) (= (n (+ (n (+ (+ v0 v1) (n (+ (n v0) v1)))) v1)) (n (+ (n v0) v1))) NIL)
+(61 (instantiate 3 ((v0 . v0)(v1 . v1)(v2 . (n (+ (n v0) v1))))) (= (+ (+ v0 v1) (n (+ (n v0) v1))) (+ v0 (+ v1 (n (+ (n v0) v1))))) NIL)
+(62 (paramod 61 (1) 60 (1 1 1 1)) (= (n (+ (n (+ v0 (+ v1 (n (+ (n v0) v1))))) v1)) (n (+ (n v0) v1))) NIL)
+(63 (instantiate 2 ((v0 . (n (+ v0 (+ v1 (n (+ (n v0) v1))))))(v1 . v1))) (= (+ (n (+ v0 (+ v1 (n (+ (n v0) v1))))) v1) (+ v1 (n (+ v0 (+ v1 (n (+ (n v0) v1))))))) NIL)
+(64 (paramod 63 (1) 62 (1 1)) (= (n (+ v1 (n (+ v0 (+ v1 (n (+ (n v0) v1))))))) (n (+ (n v0) v1))) NIL)
+(65 (instantiate 64 ((v0 . v1)(v1 . v0))) (= (n (+ v0 (n (+ v1 (+ v0 (n (+ (n v1) v0))))))) (n (+ (n v1) v0))) (338))
+(66 (instantiate 4 ((v0 . v65))) (= (+ v65 (+ v1 v2)) (+ v1 (+ v65 v2))) NIL)
+(67 (instantiate 42 ((v0 . (+ v1 v2))(v1 . v65))) (= (n (+ (n (+ (+ v1 v2) (n v65))) (n (+ v65 (+ v1 v2))))) (+ v1 v2)) NIL)
+(68 (paramod 66 (1) 67 (1 1 2 1)) (= (n (+ (n (+ (+ v1 v2) (n v65))) (n (+ v1 (+ v65 v2))))) (+ v1 v2)) NIL)
+(69 (instantiate 3 ((v0 . v1)(v1 . v2)(v2 . (n v65)))) (= (+ (+ v1 v2) (n v65)) (+ v1 (+ v2 (n v65)))) NIL)
+(70 (paramod 69 (1) 68 (1 1 1 1)) (= (n (+ (n (+ v1 (+ v2 (n v65)))) (n (+ v1 (+ v65 v2))))) (+ v1 v2)) NIL)
+(71 (instantiate 70 ((v1 . v0)(v2 . v1)(v65 . v2))) (= (n (+ (n (+ v0 (+ v1 (n v2)))) (n (+ v0 (+ v2 v1))))) (+ v0 v1)) (376))
+(72 (instantiate 22 ((v0 . v64)(v1 . (n (+ v0 (n v1))))(v2 . (+ v1 v0)))) (= (n (+ (n (+ v64 (n (+ v0 (n v1))))) (n (+ v64 (+ (n (+ (n (+ v0 (n v1))) (+ v1 v0))) (n (+ (n (+ v0 (n v1))) (n (+ v1 v0))))))))) v64) NIL)
+(73 (paramod 42 (1) 72 (1 1 2 1 2 2)) (= (n (+ (n (+ v64 (n (+ v0 (n v1))))) (n (+ v64 (+ (n (+ (n (+ v0 (n v1))) (+ v1 v0))) v0))))) v64) NIL)
+(74 (instantiate 4 ((v0 . (n (+ v0 (n v1))))(v1 . v1)(v2 . v0))) (= (+ (n (+ v0 (n v1))) (+ v1 v0)) (+ v1 (+ (n (+ v0 (n v1))) v0))) NIL)
+(75 (paramod 74 (1) 73 (1 1 2 1 2 1 1)) (= (n (+ (n (+ v64 (n (+ v0 (n v1))))) (n (+ v64 (+ (n (+ v1 (+ (n (+ v0 (n v1))) v0))) v0))))) v64) NIL)
+(76 (instantiate 2 ((v0 . (n (+ v0 (n v1))))(v1 . v0))) (= (+ (n (+ v0 (n v1))) v0) (+ v0 (n (+ v0 (n v1))))) NIL)
+(77 (paramod 76 (1) 75 (1 1 2 1 2 1 1 2)) (= (n (+ (n (+ v64 (n (+ v0 (n v1))))) (n (+ v64 (+ (n (+ v1 (+ v0 (n (+ v0 (n v1)))))) v0))))) v64) NIL)
+(78 (instantiate 2 ((v0 . (n (+ v1 (+ v0 (n (+ v0 (n v1)))))))(v1 . v0))) (= (+ (n (+ v1 (+ v0 (n (+ v0 (n v1)))))) v0) (+ v0 (n (+ v1 (+ v0 (n (+ v0 (n v1)))))))) NIL)
+(79 (paramod 78 (1) 77 (1 1 2 1 2)) (= (n (+ (n (+ v64 (n (+ v0 (n v1))))) (n (+ v64 (+ v0 (n (+ v1 (+ v0 (n (+ v0 (n v1))))))))))) v64) NIL)
+(80 (instantiate 79 ((v0 . v1)(v1 . v2)(v64 . v0))) (= (n (+ (n (+ v0 (n (+ v1 (n v2))))) (n (+ v0 (+ v1 (n (+ v2 (+ v1 (n (+ v1 (n v2))))))))))) v0) (378))
+(81 (instantiate 45 ((v0 . (d))(v1 . v65)(v2 . (c)))) (= (n (+ (n (+ (d) (+ (n (+ v65 (c))) (n (+ (c) (n v65)))))) (n (+ (c) (d))))) (d)) NIL)
+(82 (paramod 6 (1) 81 (1 1 2 1)) (= (n (+ (n (+ (d) (+ (n (+ v65 (c))) (n (+ (c) (n v65)))))) (n (c)))) (d)) NIL)
+(83 (instantiate 2 ((v0 . (n (+ (d) (+ (n (+ v65 (c))) (n (+ (c) (n v65)))))))(v1 . (n (c))))) (= (+ (n (+ (d) (+ (n (+ v65 (c))) (n (+ (c) (n v65)))))) (n (c))) (+ (n (c)) (n (+ (d) (+ (n (+ v65 (c))) (n (+ (c) (n v65)))))))) NIL)
+(84 (paramod 83 (1) 82 (1 1)) (= (n (+ (n (c)) (n (+ (d) (+ (n (+ v65 (c))) (n (+ (c) (n v65)))))))) (d)) NIL)
+(85 (instantiate 84 ((v65 . v0))) (= (n (+ (n (c)) (n (+ (d) (+ (n (+ v0 (c))) (n (+ (c) (n v0)))))))) (d)) (432))
+(86 (instantiate 38 ((v0 . (c))(v1 . (n (+ (d) (n (c))))))) (= (n (+ (n (+ (c) (n (+ (d) (n (c)))))) (n (+ (n (c)) (n (+ (d) (n (c)))))))) (n (+ (d) (n (c))))) NIL)
+(87 (paramod 47 (1) 86 (1 1 2)) (= (n (+ (n (+ (c) (n (+ (d) (n (c)))))) (d))) (n (+ (d) (n (c))))) NIL)
+(88 (instantiate 2 ((v0 . (n (+ (c) (n (+ (d) (n (c)))))))(v1 . (d)))) (= (+ (n (+ (c) (n (+ (d) (n (c)))))) (d)) (+ (d) (n (+ (c) (n (+ (d) (n (c)))))))) NIL)
+(89 (paramod 88 (1) 87 (1 1)) (= (n (+ (d) (n (+ (c) (n (+ (d) (n (c)))))))) (n (+ (d) (n (c))))) (496))
+(90 (instantiate 30 ((v0 . v64)(v1 . (c))(v2 . (+ (d) v0)))) (= (n (+ (n (+ v64 (+ (c) (+ (d) v0)))) (n (+ (+ (d) v0) (n (+ v64 (c))))))) (+ (d) v0)) NIL)
+(91 (paramod 51 (1) 90 (1 1 1 1 2)) (= (n (+ (n (+ v64 (+ (c) v0))) (n (+ (+ (d) v0) (n (+ v64 (c))))))) (+ (d) v0)) NIL)
+(92 (instantiate 3 ((v0 . (d))(v1 . v0)(v2 . (n (+ v64 (c)))))) (= (+ (+ (d) v0) (n (+ v64 (c)))) (+ (d) (+ v0 (n (+ v64 (c)))))) NIL)
+(93 (paramod 92 (1) 91 (1 1 2 1)) (= (n (+ (n (+ v64 (+ (c) v0))) (n (+ (d) (+ v0 (n (+ v64 (c)))))))) (+ (d) v0)) NIL)
+(94 (instantiate 93 ((v0 . v1)(v64 . v0))) (= (n (+ (n (+ v0 (+ (c) v1))) (n (+ (d) (+ v1 (n (+ v0 (c)))))))) (+ (d) v1)) (548))
+(95 (instantiate 65 ((v0 . (n (+ (d) (n (c)))))(v1 . (c)))) (= (n (+ (n (+ (d) (n (c)))) (n (+ (c) (+ (n (+ (d) (n (c)))) (n (+ (n (c)) (n (+ (d) (n (c))))))))))) (n (+ (n (c)) (n (+ (d) (n (c))))))) NIL)
+(96 (paramod 47 (1) 95 (1 1 2 1 2 2)) (= (n (+ (n (+ (d) (n (c)))) (n (+ (c) (+ (n (+ (d) (n (c)))) (d)))))) (n (+ (n (c)) (n (+ (d) (n (c))))))) NIL)
+(97 (instantiate 2 ((v0 . (n (+ (d) (n (c)))))(v1 . (d)))) (= (+ (n (+ (d) (n (c)))) (d)) (+ (d) (n (+ (d) (n (c)))))) NIL)
+(98 (paramod 97 (1) 96 (1 1 2 1 2)) (= (n (+ (n (+ (d) (n (c)))) (n (+ (c) (+ (d) (n (+ (d) (n (c))))))))) (n (+ (n (c)) (n (+ (d) (n (c))))))) NIL)
+(99 (instantiate 51 ((v0 . (n (+ (d) (n (c))))))) (= (+ (c) (+ (d) (n (+ (d) (n (c)))))) (+ (c) (n (+ (d) (n (c)))))) NIL)
+(100 (paramod 99 (1) 98 (1 1 2 1)) (= (n (+ (n (+ (d) (n (c)))) (n (+ (c) (n (+ (d) (n (c)))))))) (n (+ (n (c)) (n (+ (d) (n (c))))))) NIL)
+(101 (paramod 47 (1) 100 (2)) (= (n (+ (n (+ (d) (n (c)))) (n (+ (c) (n (+ (d) (n (c)))))))) (d)) (832))
+(102 (instantiate 80 ((v0 . (n (c)))(v1 . (d))(v2 . (c)))) (= (n (+ (n (+ (n (c)) (n (+ (d) (n (c)))))) (n (+ (n (c)) (+ (d) (n (+ (c) (+ (d) (n (+ (d) (n (c)))))))))))) (n (c))) NIL)
+(103 (paramod 47 (1) 102 (1 1 1)) (= (n (+ (d) (n (+ (n (c)) (+ (d) (n (+ (c) (+ (d) (n (+ (d) (n (c)))))))))))) (n (c))) NIL)
+(104 (instantiate 51 ((v0 . (n (+ (d) (n (c))))))) (= (+ (c) (+ (d) (n (+ (d) (n (c)))))) (+ (c) (n (+ (d) (n (c)))))) NIL)
+(105 (paramod 104 (1) 103 (1 1 2 1 2 2 1)) (= (n (+ (d) (n (+ (n (c)) (+ (d) (n (+ (c) (n (+ (d) (n (c))))))))))) (n (c))) NIL)
+(106 (instantiate 4 ((v0 . (n (c)))(v1 . (d))(v2 . (n (+ (c) (n (+ (d) (n (c))))))))) (= (+ (n (c)) (+ (d) (n (+ (c) (n (+ (d) (n (c)))))))) (+ (d) (+ (n (c)) (n (+ (c) (n (+ (d) (n (c))))))))) NIL)
+(107 (paramod 106 (1) 105 (1 1 2 1)) (= (n (+ (d) (n (+ (d) (+ (n (c)) (n (+ (c) (n (+ (d) (n (c))))))))))) (n (c))) (1042))
+(108 (instantiate 54 ((v0 . (n (+ (c) (n (+ (d) (n (c))))))))) (= (n (+ (n (+ (n (+ (c) (n (+ (d) (n (c)))))) (c))) (n (+ (c) (n (+ (d) (n (+ (c) (n (+ (d) (n (c)))))))))))) (c)) NIL)
+(109 (paramod 89 (1) 108 (1 1 2 1 2)) (= (n (+ (n (+ (n (+ (c) (n (+ (d) (n (c)))))) (c))) (n (+ (c) (n (+ (d) (n (c)))))))) (c)) NIL)
+(110 (instantiate 2 ((v0 . (n (+ (c) (n (+ (d) (n (c)))))))(v1 . (c)))) (= (+ (n (+ (c) (n (+ (d) (n (c)))))) (c)) (+ (c) (n (+ (c) (n (+ (d) (n (c)))))))) NIL)
+(111 (paramod 110 (1) 109 (1 1 1 1)) (= (n (+ (n (+ (c) (n (+ (c) (n (+ (d) (n (c)))))))) (n (+ (c) (n (+ (d) (n (c)))))))) (c)) NIL)
+(112 (instantiate 2 ((v0 . (n (+ (c) (n (+ (c) (n (+ (d) (n (c)))))))))(v1 . (n (+ (c) (n (+ (d) (n (c))))))))) (= (+ (n (+ (c) (n (+ (c) (n (+ (d) (n (c)))))))) (n (+ (c) (n (+ (d) (n (c))))))) (+ (n (+ (c) (n (+ (d) (n (c)))))) (n (+ (c) (n (+ (c) (n (+ (d) (n (c)))))))))) NIL)
+(113 (paramod 112 (1) 111 (1 1)) (= (n (+ (n (+ (c) (n (+ (d) (n (c)))))) (n (+ (c) (n (+ (c) (n (+ (d) (n (c)))))))))) (c)) (1112))
+(114 (instantiate 58 ((v0 . (n (c)))(v1 . (n (+ (c) (n (+ (d) (n (c)))))))(v2 . (d)))) (= (n (+ (n (+ (n (c)) (+ (n (+ (c) (n (+ (d) (n (c)))))) (d)))) (n (+ (n (+ (d) (n (c)))) (n (+ (c) (n (+ (d) (n (c)))))))))) (n (+ (c) (n (+ (d) (n (c))))))) NIL)
+(115 (paramod 101 (1) 114 (1 1 2)) (= (n (+ (n (+ (n (c)) (+ (n (+ (c) (n (+ (d) (n (c)))))) (d)))) (d))) (n (+ (c) (n (+ (d) (n (c))))))) NIL)
+(116 (instantiate 2 ((v0 . (n (+ (c) (n (+ (d) (n (c)))))))(v1 . (d)))) (= (+ (n (+ (c) (n (+ (d) (n (c)))))) (d)) (+ (d) (n (+ (c) (n (+ (d) (n (c)))))))) NIL)
+(117 (paramod 116 (1) 115 (1 1 1 1 2)) (= (n (+ (n (+ (n (c)) (+ (d) (n (+ (c) (n (+ (d) (n (c))))))))) (d))) (n (+ (c) (n (+ (d) (n (c))))))) NIL)
+(118 (instantiate 4 ((v0 . (n (c)))(v1 . (d))(v2 . (n (+ (c) (n (+ (d) (n (c))))))))) (= (+ (n (c)) (+ (d) (n (+ (c) (n (+ (d) (n (c)))))))) (+ (d) (+ (n (c)) (n (+ (c) (n (+ (d) (n (c))))))))) NIL)
+(119 (paramod 118 (1) 117 (1 1 1 1)) (= (n (+ (n (+ (d) (+ (n (c)) (n (+ (c) (n (+ (d) (n (c))))))))) (d))) (n (+ (c) (n (+ (d) (n (c))))))) NIL)
+(120 (instantiate 2 ((v0 . (n (+ (d) (+ (n (c)) (n (+ (c) (n (+ (d) (n (c))))))))))(v1 . (d)))) (= (+ (n (+ (d) (+ (n (c)) (n (+ (c) (n (+ (d) (n (c))))))))) (d)) (+ (d) (n (+ (d) (+ (n (c)) (n (+ (c) (n (+ (d) (n (c))))))))))) NIL)
+(121 (paramod 120 (1) 119 (1 1)) (= (n (+ (d) (n (+ (d) (+ (n (c)) (n (+ (c) (n (+ (d) (n (c))))))))))) (n (+ (c) (n (+ (d) (n (c))))))) NIL)
+(122 (paramod 107 (1) 121 (1)) (= (n (c)) (n (+ (c) (n (+ (d) (n (c))))))) NIL)
+(123 (flip 122 ()) (= (n (+ (c) (n (+ (d) (n (c)))))) (n (c))) (1278))
+(124 (paramod 123 (1) 113 (1 1 1)) (= (n (+ (n (c)) (n (+ (c) (n (+ (c) (n (+ (d) (n (c)))))))))) (c)) NIL)
+(125 (paramod 123 (1) 124 (1 1 2 1 2)) (= (n (+ (n (c)) (n (+ (c) (n (c)))))) (c)) (1298))
+(126 (instantiate 80 ((v0 . (n (c)))(v1 . (c))(v2 . (c)))) (= (n (+ (n (+ (n (c)) (n (+ (c) (n (c)))))) (n (+ (n (c)) (+ (c) (n (+ (c) (+ (c) (n (+ (c) (n (c)))))))))))) (n (c))) NIL)
+(127 (paramod 125 (1) 126 (1 1 1)) (= (n (+ (c) (n (+ (n (c)) (+ (c) (n (+ (c) (+ (c) (n (+ (c) (n (c)))))))))))) (n (c))) NIL)
+(128 (instantiate 4 ((v0 . (n (c)))(v1 . (c))(v2 . (n (+ (c) (+ (c) (n (+ (c) (n (c)))))))))) (= (+ (n (c)) (+ (c) (n (+ (c) (+ (c) (n (+ (c) (n (c))))))))) (+ (c) (+ (n (c)) (n (+ (c) (+ (c) (n (+ (c) (n (c)))))))))) NIL)
+(129 (paramod 128 (1) 127 (1 1 2 1)) (= (n (+ (c) (n (+ (c) (+ (n (c)) (n (+ (c) (+ (c) (n (+ (c) (n (c)))))))))))) (n (c))) (1404))
+(130 (instantiate 65 ((v0 . (n (+ (c) (n (c)))))(v1 . (c)))) (= (n (+ (n (+ (c) (n (c)))) (n (+ (c) (+ (n (+ (c) (n (c)))) (n (+ (n (c)) (n (+ (c) (n (c))))))))))) (n (+ (n (c)) (n (+ (c) (n (c))))))) NIL)
+(131 (paramod 125 (1) 130 (1 1 2 1 2 2)) (= (n (+ (n (+ (c) (n (c)))) (n (+ (c) (+ (n (+ (c) (n (c)))) (c)))))) (n (+ (n (c)) (n (+ (c) (n (c))))))) NIL)
+(132 (instantiate 2 ((v0 . (n (+ (c) (n (c)))))(v1 . (c)))) (= (+ (n (+ (c) (n (c)))) (c)) (+ (c) (n (+ (c) (n (c)))))) NIL)
+(133 (paramod 132 (1) 131 (1 1 2 1 2)) (= (n (+ (n (+ (c) (n (c)))) (n (+ (c) (+ (c) (n (+ (c) (n (c))))))))) (n (+ (n (c)) (n (+ (c) (n (c))))))) NIL)
+(134 (paramod 125 (1) 133 (2)) (= (n (+ (n (+ (c) (n (c)))) (n (+ (c) (+ (c) (n (+ (c) (n (c))))))))) (c)) (1420))
+(135 (instantiate 58 ((v0 . (n (c)))(v1 . (n (+ (c) (+ (c) (n (+ (c) (n (c))))))))(v2 . (c)))) (= (n (+ (n (+ (n (c)) (+ (n (+ (c) (+ (c) (n (+ (c) (n (c))))))) (c)))) (n (+ (n (+ (c) (n (c)))) (n (+ (c) (+ (c) (n (+ (c) (n (c))))))))))) (n (+ (c) (+ (c) (n (+ (c) (n (c)))))))) NIL)
+(136 (paramod 134 (1) 135 (1 1 2)) (= (n (+ (n (+ (n (c)) (+ (n (+ (c) (+ (c) (n (+ (c) (n (c))))))) (c)))) (c))) (n (+ (c) (+ (c) (n (+ (c) (n (c)))))))) NIL)
+(137 (instantiate 2 ((v0 . (n (+ (c) (+ (c) (n (+ (c) (n (c))))))))(v1 . (c)))) (= (+ (n (+ (c) (+ (c) (n (+ (c) (n (c))))))) (c)) (+ (c) (n (+ (c) (+ (c) (n (+ (c) (n (c))))))))) NIL)
+(138 (paramod 137 (1) 136 (1 1 1 1 2)) (= (n (+ (n (+ (n (c)) (+ (c) (n (+ (c) (+ (c) (n (+ (c) (n (c)))))))))) (c))) (n (+ (c) (+ (c) (n (+ (c) (n (c)))))))) NIL)
+(139 (instantiate 4 ((v0 . (n (c)))(v1 . (c))(v2 . (n (+ (c) (+ (c) (n (+ (c) (n (c)))))))))) (= (+ (n (c)) (+ (c) (n (+ (c) (+ (c) (n (+ (c) (n (c))))))))) (+ (c) (+ (n (c)) (n (+ (c) (+ (c) (n (+ (c) (n (c)))))))))) NIL)
+(140 (paramod 139 (1) 138 (1 1 1 1)) (= (n (+ (n (+ (c) (+ (n (c)) (n (+ (c) (+ (c) (n (+ (c) (n (c)))))))))) (c))) (n (+ (c) (+ (c) (n (+ (c) (n (c)))))))) NIL)
+(141 (instantiate 2 ((v0 . (n (+ (c) (+ (n (c)) (n (+ (c) (+ (c) (n (+ (c) (n (c)))))))))))(v1 . (c)))) (= (+ (n (+ (c) (+ (n (c)) (n (+ (c) (+ (c) (n (+ (c) (n (c)))))))))) (c)) (+ (c) (n (+ (c) (+ (n (c)) (n (+ (c) (+ (c) (n (+ (c) (n (c)))))))))))) NIL)
+(142 (paramod 141 (1) 140 (1 1)) (= (n (+ (c) (n (+ (c) (+ (n (c)) (n (+ (c) (+ (c) (n (+ (c) (n (c)))))))))))) (n (+ (c) (+ (c) (n (+ (c) (n (c)))))))) NIL)
+(143 (paramod 129 (1) 142 (1)) (= (n (c)) (n (+ (c) (+ (c) (n (+ (c) (n (c)))))))) NIL)
+(144 (flip 143 ()) (= (n (+ (c) (+ (c) (n (+ (c) (n (c))))))) (n (c))) (1482))
+(145 (instantiate 94 ((v0 . (c))(v1 . (n (+ (c) (n (c))))))) (= (n (+ (n (+ (c) (+ (c) (n (+ (c) (n (c))))))) (n (+ (d) (+ (n (+ (c) (n (c)))) (n (+ (c) (c)))))))) (+ (d) (n (+ (c) (n (c)))))) NIL)
+(146 (paramod 144 (1) 145 (1 1 1)) (= (n (+ (n (c)) (n (+ (d) (+ (n (+ (c) (n (c)))) (n (+ (c) (c)))))))) (+ (d) (n (+ (c) (n (c)))))) NIL)
+(147 (instantiate 2 ((v0 . (n (+ (c) (n (c)))))(v1 . (n (+ (c) (c)))))) (= (+ (n (+ (c) (n (c)))) (n (+ (c) (c)))) (+ (n (+ (c) (c))) (n (+ (c) (n (c)))))) NIL)
+(148 (paramod 147 (1) 146 (1 1 2 1 2)) (= (n (+ (n (c)) (n (+ (d) (+ (n (+ (c) (c))) (n (+ (c) (n (c))))))))) (+ (d) (n (+ (c) (n (c)))))) NIL)
+(149 (instantiate 85 ((v0 . (c)))) (= (n (+ (n (c)) (n (+ (d) (+ (n (+ (c) (c))) (n (+ (c) (n (c))))))))) (d)) NIL)
+(150 (paramod 149 (1) 148 (1)) (= (d) (+ (d) (n (+ (c) (n (c)))))) NIL)
+(151 (flip 150 ()) (= (+ (d) (n (+ (c) (n (c))))) (d)) (1520))
+(152 (instantiate 71 ((v0 . v64)(v1 . (n (+ (c) (n (c)))))(v2 . (d)))) (= (n (+ (n (+ v64 (+ (n (+ (c) (n (c)))) (n (d))))) (n (+ v64 (+ (d) (n (+ (c) (n (c))))))))) (+ v64 (n (+ (c) (n (c)))))) NIL)
+(153 (paramod 151 (1) 152 (1 1 2 1 2)) (= (n (+ (n (+ v64 (+ (n (+ (c) (n (c)))) (n (d))))) (n (+ v64 (d))))) (+ v64 (n (+ (c) (n (c)))))) NIL)
+(154 (instantiate 2 ((v0 . (n (+ (c) (n (c)))))(v1 . (n (d))))) (= (+ (n (+ (c) (n (c)))) (n (d))) (+ (n (d)) (n (+ (c) (n (c)))))) NIL)
+(155 (paramod 154 (1) 153 (1 1 1 1 2)) (= (n (+ (n (+ v64 (+ (n (d)) (n (+ (c) (n (c))))))) (n (+ v64 (d))))) (+ v64 (n (+ (c) (n (c)))))) NIL)
+(156 (instantiate 2 ((v0 . (n (+ v64 (+ (n (d)) (n (+ (c) (n (c))))))))(v1 . (n (+ v64 (d)))))) (= (+ (n (+ v64 (+ (n (d)) (n (+ (c) (n (c))))))) (n (+ v64 (d)))) (+ (n (+ v64 (d))) (n (+ v64 (+ (n (d)) (n (+ (c) (n (c))))))))) NIL)
+(157 (paramod 156 (1) 155 (1 1)) (= (n (+ (n (+ v64 (d))) (n (+ v64 (+ (n (d)) (n (+ (c) (n (c))))))))) (+ v64 (n (+ (c) (n (c)))))) NIL)
+(158 (instantiate 157 ((v64 . v0))) (= (n (+ (n (+ v0 (d))) (n (+ v0 (+ (n (d)) (n (+ (c) (n (c))))))))) (+ v0 (n (+ (c) (n (c)))))) (1628))
+(159 (instantiate 22 ((v0 . v64)(v1 . (d))(v2 . (+ (c) (n (c)))))) (= (n (+ (n (+ v64 (d))) (n (+ v64 (+ (n (+ (d) (+ (c) (n (c))))) (n (+ (d) (n (+ (c) (n (c))))))))))) v64) NIL)
+(160 (paramod 151 (1) 159 (1 1 2 1 2 2 1)) (= (n (+ (n (+ v64 (d))) (n (+ v64 (+ (n (+ (d) (+ (c) (n (c))))) (n (d))))))) v64) NIL)
+(161 (instantiate 4 ((v0 . (d))(v1 . (c))(v2 . (n (c))))) (= (+ (d) (+ (c) (n (c)))) (+ (c) (+ (d) (n (c))))) NIL)
+(162 (paramod 161 (1) 160 (1 1 2 1 2 1 1)) (= (n (+ (n (+ v64 (d))) (n (+ v64 (+ (n (+ (c) (+ (d) (n (c))))) (n (d))))))) v64) NIL)
+(163 (instantiate 51 ((v0 . (n (c))))) (= (+ (c) (+ (d) (n (c)))) (+ (c) (n (c)))) NIL)
+(164 (paramod 163 (1) 162 (1 1 2 1 2 1 1)) (= (n (+ (n (+ v64 (d))) (n (+ v64 (+ (n (+ (c) (n (c)))) (n (d))))))) v64) NIL)
+(165 (instantiate 2 ((v0 . (n (+ (c) (n (c)))))(v1 . (n (d))))) (= (+ (n (+ (c) (n (c)))) (n (d))) (+ (n (d)) (n (+ (c) (n (c)))))) NIL)
+(166 (paramod 165 (1) 164 (1 1 2 1 2)) (= (n (+ (n (+ v64 (d))) (n (+ v64 (+ (n (d)) (n (+ (c) (n (c))))))))) v64) NIL)
+(167 (instantiate 158 ((v0 . v64))) (= (n (+ (n (+ v64 (d))) (n (+ v64 (+ (n (d)) (n (+ (c) (n (c))))))))) (+ v64 (n (+ (c) (n (c)))))) NIL)
+(168 (paramod 167 (1) 166 (1)) (= (+ v64 (n (+ (c) (n (c))))) v64) NIL)
+(169 (instantiate 168 ((v64 . v0))) (= (+ v0 (n (+ (c) (n (c))))) v0) (1642))
+(170 (instantiate 2 ((v0 . v64)(v1 . (n (+ (c) (n (c))))))) (= (+ v64 (n (+ (c) (n (c))))) (+ (n (+ (c) (n (c)))) v64)) NIL)
+(171 (instantiate 169 ((v0 . v64))) (= (+ v64 (n (+ (c) (n (c))))) v64) NIL)
+(172 (paramod 170 (1) 171 (1)) (= (+ (n (+ (c) (n (c)))) v64) v64) NIL)
+(173 (instantiate 172 ((v64 . v0))) (= (+ (n (+ (c) (n (c)))) v0) v0) (1698))
+(174 (instantiate 169 ((v0 . (n v65)))) (= (+ (n v65) (n (+ (c) (n (c))))) (n v65)) NIL)
+(175 (instantiate 65 ((v0 . (n (+ (c) (n (c)))))(v1 . v65))) (= (n (+ (n (+ (c) (n (c)))) (n (+ v65 (+ (n (+ (c) (n (c)))) (n (+ (n v65) (n (+ (c) (n (c))))))))))) (n (+ (n v65) (n (+ (c) (n (c))))))) NIL)
+(176 (paramod 174 (1) 175 (1 1 2 1 2 2 1)) (= (n (+ (n (+ (c) (n (c)))) (n (+ v65 (+ (n (+ (c) (n (c)))) (n (n v65))))))) (n (+ (n v65) (n (+ (c) (n (c))))))) NIL)
+(177 (instantiate 173 ((v0 . (n (n v65))))) (= (+ (n (+ (c) (n (c)))) (n (n v65))) (n (n v65))) NIL)
+(178 (paramod 177 (1) 176 (1 1 2 1 2)) (= (n (+ (n (+ (c) (n (c)))) (n (+ v65 (n (n v65)))))) (n (+ (n v65) (n (+ (c) (n (c))))))) NIL)
+(179 (instantiate 173 ((v0 . (n (+ v65 (n (n v65))))))) (= (+ (n (+ (c) (n (c)))) (n (+ v65 (n (n v65))))) (n (+ v65 (n (n v65))))) NIL)
+(180 (paramod 179 (1) 178 (1 1)) (= (n (n (+ v65 (n (n v65))))) (n (+ (n v65) (n (+ (c) (n (c))))))) NIL)
+(181 (instantiate 169 ((v0 . (n v65)))) (= (+ (n v65) (n (+ (c) (n (c))))) (n v65)) NIL)
+(182 (paramod 181 (1) 180 (2 1)) (= (n (n (+ v65 (n (n v65))))) (n (n v65))) NIL)
+(183 (instantiate 182 ((v65 . v0))) (= (n (n (+ v0 (n (n v0))))) (n (n v0))) (1752))
+(184 (instantiate 173 ((v0 . (n (+ (n (+ (n (+ (c) (n (c)))) v65)) (n (n (+ (n (+ (c) (n (c)))) (n v65))))))))) (= (+ (n (+ (c) (n (c)))) (n (+ (n (+ (n (+ (c) (n (c)))) v65)) (n (n (+ (n (+ (c) (n (c)))) (n v65))))))) (n (+ (n (+ (n (+ (c) (n (c)))) v65)) (n (n (+ (n (+ (c) (n (c)))) (n v65))))))) NIL)
+(185 (instantiate 17 ((v0 . (n (+ (c) (n (c)))))(v1 . v65))) (= (n (+ (n (+ (c) (n (c)))) (n (+ (n (+ (n (+ (c) (n (c)))) v65)) (n (n (+ (n (+ (c) (n (c)))) (n v65)))))))) (n (+ (n (+ (c) (n (c)))) v65))) NIL)
+(186 (paramod 184 (1) 185 (1 1)) (= (n (n (+ (n (+ (n (+ (c) (n (c)))) v65)) (n (n (+ (n (+ (c) (n (c)))) (n v65))))))) (n (+ (n (+ (c) (n (c)))) v65))) NIL)
+(187 (instantiate 173 ((v0 . v65))) (= (+ (n (+ (c) (n (c)))) v65) v65) NIL)
+(188 (paramod 187 (1) 186 (1 1 1 1 1)) (= (n (n (+ (n v65) (n (n (+ (n (+ (c) (n (c)))) (n v65))))))) (n (+ (n (+ (c) (n (c)))) v65))) NIL)
+(189 (instantiate 173 ((v0 . (n v65)))) (= (+ (n (+ (c) (n (c)))) (n v65)) (n v65)) NIL)
+(190 (paramod 189 (1) 188 (1 1 1 2 1 1)) (= (n (n (+ (n v65) (n (n (n v65)))))) (n (+ (n (+ (c) (n (c)))) v65))) NIL)
+(191 (instantiate 183 ((v0 . (n v65)))) (= (n (n (+ (n v65) (n (n (n v65)))))) (n (n (n v65)))) NIL)
+(192 (paramod 191 (1) 190 (1)) (= (n (n (n v65))) (n (+ (n (+ (c) (n (c)))) v65))) NIL)
+(193 (instantiate 173 ((v0 . v65))) (= (+ (n (+ (c) (n (c)))) v65) v65) NIL)
+(194 (paramod 193 (1) 192 (2 1)) (= (n (n (n v65))) (n v65)) NIL)
+(195 (instantiate 194 ((v65 . v0))) (= (n (n (n v0))) (n v0)) (1961))
+(196 (instantiate 195 ((v0 . (+ (n (+ v0 (n (+ v1 (n v2))))) (n (+ v0 (+ v1 (n (+ v2 (+ v1 (n (+ v1 (n v2))))))))))))) (= (n (n (n (+ (n (+ v0 (n (+ v1 (n v2))))) (n (+ v0 (+ v1 (n (+ v2 (+ v1 (n (+ v1 (n v2))))))))))))) (n (+ (n (+ v0 (n (+ v1 (n v2))))) (n (+ v0 (+ v1 (n (+ v2 (+ v1 (n (+ v1 (n v2)))))))))))) NIL)
+(197 (paramod 80 (1) 196 (1 1 1)) (= (n (n v0)) (n (+ (n (+ v0 (n (+ v1 (n v2))))) (n (+ v0 (+ v1 (n (+ v2 (+ v1 (n (+ v1 (n v2)))))))))))) NIL)
+(198 (paramod 80 (1) 197 (2)) (= (n (n v0)) v0) (2031))
+(199 (instantiate 198 ((v0 . (+ (n (+ v0 v1)) (n (+ (n v0) v1)))))) (= (n (n (+ (n (+ v0 v1)) (n (+ (n v0) v1))))) (+ (n (+ v0 v1)) (n (+ (n v0) v1)))) NIL)
+(200 (paramod 38 (1) 199 (1 1)) (= (n v1) (+ (n (+ v0 v1)) (n (+ (n v0) v1)))) NIL)
+(201 (flip 200 ()) (= (+ (n (+ v0 v1)) (n (+ (n v0) v1))) (n v1)) (2143))
+(202 (instantiate 201 ((v0 . (A))(v1 . (n (B))))) (= (+ (n (+ (A) (n (B)))) (n (+ (n (A)) (n (B))))) (n (n (B)))) NIL)
+(203 (paramod 202 (1) 7 (1 1)) (not (= (n (n (B))) (B))) NIL)
+(204 (instantiate 198 ((v0 . (B)))) (= (n (n (B))) (B)) NIL)
+(205 (paramod 204 (1) 203 (1 1)) (not (= (B) (B))) (2173))
+(206 (instantiate 1 ((v0 . (B)))) (= (B) (B)) NIL)
+(207 (resolve 205 () 206 ()) false (2174))
+
+Search stopped by max_proofs option.
+
+)
+;; END OF PROOF OBJECT
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 48
+clauses generated           3063
+  para_from generated       1790
+  para_into generated       1273
+demod & eval rewrites       6647
+clauses wt,lit,sk delete     773
+tautologies deleted            0
+clauses forward subsumed    1669
+  (subsumed by sos)           16
+unit deletions                 0
+factor simplifications         0
+clauses kept                1073
+new demodulators            1067
+empty clauses                  1
+clauses back demodulated     423
+clauses back subsumed          2
+usable size                   24
+sos size                     624
+demodulators size            645
+passive size                   0
+hot size                       0
+Kbytes malloced             7812
+
+----------- times (seconds) -----------
+user CPU time          0.48          (0 hr, 0 min, 0 sec)
+system CPU time        0.01          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8947 finished Mon Aug  2 15:31:15 2004

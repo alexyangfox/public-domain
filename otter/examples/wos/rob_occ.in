@@ -1,0 +1,79 @@
+%  Input File for Studying Robbins Algebra with OTTER 3.0
+set(knuth_bendix).
+clear(eq_units_both_ways).
+set(index_for_back_demod).
+set(dynamic_demod_lex_dep).
+set(lrpo).
+set(process_input).
+set(display_terms).
+clear(print_kept).
+clear(print_new_demod).
+clear(print_back_demod).
+% assign(report, 60).
+assign(max_weight, 20).
+assign(max_mem, 8000).
+lex([A, B, C, D, E, F, g(x), n(x), +(x,x)]).
+
+weight_list(pick_and_purge).
+weight(EQ(+(C,C),C), 2).
+%  following are steps from a proof of +(c,c)=c, the union of c and c = c.
+weight(EQ(+(C,+(C,x)),+(C,x)), 2).
+weight(EQ(+(C,+(x,C)),+(C,x)), 2).
+weight(EQ(+(C,+(x,+(y,C))),+(C,+(x,y))), 2).
+weight(EQ(+(C,+(x,+(C,y))),+(C,+(x,y))), 2).
+weight(EQ(n(+(n(+(C,x)),n(+(C,n(+(x,C)))))),C), 2).
+weight(EQ(n(+(n(+(C,x)),n(+(C,n(+(C,x)))))),C), 2).
+weight(EQ(n(+(n(C),n(+(C,n(C))))),C), 2).
+weight(EQ(n(+(n(+(x,y)),n(+(y,n(x))))),y), 2).
+weight(EQ(n(+(n(+(x,y)),n(+(n(y),x)))),x), 2).
+weight(EQ(n(+(C,n(+(n(C),+(C,n(C)))))),n(C)), 2).
+weight(EQ(+(C,+(x,y)),+(C,+(y,x))), 2).
+weight(EQ(n(+(n(+(C,+(x,y))),n(+(C,n(+(y,x)))))),C), 2).
+weight(EQ(n(+(n(+(C,x)),n(+(n(C),+(x,C))))),+(x,C)), 2).
+weight(EQ(n(+(n(+(x,+(y,z))),n(+(z,n(+(x,y)))))),z), 2).
+weight(EQ(n(+(n(+(x,y)),n(+(n(x),y)))),y), 2).
+weight(EQ(n(+(n(+(x,n(y))),n(+(y,x)))),x), 2).
+weight(EQ(n(+(n(+(n(x),y)),n(+(y,x)))),y), 2).
+weight(EQ(n(+(n(+(x,+(y,z))),n(+(n(+(x,y)),z)))),z), 2).
+weight(EQ(n(+(n(+(x,C)),n(+(C,n(+(C,x)))))),C), 2).
+weight(EQ(n(+(C,n(+(C,+(n(+(C,x)),n(+(x,C))))))),n(+(x,C))), 2).
+weight(EQ(n(+(n(C),n(+(C,+(n(C),n(+(C,n(C)))))))),C), 2).
+weight(EQ(n(+(n(+(x,+(y,z))),n(+(y,n(+(x,z)))))),y), 2).
+weight(EQ(n(+(n(C),n(+(n(C),+(C,n(C)))))),C), 2).
+weight(EQ(n(+(n(C),+(C,n(C)))),n(+(C,n(C)))), 2).
+weight(EQ(n(+(C,n(+(C,n(C))))),n(C)), 2).
+weight(EQ(n(+(n(+(x,+(y,z))),n(+(n(+(x,z)),y)))),y), 2).
+weight(EQ(n(+(x,C)),n(+(C,x))), 2).
+weight(EQ(n(+(x,+(y,C))),n(+(C,+(x,y)))), 2).
+weight(EQ(n(+(n(+(C,x)),n(+(C,+(n(C),x))))),+(x,C)), 2).
+weight(EQ(n(+(n(+(C,x)),n(+(n(C),+(x,n(+(C,n(C)))))))),x), 2).
+weight(EQ(+(C,n(+(C,n(C)))),C), 2).
+weight(EQ(+(C,+(x,n(+(C,n(C))))),+(C,x)), 2).
+weight(EQ(+(x,n(+(C,n(C)))),x), 2).
+weight(EQ(+(n(+(C,n(C))),x),x), 2).
+weight(EQ(n(+(n(x),n(+(C,+(x,n(C)))))),x), 2).
+weight(EQ(n(+(n(x),n(n(x)))),n(+(C,n(C)))), 2).
+weight(EQ(n(+(x,n(x))),n(+(C,n(C)))), 2).
+weight(EQ(n(n(+(x,n(n(x))))),n(n(x))), 2).
+weight(EQ(n(n(x)),x), 2).
+weight(EQ(+(n(+(y,x)),n(+(n(y),x))),n(x)), 2).
+end_of_list.
+ 
+list(usable).
+EQ(x,x).
+EQ(+(x,y),+(y,x)).
+EQ(+(+(x,y),z),+(x,+(y,z))).
+end_of_list.
+
+list(sos).
+EQ(n(+(n(+(x,y)),n(+(x,n(y))))),x).    % Robbins axiom
+EQ(+(C,C),C).   % hypothesis
+-EQ(+(n(+(A,n(B))),n(+(n(A),n(B)))),B).  % denial of Huntington axiom
+end_of_list.
+
+% list(demodulators).
+% (+(x,y) = +(y,x)).
+% (+(+(x,y),z) = +(x,+(y,z))).
+% (n(+(n(+(x,y)),n(+(x,n(y))))) = x).    % Robbins axiom
+% (+(C,C) = C).   % hypothesis
+% end_of_list.

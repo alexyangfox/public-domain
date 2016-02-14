@@ -1,0 +1,19 @@
+#!/usr/bin/perl -w
+
+$mace2 = "../../bin/mace2";
+
+if (! -x $mace2) { die "binary $mace2 not found"; }
+
+$unsatisfiable_exit = 12;
+$input = "/tmp/mace2$$";
+
+while ($equation = <STDIN>) {
+    open(FH, ">$input") || die "Cannot open file $input";
+    print FH "list(usable). $equation f(0,1)!=f(1,0). end_of_list.\n";
+    close(FH);
+    $rc = system("$mace2 -N4 < $input > /dev/null 2> /dev/null");
+    $rc = $rc / 256;	# This gets the actual exit code.
+    if ($rc == $unsatisfiable_exit) { print $equation; }
+}
+system("/bin/rm $input");
+

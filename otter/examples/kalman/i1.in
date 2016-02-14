@@ -1,0 +1,21 @@
+% From John Kalman:
+% 
+%      (1) The input file %i1 below. This is Example 4.27 on page 83
+% of my latest notes. It illustrates that looping is possible when
+% for_sub is clear, and would be possible if backward subsumption were done
+% before forward subsumption.
+
+set(hyper_res).
+clear(for_sub).                 % switch off forward subsumption
+set(print_lists_at_end).
+assign(max_given,15).           % stop after 15 given clauses
+assign(stats_level,1).  % changed from 0 to 1 by McCune
+
+list(usable).
+  -P(x) | P(x).
+end_of_list.
+
+list(sos).
+  P(a).
+end_of_list.
+  

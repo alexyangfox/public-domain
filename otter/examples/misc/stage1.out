@@ -1,0 +1,317 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:37 2004
+The command was "../../bin/otter".  The process ID is 8401.
+
+set(para_into).
+clear(para_from_left).
+clear(para_into_left).
+set(para_ones_rule).
+clear(back_sub).
+clear(print_proofs).
+assign(max_proofs,-1).
+assign(max_given,30).
+
+list(usable).
+1 [] x=x.
+2 [] a(a(a(B,x),y),z)=a(x,a(y,z)).
+3 [] a(a(W,x),y)=a(a(x,y),y).
+end_of_list.
+
+list(sos).
+4 [] y!=a(f,y)|$Ans(y).
+end_of_list.
+assign(max_weight,1).
+
+weight_list(purge_gen).
+weight(x,-1000).
+end_of_list.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=5) 4 [] y!=a(f,y)|$Ans(y).
+** KEPT (pick-wt=11): 5 [para_into,4.1.2,2.1.2] a(x,y)!=a(a(a(B,f),x),y)|$Ans(a(x,y)).
+
+----> UNIT CONFLICT at   0.00 sec ----> 6 [binary,5.1,3.1] $Ans(a(a(W,a(B,f)),a(W,a(B,f)))).
+
+
+given clause #2: (wt=11) 5 [para_into,4.1.2,2.1.2] a(x,y)!=a(a(a(B,f),x),y)|$Ans(a(x,y)).
+** KEPT (pick-wt=11): 7 [para_into,5.1.2.1,3.1.2] a(f,x)!=a(a(a(W,B),f),x)|$Ans(a(f,x)).
+** KEPT (pick-wt=17): 8 [para_into,5.1.2.1,2.1.2] a(a(x,y),z)!=a(a(a(a(B,a(B,f)),x),y),z)|$Ans(a(a(x,y),z)).
+
+----> UNIT CONFLICT at   0.00 sec ----> 9 [binary,8.1,3.1] $Ans(a(a(W,a(a(B,a(B,f)),W)),a(a(B,a(B,f)),W))).
+
+** KEPT (pick-wt=11): 10 [para_into,5.1.2,3.1.2] a(x,x)!=a(a(W,a(B,f)),x)|$Ans(a(x,x)).
+
+----> UNIT CONFLICT at   0.00 sec ----> 11 [binary,10.1,1.1] $Ans(a(a(W,a(B,f)),a(W,a(B,f)))).
+
+** KEPT (pick-wt=17): 12 [para_into,5.1.2,2.1.2] a(x,a(y,z))!=a(a(a(B,a(a(B,f),x)),y),z)|$Ans(a(x,a(y,z))).
+
+given clause #3: (wt=11) 7 [para_into,5.1.2.1,3.1.2] a(f,x)!=a(a(a(W,B),f),x)|$Ans(a(f,x)).
+** KEPT (pick-wt=17): 13 [para_into,7.1.2,2.1.2] a(f,a(x,y))!=a(a(a(B,a(a(W,B),f)),x),y)|$Ans(a(f,a(x,y))).
+
+given clause #4: (wt=11) 10 [para_into,5.1.2,3.1.2] a(x,x)!=a(a(W,a(B,f)),x)|$Ans(a(x,x)).
+** KEPT (pick-wt=13): 14 [para_into,10.1.2.1,2.1.2] a(x,x)!=a(a(a(a(B,W),B),f),x)|$Ans(a(x,x)).
+
+----> UNIT CONFLICT at   0.00 sec ----> 15 [binary,14.1,1.1] $Ans(a(a(a(a(B,W),B),f),a(a(a(B,W),B),f))).
+
+** KEPT (pick-wt=19): 16 [para_into,10.1.2,2.1.2] a(a(x,y),a(x,y))!=a(a(a(B,a(W,a(B,f))),x),y)|$Ans(a(a(x,y),a(x,y))).
+
+given clause #5: (wt=13) 14 [para_into,10.1.2.1,2.1.2] a(x,x)!=a(a(a(a(B,W),B),f),x)|$Ans(a(x,x)).
+** KEPT (pick-wt=21): 17 [para_into,14.1.2,2.1.2] a(a(x,y),a(x,y))!=a(a(a(B,a(a(a(B,W),B),f)),x),y)|$Ans(a(a(x,y),a(x,y))).
+
+given clause #6: (wt=17) 8 [para_into,5.1.2.1,2.1.2] a(a(x,y),z)!=a(a(a(a(B,a(B,f)),x),y),z)|$Ans(a(a(x,y),z)).
+** KEPT (pick-wt=19): 18 [para_into,8.1.2.1.1.1,2.1.2] a(a(x,y),z)!=a(a(a(a(a(a(B,B),B),f),x),y),z)|$Ans(a(a(x,y),z)).
+
+----> UNIT CONFLICT at   0.00 sec ----> 19 [binary,18.1,3.1] $Ans(a(a(W,a(a(a(a(B,B),B),f),W)),a(a(a(a(B,B),B),f),W))).
+
+** KEPT (pick-wt=19): 20 [para_into,8.1.2.1.1,3.1.2] a(a(a(B,f),x),y)!=a(a(a(a(W,B),a(B,f)),x),y)|$Ans(a(a(a(B,f),x),y)).
+** KEPT (pick-wt=23): 21 [para_into,8.1.2.1.1,2.1.2] a(a(a(x,y),z),u)!=a(a(a(a(a(B,a(B,a(B,f))),x),y),z),u)|$Ans(a(a(a(x,y),z),u)).
+** KEPT (pick-wt=17): 22 [para_into,8.1.2.1,3.1.2] a(a(x,x),y)!=a(a(a(W,a(B,a(B,f))),x),y)|$Ans(a(a(x,x),y)).
+
+----> UNIT CONFLICT at   0.00 sec ----> 23 [binary,22.1,1.1] $Ans(a(a(a(W,a(B,a(B,f))),a(W,a(B,a(B,f)))),y)).
+
+** KEPT (pick-wt=23): 24 [para_into,8.1.2.1,2.1.2] a(a(x,a(y,z)),u)!=a(a(a(a(B,a(a(B,a(B,f)),x)),y),z),u)|$Ans(a(a(x,a(y,z)),u)).
+
+----> UNIT CONFLICT at   0.00 sec ----> 25 [binary,24.1,3.1] $Ans(a(a(W,a(a(B,a(a(B,a(B,f)),W)),a(B,a(a(B,a(B,f)),W)))),a(B,a(a(B,a(B,f)),W)))).
+
+** KEPT (pick-wt=17): 26 [para_into,8.1.2,3.1.2] a(a(x,y),y)!=a(a(W,a(a(B,a(B,f)),x)),y)|$Ans(a(a(x,y),y)).
+
+----> UNIT CONFLICT at   0.00 sec ----> 27 [binary,26.1,1.1] $Ans(a(a(W,a(a(B,a(B,f)),W)),a(a(B,a(B,f)),W))).
+
+** KEPT (pick-wt=23): 28 [para_into,8.1.2,2.1.2] a(a(x,y),a(z,u))!=a(a(a(B,a(a(a(B,a(B,f)),x),y)),z),u)|$Ans(a(a(x,y),a(z,u))).
+
+given clause #7: (wt=17) 12 [para_into,5.1.2,2.1.2] a(x,a(y,z))!=a(a(a(B,a(a(B,f),x)),y),z)|$Ans(a(x,a(y,z))).
+** KEPT (pick-wt=19): 29 [para_into,12.1.2.1.1,2.1.2] a(x,a(y,z))!=a(a(a(a(a(B,B),a(B,f)),x),y),z)|$Ans(a(x,a(y,z))).
+** KEPT (pick-wt=21): 30 [para_into,12.1.2.1,3.1.2] a(x,a(a(a(B,f),x),y))!=a(a(a(W,B),a(a(B,f),x)),y)|$Ans(a(x,a(a(a(B,f),x),y))).
+** KEPT (pick-wt=23): 31 [para_into,12.1.2.1,2.1.2] a(x,a(a(y,z),u))!=a(a(a(a(B,a(B,a(a(B,f),x))),y),z),u)|$Ans(a(x,a(a(y,z),u))).
+** KEPT (pick-wt=17): 32 [para_into,12.1.2,3.1.2] a(x,a(y,y))!=a(a(W,a(B,a(a(B,f),x))),y)|$Ans(a(x,a(y,y))).
+** KEPT (pick-wt=23): 33 [para_into,12.1.2,2.1.2] a(x,a(y,a(z,u)))!=a(a(a(B,a(a(B,a(a(B,f),x)),y)),z),u)|$Ans(a(x,a(y,a(z,u)))).
+
+given clause #8: (wt=17) 13 [para_into,7.1.2,2.1.2] a(f,a(x,y))!=a(a(a(B,a(a(W,B),f)),x),y)|$Ans(a(f,a(x,y))).
+** KEPT (pick-wt=19): 34 [para_into,13.1.2.1.1,2.1.2] a(f,a(x,y))!=a(a(a(a(a(B,B),a(W,B)),f),x),y)|$Ans(a(f,a(x,y))).
+** KEPT (pick-wt=21): 35 [para_into,13.1.2.1,3.1.2] a(f,a(a(a(W,B),f),x))!=a(a(a(W,B),a(a(W,B),f)),x)|$Ans(a(f,a(a(a(W,B),f),x))).
+** KEPT (pick-wt=23): 36 [para_into,13.1.2.1,2.1.2] a(f,a(a(x,y),z))!=a(a(a(a(B,a(B,a(a(W,B),f))),x),y),z)|$Ans(a(f,a(a(x,y),z))).
+** KEPT (pick-wt=17): 37 [para_into,13.1.2,3.1.2] a(f,a(x,x))!=a(a(W,a(B,a(a(W,B),f))),x)|$Ans(a(f,a(x,x))).
+** KEPT (pick-wt=23): 38 [para_into,13.1.2,2.1.2] a(f,a(x,a(y,z)))!=a(a(a(B,a(a(B,a(a(W,B),f)),x)),y),z)|$Ans(a(f,a(x,a(y,z)))).
+
+given clause #9: (wt=17) 22 [para_into,8.1.2.1,3.1.2] a(a(x,x),y)!=a(a(a(W,a(B,a(B,f))),x),y)|$Ans(a(a(x,x),y)).
+** KEPT (pick-wt=19): 39 [para_into,22.1.2.1.1,2.1.2] a(a(x,x),y)!=a(a(a(a(a(B,W),B),a(B,f)),x),y)|$Ans(a(a(x,x),y)).
+
+----> UNIT CONFLICT at   0.00 sec ----> 40 [binary,39.1,1.1] $Ans(a(a(a(a(a(B,W),B),a(B,f)),a(a(a(B,W),B),a(B,f))),y)).
+
+** KEPT (pick-wt=25): 41 [para_into,22.1.2.1,3.1.2] a(a(a(B,a(B,f)),a(B,a(B,f))),x)!=a(a(a(W,W),a(B,a(B,f))),x)|$Ans(a(a(a(B,a(B,f)),a(B,a(B,f))),x)).
+** KEPT (pick-wt=25): 42 [para_into,22.1.2.1,2.1.2] a(a(a(x,y),a(x,y)),z)!=a(a(a(a(B,a(W,a(B,a(B,f)))),x),y),z)|$Ans(a(a(a(x,y),a(x,y)),z)).
+** KEPT (pick-wt=17): 43 [para_into,22.1.2,3.1.2] a(a(x,x),x)!=a(a(W,a(W,a(B,a(B,f)))),x)|$Ans(a(a(x,x),x)).
+** KEPT (pick-wt=23): 44 [para_into,22.1.2,2.1.2] a(a(x,x),a(y,z))!=a(a(a(B,a(a(W,a(B,a(B,f))),x)),y),z)|$Ans(a(a(x,x),a(y,z))).
+
+given clause #10: (wt=17) 26 [para_into,8.1.2,3.1.2] a(a(x,y),y)!=a(a(W,a(a(B,a(B,f)),x)),y)|$Ans(a(a(x,y),y)).
+** KEPT (pick-wt=19): 45 [para_into,26.1.2.1,2.1.2] a(a(x,y),y)!=a(a(a(a(B,W),a(B,a(B,f))),x),y)|$Ans(a(a(x,y),y)).
+
+----> UNIT CONFLICT at   0.00 sec ----> 46 [binary,45.1,1.1] $Ans(a(a(a(a(B,W),a(B,a(B,f))),a(a(B,W),a(B,a(B,f)))),a(a(B,W),a(B,a(B,f))))).
+
+** KEPT (pick-wt=29): 47 [para_into,26.1.2,3.1.2] a(a(x,a(a(B,a(B,f)),x)),a(a(B,a(B,f)),x))!=a(a(W,W),a(a(B,a(B,f)),x))|$Ans(a(a(x,a(a(B,a(B,f)),x)),a(a(B,a(B,f)),x))).
+** KEPT (pick-wt=25): 48 [para_into,26.1.2,2.1.2] a(a(x,a(y,z)),a(y,z))!=a(a(a(B,a(W,a(a(B,a(B,f)),x))),y),z)|$Ans(a(a(x,a(y,z)),a(y,z))).
+
+given clause #11: (wt=17) 32 [para_into,12.1.2,3.1.2] a(x,a(y,y))!=a(a(W,a(B,a(a(B,f),x))),y)|$Ans(a(x,a(y,y))).
+** KEPT (pick-wt=19): 49 [para_into,32.1.2.1,2.1.2] a(x,a(y,y))!=a(a(a(a(B,W),B),a(a(B,f),x)),y)|$Ans(a(x,a(y,y))).
+** KEPT (pick-wt=29): 50 [para_into,32.1.2,3.1.2] a(x,a(a(B,a(a(B,f),x)),a(B,a(a(B,f),x))))!=a(a(W,W),a(B,a(a(B,f),x)))|$Ans(a(x,a(a(B,a(a(B,f),x)),a(B,a(a(B,f),x))))).
+** KEPT (pick-wt=25): 51 [para_into,32.1.2,2.1.2] a(x,a(a(y,z),a(y,z)))!=a(a(a(B,a(W,a(B,a(a(B,f),x)))),y),z)|$Ans(a(x,a(a(y,z),a(y,z)))).
+
+given clause #12: (wt=17) 37 [para_into,13.1.2,3.1.2] a(f,a(x,x))!=a(a(W,a(B,a(a(W,B),f))),x)|$Ans(a(f,a(x,x))).
+** KEPT (pick-wt=19): 52 [para_into,37.1.2.1,2.1.2] a(f,a(x,x))!=a(a(a(a(B,W),B),a(a(W,B),f)),x)|$Ans(a(f,a(x,x))).
+** KEPT (pick-wt=25): 53 [para_into,37.1.2,2.1.2] a(f,a(a(x,y),a(x,y)))!=a(a(a(B,a(W,a(B,a(a(W,B),f)))),x),y)|$Ans(a(f,a(a(x,y),a(x,y)))).
+
+given clause #13: (wt=17) 43 [para_into,22.1.2,3.1.2] a(a(x,x),x)!=a(a(W,a(W,a(B,a(B,f)))),x)|$Ans(a(a(x,x),x)).
+** KEPT (pick-wt=19): 54 [para_into,43.1.2.1,2.1.2] a(a(x,x),x)!=a(a(a(a(B,W),W),a(B,a(B,f))),x)|$Ans(a(a(x,x),x)).
+** KEPT (pick-wt=27): 55 [para_into,43.1.2,2.1.2] a(a(a(x,y),a(x,y)),a(x,y))!=a(a(a(B,a(W,a(W,a(B,a(B,f))))),x),y)|$Ans(a(a(a(x,y),a(x,y)),a(x,y))).
+
+given clause #14: (wt=19) 16 [para_into,10.1.2,2.1.2] a(a(x,y),a(x,y))!=a(a(a(B,a(W,a(B,f))),x),y)|$Ans(a(a(x,y),a(x,y))).
+** KEPT (pick-wt=21): 56 [para_into,16.1.2.1.1,2.1.2] a(a(x,y),a(x,y))!=a(a(a(a(a(B,B),W),a(B,f)),x),y)|$Ans(a(a(x,y),a(x,y))).
+** KEPT (pick-wt=27): 57 [para_into,16.1.2.1,3.1.2] a(a(a(W,a(B,f)),x),a(a(W,a(B,f)),x))!=a(a(a(W,B),a(W,a(B,f))),x)|$Ans(a(a(a(W,a(B,f)),x),a(a(W,a(B,f)),x))).
+** KEPT (pick-wt=27): 58 [para_into,16.1.2.1,2.1.2] a(a(a(x,y),z),a(a(x,y),z))!=a(a(a(a(B,a(B,a(W,a(B,f)))),x),y),z)|$Ans(a(a(a(x,y),z),a(a(x,y),z))).
+** KEPT (pick-wt=19): 59 [para_into,16.1.2,3.1.2] a(a(x,x),a(x,x))!=a(a(W,a(B,a(W,a(B,f)))),x)|$Ans(a(a(x,x),a(x,x))).
+** KEPT (pick-wt=27): 60 [para_into,16.1.2,2.1.2] a(a(x,a(y,z)),a(x,a(y,z)))!=a(a(a(B,a(a(B,a(W,a(B,f))),x)),y),z)|$Ans(a(a(x,a(y,z)),a(x,a(y,z)))).
+
+given clause #15: (wt=19) 18 [para_into,8.1.2.1.1.1,2.1.2] a(a(x,y),z)!=a(a(a(a(a(a(B,B),B),f),x),y),z)|$Ans(a(a(x,y),z)).
+** KEPT (pick-wt=19): 61 [para_into,18.1.2.1.1.1.1,3.1.2] a(a(x,y),z)!=a(a(a(a(a(a(W,B),B),f),x),y),z)|$Ans(a(a(x,y),z)).
+
+----> UNIT CONFLICT at   0.01 sec ----> 62 [binary,61.1,3.1] $Ans(a(a(W,a(a(a(a(W,B),B),f),W)),a(a(a(a(W,B),B),f),W))).
+
+** KEPT (pick-wt=19): 63 [para_into,18.1.2.1.1,3.1.2] a(a(f,x),y)!=a(a(a(a(W,a(a(B,B),B)),f),x),y)|$Ans(a(a(f,x),y)).
+** KEPT (pick-wt=25): 64 [para_into,18.1.2.1.1,2.1.2] a(a(a(x,y),z),u)!=a(a(a(a(a(B,a(a(a(B,B),B),f)),x),y),z),u)|$Ans(a(a(a(x,y),z),u)).
+** KEPT (pick-wt=19): 65 [para_into,18.1.2.1,3.1.2] a(a(x,x),y)!=a(a(a(W,a(a(a(B,B),B),f)),x),y)|$Ans(a(a(x,x),y)).
+
+----> UNIT CONFLICT at   0.01 sec ----> 66 [binary,65.1,1.1] $Ans(a(a(a(W,a(a(a(B,B),B),f)),a(W,a(a(a(B,B),B),f))),y)).
+
+** KEPT (pick-wt=25): 67 [para_into,18.1.2.1,2.1.2] a(a(x,a(y,z)),u)!=a(a(a(a(B,a(a(a(a(B,B),B),f),x)),y),z),u)|$Ans(a(a(x,a(y,z)),u)).
+
+----> UNIT CONFLICT at   0.01 sec ----> 68 [binary,67.1,3.1] $Ans(a(a(W,a(a(B,a(a(a(a(B,B),B),f),W)),a(B,a(a(a(a(B,B),B),f),W)))),a(B,a(a(a(a(B,B),B),f),W)))).
+
+** KEPT (pick-wt=19): 69 [para_into,18.1.2,3.1.2] a(a(x,y),y)!=a(a(W,a(a(a(a(B,B),B),f),x)),y)|$Ans(a(a(x,y),y)).
+
+----> UNIT CONFLICT at   0.01 sec ----> 70 [binary,69.1,1.1] $Ans(a(a(W,a(a(a(a(B,B),B),f),W)),a(a(a(a(B,B),B),f),W))).
+
+** KEPT (pick-wt=25): 71 [para_into,18.1.2,2.1.2] a(a(x,y),a(z,u))!=a(a(a(B,a(a(a(a(a(B,B),B),f),x),y)),z),u)|$Ans(a(a(x,y),a(z,u))).
+
+given clause #16: (wt=19) 20 [para_into,8.1.2.1.1,3.1.2] a(a(a(B,f),x),y)!=a(a(a(a(W,B),a(B,f)),x),y)|$Ans(a(a(a(B,f),x),y)).
+** KEPT (pick-wt=21): 72 [para_into,20.1.2.1.1,2.1.2] a(a(a(B,f),x),y)!=a(a(a(a(a(B,a(W,B)),B),f),x),y)|$Ans(a(a(a(B,f),x),y)).
+** KEPT (pick-wt=21): 73 [para_into,20.1.2.1,3.1.2] a(a(a(B,f),a(B,f)),x)!=a(a(a(W,a(W,B)),a(B,f)),x)|$Ans(a(a(a(B,f),a(B,f)),x)).
+** KEPT (pick-wt=25): 74 [para_into,20.1.2.1,2.1.2] a(a(a(B,f),a(x,y)),z)!=a(a(a(a(B,a(a(W,B),a(B,f))),x),y),z)|$Ans(a(a(a(B,f),a(x,y)),z)).
+** KEPT (pick-wt=19): 75 [para_into,20.1.2,3.1.2] a(a(a(B,f),x),x)!=a(a(W,a(a(W,B),a(B,f))),x)|$Ans(a(a(a(B,f),x),x)).
+** KEPT (pick-wt=25): 76 [para_into,20.1.2,2.1.2] a(a(a(B,f),x),a(y,z))!=a(a(a(B,a(a(a(W,B),a(B,f)),x)),y),z)|$Ans(a(a(a(B,f),x),a(y,z))).
+
+given clause #17: (wt=19) 29 [para_into,12.1.2.1.1,2.1.2] a(x,a(y,z))!=a(a(a(a(a(B,B),a(B,f)),x),y),z)|$Ans(a(x,a(y,z))).
+** KEPT (pick-wt=21): 77 [para_into,29.1.2.1.1.1,2.1.2] a(x,a(y,z))!=a(a(a(a(a(a(B,a(B,B)),B),f),x),y),z)|$Ans(a(x,a(y,z))).
+** KEPT (pick-wt=21): 78 [para_into,29.1.2.1.1,3.1.2] a(a(B,f),a(x,y))!=a(a(a(a(W,a(B,B)),a(B,f)),x),y)|$Ans(a(a(B,f),a(x,y))).
+** KEPT (pick-wt=25): 79 [para_into,29.1.2.1.1,2.1.2] a(a(x,y),a(z,u))!=a(a(a(a(a(B,a(a(B,B),a(B,f))),x),y),z),u)|$Ans(a(a(x,y),a(z,u))).
+** KEPT (pick-wt=19): 80 [para_into,29.1.2.1,3.1.2] a(x,a(x,y))!=a(a(a(W,a(a(B,B),a(B,f))),x),y)|$Ans(a(x,a(x,y))).
+** KEPT (pick-wt=25): 81 [para_into,29.1.2.1,2.1.2] a(x,a(a(y,z),u))!=a(a(a(a(B,a(a(a(B,B),a(B,f)),x)),y),z),u)|$Ans(a(x,a(a(y,z),u))).
+** KEPT (pick-wt=19): 82 [para_into,29.1.2,3.1.2] a(x,a(y,y))!=a(a(W,a(a(a(B,B),a(B,f)),x)),y)|$Ans(a(x,a(y,y))).
+** KEPT (pick-wt=25): 83 [para_into,29.1.2,2.1.2] a(x,a(y,a(z,u)))!=a(a(a(B,a(a(a(a(B,B),a(B,f)),x),y)),z),u)|$Ans(a(x,a(y,a(z,u)))).
+
+given clause #18: (wt=19) 34 [para_into,13.1.2.1.1,2.1.2] a(f,a(x,y))!=a(a(a(a(a(B,B),a(W,B)),f),x),y)|$Ans(a(f,a(x,y))).
+** KEPT (pick-wt=21): 84 [para_into,34.1.2.1.1.1,2.1.2] a(f,a(x,y))!=a(a(a(a(a(a(B,a(B,B)),W),B),f),x),y)|$Ans(a(f,a(x,y))).
+** KEPT (pick-wt=19): 85 [para_into,34.1.2.1,3.1.2] a(f,a(f,x))!=a(a(a(W,a(a(B,B),a(W,B))),f),x)|$Ans(a(f,a(f,x))).
+** KEPT (pick-wt=25): 86 [para_into,34.1.2.1,2.1.2] a(f,a(a(x,y),z))!=a(a(a(a(B,a(a(a(B,B),a(W,B)),f)),x),y),z)|$Ans(a(f,a(a(x,y),z))).
+** KEPT (pick-wt=19): 87 [para_into,34.1.2,3.1.2] a(f,a(x,x))!=a(a(W,a(a(a(B,B),a(W,B)),f)),x)|$Ans(a(f,a(x,x))).
+** KEPT (pick-wt=25): 88 [para_into,34.1.2,2.1.2] a(f,a(x,a(y,z)))!=a(a(a(B,a(a(a(a(B,B),a(W,B)),f),x)),y),z)|$Ans(a(f,a(x,a(y,z)))).
+
+given clause #19: (wt=19) 39 [para_into,22.1.2.1.1,2.1.2] a(a(x,x),y)!=a(a(a(a(a(B,W),B),a(B,f)),x),y)|$Ans(a(a(x,x),y)).
+** KEPT (pick-wt=21): 89 [para_into,39.1.2.1.1,2.1.2] a(a(x,x),y)!=a(a(a(a(a(B,a(a(B,W),B)),B),f),x),y)|$Ans(a(a(x,x),y)).
+
+----> UNIT CONFLICT at   0.01 sec ----> 90 [binary,89.1,1.1] $Ans(a(a(a(a(a(B,a(a(B,W),B)),B),f),a(a(a(B,a(a(B,W),B)),B),f)),y)).
+
+** KEPT (pick-wt=23): 91 [para_into,39.1.2.1,3.1.2] a(a(a(B,f),a(B,f)),x)!=a(a(a(W,a(a(B,W),B)),a(B,f)),x)|$Ans(a(a(a(B,f),a(B,f)),x)).
+** KEPT (pick-wt=27): 92 [para_into,39.1.2.1,2.1.2] a(a(a(x,y),a(x,y)),z)!=a(a(a(a(B,a(a(a(B,W),B),a(B,f))),x),y),z)|$Ans(a(a(a(x,y),a(x,y)),z)).
+** KEPT (pick-wt=19): 93 [para_into,39.1.2,3.1.2] a(a(x,x),x)!=a(a(W,a(a(a(B,W),B),a(B,f))),x)|$Ans(a(a(x,x),x)).
+** KEPT (pick-wt=25): 94 [para_into,39.1.2,2.1.2] a(a(x,x),a(y,z))!=a(a(a(B,a(a(a(a(B,W),B),a(B,f)),x)),y),z)|$Ans(a(a(x,x),a(y,z))).
+
+given clause #20: (wt=19) 45 [para_into,26.1.2.1,2.1.2] a(a(x,y),y)!=a(a(a(a(B,W),a(B,a(B,f))),x),y)|$Ans(a(a(x,y),y)).
+** KEPT (pick-wt=21): 95 [para_into,45.1.2.1.1,2.1.2] a(a(x,y),y)!=a(a(a(a(a(B,a(B,W)),B),a(B,f)),x),y)|$Ans(a(a(x,y),y)).
+
+----> UNIT CONFLICT at   0.01 sec ----> 96 [binary,95.1,1.1] $Ans(a(a(a(a(a(B,a(B,W)),B),a(B,f)),a(a(a(B,a(B,W)),B),a(B,f))),a(a(a(B,a(B,W)),B),a(B,f)))).
+
+** KEPT (pick-wt=23): 97 [para_into,45.1.2.1,3.1.2] a(a(a(B,a(B,f)),x),x)!=a(a(a(W,a(B,W)),a(B,a(B,f))),x)|$Ans(a(a(a(B,a(B,f)),x),x)).
+** KEPT (pick-wt=25): 98 [para_into,45.1.2.1,2.1.2] a(a(a(x,y),z),z)!=a(a(a(a(B,a(a(B,W),a(B,a(B,f)))),x),y),z)|$Ans(a(a(a(x,y),z),z)).
+
+----> UNIT CONFLICT at   0.01 sec ----> 99 [binary,98.1,1.1] $Ans(a(a(a(a(B,a(a(B,W),a(B,a(B,f)))),a(B,a(a(B,W),a(B,a(B,f))))),a(B,a(a(B,W),a(B,a(B,f))))),a(B,a(a(B,W),a(B,a(B,f)))))).
+
+** KEPT (pick-wt=19): 100 [para_into,45.1.2,3.1.2] a(a(x,x),x)!=a(a(W,a(a(B,W),a(B,a(B,f)))),x)|$Ans(a(a(x,x),x)).
+** KEPT (pick-wt=27): 101 [para_into,45.1.2,2.1.2] a(a(x,a(y,z)),a(y,z))!=a(a(a(B,a(a(a(B,W),a(B,a(B,f))),x)),y),z)|$Ans(a(a(x,a(y,z)),a(y,z))).
+
+given clause #21: (wt=19) 49 [para_into,32.1.2.1,2.1.2] a(x,a(y,y))!=a(a(a(a(B,W),B),a(a(B,f),x)),y)|$Ans(a(x,a(y,y))).
+** KEPT (pick-wt=21): 102 [para_into,49.1.2.1,2.1.2] a(x,a(y,y))!=a(a(a(a(B,a(a(B,W),B)),a(B,f)),x),y)|$Ans(a(x,a(y,y))).
+** KEPT (pick-wt=27): 103 [para_into,49.1.2,3.1.2] a(x,a(a(a(B,f),x),a(a(B,f),x)))!=a(a(W,a(a(B,W),B)),a(a(B,f),x))|$Ans(a(x,a(a(a(B,f),x),a(a(B,f),x)))).
+** KEPT (pick-wt=27): 104 [para_into,49.1.2,2.1.2] a(x,a(a(y,z),a(y,z)))!=a(a(a(B,a(a(a(B,W),B),a(a(B,f),x))),y),z)|$Ans(a(x,a(a(y,z),a(y,z)))).
+
+given clause #22: (wt=19) 52 [para_into,37.1.2.1,2.1.2] a(f,a(x,x))!=a(a(a(a(B,W),B),a(a(W,B),f)),x)|$Ans(a(f,a(x,x))).
+** KEPT (pick-wt=21): 105 [para_into,52.1.2.1,2.1.2] a(f,a(x,x))!=a(a(a(a(B,a(a(B,W),B)),a(W,B)),f),x)|$Ans(a(f,a(x,x))).
+** KEPT (pick-wt=27): 106 [para_into,52.1.2,2.1.2] a(f,a(a(x,y),a(x,y)))!=a(a(a(B,a(a(a(B,W),B),a(a(W,B),f))),x),y)|$Ans(a(f,a(a(x,y),a(x,y)))).
+
+given clause #23: (wt=19) 54 [para_into,43.1.2.1,2.1.2] a(a(x,x),x)!=a(a(a(a(B,W),W),a(B,a(B,f))),x)|$Ans(a(a(x,x),x)).
+** KEPT (pick-wt=19): 107 [para_into,54.1.2.1.1,3.1.2] a(a(x,x),x)!=a(a(a(a(W,B),W),a(B,a(B,f))),x)|$Ans(a(a(x,x),x)).
+** KEPT (pick-wt=21): 108 [para_into,54.1.2.1,2.1.2] a(a(x,x),x)!=a(a(a(a(B,a(a(B,W),W)),B),a(B,f)),x)|$Ans(a(a(x,x),x)).
+** KEPT (pick-wt=29): 109 [para_into,54.1.2,2.1.2] a(a(a(x,y),a(x,y)),a(x,y))!=a(a(a(B,a(a(a(B,W),W),a(B,a(B,f)))),x),y)|$Ans(a(a(a(x,y),a(x,y)),a(x,y))).
+
+given clause #24: (wt=19) 59 [para_into,16.1.2,3.1.2] a(a(x,x),a(x,x))!=a(a(W,a(B,a(W,a(B,f)))),x)|$Ans(a(a(x,x),a(x,x))).
+** KEPT (pick-wt=21): 110 [para_into,59.1.2.1,2.1.2] a(a(x,x),a(x,x))!=a(a(a(a(B,W),B),a(W,a(B,f))),x)|$Ans(a(a(x,x),a(x,x))).
+** KEPT (pick-wt=31): 111 [para_into,59.1.2,2.1.2] a(a(a(x,y),a(x,y)),a(a(x,y),a(x,y)))!=a(a(a(B,a(W,a(B,a(W,a(B,f))))),x),y)|$Ans(a(a(a(x,y),a(x,y)),a(a(x,y),a(x,y)))).
+
+given clause #25: (wt=19) 61 [para_into,18.1.2.1.1.1.1,3.1.2] a(a(x,y),z)!=a(a(a(a(a(a(W,B),B),f),x),y),z)|$Ans(a(a(x,y),z)).
+** KEPT (pick-wt=19): 112 [para_into,61.1.2.1.1.1.1,3.1.2] a(a(x,y),z)!=a(a(a(a(a(a(W,W),B),f),x),y),z)|$Ans(a(a(x,y),z)).
+
+----> UNIT CONFLICT at   0.01 sec ----> 113 [binary,112.1,3.1] $Ans(a(a(W,a(a(a(a(W,W),B),f),W)),a(a(a(a(W,W),B),f),W))).
+
+** KEPT (pick-wt=19): 114 [para_into,61.1.2.1.1,3.1.2] a(a(f,x),y)!=a(a(a(a(W,a(a(W,B),B)),f),x),y)|$Ans(a(a(f,x),y)).
+** KEPT (pick-wt=25): 115 [para_into,61.1.2.1.1,2.1.2] a(a(a(x,y),z),u)!=a(a(a(a(a(B,a(a(a(W,B),B),f)),x),y),z),u)|$Ans(a(a(a(x,y),z),u)).
+** KEPT (pick-wt=19): 116 [para_into,61.1.2.1,3.1.2] a(a(x,x),y)!=a(a(a(W,a(a(a(W,B),B),f)),x),y)|$Ans(a(a(x,x),y)).
+
+----> UNIT CONFLICT at   0.01 sec ----> 117 [binary,116.1,1.1] $Ans(a(a(a(W,a(a(a(W,B),B),f)),a(W,a(a(a(W,B),B),f))),y)).
+
+** KEPT (pick-wt=25): 118 [para_into,61.1.2.1,2.1.2] a(a(x,a(y,z)),u)!=a(a(a(a(B,a(a(a(a(W,B),B),f),x)),y),z),u)|$Ans(a(a(x,a(y,z)),u)).
+
+----> UNIT CONFLICT at   0.01 sec ----> 119 [binary,118.1,3.1] $Ans(a(a(W,a(a(B,a(a(a(a(W,B),B),f),W)),a(B,a(a(a(a(W,B),B),f),W)))),a(B,a(a(a(a(W,B),B),f),W)))).
+
+** KEPT (pick-wt=19): 120 [para_into,61.1.2,3.1.2] a(a(x,y),y)!=a(a(W,a(a(a(a(W,B),B),f),x)),y)|$Ans(a(a(x,y),y)).
+
+----> UNIT CONFLICT at   0.01 sec ----> 121 [binary,120.1,1.1] $Ans(a(a(W,a(a(a(a(W,B),B),f),W)),a(a(a(a(W,B),B),f),W))).
+
+** KEPT (pick-wt=25): 122 [para_into,61.1.2,2.1.2] a(a(x,y),a(z,u))!=a(a(a(B,a(a(a(a(a(W,B),B),f),x),y)),z),u)|$Ans(a(a(x,y),a(z,u))).
+
+given clause #26: (wt=19) 63 [para_into,18.1.2.1.1,3.1.2] a(a(f,x),y)!=a(a(a(a(W,a(a(B,B),B)),f),x),y)|$Ans(a(a(f,x),y)).
+** KEPT (pick-wt=21): 123 [para_into,63.1.2.1.1.1,2.1.2] a(a(f,x),y)!=a(a(a(a(a(a(B,W),a(B,B)),B),f),x),y)|$Ans(a(a(f,x),y)).
+** KEPT (pick-wt=19): 124 [para_into,63.1.2.1,3.1.2] a(a(f,f),x)!=a(a(a(W,a(W,a(a(B,B),B))),f),x)|$Ans(a(a(f,f),x)).
+** KEPT (pick-wt=25): 125 [para_into,63.1.2.1,2.1.2] a(a(f,a(x,y)),z)!=a(a(a(a(B,a(a(W,a(a(B,B),B)),f)),x),y),z)|$Ans(a(a(f,a(x,y)),z)).
+** KEPT (pick-wt=19): 126 [para_into,63.1.2,3.1.2] a(a(f,x),x)!=a(a(W,a(a(W,a(a(B,B),B)),f)),x)|$Ans(a(a(f,x),x)).
+** KEPT (pick-wt=25): 127 [para_into,63.1.2,2.1.2] a(a(f,x),a(y,z))!=a(a(a(B,a(a(a(W,a(a(B,B),B)),f),x)),y),z)|$Ans(a(a(f,x),a(y,z))).
+
+given clause #27: (wt=19) 65 [para_into,18.1.2.1,3.1.2] a(a(x,x),y)!=a(a(a(W,a(a(a(B,B),B),f)),x),y)|$Ans(a(a(x,x),y)).
+** KEPT (pick-wt=21): 128 [para_into,65.1.2.1.1,2.1.2] a(a(x,x),y)!=a(a(a(a(a(B,W),a(a(B,B),B)),f),x),y)|$Ans(a(a(x,x),y)).
+
+----> UNIT CONFLICT at   0.01 sec ----> 129 [binary,128.1,1.1] $Ans(a(a(a(a(a(B,W),a(a(B,B),B)),f),a(a(a(B,W),a(a(B,B),B)),f)),y)).
+
+** KEPT (pick-wt=31): 130 [para_into,65.1.2.1,3.1.2] a(a(a(a(a(B,B),B),f),a(a(a(B,B),B),f)),x)!=a(a(a(W,W),a(a(a(B,B),B),f)),x)|$Ans(a(a(a(a(a(B,B),B),f),a(a(a(B,B),B),f)),x)).
+** KEPT (pick-wt=27): 131 [para_into,65.1.2.1,2.1.2] a(a(a(x,y),a(x,y)),z)!=a(a(a(a(B,a(W,a(a(a(B,B),B),f))),x),y),z)|$Ans(a(a(a(x,y),a(x,y)),z)).
+** KEPT (pick-wt=19): 132 [para_into,65.1.2,3.1.2] a(a(x,x),x)!=a(a(W,a(W,a(a(a(B,B),B),f))),x)|$Ans(a(a(x,x),x)).
+** KEPT (pick-wt=25): 133 [para_into,65.1.2,2.1.2] a(a(x,x),a(y,z))!=a(a(a(B,a(a(W,a(a(a(B,B),B),f)),x)),y),z)|$Ans(a(a(x,x),a(y,z))).
+
+given clause #28: (wt=19) 69 [para_into,18.1.2,3.1.2] a(a(x,y),y)!=a(a(W,a(a(a(a(B,B),B),f),x)),y)|$Ans(a(a(x,y),y)).
+** KEPT (pick-wt=21): 134 [para_into,69.1.2.1,2.1.2] a(a(x,y),y)!=a(a(a(a(B,W),a(a(a(B,B),B),f)),x),y)|$Ans(a(a(x,y),y)).
+
+----> UNIT CONFLICT at   0.01 sec ----> 135 [binary,134.1,1.1] $Ans(a(a(a(a(B,W),a(a(a(B,B),B),f)),a(a(B,W),a(a(a(B,B),B),f))),a(a(B,W),a(a(a(B,B),B),f)))).
+
+** KEPT (pick-wt=35): 136 [para_into,69.1.2,3.1.2] a(a(x,a(a(a(a(B,B),B),f),x)),a(a(a(a(B,B),B),f),x))!=a(a(W,W),a(a(a(a(B,B),B),f),x))|$Ans(a(a(x,a(a(a(a(B,B),B),f),x)),a(a(a(a(B,B),B),f),x))).
+** KEPT (pick-wt=27): 137 [para_into,69.1.2,2.1.2] a(a(x,a(y,z)),a(y,z))!=a(a(a(B,a(W,a(a(a(a(B,B),B),f),x))),y),z)|$Ans(a(a(x,a(y,z)),a(y,z))).
+
+given clause #29: (wt=19) 75 [para_into,20.1.2,3.1.2] a(a(a(B,f),x),x)!=a(a(W,a(a(W,B),a(B,f))),x)|$Ans(a(a(a(B,f),x),x)).
+** KEPT (pick-wt=21): 138 [para_into,75.1.2.1,2.1.2] a(a(a(B,f),x),x)!=a(a(a(a(B,W),a(W,B)),a(B,f)),x)|$Ans(a(a(a(B,f),x),x)).
+** KEPT (pick-wt=27): 139 [para_into,75.1.2,2.1.2] a(a(a(B,f),a(x,y)),a(x,y))!=a(a(a(B,a(W,a(a(W,B),a(B,f)))),x),y)|$Ans(a(a(a(B,f),a(x,y)),a(x,y))).
+
+given clause #30: (wt=19) 80 [para_into,29.1.2.1,3.1.2] a(x,a(x,y))!=a(a(a(W,a(a(B,B),a(B,f))),x),y)|$Ans(a(x,a(x,y))).
+
+Search stopped by max_given option.
+
+** KEPT (pick-wt=21): 140 [para_into,80.1.2.1.1,2.1.2] a(x,a(x,y))!=a(a(a(a(a(B,W),a(B,B)),a(B,f)),x),y)|$Ans(a(x,a(x,y))).
+** KEPT (pick-wt=31): 141 [para_into,80.1.2.1,3.1.2] a(a(a(B,B),a(B,f)),a(a(a(B,B),a(B,f)),x))!=a(a(a(W,W),a(a(B,B),a(B,f))),x)|$Ans(a(a(a(B,B),a(B,f)),a(a(a(B,B),a(B,f)),x))).
+** KEPT (pick-wt=27): 142 [para_into,80.1.2.1,2.1.2] a(a(x,y),a(a(x,y),z))!=a(a(a(a(B,a(W,a(a(B,B),a(B,f)))),x),y),z)|$Ans(a(a(x,y),a(a(x,y),z))).
+** KEPT (pick-wt=19): 143 [para_into,80.1.2,3.1.2] a(x,a(x,x))!=a(a(W,a(W,a(a(B,B),a(B,f)))),x)|$Ans(a(x,a(x,x))).
+** KEPT (pick-wt=25): 144 [para_into,80.1.2,2.1.2] a(x,a(x,a(y,z)))!=a(a(a(B,a(a(W,a(a(B,B),a(B,f))),x)),y),z)|$Ans(a(x,a(x,a(y,z)))).
+
+Search stopped by max_given option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 30
+clauses generated            126
+  para_into generated        126
+demod & eval rewrites          0
+clauses wt,lit,sk delete       9
+tautologies deleted            0
+clauses forward subsumed       0
+  (subsumed by sos)            0
+unit deletions                 0
+factor simplifications         0
+clauses kept                 117
+new demodulators               0
+empty clauses                 23
+clauses back demodulated       0
+clauses back subsumed          0
+usable size                   33
+sos size                      88
+demodulators size              0
+passive size                   0
+hot size                       0
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8401 finished Mon Aug  2 15:30:37 2004

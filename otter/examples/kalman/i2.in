@@ -1,0 +1,25 @@
+% From John Kalman
+% 
+%      (2) The input file %i2 below. This is Example 5.15 on page 97
+% of my latest notes, and was suggested by Robert O'Callahan. It shows
+% how the inequality predicate on a finite set can be computed with
+% the help of the passive list.
+
+set(hyper_res).
+set(print_lists_at_end).
+assign(stats_level,1).  % changed from 0 to 1 by McCune
+
+list(usable).
+  P(A).
+  P(B).
+  P(C).
+  P(D).
+end_of_list.
+
+list(sos).
+  -P(x) | -P(y) | NE(x,y).
+end_of_list.
+
+list(passive).
+  NE(x,x).
+end_of_list.

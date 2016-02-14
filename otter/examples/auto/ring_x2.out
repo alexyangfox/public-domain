@@ -1,0 +1,315 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:35 2004
+The command was "../../bin/otter".  The process ID is 8288.
+
+set(auto).
+   dependent: set(auto1).
+   dependent: set(process_input).
+   dependent: clear(print_kept).
+   dependent: clear(print_new_demod).
+   dependent: clear(print_back_demod).
+   dependent: clear(print_back_sub).
+   dependent: set(control_memory).
+   dependent: assign(max_mem, 12000).
+   dependent: assign(pick_given_ratio, 4).
+   dependent: assign(stats_level, 1).
+   dependent: assign(max_seconds, 10800).
+
+list(usable).
+0 [] x=x.
+0 [] j(0,x)=x.
+0 [] j(g(x),x)=0.
+0 [] j(j(x,y),z)=j(x,j(y,z)).
+0 [] j(x,y)=j(y,x).
+0 [] f(f(x,y),z)=f(x,f(y,z)).
+0 [] f(x,j(y,z))=j(f(x,y),f(x,z)).
+0 [] f(j(y,z),x)=j(f(y,x),f(z,x)).
+0 [] f(x,x)=x.
+0 [] f(a,b)!=f(b,a).
+end_of_list.
+
+SCAN INPUT: prop=0, horn=1, equality=1, symmetry=0, max_lits=1.
+
+All clauses are units, and equality is present; the
+strategy will be Knuth-Bendix with positive clauses in sos.
+
+   dependent: set(knuth_bendix).
+   dependent: set(anl_eq).
+   dependent: set(para_from).
+   dependent: set(para_into).
+   dependent: clear(para_from_right).
+   dependent: clear(para_into_right).
+   dependent: set(para_from_vars).
+   dependent: set(eq_units_both_ways).
+   dependent: set(dynamic_demod_all).
+   dependent: set(dynamic_demod).
+   dependent: set(order_eq).
+   dependent: set(back_demod).
+   dependent: set(lrpo).
+
+------------> process usable:
+** KEPT (pick-wt=7): 2 [copy,1,flip.1] f(b,a)!=f(a,b).
+
+------------> process sos:
+** KEPT (pick-wt=3): 3 [] x=x.
+** KEPT (pick-wt=5): 4 [] j(0,x)=x.
+---> New Demodulator: 5 [new_demod,4] j(0,x)=x.
+** KEPT (pick-wt=6): 6 [] j(g(x),x)=0.
+---> New Demodulator: 7 [new_demod,6] j(g(x),x)=0.
+** KEPT (pick-wt=11): 8 [] j(j(x,y),z)=j(x,j(y,z)).
+---> New Demodulator: 9 [new_demod,8] j(j(x,y),z)=j(x,j(y,z)).
+** KEPT (pick-wt=7): 10 [] j(x,y)=j(y,x).
+** KEPT (pick-wt=11): 11 [] f(f(x,y),z)=f(x,f(y,z)).
+---> New Demodulator: 12 [new_demod,11] f(f(x,y),z)=f(x,f(y,z)).
+** KEPT (pick-wt=13): 14 [copy,13,flip.1] j(f(x,y),f(x,z))=f(x,j(y,z)).
+---> New Demodulator: 15 [new_demod,14] j(f(x,y),f(x,z))=f(x,j(y,z)).
+** KEPT (pick-wt=13): 17 [copy,16,flip.1] j(f(x,y),f(z,y))=f(j(x,z),y).
+---> New Demodulator: 18 [new_demod,17] j(f(x,y),f(z,y))=f(j(x,z),y).
+** KEPT (pick-wt=5): 19 [] f(x,x)=x.
+---> New Demodulator: 20 [new_demod,19] f(x,x)=x.
+  Following clause subsumed by 3 during input processing: 0 [copy,3,flip.1] x=x.
+>>>> Starting back demodulation with 5.
+>>>> Starting back demodulation with 7.
+>>>> Starting back demodulation with 9.
+  Following clause subsumed by 10 during input processing: 0 [copy,10,flip.1] j(x,y)=j(y,x).
+>>>> Starting back demodulation with 12.
+>>>> Starting back demodulation with 15.
+>>>> Starting back demodulation with 18.
+>>>> Starting back demodulation with 20.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=3) 3 [] x=x.
+
+given clause #2: (wt=5) 4 [] j(0,x)=x.
+
+given clause #3: (wt=5) 19 [] f(x,x)=x.
+
+given clause #4: (wt=6) 6 [] j(g(x),x)=0.
+
+given clause #5: (wt=7) 10 [] j(x,y)=j(y,x).
+
+given clause #6: (wt=11) 8 [] j(j(x,y),z)=j(x,j(y,z)).
+
+given clause #7: (wt=5) 23 [para_into,10.1.1,4.1.1,flip.1] j(x,0)=x.
+
+given clause #8: (wt=4) 30 [para_into,23.1.1,6.1.1,flip.1] g(0)=0.
+
+given clause #9: (wt=6) 21 [para_into,10.1.1,6.1.1,flip.1] j(x,g(x))=0.
+
+given clause #10: (wt=8) 26 [para_into,8.1.1.1,6.1.1,demod,5,flip.1] j(g(x),j(x,y))=y.
+
+given clause #11: (wt=11) 11 [] f(f(x,y),z)=f(x,f(y,z)).
+
+given clause #12: (wt=5) 42 [para_into,26.1.1.2,6.1.1,demod,24] g(g(x))=x.
+
+given clause #13: (wt=8) 34 [para_from,21.1.1,8.1.1.1,demod,5,flip.1] j(x,j(g(x),y))=y.
+
+given clause #14: (wt=8) 38 [para_into,26.1.1.2,10.1.1] j(g(x),j(y,x))=y.
+
+given clause #15: (wt=8) 44 [para_into,26.1.1,10.1.1,demod,9] j(x,j(y,g(x)))=y.
+
+given clause #16: (wt=13) 14 [copy,13,flip.1] j(f(x,y),f(x,z))=f(x,j(y,z)).
+
+given clause #17: (wt=9) 46 [para_into,11.1.1.1,19.1.1,flip.1] f(x,f(x,y))=f(x,y).
+
+given clause #18: (wt=9) 52 [para_into,38.1.1.2,38.1.1] j(g(j(x,y)),x)=g(y).
+
+given clause #19: (wt=10) 89 [para_into,52.1.1.1.1,38.1.1,flip.1] g(j(x,y))=j(g(x),g(y)).
+
+given clause #20: (wt=11) 25 [para_into,8.1.1.1,10.1.1,demod,9] j(x,j(y,z))=j(y,j(x,z)).
+
+given clause #21: (wt=13) 17 [copy,16,flip.1] j(f(x,y),f(z,y))=f(j(x,z),y).
+
+given clause #22: (wt=11) 28 [para_into,8.1.1,10.1.1] j(x,j(y,z))=j(y,j(z,x)).
+
+given clause #23: (wt=11) 29 [copy,28,flip.1] j(x,j(y,z))=j(z,j(x,y)).
+
+given clause #24: (wt=11) 48 [para_into,11.1.1,19.1.1,flip.1] f(x,f(y,f(x,y)))=f(x,y).
+
+given clause #25: (wt=11) 68 [para_into,14.1.1.1,19.1.1] j(x,f(x,y))=f(x,j(x,y)).
+
+given clause #26: (wt=12) 58 [para_into,38.1.1.2,8.1.1] j(g(x),j(y,j(z,x)))=j(y,z).
+
+given clause #27: (wt=9) 156 [para_into,68.1.1.2,19.1.1,flip.1] f(x,j(x,x))=j(x,x).
+
+given clause #28: (wt=11) 70 [para_into,14.1.1.2,19.1.1] j(f(x,y),x)=f(x,j(y,x)).
+
+given clause #29: (wt=11) 72 [para_into,14.1.1,10.1.1,demod,15] f(x,j(y,z))=f(x,j(z,y)).
+
+given clause #30: (wt=11) 98 [para_into,25.1.1,10.1.1,demod,9] j(x,j(y,z))=j(x,j(z,y)).
+
+given clause #31: (wt=12) 60 [para_from,38.1.1,8.1.1.1,demod,9,flip.1] j(g(x),j(y,j(x,z)))=j(y,z).
+
+given clause #32: (wt=11) 102 [para_into,17.1.1.1,19.1.1] j(x,f(y,x))=f(j(x,y),x).
+
+given clause #33: (wt=9) 282 [para_into,102.1.1.2,19.1.1,flip.1] f(j(x,x),x)=j(x,x).
+
+given clause #34: (wt=11) 108 [para_into,17.1.1.2,19.1.1] j(f(x,y),y)=f(j(x,y),y).
+
+given clause #35: (wt=11) 112 [para_into,17.1.1,14.1.1] f(x,j(y,y))=f(j(x,x),y).
+
+given clause #36: (wt=12) 62 [para_into,44.1.1.2,8.1.1] j(x,j(y,j(z,g(x))))=j(y,z).
+
+given clause #37: (wt=9) 365 [para_into,112.1.1.2,23.1.1,flip.1] f(j(x,x),0)=f(x,0).
+
+given clause #38: (wt=11) 113 [para_into,17.1.1,10.1.1,demod,18] f(j(x,y),z)=f(j(y,x),z).
+
+given clause #39: (wt=11) 116 [copy,112,flip.1] f(j(x,x),y)=f(x,j(y,y)).
+
+given clause #40: (wt=9) 442 [para_into,116.1.1.1,23.1.1,flip.1] f(0,j(x,x))=f(0,x).
+
+given clause #41: (wt=12) 66 [para_from,44.1.1,8.1.1.1,demod,9,flip.1] j(x,j(y,j(g(x),z)))=j(y,z).
+
+given clause #42: (wt=11) 131 [para_into,28.1.1.2,10.1.1] j(x,j(y,z))=j(z,j(y,x)).
+
+given clause #43: (wt=11) 241 [para_into,72.1.1,19.1.1,flip.1] f(j(x,y),j(y,x))=j(x,y).
+
+given clause #44: (wt=11) 277 [para_into,102.1.1.2,156.1.1,demod,9,9,208,20] j(x,j(x,j(x,x)))=j(x,x).
+
+given clause #45: (wt=4) 542 [para_from,277.1.1,38.1.1.2,demod,541,24,541,24] g(x)=x.
+
+given clause #46: (wt=17) 77 [para_from,14.1.1,8.1.1.1] j(f(x,j(y,z)),u)=j(f(x,y),j(f(x,z),u)).
+
+given clause #47: (wt=5) 540 [para_from,277.1.1,58.1.1.2,demod,90,9,27,7,flip.1] j(x,x)=0.
+
+given clause #48: (wt=5) 563 [back_demod,454,demod,541,541,558,558,20,541,flip.1] f(0,x)=0.
+
+given clause #49: (wt=5) 569 [back_demod,418,demod,541,564,20,564,flip.1] f(x,0)=0.
+
+given clause #50: (wt=7) 544 [para_from,277.1.1,131.1.1.2,demod,541,24,541,24,flip.1] j(x,j(x,y))=y.
+
+given clause #51: (wt=15) 79 [para_into,46.1.1.2,11.1.1,demod,12,12] f(x,f(y,f(x,f(y,z))))=f(x,f(y,z)).
+
+given clause #52: (wt=7) 546 [para_from,277.1.1,29.1.1.2,demod,541,24,541,24,flip.1] j(x,j(y,x))=y.
+
+given clause #53: (wt=9) 571 [back_demod,344,demod,541,570,flip.1] f(x,f(j(x,y),y))=0.
+
+given clause #54: (wt=9) 573 [back_demod,291,demod,541,570,flip.1] f(x,f(j(y,x),y))=0.
+
+given clause #55: (wt=9) 678 [para_into,571.1.1.2.1,546.1.1] f(x,f(y,j(y,x)))=0.
+
+given clause #56: (wt=13) 81 [para_from,46.1.1,14.1.1.2,demod,15,flip.1] f(x,j(y,f(x,z)))=f(x,j(y,z)).
+
+given clause #57: (wt=9) 680 [para_into,571.1.1.2.1,544.1.1] f(x,f(y,j(x,y)))=0.
+
+given clause #58: (wt=9) 718 [para_into,573.1.1.2.1,546.1.1] f(j(x,y),f(x,y))=0.
+
+given clause #59: (wt=9) 720 [para_into,573.1.1.2.1,544.1.1] f(j(x,y),f(y,x))=0.
+
+given clause #60: (wt=9) 884 [para_from,718.1.1,102.1.1.2,demod,24,115,545,flip.1] f(x,f(y,x))=f(y,x).
+
+given clause #61: (wt=13) 83 [para_from,46.1.1,14.1.1.1,demod,15,flip.1] f(x,j(f(x,y),z))=f(x,j(y,z)).
+
+given clause #62: (wt=11) 603 [back_demod,66,demod,543] j(x,j(y,j(x,z)))=j(y,z).
+
+given clause #63: (wt=11) 605 [back_demod,62,demod,543] j(x,j(y,j(z,x)))=j(y,z).
+
+given clause #64: (wt=11) 716 [para_from,571.1.1,11.1.1.1,demod,564,12,flip.1] f(x,f(j(x,y),f(y,z)))=0.
+
+given clause #65: (wt=11) 750 [para_from,573.1.1,11.1.1.1,demod,564,12,flip.1] f(x,f(j(y,x),f(y,z)))=0.
+
+given clause #66: (wt=15) 95 [para_into,25.1.1.2,25.1.1] j(x,j(y,j(z,u)))=j(z,j(x,j(y,u))).
+
+given clause #67: (wt=11) 772 [para_into,678.1.1.2,11.1.1,demod,159] f(x,f(y,f(z,j(z,x))))=0.
+
+given clause #68: (wt=11) 784 [para_from,678.1.1,70.1.1.1,demod,5,78,20,109,flip.1] f(x,j(y,f(j(y,x),x)))=x.
+
+-------- PROOF -------- 
+
+----> UNIT CONFLICT at   0.08 sec ----> 1223 [binary,1222.1,2.1] $F.
+
+Length of proof is 50.  Level of proof is 13.
+
+---------------- PROOF ----------------
+
+1 [] f(a,b)!=f(b,a).
+2 [copy,1,flip.1] f(b,a)!=f(a,b).
+5,4 [] j(0,x)=x.
+7,6 [] j(g(x),x)=0.
+9,8 [] j(j(x,y),z)=j(x,j(y,z)).
+10 [] j(x,y)=j(y,x).
+12,11 [] f(f(x,y),z)=f(x,f(y,z)).
+13 [] f(x,j(y,z))=j(f(x,y),f(x,z)).
+15,14 [copy,13,flip.1] j(f(x,y),f(x,z))=f(x,j(y,z)).
+16 [] f(j(x,y),z)=j(f(x,z),f(y,z)).
+17 [copy,16,flip.1] j(f(x,y),f(z,y))=f(j(x,z),y).
+20,19 [] f(x,x)=x.
+24,23 [para_into,10.1.1,4.1.1,flip.1] j(x,0)=x.
+27,26 [para_into,8.1.1.1,6.1.1,demod,5,flip.1] j(g(x),j(x,y))=y.
+28 [para_into,8.1.1,10.1.1] j(x,j(y,z))=j(y,j(z,x)).
+29 [copy,28,flip.1] j(x,j(y,z))=j(z,j(x,y)).
+38 [para_into,26.1.1.2,10.1.1] j(g(x),j(y,x))=y.
+47,46 [para_into,11.1.1.1,19.1.1,flip.1] f(x,f(x,y))=f(x,y).
+48 [para_into,11.1.1,19.1.1,flip.1] f(x,f(y,f(x,y)))=f(x,y).
+52 [para_into,38.1.1.2,38.1.1] j(g(j(x,y)),x)=g(y).
+58 [para_into,38.1.1.2,8.1.1] j(g(x),j(y,j(z,x)))=j(y,z).
+69,68 [para_into,14.1.1.1,19.1.1] j(x,f(x,y))=f(x,j(x,y)).
+71,70 [para_into,14.1.1.2,19.1.1] j(f(x,y),x)=f(x,j(y,x)).
+78,77 [para_from,14.1.1,8.1.1.1] j(f(x,j(y,z)),u)=j(f(x,y),j(f(x,z),u)).
+90,89 [para_into,52.1.1.1.1,38.1.1,flip.1] g(j(x,y))=j(g(x),g(y)).
+100 [para_into,17.1.1.1,46.1.1] j(f(x,y),f(z,f(x,y)))=f(j(x,z),f(x,y)).
+103,102 [para_into,17.1.1.1,19.1.1] j(x,f(y,x))=f(j(x,y),x).
+109,108 [para_into,17.1.1.2,19.1.1] j(f(x,y),y)=f(j(x,y),y).
+112 [para_into,17.1.1,14.1.1] f(x,j(y,y))=f(j(x,x),y).
+115,114 [back_demod,100,demod,103] f(j(f(x,y),z),f(x,y))=f(j(x,z),f(x,y)).
+116 [copy,112,flip.1] f(j(x,x),y)=f(x,j(y,y)).
+131 [para_into,28.1.1.2,10.1.1] j(x,j(y,z))=j(z,j(y,x)).
+156 [para_into,68.1.1.2,19.1.1,flip.1] f(x,j(x,x))=j(x,x).
+208,207 [para_from,156.1.1,17.1.1.1,demod,103,9] f(j(x,j(x,y)),j(x,x))=f(j(x,y),j(x,x)).
+277 [para_into,102.1.1.2,156.1.1,demod,9,9,208,20] j(x,j(x,j(x,x)))=j(x,x).
+281 [para_into,102.1.1.2,46.1.1,demod,15,71,12] f(x,j(y,y))=f(x,f(j(y,x),f(x,y))).
+287,286 [para_into,102.1.1,14.1.1,demod,103,71,12,flip.1] f(x,f(j(y,x),f(x,y)))=f(x,f(j(y,x),y)).
+291 [back_demod,281,demod,287] f(x,j(y,y))=f(x,f(j(y,x),y)).
+331 [para_into,108.1.1.1,46.1.1,demod,15,69,12] f(x,j(y,y))=f(x,f(j(x,y),f(x,y))).
+341,340 [para_into,108.1.1,14.1.1,demod,109,69,12,flip.1] f(x,f(j(x,y),f(x,y)))=f(x,f(j(x,y),y)).
+344 [back_demod,331,demod,341] f(x,j(y,y))=f(x,f(j(x,y),y)).
+365 [para_into,112.1.1.2,23.1.1,flip.1] f(j(x,x),0)=f(x,0).
+418 [para_from,365.1.1,11.1.1.1,demod,12,flip.1] f(j(x,x),f(0,y))=f(x,f(0,y)).
+442 [para_into,116.1.1.1,23.1.1,flip.1] f(0,j(x,x))=f(0,x).
+454 [para_from,116.1.1,48.1.1.2.2] f(j(x,x),f(y,f(x,j(y,y))))=f(j(x,x),y).
+464 [para_into,442.1.1.2,17.1.1] f(0,f(j(x,x),y))=f(0,f(x,y)).
+541,540 [para_from,277.1.1,58.1.1.2,demod,90,9,27,7,flip.1] j(x,x)=0.
+545,544 [para_from,277.1.1,131.1.1.2,demod,541,24,541,24,flip.1] j(x,j(x,y))=y.
+546 [para_from,277.1.1,29.1.1.2,demod,541,24,541,24,flip.1] j(x,j(y,x))=y.
+558,557 [back_demod,464,demod,541,47,flip.1] f(0,f(x,y))=f(0,y).
+564,563 [back_demod,454,demod,541,541,558,558,20,541,flip.1] f(0,x)=0.
+570,569 [back_demod,418,demod,541,564,20,564,flip.1] f(x,0)=0.
+571 [back_demod,344,demod,541,570,flip.1] f(x,f(j(x,y),y))=0.
+573 [back_demod,291,demod,541,570,flip.1] f(x,f(j(y,x),y))=0.
+678 [para_into,571.1.1.2.1,546.1.1] f(x,f(y,j(y,x)))=0.
+719,718 [para_into,573.1.1.2.1,546.1.1] f(j(x,y),f(x,y))=0.
+784 [para_from,678.1.1,70.1.1.1,demod,5,78,20,109,flip.1] f(x,j(y,f(j(y,x),x)))=x.
+885,884 [para_from,718.1.1,102.1.1.2,demod,24,115,545,flip.1] f(x,f(y,x))=f(y,x).
+1222 [para_into,784.1.1.2.2.1,68.1.1,demod,12,719,570,24,12,885] f(x,y)=f(y,x).
+1223 [binary,1222.1,2.1] $F.
+
+------------ end of proof -------------
+
+
+Search stopped by max_proofs option.
+
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 68
+clauses generated           2527
+clauses kept                 745
+clauses forward subsumed    2347
+clauses back subsumed         12
+Kbytes malloced             2929
+
+----------- times (seconds) -----------
+user CPU time          0.08          (0 hr, 0 min, 0 sec)
+system CPU time        0.01          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+That finishes the proof of the theorem.
+
+Process 8288 finished Mon Aug  2 15:30:36 2004

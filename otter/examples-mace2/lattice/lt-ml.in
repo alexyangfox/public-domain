@@ -1,0 +1,14 @@
+% benchmark parameters -N5 -p
+%
+% Find a nonmodular lattice.
+% The smallest ones are pentagon (-n5) and benzine (-n6).
+
+include("finite-lattice").
+
+list(usable).
+
+% Denial of modularity:
+
+A v (B ^ (A v C)) != (A v B) ^ (A v C).
+
+end_of_list.

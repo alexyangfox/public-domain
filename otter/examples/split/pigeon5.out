@@ -1,0 +1,2711 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:31:09 2004
+The command was "../../bin/otter".  The process ID is 8730.
+
+set(binary_res).
+   dependent: set(factor).
+   dependent: set(unit_deletion).
+set(split_when_given).
+   dependent: set(back_unit_deletion).
+set(split_pos).
+clear(print_kept).
+clear(print_back_sub).
+assign(stats_level,1).
+
+list(sos).
+1 [] p00|p01|p02|p03.
+2 [] p04|p05|p06|p07.
+3 [] p08|p09|p10|p11.
+4 [] p12|p13|p14|p15.
+5 [] p16|p17|p18|p19.
+6 [] -p00| -p04.
+7 [] -p00| -p08.
+8 [] -p00| -p12.
+9 [] -p00| -p16.
+10 [] -p04| -p08.
+11 [] -p04| -p12.
+12 [] -p04| -p16.
+13 [] -p08| -p12.
+14 [] -p08| -p16.
+15 [] -p12| -p16.
+16 [] -p01| -p05.
+17 [] -p01| -p09.
+18 [] -p01| -p13.
+19 [] -p01| -p17.
+20 [] -p05| -p09.
+21 [] -p05| -p13.
+22 [] -p05| -p17.
+23 [] -p09| -p13.
+24 [] -p09| -p17.
+25 [] -p13| -p17.
+26 [] -p02| -p06.
+27 [] -p02| -p10.
+28 [] -p02| -p14.
+29 [] -p02| -p18.
+30 [] -p06| -p10.
+31 [] -p06| -p14.
+32 [] -p06| -p18.
+33 [] -p10| -p14.
+34 [] -p10| -p18.
+35 [] -p14| -p18.
+36 [] -p03| -p07.
+37 [] -p03| -p11.
+38 [] -p03| -p15.
+39 [] -p03| -p19.
+40 [] -p07| -p11.
+41 [] -p07| -p15.
+42 [] -p07| -p19.
+43 [] -p11| -p15.
+44 [] -p11| -p19.
+45 [] -p15| -p19.
+end_of_list.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=2) 6 [] -p00| -p04.
+
+given clause #2: (wt=2) 7 [] -p00| -p08.
+
+given clause #3: (wt=2) 8 [] -p00| -p12.
+
+given clause #4: (wt=2) 9 [] -p00| -p16.
+
+given clause #5: (wt=2) 10 [] -p04| -p08.
+
+given clause #6: (wt=2) 11 [] -p04| -p12.
+
+given clause #7: (wt=2) 12 [] -p04| -p16.
+
+given clause #8: (wt=2) 13 [] -p08| -p12.
+
+given clause #9: (wt=2) 14 [] -p08| -p16.
+
+given clause #10: (wt=2) 15 [] -p12| -p16.
+
+given clause #11: (wt=2) 16 [] -p01| -p05.
+
+given clause #12: (wt=2) 17 [] -p01| -p09.
+
+given clause #13: (wt=2) 18 [] -p01| -p13.
+
+given clause #14: (wt=2) 19 [] -p01| -p17.
+
+given clause #15: (wt=2) 20 [] -p05| -p09.
+
+given clause #16: (wt=2) 21 [] -p05| -p13.
+
+given clause #17: (wt=2) 22 [] -p05| -p17.
+
+given clause #18: (wt=2) 23 [] -p09| -p13.
+
+given clause #19: (wt=2) 24 [] -p09| -p17.
+
+given clause #20: (wt=2) 25 [] -p13| -p17.
+
+given clause #21: (wt=2) 26 [] -p02| -p06.
+
+given clause #22: (wt=2) 27 [] -p02| -p10.
+
+given clause #23: (wt=2) 28 [] -p02| -p14.
+
+given clause #24: (wt=2) 29 [] -p02| -p18.
+
+given clause #25: (wt=2) 30 [] -p06| -p10.
+
+given clause #26: (wt=2) 31 [] -p06| -p14.
+
+given clause #27: (wt=2) 32 [] -p06| -p18.
+
+given clause #28: (wt=2) 33 [] -p10| -p14.
+
+given clause #29: (wt=2) 34 [] -p10| -p18.
+
+given clause #30: (wt=2) 35 [] -p14| -p18.
+
+given clause #31: (wt=2) 36 [] -p03| -p07.
+
+given clause #32: (wt=2) 37 [] -p03| -p11.
+
+given clause #33: (wt=2) 38 [] -p03| -p15.
+
+given clause #34: (wt=2) 39 [] -p03| -p19.
+
+given clause #35: (wt=2) 40 [] -p07| -p11.
+
+given clause #36: (wt=2) 41 [] -p07| -p15.
+
+given clause #37: (wt=2) 42 [] -p07| -p19.
+
+given clause #38: (wt=2) 43 [] -p11| -p15.
+
+given clause #39: (wt=2) 44 [] -p11| -p19.
+
+given clause #40: (wt=2) 45 [] -p15| -p19.
+
+given clause #41: (wt=4) 1 [] p00|p01|p02|p03.
+
+Splitting on clause 1 [] p00|p01|p02|p03.
+
+Case [1]   (process 8731):
+Assumption: 46 [1,split.1] p00.
+>>>> Starting back unit deletion with 46.
+0 [back_unit_del,46.1,9.1] -p16.
+0 [back_unit_del,46.1,8.1] -p12.
+0 [back_unit_del,46.1,7.1] -p08.
+0 [back_unit_del,46.1,6.1] -p04.
+>>>> Starting back unit deletion with 47.
+>>>> Starting back unit deletion with 48.
+>>>> Starting back unit deletion with 49.
+>>>> Starting back unit deletion with 50.
+
+given clause #42: (wt=1) 46 [1,split.1] p00.
+
+given clause #43: (wt=3) 51 [back_unit_del,47.1,5.1] p17|p18|p19.
+
+Splitting on clause 51 [back_unit_del,47.1,5.1] p17|p18|p19.
+
+Case [1.1]   (process 8732):
+Assumption: 55 [51,split.1.1] p17.
+>>>> Starting back unit deletion with 55.
+0 [back_unit_del,55.1,25.2] -p13.
+0 [back_unit_del,55.1,24.2] -p09.
+0 [back_unit_del,55.1,22.2] -p05.
+0 [back_unit_del,55.1,19.2] -p01.
+>>>> Starting back unit deletion with 56.
+>>>> Starting back unit deletion with 57.
+>>>> Starting back unit deletion with 58.
+>>>> Starting back unit deletion with 59.
+
+given clause #44: (wt=1) 55 [51,split.1.1] p17.
+
+given clause #45: (wt=2) 60 [back_unit_del,56.1,52.1] p14|p15.
+
+Splitting on clause 60 [back_unit_del,56.1,52.1] p14|p15.
+
+--- refuted case [1.1.1]
+
+Case [1.1.1]   (process 8733):
+Assumption: 63 [60,split.1.1.1] p14.
+>>>> Starting back unit deletion with 63.
+0 [back_unit_del,63.1,35.1] -p18.
+0 [back_unit_del,63.1,33.2] -p10.
+0 [back_unit_del,63.1,31.2] -p06.
+0 [back_unit_del,63.1,28.2] -p02.
+>>>> Starting back unit deletion with 64.
+>>>> Starting back unit deletion with 65.
+>>>> Starting back unit deletion with 66.
+>>>> Starting back unit deletion with 67.
+>>>> Starting back unit deletion with 68.
+0 [back_unit_del,68.1,44.1] -p19.
+0 [back_unit_del,68.1,43.1] -p15.
+0 [back_unit_del,68.1,40.2] -p07.
+
+----> UNIT CONFLICT at   0.00 sec ----> 73 [binary,72.1,69.1] $F.
+
+Length of proof is 22.  Level of proof is 10.  Case [1.1.1]
+
+---------------- PROOF ----------------
+
+1 [] p00|p01|p02|p03.
+2 [] p04|p05|p06|p07.
+3 [] p08|p09|p10|p11.
+4 [] p12|p13|p14|p15.
+5 [] p16|p17|p18|p19.
+6 [] -p00| -p04.
+7 [] -p00| -p08.
+8 [] -p00| -p12.
+9 [] -p00| -p16.
+22 [] -p05| -p17.
+24 [] -p09| -p17.
+25 [] -p13| -p17.
+31 [] -p06| -p14.
+33 [] -p10| -p14.
+40 [] -p07| -p11.
+46 [1,split.1] p00.
+47 [back_unit_del,46.1,9.1] -p16.
+48 [back_unit_del,46.1,8.1] -p12.
+49 [back_unit_del,46.1,7.1] -p08.
+50 [back_unit_del,46.1,6.1] -p04.
+51 [back_unit_del,47.1,5.1] p17|p18|p19.
+52 [back_unit_del,48.1,4.1] p13|p14|p15.
+53 [back_unit_del,49.1,3.1] p09|p10|p11.
+54 [back_unit_del,50.1,2.1] p05|p06|p07.
+55 [51,split.1.1] p17.
+56 [back_unit_del,55.1,25.2] -p13.
+57 [back_unit_del,55.1,24.2] -p09.
+58 [back_unit_del,55.1,22.2] -p05.
+60 [back_unit_del,56.1,52.1] p14|p15.
+61 [back_unit_del,57.1,53.1] p10|p11.
+62 [back_unit_del,58.1,54.1] p06|p07.
+63 [60,split.1.1.1] p14.
+65 [back_unit_del,63.1,33.2] -p10.
+66 [back_unit_del,63.1,31.2] -p06.
+68 [back_unit_del,65.1,61.1] p11.
+69 [back_unit_del,66.1,62.1] p07.
+72 [back_unit_del,68.1,40.2] -p07.
+73 [binary,72.1,69.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8733) -------
+clauses given                 45
+clauses generated             24
+clauses kept                  27
+clauses forward subsumed       0
+clauses back subsumed         38
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8733 finished Mon Aug  2 15:31:09 2004
+Refuted case [1.1.1].
+
+--- refuted case [1.1.2]
+
+Case [1.1.2]   (process 8734):
+Assumption: 64 [60,split.1.1.2] p15.
+>>>> Starting back unit deletion with 63.
+>>>> Starting back unit deletion with 64.
+0 [back_unit_del,64.1,45.1] -p19.
+0 [back_unit_del,64.1,43.2] -p11.
+0 [back_unit_del,64.1,41.2] -p07.
+0 [back_unit_del,64.1,38.2] -p03.
+>>>> Starting back unit deletion with 65.
+>>>> Starting back unit deletion with 66.
+>>>> Starting back unit deletion with 67.
+>>>> Starting back unit deletion with 68.
+>>>> Starting back unit deletion with 69.
+0 [back_unit_del,69.1,34.1] -p18.
+0 [back_unit_del,69.1,30.2] -p06.
+
+----> UNIT CONFLICT at   0.00 sec ----> 73 [binary,72.1,70.1] $F.
+
+Length of proof is 22.  Level of proof is 10.  Case [1.1.2]
+
+---------------- PROOF ----------------
+
+1 [] p00|p01|p02|p03.
+2 [] p04|p05|p06|p07.
+3 [] p08|p09|p10|p11.
+4 [] p12|p13|p14|p15.
+5 [] p16|p17|p18|p19.
+6 [] -p00| -p04.
+7 [] -p00| -p08.
+8 [] -p00| -p12.
+9 [] -p00| -p16.
+22 [] -p05| -p17.
+24 [] -p09| -p17.
+25 [] -p13| -p17.
+30 [] -p06| -p10.
+41 [] -p07| -p15.
+43 [] -p11| -p15.
+46 [1,split.1] p00.
+47 [back_unit_del,46.1,9.1] -p16.
+48 [back_unit_del,46.1,8.1] -p12.
+49 [back_unit_del,46.1,7.1] -p08.
+50 [back_unit_del,46.1,6.1] -p04.
+51 [back_unit_del,47.1,5.1] p17|p18|p19.
+52 [back_unit_del,48.1,4.1] p13|p14|p15.
+53 [back_unit_del,49.1,3.1] p09|p10|p11.
+54 [back_unit_del,50.1,2.1] p05|p06|p07.
+55 [51,split.1.1] p17.
+56 [back_unit_del,55.1,25.2] -p13.
+57 [back_unit_del,55.1,24.2] -p09.
+58 [back_unit_del,55.1,22.2] -p05.
+60 [back_unit_del,56.1,52.1] p14|p15.
+61 [back_unit_del,57.1,53.1] p10|p11.
+62 [back_unit_del,58.1,54.1] p06|p07.
+64 [60,split.1.1.2] p15.
+66 [back_unit_del,64.1,43.2] -p11.
+67 [back_unit_del,64.1,41.2] -p07.
+69 [back_unit_del,66.1,61.2] p10.
+70 [back_unit_del,67.1,62.2] p06.
+72 [back_unit_del,69.1,30.2] -p06.
+73 [binary,72.1,70.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8734) -------
+clauses given                 45
+clauses generated             23
+clauses kept                  27
+clauses forward subsumed       0
+clauses back subsumed         42
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8734 finished Mon Aug  2 15:31:09 2004
+Refuted case [1.1.2].
+
+------- statistics (process 8732) -------
+clauses given                 45
+clauses generated             15
+clauses kept                  17
+clauses forward subsumed       0
+clauses back subsumed         27
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8732 finished Mon Aug  2 15:31:09 2004
+Refuted case [1.1].
+
+Case [1.2]   (process 8735):
+Assumption: 56 [51,split.1.2] p18.
+>>>> Starting back unit deletion with 55.
+>>>> Starting back unit deletion with 56.
+0 [back_unit_del,56.1,35.2] -p14.
+0 [back_unit_del,56.1,34.2] -p10.
+0 [back_unit_del,56.1,32.2] -p06.
+0 [back_unit_del,56.1,29.2] -p02.
+>>>> Starting back unit deletion with 57.
+>>>> Starting back unit deletion with 58.
+>>>> Starting back unit deletion with 59.
+>>>> Starting back unit deletion with 60.
+
+given clause #44: (wt=1) 55 [51,split_neg.1.2] -p17.
+
+given clause #45: (wt=1) 56 [51,split.1.2] p18.
+
+given clause #46: (wt=2) 61 [back_unit_del,57.1,52.2] p13|p15.
+
+Splitting on clause 61 [back_unit_del,57.1,52.2] p13|p15.
+
+--- refuted case [1.2.1]
+
+Case [1.2.1]   (process 8736):
+Assumption: 64 [61,split.1.2.1] p13.
+>>>> Starting back unit deletion with 64.
+0 [back_unit_del,64.1,23.2] -p09.
+0 [back_unit_del,64.1,21.2] -p05.
+0 [back_unit_del,64.1,18.2] -p01.
+>>>> Starting back unit deletion with 65.
+>>>> Starting back unit deletion with 66.
+>>>> Starting back unit deletion with 67.
+>>>> Starting back unit deletion with 68.
+0 [back_unit_del,68.1,44.1] -p19.
+0 [back_unit_del,68.1,43.1] -p15.
+0 [back_unit_del,68.1,40.2] -p07.
+
+----> UNIT CONFLICT at   0.00 sec ----> 73 [binary,72.1,69.1] $F.
+
+Length of proof is 22.  Level of proof is 10.  Case [1.2.1]
+
+---------------- PROOF ----------------
+
+1 [] p00|p01|p02|p03.
+2 [] p04|p05|p06|p07.
+3 [] p08|p09|p10|p11.
+4 [] p12|p13|p14|p15.
+5 [] p16|p17|p18|p19.
+6 [] -p00| -p04.
+7 [] -p00| -p08.
+8 [] -p00| -p12.
+9 [] -p00| -p16.
+21 [] -p05| -p13.
+23 [] -p09| -p13.
+32 [] -p06| -p18.
+34 [] -p10| -p18.
+35 [] -p14| -p18.
+40 [] -p07| -p11.
+46 [1,split.1] p00.
+47 [back_unit_del,46.1,9.1] -p16.
+48 [back_unit_del,46.1,8.1] -p12.
+49 [back_unit_del,46.1,7.1] -p08.
+50 [back_unit_del,46.1,6.1] -p04.
+51 [back_unit_del,47.1,5.1] p17|p18|p19.
+52 [back_unit_del,48.1,4.1] p13|p14|p15.
+53 [back_unit_del,49.1,3.1] p09|p10|p11.
+54 [back_unit_del,50.1,2.1] p05|p06|p07.
+56 [51,split.1.2] p18.
+57 [back_unit_del,56.1,35.2] -p14.
+58 [back_unit_del,56.1,34.2] -p10.
+59 [back_unit_del,56.1,32.2] -p06.
+61 [back_unit_del,57.1,52.2] p13|p15.
+62 [back_unit_del,58.1,53.2] p09|p11.
+63 [back_unit_del,59.1,54.2] p05|p07.
+64 [61,split.1.2.1] p13.
+65 [back_unit_del,64.1,23.2] -p09.
+66 [back_unit_del,64.1,21.2] -p05.
+68 [back_unit_del,65.1,62.1] p11.
+69 [back_unit_del,66.1,63.1] p07.
+72 [back_unit_del,68.1,40.2] -p07.
+73 [binary,72.1,69.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8736) -------
+clauses given                 46
+clauses generated             23
+clauses kept                  27
+clauses forward subsumed       0
+clauses back subsumed         38
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8736 finished Mon Aug  2 15:31:09 2004
+Refuted case [1.2.1].
+
+--- refuted case [1.2.2]
+
+Case [1.2.2]   (process 8737):
+Assumption: 65 [61,split.1.2.2] p15.
+>>>> Starting back unit deletion with 64.
+>>>> Starting back unit deletion with 65.
+0 [back_unit_del,65.1,45.1] -p19.
+0 [back_unit_del,65.1,43.2] -p11.
+0 [back_unit_del,65.1,41.2] -p07.
+0 [back_unit_del,65.1,38.2] -p03.
+>>>> Starting back unit deletion with 66.
+>>>> Starting back unit deletion with 67.
+>>>> Starting back unit deletion with 68.
+>>>> Starting back unit deletion with 69.
+>>>> Starting back unit deletion with 70.
+0 [back_unit_del,70.1,20.2] -p05.
+
+----> UNIT CONFLICT at   0.00 sec ----> 73 [binary,72.1,71.1] $F.
+
+Length of proof is 22.  Level of proof is 10.  Case [1.2.2]
+
+---------------- PROOF ----------------
+
+1 [] p00|p01|p02|p03.
+2 [] p04|p05|p06|p07.
+3 [] p08|p09|p10|p11.
+4 [] p12|p13|p14|p15.
+5 [] p16|p17|p18|p19.
+6 [] -p00| -p04.
+7 [] -p00| -p08.
+8 [] -p00| -p12.
+9 [] -p00| -p16.
+20 [] -p05| -p09.
+32 [] -p06| -p18.
+34 [] -p10| -p18.
+35 [] -p14| -p18.
+41 [] -p07| -p15.
+43 [] -p11| -p15.
+46 [1,split.1] p00.
+47 [back_unit_del,46.1,9.1] -p16.
+48 [back_unit_del,46.1,8.1] -p12.
+49 [back_unit_del,46.1,7.1] -p08.
+50 [back_unit_del,46.1,6.1] -p04.
+51 [back_unit_del,47.1,5.1] p17|p18|p19.
+52 [back_unit_del,48.1,4.1] p13|p14|p15.
+53 [back_unit_del,49.1,3.1] p09|p10|p11.
+54 [back_unit_del,50.1,2.1] p05|p06|p07.
+56 [51,split.1.2] p18.
+57 [back_unit_del,56.1,35.2] -p14.
+58 [back_unit_del,56.1,34.2] -p10.
+59 [back_unit_del,56.1,32.2] -p06.
+61 [back_unit_del,57.1,52.2] p13|p15.
+62 [back_unit_del,58.1,53.2] p09|p11.
+63 [back_unit_del,59.1,54.2] p05|p07.
+65 [61,split.1.2.2] p15.
+67 [back_unit_del,65.1,43.2] -p11.
+68 [back_unit_del,65.1,41.2] -p07.
+70 [back_unit_del,67.1,62.2] p09.
+71 [back_unit_del,68.1,63.2] p05.
+72 [back_unit_del,70.1,20.2] -p05.
+73 [binary,72.1,71.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8737) -------
+clauses given                 46
+clauses generated             22
+clauses kept                  27
+clauses forward subsumed       0
+clauses back subsumed         45
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8737 finished Mon Aug  2 15:31:09 2004
+Refuted case [1.2.2].
+
+------- statistics (process 8735) -------
+clauses given                 46
+clauses generated             15
+clauses kept                  18
+clauses forward subsumed       0
+clauses back subsumed         31
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8735 finished Mon Aug  2 15:31:09 2004
+Refuted case [1.2].
+
+Case [1.3]   (process 8738):
+Assumption: 57 [51,split.1.3] p19.
+>>>> Starting back unit deletion with 55.
+>>>> Starting back unit deletion with 56.
+>>>> Starting back unit deletion with 57.
+0 [back_unit_del,57.1,45.2] -p15.
+0 [back_unit_del,57.1,44.2] -p11.
+0 [back_unit_del,57.1,42.2] -p07.
+0 [back_unit_del,57.1,39.2] -p03.
+>>>> Starting back unit deletion with 58.
+>>>> Starting back unit deletion with 59.
+>>>> Starting back unit deletion with 60.
+>>>> Starting back unit deletion with 61.
+
+given clause #44: (wt=1) 55 [51,split_neg.1.3] -p17.
+
+given clause #45: (wt=1) 56 [51,split_neg.1.3] -p18.
+
+given clause #46: (wt=1) 57 [51,split.1.3] p19.
+
+given clause #47: (wt=2) 62 [back_unit_del,58.1,52.3] p13|p14.
+
+Splitting on clause 62 [back_unit_del,58.1,52.3] p13|p14.
+
+--- refuted case [1.3.1]
+
+Case [1.3.1]   (process 8739):
+Assumption: 65 [62,split.1.3.1] p13.
+>>>> Starting back unit deletion with 65.
+0 [back_unit_del,65.1,23.2] -p09.
+0 [back_unit_del,65.1,21.2] -p05.
+0 [back_unit_del,65.1,18.2] -p01.
+>>>> Starting back unit deletion with 66.
+>>>> Starting back unit deletion with 67.
+>>>> Starting back unit deletion with 68.
+>>>> Starting back unit deletion with 69.
+0 [back_unit_del,69.1,33.1] -p14.
+0 [back_unit_del,69.1,30.2] -p06.
+
+----> UNIT CONFLICT at   0.00 sec ----> 73 [binary,72.1,70.1] $F.
+
+Length of proof is 22.  Level of proof is 10.  Case [1.3.1]
+
+---------------- PROOF ----------------
+
+1 [] p00|p01|p02|p03.
+2 [] p04|p05|p06|p07.
+3 [] p08|p09|p10|p11.
+4 [] p12|p13|p14|p15.
+5 [] p16|p17|p18|p19.
+6 [] -p00| -p04.
+7 [] -p00| -p08.
+8 [] -p00| -p12.
+9 [] -p00| -p16.
+21 [] -p05| -p13.
+23 [] -p09| -p13.
+30 [] -p06| -p10.
+42 [] -p07| -p19.
+44 [] -p11| -p19.
+45 [] -p15| -p19.
+46 [1,split.1] p00.
+47 [back_unit_del,46.1,9.1] -p16.
+48 [back_unit_del,46.1,8.1] -p12.
+49 [back_unit_del,46.1,7.1] -p08.
+50 [back_unit_del,46.1,6.1] -p04.
+51 [back_unit_del,47.1,5.1] p17|p18|p19.
+52 [back_unit_del,48.1,4.1] p13|p14|p15.
+53 [back_unit_del,49.1,3.1] p09|p10|p11.
+54 [back_unit_del,50.1,2.1] p05|p06|p07.
+57 [51,split.1.3] p19.
+58 [back_unit_del,57.1,45.2] -p15.
+59 [back_unit_del,57.1,44.2] -p11.
+60 [back_unit_del,57.1,42.2] -p07.
+62 [back_unit_del,58.1,52.3] p13|p14.
+63 [back_unit_del,59.1,53.3] p09|p10.
+64 [back_unit_del,60.1,54.3] p05|p06.
+65 [62,split.1.3.1] p13.
+66 [back_unit_del,65.1,23.2] -p09.
+67 [back_unit_del,65.1,21.2] -p05.
+69 [back_unit_del,66.1,63.1] p10.
+70 [back_unit_del,67.1,64.1] p06.
+72 [back_unit_del,69.1,30.2] -p06.
+73 [binary,72.1,70.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8739) -------
+clauses given                 47
+clauses generated             22
+clauses kept                  27
+clauses forward subsumed       0
+clauses back subsumed         42
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8739 finished Mon Aug  2 15:31:09 2004
+Refuted case [1.3.1].
+
+--- refuted case [1.3.2]
+
+Case [1.3.2]   (process 8740):
+Assumption: 66 [62,split.1.3.2] p14.
+>>>> Starting back unit deletion with 65.
+>>>> Starting back unit deletion with 66.
+0 [back_unit_del,66.1,33.2] -p10.
+0 [back_unit_del,66.1,31.2] -p06.
+0 [back_unit_del,66.1,28.2] -p02.
+>>>> Starting back unit deletion with 67.
+>>>> Starting back unit deletion with 68.
+>>>> Starting back unit deletion with 69.
+>>>> Starting back unit deletion with 70.
+0 [back_unit_del,70.1,20.2] -p05.
+
+----> UNIT CONFLICT at   0.00 sec ----> 73 [binary,72.1,71.1] $F.
+
+Length of proof is 22.  Level of proof is 10.  Case [1.3.2]
+
+---------------- PROOF ----------------
+
+1 [] p00|p01|p02|p03.
+2 [] p04|p05|p06|p07.
+3 [] p08|p09|p10|p11.
+4 [] p12|p13|p14|p15.
+5 [] p16|p17|p18|p19.
+6 [] -p00| -p04.
+7 [] -p00| -p08.
+8 [] -p00| -p12.
+9 [] -p00| -p16.
+20 [] -p05| -p09.
+31 [] -p06| -p14.
+33 [] -p10| -p14.
+42 [] -p07| -p19.
+44 [] -p11| -p19.
+45 [] -p15| -p19.
+46 [1,split.1] p00.
+47 [back_unit_del,46.1,9.1] -p16.
+48 [back_unit_del,46.1,8.1] -p12.
+49 [back_unit_del,46.1,7.1] -p08.
+50 [back_unit_del,46.1,6.1] -p04.
+51 [back_unit_del,47.1,5.1] p17|p18|p19.
+52 [back_unit_del,48.1,4.1] p13|p14|p15.
+53 [back_unit_del,49.1,3.1] p09|p10|p11.
+54 [back_unit_del,50.1,2.1] p05|p06|p07.
+57 [51,split.1.3] p19.
+58 [back_unit_del,57.1,45.2] -p15.
+59 [back_unit_del,57.1,44.2] -p11.
+60 [back_unit_del,57.1,42.2] -p07.
+62 [back_unit_del,58.1,52.3] p13|p14.
+63 [back_unit_del,59.1,53.3] p09|p10.
+64 [back_unit_del,60.1,54.3] p05|p06.
+66 [62,split.1.3.2] p14.
+67 [back_unit_del,66.1,33.2] -p10.
+68 [back_unit_del,66.1,31.2] -p06.
+70 [back_unit_del,67.1,63.2] p09.
+71 [back_unit_del,68.1,64.2] p05.
+72 [back_unit_del,70.1,20.2] -p05.
+73 [binary,72.1,71.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8740) -------
+clauses given                 47
+clauses generated             21
+clauses kept                  27
+clauses forward subsumed       0
+clauses back subsumed         45
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8740 finished Mon Aug  2 15:31:09 2004
+Refuted case [1.3.2].
+
+------- statistics (process 8738) -------
+clauses given                 47
+clauses generated             15
+clauses kept                  19
+clauses forward subsumed       0
+clauses back subsumed         35
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8738 finished Mon Aug  2 15:31:09 2004
+Refuted case [1.3].
+
+------- statistics (process 8731) -------
+clauses given                 43
+clauses generated              8
+clauses kept                   9
+clauses forward subsumed       0
+clauses back subsumed         14
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8731 finished Mon Aug  2 15:31:09 2004
+Refuted case [1].
+
+Case [2]   (process 8741):
+Assumption: 47 [1,split.2] p01.
+>>>> Starting back unit deletion with 46.
+>>>> Starting back unit deletion with 47.
+0 [back_unit_del,47.1,19.1] -p17.
+0 [back_unit_del,47.1,18.1] -p13.
+0 [back_unit_del,47.1,17.1] -p09.
+0 [back_unit_del,47.1,16.1] -p05.
+>>>> Starting back unit deletion with 48.
+>>>> Starting back unit deletion with 49.
+>>>> Starting back unit deletion with 50.
+>>>> Starting back unit deletion with 51.
+
+given clause #42: (wt=1) 46 [1,split_neg.2] -p00.
+
+given clause #43: (wt=1) 47 [1,split.2] p01.
+
+given clause #44: (wt=3) 52 [back_unit_del,48.1,5.2] p16|p18|p19.
+
+Splitting on clause 52 [back_unit_del,48.1,5.2] p16|p18|p19.
+
+Case [2.1]   (process 8742):
+Assumption: 56 [52,split.2.1] p16.
+>>>> Starting back unit deletion with 56.
+0 [back_unit_del,56.1,15.2] -p12.
+0 [back_unit_del,56.1,14.2] -p08.
+0 [back_unit_del,56.1,12.2] -p04.
+>>>> Starting back unit deletion with 57.
+>>>> Starting back unit deletion with 58.
+>>>> Starting back unit deletion with 59.
+
+given clause #45: (wt=1) 56 [52,split.2.1] p16.
+
+given clause #46: (wt=2) 60 [back_unit_del,57.1,53.1] p14|p15.
+
+Splitting on clause 60 [back_unit_del,57.1,53.1] p14|p15.
+
+--- refuted case [2.1.1]
+
+Case [2.1.1]   (process 8743):
+Assumption: 63 [60,split.2.1.1] p14.
+>>>> Starting back unit deletion with 63.
+0 [back_unit_del,63.1,35.1] -p18.
+0 [back_unit_del,63.1,33.2] -p10.
+0 [back_unit_del,63.1,31.2] -p06.
+0 [back_unit_del,63.1,28.2] -p02.
+>>>> Starting back unit deletion with 64.
+>>>> Starting back unit deletion with 65.
+>>>> Starting back unit deletion with 66.
+>>>> Starting back unit deletion with 67.
+>>>> Starting back unit deletion with 68.
+0 [back_unit_del,68.1,44.1] -p19.
+0 [back_unit_del,68.1,43.1] -p15.
+0 [back_unit_del,68.1,40.2] -p07.
+
+----> UNIT CONFLICT at   0.00 sec ----> 73 [binary,72.1,69.1] $F.
+
+Length of proof is 22.  Level of proof is 10.  Case [2.1.1]
+
+---------------- PROOF ----------------
+
+1 [] p00|p01|p02|p03.
+2 [] p04|p05|p06|p07.
+3 [] p08|p09|p10|p11.
+4 [] p12|p13|p14|p15.
+5 [] p16|p17|p18|p19.
+12 [] -p04| -p16.
+14 [] -p08| -p16.
+15 [] -p12| -p16.
+16 [] -p01| -p05.
+17 [] -p01| -p09.
+18 [] -p01| -p13.
+19 [] -p01| -p17.
+31 [] -p06| -p14.
+33 [] -p10| -p14.
+40 [] -p07| -p11.
+47 [1,split.2] p01.
+48 [back_unit_del,47.1,19.1] -p17.
+49 [back_unit_del,47.1,18.1] -p13.
+50 [back_unit_del,47.1,17.1] -p09.
+51 [back_unit_del,47.1,16.1] -p05.
+52 [back_unit_del,48.1,5.2] p16|p18|p19.
+53 [back_unit_del,49.1,4.2] p12|p14|p15.
+54 [back_unit_del,50.1,3.2] p08|p10|p11.
+55 [back_unit_del,51.1,2.2] p04|p06|p07.
+56 [52,split.2.1] p16.
+57 [back_unit_del,56.1,15.2] -p12.
+58 [back_unit_del,56.1,14.2] -p08.
+59 [back_unit_del,56.1,12.2] -p04.
+60 [back_unit_del,57.1,53.1] p14|p15.
+61 [back_unit_del,58.1,54.1] p10|p11.
+62 [back_unit_del,59.1,55.1] p06|p07.
+63 [60,split.2.1.1] p14.
+65 [back_unit_del,63.1,33.2] -p10.
+66 [back_unit_del,63.1,31.2] -p06.
+68 [back_unit_del,65.1,61.1] p11.
+69 [back_unit_del,66.1,62.1] p07.
+72 [back_unit_del,68.1,40.2] -p07.
+73 [binary,72.1,69.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8743) -------
+clauses given                 46
+clauses generated             23
+clauses kept                  27
+clauses forward subsumed       0
+clauses back subsumed         38
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8743 finished Mon Aug  2 15:31:09 2004
+Refuted case [2.1.1].
+
+--- refuted case [2.1.2]
+
+Case [2.1.2]   (process 8744):
+Assumption: 64 [60,split.2.1.2] p15.
+>>>> Starting back unit deletion with 63.
+>>>> Starting back unit deletion with 64.
+0 [back_unit_del,64.1,45.1] -p19.
+0 [back_unit_del,64.1,43.2] -p11.
+0 [back_unit_del,64.1,41.2] -p07.
+0 [back_unit_del,64.1,38.2] -p03.
+>>>> Starting back unit deletion with 65.
+>>>> Starting back unit deletion with 66.
+>>>> Starting back unit deletion with 67.
+>>>> Starting back unit deletion with 68.
+>>>> Starting back unit deletion with 69.
+0 [back_unit_del,69.1,34.1] -p18.
+0 [back_unit_del,69.1,30.2] -p06.
+
+----> UNIT CONFLICT at   0.00 sec ----> 73 [binary,72.1,70.1] $F.
+
+Length of proof is 22.  Level of proof is 10.  Case [2.1.2]
+
+---------------- PROOF ----------------
+
+1 [] p00|p01|p02|p03.
+2 [] p04|p05|p06|p07.
+3 [] p08|p09|p10|p11.
+4 [] p12|p13|p14|p15.
+5 [] p16|p17|p18|p19.
+12 [] -p04| -p16.
+14 [] -p08| -p16.
+15 [] -p12| -p16.
+16 [] -p01| -p05.
+17 [] -p01| -p09.
+18 [] -p01| -p13.
+19 [] -p01| -p17.
+30 [] -p06| -p10.
+41 [] -p07| -p15.
+43 [] -p11| -p15.
+47 [1,split.2] p01.
+48 [back_unit_del,47.1,19.1] -p17.
+49 [back_unit_del,47.1,18.1] -p13.
+50 [back_unit_del,47.1,17.1] -p09.
+51 [back_unit_del,47.1,16.1] -p05.
+52 [back_unit_del,48.1,5.2] p16|p18|p19.
+53 [back_unit_del,49.1,4.2] p12|p14|p15.
+54 [back_unit_del,50.1,3.2] p08|p10|p11.
+55 [back_unit_del,51.1,2.2] p04|p06|p07.
+56 [52,split.2.1] p16.
+57 [back_unit_del,56.1,15.2] -p12.
+58 [back_unit_del,56.1,14.2] -p08.
+59 [back_unit_del,56.1,12.2] -p04.
+60 [back_unit_del,57.1,53.1] p14|p15.
+61 [back_unit_del,58.1,54.1] p10|p11.
+62 [back_unit_del,59.1,55.1] p06|p07.
+64 [60,split.2.1.2] p15.
+66 [back_unit_del,64.1,43.2] -p11.
+67 [back_unit_del,64.1,41.2] -p07.
+69 [back_unit_del,66.1,61.2] p10.
+70 [back_unit_del,67.1,62.2] p06.
+72 [back_unit_del,69.1,30.2] -p06.
+73 [binary,72.1,70.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8744) -------
+clauses given                 46
+clauses generated             22
+clauses kept                  27
+clauses forward subsumed       0
+clauses back subsumed         42
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8744 finished Mon Aug  2 15:31:09 2004
+Refuted case [2.1.2].
+
+------- statistics (process 8742) -------
+clauses given                 46
+clauses generated             14
+clauses kept                  17
+clauses forward subsumed       0
+clauses back subsumed         27
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8742 finished Mon Aug  2 15:31:09 2004
+Refuted case [2.1].
+
+Case [2.2]   (process 8745):
+Assumption: 57 [52,split.2.2] p18.
+>>>> Starting back unit deletion with 56.
+>>>> Starting back unit deletion with 57.
+0 [back_unit_del,57.1,35.2] -p14.
+0 [back_unit_del,57.1,34.2] -p10.
+0 [back_unit_del,57.1,32.2] -p06.
+0 [back_unit_del,57.1,29.2] -p02.
+>>>> Starting back unit deletion with 58.
+>>>> Starting back unit deletion with 59.
+>>>> Starting back unit deletion with 60.
+>>>> Starting back unit deletion with 61.
+
+given clause #45: (wt=1) 56 [52,split_neg.2.2] -p16.
+
+given clause #46: (wt=1) 57 [52,split.2.2] p18.
+
+given clause #47: (wt=2) 62 [back_unit_del,58.1,53.2] p12|p15.
+
+Splitting on clause 62 [back_unit_del,58.1,53.2] p12|p15.
+
+--- refuted case [2.2.1]
+
+Case [2.2.1]   (process 8746):
+Assumption: 65 [62,split.2.2.1] p12.
+>>>> Starting back unit deletion with 65.
+0 [back_unit_del,65.1,13.2] -p08.
+0 [back_unit_del,65.1,11.2] -p04.
+>>>> Starting back unit deletion with 66.
+>>>> Starting back unit deletion with 67.
+>>>> Starting back unit deletion with 68.
+0 [back_unit_del,68.1,44.1] -p19.
+0 [back_unit_del,68.1,43.1] -p15.
+0 [back_unit_del,68.1,40.2] -p07.
+
+----> UNIT CONFLICT at   0.00 sec ----> 73 [binary,72.1,69.1] $F.
+
+Length of proof is 22.  Level of proof is 10.  Case [2.2.1]
+
+---------------- PROOF ----------------
+
+1 [] p00|p01|p02|p03.
+2 [] p04|p05|p06|p07.
+3 [] p08|p09|p10|p11.
+4 [] p12|p13|p14|p15.
+5 [] p16|p17|p18|p19.
+11 [] -p04| -p12.
+13 [] -p08| -p12.
+16 [] -p01| -p05.
+17 [] -p01| -p09.
+18 [] -p01| -p13.
+19 [] -p01| -p17.
+32 [] -p06| -p18.
+34 [] -p10| -p18.
+35 [] -p14| -p18.
+40 [] -p07| -p11.
+47 [1,split.2] p01.
+48 [back_unit_del,47.1,19.1] -p17.
+49 [back_unit_del,47.1,18.1] -p13.
+50 [back_unit_del,47.1,17.1] -p09.
+51 [back_unit_del,47.1,16.1] -p05.
+52 [back_unit_del,48.1,5.2] p16|p18|p19.
+53 [back_unit_del,49.1,4.2] p12|p14|p15.
+54 [back_unit_del,50.1,3.2] p08|p10|p11.
+55 [back_unit_del,51.1,2.2] p04|p06|p07.
+57 [52,split.2.2] p18.
+58 [back_unit_del,57.1,35.2] -p14.
+59 [back_unit_del,57.1,34.2] -p10.
+60 [back_unit_del,57.1,32.2] -p06.
+62 [back_unit_del,58.1,53.2] p12|p15.
+63 [back_unit_del,59.1,54.2] p08|p11.
+64 [back_unit_del,60.1,55.2] p04|p07.
+65 [62,split.2.2.1] p12.
+66 [back_unit_del,65.1,13.2] -p08.
+67 [back_unit_del,65.1,11.2] -p04.
+68 [back_unit_del,66.1,63.1] p11.
+69 [back_unit_del,67.1,64.1] p07.
+72 [back_unit_del,68.1,40.2] -p07.
+73 [binary,72.1,69.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8746) -------
+clauses given                 47
+clauses generated             22
+clauses kept                  27
+clauses forward subsumed       0
+clauses back subsumed         38
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8746 finished Mon Aug  2 15:31:09 2004
+Refuted case [2.2.1].
+
+--- refuted case [2.2.2]
+
+Case [2.2.2]   (process 8747):
+Assumption: 66 [62,split.2.2.2] p15.
+>>>> Starting back unit deletion with 65.
+>>>> Starting back unit deletion with 66.
+0 [back_unit_del,66.1,45.1] -p19.
+0 [back_unit_del,66.1,43.2] -p11.
+0 [back_unit_del,66.1,41.2] -p07.
+0 [back_unit_del,66.1,38.2] -p03.
+>>>> Starting back unit deletion with 67.
+>>>> Starting back unit deletion with 68.
+>>>> Starting back unit deletion with 69.
+>>>> Starting back unit deletion with 70.
+>>>> Starting back unit deletion with 71.
+0 [back_unit_del,71.1,10.2] -p04.
+
+----> UNIT CONFLICT at   0.00 sec ----> 74 [binary,73.1,72.1] $F.
+
+Length of proof is 22.  Level of proof is 10.  Case [2.2.2]
+
+---------------- PROOF ----------------
+
+1 [] p00|p01|p02|p03.
+2 [] p04|p05|p06|p07.
+3 [] p08|p09|p10|p11.
+4 [] p12|p13|p14|p15.
+5 [] p16|p17|p18|p19.
+10 [] -p04| -p08.
+16 [] -p01| -p05.
+17 [] -p01| -p09.
+18 [] -p01| -p13.
+19 [] -p01| -p17.
+32 [] -p06| -p18.
+34 [] -p10| -p18.
+35 [] -p14| -p18.
+41 [] -p07| -p15.
+43 [] -p11| -p15.
+47 [1,split.2] p01.
+48 [back_unit_del,47.1,19.1] -p17.
+49 [back_unit_del,47.1,18.1] -p13.
+50 [back_unit_del,47.1,17.1] -p09.
+51 [back_unit_del,47.1,16.1] -p05.
+52 [back_unit_del,48.1,5.2] p16|p18|p19.
+53 [back_unit_del,49.1,4.2] p12|p14|p15.
+54 [back_unit_del,50.1,3.2] p08|p10|p11.
+55 [back_unit_del,51.1,2.2] p04|p06|p07.
+57 [52,split.2.2] p18.
+58 [back_unit_del,57.1,35.2] -p14.
+59 [back_unit_del,57.1,34.2] -p10.
+60 [back_unit_del,57.1,32.2] -p06.
+62 [back_unit_del,58.1,53.2] p12|p15.
+63 [back_unit_del,59.1,54.2] p08|p11.
+64 [back_unit_del,60.1,55.2] p04|p07.
+66 [62,split.2.2.2] p15.
+68 [back_unit_del,66.1,43.2] -p11.
+69 [back_unit_del,66.1,41.2] -p07.
+71 [back_unit_del,68.1,63.2] p08.
+72 [back_unit_del,69.1,64.2] p04.
+73 [back_unit_del,71.1,10.2] -p04.
+74 [binary,73.1,72.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8747) -------
+clauses given                 47
+clauses generated             22
+clauses kept                  28
+clauses forward subsumed       0
+clauses back subsumed         47
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8747 finished Mon Aug  2 15:31:09 2004
+Refuted case [2.2.2].
+
+------- statistics (process 8745) -------
+clauses given                 47
+clauses generated             15
+clauses kept                  19
+clauses forward subsumed       0
+clauses back subsumed         34
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8745 finished Mon Aug  2 15:31:09 2004
+Refuted case [2.2].
+
+Case [2.3]   (process 8748):
+Assumption: 58 [52,split.2.3] p19.
+>>>> Starting back unit deletion with 56.
+>>>> Starting back unit deletion with 57.
+>>>> Starting back unit deletion with 58.
+0 [back_unit_del,58.1,45.2] -p15.
+0 [back_unit_del,58.1,44.2] -p11.
+0 [back_unit_del,58.1,42.2] -p07.
+0 [back_unit_del,58.1,39.2] -p03.
+>>>> Starting back unit deletion with 59.
+>>>> Starting back unit deletion with 60.
+>>>> Starting back unit deletion with 61.
+>>>> Starting back unit deletion with 62.
+
+given clause #45: (wt=1) 56 [52,split_neg.2.3] -p16.
+
+given clause #46: (wt=1) 57 [52,split_neg.2.3] -p18.
+
+given clause #47: (wt=1) 58 [52,split.2.3] p19.
+
+given clause #48: (wt=2) 63 [back_unit_del,59.1,53.3] p12|p14.
+
+Splitting on clause 63 [back_unit_del,59.1,53.3] p12|p14.
+
+--- refuted case [2.3.1]
+
+Case [2.3.1]   (process 8749):
+Assumption: 66 [63,split.2.3.1] p12.
+>>>> Starting back unit deletion with 66.
+0 [back_unit_del,66.1,13.2] -p08.
+0 [back_unit_del,66.1,11.2] -p04.
+>>>> Starting back unit deletion with 67.
+>>>> Starting back unit deletion with 68.
+>>>> Starting back unit deletion with 69.
+0 [back_unit_del,69.1,33.1] -p14.
+0 [back_unit_del,69.1,30.2] -p06.
+
+----> UNIT CONFLICT at   0.00 sec ----> 73 [binary,72.1,70.1] $F.
+
+Length of proof is 22.  Level of proof is 10.  Case [2.3.1]
+
+---------------- PROOF ----------------
+
+1 [] p00|p01|p02|p03.
+2 [] p04|p05|p06|p07.
+3 [] p08|p09|p10|p11.
+4 [] p12|p13|p14|p15.
+5 [] p16|p17|p18|p19.
+11 [] -p04| -p12.
+13 [] -p08| -p12.
+16 [] -p01| -p05.
+17 [] -p01| -p09.
+18 [] -p01| -p13.
+19 [] -p01| -p17.
+30 [] -p06| -p10.
+42 [] -p07| -p19.
+44 [] -p11| -p19.
+45 [] -p15| -p19.
+47 [1,split.2] p01.
+48 [back_unit_del,47.1,19.1] -p17.
+49 [back_unit_del,47.1,18.1] -p13.
+50 [back_unit_del,47.1,17.1] -p09.
+51 [back_unit_del,47.1,16.1] -p05.
+52 [back_unit_del,48.1,5.2] p16|p18|p19.
+53 [back_unit_del,49.1,4.2] p12|p14|p15.
+54 [back_unit_del,50.1,3.2] p08|p10|p11.
+55 [back_unit_del,51.1,2.2] p04|p06|p07.
+58 [52,split.2.3] p19.
+59 [back_unit_del,58.1,45.2] -p15.
+60 [back_unit_del,58.1,44.2] -p11.
+61 [back_unit_del,58.1,42.2] -p07.
+63 [back_unit_del,59.1,53.3] p12|p14.
+64 [back_unit_del,60.1,54.3] p08|p10.
+65 [back_unit_del,61.1,55.3] p04|p06.
+66 [63,split.2.3.1] p12.
+67 [back_unit_del,66.1,13.2] -p08.
+68 [back_unit_del,66.1,11.2] -p04.
+69 [back_unit_del,67.1,64.1] p10.
+70 [back_unit_del,68.1,65.1] p06.
+72 [back_unit_del,69.1,30.2] -p06.
+73 [binary,72.1,70.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8749) -------
+clauses given                 48
+clauses generated             21
+clauses kept                  27
+clauses forward subsumed       0
+clauses back subsumed         42
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8749 finished Mon Aug  2 15:31:09 2004
+Refuted case [2.3.1].
+
+--- refuted case [2.3.2]
+
+Case [2.3.2]   (process 8750):
+Assumption: 67 [63,split.2.3.2] p14.
+>>>> Starting back unit deletion with 66.
+>>>> Starting back unit deletion with 67.
+0 [back_unit_del,67.1,33.2] -p10.
+0 [back_unit_del,67.1,31.2] -p06.
+0 [back_unit_del,67.1,28.2] -p02.
+>>>> Starting back unit deletion with 68.
+>>>> Starting back unit deletion with 69.
+>>>> Starting back unit deletion with 70.
+>>>> Starting back unit deletion with 71.
+0 [back_unit_del,71.1,10.2] -p04.
+
+----> UNIT CONFLICT at   0.00 sec ----> 74 [binary,73.1,72.1] $F.
+
+Length of proof is 22.  Level of proof is 10.  Case [2.3.2]
+
+---------------- PROOF ----------------
+
+1 [] p00|p01|p02|p03.
+2 [] p04|p05|p06|p07.
+3 [] p08|p09|p10|p11.
+4 [] p12|p13|p14|p15.
+5 [] p16|p17|p18|p19.
+10 [] -p04| -p08.
+16 [] -p01| -p05.
+17 [] -p01| -p09.
+18 [] -p01| -p13.
+19 [] -p01| -p17.
+31 [] -p06| -p14.
+33 [] -p10| -p14.
+42 [] -p07| -p19.
+44 [] -p11| -p19.
+45 [] -p15| -p19.
+47 [1,split.2] p01.
+48 [back_unit_del,47.1,19.1] -p17.
+49 [back_unit_del,47.1,18.1] -p13.
+50 [back_unit_del,47.1,17.1] -p09.
+51 [back_unit_del,47.1,16.1] -p05.
+52 [back_unit_del,48.1,5.2] p16|p18|p19.
+53 [back_unit_del,49.1,4.2] p12|p14|p15.
+54 [back_unit_del,50.1,3.2] p08|p10|p11.
+55 [back_unit_del,51.1,2.2] p04|p06|p07.
+58 [52,split.2.3] p19.
+59 [back_unit_del,58.1,45.2] -p15.
+60 [back_unit_del,58.1,44.2] -p11.
+61 [back_unit_del,58.1,42.2] -p07.
+63 [back_unit_del,59.1,53.3] p12|p14.
+64 [back_unit_del,60.1,54.3] p08|p10.
+65 [back_unit_del,61.1,55.3] p04|p06.
+67 [63,split.2.3.2] p14.
+68 [back_unit_del,67.1,33.2] -p10.
+69 [back_unit_del,67.1,31.2] -p06.
+71 [back_unit_del,68.1,64.2] p08.
+72 [back_unit_del,69.1,65.2] p04.
+73 [back_unit_del,71.1,10.2] -p04.
+74 [binary,73.1,72.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8750) -------
+clauses given                 48
+clauses generated             21
+clauses kept                  28
+clauses forward subsumed       0
+clauses back subsumed         47
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8750 finished Mon Aug  2 15:31:09 2004
+Refuted case [2.3.2].
+
+------- statistics (process 8748) -------
+clauses given                 48
+clauses generated             15
+clauses kept                  20
+clauses forward subsumed       0
+clauses back subsumed         38
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8748 finished Mon Aug  2 15:31:09 2004
+Refuted case [2.3].
+
+------- statistics (process 8741) -------
+clauses given                 44
+clauses generated              8
+clauses kept                  10
+clauses forward subsumed       0
+clauses back subsumed         18
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8741 finished Mon Aug  2 15:31:09 2004
+Refuted case [2].
+
+Case [3]   (process 8751):
+Assumption: 48 [1,split.3] p02.
+>>>> Starting back unit deletion with 46.
+>>>> Starting back unit deletion with 47.
+>>>> Starting back unit deletion with 48.
+0 [back_unit_del,48.1,29.1] -p18.
+0 [back_unit_del,48.1,28.1] -p14.
+0 [back_unit_del,48.1,27.1] -p10.
+0 [back_unit_del,48.1,26.1] -p06.
+>>>> Starting back unit deletion with 49.
+>>>> Starting back unit deletion with 50.
+>>>> Starting back unit deletion with 51.
+>>>> Starting back unit deletion with 52.
+
+given clause #42: (wt=1) 46 [1,split_neg.3] -p00.
+
+given clause #43: (wt=1) 47 [1,split_neg.3] -p01.
+
+given clause #44: (wt=1) 48 [1,split.3] p02.
+
+given clause #45: (wt=3) 53 [back_unit_del,49.1,5.3] p16|p17|p19.
+
+Splitting on clause 53 [back_unit_del,49.1,5.3] p16|p17|p19.
+
+Case [3.1]   (process 8752):
+Assumption: 57 [53,split.3.1] p16.
+>>>> Starting back unit deletion with 57.
+0 [back_unit_del,57.1,15.2] -p12.
+0 [back_unit_del,57.1,14.2] -p08.
+0 [back_unit_del,57.1,12.2] -p04.
+>>>> Starting back unit deletion with 58.
+>>>> Starting back unit deletion with 59.
+>>>> Starting back unit deletion with 60.
+
+given clause #46: (wt=1) 57 [53,split.3.1] p16.
+
+given clause #47: (wt=2) 61 [back_unit_del,58.1,54.1] p13|p15.
+
+Splitting on clause 61 [back_unit_del,58.1,54.1] p13|p15.
+
+--- refuted case [3.1.1]
+
+Case [3.1.1]   (process 8753):
+Assumption: 64 [61,split.3.1.1] p13.
+>>>> Starting back unit deletion with 64.
+0 [back_unit_del,64.1,25.1] -p17.
+0 [back_unit_del,64.1,23.2] -p09.
+0 [back_unit_del,64.1,21.2] -p05.
+>>>> Starting back unit deletion with 65.
+>>>> Starting back unit deletion with 66.
+>>>> Starting back unit deletion with 67.
+>>>> Starting back unit deletion with 68.
+0 [back_unit_del,68.1,44.1] -p19.
+0 [back_unit_del,68.1,43.1] -p15.
+0 [back_unit_del,68.1,40.2] -p07.
+
+----> UNIT CONFLICT at   0.00 sec ----> 73 [binary,72.1,69.1] $F.
+
+Length of proof is 22.  Level of proof is 10.  Case [3.1.1]
+
+---------------- PROOF ----------------
+
+1 [] p00|p01|p02|p03.
+2 [] p04|p05|p06|p07.
+3 [] p08|p09|p10|p11.
+4 [] p12|p13|p14|p15.
+5 [] p16|p17|p18|p19.
+12 [] -p04| -p16.
+14 [] -p08| -p16.
+15 [] -p12| -p16.
+21 [] -p05| -p13.
+23 [] -p09| -p13.
+26 [] -p02| -p06.
+27 [] -p02| -p10.
+28 [] -p02| -p14.
+29 [] -p02| -p18.
+40 [] -p07| -p11.
+48 [1,split.3] p02.
+49 [back_unit_del,48.1,29.1] -p18.
+50 [back_unit_del,48.1,28.1] -p14.
+51 [back_unit_del,48.1,27.1] -p10.
+52 [back_unit_del,48.1,26.1] -p06.
+53 [back_unit_del,49.1,5.3] p16|p17|p19.
+54 [back_unit_del,50.1,4.3] p12|p13|p15.
+55 [back_unit_del,51.1,3.3] p08|p09|p11.
+56 [back_unit_del,52.1,2.3] p04|p05|p07.
+57 [53,split.3.1] p16.
+58 [back_unit_del,57.1,15.2] -p12.
+59 [back_unit_del,57.1,14.2] -p08.
+60 [back_unit_del,57.1,12.2] -p04.
+61 [back_unit_del,58.1,54.1] p13|p15.
+62 [back_unit_del,59.1,55.1] p09|p11.
+63 [back_unit_del,60.1,56.1] p05|p07.
+64 [61,split.3.1.1] p13.
+66 [back_unit_del,64.1,23.2] -p09.
+67 [back_unit_del,64.1,21.2] -p05.
+68 [back_unit_del,66.1,62.1] p11.
+69 [back_unit_del,67.1,63.1] p07.
+72 [back_unit_del,68.1,40.2] -p07.
+73 [binary,72.1,69.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8753) -------
+clauses given                 47
+clauses generated             22
+clauses kept                  27
+clauses forward subsumed       0
+clauses back subsumed         38
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8753 finished Mon Aug  2 15:31:09 2004
+Refuted case [3.1.1].
+
+--- refuted case [3.1.2]
+
+Case [3.1.2]   (process 8754):
+Assumption: 65 [61,split.3.1.2] p15.
+>>>> Starting back unit deletion with 64.
+>>>> Starting back unit deletion with 65.
+0 [back_unit_del,65.1,45.1] -p19.
+0 [back_unit_del,65.1,43.2] -p11.
+0 [back_unit_del,65.1,41.2] -p07.
+0 [back_unit_del,65.1,38.2] -p03.
+>>>> Starting back unit deletion with 66.
+>>>> Starting back unit deletion with 67.
+>>>> Starting back unit deletion with 68.
+>>>> Starting back unit deletion with 69.
+>>>> Starting back unit deletion with 70.
+0 [back_unit_del,70.1,24.1] -p17.
+0 [back_unit_del,70.1,20.2] -p05.
+
+----> UNIT CONFLICT at   0.00 sec ----> 74 [binary,73.1,71.1] $F.
+
+Length of proof is 22.  Level of proof is 10.  Case [3.1.2]
+
+---------------- PROOF ----------------
+
+1 [] p00|p01|p02|p03.
+2 [] p04|p05|p06|p07.
+3 [] p08|p09|p10|p11.
+4 [] p12|p13|p14|p15.
+5 [] p16|p17|p18|p19.
+12 [] -p04| -p16.
+14 [] -p08| -p16.
+15 [] -p12| -p16.
+20 [] -p05| -p09.
+26 [] -p02| -p06.
+27 [] -p02| -p10.
+28 [] -p02| -p14.
+29 [] -p02| -p18.
+41 [] -p07| -p15.
+43 [] -p11| -p15.
+48 [1,split.3] p02.
+49 [back_unit_del,48.1,29.1] -p18.
+50 [back_unit_del,48.1,28.1] -p14.
+51 [back_unit_del,48.1,27.1] -p10.
+52 [back_unit_del,48.1,26.1] -p06.
+53 [back_unit_del,49.1,5.3] p16|p17|p19.
+54 [back_unit_del,50.1,4.3] p12|p13|p15.
+55 [back_unit_del,51.1,3.3] p08|p09|p11.
+56 [back_unit_del,52.1,2.3] p04|p05|p07.
+57 [53,split.3.1] p16.
+58 [back_unit_del,57.1,15.2] -p12.
+59 [back_unit_del,57.1,14.2] -p08.
+60 [back_unit_del,57.1,12.2] -p04.
+61 [back_unit_del,58.1,54.1] p13|p15.
+62 [back_unit_del,59.1,55.1] p09|p11.
+63 [back_unit_del,60.1,56.1] p05|p07.
+65 [61,split.3.1.2] p15.
+67 [back_unit_del,65.1,43.2] -p11.
+68 [back_unit_del,65.1,41.2] -p07.
+70 [back_unit_del,67.1,62.2] p09.
+71 [back_unit_del,68.1,63.2] p05.
+73 [back_unit_del,70.1,20.2] -p05.
+74 [binary,73.1,71.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8754) -------
+clauses given                 47
+clauses generated             22
+clauses kept                  28
+clauses forward subsumed       0
+clauses back subsumed         45
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8754 finished Mon Aug  2 15:31:09 2004
+Refuted case [3.1.2].
+
+------- statistics (process 8752) -------
+clauses given                 47
+clauses generated             14
+clauses kept                  18
+clauses forward subsumed       0
+clauses back subsumed         31
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8752 finished Mon Aug  2 15:31:09 2004
+Refuted case [3.1].
+
+Case [3.2]   (process 8755):
+Assumption: 58 [53,split.3.2] p17.
+>>>> Starting back unit deletion with 57.
+>>>> Starting back unit deletion with 58.
+0 [back_unit_del,58.1,25.2] -p13.
+0 [back_unit_del,58.1,24.2] -p09.
+0 [back_unit_del,58.1,22.2] -p05.
+>>>> Starting back unit deletion with 59.
+>>>> Starting back unit deletion with 60.
+>>>> Starting back unit deletion with 61.
+
+given clause #46: (wt=1) 57 [53,split_neg.3.2] -p16.
+
+given clause #47: (wt=1) 58 [53,split.3.2] p17.
+
+given clause #48: (wt=2) 62 [back_unit_del,59.1,54.2] p12|p15.
+
+Splitting on clause 62 [back_unit_del,59.1,54.2] p12|p15.
+
+--- refuted case [3.2.1]
+
+Case [3.2.1]   (process 8756):
+Assumption: 65 [62,split.3.2.1] p12.
+>>>> Starting back unit deletion with 65.
+0 [back_unit_del,65.1,13.2] -p08.
+0 [back_unit_del,65.1,11.2] -p04.
+>>>> Starting back unit deletion with 66.
+>>>> Starting back unit deletion with 67.
+>>>> Starting back unit deletion with 68.
+0 [back_unit_del,68.1,44.1] -p19.
+0 [back_unit_del,68.1,43.1] -p15.
+0 [back_unit_del,68.1,40.2] -p07.
+
+----> UNIT CONFLICT at   0.00 sec ----> 73 [binary,72.1,69.1] $F.
+
+Length of proof is 22.  Level of proof is 10.  Case [3.2.1]
+
+---------------- PROOF ----------------
+
+1 [] p00|p01|p02|p03.
+2 [] p04|p05|p06|p07.
+3 [] p08|p09|p10|p11.
+4 [] p12|p13|p14|p15.
+5 [] p16|p17|p18|p19.
+11 [] -p04| -p12.
+13 [] -p08| -p12.
+22 [] -p05| -p17.
+24 [] -p09| -p17.
+25 [] -p13| -p17.
+26 [] -p02| -p06.
+27 [] -p02| -p10.
+28 [] -p02| -p14.
+29 [] -p02| -p18.
+40 [] -p07| -p11.
+48 [1,split.3] p02.
+49 [back_unit_del,48.1,29.1] -p18.
+50 [back_unit_del,48.1,28.1] -p14.
+51 [back_unit_del,48.1,27.1] -p10.
+52 [back_unit_del,48.1,26.1] -p06.
+53 [back_unit_del,49.1,5.3] p16|p17|p19.
+54 [back_unit_del,50.1,4.3] p12|p13|p15.
+55 [back_unit_del,51.1,3.3] p08|p09|p11.
+56 [back_unit_del,52.1,2.3] p04|p05|p07.
+58 [53,split.3.2] p17.
+59 [back_unit_del,58.1,25.2] -p13.
+60 [back_unit_del,58.1,24.2] -p09.
+61 [back_unit_del,58.1,22.2] -p05.
+62 [back_unit_del,59.1,54.2] p12|p15.
+63 [back_unit_del,60.1,55.2] p08|p11.
+64 [back_unit_del,61.1,56.2] p04|p07.
+65 [62,split.3.2.1] p12.
+66 [back_unit_del,65.1,13.2] -p08.
+67 [back_unit_del,65.1,11.2] -p04.
+68 [back_unit_del,66.1,63.1] p11.
+69 [back_unit_del,67.1,64.1] p07.
+72 [back_unit_del,68.1,40.2] -p07.
+73 [binary,72.1,69.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8756) -------
+clauses given                 48
+clauses generated             21
+clauses kept                  27
+clauses forward subsumed       0
+clauses back subsumed         38
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8756 finished Mon Aug  2 15:31:09 2004
+Refuted case [3.2.1].
+
+--- refuted case [3.2.2]
+
+Case [3.2.2]   (process 8757):
+Assumption: 66 [62,split.3.2.2] p15.
+>>>> Starting back unit deletion with 65.
+>>>> Starting back unit deletion with 66.
+0 [back_unit_del,66.1,45.1] -p19.
+0 [back_unit_del,66.1,43.2] -p11.
+0 [back_unit_del,66.1,41.2] -p07.
+0 [back_unit_del,66.1,38.2] -p03.
+>>>> Starting back unit deletion with 67.
+>>>> Starting back unit deletion with 68.
+>>>> Starting back unit deletion with 69.
+>>>> Starting back unit deletion with 70.
+>>>> Starting back unit deletion with 71.
+0 [back_unit_del,71.1,10.2] -p04.
+
+----> UNIT CONFLICT at   0.00 sec ----> 74 [binary,73.1,72.1] $F.
+
+Length of proof is 22.  Level of proof is 10.  Case [3.2.2]
+
+---------------- PROOF ----------------
+
+1 [] p00|p01|p02|p03.
+2 [] p04|p05|p06|p07.
+3 [] p08|p09|p10|p11.
+4 [] p12|p13|p14|p15.
+5 [] p16|p17|p18|p19.
+10 [] -p04| -p08.
+22 [] -p05| -p17.
+24 [] -p09| -p17.
+25 [] -p13| -p17.
+26 [] -p02| -p06.
+27 [] -p02| -p10.
+28 [] -p02| -p14.
+29 [] -p02| -p18.
+41 [] -p07| -p15.
+43 [] -p11| -p15.
+48 [1,split.3] p02.
+49 [back_unit_del,48.1,29.1] -p18.
+50 [back_unit_del,48.1,28.1] -p14.
+51 [back_unit_del,48.1,27.1] -p10.
+52 [back_unit_del,48.1,26.1] -p06.
+53 [back_unit_del,49.1,5.3] p16|p17|p19.
+54 [back_unit_del,50.1,4.3] p12|p13|p15.
+55 [back_unit_del,51.1,3.3] p08|p09|p11.
+56 [back_unit_del,52.1,2.3] p04|p05|p07.
+58 [53,split.3.2] p17.
+59 [back_unit_del,58.1,25.2] -p13.
+60 [back_unit_del,58.1,24.2] -p09.
+61 [back_unit_del,58.1,22.2] -p05.
+62 [back_unit_del,59.1,54.2] p12|p15.
+63 [back_unit_del,60.1,55.2] p08|p11.
+64 [back_unit_del,61.1,56.2] p04|p07.
+66 [62,split.3.2.2] p15.
+68 [back_unit_del,66.1,43.2] -p11.
+69 [back_unit_del,66.1,41.2] -p07.
+71 [back_unit_del,68.1,63.2] p08.
+72 [back_unit_del,69.1,64.2] p04.
+73 [back_unit_del,71.1,10.2] -p04.
+74 [binary,73.1,72.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8757) -------
+clauses given                 48
+clauses generated             21
+clauses kept                  28
+clauses forward subsumed       0
+clauses back subsumed         47
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8757 finished Mon Aug  2 15:31:09 2004
+Refuted case [3.2.2].
+
+------- statistics (process 8755) -------
+clauses given                 48
+clauses generated             14
+clauses kept                  19
+clauses forward subsumed       0
+clauses back subsumed         34
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8755 finished Mon Aug  2 15:31:09 2004
+Refuted case [3.2].
+
+Case [3.3]   (process 8758):
+Assumption: 59 [53,split.3.3] p19.
+>>>> Starting back unit deletion with 57.
+>>>> Starting back unit deletion with 58.
+>>>> Starting back unit deletion with 59.
+0 [back_unit_del,59.1,45.2] -p15.
+0 [back_unit_del,59.1,44.2] -p11.
+0 [back_unit_del,59.1,42.2] -p07.
+0 [back_unit_del,59.1,39.2] -p03.
+>>>> Starting back unit deletion with 60.
+>>>> Starting back unit deletion with 61.
+>>>> Starting back unit deletion with 62.
+>>>> Starting back unit deletion with 63.
+
+given clause #46: (wt=1) 57 [53,split_neg.3.3] -p16.
+
+given clause #47: (wt=1) 58 [53,split_neg.3.3] -p17.
+
+given clause #48: (wt=1) 59 [53,split.3.3] p19.
+
+given clause #49: (wt=2) 64 [back_unit_del,60.1,54.3] p12|p13.
+
+Splitting on clause 64 [back_unit_del,60.1,54.3] p12|p13.
+
+--- refuted case [3.3.1]
+
+Case [3.3.1]   (process 8759):
+Assumption: 67 [64,split.3.3.1] p12.
+>>>> Starting back unit deletion with 67.
+0 [back_unit_del,67.1,13.2] -p08.
+0 [back_unit_del,67.1,11.2] -p04.
+>>>> Starting back unit deletion with 68.
+>>>> Starting back unit deletion with 69.
+>>>> Starting back unit deletion with 70.
+0 [back_unit_del,70.1,23.1] -p13.
+0 [back_unit_del,70.1,20.2] -p05.
+
+----> UNIT CONFLICT at   0.00 sec ----> 74 [binary,73.1,71.1] $F.
+
+Length of proof is 22.  Level of proof is 10.  Case [3.3.1]
+
+---------------- PROOF ----------------
+
+1 [] p00|p01|p02|p03.
+2 [] p04|p05|p06|p07.
+3 [] p08|p09|p10|p11.
+4 [] p12|p13|p14|p15.
+5 [] p16|p17|p18|p19.
+11 [] -p04| -p12.
+13 [] -p08| -p12.
+20 [] -p05| -p09.
+26 [] -p02| -p06.
+27 [] -p02| -p10.
+28 [] -p02| -p14.
+29 [] -p02| -p18.
+42 [] -p07| -p19.
+44 [] -p11| -p19.
+45 [] -p15| -p19.
+48 [1,split.3] p02.
+49 [back_unit_del,48.1,29.1] -p18.
+50 [back_unit_del,48.1,28.1] -p14.
+51 [back_unit_del,48.1,27.1] -p10.
+52 [back_unit_del,48.1,26.1] -p06.
+53 [back_unit_del,49.1,5.3] p16|p17|p19.
+54 [back_unit_del,50.1,4.3] p12|p13|p15.
+55 [back_unit_del,51.1,3.3] p08|p09|p11.
+56 [back_unit_del,52.1,2.3] p04|p05|p07.
+59 [53,split.3.3] p19.
+60 [back_unit_del,59.1,45.2] -p15.
+61 [back_unit_del,59.1,44.2] -p11.
+62 [back_unit_del,59.1,42.2] -p07.
+64 [back_unit_del,60.1,54.3] p12|p13.
+65 [back_unit_del,61.1,55.3] p08|p09.
+66 [back_unit_del,62.1,56.3] p04|p05.
+67 [64,split.3.3.1] p12.
+68 [back_unit_del,67.1,13.2] -p08.
+69 [back_unit_del,67.1,11.2] -p04.
+70 [back_unit_del,68.1,65.1] p09.
+71 [back_unit_del,69.1,66.1] p05.
+73 [back_unit_del,70.1,20.2] -p05.
+74 [binary,73.1,71.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8759) -------
+clauses given                 49
+clauses generated             21
+clauses kept                  28
+clauses forward subsumed       0
+clauses back subsumed         45
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8759 finished Mon Aug  2 15:31:09 2004
+Refuted case [3.3.1].
+
+--- refuted case [3.3.2]
+
+Case [3.3.2]   (process 8760):
+Assumption: 68 [64,split.3.3.2] p13.
+>>>> Starting back unit deletion with 67.
+>>>> Starting back unit deletion with 68.
+0 [back_unit_del,68.1,23.2] -p09.
+0 [back_unit_del,68.1,21.2] -p05.
+>>>> Starting back unit deletion with 69.
+>>>> Starting back unit deletion with 70.
+>>>> Starting back unit deletion with 71.
+0 [back_unit_del,71.1,10.2] -p04.
+
+----> UNIT CONFLICT at   0.00 sec ----> 74 [binary,73.1,72.1] $F.
+
+Length of proof is 22.  Level of proof is 10.  Case [3.3.2]
+
+---------------- PROOF ----------------
+
+1 [] p00|p01|p02|p03.
+2 [] p04|p05|p06|p07.
+3 [] p08|p09|p10|p11.
+4 [] p12|p13|p14|p15.
+5 [] p16|p17|p18|p19.
+10 [] -p04| -p08.
+21 [] -p05| -p13.
+23 [] -p09| -p13.
+26 [] -p02| -p06.
+27 [] -p02| -p10.
+28 [] -p02| -p14.
+29 [] -p02| -p18.
+42 [] -p07| -p19.
+44 [] -p11| -p19.
+45 [] -p15| -p19.
+48 [1,split.3] p02.
+49 [back_unit_del,48.1,29.1] -p18.
+50 [back_unit_del,48.1,28.1] -p14.
+51 [back_unit_del,48.1,27.1] -p10.
+52 [back_unit_del,48.1,26.1] -p06.
+53 [back_unit_del,49.1,5.3] p16|p17|p19.
+54 [back_unit_del,50.1,4.3] p12|p13|p15.
+55 [back_unit_del,51.1,3.3] p08|p09|p11.
+56 [back_unit_del,52.1,2.3] p04|p05|p07.
+59 [53,split.3.3] p19.
+60 [back_unit_del,59.1,45.2] -p15.
+61 [back_unit_del,59.1,44.2] -p11.
+62 [back_unit_del,59.1,42.2] -p07.
+64 [back_unit_del,60.1,54.3] p12|p13.
+65 [back_unit_del,61.1,55.3] p08|p09.
+66 [back_unit_del,62.1,56.3] p04|p05.
+68 [64,split.3.3.2] p13.
+69 [back_unit_del,68.1,23.2] -p09.
+70 [back_unit_del,68.1,21.2] -p05.
+71 [back_unit_del,69.1,65.2] p08.
+72 [back_unit_del,70.1,66.2] p04.
+73 [back_unit_del,71.1,10.2] -p04.
+74 [binary,73.1,72.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8760) -------
+clauses given                 49
+clauses generated             20
+clauses kept                  28
+clauses forward subsumed       0
+clauses back subsumed         47
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8760 finished Mon Aug  2 15:31:09 2004
+Refuted case [3.3.2].
+
+------- statistics (process 8758) -------
+clauses given                 49
+clauses generated             15
+clauses kept                  21
+clauses forward subsumed       0
+clauses back subsumed         41
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8758 finished Mon Aug  2 15:31:09 2004
+Refuted case [3.3].
+
+------- statistics (process 8751) -------
+clauses given                 45
+clauses generated              8
+clauses kept                  11
+clauses forward subsumed       0
+clauses back subsumed         22
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8751 finished Mon Aug  2 15:31:09 2004
+Refuted case [3].
+
+Case [4]   (process 8761):
+Assumption: 49 [1,split.4] p03.
+>>>> Starting back unit deletion with 46.
+>>>> Starting back unit deletion with 47.
+>>>> Starting back unit deletion with 48.
+>>>> Starting back unit deletion with 49.
+0 [back_unit_del,49.1,39.1] -p19.
+0 [back_unit_del,49.1,38.1] -p15.
+0 [back_unit_del,49.1,37.1] -p11.
+0 [back_unit_del,49.1,36.1] -p07.
+>>>> Starting back unit deletion with 50.
+>>>> Starting back unit deletion with 51.
+>>>> Starting back unit deletion with 52.
+>>>> Starting back unit deletion with 53.
+
+given clause #42: (wt=1) 46 [1,split_neg.4] -p00.
+
+given clause #43: (wt=1) 47 [1,split_neg.4] -p01.
+
+given clause #44: (wt=1) 48 [1,split_neg.4] -p02.
+
+given clause #45: (wt=1) 49 [1,split.4] p03.
+
+given clause #46: (wt=3) 54 [back_unit_del,50.1,5.4] p16|p17|p18.
+
+Splitting on clause 54 [back_unit_del,50.1,5.4] p16|p17|p18.
+
+Case [4.1]   (process 8762):
+Assumption: 58 [54,split.4.1] p16.
+>>>> Starting back unit deletion with 58.
+0 [back_unit_del,58.1,15.2] -p12.
+0 [back_unit_del,58.1,14.2] -p08.
+0 [back_unit_del,58.1,12.2] -p04.
+>>>> Starting back unit deletion with 59.
+>>>> Starting back unit deletion with 60.
+>>>> Starting back unit deletion with 61.
+
+given clause #47: (wt=1) 58 [54,split.4.1] p16.
+
+given clause #48: (wt=2) 62 [back_unit_del,59.1,55.1] p13|p14.
+
+Splitting on clause 62 [back_unit_del,59.1,55.1] p13|p14.
+
+--- refuted case [4.1.1]
+
+Case [4.1.1]   (process 8763):
+Assumption: 65 [62,split.4.1.1] p13.
+>>>> Starting back unit deletion with 65.
+0 [back_unit_del,65.1,25.1] -p17.
+0 [back_unit_del,65.1,23.2] -p09.
+0 [back_unit_del,65.1,21.2] -p05.
+>>>> Starting back unit deletion with 66.
+>>>> Starting back unit deletion with 67.
+>>>> Starting back unit deletion with 68.
+>>>> Starting back unit deletion with 69.
+0 [back_unit_del,69.1,34.1] -p18.
+0 [back_unit_del,69.1,33.1] -p14.
+0 [back_unit_del,69.1,30.2] -p06.
+
+----> UNIT CONFLICT at   0.00 sec ----> 74 [binary,73.1,70.1] $F.
+
+Length of proof is 22.  Level of proof is 10.  Case [4.1.1]
+
+---------------- PROOF ----------------
+
+1 [] p00|p01|p02|p03.
+2 [] p04|p05|p06|p07.
+3 [] p08|p09|p10|p11.
+4 [] p12|p13|p14|p15.
+5 [] p16|p17|p18|p19.
+12 [] -p04| -p16.
+14 [] -p08| -p16.
+15 [] -p12| -p16.
+21 [] -p05| -p13.
+23 [] -p09| -p13.
+30 [] -p06| -p10.
+36 [] -p03| -p07.
+37 [] -p03| -p11.
+38 [] -p03| -p15.
+39 [] -p03| -p19.
+49 [1,split.4] p03.
+50 [back_unit_del,49.1,39.1] -p19.
+51 [back_unit_del,49.1,38.1] -p15.
+52 [back_unit_del,49.1,37.1] -p11.
+53 [back_unit_del,49.1,36.1] -p07.
+54 [back_unit_del,50.1,5.4] p16|p17|p18.
+55 [back_unit_del,51.1,4.4] p12|p13|p14.
+56 [back_unit_del,52.1,3.4] p08|p09|p10.
+57 [back_unit_del,53.1,2.4] p04|p05|p06.
+58 [54,split.4.1] p16.
+59 [back_unit_del,58.1,15.2] -p12.
+60 [back_unit_del,58.1,14.2] -p08.
+61 [back_unit_del,58.1,12.2] -p04.
+62 [back_unit_del,59.1,55.1] p13|p14.
+63 [back_unit_del,60.1,56.1] p09|p10.
+64 [back_unit_del,61.1,57.1] p05|p06.
+65 [62,split.4.1.1] p13.
+67 [back_unit_del,65.1,23.2] -p09.
+68 [back_unit_del,65.1,21.2] -p05.
+69 [back_unit_del,67.1,63.1] p10.
+70 [back_unit_del,68.1,64.1] p06.
+73 [back_unit_del,69.1,30.2] -p06.
+74 [binary,73.1,70.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8763) -------
+clauses given                 48
+clauses generated             22
+clauses kept                  28
+clauses forward subsumed       0
+clauses back subsumed         42
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8763 finished Mon Aug  2 15:31:09 2004
+Refuted case [4.1.1].
+
+--- refuted case [4.1.2]
+
+Case [4.1.2]   (process 8764):
+Assumption: 66 [62,split.4.1.2] p14.
+>>>> Starting back unit deletion with 65.
+>>>> Starting back unit deletion with 66.
+0 [back_unit_del,66.1,35.1] -p18.
+0 [back_unit_del,66.1,33.2] -p10.
+0 [back_unit_del,66.1,31.2] -p06.
+>>>> Starting back unit deletion with 67.
+>>>> Starting back unit deletion with 68.
+>>>> Starting back unit deletion with 69.
+>>>> Starting back unit deletion with 70.
+0 [back_unit_del,70.1,24.1] -p17.
+0 [back_unit_del,70.1,20.2] -p05.
+
+----> UNIT CONFLICT at   0.00 sec ----> 74 [binary,73.1,71.1] $F.
+
+Length of proof is 22.  Level of proof is 10.  Case [4.1.2]
+
+---------------- PROOF ----------------
+
+1 [] p00|p01|p02|p03.
+2 [] p04|p05|p06|p07.
+3 [] p08|p09|p10|p11.
+4 [] p12|p13|p14|p15.
+5 [] p16|p17|p18|p19.
+12 [] -p04| -p16.
+14 [] -p08| -p16.
+15 [] -p12| -p16.
+20 [] -p05| -p09.
+31 [] -p06| -p14.
+33 [] -p10| -p14.
+36 [] -p03| -p07.
+37 [] -p03| -p11.
+38 [] -p03| -p15.
+39 [] -p03| -p19.
+49 [1,split.4] p03.
+50 [back_unit_del,49.1,39.1] -p19.
+51 [back_unit_del,49.1,38.1] -p15.
+52 [back_unit_del,49.1,37.1] -p11.
+53 [back_unit_del,49.1,36.1] -p07.
+54 [back_unit_del,50.1,5.4] p16|p17|p18.
+55 [back_unit_del,51.1,4.4] p12|p13|p14.
+56 [back_unit_del,52.1,3.4] p08|p09|p10.
+57 [back_unit_del,53.1,2.4] p04|p05|p06.
+58 [54,split.4.1] p16.
+59 [back_unit_del,58.1,15.2] -p12.
+60 [back_unit_del,58.1,14.2] -p08.
+61 [back_unit_del,58.1,12.2] -p04.
+62 [back_unit_del,59.1,55.1] p13|p14.
+63 [back_unit_del,60.1,56.1] p09|p10.
+64 [back_unit_del,61.1,57.1] p05|p06.
+66 [62,split.4.1.2] p14.
+68 [back_unit_del,66.1,33.2] -p10.
+69 [back_unit_del,66.1,31.2] -p06.
+70 [back_unit_del,68.1,63.2] p09.
+71 [back_unit_del,69.1,64.2] p05.
+73 [back_unit_del,70.1,20.2] -p05.
+74 [binary,73.1,71.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8764) -------
+clauses given                 48
+clauses generated             21
+clauses kept                  28
+clauses forward subsumed       0
+clauses back subsumed         45
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8764 finished Mon Aug  2 15:31:09 2004
+Refuted case [4.1.2].
+
+------- statistics (process 8762) -------
+clauses given                 48
+clauses generated             14
+clauses kept                  19
+clauses forward subsumed       0
+clauses back subsumed         35
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8762 finished Mon Aug  2 15:31:09 2004
+Refuted case [4.1].
+
+Case [4.2]   (process 8765):
+Assumption: 59 [54,split.4.2] p17.
+>>>> Starting back unit deletion with 58.
+>>>> Starting back unit deletion with 59.
+0 [back_unit_del,59.1,25.2] -p13.
+0 [back_unit_del,59.1,24.2] -p09.
+0 [back_unit_del,59.1,22.2] -p05.
+>>>> Starting back unit deletion with 60.
+>>>> Starting back unit deletion with 61.
+>>>> Starting back unit deletion with 62.
+
+given clause #47: (wt=1) 58 [54,split_neg.4.2] -p16.
+
+given clause #48: (wt=1) 59 [54,split.4.2] p17.
+
+given clause #49: (wt=2) 63 [back_unit_del,60.1,55.2] p12|p14.
+
+Splitting on clause 63 [back_unit_del,60.1,55.2] p12|p14.
+
+--- refuted case [4.2.1]
+
+Case [4.2.1]   (process 8766):
+Assumption: 66 [63,split.4.2.1] p12.
+>>>> Starting back unit deletion with 66.
+0 [back_unit_del,66.1,13.2] -p08.
+0 [back_unit_del,66.1,11.2] -p04.
+>>>> Starting back unit deletion with 67.
+>>>> Starting back unit deletion with 68.
+>>>> Starting back unit deletion with 69.
+0 [back_unit_del,69.1,34.1] -p18.
+0 [back_unit_del,69.1,33.1] -p14.
+0 [back_unit_del,69.1,30.2] -p06.
+
+----> UNIT CONFLICT at   0.00 sec ----> 74 [binary,73.1,70.1] $F.
+
+Length of proof is 22.  Level of proof is 10.  Case [4.2.1]
+
+---------------- PROOF ----------------
+
+1 [] p00|p01|p02|p03.
+2 [] p04|p05|p06|p07.
+3 [] p08|p09|p10|p11.
+4 [] p12|p13|p14|p15.
+5 [] p16|p17|p18|p19.
+11 [] -p04| -p12.
+13 [] -p08| -p12.
+22 [] -p05| -p17.
+24 [] -p09| -p17.
+25 [] -p13| -p17.
+30 [] -p06| -p10.
+36 [] -p03| -p07.
+37 [] -p03| -p11.
+38 [] -p03| -p15.
+39 [] -p03| -p19.
+49 [1,split.4] p03.
+50 [back_unit_del,49.1,39.1] -p19.
+51 [back_unit_del,49.1,38.1] -p15.
+52 [back_unit_del,49.1,37.1] -p11.
+53 [back_unit_del,49.1,36.1] -p07.
+54 [back_unit_del,50.1,5.4] p16|p17|p18.
+55 [back_unit_del,51.1,4.4] p12|p13|p14.
+56 [back_unit_del,52.1,3.4] p08|p09|p10.
+57 [back_unit_del,53.1,2.4] p04|p05|p06.
+59 [54,split.4.2] p17.
+60 [back_unit_del,59.1,25.2] -p13.
+61 [back_unit_del,59.1,24.2] -p09.
+62 [back_unit_del,59.1,22.2] -p05.
+63 [back_unit_del,60.1,55.2] p12|p14.
+64 [back_unit_del,61.1,56.2] p08|p10.
+65 [back_unit_del,62.1,57.2] p04|p06.
+66 [63,split.4.2.1] p12.
+67 [back_unit_del,66.1,13.2] -p08.
+68 [back_unit_del,66.1,11.2] -p04.
+69 [back_unit_del,67.1,64.1] p10.
+70 [back_unit_del,68.1,65.1] p06.
+73 [back_unit_del,69.1,30.2] -p06.
+74 [binary,73.1,70.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8766) -------
+clauses given                 49
+clauses generated             21
+clauses kept                  28
+clauses forward subsumed       0
+clauses back subsumed         42
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8766 finished Mon Aug  2 15:31:09 2004
+Refuted case [4.2.1].
+
+--- refuted case [4.2.2]
+
+Case [4.2.2]   (process 8767):
+Assumption: 67 [63,split.4.2.2] p14.
+>>>> Starting back unit deletion with 66.
+>>>> Starting back unit deletion with 67.
+0 [back_unit_del,67.1,35.1] -p18.
+0 [back_unit_del,67.1,33.2] -p10.
+0 [back_unit_del,67.1,31.2] -p06.
+>>>> Starting back unit deletion with 68.
+>>>> Starting back unit deletion with 69.
+>>>> Starting back unit deletion with 70.
+>>>> Starting back unit deletion with 71.
+0 [back_unit_del,71.1,10.2] -p04.
+
+----> UNIT CONFLICT at   0.00 sec ----> 74 [binary,73.1,72.1] $F.
+
+Length of proof is 22.  Level of proof is 10.  Case [4.2.2]
+
+---------------- PROOF ----------------
+
+1 [] p00|p01|p02|p03.
+2 [] p04|p05|p06|p07.
+3 [] p08|p09|p10|p11.
+4 [] p12|p13|p14|p15.
+5 [] p16|p17|p18|p19.
+10 [] -p04| -p08.
+22 [] -p05| -p17.
+24 [] -p09| -p17.
+25 [] -p13| -p17.
+31 [] -p06| -p14.
+33 [] -p10| -p14.
+36 [] -p03| -p07.
+37 [] -p03| -p11.
+38 [] -p03| -p15.
+39 [] -p03| -p19.
+49 [1,split.4] p03.
+50 [back_unit_del,49.1,39.1] -p19.
+51 [back_unit_del,49.1,38.1] -p15.
+52 [back_unit_del,49.1,37.1] -p11.
+53 [back_unit_del,49.1,36.1] -p07.
+54 [back_unit_del,50.1,5.4] p16|p17|p18.
+55 [back_unit_del,51.1,4.4] p12|p13|p14.
+56 [back_unit_del,52.1,3.4] p08|p09|p10.
+57 [back_unit_del,53.1,2.4] p04|p05|p06.
+59 [54,split.4.2] p17.
+60 [back_unit_del,59.1,25.2] -p13.
+61 [back_unit_del,59.1,24.2] -p09.
+62 [back_unit_del,59.1,22.2] -p05.
+63 [back_unit_del,60.1,55.2] p12|p14.
+64 [back_unit_del,61.1,56.2] p08|p10.
+65 [back_unit_del,62.1,57.2] p04|p06.
+67 [63,split.4.2.2] p14.
+69 [back_unit_del,67.1,33.2] -p10.
+70 [back_unit_del,67.1,31.2] -p06.
+71 [back_unit_del,69.1,64.2] p08.
+72 [back_unit_del,70.1,65.2] p04.
+73 [back_unit_del,71.1,10.2] -p04.
+74 [binary,73.1,72.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8767) -------
+clauses given                 49
+clauses generated             20
+clauses kept                  28
+clauses forward subsumed       0
+clauses back subsumed         47
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8767 finished Mon Aug  2 15:31:09 2004
+Refuted case [4.2.2].
+
+------- statistics (process 8765) -------
+clauses given                 49
+clauses generated             14
+clauses kept                  20
+clauses forward subsumed       0
+clauses back subsumed         38
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8765 finished Mon Aug  2 15:31:09 2004
+Refuted case [4.2].
+
+Case [4.3]   (process 8768):
+Assumption: 60 [54,split.4.3] p18.
+>>>> Starting back unit deletion with 58.
+>>>> Starting back unit deletion with 59.
+>>>> Starting back unit deletion with 60.
+0 [back_unit_del,60.1,35.2] -p14.
+0 [back_unit_del,60.1,34.2] -p10.
+0 [back_unit_del,60.1,32.2] -p06.
+>>>> Starting back unit deletion with 61.
+>>>> Starting back unit deletion with 62.
+>>>> Starting back unit deletion with 63.
+
+given clause #47: (wt=1) 58 [54,split_neg.4.3] -p16.
+
+given clause #48: (wt=1) 59 [54,split_neg.4.3] -p17.
+
+given clause #49: (wt=1) 60 [54,split.4.3] p18.
+
+given clause #50: (wt=2) 64 [back_unit_del,61.1,55.3] p12|p13.
+
+Splitting on clause 64 [back_unit_del,61.1,55.3] p12|p13.
+
+--- refuted case [4.3.1]
+
+Case [4.3.1]   (process 8769):
+Assumption: 67 [64,split.4.3.1] p12.
+>>>> Starting back unit deletion with 67.
+0 [back_unit_del,67.1,13.2] -p08.
+0 [back_unit_del,67.1,11.2] -p04.
+>>>> Starting back unit deletion with 68.
+>>>> Starting back unit deletion with 69.
+>>>> Starting back unit deletion with 70.
+0 [back_unit_del,70.1,23.1] -p13.
+0 [back_unit_del,70.1,20.2] -p05.
+
+----> UNIT CONFLICT at   0.00 sec ----> 74 [binary,73.1,71.1] $F.
+
+Length of proof is 22.  Level of proof is 10.  Case [4.3.1]
+
+---------------- PROOF ----------------
+
+1 [] p00|p01|p02|p03.
+2 [] p04|p05|p06|p07.
+3 [] p08|p09|p10|p11.
+4 [] p12|p13|p14|p15.
+5 [] p16|p17|p18|p19.
+11 [] -p04| -p12.
+13 [] -p08| -p12.
+20 [] -p05| -p09.
+32 [] -p06| -p18.
+34 [] -p10| -p18.
+35 [] -p14| -p18.
+36 [] -p03| -p07.
+37 [] -p03| -p11.
+38 [] -p03| -p15.
+39 [] -p03| -p19.
+49 [1,split.4] p03.
+50 [back_unit_del,49.1,39.1] -p19.
+51 [back_unit_del,49.1,38.1] -p15.
+52 [back_unit_del,49.1,37.1] -p11.
+53 [back_unit_del,49.1,36.1] -p07.
+54 [back_unit_del,50.1,5.4] p16|p17|p18.
+55 [back_unit_del,51.1,4.4] p12|p13|p14.
+56 [back_unit_del,52.1,3.4] p08|p09|p10.
+57 [back_unit_del,53.1,2.4] p04|p05|p06.
+60 [54,split.4.3] p18.
+61 [back_unit_del,60.1,35.2] -p14.
+62 [back_unit_del,60.1,34.2] -p10.
+63 [back_unit_del,60.1,32.2] -p06.
+64 [back_unit_del,61.1,55.3] p12|p13.
+65 [back_unit_del,62.1,56.3] p08|p09.
+66 [back_unit_del,63.1,57.3] p04|p05.
+67 [64,split.4.3.1] p12.
+68 [back_unit_del,67.1,13.2] -p08.
+69 [back_unit_del,67.1,11.2] -p04.
+70 [back_unit_del,68.1,65.1] p09.
+71 [back_unit_del,69.1,66.1] p05.
+73 [back_unit_del,70.1,20.2] -p05.
+74 [binary,73.1,71.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8769) -------
+clauses given                 50
+clauses generated             20
+clauses kept                  28
+clauses forward subsumed       0
+clauses back subsumed         45
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8769 finished Mon Aug  2 15:31:09 2004
+Refuted case [4.3.1].
+
+--- refuted case [4.3.2]
+
+Case [4.3.2]   (process 8770):
+Assumption: 68 [64,split.4.3.2] p13.
+>>>> Starting back unit deletion with 67.
+>>>> Starting back unit deletion with 68.
+0 [back_unit_del,68.1,23.2] -p09.
+0 [back_unit_del,68.1,21.2] -p05.
+>>>> Starting back unit deletion with 69.
+>>>> Starting back unit deletion with 70.
+>>>> Starting back unit deletion with 71.
+0 [back_unit_del,71.1,10.2] -p04.
+
+----> UNIT CONFLICT at   0.00 sec ----> 74 [binary,73.1,72.1] $F.
+
+Length of proof is 22.  Level of proof is 10.  Case [4.3.2]
+
+---------------- PROOF ----------------
+
+1 [] p00|p01|p02|p03.
+2 [] p04|p05|p06|p07.
+3 [] p08|p09|p10|p11.
+4 [] p12|p13|p14|p15.
+5 [] p16|p17|p18|p19.
+10 [] -p04| -p08.
+21 [] -p05| -p13.
+23 [] -p09| -p13.
+32 [] -p06| -p18.
+34 [] -p10| -p18.
+35 [] -p14| -p18.
+36 [] -p03| -p07.
+37 [] -p03| -p11.
+38 [] -p03| -p15.
+39 [] -p03| -p19.
+49 [1,split.4] p03.
+50 [back_unit_del,49.1,39.1] -p19.
+51 [back_unit_del,49.1,38.1] -p15.
+52 [back_unit_del,49.1,37.1] -p11.
+53 [back_unit_del,49.1,36.1] -p07.
+54 [back_unit_del,50.1,5.4] p16|p17|p18.
+55 [back_unit_del,51.1,4.4] p12|p13|p14.
+56 [back_unit_del,52.1,3.4] p08|p09|p10.
+57 [back_unit_del,53.1,2.4] p04|p05|p06.
+60 [54,split.4.3] p18.
+61 [back_unit_del,60.1,35.2] -p14.
+62 [back_unit_del,60.1,34.2] -p10.
+63 [back_unit_del,60.1,32.2] -p06.
+64 [back_unit_del,61.1,55.3] p12|p13.
+65 [back_unit_del,62.1,56.3] p08|p09.
+66 [back_unit_del,63.1,57.3] p04|p05.
+68 [64,split.4.3.2] p13.
+69 [back_unit_del,68.1,23.2] -p09.
+70 [back_unit_del,68.1,21.2] -p05.
+71 [back_unit_del,69.1,65.2] p08.
+72 [back_unit_del,70.1,66.2] p04.
+73 [back_unit_del,71.1,10.2] -p04.
+74 [binary,73.1,72.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8770) -------
+clauses given                 50
+clauses generated             19
+clauses kept                  28
+clauses forward subsumed       0
+clauses back subsumed         47
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8770 finished Mon Aug  2 15:31:09 2004
+Refuted case [4.3.2].
+
+------- statistics (process 8768) -------
+clauses given                 50
+clauses generated             14
+clauses kept                  21
+clauses forward subsumed       0
+clauses back subsumed         41
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8768 finished Mon Aug  2 15:31:09 2004
+Refuted case [4.3].
+
+------- statistics (process 8761) -------
+clauses given                 46
+clauses generated              8
+clauses kept                  12
+clauses forward subsumed       0
+clauses back subsumed         26
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8761 finished Mon Aug  2 15:31:09 2004
+Refuted case [4].
+
+That finishes the proof of the theorem.
+
+That finishes the proof of the theorem.
+
+------- statistics (process 8730) -------
+clauses given                 41
+clauses generated              0
+clauses kept                   0
+clauses forward subsumed       0
+clauses back subsumed          0
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8730 finished Mon Aug  2 15:31:09 2004

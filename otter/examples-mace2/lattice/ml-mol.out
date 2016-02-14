@@ -1,0 +1,406 @@
+----- MACE 2.2f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:44:37 2004
+The command was "../../bin/mace2 -N10 -p".
+include("finite-lattice").
+------- start included file finite-lattice-------
+op(400,xfx,[^,v]).
+
+list(usable).
+1 [] x^y=y^x.
+2 [] (x^y)^z=x^ (y^z).
+3 [] x v y=y v x.
+4 [] (x v y) v z=x v (y v z).
+5 [] x^ (x v y)=x.
+6 [] x v (x^y)=x.
+7 [] x^x=x.
+8 [] x v x=x.
+9 [] 1 v x=1.
+10 [] x v 1=1.
+11 [] 1^x=x.
+12 [] x^1=x.
+13 [] 0^x=0.
+14 [] x^0=0.
+15 [] 0 v x=x.
+16 [] x v 0=x.
+end_of_list.
+------- end included file finite-lattice-------
+
+list(usable).
+17 [] c(x) v x=1.
+18 [] c(x)^x=0.
+19 [] c(c(x))=x.
+20 [] x v (y^ (x v z))= (x v y)^ (x v z).
+21 [] c(A^B)!=c(A) v c(B).
+end_of_list.
+
+list(flattened_and_parted_clauses).
+1 [] x^y!=z|y^x=z.
+2 [] x^y!=z|u^z!=v|$Connect1(x,y,u,v).
+2 [] x^y!=z|z^u=v| -$Connect1(y,u,x,v).
+3 [] x v y!=z|y v x=z.
+4 [] x v y!=z|u v z!=v|$Connect2(x,y,u,v).
+4 [] x v y!=z|z v u=v| -$Connect2(y,u,x,v).
+5 [] x v y!=z|x^z=x.
+6 [] x^y!=z|x v z=x.
+7 [] x^x=x.
+8 [] x v x=x.
+9 [] 1 v x=1.
+10 [] x v 1=1.
+11 [] 1^x=x.
+12 [] x^1=x.
+13 [] 0^x=0.
+14 [] x^0=0.
+15 [] 0 v x=x.
+16 [] x v 0=x.
+17 [] c(x)!=y|y v x=1.
+18 [] c(x)!=y|y^x=0.
+19 [] c(x)!=y|c(y)=x.
+20 [] x v y!=z|z^u!=v| -$Connect3(x,u)|$Connect4(x,y,u,v).
+20 [] x^y!=z|u v z=v| -$Connect4(u,x,y,v).
+20 [] x v y!=z|$Connect3(x,z).
+21 [] c(x)!=y|z v y!=u|B!=x| -$Connect6(x,z,u).
+21 [] c(x)!=y|A!=x| -$Connect5(z,x,u)|$Connect6(z,y,u).
+21 [] x^y!=z|c(z)!=u|$Connect5(y,x,u).
+end_of_list.
+
+--- Starting search for models of size 2 ---
+
+Applying isomorphism constraints to constants: B A.
+
+340 clauses were generated; 142 of those survived the first stage
+of unit preprocessing; there are 96 atoms.
+
+After all unit preprocessing, 18 atoms are still unassigned;
+16 clauses remain; 2 of those are non-Horn (selectable);
+4884 K allocated; cpu time so far for this domain size: 0.00 sec.
+
+----- statistics for domain size 2 ----
+Input:
+    Clauses input                   142
+    Literal occurrences input       255
+    Greatest atom                    96
+Unit preprocess:
+    Preprocess unit assignments      78
+    Clauses after subsumption        16
+    Literal occ. after subsump.      52
+    Selectable clauses                2
+Decide:
+    Splits                            1
+    Unit assignments                  8
+    Failed paths                      2
+Memory:
+    Memory malloced                 2 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.00
+    DPLL                           0.00
+
+--- Starting search for models of size 3 ---
+
+Applying isomorphism constraints to constants: B A.
+
+1994 clauses were generated; 590 of those survived the first stage
+of unit preprocessing; there are 384 atoms.
+
+After all unit preprocessing, 77 atoms are still unassigned;
+109 clauses remain; 5 of those are non-Horn (selectable);
+4892 K allocated; cpu time so far for this domain size: 0.00 sec.
+
+----- statistics for domain size 3 ----
+Input:
+    Clauses input                   590
+    Literal occurrences input      1071
+    Greatest atom                   384
+Unit preprocess:
+    Preprocess unit assignments     307
+    Clauses after subsumption       109
+    Literal occ. after subsump.     328
+    Selectable clauses                5
+Decide:
+    Splits                            0
+    Unit assignments                  0
+    Failed paths                      1
+Memory:
+    Memory malloced                10 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.00
+    DPLL                           0.00
+
+--- Starting search for models of size 4 ---
+
+Applying isomorphism constraints to constants: B A.
+
+7605 clauses were generated; 2128 of those survived the first stage
+of unit preprocessing; there are 1080 atoms.
+
+After all unit preprocessing, 148 atoms are still unassigned;
+97 clauses remain; 5 of those are non-Horn (selectable);
+4912 K allocated; cpu time so far for this domain size: 0.01 sec.
+
+----- statistics for domain size 4 ----
+Input:
+    Clauses input                  2128
+    Literal occurrences input      4354
+    Greatest atom                  1080
+Unit preprocess:
+    Preprocess unit assignments     932
+    Clauses after subsumption        97
+    Literal occ. after subsump.     349
+    Selectable clauses                5
+Decide:
+    Splits                            2
+    Unit assignments                 26
+    Failed paths                      3
+Memory:
+    Memory malloced                30 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.01
+    DPLL                           0.00
+
+--- Starting search for models of size 5 ---
+
+Applying isomorphism constraints to constants: B A.
+
+22031 clauses were generated; 6668 of those survived the first stage
+of unit preprocessing; there are 2460 atoms.
+
+After all unit preprocessing, 1011 atoms are still unassigned;
+3188 clauses remain; 21 of those are non-Horn (selectable);
+4951 K allocated; cpu time so far for this domain size: 0.01 sec.
+
+----- statistics for domain size 5 ----
+Input:
+    Clauses input                  6668
+    Literal occurrences input     15151
+    Greatest atom                  2460
+Unit preprocess:
+    Preprocess unit assignments    1449
+    Clauses after subsumption      3188
+    Literal occ. after subsump.    8117
+    Selectable clauses               21
+Decide:
+    Splits                            1
+    Unit assignments                107
+    Failed paths                      2
+Memory:
+    Memory malloced                69 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.01
+    DPLL                           0.00
+
+--- Starting search for models of size 6 ---
+
+Applying isomorphism constraints to constants: B A.
+
+53112 clauses were generated; 18024 of those survived the first stage
+of unit preprocessing; there are 4872 atoms.
+
+After all unit preprocessing, 2466 atoms are still unassigned;
+11152 clauses remain; 34 of those are non-Horn (selectable);
+5020 K allocated; cpu time so far for this domain size: 0.03 sec.
+
+----- statistics for domain size 6 ----
+Input:
+    Clauses input                 18024
+    Literal occurrences input     44095
+    Greatest atom                  4872
+Unit preprocess:
+    Preprocess unit assignments    2406
+    Clauses after subsumption     11152
+    Literal occ. after subsump.   29440
+    Selectable clauses               34
+Decide:
+    Splits                           10
+    Unit assignments               4915
+    Failed paths                     11
+Memory:
+    Memory malloced               138 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.03
+    DPLL                           0.01
+
+--- Starting search for models of size 7 ---
+
+Applying isomorphism constraints to constants: B A.
+
+112384 clauses were generated; 42626 of those survived the first stage
+of unit preprocessing; there are 8736 atoms.
+
+After all unit preprocessing, 5063 atoms are still unassigned;
+30235 clauses remain; 51 of those are non-Horn (selectable);
+5129 K allocated; cpu time so far for this domain size: 0.05 sec.
+
+----- statistics for domain size 7 ----
+Input:
+    Clauses input                 42626
+    Literal occurrences input    109671
+    Greatest atom                  8736
+Unit preprocess:
+    Preprocess unit assignments    3673
+    Clauses after subsumption     30235
+    Literal occ. after subsump.   82163
+    Selectable clauses               51
+Decide:
+    Splits                           20
+    Unit assignments               2568
+    Failed paths                     21
+Memory:
+    Memory malloced               247 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.05
+    DPLL                           0.01
+
+--- Starting search for models of size 8 ---
+
+Applying isomorphism constraints to constants: B A.
+
+215798 clauses were generated; 90239 of those survived the first stage
+of unit preprocessing; there are 14544 atoms.
+
+After all unit preprocessing, 9258 atoms are still unassigned;
+69392 clauses remain; 72 of those are non-Horn (selectable);
+5294 K allocated; cpu time so far for this domain size: 0.11 sec.
+
+----- statistics for domain size 8 ----
+Input:
+    Clauses input                 90239
+    Literal occurrences input    240487
+    Greatest atom                 14544
+Unit preprocess:
+    Preprocess unit assignments    5286
+    Clauses after subsumption     69392
+    Literal occ. after subsump.  192782
+    Selectable clauses               72
+Decide:
+    Splits                          133
+    Unit assignments             241256
+    Failed paths                    134
+Memory:
+    Memory malloced               412 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.09
+    DPLL                           0.56
+
+--- Starting search for models of size 9 ---
+
+Applying isomorphism constraints to constants: B A.
+
+384441 clauses were generated; 174684 of those survived the first stage
+of unit preprocessing; there are 22860 atoms.
+
+After all unit preprocessing, 15579 atoms are still unassigned;
+141490 clauses remain; 97 of those are non-Horn (selectable);
+10412 K allocated; cpu time so far for this domain size: 0.19 sec.
+
+----- statistics for domain size 9 ----
+Input:
+    Clauses input                174684
+    Literal occurrences input    477559
+    Greatest atom                 22860
+Unit preprocess:
+    Preprocess unit assignments    7281
+    Clauses after subsumption    141490
+    Literal occ. after subsump.  399817
+    Selectable clauses               97
+Decide:
+    Splits                           60
+    Unit assignments              28320
+    Failed paths                     61
+Memory:
+    Memory malloced               647 K
+    Memory MACE_tp_alloced       9765 K
+Time (seconds):
+    Generate ground clauses        0.16
+    DPLL                           0.12
+
+--- Starting search for models of size 10 ---
+
+Applying isomorphism constraints to constants: B A.
+
+645256 clauses were generated; 314558 of those survived the first stage
+of unit preprocessing; there are 34320 atoms.
+
+After all unit preprocessing, 24626 atoms are still unassigned;
+264028 clauses remain; 126 of those are non-Horn (selectable);
+15620 K allocated; cpu time so far for this domain size: 0.33 sec.
+
+======================= Model #1 at 1.42 seconds:
+
+ ^ :
+      | 0 1 2 3 4 5 6 7 8 9
+    --+--------------------
+    0 | 0 0 0 0 0 0 0 0 0 0
+    1 | 0 1 2 3 4 5 6 7 8 9
+    2 | 0 2 2 0 0 0 0 2 0 2
+    3 | 0 3 0 3 6 0 6 8 8 6
+    4 | 0 4 0 6 4 5 6 5 0 6
+    5 | 0 5 0 0 5 5 0 5 0 0
+    6 | 0 6 0 6 6 0 6 0 0 6
+    7 | 0 7 2 8 5 5 0 7 8 2
+    8 | 0 8 0 8 0 0 0 8 8 0
+    9 | 0 9 2 6 6 0 6 2 0 9
+
+ v :
+      | 0 1 2 3 4 5 6 7 8 9
+    --+--------------------
+    0 | 0 1 2 3 4 5 6 7 8 9
+    1 | 1 1 1 1 1 1 1 1 1 1
+    2 | 2 1 2 1 1 7 9 7 7 9
+    3 | 3 1 1 3 1 1 3 1 3 1
+    4 | 4 1 1 1 4 4 4 1 1 1
+    5 | 5 1 7 1 4 5 4 7 7 1
+    6 | 6 1 9 3 4 4 6 1 3 9
+    7 | 7 1 7 1 1 7 1 7 7 1
+    8 | 8 1 7 3 1 7 3 7 8 1
+    9 | 9 1 9 1 1 1 9 1 1 9
+
+ c :
+        0 1 2 3 4 5 6 7 8 9
+    -----------------------
+        1 0 4 5 2 3 7 6 9 8
+
+ B: 2
+
+ A: 3
+end_of_model
+
+Exit by max_models parameter.  The set is satisfiable (1 model(s) found).
+
+
+----- statistics for domain size 10 ----
+Input:
+    Clauses input                314558
+    Literal occurrences input    876591
+    Greatest atom                 34320
+Unit preprocess:
+    Preprocess unit assignments    9694
+    Clauses after subsumption    264028
+    Literal occ. after subsump.  756092
+    Selectable clauses              126
+Decide:
+    Splits                           33
+    Unit assignments              25391
+    Failed paths                     25
+Memory:
+    Memory malloced               972 K
+    Memory MACE_tp_alloced      14648 K
+Time (seconds):
+    Generate ground clauses        0.27
+    DPLL                           0.11
+
+=======================================
+Total times for run (seconds):
+    user CPU time                  1.42   (0 hr, 0 min, 1 sec)
+    system CPU time                0.12   (0 hr, 0 min, 0 sec)
+    wall-clock time                2      (0 hr, 0 min, 2 sec)
+
+Exit by max_models parameter.  The set is satisfiable (1 model(s) found).
+
+The job finished Mon Aug  2 15:44:39 2004

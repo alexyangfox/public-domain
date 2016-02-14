@@ -1,0 +1,42 @@
+%
+% SAM's Lemma in the P-formulation with hyperresolution
+% This is not a complete axiomatization, because closure
+% and function symbols are not included.
+%
+
+set(auto).
+
+list(usable).
+join(1,x,1).
+join(x,1,1).
+join(0,x,x).
+join(x,0,x).
+meet(0,x,0).
+meet(x,0,0).
+meet(1,x,x).
+meet(x,1,x).
+meet(x,x,x).
+join(x,x,x).
+-meet(x,y,z) | meet(y,x,z).
+-join(x,y,z) | join(y,x,z).
+-meet(x,y,z) | join(x,z,x).
+-join(x,y,z) | meet(x,z,x).
+-meet(x,y,xy) | -meet(y,z,yz) | -meet(x,yz,xyz) | meet(xy,z,xyz).
+-meet(x,y,xy) | -meet(y,z,yz) | -meet(xy,z,xyz) | meet(x,yz,xyz).
+-join(x,y,xy) | -join(y,z,yz) | -join(x,yz,xyz) | join(xy,z,xyz).
+-join(x,y,xy) | -join(y,z,yz) | -join(xy,z,xyz) | join(x,yz,xyz).
+-meet(x,z,x) | -join(x,y,x1) | -meet(y,z,y1) | -meet(z,x1,z1) | join(x,y1,z1).
+-meet(x,z,x) | -join(x,y,x1) | -meet(y,z,y1) | -join(x,y1,z1) | meet(z,x1,z1).
+
+-meet(a2,b2,r1).
+meet(a,b,c).
+join(c,r2,1).
+meet(c,r2,0).
+meet(r2,b,e).
+join(a,b,c2).
+join(c2,r1,1).
+meet(c2,r1,0).
+meet(r2,a,d).
+join(r1,e,a2).
+join(r1,d,b2).
+end_of_list.

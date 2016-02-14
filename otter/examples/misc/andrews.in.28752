@@ -1,0 +1,37 @@
+%  Challenge problem from Peter Andrews (1979)
+%
+%  Although this problem is more easily solved by direct simplification
+%  of the quantified formula (Champeaux, J. ACM 1986 and SIGART Newsletter), 
+%  it makes a good test problem for resolution theorem provers.  Otter
+%  can do this problem, because it translates equivalences in two ways,
+%  depending on the context, producing only 128 clauses.  (Also, FormEd
+%  can prove it by direct simplification.)
+%
+
+set(binary_res).
+set(process_input).
+clear(print_kept).
+clear(print_back_sub).
+
+assign(max_mem, 1500).      % 1.5 Megabytes
+
+formula_list(sos).
+
+% Andrews challenge problem
+
+-(
+   (
+     (exists x all y (p(x) <-> p(y)))
+     <->
+     ((exists u q(u)) <-> (all v p(v)))
+   )
+   <->
+   (
+     (exists w all z (q(z) <-> q(w)))
+     <->
+     ((exists x1 p(x1)) <-> (all x2 q(x2)))
+   )
+ ).
+
+end_of_list.
+

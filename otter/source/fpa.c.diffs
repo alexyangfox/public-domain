@@ -1,0 +1,114 @@
+219,221c219
+<     tp1 = get_term_ptr();
+<     fp3->terms = tp1;
+<     tp1->term = t;
+---
+>     fp3->terms = flist_insert(NULL, t);
+235,256c233
+< 
+<     tp1 = fp1->terms;
+<     tp2 = NULL;
+<     /* keep list sorted, decreasing addresses */
+<     while (tp1 != NULL && tp1->term->fpa_id > t->fpa_id) {
+<       tp2 = tp1;
+<       tp1 = tp1->next;
+<     }
+<     if (tp1 != NULL && tp1->term == t)
+<       Stats[FPA_OVERLOADS]++;  /* term already in list */
+<     else {
+<       tp3 = get_term_ptr();
+<       tp3->term = t;
+<       if (tp2 == NULL) { /* insert at beginning */
+< 	tp3->next = fp1->terms;
+< 	fp1->terms = tp3;
+<       }
+<       else { /* insert after tp2 */
+< 	tp3->next = tp1;
+< 	tp2->next = tp3;
+<       }
+<     }
+---
+>     fp1->terms = flist_insert(fp1->terms, t);
+291,314c268,275
+<     tp1 = fp1->terms;
+<     tp2 = NULL;
+<     /* list is sorted, decreasing addresses */
+<     while (tp1 != NULL && tp1->term->fpa_id > t->fpa_id) {
+<       tp2 = tp1;
+<       tp1 = tp1->next;
+<     }
+<     if (tp1 == NULL || tp1->term != t)
+<       Stats[FPA_UNDERLOADS]++;  /* term not found in list */
+<     else {
+<       if (tp2 == NULL) {  /* delete from beginning */
+< 	fp1->terms = tp1->next;
+< 	if (fp1->terms == NULL) { /* delete fpa_head also */
+< 	  if (fp2 == NULL)
+< 	    index->table[hashval] = fp1->next;
+< 	  else
+< 	    fp2->next = fp1->next;
+< 	  free_fpa_head(fp1);
+< 	  /* don't worry about fp1->path; let it be lost forever */
+< 	}
+<       }
+<       else  /* delete */
+< 	tp2->next = tp1->next;
+<       free_term_ptr(tp1);
+---
+>     fp1->terms = flist_delete(fp1->terms, t);
+>     if (fp1->terms == NULL) { /* delete fpa_head also */
+>       if (fp2 == NULL)
+> 	index->table[hashval] = fp1->next;
+>       else
+> 	fp2->next = fp1->next;
+>       free_fpa_head(fp1);
+>       /* don't worry about fp1->path; let it be lost forever */
+438c399
+<     pp->terms = fp->terms;
+---
+>     pp->position = first_fpos(fp->terms);
+632a594
+> 
+634,637c596,601
+<     tp = n->terms;  /* fpa lists: terms have decreasing addresses */
+<     while (tp != NULL && max != 0 && tp->term->fpa_id > max)
+<       tp = tp->next;
+<     if (tp == NULL) {
+---
+>     struct term *t = FTERM(n->position);
+>     while (t != NULL && max != 0 && t->fpa_id > max) {
+>       n->position = next_fpos(n->position);
+>       t = FTERM(n->position);
+>     }
+>     if (t == NULL) {
+642,643c606,607
+<       n->terms = tp->next;
+<       return(tp->term);
+---
+>       n->position = next_fpos(n->position);
+>       return(t);
+745c709
+<       p2->terms = h->terms;
+---
+>       p2->position = first_fpos(h->terms);
+791d754
+<   struct term_ptr *tp;
+798a762,763
+> 	struct fposition fpos;
+> 	struct term *t;
+800,801c765,767
+< 	tp = f->terms;
+< 	while (tp != NULL) {
+---
+> 	fpos = first_fpos(f->terms);
+> 	t = FTERM(fpos);
+> 	while (t != NULL) {
+803,804c769,771
+< 	  print_term(fp, tp->term);
+< 	  tp = tp->next;
+---
+> 	  print_term(fp, t);
+> 	  fpos = first_fpos(f->terms);
+> 	  t = FTERM(fpos);
+935a903
+> 

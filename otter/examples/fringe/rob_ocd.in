@@ -1,0 +1,88 @@
+%
+% If a Robbins algebra has elements C and D such that C+D=C, then it
+% is Boolean.  This input file uses the proof of a similar theorem
+% to guide the search.
+%
+% Special features used: list(hints), label attributes, build_proof_object.
+%
+%%%%%%%%%%%%%%%%%%%%%  Basic options
+
+op(400, xfx, +).
+
+clear(print_kept).
+clear(print_new_demod).
+clear(print_back_demod).
+
+assign(pick_given_ratio, 4).
+assign(max_mem, 20000).
+
+%%%%%%%%%%%%%%%%%%%%%  Standard for equational problems
+
+set(knuth_bendix).
+
+%%%%%%%%%%%%%%%%%%%%%  Modifications to strategy
+
+set(build_proof_object_2).
+set(dynamic_demod_lex_dep).
+assign(max_weight, 30).
+lex([A, B, E, c, d, e, f, g(x), n(x), +(x,x)]).
+
+%%%%%%%%%%%%%%%%%%%%%  Clauses
+
+list(usable).
+x = x.
+x + y = y + x.
+(x + y) + z = x + (y + z).
+x + (y + z) = y + (x + z).           % commuted form of associativity
+end_of_list.
+ 
+list(sos).
+n(n(x + y) + n(x + n(y))) = x.       % Robbins axiom
+c + d = c.                           % hypothesis
+n(A + n(B)) + n(n(A) + n(B)) != B.   % denial of Huntington axiom
+end_of_list.
+
+% Subtract 20 from the pick-weight of kept clauses that subsume any hint.
+
+assign(bsub_hint_wt, -20).
+
+% The hints list conatins a proof of the (slightly weaker) theorem that
+% from the same hypotheses, we can derive a 0 such that x+0=x.  Label
+% attributes on hints are inherited by the clauses to which the hints
+% apply.
+
+list(hints).
+n(n(x+ (y+z))+n(y+n(x+z)))=y           # label(step_1).
+n(n(x+y)+n(y+n(x)))=y                  # label(step_2).
+n(n(x+y)+n(x+ (n(y+z)+n(y+n(z)))))=x   # label(step_3).
+n(n(x+y)+n(n(y)+x))=x                  # label(step_4).
+c+ (d+x)=c+x                           # label(step_5).
+n(n(x+c)+n(c+n(x+d)))=c                # label(step_6).
+n(n(x+ (y+z))+n(z+n(x+y)))=z           # label(step_7).
+n(n(x+ (y+z))+n(y+n(z+x)))=y           # label(step_8).
+n(n(c)+n(d+n(c)))=d                    # label(step_9).
+n(n(x+y)+n(n(x)+y))=y                  # label(step_10).
+n(n(x+n(y))+n(y+x))=x                  # label(step_11).
+n(n(x+ (n(y+z)+n(z+n(y))))+n(z+x))=x   # label(step_12).
+n(n(x+c)+n(c+n(d+x)))=c                # label(step_13).
+n(n(x+ (c+y))+n(d+ (y+n(x+c))))=d+y    # label(step_14).
+n(n(x+ (y+z))+n(z+n(y+x)))=z           # label(step_15).
+n(n(x+ (y+z))+n(n(z+x)+y))=y           # label(step_16).
+n(d+n(c+n(d+n(c))))=n(d+n(c))          # label(step_17).
+n(d+n(n(c)+ (n(n(d+n(c))+x)+n(n(d+n(c))+n(x)))))=n(c)   # label(step_18).
+n(x+n(y+ (x+n(n(y)+x))))=n(n(y)+x)     # label(step_19).
+n(n(x+ (y+n(z)))+n(x+ (z+y)))=x+y      # label(step_20).
+n(n(x+n(y+n(z)))+n(x+ (y+n(z+ (y+n(y+n(z)))))))=x   # label(step_21).
+n(n(c)+n(d+ (n(x+c)+n(c+n(x)))))=d     # label(step_22).
+n(n(d+n(c))+n(c+n(d+n(c))))=d          # label(step_23).
+n(n(c+n(d+n(c)))+n(c+n(c+n(d+n(c)))))=c   # label(step_24).
+n(d+n(d+ (n(c)+n(c+n(d+n(c))))))=n(c)  # label(step_25).
+n(c+n(d+n(c)))=n(c)                    # label(step_26).
+n(n(c)+n(c+n(c)))=c                    # label(step_27).
+n(c+n(c+ (n(c)+n(c+ (c+n(c+n(c)))))))=n(c)   # label(step_28).
+n(n(c+n(c))+n(c+ (c+n(c+n(c)))))=c     # label(step_29).
+n(c+ (c+n(c+n(c))))=n(c)               # label(step_30).
+d+n(c+n(c))=d                          # label(step_31).
+n(n(x+d)+n(x+ (n(d)+n(c+n(c)))))=x+n(c+n(c))   # label(step_32).
+x+n(c+n(c))=x                          # label(step_33).
+end_of_list.

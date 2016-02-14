@@ -1,0 +1,226 @@
+%  Input File for Studying Two-Valued Sentential Calculus with OTTER 3.0
+set(hyper_res).
+assign(max_weight,20).
+assign(max_proofs, -1).
+clear(print_kept).
+% clear(for_sub).
+clear(back_sub).
+% assign(max_seconds, 1200).
+assign(max_mem, 24000).
+% assign(report, 900).
+% assign(max_distinct_vars, 4).
+% assign(pick_given_ratio, 3).
+assign(max_given, 618).
+set(order_history).
+set(input_sos_first).
+% set(sos_queue).
+  
+weight_list(pick_and_purge).
+%  Following are templates corresponding to the 68 theses to be proved.
+weight(P(i(i(i(i(x,y),i(z,y)),u),i(i(z,x),u))),2).
+weight(P(i(i(x,i(y,z)),i(i(u,y),i(x,i(u,z))))),2).
+weight(P(i(i(x,y),i(i(i(x,z),u),i(i(y,z),u)))),2).
+weight(P(i(i(x,i(i(y,z),u)),i(i(y,v),i(x,i(i(v,z),u))))),2).
+weight(P(i(i(x,y),i(i(z,x),i(i(y,u),i(z,u))))),2).
+weight(P(i(i(i(n(x),y),z),i(x,z))),2).
+weight(P(i(x,i(i(i(n(x),x),x),i(i(y,x),x)))),2).
+weight(P(i(i(x,i(i(n(y),y),y)),i(i(n(y),y),y))),2).
+weight(P(i(x,i(i(n(y),y),y))),2).
+weight(P(i(i(n(x),y),i(z,i(i(y,x),x)))),2).
+weight(P(i(i(i(x,i(i(y,z),z)),u),i(i(n(z),y),u))),2).
+weight(P(i(i(n(x),y),i(i(y,x),x))),2).
+weight(P(i(x,x)),2).
+weight(P(i(x,i(i(y,x),x))),2).
+weight(P(i(x,i(y,x))),2).
+weight(P(i(i(i(x,y),z),i(y,z))),2).
+weight(P(i(x,i(i(x,y),y))),2).
+weight(P(i(i(x,i(y,z)),i(y,i(x,z)))),2).
+weight(P(i(i(x,y),i(i(z,x),i(z,y)))),2).
+weight(P(i(i(i(x,i(y,z)),u),i(i(y,i(x,z)),u))),2).
+weight(P(i(i(i(x,y),x),x)),2).
+weight(P(i(i(i(x,y),z),i(i(x,u),i(i(u,y),z)))),2).
+weight(P(i(i(i(x,y),z),i(i(z,x),x))),2).
+weight(P(i(i(i(x,y),y),i(i(y,x),x))),2).
+weight(P(i(i(i(i(x,y),y),z),i(i(i(y,u),x),z))),2).
+weight(P(i(i(i(x,y),z),i(i(x,z),z))),2).
+weight(P(i(i(x,i(x,y)),i(x,y))),2).
+weight(P(i(i(x,y),i(i(i(x,z),u),i(i(y,u),u)))),2).
+weight(P(i(i(i(x,y),z),i(i(x,u),i(i(u,z),z)))),2).
+weight(P(i(i(x,y),i(i(y,i(z,i(x,u))),i(z,i(x,u))))),2).
+weight(P(i(i(x,i(y,i(z,u))),i(i(z,x),i(y,i(z,u))))),2).
+weight(P(i(i(x,i(y,z)),i(i(x,y),i(x,z)))),2).
+weight(P(i(n(x),i(x,y))),2).
+weight(P(i(i(i(x,y),z),i(n(x),z))),2).
+weight(P(i(i(x,n(x)),n(x))),2).
+weight(P(i(n(n(x)),x)),2).
+weight(P(i(x,n(n(x)))),2).
+weight(P(i(i(x,y),i(n(n(x)),y))),2).
+weight(P(i(i(i(n(n(x)),y),z),i(i(x,y),z))),2).
+weight(P(i(i(x,y),i(i(y,n(x)),n(x)))),2).
+weight(P(i(i(x,i(y,n(z))),i(i(z,y),i(x,n(z))))),2).
+weight(P(i(i(x,i(y,z)),i(i(n(z),y),i(x,z)))),2).
+weight(P(i(i(x,y),i(n(y),n(x)))),2).
+weight(P(i(i(x,n(y)),i(y,n(x)))),2).
+weight(P(i(i(n(x),y),i(n(y),x))),2).
+weight(P(i(i(n(x),n(y)),i(y,x))),2).
+weight(P(i(i(i(n(x),y),z),i(i(n(y),x),z))),2).
+weight(P(i(i(x,i(y,z)),i(x,i(n(z),n(y))))),2).
+weight(P(i(i(x,i(y,n(z))),i(x,i(z,n(y))))),2).
+weight(P(i(i(n(x),y),i(i(x,y),y))),2).
+weight(P(i(i(x,y),i(i(n(x),y),y))),2).
+weight(P(i(i(x,y),i(i(x,n(y)),n(x)))),2).
+weight(P(i(i(i(i(x,y),y),z),i(i(n(x),y),z))),2).
+weight(P(i(i(n(x),y),i(i(x,z),i(i(z,y),y)))),2).
+weight(P(i(i(i(i(x,y),i(i(y,z),z)),u),i(i(n(x),z),u))),2).
+weight(P(i(i(n(x),y),i(i(z,y),i(i(x,z),y)))),2).
+weight(P(i(i(x,i(n(y),z)),i(x,i(i(u,z),i(i(y,u),z))))),2).
+weight(P(i(i(x,y),i(i(z,y),i(i(n(x),z),y)))),2).
+weight(P(i(i(n(n(x)),y),i(x,y))),2).
+weight(P(i(x,i(y,y))),2).
+weight(P(i(n(i(x,x)),y)),2).
+weight(P(i(i(n(x),n(i(y,y))),x)),2).
+weight(P(i(n(i(x,y)),x)),2).
+weight(P(i(n(i(x,y)),n(y))),2).
+weight(P(i(n(i(x,n(y))),y)),2).
+weight(P(i(x,i(n(y),n(i(x,y))))),2).
+weight(P(i(x,i(y,n(i(x,n(y)))))),2).
+weight(P(n(i(i(x,x),n(i(y,y))))),2).
+end_of_list.
+  
+list(usable).
+%  The following clause is used with hyperresolution for condensed detachment.
+-P(i(x,y)) | -P(x) | P(y).
+%  The following disjunctions, except those mentioning Scott,
+%  are the negation of known axiom systems.
+  
+-P(i(p,i(q,p))) | -P(i(i(p,i(q,r)),i(i(p,q),i(p,r)))) | -P(i(n(n(p)),p)) | 
+-P(i(p,n(n(p)))) | -P(i(i(p,q),i(n(q),n(p)))) | -P(i(i(p,i(q,r)),i(q,i(p,r)))) | 
+$ANSWER(step_allFrege_18_35_39_40_46_21).  % 21 is dependent.
+  
+-P(i(p,i(q,p))) | -P(i(i(p,i(q,r)),i(q,i(p,r)))) | 
+-P(i(i(q,r),i(i(p,q),i(p,r)))) | -P(i(p,i(n(p),q))) | 
+-P(i(i(p,q),i(i(n(p),q),q))) | -P(i(i(p,i(p,q)),i(p,q))) | 
+$ANSWER(step_allHilbert_18_21_22_3_54_30).  % 30 is dependent.
+  
+-P(i(p,i(q,p))) | -P(i(i(p,i(q,r)),i(i(p,q),i(p,r)))) | 
+-P(i(i(n(p),n(q)),i(q,p))) | $ANSWER(step_allBEH_Church_FL_18_35_49).
+  
+-P(i(i(i(p,q),r),i(q,r))) | -P(i(i(i(p,q),r),i(n(p),r))) | 
+-P(i(i(n(p),r),i(i(q,r),i(i(p,q),r)))) | $ANSWER(step_allLuka_x_19_37_59).
+  
+-P(i(i(i(p,q),r),i(q,r))) | -P(i(i(i(p,q),r),i(n(p),r))) | 
+-P(i(i(s,i(n(p),r)),i(s,i(i(q,r),i(i(p,q),r))))) | $ANSWER(step_allWos_x_19_37_60).
+  
+-P(i(i(p,q),i(i(q,r),i(p,r)))) | -P(i(i(n(p),p),p)) | 
+-P(i(p,i(n(p),q))) | $ANSWER(step_allLuka_1_2_3).
+  
+-P(i(p,p)) | -P(i(p,i(q,p))) | -P(i(i(p,i(q,r)),i(q,i(p,r)))) | 
+-P(i(i(i(p,q),p),p)) | -P(i(i(p,i(q,r)),i(i(p,q),i(p,r)))) | 
+-P(i(n(n(p)),p)) | -P(i(p,n(n(p)))) | -P(i(i(p,q),i(n(q),n(p)))) | 
+$ANSWER(step_allScott_orig_16_18_21_24_35_39_40_46).
+  
+-P(i(p,p)) | -P(i(p,i(q,p))) | -P(i(i(p,i(q,r)),i(q,i(p,r)))) | 
+-P(i(i(i(p,q),p),p)) | -P(i(i(p,i(q,r)),i(i(p,q),i(p,r)))) | 
+-P(i(n(n(p)),p)) | -P(i(p,n(n(p)))) | -P(i(i(n(p),n(q)),i(q,p))) | 
+$ANSWER(step_allScott_orig0_16_18_21_24_35_39_40_49).
+  
+end_of_list.
+  
+list(sos).
+%  The following three are Luka, 1 2 3.
+P(i(i(x,y),i(i(y,z),i(x,z)))).
+P(i(i(n(x),x),x)).
+P(i(x,i(n(x),y))).
+  
+%  The following are from Frege, 18 35 21 46 39 40, with 21 dependent.
+% P(i(x,i(y,x))).  %  axiom F1.
+% P(i(i(x,i(y,z)),i(i(x,y),i(x,z)))).  %  axiom F2.
+% P(i(i(x,i(y,z)),i(y,i(x,z)))).  %  axiom F3.
+% P(i(i(x,y),i(n(y),n(x)))).  %  axiom F4.
+% P(i(n(n(x)),x)).  %  axiom F5.
+% P(i(x,n(n(x)))).  %  axiom f6.
+end_of_list.
+  
+list(passive).
+-P(i(i(i(i(q,r),i(p,r)),s),i(i(p,q),s))) | $ANS(neg_th_04).
+-P(i(i(p,i(q,r)),i(i(s,q),i(p,i(s,r))))) | $ANS(neg_th_05).
+-P(i(i(p,q),i(i(i(p,r),s),i(i(q,r),s)))) | $ANS(neg_th_06).
+-P(i(i(t,i(i(p,r),s)),i(i(p,q),i(t,i(i(q,r),s))))) | $ANS(neg_th_07).
+-P(i(i(q,r),i(i(p,q),i(i(r,s),i(p,s))))) | $ANS(neg_th_08).
+-P(i(i(i(n(p),q),r),i(p,r))) | $ANS(neg_th_09).
+-P(i(p,i(i(i(n(p),p),p),i(i(q,p),p)))) | $ANS(neg_th_10).
+-P(i(i(q,i(i(n(p),p),p)),i(i(n(p),p),p))) | $ANS(neg_th_11).
+-P(i(t,i(i(n(p),p),p))) | $ANS(neg_th_12).
+-P(i(i(n(p),q),i(t,i(i(q,p),p)))) | $ANS(neg_th_13).
+-P(i(i(i(t,i(i(q,p),p)),r),i(i(n(p),q),r))) | $ANS(neg_th_14).
+-P(i(i(n(p),q),i(i(q,p),p))) | $ANS(neg_th_15).
+-P(i(p,p)) | $ANS(neg_th_16).
+-P(i(p,i(i(q,p),p))) | $ANS(neg_th_17).
+-P(i(q,i(p,q))) | $ANS(neg_th_18).
+-P(i(i(i(p,q),r),i(q,r))) | $ANS(neg_th_19).
+-P(i(p,i(i(p,q),q))) | $ANS(neg_th_20).
+-P(i(i(p,i(q,r)),i(q,i(p,r)))) | $ANS(neg_th_21).
+-P(i(i(q,r),i(i(p,q),i(p,r)))) | $ANS(neg_th_22).
+-P(i(i(i(q,i(p,r)),s),i(i(p,i(q,r)),s))) | $ANS(neg_th_23).
+-P(i(i(i(p,q),p),p)) | $ANS(neg_th_24).
+-P(i(i(i(p,r),s),i(i(p,q),i(i(q,r),s)))) | $ANS(neg_th_25).
+-P(i(i(i(p,q),r),i(i(r,p),p))) | $ANS(neg_th_26).
+-P(i(i(i(p,q),q),i(i(q,p),p))) | $ANS(neg_th_27).
+-P(i(i(i(i(r,p),p),s),i(i(i(p,q),r),s))) | $ANS(neg_th_28).
+-P(i(i(i(p,q),r),i(i(p,r),r))) | $ANS(neg_th_29).
+-P(i(i(p,i(p,q)),i(p,q))) | $ANS(neg_th_30).
+-P(i(i(p,s),i(i(i(p,q),r),i(i(s,r),r)))) | $ANS(neg_th_31).
+-P(i(i(i(p,q),r),i(i(p,s),i(i(s,r),r)))) | $ANS(neg_th_32).
+-P(i(i(p,s),i(i(s,i(q,i(p,r))),i(q,i(p,r))))) | $ANS(neg_th_33).
+-P(i(i(s,i(q,i(p,r))),i(i(p,s),i(q,i(p,r))))) | $ANS(neg_th_34).
+-P(i(i(p,i(q,r)),i(i(p,q),i(p,r)))) | $ANS(neg_th_35).
+-P(i(n(p),i(p,q))) | $ANS(neg_th_36).
+-P(i(i(i(p,q),r),i(n(p),r))) | $ANS(neg_th_37).
+-P(i(i(p,n(p)),n(p))) | $ANS(neg_th_38).
+-P(i(n(n(p)),p)) | $ANS(neg_th_39).
+-P(i(p,n(n(p)))) | $ANS(neg_th_40).
+-P(i(i(p,q),i(n(n(p)),q))) | $ANS(neg_th_41).
+-P(i(i(i(n(n(p)),q),r),i(i(p,q),r))) | $ANS(neg_th_42).
+-P(i(i(p,q),i(i(q,n(p)),n(p)))) | $ANS(neg_th_43).
+-P(i(i(s,i(q,n(p))),i(i(p,q),i(s,n(p))))) | $ANS(neg_th_44).
+-P(i(i(s,i(q,p)),i(i(n(p),q),i(s,p)))) | $ANS(neg_th_45).
+-P(i(i(p,q),i(n(q),n(p)))) | $ANS(neg_th_46).
+-P(i(i(p,n(q)),i(q,n(p)))) | $ANS(neg_th_47).
+-P(i(i(n(p),q),i(n(q),p))) | $ANS(neg_th_48).
+-P(i(i(n(p),n(q)),i(q,p))) | $ANS(neg_th_49).
+-P(i(i(i(n(q),p),r),i(i(n(p),q),r))) | $ANS(neg_th_50).
+-P(i(i(p,i(q,r)),i(p,i(n(r),n(q))))) | $ANS(neg_th_51).
+-P(i(i(p,i(q,n(r))),i(p,i(r,n(q))))) | $ANS(neg_th_52).
+-P(i(i(n(p),q),i(i(p,q),q))) | $ANS(neg_th_53).
+-P(i(i(p,q),i(i(n(p),q),q))) | $ANS(neg_th_54).
+-P(i(i(p,q),i(i(p,n(q)),n(p)))) | $ANS(neg_th_55).
+-P(i(i(i(i(p,q),q),r),i(i(n(p),q),r))) | $ANS(neg_th_56).
+-P(i(i(n(p),r),i(i(p,q),i(i(q,r),r)))) | $ANS(neg_th_57).
+-P(i(i(i(i(p,q),i(i(q,r),r)),s),i(i(n(p),r),s))) | $ANS(neg_th_58).
+-P(i(i(n(p),r),i(i(q,r),i(i(p,q),r)))) | $ANS(neg_th_59).
+-P(i(i(s,i(n(p),r)),i(s,i(i(q,r),i(i(p,q),r))))) | $ANS(neg_th_60).
+-P(i(i(p,r),i(i(q,r),i(i(n(p),q),r)))) | $ANS(neg_th_61).
+-P(i(i(n(n(p)),q),i(p,q))) | $ANS(neg_th_62).
+-P(i(q,i(p,p))) | $ANS(neg_th_63).
+-P(i(n(i(p,p)),q)) | $ANS(neg_th_64).
+-P(i(i(n(q),n(i(p,p))),q)) | $ANS(neg_th_65).
+-P(i(n(i(p,q)),p)) | $ANS(neg_th_66).
+-P(i(n(i(p,q)),n(q))) | $ANS(neg_th_67).
+-P(i(n(i(p,n(q))),q)) | $ANS(neg_th_68).
+-P(i(p,i(n(q),n(i(p,q))))) | $ANS(neg_th_69).
+-P(i(p,i(q,n(i(p,n(q)))))) | $ANS(neg_th_70).
+-P(n(i(i(p,p),n(i(q,q))))) | $ANS(neg_th_71).
+end_of_list.
+  
+% list(demodulators).
+%  (n(n(x)) = junk).
+%  (n(n(n(x))) = junk).
+%  (i(i(x,x),y) = junk).
+%  (i(y,i(x,x)) = junk).
+%  (i(n(i(x,x)),y) = junk).
+%  (i(y,n(i(x,x))) = junk).
+% (i(junk,x) = junk).
+% (i(x,junk) = junk).
+% (n(junk) = junk).
+% (P(junk) = $T).
+% end_of_list.

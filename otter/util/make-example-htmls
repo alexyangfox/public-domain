@@ -1,0 +1,116 @@
+#!/usr/bin/perl -w
+
+sub do_directory {
+
+    $exdir = `pwd`;
+    open(FH1, ">index.html") || die "cannot create file";
+
+###########################################
+    print FH1 <<END_OF_HEAD;
+<HTML>
+<HEAD>
+<TITLE>$exdir</TITLE>
+</HEAD>
+<BODY>
+<H3>$exdir</H3>
+END_OF_HEAD
+###########################################
+    if (-e "README") {
+	print FH1 "<HR>\n";
+	print FH1 `cat README`;
+	print FH1 "<HR>\n";
+    }
+
+    foreach $i (`/bin/ls *.in`) {
+	chop $i;
+	if (-e "program") {
+	    $program = `cat program`;
+	    chop $program;
+	}
+	else {
+	    $program = "otter";
+	}
+	if ($program eq "mace2") {
+	    $parms = `grep 'benchmark parameters' $i | sed 's/.*parameters//'`;
+	    chop $parms;
+	}
+	else {
+	    $parms = "";
+	}
+	$i =~ s/\.in//;
+	print FH1 "<P><TT>$program $parms &lt <A HREF=$i.in>$i.in</A> &gt <A HREF=$i.out>$i.out</A></TT>\n";
+    }
+
+###########################################
+    print FH1 <<END_OF_TAIL;
+<HR>
+<P>
+<I>
+These activities are projects of the
+<A HREF="http://www.mcs.anl.gov/">Mathematics and Computer Science Division</A>
+of
+<A HREF="http://www.anl.gov/">Argonne National Laboratory</A>.
+</I>
+</BODY>
+</HTML>
+END_OF_TAIL
+###########################################
+    
+}
+
+$base = `pwd`;
+chop $base;
+
+open(FH, ">index.html") || die "cannot create file";
+
+###########################################
+print FH <<END_OF_HEAD;
+<HTML>
+<HEAD>
+<TITLE>$base</TITLE>
+</HEAD>
+<BODY>
+<H3>$base</H3>
+END_OF_HEAD
+###########################################
+
+# if (-e "README") {
+#     print FH "<HR>\n";
+#     print FH `cat README`;
+#     print FH "<HR>\n";
+# }
+
+print FH "<UL>\n";
+foreach $i (`/bin/ls -d [[:lower:]]*`) {
+    chop $i;
+    if (-d $i) {
+	print FH "<LI><A HREF=$i/index.html>$i</A>\n";
+	if (-e "$i/README") {
+	    # print FH "<BLOCKQUOTE>\n";
+	    # print FH `cat $i/README`;
+	    # print FH "</BLOCKQUOTE>\n";
+	    print FH ".\n";
+	    print FH `cat $i/README`;
+	}
+	chdir $i;
+	&do_directory;
+	chdir $base;
+    }
+}
+
+print FH "</UL>\n";
+
+###########################################
+print FH <<END_OF_TAIL;
+<HR>
+<P>
+<I>
+These activities are projects of the
+<A HREF="http://www.mcs.anl.gov/">Mathematics and Computer Science Division</A>
+of
+<A HREF="http://www.anl.gov/">Argonne National Laboratory</A>.
+</I>
+</BODY>
+</HTML>
+END_OF_TAIL
+###########################################

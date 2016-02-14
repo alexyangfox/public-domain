@@ -1,0 +1,149 @@
+%  Input File for Cursory Proof Checking
+set(hyper_res).
+assign(max_weight,2).
+% set(control_memory).
+assign(max_proofs, -1).
+clear(print_kept).
+% set(very_verbose).
+% set(ancestor_subsume).
+clear(back_sub).
+% assign(max_seconds, 600).
+assign(max_mem,22000).
+% assign(report, 900).
+% assign(max_distinct_vars, 4).
+% assign(pick_given_ratio, 3).
+set(order_history).
+set(input_sos_first).
+% set(sos_queue).
+  
+weight_list(pick_and_purge).
+%  Following are the steps of a 42-step proof, including duplicates,
+%  of the deducibility of the Church axiom system from that of Lukasiewicz.
+weight(P(i(i(i(i(x,y),i(z,y)),u),i(i(z,x),u))),2).
+weight(P(i(i(x,y),i(i(n(x),x),y))),2).
+weight(P(i(i(i(n(x),y),z),i(x,z))),2).
+weight(P(i(i(x,i(y,z)),i(i(u,y),i(x,i(u,z))))),2).
+weight(P(i(i(x,y),i(i(i(x,z),u),i(i(y,z),u)))),2).
+weight(P(i(i(x,n(y)),i(y,i(x,z)))),2).
+weight(P(i(x,x)),2).
+weight(P(i(i(x,i(i(y,z),u)),i(i(y,v),i(x,i(i(v,z),u))))),2).
+weight(P(i(n(i(x,x)),y)),2).
+weight(P(i(i(n(x),y),i(i(x,z),i(i(y,x),z)))),2).
+weight(P(i(i(i(i(x,y),i(i(z,x),y)),u),i(i(n(x),z),u))),2).
+weight(P(i(x,i(n(i(y,y)),z))),2).
+weight(P(i(i(i(n(i(x,x)),y),z),i(u,z))),2).
+weight(P(i(x,i(y,y))),2).
+weight(P(i(i(i(x,x),y),i(z,y))),2).
+weight(P(i(i(n(x),y),i(z,i(i(y,x),x)))),2).
+weight(P(i(x,i(i(n(y),y),y))),2).
+weight(P(i(i(i(x,i(i(y,z),z)),u),i(i(n(z),y),u))),2).
+weight(P(i(i(n(x),y),i(z,i(i(y,x),x)))),2).
+weight(P(i(i(n(x),y),i(i(y,x),x))),2).
+weight(P(i(i(i(x,i(i(y,z),z)),u),i(i(n(z),y),u))),2).
+weight(P(i(i(x,i(y,z)),i(i(n(z),y),i(x,z)))),2).
+weight(P(i(i(n(x),y),i(i(y,x),x))),2).
+weight(P(i(i(n(x),n(y)),i(y,x))),2).
+weight(P(i(i(x,i(y,z)),i(i(n(z),y),i(x,z)))),2).
+weight(P(i(x,i(y,x))),2).
+weight(P(i(i(n(x),n(y)),i(y,x))),2).
+weight(P(i(i(i(x,y),z),i(y,z))),2).
+weight(P(i(x,i(y,x))),2).
+weight(P(i(x,i(i(x,y),y))),2).
+weight(P(i(i(i(x,y),z),i(y,z))),2).
+weight(P(i(i(x,i(y,z)),i(y,i(x,z)))),2).
+weight(P(i(n(x),i(x,y))),2).
+weight(P(i(x,i(i(x,y),y))),2).
+weight(P(i(i(x,y),i(i(n(y),x),y))),2).
+weight(P(i(i(n(x),y),i(n(y),x))),2).
+weight(P(i(i(x,i(y,z)),i(y,i(x,z)))),2).
+weight(P(i(i(n(x),y),i(i(z,x),i(i(y,z),x)))),2).
+weight(P(i(n(i(x,y)),x)),2).
+weight(P(i(i(i(x,i(y,z)),u),i(i(y,i(x,z)),u))),2).
+weight(P(i(i(x,i(y,z)),i(i(y,x),i(y,z)))),2).
+weight(P(i(i(x,i(y,z)),i(i(x,y),i(x,z)))),2).
+end_of_list.
+  
+list(usable).
+-P(i(x,y)) | -P(x) | P(y).
+  
+%  The following disjunctions are known axiom systems.
+  
+% -P(i(p,i(q,p))) | -P(i(i(p,i(q,r)),i(i(p,q),i(p,r)))) | -P(i(n(n(p)),p)) | 
+% -P(i(p,n(n(p)))) | -P(i(i(p,q),i(n(q),n(p)))) | -P(i(i(p,i(q,r)),i(q,i(p,r)))) | 
+% $ANSWER(step_allFrege_18_35_39_40_46_21).  % 21 is dependent.
+   
+% -P(i(p,i(q,p))) | -P(i(i(p,i(q,r)),i(q,i(p,r)))) | 
+% -P(i(i(q,r),i(i(p,q),i(p,r)))) | -P(i(p,i(n(p),q))) | 
+% -P(i(i(p,q),i(i(n(p),q),q))) | -P(i(i(p,i(p,q)),i(p,q))) | 
+% $ANSWER(step_allHilbert_18_21_22_3_54_30).  % 30 is dependent.
+   
+-P(i(p,i(q,p))) | -P(i(i(p,i(q,r)),i(i(p,q),i(p,r)))) | 
+-P(i(i(n(p),n(q)),i(q,p))) | $ANSWER(step_allBEH_Church_FL_18_35_49).
+   
+% -P(i(i(i(p,q),r),i(q,r))) | -P(i(i(i(p,q),r),i(n(p),r))) | 
+% -P(i(i(n(p),r),i(i(q,r),i(i(p,q),r)))) | $ANSWER(step_allLuka_x_19_37_59).
+   
+% -P(i(i(i(p,q),r),i(q,r))) | -P(i(i(i(p,q),r),i(n(p),r))) | 
+% -P(i(i(s,i(n(p),r)),i(s,i(i(q,r),i(i(p,q),r))))) |
+$ANSWER(step_allWos_x_19_37_60).
+   
+% -P(i(i(p,q),i(i(q,r),i(p,r)))) | -P(i(i(n(p),p),p)) | 
+% -P(i(p,i(n(p),q))) | $ANSWER(step_allLuka_1_2_3).
+   
+% -P(i(p,p)) | -P(i(p,i(q,p))) | -P(i(i(p,i(q,r)),i(q,i(p,r)))) | 
+% -P(i(i(i(p,q),p),p)) | -P(i(i(p,i(q,r)),i(i(p,q),i(p,r)))) | 
+% -P(i(n(n(p)),p)) | -P(i(p,n(n(p)))) | -P(i(i(p,q),i(n(q),n(p)))) | 
+% $ANSWER(step_allScott_orig_16_18_21_24_35_39_40_46).
+   
+% -P(i(p,p)) | -P(i(p,i(q,p))) | -P(i(i(p,i(q,r)),i(q,i(p,r)))) | 
+% -P(i(i(i(p,q),p),p)) | -P(i(i(p,i(q,r)),i(i(p,q),i(p,r)))) | 
+% -P(i(n(n(p)),p)) | -P(i(p,n(n(p)))) | -P(i(i(n(p),n(q)),i(q,p))) | 
+% $ANSWER(step_allScott_orig0_16_18_21_24_35_39_40_49).
+   
+end_of_list.
+  
+list(sos).
+%  The following three are Luka, 1 2 3.
+P(i(i(x,y),i(i(y,z),i(x,z)))).
+P(i(i(n(x),x),x)).
+P(i(x,i(n(x),y))).
+  
+%  The following are from Frege, 18 35 21 46 39 40, with 21 dependent.
+% P(i(x,i(y,x))).  %  axiom F1.
+% P(i(i(x,i(y,z)),i(i(x,y),i(x,z)))).  %  axiom F2.
+% P(i(i(x,i(y,z)),i(y,i(x,z)))).  %  axiom F3.
+% P(i(i(x,y),i(n(y),n(x)))).  %  axiom F4.
+% P(i(n(n(x)),x)).  %  axiom F5.
+% P(i(x,n(n(x)))).  %  axiom f6.
+end_of_list.
+  
+list(passive).
+% -P(i(i(p,q),i(i(q,r),i(p,r)))) | $ANSWER(step_L1).
+% -P(i(i(n(p),p),p)) | $ANSWER(step_L2).
+% -P(i(p,i(n(p),q))) | $ANSWER(step_L3).
+-P(i(q,i(p,q))) | $ANSWER(step_18).
+% -P(i(i(i(p,q),r),i(q,r))) | $ANSWER(step_19).
+% -P(i(i(p,i(q,r)),i(q,i(p,r)))) | $ANSWER(step_21).
+% -P(i(i(q,r),i(i(p,q),i(p,r)))) | $ANSWER(step_22).
+% -P(i(i(p,i(p,q)),i(p,q))) | $ANSWER(step_30).
+-P(i(i(p,i(q,r)),i(i(p,q),i(p,r)))) | $ANSWER(step_35).
+% -P(i(i(i(p,q),r),i(n(p),r))) | $ANSWER(step_37).
+% -P(i(n(n(p)),p)) | $ANSWER(step_39).
+% -P(i(p,n(n(p)))) | $ANSWER(step_40).
+% -P(i(i(p,q),i(n(q),n(p)))) | $ANSWER(step_46).
+-P(i(i(n(p),n(q)),i(q,p))) | $ANSWER(step_49).
+% -P(i(i(p,q),i(i(n(p),q),q))) | $ANSWER(step_54).
+% -P(i(i(n(p),r),i(i(q,r),i(i(p,q),r)))) | $ANSWER(step_59).
+% -P(i(i(s,i(n(p),r)),i(s,i(i(q,r),i(i(p,q),r))))) | $ANSWER(step_60).
+end_of_list.
+  
+list(demodulators).
+% (n(n(x)) = junk).
+(n(n(n(x))) = junk).
+% (i(i(x,x),y) = junk).
+% (i(y,i(x,x)) = junk).
+(i(junk,x) = junk).
+(i(x,junk) = junk).
+(n(junk) = junk).
+(P(junk) = $T).
+end_of_list.

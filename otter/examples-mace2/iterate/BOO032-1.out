@@ -1,0 +1,260 @@
+----- MACE 2.2f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:44:32 2004
+The command was "../../bin/mace2 -n2 -N6 -p".
+set(prolog_style_variables).
+set(tptp_eq).
+set(auto).
+   dependent: set(auto1).
+   dependent: set(process_input).
+   dependent: clear(print_kept).
+   dependent: clear(print_new_demod).
+   dependent: clear(print_back_demod).
+   dependent: clear(print_back_sub).
+   dependent: set(control_memory).
+   dependent: assign(max_mem, 12000).
+   dependent: assign(pick_given_ratio, 4).
+   dependent: assign(stats_level, 1).
+   dependent: assign(max_seconds, 10800).
+clear(print_given).
+
+list(usable).
+0 [] equal(X,X).
+0 [] equal(add(X,multiply(Y,multiply(X,Z))),X).
+0 [] equal(add(add(multiply(X,Y),multiply(Y,Z)),Y),Y).
+0 [] equal(multiply(add(X,inverse(X)),Y),Y).
+0 [] equal(multiply(X,add(Y,add(X,Z))),X).
+0 [] equal(multiply(multiply(add(X,Y),add(Y,Z)),Y),Y).
+0 [] equal(add(multiply(X,inverse(X)),Y),Y).
+0 [] equal(add(multiply(add(X,Y),X),multiply(X,Y)),X).
+0 [] equal(add(multiply(add(X,X),Y),multiply(X,X)),X).
+0 [] equal(add(multiply(add(X,Y),Y),multiply(X,Y)),Y).
+0 [] equal(multiply(add(multiply(X,Y),X),add(X,Y)),X).
+0 [] equal(multiply(add(multiply(X,X),Y),add(X,X)),X).
+0 [] equal(multiply(add(multiply(X,Y),Y),add(X,Y)),Y).
+end_of_list.
+
+list(sos).
+0 [] -equal(inverse(inverse(a)),a).
+end_of_list.
+
+list(clauses).
+1 [] equal(X,X).
+2 [] equal(add(X,multiply(Y,multiply(X,Z))),X).
+3 [] equal(add(add(multiply(X,Y),multiply(Y,Z)),Y),Y).
+4 [] equal(multiply(add(X,inverse(X)),Y),Y).
+5 [] equal(multiply(X,add(Y,add(X,Z))),X).
+6 [] equal(multiply(multiply(add(X,Y),add(Y,Z)),Y),Y).
+7 [] equal(add(multiply(X,inverse(X)),Y),Y).
+8 [] equal(add(multiply(add(X,Y),X),multiply(X,Y)),X).
+9 [] equal(add(multiply(add(X,X),Y),multiply(X,X)),X).
+10 [] equal(add(multiply(add(X,Y),Y),multiply(X,Y)),Y).
+11 [] equal(multiply(add(multiply(X,Y),X),add(X,Y)),X).
+12 [] equal(multiply(add(multiply(X,X),Y),add(X,X)),X).
+13 [] equal(multiply(add(multiply(X,Y),Y),add(X,Y)),Y).
+14 [] -equal(inverse(inverse(a)),a).
+end_of_list.
+
+list(flattened_and_parted_clauses).
+1 [] equal(A,A).
+2 [] -equal(multiply(A,B),C)|$Connect2(A,C).
+2 [] equal(add(A,B),A)| -$Connect1(C,B)| -$Connect2(A,C).
+2 [] -equal(multiply(A,B),C)|$Connect1(B,C).
+3 [] -equal(multiply(A,B),C)|$Connect4(A,C).
+3 [] -equal(add(A,B),C)|equal(add(C,D),D)| -$Connect3(D,A)| -$Connect4(D,B).
+3 [] -equal(multiply(A,B),C)|$Connect3(B,C).
+4 [] -equal(inverse(A),B)| -equal(add(A,B),C)|$Connect5(C).
+4 [] equal(multiply(A,B),B)| -$Connect5(A).
+5 [] -equal(add(A,B),C)|$Connect7(A,C).
+5 [] equal(multiply(A,B),A)| -$Connect6(C,B)| -$Connect7(A,C).
+5 [] -equal(add(A,B),C)|$Connect6(B,C).
+6 [] -equal(add(A,B),C)|$Connect9(A,C).
+6 [] -equal(multiply(A,B),C)|equal(multiply(C,D),D)| -$Connect8(D,A)| -$Connect9(D,B).
+6 [] -equal(add(A,B),C)|$Connect8(B,C).
+7 [] -equal(inverse(A),B)| -equal(multiply(A,B),C)|$Connect10(C).
+7 [] equal(add(A,B),B)| -$Connect10(A).
+8 [] -equal(multiply(A,B),C)| -equal(add(A,B),D)|$Connect11(A,C,D).
+8 [] -equal(multiply(A,B),C)|equal(add(C,D),B)| -$Connect11(B,D,A).
+9 [] -equal(multiply(A,A),B)|equal(add(C,B),A)| -$Connect13(A,C).
+9 [] -equal(add(A,A),B)| -$Connect12(B,C)|$Connect13(A,C).
+9 [] -equal(multiply(A,B),C)|$Connect12(A,C).
+10 [] -equal(multiply(A,B),C)| -equal(add(A,B),D)|$Connect14(B,C,D).
+10 [] -equal(multiply(A,B),C)|equal(add(C,D),B)| -$Connect14(B,D,A).
+11 [] -equal(add(A,B),C)| -equal(multiply(A,B),D)|$Connect15(A,C,D).
+11 [] -equal(add(A,B),C)|equal(multiply(C,D),B)| -$Connect15(B,D,A).
+12 [] -equal(add(A,A),B)|equal(multiply(C,B),A)| -$Connect17(A,C).
+12 [] -equal(multiply(A,A),B)| -$Connect16(B,C)|$Connect17(A,C).
+12 [] -equal(add(A,B),C)|$Connect16(A,C).
+13 [] -equal(add(A,B),C)| -equal(multiply(A,B),D)|$Connect18(B,C,D).
+13 [] -equal(add(A,B),C)|equal(multiply(C,D),B)| -$Connect18(B,D,A).
+14 [] -equal(a,A)| -equal(inverse(A),B)| -equal(inverse(B),A).
+end_of_list.
+
+--- Starting search for models of size 2 ---
+
+Applying isomorphism constraints to constants: a.
+
+345 clauses were generated; 336 of those survived the first stage
+of unit preprocessing; there are 110 atoms.
+
+After all unit preprocessing, 100 atoms are still unassigned;
+316 clauses remain; 8 of those are non-Horn (selectable);
+4885 K allocated; cpu time so far for this domain size: 0.00 sec.
+
+----- statistics for domain size 2 ----
+Input:
+    Clauses input                   336
+    Literal occurrences input       913
+    Greatest atom                   110
+Unit preprocess:
+    Preprocess unit assignments      10
+    Clauses after subsumption       316
+    Literal occ. after subsump.     872
+    Selectable clauses                8
+Decide:
+    Splits                            2
+    Unit assignments                116
+    Failed paths                      3
+Memory:
+    Memory malloced                 3 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.00
+    DPLL                           0.00
+
+--- Starting search for models of size 3 ---
+
+Applying isomorphism constraints to constants: a.
+
+1424 clauses were generated; 1407 of those survived the first stage
+of unit preprocessing; there are 297 atoms.
+
+After all unit preprocessing, 284 atoms are still unassigned;
+1386 clauses remain; 21 of those are non-Horn (selectable);
+4890 K allocated; cpu time so far for this domain size: 0.00 sec.
+
+----- statistics for domain size 3 ----
+Input:
+    Clauses input                  1407
+    Literal occurrences input      3998
+    Greatest atom                   297
+Unit preprocess:
+    Preprocess unit assignments      13
+    Clauses after subsumption      1386
+    Literal occ. after subsump.    3963
+    Selectable clauses               21
+Decide:
+    Splits                           20
+    Unit assignments               1019
+    Failed paths                     21
+Memory:
+    Memory malloced                 8 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.00
+    DPLL                           0.00
+
+--- Starting search for models of size 4 ---
+
+Applying isomorphism constraints to constants: a.
+
+4040 clauses were generated; 4012 of those survived the first stage
+of unit preprocessing; there are 620 atoms.
+
+After all unit preprocessing, 599 atoms are still unassigned;
+3980 clauses remain; 36 of those are non-Horn (selectable);
+4899 K allocated; cpu time so far for this domain size: 0.01 sec.
+
+----- statistics for domain size 4 ----
+Input:
+    Clauses input                  4012
+    Literal occurrences input     11643
+    Greatest atom                   620
+Unit preprocess:
+    Preprocess unit assignments      21
+    Clauses after subsumption      3980
+    Literal occ. after subsump.   11592
+    Selectable clauses               36
+Decide:
+    Splits                           91
+    Unit assignments               6322
+    Failed paths                     92
+Memory:
+    Memory malloced                17 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.01
+    DPLL                           0.00
+
+--- Starting search for models of size 5 ---
+
+Applying isomorphism constraints to constants: a.
+
+9222 clauses were generated; 9180 of those survived the first stage
+of unit preprocessing; there are 1115 atoms.
+
+After all unit preprocessing, 1084 atoms are still unassigned;
+9135 clauses remain; 55 of those are non-Horn (selectable);
+4913 K allocated; cpu time so far for this domain size: 0.01 sec.
+
+======================= Model #1 at 0.02 seconds:
+
+ multiply :
+      | 0 1 2 3 4
+    --+----------
+    0 | 0 3 3 3 0
+    1 | 3 1 3 3 1
+    2 | 3 3 2 3 2
+    3 | 3 3 3 3 3
+    4 | 0 1 2 3 4
+
+ add :
+      | 0 1 2 3 4
+    --+----------
+    0 | 0 4 4 0 4
+    1 | 4 1 4 1 4
+    2 | 4 4 2 2 4
+    3 | 0 1 2 3 4
+    4 | 4 4 4 4 4
+
+ inverse :
+        0 1 2 3 4
+    -------------
+        1 2 0 4 3
+
+ a: 0
+end_of_model
+
+Exit by max_models parameter.  The set is satisfiable (1 model(s) found).
+
+
+----- statistics for domain size 5 ----
+Input:
+    Clauses input                  9180
+    Literal occurrences input     26974
+    Greatest atom                  1115
+Unit preprocess:
+    Preprocess unit assignments      31
+    Clauses after subsumption      9135
+    Literal occ. after subsump.   26905
+    Selectable clauses               55
+Decide:
+    Splits                           25
+    Unit assignments               2349
+    Failed paths                     20
+Memory:
+    Memory malloced                31 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.01
+    DPLL                           0.00
+
+=======================================
+Total times for run (seconds):
+    user CPU time                  0.02   (0 hr, 0 min, 0 sec)
+    system CPU time                0.01   (0 hr, 0 min, 0 sec)
+    wall-clock time                0      (0 hr, 0 min, 0 sec)
+
+Exit by max_models parameter.  The set is satisfiable (1 model(s) found).
+
+The job finished Mon Aug  2 15:44:32 2004

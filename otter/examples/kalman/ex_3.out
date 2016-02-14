@@ -1,0 +1,377 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:38 2004
+The command was "../../bin/otter".  The process ID is 8449.
+
+set(knuth_bendix).
+   dependent: set(anl_eq).
+   dependent: set(para_from).
+   dependent: set(para_into).
+   dependent: clear(para_from_right).
+   dependent: clear(para_into_right).
+   dependent: set(para_from_vars).
+   dependent: set(eq_units_both_ways).
+   dependent: set(dynamic_demod_all).
+   dependent: set(dynamic_demod).
+   dependent: set(order_eq).
+   dependent: set(back_demod).
+   dependent: set(process_input).
+   dependent: set(lrpo).
+clear(print_kept).
+clear(print_new_demod).
+clear(print_back_demod).
+clear(print_back_sub).
+assign(pick_given_ratio,10).
+assign(max_proofs,2).
+assign(stats_level,1).
+
+list(usable).
+0 [] x=x.
+0 [] x+y=y+x.
+0 [] x*y=y*x.
+0 [] (x+y)+z=x+y+z.
+0 [] (x*y)*z=x*y*z.
+0 [] x+x*y=x.
+0 [] x* (x+y)=x.
+end_of_list.
+
+list(sos).
+0 [] x*y+y*z+z*x= (x+y)* (y+z)* (z+x).
+0 [] a+b*c!= (a+b)* (a+c).
+0 [] d* (e+f)!=d*e+d*f.
+end_of_list.
+
+------------> process usable:
+** KEPT (pick-wt=3): 1 [] x=x.
+** KEPT (pick-wt=7): 2 [] x+y=y+x.
+** KEPT (pick-wt=7): 3 [] x*y=y*x.
+** KEPT (pick-wt=11): 4 [] (x+y)+z=x+y+z.
+---> New Demodulator: 5 [new_demod,4] (x+y)+z=x+y+z.
+** KEPT (pick-wt=11): 6 [] (x*y)*z=x*y*z.
+---> New Demodulator: 7 [new_demod,6] (x*y)*z=x*y*z.
+** KEPT (pick-wt=7): 8 [] x+x*y=x.
+---> New Demodulator: 9 [new_demod,8] x+x*y=x.
+** KEPT (pick-wt=7): 10 [] x* (x+y)=x.
+---> New Demodulator: 11 [new_demod,10] x* (x+y)=x.
+  Following clause subsumed by 1 during input processing: 0 [copy,1,flip.1] x=x.
+  Following clause subsumed by 2 during input processing: 0 [copy,2,flip.1] x+y=y+x.
+  Following clause subsumed by 3 during input processing: 0 [copy,3,flip.1] x*y=y*x.
+>>>> Starting back demodulation with 5.
+>>>> Starting back demodulation with 7.
+>>>> Starting back demodulation with 9.
+>>>> Starting back demodulation with 11.
+
+------------> process sos:
+** KEPT (pick-wt=23): 12 [] x*y+y*z+z*x= (x+y)* (y+z)* (z+x).
+---> New Demodulator: 13 [new_demod,12] x*y+y*z+z*x= (x+y)* (y+z)* (z+x).
+** KEPT (pick-wt=13): 14 [] a+b*c!= (a+b)* (a+c).
+** KEPT (pick-wt=13): 16 [copy,15,flip.1] d*e+d*f!=d* (e+f).
+>>>> Starting back demodulation with 13.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=23) 12 [] x*y+y*z+z*x= (x+y)* (y+z)* (z+x).
+
+given clause #2: (wt=13) 14 [] a+b*c!= (a+b)* (a+c).
+
+given clause #3: (wt=13) 16 [copy,15,flip.1] d*e+d*f!=d* (e+f).
+
+given clause #4: (wt=13) 43 [para_into,14.1.1.2,3.1.1] a+c*b!= (a+b)* (a+c).
+
+given clause #5: (wt=13) 44 [para_into,14.1.1,2.1.1] b*c+a!= (a+b)* (a+c).
+
+given clause #6: (wt=13) 45 [para_into,16.1.1.1,3.1.1] e*d+d*f!=d* (e+f).
+
+given clause #7: (wt=13) 46 [para_into,16.1.1.2,3.1.1] d*e+f*d!=d* (e+f).
+
+given clause #8: (wt=13) 47 [para_into,16.1.1,2.1.1] d*f+d*e!=d* (e+f).
+
+given clause #9: (wt=13) 48 [para_into,43.1.1,2.1.1] c*b+a!= (a+b)* (a+c).
+
+given clause #10: (wt=13) 49 [para_into,45.1.1.2,3.1.1] e*d+f*d!=d* (e+f).
+
+given clause #11: (wt=13) 50 [para_into,45.1.1,2.1.1] d*f+e*d!=d* (e+f).
+
+given clause #12: (wt=27) 17 [para_into,12.1.1.1,10.1.1,demod,5] x+ (x+y)*z+z*x= (x+x+y)* (x+y+z)* (z+x).
+
+given clause #13: (wt=13) 51 [para_into,46.1.1,2.1.1] f*d+d*e!=d* (e+f).
+
+given clause #14: (wt=13) 52 [para_into,49.1.1,2.1.1] f*d+e*d!=d* (e+f).
+
+given clause #15: (wt=19) 39 [para_from,12.1.1,10.1.1.2,demod,7] x*y* (x+y)* (y+z)* (z+x)=x*y.
+
+given clause #16: (wt=19) 77 [para_from,17.1.1,10.1.1.2] x* (x+x+y)* (x+y+z)* (z+x)=x.
+
+given clause #17: (wt=5) 188 [para_from,77.1.1,8.1.1.2] x+x=x.
+
+given clause #18: (wt=5) 217 [para_from,188.1.1,10.1.1.2] x*x=x.
+
+given clause #19: (wt=9) 219 [para_from,188.1.1,4.1.1.1,flip.1] x+x+y=x+y.
+
+given clause #20: (wt=9) 321 [para_from,217.1.1,6.1.1.1,flip.1] x*x*y=x*y.
+
+given clause #21: (wt=9) 349 [para_into,219.1.1.2,2.1.1] x+y+x=x+y.
+
+given clause #22: (wt=9) 379 [para_into,321.1.1.2,3.1.1] x*y*x=x*y.
+
+given clause #23: (wt=31) 19 [para_into,12.1.1.1,6.1.1] x*y*z+z*u+u*x*y= (x*y+z)* (z+u)* (u+x*y).
+
+given clause #24: (wt=11) 319 [para_from,217.1.1,12.1.1.2.1,demod,9,189,11] x*y+y= (x+y)*y.
+
+given clause #25: (wt=11) 371 [back_demod,199,demod,350,350,322,322] (x+y)* (y+x)=x+y.
+
+given clause #26: (wt=7) 501 [para_into,371.1.1.1,8.1.1,demod,480,380,9] x* (y+x)=x.
+
+given clause #27: (wt=7) 539 [para_into,501.1.1,3.1.1] (x+y)*y=y.
+
+given clause #28: (wt=7) 541 [back_demod,529,demod,540,480,540,flip.1] (x+y)*x=x.
+
+given clause #29: (wt=7) 547 [back_demod,505,demod,540,542,flip.1] x+y*x=x.
+
+given clause #30: (wt=7) 555 [back_demod,479,demod,540] x*y+x=x.
+
+given clause #31: (wt=7) 569 [back_demod,319,demod,540] x*y+y=y.
+
+given clause #32: (wt=9) 535 [para_into,501.1.1.2,4.1.1] x* (y+z+x)=x.
+
+given clause #33: (wt=9) 561 [back_demod,441,demod,540] x*y*z+z=z.
+
+given clause #34: (wt=23) 21 [para_into,12.1.1.1,3.1.1] x*y+x*z+z*y= (y+x)* (x+z)* (z+y).
+
+given clause #35: (wt=9) 663 [back_demod,622,demod,657] x* (y+x+z)=x.
+
+given clause #36: (wt=9) 675 [para_into,539.1.1.1,4.1.1] (x+y+z)*z=z.
+
+given clause #37: (wt=9) 751 [para_into,547.1.1.2,6.1.1] x+y*z*x=x.
+
+given clause #38: (wt=9) 811 [para_into,561.1.1.1.2,3.1.1] x*y*z+y=y.
+
+given clause #39: (wt=9) 961 [para_into,663.1.1,3.1.1] (x+y+z)*y=y.
+
+given clause #40: (wt=9) 1032 [para_into,751.1.1.2.2,3.1.1] x+y*x*z=x.
+
+given clause #41: (wt=11) 549 [back_demod,499,demod,540,flip.1] x*y+y+z=y+z.
+
+given clause #42: (wt=11) 612 [para_from,501.1.1,6.1.1.1,flip.1] x* (y+x)*z=x*z.
+
+given clause #43: (wt=11) 656 [back_demod,99,demod,613,613] x*y* (z+x)=x*y.
+
+given clause #44: (wt=11) 693 [para_from,539.1.1,6.1.1.1,flip.1] (x+y)*y*z=y*z.
+
+given clause #45: (wt=31) 24 [para_into,12.1.1.2.1,6.1.1] x*y*z+y*z*u+u*x= (x+y*z)* (y*z+u)* (u+x).
+
+given clause #46: (wt=11) 742 [para_from,541.1.1,6.1.1.1,flip.1] (x+y)*x*z=x*z.
+
+given clause #47: (wt=11) 755 [para_from,547.1.1,4.1.1.1,flip.1] x+y*x+z=x+z.
+
+-------- PROOF -------- 
+
+----> UNIT CONFLICT at   0.17 sec ----> 1493 [binary,1491.1,43.1] $F.
+
+Length of proof is 55.  Level of proof is 14.
+
+---------------- PROOF ----------------
+
+2 [] x+y=y+x.
+3 [] x*y=y*x.
+5,4 [] (x+y)+z=x+y+z.
+6 [] (x*y)*z=x*y*z.
+9,8 [] x+x*y=x.
+11,10 [] x* (x+y)=x.
+12 [] x*y+y*z+z*x= (x+y)* (y+z)* (z+x).
+14 [] a+b*c!= (a+b)* (a+c).
+17 [para_into,12.1.1.1,10.1.1,demod,5] x+ (x+y)*z+z*x= (x+x+y)* (x+y+z)* (z+x).
+21 [para_into,12.1.1.1,3.1.1] x*y+x*z+z*y= (y+x)* (x+z)* (z+y).
+29,28 [para_into,12.1.1.2.2,10.1.1,demod,5] (x+y)*z+z*x+x= (x+y+z)* (z+x)* (x+x+y).
+43 [para_into,14.1.1.2,3.1.1] a+c*b!= (a+b)* (a+c).
+60 [para_into,17.1.1.2.1.1,2.1.1] x+ (y+x)*z+z*x= (x+x+y)* (x+y+z)* (z+x).
+62 [para_into,17.1.1.2.1,10.1.1,demod,5,5,5,5,5,5] x+x+y+ (x+y+z)*x= (x+x+y)* (x+y+x+y+z)* (x+y+z+x).
+71 [para_into,17.1.1.2,2.1.1] x+y*x+ (x+z)*y= (x+x+z)* (x+z+y)* (y+x).
+72 [para_into,17.1.1,2.1.1,demod,5,29] (x+y+z)* (z+x)* (x+x+y)= (x+x+y)* (x+y+z)* (z+x).
+74 [copy,62,flip.1] (x+x+y)* (x+y+x+y+z)* (x+y+z+x)=x+x+y+ (x+y+z)*x.
+75 [copy,71,flip.1] (x+x+y)* (x+y+z)* (z+x)=x+z*x+ (x+y)*z.
+76 [copy,72,flip.1] (x+x+y)* (x+y+z)* (z+x)= (x+y+z)* (z+x)* (x+x+y).
+77 [para_from,17.1.1,10.1.1.2] x* (x+x+y)* (x+y+z)* (z+x)=x.
+189,188 [para_from,77.1.1,8.1.1.2] x+x=x.
+198,197 [para_into,188.1.1,4.1.1] x+y+x+y=x+y.
+199 [para_from,188.1.1,77.1.1.2.2.1,demod,5,5,198] (x+y)* (x+y+x)* (x+y)* (y+x+y)=x+y.
+218,217 [para_from,188.1.1,10.1.1.2] x*x=x.
+220,219 [para_from,188.1.1,4.1.1.1,flip.1] x+x+y=x+y.
+292,291 [back_demod,76,demod,220,220,flip.1] (x+y+z)* (z+x)* (x+y)= (x+y)* (x+y+z)* (z+x).
+293 [back_demod,75,demod,220] (x+y)* (x+y+z)* (z+x)=x+z*x+ (x+y)*z.
+294 [back_demod,74,demod,220,220] (x+y)* (x+y+x+y+z)* (x+y+z+x)=x+y+ (x+y+z)*x.
+305 [back_demod,60,demod,220] x+ (y+x)*z+z*x= (x+y)* (x+y+z)* (z+x).
+310 [back_demod,28,demod,220,292] (x+y)*z+z*x+x= (x+y)* (x+y+z)* (z+x).
+317 [para_from,217.1.1,12.1.1.2.2,demod,189] x*y+y*x+x= (x+y)* (y+x)*x.
+320,319 [para_from,217.1.1,12.1.1.2.1,demod,9,189,11] x*y+y= (x+y)*y.
+322,321 [para_from,217.1.1,6.1.1.1,flip.1] x*x*y=x*y.
+323 [back_demod,317,demod,320] x*y+ (y+x)*x= (x+y)* (y+x)*x.
+325 [back_demod,310,demod,320] (x+y)*z+ (z+x)*x= (x+y)* (x+y+z)* (z+x).
+348,347 [para_into,219.1.1.2,4.1.1,demod,5,5] x+y+x+y+z=x+y+z.
+350,349 [para_into,219.1.1.2,2.1.1] x+y+x=x+y.
+358 [back_demod,294,demod,348] (x+y)* (x+y+z)* (x+y+z+x)=x+y+ (x+y+z)*x.
+371 [back_demod,199,demod,350,350,322,322] (x+y)* (y+x)=x+y.
+380,379 [para_into,321.1.1.2,3.1.1] x*y*x=x*y.
+392,391 [para_into,349.1.1.2,4.1.1] x+y+z+x=x+y+z.
+393 [back_demod,358,demod,392,218,flip.1] x+y+ (x+y+z)*x= (x+y)* (x+y+z).
+480,479 [para_into,319.1.1.1,3.1.1] x*y+x= (y+x)*x.
+501 [para_into,371.1.1.1,8.1.1,demod,480,380,9] x* (y+x)=x.
+505 [para_into,371.1.1.2,319.1.1] (x+y*x)* (y+x)*x=x+y*x.
+524,523 [para_from,371.1.1,6.1.1.1,flip.1] (x+y)* (y+x)*z= (x+y)*z.
+529 [back_demod,323,demod,524] x*y+ (y+x)*x= (x+y)*x.
+540,539 [para_into,501.1.1,3.1.1] (x+y)*y=y.
+542,541 [back_demod,529,demod,540,480,540,flip.1] (x+y)*x=x.
+547 [back_demod,505,demod,540,542,flip.1] x+y*x=x.
+568,567 [back_demod,325,demod,540] (x+y)*z+x= (x+y)* (x+y+z)* (z+x).
+578,577 [back_demod,393,demod,542,350,flip.1] (x+y)* (x+y+z)=x+y.
+694,693 [para_from,539.1.1,6.1.1.1,flip.1] (x+y)*y*z=y*z.
+751 [para_into,547.1.1.2,6.1.1] x+y*z*x=x.
+756,755 [para_from,547.1.1,4.1.1.1,flip.1] x+y*x+z=x+z.
+758 [back_demod,293,demod,756] (x+y)* (x+y+z)* (z+x)=x+ (x+y)*z.
+838,837 [para_into,21.1.1.2.1,541.1.1,demod,9,568,5,350,694] (x+y)* (x+y+z)* (z+x)= (x+y)* (x+z).
+875,874 [back_demod,758,demod,838,flip.1] x+ (x+y)*z= (x+y)* (x+z).
+890 [back_demod,305,demod,838] x+ (y+x)*z+z*x= (x+y)* (x+z).
+1029,1028 [para_into,751.1.1.2.2,10.1.1,demod,5] x+y+z*x=x+y.
+1041,1040 [back_demod,890,demod,1029] x+ (y+x)*z= (x+y)* (x+z).
+1485,1484 [para_into,755.1.1.2.1,3.1.1] x+x*y+z=x+z.
+1491 [para_into,755.1.1.2,12.1.1,demod,1041,875,578,1485,flip.1] x+y*z= (x+z)* (x+y).
+1493 [binary,1491.1,43.1] $F.
+
+------------ end of proof -------------
+
+-------- PROOF -------- 
+
+----> UNIT CONFLICT at   0.18 sec ----> 1552 [binary,1551.1,1408.1] $F.
+
+Length of proof is 90.  Level of proof is 20.
+
+---------------- PROOF ----------------
+
+2 [] x+y=y+x.
+3 [] x*y=y*x.
+5,4 [] (x+y)+z=x+y+z.
+7,6 [] (x*y)*z=x*y*z.
+9,8 [] x+x*y=x.
+11,10 [] x* (x+y)=x.
+12 [] x*y+y*z+z*x= (x+y)* (y+z)* (z+x).
+15 [] d* (e+f)!=d*e+d*f.
+16 [copy,15,flip.1] d*e+d*f!=d* (e+f).
+17 [para_into,12.1.1.1,10.1.1,demod,5] x+ (x+y)*z+z*x= (x+x+y)* (x+y+z)* (z+x).
+19 [para_into,12.1.1.1,6.1.1] x*y*z+z*u+u*x*y= (x*y+z)* (z+u)* (u+x*y).
+21 [para_into,12.1.1.1,3.1.1] x*y+x*z+z*y= (y+x)* (x+z)* (z+y).
+24 [para_into,12.1.1.2.1,6.1.1] x*y*z+y*z*u+u*x= (x+y*z)* (y*z+u)* (u+x).
+29,28 [para_into,12.1.1.2.2,10.1.1,demod,5] (x+y)*z+z*x+x= (x+y+z)* (z+x)* (x+x+y).
+39 [para_from,12.1.1,10.1.1.2,demod,7] x*y* (x+y)* (y+z)* (z+x)=x*y.
+47 [para_into,16.1.1,2.1.1] d*f+d*e!=d* (e+f).
+60 [para_into,17.1.1.2.1.1,2.1.1] x+ (y+x)*z+z*x= (x+x+y)* (x+y+z)* (z+x).
+62 [para_into,17.1.1.2.1,10.1.1,demod,5,5,5,5,5,5] x+x+y+ (x+y+z)*x= (x+x+y)* (x+y+x+y+z)* (x+y+z+x).
+71 [para_into,17.1.1.2,2.1.1] x+y*x+ (x+z)*y= (x+x+z)* (x+z+y)* (y+x).
+72 [para_into,17.1.1,2.1.1,demod,5,29] (x+y+z)* (z+x)* (x+x+y)= (x+x+y)* (x+y+z)* (z+x).
+74 [copy,62,flip.1] (x+x+y)* (x+y+x+y+z)* (x+y+z+x)=x+x+y+ (x+y+z)*x.
+75 [copy,71,flip.1] (x+x+y)* (x+y+z)* (z+x)=x+z*x+ (x+y)*z.
+76 [copy,72,flip.1] (x+x+y)* (x+y+z)* (z+x)= (x+y+z)* (z+x)* (x+x+y).
+77 [para_from,17.1.1,10.1.1.2] x* (x+x+y)* (x+y+z)* (z+x)=x.
+99 [para_into,39.1.1.2.2.2.1,2.1.1] x*y* (x+y)* (z+y)* (z+x)=x*y.
+189,188 [para_from,77.1.1,8.1.1.2] x+x=x.
+198,197 [para_into,188.1.1,4.1.1] x+y+x+y=x+y.
+199 [para_from,188.1.1,77.1.1.2.2.1,demod,5,5,198] (x+y)* (x+y+x)* (x+y)* (y+x+y)=x+y.
+218,217 [para_from,188.1.1,10.1.1.2] x*x=x.
+220,219 [para_from,188.1.1,4.1.1.1,flip.1] x+x+y=x+y.
+292,291 [back_demod,76,demod,220,220,flip.1] (x+y+z)* (z+x)* (x+y)= (x+y)* (x+y+z)* (z+x).
+293 [back_demod,75,demod,220] (x+y)* (x+y+z)* (z+x)=x+z*x+ (x+y)*z.
+294 [back_demod,74,demod,220,220] (x+y)* (x+y+x+y+z)* (x+y+z+x)=x+y+ (x+y+z)*x.
+305 [back_demod,60,demod,220] x+ (y+x)*z+z*x= (x+y)* (x+y+z)* (z+x).
+310 [back_demod,28,demod,220,292] (x+y)*z+z*x+x= (x+y)* (x+y+z)* (z+x).
+317 [para_from,217.1.1,12.1.1.2.2,demod,189] x*y+y*x+x= (x+y)* (y+x)*x.
+320,319 [para_from,217.1.1,12.1.1.2.1,demod,9,189,11] x*y+y= (x+y)*y.
+322,321 [para_from,217.1.1,6.1.1.1,flip.1] x*x*y=x*y.
+323 [back_demod,317,demod,320] x*y+ (y+x)*x= (x+y)* (y+x)*x.
+325 [back_demod,310,demod,320] (x+y)*z+ (z+x)*x= (x+y)* (x+y+z)* (z+x).
+348,347 [para_into,219.1.1.2,4.1.1,demod,5,5] x+y+x+y+z=x+y+z.
+350,349 [para_into,219.1.1.2,2.1.1] x+y+x=x+y.
+358 [back_demod,294,demod,348] (x+y)* (x+y+z)* (x+y+z+x)=x+y+ (x+y+z)*x.
+371 [back_demod,199,demod,350,350,322,322] (x+y)* (y+x)=x+y.
+380,379 [para_into,321.1.1.2,3.1.1] x*y*x=x*y.
+387 [para_from,321.1.1,12.1.1.1,demod,7,9] x*y+x*y*z+z*x=x* (x*y+z)* (z+x).
+392,391 [para_into,349.1.1.2,4.1.1] x+y+z+x=x+y+z.
+393 [back_demod,358,demod,392,218,flip.1] x+y+ (x+y+z)*x= (x+y)* (x+y+z).
+406,405 [para_into,379.1.1.2,6.1.1] x*y*z*x=x*y*z.
+410 [para_from,379.1.1,12.1.1.1,demod,7] x*y+y*x*z+z*x= (x+y*x)* (y*x+z)* (z+x).
+435 [para_into,19.1.1.1,379.1.1] x*y+x*z+z*x*y= (x*y+x)* (x+z)* (z+x*y).
+441 [para_into,19.1.1.2.1,217.1.1,demod,9,189,11] x*y*z+z= (x*y+z)*z.
+480,479 [para_into,319.1.1.1,3.1.1] x*y+x= (y+x)*x.
+486 [back_demod,435,demod,480,7] x*y+x*z+z*x*y= (y+x)*x* (x+z)* (z+x*y).
+501 [para_into,371.1.1.1,8.1.1,demod,480,380,9] x* (y+x)=x.
+505 [para_into,371.1.1.2,319.1.1] (x+y*x)* (y+x)*x=x+y*x.
+524,523 [para_from,371.1.1,6.1.1.1,flip.1] (x+y)* (y+x)*z= (x+y)*z.
+529 [back_demod,323,demod,524] x*y+ (y+x)*x= (x+y)*x.
+540,539 [para_into,501.1.1,3.1.1] (x+y)*y=y.
+542,541 [back_demod,529,demod,540,480,540,flip.1] (x+y)*x=x.
+548,547 [back_demod,505,demod,540,542,flip.1] x+y*x=x.
+561 [back_demod,441,demod,540] x*y*z+z=z.
+568,567 [back_demod,325,demod,540] (x+y)*z+x= (x+y)* (x+y+z)* (z+x).
+578,577 [back_demod,393,demod,542,350,flip.1] (x+y)* (x+y+z)=x+y.
+584 [back_demod,410,demod,548] x*y+y*x*z+z*x=x* (y*x+z)* (z+x).
+613,612 [para_from,501.1.1,6.1.1.1,flip.1] x* (y+x)*z=x*z.
+657,656 [back_demod,99,demod,613,613] x*y* (z+x)=x*y.
+665 [back_demod,584,demod,657] x*y+y*x*z+z*x=x* (y*x+z).
+669 [back_demod,387,demod,657] x*y+x*y*z+z*x=x* (x*y+z).
+694,693 [para_from,539.1.1,6.1.1.1,flip.1] (x+y)*y*z=y*z.
+715,714 [back_demod,486,demod,694] x*y+x*z+z*x*y=x* (x+z)* (z+x*y).
+752,751 [para_into,547.1.1.2,6.1.1] x+y*z*x=x.
+756,755 [para_from,547.1.1,4.1.1.1,flip.1] x+y*x+z=x+z.
+758 [back_demod,293,demod,756] (x+y)* (x+y+z)* (z+x)=x+ (x+y)*z.
+806,805 [para_into,561.1.1.1.2,379.1.1] x*y*z+z*y=z*y.
+812,811 [para_into,561.1.1.1.2,3.1.1] x*y*z+y=y.
+821 [back_demod,665,demod,806] x*y+z*x=x* (y*x+z).
+824 [copy,821,flip.1] x* (y*x+z)=x*y+z*x.
+838,837 [para_into,21.1.1.2.1,541.1.1,demod,9,568,5,350,694] (x+y)* (x+y+z)* (z+x)= (x+y)* (x+z).
+842,841 [para_into,21.1.1.2.1,379.1.1,demod,7,715,548,694,flip.1] x* (y*x+z)=x* (x+y)* (y+x*z).
+875,874 [back_demod,758,demod,838,flip.1] x+ (x+y)*z= (x+y)* (x+z).
+890 [back_demod,305,demod,838] x+ (y+x)*z+z*x= (x+y)* (x+z).
+909,908 [back_demod,824,demod,842,flip.1] x*y+z*x=x* (x+y)* (y+x*z).
+931 [back_demod,669,demod,909] x*y+x* (x+y*z)* (y*z+x*z)=x* (x*y+z).
+1029,1028 [para_into,751.1.1.2.2,10.1.1,demod,5] x+y+z*x=x+y.
+1041,1040 [back_demod,890,demod,1029] x+ (y+x)*z= (x+y)* (x+z).
+1049 [back_demod,714,demod,1029] x*y+x*z=x* (x+z)* (z+x*y).
+1146,1145 [para_into,612.1.1.2.1,2.1.1] x* (x+y)*z=x*z.
+1155 [back_demod,1049,demod,1146] x*y+x*z=x* (z+x*y).
+1165 [back_demod,931,demod,1146] x*y+x* (y*z+x*z)=x* (x*y+z).
+1173,1172 [back_demod,908,demod,1146] x*y+z*x=x* (y+x*z).
+1368,1367 [para_into,24.1.1.2,811.1.1,demod,406,1173,752,812,11] x* (y*z+x*z)=x*z.
+1391,1390 [back_demod,1165,demod,1368] x*y+x*z=x* (x*y+z).
+1402 [back_demod,1155,demod,1391] x* (x*y+z)=x* (z+x*y).
+1408 [back_demod,47,demod,1391] d* (d*f+e)!=d* (e+f).
+1485,1484 [para_into,755.1.1.2.1,3.1.1] x+x*y+z=x+z.
+1492,1491 [para_into,755.1.1.2,12.1.1,demod,1041,875,578,1485,flip.1] x+y*z= (x+z)* (x+y).
+1551 [back_demod,1402,demod,1492,657] x* (x*y+z)=x* (z+y).
+1552 [binary,1551.1,1408.1] $F.
+
+------------ end of proof -------------
+
+
+Search stopped by max_proofs option.
+
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 47
+clauses generated           1459
+clauses kept                 903
+clauses forward subsumed    1263
+clauses back subsumed          5
+Kbytes malloced             5859
+
+----------- times (seconds) -----------
+user CPU time          0.18          (0 hr, 0 min, 0 sec)
+system CPU time        0.01          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8449 finished Mon Aug  2 15:30:38 2004

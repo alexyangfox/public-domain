@@ -1,0 +1,529 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:36 2004
+The command was "../../bin/otter".  The process ID is 8361.
+
+set(binary_res).
+   dependent: set(factor).
+   dependent: set(unit_deletion).
+set(process_input).
+clear(print_kept).
+clear(print_back_sub).
+
+formula_list(sos).
+-(((exists x all y (p(x)<->p(y)))<-> ((exists u q(u))<-> (all v p(v))))<-> ((exists w all z (q(z)<->q(w)))<-> ((exists x1 p(x1))<-> (all x2 q(x2))))).
+end_of_list.
+
+-------> sos clausifies to:
+
+list(sos).
+0 [] p(x)|p($f1(x))| -q(u)|p(v)|q($f2(w))|q(w)| -p(x1)|q(x2).
+0 [] p(x)|p($f1(x))| -q(u)|p(v)|q($f2(w))|q(w)|p($c6)| -q($c7).
+0 [] p(x)|p($f1(x))| -q(u)|p(v)| -q($f2(w))| -q(w)| -p(x1)|q(x2).
+0 [] p(x)|p($f1(x))| -q(u)|p(v)| -q($f2(w))| -q(w)|p($c6)| -q($c7).
+0 [] p(x)|p($f1(x))| -q(u)|p(v)| -q(z)|q($c8)|p($c9)|q(x5).
+0 [] p(x)|p($f1(x))| -q(u)|p(v)| -q(z)|q($c8)| -p(x6)| -q($c10).
+0 [] p(x)|p($f1(x))| -q(u)|p(v)|q(z)| -q($c8)|p($c9)|q(x5).
+0 [] p(x)|p($f1(x))| -q(u)|p(v)|q(z)| -q($c8)| -p(x6)| -q($c10).
+0 [] p(x)|p($f1(x))|q($c1)| -p($c2)|q($f2(w))|q(w)| -p(x1)|q(x2).
+0 [] p(x)|p($f1(x))|q($c1)| -p($c2)|q($f2(w))|q(w)|p($c6)| -q($c7).
+0 [] p(x)|p($f1(x))|q($c1)| -p($c2)| -q($f2(w))| -q(w)| -p(x1)|q(x2).
+0 [] p(x)|p($f1(x))|q($c1)| -p($c2)| -q($f2(w))| -q(w)|p($c6)| -q($c7).
+0 [] p(x)|p($f1(x))|q($c1)| -p($c2)| -q(z)|q($c8)|p($c9)|q(x5).
+0 [] p(x)|p($f1(x))|q($c1)| -p($c2)| -q(z)|q($c8)| -p(x6)| -q($c10).
+0 [] p(x)|p($f1(x))|q($c1)| -p($c2)|q(z)| -q($c8)|p($c9)|q(x5).
+0 [] p(x)|p($f1(x))|q($c1)| -p($c2)|q(z)| -q($c8)| -p(x6)| -q($c10).
+0 [] -p(x)| -p($f1(x))| -q(u)|p(v)|q($f2(w))|q(w)| -p(x1)|q(x2).
+0 [] -p(x)| -p($f1(x))| -q(u)|p(v)|q($f2(w))|q(w)|p($c6)| -q($c7).
+0 [] -p(x)| -p($f1(x))| -q(u)|p(v)| -q($f2(w))| -q(w)| -p(x1)|q(x2).
+0 [] -p(x)| -p($f1(x))| -q(u)|p(v)| -q($f2(w))| -q(w)|p($c6)| -q($c7).
+0 [] -p(x)| -p($f1(x))| -q(u)|p(v)| -q(z)|q($c8)|p($c9)|q(x5).
+0 [] -p(x)| -p($f1(x))| -q(u)|p(v)| -q(z)|q($c8)| -p(x6)| -q($c10).
+0 [] -p(x)| -p($f1(x))| -q(u)|p(v)|q(z)| -q($c8)|p($c9)|q(x5).
+0 [] -p(x)| -p($f1(x))| -q(u)|p(v)|q(z)| -q($c8)| -p(x6)| -q($c10).
+0 [] -p(x)| -p($f1(x))|q($c1)| -p($c2)|q($f2(w))|q(w)| -p(x1)|q(x2).
+0 [] -p(x)| -p($f1(x))|q($c1)| -p($c2)|q($f2(w))|q(w)|p($c6)| -q($c7).
+0 [] -p(x)| -p($f1(x))|q($c1)| -p($c2)| -q($f2(w))| -q(w)| -p(x1)|q(x2).
+0 [] -p(x)| -p($f1(x))|q($c1)| -p($c2)| -q($f2(w))| -q(w)|p($c6)| -q($c7).
+0 [] -p(x)| -p($f1(x))|q($c1)| -p($c2)| -q(z)|q($c8)|p($c9)|q(x5).
+0 [] -p(x)| -p($f1(x))|q($c1)| -p($c2)| -q(z)|q($c8)| -p(x6)| -q($c10).
+0 [] -p(x)| -p($f1(x))|q($c1)| -p($c2)|q(z)| -q($c8)|p($c9)|q(x5).
+0 [] -p(x)| -p($f1(x))|q($c1)| -p($c2)|q(z)| -q($c8)| -p(x6)| -q($c10).
+0 [] -p($c3)|p(y)|q($c4)|p(x3)|q($f2(w))|q(w)| -p(x1)|q(x2).
+0 [] -p($c3)|p(y)|q($c4)|p(x3)|q($f2(w))|q(w)|p($c6)| -q($c7).
+0 [] -p($c3)|p(y)|q($c4)|p(x3)| -q($f2(w))| -q(w)| -p(x1)|q(x2).
+0 [] -p($c3)|p(y)|q($c4)|p(x3)| -q($f2(w))| -q(w)|p($c6)| -q($c7).
+0 [] -p($c3)|p(y)|q($c4)|p(x3)| -q(z)|q($c8)|p($c9)|q(x5).
+0 [] -p($c3)|p(y)|q($c4)|p(x3)| -q(z)|q($c8)| -p(x6)| -q($c10).
+0 [] -p($c3)|p(y)|q($c4)|p(x3)|q(z)| -q($c8)|p($c9)|q(x5).
+0 [] -p($c3)|p(y)|q($c4)|p(x3)|q(z)| -q($c8)| -p(x6)| -q($c10).
+0 [] -p($c3)|p(y)| -q(x4)| -p($c5)|q($f2(w))|q(w)| -p(x1)|q(x2).
+0 [] -p($c3)|p(y)| -q(x4)| -p($c5)|q($f2(w))|q(w)|p($c6)| -q($c7).
+0 [] -p($c3)|p(y)| -q(x4)| -p($c5)| -q($f2(w))| -q(w)| -p(x1)|q(x2).
+0 [] -p($c3)|p(y)| -q(x4)| -p($c5)| -q($f2(w))| -q(w)|p($c6)| -q($c7).
+0 [] -p($c3)|p(y)| -q(x4)| -p($c5)| -q(z)|q($c8)|p($c9)|q(x5).
+0 [] -p($c3)|p(y)| -q(x4)| -p($c5)| -q(z)|q($c8)| -p(x6)| -q($c10).
+0 [] -p($c3)|p(y)| -q(x4)| -p($c5)|q(z)| -q($c8)|p($c9)|q(x5).
+0 [] -p($c3)|p(y)| -q(x4)| -p($c5)|q(z)| -q($c8)| -p(x6)| -q($c10).
+0 [] p($c3)| -p(y)|q($c4)|p(x3)|q($f2(w))|q(w)| -p(x1)|q(x2).
+0 [] p($c3)| -p(y)|q($c4)|p(x3)|q($f2(w))|q(w)|p($c6)| -q($c7).
+0 [] p($c3)| -p(y)|q($c4)|p(x3)| -q($f2(w))| -q(w)| -p(x1)|q(x2).
+0 [] p($c3)| -p(y)|q($c4)|p(x3)| -q($f2(w))| -q(w)|p($c6)| -q($c7).
+0 [] p($c3)| -p(y)|q($c4)|p(x3)| -q(z)|q($c8)|p($c9)|q(x5).
+0 [] p($c3)| -p(y)|q($c4)|p(x3)| -q(z)|q($c8)| -p(x6)| -q($c10).
+0 [] p($c3)| -p(y)|q($c4)|p(x3)|q(z)| -q($c8)|p($c9)|q(x5).
+0 [] p($c3)| -p(y)|q($c4)|p(x3)|q(z)| -q($c8)| -p(x6)| -q($c10).
+0 [] p($c3)| -p(y)| -q(x4)| -p($c5)|q($f2(w))|q(w)| -p(x1)|q(x2).
+0 [] p($c3)| -p(y)| -q(x4)| -p($c5)|q($f2(w))|q(w)|p($c6)| -q($c7).
+0 [] p($c3)| -p(y)| -q(x4)| -p($c5)| -q($f2(w))| -q(w)| -p(x1)|q(x2).
+0 [] p($c3)| -p(y)| -q(x4)| -p($c5)| -q($f2(w))| -q(w)|p($c6)| -q($c7).
+0 [] p($c3)| -p(y)| -q(x4)| -p($c5)| -q(z)|q($c8)|p($c9)|q(x5).
+0 [] p($c3)| -p(y)| -q(x4)| -p($c5)| -q(z)|q($c8)| -p(x6)| -q($c10).
+0 [] p($c3)| -p(y)| -q(x4)| -p($c5)|q(z)| -q($c8)|p($c9)|q(x5).
+0 [] p($c3)| -p(y)| -q(x4)| -p($c5)|q(z)| -q($c8)| -p(x6)| -q($c10).
+0 [] -p($c11)|p(x7)| -q(x8)|p(x9)| -q(x13)|q($c16)| -p(x14)|q(x15).
+0 [] -p($c11)|p(x7)| -q(x8)|p(x9)| -q(x13)|q($c16)|p($c17)| -q($c18).
+0 [] -p($c11)|p(x7)| -q(x8)|p(x9)|q(x13)| -q($c16)| -p(x14)|q(x15).
+0 [] -p($c11)|p(x7)| -q(x8)|p(x9)|q(x13)| -q($c16)|p($c17)| -q($c18).
+0 [] -p($c11)|p(x7)| -q(x8)|p(x9)|q($f4(x16))|q(x16)|p($c19)|q(x17).
+0 [] -p($c11)|p(x7)| -q(x8)|p(x9)|q($f4(x16))|q(x16)| -p(x18)| -q($c20).
+0 [] -p($c11)|p(x7)| -q(x8)|p(x9)| -q($f4(x16))| -q(x16)|p($c19)|q(x17).
+0 [] -p($c11)|p(x7)| -q(x8)|p(x9)| -q($f4(x16))| -q(x16)| -p(x18)| -q($c20).
+0 [] -p($c11)|p(x7)|q($c12)| -p($c13)| -q(x13)|q($c16)| -p(x14)|q(x15).
+0 [] -p($c11)|p(x7)|q($c12)| -p($c13)| -q(x13)|q($c16)|p($c17)| -q($c18).
+0 [] -p($c11)|p(x7)|q($c12)| -p($c13)|q(x13)| -q($c16)| -p(x14)|q(x15).
+0 [] -p($c11)|p(x7)|q($c12)| -p($c13)|q(x13)| -q($c16)|p($c17)| -q($c18).
+0 [] -p($c11)|p(x7)|q($c12)| -p($c13)|q($f4(x16))|q(x16)|p($c19)|q(x17).
+0 [] -p($c11)|p(x7)|q($c12)| -p($c13)|q($f4(x16))|q(x16)| -p(x18)| -q($c20).
+0 [] -p($c11)|p(x7)|q($c12)| -p($c13)| -q($f4(x16))| -q(x16)|p($c19)|q(x17).
+0 [] -p($c11)|p(x7)|q($c12)| -p($c13)| -q($f4(x16))| -q(x16)| -p(x18)| -q($c20).
+0 [] p($c11)| -p(x7)| -q(x8)|p(x9)| -q(x13)|q($c16)| -p(x14)|q(x15).
+0 [] p($c11)| -p(x7)| -q(x8)|p(x9)| -q(x13)|q($c16)|p($c17)| -q($c18).
+0 [] p($c11)| -p(x7)| -q(x8)|p(x9)|q(x13)| -q($c16)| -p(x14)|q(x15).
+0 [] p($c11)| -p(x7)| -q(x8)|p(x9)|q(x13)| -q($c16)|p($c17)| -q($c18).
+0 [] p($c11)| -p(x7)| -q(x8)|p(x9)|q($f4(x16))|q(x16)|p($c19)|q(x17).
+0 [] p($c11)| -p(x7)| -q(x8)|p(x9)|q($f4(x16))|q(x16)| -p(x18)| -q($c20).
+0 [] p($c11)| -p(x7)| -q(x8)|p(x9)| -q($f4(x16))| -q(x16)|p($c19)|q(x17).
+0 [] p($c11)| -p(x7)| -q(x8)|p(x9)| -q($f4(x16))| -q(x16)| -p(x18)| -q($c20).
+0 [] p($c11)| -p(x7)|q($c12)| -p($c13)| -q(x13)|q($c16)| -p(x14)|q(x15).
+0 [] p($c11)| -p(x7)|q($c12)| -p($c13)| -q(x13)|q($c16)|p($c17)| -q($c18).
+0 [] p($c11)| -p(x7)|q($c12)| -p($c13)|q(x13)| -q($c16)| -p(x14)|q(x15).
+0 [] p($c11)| -p(x7)|q($c12)| -p($c13)|q(x13)| -q($c16)|p($c17)| -q($c18).
+0 [] p($c11)| -p(x7)|q($c12)| -p($c13)|q($f4(x16))|q(x16)|p($c19)|q(x17).
+0 [] p($c11)| -p(x7)|q($c12)| -p($c13)|q($f4(x16))|q(x16)| -p(x18)| -q($c20).
+0 [] p($c11)| -p(x7)|q($c12)| -p($c13)| -q($f4(x16))| -q(x16)|p($c19)|q(x17).
+0 [] p($c11)| -p(x7)|q($c12)| -p($c13)| -q($f4(x16))| -q(x16)| -p(x18)| -q($c20).
+0 [] p(x10)|p($f3(x10))|q($c14)|p(x11)| -q(x13)|q($c16)| -p(x14)|q(x15).
+0 [] p(x10)|p($f3(x10))|q($c14)|p(x11)| -q(x13)|q($c16)|p($c17)| -q($c18).
+0 [] p(x10)|p($f3(x10))|q($c14)|p(x11)|q(x13)| -q($c16)| -p(x14)|q(x15).
+0 [] p(x10)|p($f3(x10))|q($c14)|p(x11)|q(x13)| -q($c16)|p($c17)| -q($c18).
+0 [] p(x10)|p($f3(x10))|q($c14)|p(x11)|q($f4(x16))|q(x16)|p($c19)|q(x17).
+0 [] p(x10)|p($f3(x10))|q($c14)|p(x11)|q($f4(x16))|q(x16)| -p(x18)| -q($c20).
+0 [] p(x10)|p($f3(x10))|q($c14)|p(x11)| -q($f4(x16))| -q(x16)|p($c19)|q(x17).
+0 [] p(x10)|p($f3(x10))|q($c14)|p(x11)| -q($f4(x16))| -q(x16)| -p(x18)| -q($c20).
+0 [] p(x10)|p($f3(x10))| -q(x12)| -p($c15)| -q(x13)|q($c16)| -p(x14)|q(x15).
+0 [] p(x10)|p($f3(x10))| -q(x12)| -p($c15)| -q(x13)|q($c16)|p($c17)| -q($c18).
+0 [] p(x10)|p($f3(x10))| -q(x12)| -p($c15)|q(x13)| -q($c16)| -p(x14)|q(x15).
+0 [] p(x10)|p($f3(x10))| -q(x12)| -p($c15)|q(x13)| -q($c16)|p($c17)| -q($c18).
+0 [] p(x10)|p($f3(x10))| -q(x12)| -p($c15)|q($f4(x16))|q(x16)|p($c19)|q(x17).
+0 [] p(x10)|p($f3(x10))| -q(x12)| -p($c15)|q($f4(x16))|q(x16)| -p(x18)| -q($c20).
+0 [] p(x10)|p($f3(x10))| -q(x12)| -p($c15)| -q($f4(x16))| -q(x16)|p($c19)|q(x17).
+0 [] p(x10)|p($f3(x10))| -q(x12)| -p($c15)| -q($f4(x16))| -q(x16)| -p(x18)| -q($c20).
+0 [] -p(x10)| -p($f3(x10))|q($c14)|p(x11)| -q(x13)|q($c16)| -p(x14)|q(x15).
+0 [] -p(x10)| -p($f3(x10))|q($c14)|p(x11)| -q(x13)|q($c16)|p($c17)| -q($c18).
+0 [] -p(x10)| -p($f3(x10))|q($c14)|p(x11)|q(x13)| -q($c16)| -p(x14)|q(x15).
+0 [] -p(x10)| -p($f3(x10))|q($c14)|p(x11)|q(x13)| -q($c16)|p($c17)| -q($c18).
+0 [] -p(x10)| -p($f3(x10))|q($c14)|p(x11)|q($f4(x16))|q(x16)|p($c19)|q(x17).
+0 [] -p(x10)| -p($f3(x10))|q($c14)|p(x11)|q($f4(x16))|q(x16)| -p(x18)| -q($c20).
+0 [] -p(x10)| -p($f3(x10))|q($c14)|p(x11)| -q($f4(x16))| -q(x16)|p($c19)|q(x17).
+0 [] -p(x10)| -p($f3(x10))|q($c14)|p(x11)| -q($f4(x16))| -q(x16)| -p(x18)| -q($c20).
+0 [] -p(x10)| -p($f3(x10))| -q(x12)| -p($c15)| -q(x13)|q($c16)| -p(x14)|q(x15).
+0 [] -p(x10)| -p($f3(x10))| -q(x12)| -p($c15)| -q(x13)|q($c16)|p($c17)| -q($c18).
+0 [] -p(x10)| -p($f3(x10))| -q(x12)| -p($c15)|q(x13)| -q($c16)| -p(x14)|q(x15).
+0 [] -p(x10)| -p($f3(x10))| -q(x12)| -p($c15)|q(x13)| -q($c16)|p($c17)| -q($c18).
+0 [] -p(x10)| -p($f3(x10))| -q(x12)| -p($c15)|q($f4(x16))|q(x16)|p($c19)|q(x17).
+0 [] -p(x10)| -p($f3(x10))| -q(x12)| -p($c15)|q($f4(x16))|q(x16)| -p(x18)| -q($c20).
+0 [] -p(x10)| -p($f3(x10))| -q(x12)| -p($c15)| -q($f4(x16))| -q(x16)|p($c19)|q(x17).
+0 [] -p(x10)| -p($f3(x10))| -q(x12)| -p($c15)| -q($f4(x16))| -q(x16)| -p(x18)| -q($c20).
+end_of_list.
+
+------------> process usable:
+
+------------> process sos:
+** KEPT (pick-wt=14): 2 [copy,1,factor_simp,factor_simp] p(x)|p($f1(x))| -q(y)|q($f2(z))|q(z)| -p(u).
+** KEPT (pick-wt=14): 4 [copy,3,factor_simp,factor_simp] p(x)|p($f1(x))| -q($c7)|q($f2(y))|q(y)|p($c6).
+** KEPT (pick-wt=14): 6 [copy,5,factor_simp,factor_simp] p(x)|p($f1(x))| -q($f2(y))| -q(y)| -p(z)|q(u).
+** KEPT (pick-wt=14): 8 [copy,7,factor_simp,factor_simp] p(x)|p($f1(x))| -q($f2(y))| -q(y)|p($c6)| -q($c7).
+** KEPT (pick-wt=11): 10 [copy,9,factor_simp,factor_simp,factor_simp] p(x)|p($f1(x))| -q(y)|q($c8)|p($c9).
+** KEPT (pick-wt=11): 12 [copy,11,factor_simp,factor_simp,factor_simp] p(x)|p($f1(x))| -q($c10)|q($c8)| -p(y).
+** KEPT (pick-wt=11): 14 [copy,13,factor_simp,factor_simp,factor_simp] p(x)|p($f1(x))| -q($c8)|q(y)|p($c9).
+** KEPT (pick-wt=13): 16 [copy,15,factor_simp,factor_simp] p(x)|p($f1(x))| -q($c8)|q(y)| -p(z)| -q($c10).
+** KEPT (pick-wt=14): 18 [copy,17,factor_simp,factor_simp] p(x)|p($f1(x))|q($c1)| -p($c2)|q($f2(y))|q(y).
+  Following clause subsumed by 18 during input processing: 0 [] p(x)|p($f1(x))|q($c1)| -p($c2)|q($f2(y))|q(y)|p($c6)| -q($c7).
+  Following clause subsumed by 6 during input processing: 0 [factor_simp,factor_simp] p(x)|p($f1(x))|q($c1)| -p($c2)| -q($f2(y))| -q(y).
+  Following clause subsumed by 8 during input processing: 0 [] p(x)|p($f1(x))|q($c1)| -p($c2)| -q($f2(y))| -q(y)|p($c6)| -q($c7).
+  Following clause subsumed by 10 during input processing: 0 [factor_simp] p(x)|p($f1(x))|q($c1)| -p($c2)| -q(y)|q($c8)|p($c9).
+  Following clause subsumed by 12 during input processing: 0 [factor_simp,factor_simp] p(x)|p($f1(x))|q($c1)| -p($c2)| -q($c10)|q($c8).
+  Following clause subsumed by 14 during input processing: 0 [factor_simp,factor_simp] p(x)|p($f1(x))|q($c1)| -p($c2)| -q($c8)|p($c9).
+  Following clause subsumed by 16 during input processing: 0 [factor_simp,factor_simp] p(x)|p($f1(x))|q($c1)| -p($c2)| -q($c8)| -q($c10).
+** KEPT (pick-wt=14): 20 [copy,19,factor_simp,factor_simp] -p(x)| -p($f1(x))| -q(y)|p(z)|q($f2(u))|q(u).
+  Following clause subsumed by 20 during input processing: 0 [factor_simp,factor_simp] -p(x)| -p($f1(x))| -q($c7)|p($c6)|q($f2(u))|q(u).
+** KEPT (pick-wt=14): 22 [copy,21,factor_simp,factor_simp] -p(x)| -p($f1(x))| -q($f2(y))|p(z)| -q(y)|q(u).
+** KEPT (pick-wt=14): 24 [copy,23,factor_simp,factor_simp] -p(x)| -p($f1(x))| -q($f2(y))|p($c6)| -q(y)| -q($c7).
+** KEPT (pick-wt=11): 26 [copy,25,factor_simp,factor_simp,factor_simp] -p(x)| -p($f1(x))| -q(y)|p($c9)|q($c8).
+** KEPT (pick-wt=11): 28 [copy,27,factor_simp,factor_simp,factor_simp] -p(x)| -p($f1(x))| -q($c10)|p(y)|q($c8).
+** KEPT (pick-wt=11): 30 [copy,29,factor_simp,factor_simp,factor_simp] -p(x)| -p($f1(x))| -q($c8)|p($c9)|q(y).
+** KEPT (pick-wt=13): 32 [copy,31,factor_simp,factor_simp] -p(x)| -p($f1(x))| -q($c8)|p(y)|q(z)| -q($c10).
+** KEPT (pick-wt=14): 34 [copy,33,factor_simp,factor_simp] -p(x)| -p($f1(x))|q($c1)| -p($c2)|q($f2(y))|q(y).
+  Following clause subsumed by 34 during input processing: 0 [] -p(x)| -p($f1(x))|q($c1)| -p($c2)|q($f2(y))|q(y)|p($c6)| -q($c7).
+** KEPT (pick-wt=14): 36 [copy,35,factor_simp,factor_simp] -p(x)| -p($f1(x))|q($c1)| -p($c2)| -q($f2(y))| -q(y).
+  Following clause subsumed by 36 during input processing: 0 [] -p(x)| -p($f1(x))|q($c1)| -p($c2)| -q($f2(y))| -q(y)|p($c6)| -q($c7).
+  Following clause subsumed by 26 during input processing: 0 [factor_simp] -p(x)| -p($f1(x))|q($c1)| -p($c2)| -q(y)|q($c8)|p($c9).
+** KEPT (pick-wt=13): 38 [copy,37,factor_simp,factor_simp] -p(x)| -p($f1(x))|q($c1)| -p($c2)| -q($c10)|q($c8).
+  Following clause subsumed by 30 during input processing: 0 [factor_simp,factor_simp] -p(x)| -p($f1(x))|q($c1)| -p($c2)| -q($c8)|p($c9).
+** KEPT (pick-wt=13): 40 [copy,39,factor_simp,factor_simp] -p(x)| -p($f1(x))|q($c1)| -p($c2)| -q($c8)| -q($c10).
+** KEPT (pick-wt=11): 42 [copy,41,factor_simp,factor_simp,factor_simp] -p($c3)|p(x)|q($c4)|q($f2(y))|q(y).
+  Following clause subsumed by 42 during input processing: 0 [factor_simp,factor_simp] -p($c3)|p($c6)|q($c4)|q($f2(z))|q(z)| -q($c7).
+** KEPT (pick-wt=11): 44 [copy,43,factor_simp,factor_simp,factor_simp] -p($c3)|p(x)|q($c4)| -q($f2(y))| -q(y).
+  Following clause subsumed by 44 during input processing: 0 [factor_simp,factor_simp] -p($c3)|p($c6)|q($c4)| -q($f2(z))| -q(z)| -q($c7).
+** KEPT (pick-wt=10): 46 [copy,45,factor_simp,factor_simp,factor_simp] -p($c3)|p($c9)|q($c4)| -q(x)|q($c8).
+** KEPT (pick-wt=10): 48 [copy,47,factor_simp,factor_simp,factor_simp] -p($c3)|p(x)|q($c4)| -q($c10)|q($c8).
+** KEPT (pick-wt=8): 50 [copy,49,factor_simp,factor_simp,factor_simp,factor_simp] -p($c3)|p($c9)|q($c4)| -q($c8).
+** KEPT (pick-wt=10): 52 [copy,51,factor_simp,factor_simp,factor_simp] -p($c3)|p(x)|q($c4)| -q($c8)| -q($c10).
+** KEPT (pick-wt=13): 54 [copy,53,factor_simp,factor_simp] -p($c3)|p(x)| -q(y)| -p($c5)|q($f2(z))|q(z).
+  Following clause subsumed by 54 during input processing: 0 [factor_simp,factor_simp] -p($c3)|p($c6)| -q($c7)| -p($c5)|q($f2(z))|q(z).
+** KEPT (pick-wt=13): 56 [copy,55,factor_simp,factor_simp] -p($c3)|p(x)| -q($f2(y))| -p($c5)| -q(y)|q(z).
+** KEPT (pick-wt=13): 58 [copy,57,factor_simp,factor_simp] -p($c3)|p($c6)| -q($f2(x))| -p($c5)| -q(x)| -q($c7).
+** KEPT (pick-wt=10): 60 [copy,59,factor_simp,factor_simp,factor_simp] -p($c3)|p($c9)| -q(x)| -p($c5)|q($c8).
+** KEPT (pick-wt=10): 62 [copy,61,factor_simp,factor_simp,factor_simp] -p($c3)|p(x)| -q($c10)| -p($c5)|q($c8).
+** KEPT (pick-wt=10): 64 [copy,63,factor_simp,factor_simp,factor_simp] -p($c3)|p($c9)| -q($c8)| -p($c5)|q(x).
+** KEPT (pick-wt=12): 66 [copy,65,factor_simp,factor_simp] -p($c3)|p(x)| -q($c8)| -p($c5)|q(y)| -q($c10).
+** KEPT (pick-wt=11): 68 [copy,67,factor_simp,factor_simp,factor_simp] p($c3)| -p(x)|q($c4)|q($f2(y))|q(y).
+  Following clause subsumed by 68 during input processing: 0 [factor_simp] p($c3)| -p(x)|q($c4)|q($f2(z))|q(z)|p($c6)| -q($c7).
+** KEPT (pick-wt=11): 70 [copy,69,factor_simp,factor_simp,factor_simp] p($c3)| -p(x)|q($c4)| -q($f2(y))| -q(y).
+  Following clause subsumed by 70 during input processing: 0 [factor_simp] p($c3)| -p(x)|q($c4)| -q($f2(z))| -q(z)|p($c6)| -q($c7).
+** KEPT (pick-wt=12): 72 [copy,71,factor_simp,factor_simp] p($c3)| -p(x)|q($c4)| -q(y)|q($c8)|p($c9).
+** KEPT (pick-wt=10): 74 [copy,73,factor_simp,factor_simp,factor_simp] p($c3)| -p(x)|q($c4)| -q($c10)|q($c8).
+** KEPT (pick-wt=10): 76 [copy,75,factor_simp,factor_simp,factor_simp] p($c3)| -p(x)|q($c4)| -q($c8)|p($c9).
+** KEPT (pick-wt=10): 78 [copy,77,factor_simp,factor_simp,factor_simp] p($c3)| -p(x)|q($c4)| -q($c8)| -q($c10).
+** KEPT (pick-wt=11): 80 [copy,79,factor_simp,factor_simp,factor_simp] p($c3)| -p($c5)| -q(x)|q($f2(y))|q(y).
+  Following clause subsumed by 80 during input processing: 0 [factor_simp,factor_simp] p($c3)| -p($c5)| -q($c7)|q($f2(z))|q(z)|p($c6).
+** KEPT (pick-wt=11): 82 [copy,81,factor_simp,factor_simp,factor_simp] p($c3)| -p($c5)| -q($f2(x))| -q(x)|q(y).
+** KEPT (pick-wt=13): 84 [copy,83,factor_simp,factor_simp] p($c3)| -p($c5)| -q($f2(x))| -q(x)|p($c6)| -q($c7).
+** KEPT (pick-wt=10): 86 [copy,85,factor_simp,factor_simp,factor_simp] p($c3)| -p($c5)| -q(x)|q($c8)|p($c9).
+** KEPT (pick-wt=8): 88 [copy,87,factor_simp,factor_simp,factor_simp,factor_simp] p($c3)| -p($c5)| -q($c10)|q($c8).
+** KEPT (pick-wt=10): 90 [copy,89,factor_simp,factor_simp,factor_simp] p($c3)| -p($c5)| -q($c8)|q(x)|p($c9).
+** KEPT (pick-wt=10): 92 [copy,91,factor_simp,factor_simp,factor_simp] p($c3)| -p($c5)| -q($c8)|q(x)| -q($c10).
+** KEPT (pick-wt=8): 94 [copy,93,factor_simp,factor_simp,factor_simp,factor_simp] -p($c11)|p(x)| -q(y)|q($c16).
+  Following clause subsumed by 94 during input processing: 0 [factor_simp,factor_simp,factor_simp,factor_simp] -p($c11)|p($c17)| -q($c18)|q($c16).
+** KEPT (pick-wt=8): 96 [copy,95,factor_simp,factor_simp,factor_simp,factor_simp] -p($c11)|p(x)| -q($c16)|q(y).
+  Following clause subsumed by 96 during input processing: 0 [factor_simp,factor_simp,factor_simp] -p($c11)|p($c17)| -q($c16)|q(u)| -q($c18).
+** KEPT (pick-wt=11): 98 [copy,97,factor_simp,factor_simp,factor_simp] -p($c11)|p($c19)| -q(x)|q($f4(y))|q(y).
+** KEPT (pick-wt=11): 100 [copy,99,factor_simp,factor_simp,factor_simp] -p($c11)|p(x)| -q($c20)|q($f4(y))|q(y).
+** KEPT (pick-wt=11): 102 [copy,101,factor_simp,factor_simp,factor_simp] -p($c11)|p($c19)| -q($f4(x))| -q(x)|q(y).
+** KEPT (pick-wt=11): 104 [copy,103,factor_simp,factor_simp,factor_simp] -p($c11)|p(x)| -q($f4(y))| -q(y)| -q($c20).
+  Following clause subsumed by 94 during input processing: 0 [factor_simp,factor_simp] -p($c11)|p(x)|q($c12)| -p($c13)| -q(y)|q($c16).
+  Following clause subsumed by 94 during input processing: 0 [factor_simp,factor_simp] -p($c11)|p($c17)|q($c12)| -p($c13)| -q($c18)|q($c16).
+  Following clause subsumed by 96 during input processing: 0 [factor_simp,factor_simp,factor_simp] -p($c11)|p(x)|q($c12)| -p($c13)| -q($c16).
+  Following clause subsumed by 96 during input processing: 0 [factor_simp,factor_simp] -p($c11)|p($c17)|q($c12)| -p($c13)| -q($c16)| -q($c18).
+** KEPT (pick-wt=13): 106 [copy,105,factor_simp,factor_simp] -p($c11)|p($c19)|q($c12)| -p($c13)|q($f4(x))|q(x).
+  Following clause subsumed by 100 during input processing: 0 [factor_simp] -p($c11)|p(x)|q($c12)| -p($c13)|q($f4(y))|q(y)| -q($c20).
+  Following clause subsumed by 102 during input processing: 0 [factor_simp,factor_simp] -p($c11)|p($c19)|q($c12)| -p($c13)| -q($f4(y))| -q(y).
+  Following clause subsumed by 104 during input processing: 0 [factor_simp] -p($c11)|p(x)|q($c12)| -p($c13)| -q($f4(y))| -q(y)| -q($c20).
+** KEPT (pick-wt=8): 108 [copy,107,factor_simp,factor_simp,factor_simp,factor_simp] p($c11)| -p(x)| -q(y)|q($c16).
+  Following clause subsumed by 108 during input processing: 0 [factor_simp,factor_simp,factor_simp] p($c11)| -p(x)| -q($c18)|q($c16)|p($c17).
+** KEPT (pick-wt=8): 110 [copy,109,factor_simp,factor_simp,factor_simp,factor_simp] p($c11)| -p(x)| -q($c16)|q(y).
+  Following clause subsumed by 110 during input processing: 0 [factor_simp,factor_simp] p($c11)| -p(x)| -q($c16)|q(u)|p($c17)| -q($c18).
+** KEPT (pick-wt=13): 112 [copy,111,factor_simp,factor_simp] p($c11)| -p(x)| -q(y)|q($f4(z))|q(z)|p($c19).
+** KEPT (pick-wt=11): 114 [copy,113,factor_simp,factor_simp,factor_simp] p($c11)| -p(x)| -q($c20)|q($f4(y))|q(y).
+** KEPT (pick-wt=13): 116 [copy,115,factor_simp,factor_simp] p($c11)| -p(x)| -q($f4(y))| -q(y)|p($c19)|q(z).
+** KEPT (pick-wt=11): 118 [copy,117,factor_simp,factor_simp,factor_simp] p($c11)| -p(x)| -q($f4(y))| -q(y)| -q($c20).
+  Following clause subsumed by 108 during input processing: 0 [factor_simp,factor_simp,factor_simp] p($c11)| -p($c13)|q($c12)| -q(y)|q($c16).
+  Following clause subsumed by 108 during input processing: 0 [factor_simp,factor_simp] p($c11)| -p($c13)|q($c12)| -q($c18)|q($c16)|p($c17).
+  Following clause subsumed by 110 during input processing: 0 [factor_simp,factor_simp,factor_simp,factor_simp] p($c11)| -p($c13)|q($c12)| -q($c16).
+  Following clause subsumed by 110 during input processing: 0 [factor_simp,factor_simp] p($c11)| -p($c13)|q($c12)| -q($c16)|p($c17)| -q($c18).
+** KEPT (pick-wt=13): 120 [copy,119,factor_simp,factor_simp] p($c11)| -p($c13)|q($c12)|q($f4(x))|q(x)|p($c19).
+  Following clause subsumed by 114 during input processing: 0 [factor_simp,factor_simp] p($c11)| -p($c13)|q($c12)|q($f4(y))|q(y)| -q($c20).
+  Following clause subsumed by 116 during input processing: 0 [factor_simp,factor_simp] p($c11)| -p($c13)|q($c12)| -q($f4(y))| -q(y)|p($c19).
+  Following clause subsumed by 118 during input processing: 0 [factor_simp,factor_simp] p($c11)| -p($c13)|q($c12)| -q($f4(y))| -q(y)| -q($c20).
+** KEPT (pick-wt=13): 122 [copy,121,factor_simp,factor_simp] p(x)|p($f3(x))|q($c14)| -q(y)|q($c16)| -p(z).
+** KEPT (pick-wt=13): 124 [copy,123,factor_simp,factor_simp] p(x)|p($f3(x))|q($c14)| -q($c18)|q($c16)|p($c17).
+** KEPT (pick-wt=11): 126 [copy,125,factor_simp,factor_simp,factor_simp] p(x)|p($f3(x))|q($c14)| -q($c16)| -p(y).
+** KEPT (pick-wt=13): 128 [copy,127,factor_simp,factor_simp] p(x)|p($f3(x))|q($c14)| -q($c16)|p($c17)| -q($c18).
+** KEPT (pick-wt=14): 130 [copy,129,factor_simp,factor_simp] p(x)|p($f3(x))|q($c14)|q($f4(y))|q(y)|p($c19).
+** KEPT (pick-wt=16): 132 [copy,131,factor_simp] p(x)|p($f3(x))|q($c14)|q($f4(y))|q(y)| -p(z)| -q($c20).
+** KEPT (pick-wt=14): 134 [copy,133,factor_simp,factor_simp] p(x)|p($f3(x))|q($c14)| -q($f4(y))| -q(y)|p($c19).
+** KEPT (pick-wt=16): 136 [copy,135,factor_simp] p(x)|p($f3(x))|q($c14)| -q($f4(y))| -q(y)| -p(z)| -q($c20).
+** KEPT (pick-wt=11): 138 [copy,137,factor_simp,factor_simp,factor_simp] p(x)|p($f3(x))| -q(y)| -p($c15)|q($c16).
+  Following clause subsumed by 138 during input processing: 0 [factor_simp,factor_simp] p(x)|p($f3(x))| -q($c18)| -p($c15)|q($c16)|p($c17).
+** KEPT (pick-wt=11): 140 [copy,139,factor_simp,factor_simp,factor_simp] p(x)|p($f3(x))| -q($c16)| -p($c15)|q(y).
+  Following clause subsumed by 140 during input processing: 0 [factor_simp] p(x)|p($f3(x))| -q($c16)| -p($c15)|q(z)|p($c17)| -q($c18).
+** KEPT (pick-wt=16): 142 [copy,141,factor_simp] p(x)|p($f3(x))| -q(y)| -p($c15)|q($f4(z))|q(z)|p($c19).
+** KEPT (pick-wt=14): 144 [copy,143,factor_simp,factor_simp] p(x)|p($f3(x))| -q($c20)| -p($c15)|q($f4(y))|q(y).
+** KEPT (pick-wt=16): 146 [copy,145,factor_simp] p(x)|p($f3(x))| -q($f4(y))| -p($c15)| -q(y)|p($c19)|q(z).
+** KEPT (pick-wt=14): 148 [copy,147,factor_simp,factor_simp] p(x)|p($f3(x))| -q($f4(y))| -p($c15)| -q(y)| -q($c20).
+** KEPT (pick-wt=13): 150 [copy,149,factor_simp,factor_simp] -p(x)| -p($f3(x))|q($c14)|p(y)| -q(z)|q($c16).
+  Following clause subsumed by 150 during input processing: 0 [factor_simp,factor_simp] -p(x)| -p($f3(x))|q($c14)|p($c17)| -q($c18)|q($c16).
+** KEPT (pick-wt=11): 152 [copy,151,factor_simp,factor_simp,factor_simp] -p(x)| -p($f3(x))|q($c14)|p(y)| -q($c16).
+  Following clause subsumed by 152 during input processing: 0 [factor_simp,factor_simp] -p(x)| -p($f3(x))|q($c14)|p($c17)| -q($c16)| -q($c18).
+** KEPT (pick-wt=14): 154 [copy,153,factor_simp,factor_simp] -p(x)| -p($f3(x))|q($c14)|p($c19)|q($f4(y))|q(y).
+** KEPT (pick-wt=16): 156 [copy,155,factor_simp] -p(x)| -p($f3(x))|q($c14)|p(y)|q($f4(z))|q(z)| -q($c20).
+** KEPT (pick-wt=14): 158 [copy,157,factor_simp,factor_simp] -p(x)| -p($f3(x))|q($c14)|p($c19)| -q($f4(y))| -q(y).
+** KEPT (pick-wt=16): 160 [copy,159,factor_simp] -p(x)| -p($f3(x))|q($c14)|p(y)| -q($f4(z))| -q(z)| -q($c20).
+** KEPT (pick-wt=11): 162 [copy,161,factor_simp,factor_simp,factor_simp] -p(x)| -p($f3(x))| -q(y)| -p($c15)|q($c16).
+  Following clause subsumed by 162 during input processing: 0 [factor_simp,factor_simp] -p(x)| -p($f3(x))| -q($c18)| -p($c15)|q($c16)|p($c17).
+** KEPT (pick-wt=11): 164 [copy,163,factor_simp,factor_simp,factor_simp] -p(x)| -p($f3(x))| -q($c16)| -p($c15)|q(y).
+  Following clause subsumed by 164 during input processing: 0 [factor_simp] -p(x)| -p($f3(x))| -q($c16)| -p($c15)|q(z)|p($c17)| -q($c18).
+** KEPT (pick-wt=16): 166 [copy,165,factor_simp] -p(x)| -p($f3(x))| -q(y)| -p($c15)|q($f4(z))|q(z)|p($c19).
+** KEPT (pick-wt=14): 168 [copy,167,factor_simp,factor_simp] -p(x)| -p($f3(x))| -q($c20)| -p($c15)|q($f4(y))|q(y).
+** KEPT (pick-wt=16): 170 [copy,169,factor_simp] -p(x)| -p($f3(x))| -q($f4(y))| -p($c15)| -q(y)|p($c19)|q(z).
+** KEPT (pick-wt=14): 172 [copy,171,factor_simp,factor_simp] -p(x)| -p($f3(x))| -q($f4(y))| -p($c15)| -q(y)| -q($c20).
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=8) 50 [copy,49,factor_simp,factor_simp,factor_simp,factor_simp] -p($c3)|p($c9)|q($c4)| -q($c8).
+
+given clause #2: (wt=8) 88 [copy,87,factor_simp,factor_simp,factor_simp,factor_simp] p($c3)| -p($c5)| -q($c10)|q($c8).
+
+given clause #3: (wt=8) 94 [copy,93,factor_simp,factor_simp,factor_simp,factor_simp] -p($c11)|p(x)| -q(y)|q($c16).
+
+given clause #4: (wt=8) 96 [copy,95,factor_simp,factor_simp,factor_simp,factor_simp] -p($c11)|p(x)| -q($c16)|q(y).
+
+given clause #5: (wt=8) 108 [copy,107,factor_simp,factor_simp,factor_simp,factor_simp] p($c11)| -p(x)| -q(y)|q($c16).
+
+given clause #6: (wt=8) 110 [copy,109,factor_simp,factor_simp,factor_simp,factor_simp] p($c11)| -p(x)| -q($c16)|q(y).
+
+given clause #7: (wt=8) 217 [binary,96.3,94.4,factor_simp,factor_simp] -p($c11)|p(x)|q(y)| -q(z).
+
+given clause #8: (wt=8) 218 [binary,110.3,108.4,factor_simp,factor_simp] p($c11)| -p(x)|q(y)| -q(z).
+
+given clause #9: (wt=8) 219 [binary,218.1,217.1,factor_simp,factor_simp] -p(x)|q(y)| -q(z)|p(u).
+
+given clause #10: (wt=9) 176 [factor,10.1.5] p($c9)|p($f1($c9))| -q(x)|q($c8).
+
+given clause #11: (wt=6) 221 [binary,176.2,219.1,factor_simp,factor_simp,factor_simp] p($c9)| -q(x)|q($c8).
+
+given clause #12: (wt=6) 222 [binary,221.1,219.1,factor_simp,factor_simp] -q(x)|q($c8)|p(y).
+
+given clause #13: (wt=9) 177 [factor,14.1.5] p($c9)|p($f1($c9))| -q($c8)|q(x).
+
+given clause #14: (wt=6) 224 [binary,177.2,219.1,factor_simp,factor_simp,factor_simp] p($c9)| -q($c8)|q(x).
+
+given clause #15: (wt=6) 226 [binary,224.1,219.1,factor_simp,factor_simp] -q($c8)|q(x)|p(y).
+
+given clause #16: (wt=6) 228 [binary,226.1,222.2,factor_simp] q(x)|p(y)| -q(z).
+
+given clause #17: (wt=9) 185 [factor,42.3.5] -p($c3)|p(x)|q($c4)|q($f2($c4)).
+
+given clause #18: (wt=6) 230 [binary,185.4,228.3,factor_simp,factor_simp] -p($c3)|p(x)|q($c4).
+
+given clause #19: (wt=6) 231 [binary,230.3,228.3,factor_simp] -p($c3)|p(x)|q(y).
+
+given clause #20: (wt=9) 187 [factor,68.3.5] p($c3)| -p(x)|q($c4)|q($f2($c4)).
+
+given clause #21: (wt=6) 234 [binary,187.4,228.3,factor_simp,factor_simp] p($c3)| -p(x)|q($c4).
+
+given clause #22: (wt=6) 235 [binary,234.1,231.1,factor_simp] -p(x)|q($c4)|p(y).
+
+given clause #23: (wt=6) 237 [binary,235.2,228.3,factor_simp] -p(x)|p(y)|q(z).
+
+given clause #24: (wt=9) 189 [factor,104.4.5] -p($c11)|p(x)| -q($f4($c20))| -q($c20).
+
+given clause #25: (wt=6) 238 [binary,189.3,237.3,factor_simp,factor_simp] -p($c11)|p(x)| -q($c20).
+
+given clause #26: (wt=4) 240 [binary,238.3,237.3,factor_simp,factor_simp] -p($c11)|p(x).
+
+given clause #27: (wt=9) 191 [factor,118.4.5] p($c11)| -p(x)| -q($f4($c20))| -q($c20).
+
+given clause #28: (wt=6) 242 [binary,191.3,237.3,factor_simp,factor_simp] p($c11)| -p(x)| -q($c20).
+
+given clause #29: (wt=4) 245 [binary,242.3,237.3,factor_simp,factor_simp] p($c11)| -p(x).
+
+given clause #30: (wt=4) 246 [binary,245.1,240.1] -p(x)|p(y).
+
+given clause #31: (wt=9) 206 [factor,162.1.4] -p($c15)| -p($f3($c15))| -q(x)|q($c16).
+
+given clause #32: (wt=6) 248 [binary,206.2,246.2,factor_simp] -p($c15)| -q(x)|q($c16).
+
+given clause #33: (wt=4) 250 [binary,248.1,228.2,factor_simp,factor_simp] -q(x)|q($c16).
+
+given clause #34: (wt=9) 207 [factor,164.1.4] -p($c15)| -p($f3($c15))| -q($c16)|q(x).
+
+given clause #35: (wt=6) 252 [binary,207.2,246.2,factor_simp] -p($c15)| -q($c16)|q(x).
+
+given clause #36: (wt=4) 255 [binary,252.1,228.2,factor_simp,factor_simp] -q($c16)|q(x).
+
+given clause #37: (wt=4) 257 [binary,255.1,250.2] q(x)| -q(y).
+
+given clause #38: (wt=10) 213 [factor,174.4.5] p($c6)|p($f1($c6))| -q($f2($c7))| -q($c7).
+
+given clause #39: (wt=7) 259 [binary,213.2,246.1,factor_simp] p($c6)| -q($f2($c7))| -q($c7).
+
+given clause #40: (wt=4) 263 [binary,259.2,257.1,factor_simp] p($c6)| -q($c7).
+
+given clause #41: (wt=4) 265 [binary,263.1,246.1] -q($c7)|p(x).
+
+given clause #42: (wt=4) 267 [binary,265.1,257.1] p(x)| -q(y).
+
+given clause #43: (wt=10) 214 [factor,180.3.5] -p($c2)| -p($f1($c2))|q($c1)|q($f2($c1)).
+
+given clause #44: (wt=7) 269 [binary,214.2,246.2,factor_simp] -p($c2)|q($c1)|q($f2($c1)).
+
+given clause #45: (wt=4) 274 [binary,269.3,257.2,factor_simp] -p($c2)|q($c1).
+
+given clause #46: (wt=4) 275 [binary,274.1,246.2] q($c1)| -p(x).
+
+given clause #47: (wt=4) 277 [binary,275.1,257.2] -p(x)|q(y).
+
+given clause #48: (wt=10) 215 [factor,195.3.5] p($c19)|p($f3($c19))|q($c14)|q($f4($c14)).
+
+given clause #49: (wt=7) 279 [binary,215.2,277.1,factor_simp] p($c19)|q($c14)|q($f4($c14)).
+
+given clause #50: (wt=4) 284 [binary,279.3,267.2,factor_simp] p($c19)|q($c14).
+
+given clause #51: (wt=2) 285 [binary,284.1,277.1,factor_simp] q($c14).
+
+given clause #52: (wt=2) 287 [binary,285.1,267.2] p(x).
+
+given clause #53: (wt=2) 288 [binary,285.1,257.2] q(x).
+
+given clause #54: (wt=10) 216 [factor,211.4.5] -p($c15)| -p($f3($c15))| -q($f4($c20))| -q($c20).
+
+-------- PROOF -------- 
+
+-----> EMPTY CLAUSE at   0.06 sec ----> 289 [binary,216.1,287.1,unit_del,287,288,288] $F.
+
+Length of proof is 68.  Level of proof is 23.
+
+---------------- PROOF ----------------
+
+7 [] p(x)|p($f1(x))| -q(y)|p(z)| -q($f2(u))| -q(u)|p($c6)| -q($c7).
+8 [copy,7,factor_simp,factor_simp] p(x)|p($f1(x))| -q($f2(y))| -q(y)|p($c6)| -q($c7).
+9 [] p(x)|p($f1(x))| -q(y)|p(z)| -q(u)|q($c8)|p($c9)|q(v).
+10 [copy,9,factor_simp,factor_simp,factor_simp] p(x)|p($f1(x))| -q(y)|q($c8)|p($c9).
+13 [] p(x)|p($f1(x))| -q(y)|p(z)|q(u)| -q($c8)|p($c9)|q(v).
+14 [copy,13,factor_simp,factor_simp,factor_simp] p(x)|p($f1(x))| -q($c8)|q(y)|p($c9).
+33 [] -p(x)| -p($f1(x))|q($c1)| -p($c2)|q($f2(y))|q(y)| -p(z)|q(u).
+34 [copy,33,factor_simp,factor_simp] -p(x)| -p($f1(x))|q($c1)| -p($c2)|q($f2(y))|q(y).
+41 [] -p($c3)|p(x)|q($c4)|p(y)|q($f2(z))|q(z)| -p(u)|q(v).
+42 [copy,41,factor_simp,factor_simp,factor_simp] -p($c3)|p(x)|q($c4)|q($f2(y))|q(y).
+67 [] p($c3)| -p(x)|q($c4)|p(y)|q($f2(z))|q(z)| -p(u)|q(v).
+68 [copy,67,factor_simp,factor_simp,factor_simp] p($c3)| -p(x)|q($c4)|q($f2(y))|q(y).
+93 [] -p($c11)|p(x)| -q(y)|p(z)| -q(u)|q($c16)| -p(v)|q(w).
+94 [copy,93,factor_simp,factor_simp,factor_simp,factor_simp] -p($c11)|p(x)| -q(y)|q($c16).
+95 [] -p($c11)|p(x)| -q(y)|p(z)|q(u)| -q($c16)| -p(v)|q(w).
+96 [copy,95,factor_simp,factor_simp,factor_simp,factor_simp] -p($c11)|p(x)| -q($c16)|q(y).
+103 [] -p($c11)|p(x)| -q(y)|p(z)| -q($f4(u))| -q(u)| -p(v)| -q($c20).
+104 [copy,103,factor_simp,factor_simp,factor_simp] -p($c11)|p(x)| -q($f4(y))| -q(y)| -q($c20).
+107 [] p($c11)| -p(x)| -q(y)|p(z)| -q(u)|q($c16)| -p(v)|q(w).
+108 [copy,107,factor_simp,factor_simp,factor_simp,factor_simp] p($c11)| -p(x)| -q(y)|q($c16).
+109 [] p($c11)| -p(x)| -q(y)|p(z)|q(u)| -q($c16)| -p(v)|q(w).
+110 [copy,109,factor_simp,factor_simp,factor_simp,factor_simp] p($c11)| -p(x)| -q($c16)|q(y).
+117 [] p($c11)| -p(x)| -q(y)|p(z)| -q($f4(u))| -q(u)| -p(v)| -q($c20).
+118 [copy,117,factor_simp,factor_simp,factor_simp] p($c11)| -p(x)| -q($f4(y))| -q(y)| -q($c20).
+129 [] p(x)|p($f3(x))|q($c14)|p(y)|q($f4(z))|q(z)|p($c19)|q(u).
+130 [copy,129,factor_simp,factor_simp] p(x)|p($f3(x))|q($c14)|q($f4(y))|q(y)|p($c19).
+161 [] -p(x)| -p($f3(x))| -q(y)| -p($c15)| -q(z)|q($c16)| -p(u)|q(v).
+162 [copy,161,factor_simp,factor_simp,factor_simp] -p(x)| -p($f3(x))| -q(y)| -p($c15)|q($c16).
+163 [] -p(x)| -p($f3(x))| -q(y)| -p($c15)|q(z)| -q($c16)| -p(u)|q(v).
+164 [copy,163,factor_simp,factor_simp,factor_simp] -p(x)| -p($f3(x))| -q($c16)| -p($c15)|q(y).
+171 [] -p(x)| -p($f3(x))| -q(y)| -p($c15)| -q($f4(z))| -q(z)| -p(u)| -q($c20).
+172 [copy,171,factor_simp,factor_simp] -p(x)| -p($f3(x))| -q($f4(y))| -p($c15)| -q(y)| -q($c20).
+174 [factor,8.1.5] p($c6)|p($f1($c6))| -q($f2(x))| -q(x)| -q($c7).
+176 [factor,10.1.5] p($c9)|p($f1($c9))| -q(x)|q($c8).
+177 [factor,14.1.5] p($c9)|p($f1($c9))| -q($c8)|q(x).
+180 [factor,34.1.4] -p($c2)| -p($f1($c2))|q($c1)|q($f2(x))|q(x).
+185 [factor,42.3.5] -p($c3)|p(x)|q($c4)|q($f2($c4)).
+187 [factor,68.3.5] p($c3)| -p(x)|q($c4)|q($f2($c4)).
+189 [factor,104.4.5] -p($c11)|p(x)| -q($f4($c20))| -q($c20).
+191 [factor,118.4.5] p($c11)| -p(x)| -q($f4($c20))| -q($c20).
+195 [factor,130.1.6] p($c19)|p($f3($c19))|q($c14)|q($f4(x))|q(x).
+206 [factor,162.1.4] -p($c15)| -p($f3($c15))| -q(x)|q($c16).
+207 [factor,164.1.4] -p($c15)| -p($f3($c15))| -q($c16)|q(x).
+211 [factor,172.1.4] -p($c15)| -p($f3($c15))| -q($f4(x))| -q(x)| -q($c20).
+213 [factor,174.4.5] p($c6)|p($f1($c6))| -q($f2($c7))| -q($c7).
+214 [factor,180.3.5] -p($c2)| -p($f1($c2))|q($c1)|q($f2($c1)).
+215 [factor,195.3.5] p($c19)|p($f3($c19))|q($c14)|q($f4($c14)).
+216 [factor,211.4.5] -p($c15)| -p($f3($c15))| -q($f4($c20))| -q($c20).
+217 [binary,96.3,94.4,factor_simp,factor_simp] -p($c11)|p(x)|q(y)| -q(z).
+218 [binary,110.3,108.4,factor_simp,factor_simp] p($c11)| -p(x)|q(y)| -q(z).
+219 [binary,218.1,217.1,factor_simp,factor_simp] -p(x)|q(y)| -q(z)|p(u).
+221 [binary,176.2,219.1,factor_simp,factor_simp,factor_simp] p($c9)| -q(x)|q($c8).
+222 [binary,221.1,219.1,factor_simp,factor_simp] -q(x)|q($c8)|p(y).
+224 [binary,177.2,219.1,factor_simp,factor_simp,factor_simp] p($c9)| -q($c8)|q(x).
+226 [binary,224.1,219.1,factor_simp,factor_simp] -q($c8)|q(x)|p(y).
+228 [binary,226.1,222.2,factor_simp] q(x)|p(y)| -q(z).
+230 [binary,185.4,228.3,factor_simp,factor_simp] -p($c3)|p(x)|q($c4).
+231 [binary,230.3,228.3,factor_simp] -p($c3)|p(x)|q(y).
+234 [binary,187.4,228.3,factor_simp,factor_simp] p($c3)| -p(x)|q($c4).
+235 [binary,234.1,231.1,factor_simp] -p(x)|q($c4)|p(y).
+237 [binary,235.2,228.3,factor_simp] -p(x)|p(y)|q(z).
+238 [binary,189.3,237.3,factor_simp,factor_simp] -p($c11)|p(x)| -q($c20).
+240 [binary,238.3,237.3,factor_simp,factor_simp] -p($c11)|p(x).
+242 [binary,191.3,237.3,factor_simp,factor_simp] p($c11)| -p(x)| -q($c20).
+245 [binary,242.3,237.3,factor_simp,factor_simp] p($c11)| -p(x).
+246 [binary,245.1,240.1] -p(x)|p(y).
+248 [binary,206.2,246.2,factor_simp] -p($c15)| -q(x)|q($c16).
+250 [binary,248.1,228.2,factor_simp,factor_simp] -q(x)|q($c16).
+252 [binary,207.2,246.2,factor_simp] -p($c15)| -q($c16)|q(x).
+255 [binary,252.1,228.2,factor_simp,factor_simp] -q($c16)|q(x).
+257 [binary,255.1,250.2] q(x)| -q(y).
+259 [binary,213.2,246.1,factor_simp] p($c6)| -q($f2($c7))| -q($c7).
+263 [binary,259.2,257.1,factor_simp] p($c6)| -q($c7).
+265 [binary,263.1,246.1] -q($c7)|p(x).
+267 [binary,265.1,257.1] p(x)| -q(y).
+269 [binary,214.2,246.2,factor_simp] -p($c2)|q($c1)|q($f2($c1)).
+274 [binary,269.3,257.2,factor_simp] -p($c2)|q($c1).
+275 [binary,274.1,246.2] q($c1)| -p(x).
+277 [binary,275.1,257.2] -p(x)|q(y).
+279 [binary,215.2,277.1,factor_simp] p($c19)|q($c14)|q($f4($c14)).
+284 [binary,279.3,267.2,factor_simp] p($c19)|q($c14).
+285 [binary,284.1,277.1,factor_simp] q($c14).
+287 [binary,285.1,267.2] p(x).
+288 [binary,285.1,257.2] q(x).
+289 [binary,216.1,287.1,unit_del,287,288,288] $F.
+
+------------ end of proof -------------
+
+
+Search stopped by max_proofs option.
+
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 54
+clauses generated            349
+  binary_res generated       301
+  factors generated           48
+demod & eval rewrites          0
+clauses wt,lit,sk delete       0
+tautologies deleted           22
+clauses forward subsumed     252
+  (subsumed by sos)           95
+unit deletions                 3
+factor simplifications       593
+clauses kept                 202
+new demodulators               0
+empty clauses                  1
+clauses back demodulated       0
+clauses back subsumed        196
+usable size                    3
+sos size                       3
+demodulators size              0
+passive size                   0
+hot size                       0
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.06          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8361 finished Mon Aug  2 15:30:36 2004

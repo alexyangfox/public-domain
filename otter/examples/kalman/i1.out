@@ -1,0 +1,116 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:38 2004
+The command was "../../bin/otter".  The process ID is 8459.
+
+set(hyper_res).
+clear(for_sub).
+set(print_lists_at_end).
+assign(max_given,15).
+assign(stats_level,1).
+
+list(usable).
+1 [] -P(x)|P(x).
+end_of_list.
+
+list(sos).
+2 [] P(a).
+end_of_list.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=2) 2 [] P(a).
+** KEPT (pick-wt=2): 3 [hyper,2,1] P(a).
+3 back subsumes 2.
+
+given clause #2: (wt=2) 3 [hyper,2,1] P(a).
+** KEPT (pick-wt=2): 4 [hyper,3,1] P(a).
+4 back subsumes 3.
+
+given clause #3: (wt=2) 4 [hyper,3,1] P(a).
+** KEPT (pick-wt=2): 5 [hyper,4,1] P(a).
+5 back subsumes 4.
+
+given clause #4: (wt=2) 5 [hyper,4,1] P(a).
+** KEPT (pick-wt=2): 6 [hyper,5,1] P(a).
+6 back subsumes 5.
+
+given clause #5: (wt=2) 6 [hyper,5,1] P(a).
+** KEPT (pick-wt=2): 7 [hyper,6,1] P(a).
+7 back subsumes 6.
+
+given clause #6: (wt=2) 7 [hyper,6,1] P(a).
+** KEPT (pick-wt=2): 8 [hyper,7,1] P(a).
+8 back subsumes 7.
+
+given clause #7: (wt=2) 8 [hyper,7,1] P(a).
+** KEPT (pick-wt=2): 9 [hyper,8,1] P(a).
+9 back subsumes 8.
+
+given clause #8: (wt=2) 9 [hyper,8,1] P(a).
+** KEPT (pick-wt=2): 10 [hyper,9,1] P(a).
+10 back subsumes 9.
+
+given clause #9: (wt=2) 10 [hyper,9,1] P(a).
+** KEPT (pick-wt=2): 11 [hyper,10,1] P(a).
+11 back subsumes 10.
+
+given clause #10: (wt=2) 11 [hyper,10,1] P(a).
+** KEPT (pick-wt=2): 12 [hyper,11,1] P(a).
+12 back subsumes 11.
+
+given clause #11: (wt=2) 12 [hyper,11,1] P(a).
+** KEPT (pick-wt=2): 13 [hyper,12,1] P(a).
+13 back subsumes 12.
+
+given clause #12: (wt=2) 13 [hyper,12,1] P(a).
+** KEPT (pick-wt=2): 14 [hyper,13,1] P(a).
+14 back subsumes 13.
+
+given clause #13: (wt=2) 14 [hyper,13,1] P(a).
+** KEPT (pick-wt=2): 15 [hyper,14,1] P(a).
+15 back subsumes 14.
+
+given clause #14: (wt=2) 15 [hyper,14,1] P(a).
+** KEPT (pick-wt=2): 16 [hyper,15,1] P(a).
+16 back subsumes 15.
+
+given clause #15: (wt=2) 16 [hyper,15,1] P(a).
+
+Search stopped by max_given option.
+
+** KEPT (pick-wt=2): 17 [hyper,16,1] P(a).
+17 back subsumes 16.
+
+Search stopped by max_given option.
+
+============ end of search ============
+
+list(usable).
+1 [] -P(x)|P(x).
+end_of_list.
+
+list(sos).
+17 [hyper,16,1] P(a).
+end_of_list.
+
+list(demodulators).
+end_of_list.
+
+
+-------------- statistics -------------
+clauses given                 15
+clauses generated             15
+clauses kept                  15
+clauses forward subsumed       0
+clauses back subsumed         15
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8459 finished Mon Aug  2 15:30:38 2004

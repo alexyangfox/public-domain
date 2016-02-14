@@ -1,0 +1,42 @@
+----- ANLDP 2.2, August 2003 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:45:35 2004
+The command was "../../bin/anldp -m1000".
+
+After all unit preprocessing, 30 atoms are still unassigned;
+81 clauses remain; 6 of those are non-Horn (selectable);
+4882 K allocated; cpu time so far for this domain size: 0.00 sec.
+
+The search is complete.  No models were found.
+
+
+----- statistics for domain size 0 ----
+Input:
+    Clauses input                    81
+    Literal occurrences input       180
+    Greatest atom                    30
+Unit preprocess:
+    Preprocess unit assignments       0
+    Clauses after subsumption        81
+    Literal occ. after subsump.     180
+    Selectable clauses                6
+Decide:
+    Splits                          119
+    Unit assignments                981
+    Failed paths                    120
+Memory:
+    Memory malloced                 0 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.00
+    DPLL                           0.00
+
+=======================================
+Total times for run (seconds):
+    user CPU time                  0.00   (0 hr, 0 min, 0 sec)
+    system CPU time                0.00   (0 hr, 0 min, 0 sec)
+    wall-clock time                0      (0 hr, 0 min, 0 sec)
+
+The search is complete.  No models were found.
+
+The job finished Mon Aug  2 15:45:35 2004

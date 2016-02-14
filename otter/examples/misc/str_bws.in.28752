@@ -1,0 +1,38 @@
+%
+%  Combinatory Logic.
+%  Find a fixed point combinator in the fragment {B, W, S}.
+%  UR-resolution.
+%
+
+set(ur_res).
+clear(print_kept).
+set(bird_print).       % Output (but not input) in combinatory logic notation.
+assign(fpa_literals, 3). % to save memory
+
+assign(max_mem, 1500).      % 1.5 Megabytes
+
+list(usable).
+
+x = x.
+x != y | y = x.
+x != y | y != z | x = z.
+x != y | a(x,z) = a(y,z).
+x != y | a(z,x) = a(z,y).
+
+a(a(a(B,x),y),z) = a(x,a(y,z)).
+a(a(W,x),y) = a(a(x,y),y).
+a(a(a(S,x),y),z) = a(a(x,z),a(y,z)).
+
+end_of_list.
+
+% Deny the existence of a fixed point combinator.
+% If a refutation is found, $Ans contains a fixed point combinator.
+
+formula_list(sos).
+-(exists y all x (a(y,x) = a(x,a(y,x)) & -$Ans(y))).
+end_of_list.
+
+list(demodulators).
+a(a(a(B,x),y),z) = a(x,a(y,z)).
+end_of_list.
+

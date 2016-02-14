@@ -1,0 +1,60 @@
+% benchmark parameters -N8 -p
+
+% Find a noncommutative ring.  To make it more difficult, assume
+% the ring has a unit.
+
+op(450, xfx, +). % sum
+op(400, xfx, *). % product
+op(350, fy, ~).  % minus
+
+list(usable).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RING AXIOMS
+
+% <+,~,0> is an Abelian group:
+
+0+x=x.
+x+0=x.
+~x+x=0.
+x+ ~x=0.
+(x+y)+z=x+ (y+z).
+x+y=y+x.
+
+% Product is associative:
+
+(x*y)*z=x* (y*z).
+
+% Left and right distributivity:
+
+x* (y+z)=x*y+x*z.
+(y+z)*x=y*x+z*x.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Ring lemmas
+
+~ ~x=x.
+~0=0.
+0*x=0.
+x*0=0.
+
+% Assume the ring has a unit.
+
+1*x=x.
+x*1=x.
+
+% There are 2 noncommuting elements.
+
+a*b!=b*a.
+
+% Using constants a and b as the noncommuting elements allows
+% the possibility that they can be 0 or 1.
+% Since 0 and 1 commute with everything, we could fix the
+% noncommuting elements by using 2*3!=3*2 instead.
+% In general it's a good idea to do this, but it doesn't make
+% much difference in this case.
+%
+% 2*3!=3*2.
+
+end_of_list.

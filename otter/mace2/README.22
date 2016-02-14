@@ -1,0 +1,17 @@
+Mace 2.2
+
+NEW FEATURE
+
+An optimization has been added.  See the "August 4-6, 2003" entry
+in the Changelog file.
+
+COMPILING
+
+The code is linked with the the library ../source/libotter.a,
+which is created when Otter is compiled, so you have to
+compile Otter first.
+
+Compiling Mace2 from the parent directory (make all) puts the
+binaries in ../bin/.
+
+If you 'make mace2' here, the binary stays here.

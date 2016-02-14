@@ -1,0 +1,119 @@
+% This input file can be used to rewrite Boolean expressions into
+% canonical if-then-else form.  It should rewrite tautologies to 1
+% and unsatisfiable expressions to 0.  The result is like an OBDD
+% (ordered binary decision diagram); it is not very fast, because it
+% is done with ordinary rewriting, not with the fast OBDD algorithms
+% (structure sharing, caching, etc.).
+%
+% The propositional "variables" in the expressions to be
+% rewritten can be either (Otter) variables, constants, or a
+% mixture.  If variables are included, the flag lex_order_vars
+% must be set
+%
+% The built-in ordering relation has variables < constants, with
+% variables ordered by variable number and constants ordered by
+% the C library strcmp() function.  The constant ordering can be
+% changed with a lex command, e.g., lex([b,c,a]) means that b < c < a,
+% variables are still smaller, and other constants are bigger.
+%
+% There is something tricky going on here, but I think it is
+% correct.  There are two if-then-else operators: if(x,y,z) is
+% the external form, and ite(x,y,z) is the internal form.  The
+% internal form has the property that it NEVER has propositional
+% variables in the second or third argument.  This property
+% speeds up the rewriting.  If the expression to be rewritten
+% has if-then-else, if(x,y,z) should be used.  These are rewritten
+% right away to the ite(x,y,z) form, and the rest of the rewriting is
+% done in terms of ite(x,y,z).
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Declare Boolean operations as infix or prefix.
+% This is for parsing and printing only.
+% Note that the defaults for & and | are overridden.
+
+op(400, fx, ~).
+op(450, xfy, #).  % exclusive or
+op(450, xfy, |).
+op(460, xfy, &).
+op(470, xfx, -->).
+op(480, xfx, <-->).
+
+make_evaluable(_>_, $LGT(_,_)).
+
+list(demodulators).
+
+% Define ordinary Boolean operations in terms of if(_,_,_).
+
+if(x,y,z) = ite(x,ite(y,1,0),ite(z,1,0)).
+x & y     = ite(x,ite(y,1,0),0).
+x | y     = ite(x,1,ite(y,1,0)).
+~x        = ite(x,0,1).
+x --> y   = ~x | y.
+x <--> y  = (x --> y) & (y --> x).
+x # y     = ~(x <--> y).
+
+% These can speed things up, because they are applied first.
+
+x <--> x  = 1.
+x --> x   = 1.
+x & x   = x.
+x | x   = x.
+x # x   = 0.
+
+% The rest of the rules rewrite ite-expressions into canonical form.
+
+% basic simplification
+
+ite(x,y,y) = y.
+ite(1,x,y) = x.
+ite(0,x,y) = y.
+
+% move if-expressions out of conditions
+
+ite(ite(x,y,z),u,v) = ite(x,ite(y,u,v),ite(z,u,v)).
+
+% collapse conditions
+
+ite(x,ite(x,y,z),w) = ite(x,y,w).
+ite(x,w,ite(x,y,z)) = ite(x,w,z).
+
+% sort on conditions
+
+(x1 > x2) -> ite(x1,ite(x2,y,z),w) = ite(x2,ite(x1,y,w),ite(x1,z,w)).
+(x1 > x2) -> ite(x1,w,ite(x2,y,z)) = ite(x2,ite(x1,w,y),ite(x1,w,z)).
+
+end_of_list.
+
+set(demod_inf).          % the "inference rule"
+clear(demod_history).    % we don't want to see a list of 44775 integers
+assign(demod_limit, -1). % no limit
+set(sos_queue).
+assign(max_given, 4).
+set(lex_order_vars).
+set(pretty_print).
+
+% Here are the expressions to be rewritten.
+
+list(sos).
+
+P1((A & (B | C)) <--> ((A & B) | (A & C))).  % Distributivity (=1)
+
+P2(~(~x | ~y) | ~(~x | y) <--> x).           % Huntington identity (=1)
+
+P3(if(D,if(C,if(A,B,I),if(E,F,G)),H)).
+
+P4(
+   ((a2# (b2# (1# (a2&b2))))# ((a3#b3)# (1# (a0# (b0# (1# (a0&b0)))))))
+
+   <-->
+
+   if(a0,if(a2,if(a3,if(b3,1,0),if(b3,0,1)),if(a3,if(b2,if(b3,1,0),
+   if(b3,0,1)),if(b2,if(b3,0,1),if(b3,1,0)))),if(a2,if(a3,if(b0,
+   if(b3,1,0),if(b3,0,1)),if(b0,if(b3,0,1),if(b3,1,0))),if(a3,
+   if(b0,if(b2,if(b3,1,0),if(b3,0,1)),if(b2,if(b3,0,1),if(b3,1,0))),
+   if(b0,if(b2,if(b3,0,1),if(b3,1,0)),if(b2,if(b3,1,0),if(b3,0,1))))))
+).
+
+end_of_list.
+

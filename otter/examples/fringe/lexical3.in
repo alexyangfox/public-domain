@@ -1,0 +1,47 @@
+% -------------------------------------------------------------------------
+% Lex Demo 3
+%
+% Demonstrate lex() and an advanced use of special_unary().
+%
+% Function coeff(x,y) is special "unary"; its lexical order is determined
+% by its first argument.
+%
+% Canonicalization with respect to commutativity and associativity only.
+%
+% Contributed by Bob Veroff.
+% -------------------------------------------------------------------------
+
+% inference rule
+set(binary_res).
+
+% include variables in lexical ordering
+set(lex_order_vars).
+
+% processing
+assign(max_given, 1).
+
+% lexical ordering of terms
+lex([a,b,c,d,e,C1,C2,C3,C4,C5,C6,neg(x),coeff(x,x),add(x,x)]).
+special_unary([neg(x),coeff(x,x)]).
+
+list(usable).
+
+   % a mixture of constants, negated constants, with and with coefficients
+   -dum | P(add(a,add(b,add(coeff(neg(c),C6),add(neg(a),add(neg(b),add(coeff(c,C5),add(coeff(a,C1),add(coeff(b,C2),add(neg(c),add(coeff(neg(a),C3),add(coeff(neg(b),C4),add(c,coeff(neg(a),C2)))))))))))))).
+
+end_of_list.
+
+list(sos).
+   dum.
+end_of_list.
+
+list(demodulators).
+
+   % commutativity
+   EQ(add(x,y),add(y,x)).
+   EQ(add(x,add(y,z)),add(y,add(x,z))).
+
+   % associativity
+   EQ(add(add(x,y),z),add(x,add(y,z))).
+
+end_of_list.

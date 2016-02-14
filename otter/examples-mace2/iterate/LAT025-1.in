@@ -1,0 +1,92 @@
+% benchmark parameters -n2 -N6 -p
+
+%--------------------------------------------------------------------------
+% File     : LAT025-1 : TPTP v2.3.0. Released v2.2.0.
+% Domain   : Lattice Theory (Ternary Near Lattices)
+% Problem  : Non-uniqueness of meet (dually join) in TNL
+% Version  : [MP96] (equality) axioms.
+% English  : Let's say we have a ternary near-lattice (TNL) with two meet
+%            operations, say meet1 and meet2.  In other words, {join,meet1}
+%            and {join,meet2} are TNLs.  Are the two meets necessarily
+%            the same?  No, they aren't.  Here is a counterexample.
+
+% Refs     : [McC98] McCune (1998), Email to G. Sutcliffe
+%          : [MP96]  McCune & Padmanabhan (1996), Automated Deduction in Eq
+% Source   : [McC98]
+% Names    : TNL-2 [MP96]
+
+% Status   : satisfiable
+% Rating   : 1.00 v2.2.1
+% Syntax   : Number of clauses    :   16 (   0 non-Horn;  16 unit;   1 RR)
+%            Number of literals   :   16 (  16 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    5 (   2 constant; 0-2 arity)
+%            Number of variables  :   30 (  12 singleton)
+%            Maximal term depth   :    4 (   1 average)
+
+% Comments : The smallest model has 5 elements.
+%          : tptp2X -f otter:hypothesis:[set(tptp_eq),set(auto),clear(print_given)] -t rm_equality:stfp LAT025-1.p 
+%--------------------------------------------------------------------------
+set(prolog_style_variables).
+set(tptp_eq).
+set(auto).
+clear(print_given).
+
+list(usable).
+
+% reflexivity, axiom.
+ equal(X, X).
+
+% idempotence_of_meet, axiom.
+ equal(meet(X, X), X).
+
+% idempotence_of_join, axiom.
+ equal(join(X, X), X).
+
+% absorption1, axiom.
+ equal(meet(X, join(X, Y)), X).
+
+% absorption2, axiom.
+ equal(join(X, meet(X, Y)), X).
+
+% commutativity_of_meet, axiom.
+ equal(meet(X, Y), meet(Y, X)).
+
+% commutativity_of_join, axiom.
+ equal(join(X, Y), join(Y, X)).
+
+% tnl_1, axiom.
+ equal(join(X, meet(Y, meet(X, Z))), X).
+
+% tnl_2, axiom.
+ equal(meet(X, join(Y, join(X, Z))), X).
+
+% idempotence_of_meet2, axiom.
+ equal(meet2(X, X), X).
+
+% absorption1_2, axiom.
+ equal(meet2(X, join(X, Y)), X).
+
+% absorption2_2, axiom.
+ equal(join(X, meet2(X, Y)), X).
+
+% commutativity_of_meet2, axiom.
+ equal(meet2(X, Y), meet2(Y, X)).
+
+% tnl_1_2, axiom.
+ equal(join(X, meet2(Y, meet2(X, Z))), X).
+
+% tnl_2_2, axiom.
+ equal(meet2(X, join(Y, join(X, Z))), X).
+
+end_of_list.
+
+list(sos).
+
+% prove_meets_equal, conjecture.
+-equal(meet(a, b), meet2(a, b)).
+
+end_of_list.
+
+%--------------------------------------------------------------------------

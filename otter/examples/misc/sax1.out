@@ -1,0 +1,372 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:37 2004
+The command was "../../bin/otter".  The process ID is 8391.
+
+set(knuth_bendix).
+   dependent: set(anl_eq).
+   dependent: set(para_from).
+   dependent: set(para_into).
+   dependent: clear(para_from_right).
+   dependent: clear(para_into_right).
+   dependent: set(para_from_vars).
+   dependent: set(eq_units_both_ways).
+   dependent: set(dynamic_demod_all).
+   dependent: set(dynamic_demod).
+   dependent: set(order_eq).
+   dependent: set(back_demod).
+   dependent: set(process_input).
+   dependent: set(lrpo).
+assign(max_proofs,3).
+clear(print_kept).
+clear(print_new_demod).
+clear(print_back_demod).
+assign(stats_level,1).
+
+list(usable).
+0 [] x=x.
+end_of_list.
+
+list(passive).
+1 [] f(a,g(a))!=f(b,g(b))|$Ans(R_inverse).
+2 [] f(a,f(b,g(b)))!=a|$Ans(R_ident).
+3 [] f(f(a,b),c)!=f(a,f(b,c))|$Ans(assoc).
+end_of_list.
+
+list(sos).
+0 [] f(x,g(f(y,f(f(f(z,g(z)),g(f(u,y))),x))))=u.
+end_of_list.
+
+------------> process usable:
+** KEPT (pick-wt=3): 4 [] x=x.
+  Following clause subsumed by 4 during input processing: 0 [copy,4,flip.1] x=x.
+
+------------> process sos:
+** KEPT (pick-wt=18): 5 [] f(x,g(f(y,f(f(f(z,g(z)),g(f(u,y))),x))))=u.
+---> New Demodulator: 6 [new_demod,5] f(x,g(f(y,f(f(f(z,g(z)),g(f(u,y))),x))))=u.
+>>>> Starting back demodulation with 6.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=18) 5 [] f(x,g(f(y,f(f(f(z,g(z)),g(f(u,y))),x))))=u.
+
+given clause #2: (wt=23) 9 [para_into,5.1.1.2.1.2.1,5.1.1] f(x,g(f(f(f(f(y,g(y)),g(f(z,u))),f(v,g(v))),f(z,x))))=u.
+
+given clause #3: (wt=28) 16 [para_into,9.1.1.2.1.1.1,5.1.1] f(x,g(f(f(y,f(z,g(z))),f(u,x))))=f(f(f(v,g(v)),g(f(y,u))),f(w,g(w))).
+
+given clause #4: (wt=24) 33 [para_into,16.1.1,9.1.1,flip.1] f(f(f(x,g(x)),g(f(f(f(y,g(y)),g(f(z,u))),z))),f(v,g(v)))=u.
+
+given clause #5: (wt=15) 56 [para_into,33.1.1.1.2.1,33.1.1] f(f(f(x,g(x)),g(g(y))),f(z,g(z)))=y.
+
+given clause #6: (wt=19) 71 [para_from,33.1.1,5.1.1.2.1.2] f(f(x,g(x)),g(f(y,z)))=f(f(u,g(u)),g(f(y,z))).
+93 back subsumes 71.
+
+given clause #7: (wt=13) 103 [back_demod,62,demod,97] f(x,f(y,g(y)))=f(x,f(z,g(z))).
+
+-------- PROOF -------- 110 [binary,109.1,1.1] $Ans(R_inverse).
+
+----> UNIT CONFLICT at   0.01 sec ----> 110 [binary,109.1,1.1] $Ans(R_inverse).
+
+Length of proof is 9.  Level of proof is 7.
+
+---------------- PROOF ----------------
+
+1 [] f(a,g(a))!=f(b,g(b))|$Ans(R_inverse).
+5 [] f(x,g(f(y,f(f(f(z,g(z)),g(f(u,y))),x))))=u.
+9 [para_into,5.1.1.2.1.2.1,5.1.1] f(x,g(f(f(f(f(y,g(y)),g(f(z,u))),f(v,g(v))),f(z,x))))=u.
+16 [para_into,9.1.1.2.1.1.1,5.1.1] f(x,g(f(f(y,f(z,g(z))),f(u,x))))=f(f(f(v,g(v)),g(f(y,u))),f(w,g(w))).
+34,33 [para_into,16.1.1,9.1.1,flip.1] f(f(f(x,g(x)),g(f(f(f(y,g(y)),g(f(z,u))),z))),f(v,g(v)))=u.
+54 [para_into,33.1.1.1.2.1.1,16.1.1] f(f(f(x,g(x)),g(f(f(f(f(y,g(y)),g(f(z,u))),f(v,g(v))),f(z,f(w,g(w)))))),f(v6,g(v6)))=f(u,f(v7,g(v7))).
+62 [copy,54,flip.1] f(x,f(y,g(y)))=f(f(f(z,g(z)),g(f(f(f(f(u,g(u)),g(f(v,x))),f(w,g(w))),f(v,f(v6,g(v6)))))),f(v7,g(v7))).
+71 [para_from,33.1.1,5.1.1.2.1.2] f(f(x,g(x)),g(f(y,z)))=f(f(u,g(u)),g(f(y,z))).
+97,96 [para_into,71.1.1,9.1.1,flip.1] f(f(x,g(x)),g(f(f(f(f(y,g(y)),g(f(z,u))),f(v,g(v))),f(z,f(w,g(w))))))=u.
+103 [back_demod,62,demod,97] f(x,f(y,g(y)))=f(x,f(z,g(z))).
+109 [para_from,103.1.1,33.1.1.1.2.1.1.2.1,demod,34] f(x,g(x))=f(y,g(y)).
+110 [binary,109.1,1.1] $Ans(R_inverse).
+
+------------ end of proof -------------
+
+
+given clause #8: (wt=9) 109 [para_from,103.1.1,33.1.1.1.2.1.1.2.1,demod,34] f(x,g(x))=f(y,g(y)).
+
+given clause #9: (wt=14) 124 [para_from,109.1.1,5.1.1.2.1.2.1] f(x,g(f(g(y),f(f(z,g(z)),x))))=y.
+
+given clause #10: (wt=15) 93 [para_into,71.1.1.2.1,56.1.1,demod,57] f(f(x,g(x)),g(y))=f(f(z,g(z)),g(y)).
+156 back subsumes 91.
+158 back subsumes 100.
+
+given clause #11: (wt=15) 157 [para_into,93.1.1,109.1.1] f(x,g(x))=f(f(y,g(y)),g(f(z,g(z)))).
+
+given clause #12: (wt=15) 159 [copy,157,flip.1] f(f(x,g(x)),g(f(y,g(y))))=f(z,g(z)).
+
+given clause #13: (wt=11) 203 [para_from,159.1.1,33.1.1.1.2.1.1.2.1,demod,121] g(f(x,g(x)))=g(f(y,g(y))).
+
+given clause #14: (wt=16) 130 [para_into,124.1.1.2.1.2,109.1.1] f(g(f(x,g(x))),g(f(g(y),f(z,g(z)))))=y.
+
+given clause #15: (wt=16) 190 [para_from,157.1.1,9.1.1.2.1.1.1.2.1,demod,117] f(x,g(f(g(g(f(y,g(y)))),f(z,x))))=g(z).
+
+given clause #16: (wt=17) 206 [para_into,203.1.1.1.2,203.1.1] g(f(f(x,g(x)),g(f(y,g(y)))))=g(f(z,g(z))).
+
+given clause #17: (wt=17) 207 [copy,206,flip.1] g(f(x,g(x)))=g(f(f(y,g(y)),g(f(z,g(z))))).
+
+given clause #18: (wt=17) 241 [para_into,190.1.1,5.1.1,flip.1] g(f(f(x,g(x)),g(f(y,g(g(f(z,g(z))))))))=y.
+391 back subsumes 93.
+
+given clause #19: (wt=13) 391 [para_from,241.1.1,93.1.1.2,demod,242] f(f(x,g(x)),y)=f(f(z,g(z)),y).
+430 back subsumes 377.
+431 back subsumes 320.
+432 back subsumes 278.
+433 back subsumes 156.
+435 back subsumes 418.
+436 back subsumes 347.
+437 back subsumes 307.
+438 back subsumes 158.
+439 back subsumes 164.
+440 back subsumes 179.
+
+given clause #20: (wt=18) 229 [para_into,190.1.1.2.1.2,109.1.1] f(g(x),g(f(g(g(f(y,g(y)))),f(z,g(z)))))=g(x).
+
+given clause #21: (wt=16) 441 [para_into,229.1.1.1,241.1.1,demod,242] f(x,g(f(g(g(f(y,g(y)))),f(z,g(z)))))=x.
+
+given clause #22: (wt=12) 505 [para_from,441.1.1,33.1.1.1.2.1.1,demod,117] g(g(g(f(x,g(x)))))=f(y,g(y)).
+
+given clause #23: (wt=12) 537 [copy,505,flip.1] f(x,g(x))=g(g(g(f(y,g(y))))).
+
+given clause #24: (wt=14) 568 [para_from,537.1.1,241.1.1.1] g(g(g(g(f(x,g(x))))))=g(f(y,g(y))).
+
+given clause #25: (wt=14) 625 [copy,568,flip.1] g(f(x,g(x)))=g(g(g(g(f(y,g(y)))))).
+
+given clause #26: (wt=15) 562 [para_into,537.1.1,537.1.1] g(g(g(f(x,g(x)))))=g(g(g(f(y,g(y))))).
+
+given clause #27: (wt=13) 812 [para_from,562.1.1,130.1.1.2.1.1,demod,131] g(g(f(x,g(x))))=g(g(f(y,g(y)))).
+
+given clause #28: (wt=15) 577 [para_from,537.1.1,505.1.1.1.1.1] g(g(g(g(g(g(f(x,g(x))))))))=f(y,g(y)).
+
+given clause #29: (wt=15) 630 [copy,577,flip.1] f(x,g(x))=g(g(g(g(g(g(f(y,g(y)))))))).
+
+given clause #30: (wt=16) 478 [para_into,441.1.1,109.1.1] f(x,g(x))=f(g(g(f(y,g(y)))),f(z,g(z))).
+
+given clause #31: (wt=16) 480 [copy,478,flip.1] f(g(g(f(x,g(x)))),f(y,g(y)))=f(z,g(z)).
+-------- PROOF -------- 1296 [binary,1294.1,2.1] $Ans(R_ident).
+
+----> UNIT CONFLICT at   0.12 sec ----> 1296 [binary,1294.1,2.1] $Ans(R_ident).
+
+Length of proof is 33.  Level of proof is 17.
+
+---------------- PROOF ----------------
+
+2 [] f(a,f(b,g(b)))!=a|$Ans(R_ident).
+5 [] f(x,g(f(y,f(f(f(z,g(z)),g(f(u,y))),x))))=u.
+9 [para_into,5.1.1.2.1.2.1,5.1.1] f(x,g(f(f(f(f(y,g(y)),g(f(z,u))),f(v,g(v))),f(z,x))))=u.
+16 [para_into,9.1.1.2.1.1.1,5.1.1] f(x,g(f(f(y,f(z,g(z))),f(u,x))))=f(f(f(v,g(v)),g(f(y,u))),f(w,g(w))).
+34,33 [para_into,16.1.1,9.1.1,flip.1] f(f(f(x,g(x)),g(f(f(f(y,g(y)),g(f(z,u))),z))),f(v,g(v)))=u.
+54 [para_into,33.1.1.1.2.1.1,16.1.1] f(f(f(x,g(x)),g(f(f(f(f(y,g(y)),g(f(z,u))),f(v,g(v))),f(z,f(w,g(w)))))),f(v6,g(v6)))=f(u,f(v7,g(v7))).
+57,56 [para_into,33.1.1.1.2.1,33.1.1] f(f(f(x,g(x)),g(g(y))),f(z,g(z)))=y.
+62 [copy,54,flip.1] f(x,f(y,g(y)))=f(f(f(z,g(z)),g(f(f(f(f(u,g(u)),g(f(v,x))),f(w,g(w))),f(v,f(v6,g(v6)))))),f(v7,g(v7))).
+71 [para_from,33.1.1,5.1.1.2.1.2] f(f(x,g(x)),g(f(y,z)))=f(f(u,g(u)),g(f(y,z))).
+93 [para_into,71.1.1.2.1,56.1.1,demod,57] f(f(x,g(x)),g(y))=f(f(z,g(z)),g(y)).
+97,96 [para_into,71.1.1,9.1.1,flip.1] f(f(x,g(x)),g(f(f(f(f(y,g(y)),g(f(z,u))),f(v,g(v))),f(z,f(w,g(w))))))=u.
+103 [back_demod,62,demod,97] f(x,f(y,g(y)))=f(x,f(z,g(z))).
+109 [para_from,103.1.1,33.1.1.1.2.1.1.2.1,demod,34] f(x,g(x))=f(y,g(y)).
+117,116 [para_from,109.1.1,33.1.1.1.2.1.1] f(f(f(x,g(x)),g(f(f(y,g(y)),z))),f(u,g(u)))=g(z).
+124 [para_from,109.1.1,5.1.1.2.1.2.1] f(x,g(f(g(y),f(f(z,g(z)),x))))=y.
+130 [para_into,124.1.1.2.1.2,109.1.1] f(g(f(x,g(x))),g(f(g(y),f(z,g(z)))))=y.
+157 [para_into,93.1.1,109.1.1] f(x,g(x))=f(f(y,g(y)),g(f(z,g(z)))).
+190 [para_from,157.1.1,9.1.1.2.1.1.1.2.1,demod,117] f(x,g(f(g(g(f(y,g(y)))),f(z,x))))=g(z).
+213 [para_from,130.1.1,33.1.1.1.2.1.1.2.1] f(f(f(x,g(x)),g(f(f(f(y,g(y)),g(z)),g(f(u,g(u)))))),f(v,g(v)))=g(f(g(z),f(w,g(w)))).
+217 [copy,213,flip.1] g(f(g(x),f(y,g(y))))=f(f(f(z,g(z)),g(f(f(f(u,g(u)),g(x)),g(f(v,g(v)))))),f(w,g(w))).
+229 [para_into,190.1.1.2.1.2,109.1.1] f(g(x),g(f(g(g(f(y,g(y)))),f(z,g(z)))))=g(x).
+242,241 [para_into,190.1.1,5.1.1,flip.1] g(f(f(x,g(x)),g(f(y,g(g(f(z,g(z))))))))=y.
+441 [para_into,229.1.1.1,241.1.1,demod,242] f(x,g(f(g(g(f(y,g(y)))),f(z,g(z)))))=x.
+478 [para_into,441.1.1,109.1.1] f(x,g(x))=f(g(g(f(y,g(y)))),f(z,g(z))).
+480 [copy,478,flip.1] f(g(g(f(x,g(x)))),f(y,g(y)))=f(z,g(z)).
+505 [para_from,441.1.1,33.1.1.1.2.1.1,demod,117] g(g(g(f(x,g(x)))))=f(y,g(y)).
+537 [copy,505,flip.1] f(x,g(x))=g(g(g(f(y,g(y))))).
+577 [para_from,537.1.1,505.1.1.1.1.1] g(g(g(g(g(g(f(x,g(x))))))))=f(y,g(y)).
+630 [copy,577,flip.1] f(x,g(x))=g(g(g(g(g(g(f(y,g(y)))))))).
+967 [para_from,577.1.1,130.1.1.1.1.2] f(g(f(g(g(g(g(g(f(x,g(x))))))),f(y,g(y)))),g(f(g(z),f(u,g(u)))))=z.
+1059 [para_from,630.1.1,56.1.1.1.1] f(f(g(g(g(g(g(g(f(x,g(x)))))))),g(g(y))),f(z,g(z)))=y.
+1189,1188 [para_from,480.1.1,441.1.1.2.1] f(x,g(f(y,g(y))))=x.
+1197,1196 [back_demod,217,demod,1189,117] g(f(g(x),f(y,g(y))))=g(g(x)).
+1227,1226 [back_demod,967,demod,1197,1197] f(g(g(g(g(g(g(f(x,g(x)))))))),g(g(y)))=y.
+1294 [back_demod,1059,demod,1227] f(x,f(y,g(y)))=x.
+1296 [binary,1294.1,2.1] $Ans(R_ident).
+
+------------ end of proof -------------
+
+1439 back subsumes 1429.
+1440 back subsumes 1432.
+
+given clause #32: (wt=8) 1294 [back_demod,1059,demod,1227] f(x,f(y,g(y)))=x.
+
+given clause #33: (wt=8) 1393 [back_demod,529,demod,1295,1339,1331] f(f(x,y),g(y))=x.
+
+given clause #34: (wt=5) 1528 [back_demod,1463,demod,1501] g(g(x))=x.
+
+given clause #35: (wt=8) 1395 [back_demod,513,demod,1295,1295,1339,1331] f(g(x),f(x,y))=y.
+
+given clause #36: (wt=8) 1447 [back_demod,48,demod,1295,1337,1295,1295,1295,1444,flip.1] f(x,f(g(x),y))=y.
+
+given clause #37: (wt=8) 1504 [para_into,1393.1.1.1,109.1.1,demod,1499] f(f(x,g(x)),y)=y.
+
+given clause #38: (wt=8) 1516 [back_demod,1412,demod,1505,1499] f(f(g(x),x),y)=y.
+
+given clause #39: (wt=8) 1532 [back_demod,1403,demod,1505] f(x,f(g(y),y))=x.
+
+given clause #40: (wt=8) 1550 [para_from,1528.1.1,1393.1.1.2] f(f(x,g(y)),y)=x.
+
+given clause #41: (wt=9) 1439 [back_demod,89,demod,1295,1313,1339,1293] f(x,g(x))=f(g(y),y).
+
+given clause #42: (wt=9) 1440 [back_demod,82,demod,1295,1313,1339,1293] f(g(x),x)=f(y,g(y)).
+
+given clause #43: (wt=9) 1552 [para_into,1532.1.1,1516.1.1] f(g(x),x)=f(g(y),y).
+
+given clause #44: (wt=10) 1530 [back_demod,1345,demod,1529,1527] g(f(x,y))=f(g(y),g(x)).
+
+given clause #45: (wt=13) 1546 [back_demod,1437,demod,1531,1531,1531,1529,1529,1529] f(f(g(x),g(y)),f(f(y,x),z))=z.
+
+given clause #46: (wt=13) 1554 [para_from,1530.1.1,1447.1.1.2.1] f(f(x,y),f(f(g(y),g(x)),z))=z.
+
+given clause #47: (wt=13) 1557 [para_from,1530.1.1,1504.1.1.1.2] f(f(f(x,y),f(g(y),g(x))),z)=z.
+
+given clause #48: (wt=13) 1559 [para_from,1530.1.1,1550.1.1.1.2] f(f(x,f(g(y),g(z))),f(z,y))=x.
+
+given clause #49: (wt=13) 1561 [para_from,1530.1.1,1393.1.1.2] f(f(x,f(y,z)),f(g(z),g(y)))=x.
+
+given clause #50: (wt=13) 1563 [para_from,1530.1.1,1294.1.1.2.2] f(x,f(f(y,z),f(g(z),g(y))))=x.
+
+given clause #51: (wt=13) 1569 [para_into,1546.1.1.1.1,1528.1.1] f(f(x,g(y)),f(f(y,g(x)),z))=z.
+
+given clause #52: (wt=13) 1573 [para_into,1546.1.1.1.2,1528.1.1] f(f(g(x),y),f(f(g(y),x),z))=z.
+
+given clause #53: (wt=13) 1581 [para_into,1557.1.1.1.2.1,1528.1.1] f(f(f(x,g(y)),f(y,g(x))),z)=z.
+
+given clause #54: (wt=13) 1585 [para_into,1557.1.1.1.2.2,1528.1.1] f(f(f(g(x),y),f(g(y),x)),z)=z.
+
+given clause #55: (wt=13) 1589 [para_into,1559.1.1.1.2.1,1528.1.1] f(f(x,f(y,g(z))),f(z,g(y)))=x.
+
+given clause #56: (wt=13) 1593 [para_into,1559.1.1.1.2.2,1528.1.1] f(f(x,f(g(y),z)),f(g(z),y))=x.
+
+given clause #57: (wt=13) 1614 [para_into,1563.1.1.2.2.1,1528.1.1] f(x,f(f(y,g(z)),f(z,g(y))))=x.
+
+given clause #58: (wt=13) 1618 [para_into,1563.1.1.2.2.2,1528.1.1] f(x,f(f(g(y),z),f(g(z),y)))=x.
+
+given clause #59: (wt=14) 1542 [back_demod,1443,demod,1531,1531,1531,1529,1529] f(f(g(x),g(y)),f(y,z))=f(g(x),z).
+
+given clause #60: (wt=12) 1670 [para_into,1542.1.1.1.1,1528.1.1,demod,1529] f(f(x,g(y)),f(y,z))=f(x,z).
+-------- PROOF -------- 1718 [binary,1716.1,3.1] $Ans(assoc).
+
+----> UNIT CONFLICT at   0.20 sec ----> 1718 [binary,1716.1,3.1] $Ans(assoc).
+
+Length of proof is 76.  Level of proof is 27.
+
+---------------- PROOF ----------------
+
+3 [] f(f(a,b),c)!=f(a,f(b,c))|$Ans(assoc).
+5 [] f(x,g(f(y,f(f(f(z,g(z)),g(f(u,y))),x))))=u.
+9 [para_into,5.1.1.2.1.2.1,5.1.1] f(x,g(f(f(f(f(y,g(y)),g(f(z,u))),f(v,g(v))),f(z,x))))=u.
+16 [para_into,9.1.1.2.1.1.1,5.1.1] f(x,g(f(f(y,f(z,g(z))),f(u,x))))=f(f(f(v,g(v)),g(f(y,u))),f(w,g(w))).
+34,33 [para_into,16.1.1,9.1.1,flip.1] f(f(f(x,g(x)),g(f(f(f(y,g(y)),g(f(z,u))),z))),f(v,g(v)))=u.
+52 [para_into,33.1.1.1.2.1.1.2.1,9.1.1] f(f(f(x,g(x)),g(f(f(f(y,g(y)),g(z)),u))),f(v,g(v)))=g(f(f(f(f(w,g(w)),g(f(v6,z))),f(v7,g(v7))),f(v6,u))).
+54 [para_into,33.1.1.1.2.1.1,16.1.1] f(f(f(x,g(x)),g(f(f(f(f(y,g(y)),g(f(z,u))),f(v,g(v))),f(z,f(w,g(w)))))),f(v6,g(v6)))=f(u,f(v7,g(v7))).
+57,56 [para_into,33.1.1.1.2.1,33.1.1] f(f(f(x,g(x)),g(g(y))),f(z,g(z)))=y.
+60 [copy,52,flip.1] g(f(f(f(f(x,g(x)),g(f(y,z))),f(u,g(u))),f(y,v)))=f(f(f(w,g(w)),g(f(f(f(v6,g(v6)),g(z)),v))),f(v7,g(v7))).
+62 [copy,54,flip.1] f(x,f(y,g(y)))=f(f(f(z,g(z)),g(f(f(f(f(u,g(u)),g(f(v,x))),f(w,g(w))),f(v,f(v6,g(v6)))))),f(v7,g(v7))).
+71 [para_from,33.1.1,5.1.1.2.1.2] f(f(x,g(x)),g(f(y,z)))=f(f(u,g(u)),g(f(y,z))).
+93 [para_into,71.1.1.2.1,56.1.1,demod,57] f(f(x,g(x)),g(y))=f(f(z,g(z)),g(y)).
+97,96 [para_into,71.1.1,9.1.1,flip.1] f(f(x,g(x)),g(f(f(f(f(y,g(y)),g(f(z,u))),f(v,g(v))),f(z,f(w,g(w))))))=u.
+103 [back_demod,62,demod,97] f(x,f(y,g(y)))=f(x,f(z,g(z))).
+109 [para_from,103.1.1,33.1.1.1.2.1.1.2.1,demod,34] f(x,g(x))=f(y,g(y)).
+117,116 [para_from,109.1.1,33.1.1.1.2.1.1] f(f(f(x,g(x)),g(f(f(y,g(y)),z))),f(u,g(u)))=g(z).
+121,120 [para_from,109.1.1,33.1.1.1.2.1.1.2.1] f(f(f(x,g(x)),g(f(f(f(y,g(y)),g(f(z,g(z)))),u))),f(v,g(v)))=g(u).
+124 [para_from,109.1.1,5.1.1.2.1.2.1] f(x,g(f(g(y),f(f(z,g(z)),x))))=y.
+131,130 [para_into,124.1.1.2.1.2,109.1.1] f(g(f(x,g(x))),g(f(g(y),f(z,g(z)))))=y.
+157 [para_into,93.1.1,109.1.1] f(x,g(x))=f(f(y,g(y)),g(f(z,g(z)))).
+159 [copy,157,flip.1] f(f(x,g(x)),g(f(y,g(y))))=f(z,g(z)).
+190 [para_from,157.1.1,9.1.1.2.1.1.1.2.1,demod,117] f(x,g(f(g(g(f(y,g(y)))),f(z,x))))=g(z).
+203 [para_from,159.1.1,33.1.1.1.2.1.1.2.1,demod,121] g(f(x,g(x)))=g(f(y,g(y))).
+208 [para_into,130.1.1.1.1.2,203.1.1] f(g(f(f(x,g(x)),g(f(y,g(y))))),g(f(g(z),f(u,g(u)))))=z.
+213 [para_from,130.1.1,33.1.1.1.2.1.1.2.1] f(f(f(x,g(x)),g(f(f(f(y,g(y)),g(z)),g(f(u,g(u)))))),f(v,g(v)))=g(f(g(z),f(w,g(w)))).
+217 [copy,213,flip.1] g(f(g(x),f(y,g(y))))=f(f(f(z,g(z)),g(f(f(f(u,g(u)),g(x)),g(f(v,g(v)))))),f(w,g(w))).
+229 [para_into,190.1.1.2.1.2,109.1.1] f(g(x),g(f(g(g(f(y,g(y)))),f(z,g(z)))))=g(x).
+242,241 [para_into,190.1.1,5.1.1,flip.1] g(f(f(x,g(x)),g(f(y,g(g(f(z,g(z))))))))=y.
+441 [para_into,229.1.1.1,241.1.1,demod,242] f(x,g(f(g(g(f(y,g(y)))),f(z,g(z)))))=x.
+478 [para_into,441.1.1,109.1.1] f(x,g(x))=f(g(g(f(y,g(y)))),f(z,g(z))).
+480 [copy,478,flip.1] f(g(g(f(x,g(x)))),f(y,g(y)))=f(z,g(z)).
+496 [para_from,441.1.1,16.1.1.2.1.2] f(g(f(g(g(f(x,g(x)))),f(y,g(y)))),g(f(f(z,f(u,g(u))),v)))=f(f(f(w,g(w)),g(f(z,v))),f(v6,g(v6))).
+505 [para_from,441.1.1,33.1.1.1.2.1.1,demod,117] g(g(g(f(x,g(x)))))=f(y,g(y)).
+529 [para_from,441.1.1,5.1.1.2.1.2.1.1] f(x,g(f(y,f(f(f(g(g(f(z,g(z)))),f(u,g(u))),g(f(v,y))),x))))=v.
+536 [copy,496,flip.1] f(f(f(x,g(x)),g(f(y,z))),f(u,g(u)))=f(g(f(g(g(f(v,g(v)))),f(w,g(w)))),g(f(f(y,f(v6,g(v6))),z))).
+537 [copy,505,flip.1] f(x,g(x))=g(g(g(f(y,g(y))))).
+562 [para_into,537.1.1,537.1.1] g(g(g(f(x,g(x)))))=g(g(g(f(y,g(y))))).
+577 [para_from,537.1.1,505.1.1.1.1.1] g(g(g(g(g(g(f(x,g(x))))))))=f(y,g(y)).
+585 [para_from,537.1.1,16.1.1.2.1.2] f(g(x),g(f(f(y,f(z,g(z))),g(g(g(f(u,g(u))))))))=f(f(f(v,g(v)),g(f(y,x))),f(w,g(w))).
+622 [para_from,537.1.1,16.1.1.2.1.1.2] f(x,g(f(f(y,g(g(g(f(z,g(z)))))),f(u,x))))=f(f(f(v,g(v)),g(f(y,u))),f(w,g(w))).
+630 [copy,577,flip.1] f(x,g(x))=g(g(g(g(g(g(f(y,g(y)))))))).
+632 [copy,585,flip.1] f(f(f(x,g(x)),g(f(y,z))),f(u,g(u)))=f(g(z),g(f(f(y,f(v,g(v))),g(g(g(f(w,g(w)))))))).
+794 [para_from,562.1.1,241.1.1.1.1.2] g(f(f(g(g(f(x,g(x)))),g(g(g(f(y,g(y)))))),g(f(z,g(g(f(u,g(u))))))))=z.
+812 [para_from,562.1.1,130.1.1.2.1.1,demod,131] g(g(f(x,g(x))))=g(g(f(y,g(y)))).
+813 [para_from,562.1.1,103.1.1.2.2] f(x,f(g(g(f(y,g(y)))),g(g(g(f(z,g(z)))))))=f(x,f(u,g(u))).
+846 [copy,813,flip.1] f(x,f(y,g(y)))=f(x,f(g(g(f(z,g(z)))),g(g(g(f(u,g(u))))))).
+893 [para_from,812.1.1,441.1.1.2.1.1.1.1.2] f(x,g(f(g(g(f(g(f(y,g(y))),g(g(f(z,g(z))))))),f(u,g(u)))))=x.
+967 [para_from,577.1.1,130.1.1.1.1.2] f(g(f(g(g(g(g(g(f(x,g(x))))))),f(y,g(y)))),g(f(g(z),f(u,g(u)))))=z.
+982 [para_from,577.1.1,441.1.1.2.1.1.1.1.2] f(x,g(f(g(g(f(g(g(g(g(g(f(y,g(y))))))),f(z,g(z))))),f(u,g(u)))))=x.
+1048 [para_from,630.1.1,241.1.1.1.1] g(f(g(g(g(g(g(g(f(x,g(x)))))))),g(f(y,g(g(f(z,g(z))))))))=y.
+1059 [para_from,630.1.1,56.1.1.1.1] f(f(g(g(g(g(g(g(f(x,g(x)))))))),g(g(y))),f(z,g(z)))=y.
+1096 [para_from,630.1.1,241.1.1.1.2.1.2.1.1] g(f(f(x,g(x)),g(f(y,g(g(g(g(g(g(g(g(f(z,g(z))))))))))))))=y.
+1189,1188 [para_from,480.1.1,441.1.1.2.1] f(x,g(f(y,g(y))))=x.
+1197,1196 [back_demod,217,demod,1189,117] g(f(g(x),f(y,g(y))))=g(g(x)).
+1201,1200 [back_demod,208,demod,1189,1197] f(g(f(x,g(x))),g(g(y)))=y.
+1225,1224 [back_demod,982,demod,1197,1197] f(x,g(g(g(g(g(g(g(g(f(y,g(y)))))))))))=x.
+1227,1226 [back_demod,967,demod,1197,1197] f(g(g(g(g(g(g(f(x,g(x)))))))),g(g(y)))=y.
+1237,1236 [back_demod,893,demod,1201,1197] f(x,g(g(g(f(y,g(y))))))=x.
+1260 [back_demod,536,demod,1197] f(f(f(x,g(x)),g(f(y,z))),f(u,g(u)))=f(g(g(g(f(v,g(v))))),g(f(f(y,f(w,g(w))),z))).
+1293,1292 [back_demod,1096,demod,1225] g(f(f(x,g(x)),g(y)))=y.
+1295,1294 [back_demod,1059,demod,1227] f(x,f(y,g(y)))=x.
+1305,1304 [back_demod,846,demod,1295,1237,flip.1] f(x,g(g(f(y,g(y)))))=x.
+1331,1330 [back_demod,794,demod,1237,1305] g(f(g(g(f(x,g(x)))),g(y)))=y.
+1337,1336 [back_demod,632,demod,1295,1295,1237] f(f(x,g(x)),g(f(y,z)))=f(g(z),g(y)).
+1339,1338 [back_demod,622,demod,1237,1337,1295] f(x,g(f(y,f(z,x))))=f(g(z),g(y)).
+1345 [copy,1260,flip.1,demod,1295,1337,1295] f(g(g(g(f(x,g(x))))),g(f(y,z)))=f(g(z),g(y)).
+1393 [back_demod,529,demod,1295,1339,1331] f(f(x,y),g(y))=x.
+1443 [back_demod,60,demod,1337,1295,1337,1293,1295] g(f(f(g(x),g(y)),f(y,z)))=f(g(z),x).
+1463 [back_demod,1048,demod,1305] g(f(g(g(g(g(g(g(f(x,g(x)))))))),g(y)))=y.
+1499,1498 [para_into,1393.1.1.1,1393.1.1] f(x,g(g(y)))=f(x,y).
+1501,1500 [para_into,1393.1.1.1,630.1.1,demod,1499] f(g(g(g(g(g(g(f(x,g(x)))))))),y)=y.
+1527,1526 [back_demod,1200,demod,1499] f(g(f(x,g(x))),y)=y.
+1529,1528 [back_demod,1463,demod,1501] g(g(x))=x.
+1531,1530 [back_demod,1345,demod,1529,1527] g(f(x,y))=f(g(y),g(x)).
+1542 [back_demod,1443,demod,1531,1531,1531,1529,1529] f(f(g(x),g(y)),f(y,z))=f(g(x),z).
+1550 [para_from,1528.1.1,1393.1.1.2] f(f(x,g(y)),y)=x.
+1670 [para_into,1542.1.1.1.1,1528.1.1,demod,1529] f(f(x,g(y)),f(y,z))=f(x,z).
+1716 [para_into,1670.1.1.1,1550.1.1,demod,1529,flip.1] f(f(x,y),z)=f(x,f(y,z)).
+1718 [binary,1716.1,3.1] $Ans(assoc).
+
+------------ end of proof -------------
+
+
+Search stopped by max_proofs option.
+
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 60
+clauses generated           2460
+clauses kept                1244
+clauses forward subsumed    3168
+clauses back subsumed         16
+Kbytes malloced             8789
+
+----------- times (seconds) -----------
+user CPU time          0.20          (0 hr, 0 min, 0 sec)
+system CPU time        0.03          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8391 finished Mon Aug  2 15:30:37 2004

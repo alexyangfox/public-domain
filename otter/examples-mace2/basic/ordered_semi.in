@@ -1,0 +1,18 @@
+% benchmark parameters -n4 -m1000
+
+% How many ordered semigroups are there?
+% Note that we use the built-in relation <,
+% which orders the members of the domain.
+
+op(400, xfx, *).
+
+formula_list(usable).
+
+all x y z ((x*y)*z = x* (y*z)).    % associativity
+
+all x y z (x*y < x*z -> y < z).    % first order axiom
+
+all x y z (y*x < z*x -> y < z).    % second order axiom
+
+end_of_list.
+

@@ -1,0 +1,1799 @@
+Started otter-ploop Tue Feb 10 15:36:21 CST 2004 on theorem.mcs.anl.gov.
+
+Here is the fixed part of the input (file head).
+============================
+set(auto).
+assign(max_seconds, 10).
+assign(max_weight, 50).
+
+list(usable).
+x = x.
+f(a,b) != f(b,a) | $Ans(commute).
+end_of_list.
+
+% sos to be given on command line
+============================
+
+f(f(x,x),f(x,y)) = x.  % Job 1
+Search stopped because sos empty.
+clauses kept                   4
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+
+f(f(x,x),f(y,x)) = x.  % Job 2
+Search stopped because sos empty.
+clauses kept                   5
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(y,y)),f(x,x)) = x.  % Job 3
+Search stopped because sos empty.
+clauses kept                   3
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,y),y),f(x,x)) = x.  % Job 4
+Search stopped because sos empty.
+clauses kept                   3
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+
+f(f(x,f(y,z)),f(x,z)) = x.  % Job 5
+Search stopped by max_seconds option.
+clauses kept                2499
+user CPU time         10.03          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,z)),f(z,x)) = x.  % Job 6
+Search stopped by max_seconds option.
+clauses kept                1196
+user CPU time         10.03          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,z)),f(x,y)) = x.  % Job 7
+Search stopped by max_seconds option.
+clauses kept                 200
+user CPU time         10.08          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,z)),f(y,x)) = x.  % Job 8
+Search stopped by max_seconds option.
+clauses kept                1170
+user CPU time         10.17          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,z),x),f(x,z)) = x.  % Job 9
+Search stopped by max_seconds option.
+clauses kept                 140
+user CPU time         10.22          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,z),x),f(z,x)) = x.  % Job 10
+Search stopped by max_seconds option.
+clauses kept                 199
+user CPU time         10.01          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,z),x),f(x,y)) = x.  % Job 11
+Search stopped by max_seconds option.
+clauses kept                1522
+user CPU time         10.14          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,z),x),f(y,x)) = x.  % Job 12
+Search stopped by max_seconds option.
+clauses kept                2252
+user CPU time         10.01          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(y,y))),f(x,z)) = x.  % Job 13
+Search stopped by max_seconds option.
+clauses kept                3008
+user CPU time         10.07          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(y,y),y)),f(x,z)) = x.  % Job 14
+Search stopped by max_seconds option.
+clauses kept                3068
+user CPU time         10.04          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(y,y))),f(z,x)) = x.  % Job 15
+Search stopped because sos empty.
+clauses kept                  10
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+
+f(f(x,f(f(y,y),y)),f(z,x)) = x.  % Job 16
+Search stopped because sos empty.
+clauses kept                   8
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(y,y)),x),f(x,z)) = x.  % Job 17
+Search stopped because sos empty.
+clauses kept                   8
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(y,y),y),x),f(x,z)) = x.  % Job 18
+Search stopped because sos empty.
+clauses kept                   8
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(y,y)),x),f(z,x)) = x.  % Job 19
+Search stopped because sos empty.
+clauses kept                  26
+user CPU time          0.47          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(y,y),y),x),f(z,x)) = x.  % Job 20
+Search stopped by max_seconds option.
+clauses kept                 358
+user CPU time         10.02          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(x,y),y)),f(x,z)) = x.  % Job 21
+Search stopped because sos empty.
+clauses kept                   9
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+
+f(f(x,f(f(x,y),y)),f(z,x)) = x.  % Job 22
+Search stopped because sos empty.
+clauses kept                  43
+user CPU time          1.22          (0 hr, 0 min, 1 sec)
+
+f(f(f(f(x,y),z),z),f(x,x)) = x.  % Job 23
+Search stopped by max_seconds option.
+clauses kept                 367
+user CPU time         10.15          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(x,y))),f(x,z)) = x.  % Job 24
+Search stopped because sos empty.
+clauses kept                  66
+user CPU time          0.22          (0 hr, 0 min, 0 sec)
+
+f(f(x,f(f(y,x),y)),f(x,z)) = x.  % Job 25
+Search stopped by max_seconds option.
+clauses kept                 398
+user CPU time         10.28          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(x,y))),f(z,x)) = x.  % Job 26
+Search stopped because sos empty.
+clauses kept                   5
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+
+f(f(x,f(f(y,x),y)),f(z,x)) = x.  % Job 27
+Search stopped because sos empty.
+clauses kept                  45
+user CPU time          1.97          (0 hr, 0 min, 1 sec)
+
+f(f(x,f(y,f(y,x))),f(x,z)) = x.  % Job 28
+Search stopped by max_seconds option.
+clauses kept                 315
+user CPU time         10.03          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(x,y),y),x),f(x,z)) = x.  % Job 29
+Search stopped because sos empty.
+clauses kept                  11
+user CPU time          0.03          (0 hr, 0 min, 0 sec)
+
+f(f(x,f(y,f(y,x))),f(z,x)) = x.  % Job 30
+Search stopped by max_seconds option.
+clauses kept                  97
+user CPU time         10.02          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(x,y),y),x),f(z,x)) = x.  % Job 31
+Search stopped because sos empty.
+clauses kept                  14
+user CPU time          0.07          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(y,x),z),z),f(x,x)) = x.  % Job 32
+Search stopped by max_seconds option.
+clauses kept                2865
+user CPU time         10.04          (0 hr, 0 min, 10 sec)
+
+f(f(y,f(f(x,z),y)),f(x,x)) = x.  % Job 33
+Search stopped because sos empty.
+clauses kept                  21
+user CPU time          0.18          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(x,z)),y),f(x,x)) = x.  % Job 34
+Search stopped because sos empty.
+clauses kept                  68
+user CPU time          2.84          (0 hr, 0 min, 2 sec)
+
+f(f(f(y,f(x,y)),x),f(x,z)) = x.  % Job 35
+Search stopped because sos empty.
+clauses kept                  34
+user CPU time          0.35          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(y,x),y),x),f(x,z)) = x.  % Job 36
+Search stopped because sos empty.
+clauses kept                  13
+user CPU time          0.14          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(x,y)),x),f(z,x)) = x.  % Job 37
+Search stopped because sos empty.
+clauses kept                   9
+user CPU time          0.03          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(y,x),y),x),f(z,x)) = x.  % Job 38
+Search stopped by max_seconds option.
+clauses kept                 409
+user CPU time         10.07          (0 hr, 0 min, 10 sec)
+
+f(f(y,f(f(z,x),y)),f(x,x)) = x.  % Job 39
+Search stopped because sos empty.
+clauses kept                  11
+user CPU time          0.04          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(z,x)),y),f(x,x)) = x.  % Job 40
+Search stopped because sos empty.
+clauses kept                  45
+user CPU time          0.35          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(y,x)),x),f(x,z)) = x.  % Job 41
+Search stopped because sos empty.
+clauses kept                  13
+user CPU time          0.14          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(y,x)),x),f(z,x)) = x.  % Job 42
+Search stopped by max_seconds option.
+clauses kept                 299
+user CPU time         10.18          (0 hr, 0 min, 10 sec)
+
+f(f(y,f(y,f(x,z))),f(x,x)) = x.  % Job 43
+Search stopped because sos empty.
+clauses kept                  69
+user CPU time          5.12          (0 hr, 0 min, 5 sec)
+
+f(f(y,f(y,f(z,x))),f(x,x)) = x.  % Job 44
+Search stopped because sos empty.
+clauses kept                  45
+user CPU time          0.50          (0 hr, 0 min, 0 sec)
+
+f(f(x,f(f(x,x),y)),f(x,z)) = x.  % Job 45
+Search stopped because sos empty.
+clauses kept                   6
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+
+f(f(x,f(f(x,x),y)),f(z,x)) = x.  % Job 46
+Search stopped because sos empty.
+clauses kept                   5
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(x,x),y),x),f(x,z)) = x.  % Job 47
+Search stopped because sos empty.
+clauses kept                   5
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(x,x),y),x),f(z,x)) = x.  % Job 48
+Search stopped because sos empty.
+clauses kept                  12
+user CPU time          0.06          (0 hr, 0 min, 0 sec)
+
+f(f(x,f(y,f(x,x))),f(x,z)) = x.  % Job 49
+Search stopped because sos empty.
+clauses kept                  15
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+
+f(f(x,f(y,f(x,x))),f(z,x)) = x.  % Job 50
+Search stopped because sos empty.
+clauses kept                   7
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(x,x)),x),f(x,z)) = x.  % Job 51
+Search stopped because sos empty.
+clauses kept                  17
+user CPU time          0.08          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(x,x)),x),f(z,x)) = x.  % Job 52
+Search stopped because sos empty.
+clauses kept                  17
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+
+f(f(x,f(y,f(y,y))),f(z,f(z,z))) = x.  % Job 53
+Search stopped because sos empty.
+clauses kept                  14
+user CPU time          0.04          (0 hr, 0 min, 0 sec)
+
+f(f(x,f(f(y,y),y)),f(z,f(z,z))) = x.  % Job 54
+Search stopped because sos empty.
+clauses kept                   3
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+
+f(f(x,f(y,f(y,y))),f(f(z,z),z)) = x.  % Job 55
+Search stopped because sos empty.
+clauses kept                 143
+user CPU time          6.02          (0 hr, 0 min, 6 sec)
+
+f(f(x,f(f(y,y),y)),f(f(z,z),z)) = x.  % Job 56
+Search stopped because sos empty.
+clauses kept                   4
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(y,y)),x),f(z,f(z,z))) = x.  % Job 57
+Search stopped because sos empty.
+clauses kept                  67
+user CPU time          0.37          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(y,y),y),x),f(z,f(z,z))) = x.  % Job 58
+Search stopped because sos empty.
+clauses kept                   4
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(y,y)),x),f(f(z,z),z)) = x.  % Job 59
+Search stopped by max_seconds option.
+clauses kept                2987
+user CPU time         10.00          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(y,y),y),x),f(f(z,z),z)) = x.  % Job 60
+Search stopped because sos empty.
+clauses kept                   3
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(x,y),y),y),f(x,f(z,y))) = x.  % Job 61
+Search stopped by max_seconds option.
+clauses kept                 248
+user CPU time         10.29          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(x,y),y),y),f(x,f(y,z))) = x.  % Job 62
+Search stopped because sos empty.
+clauses kept                  11
+user CPU time          0.05          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(x,y),y),y),f(f(z,y),x)) = x.  % Job 63
+Search stopped because sos empty.
+clauses kept                  34
+user CPU time          0.53          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(x,y),y),y),f(f(y,z),x)) = x.  % Job 64
+Search stopped because sos empty.
+clauses kept                   7
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(f(x,y),y)),f(x,f(z,y))) = x.  % Job 65
+----> UNIT CONFLICT at   0.14 sec ----> 573 [binary,572.1,2.1] $Ans(commute).
+Search stopped by max_proofs option.
+clauses kept                 287
+user CPU time          0.16          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(x,y)),y),f(x,f(z,y))) = x.  % Job 66
+----> UNIT CONFLICT at   6.50 sec ----> 2427 [binary,2426.1,2.1] $Ans(commute).
+Search stopped by max_proofs option.
+clauses kept                1214
+user CPU time          6.51          (0 hr, 0 min, 6 sec)
+
+f(f(f(f(y,x),y),y),f(x,f(z,y))) = x.  % Job 67
+Search stopped because sos empty.
+clauses kept                  23
+user CPU time          0.37          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(f(x,y),y)),f(x,f(y,z))) = x.  % Job 68
+Search stopped because sos empty.
+clauses kept                  11
+user CPU time          0.04          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(x,y)),y),f(x,f(y,z))) = x.  % Job 69
+Search stopped because sos empty.
+clauses kept                  28
+user CPU time          0.16          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(y,x),y),y),f(x,f(y,z))) = x.  % Job 70
+Search stopped because sos empty.
+clauses kept                   8
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(f(x,y),y)),f(f(z,y),x)) = x.  % Job 71
+Search stopped because sos empty.
+clauses kept                  30
+user CPU time          0.18          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(x,y)),y),f(f(z,y),x)) = x.  % Job 72
+Search stopped because sos empty.
+clauses kept                  18
+user CPU time          0.13          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(y,x),y),y),f(f(z,y),x)) = x.  % Job 73
+Search stopped because sos empty.
+clauses kept                  35
+user CPU time          0.34          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(f(x,y),y)),f(f(y,z),x)) = x.  % Job 74
+Search stopped because sos empty.
+clauses kept                  15
+user CPU time          0.10          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(x,y)),y),f(f(y,z),x)) = x.  % Job 75
+Search stopped because sos empty.
+clauses kept                   8
+user CPU time          0.03          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(y,x),y),y),f(f(y,z),x)) = x.  % Job 76
+Search stopped because sos empty.
+clauses kept                  12
+user CPU time          0.05          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(y,f(x,y))),f(x,f(z,y))) = x.  % Job 77
+Search stopped because sos empty.
+clauses kept                  44
+user CPU time          1.11          (0 hr, 0 min, 1 sec)
+
+f(f(y,f(f(y,x),y)),f(x,f(z,y))) = x.  % Job 78
+Search stopped by max_seconds option.
+clauses kept                1643
+user CPU time         10.17          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(y,x)),y),f(x,f(z,y))) = x.  % Job 79
+Search stopped because sos empty.
+clauses kept                  23
+user CPU time          0.37          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(y,f(x,y))),f(x,f(y,z))) = x.  % Job 80
+Search stopped because sos empty.
+clauses kept                  71
+user CPU time          4.50          (0 hr, 0 min, 4 sec)
+
+f(f(y,f(f(y,x),y)),f(x,f(y,z))) = x.  % Job 81
+Search stopped by max_seconds option.
+clauses kept                 155
+user CPU time         10.36          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(y,x)),y),f(x,f(y,z))) = x.  % Job 82
+Search stopped because sos empty.
+clauses kept                   8
+user CPU time          0.04          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(y,f(x,y))),f(f(z,y),x)) = x.  % Job 83
+Search stopped because sos empty.
+clauses kept                  13
+user CPU time          0.05          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(f(y,x),y)),f(f(z,y),x)) = x.  % Job 84
+Search stopped because sos empty.
+clauses kept                  17
+user CPU time          0.12          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(y,x)),y),f(f(z,y),x)) = x.  % Job 85
+Search stopped by max_seconds option.
+clauses kept                 134
+user CPU time         10.06          (0 hr, 0 min, 10 sec)
+
+f(f(y,f(y,f(x,y))),f(f(y,z),x)) = x.  % Job 86
+Search stopped because sos empty.
+clauses kept                  10
+user CPU time          0.06          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(f(y,x),y)),f(f(y,z),x)) = x.  % Job 87
+Search stopped because sos empty.
+clauses kept                  15
+user CPU time          0.15          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(y,x)),y),f(f(y,z),x)) = x.  % Job 88
+Search stopped because sos empty.
+clauses kept                   7
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(y,f(y,x))),f(x,f(z,y))) = x.  % Job 89
+Search stopped because sos empty.
+clauses kept                  25
+user CPU time          0.43          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(y,f(y,x))),f(x,f(y,z))) = x.  % Job 90
+Search stopped because sos empty.
+clauses kept                  32
+user CPU time          0.29          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(y,f(y,x))),f(f(z,y),x)) = x.  % Job 91
+Search stopped because sos empty.
+clauses kept                  12
+user CPU time          0.09          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(y,f(y,x))),f(f(y,z),x)) = x.  % Job 92
+Search stopped by max_seconds option.
+clauses kept                2296
+user CPU time         10.14          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(x,y),y)),f(z,f(z,z))) = x.  % Job 93
+Search stopped because sos empty.
+clauses kept                 124
+user CPU time          1.67          (0 hr, 0 min, 1 sec)
+
+f(f(x,f(f(x,y),y)),f(f(z,z),z)) = x.  % Job 94
+Search stopped by max_seconds option.
+clauses kept                2970
+user CPU time         10.06          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(x,y))),f(z,f(z,z))) = x.  % Job 95
+Search stopped by max_seconds option.
+clauses kept                2581
+user CPU time         10.04          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(y,x),y)),f(z,f(z,z))) = x.  % Job 96
+Search stopped because sos empty.
+clauses kept                   9
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+
+f(f(x,f(y,f(x,y))),f(f(z,z),z)) = x.  % Job 97
+Search stopped because sos empty.
+clauses kept                   5
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+
+f(f(x,f(f(y,x),y)),f(f(z,z),z)) = x.  % Job 98
+Search stopped by max_seconds option.
+clauses kept                2150
+user CPU time         10.11          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(y,x))),f(z,f(z,z))) = x.  % Job 99
+Search stopped by max_seconds option.
+clauses kept                2807
+user CPU time         10.07          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(x,y),y),x),f(z,f(z,z))) = x.  % Job 100
+Search stopped because sos empty.
+clauses kept                   8
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+
+f(f(x,f(y,f(y,x))),f(f(z,z),z)) = x.  % Job 101
+Search stopped because sos empty.
+clauses kept                   6
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(x,y),y),x),f(f(z,z),z)) = x.  % Job 102
+Search stopped because sos empty.
+clauses kept                   8
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(x,y),z),z),f(x,f(y,z))) = x.  % Job 103
+Search stopped because sos empty.
+clauses kept                  24
+user CPU time          0.94          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(x,y),z),z),f(x,f(z,y))) = x.  % Job 104
+Search stopped because sos empty.
+clauses kept                  32
+user CPU time          1.59          (0 hr, 0 min, 1 sec)
+
+f(f(f(f(x,y),z),z),f(f(y,z),x)) = x.  % Job 105
+Search stopped because sos empty.
+clauses kept                  53
+user CPU time          5.68          (0 hr, 0 min, 5 sec)
+
+f(f(f(f(x,y),z),z),f(f(z,y),x)) = x.  % Job 106
+Search stopped because sos empty.
+clauses kept                  47
+user CPU time          3.04          (0 hr, 0 min, 3 sec)
+
+f(f(f(y,f(x,y)),x),f(z,f(z,z))) = x.  % Job 107
+Search stopped because sos empty.
+clauses kept                   4
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(y,x),y),x),f(z,f(z,z))) = x.  % Job 108
+Search stopped because sos empty.
+clauses kept                   5
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(x,y)),x),f(f(z,z),z)) = x.  % Job 109
+Search stopped because sos empty.
+clauses kept                   5
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(y,x),y),x),f(f(z,z),z)) = x.  % Job 110
+Search stopped because sos empty.
+clauses kept                   9
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(y,x),z),z),f(x,f(y,z))) = x.  % Job 111
+Search stopped by max_seconds option.
+clauses kept                 266
+user CPU time         10.08          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(y,x),z),z),f(x,f(z,y))) = x.  % Job 112
+Search stopped because sos empty.
+clauses kept                  64
+user CPU time          6.34          (0 hr, 0 min, 6 sec)
+
+f(f(f(f(y,x),z),z),f(f(y,z),x)) = x.  % Job 113
+Search stopped by max_seconds option.
+clauses kept                 411
+user CPU time         10.05          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(y,x),z),z),f(f(z,y),x)) = x.  % Job 114
+Search stopped because sos empty.
+clauses kept                  35
+user CPU time          2.05          (0 hr, 0 min, 2 sec)
+
+f(f(f(y,f(y,x)),x),f(z,f(z,z))) = x.  % Job 115
+Search stopped because sos empty.
+clauses kept                   7
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(y,x)),x),f(f(z,z),z)) = x.  % Job 116
+Search stopped because sos empty.
+clauses kept                   6
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(f(x,z),y)),f(x,f(z,y))) = x.  % Job 117
+Search stopped because sos empty.
+clauses kept                  30
+user CPU time          1.35          (0 hr, 0 min, 1 sec)
+
+f(f(f(y,f(x,z)),y),f(x,f(z,y))) = x.  % Job 118
+Search stopped because sos empty.
+clauses kept                  48
+user CPU time          3.84          (0 hr, 0 min, 3 sec)
+
+f(f(y,f(f(x,z),y)),f(x,f(y,z))) = x.  % Job 119
+Search stopped by max_seconds option.
+clauses kept                 464
+user CPU time         10.15          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(x,z)),y),f(x,f(y,z))) = x.  % Job 120
+Search stopped by max_seconds option.
+clauses kept                1176
+user CPU time         10.18          (0 hr, 0 min, 10 sec)
+
+f(f(y,f(f(x,z),y)),f(f(z,y),x)) = x.  % Job 121
+Search stopped because sos empty.
+clauses kept                  38
+user CPU time          3.33          (0 hr, 0 min, 3 sec)
+
+f(f(f(y,f(x,z)),y),f(f(z,y),x)) = x.  % Job 122
+Search stopped because sos empty.
+clauses kept                  54
+user CPU time          3.84          (0 hr, 0 min, 3 sec)
+
+f(f(y,f(f(x,z),y)),f(f(y,z),x)) = x.  % Job 123
+Search stopped by max_seconds option.
+clauses kept                 849
+user CPU time         10.11          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(x,z)),y),f(f(y,z),x)) = x.  % Job 124
+Search stopped because sos empty.
+clauses kept                  29
+user CPU time          1.02          (0 hr, 0 min, 1 sec)
+
+f(f(y,f(f(z,x),y)),f(x,f(z,y))) = x.  % Job 125
+Search stopped by max_seconds option.
+clauses kept                 110
+user CPU time         10.19          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(z,x)),y),f(x,f(z,y))) = x.  % Job 126
+Search stopped by max_seconds option.
+clauses kept                1106
+user CPU time         10.05          (0 hr, 0 min, 10 sec)
+
+f(f(y,f(f(z,x),y)),f(x,f(y,z))) = x.  % Job 127
+Search stopped because sos empty.
+clauses kept                  50
+user CPU time          4.20          (0 hr, 0 min, 4 sec)
+
+f(f(f(y,f(z,x)),y),f(x,f(y,z))) = x.  % Job 128
+Search stopped because sos empty.
+clauses kept                  54
+user CPU time          5.29          (0 hr, 0 min, 5 sec)
+
+f(f(y,f(f(z,x),y)),f(f(z,y),x)) = x.  % Job 129
+Search stopped because sos empty.
+clauses kept                  68
+user CPU time          8.81          (0 hr, 0 min, 8 sec)
+
+f(f(f(y,f(z,x)),y),f(f(z,y),x)) = x.  % Job 130
+Search stopped by max_seconds option.
+clauses kept                  76
+user CPU time         10.31          (0 hr, 0 min, 10 sec)
+
+f(f(y,f(f(z,x),y)),f(f(y,z),x)) = x.  % Job 131
+Search stopped because sos empty.
+clauses kept                  29
+user CPU time          1.33          (0 hr, 0 min, 1 sec)
+
+f(f(f(y,f(z,x)),y),f(f(y,z),x)) = x.  % Job 132
+Search stopped because sos empty.
+clauses kept                  31
+user CPU time          1.35          (0 hr, 0 min, 1 sec)
+
+f(f(y,f(y,f(x,z))),f(x,f(z,y))) = x.  % Job 133
+Search stopped because sos empty.
+clauses kept                  20
+user CPU time          0.40          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(y,f(x,z))),f(x,f(y,z))) = x.  % Job 134
+Search stopped because sos empty.
+clauses kept                  24
+user CPU time          0.59          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(y,f(x,z))),f(f(z,y),x)) = x.  % Job 135
+Search stopped because sos empty.
+clauses kept                  20
+user CPU time          0.49          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(y,f(x,z))),f(f(y,z),x)) = x.  % Job 136
+Search stopped by max_seconds option.
+clauses kept                1236
+user CPU time         10.27          (0 hr, 0 min, 10 sec)
+
+f(f(y,f(y,f(z,x))),f(x,f(z,y))) = x.  % Job 137
+Search stopped by max_seconds option.
+clauses kept                 329
+user CPU time         10.16          (0 hr, 0 min, 10 sec)
+
+f(f(y,f(y,f(z,x))),f(x,f(y,z))) = x.  % Job 138
+Search stopped because sos empty.
+clauses kept                  76
+user CPU time          3.64          (0 hr, 0 min, 3 sec)
+
+f(f(y,f(y,f(z,x))),f(f(z,y),x)) = x.  % Job 139
+Search stopped because sos empty.
+clauses kept                  45
+user CPU time          3.49          (0 hr, 0 min, 3 sec)
+
+f(f(y,f(y,f(z,x))),f(f(y,z),x)) = x.  % Job 140
+Search stopped because sos empty.
+clauses kept                  60
+user CPU time          7.10          (0 hr, 0 min, 7 sec)
+
+f(f(x,f(f(x,x),y)),f(z,f(z,z))) = x.  % Job 141
+Search stopped because sos empty.
+clauses kept                 198
+user CPU time          2.23          (0 hr, 0 min, 2 sec)
+
+f(f(x,f(f(x,x),y)),f(f(z,z),z)) = x.  % Job 142
+Search stopped because sos empty.
+clauses kept                  87
+user CPU time          0.13          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(x,x),y),x),f(z,f(z,z))) = x.  % Job 143
+Search stopped because sos empty.
+clauses kept                   3
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(x,x),y),x),f(f(z,z),z)) = x.  % Job 144
+Search stopped because sos empty.
+clauses kept                   3
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(x,x),y),y),f(x,f(z,y))) = x.  % Job 145
+Search stopped because sos empty.
+clauses kept                  42
+user CPU time          0.26          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(x,x),y),y),f(x,f(y,z))) = x.  % Job 146
+Search stopped because sos empty.
+clauses kept                   5
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(x,x),y),y),f(f(z,y),x)) = x.  % Job 147
+Search stopped because sos empty.
+clauses kept                  40
+user CPU time          0.73          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(x,x),y),y),f(f(y,z),x)) = x.  % Job 148
+Search stopped because sos empty.
+clauses kept                   8
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+
+f(f(x,f(y,f(x,x))),f(z,f(z,z))) = x.  % Job 149
+Search stopped by max_seconds option.
+clauses kept                1612
+user CPU time         10.03          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(x,x))),f(f(z,z),z)) = x.  % Job 150
+Search stopped by max_seconds option.
+clauses kept                1466
+user CPU time         10.22          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(x,x)),x),f(z,f(z,z))) = x.  % Job 151
+Search stopped because sos empty.
+clauses kept                   4
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(x,x)),x),f(f(z,z),z)) = x.  % Job 152
+Search stopped because sos empty.
+clauses kept                   4
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(f(x,x),y)),f(x,f(z,y))) = x.  % Job 153
+Search stopped by max_seconds option.
+clauses kept                1511
+user CPU time         10.07          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(x,x)),y),f(x,f(z,y))) = x.  % Job 154
+Search stopped because sos empty.
+clauses kept                  35
+user CPU time          0.49          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(f(x,x),y)),f(x,f(y,z))) = x.  % Job 155
+Search stopped because sos empty.
+clauses kept                  50
+user CPU time          0.73          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(x,x)),y),f(x,f(y,z))) = x.  % Job 156
+Search stopped because sos empty.
+clauses kept                  63
+user CPU time          1.20          (0 hr, 0 min, 1 sec)
+
+f(f(y,f(f(x,x),y)),f(f(z,y),x)) = x.  % Job 157
+Search stopped because sos empty.
+clauses kept                  12
+user CPU time          0.05          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(x,x)),y),f(f(z,y),x)) = x.  % Job 158
+Search stopped because sos empty.
+clauses kept                  34
+user CPU time          0.62          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(f(x,x),y)),f(f(y,z),x)) = x.  % Job 159
+Search stopped because sos empty.
+clauses kept                   6
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(x,x)),y),f(f(y,z),x)) = x.  % Job 160
+Search stopped because sos empty.
+clauses kept                 120
+user CPU time          6.32          (0 hr, 0 min, 6 sec)
+
+f(f(y,f(y,f(x,x))),f(x,f(z,y))) = x.  % Job 161
+Search stopped because sos empty.
+clauses kept                  22
+user CPU time          0.21          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(y,f(x,x))),f(x,f(y,z))) = x.  % Job 162
+Search stopped because sos empty.
+clauses kept                 107
+user CPU time          8.50          (0 hr, 0 min, 8 sec)
+
+f(f(y,f(y,f(x,x))),f(f(z,y),x)) = x.  % Job 163
+Search stopped because sos empty.
+clauses kept                  18
+user CPU time          0.14          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(y,f(x,x))),f(f(y,z),x)) = x.  % Job 164
+Search stopped because sos empty.
+clauses kept                  99
+user CPU time          5.71          (0 hr, 0 min, 5 sec)
+
+f(f(x,f(y,f(z,z))),f(x,f(u,z))) = x.  % Job 165
+Search stopped by max_seconds option.
+clauses kept                2463
+user CPU time         10.02          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(z,z))),f(x,f(z,u))) = x.  % Job 166
+Search stopped by max_seconds option.
+clauses kept                2813
+user CPU time         10.03          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(z,z))),f(f(u,z),x)) = x.  % Job 167
+Search stopped by max_seconds option.
+clauses kept                1334
+user CPU time         10.08          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(z,z))),f(f(z,u),x)) = x.  % Job 168
+Search stopped by max_seconds option.
+clauses kept                1907
+user CPU time         10.02          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(y,y),z)),f(x,f(u,y))) = x.  % Job 169
+Search stopped by max_seconds option.
+clauses kept                2631
+user CPU time         10.05          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(y,y),z)),f(x,f(y,u))) = x.  % Job 170
+Search stopped because sos empty.
+clauses kept                  14
+user CPU time          0.05          (0 hr, 0 min, 0 sec)
+
+f(f(x,f(f(y,y),z)),f(f(u,y),x)) = x.  % Job 171
+Search stopped by max_seconds option.
+clauses kept                1644
+user CPU time         10.19          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(y,y),z)),f(f(y,u),x)) = x.  % Job 172
+Search stopped because sos empty.
+clauses kept                  59
+user CPU time          3.22          (0 hr, 0 min, 3 sec)
+
+f(f(f(y,f(z,z)),x),f(x,f(u,z))) = x.  % Job 173
+Search stopped by max_seconds option.
+clauses kept                1911
+user CPU time         10.13          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(z,z)),x),f(x,f(z,u))) = x.  % Job 174
+Search stopped by max_seconds option.
+clauses kept                 333
+user CPU time         10.25          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(z,z)),x),f(f(u,z),x)) = x.  % Job 175
+Search stopped by max_seconds option.
+clauses kept                 467
+user CPU time         10.04          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(z,z)),x),f(f(z,u),x)) = x.  % Job 176
+Search stopped by max_seconds option.
+clauses kept                2225
+user CPU time         10.02          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(y,y),z),x),f(x,f(u,y))) = x.  % Job 177
+Search stopped by max_seconds option.
+clauses kept                1942
+user CPU time         10.01          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(y,y),z),x),f(x,f(y,u))) = x.  % Job 178
+Search stopped by max_seconds option.
+clauses kept                1914
+user CPU time         10.05          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(y,y),z),x),f(f(u,y),x)) = x.  % Job 179
+Search stopped by max_seconds option.
+clauses kept                2433
+user CPU time         10.00          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(y,y),z),x),f(f(y,u),x)) = x.  % Job 180
+Search stopped by max_seconds option.
+clauses kept                2122
+user CPU time         10.03          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(z,u))),f(x,f(u,z))) = x.  % Job 181
+Search stopped by max_seconds option.
+clauses kept                2379
+user CPU time         10.01          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(z,u))),f(f(u,z),x)) = x.  % Job 182
+Search stopped by max_seconds option.
+clauses kept                1616
+user CPU time         10.08          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(y,z))),f(x,f(u,z))) = x.  % Job 183
+Search stopped by max_seconds option.
+clauses kept                2170
+user CPU time         10.02          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(y,z))),f(x,f(z,u))) = x.  % Job 184
+Search stopped by max_seconds option.
+clauses kept                2279
+user CPU time         10.13          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(y,z))),f(f(u,z),x)) = x.  % Job 185
+Search stopped by max_seconds option.
+clauses kept                1444
+user CPU time         10.11          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(y,z))),f(f(z,u),x)) = x.  % Job 186
+Search stopped by max_seconds option.
+clauses kept                1889
+user CPU time         10.08          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(y,z),u)),f(x,f(z,y))) = x.  % Job 187
+Search stopped by max_seconds option.
+clauses kept                2306
+user CPU time         10.01          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(y,z),u)),f(f(z,y),x)) = x.  % Job 188
+Search stopped by max_seconds option.
+clauses kept                1766
+user CPU time         10.28          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(z,y))),f(x,f(u,z))) = x.  % Job 189
+Search stopped by max_seconds option.
+clauses kept                2150
+user CPU time         10.06          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(y,z),y)),f(x,f(u,z))) = x.  % Job 190
+Search stopped by max_seconds option.
+clauses kept                1971
+user CPU time         10.04          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(z,y))),f(x,f(z,u))) = x.  % Job 191
+Search stopped by max_seconds option.
+clauses kept                2343
+user CPU time         10.10          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(y,z),y)),f(x,f(z,u))) = x.  % Job 192
+Search stopped by max_seconds option.
+clauses kept                 563
+user CPU time         10.03          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(z,y))),f(f(u,z),x)) = x.  % Job 193
+Search stopped by max_seconds option.
+clauses kept                1818
+user CPU time         10.02          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(y,z),y)),f(f(u,z),x)) = x.  % Job 194
+Search stopped by max_seconds option.
+clauses kept                1633
+user CPU time         10.08          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(z,y))),f(f(z,u),x)) = x.  % Job 195
+Search stopped by max_seconds option.
+clauses kept                1474
+user CPU time         10.03          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(y,z),y)),f(f(z,u),x)) = x.  % Job 196
+Search stopped by max_seconds option.
+clauses kept                1384
+user CPU time         10.13          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(y,z),z)),f(x,f(u,y))) = x.  % Job 197
+Search stopped by max_seconds option.
+clauses kept                1963
+user CPU time         10.21          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(y,z),z)),f(x,f(y,u))) = x.  % Job 198
+Search stopped by max_seconds option.
+clauses kept                1395
+user CPU time         10.00          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(y,z),z)),f(f(u,y),x)) = x.  % Job 199
+Search stopped by max_seconds option.
+clauses kept                1962
+user CPU time         10.10          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(y,z),z)),f(f(y,u),x)) = x.  % Job 200
+Search stopped by max_seconds option.
+clauses kept                1622
+user CPU time         10.15          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(z,u)),x),f(x,f(u,z))) = x.  % Job 201
+Search stopped by max_seconds option.
+clauses kept                2185
+user CPU time         10.02          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(z,u)),x),f(f(u,z),x)) = x.  % Job 202
+Search stopped by max_seconds option.
+clauses kept                2519
+user CPU time         10.03          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(y,z)),x),f(x,f(u,z))) = x.  % Job 203
+Search stopped by max_seconds option.
+clauses kept                 932
+user CPU time         10.19          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(y,z)),x),f(x,f(z,u))) = x.  % Job 204
+Search stopped by max_seconds option.
+clauses kept                 154
+user CPU time         10.26          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(y,z)),x),f(f(u,z),x)) = x.  % Job 205
+Search stopped by max_seconds option.
+clauses kept                1470
+user CPU time         10.22          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(y,z)),x),f(f(z,u),x)) = x.  % Job 206
+Search stopped by max_seconds option.
+clauses kept                1883
+user CPU time         10.02          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(y,z),u),x),f(x,f(z,y))) = x.  % Job 207
+Search stopped by max_seconds option.
+clauses kept                2176
+user CPU time         10.00          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(y,z),u),x),f(f(z,y),x)) = x.  % Job 208
+Search stopped by max_seconds option.
+clauses kept                2172
+user CPU time         10.00          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(z,y)),x),f(x,f(u,z))) = x.  % Job 209
+Search stopped by max_seconds option.
+clauses kept                2359
+user CPU time         10.00          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(y,z),y),x),f(x,f(u,z))) = x.  % Job 210
+Search stopped by max_seconds option.
+clauses kept                1966
+user CPU time         10.26          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(z,y)),x),f(x,f(z,u))) = x.  % Job 211
+Search stopped by max_seconds option.
+clauses kept                1510
+user CPU time         10.12          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(y,z),y),x),f(x,f(z,u))) = x.  % Job 212
+Search stopped by max_seconds option.
+clauses kept                1765
+user CPU time         10.04          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(z,y)),x),f(f(u,z),x)) = x.  % Job 213
+Search stopped by max_seconds option.
+clauses kept                1649
+user CPU time         10.11          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(y,z),y),x),f(f(u,z),x)) = x.  % Job 214
+Search stopped by max_seconds option.
+clauses kept                2069
+user CPU time         10.02          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(z,y)),x),f(f(z,u),x)) = x.  % Job 215
+Search stopped by max_seconds option.
+clauses kept                1862
+user CPU time         10.23          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(y,z),y),x),f(f(z,u),x)) = x.  % Job 216
+Search stopped by max_seconds option.
+clauses kept                2104
+user CPU time         10.26          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(y,z),z),x),f(x,f(u,y))) = x.  % Job 217
+Search stopped by max_seconds option.
+clauses kept                2022
+user CPU time         10.00          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(y,z),z),x),f(x,f(y,u))) = x.  % Job 218
+Search stopped by max_seconds option.
+clauses kept                1023
+user CPU time         10.17          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(y,z),z),x),f(f(u,y),x)) = x.  % Job 219
+Search stopped by max_seconds option.
+clauses kept                2000
+user CPU time         10.04          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(y,z),z),x),f(f(y,u),x)) = x.  % Job 220
+Search stopped by max_seconds option.
+clauses kept                2079
+user CPU time         10.04          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(x,y),z)),f(x,f(u,y))) = x.  % Job 221
+Search stopped by max_seconds option.
+clauses kept                1639
+user CPU time         10.09          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(x,y),z)),f(x,f(y,u))) = x.  % Job 222
+Search stopped by max_seconds option.
+clauses kept                 271
+user CPU time         10.00          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(x,y),z)),f(f(u,y),x)) = x.  % Job 223
+Search stopped by max_seconds option.
+clauses kept                1481
+user CPU time         10.09          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(x,y),z)),f(f(y,u),x)) = x.  % Job 224
+Search stopped by max_seconds option.
+clauses kept                 180
+user CPU time         10.11          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(x,z))),f(x,f(u,z))) = x.  % Job 225
+Search stopped by max_seconds option.
+clauses kept                2339
+user CPU time         10.00          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(x,z))),f(x,f(z,u))) = x.  % Job 226
+Search stopped by max_seconds option.
+clauses kept                1775
+user CPU time         10.13          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(x,z))),f(f(u,z),x)) = x.  % Job 227
+Search stopped by max_seconds option.
+clauses kept                1188
+user CPU time         10.15          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(x,z))),f(f(z,u),x)) = x.  % Job 228
+Search stopped by max_seconds option.
+clauses kept                1566
+user CPU time         10.02          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(z,x))),f(x,f(u,z))) = x.  % Job 229
+Search stopped by max_seconds option.
+clauses kept                2553
+user CPU time         10.05          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(z,x))),f(x,f(z,u))) = x.  % Job 230
+Search stopped by max_seconds option.
+clauses kept                1924
+user CPU time         10.09          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(z,x))),f(f(u,z),x)) = x.  % Job 231
+Search stopped by max_seconds option.
+clauses kept                 588
+user CPU time         10.01          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(z,x))),f(f(z,u),x)) = x.  % Job 232
+Search stopped by max_seconds option.
+clauses kept                 116
+user CPU time         10.23          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(y,x),z)),f(x,f(u,y))) = x.  % Job 233
+Search stopped by max_seconds option.
+clauses kept                1691
+user CPU time         10.02          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(y,x),z)),f(x,f(y,u))) = x.  % Job 234
+Search stopped by max_seconds option.
+clauses kept                 465
+user CPU time         10.03          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(y,x),z)),f(f(u,y),x)) = x.  % Job 235
+Search stopped by max_seconds option.
+clauses kept                1439
+user CPU time         10.04          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(y,x),z)),f(f(y,u),x)) = x.  % Job 236
+Search stopped by max_seconds option.
+clauses kept                1119
+user CPU time         10.08          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(x,y),z),x),f(x,f(u,y))) = x.  % Job 237
+Search stopped by max_seconds option.
+clauses kept                1906
+user CPU time         10.01          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(x,y),z),x),f(x,f(y,u))) = x.  % Job 238
+Search stopped by max_seconds option.
+clauses kept                 224
+user CPU time         10.18          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(x,y),z),x),f(f(u,y),x)) = x.  % Job 239
+Search stopped by max_seconds option.
+clauses kept                1646
+user CPU time         10.18          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(x,y),z),x),f(f(y,u),x)) = x.  % Job 240
+Search stopped by max_seconds option.
+clauses kept                 890
+user CPU time         10.17          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(x,z)),x),f(x,f(u,z))) = x.  % Job 241
+Search stopped because sos empty.
+clauses kept                 116
+user CPU time          8.39          (0 hr, 0 min, 8 sec)
+
+f(f(f(y,f(x,z)),x),f(x,f(z,u))) = x.  % Job 242
+Search stopped by max_seconds option.
+clauses kept                 188
+user CPU time         10.16          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(x,z)),x),f(f(u,z),x)) = x.  % Job 243
+Search stopped by max_seconds option.
+clauses kept                1073
+user CPU time         10.16          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(x,z)),x),f(f(z,u),x)) = x.  % Job 244
+Search stopped by max_seconds option.
+clauses kept                2370
+user CPU time         10.11          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(z,x)),x),f(x,f(u,z))) = x.  % Job 245
+Search stopped by max_seconds option.
+clauses kept                1513
+user CPU time         10.15          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(z,x)),x),f(x,f(z,u))) = x.  % Job 246
+Search stopped by max_seconds option.
+clauses kept                 446
+user CPU time         10.18          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(z,x)),x),f(f(u,z),x)) = x.  % Job 247
+Search stopped by max_seconds option.
+clauses kept                1142
+user CPU time         10.00          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(z,x)),x),f(f(z,u),x)) = x.  % Job 248
+Search stopped by max_seconds option.
+clauses kept                2149
+user CPU time         10.04          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(y,x),z),x),f(x,f(u,y))) = x.  % Job 249
+Search stopped by max_seconds option.
+clauses kept                1731
+user CPU time         10.01          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(y,x),z),x),f(x,f(y,u))) = x.  % Job 250
+Search stopped by max_seconds option.
+clauses kept                 477
+user CPU time         10.11          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(y,x),z),x),f(f(u,y),x)) = x.  % Job 251
+Search stopped by max_seconds option.
+clauses kept                1520
+user CPU time         10.04          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(y,x),z),x),f(f(y,u),x)) = x.  % Job 252
+Search stopped by max_seconds option.
+clauses kept                2179
+user CPU time         10.06          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(y,f(z,z)),z),z),f(x,x)) = x.  % Job 253
+Search stopped because sos empty.
+clauses kept                   5
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(f(z,f(y,y)),y)),f(x,x)) = x.  % Job 254
+Search stopped because sos empty.
+clauses kept                   5
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(z,f(y,y))),y),f(x,x)) = x.  % Job 255
+Search stopped because sos empty.
+clauses kept                   4
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(y,f(z,f(y,y)))),f(x,x)) = x.  % Job 256
+Search stopped because sos empty.
+clauses kept                   4
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(f(y,y),z),y),y),f(x,x)) = x.  % Job 257
+Search stopped because sos empty.
+clauses kept                   3
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(f(f(y,y),z),y)),f(x,x)) = x.  % Job 258
+Search stopped because sos empty.
+clauses kept                   4
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(f(y,y),z)),y),f(x,x)) = x.  % Job 259
+Search stopped because sos empty.
+clauses kept                   4
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(y,f(f(y,y),z))),f(x,x)) = x.  % Job 260
+Search stopped because sos empty.
+clauses kept                   3
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(y,f(z,f(z,z)))),f(x,x)) = x.  % Job 261
+Search stopped because sos empty.
+clauses kept                  11
+user CPU time          0.04          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(y,f(f(z,z),z))),f(x,x)) = x.  % Job 262
+Search stopped because sos empty.
+clauses kept                   3
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(y,f(y,z)),z),z),f(x,x)) = x.  % Job 263
+Search stopped because sos empty.
+clauses kept                  11
+user CPU time          0.06          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(y,f(z,y)),z),z),f(x,x)) = x.  % Job 264
+Search stopped because sos empty.
+clauses kept                   5
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(f(y,z),y),z),z),f(x,x)) = x.  % Job 265
+Search stopped because sos empty.
+clauses kept                   6
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(f(z,f(z,z)),y)),f(x,x)) = x.  % Job 266
+Search stopped because sos empty.
+clauses kept                  21
+user CPU time          0.12          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(f(f(z,z),z),y)),f(x,x)) = x.  % Job 267
+Search stopped because sos empty.
+clauses kept                   3
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(z,f(z,z))),y),f(x,x)) = x.  % Job 268
+Search stopped because sos empty.
+clauses kept                  12
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(f(z,z),z)),y),f(x,x)) = x.  % Job 269
+Search stopped because sos empty.
+clauses kept                   4
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(f(z,f(z,y)),y)),f(x,x)) = x.  % Job 270
+Search stopped because sos empty.
+clauses kept                  11
+user CPU time          0.08          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(z,f(z,y))),y),f(x,x)) = x.  % Job 271
+Search stopped because sos empty.
+clauses kept                  11
+user CPU time          0.04          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(f(y,z),z),y),y),f(x,x)) = x.  % Job 272
+Search stopped because sos empty.
+clauses kept                  79
+user CPU time          3.41          (0 hr, 0 min, 3 sec)
+
+f(f(y,f(f(z,f(y,z)),y)),f(x,x)) = x.  % Job 273
+Search stopped because sos empty.
+clauses kept                   4
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(f(f(z,y),z),y)),f(x,x)) = x.  % Job 274
+Search stopped because sos empty.
+clauses kept                  10
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(z,f(y,z))),y),f(x,x)) = x.  % Job 275
+Search stopped because sos empty.
+clauses kept                   5
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(f(z,y),z)),y),f(x,x)) = x.  % Job 276
+Search stopped because sos empty.
+clauses kept                   6
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(y,f(z,f(z,y)))),f(x,x)) = x.  % Job 277
+Search stopped because sos empty.
+clauses kept                   9
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(f(f(y,z),z),y)),f(x,x)) = x.  % Job 278
+Search stopped because sos empty.
+clauses kept                   5
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+
+f(f(f(y,f(f(y,z),z)),y),f(x,x)) = x.  % Job 279
+Search stopped because sos empty.
+clauses kept                   6
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(y,f(z,f(y,z)))),f(x,x)) = x.  % Job 280
+Search stopped because sos empty.
+clauses kept                   4
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(y,f(f(z,y),z))),f(x,x)) = x.  % Job 281
+Search stopped because sos empty.
+clauses kept                  10
+user CPU time          0.04          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(y,f(f(y,z),z))),f(x,x)) = x.  % Job 282
+Search stopped because sos empty.
+clauses kept                   5
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(y,f(y,y)),z),z),f(x,x)) = x.  % Job 283
+Search stopped because sos empty.
+clauses kept                  12
+user CPU time          0.05          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(f(y,y),y),z),z),f(x,x)) = x.  % Job 284
+Search stopped because sos empty.
+clauses kept                   5
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+
+f(f(x,f(f(f(y,z),u),u)),f(x,z)) = x.  % Job 285
+Search stopped by max_seconds option.
+clauses kept                2249
+user CPU time         10.00          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(f(y,z),u),u)),f(z,x)) = x.  % Job 286
+Search stopped by max_seconds option.
+clauses kept                1994
+user CPU time         10.07          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(f(z,u),y))),f(x,u)) = x.  % Job 287
+Search stopped by max_seconds option.
+clauses kept                2140
+user CPU time         10.00          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(y,f(z,u)),y)),f(x,u)) = x.  % Job 288
+Search stopped by max_seconds option.
+clauses kept                1936
+user CPU time         10.04          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(f(z,u),y))),f(u,x)) = x.  % Job 289
+Search stopped by max_seconds option.
+clauses kept                1761
+user CPU time         10.07          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(y,f(z,u)),y)),f(u,x)) = x.  % Job 290
+Search stopped by max_seconds option.
+clauses kept                1561
+user CPU time         10.00          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(f(y,z),u),u)),f(x,y)) = x.  % Job 291
+Search stopped by max_seconds option.
+clauses kept                1534
+user CPU time         10.09          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(f(y,z),u),u)),f(y,x)) = x.  % Job 292
+Search stopped by max_seconds option.
+clauses kept                1578
+user CPU time         10.02          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(y,f(z,u)))),f(x,u)) = x.  % Job 293
+Search stopped by max_seconds option.
+clauses kept                2164
+user CPU time         10.13          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(y,f(z,u)))),f(u,x)) = x.  % Job 294
+Search stopped by max_seconds option.
+clauses kept                1484
+user CPU time         10.09          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(y,f(z,u)))),f(x,z)) = x.  % Job 295
+Search stopped by max_seconds option.
+clauses kept                2150
+user CPU time         10.14          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(y,f(z,u)))),f(z,x)) = x.  % Job 296
+Search stopped by max_seconds option.
+clauses kept                1700
+user CPU time         10.05          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(f(z,u),y))),f(x,z)) = x.  % Job 297
+Search stopped by max_seconds option.
+clauses kept                1982
+user CPU time         10.22          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(y,f(z,u)),y)),f(x,z)) = x.  % Job 298
+Search stopped by max_seconds option.
+clauses kept                 381
+user CPU time         10.01          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(f(z,u),y))),f(z,x)) = x.  % Job 299
+Search stopped by max_seconds option.
+clauses kept                1543
+user CPU time         10.05          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(y,f(z,u)),y)),f(z,x)) = x.  % Job 300
+Search stopped by max_seconds option.
+clauses kept                1411
+user CPU time         10.11          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(f(y,z),u),u),x),f(x,z)) = x.  % Job 301
+Search stopped by max_seconds option.
+clauses kept                 989
+user CPU time         10.04          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(f(y,z),u),u),x),f(z,x)) = x.  % Job 302
+Search stopped by max_seconds option.
+clauses kept                2076
+user CPU time         10.04          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(f(z,u),y)),x),f(x,u)) = x.  % Job 303
+Search stopped by max_seconds option.
+clauses kept                1447
+user CPU time         10.11          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(y,f(z,u)),y),x),f(x,u)) = x.  % Job 304
+Search stopped by max_seconds option.
+clauses kept                1707
+user CPU time         10.25          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(f(z,u),y)),x),f(u,x)) = x.  % Job 305
+Search stopped by max_seconds option.
+clauses kept                1701
+user CPU time         10.01          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(y,f(z,u)),y),x),f(u,x)) = x.  % Job 306
+Search stopped by max_seconds option.
+clauses kept                2093
+user CPU time         10.28          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(f(y,z),u),u),x),f(x,y)) = x.  % Job 307
+Search stopped by max_seconds option.
+clauses kept                2289
+user CPU time         10.02          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(f(y,z),u),u),x),f(y,x)) = x.  % Job 308
+Search stopped by max_seconds option.
+clauses kept                2258
+user CPU time         10.05          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(y,f(z,u))),x),f(x,u)) = x.  % Job 309
+Search stopped by max_seconds option.
+clauses kept                1016
+user CPU time         10.17          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(y,f(z,u))),x),f(u,x)) = x.  % Job 310
+Search stopped by max_seconds option.
+clauses kept                1501
+user CPU time         10.29          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(y,f(z,u))),x),f(x,z)) = x.  % Job 311
+Search stopped by max_seconds option.
+clauses kept                 161
+user CPU time         10.26          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(y,f(z,u))),x),f(z,x)) = x.  % Job 312
+Search stopped by max_seconds option.
+clauses kept                1962
+user CPU time         10.05          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(f(z,u),y)),x),f(x,z)) = x.  % Job 313
+Search stopped by max_seconds option.
+clauses kept                1851
+user CPU time         10.03          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(y,f(z,u)),y),x),f(x,z)) = x.  % Job 314
+Search stopped by max_seconds option.
+clauses kept                1567
+user CPU time         10.00          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(f(z,u),y)),x),f(z,x)) = x.  % Job 315
+Search stopped by max_seconds option.
+clauses kept                1951
+user CPU time         10.03          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(y,f(z,u)),y),x),f(z,x)) = x.  % Job 316
+Search stopped by max_seconds option.
+clauses kept                1837
+user CPU time         10.07          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(x,f(y,z)),u)),f(x,z)) = x.  % Job 317
+Search stopped by max_seconds option.
+clauses kept                1773
+user CPU time         10.03          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(x,f(y,z)),u)),f(z,x)) = x.  % Job 318
+Search stopped by max_seconds option.
+clauses kept                1405
+user CPU time         10.06          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(x,f(y,z)),u)),f(x,y)) = x.  % Job 319
+Search stopped by max_seconds option.
+clauses kept                 324
+user CPU time         10.24          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(x,f(y,z)),u)),f(y,x)) = x.  % Job 320
+Search stopped by max_seconds option.
+clauses kept                 461
+user CPU time         10.04          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(x,f(z,u)))),f(x,u)) = x.  % Job 321
+Search stopped by max_seconds option.
+clauses kept                2338
+user CPU time         10.05          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(x,f(z,u)))),f(u,x)) = x.  % Job 322
+Search stopped by max_seconds option.
+clauses kept                1205
+user CPU time         10.10          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(x,f(z,u)))),f(x,z)) = x.  % Job 323
+Search stopped by max_seconds option.
+clauses kept                 700
+user CPU time         10.06          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(x,f(z,u)))),f(z,x)) = x.  % Job 324
+Search stopped by max_seconds option.
+clauses kept                1527
+user CPU time         10.13          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(f(z,u),x))),f(x,u)) = x.  % Job 325
+Search stopped by max_seconds option.
+clauses kept                2568
+user CPU time         10.02          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(f(z,u),x))),f(u,x)) = x.  % Job 326
+Search stopped by max_seconds option.
+clauses kept                 570
+user CPU time         10.03          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(f(y,z),x),u)),f(x,z)) = x.  % Job 327
+Search stopped by max_seconds option.
+clauses kept                1699
+user CPU time         10.00          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(f(y,z),x),u)),f(z,x)) = x.  % Job 328
+Search stopped by max_seconds option.
+clauses kept                1450
+user CPU time         10.06          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(f(z,u),x))),f(x,z)) = x.  % Job 329
+Search stopped by max_seconds option.
+clauses kept                1972
+user CPU time         10.00          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(x,f(y,z)),u),x),f(x,z)) = x.  % Job 330
+Search stopped by max_seconds option.
+clauses kept                1765
+user CPU time         10.29          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(y,f(f(z,u),x))),f(z,x)) = x.  % Job 331
+Search stopped because sos empty.
+clauses kept                 104
+user CPU time          8.30          (0 hr, 0 min, 8 sec)
+
+f(f(f(f(x,f(y,z)),u),x),f(z,x)) = x.  % Job 332
+Search stopped by max_seconds option.
+clauses kept                1691
+user CPU time         10.15          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(f(y,z),x),u)),f(x,y)) = x.  % Job 333
+Search stopped by max_seconds option.
+clauses kept                 590
+user CPU time         10.04          (0 hr, 0 min, 10 sec)
+
+f(f(x,f(f(f(y,z),x),u)),f(y,x)) = x.  % Job 334
+Search stopped by max_seconds option.
+clauses kept                1533
+user CPU time         10.06          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(x,f(y,z)),u),x),f(x,y)) = x.  % Job 335
+Search stopped by max_seconds option.
+clauses kept                 318
+user CPU time         10.13          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(x,f(y,z)),u),x),f(y,x)) = x.  % Job 336
+Search stopped by max_seconds option.
+clauses kept                 782
+user CPU time         10.13          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(x,f(z,u))),x),f(x,u)) = x.  % Job 337
+Search stopped because sos empty.
+clauses kept                  94
+user CPU time          4.32          (0 hr, 0 min, 4 sec)
+
+f(f(f(y,f(x,f(z,u))),x),f(u,x)) = x.  % Job 338
+Search stopped by max_seconds option.
+clauses kept                1083
+user CPU time         10.13          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(x,f(z,u))),x),f(x,z)) = x.  % Job 339
+Search stopped by max_seconds option.
+clauses kept                 186
+user CPU time         10.13          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(x,f(z,u))),x),f(z,x)) = x.  % Job 340
+Search stopped by max_seconds option.
+clauses kept                2301
+user CPU time         10.02          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(f(z,u),x)),x),f(x,u)) = x.  % Job 341
+Search stopped by max_seconds option.
+clauses kept                 432
+user CPU time         10.27          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(f(z,u),x)),x),f(u,x)) = x.  % Job 342
+Search stopped by max_seconds option.
+clauses kept                1167
+user CPU time         10.02          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(f(y,z),x),u),x),f(x,z)) = x.  % Job 343
+Search stopped by max_seconds option.
+clauses kept                 637
+user CPU time         10.13          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(f(y,z),x),u),x),f(z,x)) = x.  % Job 344
+Search stopped by max_seconds option.
+clauses kept                1526
+user CPU time         10.02          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(f(z,u),x)),x),f(x,z)) = x.  % Job 345
+Search stopped by max_seconds option.
+clauses kept                1502
+user CPU time         10.04          (0 hr, 0 min, 10 sec)
+
+f(f(f(y,f(f(z,u),x)),x),f(z,x)) = x.  % Job 346
+Search stopped by max_seconds option.
+clauses kept                2168
+user CPU time         10.05          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(f(y,z),x),u),x),f(x,y)) = x.  % Job 347
+Search stopped by max_seconds option.
+clauses kept                1608
+user CPU time         10.22          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(f(y,z),x),u),x),f(y,x)) = x.  % Job 348
+Search stopped by max_seconds option.
+clauses kept                2242
+user CPU time         10.02          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(x,y),f(x,z)),u),f(x,x)) = x.  % Job 349
+Search stopped by max_seconds option.
+clauses kept                 154
+user CPU time         10.25          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(x,y),f(z,x)),u),f(x,x)) = x.  % Job 350
+Search stopped because sos empty.
+clauses kept                  16
+user CPU time          0.15          (0 hr, 0 min, 0 sec)
+
+f(f(f(f(y,x),f(x,z)),u),f(x,x)) = x.  % Job 351
+Search stopped by max_seconds option.
+clauses kept                1680
+user CPU time         10.05          (0 hr, 0 min, 10 sec)
+
+f(f(y,f(f(x,z),f(x,u))),f(x,x)) = x.  % Job 352
+Search stopped by max_seconds option.
+clauses kept                1743
+user CPU time         10.09          (0 hr, 0 min, 10 sec)
+
+f(f(f(f(y,x),f(z,x)),u),f(x,x)) = x.  % Job 353
+Search stopped by max_seconds option.
+clauses kept                 128
+user CPU time         10.22          (0 hr, 0 min, 10 sec)
+
+f(f(y,f(f(x,z),f(u,x))),f(x,x)) = x.  % Job 354
+Search stopped because sos empty.
+clauses kept                  24
+user CPU time          0.22          (0 hr, 0 min, 0 sec)
+
+f(f(y,f(f(z,x),f(x,u))),f(x,x)) = x.  % Job 355
+Search stopped because sos empty.
+clauses kept                 149
+user CPU time          4.83          (0 hr, 0 min, 4 sec)
+
+f(f(y,f(f(z,x),f(u,x))),f(x,x)) = x.  % Job 356
+Search stopped because sos empty.
+clauses kept                  10
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+
+Finished otter-ploop Tue Feb 10 16:13:36 CST 2004 on theorem.mcs.anl.gov

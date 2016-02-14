@@ -1,0 +1,24 @@
+% benchmark parameters -n5 -N10 -p
+%
+% Find an orthomodular lattice that is not a modular ortholattice.
+%
+
+include("ortholattice").
+
+list(usable).
+
+% Orthomodular law (OML)
+
+x v (c(x) ^ (x v y)) = x v y.
+
+% Denial of Modularity:
+
+% If we assume A, B, and C are distinct, and if
+% none of them is 0 or 1, we can use domain elements
+% 2,3,4 instead.  This speeds up the search.
+
+% A v (B ^ (A v C)) != (A v B) ^ (A v C).
+
+2 v (4 ^ (2 v 3)) != (2 v 4) ^ (2 v 3).
+
+end_of_list.

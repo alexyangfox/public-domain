@@ -1,0 +1,119 @@
+% This proves that an equation is a single axiom for ortholattices
+% in terms of the Sheffer stroke.
+%
+% It uses hints (hints2) to guide Otter to a particular proof.
+% In other words, this is a job to check a proof rather than find a proof.
+
+set(knuth_bendix).
+set(back_unit_deletion).
+
+assign(max_weight, 0).
+
+clear(print_kept).
+clear(print_new_demod).
+clear(print_back_demod).
+clear(print_back_sub).
+
+clear(sigint_interact).
+
+list(usable).
+x = x.
+end_of_list.
+
+list(sos).
+f(f(f(f(y,x),f(x,z)),u),f(x,f(f(x,f(f(y,y),y)),z))) = x.  % OL single axiom
+end_of_list.
+
+list(sos).
+
+% denial of SS OL 3-basis.
+
+    f(f(X,X),f(X,Y)) != X |
+    f(X,f(X,X)) != f(Y,f(Y,Y)) |
+    f(X,f(f(Y,Z),f(Y,Z))) != f(Z,f(f(Y,X),f(Y,X))).
+
+end_of_list.
+
+assign(bsub_hint_add_wt, -1000).
+set(keep_hint_subsumers).
+set(degrade_hints2).
+
+list(hints2).
+f(f(f(f(x,y),f(y,z)),u),f(y,f(f(y,f(f(x,x),x)),z)))=y.
+f(f(X,X),f(X,Y))!=X|f(X,f(X,X))!=f(Y,f(Y,Y))|f(X,f(f(Y,Z),f(Y,Z)))!=f(Z,f(f(Y,X),f(Y,X))).
+f(f(X,X),f(X,Y))!=X|f(Y,f(Y,Y))!=f(X,f(X,X))|f(X,f(f(Y,Z),f(Y,Z)))!=f(Z,f(f(Y,X),f(Y,X))).
+f(f(x,y),f(x,f(f(x,f(f(f(f(z,x),f(x,u)),f(f(z,x),f(x,u))),f(f(z,x),f(x,u)))),f(f(x,f(f(z,z),z)),u))))=x.
+f(x,f(f(x,y),f(f(f(x,y),f(f(f(z,x),f(z,x)),f(z,x))),u)))=f(x,y).
+f(f(x,y),f(f(f(x,y),f(y,z)),y))=f(f(x,y),f(y,z)).
+f(x,f(f(x,y),f(f(f(z,x),f(z,x)),f(z,x))))=f(x,y).
+f(f(f(f(x,y),f(y,z)),y),f(y,y))=y.
+f(f(x,x),f(x,x))=x.
+f(x,f(f(x,f(f(x,x),y)),f(x,x)))=f(x,f(f(x,x),y)).
+f(x,f(f(x,y),f(x,f(x,x))))=f(x,y).
+f(f(f(f(x,y),f(y,f(y,f(y,y)))),z),f(y,f(f(x,x),x)))=y.
+f(x,f(f(x,y),f(x,y)))=f(x,y).
+f(f(x,y),f(x,x))=x.
+f(f(f(f(x,y),f(y,z)),u),f(y,y))=y.
+f(x,f(f(x,x),y))=f(x,x).
+f(f(f(x,x),y),x)=f(x,x).
+f(f(x,x),f(x,y))=x.
+f(f(f(x,y),f(y,z)),f(f(x,y),f(y,z)))=f(f(f(x,y),f(y,z)),y).
+f(Y,f(Y,Y))!=f(X,f(X,X))|f(X,f(f(Y,Z),f(Y,Z)))!=f(Z,f(f(Y,X),f(Y,X))).
+f(f(f(x,y),f(x,y)),x)=f(x,y).
+f(f(f(x,y),f(y,z)),y)=f(y,f(f(x,y),f(y,z))).
+f(f(f(x,y),f(y,z)),f(f(x,y),f(y,z)))=f(y,f(f(x,y),f(y,z))).
+f(f(f(f(x,y),f(x,z)),u),f(x,x))=x.
+f(f(f(x,f(f(x,y),z)),u),f(f(x,y),f(x,y)))=f(x,y).
+f(f(x,y),f(y,y))=y.
+f(x,f(f(y,x),f(y,x)))=f(y,x).
+f(f(x,x),f(y,x))=x.
+f(x,f(y,f(x,x)))=f(x,x).
+f(f(x,y),f(x,f(f(z,z),z)))=x.
+f(f(f(x,f(f(y,x),z)),u),f(f(y,x),f(y,x)))=f(y,x).
+f(f(x,f(f(y,z),f(z,u))),f(z,z))=z.
+f(f(f(f(x,y),f(z,y)),u),f(y,y))=y.
+f(x,f(f(x,y),f(f(z,z),z)))=f(x,y).
+f(x,x)=f(x,f(f(y,y),y)).
+f(x,f(f(y,y),y))=f(x,x).
+f(x,f(y,f(y,y)))=f(x,x).
+f(x,x)=f(x,f(y,f(y,y))).
+f(x,f(f(x,y),f(z,f(z,z))))=f(x,y).
+f(f(x,f(y,f(y,y))),f(z,x))=x.
+f(f(x,f(f(y,z),f(y,u))),f(y,y))=y.
+f(f(x,f(y,f(f(z,y),u))),f(f(z,y),f(z,y)))=f(z,y).
+f(f(f(f(x,y),f(z,y)),u),f(y,f(f(v,v),v)))=y.
+f(f(f(x,f(x,x)),f(y,f(y,y))),z)=f(x,f(x,x)).
+f(x,f(x,x))=f(y,f(y,y)).
+f(X,f(f(Y,Z),f(Y,Z)))!=f(Z,f(f(Y,X),f(Y,X))).
+f(f(f(x,y),z),f(f(x,f(f(y,u),f(y,v))),f(x,f(f(y,u),f(y,v)))))=f(x,f(f(y,u),f(y,v))).
+f(f(f(x,y),z),f(f(y,x),f(y,x)))=f(y,x).
+f(f(x,y),f(y,x))=f(f(y,x),f(y,x)).
+f(f(x,y),f(f(f(y,x),z),f(f(u,u),u)))=f(f(y,x),z).
+f(x,f(f(y,x),f(x,y)))=f(y,x).
+f(x,y)=f(y,x).
+f(f(f(x,y),z),f(f(y,x),f(x,y)))=f(y,x).
+f(f(f(x,y),z),f(f(x,y),f(y,x)))=f(y,x).
+f(f(x,f(y,z)),f(f(f(f(z,u),f(z,v)),y),f(f(f(z,u),f(z,v)),y)))=f(f(f(z,u),f(z,v)),y).
+f(f(x,y),z)=f(f(y,x),z).
+f(x,f(y,z))=f(f(z,y),x).
+f(f(x,y),z)=f(z,f(y,x)).
+f(x,f(f(y,z),u))=f(f(f(z,y),u),x).
+f(f(f(x,y),z),u)=f(u,f(f(y,x),z)).
+f(f(f(f(x,y),z),u),f(f(f(y,x),z),f(f(x,y),z)))=f(z,f(x,y)).
+f(f(x,y),f(z,u))=f(f(y,x),f(u,z)).
+f(f(f(x,y),f(z,u)),v)=f(v,f(f(u,z),f(y,x))).
+f(f(f(f(x,y),f(z,u)),v),f(f(f(y,x),f(u,z)),f(f(z,u),f(x,y))))=f(f(z,u),f(x,y)).
+f(f(f(f(x,f(y,f(f(z,y),u))),z),v),f(f(z,y),f(z,y)))=f(z,y).
+f(f(x,f(f(f(y,f(f(z,y),u)),v),z)),f(f(z,y),f(z,y)))=f(z,y).
+f(f(x,f(y,z)),f(f(f(f(z,u),f(z,v)),y),f(f(f(z,v),f(z,u)),y)))=f(f(f(z,v),f(z,u)),y).
+f(f(f(f(f(x,y),f(x,z)),u),f(f(f(x,z),f(x,y)),u)),f(f(u,x),v))=f(f(f(x,z),f(x,y)),u).
+f(f(f(x,f(f(y,x),z)),f(x,u)),y)=f(y,x).
+f(f(f(x,y),f(x,z)),f(f(u,y),f(v,y)))=f(f(f(u,y),f(v,y)),x).
+f(f(f(x,y),f(z,y)),f(f(u,v),f(u,y)))=f(f(f(x,y),f(z,y)),u).
+f(f(f(x,y),f(z,y)),f(f(u,y),f(u,v)))=f(f(f(x,y),f(z,y)),u).
+f(f(f(x,y),f(x,z)),f(f(u,y),f(v,y)))=f(x,f(f(u,y),f(v,y))).
+f(f(f(x,y),f(x,y)),z)=f(x,f(f(z,y),f(z,y))).
+f(x,f(f(y,z),f(y,z)))=f(z,f(f(x,y),f(x,y))).
+f(x,f(f(y,z),f(y,z)))=f(y,f(f(x,z),f(x,z))).
+f(x,f(f(y,z),f(y,z)))=f(z,f(f(y,x),f(y,x))).
+end_of_list.

@@ -1,0 +1,102 @@
+%
+%  This test file demonstrates the use of demodulation as an
+%  equational programming language, including built-in ($) functions.
+%
+
+set(rewriter).  % meta-flag: demodulate clauses in sos.
+
+clear(demod_history).
+set(prolog_style_variables).
+
+% The following use pre-declared infix functors
+
+make_evaluable(_-_, $DIFF(_,_)).
+make_evaluable(_<_, $LT(_,_)).
+make_evaluable(_*_, $PROD(_,_)).
+make_evaluable(_==_, $EQ(_,_)).
+make_evaluable(_&_, $AND(_,_)).
+
+% Declare infix functors for lexical comparison
+% and make them evaluable.
+
+op(700, xfx, @<).
+op(700, xfx, @<=).
+op(700, xfx, @>).
+op(700, xfx, @>=).
+
+make_evaluable(_@<_,  $LLT(_,_)).
+make_evaluable(_@<=_, $LLE(_,_)).
+make_evaluable(_@>_,  $LGT(_,_)).
+make_evaluable(_@>=_, $LGE(_,_)).
+
+lex([a,b,c,d,e,f,g]).  % order for quicksort function below
+
+list(demodulators).
+
+factorial(N) =                     % factorial for nonnegative integers
+   $IF(N==0,
+       1,
+       N*factorial(N-1)).
+
+gcd(X,Y) =                         % gcd for nonnegative integers
+   $IF(X==0,
+       Y,
+       $IF(Y==0,
+           X,
+           $IF(X<Y,
+               gcd(X,Y-X),
+               gcd(Y,X-Y)))).
+
+member(X,[]) = $F.                 % some list functions
+member(X,[H|T]) = $IF($ID(X,H),
+                       $T,
+                       member(X,T)).
+
+subset([],L) = $T.
+subset([H|T],L) = (member(H,L) & subset(T,L)).
+                       
+
+intersect([],L) = [].
+intersect([H|T],L) = $IF(member(H,L),
+                         [H|intersect(T,L)],
+                         intersect(T,L)).
+
+union([],L) = L.
+union([H|T],L) = $IF(member(H,L),
+                     union(T,L),
+                     [H|union(T,L)]).
+
+append([],L) = L.
+append([H|T],L) = [H|append(T,L)].
+
+reverse(L) = rev2(L,[]).
+rev2([], L) = L.
+rev2([H|T],L) = rev2(T,[H|L]).
+
+quick_sort([]) = [].               % naive quicksort
+quick_sort([H|T]) = append(quick_sort(le_list(H,T)),
+                            [H|quick_sort(gt_list(H,T))]).
+
+le_list(X,[]) = [].
+le_list(X,[H|T]) = $IF(H @<= X,
+                       [H|le_list(X,T)],
+                       le_list(X,T)).
+
+gt_list(X,[]) = [].
+gt_list(X,[H|T]) = $IF(H @> X,
+                       [H|gt_list(X,T)],
+                       gt_list(X,T)).
+
+end_of_list.
+
+list(sos).
+p(factorial(8)).
+p(gcd(13004,5176)).
+p(member(d,[a,b,c])).
+p(subset([b,d],[a,b,c,d])).
+p(intersect([b,d],[a,b,c,d])).
+p(union([b,e],[a,b,c,d])).
+p(reverse([a,b,c,d,e,f,g])).
+p(quick_sort([c,a,b,f,c,c,e,d,b])).
+p($FSUM("1.4e-3", "3.222")).
+end_of_list.

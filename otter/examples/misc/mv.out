@@ -1,0 +1,356 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:37 2004
+The command was "../../bin/otter".  The process ID is 8386.
+
+set(hyper_res).
+assign(pick_given_ratio,3).
+clear(back_sub).
+assign(max_proofs,3).
+clear(print_kept).
+set(order_history).
+assign(fpa_literals,0).
+
+list(usable).
+1 [] -P(i(x,y))| -P(x)|P(y).
+end_of_list.
+
+list(sos).
+2 [] P(i(x,i(y,x))).
+3 [] P(i(i(x,y),i(i(y,z),i(x,z)))).
+4 [] P(i(i(i(x,y),y),i(i(y,x),x))).
+5 [] P(i(i(n(x),n(y)),i(y,x))).
+end_of_list.
+
+list(passive).
+6 [] -P(i(n(n(a)),a))|$ANS(MV_24).
+7 [] -P(i(i(a,b),i(i(c,a),i(c,b))))|$ANS(MV_25).
+8 [] -P(i(a,n(n(a))))|$ANS(MV_29).
+end_of_list.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=6) 2 [] P(i(x,i(y,x))).
+
+given clause #2: (wt=8) 9 [hyper,1,2,2] P(i(x,i(y,i(z,y)))).
+
+given clause #3: (wt=10) 5 [] P(i(i(n(x),n(y)),i(y,x))).
+
+given clause #4: (wt=10) 10 [hyper,1,2,9] P(i(x,i(y,i(z,i(u,z))))).
+
+given clause #5: (wt=12) 3 [] P(i(i(x,y),i(i(y,z),i(x,z)))).
+
+given clause #6: (wt=10) 18 [hyper,1,3,2] P(i(i(i(x,y),z),i(y,z))).
+
+given clause #7: (wt=7) 21 [hyper,1,18,5] P(i(n(x),i(x,y))).
+
+given clause #8: (wt=8) 23 [hyper,1,18,2] P(i(x,i(y,i(z,x)))).
+
+given clause #9: (wt=12) 4 [] P(i(i(i(x,y),y),i(i(y,x),x))).
+
+given clause #10: (wt=8) 36 [hyper,1,18,4] P(i(x,i(i(x,y),y))).
+
+given clause #11: (wt=9) 25 [hyper,1,2,21] P(i(x,i(n(y),i(y,z)))).
+
+given clause #12: (wt=10) 22 [hyper,1,18,3] P(i(x,i(i(x,y),i(z,y)))).
+
+given clause #13: (wt=12) 11 [hyper,1,2,5] P(i(x,i(i(n(y),n(z)),i(z,y)))).
+
+given clause #14: (wt=10) 27 [hyper,1,18,23] P(i(x,i(y,i(z,i(u,x))))).
+
+given clause #15: (wt=10) 29 [hyper,1,2,23] P(i(x,i(y,i(z,i(u,y))))).
+
+given clause #16: (wt=10) 40 [hyper,1,4,9] P(i(i(i(x,i(y,x)),z),z)).
+
+given clause #17: (wt=12) 12 [hyper,1,2,10] P(i(x,i(y,i(z,i(u,i(v,u)))))).
+
+given clause #18: (wt=4) 96 [hyper,1,18,40] P(i(x,x)).
+
+given clause #19: (wt=6) 106 [hyper,1,2,96] P(i(x,i(y,y))).
+
+given clause #20: (wt=8) 102 [hyper,1,36,96] P(i(i(i(x,x),y),y)).
+
+given clause #21: (wt=16) 13 [hyper,1,3,3] P(i(i(i(i(x,y),i(z,y)),u),i(i(z,x),u))).
+
+given clause #22: (wt=8) 104 [hyper,1,23,96] P(i(x,i(y,i(z,z)))).
+
+given clause #23: (wt=10) 43 [hyper,1,18,36] P(i(x,i(i(i(y,x),z),z))).
+
+given clause #24: (wt=10) 45 [hyper,1,2,36] P(i(x,i(y,i(i(y,z),z)))).
+
+given clause #25: (wt=14) 14 [hyper,1,2,3] P(i(x,i(i(y,z),i(i(z,u),i(y,u))))).
+
+given clause #26: (wt=10) 103 [hyper,1,27,96] P(i(x,i(y,i(z,i(u,u))))).
+
+given clause #27: (wt=10) 105 [hyper,1,22,96] P(i(i(i(x,x),y),i(z,y))).
+
+given clause #28: (wt=10) 107 [hyper,1,36,106] P(i(i(i(x,i(y,y)),z),z)).
+
+given clause #29: (wt=14) 15 [hyper,1,3,10] P(i(i(i(x,i(y,i(z,y))),u),i(v,u))).
+
+given clause #30: (wt=10) 115 [hyper,1,2,102] P(i(x,i(i(i(y,y),z),z))).
+
+given clause #31: (wt=10) 124 [hyper,1,13,40] P(i(i(x,y),i(x,i(z,y)))).
+
+given clause #32: (wt=9) 205 [hyper,1,124,21] P(i(n(x),i(y,i(x,z)))).
+
+given clause #33: (wt=12) 16 [hyper,1,3,9] P(i(i(i(x,i(y,x)),z),i(u,z))).
+
+given clause #34: (wt=10) 203 [hyper,1,124,36] P(i(x,i(y,i(i(x,z),z)))).
+
+given clause #35: (wt=11) 24 [hyper,1,3,21] P(i(i(i(x,y),z),i(n(x),z))).
+
+given clause #36: (wt=7) 280 [hyper,1,24,102] P(i(n(i(x,x)),y)).
+
+given clause #37: (wt=14) 17 [hyper,1,3,5] P(i(i(i(x,y),z),i(i(n(y),n(x)),z))).
+
+given clause #38: (wt=8) 289 [hyper,1,24,5] P(i(n(n(x)),i(y,x))).
+
+given clause #39: (wt=9) 278 [hyper,1,24,107] P(i(n(i(x,i(y,y))),z)).
+
+given clause #40: (wt=9) 279 [hyper,1,24,105] P(i(n(i(x,x)),i(y,z))).
+
+given clause #41: (wt=14) 19 [hyper,1,3,18] P(i(i(i(x,y),z),i(i(i(u,x),y),z))).
+
+given clause #42: (wt=9) 282 [hyper,1,24,40] P(i(n(i(x,i(y,x))),z)).
+
+given clause #43: (wt=9) 286 [hyper,1,24,18] P(i(n(i(x,y)),i(y,z))).
+
+given clause #44: (wt=9) 298 [hyper,1,2,280] P(i(x,i(n(i(y,y)),z))).
+
+given clause #45: (wt=12) 20 [hyper,1,2,18] P(i(x,i(i(i(y,z),u),i(z,u)))).
+
+given clause #46: (wt=10) 271 [hyper,1,24,24] P(i(n(i(x,y)),i(n(x),z))).
+
+given clause #47: (wt=10) 316 [hyper,1,17,102] P(i(i(n(x),n(i(y,y))),x)).
+
+-------- PROOF -------- 413 [binary,412.1,6.1] $ANS(MV_24).
+
+----> UNIT CONFLICT at   0.01 sec ----> 413 [binary,412.1,6.1] $ANS(MV_24).
+
+Length of proof is 11.  Level of proof is 6.
+
+---------------- PROOF ----------------
+
+1 [] -P(i(x,y))| -P(x)|P(y).
+2 [] P(i(x,i(y,x))).
+3 [] P(i(i(x,y),i(i(y,z),i(x,z)))).
+4 [] P(i(i(i(x,y),y),i(i(y,x),x))).
+5 [] P(i(i(n(x),n(y)),i(y,x))).
+6 [] -P(i(n(n(a)),a))|$ANS(MV_24).
+9 [hyper,1,2,2] P(i(x,i(y,i(z,y)))).
+17 [hyper,1,3,5] P(i(i(i(x,y),z),i(i(n(y),n(x)),z))).
+18 [hyper,1,3,2] P(i(i(i(x,y),z),i(y,z))).
+21 [hyper,1,18,5] P(i(n(x),i(x,y))).
+24 [hyper,1,3,21] P(i(i(i(x,y),z),i(n(x),z))).
+36 [hyper,1,18,4] P(i(x,i(i(x,y),y))).
+40 [hyper,1,4,9] P(i(i(i(x,i(y,x)),z),z)).
+96 [hyper,1,18,40] P(i(x,x)).
+102 [hyper,1,36,96] P(i(i(i(x,x),y),y)).
+316 [hyper,1,17,102] P(i(i(n(x),n(i(y,y))),x)).
+412 [hyper,1,24,316] P(i(n(n(x)),x)).
+413 [binary,412.1,6.1] $ANS(MV_24).
+
+------------ end of proof -------------
+
+
+given clause #48: (wt=6) 412 [hyper,1,24,316] P(i(n(n(x)),x)).
+-------- PROOF -------- 429 [binary,428.1,8.1] $ANS(MV_29).
+
+----> UNIT CONFLICT at   0.01 sec ----> 429 [binary,428.1,8.1] $ANS(MV_29).
+
+Length of proof is 12.  Level of proof is 7.
+
+---------------- PROOF ----------------
+
+1 [] -P(i(x,y))| -P(x)|P(y).
+2 [] P(i(x,i(y,x))).
+3 [] P(i(i(x,y),i(i(y,z),i(x,z)))).
+4 [] P(i(i(i(x,y),y),i(i(y,x),x))).
+5 [] P(i(i(n(x),n(y)),i(y,x))).
+8 [] -P(i(a,n(n(a))))|$ANS(MV_29).
+9 [hyper,1,2,2] P(i(x,i(y,i(z,y)))).
+17 [hyper,1,3,5] P(i(i(i(x,y),z),i(i(n(y),n(x)),z))).
+18 [hyper,1,3,2] P(i(i(i(x,y),z),i(y,z))).
+21 [hyper,1,18,5] P(i(n(x),i(x,y))).
+24 [hyper,1,3,21] P(i(i(i(x,y),z),i(n(x),z))).
+36 [hyper,1,18,4] P(i(x,i(i(x,y),y))).
+40 [hyper,1,4,9] P(i(i(i(x,i(y,x)),z),z)).
+96 [hyper,1,18,40] P(i(x,x)).
+102 [hyper,1,36,96] P(i(i(i(x,x),y),y)).
+316 [hyper,1,17,102] P(i(i(n(x),n(i(y,y))),x)).
+412 [hyper,1,24,316] P(i(n(n(x)),x)).
+428 [hyper,1,5,412] P(i(x,n(n(x)))).
+429 [binary,428.1,8.1] $ANS(MV_29).
+
+------------ end of proof -------------
+
+
+given clause #49: (wt=12) 26 [hyper,1,23,23] P(i(x,i(y,i(z,i(u,i(v,z)))))).
+
+given clause #50: (wt=6) 421 [hyper,1,316,412] P(n(n(i(x,x)))).
+
+given clause #51: (wt=6) 428 [hyper,1,5,412] P(i(x,n(n(x)))).
+
+given clause #52: (wt=8) 431 [hyper,1,2,412] P(i(x,i(n(n(y)),y))).
+
+given clause #53: (wt=12) 28 [hyper,1,3,23] P(i(i(i(x,i(y,z)),u),i(z,u))).
+
+given clause #54: (wt=8) 442 [hyper,1,2,421] P(i(x,n(n(i(y,y))))).
+
+given clause #55: (wt=8) 443 [hyper,1,428,428] P(n(n(i(x,n(n(x)))))).
+
+given clause #56: (wt=8) 445 [hyper,1,124,428] P(i(x,i(y,n(n(x))))).
+
+given clause #57: (wt=11) 30 [hyper,1,23,21] P(i(x,i(y,i(n(z),i(z,u))))).
+
+given clause #58: (wt=8) 446 [hyper,1,107,428] P(n(n(i(x,i(y,y))))).
+
+given clause #59: (wt=8) 448 [hyper,1,40,428] P(n(n(i(x,i(y,x))))).
+
+given clause #60: (wt=8) 455 [hyper,1,18,428] P(i(x,n(n(i(y,x))))).
+
+given clause #61: (wt=14) 31 [hyper,1,23,18] P(i(x,i(y,i(i(i(z,u),v),i(u,v))))).
+
+given clause #62: (wt=8) 461 [hyper,1,2,428] P(i(x,i(y,n(n(y))))).
+
+given clause #63: (wt=8) 462 [hyper,1,428,421] P(n(n(n(n(i(x,x)))))).
+
+given clause #64: (wt=8) 463 [hyper,1,428,412] P(n(n(i(n(n(x)),x)))).
+
+given clause #65: (wt=14) 32 [hyper,1,23,10] P(i(x,i(y,i(z,i(u,i(v,i(w,v))))))).
+
+given clause #66: (wt=8) 649 [hyper,1,5,455] P(i(n(i(x,n(y))),y)).
+
+given clause #67: (wt=9) 451 [hyper,1,24,428] P(i(n(x),n(n(i(x,y))))).
+
+given clause #68: (wt=7) 753 [hyper,1,5,451] P(i(n(i(x,y)),x)).
+
+given clause #69: (wt=14) 33 [hyper,1,23,5] P(i(x,i(y,i(i(n(z),n(u)),i(u,z))))).
+
+given clause #70: (wt=7) 769 [hyper,1,5,753] P(i(x,i(n(x),y))).
+
+given clause #71: (wt=9) 469 [hyper,1,428,280] P(n(n(i(n(i(x,x)),y)))).
+
+given clause #72: (wt=9) 492 [hyper,1,428,21] P(n(n(i(n(x),i(x,y))))).
+
+given clause #73: (wt=16) 34 [hyper,1,23,3] P(i(x,i(y,i(i(z,u),i(i(u,v),i(z,v)))))).
+
+given clause #74: (wt=9) 543 [hyper,1,21,443] P(i(n(i(x,n(n(x)))),y)).
+
+given clause #75: (wt=9) 714 [hyper,1,21,462] P(i(n(n(n(i(x,x)))),y)).
+
+given clause #76: (wt=9) 725 [hyper,1,21,463] P(i(n(i(n(n(x)),x)),y)).
+
+given clause #77: (wt=16) 35 [hyper,1,23,4] P(i(x,i(y,i(i(i(z,u),u),i(i(u,z),z))))).
+
+given clause #78: (wt=9) 761 [hyper,1,428,753] P(n(n(i(n(i(x,y)),x)))).
+
+given clause #79: (wt=9) 763 [hyper,1,124,753] P(i(n(i(x,y)),i(z,x))).
+
+given clause #80: (wt=9) 771 [hyper,1,2,753] P(i(x,i(n(i(y,z)),y))).
+
+given clause #81: (wt=16) 37 [hyper,1,3,4] P(i(i(i(i(x,y),y),z),i(i(i(y,x),x),z))).
+
+given clause #82: (wt=9) 781 [hyper,1,428,769] P(n(n(i(x,i(n(x),y))))).
+
+given clause #83: (wt=9) 783 [hyper,1,124,769] P(i(x,i(y,i(n(x),z)))).
+
+given clause #84: (wt=9) 792 [hyper,1,18,769] P(i(x,i(n(i(y,x)),z))).
+
+given clause #85: (wt=14) 38 [hyper,1,2,4] P(i(x,i(i(i(y,z),z),i(i(z,y),y)))).
+
+given clause #86: (wt=9) 797 [hyper,1,2,769] P(i(x,i(y,i(n(y),z)))).
+
+given clause #87: (wt=10) 332 [hyper,1,124,289] P(i(n(n(x)),i(y,i(z,x)))).
+
+given clause #88: (wt=10) 339 [hyper,1,2,289] P(i(x,i(n(n(y)),i(z,y)))).
+
+given clause #89: (wt=12) 39 [hyper,1,4,10] P(i(i(i(x,i(y,i(z,y))),u),u)).
+
+given clause #90: (wt=10) 424 [hyper,1,36,412] P(i(i(i(n(n(x)),x),y),y)).
+
+given clause #91: (wt=10) 426 [hyper,1,23,412] P(i(x,i(y,i(n(n(z)),z)))).
+
+given clause #92: (wt=10) 430 [hyper,1,3,412] P(i(i(x,y),i(n(n(x)),y))).
+
+given clause #93: (wt=12) 41 [hyper,1,36,36] P(i(i(i(x,i(i(x,y),y)),z),z)).
+
+given clause #94: (wt=8) 1257 [hyper,1,424,430] P(i(n(n(n(n(x)))),x)).
+
+given clause #95: (wt=8) 1336 [hyper,1,5,1257] P(i(x,n(n(n(n(x)))))).
+
+given clause #96: (wt=9) 1272 [hyper,1,430,753] P(i(n(n(n(i(x,y)))),x)).
+
+given clause #97: (wt=12) 42 [hyper,1,23,36] P(i(x,i(y,i(z,i(i(z,u),u))))).
+
+given clause #98: (wt=9) 1296 [hyper,1,430,21] P(i(n(n(n(x))),i(x,y))).
+
+given clause #99: (wt=9) 1460 [hyper,1,5,1272] P(i(x,n(n(i(n(x),y))))).
+
+given clause #100: (wt=9) 1513 [hyper,1,5,1460] P(i(n(i(n(n(x)),y)),x)).
+
+given clause #101: (wt=12) 44 [hyper,1,3,36] P(i(i(i(i(x,y),y),z),i(x,z))).
+-------- PROOF -------- 1658 [binary,1657.1,7.1] $ANS(MV_25).
+
+----> UNIT CONFLICT at   0.06 sec ----> 1658 [binary,1657.1,7.1] $ANS(MV_25).
+
+Length of proof is 5.  Level of proof is 4.
+
+---------------- PROOF ----------------
+
+1 [] -P(i(x,y))| -P(x)|P(y).
+2 [] P(i(x,i(y,x))).
+3 [] P(i(i(x,y),i(i(y,z),i(x,z)))).
+4 [] P(i(i(i(x,y),y),i(i(y,x),x))).
+7 [] -P(i(i(a,b),i(i(c,a),i(c,b))))|$ANS(MV_25).
+13 [hyper,1,3,3] P(i(i(i(i(x,y),i(z,y)),u),i(i(z,x),u))).
+18 [hyper,1,3,2] P(i(i(i(x,y),z),i(y,z))).
+36 [hyper,1,18,4] P(i(x,i(i(x,y),y))).
+44 [hyper,1,3,36] P(i(i(i(i(x,y),y),z),i(x,z))).
+1657 [hyper,1,44,13] P(i(i(x,y),i(i(z,x),i(z,y)))).
+1658 [binary,1657.1,7.1] $ANS(MV_25).
+
+------------ end of proof -------------
+
+
+Search stopped by max_proofs option.
+
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                101
+clauses generated           6237
+  hyper_res generated       6237
+demod & eval rewrites          0
+clauses wt,lit,sk delete       0
+tautologies deleted            0
+clauses forward subsumed    4590
+  (subsumed by sos)          599
+unit deletions                 0
+factor simplifications         0
+clauses kept                1647
+new demodulators               0
+empty clauses                  3
+clauses back demodulated       0
+clauses back subsumed          0
+usable size                  102
+sos size                    1550
+demodulators size              0
+passive size                   3
+hot size                       0
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.06          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8386 finished Mon Aug  2 15:30:37 2004

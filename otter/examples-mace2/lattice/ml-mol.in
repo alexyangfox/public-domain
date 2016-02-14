@@ -1,0 +1,25 @@
+% benchmark parameters -N10 -p
+%
+% Find an invertable modular lattice that is a modular ortholattice.
+%
+
+include("finite-lattice").
+
+list(usable).
+
+% Complement and Invertability
+
+c(x) v x = 1.
+c(x) ^ x = 0.
+c(c(x)) = x.
+
+% Equational form of modularity:
+
+x v (y ^ (x v z)) = (x v y) ^ (x v z).
+
+% Denial of compatibility
+
+c(A ^ B) != c(A) v c(B).
+
+end_of_list.
+

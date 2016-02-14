@@ -1,0 +1,22 @@
+% benchmark parameters -n4 -m50
+
+% A Problem in combinatory logic.
+% Show that no fixed point combinator Q, where Qx=x(Qx),
+% can be derived from combinators L and Q, where
+%   Lxy = x(yy),
+%   Qxyz =  y(xz).
+
+list(usable).
+
+a(a(L,x),y) = a(x,a(y,y)).
+a(a(a(Q,x),y),z) = a(y,a(x,z)).
+
+end_of_list.
+
+formula_list(usable).
+
+% There does not exist a fixed-point combinator.
+
+-(exists Q all x (a(Q,x) = a(x,a(Q,x)))).
+
+end_of_list.

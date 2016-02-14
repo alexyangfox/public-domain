@@ -1,0 +1,461 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:36 2004
+The command was "../../bin/otter".  The process ID is 8303.
+
+set(auto).
+   dependent: set(auto1).
+   dependent: set(process_input).
+   dependent: clear(print_kept).
+   dependent: clear(print_new_demod).
+   dependent: clear(print_back_demod).
+   dependent: clear(print_back_sub).
+   dependent: set(control_memory).
+   dependent: assign(max_mem, 12000).
+   dependent: assign(pick_given_ratio, 4).
+   dependent: assign(stats_level, 1).
+   dependent: assign(max_seconds, 10800).
+
+list(usable).
+0 [] join(1,x,1).
+0 [] join(x,1,1).
+0 [] join(0,x,x).
+0 [] join(x,0,x).
+0 [] meet(0,x,0).
+0 [] meet(x,0,0).
+0 [] meet(1,x,x).
+0 [] meet(x,1,x).
+0 [] meet(x,x,x).
+0 [] join(x,x,x).
+0 [] -meet(x,y,z)|meet(y,x,z).
+0 [] -join(x,y,z)|join(y,x,z).
+0 [] -meet(x,y,z)|join(x,z,x).
+0 [] -join(x,y,z)|meet(x,z,x).
+0 [] -meet(x,y,xy)| -meet(y,z,yz)| -meet(x,yz,xyz)|meet(xy,z,xyz).
+0 [] -meet(x,y,xy)| -meet(y,z,yz)| -meet(xy,z,xyz)|meet(x,yz,xyz).
+0 [] -join(x,y,xy)| -join(y,z,yz)| -join(x,yz,xyz)|join(xy,z,xyz).
+0 [] -join(x,y,xy)| -join(y,z,yz)| -join(xy,z,xyz)|join(x,yz,xyz).
+0 [] -meet(x,z,x)| -join(x,y,x1)| -meet(y,z,y1)| -meet(z,x1,z1)|join(x,y1,z1).
+0 [] -meet(x,z,x)| -join(x,y,x1)| -meet(y,z,y1)| -join(x,y1,z1)|meet(z,x1,z1).
+0 [] -meet(a2,b2,r1).
+0 [] meet(a,b,c).
+0 [] join(c,r2,1).
+0 [] meet(c,r2,0).
+0 [] meet(r2,b,e).
+0 [] join(a,b,c2).
+0 [] join(c2,r1,1).
+0 [] meet(c2,r1,0).
+0 [] meet(r2,a,d).
+0 [] join(r1,e,a2).
+0 [] join(r1,d,b2).
+end_of_list.
+
+SCAN INPUT: prop=0, horn=1, equality=0, symmetry=0, max_lits=5.
+
+This is a Horn set without equality.  The strategy will
+be hyperresolution, with satellites in sos and nuclei
+in usable.
+
+   dependent: set(hyper_res).
+   dependent: clear(order_hyper).
+
+------------> process usable:
+** KEPT (pick-wt=8): 1 [] -meet(x,y,z)|meet(y,x,z).
+** KEPT (pick-wt=8): 2 [] -join(x,y,z)|join(y,x,z).
+** KEPT (pick-wt=8): 3 [] -meet(x,y,z)|join(x,z,x).
+** KEPT (pick-wt=8): 4 [] -join(x,y,z)|meet(x,z,x).
+** KEPT (pick-wt=16): 5 [] -meet(x,y,z)| -meet(y,u,v)| -meet(x,v,w)|meet(z,u,w).
+** KEPT (pick-wt=16): 6 [] -meet(x,y,z)| -meet(y,u,v)| -meet(z,u,w)|meet(x,v,w).
+** KEPT (pick-wt=16): 7 [] -join(x,y,z)| -join(y,u,v)| -join(x,v,w)|join(z,u,w).
+** KEPT (pick-wt=16): 8 [] -join(x,y,z)| -join(y,u,v)| -join(z,u,w)|join(x,v,w).
+** KEPT (pick-wt=20): 9 [] -meet(x,y,x)| -join(x,z,u)| -meet(z,y,v)| -meet(y,u,w)|join(x,v,w).
+** KEPT (pick-wt=20): 10 [] -meet(x,y,x)| -join(x,z,u)| -meet(z,y,v)| -join(x,v,w)|meet(y,u,w).
+** KEPT (pick-wt=4): 11 [] -meet(a2,b2,r1).
+
+------------> process sos:
+** KEPT (pick-wt=4): 12 [] join(1,x,1).
+** KEPT (pick-wt=4): 13 [] join(x,1,1).
+** KEPT (pick-wt=4): 14 [] join(0,x,x).
+** KEPT (pick-wt=4): 15 [] join(x,0,x).
+** KEPT (pick-wt=4): 16 [] meet(0,x,0).
+** KEPT (pick-wt=4): 17 [] meet(x,0,0).
+** KEPT (pick-wt=4): 18 [] meet(1,x,x).
+** KEPT (pick-wt=4): 19 [] meet(x,1,x).
+** KEPT (pick-wt=4): 20 [] meet(x,x,x).
+** KEPT (pick-wt=4): 21 [] join(x,x,x).
+** KEPT (pick-wt=4): 22 [] meet(a,b,c).
+** KEPT (pick-wt=4): 23 [] join(c,r2,1).
+** KEPT (pick-wt=4): 24 [] meet(c,r2,0).
+** KEPT (pick-wt=4): 25 [] meet(r2,b,e).
+** KEPT (pick-wt=4): 26 [] join(a,b,c2).
+** KEPT (pick-wt=4): 27 [] join(c2,r1,1).
+** KEPT (pick-wt=4): 28 [] meet(c2,r1,0).
+** KEPT (pick-wt=4): 29 [] meet(r2,a,d).
+** KEPT (pick-wt=4): 30 [] join(r1,e,a2).
+** KEPT (pick-wt=4): 31 [] join(r1,d,b2).
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=4) 12 [] join(1,x,1).
+
+given clause #2: (wt=4) 13 [] join(x,1,1).
+
+given clause #3: (wt=4) 14 [] join(0,x,x).
+
+given clause #4: (wt=4) 15 [] join(x,0,x).
+
+given clause #5: (wt=4) 16 [] meet(0,x,0).
+
+given clause #6: (wt=4) 17 [] meet(x,0,0).
+
+given clause #7: (wt=4) 18 [] meet(1,x,x).
+
+given clause #8: (wt=4) 19 [] meet(x,1,x).
+
+given clause #9: (wt=4) 20 [] meet(x,x,x).
+
+given clause #10: (wt=4) 21 [] join(x,x,x).
+
+given clause #11: (wt=4) 22 [] meet(a,b,c).
+
+given clause #12: (wt=4) 23 [] join(c,r2,1).
+
+given clause #13: (wt=4) 24 [] meet(c,r2,0).
+
+given clause #14: (wt=4) 25 [] meet(r2,b,e).
+
+given clause #15: (wt=4) 26 [] join(a,b,c2).
+
+given clause #16: (wt=4) 27 [] join(c2,r1,1).
+
+given clause #17: (wt=4) 28 [] meet(c2,r1,0).
+
+given clause #18: (wt=4) 29 [] meet(r2,a,d).
+
+given clause #19: (wt=4) 30 [] join(r1,e,a2).
+
+given clause #20: (wt=4) 31 [] join(r1,d,b2).
+
+given clause #21: (wt=4) 32 [hyper,22,10,16,14,14] meet(b,a,c).
+
+given clause #22: (wt=4) 33 [hyper,22,6,20,22] meet(a,c,c).
+
+given clause #23: (wt=4) 34 [hyper,22,5,22,20] meet(c,b,c).
+
+given clause #24: (wt=4) 35 [hyper,22,3] join(a,c,a).
+
+given clause #25: (wt=4) 36 [hyper,23,2] join(r2,c,1).
+
+given clause #26: (wt=4) 37 [hyper,24,10,16,14,21] meet(r2,c,0).
+
+given clause #27: (wt=4) 38 [hyper,25,10,16,14,14] meet(b,r2,e).
+
+given clause #28: (wt=4) 39 [hyper,25,6,20,25] meet(r2,e,e).
+
+given clause #29: (wt=4) 40 [hyper,25,6,24,16] meet(c,e,0).
+
+given clause #30: (wt=4) 41 [hyper,25,5,25,20] meet(e,b,e).
+
+given clause #31: (wt=4) 42 [hyper,25,3] join(r2,e,r2).
+
+given clause #32: (wt=4) 43 [hyper,26,8,21,26] join(a,c2,c2).
+
+given clause #33: (wt=4) 44 [hyper,26,7,26,21] join(c2,b,c2).
+
+given clause #34: (wt=4) 45 [hyper,26,4] meet(a,c2,a).
+
+given clause #35: (wt=4) 46 [hyper,26,2] join(b,a,c2).
+
+given clause #36: (wt=4) 47 [hyper,27,2] join(r1,c2,1).
+
+given clause #37: (wt=4) 48 [hyper,28,10,16,14,21] meet(r1,c2,0).
+
+given clause #38: (wt=4) 49 [hyper,29,10,16,14,14] meet(a,r2,d).
+
+given clause #39: (wt=4) 50 [hyper,29,6,20,29] meet(r2,d,d).
+
+given clause #40: (wt=4) 51 [hyper,29,6,24,16] meet(c,d,0).
+
+given clause #41: (wt=4) 52 [hyper,29,5,29,20] meet(d,a,d).
+
+given clause #42: (wt=4) 53 [hyper,29,3] join(r2,d,r2).
+
+given clause #43: (wt=4) 54 [hyper,30,8,21,30] join(r1,a2,a2).
+
+given clause #44: (wt=4) 55 [hyper,30,8,27,12] join(c2,a2,1).
+
+given clause #45: (wt=4) 56 [hyper,30,7,30,21] join(a2,e,a2).
+
+given clause #46: (wt=4) 57 [hyper,30,4] meet(r1,a2,r1).
+
+given clause #47: (wt=4) 58 [hyper,30,2] join(e,r1,a2).
+
+given clause #48: (wt=4) 59 [hyper,31,8,21,31] join(r1,b2,b2).
+
+given clause #49: (wt=4) 60 [hyper,31,8,27,12] join(c2,b2,1).
+
+given clause #50: (wt=4) 61 [hyper,31,7,31,21] join(b2,d,b2).
+
+given clause #51: (wt=4) 62 [hyper,31,4] meet(r1,b2,r1).
+
+given clause #52: (wt=4) 63 [hyper,31,2] join(d,r1,b2).
+
+given clause #53: (wt=4) 64 [hyper,32,6,20,32] meet(b,c,c).
+
+given clause #54: (wt=4) 65 [hyper,32,5,32,20] meet(c,a,c).
+
+given clause #55: (wt=4) 66 [hyper,32,3] join(b,c,b).
+
+given clause #56: (wt=4) 67 [hyper,34,9,23,25,19] join(c,e,b).
+
+given clause #57: (wt=4) 68 [hyper,34,9,13,18,19] join(c,b,b).
+
+given clause #58: (wt=4) 69 [hyper,35,7,23,13] join(a,r2,1).
+
+given clause #59: (wt=4) 70 [hyper,35,2] join(c,a,a).
+
+given clause #60: (wt=4) 71 [hyper,37,5,29,33] meet(d,c,0).
+
+given clause #61: (wt=4) 72 [hyper,37,5,29,22] meet(d,b,0).
+
+given clause #62: (wt=4) 73 [hyper,37,5,25,32] meet(e,a,0).
+
+given clause #63: (wt=4) 74 [hyper,38,6,20,38] meet(b,e,e).
+
+given clause #64: (wt=4) 75 [hyper,38,6,22,24] meet(a,e,0).
+
+given clause #65: (wt=4) 76 [hyper,38,5,38,20] meet(e,r2,e).
+
+given clause #66: (wt=4) 77 [hyper,38,5,37,17] meet(e,c,0).
+
+given clause #67: (wt=4) 78 [hyper,38,3] join(b,e,b).
+
+given clause #68: (wt=4) 79 [hyper,41,9,13,18,19] join(e,b,b).
+
+given clause #69: (wt=4) 80 [hyper,42,2] join(e,r2,r2).
+
+given clause #70: (wt=4) 81 [hyper,43,2] join(c2,a,c2).
+
+given clause #71: (wt=4) 82 [hyper,44,2] join(b,c2,c2).
+
+given clause #72: (wt=4) 83 [hyper,45,10,45,21,21] meet(c2,a,a).
+
+given clause #73: (wt=4) 84 [hyper,45,5,32,32] meet(c,c2,c).
+
+given clause #74: (wt=4) 85 [hyper,45,5,29,29] meet(d,c2,d).
+
+given clause #75: (wt=4) 86 [hyper,45,5,28,17] meet(a,r1,0).
+
+given clause #76: (wt=4) 87 [hyper,46,7,46,35] join(c2,c,c2).
+
+given clause #77: (wt=4) 88 [hyper,46,4] meet(b,c2,b).
+
+given clause #78: (wt=4) 89 [hyper,49,6,20,49] meet(a,d,d).
+
+given clause #79: (wt=4) 90 [hyper,49,6,32,24] meet(b,d,0).
+
+given clause #80: (wt=4) 91 [hyper,49,5,49,20] meet(d,r2,d).
+
+given clause #81: (wt=4) 92 [hyper,49,3] join(a,d,a).
+
+given clause #82: (wt=4) 93 [hyper,52,9,13,18,19] join(d,a,a).
+
+given clause #83: (wt=4) 94 [hyper,53,2] join(d,r2,r2).
+
+given clause #84: (wt=4) 95 [hyper,54,2] join(a2,r1,a2).
+
+given clause #85: (wt=4) 96 [hyper,55,2] join(a2,c2,1).
+
+given clause #86: (wt=4) 97 [hyper,56,2] join(e,a2,a2).
+
+given clause #87: (wt=4) 98 [hyper,57,10,57,21,21] meet(a2,r1,r1).
+
+given clause #88: (wt=4) 99 [hyper,58,4] meet(e,a2,e).
+
+given clause #89: (wt=4) 100 [hyper,59,2] join(b2,r1,b2).
+
+given clause #90: (wt=4) 101 [hyper,60,2] join(b2,c2,1).
+
+given clause #91: (wt=4) 102 [hyper,61,2] join(d,b2,b2).
+
+given clause #92: (wt=4) 103 [hyper,62,10,62,21,21] meet(b2,r1,r1).
+
+given clause #93: (wt=4) 104 [hyper,63,4] meet(d,b2,d).
+
+given clause #94: (wt=4) 105 [hyper,65,9,23,29,19] join(c,d,a).
+
+given clause #95: (wt=4) 106 [hyper,66,7,23,13] join(b,r2,1).
+
+given clause #96: (wt=4) 107 [hyper,67,8,36,12] join(r2,b,1).
+
+given clause #97: (wt=4) 108 [hyper,67,7,35,26] join(a,e,c2).
+
+given clause #98: (wt=4) 109 [hyper,67,2] join(e,c,b).
+
+given clause #99: (wt=4) 110 [hyper,68,8,46,46] join(c,c2,c2).
+
+given clause #100: (wt=4) 111 [hyper,69,7,46,13] join(c2,r2,1).
+
+given clause #101: (wt=4) 112 [hyper,69,2] join(r2,a,1).
+
+given clause #102: (wt=4) 113 [hyper,72,6,38,16] meet(d,e,0).
+
+given clause #103: (wt=4) 114 [hyper,73,6,49,16] meet(e,d,0).
+
+given clause #104: (wt=4) 115 [hyper,78,7,44,44] join(c2,e,c2).
+
+given clause #105: (wt=4) 116 [hyper,79,8,46,46] join(e,c2,c2).
+
+given clause #106: (wt=4) 117 [hyper,83,6,48,16] meet(r1,a,0).
+
+given clause #107: (wt=4) 118 [hyper,83,6,49,49] meet(c2,d,d).
+
+given clause #108: (wt=4) 119 [hyper,83,6,33,33] meet(c2,c,c).
+
+given clause #109: (wt=4) 120 [hyper,84,5,28,17] meet(c,r1,0).
+
+given clause #110: (wt=4) 121 [hyper,85,10,63,48,15] meet(c2,b2,d).
+
+given clause #111: (wt=4) 122 [hyper,85,9,13,18,19] join(d,c2,c2).
+
+given clause #112: (wt=4) 123 [hyper,85,5,28,17] meet(d,r1,0).
+
+given clause #113: (wt=4) 124 [hyper,88,10,88,21,21] meet(c2,b,b).
+
+given clause #114: (wt=4) 125 [hyper,88,5,41,41] meet(e,c2,e).
+
+given clause #115: (wt=4) 126 [hyper,88,5,28,17] meet(b,r1,0).
+
+given clause #116: (wt=4) 127 [hyper,92,7,81,81] join(c2,d,c2).
+
+given clause #117: (wt=4) 128 [hyper,99,10,99,21,21] meet(a2,e,e).
+
+given clause #118: (wt=4) 129 [hyper,104,10,104,21,21] meet(b2,d,d).
+
+given clause #119: (wt=4) 130 [hyper,105,7,66,46] join(b,d,c2).
+
+given clause #120: (wt=4) 131 [hyper,105,2] join(d,c,a).
+
+given clause #121: (wt=4) 132 [hyper,107,8,82,12] join(r2,c2,1).
+
+given clause #122: (wt=4) 133 [hyper,108,8,97,55] join(a,a2,1).
+
+given clause #123: (wt=4) 134 [hyper,108,2] join(e,a,c2).
+
+given clause #124: (wt=4) 135 [hyper,117,10,52,63,15] meet(a,b2,d).
+
+given clause #125: (wt=4) 136 [hyper,117,6,89,16] meet(r1,d,0).
+
+given clause #126: (wt=4) 137 [hyper,117,6,33,16] meet(r1,c,0).
+
+given clause #127: (wt=4) 138 [hyper,121,10,16,14,14] meet(b2,c2,d).
+
+given clause #128: (wt=4) 139 [hyper,121,5,88,90] meet(b,b2,0).
+
+given clause #129: (wt=4) 140 [hyper,121,5,84,51] meet(c,b2,0).
+
+given clause #130: (wt=4) 141 [hyper,124,6,48,16] meet(r1,b,0).
+
+given clause #131: (wt=4) 142 [hyper,124,6,74,74] meet(c2,e,e).
+
+given clause #132: (wt=4) 143 [hyper,125,10,58,48,15] meet(c2,a2,e).
+
+given clause #133: (wt=4) 144 [hyper,125,5,121,114] meet(e,b2,0).
+
+given clause #134: (wt=4) 145 [hyper,125,5,28,17] meet(e,r1,0).
+
+given clause #135: (wt=4) 146 [hyper,130,8,102,60] join(b,b2,1).
+
+given clause #136: (wt=4) 147 [hyper,130,2] join(d,b,c2).
+
+given clause #137: (wt=4) 148 [hyper,133,2] join(a2,a,1).
+
+given clause #138: (wt=4) 149 [hyper,135,10,104,93,21] meet(b2,a,d).
+
+given clause #139: (wt=4) 150 [hyper,138,6,124,72] meet(b2,b,0).
+
+given clause #140: (wt=4) 151 [hyper,138,6,119,71] meet(b2,c,0).
+
+given clause #141: (wt=4) 152 [hyper,141,10,41,58,15] meet(b,a2,e).
+
+given clause #142: (wt=4) 153 [hyper,141,6,74,16] meet(r1,e,0).
+
+given clause #143: (wt=4) 154 [hyper,142,6,138,113] meet(b2,e,0).
+
+given clause #144: (wt=4) 155 [hyper,143,10,99,116,21] meet(a2,c2,e).
+
+given clause #145: (wt=4) 156 [hyper,143,5,85,113] meet(d,a2,0).
+
+-------- PROOF -------- 
+
+----> UNIT CONFLICT at   0.07 sec ----> 166 [binary,165.1,11.1] $F.
+
+Length of proof is 16.  Level of proof is 6.
+
+---------------- PROOF ----------------
+
+2 [] -join(x,y,z)|join(y,x,z).
+4 [] -join(x,y,z)|meet(x,z,x).
+5 [] -meet(x,y,z)| -meet(y,u,v)| -meet(x,v,w)|meet(z,u,w).
+6 [] -meet(x,y,z)| -meet(y,u,v)| -meet(z,u,w)|meet(x,v,w).
+10 [] -meet(x,y,x)| -join(x,z,u)| -meet(z,y,v)| -join(x,v,w)|meet(y,u,w).
+11 [] -meet(a2,b2,r1).
+14 [] join(0,x,x).
+15 [] join(x,0,x).
+16 [] meet(0,x,0).
+20 [] meet(x,x,x).
+21 [] join(x,x,x).
+22 [] meet(a,b,c).
+24 [] meet(c,r2,0).
+25 [] meet(r2,b,e).
+26 [] join(a,b,c2).
+28 [] meet(c2,r1,0).
+29 [] meet(r2,a,d).
+30 [] join(r1,e,a2).
+31 [] join(r1,d,b2).
+37 [hyper,24,10,16,14,21] meet(r2,c,0).
+38 [hyper,25,10,16,14,14] meet(b,r2,e).
+41 [hyper,25,5,25,20] meet(e,b,e).
+45 [hyper,26,4] meet(a,c2,a).
+46 [hyper,26,2] join(b,a,c2).
+48 [hyper,28,10,16,14,21] meet(r1,c2,0).
+57 [hyper,30,4] meet(r1,a2,r1).
+58 [hyper,30,2] join(e,r1,a2).
+72 [hyper,37,5,29,22] meet(d,b,0).
+85 [hyper,45,5,29,29] meet(d,c2,d).
+88 [hyper,46,4] meet(b,c2,b).
+113 [hyper,72,6,38,16] meet(d,e,0).
+125 [hyper,88,5,41,41] meet(e,c2,e).
+143 [hyper,125,10,58,48,15] meet(c2,a2,e).
+156 [hyper,143,5,85,113] meet(d,a2,0).
+165 [hyper,156,10,57,31,15] meet(a2,b2,r1).
+166 [binary,165.1,11.1] $F.
+
+------------ end of proof -------------
+
+
+Search stopped by max_proofs option.
+
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                145
+clauses generated           7058
+clauses kept                 165
+clauses forward subsumed    6924
+clauses back subsumed          0
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.07          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8303 finished Mon Aug  2 15:30:36 2004

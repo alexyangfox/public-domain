@@ -1,0 +1,18 @@
+%
+%  Combinatory Logic
+%  Construct W in terms of S and K.  Wxy = xyy.
+%
+
+set(auto).
+
+list(usable).
+x = x.
+a(a(a(S,x),y),z) = a(a(x,z),a(y,z)).
+a(a(K,x),y) = x.
+end_of_list.
+
+formula_list(usable).
+
+-(exists W all x all y (a(a(W,x),y) = a(a(x,y),y) & -$ans(W))).
+
+end_of_list.

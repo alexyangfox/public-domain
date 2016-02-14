@@ -1,0 +1,219 @@
+CASE SPLITTING IN OTTER
+
+William McCune, Dale Myers, Rusty Lusk, Mohammed Alumlla
+December 1997
+
+This implementation uses the UNIX fork() command to make copies of the
+current state of the process for the cases.  This avoids having to
+explicitly save the state and restore it for the next case.  (That is,
+it was easy to implement.)
+
+When enabled, splitting occurs periodically during the search.  The
+default is to split after every 5 given clauses.  This can be changed
+to some other number of given clauses, say 10, with the command
+
+  assign(split_given, 10).    % default 5
+
+Instead, one can split after a specified number of seconds, with
+a command such as
+
+  assign(split_seconds, 10).    % default infinity
+
+which asks Otter to attempt a split every (approximately) 10 seconds.
+(Jobs that use split_seconds are usually not repeatable.)
+
+A third method is to split when a nonunit ground clause is selected
+as the given clause.  This option is specified with the command
+
+  set(split_when_given).
+
+which causes splitting on the given clause if (1) it is ground, (2) it
+is within the split_depth bound (see below), and (3) it satisfies the
+split_pos and split_neg flags (see below).
+
+If you wish to limit the depth of splitting, use a command such as
+
+  assign(split_depth, 3).   % default 256 (which is also the maximum)
+
+which will not allow a case such as "Case [1.1.1.1]".
+
+There are two kinds of splitting: on ground clauses and on ground
+atoms.  Clause splitting constructs one case for each literal, and
+atom splitting, say on p, constructs two cases: p is true; p is false
+(or, as Larry Wos says, splitting on a tautology).
+
+Sequence of Splitting Processes
+
+Say Otter decides to split the search into n cases.  For each case,
+the fork() command creates a child process for the case, then the
+parent process waits for the child to exit.  If any child fails to
+refute its case, the parent exits in failure (causing all
+ancestor processes to fail as well).  If each child refutes its case,
+the parent exits with success.
+
+The Output File
+
+Various messages about the splitting events are sent to the output file.
+To get an overview of the search from an output file, say problem.out,
+one can use the following command.
+
+  egrep "Splitting|Assumption|Refuted|skip|That" problem.out
+
+Splitting Clauses
+
+The following commands enables splitting on clauses after some number
+of given clauses have been used (see split_given), or after some
+number of seconds (see split_seconds).
+
+  set(split_clause).     % default clear
+
+The following command simply asks Otter to split on ground given clauses.
+
+  set(split_when_given). % default clear
+
+(I suppose one could use both of the preceding commands at the same
+time---I haven't tried it.)
+
+If Otter finds a suitable (see flags below) nonunit ground clause
+for splitting, say "p | q | r", the assumptions for three cases
+are
+
+  Case 1: p.
+  Case 2: -p & q.
+  Case 3: -p & -q & r.
+
+Eligible Clauses for Splitting
+
+Otter splits on ground nonunit clauses only.  They can
+occur in Usable or in Sos.  The following commands can be used
+to specify the type of clause to split.
+
+  set(split_pos).     % split on positive clauses only (default clear)
+  set(split_neg).     % split on negative clauses only (default clear)
+  set(split_nonhorn). % split on nonhorn clauses only (default clear)
+
+If none of the preceding flags are set, all ground clauses are eligible.
+
+Selecting the Best Eligible Clause
+
+The default method for selecting the best eligible clause for
+splitting is simply to take the first, lowest weight (using the
+pick_given scale) clause from Usable+Sos.
+
+Instead, one can use The command
+
+  set(split_min_max).  % default clear
+
+which says to use the following method to compare two eligible clauses
+C and D.  Prefer the clause with the lighter heaviest literal
+(pick_given scale);  if the heaviest literals have the same
+weight, use the lighter clause;  if the clauses have the same
+weight, use the first in Usable+Sos.
+
+Splitting Atoms
+
+The following commands enables splitting on atoms after some number
+of given clauses have been used (see split_given), or after some
+number of seconds (see split_seconds).
+
+  set(split_atom).
+
+(For propositional problems with assign(split_given, 0), this will
+cause Otter to perform a (not very speedy) Davis-Putnam search.)
+To select an atom for splitting, we consider OCCURRENCES of
+atoms within clauses.
+
+Eligible Atoms
+
+Otter splits on atoms that occur in nonunit ground clauses.
+The command 
+
+  set(split_pos).   % default clear
+
+says to split on atoms the occur only in positive clauses,
+
+  set(split_neg).   % default clear
+
+says to split on atoms the occur only in negative clauses, and
+
+  set(split_nonhorn).   % default clear
+
+says to split on atoms that occur positively in nonHorn clauses.
+
+Selecting the Best Eligible Atom
+
+Default method for comparing two eligible atom-occurrences:
+Prefer the atom that occurs in the lower weight clause.
+If the clauses have the same weight, prefer the atom
+with the lower weight.
+
+An optional method for selecting an atom considers the number
+of occurrences of the atom.  The command
+
+  set(split_popular).  % default clear
+
+says to prefer the atom that occurs in the greatest number
+of clauses.  All clauses in Usable+Sos containing the atom
+are counted.
+
+Another Way to Split Atoms
+
+If the user has an idea of how atom splitting should occur, he/she
+can give a sequence of atoms in the input file, and Otter will
+split accordingly.  (As above, the TIME of splitting is determined
+as above with the split_given and split_seconds parameters.)
+
+For example, with the commands
+
+  set(split_atom).
+  split_atoms([P, a=b, R]).
+  assign(split_given, 0).
+
+Otter will immediately (because of split_given) split the
+search into 8 cases (because there are 3 atoms), then do no
+more splitting.
+
+Problems With This Implementation
+
+Splitting is permanent.  That is, if a case fails, the whole
+search fails (no backing up to try a different split).
+
+If Otter fails to find a proof for a particular case (e.g., the Sos
+empties or some limit is reached), the whole attempt fails.  If
+the search strategy is complete, then an empty Sos indicates
+satisfiability, and the set of assumptions introduced by splitting
+give you a partial model; however, it is up to the user to figure this
+out.
+
+When splitting is enabled, max_seconds (for the initial process and
+all descendent processes) is checked against the wall clock (from the
+start of the initial process) instead of against the process clock.
+This is problematic if the computer is busy with other processes.
+
+Getting the Total Process Time
+
+The process clock ("user CPU" statistic) is initialized at the
+start of the process, and each process prints statistics once at the
+end of its life.  Therefore, one can get the total process by
+summing all of the "user CPU" times in the output file.  The command
+
+  grep "user CPU" problem.out | awk '{sum += $4}END{print sum}'
+
+can be used to get the approximate total process time from an
+output file problem.out.
+
+Advice on Using Otter's Splitting (from McCune)
+
+At this time, we don't have much data.  A general strategy
+for nonground problems is the following.
+
+  set(split_when_given).
+  set(split_pos).            % Also try it without this command.
+  assign(split_depth, 10).
+
+For ground (propositional) problems, try the following, which 
+is essentially a Davis-Putnam procedure.
+
+  set(split_atom).
+  set(split_pos).
+  assign(split_given, 0).

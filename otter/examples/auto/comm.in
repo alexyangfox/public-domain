@@ -1,0 +1,15 @@
+%  The group theory commutator problem.
+%  If xxx = e, then [[yz]z] = e, where [uv] = uv(u-1)(v-1).
+
+set(auto).
+
+list(usable).
+x = x.
+f(e,x) = x.
+f(g(x),x) = e.
+f(f(x,y),z) = f(x,f(y,z)).
+h(x,y) = f(x,f(y,f(g(x),g(y)))).
+f(x,f(x,x)) = e.
+h(h(a,b),b) != e.
+end_of_list.
+

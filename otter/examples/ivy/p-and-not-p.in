@@ -1,0 +1,2 @@
+set(auto).set(build_proof_object_2).clear(sigint_interact).assign(max_seconds, 10).initial_proof_object(junk).
+((1 (INPUT) (P)) (2 (INPUT) (NOT (P)))) 

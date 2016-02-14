@@ -1,0 +1,93 @@
+% The 2-inverter puzzle.
+%
+% The problem is to build a combinational circuit with 3 inputs
+% and 3 outputs, such that the outputs negate the inputs; we can
+% use as many AND and OR gates as we wish, but at most 2 NOT gates.
+%
+% The clause P(function, inversion_list) represents a wire, whose
+% state is a function of the inputs, and which depends on negated
+% wires listed in inversion_list.
+%
+% The initial clauses are
+%   P(00001111, v).  % input 1
+%   P(00110011, v).  % input 2
+%   P(01010101, v).  % input 3
+% which represent the three input wires. The goal clause is
+%   -P(11110000, v) | -P(11001100, v) | -P(10101010, v).
+% That is, the three output functions with unifiable inversion lists.
+%
+% The inversion lists are tricky: each has a variable as its tail, which
+% means that two lists unify iff on is an initial sublist of the other.
+% Two wires can be input to an OR or AND gate if their inversion lists
+% are unifiable.  (Note this means that the second NOT gate must depend
+% on the first.)
+%
+% For example, P(01000110,[11111000,11001110|x]) means that we
+% can acheive the function 01000110 with a circuit in which 11111000 and
+% 11001110 are inverted.
+%
+% The following clause is placed on the passive list to subsume
+% circuits with 3 or more NOT gates.
+% P(x, [y1,y2,y3|y4]).
+%
+% If a proof is found, the corresponding circuit can be constructed by
+% going through the proof; each step represents a gate, and the parent
+% lists show how to connect the wires.
+%
+% The original formulation is by Steve Winker and is documented in
+% "Automated Reasoning: Introduction and Applications" by Wos et al.
+% This formulation does not use the "reversion" heuristic of Winker's
+% formulation.
+%
+% This takes about 40 minutes and about 6 megabytes on McCune's 486.
+%  
+
+set(hyper_res).
+clear(back_sub).
+clear(demod_history).
+clear(print_kept).
+clear(print_given).
+assign(max_mem, 9000).
+assign(min_bit_width, 8).
+
+list(usable).
+% Rules for building circuits.
+-P(x, v) | -P(y, v) | P($BIT_AND(x,y), v).
+-P(x, v) | -P(y, v) | P($BIT_OR(x,y), v).
+-P(x, v) | P($BIT_AND(11111111,$BIT_NOT(x)), append_inversion(v,x)).
+end_of_list.
+
+list(sos).
+P(00001111, v).  % input 1
+P(00110011, v).  % input 2
+P(01010101, v).  % input 3
+end_of_list.
+
+list(usable).
+% Denial of the goal.
+-P(11110000, v) | -P(11001100, v) | -P(10101010, v).
+end_of_list.
+
+list(demodulators).
+% The following pair of demodulators inserts an element y just before the
+% tail-variable.
+append_inversion([x1|x2],y) = [x1|append_inversion(x2,y)].
+$VAR(x) -> append_inversion(x,y) = [y|x].
+end_of_list.
+
+list(passive).
+% The following clause subsumes functions obtained with 3 (or more) inversions.
+P(x, [y1,y2,y3|y4]).
+end_of_list.
+
+% The following list of weight templates gives first priority to the
+% goal functions, regardless of the inversion list.  Recall that with
+% a multiliteral denial, all of the goals must be selected as given
+% clauses before a proof is found by hyper.  Without these templates,
+% the three goals can sit on sos for a long time, delaying a proof.
+
+weight_list(pick_given).
+weight(P(11110000, $(1)), -50).
+weight(P(11001100, $(1)), -50).
+weight(P(10101010, $(1)), -50).
+end_of_list.

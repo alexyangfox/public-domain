@@ -1,0 +1,14 @@
+% benchmark parameters -N6 -p
+%
+% Find an ortholattice that is not orthomodular.
+%
+
+include("ortholattice").
+
+list(usable).
+
+% Denial of orthomodularity:
+
+A v (c(A) ^ (A v B)) != A v B.
+
+end_of_list.

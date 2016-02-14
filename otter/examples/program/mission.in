@@ -1,0 +1,78 @@
+%
+% Missionaries and Cannibals Puzzle -- 
+%
+% There are 3 missionaries, 3 cannibals, and a boat on the west bank of
+% a river.  All wish to cross, but the boat holds at most 2 people.
+% If the missionaries ever outnumber the cannibals on either bank of the
+% river or in the boat, the outnumbered cannibals will be converted.
+% Can they all safely cross the river?  If so, how?
+% (The boat cannot cross empty.)
+%
+% state(X,Y,Z) means that X missionaries, Y cannibals, and the boat
+% are on the Z side of the river.
+%
+
+set(hyper_res).
+set(prolog_style_variables).
+
+op(900, xfx, ||).
+op(900, xfx, &&).
+
+make_evaluable(_-_, $DIFF(_,_)).
+make_evaluable(_+_, $SUM(_,_)).
+make_evaluable(_<_, $LT(_,_)).
+make_evaluable(_<=_, $LE(_,_)).
+make_evaluable(_>_, $GT(_,_)).
+make_evaluable(_>=_, $GE(_,_)).
+make_evaluable(_==_, $EQ(_,_)).
+make_evaluable(_&&_, $AND(_,_)).
+make_evaluable(_||_, $OR(_,_)).
+
+list(usable).
+
+%  MBS - missionaries on same side as the boat
+%  CBS - cannibals on same side as the boat
+%  BP  - position of boat (either west or east)
+%  M   - missionaries to cross
+%  C   - cannibals to cross
+
+-state(MBS,CBS,BP)   % If we have an achievable state,
+
+ | -pick(M)          % missionaries to cross
+ | -pick(C)          % cannibals to cross
+ | -(M<=MBS)
+ | -(C<=CBS)
+ | -(M+C>0)          % if number in boat > 0,
+ | -(M+C<=2)         % if number in boat <= 2,
+ | -(C>=M||C==0)     % if no conversions in the boat,
+
+	% if no conversions after the boat leaves current side,
+
+ | -(CBS-C>=MBS-M || CBS-C==0)
+
+	% if no conversions when the boat arrives at the other side,
+
+ | -((3-CBS)+C >= (3-MBS)+M || (3-CBS)+C==0)
+
+	% then a crossing can occur
+
+ | state((3-MBS)+M, (3-CBS)+C, otherside(BP)).
+
+% The following give the number of each that can cross.
+
+pick(0).
+pick(1).
+pick(2).
+
+-state(3,3,east).   % goal state
+end_of_list.
+
+list(sos).
+state(3,3,west).    % initial state
+end_of_list.
+
+list(demodulators).
+otherside(west) = east.
+otherside(east) = west.
+end_of_list.
+

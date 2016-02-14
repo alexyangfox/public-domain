@@ -1,0 +1,46 @@
+%
+%  Consider an associative system with 8 left identities
+%  and 8 right inverses.
+%  Search for a complete set of reductions.
+%
+
+set(knuth_bendix).
+set(print_lists_at_end).
+set(really_delete_clauses).
+
+clear(print_kept).
+clear(print_new_demod).
+clear(print_back_demod).
+
+set(para_skip_skolem).
+
+skolem([g1(x),g2(x),g3(x),g4(x),g5(x),g6(x),g7(x),g8(x)]).
+
+lex([   e1,e2,e3,e4,e5,e6,e7,e8,
+        f(x,x),
+        g1(x),g2(x),g3(x),g4(x),g5(x),g6(x),g7(x),g8(x)   ]).
+
+list(usable).
+x = x.
+end_of_list.
+
+list(sos).
+f(f(x,y),z) = f(x,f(y,z)).
+f(e1,x) = x.
+f(e2,x) = x.
+f(e3,x) = x.
+f(e4,x) = x.
+f(e5,x) = x.
+f(e6,x) = x.
+f(e7,x) = x.
+f(e8,x) = x.
+f(x,g1(x)) = e1.
+f(x,g2(x)) = e2.
+f(x,g3(x)) = e3.
+f(x,g4(x)) = e4.
+f(x,g5(x)) = e5.
+f(x,g6(x)) = e6.
+f(x,g7(x)) = e7.
+f(x,g8(x)) = e8.
+end_of_list.
+

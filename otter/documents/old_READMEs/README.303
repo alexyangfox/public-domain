@@ -1,0 +1,53 @@
+
+                     Otter, Version 3.0.3
+                     --------------------
+
+Summary of changes from 3.0.2.
+
+1. Several bugs have been fixed (see Changelog).
+   (One known bug has not fixed: Do not use lex-dependent demodulation with
+   build_proof_object.)
+
+2. Two new features:
+
+   A new parameter, max_answers, allows the user to limit the number
+   of answer literal in a clause.  For example, assign(max_answers, 3).
+
+   Weighting has been extended to allow the user to specify terms that
+   _contain_ particular terms.  This is done with a new unary function
+   symbol $dots(_).  If $dots(t) occurs in a weight template, it will
+   match any term that contains a term that matches t.  This is very
+   useful for discarding "bad" clauses.
+   Here is part of an output file that illustrates $dots.
+
+3. An ASCII version of the manual is included.
+   
+************************************************************************
+list(sos).
+1 [] p(f(g(g(g(g(g(h(h(h(h(j(b)))))))))))).
+2 [] p(F(g(g(h(g(H(g(h(g(g(g(B)))))))))))).
+3 [] p(f3(g(h(a)),g(g(b)),h(h(c)))).
+end_of_list.
+
+weight_list(pick_given).
+weight(f($dots(j($(5)))),100).
+weight(F($dots(H($dots(B)))),1000).
+weight(f3($dots(a),$dots(b),$dots(c)),2000).
+end_of_list.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=106) 1 [] p(f(g(g(g(g(g(h(h(h(h(j(b)))))))))))).
+
+given clause #2: (wt=1001) 2 [] p(F(g(g(h(g(H(g(h(g(g(g(B)))))))))))).
+
+given clause #3: (wt=2001) 3 [] p(f3(g(h(a)),g(g(b)),h(h(c)))).
+************************************************************************
+
+FTP Otter 3.0.3 from info.mcs.anl.gov in pub/Otter/otter-3.0.3.tar.Z .
+
+   W. McCune   (otter@mcs.anl.gov)
+   Argonne National Laboratory
+   August 27, 1994

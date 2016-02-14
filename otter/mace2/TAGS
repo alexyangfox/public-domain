@@ -1,0 +1,1409 @@
+
+anldp.c,631
+#define VERSION 16,320
+#define VDATE 17,342
+#define MACE_ABEND_EXIT 32,641
+#define UNSATISFIABLE_EXIT 33,676
+#define MACE_MAX_SECONDS_EXIT 34,711
+#define MACE_MAX_MEM_EXIT 35,746
+#define MAX_MODELS_EXIT 36,781
+#define ALL_MODELS_EXIT 37,816
+#define MACE_SIGINT_EXIT 38,851
+#define MACE_SEGV_EXIT 39,886
+#define MACE_INPUT_ERROR_EXIT 40,921
+int First_order;52,1147
+int Domain_size 53,1190
+int Init_wall_seconds;54,1236
+int Models 55,1282
+static void MACE_print_banner(68,1577
+static void usage_message(89,2034
+static int process_command_line_args(112,2731
+static void MACE_sig_handler(163,3667
+int main(198,4600
+
+avail.c,329
+#define TP_ALLOC_SIZE 3,59
+static char *Alloc_block;5,133
+static char *Alloc_pos;6,209
+static int Malloc_calls;8,272
+static int Free_calls;9,330
+static Gen_ptr_ptr Chunks;13,467
+static void add_chunk(21,575
+static void free_chunks(35,790
+void reinit_mem(51,1092
+void *MACE_tp_alloc(67,1391
+int MACE_total_mem(107,2476
+
+clock.c,120
+ struct MACE_clock MACE_Clocks[5,59
+void init_clocks(13,192
+long MACE_clock_val(28,469
+void MACE_clock_reset(48,833
+
+dp.c,1855
+#define SUBSUMED(SUBSUMED13,177
+int Greatest_atom;21,421
+static int Subsume;25,516
+static int Check_time;26,593
+static int Num_clauses;28,668
+static Clause_ptr Clauses;29,692
+static Atom_ptr Atoms;30,719
+static int Num_selectable_clauses;31,797
+static Clause_ptr *Selectable_clauses;32,832
+static int *Unit_queue;34,898
+static int Unit_queue_size;35,964
+static int Unit_queue_first,36,1042
+static int Unit_queue_first, Unit_queue_last;36,1042
+static Gen_ptr_ptr Gen_ptr_avail;38,1089
+static Clause_ptr Prev_dp;39,1166
+static int Next_message 40,1234
+static int Num_assignments;44,1363
+static int *Assignments;45,1391
+static int *Split_positions;46,1457
+static Gen_ptr_ptr get_gen_ptr(54,1573
+static void free_gen_ptr(74,1916
+void init_dp(86,2082
+void exit_if_over_time_limit(99,2242
+int subsumed(114,2542
+static void init_unit_queue(132,2868
+static int unit_enqueue(148,3209
+static int unit_dequeue(228,5126
+void MACE_p_clause(253,5549
+void MACE_pp_clause(272,5933
+void MACE_pp_clause_active(290,6266
+void p_atom(313,6694
+void insert_dp_clause(336,7195
+static int read_one_clause(400,8764
+int read_all_clauses(429,9274
+int more_setup(452,9829
+static void select_init(548,12292
+static int select_atom(610,14098
+static Clause_ptr select_clause(645,14807
+int atom_value(676,15493
+static void print_initial_assignments(696,15921
+static void print_assignments(712,16206
+static void model(738,16743
+static int assign(811,18675
+static void unassign(888,20217
+static void dp(943,21307
+#define ISO_PRUNE 1037,23221
+#define SPECIFIED 1038,23243
+#define UNSPECIFIED 1039,23265
+int function_value(1047,23348
+int iso_prune(1062,23566
+void add_args_to_set(1101,24365
+static void clause_split(1126,24829
+static void delete_pointers_to_subsumed_clauses(1237,27752
+int dp_prover(1272,28709
+void reinit_dp(1356,31086
+
+flatten.c,466
+int kludgey_e_subsume(13,239
+void check_for_bad_things(45,942
+int int_term(64,1411
+int domain_element(78,1634
+static struct term *build_binary_term(89,1775
+static struct term *replace_term(109,2173
+void process_negative_equalities(132,2652
+static struct term *yankable_term(180,3724
+static struct term *yankable(207,4289
+static int eq_sn(233,4819
+void flatten_clause(253,5184
+struct list *flatten_clauses(282,5797
+void check_transformed_clause(307,6385
+
+generate.c,2028
+#define PRINT_CLAUSES 16,398
+#define MAX_MLITERALS 23,550
+#define MAX_CLAUSES 24,595
+struct rel_lit rel_lit28,690
+struct rel_clause rel_clause35,964
+struct sort Sorts[47,1240
+int Num_sorts;48,1270
+struct symbol Symbols[50,1286
+int Next_base 51,1322
+int Num_symbols;52,1341
+static int Clauses_generated;54,1359
+static int Clauses_inserted;55,1389
+static struct rel_clause Clauses[57,1419
+static int Num_rel_clauses;58,1466
+static int *Units;60,1495
+static int Unsatisfiable 61,1514
+static int sort_index(69,1640
+static int declare_symbol_sorted(84,1872
+static int str_to_id(127,2792
+int decode_int(146,3226
+void p_unit(191,4129
+void decode_and_p_clause(211,4491
+static void p_relational_clause(232,4908
+static void sort_clause(264,5596
+static int unit_subsumed(284,5961
+static int MACE_tautology(302,6286
+static int merge_lits(317,6544
+static int unit_delete(342,7082
+static void add_clause(368,7628
+static void add_2clause(400,8255
+static void add_unit(415,8476
+static void well_defined_0(453,9621
+static void well_defined_1(470,9930
+static void well_defined_2(489,10299
+static void well_defined_3(510,10726
+static void closed_0(533,11262
+static void closed_1(550,11528
+static void closed_2(570,11877
+static void closed_3(592,12300
+static void well_defined(616,12796
+static void closed(633,13135
+static void one_one(650,13433
+static void onto(670,13771
+static void left_cancel(691,14116
+static void right_cancel(714,14537
+static void left_onto(737,14957
+static void right_onto(760,15385
+static int process_variables(787,16010
+static void generate_prop_clauses(834,17146
+static void add_clauses_for_qg_constraint(933,20157
+static int number_variables(969,20946
+static int trans_relational_clause(1015,22051
+void read_all_mace_input(1108,24625
+static void remove_ans_literals(1140,25228
+static void MACE_collect_symbols(1169,25848
+static void iso_constants_recurse(1220,27096
+static void iso_constants(1264,28104
+int dp_trans(1308,29381
+void reinit_generate(1632,38063
+
+mace2.c,448
+#define VERSION 14,263
+#define VDATE 15,285
+static int Domain_min 21,373
+static int Domain_max 22,431
+int Models 24,495
+int First_order 25,555
+int Domain_size;26,601
+int Init_wall_seconds;27,650
+static void MACE_print_banner(36,780
+static void usage_message(57,1218
+static int process_command_line_args(111,3072
+static void MACE_sig_handler(214,5295
+static void reinit(249,6234
+static void try_domain_size(268,6559
+int main(295,7088
+
+miscellany.c,56
+void exit_with_message(11,158
+void MACE_abend(55,1503
+
+opts.c,329
+ struct flag MACE_Flags[3,19
+ struct parm MACE_Parms[4,60
+void MACE_init_options(12,166
+void MACE_print_options(101,1969
+void MACE_p_options(141,2859
+void auto_MACE_change_flag(152,3011
+void MACE_dependent_flags(173,3587
+void MACE_dependent_parms(219,4557
+int MACE_change_parm(272,5703
+void MACE_check_options(313,6774
+
+part.c,709
+#define MAX_LITS 3,20
+static int num_pos_lits(11,100
+static struct literal *copy_literal(27,356
+static void append_literal(41,605
+static void append_subterm(59,944
+static void p_vars(80,1280
+static void intersect_vars(95,1489
+static void union_vars(111,1712
+static int cardinality(127,1928
+static int diff_cardinality(143,2146
+static void which_vars_term(159,2390
+static void which_vars(177,2699
+static void which_vars_part(192,2993
+static int gen_connector_symnum(211,3362
+static struct literal *connector(232,3742
+static void score_the_part(263,4305
+static void parts(316,5741
+static void try_to_part(339,6070
+static struct list *var_opt(422,8037
+struct list *variable_optimize(446,8485
+
+print.c,1256
+static int function_value_0(23,515
+static int function_value_1(39,789
+static int function_value_2(55,1073
+static int function_value_3(71,1367
+static void print_table_f0(87,1669
+static void print_table_f1(98,1871
+static void print_table_f2(132,2479
+static void print_table_r0(178,3281
+static void print_table_r1(198,3642
+static void print_table_r2(231,4309
+void print_model(278,5466
+static void print_table_f0_portable(321,6569
+static void print_table_f1_portable(332,6813
+static void print_table_f2_portable(353,7229
+static void print_table_f3_portable(382,7824
+static void print_table_r0_portable(415,8509
+static void print_table_r1_portable(435,8914
+static void print_table_r2_portable(467,9530
+static void print_table_r3_portable(503,10288
+static void print_table_r4_portable(543,11107
+void print_model_portable(597,12549
+static void print_table_f0_ivy(655,13984
+static void print_table_f1_ivy(666,14215
+static void print_table_f2_ivy(684,14596
+static void print_table_f3_ivy(705,15053
+static void print_table_r0_ivy(729,15579
+static void print_table_r1_ivy(749,15975
+static void print_table_r2_ivy(775,16527
+static void print_table_r3_ivy(804,17167
+static void print_table_r4_ivy(836,17843
+void print_model_ivy(880,18967
+
+stats.c,280
+ long MACE_Stats[3,20
+ struct MACE_clock MACE_Clocks[4,54
+ int Internal_flags[5,103
+void init_stats(16,306
+void MACE_print_mem(33,569
+void p_mem(47,826
+void MACE_print_stats(58,954
+void MACE_p_stats(89,2557
+void MACE_print_times(100,2701
+void MACE_output_stats(130,3647
+
+../source/attrib.c,300
+} Attributes[11,104
+void init_attributes(19,196
+int get_attribute_index(57,1205
+int attribute_type(76,1540
+struct cl_attribute *get_attribute(102,2223
+void set_attribute(116,2479
+void delete_attributes(151,3083
+struct cl_attribute *term_to_attributes(173,3482
+void print_attributes(238,4915
+
+../source/av.c,8940
+#define TP_ALLOC_SIZE 10,131
+#define ALLOC_ARG_T 11,159
+static char *Alloc_block;13,189
+static char *Alloc_pos;14,264
+static struct term *term_avail;18,387
+static struct rel *rel_avail;19,419
+static struct sym_ent *sym_ent_avail;20,449
+static struct term_ptr *term_ptr_avail;21,487
+static struct formula_ptr_2 *formula_ptr_2_avail;22,527
+static struct fpa_tree *fpa_tree_avail;23,577
+static struct fpa_head *fpa_head_avail;24,617
+static struct context *context_avail;25,657
+static struct trail *trail_avail;26,695
+static struct imd_tree *imd_tree_avail;27,729
+static struct imd_pos *imd_pos_avail;28,769
+static struct is_tree *is_tree_avail;29,807
+static struct is_pos *is_pos_avail;30,845
+static struct fsub_pos *fsub_pos_avail;31,881
+static struct literal *literal_avail;32,921
+static struct clause *clause_avail;33,959
+static struct list *list_avail;34,995
+static struct clash_nd *clash_nd_avail;35,1027
+static struct clause_ptr *clause_ptr_avail;36,1067
+static struct ci_ptr *ci_ptr_avail;37,1111
+static struct ilist *ilist_avail;38,1147
+static struct link_node *link_node_avail;40,1182
+static struct ans_lit_node *ans_lit_node_avail;41,1224
+static struct formula_box *formula_box_avail;42,1272
+static struct formula *formula_avail;43,1318
+static struct formula_ptr *formula_ptr_avail;44,1356
+static struct cl_attribute *cl_attribute_avail;45,1402
+static struct glist *glist_avail;46,1450
+static struct g2list *g2list_avail;47,1484
+static int Malloc_calls;49,1521
+static unsigned long term_gets,53,1655
+static unsigned long term_gets, term_frees,53,1655
+static unsigned long term_gets, term_frees, term_avails;53,1655
+static unsigned long rel_gets,54,1712
+static unsigned long rel_gets, rel_frees,54,1712
+static unsigned long rel_gets, rel_frees, rel_avails;54,1712
+static unsigned long sym_ent_gets,55,1766
+static unsigned long sym_ent_gets, sym_ent_frees,55,1766
+static unsigned long sym_ent_gets, sym_ent_frees, sym_ent_avails;55,1766
+static unsigned long term_ptr_gets,56,1832
+static unsigned long term_ptr_gets, term_ptr_frees,56,1832
+static unsigned long term_ptr_gets, term_ptr_frees, term_ptr_avails;56,1832
+static unsigned long formula_ptr_2_gets,57,1901
+static unsigned long formula_ptr_2_gets, formula_ptr_2_frees,57,1901
+static unsigned long formula_ptr_2_gets, formula_ptr_2_frees, formula_ptr_2_avails;57,1901
+static unsigned long fpa_tree_gets,58,1985
+static unsigned long fpa_tree_gets, fpa_tree_frees,58,1985
+static unsigned long fpa_tree_gets, fpa_tree_frees, fpa_tree_avails;58,1985
+static unsigned long fpa_head_gets,59,2054
+static unsigned long fpa_head_gets, fpa_head_frees,59,2054
+static unsigned long fpa_head_gets, fpa_head_frees, fpa_head_avails;59,2054
+static unsigned long context_gets,60,2123
+static unsigned long context_gets, context_frees,60,2123
+static unsigned long context_gets, context_frees, context_avails;60,2123
+static unsigned long trail_gets,61,2189
+static unsigned long trail_gets, trail_frees,61,2189
+static unsigned long trail_gets, trail_frees, trail_avails;61,2189
+static unsigned long imd_tree_gets,62,2249
+static unsigned long imd_tree_gets, imd_tree_frees,62,2249
+static unsigned long imd_tree_gets, imd_tree_frees, imd_tree_avails;62,2249
+static unsigned long imd_pos_gets,63,2318
+static unsigned long imd_pos_gets, imd_pos_frees,63,2318
+static unsigned long imd_pos_gets, imd_pos_frees, imd_pos_avails;63,2318
+static unsigned long is_tree_gets,64,2384
+static unsigned long is_tree_gets, is_tree_frees,64,2384
+static unsigned long is_tree_gets, is_tree_frees, is_tree_avails;64,2384
+static unsigned long is_pos_gets,65,2450
+static unsigned long is_pos_gets, is_pos_frees,65,2450
+static unsigned long is_pos_gets, is_pos_frees, is_pos_avails;65,2450
+static unsigned long fsub_pos_gets,66,2513
+static unsigned long fsub_pos_gets, fsub_pos_frees,66,2513
+static unsigned long fsub_pos_gets, fsub_pos_frees, fsub_pos_avails;66,2513
+static unsigned long literal_gets,67,2582
+static unsigned long literal_gets, literal_frees,67,2582
+static unsigned long literal_gets, literal_frees, literal_avails;67,2582
+static unsigned long clause_gets,68,2648
+static unsigned long clause_gets, clause_frees,68,2648
+static unsigned long clause_gets, clause_frees, clause_avails;68,2648
+static unsigned long list_gets,69,2711
+static unsigned long list_gets, list_frees,69,2711
+static unsigned long list_gets, list_frees, list_avails;69,2711
+static unsigned long clash_nd_gets,70,2768
+static unsigned long clash_nd_gets, clash_nd_frees,70,2768
+static unsigned long clash_nd_gets, clash_nd_frees, clash_nd_avails;70,2768
+static unsigned long clause_ptr_gets,71,2837
+static unsigned long clause_ptr_gets, clause_ptr_frees,71,2837
+static unsigned long clause_ptr_gets, clause_ptr_frees, clause_ptr_avails;71,2837
+static unsigned long ci_ptr_gets,72,2912
+static unsigned long ci_ptr_gets, ci_ptr_frees,72,2912
+static unsigned long ci_ptr_gets, ci_ptr_frees, ci_ptr_avails;72,2912
+static unsigned long ilist_gets,73,2975
+static unsigned long ilist_gets, ilist_frees,73,2975
+static unsigned long ilist_gets, ilist_frees, ilist_avails;73,2975
+static unsigned long link_node_gets,75,3036
+static unsigned long link_node_gets, link_node_frees,75,3036
+static unsigned long link_node_gets, link_node_frees, link_node_avails;75,3036
+static unsigned long ans_lit_node_gets,76,3108
+static unsigned long ans_lit_node_gets, ans_lit_node_frees,76,3108
+static unsigned long ans_lit_node_gets, ans_lit_node_frees, ans_lit_node_avails;76,3108
+static unsigned long formula_box_gets,77,3189
+static unsigned long formula_box_gets, formula_box_frees,77,3189
+static unsigned long formula_box_gets, formula_box_frees, formula_box_avails;77,3189
+static unsigned long formula_gets,78,3267
+static unsigned long formula_gets, formula_frees,78,3267
+static unsigned long formula_gets, formula_frees, formula_avails;78,3267
+static unsigned long formula_ptr_gets,79,3333
+static unsigned long formula_ptr_gets, formula_ptr_frees,79,3333
+static unsigned long formula_ptr_gets, formula_ptr_frees, formula_ptr_avails;79,3333
+static unsigned long cl_attribute_gets,80,3411
+static unsigned long cl_attribute_gets, cl_attribute_frees,80,3411
+static unsigned long cl_attribute_gets, cl_attribute_frees, cl_attribute_avails;80,3411
+static unsigned long glist_gets,81,3492
+static unsigned long glist_gets, glist_frees,81,3492
+static unsigned long glist_gets, glist_frees, glist_avails;81,3492
+static unsigned long g2list_gets,82,3552
+static unsigned long g2list_gets, g2list_frees,82,3552
+static unsigned long g2list_gets, g2list_frees, g2list_avails;82,3552
+int **tp_alloc(92,3744
+struct term *get_term(153,5555
+void free_term(180,6003
+struct rel *get_rel(194,6212
+void free_rel(221,6635
+struct sym_ent *get_sym_ent(235,6830
+void free_sym_ent(266,7394
+struct term_ptr *get_term_ptr(280,7619
+void free_term_ptr(303,8033
+struct formula_ptr_2 *get_formula_ptr_2(317,8275
+void free_formula_ptr_2(345,8840
+struct fpa_tree *get_fpa_tree(359,9107
+void free_fpa_tree(386,9606
+struct fpa_head *get_fpa_head(400,9838
+void free_fpa_head(424,10271
+struct context *get_context(438,10497
+void free_context(468,11075
+struct trail *get_trail(493,11549
+void free_trail(515,11906
+struct imd_tree *get_imd_tree(529,12117
+void free_imd_tree(555,12579
+struct imd_pos *get_imd_pos(569,12809
+void free_imd_pos(591,13192
+struct is_tree *get_is_tree(605,13415
+void free_is_tree(630,13847
+struct is_pos *get_is_pos(644,14068
+void free_is_pos(666,14438
+struct fsub_pos *get_fsub_pos(680,14656
+void free_fsub_pos(701,15055
+struct literal *get_literal(715,15306
+void free_literal(740,15753
+struct clause *get_clause(754,15978
+void free_clause(788,16592
+struct list *get_list(802,16805
+void free_list(826,17215
+struct clash_nd *get_clash_nd(840,17441
+void free_clash_nd(864,17875
+struct clause_ptr *get_clause_ptr(878,18111
+void free_clause_ptr(901,18548
+struct ci_ptr *get_ci_ptr(915,18790
+void free_ci_ptr(939,19190
+struct ilist *get_ilist(953,19402
+void free_ilist(976,19771
+struct ans_lit_node *get_ans_lit_node(990,19990
+void free_ans_lit_node(1016,20482
+struct formula_box *get_formula_box(1030,20748
+void free_formula_box(1058,21363
+struct formula *get_formula(1072,21614
+void free_formula(1098,22083
+struct formula_ptr *get_formula_ptr(1112,22314
+void free_formula_ptr(1136,22770
+struct cl_attribute *get_cl_attribute(1150,23031
+void free_cl_attribute(1174,23501
+struct link_node *get_link_node(1188,23763
+void free_link_node(1229,24660
+void free_imd_pos_list(1243,24935
+void free_is_pos_list(1267,25361
+struct glist *get_glist(1291,25746
+void free_glist(1314,26118
+struct g2list *get_g2list(1328,26325
+void free_g2list(1352,26727
+void print_mem(1366,26925
+void print_mem_brief(1412,34958
+int total_mem(1432,36372
+int total_mem_calls(1443,36534
+void print_linked_ur_mem_stats(1454,36697
+
+../source/case.c,1320
+#define MAX_SPLIT_DEPTH 14,192
+#define POS_CLAUSE 16,258
+#define NEG_CLAUSE 17,279
+#define MIX_CLAUSE 18,300
+#define FORK_FAIL 20,322
+#define PARENT 21,343
+#define CHILD 22,364
+#define CHILD_FAIL 23,385
+struct ilist *Current_case 27,476
+struct literal_data literal_data36,805
+int To_parent,58,1407
+int To_parent,   From_parent;58,1407
+int To_children,59,1481
+int To_children, From_children;59,1481
+int splitting(67,1637
+int max_split_depth(80,1886
+int splitable_literal(93,2124
+static struct literal_data compare_literal_data(118,2722
+int splitable_clause(150,3440
+struct clause *compare_splitable_clauses(176,4006
+static void init_literal_data(214,5005
+static void p_literal_data(225,5216
+static void get_literal_data(244,5844
+void print_case(306,7396
+void p_case(321,7663
+void print_case_n(332,7822
+void p_case_n(348,8081
+void p_assumption_depths(359,8215
+struct ilist *current_case(378,8607
+void add_subcase(389,8785
+int case_depth(409,9135
+struct clause *find_clause_to_split(422,9356
+struct term *find_atom_to_split(452,10045
+int prover_forks(522,12388
+int split_clause(648,15559
+int split_atom(778,19123
+void possible_split(874,21783
+void always_split(920,22766
+void possible_given_split(949,23338
+void assumps_to_parent(998,24566
+void exit_with_possible_model(1040,25662
+
+../source/check.c,2529
+#define GEN_TAB_SIZE 16,281
+struct gen_node gen_node18,307
+struct gen_tab gen_tab24,375
+static struct gen_tab *Old_proof_tab;30,456
+static struct gen_tab *New_proof_old_id_tab;31,494
+static struct gen_tab *New_proof_tab;32,539
+struct gen_node *get_gen_node(40,636
+struct proof_object *get_proof_object(55,889
+struct proof_object_node *get_proof_object_node(71,1196
+static struct gen_tab *init_gen_tab(97,1745
+static int insert_into_gen_tab(115,2102
+static void * retrieve_from_gen_tab(150,2734
+static void p_gen_tab(164,3014
+static int check_eq_lit(182,3325
+int trivial_subst(198,3666
+struct proof_object_node *connect_new_node(225,4159
+static char *po_rule(254,4778
+void print_term_s(277,5333
+void p_term_s(303,5818
+void print_clause_s(316,6024
+void p_clause_s(340,6469
+void print_clause_s2(353,6684
+void p_clause_s2(391,7436
+void print_proof_object_node(402,7598
+void p_proof_object_node(472,9141
+void print_proof_object(483,9335
+void p_proof_object(499,9643
+static int new_literal_index(512,9890
+static void copy_subst_to_proof_object(528,10186
+struct clause *cl_copy_delete_literal(570,11016
+int variant(606,11960
+static int match_literals(649,12693
+struct ilist *match_clauses(713,14310
+struct clause *cl_append(769,15389
+struct clause *identity_resolve(796,15881
+static struct clause *identity_paramod(816,16228
+void renumber_vars_subst(861,17288
+static int translate_unit_deletion(896,17924
+static int translate_factor_simp(974,20052
+static struct ilist *first_rewrite(1048,22026
+static struct ilist *first_rewrite_clause(1111,23466
+static int translate_demod_nonunit(1144,24445
+static int translate_demod_unit(1244,27438
+int finish_translating(1336,30117
+static int translate_resolution(1523,35758
+static struct ilist *order_new_lits_for_hyper(1671,40348
+static int translate_hyper(1716,41236
+int ipx(1830,44676
+static int translate_ur(1847,44896
+static int translate_factor(2016,49226
+static struct term *para_position(2083,50938
+static int translate_paramod(2106,51351
+static void varmap(2251,55688
+static BOOLEAN match2(2265,56008
+struct proof_object_node *find_match2(2299,56820
+static int translate_step(2322,57415
+int contains_answer_literal(2428,60563
+int contains_rule(2443,60835
+struct ilist *trans_2_pos(2460,61085
+void type_2_trans(2505,62053
+int glist_subsume(2529,62618
+void p_proof_object_as_hints(2545,62887
+struct literal *remove_answer_literals(2584,63763
+void build_proof_object(2610,64357
+void init_proof_object_environment(2710,68061
+
+../source/clause.c,3761
+#define CLAUSE_TAB_SIZE 8,109
+static struct clause_ptr *Clause_tab[11,184
+static int Clause_id_count;14,264
+static struct clause *Hidden_clauses;17,348
+#define MAX_LITS 20,442
+static char Map_array[21,463
+void reset_clause_counter(29,563
+int next_cl_num(42,783
+void assign_cl_id(55,996
+void hot_cl_integrate(88,2059
+void cl_integrate(114,2688
+void cl_del_int(178,4175
+void cl_del_non(270,6091
+void cl_int_chk(300,6682
+static struct term *literals_to_term(323,7312
+struct term *clause_to_term(357,8018
+static struct literal *term_to_literals(377,8359
+struct clause *term_to_clause(407,8989
+struct clause *read_sequent_clause(456,10063
+struct clause *read_clause(657,14269
+struct list *read_cl_list(710,15369
+int set_vars_cl(756,16300
+void print_sequent_clause(782,16753
+void print_justification(814,17331
+void print_clause_bare(880,19538
+void print_clause(895,19827
+void print_clause_without_just(991,21758
+void p_clause(1066,23259
+void print_cl_list(1077,23408
+void cl_merge(1100,23812
+int tautology(1130,24367
+int prf_weight(1157,24865
+int proof_length(1191,25678
+int subsume(1215,26213
+int map_rest(1237,26605
+int anc_subsume(1296,28043
+struct clause *for_sub_prop(1317,28449
+struct clause *forward_subsume(1341,28884
+struct clause_ptr *back_subsume(1482,32598
+struct clause_ptr *unit_conflict(1553,34344
+int propositional_clause(1617,35837
+int xx_resolvable(1638,36217
+int pos_clause(1669,36855
+int answer_lit(1688,37226
+int pos_eq_lit(1699,37430
+int neg_eq_lit(1710,37634
+int eq_lit(1721,37839
+int neg_clause(1734,38059
+int num_literals(1753,38450
+int num_answers(1774,38792
+int num_literals_including_answers(1795,39114
+int literal_number(1812,39472
+int unit_clause(1833,39816
+int horn_clause(1848,40062
+int equality_clause(1867,40408
+int symmetry_clause(1885,40741
+struct literal *ith_literal(1920,41560
+void append_cl(1945,41914
+void prepend_cl(1973,42374
+void insert_before_cl(1999,42836
+void insert_after_cl(2031,43390
+void rem_from_list(2063,43931
+void insert_clause(2098,44597
+int max_literal_weight(2126,45083
+int weight_cl(2149,45591
+void hide_clause(2180,46273
+struct clause *proof_last_hidden_empty(2192,46454
+void del_hidden_clauses(2217,46976
+struct clause *cl_copy(2236,47290
+int clause_ident(2271,47952
+void remove_var_syms(2294,48470
+void cl_insert_tab(2311,48764
+void cl_delete_tab(2348,49435
+struct clause *cl_find(2383,50075
+int lit_compare(2411,50550
+int ordered_sub_clause(2452,51675
+int sub_clause(2497,52759
+int sort_lits(2524,53250
+void all_cont_cl(2564,54069
+void zap_cl_list(2592,54590
+int is_eq(2611,54841
+void mark_literal(2635,55330
+int get_ancestors(2684,56670
+struct ilist *clauses_to_ids(2765,58519
+void free_clause_ptr_list(2783,58823
+struct ilist *get_ancestors2(2799,59109
+struct ilist *just_to_supporters(2820,59522
+int renumber_vars_term(2867,60696
+int renumber_vars(2888,61112
+int renum_vars_term(2915,61557
+void clear_var_names(2957,62290
+void cl_clear_vars(2975,62566
+static void distinct_vars_rec(2989,62822
+int distinct_vars(3018,63443
+struct clause *find_first_cl(3039,63803
+struct clause *find_last_cl(3057,64057
+struct clause *find_random_cl(3075,64309
+struct clause_ptr *get_clauses_of_wt_range(3102,64761
+int clause_ptr_list_size(3123,65248
+struct clause *nth_clause(3137,65493
+void zap_clause_ptr_list(3155,65810
+struct clause *find_random_lightest_cl(3169,66056
+struct clause *find_mid_lightest_cl(3192,66557
+struct clause *find_lightest_cl(3221,67284
+struct clause *find_lightest_geo_child(3251,67984
+struct clause *find_interactive_cl(3274,68418
+struct clause *find_given_clause(3334,69866
+struct clause *extract_given_clause(3384,71045
+int unit_del(3413,71735
+void back_unit_deletion(3524,74186
+
+../source/clocks.c,177
+void clock_init(15,218
+long clock_val(60,1037
+void clock_reset(81,1477
+char *get_time(93,1739
+long system_time(110,2032
+long run_time(139,2550
+long wall_seconds(170,3021
+
+../source/demod.c,673
+static struct term *contract_lin(18,350
+static void dollar_out_non_list(94,1959
+static void dollar_out(110,2287
+static struct term *dollar_contract(159,4086
+static struct term *replace_special(556,16479
+static struct term *demod(593,17616
+static struct term *left_most_one_step(692,20357
+static struct term *demod_out_in(749,21553
+void un_share_special(787,22560
+struct term *convenient_demod(814,23003
+void zap_term_special(861,24263
+struct term *apply_demod(905,25496
+void demod_cl(957,26656
+void back_demod(1065,29636
+int lit_t_f_reduce(1165,32155
+int check_input_demod(1229,33653
+int dynamic_demodulator(1300,35398
+struct clause *new_demod(1364,36893
+
+../source/foreign.c,446
+long foo(14,155
+long user_test_long(28,343
+double user_test_double(45,616
+int user_test_bool(62,885
+char *user_test_string(79,1152
+struct term *user_test_term(96,1460
+void declare_user_functions(116,1849
+int get_args_for_user_function(211,4633
+struct term *long_to_term(289,6201
+struct term *double_to_term(307,6517
+struct term *bool_to_term(325,6836
+struct term *string_to_term(341,7121
+struct term *evaluate_user_function(357,7351
+
+../source/formula.c,3021
+static int Sk_func_num,11,201
+static int Sk_func_num, Sk_const_num;11,201
+void print_formula(19,374
+void p_formula(87,1809
+static struct term *formula_args_to_term(101,2094
+struct term *formula_to_term(142,3123
+struct formula *term_to_formula(207,4583
+struct formula *read_formula(278,6318
+struct formula_ptr *read_formula_list(323,7236
+void print_formula_list(378,8349
+struct formula *copy_formula(396,8720
+void zap_formula(433,9494
+struct formula *negate_formula(460,9977
+struct formula *nnf(495,10754
+static void rename_free_formula(603,13339
+static struct formula *skolem(631,13962
+struct formula *skolemize(722,16180
+struct formula *anti_skolemize(742,16544
+static void subst_free_term(755,16839
+void subst_free_formula(784,17385
+void gen_sk_sym(811,17981
+int skolem_symbol(849,18677
+int contains_skolem_symbol(868,19009
+int new_var_name(897,19623
+int new_functor_name(926,20173
+static void uq_all(949,20570
+void unique_all(996,21594
+static void mark_free_var_term(1022,22112
+static void mark_free_var_formula(1057,22820
+struct formula *zap_quant(1084,23547
+static void flatten_top_2(1125,24302
+void flatten_top(1160,25069
+static struct formula *distribute(1183,25530
+struct formula *cnf(1264,27078
+struct formula *dnf(1307,27910
+static void rename_syms_term(1320,28147
+void rename_syms_formula(1359,29156
+void subst_sn_term(1378,29524
+void subst_sn_formula(1405,30065
+int gen_subsume_prop(1430,30665
+struct formula *subsume_conj(1470,31932
+struct formula *subsume_disj(1536,33411
+int formula_ident(1599,34728
+void conflict_tautology(1634,35671
+void ts_and_fs(1676,36657
+static int set_vars_term_2(1730,37624
+static int set_vars_cl_2(1775,38545
+static struct clause *disj_to_clause(1799,38954
+static struct list *cnf_to_list(1864,40647
+struct list *clausify(1896,41284
+struct list *clausify_formula_list(1920,41707
+struct formula *negation_inward(1972,42835
+struct formula *expand_imp(2017,43811
+struct formula *iff_to_conj(2036,44153
+struct formula *iff_to_disj(2076,44852
+struct formula *nnf_cnf(2109,45476
+struct formula *nnf_dnf(2120,45633
+struct formula *nnf_skolemize(2131,45796
+struct formula *clausify_formed(2142,45979
+void rms_conflict_tautology(2164,46459
+struct formula *rms_subsume_conj(2219,47554
+struct formula *rms_subsume_disj(2285,49035
+int free_occurrence(2348,50339
+struct formula *rms_distribute_quants(2389,51153
+static void separate_free(2428,51980
+struct formula *rms_push_free(2492,53263
+struct formula *rms_quantifiers(2538,54279
+static struct formula *rms_distribute(2614,55990
+struct formula *rms(2691,57481
+static void introduce_var_term(2739,58440
+static void introduce_var(2772,59078
+struct formula *renumber_unique(2808,59835
+int gen_subsume_rec(2859,61026
+int gen_subsume(2904,62504
+int gen_conflict(2941,63251
+int gen_tautology(2979,64090
+struct formula *rms_cnf(3012,64752
+struct formula *rms_dnf(3023,64909
+static struct formula *push_free(3039,65305
+struct formula *distribute_quantifier(3088,66470
+
+../source/fpa.c,919
+#define AND 48,1654
+#define OR 49,1668
+#define LEAF 50,1681
+#define MAX_PATH 54,1801
+struct fpa_index *alloc_fpa_index(62,1884
+static void path_mark_end(83,2261
+static int hash_path(112,2855
+static int path_comp(130,3100
+static int path_size(153,3440
+static int *path_copy(171,3650
+static void insert_fpa_tab(196,4090
+static void delete_fpa_tab(269,5767
+void term_fpa_rec(327,7154
+void fpa_insert(377,8244
+void fpa_delete(404,8886
+static struct fpa_tree *get_leaf_node(422,9253
+static int all_args_vars(449,9843
+static struct fpa_tree *build_tree_local(504,11443
+struct fpa_tree *build_tree(598,13534
+struct term *next_term(625,14358
+struct fpa_tree *build_for_all(732,16809
+void zap_prop_tree(771,17605
+void print_fpa_tab(786,17889
+void p_fpa_tab(818,18478
+void print_prop_tree(832,18777
+void p_prop_tree(859,19261
+void print_path(870,19451
+void p_path(904,20075
+int new_sym_num(921,20389
+
+../source/geometry.c,348
+#define MAX_DEPTH 31,1181
+static int is_geometry_symbol(39,1298
+static int geo_rewrite_recurse(56,1619
+int geo_rewrite(123,3347
+static struct term *geo_replace_unif(146,3820
+static void geo_generate_unif(173,4302
+static void geo_recurse_unif(215,5354
+void geometry_rule_unif(260,6528
+int child_of_geometry(282,6975
+void gl_demod(303,7289
+
+../source/hints2.c,771
+struct hint2_data hint2_data17,402
+static struct fpa_index *Fpa_hints2_lits 22,460
+#define KEEP_BACK_DEMODULATED_HINTS 26,537
+static struct literal *first_nonanswer_lit(34,646
+static void zap_ilist(52,956
+static struct hint2_data *copy_hint2_data(66,1141
+void print_hint2_clause(82,1486
+void print_hints2_cl_list(113,2080
+void hint2_integrate(140,2614
+static void index_hint2(161,3093
+static void process_hint2_attributes(184,3741
+void compile_hints2(220,4691
+static struct clause *find_hint2(239,5073
+void adjust_weight_with_hints2(278,6039
+int hint2_keep_test(323,7371
+static void all_containing_hints2(345,7893
+static int xx_tautology(375,8514
+static struct clause *hint2_subsumed(403,9125
+void back_demod_hints(436,9935
+void zap_hints2(536,12205
+
+../source/hints.c,307
+struct hint_data hint_data65,2095
+static void process_hint_attributes(79,2366
+void compile_hints(132,3955
+void print_hint_clause(147,4228
+void p_hint_clause(182,4928
+void print_hints_cl_list(193,5088
+void p_hints_cl_list(216,5463
+void adjust_weight_with_hints(234,5872
+int hint_keep_test(305,7377
+
+../source/hot.c,733
+static struct fpa_index *Hot_clash_pos_lits;23,696
+static struct fpa_index *Hot_clash_neg_lits;24,741
+static struct fpa_index *Hot_alphas;25,786
+static struct fpa_index *Hot_clash_terms;26,823
+static struct fpa_index *Ordinary_clash_pos_lits;30,905
+static struct fpa_index *Ordinary_clash_neg_lits;31,955
+static struct fpa_index *Ordinary_alphas;32,1005
+static struct fpa_index *Ordinary_clash_terms;33,1047
+void init_hot(41,1187
+int heat_is_on(66,1873
+void switch_to_hot_index(78,2060
+void switch_to_ordinary_index(92,2354
+void hot_index_clause(108,2721
+void hot_dynamic(127,3051
+static void hot_mark_clash(154,3530
+static void hot_unmark_clash(195,4305
+void hot_mark_clash_cl(240,5348
+void hot_inference(280,6124
+
+../source/imd.c,240
+static struct imd_tree *insert_imd_tree(16,242
+void imd_insert(95,2022
+static struct imd_tree *end_term_imd(147,3611
+void imd_delete(208,5012
+struct term *contract_imd(294,7012
+void print_imd_tree(460,11267
+void p_imd_tree(499,12050
+
+../source/index.c,283
+static void index_mark_clash(15,262
+static void un_index_mark_clash(58,1126
+static void index_paramod(105,2227
+static void un_index_paramod(158,3583
+void index_lits_all(215,5299
+void un_index_lits_all(249,6186
+void index_lits_clash(284,7182
+void un_index_lits_clash(312,7900
+
+../source/io.c,2308
+#define SYM_TAB_SIZE 18,343
+#define MAX_COMPLEX 19,369
+struct sequence_member sequence_member23,509
+static struct sym_ent *Sym_tab[31,642
+int str_double(41,855
+void double_str(67,1307
+int str_int(92,1722
+void int_str(121,2184
+int str_long(153,2681
+int bits_ulong(187,3252
+void long_str(206,3573
+void ulong_bits(236,3992
+void cat_str(258,4492
+int str_ident(277,4796
+void reverse(291,5006
+struct sym_ent *insert_sym(312,5402
+int str_to_sn(339,6051
+void print_syms(423,8169
+void p_syms(443,8503
+char *sn_to_str(454,8675
+int sn_to_arity(473,9024
+struct sym_ent *sn_to_node(494,9392
+int sn_to_ec(512,9738
+struct sym_ent *sym_tab_member(534,10145
+int in_sym_tab(561,10609
+void free_sym_tab(583,10956
+int is_symbol(607,11354
+void mark_as_skolem(622,11642
+int is_skolem(643,11958
+int initial_str(665,12335
+int set_vars(686,12830
+int set_vars_term(703,13089
+int var_name(746,13987
+struct term_ptr *read_list(766,14470
+void print_list(820,15534
+void bird_print(836,15792
+#define OPEN_PAREN 927,18720
+#define OTHER_PUNC 928,18742
+#define NAME_SYM 929,18764
+#define SYM_SYM 930,18786
+static int next_token_type(941,18991
+void write_term(1006,20514
+void display_term(1204,25107
+void print_term(1238,25818
+void p_term(1257,26167
+void d_term(1270,26379
+void print_term_nl(1283,26602
+int print_term_length(1296,26788
+void  pretty_print_term(1327,27305
+void print_variable(1372,28166
+void built_in_symbols(1404,28870
+int declare_op(1489,32587
+void init_special_ops(1534,33345
+int process_op_command(1579,34349
+static void fill_in_op_data(1646,36170
+static int is_white(1683,36968
+void skip_white(1702,37357
+static int is_symbol_char(1723,37716
+static int is_alpha_numeric(1756,38180
+int name_sym(1771,38423
+static void get_name(1789,38717
+void print_error(1844,39812
+static struct term *seq_to_quant_term(1903,41084
+static struct term *seq_to_term(1970,42672
+static struct term *str_to_args(2131,46293
+static struct term *str_to_list(2187,47437
+static int str_to_sequence(2272,49646
+struct term *str_to_term(2380,52319
+int read_buf(2437,53886
+struct term *term_fixup(2528,55870
+struct term *term_fixup_2(2574,56807
+struct term *read_term(2606,57542
+void merge_sort(2652,58297
+int compare_for_auto_lex_order(2695,59139
+void auto_lex_order(2736,59993
+
+../source/is.c,298
+static struct is_tree *insert_is_tree(15,220
+void is_insert(95,2078
+static struct is_tree *end_term_is(122,2848
+void is_delete(181,4174
+struct term_ptr *is_retrieve(270,6410
+struct term *fs_retrieve(393,9646
+void canc_fs_pos(441,10658
+void print_is_tree(463,11019
+void p_is_tree(475,11225
+
+../source/ivy.c,413
+static struct proof_object *Initial_proof_object 10,114
+static int bnode_to_natural(14,249
+static struct term *bnode_to_otterterm(29,535
+int special_is_symbol(82,1828
+void trans_logic_symbols(90,2082
+static struct clause *bnode_to_clause(113,2727
+struct proof_object *parse_initial_proof_object(135,3236
+struct list *init_proof_object(175,4553
+struct proof_object *retrieve_initial_proof_object(198,5273
+
+../source/linkhyp.c,30
+void linked_hyper_res(14,141
+
+../source/linkur.c,1421
+static void construct_children_nodes(125,4477
+static struct clause *subsumable_unit(285,8717
+static struct clause *linked_unit_del(425,14029
+static struct link_node *backward(557,18387
+void linked_ur_res(702,22141
+static struct ilist *build_parental_chain(1096,34176
+static struct clause *build_ur_resolvent(1145,35385
+static BOOLEAN check_down_tree(1206,36938
+static BOOLEAN check_up_tree(1259,38136
+static struct term *first_unifiable(1314,39534
+static struct link_node *forward(1354,40665
+static struct link_node *forward_from_resolved_tree(1484,44080
+static void free_linked_node_tree(1558,46012
+static struct term *generate_resolvent(1588,46913
+static struct link_node *initialize_tree(1630,48026
+static BOOLEAN is_in_ancestry(1711,50240
+static BOOLEAN keep_clause(1776,51984
+static void linked_print_clause(1852,53724
+static void linked_print_link_node(1908,54874
+static void linked_print_link_node_tree(1985,57052
+static BOOLEAN more_targets_here(2010,57691
+static struct term *next_unifiable(2042,58463
+static BOOLEAN poss_nuc_link(2132,60642
+static BOOLEAN pass_parms_check(2164,61420
+static BOOLEAN pass_target_depth_check(2247,63593
+int process_linked_tags(2265,64002
+static BOOLEAN process_this_resolution(2432,68907
+static int term_ident_subst(2533,71032
+static void write_down_tree(2596,72633
+static void write_up_tree(2627,73462
+static void write_target_distances(2665,74627
+
+../source/lisp.c,714
+#define MAX_WORD 3,19
+static char Word[4,40
+static int Gets,5,68
+static int Gets, Frees;5,68
+static char *new_str_copy(22,524
+static Bnode get_bnode(31,746
+static void free_bnode(44,1027
+/**/ void zap_btree(54,1215
+/**/ BOOLEAN true_listp(65,1428
+/**/ void fprint_btree(75,1653
+/**/ void p_btree(100,2202
+static BOOLEAN white_char(109,2387
+static BOOLEAN paren(119,2668
+static int fill_word(127,2836
+/**/ BOOLEAN nullp(154,3405
+static BOOLEAN dotp(159,3500
+static void dot_trans 166,3671
+/**/ Bnode parse_lisp(194,4261
+/**/ int atom(229,5019
+/**/ Bnode car(234,5152
+/**/ Bnode cdr(239,5283
+/**/ Bnode cadr(244,5414
+/**/ Bnode caddr(249,5552
+/**/ int length(254,5697
+/**/ int main(263,5876
+
+../source/lists.c,864
+void free_ilist_list(16,222
+struct ilist *ilist_tack_on(30,419
+struct ilist *iset_add(49,705
+struct ilist *iset_remove(76,1140
+int ilist_member(102,1519
+int iset_subset(118,1753
+struct ilist *iset_subtract(132,1987
+struct ilist *iset_sort(148,2293
+struct ilist *idempot_ip(166,2565
+struct ilist *reverse_ip(187,2904
+struct ilist *ilist_append(204,3217
+struct ilist *copy_ilist(222,3513
+int ilist_length(240,3784
+struct ilist *copy_ilist_segment(254,4011
+void print_ilist(272,4333
+void p_ilist(288,4606
+int glist_length(302,4833
+struct glist *copy_glist(316,5063
+struct glist *glist_append(334,5365
+struct glist *glist_prepend(350,5641
+struct glist *glist_tack_on(364,5852
+void free_glist_list(383,6147
+int g2list_length(399,6420
+int member_is_subset(415,6699
+struct glist *copy_glist_of_ilists(431,6975
+void free_glist_of_ilists(449,7296
+
+../source/lrpo.c,298
+static int sym_precedence(16,257
+static int lrpo_status(51,1151
+static int lrpo_lex(68,1539
+static int num_occurrences(109,2537
+static struct term *set_multiset_diff(136,3136
+static int lrpo_multiset(184,4416
+int lrpo(222,5220
+int lrpo_greater(267,6403
+void order_equalities_lrpo(294,6923
+
+../source/main.c,133
+#define OTTER_VERSION 14,265
+#define VERSION_DATE 15,293
+#define IN_MAIN 17,330
+/**/ int main(20,427
+void print_banner(162,4523
+
+../source/misc.c,1462
+void init(14,152
+void abend(51,992
+void read_a_file(71,1364
+void sos_argument(702,19592
+void read_all_input(770,21001
+void set_lex_vals(924,24691
+void set_lrpo_status(949,25218
+void set_special_unary(970,25693
+void set_skolem(992,26300
+void free_all_mem(1009,26614
+void output_stats(1099,28528
+void print_stats(1140,29326
+void print_stats_brief(1226,33317
+void p_stats(1251,34212
+void print_times(1262,34334
+void print_times_brief(1336,38143
+void p_times(1387,40243
+void append_lists(1398,40417
+struct term *copy_term(1448,41547
+int biggest_var(1482,42152
+int biggest_var_clause(1510,42608
+int ground_clause(1529,42932
+void zap_list(1540,43139
+int occurs_in(1560,43447
+int occurrences(1585,43861
+int sn_occur(1610,44296
+int is_atom(1640,44885
+static int id_nested_skolems(1653,45134
+int ident_nested_skolems(1692,45834
+int ground(1712,46172
+void cleanup(1735,46519
+int check_stop(1776,47777
+void report(1813,48677
+void control_memory(1838,49259
+static void proof_message(1905,50806
+void print_proof(1937,51505
+struct clause *check_for_proof(2000,53060
+int proper_list(2061,54525
+void move_clauses(2081,54947
+void automatic_1_settings(2109,55523
+int sos_has_pos_nonground(2230,60437
+void automatic_2_settings(2255,61002
+void log_for_x_show(2377,65107
+int same_structure(2402,65969
+void zap_variable_names(2432,66512
+int commuted_terms(2449,66830
+int symbol_count(2484,67743
+int commutativity_consequence(2503,68092
+
+../source/multijust.c,2590
+static int Asize;24,704
+static int Bsize;25,722
+static struct glist **Alists;26,740
+static struct glist **Blists;27,770
+static int *A_to_B;28,800
+static int *B_to_A;29,820
+static struct ilist *Demod_map;31,841
+static struct glist *remove_those_containing(39,990
+struct glist *keep_only(61,1421
+struct glist *remove_supersets(81,1724
+struct glist *remove_all_supersets(103,2140
+static int g2_superset(130,2716
+struct g2list *g2_remove_supersets(149,3084
+static void append_parents(173,3549
+int input_clause(205,4270
+int first_just_input_only(222,4518
+int all_supporters_less_than(238,4809
+int derived_from_itself(254,5126
+int proof_not_longer_than(265,5337
+void possibly_append_parents(292,6126
+static void print_multi_supporters(332,7269
+static struct glist *just_lists_to_supporters_lists(352,7708
+static void build_support_lists(370,8067
+int map_demod(400,8917
+static void collapse_new_demod2(421,9366
+static void multi_map(460,10216
+#define INT_BIT 542,12168
+static int Set_size;543,12187
+static unsigned Compares;544,12235
+void set_jset_size(552,12321
+int *get_jset(563,12463
+int *copy_jset(574,12599
+int jset_member(589,12794
+void add_to_jset(602,12976
+void remove_from_jset(615,13164
+static int j_compare(630,13397
+#define JHASH_SIZE 653,13851
+static struct glist **Jhash;655,13898
+static unsigned int Lookups;656,13927
+static unsigned int Crashes;657,13956
+static void jhash_init(665,14042
+static int jhash(676,14199
+static int jhash_member_recurse(691,14421
+static int jhash_member(714,14821
+static struct glist *jhash_insert_recurse(727,15021
+static void jhash_insert(761,15701
+void print_set(773,15882
+void print_set_b_to_a(793,16188
+static void print_jhash(813,16511
+struct jnode jnode838,17006
+static struct jnode *Jstart;847,17283
+static struct jnode *Jend;848,17312
+static struct jnode *Jcurrent;849,17339
+static int Expanded;851,17371
+static int Generated;852,17392
+static int Pruned;853,17414
+static int Subsumed;854,17433
+static int Kept;855,17454
+static struct jnode *get_jnode(863,17527
+static int b_input(880,17822
+static int a_input(891,17949
+static void print_jnode(902,18088
+static void print_jnode_b_to_a(918,18380
+int subset_or_input(934,18726
+static void jproof(954,19148
+static int j_subsumed_recurse(1069,22312
+static int j_subsumed(1109,23145
+struct ilist *jset_to_ilist(1142,23746
+int *ilist_to_jset(1162,24075
+static int iset_jset_disjoint(1176,24296
+static int j_expand(1192,24564
+static int j_search(1264,26157
+void multi_just_process(1315,27525
+int multi_justifications(1364,28577
+
+../source/nonport.c,220
+void non_portable_init(30,499
+void sig_handler(49,779
+char *username(92,1891
+char *hostname(113,2275
+void interact(134,2602
+void foreach_sos(308,7616
+FILE *init_log_for_x_show(364,8720
+int my_process_id(381,8990
+
+../source/options.c,264
+void init_options(14,149
+void print_options(669,18918
+void p_options(706,19663
+void auto_change_flag(717,19793
+void dependent_flags(740,20351
+void dependent_parms(892,24865
+int change_flag(913,25301
+int change_parm(981,27143
+void check_options(1058,29213
+
+../source/overbeek.c,205
+#define OVERBEEK_WORLD_SIZE 64,1563
+static unsigned hash_term2(74,1746
+void overbeek_insert(98,2253
+int overbeek_weight(130,3070
+void print_overbeek_world(160,3720
+void check_overbeek_world(197,4482
+
+../source/paramod.c,304
+static struct term *apply_substitute(17,337
+static struct clause *build_bin_para(76,1757
+static void insert_detailed_para_history(154,3988
+static void para_from_up(203,5164
+static void para_from_alpha(264,6866
+void para_from(307,7991
+static void para_into_terms(342,8861
+void para_into(416,10940
+
+../source/pickdiff.c,520
+static struct rel *copy_rels(9,132
+static void zap_rels(27,466
+static struct rel *remove1(42,705
+static struct ilist *add_vecs(64,1101
+static int le_vecs(86,1523
+static struct ilist *diff_lists(108,1943
+static struct ilist *diff(134,2536
+static struct ilist *min_diff(167,3336
+static struct ilist *diff2_lists(200,3982
+static struct ilist *diff2(229,4661
+struct ilist *cldiff(258,5343
+static struct ci_ptr *get_ci_of_wt_range(282,5911
+void zap_ci_ptr_list(305,6428
+struct clause *find_pickdiff_cl(322,6676
+
+../source/process.c,183
+static void post_process(20,530
+void post_proc_all(143,3758
+static int given_clause_ok(185,4709
+void infer_and_process(206,5134
+int proc_gen(337,8736
+void pre_process(584,14893
+
+../source/resolve.c,491
+static struct clause *build_hyper(17,332
+int maximal_lit(176,3908
+static void clash(225,5721
+void hyper_res(394,9698
+void neg_hyper_res(596,14970
+void ur_res(800,20339
+int one_unary_answer(1047,26551
+struct term *build_term(1068,27064
+void combine_answers(1103,27658
+struct clause *build_bin_res(1165,29243
+struct clause *apply_clause(1252,31330
+void bin_res(1282,31977
+struct clause *first_or_next_factor(1345,33565
+void all_factors(1419,35235
+int factor_simplify(1460,36321
+
+../source/share.c,533
+#define TERM_TAB_SIZE 8,93
+static struct term_ptr *Term_tab[12,155
+static struct term_ptr *Bd_kludge;17,356
+static int hash_term(30,668
+static int term_compare(62,1492
+struct term *integrate_term(103,2521
+void disintegrate_term(181,4209
+void set_up_pointers(251,5725
+void zap_term(272,6121
+void print_term_tab(302,6702
+void p_term_tab(327,7094
+void test_terms(341,7335
+struct term_ptr *all_instances(375,8033
+struct term_ptr *all_instances_fpa(431,9283
+void bd_kludge_insert(492,10734
+void bd_kludge_delete(516,11120
+
+../source/unify.c,358
+#define BIND(BIND10,142
+#define DEREFERENCE(DEREFERENCE15,337
+int occur_check(28,681
+int unify(92,2810
+int unify_no_occur_check(172,4568
+int match(248,6632
+struct term *apply(301,8040
+int term_ident(360,9402
+void clear_subst_2(394,10240
+void clear_subst_1(414,10610
+void print_subst(431,10883
+void p_subst(453,11360
+void print_trail(464,11513
+
+../source/weight.c,742
+struct term_ptr *read_wt_list(17,291
+static struct is_tree *weight_retrieve(43,858
+int noncomplexifying(65,1328
+int overbeek_match(81,1650
+int weight(112,2278
+static int wt_match_dots(176,3653
+int wt_match(203,4264
+static void set_wt_term(252,5472
+static int set_wt_template(287,6371
+static void weight_insert(312,7038
+void set_wt_list(352,7850
+void weight_index_delete(379,8330
+static int lex_compare_sym_nums(411,8935
+int lex_order(450,9880
+int lex_order_vars(517,11860
+static int wt_lex_order(587,13822
+int lex_check(613,14325
+static void get_var_multiset(631,14667
+int var_subset(655,15080
+static int sym_occur(685,15668
+static int sym_elim(719,16451
+void order_equalities(764,17537
+int term_ident_x_vars(819,18828

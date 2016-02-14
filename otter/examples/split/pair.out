@@ -1,0 +1,532 @@
+
+WARNING, with splitting, max_seconds is checked against the wall clock.
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:31:08 2004
+The command was "../../bin/otter".  The process ID is 8716.
+
+set(auto1).
+   dependent: set(process_input).
+   dependent: clear(print_kept).
+   dependent: clear(print_new_demod).
+   dependent: clear(print_back_demod).
+   dependent: clear(print_back_sub).
+   dependent: set(control_memory).
+   dependent: assign(max_mem, 12000).
+   dependent: assign(pick_given_ratio, 4).
+   dependent: assign(stats_level, 1).
+   dependent: assign(max_seconds, 10800).
+set(binary_res).
+   dependent: set(factor).
+   dependent: set(unit_deletion).
+set(split_when_given).
+   dependent: set(back_unit_deletion).
+WARNING: clear(print_kept) flag already clear.
+clear(print_kept).
+clear(print_given).
+WARNING: clear(print_new_demod) flag already clear.
+clear(print_new_demod).
+WARNING: clear(print_back_demod) flag already clear.
+clear(print_back_demod).
+WARNING: clear(print_back_sub) flag already clear.
+clear(print_back_sub).
+WARNING: assign(stats_level,1) already has that value.
+assign(stats_level,1).
+
+list(usable).
+0 [] x=x.
+0 [] z!=x|el(z,nop(x,y)).
+0 [] z!=y|el(z,nop(x,y)).
+0 [] -el(z,nop(x,y))|z=x|z=y.
+0 [] op(x,y)=nop(nop(x,x),nop(x,y)).
+0 [] op(A,B)=op(C,D).
+0 [] A!=C|B!=D.
+end_of_list.
+
+SCAN INPUT: prop=0, horn=0, equality=1, symmetry=0, max_lits=3.
+
+This ia a non-Horn set with equality.  The strategy will be
+Knuth-Bendix, ordered hyper_res, factoring, and unit
+deletion, with positive clauses in sos and nonpositive
+clauses in usable.
+
+   dependent: set(knuth_bendix).
+   dependent: set(anl_eq).
+   dependent: set(para_from).
+   dependent: set(para_into).
+   dependent: clear(para_from_right).
+   dependent: clear(para_into_right).
+   dependent: set(para_from_vars).
+   dependent: set(eq_units_both_ways).
+   dependent: set(dynamic_demod_all).
+   dependent: set(dynamic_demod).
+   dependent: set(order_eq).
+   dependent: set(back_demod).
+   dependent: set(lrpo).
+   dependent: set(hyper_res).
+
+------------> process usable:
+** KEPT (pick-wt=8): 1 [] x!=y|el(x,nop(y,z)).
+** KEPT (pick-wt=8): 2 [] x!=y|el(x,nop(z,y)).
+** KEPT (pick-wt=11): 3 [] -el(x,nop(y,z))|x=y|x=z.
+** KEPT (pick-wt=6): 5 [copy,4,flip.1,flip.2] C!=A|D!=B.
+
+------------> process sos:
+** KEPT (pick-wt=3): 7 [] x=x.
+** KEPT (pick-wt=11): 8 [] op(x,y)=nop(nop(x,x),nop(x,y)).
+---> New Demodulator: 9 [new_demod,8] op(x,y)=nop(nop(x,x),nop(x,y)).
+** KEPT (pick-wt=15): 11 [copy,10,demod,9,9,flip.1] nop(nop(C,C),nop(C,D))=nop(nop(A,A),nop(A,B)).
+---> New Demodulator: 12 [new_demod,11] nop(nop(C,C),nop(C,D))=nop(nop(A,A),nop(A,B)).
+  Following clause subsumed by 7 during input processing: 0 [copy,7,flip.1] x=x.
+>>>> Starting back unit deletion with 7.
+>>>> Starting back demodulation with 9.
+>>>> Starting back unit deletion with 8.
+>>>> Starting back demodulation with 12.
+>>>> Starting back unit deletion with 11.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+Splitting on clause 190 [factor,185.1.3] nop(C,D)!=nop(B,B)|B!=A.
+
+Case [1]   (process 8717):
+Assumption: 335 [190,split.1] nop(C,D)!=nop(B,B).
+
+Splitting on clause 215 [factor,210.1.3,flip.2] nop(D,C)!=nop(A,A)|B!=A.
+
+Case [1.1]   (process 8718):
+Assumption: 359 [215,split.1.1] nop(D,C)!=nop(A,A).
+
+Splitting on clause 240 [factor,236.1.3] nop(D,C)!=nop(B,B)|B!=A.
+
+Case [1.1.1]   (process 8719):
+Assumption: 470 [240,split.1.1.1] nop(D,C)!=nop(B,B).
+
+Splitting on clause 264 [factor,260.1.3,flip.2] nop(C,D)!=nop(A,A)|B!=A.
+
+Case [1.1.1.1]   (process 8720):
+Assumption: 496 [264,split.1.1.1.1] nop(C,D)!=nop(A,A).
+
+Splitting on clause 749 [binary,674.1,3.1] C=A|C=B.
+
+--- refuted case [1.1.1.1.1]
+
+Case [1.1.1.1.1]   (process 8721):
+Assumption: 895 [749,split.1.1.1.1.1] C=A.
+
+----> UNIT CONFLICT at   0.12 sec ----> 1256 [binary,1255.1,7.1] $F.
+
+Length of proof is 31.  Level of proof is 14.  Case [1.1.1.1.1]
+
+---------------- PROOF ----------------
+
+1 [] x!=y|el(x,nop(y,z)).
+2 [] x!=y|el(x,nop(z,y)).
+3 [] -el(x,nop(y,z))|x=y|x=z.
+4 [] A!=C|B!=D.
+5 [copy,4,flip.1,flip.2] C!=A|D!=B.
+6 [factor,3.2.3] -el(x,nop(y,y))|x=y.
+7 [] x=x.
+9,8 [] op(x,y)=nop(nop(x,x),nop(x,y)).
+10 [] op(A,B)=op(C,D).
+11 [copy,10,demod,9,9,flip.1] nop(nop(C,C),nop(C,D))=nop(nop(A,A),nop(A,B)).
+13 [binary,7.1,2.1] el(x,nop(y,x)).
+14 [binary,7.1,1.1] el(x,nop(x,y)).
+15 [para_into,13.1.2,6.2.1] el(x,y)| -el(nop(z,x),nop(y,y)).
+16 [para_into,13.1.2,3.3.1] el(x,y)| -el(nop(z,x),nop(u,y))|nop(z,x)=u.
+18 [para_into,14.1.2,6.2.1] el(x,y)| -el(nop(x,z),nop(y,y)).
+19 [para_into,14.1.2,3.3.1] el(x,y)| -el(nop(x,z),nop(u,y))|nop(x,z)=u.
+24 [binary,15.2,2.2] el(x,y)|nop(z,x)!=y.
+32 [binary,24.1,6.1] nop(x,y)!=nop(z,z)|y=z.
+46 [binary,18.2,2.2] el(x,y)|nop(x,z)!=y.
+55 [binary,46.1,6.1] nop(x,y)!=nop(z,z)|x=z.
+64 [binary,32.2,5.1] nop(x,C)!=nop(A,A)|D!=B.
+95 [binary,55.2,5.1] nop(C,x)!=nop(A,A)|D!=B.
+125 [binary,11.1,24.2] el(nop(C,D),nop(nop(A,A),nop(A,B))).
+210 [para_into,64.2.1,55.2.1] nop(x,C)!=nop(A,A)|y!=B|nop(D,z)!=nop(y,y).
+215 [factor,210.1.3,flip.2] nop(D,C)!=nop(A,A)|B!=A.
+260 [para_into,95.2.1,32.2.1] nop(C,x)!=nop(A,A)|y!=B|nop(z,D)!=nop(y,y).
+264 [factor,260.1.3,flip.2] nop(C,D)!=nop(A,A)|B!=A.
+359 [215,split.1.1] nop(D,C)!=nop(A,A).
+496 [264,split.1.1.1.1] nop(C,D)!=nop(A,A).
+674 [binary,125.1,19.2,unit_del,496] el(C,nop(A,B)).
+676 [binary,125.1,16.2,unit_del,496] el(D,nop(A,B)).
+749 [binary,674.1,3.1] C=A|C=B.
+773 [binary,676.1,3.1] D=A|D=B.
+896,895 [749,split.1.1.1.1.1] C=A.
+1058 [back_demod,359,demod,896] nop(D,A)!=nop(A,A).
+1183 [back_demod,5,demod,896,unit_del,7] D!=B.
+1189,1188 [back_unit_del,1183.1,773.2] D=A.
+1255 [back_demod,1058,demod,1189] nop(A,A)!=nop(A,A).
+1256 [binary,1255.1,7.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8721) -------
+clauses given                 32
+clauses generated           1135
+clauses kept                1246
+clauses forward subsumed     424
+clauses back subsumed        107
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.12          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8721 finished Mon Aug  2 15:31:09 2004
+Refuted case [1.1.1.1.1].
+
+--- refuted case [1.1.1.1.2]
+
+Case [1.1.1.1.2]   (process 8722):
+Assumption: 896 [749,split.1.1.1.1.2] C=B.
+
+----> UNIT CONFLICT at   0.11 sec ----> 1188 [binary,1187.1,1014.1] $F.
+
+Length of proof is 32.  Level of proof is 13.  Case [1.1.1.1.2]
+
+---------------- PROOF ----------------
+
+1 [] x!=y|el(x,nop(y,z)).
+2 [] x!=y|el(x,nop(z,y)).
+3 [] -el(x,nop(y,z))|x=y|x=z.
+4 [] A!=C|B!=D.
+5 [copy,4,flip.1,flip.2] C!=A|D!=B.
+6 [factor,3.2.3] -el(x,nop(y,y))|x=y.
+7 [] x=x.
+9,8 [] op(x,y)=nop(nop(x,x),nop(x,y)).
+10 [] op(A,B)=op(C,D).
+11 [copy,10,demod,9,9,flip.1] nop(nop(C,C),nop(C,D))=nop(nop(A,A),nop(A,B)).
+13 [binary,7.1,2.1] el(x,nop(y,x)).
+14 [binary,7.1,1.1] el(x,nop(x,y)).
+15 [para_into,13.1.2,6.2.1] el(x,y)| -el(nop(z,x),nop(y,y)).
+18 [para_into,14.1.2,6.2.1] el(x,y)| -el(nop(x,z),nop(y,y)).
+19 [para_into,14.1.2,3.3.1] el(x,y)| -el(nop(x,z),nop(u,y))|nop(x,z)=u.
+24 [binary,15.2,2.2] el(x,y)|nop(z,x)!=y.
+32 [binary,24.1,6.1] nop(x,y)!=nop(z,z)|y=z.
+46 [binary,18.2,2.2] el(x,y)|nop(x,z)!=y.
+55 [binary,46.1,6.1] nop(x,y)!=nop(z,z)|x=z.
+63 [binary,32.2,5.2] nop(x,D)!=nop(B,B)|C!=A.
+95 [binary,55.2,5.1] nop(C,x)!=nop(A,A)|D!=B.
+124 [binary,11.1,46.2] el(nop(C,C),nop(nop(A,A),nop(A,B))).
+125 [binary,11.1,24.2] el(nop(C,D),nop(nop(A,A),nop(A,B))).
+185 [para_into,63.2.1,55.2.1] nop(x,D)!=nop(B,B)|y!=A|nop(C,z)!=nop(y,y).
+190 [factor,185.1.3] nop(C,D)!=nop(B,B)|B!=A.
+260 [para_into,95.2.1,32.2.1] nop(C,x)!=nop(A,A)|y!=B|nop(z,D)!=nop(y,y).
+264 [factor,260.1.3,flip.2] nop(C,D)!=nop(A,A)|B!=A.
+335 [190,split.1] nop(C,D)!=nop(B,B).
+496 [264,split.1.1.1.1] nop(C,D)!=nop(A,A).
+613 [binary,124.1,3.1] nop(C,C)=nop(A,A)|nop(C,C)=nop(A,B).
+674 [binary,125.1,19.2,unit_del,496] el(C,nop(A,B)).
+678,677 [binary,125.1,3.1,unit_del,496] nop(C,D)=nop(A,B).
+720 [back_demod,335,demod,678,flip.1] nop(B,B)!=nop(A,B).
+749 [binary,674.1,3.1] C=A|C=B.
+895 [749,split_neg.1.1.1.1.2] C!=A.
+897,896 [749,split.1.1.1.1.2] C=B.
+898 [back_demod,895,demod,897] B!=A.
+1014 [back_demod,613,demod,897,897,897,897,unit_del,720] nop(B,B)=nop(A,A).
+1187 [binary,898.1,55.2] nop(B,x)!=nop(A,A).
+1188 [binary,1187.1,1014.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8722) -------
+clauses given                 34
+clauses generated           1144
+clauses kept                1177
+clauses forward subsumed     472
+clauses back subsumed         81
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.11          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8722 finished Mon Aug  2 15:31:09 2004
+Refuted case [1.1.1.1.2].
+
+------- statistics (process 8720) -------
+clauses given                 32
+clauses generated           1120
+clauses kept                 888
+clauses forward subsumed     330
+clauses back subsumed          5
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.15          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8720 finished Mon Aug  2 15:31:09 2004
+Refuted case [1.1.1.1].
+
+--- refuted case [1.1.1.2]
+
+Case [1.1.1.2]   (process 8723):
+Assumption: 498 [264,split.1.1.1.2] B!=A.
+
+----> UNIT CONFLICT at   0.06 sec ----> 708 [binary,707.1,7.1] $F.
+
+Length of proof is 25.  Level of proof is 11.  Case [1.1.1.2]
+
+---------------- PROOF ----------------
+
+1 [] x!=y|el(x,nop(y,z)).
+2 [] x!=y|el(x,nop(z,y)).
+3 [] -el(x,nop(y,z))|x=y|x=z.
+4 [] A!=C|B!=D.
+5 [copy,4,flip.1,flip.2] C!=A|D!=B.
+6 [factor,3.2.3] -el(x,nop(y,y))|x=y.
+7 [] x=x.
+13 [binary,7.1,2.1] el(x,nop(y,x)).
+14 [binary,7.1,1.1] el(x,nop(x,y)).
+15 [para_into,13.1.2,6.2.1] el(x,y)| -el(nop(z,x),nop(y,y)).
+18 [para_into,14.1.2,6.2.1] el(x,y)| -el(nop(x,z),nop(y,y)).
+19 [para_into,14.1.2,3.3.1] el(x,y)| -el(nop(x,z),nop(u,y))|nop(x,z)=u.
+24 [binary,15.2,2.2] el(x,y)|nop(z,x)!=y.
+32 [binary,24.1,6.1] nop(x,y)!=nop(z,z)|y=z.
+46 [binary,18.2,2.2] el(x,y)|nop(x,z)!=y.
+55 [binary,46.1,6.1] nop(x,y)!=nop(z,z)|x=z.
+64 [binary,32.2,5.1] nop(x,C)!=nop(A,A)|D!=B.
+95 [binary,55.2,5.1] nop(C,x)!=nop(A,A)|D!=B.
+210 [para_into,64.2.1,55.2.1] nop(x,C)!=nop(A,A)|y!=B|nop(D,z)!=nop(y,y).
+215 [factor,210.1.3,flip.2] nop(D,C)!=nop(A,A)|B!=A.
+260 [para_into,95.2.1,32.2.1] nop(C,x)!=nop(A,A)|y!=B|nop(z,D)!=nop(y,y).
+264 [factor,260.1.3,flip.2] nop(C,D)!=nop(A,A)|B!=A.
+359 [215,split.1.1] nop(D,C)!=nop(A,A).
+374 [para_into,359.1.1.2,6.2.1] nop(D,x)!=nop(A,A)| -el(C,nop(x,x)).
+496 [264,split_neg.1.1.1.2] nop(C,D)=nop(A,A).
+571 [binary,19.3,359.1] el(D,x)| -el(nop(D,C),nop(nop(A,A),x)).
+668,667 [binary,496.1,55.1] C=A.
+670,669 [binary,496.1,32.1] D=A.
+676 [back_demod,571,demod,670,670,668,unit_del,14] el(A,x).
+707 [back_demod,374,demod,670,668,unit_del,676] nop(A,x)!=nop(A,A).
+708 [binary,707.1,7.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8723) -------
+clauses given                 28
+clauses generated            842
+clauses kept                 698
+clauses forward subsumed     297
+clauses back subsumed         52
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.07          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8723 finished Mon Aug  2 15:31:09 2004
+Refuted case [1.1.1.2].
+
+------- statistics (process 8719) -------
+clauses given                 24
+clauses generated            655
+clauses kept                 491
+clauses forward subsumed     179
+clauses back subsumed          4
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8719 finished Mon Aug  2 15:31:09 2004
+Refuted case [1.1.1].
+
+The Assumption for case [1.1.1] was not used;
+therefore we skip case:  [1.1.2].
+
+------- statistics (process 8718) -------
+clauses given                 22
+clauses generated            631
+clauses kept                 465
+clauses forward subsumed     178
+clauses back subsumed          4
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.03          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8718 finished Mon Aug  2 15:31:09 2004
+Refuted case [1.1].
+
+--- refuted case [1.2]
+
+Case [1.2]   (process 8724):
+Assumption: 361 [215,split.1.2] B!=A.
+
+----> UNIT CONFLICT at   0.10 sec ----> 765 [binary,764.1,621.1] $F.
+
+Length of proof is 21.  Level of proof is 10.  Case [1.2]
+
+---------------- PROOF ----------------
+
+1 [] x!=y|el(x,nop(y,z)).
+2 [] x!=y|el(x,nop(z,y)).
+3 [] -el(x,nop(y,z))|x=y|x=z.
+4 [] A!=C|B!=D.
+5 [copy,4,flip.1,flip.2] C!=A|D!=B.
+6 [factor,3.2.3] -el(x,nop(y,y))|x=y.
+7 [] x=x.
+9,8 [] op(x,y)=nop(nop(x,x),nop(x,y)).
+10 [] op(A,B)=op(C,D).
+11 [copy,10,demod,9,9,flip.1] nop(nop(C,C),nop(C,D))=nop(nop(A,A),nop(A,B)).
+13 [binary,7.1,2.1] el(x,nop(y,x)).
+14 [binary,7.1,1.1] el(x,nop(x,y)).
+15 [para_into,13.1.2,6.2.1] el(x,y)| -el(nop(z,x),nop(y,y)).
+18 [para_into,14.1.2,6.2.1] el(x,y)| -el(nop(x,z),nop(y,y)).
+24 [binary,15.2,2.2] el(x,y)|nop(z,x)!=y.
+32 [binary,24.1,6.1] nop(x,y)!=nop(z,z)|y=z.
+46 [binary,18.2,2.2] el(x,y)|nop(x,z)!=y.
+55 [binary,46.1,6.1] nop(x,y)!=nop(z,z)|x=z.
+64 [binary,32.2,5.1] nop(x,C)!=nop(A,A)|D!=B.
+210 [para_into,64.2.1,55.2.1] nop(x,C)!=nop(A,A)|y!=B|nop(D,z)!=nop(y,y).
+215 [factor,210.1.3,flip.2] nop(D,C)!=nop(A,A)|B!=A.
+359 [215,split_neg.1.2] nop(D,C)=nop(A,A).
+361 [215,split.1.2] B!=A.
+363 [binary,361.1,32.2] nop(x,B)!=nop(A,A).
+486,485 [binary,359.1,55.1] D=A.
+488,487 [binary,359.1,32.1] C=A.
+621 [back_demod,11,demod,488,488,488,486,flip.1] nop(nop(A,A),nop(A,B))=nop(nop(A,A),nop(A,A)).
+764 [binary,363.1,32.2] nop(x,nop(y,B))!=nop(nop(A,A),nop(A,A)).
+765 [binary,764.1,621.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8724) -------
+clauses given                 28
+clauses generated            842
+clauses kept                 756
+clauses forward subsumed     312
+clauses back subsumed         92
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.10          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8724 finished Mon Aug  2 15:31:09 2004
+Refuted case [1.2].
+
+------- statistics (process 8717) -------
+clauses given                 19
+clauses generated            476
+clauses kept                 354
+clauses forward subsumed     132
+clauses back subsumed          2
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8717 finished Mon Aug  2 15:31:09 2004
+Refuted case [1].
+
+--- refuted case [2]
+
+Case [2]   (process 8725):
+Assumption: 337 [190,split.2] B!=A.
+
+----> UNIT CONFLICT at   0.09 sec ----> 641 [binary,640.1,411.1] $F.
+
+Length of proof is 23.  Level of proof is 12.  Case [2]
+
+---------------- PROOF ----------------
+
+1 [] x!=y|el(x,nop(y,z)).
+2 [] x!=y|el(x,nop(z,y)).
+3 [] -el(x,nop(y,z))|x=y|x=z.
+4 [] A!=C|B!=D.
+5 [copy,4,flip.1,flip.2] C!=A|D!=B.
+6 [factor,3.2.3] -el(x,nop(y,y))|x=y.
+7 [] x=x.
+9,8 [] op(x,y)=nop(nop(x,x),nop(x,y)).
+10 [] op(A,B)=op(C,D).
+11 [copy,10,demod,9,9,flip.1] nop(nop(C,C),nop(C,D))=nop(nop(A,A),nop(A,B)).
+13 [binary,7.1,2.1] el(x,nop(y,x)).
+14 [binary,7.1,1.1] el(x,nop(x,y)).
+15 [para_into,13.1.2,6.2.1] el(x,y)| -el(nop(z,x),nop(y,y)).
+18 [para_into,14.1.2,6.2.1] el(x,y)| -el(nop(x,z),nop(y,y)).
+24 [binary,15.2,2.2] el(x,y)|nop(z,x)!=y.
+32 [binary,24.1,6.1] nop(x,y)!=nop(z,z)|y=z.
+46 [binary,18.2,2.2] el(x,y)|nop(x,z)!=y.
+55 [binary,46.1,6.1] nop(x,y)!=nop(z,z)|x=z.
+63 [binary,32.2,5.2] nop(x,D)!=nop(B,B)|C!=A.
+185 [para_into,63.2.1,55.2.1] nop(x,D)!=nop(B,B)|y!=A|nop(C,z)!=nop(y,y).
+190 [factor,185.1.3] nop(C,D)!=nop(B,B)|B!=A.
+336,335 [190,split_neg.2] nop(C,D)=nop(B,B).
+337 [190,split.2] B!=A.
+369 [back_demod,11,demod,336] nop(nop(C,C),nop(B,B))=nop(nop(A,A),nop(A,B)).
+372 [binary,337.1,32.2] nop(x,B)!=nop(A,A).
+376 [copy,372,flip.1] nop(A,A)!=nop(x,B).
+408,407 [binary,335.1,55.1] C=B.
+411 [back_demod,369,demod,408,408] nop(nop(B,B),nop(B,B))=nop(nop(A,A),nop(A,B)).
+633 [binary,376.1,55.2] nop(nop(A,A),x)!=nop(nop(y,B),nop(y,B)).
+640 [copy,633,flip.1] nop(nop(x,B),nop(x,B))!=nop(nop(A,A),y).
+641 [binary,640.1,411.1] $F.
+
+------------ end of proof -------------
+
+
+
+
+------- statistics (process 8725) -------
+clauses given                 27
+clauses generated            820
+clauses kept                 631
+clauses forward subsumed     354
+clauses back subsumed         45
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.09          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8725 finished Mon Aug  2 15:31:09 2004
+Refuted case [2].
+
+That finishes the proof of the theorem.
+
+That finishes the proof of the theorem.
+
+------- statistics (process 8716) -------
+clauses given                 17
+clauses generated            454
+clauses kept                 330
+clauses forward subsumed     131
+clauses back subsumed          2
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.04          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+Process 8716 finished Mon Aug  2 15:31:09 2004

@@ -1,0 +1,56 @@
+% -------------------------------------------------------------------------
+% Lex Demo 1
+%
+% Demonstrate lex() and special_unary().
+%
+% Canonicalization with respect to commutativity and associativity only.
+%
+% Contributed by Bob Veroff.
+% -------------------------------------------------------------------------
+
+% inference rule
+set(binary_res).
+
+% include variables in lexical ordering
+set(lex_order_vars).
+
+% processing
+assign(max_given, 1).
+
+% lexical ordering of terms
+lex([a,b,c,d,e,f(x),add(x,x)]).
+special_unary([neg(x)]).
+
+list(usable).
+
+   % nonnegated constants only
+   -dum | P1(add(c,add(add(a,b),add(e,d)))).
+
+   % negated constants only
+   -dum | P2(add(neg(c),add(add(neg(a),neg(b)),add(neg(e),neg(d))))).
+
+   % mixed negated and nonnegated constants (but distinct from each other)
+   -dum | P3(add(c,add(add(a,neg(b)),add(e,neg(d))))).
+
+   % negated and nonnegated occurrences of same constant
+   -dum | P4(add(add(neg(a),b),add(neg(b),add(add(b,neg(b)),add(a,b))))).
+
+   % include variables and other functions
+   -dum | P5(add(x,add(add(c,add(add(a,neg(y)),neg(b))),add(f(y),b)))).
+
+end_of_list.
+
+list(sos).
+   dum.
+end_of_list.
+
+list(demodulators).
+
+   % commutativity
+   EQ(add(x,y),add(y,x)).
+   EQ(add(x,add(y,z)),add(y,add(x,z))).
+
+   % associativity
+   EQ(add(add(x,y),z),add(x,add(y,z))).
+
+end_of_list.

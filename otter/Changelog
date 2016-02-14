@@ -1,0 +1,1001 @@
+In this file I'll try to record the differences in the various patchlevels
+of Otter 3.0.  The most recent entries are at the end.
+
+Mace2 changes are not listed here.
+
+--------------------------------------------------------
+
+Otter 2.99 released November 25, 1993.
+
+--------------------------------------------------------
+
+   Many small changes.
+
+Otter 3.0.0 released January 24, 1994.
+
+--------------------------------------------------------
+
+   Check for errors when reading clause id from terminal, flag
+   interactive_given, routine find_interactive_clause().
+
+   FormEd only: parsing strings read interactively, routine str_2_formula().
+
+   Problem with dynamic demodulators that have answer literal before equality.
+   (Answer lits are not propagated during demodulation, so I can't see any use
+   for answer lits on input demodulators, but they can occur in dynamic
+   demodulators.)  Changed contract_lin(), insert_imd(), delete_imd(),
+   new_demod(), back_demod(), post_process(), so that they use ith_literal(),
+   which skips answer lits.  Also changed check_input_demod() to allow
+   answer lits on input demodulators.
+
+Otter 3.0.1 - DOS version released Feb 22, 1994.
+   
+--------------------------------------------------------
+   
+   Optimized forward subsumption for nonunit clauses: require that found
+   literal be first literal.  Routine forward subsume() in file clause.c.
+   
+   Mar. 21, 1994.  Bug in unit deletion when answer literals with fresh
+   variables introduced.  Factor_simp crashes because variables not renumbered.
+   Fix: in unit_del(), renumber variables if ANY answer literals
+   introduced.  Result is otter301b.
+   
+   March 31, 1994.  Added code to translate otter input for Davis-Putnam
+   model searcher: set(dp_transform).  Result is otter301dp.
+
+   Apr. 13, 1994.  Slight change to Davis-Putnam translator so that it
+   outputs variable names with "v" instead of plain integers.
+
+   May 23, 1994.  Kunen convinced me to make answer literals sound.  In
+   particular, if they occur on demodulators, then they should be inherited
+   by rewritten clauses.  Since inheriting during demodulation would
+   slow it down, would take a lot of time to code, and would be of
+   questionable value, I'll simply not let demodulators have answer literals.
+   Fix: check_input_demod(), pre_process(); new routine
+   num_literals_including_answers().  NOTE: Subsumption still ignores
+   answer literals, and factoring still attempts to factor answer literals.
+   Result is otter301c.
+
+   June 8, 1994.  In procgen() (process generated clauses) moved cl_merge()
+   after factor_simplify() to make construction of proof objects easier.
+
+   June 8, 1994.  When input clauses are changed in procgen() (due to
+   flag process_input), e.g., by demod, unit_del, or factor_simp, the
+   original input clause is now assigned an ID and appears in proofs.
+   The new inference rule "copy" indicates this.  Changed header.h, 
+   pre_process(), and print_clause().  Motivation: to make proofs easier
+   to read and to ease proof object construction.
+
+   June 8, 1994.  When equality literals are flipped, add an entry to
+   the justification list.  Changed order_equalities(), order_equalities_lrpo(),
+   post_process(), header.h, proc_gen(), print_clause(), maybe others??.
+   Motivation: to make proofs easier
+   to read and to ease proof object construction.
+
+   June 9--16, 1994.  Various changes related to construction of proof objects.
+
+Otter 3.0.2 - UNIX version released June 17, 1994
+
+--------------------------------------------------------
+
+   July 14, 1994.  Bug in FPA indexing, because abs(2^31) returns 2^31,
+   a negative number!  Change one line in hash_path(), file fpa.c.
+   Result is otter302a.
+
+   July 14, 1994.  Bug (feature?) about symbol order of dynamically-introduced
+   symbols.  (Arose with sort_literals, $SUM, without lex([...]) command.
+   Change lex_compare_sym_nums() so that if either has no lex value, then
+   call compare_for_auto_lex_order() to compare.  Note that this may change
+   behavior, because before the fix, if one symbol has lex_val and the other
+   does not, then the one with lex_val is smaller.
+   Result is otter302b.
+
+   August 5, 1994.  Bug with dynamic hot list.  When making hot inference with 
+   a clause C, if new clause was added to hot list, then when return to
+   making hot inferences with C, the ordinary index would be used instead of
+   the hot index.  Result: lose a few hot inferences, get a lot of bogus
+   (but sound) hot inferences.  Also, one other small bug: heat_level was
+   not copied to new hot list clauses. Bugs fixed.
+   Result is otter302c.
+   
+-----------------------------------------------------------
+
+   August 23, 1994.  Added new flag `log_for_x_show' which causes some
+   statistics to be periodically logged to a special file so that the
+   user can have a real-time X display of some properties of the search.
+
+   August 24, 1994.  Added two new statistics: PASSIVE_SIZE and HOT_SIZE.
+
+   August 25, 1994.  Added $dots for weight templates.  Added parameter
+     MAX_ANSWERS.
+
+-----------------------------------------------------------
+
+Otter 3.0.3 released August 26, 1994.
+
+-----------------------------------------------------------
+
+   Sept. 21, 1994.  (Veroff,Kunen) Bug getting ancestors with [...,flip,1,...],
+   because the 1 does not refer to a clause.  Change the flip position
+   to a list (like all other positions).  Now get [...,flip.1,...],
+   (note period).  Changed post_process(), proc_gen(), and
+   finish_translating().
+
+   Oct 24, 1995.  Deleted GEOMETRIC_REWRITE (which occurred after demod),
+   and added GEOMETRIC_REWRITE_BEFORE and GEOMETRIC_REWRITE_AFTER (demod).
+
+   Jan 4, 1995.  Overbeek requested an extension to weighting.  This includes
+   the new command "overbeek_terms([])."  When an argument of an atom is
+   being weighed, if it is an instance of a term in overbeek_terms, then
+   it gets weight 0.
+   
+   Jan 12, 1995.  Overbeek requested a change (see preceding) so that we check
+   for a noncomplexifying instance.  The result is otter303b.
+   
+   Jan 22, 1995.  Veroff found a bug about reordering equalities in
+   nonunits.  Equalities that should not be flipped are sometimes flipped.
+   Changed order_equalities() in weight.c.  The result is otter303c.
+
+   Feb 21, 1995.  Yuan Yu pointed out that max_answers doesn't work.
+   Fix is s/MAX_LITERALS/MAX_ANSWERS/ in process.c (line 411 in 3.0.3,
+   line 415 in current).  Looks like it wasn't tested when first installed.
+   The result is otter303d.
+
+   Feb 21, 1995.  log_for_x_show() in misc.c had new_style procedure
+   declaration (so it wouldn't work with cc).  Fixed.
+
+   March 7, 1995. Bug in ancestor_subsume (wos).  If, during a given clause,
+   you keep more than one occurrence, back subsumption (because it
+   didn't check anc_subsume()), deletes all but the first.  The fix is to
+   have back_subsume() check anc_subsume()  (file clause.c).  Fixed.
+   The result is otter303e.
+
+   March 31, 1995.  Enhancement suggested by Ingo Dahn:  quantified
+   formulas can now appear in proofs, just like clauses do.  The skolemized
+   input clauses can have the quantified formula as parent, e.g.,
+   [clausify,4].  One gets this feature by setting the new flag
+   formula_history.  The result is otter303f.
+
+   April 7, 1995.  Updated build_proof_object so that it can build proof
+   objects with lex-dependent demodulation.
+
+   April 9, 1995.  Installed primitive "hints" mechanism.  (It will be changed
+   when the real hints mech. is installed.)
+
+   April 11, 1995.  Some cleanup and bug fixes from Art Quaife (email #27,
+   9/6/94).  Two bugs: getppid() call in init_log_for_x_show() (misc.c)
+   undefined for nonNUIX systems.  Move to nonport.c and call only if
+   TP_NAMES is defined.  variant() in check.c forgot to tpos=*trp.
+   In av.c, discarded routines term_ptr_get_size() and is_tree_get_size(),
+   because obsolete.  Fixed "unreachable break"s in several places.
+   
+   Unit deletion doesn't work if forward subsumption is disabled.  Fixed
+   by changing index_lits_all() and un_index_lits_all().
+
+   If the two symbols given to the make_evaluable command have different
+   arities, CRASH!  Fixed by including check in read_a_file().
+
+   Passive list units used for unit deletion.  The manual says that the
+   passive list is used only for subsumption and unit conflict.
+   Fixed unit_del() in file clause.c
+
+   April 12, 1995.  Removed all ROO code and references (#ifdefs).
+
+   April 12-13, 1995.  Install some of Veroff's features:
+      (1) Debugging:
+          DEBUG_FIRST            
+          DEBUG_LAST        
+          VERBOSE_DEMOD_SKIP
+      (2) Hints:
+          FSUB_HINT_ADD_WT  
+          BSUB_HINT_ADD_WT  
+          EQUIV_HINT_ADD_WT 
+          KEEP_HINT_SUBSUMERS
+      (3) Evaluable symbols:
+          $UNIQUE_NUM, $RENAME(_,_);
+
+   April 21, 1995.  Add flag PROOF_WEIGHT.  If set, (1) the "weight" of
+   a proof is printed along with its level and length, and (2) ancestor
+   subsumption uses "weight" instead of the proof length.  The weight
+   of a proof is the number of leaves in the proof tree, that is,
+   the number of OCCURRENCES of input clauses in the proof tree.
+   The result is otter303g.
+
+   April 25, 1995.  Bug (wos).  If more than 32767 symbols, CRASH!,
+   because term->sym_num was short, and no check in new_sym_num().
+   Fix: make sym_num unsigned short (so we can have 65535 symbols),
+   and put check in new_sym_num(), so it will abend instead of crash.
+
+   April 25, 1995.  Secret flag, hyper_symmetry_kludge.
+   The result if otter303h.
+
+   May 18, 1995.  Bug (kunen).  Unit deletion with a unit containing
+   answer literals.  This can cause an infinite loop, incorrect answers,
+   or a crash.  The problem is a leftover context pointer in a 
+   substitution.  Otter was designed for this to be ok, but I forgot
+   that when updating unit_del to handle answers.  The solution is to
+   set the context pointer to NULL when binding variables in is_retrieve().
+   I changed imd_retrieve() analogously.
+
+   May 18, 1995.  Bug (Ohlbach).  set(auto), set(free_all_mem) -> CRASH!
+   when printing statistics at the end of the run.  Because free_all_mem
+   deletes lists, then stats (level 1) tries to look at lists.
+   Fixed by including more checks in print_*_brief() in misc.c.
+
+   otter303i
+
+------------
+
+   June 5, 1995.  DP preprocessing - delete some subsumed clauses.
+   
+   June 16, 1995. DP preprocessing - change form of output; output
+   ordinary clauses as well as relational clauses, and all clauses
+   get IDs (in preparations for Olga's MACE enhancements).
+
+   otter303j
+
+------------
+
+   June 20--23, 1995.  Veroff visit.  We made a great many changes.
+   Here is a summary.
+
+1. New parameters to decide dynamic demodulators when lrpo is clear:
+
+   dynamic_demod_depth  (default -1)
+   dynamic_demod_rhs    (default  1)
+
+   Here is the new code.
+
+	 /* equality alpha=beta */
+         else if (var_subset(beta, alpha)) {
+            if (Flags[DYNAMIC_DEMOD_ALL].val)
+                return(1);  /* make it a demodulator */
+            else {
+                wt_left  =  weight(alpha, Weight_terms_index);
+                wt_right =  weight(beta, Weight_terms_index);
+                if (wt_right <= Parms[DYNAMIC_DEMOD_RHS].val &&
+                    wt_left - wt_right >= Parms[DYNAMIC_DEMOD_DEPTH].val)
+                    return(1);    /* make it a demodulator */
+                }
+            }
+
+    If these parameters are not used, Otter should behave as before.
+
+2. New parameters to adjust the pick_given weight of clauses.
+
+   age_factor  (default 0)
+   distinct_vars_factor  (default 0)
+
+   Here is the new code.
+
+   /* c is a newly kept clause that already has its ordinary pick-weight. */
+
+   if (Parms[AGE_FACTOR].val != 0)
+       c->pick_weight = c->pick_weight +
+                        (Stats[CL_GIVEN] / Parms[AGE_FACTOR].val);
+   if (Parms[DISTINCT_VARS_FACTOR].val != 0)
+       c->pick_weight = c->pick_weight + 
+                        (distinct_vars(c) * Parms[DISTINCT_VARS_FACTOR].val);
+
+3. Special_unary processing has been improved.  If you use this feature,
+   check the code in lex_order() and lex_order_vars() to see how it works
+   now.
+
+4. The hints mechanism has been overhauled.  From hints.c:
+
+   The main purpose of the hints mechanism is to set or adjust the
+   pick-given weight of clauses.  A hint H can apply to a clause C
+   in 3 ways:
+       H subsumes C (forward subsume, fsub),
+       C subsumes H (back subsume, bsub), and
+       H is equivalent to C (equiv, which implies fsub and bsub).
+   
+   2 more ways, which apply to unit clauses only, to be added later:
+       H and C unify
+       H anc C have the same shape (identical-except-variables)
+   
+   Another purpose of hints is to retain clauses that would 
+   otherwise be discarded because the purge-gen weight is
+   too high.  The Flag KEEP_HINT_SUBSUMERS (default clear)
+   says to skip the purge-gen test on generated clauses that
+   subsume hints (i.e., bsub).
+   
+   The Parms are
+   
+   FSUB_HINT_WT         FSUB_HINT_ADD_WT  
+   BSUB_HINT_WT  	BSUB_HINT_ADD_WT  
+   EQUIV_HINT_WT	EQUIV_HINT_ADD_WT 
+   
+   These can be overridden for individual hints with  corresponding
+   attributes on the hints, e.g.,
+   
+   p0(a,x)    # bsub_hint_wt(200)  # fsub_hint_wt(100).
+   
+   If the Parms (attributes) are not set, they are not used; if you
+   have a list of hints with no attributes, and you don't set any
+   hint parms, the hints won't be used for anything.
+   
+   If more than Parm (attribute) might apply, equiv is tested
+   first, then fsub, then bsub.  If you use both WT and ADD_WT,
+   then BOTH can apply, e.g., when the hint
+   
+   p  # bsub_hint_wt(200)  # bsub_hint_add_wt(20).
+   
+   applies to a clause, the clause gets pick-given weight 220.
+   
+   The hint attributes and parameters are compiled into a special
+   structure that is attached to the hint clause with the parents
+   pointer.  This causes several problems.  (1) Compiled hints
+   must be printed with print_hint_clause() instead of print_clause(),
+   and (2) the Parms in effect at the start of the search are
+   compiled in; if the user changes hint parms during the search,
+   this will have no effect.
+
+5. A new attribute mechanism has been installed.  This allows users to
+   attach supported attributes to clauses, and allows Otter programmers to
+   easily add new attributes.  Each attribute has a type in
+   [boolean, integer, double, string, otter-term].
+
+   W.r.t. I/O, attributes look just like positive literals with
+   one argument.  The name of the attribute is the "predicate symbol",
+   and the value is the argument.  Attributes are appended to clauses
+   with the "#" operator.  For example, the following clause has
+   two literals and two attributes (integer and string).
+
+   p | q # bsub_hint_wt(-10) # label("This is a label").
+
+   We think the Boolean and integer types will be useful to have flags and
+   parameters apply only to particular clauses.
+
+   The first set of attributes are for the hints mechanism. 
+
+   bsub_hint_wt
+   fsub_hint_wt
+   equiv_hint_wt
+   bsub_hint_add_wt
+   fsub_hint_add_wt
+   equiv_hint_add_wt
+
+   These have type integer, and correspond to the ordinary hint
+   parameters of the same names, and can be used
+   to override the ordinary parameters for particular hint clauses.
+
+   Another implemented attribute is label, whose type is string.  The
+   way it works is that if the pick-given weight of a clause is
+   changed by a hint with a label attribute, the clause gets a copy
+   of the label attribute.
+
+------------
+
+   July 6, 1995.  DP preprocessing - fix g(0)=1 bug, introduce flag
+   dp_int_domain to say that integers are domain elements, and make
+   several small changes.
+   
+------------
+
+otter303k - July 7, 1995.
+
+------------
+
+   July 14, 1995.  Improve demodulation in proof object construction.
+
+   July 26, 1995.  Prevent paramodulation from t=t in para_from rule.
+
+   July 27, 1995.  Install Slaney's Scott fragments, all with #ifdef SCOTT.
+
+otter303l - Aug 4, 1995.
+
+   August 9, 1995. A few minor corrections to the manual.
+   (The manual does not document any of the new features.)
+
+   August 10, 1995.  Change dp_transform so that Sos and Demodulators
+   are used as well as Usable.  This is so that ordinary Otter input
+   files (except for passive list) can be used for MACE input.
+
+   August 16, 1995.  A few small things suggested by Mark Stickel for
+   the Macintosh version.
+
+---------------
+
+Otter 3.0.4 released -- August 16, 1995.
+
+---------------
+
+    Sept 24, 1995 -- 3 minor corrections in the examples directory.
+    wos/manyval.sparc2 is missing the statistics, wos/README is missing,
+    and examples/README refers to a 486 instead of a Sparc2.
+    I'll just silently rerelease 3.0.4, because Otter hasn't changed.
+
+---------------
+
+Otter 3.0.4 rereleased -- Sept. 24, 1995.
+
+---------------
+
+    Nov 16, 1995.  Minor bug (incompleteness) in build_proof_object
+    that sometimes causes abend with lex-dependent demodulators.
+    Fixed.   Result is otter304a.
+
+    Feb 12, 1996.  Very minor bug: auto output message in misc.c corrected.
+
+    Feb 28, 1996.  Added flag "discard_non_oriented_eq", which will,
+    if order_eq is set, discard nonorientable positive equality units.
+    Result is otter304b.
+
+    May 6, 1996.  Bug in forward subsumption when doing ancestor subsumption
+    with nonunits.  I believe the only bad effect of the bug is that
+    subsumption can be incomplete, that is, a subsumed clause will be kept.
+    This is not a major bug, because (a) almost no one uses ancestor
+    subsumption (b) when it is used, it is almost always with units,
+    (c) when the problem occurs, an error message goes to stdout,
+    (d) ancestor subsumption is highly experimental and not well
+    understood anyway.  To fix, move clear_subst_1(tr) call in 
+    forward_subsume().
+    Result is otter304c.
+
+    April 2, 1997.  New flag "discard_xx_resolvable", which causes nonunit
+    clauses containing a literal that can be resolved with x=x to be
+    deleted.  (For new-foundations project.)
+    Result is otter304d.
+
+    April 12, 1997.  Change the format of proof objects.  I added a
+    new field <other-id> to lines in proof objects.  If the new field is not
+    empty, it gives the ID number of the corresponding (equivalent)
+    line in the ordinary Otter proof.
+
+       Before: (<id> <justification> <clause>)
+       After:  (<id> <justification> <clause> <other-id>)
+
+----------------
+
+    June 1997.  Several changes to prepare for CASC-14 (CADE-14 contest).
+
+    1. New flag set(tptp_eq).  Ordinarily, a predicate symbol is recognized
+    as equality for paramodulation and demodulation if it is "=", or
+    if it starts with "EQ", "eq", or "Eq".  If tptp_eq is set, a predicate
+    symbol is equality iff it is "equal".  This is because TPTP has
+    nonequality predicate symbols that start with "eq".
+
+    2. A new automatic mode.  I wish to be able to introduce new auto
+    modes and keep all of the old auto modes.  But if the user has to
+    choose between auto modes, the program is not really automatic.
+    Therefore, I'll have flags "auto1", "auto2", ..., for the auto modes,
+    and also have a flag "auto" (like a symbolic link) which which
+    specifies the default auto mode.
+
+    Two new flags: auto1 and auto2.  auto1 specifies the old auto mode,
+    and auto2 the new one.  The default will be auto2.  (So if you
+    you wish your old auto input files to work the same way with the
+    new otter, you should use set(auto1).
+
+    See README.305 for a description of the new auto mode.
+
+    The result of these changes is called otter305-beta, the version
+    used for CASC-14 (July 16, 1997).
+
+    August 21, 1997.  Two new parameters: warn_mem and warn_mem_max_weight.
+    These are used together to reset the max_weight (to warn_mem_max_weight),
+    when a specified amount of memory (warn_mem) has been used.  For
+    example, if you wish to reset the max_weight to 10 after 90 megabytes
+    of memory has been used, include the following in your input file.
+        assign(warn_mem, 90000).
+        assign(warn_mem_max_weight, 10).
+
+    September 12, 1997.  Bug reported by Dale Myers.  If the search
+    is stopped before the first given clause is used (for example
+    max_given=0) the would-be first given clause is lost.  Ordinarily
+    this doesn't matter, because the search is over.  But if you have
+    set(print_lists_at_end), that clause will not appear in the output.
+    Easy fix in file main.c.
+
+    September 16, 1997.  I moved the extra source code for the FormEd
+    program into a subdirectory called formed, which has its own
+    makefile for FormEd.
+
+    Sept?--Nov?, 1997.  Otter now catches the SIGUSR1 signal; when it
+    happens, statistics are sent to the output file, and Otter exits
+    with code 113.  The reason for this is so that if you have a long-term
+    Otter jobs that is no longer attached to a login shell (i.e., you
+    started Otter in the background, then logged out, then logged in again),
+    you can kill Otter and get statistics.  To kill Otter and get statistics
+    at the end of the output, run "kill -USR1 <process-id>".
+    This probably works only under UNIX.
+
+-----------
+
+    November 1997.
+
+    Dale Myers (Univ. of HI Math Dept) visited for three weeks, and
+    we installed a splitting rule.  Mohammed Almulla (Univ. of
+    Kuwait) was also visiting, and he contributed to the effort.
+    See split.txt in the documentation directory.  Splitting uses
+    the UNIX fork() system call, so I doubt it will work as is for
+    Macintosh or Microsoft.
+
+    The splitting rule required the introduction of a new flag
+    set(back_unit_deletion),  which causes any new unit to be used
+    to remove literals from existing clauses.  Analogous to
+    back demodulation.  This flag should also be useful when not
+    splitting.
+
+    Also, to make more sense of output files when splitting is used,
+    I changed some of the messages that go to the output file---for
+    example, the first few lines and the last few lines of the output.
+
+    Also, a new flag BELL (default set).  If you clear it, Otter
+    won't ring the bell when important things (like a proof) happen.
+    Requested by Dale Myers.
+
+-------------
+
+    Feb 19, 1998.  Preparing for the release of 3.0.5.  I had been
+    planning to make the new auto mode (auto2) the default, but I
+    have changed my mind---the old auto mode (auto1) will be the default.
+    (set(auto) gives the default auto mode.)  The reasons: (1) auto1
+    is closer to being complete, and (2) users will be annoyed if
+    their old auto files don't work with 3.0.5.
+
+---------------
+
+Otter 3.0.5 released -- February 19, 1998.
+
+---------------
+
+    March 4, 1998.  Added new flag "unit_res", default clear.  If
+    set, then for each binary resolution inference, one of the
+    parents must be a unit clause.  Requested by Jim Boyle.
+    Note that you still have to set binary_res.
+    The result of this change is otter305b.
+
+    April 1, 1998 (no fooling).	 Bug in example input file
+    examples/split/zebra2.in.  Two clauses missing: ivory!=5, green!=1.
+    Fixed.
+
+    June 17, 1998.  Changed memory counters (term_gets, etc.)
+    from long to unsigned long.
+
+----------------------------  1999
+
+    June 7, 1999.  Type 2 proof objects (binary OR clauses), and
+    several other changes for the Otter-Ivy interface.
+
+    July 30, 1999.  Version 306-beta included in Ivy package for
+    ACL2 submission.  We intend to release 306 as the version
+    in IVY-1.0.
+
+    Sept 8, 1999.  When sorting literals of input clauses, add
+    "propositional" to the justification (so that type 2 proof objects
+    can be constructed).
+
+    Sept 15, 1999.  Bug in case splitting (reported by Oswaldo Teran.)
+    If clear(print_proofs), Otter will hang after finding the first
+    refutation.  The process that finds the refutation is supposed to
+    send the split assumptions used to its parent; but that info was
+    sent in the print_proof routine!.  If clear(print_proofs), the
+    info doesn't get sent, and the parent waits forever trying to
+    read it.  FIX:  Send the info just before exit in pre_process().
+    Files changed: process.c, misc.c, case.c, proto.h.  FIXED.
+    
+    Interim release: otter-3.0.6-beta2, for anyone who needs the
+    case split fix.  Sept 15, 1999.
+
+    ftp://info.mcs.anl.gov/pub/Otter/otter-3.0.6-beta2.tar.gz
+
+    Nov 24, 1999.  Added flag "ur_last".  This is a restriction on
+    UR resolution: the target literal must be the last literal of
+    the nucleus.
+
+    Nov 24, 1999.  Changed splitting to allow split_atom with
+    split_when_given option.  This is a little kludgey, but it
+    makes sense if you wish to exhaust the non-splitting inferences
+    before splitting on atoms.  (To do this, the pick_given weighting
+    strategy should pick splittable clauses last.  Even though we're
+    not splitting on clauses, we use the selection of a splittable
+    clause to trigger split_atom.)
+
+-------------------------- 2000
+
+    Feb 21, 2000.  Bug when building more than one type 2 proof objects
+    when there is an initial proof object (as when called by Ivy).
+    There isn't an easy fix (see build_proof_object for notes), so we'll
+    just abend in that case.
+
+    Feb 23, 2000 -- Send IVY-v1 to Texas.
+                    (Along with MACE-1.3.4 and current otter).
+
+    March 14, 2000 -- minor bug in back_unit_deletion.  If using
+	back_unit_deletion and there are clauses in passive, you
+	might get some messages like "ERROR, context 0, var 0 not null."
+	Nothing bad will happen when this occurs.  Fixed.
+
+    April 14, 2000 -- silently release Otter-3.0.6.
+
+    April 15, 2000 -- otter306 goes into Ivy-v2 package for ACL2 book.
+
+    April 17, 2000 -- Bug from Bob Veroff.  FACTOR_RULE builds parent
+	list incorrectly: [factor,186,1,2].  Fix: factored literals
+	should be a list: [factor,186.1.2].  1 and 2 were being interpreted
+	as clause numbers.  This usually didn't cause cause a crash,
+	because 1 and 2 are usually valid clause numbers.  However,
+	it did incorrectly put clauses 1 and 2 into the proof.  The
+	bug surfaced, because clause 1 was a hint.  The fix required
+	changes all_factors() in resolve.c and to translate_factor()
+	in check.c.  We had a similar bug involving FLIP_RULE
+	(see Sept. 21, 1994 entry above).
+
+    April 18, 2000 -- New evaluable functions of type (term x term -> bool).
+	$OCCURS(x,y)  -- term x occurs in term y.
+        $VOCCURS(x,y) -- variable x occurs in term y.
+ 	$VFREE(x,y)   -- variable x does not occur in term y.
+
+    May 1, 2000 -- Installed several new options for picking the given
+	clause:  PICK_DIFF_SIM, PICK_RANDOM_LIGHTEST,
+	PICK_LAST_LIGHTEST, PICK_MID_LIGHTEST,
+	These were for some one-time experiments, and I have
+	not documented them.
+
+    May 11, 2000 -- auto1 mode doesn't accept Sos clauses.  I changed it
+	so that does.  If there are any Sos clauses, they are immediately
+	moved to Usable and a warning message is printed.  (Recall that
+	auto2 mode accepts Sos clasues.)
+
+    May 12, 2000 -- Remove references to SCOTT, PRUNE, TURBO_C, TP_DYNIX.
+	These are all conditional compilation for old stuff that I think
+	is irrelevant now.
+
+    May 15, 2000 -- Change to new-style functions (types go in the
+	argument list rather than after), update the prototype
+	extraction script, and get closer to ANSI conformance.
+
+	On linux, it compiles cleanly (well, almost) with
+	"gcc -ansi -pedantic -Wall".
+
+	On solaris, it compiles cleanly with "cc -Xc", which checks
+	for strict ANSI conformance.
+
+	Also, I made a LOT of little changes, including re-indenting
+	all of the source, so diffs with previous versions will be useless.
+
+    Version 3.1-b0
+
+    July 30, 2000 -- added flag sos_arg (default clear).  If set,
+	then Otter expects to find a clause as a command-line
+	argument; the clause is appended to the sos list.
+
+    August 1, 2000 -- SOUNDNESS BUG!  (from Dale Myers)
+	If you use set(really_delete_clauses) with case splitting,
+	You will probably get unsound proofs or refutations of
+	consistent theories.  The reason: when splitting, there is
+	a check to see if assumptions are used.  If not, subsequent
+	cases are skipped.  If really_delete_clasues is set, the
+	check can say that an assumption was not used (because it
+	can't be found), and required cases are skipped.
+	The (not very satisfying) fix.  If really_delete_clasues is set,
+	The redundancy check is not performed.
+
+------------------------------------------------------------------
+
+    Feb 19, 2001 -- added flag FOR_SUB_EQUIVALENTS_ONLY, which
+	restricts forward subsumption to equivalence.  That is,
+        a clause is deleted by forward subsumption iff it is
+        equivalent to an existing clause.  There is no need for
+	an analogous flag for back subsumption: just turn off
+	back subsumption when using this new flag.  This interplay
+	with ancestor subsumption has not been analyzed: use them
+	together at your own risk!
+
+--------------------------------------------------------
+
+    Feb 20, 2001 -- added new command overbeek_world, for some
+	weighting experiments Overbeek, Swartz and I are doing.
+	See new source file overbeek.c for documentation.
+	Let it be otter-3.1b1 (bin-linux/otter31b1).
+
+    April 4, 2001 -- Looked at renumbering of variables in proc_gen()
+	and added a few comments.  Checked how renumbering occurs
+	during various kinds of processing.  Changed geo_rewrite_recurse()
+	to abend if too many variables; changed forward_subsume()
+	so that vars are not renumberd for ancestor subsumption.
+
+    April 5, 2001 -- Installed new flag KEEP_HINT_EQUIVALENTS.
+	See process() and hint_keep_test().  This was suggested
+	by Veroff and Fitelson.
+
+    April 6--9, 2001 --  Kal Hodgson installed SCOTT ifdefs.
+	He has an enhanced version of Otter, called SCOTT, that
+        uses semantics to guide searches.  If SCOTT is not defined
+ 	when Otter is compiled, you get ordinary Otter.  The
+	rest of the SCOTT stuff is not included in Otter 3.1.
+	If you're interested, contact Kal at kahlil@discus.anu.edu.au.
+
+    April 13, 2001 -- Changed the scripts that run the test problems.
+	See examples/README.
+
+    May, first half, 2001 -- I decided to make MACE a self-contained
+	program.  (Previously, MACE would call Otter to parse the input
+	and create an intermediate form, then send that to ANLDP.)
+
+	MACE is now in a subdirectory of the Otter source.
+
+	After that was done, I removed the Otter code that created
+	the intermediate form (flag dp_transform, file dp_util.c).
+
+    May 11, 2001 -- release Otter 3.2-beta (and MACE 2.0-beta)
+
+    August 13, 2001 -- release Otter 3.2 and MACE 2.0 for Unix.
+
+---------------------------------
+
+    August-Sept, 2001 -- added experimental feature to try to find shorter
+	proofs.  Multiple justifications are kept for each clause, and
+	when a proof is found, look through the multi-justifications for
+	the shortest proof.  So far, it's practical only for proofs that
+	are short to begin with.  See file multijust.c.
+
+    October 26, 2001 -- added list(foreach).  This is intended to be a
+	high-performance version of otter-loop.  Read the ordinary input;
+	Then foreach clause in list(foreach), fork a child process, add
+	the clause to sos, then search; parent waits for child to finish.
+
+    October 30, 2001 -- added flag set(print_proof_as_hints).  After an
+	ordinary proof is printed, a corresponding list of hints is printed.
+	It contains all of the clauses in the proof and the intermediate
+	demodulants.  Also, each equality unit (pos or neg) is printed
+	in both orientations.  (Some extra clauses are printed as well.)
+
+    otter-3.2b
+
+----------------------------------
+
+    December 13, 2001.  Minor bug from Pavel Podgoretsky.
+	symmetry_clause() in clause.c has precedence problem:
+        else if (!l1->atom->farg->argval->type = VARIABLE)
+	Fixed.  otter-3.2c.
+
+----------------------------------
+
+    May 1, 2002.  Bug from Jean-Luc Delatre.  Conditional
+	outside-in demodulation.  In contract_imd, add call
+	to un_share_special(t2) right after apply_demod().
+	Same fix to contract_lin.  Also make un_share_special
+	non-static.
+
+	This pointed out a feature (bug?) in conditional
+	demodulation.  Conditions were always rewritten inside-out.
+	Fixed by updating convenient_demod().  The fix has not
+	been well tested.  otter-3.2d.
+
+----------------------------------
+
+    Date unknown.  Install flag discard_commutativity_consequences
+	(default clear).  If set, positive unit equalities (a=b)
+	be discarded if a and b are commuted variants of each other
+	(assuming that all binary operations are commutative).
+
+    otter-3.2e
+
+----------------------------------
+
+    November 5-7, 2002.  Install new hints code (hints2.c).
+	This is in addition to the old hints code.  To get the
+	new code, use list(hints2) instead of list(hints).
+	The new code indexes hints.  The new code allows bsub
+	checks only.  fsub and equiv are not available.
+
+	If back demodulation is set, hints are back demodulated,
+	but the back demodulated hints are retained.
+
+	If order_eq is set, backward equalities in hints are flipped.
+
+	Change print_proof_as_hints so that it if order_eq
+	is set, all equalities are ordered.  Also, a (forward)
+	subsumption check is done of the proof hints.
+	otter-3.2f.
+
+	Allow OPS-style operator declarations: infix instead of xfx, etc.
+
+----------------------------------
+
+    December 11, 2002.  Bug in hints2 (Wos) when hints2 list is empty
+	(index doesn't get allocated).  Fixed.
+
+	Bug (jsruokom@cc.hut.fi) in demodulation when an absorption
+	demoulator applies to an atom (resulting in a variable atom).
+	Fix: abend in this case.  The only way I can see this occurring
+	is when a symbol is used as both a function and relation symbol,
+	which is bad style (and shouln't be allowed anyway).
+
+	otter-3.2g.
+
+----------------------------------
+
+    January 2, 2003.  Install Bob Veroff's hint degradation strategy.
+	in hints2.c.  To use it, there's a new flag,
+	set(degrade_hints2).
+
+	otter-3.2h.
+
+----------------------------------
+
+    February 6, 2003.  Michael Beeson suggested that changing the size
+	of the FPA hash tables from 500 to 3793 will improve performance.
+	Done.  In the same sprit I changed the size of the Term hash
+	table (share.c) from 2000 to 3793.
+
+	otter-3.2i.
+
+----------------------------------
+
+    April 30, 2003.  Michael Beeson sent (on Feb 27) a list of warning
+	messages he got when he compiled Otter on a Windows PC.  These
+	weren't serious.  Most of these have been addressed.
+
+	Bob Veroff reported a bug in the hints2 code:  if a hint is
+	an empty clause (these can sneak in when hints are derived from
+	proofs), a segfault occurs.  Fixed.
+
+        Changed mace/anldp.c so that it compiles (it got messed up when
+	we added the iso_prune feature to mace in the summer of 2001.
+
+----------------------------------
+
+    June 2003.  Updating the Otter3 manual.
+	The new version will be an MCS Tech. Memo. named
+        "Otter 3.3 Reference Manual".  Many new flags and
+        parameters are documented, and there are new sections
+	on Hints, Splitting, and Linked UR.
+
+----------------------------------
+
+    June 23, 2003.
+	Changed the name of the knuth_bendix flag to anl_eq.  The reasons:
+	(1) Although it can be essentially KB, it was derived mostly from
+	equational methods developed at Argonne (by Wos and Overbeek).
+	(2) It was designed for proving theorems, not completion.
+	(3) It applies to any theory with equality, not just equational
+	theories.
+
+	The flag knuth_bendix still works, as an alias to anl_eq.
+
+----------------------------------
+
+    July 16, 2003.
+	Added max_levels parameter (for use with sos_queue).
+	Added meta-option rewriter (to demodulate a list of clauses).
+
+----------------------------------
+
+    July 17--18, 2003.
+	Reorganized the disribution directories.
+
+----------------------------------
+
+    July 22.  Discovered bug introduced in otter32f when installing hints2.
+	input_sos_first ignored if process_input.  Fixed.
+
+----------------------------------
+
+    September 8, 2003 -- release Otter 3.3 / Mace 2.2 
+
+    http://www.mcs.anl.gov/AR/otter/dist33/otter-3.3.tar.gz
+
+----------------------------------
+
+    Jan 12, 2004 -- I realized that the MacOS X installation doesn't
+    work if the developer tools (compilers, make) aren't installed
+    (even though binaries are included).  So I changed the installation
+    procedure and replaced the unix package with
+
+    http://www.mcs.anl.gov/AR/otter/dist33/otter-3.3b.tar.gz
+
+----------------------------------
+
+    December 23, 2003 -- memory allocation problem if there are
+    a GREAT number of constants in the input (Rick Stevens, bio app).
+    Fix: in av.c, change TP_ALLOC_SIZE from 32700 to 1000000.
+
+----------------------------------
+
+    February 9, 2004 -- Hints2 incomplete for nonunits (Geoff Sutcliffe).
+    Fix: minor change in hints2.c (index all literals of hints2).
+    This changes output (trivially) in one of the example problems,
+    fringe/olsax_hints.out, so I replaed the output for that example.
+
+----------------------------------
+
+    February 9, 2004 -- max_levels limit didn't work correctly in some cases.
+    Fixed.
+
+    otter-3.3x2.tar.gz released to Geoff Sutcliffe.
+
+----------------------------------
+
+    Feb 3--6, 2004 --- I went to ABQ to visit Bob Veroff, and the 
+    following changes were prompted by work during that visit.
+
+----------------------------------
+
+    February 10, 2004 -- It has been known for a long time that
+    build_proof_object sometimes fails to translate demodulation
+    steps, causing an ABNORMAL END.  I have made another attempt
+    to fix it.  (The algorithm and code are so messy that I'll
+    never be confident that build_proof_object works well.)  However,
+    as far as I know, it has never produced a bad proof object---
+    when it does fail, it always seems to trigger an ABNORMAL END.
+
+    Anyway, this attempt:  Stop calling order_equalities* and simply
+    use the justification to flip equalities.  This might fix the
+    unit case, but I think there are still problems with nonunits.
+
+    otter-3.3x3.tar.gz released to Bob Veroff
+
+----------------------------------
+
+    Feb 10, 2004.  Change quote characters.  Previously, ' and "
+    could be used for string symbols, e.g., p("Hi there!", 'good bye...').
+    Now, single quotes are in the set of characters that are used for
+    "special names" [3.3 manual, p. 6].  Also, the default type and
+    precedence [3.3 manual, p. 9] for ' is op(300, XF, ').
+    The whole purpose of this change is so that we can use ' as
+    a postfix operation (without any declaration), e.g.,
+    (x * y)' = y' * x'.  Also, this change makes the language
+    a bit more compatible with Mace4 and future provers.
+
+----------------------------------
+
+    Feb 10, 2004.  Change command-line argument processing.  Previously,
+    the only command-line argument that was accepted was a clause
+    to be appended to sos (if set(sos_arg). was in the input), e.g.,
+    
+    otter 'f(x,x)=x.' < in > out
+
+    Now, that is accomplished with (and flag sos_arg has been eliminated)
+
+    otter -s 'f(x,x)=x.' < in > out
+
+    Also, we can now give input filenames as arguments instead of using
+    the standard input.  All arguments after -f are understood as
+    input files, e.g.,
+
+    otter -f f1 f2 f3 f4 > out
+
+    If -s and -f are used together, -s must be first, so the acceptable
+    ways to call otter now are
+
+     otter                            < in > out
+     otter                -f f1 f2 f3      > out
+     otter -s 'f(x,x)=x.'             < in > out
+     otter -s 'f(x,x)=x.' -f f1 f2 f3      > out
+
+----------------------------------
+
+    Feb 17, 2004.  Mark Stickel pointed out that the detailed timing
+    can really slow down an Otter job on the Mac.  (Similar to Solaris.)
+    It can cause a substantial penalty, even in Linux, so we're changing
+    the default configuration so that it's disabled.  If you need detailed
+    timing, use (in the source directory) 'make otter'.
+
+----------------------------------
+
+    April 19, 2004.  Install improved FPA indexing.  Insertions and
+    queries should be about the same performance; deletions should
+    be much faster ("unindex time" in statistics).  Function should
+    be unchanged (queries return same terms in same order).  Memory
+    usage a bit higher for small problems, a bit lower for big problems.
+    For that reason, if max_mem, control_mem, or auto are used, the
+    updated otter may give a different search.
+
+    otter-3.3d
+
+----------------------------------
+
+    August 2, 2004.  Install new flag set(clocks).  Default clear.
+    This turns on detailed timing for various operations during
+    the search.  Previously this always occurred (unless the code
+    was compliled with TP_NO_CLOCKS).  As hardware gets faster, the
+    percentage of CPU time used to obtain detailed timings has been
+    increasing, so it is now disabled by default and can be enabled
+    by setting this flag in the input file.  Because clocks are off
+    by default, I have removed the TP_NO_CLOCKS #ifdefs.
+
+    otter-3.3f

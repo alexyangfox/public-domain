@@ -1,0 +1,18 @@
+% benchmark parameters -N6 -p
+%
+% Find a modular ortholattice that is not a Boolean algebra.
+%
+
+include("ortholattice").
+
+list(usable).
+
+% Modularity
+
+x v (y ^ (x v z)) = (x v y) ^ (x v z).
+
+% Denial of distributivity:
+
+A ^ (B v C) != (A ^ B) v (A ^ C).
+
+end_of_list.

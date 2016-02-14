@@ -1,0 +1,252 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:37 2004
+The command was "../../bin/otter".  The process ID is 8411.
+
+set(ur_res).
+clear(print_kept).
+set(bird_print).
+assign(fpa_literals,3).
+
+list(usable).
+1 [] x=x.
+2 [] x!=y|y=x.
+3 [] x!=y|y!=z|x=z.
+4 [] x!=y|x z =y z.
+5 [] x!=y|z x =z y.
+6 [] B x y z=x (y z).
+7 [] W x y=x y y.
+8 [] S x y z=x z (y z).
+end_of_list.
+
+formula_list(sos).
+-(exists y all x (y x =x (y x) & -$Ans(y))).
+end_of_list.
+
+-------> sos clausifies to:
+
+list(sos).
+9 [] y $f1(y)!=$f1(y) (y $f1(y)) |$Ans(y).
+end_of_list.
+
+list(demodulators).
+10 [] B x y z=x (y z).
+end_of_list.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=12) 9 [] y $f1(y)!=$f1(y) (y $f1(y)) |$Ans(y).
+
+given clause #2: (wt=12) 14 [ur,9,2] $Ans(x)|$f1(x) (x $f1(x)) !=x $f1(x).
+
+given clause #3: (wt=25) 12 [ur,9,3,7] $Ans(W x)|x $f1(W x) $f1(W x) !=$f1(W x) (W x $f1(W x)).
+
+given clause #4: (wt=25) 18 [ur,12,2] $Ans(W x)|$f1(W x) (W x $f1(W x)) !=x $f1(W x) $f1(W x).
+
+given clause #5: (wt=28) 13 [ur,9,3,6,demod,10] $Ans(B x y)|x (y $f1(B x y)) !=$f1(B x y) (x (y $f1(B x y))).
+
+given clause #6: (wt=28) 16 [ur,12,3,7] $Ans(W W)|$f1(W W) $f1(W W) $f1(W W) !=$f1(W W) (W W $f1(W W)).
+
+given clause #7: (wt=28) 22 [ur,13,2] $Ans(B x y)|$f1(B x y) (x (y $f1(B x y))) !=x (y $f1(B x y)).
+
+given clause #8: (wt=28) 23 [ur,16,2] $Ans(W W)|$f1(W W) (W W $f1(W W)) !=$f1(W W) $f1(W W) $f1(W W).
+
+given clause #9: (wt=35) 17 [ur,12,3,6] $Ans(W (B x))|x ($f1(W (B x)) $f1(W (B x))) !=$f1(W (B x)) (W (B x) $f1(W (B x))).
+
+given clause #10: (wt=35) 27 [ur,17,2] $Ans(W (B x))|$f1(W (B x)) (W (B x) $f1(W (B x))) !=x ($f1(W (B x)) $f1(W (B x))).
+
+given clause #11: (wt=37) 11 [ur,9,3,8] $Ans(S x y)|x $f1(S x y) (y $f1(S x y)) !=$f1(S x y) (S x y $f1(S x y)).
+
+given clause #12: (wt=37) 31 [ur,11,2] $Ans(S x y)|$f1(S x y) (S x y $f1(S x y)) !=x $f1(S x y) (y $f1(S x y)).
+
+given clause #13: (wt=42) 15 [ur,12,3,8] $Ans(W (S x))|x $f1(W (S x)) ($f1(W (S x)) $f1(W (S x))) !=$f1(W (S x)) (W (S x) $f1(W (S x))).
+
+given clause #14: (wt=42) 35 [ur,15,2] $Ans(W (S x))|$f1(W (S x)) (W (S x) $f1(W (S x))) !=x $f1(W (S x)) ($f1(W (S x)) $f1(W (S x))).
+
+given clause #15: (wt=44) 21 [ur,13,3,6,demod,10] $Ans(B (B x y) z)|x (y (z $f1(B (B x y) z))) !=$f1(B (B x y) z) (x (y (z $f1(B (B x y) z)))).
+
+given clause #16: (wt=44) 29 [ur,11,3,7] $Ans(S W x)|$f1(S W x) (x $f1(S W x)) (x $f1(S W x)) !=$f1(S W x) (S W x $f1(S W x)).
+
+given clause #17: (wt=44) 39 [ur,21,2] $Ans(B (B x y) z)|$f1(B (B x y) z) (x (y (z $f1(B (B x y) z)))) !=x (y (z $f1(B (B x y) z))).
+
+given clause #18: (wt=44) 40 [ur,29,2] $Ans(S W x)|$f1(S W x) (S W x $f1(S W x)) !=$f1(S W x) (x $f1(S W x)) (x $f1(S W x)).
+
+given clause #19: (wt=47) 20 [ur,13,3,7] $Ans(B (W x) y)|x (y $f1(B (W x) y)) (y $f1(B (W x) y)) !=$f1(B (W x) y) (W x (y $f1(B (W x) y))).
+
+given clause #20: (wt=47) 30 [ur,11,3,6] $Ans(S (B x) y)|x ($f1(S (B x) y) (y $f1(S (B x) y))) !=$f1(S (B x) y) (S (B x) y $f1(S (B x) y)).
+
+given clause #21: (wt=47) 44 [ur,20,2] $Ans(B (W x) y)|$f1(B (W x) y) (W x (y $f1(B (W x) y))) !=x (y $f1(B (W x) y)) (y $f1(B (W x) y)).
+
+given clause #22: (wt=47) 48 [ur,30,2] $Ans(S (B x) y)|$f1(S (B x) y) (S (B x) y $f1(S (B x) y)) !=x ($f1(S (B x) y) (y $f1(S (B x) y))).
+
+given clause #23: (wt=54) 33 [ur,15,3,7] $Ans(W (S W))|$f1(W (S W)) ($f1(W (S W)) $f1(W (S W))) ($f1(W (S W)) $f1(W (S W))) !=$f1(W (S W)) (W (S W) $f1(W (S W))).
+
+given clause #24: (wt=54) 34 [ur,15,3,6] $Ans(W (S (B x)))|x ($f1(W (S (B x))) ($f1(W (S (B x))) $f1(W (S (B x))))) !=$f1(W (S (B x))) (W (S (B x)) $f1(W (S (B x)))).
+
+given clause #25: (wt=54) 49 [ur,33,2] $Ans(W (S W))|$f1(W (S W)) (W (S W) $f1(W (S W))) !=$f1(W (S W)) ($f1(W (S W)) $f1(W (S W))) ($f1(W (S W)) $f1(W (S W))).
+
+given clause #26: (wt=54) 53 [ur,34,2] $Ans(W (S (B x)))|$f1(W (S (B x))) (W (S (B x)) $f1(W (S (B x)))) !=x ($f1(W (S (B x))) ($f1(W (S (B x))) $f1(W (S (B x))))).
+
+given clause #27: (wt=56) 42 [ur,20,3,7] $Ans(B (W W) x)|x $f1(B (W W) x) (x $f1(B (W W) x)) (x $f1(B (W W) x)) !=$f1(B (W W) x) (W W (x $f1(B (W W) x))).
+
+given clause #28: (wt=54) 55 [ur,42,3,6] $Ans(B (W W) B)|$f1(B (W W) B) (B $f1(B (W W) B) (B $f1(B (W W) B))) !=$f1(B (W W) B) (W W (B $f1(B (W W) B))).
+
+given clause #29: (wt=36) 57 [ur,55,5] $Ans(B (W W) B)|B $f1(B (W W) B) (B $f1(B (W W) B)) !=W W (B $f1(B (W W) B)).
+
+given clause #30: (wt=14) 59 [ur,57,4] $Ans(B (W W) B)|B $f1(B (W W) B) !=W W.
+
+given clause #31: (wt=14) 61 [ur,59,2] $Ans(B (W W) B)|W W !=B $f1(B (W W) B).
+
+given clause #32: (wt=36) 60 [ur,57,2] $Ans(B (W W) B)|W W (B $f1(B (W W) B)) !=B $f1(B (W W) B) (B $f1(B (W W) B)).
+
+given clause #33: (wt=29) 62 [ur,60,3,8] $Ans(B (W W) B)|W W (B $f1(B (W W) B)) !=S B B $f1(B (W W) B).
+
+given clause #34: (wt=29) 65 [ur,62,2] $Ans(B (W W) B)|S B B $f1(B (W W) B) !=W W (B $f1(B (W W) B)).
+
+given clause #35: (wt=38) 64 [ur,62,3,7] $Ans(B (W W) B)|W (B $f1(B (W W) B)) (B $f1(B (W W) B)) !=S B B $f1(B (W W) B).
+
+given clause #36: (wt=38) 67 [ur,64,2] $Ans(B (W W) B)|S B B $f1(B (W W) B) !=W (B $f1(B (W W) B)) (B $f1(B (W W) B)).
+
+given clause #37: (wt=45) 63 [ur,60,3,7] $Ans(B (W W) B)|W (B $f1(B (W W) B)) (B $f1(B (W W) B)) !=B $f1(B (W W) B) (B $f1(B (W W) B)).
+
+given clause #38: (wt=23) 69 [ur,63,4] $Ans(B (W W) B)|W (B $f1(B (W W) B)) !=B $f1(B (W W) B).
+
+given clause #39: (wt=23) 71 [ur,69,2] $Ans(B (W W) B)|B $f1(B (W W) B) !=W (B $f1(B (W W) B)).
+
+given clause #40: (wt=45) 66 [ur,64,3,7,demod,10] $Ans(B (W W) B)|$f1(B (W W) B) (B $f1(B (W W) B) (B $f1(B (W W) B))) !=S B B $f1(B (W W) B).
+
+given clause #41: (wt=45) 68 [ur,67,3,8] $Ans(B (W W) B)|B $f1(B (W W) B) (B $f1(B (W W) B)) !=W (B $f1(B (W W) B)) (B $f1(B (W W) B)).
+
+given clause #42: (wt=45) 72 [ur,66,2] $Ans(B (W W) B)|S B B $f1(B (W W) B) !=$f1(B (W W) B) (B $f1(B (W W) B) (B $f1(B (W W) B))).
+
+given clause #43: (wt=52) 70 [ur,63,3,7,demod,10] $Ans(B (W W) B)|$f1(B (W W) B) (B $f1(B (W W) B) (B $f1(B (W W) B))) !=B $f1(B (W W) B) (B $f1(B (W W) B)).
+
+given clause #44: (wt=52) 73 [ur,72,3,8] $Ans(B (W W) B)|B $f1(B (W W) B) (B $f1(B (W W) B)) !=$f1(B (W W) B) (B $f1(B (W W) B) (B $f1(B (W W) B))).
+
+given clause #45: (wt=54) 58 [ur,55,2] $Ans(B (W W) B)|$f1(B (W W) B) (W W (B $f1(B (W W) B))) !=$f1(B (W W) B) (B $f1(B (W W) B) (B $f1(B (W W) B))).
+
+given clause #46: (wt=56) 56 [ur,42,2] $Ans(B (W W) x)|$f1(B (W W) x) (W W (x $f1(B (W W) x))) !=x $f1(B (W W) x) (x $f1(B (W W) x)) (x $f1(B (W W) x)).
+
+given clause #47: (wt=57) 26 [ur,17,3,6] $Ans(W (B (B x y)))|x (y ($f1(W (B (B x y))) $f1(W (B (B x y))))) !=$f1(W (B (B x y))) (W (B (B x y)) $f1(W (B (B x y)))).
+
+given clause #48: (wt=57) 43 [ur,20,3,6] $Ans(B (W (B x)) y)|x (y $f1(B (W (B x)) y) (y $f1(B (W (B x)) y))) !=$f1(B (W (B x)) y) (W (B x) (y $f1(B (W (B x)) y))).
+
+given clause #49: (wt=57) 77 [ur,26,2] $Ans(W (B (B x y)))|$f1(W (B (B x y))) (W (B (B x y)) $f1(W (B (B x y)))) !=x (y ($f1(W (B (B x y))) $f1(W (B (B x y))))).
+
+given clause #50: (wt=57) 81 [ur,43,2] $Ans(B (W (B x)) y)|$f1(B (W (B x)) y) (W (B x) (y $f1(B (W (B x)) y))) !=x (y $f1(B (W (B x)) y) (y $f1(B (W (B x)) y))).
+
+given clause #51: (wt=58) 28 [ur,11,3,8] $Ans(S (S x) y)|x (y $f1(S (S x) y)) ($f1(S (S x) y) (y $f1(S (S x) y))) !=$f1(S (S x) y) (S (S x) y $f1(S (S x) y)).
+
+given clause #52: (wt=58) 85 [ur,28,2] $Ans(S (S x) y)|$f1(S (S x) y) (S (S x) y $f1(S (S x) y)) !=x (y $f1(S (S x) y)) ($f1(S (S x) y) (y $f1(S (S x) y))).
+
+given clause #53: (wt=59) 19 [ur,13,3,8] $Ans(B (S x y) z)|x (z $f1(B (S x y) z)) (y (z $f1(B (S x y) z))) !=$f1(B (S x y) z) (S x y (z $f1(B (S x y) z))).
+
+given clause #54: (wt=59) 89 [ur,19,2] $Ans(B (S x y) z)|$f1(B (S x y) z) (S x y (z $f1(B (S x y) z))) !=x (z $f1(B (S x y) z)) (y (z $f1(B (S x y) z))).
+
+given clause #55: (wt=60) 38 [ur,21,3,6,demod,10] $Ans(B (B (B x y) z) u)|x (y (z (u $f1(B (B (B x y) z) u)))) !=$f1(B (B (B x y) z) u) (x (y (z (u $f1(B (B (B x y) z) u))))).
+
+given clause #56: (wt=60) 93 [ur,38,2] $Ans(B (B (B x y) z) u)|$f1(B (B (B x y) z) u) (x (y (z (u $f1(B (B (B x y) z) u))))) !=x (y (z (u $f1(B (B (B x y) z) u)))).
+
+given clause #57: (wt=63) 25 [ur,17,3,7] $Ans(W (B (W x)))|x ($f1(W (B (W x))) $f1(W (B (W x)))) ($f1(W (B (W x))) $f1(W (B (W x)))) !=$f1(W (B (W x))) (W (B (W x)) $f1(W (B (W x)))).
+
+given clause #58: (wt=63) 97 [ur,25,2] $Ans(W (B (W x)))|$f1(W (B (W x))) (W (B (W x)) $f1(W (B (W x)))) !=x ($f1(W (B (W x))) $f1(W (B (W x)))) ($f1(W (B (W x))) $f1(W (B (W x)))).
+
+given clause #59: (wt=65) 54 [ur,42,3,8] $Ans(B (W W) S)|$f1(B (W W) S) (S $f1(B (W W) S)) (S $f1(B (W W) S) (S $f1(B (W W) S))) !=$f1(B (W W) S) (W W (S $f1(B (W W) S))).
+
+given clause #60: (wt=65) 98 [ur,54,2] $Ans(B (W W) S)|$f1(B (W W) S) (W W (S $f1(B (W W) S))) !=$f1(B (W W) S) (S $f1(B (W W) S)) (S $f1(B (W W) S) (S $f1(B (W W) S))).
+
+given clause #61: (wt=69) 37 [ur,21,3,7] $Ans(B (B (W x) y) z)|x (y (z $f1(B (B (W x) y) z))) (y (z $f1(B (B (W x) y) z))) !=$f1(B (B (W x) y) z) (W x (y (z $f1(B (B (W x) y) z)))).
+
+given clause #62: (wt=69) 47 [ur,30,3,6] $Ans(S (B (B x y)) z)|x (y ($f1(S (B (B x y)) z) (z $f1(S (B (B x y)) z)))) !=$f1(S (B (B x y)) z) (S (B (B x y)) z $f1(S (B (B x y)) z)).
+
+given clause #63: (wt=69) 88 [ur,19,3,6] $Ans(B (S (B x) y) z)|x (z $f1(B (S (B x) y) z) (y (z $f1(B (S (B x) y) z)))) !=$f1(B (S (B x) y) z) (S (B x) y (z $f1(B (S (B x) y) z))).
+
+given clause #64: (wt=69) 102 [ur,37,2] $Ans(B (B (W x) y) z)|$f1(B (B (W x) y) z) (W x (y (z $f1(B (B (W x) y) z)))) !=x (y (z $f1(B (B (W x) y) z))) (y (z $f1(B (B (W x) y) z))).
+
+given clause #65: (wt=69) 106 [ur,47,2] $Ans(S (B (B x y)) z)|$f1(S (B (B x y)) z) (S (B (B x y)) z $f1(S (B (B x y)) z)) !=x (y ($f1(S (B (B x y)) z) (z $f1(S (B (B x y)) z)))).
+
+given clause #66: (wt=69) 110 [ur,88,2] $Ans(B (S (B x) y) z)|$f1(B (S (B x) y) z) (S (B x) y (z $f1(B (S (B x) y) z))) !=x (z $f1(B (S (B x) y) z) (y (z $f1(B (S (B x) y) z)))).
+
+given clause #67: (wt=70) 41 [ur,20,3,8] $Ans(B (W (S x)) y)|x (y $f1(B (W (S x)) y)) (y $f1(B (W (S x)) y) (y $f1(B (W (S x)) y))) !=$f1(B (W (S x)) y) (W (S x) (y $f1(B (W (S x)) y))).
+
+given clause #68: (wt=70) 84 [ur,28,3,6] $Ans(S (S (B x)) y)|x (y $f1(S (S (B x)) y) ($f1(S (S (B x)) y) (y $f1(S (S (B x)) y)))) !=$f1(S (S (B x)) y) (S (S (B x)) y $f1(S (S (B x)) y)).
+
+given clause #69: (wt=70) 114 [ur,41,2] $Ans(B (W (S x)) y)|$f1(B (W (S x)) y) (W (S x) (y $f1(B (W (S x)) y))) !=x (y $f1(B (W (S x)) y)) (y $f1(B (W (S x)) y) (y $f1(B (W (S x)) y))).
+
+given clause #70: (wt=70) 118 [ur,84,2] $Ans(S (S (B x)) y)|$f1(S (S (B x)) y) (S (S (B x)) y $f1(S (S (B x)) y)) !=x (y $f1(S (S (B x)) y) ($f1(S (S (B x)) y) (y $f1(S (S (B x)) y)))).
+
+given clause #71: (wt=72) 32 [ur,15,3,8] $Ans(W (S (S x)))|x ($f1(W (S (S x))) $f1(W (S (S x)))) ($f1(W (S (S x))) ($f1(W (S (S x))) $f1(W (S (S x))))) !=$f1(W (S (S x))) (W (S (S x)) $f1(W (S (S x)))).
+
+given clause #72: (wt=72) 87 [ur,19,3,7] $Ans(B (S W x) y)|y $f1(B (S W x) y) (x (y $f1(B (S W x) y))) (x (y $f1(B (S W x) y))) !=$f1(B (S W x) y) (S W x (y $f1(B (S W x) y))).
+
+given clause #73: (wt=70) 124 [ur,87,3,6] $Ans(B (S W x) B)|$f1(B (S W x) B) (x (B $f1(B (S W x) B)) (x (B $f1(B (S W x) B)))) !=$f1(B (S W x) B) (S W x (B $f1(B (S W x) B))).
+
+given clause #74: (wt=48) 126 [ur,124,5] $Ans(B (S W x) B)|x (B $f1(B (S W x) B)) (x (B $f1(B (S W x) B))) !=S W x (B $f1(B (S W x) B)).
+
+-------- PROOF -------- 132 [binary,131.1,8.1] $Ans(B (S W W) B).
+
+----> UNIT CONFLICT at   0.02 sec ----> 132 [binary,131.1,8.1] $Ans(B (S W W) B).
+
+Length of proof is 6.  Level of proof is 6.
+
+---------------- PROOF ----------------
+
+2 [] x!=y|y=x.
+3 [] x!=y|y!=z|x=z.
+5 [] x!=y|z x =z y.
+6 [] B x y z=x (y z).
+7 [] W x y=x y y.
+8 [] S x y z=x z (y z).
+9 [] y $f1(y)!=$f1(y) (y $f1(y)) |$Ans(y).
+10 [] B x y z=x (y z).
+13 [ur,9,3,6,demod,10] $Ans(B x y)|x (y $f1(B x y)) !=$f1(B x y) (x (y $f1(B x y))).
+19 [ur,13,3,8] $Ans(B (S x y) z)|x (z $f1(B (S x y) z)) (y (z $f1(B (S x y) z))) !=$f1(B (S x y) z) (S x y (z $f1(B (S x y) z))).
+87 [ur,19,3,7] $Ans(B (S W x) y)|y $f1(B (S W x) y) (x (y $f1(B (S W x) y))) (x (y $f1(B (S W x) y))) !=$f1(B (S W x) y) (S W x (y $f1(B (S W x) y))).
+124 [ur,87,3,6] $Ans(B (S W x) B)|$f1(B (S W x) B) (x (B $f1(B (S W x) B)) (x (B $f1(B (S W x) B)))) !=$f1(B (S W x) B) (S W x (B $f1(B (S W x) B))).
+126 [ur,124,5] $Ans(B (S W x) B)|x (B $f1(B (S W x) B)) (x (B $f1(B (S W x) B))) !=S W x (B $f1(B (S W x) B)).
+131 [ur,126,2] $Ans(B (S W x) B)|S W x (B $f1(B (S W x) B)) !=x (B $f1(B (S W x) B)) (x (B $f1(B (S W x) B))).
+132 [binary,131.1,8.1] $Ans(B (S W W) B).
+
+------------ end of proof -------------
+
+
+Search stopped by max_proofs option.
+
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 74
+clauses generated            393
+  ur_res generated           393
+demod & eval rewrites         72
+clauses wt,lit,sk delete       0
+tautologies deleted            0
+clauses forward subsumed     272
+  (subsumed by sos)            2
+unit deletions                 0
+factor simplifications         0
+clauses kept                 121
+new demodulators               0
+empty clauses                  1
+clauses back demodulated       0
+clauses back subsumed          0
+usable size                   82
+sos size                      48
+demodulators size              1
+passive size                   0
+hot size                       0
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8411 finished Mon Aug  2 15:30:37 2004

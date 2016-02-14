@@ -1,0 +1,66 @@
+% benchmark parameters -n2 -N6 -p
+
+%--------------------------------------------------------------------------
+% File     : LCL136-1 : TPTP v2.3.0. Released v1.0.0.
+% Domain   : Logic Calculi (Wajsberg Algebra)
+% Problem  : A lemma in Wajsberg algebras
+% Version  : [Bon91] (equality) axioms.
+% English  : An axiomatisation of the many valued sentential calculus 
+%            is {MV-1,MV-2,MV-3,MV-5} by Meredith. Wajsberg provided 
+%            a different axiomatisation. Show that a version of MV-2 
+%            depends on the Wajsberg system.
+
+% Refs     : [FRT84] Font et al. (1984), Wajsberg Algebras
+%          : [Bon91] Bonacina (1991), Problems in Lukasiewicz Logic
+%          : [MW92]  McCune & Wos (1992), Experiments in Automated Deductio
+% Source   : [Bon91]
+% Names    : Lemma 5 [Bon91]
+
+% Status   : satisfiable
+% Rating   : 0.67 v2.2.1, 0.75 v2.2.0, 0.67 v2.1.0, 1.00 v2.0.0
+% Syntax   : Number of clauses    :    7 (   0 non-Horn;   7 unit;   2 RR)
+%            Number of literals   :    7 (   7 equality)
+%            Maximal clause size  :    1 (   1 average)
+%            Number of predicates :    1 (   0 propositional; 2-2 arity)
+%            Number of functors   :    6 (   4 constant; 0-2 arity)
+%            Number of variables  :    9 (   0 singleton)
+%            Maximal term depth   :    4 (   2 average)
+
+% Comments : 
+%          : tptp2X -f otter:hypothesis:[set(tptp_eq),set(auto),clear(print_given)] -t rm_equality:stfp LCL136-1.p 
+%--------------------------------------------------------------------------
+set(prolog_style_variables).
+set(tptp_eq).
+set(auto).
+clear(print_given).
+
+list(usable).
+
+% reflexivity, axiom.
+ equal(X, X).
+
+% wajsberg_1, axiom.
+ equal(implies(true, X), X).
+
+% wajsberg_2, axiom.
+ equal(implies(implies(X, Y), implies(implies(Y, Z), implies(X, Z))), true).
+
+% wajsberg_3, axiom.
+ equal(implies(implies(X, Y), Y), implies(implies(Y, X), X)).
+
+% wajsberg_4, axiom.
+ equal(implies(implies(not(X), not(Y)), implies(Y, X)), true).
+
+end_of_list.
+
+list(sos).
+
+% lemma_antecedent, conjecture.
+ equal(implies(x, y), implies(y, z)).
+
+% prove_wajsberg_lemma, conjecture.
+-equal(implies(x, z), true).
+
+end_of_list.
+
+%--------------------------------------------------------------------------

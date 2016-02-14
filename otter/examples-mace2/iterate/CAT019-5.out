@@ -1,0 +1,199 @@
+----- MACE 2.2f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:44:32 2004
+The command was "../../bin/mace2 -n2 -N6 -p".
+set(prolog_style_variables).
+set(tptp_eq).
+set(auto).
+   dependent: set(auto1).
+   dependent: set(process_input).
+   dependent: clear(print_kept).
+   dependent: clear(print_new_demod).
+   dependent: clear(print_back_demod).
+   dependent: clear(print_back_sub).
+   dependent: set(control_memory).
+   dependent: assign(max_mem, 12000).
+   dependent: assign(pick_given_ratio, 4).
+   dependent: assign(stats_level, 1).
+   dependent: assign(max_seconds, 10800).
+clear(print_given).
+
+list(usable).
+0 [] equal(X,X).
+0 [] -equivalent(X,Y)|there_exists(X).
+0 [] -equivalent(X,Y)|equal(X,Y).
+0 [] -there_exists(X)| -equal(X,Y)|equivalent(X,Y).
+0 [] -there_exists(domain(X))|there_exists(X).
+0 [] -there_exists(codomain(X))|there_exists(X).
+0 [] -there_exists(compose(X,Y))|there_exists(domain(X)).
+0 [] -there_exists(compose(X,Y))|equal(domain(X),codomain(Y)).
+0 [] -there_exists(domain(X))| -equal(domain(X),codomain(Y))|there_exists(compose(X,Y)).
+0 [] equal(compose(X,compose(Y,Z)),compose(compose(X,Y),Z)).
+0 [] equal(compose(X,domain(X)),X).
+0 [] equal(compose(codomain(X),X),X).
+end_of_list.
+
+list(sos).
+0 [] there_exists(c).
+0 [] -there_exists(Z)| -equal(a,Z)|equal(b,Z).
+0 [] -there_exists(Z)|equal(a,Z)| -equal(b,Z).
+0 [] -equal(a,b).
+end_of_list.
+
+list(clauses).
+1 [] equal(X,X).
+2 [] -equivalent(X,Y)|there_exists(X).
+3 [] -equivalent(X,Y)|equal(X,Y).
+4 [] -there_exists(X)| -equal(X,Y)|equivalent(X,Y).
+5 [] -there_exists(domain(X))|there_exists(X).
+6 [] -there_exists(codomain(X))|there_exists(X).
+7 [] -there_exists(compose(X,Y))|there_exists(domain(X)).
+8 [] -there_exists(compose(X,Y))|equal(domain(X),codomain(Y)).
+9 [] -there_exists(domain(X))| -equal(domain(X),codomain(Y))|there_exists(compose(X,Y)).
+10 [] equal(compose(X,compose(Y,Z)),compose(compose(X,Y),Z)).
+11 [] equal(compose(X,domain(X)),X).
+12 [] equal(compose(codomain(X),X),X).
+13 [] there_exists(c).
+14 [] -there_exists(Z)| -equal(a,Z)|equal(b,Z).
+15 [] -there_exists(Z)|equal(a,Z)| -equal(b,Z).
+16 [] -equal(a,b).
+end_of_list.
+
+list(flattened_and_parted_clauses).
+1 [] equal(A,A).
+2 [] -equivalent(A,B)|there_exists(A).
+3 [] -equivalent(A,B)|equal(A,B).
+4 [] -there_exists(A)| -equal(A,B)|equivalent(A,B).
+5 [] -equal(domain(A),B)| -there_exists(B)|there_exists(A).
+6 [] -equal(codomain(A),B)| -there_exists(B)|there_exists(A).
+7 [] -equal(domain(A),B)|there_exists(B)| -$Connect1(A).
+7 [] -equal(compose(A,B),C)| -there_exists(C)|$Connect1(A).
+8 [] -equal(codomain(A),B)|equal(domain(C),B)| -$Connect2(A,C).
+8 [] -equal(compose(A,B),C)| -there_exists(C)|$Connect2(B,A).
+9 [] -equal(compose(A,B),C)|there_exists(C)| -$Connect4(A,B).
+9 [] -equal(codomain(A),B)| -$Connect3(C,B)|$Connect4(C,A).
+9 [] -equal(domain(A),B)| -there_exists(B)| -equal(B,C)|$Connect3(A,C).
+10 [] -equal(compose(A,B),C)| -equal(compose(C,D),E)|$Connect5(A,B,D,E).
+10 [] -equal(compose(A,B),C)|equal(compose(D,C),E)| -$Connect5(D,A,B,E).
+11 [] -equal(domain(A),B)|equal(compose(A,B),A).
+12 [] -equal(codomain(A),B)|equal(compose(B,A),A).
+13 [] -equal(c,A)|there_exists(A).
+14 [] -there_exists(A)| -equal(a,A)|equal(b,A).
+15 [] -there_exists(A)|equal(a,A)| -equal(b,A).
+16 [] -equal(b,A)| -equal(a,A).
+end_of_list.
+
+--- Starting search for models of size 2 ---
+
+Applying isomorphism constraints to constants: c a b.
+
+181 clauses were generated; 154 of those survived the first stage
+of unit preprocessing; there are 62 atoms.
+
+After all unit preprocessing, 52 atoms are still unassigned;
+140 clauses remain; 10 of those are non-Horn (selectable);
+4883 K allocated; cpu time so far for this domain size: 0.00 sec.
+
+----- statistics for domain size 2 ----
+Input:
+    Clauses input                   154
+    Literal occurrences input       388
+    Greatest atom                    62
+Unit preprocess:
+    Preprocess unit assignments      10
+    Clauses after subsumption       140
+    Literal occ. after subsump.     370
+    Selectable clauses               10
+Decide:
+    Splits                           11
+    Unit assignments                148
+    Failed paths                     12
+Memory:
+    Memory malloced                 1 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.00
+    DPLL                           0.00
+
+--- Starting search for models of size 3 ---
+
+Applying isomorphism constraints to constants: c a b.
+
+819 clauses were generated; 756 of those survived the first stage
+of unit preprocessing; there are 186 atoms.
+
+After all unit preprocessing, 166 atoms are still unassigned;
+727 clauses remain; 19 of those are non-Horn (selectable);
+4887 K allocated; cpu time so far for this domain size: 0.00 sec.
+
+======================= Model #1 at 0.00 seconds:
+
+ equivalent :
+      | 0 1 2
+    --+------
+    0 | T F F
+    1 | F F F
+    2 | F F F
+
+ there_exists :
+        0 1 2
+    ---------
+        T F F
+
+ domain :
+        0 1 2
+    ---------
+        0 1 1
+
+ codomain :
+        0 1 2
+    ---------
+        0 1 1
+
+ compose :
+      | 0 1 2
+    --+------
+    0 | 0 1 2
+    1 | 1 1 2
+    2 | 2 2 1
+
+ c: 0
+
+ a: 1
+
+ b: 2
+end_of_model
+
+Exit by max_models parameter.  The set is satisfiable (1 model(s) found).
+
+
+----- statistics for domain size 3 ----
+Input:
+    Clauses input                   756
+    Literal occurrences input      2106
+    Greatest atom                   186
+Unit preprocess:
+    Preprocess unit assignments      20
+    Clauses after subsumption       727
+    Literal occ. after subsump.    2068
+    Selectable clauses               19
+Decide:
+    Splits                            6
+    Unit assignments                153
+    Failed paths                      1
+Memory:
+    Memory malloced                 5 K
+    Memory MACE_tp_alloced       4882 K
+Time (seconds):
+    Generate ground clauses        0.00
+    DPLL                           0.00
+
+=======================================
+Total times for run (seconds):
+    user CPU time                  0.00   (0 hr, 0 min, 0 sec)
+    system CPU time                0.00   (0 hr, 0 min, 0 sec)
+    wall-clock time                0      (0 hr, 0 min, 0 sec)
+
+Exit by max_models parameter.  The set is satisfiable (1 model(s) found).
+
+The job finished Mon Aug  2 15:44:32 2004

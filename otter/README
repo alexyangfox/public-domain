@@ -1,0 +1,88 @@
+        ------------------
+        Otter, Version 3.3    Search for Proofs
+        ------------------
+        ------------------
+        Mace,  Version 2.2    Search for Countermodels
+        ------------------
+
+(Also see index.html in this directory.)
+
+----------------
+OTTER HIGHLIGHTS
+----------------
+
+Over the years we've added many experimental features to Otter,
+but the basic functions haven't changed much in the past
+ten years.
+
+The Otter package now includes Mace 2 (as a separate program).
+
+----------------
+Mace2 HIGHLIGHTS
+----------------
+
+Mace2 is now in independent program.  It no longer calls Otter
+to parse the input.  It still accepts the same inputs as Otter.
+Performance is sometimes better than in previous versions
+(see mace2/README.22).
+
+----------------
+DOCUMENTS
+----------------
+
+The documents directory contains a (newly updated) Otter 3.3
+manual and a Mace 2.0 manual.  See documents/README.
+
+----------------
+FETCHING
+----------------
+
+Download Otter 3.3 and Mace 2.2 from the Otter Web page:
+
+  http://www.mcs.anl.gov/AR/otter/
+
+----------------
+INSTALLING AND TESTING (for unix-like systems)
+----------------
+
+Unpack the package with a command something like
+
+  % gunzip -c otter-3.3.tar.gz | tar xvf -
+
+Then
+
+  % cd otter-3.3
+
+If you are on a recent linux or Macintosh system, try
+
+  % make install      (this just copies pre-compiled binaries to ./bin/)
+  % make test-otter
+  % make test-mace2
+
+Macintosh users:  If you see "make: Command not found.", it means
+you don't have the developer's tools (compliers, etc.) installed.
+The good news is that you don't need them.  Instead, run the commands
+"./make-install", "./make-test-otter", and "./make-test-mace2".
+
+If test-otter gives a proof and test-mace2 gives a model, everything is
+probably okay.  The binaries should be in the directory bin/.
+
+If something goes wrong, try
+
+  % make all
+
+THEN
+
+  % make test-otter
+  % make test-mace2
+
+If any of that fails, see README.make.
+
+To run the Otter test suite, "cd examples; ./Run_all".
+To run the Mace2 test suite, "cd examples-mace; ./Run_all".
+
+The Otter web page is http://www.mcs.anl.gov/AR/otter/
+
+  W. McCune   (otter@mcs.anl.gov)
+  Argonne National Laboratory
+  August, 2003 (updated August 2004)

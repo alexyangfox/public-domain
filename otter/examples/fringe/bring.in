@@ -1,0 +1,113 @@
+% This input file uses Boolean ring rules to rewrite
+% Boolean expressions into canonical form in terms of
+% {and,xor,0,1}.  It should rewrite
+% tautologies to 1 and unsatisfiable expressions to 0.
+%
+% The propositional "variables" in the expressions to be
+% rewritten can be either (Otter) variables, constants, or a
+% mixture.  If variables are included, the flag lex_order_vars
+% must be set.
+%
+% A lex command of the form lex([<constants>, _&_, _#_)])
+% must be present.  All constants in the expressions to be rewritten
+% must occur in the lex command.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Declare Boolean operations as infix or prefix.
+% This is for parsing and printing only.
+% Note that the defaults for & and | are overridden.
+
+op(400, fx, ~).
+op(450, xfy, #).  % exclusive or
+op(450, xfy, |).
+op(460, xfy, &).
+op(470, xfx, -->).
+op(480, xfx, <-->).
+
+make_evaluable(_>_, $LGT(_,_)).
+
+set(lex_order_vars).
+lex([0, 1, A, B, C, cin, a0, b0, a1, b1, a2, b2, a3, b3, _&_, _#_]).
+
+list(demodulators).
+
+% Define ordinary Boolean operations in terms of {0,1,&,#}.
+
+x | y = x # (y # (x & y)).
+~x = 1 # x.
+x --> y = ~x | y.
+x <--> y = (x --> y) & (y --> x).
+if(x,y,z) = (x --> y) & (~x --> z).
+
+% The rest of the rules rewrite Boolean ring terms into canonical form.
+
+0 # x = x.
+x # 0 = x.
+x # x = 0.
+x # (x # y) = y.
+
+0 & x = 0.
+x & 0 = 0.
+1 & x = x.
+x & 1 = x.
+x & x = x.
+x & (x & y) = x & y.
+x & (y # z) = (x & y) # (x & z).
+
+% To handle sorting of associative/commutative expressions,
+% we can use either the built-in lex-dependent demodulation
+% or conditional demodulation.  Take your pick.  The lex-dependent
+% alternative is three times faster for the P3 expression below.
+
+% lex-dependent demodulators
+x # y = y # x.
+x # (y # z) = y # (x # z).
+x & y = y & x.
+y & (x & z) = x & (y & z).
+
+% conditional demodulators
+% (x > y) -> (x # y = y # x).
+% (x > y) -> (x # (y # z) = y # (x # z)).
+% (x > y) -> (x & y = y & x).
+% (x > y) -> (x & (y & z) = y & (x & z)).
+
+end_of_list.
+
+set(demod_inf).          % the "inference rule"
+clear(demod_history).    % we don't want to see a list of 44775 integers
+assign(demod_limit, -1). % no limit
+set(sos_queue).
+assign(max_given, 3).
+
+% Here are the expressions to be rewritten.
+
+list(sos).
+
+P1((A & (B | C)) <--> ((A & B) | (A & C))). % Distributivity
+
+P2(~(~x | ~y) | ~(~x | y) <--> x).      % Huntington identity
+
+P3(#(#(a2,#(b2,#(1,&(a2,b2)))),#(#(a3,b3),#(1,#(&(#(a0,#(b0,#(1,&(a0,b0)))),
+  &(#(1,&(a0,b0)),&(#(a1,#(b1,#(1,&(a1,b1)))),&(#(1,&(a1,b1)),&(#(a2,#(b2,#(1,
+  &(a2,b2)))),&(#(1,&(a2,b2)),#(cin,1))))))),#(&(#(a0,#(b0,#(1,&(a0,b0)))),
+  &(#(1,&(a0,b0)),&(#(a1,#(b1,#(1,&(a1,b1)))),&(#(1,&(a1,b1)),&(#(1,&(a2,b2)),
+  #(cin,1)))))),#(&(#(a0,#(b0,#(1,&(a0,b0)))),&(#(1,&(a0,b0)),&(#(1,&(a1,b1)),
+  &(#(a2,#(b2,#(1,&(a2,b2)))),&(#(1,&(a2,b2)),#(cin,1)))))),#(&(#(a0,#(b0,#(1,
+  &(a0,b0)))),&(#(1,&(a0,b0)),&(#(1,&(a1,b1)),&(#(1,&(a2,b2)),#(cin,1))))),
+  #(&(#(a0,#(b0,#(1,&(a0,b0)))),&(#(a1,#(b1,#(1,&(a1,b1)))),&(#(1,&(a1,b1)),
+  #(1,&(a2,b2))))),#(&(#(a0,#(b0,#(1,&(a0,b0)))),&(#(a1,#(b1,#(1,&(a1,b1)))),
+  &(#(1,&(a1,b1)),&(#(a2,#(b2,#(1,&(a2,b2)))),#(1,&(a2,b2)))))),#(&(#(a0,#(b0,
+  #(1,&(a0,b0)))),&(#(1,&(a1,b1)),#(1,&(a2,b2)))),#(&(#(a0,#(b0,#(1,&(a0,
+  b0)))),&(#(1,&(a1,b1)),&(#(a2,#(b2,#(1,&(a2,b2)))),#(1,&(a2,b2))))),#(&(#(1,
+  &(a0,b0)),&(#(a1,#(b1,#(1,&(a1,b1)))),&(#(1,&(a1,b1)),&(#(a2,#(b2,#(1,
+  &(a2,b2)))),&(#(1,&(a2,b2)),#(cin,1)))))),#(&(#(1,&(a0,b0)),&(#(a1,#(b1,
+  #(1,&(a1,b1)))),&(#(1,&(a1,b1)),&(#(1,&(a2,b2)),#(cin,1))))),#(&(#(1,&(a0,
+  b0)),&(#(1,&(a1,b1)),&(#(a2,#(b2,#(1,&(a2,b2)))),&(#(1,&(a2,b2)),#(cin,
+  1))))),#(&(#(1,&(a0,b0)),&(#(1,&(a1,b1)),&(#(1,&(a2,b2)),#(cin,1)))),
+  #(&(#(a1,#(b1,#(1,&(a1,b1)))),#(1,&(a2,b2))),&(#(a1,#(b1,#(1,&(a1,b1)))),
+  &(#(a2,#(b2,#(1,&(a2,b2)))),#(1,&(a2,b2))))))))))))))))))))).
+
+end_of_list.
+
+set(pretty_print).

@@ -1,0 +1,45 @@
+set(auto).
+set(build_proof_object_2).
+clear(sigint_interact).
+assign(max_seconds, 10).
+initial_proof_object(junk).
+
+((1 (INPUT) (OR (NOT (WOLF V1)) (ANIMAL V1)))
+ (2 (INPUT) (OR (NOT (FOX V2)) (ANIMAL V2)))
+ (3 (INPUT) (OR (NOT (BIRD V3)) (ANIMAL V3)))
+ (4 (INPUT) (OR (NOT (SNAIL V4)) (ANIMAL V4)))
+ (5 (INPUT) (OR (NOT (GRAIN V5)) (PLANT V5))) (6 (INPUT) (WOLF (SK1)))
+ (7 (INPUT) (FOX (SK2))) (8 (INPUT) (BIRD (SK3)))
+ (9 (INPUT) (SNAIL (SK4))) (10 (INPUT) (GRAIN (SK5)))
+ (11 (INPUT)
+  (OR (NOT (SNAIL V11)) (OR (NOT (BIRD V12)) (SMALLER V11 V12))))
+ (12 (INPUT)
+  (OR (NOT (BIRD V13)) (OR (NOT (FOX V14)) (SMALLER V13 V14))))
+ (13 (INPUT)
+  (OR (NOT (FOX V15)) (OR (NOT (WOLF V16)) (SMALLER V15 V16))))
+ (14 (INPUT) (OR (NOT (SNAIL V17)) (PLANT (SK6 V17))))
+ (15 (INPUT) (OR (NOT (SNAIL V17)) (EATS V17 (SK6 V17))))
+ (16 (INPUT)
+  (OR (NOT (WOLF V19)) (OR (NOT (FOX V20)) (NOT (EATS V19 V20)))))
+ (17 (INPUT)
+  (OR (NOT (WOLF V21)) (OR (NOT (GRAIN V22)) (NOT (EATS V21 V22)))))
+ (18 (INPUT)
+  (OR (NOT (BIRD V23)) (OR (NOT (SNAIL V24)) (NOT (EATS V23 V24)))))
+ (19 (INPUT)
+  (OR (NOT (ANIMAL V25))
+      (OR (NOT (PLANT V26))
+          (OR (EATS V25 V26)
+              (OR (NOT (ANIMAL V27))
+                  (OR (NOT (SMALLER V27 V25))
+                      (OR (NOT (PLANT V28))
+                          (OR (NOT (EATS V27 V28)) (EATS V25 V27)))))))))
+ (20 (INPUT)
+  (OR (NOT (ANIMAL V29))
+      (OR (NOT (ANIMAL V30))
+          (OR (NOT (EATS V29 V30)) (GRAIN (SK7 V29 V30))))))
+ (21 (INPUT)
+  (OR (NOT (ANIMAL V29))
+      (OR (NOT (ANIMAL V30))
+          (OR (NOT (EATS V29 V30)) (NOT (EATS V30 (SK7 V29 V30)))))))) 
+
+

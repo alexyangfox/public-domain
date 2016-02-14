@@ -1,0 +1,32 @@
+% The (infinitely) Many-Valued sentential calculus (MV).
+% 
+% {MV-1,MV-2,MV-3,MV-5} axiomatizes MV.
+% 
+% Derive MV-24, MV-25, and MV-29 by condensed detachment.
+
+set(hyper_res).
+assign(pick_given_ratio,3).
+clear(back_sub).
+assign(max_proofs, 3).
+clear(print_kept).
+set(order_history).
+assign(fpa_literals, 0).  % Disable FPA indexing, because it doesn't help much.
+
+
+list(usable).
+-P(i(x,y)) | -P(x) | P(y).      % condensed detachment
+end_of_list.
+
+list(sos).
+P(i(x,i(y,x))).                 % MV-1
+P(i(i(x,y),i(i(y,z),i(x,z)))).  % MV-2
+P(i(i(i(x,y),y),i(i(y,x),x))).  % MV-3
+P(i(i(n(x),n(y)),i(y,x))).      % MV-5
+end_of_list.
+
+list(passive).
+-P(i(n(n(a)),a)) | $ANS(MV_24).
+-P(i(i(a,b),i(i(c,a),i(c,b)))) | $ANS(MV_25).
+-P(i(a,n(n(a)))) | $ANS(MV_29).
+end_of_list.
+

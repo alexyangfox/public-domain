@@ -1,0 +1,20 @@
+%
+% xx=e groups are commutative.
+%
+
+set(auto).
+
+formula_list(usable).
+
+all x (x = x).
+
+all x y z (f(f(x,y),z) = f(x,f(y,z))).
+
+exists e (  (all x (f(e,x) = x)          ) &
+	    (all x exists y (f(y,x) = e) ) &
+	    (all x (f(x,x) = e))              )   .
+
+-(all x y (f(x,y) = f(y,x))).
+
+end_of_list.
+

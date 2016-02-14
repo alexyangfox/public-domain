@@ -1,0 +1,15 @@
+#!/bin/csh
+
+/bin/mv proto.h proto.h~
+
+echo "/* proto.h made "   >  proto.h
+date                           >> proto.h
+echo "*/"                      >> proto.h
+
+foreach i ($argv)
+    set source=$i:r.c
+    echo ""                        >> proto.h
+    echo "/* $source */"                >> proto.h
+    echo ""                        >> proto.h
+    awk -f awk.prototypes < $source | sed -f sed.prototypes >> proto.h
+end

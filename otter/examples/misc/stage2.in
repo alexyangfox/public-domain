@@ -1,0 +1,85 @@
+%
+% This is Stage 2 of the Kernel Method.
+% Wos & McCune, "Searching for Fixed Point Combinators ...", ANL-88-10.
+%
+% Stage 1 searches for kernels (reducible fixed points of an
+% arbitrary combinator).
+% Stage 2 attempts to expand a kernel into a fixed point combinator.
+%
+% This is the "sound" version of Stage 2, in which each proof
+% represents a fixed point combinator.  (In the original, "unsound"
+% version, the user had to filter out answers containing a Skolem
+% constant.)
+%
+% "grep UNIT <output>" to see the finxed-point combinators.
+%
+
+set(para_into).
+clear(para_from_left).
+set(para_ones_rule).
+set(bird_print).
+clear(back_sub).
+clear(print_proofs).
+
+assign(max_proofs, -1).
+assign(max_given, 30).
+
+% set(para_into_vars).
+% set(para_from_vars).
+
+list(usable).
+x = x.
+
+% regular isolators (including replicators)
+
+ a(a(a(B,x),y),z) = a(x,a(y,z)).
+% a(a(L,x),y) = a(x,a(y,y)).
+% a(I,x) = x.
+% a(a(K,x),y) = x.
+% a(a(a(Q1,x),y),z) = a(x,a(z,y)).
+
+% irregular isolators (including replicators)
+
+% a(M,x) = a(x,x).
+% a(a(O,x),y) = a(y,a(x,y)).
+% a(a(T,x),y) = a(y,x).
+% a(a(a(Q,x),y),z) = a(y,a(x,z)).
+
+% regular replicators (non-isolating)
+
+ a(a(W,x),y) = a(a(x,y),y).
+% a(a(a(N,x),y),z) = a(a(a(x,z),y),z).
+% a(a(a(H,x),y),z) = a(a(a(x,y),z),y).
+% a(a(a(S,x),y),z) = a(a(x,z),a(y,z)).
+
+% irregular replicators (non-isolating)
+
+% a(a(W1,x),y) = a(a(y,x),x).
+
+% others (non-isolating non-replicating)
+
+% a(a(a(C,x),y),z) = a(a(x,z),y).
+% a(a(a(R,x),y),z) = a(a(y,z),x).
+
+-FIXED(a(y,g(y)), g(y)) | $Ans(y).  % Deny: Exists T All x FIXED(Tx,x).
+end_of_list.
+
+list(sos).
+% FIXED(a(a(W,a(B,xf)),a(W,a(B,xf))), xf).
+% FIXED(a(a(W,a(a(B,a(B,xf)),W)),a(a(B,a(B,xf)),W)), xf).
+% FIXED(a(a(W,a(B,xf)),a(W,a(B,xf))), xf).
+% FIXED(a(a(a(a(B,W),B),xf),a(a(a(B,W),B),xf)), xf).
+% FIXED(a(a(W,a(a(a(a(B,B),B),xf),W)),a(a(a(a(B,B),B),xf),W)), xf).
+ FIXED(a(a(a(W,a(B,a(B,xf))),a(W,a(B,a(B,xf)))),x), xf).
+% FIXED(a(a(W,a(a(B,a(a(B,a(B,xf)),W)),a(B,a(a(B,a(B,xf)),W)))),a(B,a(a(B,a(B,xf)),W))), xf).
+% FIXED(a(a(W,a(a(B,a(B,xf)),W)),a(a(B,a(B,xf)),W)), xf).
+% FIXED(a(a(a(a(a(B,W),B),a(B,xf)),a(a(a(B,W),B),a(B,xf))),x), xf).
+% FIXED(a(a(a(a(B,W),a(B,a(B,xf))),a(a(B,W),a(B,a(B,xf)))),a(a(B,W),a(B,a(B,xf)))), xf).
+% FIXED(a(a(W,a(a(a(a(W,B),B),xf),W)),a(a(a(a(W,B),B),xf),W)), xf).
+% FIXED(a(a(a(W,a(a(a(B,B),B),xf)),a(W,a(a(a(B,B),B),xf))),x), xf).
+% FIXED(a(a(W,a(a(B,a(a(a(a(B,B),B),xf),W)),a(B,a(a(a(a(B,B),B),xf),W)))),a(B,a(a(a(a(B,B),B),xf),W))), xf).
+% FIXED(a(a(W,a(a(a(a(B,B),B),xf),W)),a(a(a(a(B,B),B),xf),W)), xf).
+% FIXED(a(a(a(a(a(B,a(a(B,W),B)),B),xf),a(a(a(B,a(a(B,W),B)),B),xf)),x), xf).
+% FIXED(a(a(a(a(a(B,a(B,W)),B),a(B,xf)),a(a(a(B,a(B,W)),B),a(B,xf))),a(a(a(B,a(B,W)),B),a(B,xf))), xf).
+% FIXED(a(a(a(a(B,a(a(B,W),a(B,a(B,xf)))),a(B,a(a(B,W),a(B,a(B,xf))))),a(B,a(a(B,W),a(B,a(B,xf))))),a(B,a(a(B,W),a(B,a(B,xf))))), xf).
+end_of_list.

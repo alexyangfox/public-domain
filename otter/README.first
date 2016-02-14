@@ -1,0 +1,20 @@
+Otter 3.3 and Mace 2.2
+
+QUICK INSTALL
+
+If you are using a recent Linux or Macintosh computer
+you'll probably be able to use the pre-compiled binaries.
+
+Try the commands
+
+   % gunzip -c otter-3.3.tar.gz | tar xvf -
+   % cd otter-3.3
+   % make install      (if that fails, try ./make-install)
+
+This will try to determine what kind of computer you are using and
+copy the appropriate binaries to the bin/ subdirectory.  It will
+then run a few simple tests to see if the binaries are okay
+for your machine.
+
+For more information, point your browser at index.html in this
+directory.

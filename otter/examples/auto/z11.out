@@ -1,0 +1,272 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:36 2004
+The command was "../../bin/otter".  The process ID is 8333.
+
+set(auto).
+   dependent: set(auto1).
+   dependent: set(process_input).
+   dependent: clear(print_kept).
+   dependent: clear(print_new_demod).
+   dependent: clear(print_back_demod).
+   dependent: clear(print_back_sub).
+   dependent: set(control_memory).
+   dependent: assign(max_mem, 12000).
+   dependent: assign(pick_given_ratio, 4).
+   dependent: assign(stats_level, 1).
+   dependent: assign(max_seconds, 10800).
+
+list(usable).
+0 [] x=x.
+0 [] f(e,x)=x.
+0 [] f(g(x),x)=e.
+0 [] f(f(x,y),z)=f(x,f(y,z)).
+0 [] f(a,b)=c.
+0 [] f(b,c)=d.
+0 [] f(c,d)=h.
+0 [] f(d,h)=a.
+0 [] f(h,a)=b.
+end_of_list.
+
+SCAN INPUT: prop=0, horn=1, equality=1, symmetry=0, max_lits=1.
+
+All clauses are units, and equality is present; the
+strategy will be Knuth-Bendix with positive clauses in sos.
+
+   dependent: set(knuth_bendix).
+   dependent: set(anl_eq).
+   dependent: set(para_from).
+   dependent: set(para_into).
+   dependent: clear(para_from_right).
+   dependent: clear(para_into_right).
+   dependent: set(para_from_vars).
+   dependent: set(eq_units_both_ways).
+   dependent: set(dynamic_demod_all).
+   dependent: set(dynamic_demod).
+   dependent: set(order_eq).
+   dependent: set(back_demod).
+   dependent: set(lrpo).
+
+There is no negative clause, so all clause lists will
+be printed at the end of the search.
+
+   dependent: set(print_lists_at_end).
+
+------------> process usable:
+
+------------> process sos:
+** KEPT (pick-wt=3): 1 [] x=x.
+** KEPT (pick-wt=5): 2 [] f(e,x)=x.
+---> New Demodulator: 3 [new_demod,2] f(e,x)=x.
+** KEPT (pick-wt=6): 4 [] f(g(x),x)=e.
+---> New Demodulator: 5 [new_demod,4] f(g(x),x)=e.
+** KEPT (pick-wt=11): 6 [] f(f(x,y),z)=f(x,f(y,z)).
+---> New Demodulator: 7 [new_demod,6] f(f(x,y),z)=f(x,f(y,z)).
+** KEPT (pick-wt=5): 8 [] f(a,b)=c.
+---> New Demodulator: 9 [new_demod,8] f(a,b)=c.
+** KEPT (pick-wt=5): 10 [] f(b,c)=d.
+---> New Demodulator: 11 [new_demod,10] f(b,c)=d.
+** KEPT (pick-wt=5): 12 [] f(c,d)=h.
+---> New Demodulator: 13 [new_demod,12] f(c,d)=h.
+** KEPT (pick-wt=5): 14 [] f(d,h)=a.
+---> New Demodulator: 15 [new_demod,14] f(d,h)=a.
+** KEPT (pick-wt=5): 16 [] f(h,a)=b.
+---> New Demodulator: 17 [new_demod,16] f(h,a)=b.
+  Following clause subsumed by 1 during input processing: 0 [copy,1,flip.1] x=x.
+>>>> Starting back demodulation with 3.
+>>>> Starting back demodulation with 5.
+>>>> Starting back demodulation with 7.
+>>>> Starting back demodulation with 9.
+>>>> Starting back demodulation with 11.
+>>>> Starting back demodulation with 13.
+>>>> Starting back demodulation with 15.
+>>>> Starting back demodulation with 17.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=3) 1 [] x=x.
+
+given clause #2: (wt=5) 2 [] f(e,x)=x.
+
+given clause #3: (wt=5) 8 [] f(a,b)=c.
+
+given clause #4: (wt=5) 10 [] f(b,c)=d.
+
+given clause #5: (wt=5) 12 [] f(c,d)=h.
+
+given clause #6: (wt=6) 4 [] f(g(x),x)=e.
+
+given clause #7: (wt=5) 14 [] f(d,h)=a.
+
+given clause #8: (wt=5) 16 [] f(h,a)=b.
+
+given clause #9: (wt=11) 6 [] f(f(x,y),z)=f(x,f(y,z)).
+
+given clause #10: (wt=7) 42 [back_demod,12,demod,27] f(a,f(b,d))=h.
+
+given clause #11: (wt=9) 26 [para_into,6.1.1.1,8.1.1] f(c,x)=f(a,f(b,x)).
+
+given clause #12: (wt=8) 28 [para_into,6.1.1.1,4.1.1,demod,3,flip.1] f(g(x),f(x,y))=y.
+
+given clause #13: (wt=5) 56 [para_into,28.1.1.2,4.1.1,demod,47] f(x,e)=x.
+
+given clause #14: (wt=4) 60 [para_into,56.1.1,4.1.1,flip.1] g(e)=e.
+
+given clause #15: (wt=6) 50 [para_into,28.1.1.2,10.1.1] f(g(b),d)=c.
+
+given clause #16: (wt=21) 30 [back_demod,20,demod,23,25,27,27,25,27] f(b,f(a,f(b,f(a,f(b,f(b,f(a,f(b,x))))))))=f(a,x).
+
+given clause #17: (wt=6) 52 [para_into,28.1.1.2,8.1.1] f(g(a),c)=b.
+
+given clause #18: (wt=8) 44 [para_into,28.1.1.2,42.1.1] f(g(a),h)=f(b,d).
+
+given clause #19: (wt=9) 38 [back_demod,14,demod,25,27] f(b,f(a,f(b,h)))=a.
+
+given clause #20: (wt=9) 46 [para_into,28.1.1.2,28.1.1] f(g(g(x)),y)=f(x,y).
+
+given clause #21: (wt=17) 32 [back_demod,18,demod,23,25,27,27] f(a,f(b,f(b,f(a,f(b,f(a,x))))))=f(b,x).
+
+given clause #22: (wt=5) 78 [para_into,46.1.1,56.1.1,demod,57] g(g(x))=x.
+
+given clause #23: (wt=6) 82 [para_into,46.1.1,4.1.1,flip.1] f(x,g(x))=e.
+
+given clause #24: (wt=8) 80 [para_into,46.1.1,28.1.1,flip.1] f(x,f(g(x),y))=y.
+
+given clause #25: (wt=8) 142 [para_into,82.1.1,26.1.1] f(a,f(b,g(c)))=e.
+
+given clause #26: (wt=11) 40 [back_demod,24,demod,27] f(d,x)=f(b,f(a,f(b,x))).
+
+given clause #27: (wt=7) 150 [para_from,142.1.1,28.1.1.2,demod,57,flip.1] f(b,g(c))=g(a).
+
+given clause #28: (wt=8) 158 [para_from,150.1.1,28.1.1.2,flip.1] g(c)=f(g(b),g(a)).
+
+given clause #29: (wt=8) 160 [para_from,158.1.1,78.1.1.1] g(f(g(b),g(a)))=c.
+
+given clause #30: (wt=10) 76 [para_from,38.1.1,28.1.1.2] f(g(b),a)=f(a,f(b,h)).
+
+given clause #31: (wt=12) 54 [para_into,28.1.1.2,6.1.1] f(g(f(x,y)),f(x,f(y,z)))=z.
+
+given clause #32: (wt=9) 174 [para_into,54.1.1.2.2,82.1.1,demod,57] f(g(f(x,y)),x)=g(y).
+
+given clause #33: (wt=5) 248 [back_demod,214,demod,245] f(a,h)=b.
+
+given clause #34: (wt=6) 252 [para_from,248.1.1,28.1.1.2] f(g(a),b)=h.
+
+given clause #35: (wt=7) 244 [back_demod,234,demod,239] f(a,f(a,a))=h.
+
+given clause #36: (wt=11) 188 [para_into,174.1.1.1.1,50.1.1,demod,159,7,flip.1] g(d)=f(g(b),f(g(a),g(b))).
+
+given clause #37: (wt=8) 246 [back_demod,232,demod,239] f(g(a),h)=f(a,a).
+
+given clause #38: (wt=9) 238 [back_demod,38,demod,211,211,223] f(a,f(a,f(a,d)))=a.
+
+given clause #39: (wt=7) 260 [para_from,238.1.1,28.1.1.2,demod,5,flip.1] f(a,f(a,d))=e.
+
+given clause #40: (wt=6) 262 [para_from,260.1.1,28.1.1.2,demod,57] g(a)=f(a,d).
+
+given clause #41: (wt=10) 198 [para_into,174.1.1.1.1,28.1.1,flip.1] g(f(x,y))=f(g(y),g(x)).
+
+given clause #42: (wt=6) 272 [back_demod,188,demod,263,7,237,267,57,245,249,9,225,243,261,57] g(d)=f(a,a).
+
+given clause #43: (wt=6) 274 [back_demod,158,demod,263,225,261,57,245,249,9] g(c)=f(a,c).
+
+given clause #44: (wt=8) 276 [para_into,198.1.1.1,248.1.1,demod,271,263,7,7,7,241,261,57,245,249,9] g(b)=f(a,f(a,c)).
+
+given clause #45: (wt=10) 270 [back_demod,200,demod,263,263,225,261,57,245,249,9,225,243,261,57,7,237,245,249,9,243,261,57,251] g(h)=f(a,f(a,f(a,c))).
+
+given clause #46: (wt=13) 210 [back_demod,136,demod,209,flip.1] f(b,x)=f(a,f(a,f(a,f(a,x)))).
+
+given clause #47: (wt=11) 216 [back_demod,132,demod,211,211,213] f(h,x)=f(a,f(a,f(a,x))).
+
+given clause #48: (wt=11) 242 [back_demod,10,demod,211] f(a,f(a,f(a,f(a,c))))=d.
+
+given clause #49: (wt=15) 240 [back_demod,26,demod,211] f(c,x)=f(a,f(a,f(a,f(a,f(a,x))))).
+
+given clause #50: (wt=23) 236 [back_demod,40,demod,211,211] f(d,x)=f(a,f(a,f(a,f(a,f(a,f(a,f(a,f(a,f(a,x))))))))).
+
+given clause #51: (wt=25) 212 [back_demod,208,demod,211] f(a,f(a,f(a,f(a,f(a,f(a,f(a,f(a,f(a,f(a,f(a,x)))))))))))=x.
+
+Search stopped because sos empty.
+
+
+Search stopped because sos empty.
+
+============ end of search ============
+
+list(usable).
+1 [] x=x.
+2 [] f(e,x)=x.
+8 [] f(a,b)=c.
+4 [] f(g(x),x)=e.
+6 [] f(f(x,y),z)=f(x,f(y,z)).
+28 [para_into,6.1.1.1,4.1.1,demod,3,flip.1] f(g(x),f(x,y))=y.
+56 [para_into,28.1.1.2,4.1.1,demod,47] f(x,e)=x.
+60 [para_into,56.1.1,4.1.1,flip.1] g(e)=e.
+78 [para_into,46.1.1,56.1.1,demod,57] g(g(x))=x.
+82 [para_into,46.1.1,4.1.1,flip.1] f(x,g(x))=e.
+80 [para_into,46.1.1,28.1.1,flip.1] f(x,f(g(x),y))=y.
+248 [back_demod,214,demod,245] f(a,h)=b.
+244 [back_demod,234,demod,239] f(a,f(a,a))=h.
+260 [para_from,238.1.1,28.1.1.2,demod,5,flip.1] f(a,f(a,d))=e.
+262 [para_from,260.1.1,28.1.1.2,demod,57] g(a)=f(a,d).
+198 [para_into,174.1.1.1.1,28.1.1,flip.1] g(f(x,y))=f(g(y),g(x)).
+272 [back_demod,188,demod,263,7,237,267,57,245,249,9,225,243,261,57] g(d)=f(a,a).
+274 [back_demod,158,demod,263,225,261,57,245,249,9] g(c)=f(a,c).
+276 [para_into,198.1.1.1,248.1.1,demod,271,263,7,7,7,241,261,57,245,249,9] g(b)=f(a,f(a,c)).
+270 [back_demod,200,demod,263,263,225,261,57,245,249,9,225,243,261,57,7,237,245,249,9,243,261,57,251] g(h)=f(a,f(a,f(a,c))).
+210 [back_demod,136,demod,209,flip.1] f(b,x)=f(a,f(a,f(a,f(a,x)))).
+216 [back_demod,132,demod,211,211,213] f(h,x)=f(a,f(a,f(a,x))).
+242 [back_demod,10,demod,211] f(a,f(a,f(a,f(a,c))))=d.
+240 [back_demod,26,demod,211] f(c,x)=f(a,f(a,f(a,f(a,f(a,x))))).
+236 [back_demod,40,demod,211,211] f(d,x)=f(a,f(a,f(a,f(a,f(a,f(a,f(a,f(a,f(a,x))))))))).
+212 [back_demod,208,demod,211] f(a,f(a,f(a,f(a,f(a,f(a,f(a,f(a,f(a,f(a,f(a,x)))))))))))=x.
+end_of_list.
+
+list(sos).
+end_of_list.
+
+list(demodulators).
+3 [new_demod,2] f(e,x)=x.
+5 [new_demod,4] f(g(x),x)=e.
+7 [new_demod,6] f(f(x,y),z)=f(x,f(y,z)).
+9 [new_demod,8] f(a,b)=c.
+29 [new_demod,28] f(g(x),f(x,y))=y.
+57 [new_demod,56] f(x,e)=x.
+61 [new_demod,60] g(e)=e.
+79 [new_demod,78] g(g(x))=x.
+81 [new_demod,80] f(x,f(g(x),y))=y.
+83 [new_demod,82] f(x,g(x))=e.
+199 [new_demod,198] g(f(x,y))=f(g(y),g(x)).
+211 [new_demod,210] f(b,x)=f(a,f(a,f(a,f(a,x)))).
+213 [new_demod,212] f(a,f(a,f(a,f(a,f(a,f(a,f(a,f(a,f(a,f(a,f(a,x)))))))))))=x.
+217 [new_demod,216] f(h,x)=f(a,f(a,f(a,x))).
+237 [new_demod,236] f(d,x)=f(a,f(a,f(a,f(a,f(a,f(a,f(a,f(a,f(a,x))))))))).
+241 [new_demod,240] f(c,x)=f(a,f(a,f(a,f(a,f(a,x))))).
+243 [new_demod,242] f(a,f(a,f(a,f(a,c))))=d.
+245 [new_demod,244] f(a,f(a,a))=h.
+249 [new_demod,248] f(a,h)=b.
+261 [new_demod,260] f(a,f(a,d))=e.
+263 [new_demod,262] g(a)=f(a,d).
+271 [new_demod,270] g(h)=f(a,f(a,f(a,c))).
+273 [new_demod,272] g(d)=f(a,a).
+275 [new_demod,274] g(c)=f(a,c).
+277 [new_demod,276] g(b)=f(a,f(a,c)).
+end_of_list.
+
+
+-------------- statistics -------------
+clauses given                 51
+clauses generated            427
+clauses kept                 139
+clauses forward subsumed     411
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+Process 8333 finished Mon Aug  2 15:30:36 2004

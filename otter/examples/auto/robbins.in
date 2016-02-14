@@ -1,0 +1,18 @@
+% Robbins algebra
+%
+% If a Robbins algebra has an element c such that x+c=c,
+% then it is Boolean.
+%
+% Commutativity, associativity, and Huntington's axiom 
+% axiomatize Boolean algebra.
+
+set(auto).
+
+list(usable).
+x = x.
+x+y = y+x.
+(x+y)+z = x+y+z.
+n(n(x+y)+n(x+n(y))) = x.       % Robbins axiom
+x+C = C.                       % hypothesis---exists a 1
+n(A+n(B))+n(n(A)+n(B)) != B.   % denial of Huntington axiom
+end_of_list.

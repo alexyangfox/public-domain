@@ -1,0 +1,181 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:35 2004
+The command was "../../bin/otter".  The process ID is 8258.
+
+set(auto).
+   dependent: set(auto1).
+   dependent: set(process_input).
+   dependent: clear(print_kept).
+   dependent: clear(print_new_demod).
+   dependent: clear(print_back_demod).
+   dependent: clear(print_back_sub).
+   dependent: set(control_memory).
+   dependent: assign(max_mem, 12000).
+   dependent: assign(pick_given_ratio, 4).
+   dependent: assign(stats_level, 1).
+   dependent: assign(max_seconds, 10800).
+
+list(usable).
+0 [] x=x.
+0 [] f(e,x)=x.
+0 [] f(g(x),x)=e.
+0 [] f(f(x,y),z)=f(x,f(y,z)).
+0 [] h(x,y)=f(x,f(y,f(g(x),g(y)))).
+0 [] f(x,f(x,x))=e.
+0 [] h(h(a,b),b)!=e.
+end_of_list.
+
+SCAN INPUT: prop=0, horn=1, equality=1, symmetry=0, max_lits=1.
+
+All clauses are units, and equality is present; the
+strategy will be Knuth-Bendix with positive clauses in sos.
+
+   dependent: set(knuth_bendix).
+   dependent: set(anl_eq).
+   dependent: set(para_from).
+   dependent: set(para_into).
+   dependent: clear(para_from_right).
+   dependent: clear(para_into_right).
+   dependent: set(para_from_vars).
+   dependent: set(eq_units_both_ways).
+   dependent: set(dynamic_demod_all).
+   dependent: set(dynamic_demod).
+   dependent: set(order_eq).
+   dependent: set(back_demod).
+   dependent: set(lrpo).
+
+------------> process usable:
+** KEPT (pick-wt=7): 1 [] h(h(a,b),b)!=e.
+
+------------> process sos:
+** KEPT (pick-wt=3): 2 [] x=x.
+** KEPT (pick-wt=5): 3 [] f(e,x)=x.
+---> New Demodulator: 4 [new_demod,3] f(e,x)=x.
+** KEPT (pick-wt=6): 5 [] f(g(x),x)=e.
+---> New Demodulator: 6 [new_demod,5] f(g(x),x)=e.
+** KEPT (pick-wt=11): 7 [] f(f(x,y),z)=f(x,f(y,z)).
+---> New Demodulator: 8 [new_demod,7] f(f(x,y),z)=f(x,f(y,z)).
+** KEPT (pick-wt=13): 9 [] h(x,y)=f(x,f(y,f(g(x),g(y)))).
+** KEPT (pick-wt=7): 10 [] f(x,f(x,x))=e.
+---> New Demodulator: 11 [new_demod,10] f(x,f(x,x))=e.
+  Following clause subsumed by 2 during input processing: 0 [copy,2,flip.1] x=x.
+>>>> Starting back demodulation with 4.
+>>>> Starting back demodulation with 6.
+>>>> Starting back demodulation with 8.
+** KEPT (pick-wt=13): 12 [copy,9,flip.1] f(x,f(y,f(g(x),g(y))))=h(x,y).
+>>>> Starting back demodulation with 11.
+  Following clause subsumed by 9 during input processing: 0 [copy,12,flip.1] h(x,y)=f(x,f(y,f(g(x),g(y)))).
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=3) 2 [] x=x.
+
+given clause #2: (wt=5) 3 [] f(e,x)=x.
+
+given clause #3: (wt=6) 5 [] f(g(x),x)=e.
+
+given clause #4: (wt=7) 10 [] f(x,f(x,x))=e.
+
+given clause #5: (wt=11) 7 [] f(f(x,y),z)=f(x,f(y,z)).
+
+given clause #6: (wt=13) 9 [] h(x,y)=f(x,f(y,f(g(x),g(y)))).
+
+given clause #7: (wt=8) 15 [para_into,7.1.1.1,5.1.1,demod,4,flip.1] f(g(x),f(x,y))=y.
+
+given clause #8: (wt=6) 29 [para_into,15.1.1.2,3.1.1] f(g(e),x)=x.
+
+given clause #9: (wt=7) 27 [para_into,15.1.1.2,5.1.1,demod,24] f(g(x),g(x))=x.
+
+given clause #10: (wt=5) 35 [back_demod,27,demod,34,34,8,11] f(x,e)=x.
+
+given clause #11: (wt=9) 13 [para_into,7.1.1.1,10.1.1,demod,4,8,flip.1] f(x,f(x,f(x,y)))=y.
+
+given clause #12: (wt=6) 33 [para_from,27.1.1,15.1.1.2,demod,22,flip.1] g(x)=f(x,x).
+
+given clause #13: (wt=13) 17 [para_into,7.1.1,10.1.1,demod,8,flip.1] f(x,f(y,f(x,f(y,f(x,y)))))=e.
+
+given clause #14: (wt=13) 46 [para_from,17.1.1,13.1.1.2.2,demod,36,flip.1] f(x,f(y,f(x,f(y,x))))=f(y,y).
+
+given clause #15: (wt=15) 41 [back_demod,12,demod,34,34,8,flip.1] h(x,y)=f(x,f(y,f(x,f(x,f(y,y))))).
+
+given clause #16: (wt=25) 43 [back_demod,40,demod,42,42,42,8,8,8,8,8,11,36,8,8,8,8,8,8,8,8,8,8,14,14] f(a,f(b,f(b,f(a,f(a,f(b,f(b,f(a,f(b,f(a,f(a,b)))))))))))!=e.
+
+given clause #17: (wt=15) 50 [para_from,46.1.1,13.1.1.2.2] f(x,f(x,f(y,y)))=f(y,f(x,f(y,x))).
+
+given clause #18: (wt=15) 53 [copy,50,flip.1] f(x,f(y,f(x,y)))=f(y,f(y,f(x,x))).
+
+given clause #19: (wt=17) 51 [para_from,46.1.1,7.1.1.1,demod,8,8,8,8,flip.1] f(x,f(y,f(x,f(y,f(x,z)))))=f(y,f(y,z)).
+
+given clause #20: (wt=17) 64 [para_from,53.1.1,13.1.1.2.2] f(x,f(x,f(y,f(y,f(x,x)))))=f(y,f(x,y)).
+
+given clause #21: (wt=21) 48 [para_into,46.1.1.2.2.2,7.1.1,demod,8,8] f(x,f(y,f(z,f(x,f(y,f(z,x))))))=f(y,f(z,f(y,z))).
+
+given clause #22: (wt=17) 65 [copy,64,flip.1] f(x,f(y,x))=f(y,f(y,f(x,f(x,f(y,y))))).
+
+given clause #23: (wt=19) 58 [para_from,50.1.1,7.1.1.1,demod,8,8,8,8,8] f(x,f(y,f(x,f(y,z))))=f(y,f(y,f(x,f(x,z)))).
+
+-------- PROOF -------- 
+
+----> UNIT CONFLICT at   0.01 sec ----> 159 [binary,158.1,2.1] $F.
+
+Length of proof is 19.  Level of proof is 9.
+
+---------------- PROOF ----------------
+
+1 [] h(h(a,b),b)!=e.
+2 [] x=x.
+4,3 [] f(e,x)=x.
+5 [] f(g(x),x)=e.
+8,7 [] f(f(x,y),z)=f(x,f(y,z)).
+9 [] h(x,y)=f(x,f(y,f(g(x),g(y)))).
+11,10 [] f(x,f(x,x))=e.
+12 [copy,9,flip.1] f(x,f(y,f(g(x),g(y))))=h(x,y).
+14,13 [para_into,7.1.1.1,10.1.1,demod,4,8,flip.1] f(x,f(x,f(x,y)))=y.
+15 [para_into,7.1.1.1,5.1.1,demod,4,flip.1] f(g(x),f(x,y))=y.
+17 [para_into,7.1.1,10.1.1,demod,8,flip.1] f(x,f(y,f(x,f(y,f(x,y)))))=e.
+19 [para_from,9.1.1,1.1.1] f(h(a,b),f(b,f(g(h(a,b)),g(b))))!=e.
+22,21 [para_into,15.1.1.2,15.1.1] f(g(g(x)),y)=f(x,y).
+24,23 [para_into,15.1.1.2,10.1.1] f(g(x),e)=f(x,x).
+27 [para_into,15.1.1.2,5.1.1,demod,24] f(g(x),g(x))=x.
+34,33 [para_from,27.1.1,15.1.1.2,demod,22,flip.1] g(x)=f(x,x).
+36,35 [back_demod,27,demod,34,34,8,11] f(x,e)=x.
+40 [back_demod,19,demod,34,34,8] f(h(a,b),f(b,f(h(a,b),f(h(a,b),f(b,b)))))!=e.
+42,41 [back_demod,12,demod,34,34,8,flip.1] h(x,y)=f(x,f(y,f(x,f(x,f(y,y))))).
+43 [back_demod,40,demod,42,42,42,8,8,8,8,8,11,36,8,8,8,8,8,8,8,8,8,8,14,14] f(a,f(b,f(b,f(a,f(a,f(b,f(b,f(a,f(b,f(a,f(a,b)))))))))))!=e.
+47,46 [para_from,17.1.1,13.1.1.2.2,demod,36,flip.1] f(x,f(y,f(x,f(y,x))))=f(y,y).
+50 [para_from,46.1.1,13.1.1.2.2] f(x,f(x,f(y,y)))=f(y,f(x,f(y,x))).
+51 [para_from,46.1.1,7.1.1.1,demod,8,8,8,8,flip.1] f(x,f(y,f(x,f(y,f(x,z)))))=f(y,f(y,z)).
+58 [para_from,50.1.1,7.1.1.1,demod,8,8,8,8,8] f(x,f(y,f(x,f(y,z))))=f(y,f(y,f(x,f(x,z)))).
+73,72 [para_into,51.1.1.2.2.2,7.1.1,demod,8,8,8] f(x,f(y,f(z,f(x,f(y,f(z,f(x,u)))))))=f(y,f(z,f(y,f(z,u)))).
+158 [para_from,58.1.1,43.1.1.2.2.2.2.2.2,demod,73,14,47,11] e!=e.
+159 [binary,158.1,2.1] $F.
+
+------------ end of proof -------------
+
+
+Search stopped by max_proofs option.
+
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 23
+clauses generated            419
+clauses kept                 118
+clauses forward subsumed     399
+clauses back subsumed          0
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.01          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8258 finished Mon Aug  2 15:30:35 2004

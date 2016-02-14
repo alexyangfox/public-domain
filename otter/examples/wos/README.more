@@ -1,0 +1,50 @@
+This subdirectory serves two purposes.  First, its members sup-
+plement the test problems supplied by Bill McCune.  Second, its
+members provide a beginning for studying various fields of
+mathematics and logic.  Currently, as of 01-21-94, all members
+are input files and summaries of the corresponding output files.
+For additional input files, output files, statistics, research
+topics, and more, see the book to be published by Larry Wos,
+"Automating the Search for Elegant Proofs: An Experimenter's
+Notebook".
+
+The following briefly describes the possible use for the respec-
+tive input files.  The files feature the use of the resonance
+strategy, but other strategies are used.  They contain options
+commented out with % that can be used by removing the %.
+
+grp_exp3.in --- can be used to study a given single axiom for
+groups of exponent 3, those groups in which the third power of
+all elements x is the identity e.
+
+grp_exp4.in --- can be used to study a given single axiom for
+groups of exponent 4, those in which the fourth power of every
+element x is the identity e.
+
+robbins.in --- can be used to study Robbins algebra in the context
+of proving such an algebra is Boolean when one adjoins to its ax-
+ioms the equation c+c = c.
+
+twoval.in --- can be used to study two-valued or propositional cal-
+culus.
+
+mayval.in --- can be used to study may-valued calculus.  The file
+includes a very difficult theorem to prove, MV5.  If one wishes
+to attempt its proof, one must change the assigned limit on
+max_proofs from 4 to 5.
+
+cursory.in --- can be used to proof check a given
+proof, but in a cursory manner rather than in a rigorous manner.
+In cursory proof checking, OTTER is not forced to produce a proof
+that is consistent with the precise history of the given proof
+being checked.  In rigorous proof checking, by supplying the pre-
+cise history of the proof being checked (with appropriate demodu-
+lators), OTTER is forced to attempt to duplicate the given proof.
+
+rigorous.in --- can be used to rigorously check a
+given proof.  See the comments accompanying
+cursory.proof.checking.in for pertinent detail.
+
+Welcome are questions on these files, e-mailed to wos@mcs.anl.gov
+or phone 312-493-0767 (home), or 708-252-7224 (office).  Even
+more welcome are open questions and unsolved problems.

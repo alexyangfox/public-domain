@@ -1,0 +1,35 @@
+% Naive set theory
+% If two ordered pairs are equal, their components are equal.
+
+set(auto1).
+set(binary_res).
+
+set(split_when_given).
+
+clear(print_kept).
+clear(print_given).
+clear(print_new_demod).
+clear(print_back_demod).
+clear(print_back_sub).
+assign(stats_level, 1).
+
+list(usable).
+x = x.
+
+% Definition of non-ordered pair.
+
+z != x | el(z, nop(x,y)).
+z != y | el(z, nop(x,y)).
+-el(z,nop(x,y)) | z=x | z=y.
+
+% Definition of ordered pair.
+
+op(x,y) = nop(nop(x,x),nop(x,y)).
+
+% Denial of theorem.
+
+op(A,B) = op(C,D).
+A != C | B != D.
+
+end_of_list.
+

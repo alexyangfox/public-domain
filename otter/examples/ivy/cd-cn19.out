@@ -1,0 +1,466 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:31:05 2004
+The command was "../../bin/otter".  The process ID is 8560.
+
+set(auto).
+   dependent: set(auto1).
+   dependent: set(process_input).
+   dependent: clear(print_kept).
+   dependent: clear(print_new_demod).
+   dependent: clear(print_back_demod).
+   dependent: clear(print_back_sub).
+   dependent: set(control_memory).
+   dependent: assign(max_mem, 12000).
+   dependent: assign(pick_given_ratio, 4).
+   dependent: assign(stats_level, 1).
+   dependent: assign(max_seconds, 10800).
+set(build_proof_object_2).
+   dependent: set(order_history).
+clear(sigint_interact).
+assign(max_seconds,10).
+
+initial_proof_object(junk).
+(
+(1 (input) (or (not (P (I V1 V2))) (or (not (P V1)) (P V2))) NIL)
+(2 (input) (P (I (I V3 V4) (I (I V4 V5) (I V3 V5)))) NIL)
+(3 (input) (P (I (I (N V6) V6) V6)) NIL)
+(4 (input) (P (I V7 (I (N V7) V8))) NIL)
+(5 (input) (not (P (I (I (I (SK1) (SK2)) (SK3)) (I (SK2) (SK3))))) NIL)
+)
+0 [] -P(I(x,y))| -P(x)|P(y).
+0 [] P(I(I(x,y),I(I(y,z),I(x,z)))).
+0 [] P(I(I(N(x),x),x)).
+0 [] P(I(x,I(N(x),y))).
+0 [] -P(I(I(I(SK1,SK2),SK3),I(SK2,SK3))).
+end_of_list.
+
+SCAN INPUT: prop=0, horn=1, equality=0, symmetry=0, max_lits=3.
+
+This is a Horn set without equality.  The strategy will
+be hyperresolution, with satellites in sos and nuclei
+in usable.
+
+   dependent: set(hyper_res).
+   dependent: clear(order_hyper).
+
+------------> process usable:
+** KEPT (pick-wt=8): 1 [] -P(I(x,y))| -P(x)|P(y).
+** KEPT (pick-wt=10): 2 [] -P(I(I(I(SK1,SK2),SK3),I(SK2,SK3))).
+
+------------> process sos:
+** KEPT (pick-wt=12): 3 [] P(I(I(x,y),I(I(y,z),I(x,z)))).
+** KEPT (pick-wt=7): 4 [] P(I(I(N(x),x),x)).
+** KEPT (pick-wt=7): 5 [] P(I(x,I(N(x),y))).
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=12) 3 [] P(I(I(x,y),I(I(y,z),I(x,z)))).
+
+given clause #2: (wt=7) 4 [] P(I(I(N(x),x),x)).
+
+given clause #3: (wt=7) 5 [] P(I(x,I(N(x),y))).
+
+given clause #4: (wt=10) 8 [hyper,1,5.1,5.1] P(I(N(I(x,I(N(x),y))),z)).
+
+given clause #5: (wt=10) 10 [hyper,1,5.1,4.1] P(I(N(I(I(N(x),x),x)),y)).
+
+given clause #6: (wt=16) 6 [hyper,1,3.1,3.1] P(I(I(I(I(x,y),I(z,y)),u),I(I(z,x),u))).
+
+given clause #7: (wt=11) 7 [hyper,1,3.1,4.1] P(I(I(x,y),I(I(N(x),x),y))).
+
+given clause #8: (wt=10) 28 [hyper,1,7.1,5.1] P(I(I(N(x),x),I(N(x),y))).
+
+given clause #9: (wt=11) 9 [hyper,1,3.1,5.1] P(I(I(I(N(x),y),z),I(x,z))).
+
+given clause #10: (wt=4) 40 [hyper,1,9.1,4.1] P(I(x,x)).
+
+given clause #11: (wt=15) 11 [hyper,1,5.1,3.1] P(I(N(I(I(x,y),I(I(y,z),I(x,z)))),u)).
+
+given clause #12: (wt=7) 42 [hyper,1,5.1,40.1] P(I(N(I(x,x)),y)).
+
+given clause #13: (wt=10) 39 [hyper,1,9.1,5.1] P(I(x,I(N(I(N(x),y)),z))).
+
+given clause #14: (wt=10) 47 [hyper,1,5.1,42.1] P(I(N(I(N(I(x,x)),y)),z)).
+
+given clause #15: (wt=11) 35 [hyper,1,6.1,9.1] P(I(I(x,N(y)),I(y,I(x,z)))).
+
+given clause #16: (wt=13) 12 [hyper,1,5.1,8.1] P(I(N(I(N(I(x,I(N(x),y))),z)),u)).
+
+given clause #17: (wt=9) 67 [hyper,1,9.1,35.1] P(I(x,I(y,I(N(x),z)))).
+
+given clause #18: (wt=9) 72 [hyper,1,35.1,42.1] P(I(x,I(N(I(y,y)),z))).
+
+given clause #19: (wt=11) 38 [hyper,1,9.1,7.1] P(I(x,I(I(N(N(x)),N(x)),y))).
+
+given clause #20: (wt=12) 71 [hyper,1,35.1,47.1] P(I(x,I(N(I(N(I(y,y)),z)),u))).
+
+given clause #21: (wt=13) 14 [hyper,1,5.1,10.1] P(I(N(I(N(I(I(N(x),x),x)),y)),z)).
+
+given clause #22: (wt=12) 74 [hyper,1,35.1,10.1] P(I(x,I(N(I(I(N(y),y),y)),z))).
+
+given clause #23: (wt=12) 75 [hyper,1,35.1,8.1] P(I(x,I(N(I(y,I(N(y),z))),u))).
+
+given clause #24: (wt=12) 81 [hyper,1,9.1,67.1] P(I(x,I(y,I(N(I(N(x),z)),u)))).
+
+given clause #25: (wt=12) 82 [hyper,1,7.1,67.1] P(I(I(N(x),x),I(y,I(N(x),z)))).
+
+given clause #26: (wt=16) 16 [hyper,1,6.1,6.1] P(I(I(x,I(y,z)),I(I(u,y),I(x,I(u,z))))).
+
+given clause #27: (wt=12) 84 [hyper,1,5.1,67.1] P(I(N(I(x,I(y,I(N(x),z)))),u)).
+
+given clause #28: (wt=12) 98 [hyper,1,5.1,72.1] P(I(N(I(x,I(N(I(y,y)),z))),u)).
+
+given clause #29: (wt=13) 29 [hyper,1,7.1,4.1] P(I(I(N(I(N(x),x)),I(N(x),x)),x)).
+
+given clause #30: (wt=13) 32 [hyper,1,5.1,28.1] P(I(N(I(I(N(x),x),I(N(x),y))),z)).
+
+given clause #31: (wt=19) 17 [hyper,1,5.1,6.1] P(I(N(I(I(I(I(x,y),I(z,y)),u),I(I(z,x),u))),v)).
+
+given clause #32: (wt=13) 46 [hyper,1,7.1,42.1] P(I(I(N(N(I(x,x))),N(I(x,x))),y)).
+
+given clause #33: (wt=13) 50 [hyper,1,9.1,39.1] P(I(x,I(N(I(N(I(N(x),y)),z)),u))).
+
+given clause #34: (wt=13) 51 [hyper,1,7.1,39.1] P(I(I(N(x),x),I(N(I(N(x),y)),z))).
+
+given clause #35: (wt=13) 53 [hyper,1,5.1,39.1] P(I(N(I(x,I(N(I(N(x),y)),z))),u)).
+
+given clause #36: (wt=20) 18 [hyper,1,3.1,6.1] P(I(I(I(I(x,y),z),u),I(I(I(I(y,v),I(x,v)),z),u))).
+
+given clause #37: (wt=13) 55 [hyper,1,39.1,42.1] P(I(N(I(N(I(N(I(x,x)),y)),z)),u)).
+
+given clause #38: (wt=13) 85 [hyper,1,3.1,67.1] P(I(I(I(x,I(N(y),z)),u),I(y,u))).
+
+given clause #39: (wt=12) 305 [hyper,1,85.1,5.1] P(I(x,I(N(I(y,I(N(x),z))),u))).
+
+given clause #40: (wt=13) 99 [hyper,1,3.1,72.1] P(I(I(I(N(I(x,x)),y),z),I(u,z))).
+
+given clause #41: (wt=15) 19 [hyper,1,6.1,5.1] P(I(I(x,y),I(N(I(I(y,z),I(x,z))),u))).
+
+given clause #42: (wt=6) 370 [hyper,1,99.1,4.1] P(I(x,I(y,y))).
+
+given clause #43: (wt=9) 413 [hyper,1,5.1,370.1] P(I(N(I(x,I(y,y))),z)).
+
+given clause #44: (wt=10) 412 [hyper,1,16.1,370.1] P(I(I(x,y),I(z,I(x,y)))).
+
+given clause #45: (wt=8) 433 [hyper,1,412.1,370.1] P(I(x,I(y,I(z,z)))).
+
+given clause #46: (wt=16) 20 [hyper,1,6.1,3.1] P(I(I(x,y),I(I(I(x,z),u),I(I(y,z),u)))).
+
+given clause #47: (wt=9) 455 [hyper,1,412.1,5.1] P(I(x,I(y,I(N(y),z)))).
+
+given clause #48: (wt=9) 456 [hyper,1,412.1,4.1] P(I(x,I(I(N(y),y),y))).
+
+given clause #49: (wt=10) 414 [hyper,1,3.1,370.1] P(I(I(I(x,x),y),I(z,y))).
+
+given clause #50: (wt=10) 458 [hyper,1,412.1,433.1] P(I(x,I(y,I(z,I(u,u))))).
+
+given clause #51: (wt=16) 21 [hyper,1,7.1,7.1] P(I(I(N(I(x,y)),I(x,y)),I(I(N(x),x),y))).
+
+given clause #52: (wt=11) 366 [hyper,1,99.1,82.1] P(I(x,I(y,I(N(I(z,z)),u)))).
+
+given clause #53: (wt=11) 407 [hyper,1,67.1,370.1] P(I(x,I(N(I(y,I(z,z))),u))).
+
+given clause #54: (wt=11) 421 [hyper,1,85.1,412.1] P(I(x,I(y,I(z,I(N(x),u))))).
+
+given clause #55: (wt=11) 441 [hyper,1,412.1,67.1] P(I(x,I(y,I(z,I(N(y),u))))).
+
+given clause #56: (wt=17) 22 [hyper,1,6.1,7.1] P(I(I(x,y),I(I(N(I(y,z)),I(y,z)),I(x,z)))).
+
+given clause #57: (wt=11) 466 [hyper,1,5.1,433.1] P(I(N(I(x,I(y,I(z,z)))),u)).
+
+given clause #58: (wt=11) 517 [hyper,1,412.1,455.1] P(I(x,I(y,I(z,I(N(z),u))))).
+
+given clause #59: (wt=11) 529 [hyper,1,412.1,456.1] P(I(x,I(y,I(I(N(z),z),z)))).
+
+given clause #60: (wt=12) 409 [hyper,1,39.1,370.1] P(I(N(I(N(I(x,I(y,y))),z)),u)).
+
+given clause #61: (wt=14) 23 [hyper,1,5.1,7.1] P(I(N(I(I(x,y),I(I(N(x),x),y))),z)).
+
+given clause #62: (wt=12) 419 [hyper,1,412.1,412.1] P(I(x,I(I(y,z),I(u,I(y,z))))).
+
+given clause #63: (wt=12) 444 [hyper,1,412.1,39.1] P(I(x,I(y,I(N(I(N(y),z)),u)))).
+
+given clause #64: (wt=12) 448 [hyper,1,412.1,28.1] P(I(x,I(I(N(y),y),I(N(y),z)))).
+
+given clause #65: (wt=12) 467 [hyper,1,3.1,433.1] P(I(I(I(x,I(y,y)),z),I(u,z))).
+
+given clause #66: (wt=15) 24 [hyper,1,3.1,7.1] P(I(I(I(I(N(x),x),y),z),I(I(x,y),z))).
+
+given clause #67: (wt=12) 527 [hyper,1,5.1,455.1] P(I(N(I(x,I(y,I(N(y),z)))),u)).
+
+given clause #68: (wt=12) 539 [hyper,1,5.1,456.1] P(I(N(I(x,I(I(N(y),y),y))),z)).
+
+given clause #69: (wt=12) 541 [hyper,1,412.1,414.1] P(I(x,I(I(I(y,y),z),I(u,z)))).
+
+given clause #70: (wt=12) 551 [hyper,1,412.1,458.1] P(I(x,I(y,I(z,I(u,I(v,v)))))).
+
+given clause #71: (wt=19) 25 [hyper,1,7.1,10.1] P(I(I(N(N(I(I(N(x),x),x))),N(I(I(N(x),x),x))),y)).
+
+given clause #72: (wt=13) 183 [hyper,1,16.1,72.1] P(I(I(x,N(I(y,y))),I(z,I(x,u)))).
+
+given clause #73: (wt=13) 304 [hyper,1,85.1,16.1] P(I(x,I(I(y,N(x)),I(z,I(y,u))))).
+
+given clause #74: (wt=13) 306 [hyper,1,85.1,3.1] P(I(x,I(I(I(N(x),y),z),I(u,z)))).
+
+given clause #75: (wt=13) 411 [hyper,1,19.1,370.1] P(I(N(I(I(I(x,x),y),I(z,y))),u)).
+
+given clause #76: (wt=19) 26 [hyper,1,7.1,8.1] P(I(I(N(N(I(x,I(N(x),y)))),N(I(x,I(N(x),y)))),z)).
+
+given clause #77: (wt=13) 431 [hyper,1,5.1,412.1] P(I(N(I(I(x,y),I(z,I(x,y)))),u)).
+
+given clause #78: (wt=13) 445 [hyper,1,412.1,38.1] P(I(x,I(y,I(I(N(N(y)),N(y)),z)))).
+
+given clause #79: (wt=13) 446 [hyper,1,412.1,35.1] P(I(x,I(I(y,N(z)),I(z,I(y,u))))).
+
+given clause #80: (wt=13) 452 [hyper,1,412.1,9.1] P(I(x,I(I(I(N(y),z),u),I(y,u)))).
+
+given clause #81: (wt=27) 27 [hyper,1,7.1,6.1] P(I(I(N(I(I(I(x,y),I(z,y)),u)),I(I(I(x,y),I(z,y)),u)),I(I(z,x),u))).
+
+given clause #82: (wt=13) 453 [hyper,1,412.1,7.1] P(I(x,I(I(y,z),I(I(N(y),y),z)))).
+
+given clause #83: (wt=13) 461 [hyper,1,67.1,433.1] P(I(x,I(N(I(y,I(z,I(u,u)))),v))).
+
+given clause #84: (wt=13) 526 [hyper,1,16.1,455.1] P(I(I(x,y),I(z,I(x,I(N(y),u))))).
+
+given clause #85: (wt=13) 528 [hyper,1,3.1,455.1] P(I(I(I(x,I(N(x),y)),z),I(u,z))).
+
+given clause #86: (wt=17) 30 [hyper,1,7.1,3.1] P(I(I(N(I(x,y)),I(x,y)),I(I(y,z),I(x,z)))).
+
+given clause #87: (wt=13) 538 [hyper,1,16.1,456.1] P(I(I(x,I(N(y),y)),I(z,I(x,y)))).
+
+given clause #88: (wt=8) 1315 [hyper,1,85.1,538.1] P(I(x,I(y,I(z,x)))).
+
+given clause #89: (wt=8) 1341 [hyper,1,538.1,1315.1] P(I(x,I(y,I(z,y)))).
+
+-------- PROOF -------- 
+
+----> UNIT CONFLICT at   0.09 sec ----> 1424 [binary,1423.1,2.1] $F.
+
+Length of proof is 19.  Level of proof is 12.
+
+---------------- PROOF ----------------
+
+1 [] -P(I(x,y))| -P(x)|P(y).
+2 [] -P(I(I(I(SK1,SK2),SK3),I(SK2,SK3))).
+3 [] P(I(I(x,y),I(I(y,z),I(x,z)))).
+4 [] P(I(I(N(x),x),x)).
+5 [] P(I(x,I(N(x),y))).
+6 [hyper,1,3.1,3.1] P(I(I(I(I(x,y),I(z,y)),u),I(I(z,x),u))).
+7 [hyper,1,3.1,4.1] P(I(I(x,y),I(I(N(x),x),y))).
+9 [hyper,1,3.1,5.1] P(I(I(I(N(x),y),z),I(x,z))).
+16 [hyper,1,6.1,6.1] P(I(I(x,I(y,z)),I(I(u,y),I(x,I(u,z))))).
+30 [hyper,1,7.1,3.1] P(I(I(N(I(x,y)),I(x,y)),I(I(y,z),I(x,z)))).
+35 [hyper,1,6.1,9.1] P(I(I(x,N(y)),I(y,I(x,z)))).
+40 [hyper,1,9.1,4.1] P(I(x,x)).
+42 [hyper,1,5.1,40.1] P(I(N(I(x,x)),y)).
+67 [hyper,1,9.1,35.1] P(I(x,I(y,I(N(x),z)))).
+72 [hyper,1,35.1,42.1] P(I(x,I(N(I(y,y)),z))).
+85 [hyper,1,3.1,67.1] P(I(I(I(x,I(N(y),z)),u),I(y,u))).
+99 [hyper,1,3.1,72.1] P(I(I(I(N(I(x,x)),y),z),I(u,z))).
+370 [hyper,1,99.1,4.1] P(I(x,I(y,y))).
+412 [hyper,1,16.1,370.1] P(I(I(x,y),I(z,I(x,y)))).
+456 [hyper,1,412.1,4.1] P(I(x,I(I(N(y),y),y))).
+538 [hyper,1,16.1,456.1] P(I(I(x,I(N(y),y)),I(z,I(x,y)))).
+1315 [hyper,1,85.1,538.1] P(I(x,I(y,I(z,x)))).
+1341 [hyper,1,538.1,1315.1] P(I(x,I(y,I(z,y)))).
+1423 [hyper,1,30.1,1341.1] P(I(I(I(x,y),z),I(y,z))).
+1424 [binary,1423.1,2.1] $F.
+
+------------ end of proof -------------
+
+
+;; BEGINNING OF PROOF OBJECT
+(
+(1 (input) (or (not (P (I V1 V2))) (or (not (P V1)) (P V2))) NIL)
+(2 (input) (P (I (I V3 V4) (I (I V4 V5) (I V3 V5)))) NIL)
+(3 (input) (P (I (I (N V6) V6) V6)) NIL)
+(4 (input) (P (I V7 (I (N V7) V8))) NIL)
+(5 (input) (not (P (I (I (I (SK1) (SK2)) (SK3)) (I (SK2) (SK3))))) NIL)
+(6 (instantiate 1 ((V1 . v0)(V2 . v1))) (or (not (P (I v0 v1))) (or (not (P v0)) (P v1))) (1))
+(7 (instantiate 5 ()) (not (P (I (I (I (SK1) (SK2)) (SK3)) (I (SK2) (SK3))))) (2))
+(8 (instantiate 2 ((V3 . v0)(V4 . v1)(V5 . v2))) (P (I (I v0 v1) (I (I v1 v2) (I v0 v2)))) (3))
+(9 (instantiate 3 ((V6 . v0))) (P (I (I (N v0) v0) v0)) (4))
+(10 (instantiate 4 ((V7 . v0)(V8 . v1))) (P (I v0 (I (N v0) v1))) (5))
+(11 (instantiate 6 ((v0 . (I v64 v65))(v1 . (I (I v65 v66) (I v64 v66))))) (or (not (P (I (I v64 v65) (I (I v65 v66) (I v64 v66))))) (or (not (P (I v64 v65))) (P (I (I v65 v66) (I v64 v66))))) NIL)
+(12 (instantiate 8 ((v0 . v64)(v1 . v65)(v2 . v66))) (P (I (I v64 v65) (I (I v65 v66) (I v64 v66)))) NIL)
+(13 (resolve 11 (1) 12 ()) (or (not (P (I v64 v65))) (P (I (I v65 v66) (I v64 v66)))) NIL)
+(14 (instantiate 13 ((v64 . v0)(v65 . v1)(v66 . v2))) (or (not (P (I v0 v1))) (P (I (I v1 v2) (I v0 v2)))) NIL)
+(15 (instantiate 14 ((v0 . (I v64 v65))(v1 . (I (I v65 v66) (I v64 v66))))) (or (not (P (I (I v64 v65) (I (I v65 v66) (I v64 v66))))) (P (I (I (I (I v65 v66) (I v64 v66)) v2) (I (I v64 v65) v2)))) NIL)
+(16 (instantiate 8 ((v0 . v64)(v1 . v65)(v2 . v66))) (P (I (I v64 v65) (I (I v65 v66) (I v64 v66)))) NIL)
+(17 (resolve 15 (1) 16 ()) (P (I (I (I (I v65 v66) (I v64 v66)) v2) (I (I v64 v65) v2))) NIL)
+(18 (instantiate 17 ((v2 . v3)(v64 . v2)(v65 . v0)(v66 . v1))) (P (I (I (I (I v0 v1) (I v2 v1)) v3) (I (I v2 v0) v3))) (6))
+(19 (instantiate 6 ((v0 . (I v64 v65))(v1 . (I (I v65 v66) (I v64 v66))))) (or (not (P (I (I v64 v65) (I (I v65 v66) (I v64 v66))))) (or (not (P (I v64 v65))) (P (I (I v65 v66) (I v64 v66))))) NIL)
+(20 (instantiate 8 ((v0 . v64)(v1 . v65)(v2 . v66))) (P (I (I v64 v65) (I (I v65 v66) (I v64 v66)))) NIL)
+(21 (resolve 19 (1) 20 ()) (or (not (P (I v64 v65))) (P (I (I v65 v66) (I v64 v66)))) NIL)
+(22 (instantiate 21 ((v64 . v0)(v65 . v1)(v66 . v2))) (or (not (P (I v0 v1))) (P (I (I v1 v2) (I v0 v2)))) NIL)
+(23 (instantiate 22 ((v0 . (I (N v64) v64))(v1 . v64))) (or (not (P (I (I (N v64) v64) v64))) (P (I (I v64 v2) (I (I (N v64) v64) v2)))) NIL)
+(24 (instantiate 9 ((v0 . v64))) (P (I (I (N v64) v64) v64)) NIL)
+(25 (resolve 23 (1) 24 ()) (P (I (I v64 v2) (I (I (N v64) v64) v2))) NIL)
+(26 (instantiate 25 ((v2 . v1)(v64 . v0))) (P (I (I v0 v1) (I (I (N v0) v0) v1))) (7))
+(27 (instantiate 6 ((v0 . (I v64 v65))(v1 . (I (I v65 v66) (I v64 v66))))) (or (not (P (I (I v64 v65) (I (I v65 v66) (I v64 v66))))) (or (not (P (I v64 v65))) (P (I (I v65 v66) (I v64 v66))))) NIL)
+(28 (instantiate 8 ((v0 . v64)(v1 . v65)(v2 . v66))) (P (I (I v64 v65) (I (I v65 v66) (I v64 v66)))) NIL)
+(29 (resolve 27 (1) 28 ()) (or (not (P (I v64 v65))) (P (I (I v65 v66) (I v64 v66)))) NIL)
+(30 (instantiate 29 ((v64 . v0)(v65 . v1)(v66 . v2))) (or (not (P (I v0 v1))) (P (I (I v1 v2) (I v0 v2)))) NIL)
+(31 (instantiate 30 ((v0 . v64)(v1 . (I (N v64) v65)))) (or (not (P (I v64 (I (N v64) v65)))) (P (I (I (I (N v64) v65) v2) (I v64 v2)))) NIL)
+(32 (instantiate 10 ((v0 . v64)(v1 . v65))) (P (I v64 (I (N v64) v65))) NIL)
+(33 (resolve 31 (1) 32 ()) (P (I (I (I (N v64) v65) v2) (I v64 v2))) NIL)
+(34 (instantiate 33 ((v64 . v0)(v65 . v1))) (P (I (I (I (N v0) v1) v2) (I v0 v2))) (9))
+(35 (instantiate 6 ((v0 . (I (I (I v64 v65) (I v66 v65)) v67))(v1 . (I (I v66 v64) v67)))) (or (not (P (I (I (I (I v64 v65) (I v66 v65)) v67) (I (I v66 v64) v67)))) (or (not (P (I (I (I v64 v65) (I v66 v65)) v67))) (P (I (I v66 v64) v67)))) NIL)
+(36 (instantiate 18 ((v0 . v64)(v1 . v65)(v2 . v66)(v3 . v67))) (P (I (I (I (I v64 v65) (I v66 v65)) v67) (I (I v66 v64) v67))) NIL)
+(37 (resolve 35 (1) 36 ()) (or (not (P (I (I (I v64 v65) (I v66 v65)) v67))) (P (I (I v66 v64) v67))) NIL)
+(38 (instantiate 37 ((v64 . v0)(v65 . v1)(v66 . v2)(v67 . v3))) (or (not (P (I (I (I v0 v1) (I v2 v1)) v3))) (P (I (I v2 v0) v3))) NIL)
+(39 (instantiate 38 ((v0 . (I v64 v65))(v1 . (I v66 v65))(v3 . (I (I v66 v64) (I v2 (I v66 v65)))))) (or (not (P (I (I (I (I v64 v65) (I v66 v65)) (I v2 (I v66 v65))) (I (I v66 v64) (I v2 (I v66 v65)))))) (P (I (I v2 (I v64 v65)) (I (I v66 v64) (I v2 (I v66 v65)))))) NIL)
+(40 (instantiate 18 ((v0 . v64)(v1 . v65)(v2 . v66)(v3 . (I v2 (I v66 v65))))) (P (I (I (I (I v64 v65) (I v66 v65)) (I v2 (I v66 v65))) (I (I v66 v64) (I v2 (I v66 v65))))) NIL)
+(41 (resolve 39 (1) 40 ()) (P (I (I v2 (I v64 v65)) (I (I v66 v64) (I v2 (I v66 v65))))) NIL)
+(42 (instantiate 41 ((v2 . v0)(v64 . v1)(v65 . v2)(v66 . v3))) (P (I (I v0 (I v1 v2)) (I (I v3 v1) (I v0 (I v3 v2))))) (16))
+(43 (instantiate 6 ((v0 . (I v64 v65))(v1 . (I (I (N v64) v64) v65)))) (or (not (P (I (I v64 v65) (I (I (N v64) v64) v65)))) (or (not (P (I v64 v65))) (P (I (I (N v64) v64) v65)))) NIL)
+(44 (instantiate 26 ((v0 . v64)(v1 . v65))) (P (I (I v64 v65) (I (I (N v64) v64) v65))) NIL)
+(45 (resolve 43 (1) 44 ()) (or (not (P (I v64 v65))) (P (I (I (N v64) v64) v65))) NIL)
+(46 (instantiate 45 ((v64 . v0)(v65 . v1))) (or (not (P (I v0 v1))) (P (I (I (N v0) v0) v1))) NIL)
+(47 (instantiate 46 ((v0 . (I v64 v65))(v1 . (I (I v65 v66) (I v64 v66))))) (or (not (P (I (I v64 v65) (I (I v65 v66) (I v64 v66))))) (P (I (I (N (I v64 v65)) (I v64 v65)) (I (I v65 v66) (I v64 v66))))) NIL)
+(48 (instantiate 8 ((v0 . v64)(v1 . v65)(v2 . v66))) (P (I (I v64 v65) (I (I v65 v66) (I v64 v66)))) NIL)
+(49 (resolve 47 (1) 48 ()) (P (I (I (N (I v64 v65)) (I v64 v65)) (I (I v65 v66) (I v64 v66)))) NIL)
+(50 (instantiate 49 ((v64 . v0)(v65 . v1)(v66 . v2))) (P (I (I (N (I v0 v1)) (I v0 v1)) (I (I v1 v2) (I v0 v2)))) (30))
+(51 (instantiate 6 ((v0 . (I (I (I v64 v65) (I v66 v65)) v67))(v1 . (I (I v66 v64) v67)))) (or (not (P (I (I (I (I v64 v65) (I v66 v65)) v67) (I (I v66 v64) v67)))) (or (not (P (I (I (I v64 v65) (I v66 v65)) v67))) (P (I (I v66 v64) v67)))) NIL)
+(52 (instantiate 18 ((v0 . v64)(v1 . v65)(v2 . v66)(v3 . v67))) (P (I (I (I (I v64 v65) (I v66 v65)) v67) (I (I v66 v64) v67))) NIL)
+(53 (resolve 51 (1) 52 ()) (or (not (P (I (I (I v64 v65) (I v66 v65)) v67))) (P (I (I v66 v64) v67))) NIL)
+(54 (instantiate 53 ((v64 . v0)(v65 . v1)(v66 . v2)(v67 . v3))) (or (not (P (I (I (I v0 v1) (I v2 v1)) v3))) (P (I (I v2 v0) v3))) NIL)
+(55 (instantiate 54 ((v0 . (N v64))(v1 . v65)(v3 . (I v64 (I v2 v65))))) (or (not (P (I (I (I (N v64) v65) (I v2 v65)) (I v64 (I v2 v65))))) (P (I (I v2 (N v64)) (I v64 (I v2 v65))))) NIL)
+(56 (instantiate 34 ((v0 . v64)(v1 . v65)(v2 . (I v2 v65)))) (P (I (I (I (N v64) v65) (I v2 v65)) (I v64 (I v2 v65)))) NIL)
+(57 (resolve 55 (1) 56 ()) (P (I (I v2 (N v64)) (I v64 (I v2 v65)))) NIL)
+(58 (instantiate 57 ((v2 . v0)(v64 . v1)(v65 . v2))) (P (I (I v0 (N v1)) (I v1 (I v0 v2)))) (35))
+(59 (instantiate 6 ((v0 . (I (I (N v64) v65) v66))(v1 . (I v64 v66)))) (or (not (P (I (I (I (N v64) v65) v66) (I v64 v66)))) (or (not (P (I (I (N v64) v65) v66))) (P (I v64 v66)))) NIL)
+(60 (instantiate 34 ((v0 . v64)(v1 . v65)(v2 . v66))) (P (I (I (I (N v64) v65) v66) (I v64 v66))) NIL)
+(61 (resolve 59 (1) 60 ()) (or (not (P (I (I (N v64) v65) v66))) (P (I v64 v66))) NIL)
+(62 (instantiate 61 ((v64 . v0)(v65 . v1)(v66 . v2))) (or (not (P (I (I (N v0) v1) v2))) (P (I v0 v2))) NIL)
+(63 (instantiate 62 ((v0 . v64)(v1 . v64)(v2 . v64))) (or (not (P (I (I (N v64) v64) v64))) (P (I v64 v64))) NIL)
+(64 (instantiate 9 ((v0 . v64))) (P (I (I (N v64) v64) v64)) NIL)
+(65 (resolve 63 (1) 64 ()) (P (I v64 v64)) NIL)
+(66 (instantiate 65 ((v64 . v0))) (P (I v0 v0)) (40))
+(67 (instantiate 6 ((v0 . v64)(v1 . (I (N v64) v65)))) (or (not (P (I v64 (I (N v64) v65)))) (or (not (P v64)) (P (I (N v64) v65)))) NIL)
+(68 (instantiate 10 ((v0 . v64)(v1 . v65))) (P (I v64 (I (N v64) v65))) NIL)
+(69 (resolve 67 (1) 68 ()) (or (not (P v64)) (P (I (N v64) v65))) NIL)
+(70 (instantiate 69 ((v64 . v0)(v65 . v1))) (or (not (P v0)) (P (I (N v0) v1))) NIL)
+(71 (instantiate 70 ((v0 . (I v64 v64)))) (or (not (P (I v64 v64))) (P (I (N (I v64 v64)) v1))) NIL)
+(72 (instantiate 66 ((v0 . v64))) (P (I v64 v64)) NIL)
+(73 (resolve 71 (1) 72 ()) (P (I (N (I v64 v64)) v1)) NIL)
+(74 (instantiate 73 ((v64 . v0))) (P (I (N (I v0 v0)) v1)) (42))
+(75 (instantiate 6 ((v0 . (I (I (N v64) v65) v66))(v1 . (I v64 v66)))) (or (not (P (I (I (I (N v64) v65) v66) (I v64 v66)))) (or (not (P (I (I (N v64) v65) v66))) (P (I v64 v66)))) NIL)
+(76 (instantiate 34 ((v0 . v64)(v1 . v65)(v2 . v66))) (P (I (I (I (N v64) v65) v66) (I v64 v66))) NIL)
+(77 (resolve 75 (1) 76 ()) (or (not (P (I (I (N v64) v65) v66))) (P (I v64 v66))) NIL)
+(78 (instantiate 77 ((v64 . v0)(v65 . v1)(v66 . v2))) (or (not (P (I (I (N v0) v1) v2))) (P (I v0 v2))) NIL)
+(79 (instantiate 78 ((v1 . (N v65))(v2 . (I v65 (I (N v0) v66))))) (or (not (P (I (I (N v0) (N v65)) (I v65 (I (N v0) v66))))) (P (I v0 (I v65 (I (N v0) v66))))) NIL)
+(80 (instantiate 58 ((v0 . (N v0))(v1 . v65)(v2 . v66))) (P (I (I (N v0) (N v65)) (I v65 (I (N v0) v66)))) NIL)
+(81 (resolve 79 (1) 80 ()) (P (I v0 (I v65 (I (N v0) v66)))) NIL)
+(82 (instantiate 81 ((v65 . v1)(v66 . v2))) (P (I v0 (I v1 (I (N v0) v2)))) (67))
+(83 (instantiate 6 ((v0 . (I v64 (N v65)))(v1 . (I v65 (I v64 v66))))) (or (not (P (I (I v64 (N v65)) (I v65 (I v64 v66))))) (or (not (P (I v64 (N v65)))) (P (I v65 (I v64 v66))))) NIL)
+(84 (instantiate 58 ((v0 . v64)(v1 . v65)(v2 . v66))) (P (I (I v64 (N v65)) (I v65 (I v64 v66)))) NIL)
+(85 (resolve 83 (1) 84 ()) (or (not (P (I v64 (N v65)))) (P (I v65 (I v64 v66)))) NIL)
+(86 (instantiate 85 ((v64 . v0)(v65 . v1)(v66 . v2))) (or (not (P (I v0 (N v1)))) (P (I v1 (I v0 v2)))) NIL)
+(87 (instantiate 86 ((v0 . (N (I v64 v64))))) (or (not (P (I (N (I v64 v64)) (N v1)))) (P (I v1 (I (N (I v64 v64)) v2)))) NIL)
+(88 (instantiate 74 ((v0 . v64)(v1 . (N v1)))) (P (I (N (I v64 v64)) (N v1))) NIL)
+(89 (resolve 87 (1) 88 ()) (P (I v1 (I (N (I v64 v64)) v2))) NIL)
+(90 (instantiate 89 ((v1 . v0)(v64 . v1))) (P (I v0 (I (N (I v1 v1)) v2))) (72))
+(91 (instantiate 6 ((v0 . (I v64 v65))(v1 . (I (I v65 v66) (I v64 v66))))) (or (not (P (I (I v64 v65) (I (I v65 v66) (I v64 v66))))) (or (not (P (I v64 v65))) (P (I (I v65 v66) (I v64 v66))))) NIL)
+(92 (instantiate 8 ((v0 . v64)(v1 . v65)(v2 . v66))) (P (I (I v64 v65) (I (I v65 v66) (I v64 v66)))) NIL)
+(93 (resolve 91 (1) 92 ()) (or (not (P (I v64 v65))) (P (I (I v65 v66) (I v64 v66)))) NIL)
+(94 (instantiate 93 ((v64 . v0)(v65 . v1)(v66 . v2))) (or (not (P (I v0 v1))) (P (I (I v1 v2) (I v0 v2)))) NIL)
+(95 (instantiate 94 ((v0 . v64)(v1 . (I v65 (I (N v64) v66))))) (or (not (P (I v64 (I v65 (I (N v64) v66))))) (P (I (I (I v65 (I (N v64) v66)) v2) (I v64 v2)))) NIL)
+(96 (instantiate 82 ((v0 . v64)(v1 . v65)(v2 . v66))) (P (I v64 (I v65 (I (N v64) v66)))) NIL)
+(97 (resolve 95 (1) 96 ()) (P (I (I (I v65 (I (N v64) v66)) v2) (I v64 v2))) NIL)
+(98 (instantiate 97 ((v2 . v3)(v64 . v1)(v65 . v0)(v66 . v2))) (P (I (I (I v0 (I (N v1) v2)) v3) (I v1 v3))) (85))
+(99 (instantiate 6 ((v0 . (I v64 v65))(v1 . (I (I v65 v66) (I v64 v66))))) (or (not (P (I (I v64 v65) (I (I v65 v66) (I v64 v66))))) (or (not (P (I v64 v65))) (P (I (I v65 v66) (I v64 v66))))) NIL)
+(100 (instantiate 8 ((v0 . v64)(v1 . v65)(v2 . v66))) (P (I (I v64 v65) (I (I v65 v66) (I v64 v66)))) NIL)
+(101 (resolve 99 (1) 100 ()) (or (not (P (I v64 v65))) (P (I (I v65 v66) (I v64 v66)))) NIL)
+(102 (instantiate 101 ((v64 . v0)(v65 . v1)(v66 . v2))) (or (not (P (I v0 v1))) (P (I (I v1 v2) (I v0 v2)))) NIL)
+(103 (instantiate 102 ((v0 . v64)(v1 . (I (N (I v65 v65)) v66)))) (or (not (P (I v64 (I (N (I v65 v65)) v66)))) (P (I (I (I (N (I v65 v65)) v66) v2) (I v64 v2)))) NIL)
+(104 (instantiate 90 ((v0 . v64)(v1 . v65)(v2 . v66))) (P (I v64 (I (N (I v65 v65)) v66))) NIL)
+(105 (resolve 103 (1) 104 ()) (P (I (I (I (N (I v65 v65)) v66) v2) (I v64 v2))) NIL)
+(106 (instantiate 105 ((v64 . v3)(v65 . v0)(v66 . v1))) (P (I (I (I (N (I v0 v0)) v1) v2) (I v3 v2))) (99))
+(107 (instantiate 6 ((v0 . (I (I (N (I v64 v64)) v65) v66))(v1 . (I v67 v66)))) (or (not (P (I (I (I (N (I v64 v64)) v65) v66) (I v67 v66)))) (or (not (P (I (I (N (I v64 v64)) v65) v66))) (P (I v67 v66)))) NIL)
+(108 (instantiate 106 ((v0 . v64)(v1 . v65)(v2 . v66)(v3 . v67))) (P (I (I (I (N (I v64 v64)) v65) v66) (I v67 v66))) NIL)
+(109 (resolve 107 (1) 108 ()) (or (not (P (I (I (N (I v64 v64)) v65) v66))) (P (I v67 v66))) NIL)
+(110 (instantiate 109 ((v64 . v0)(v65 . v1)(v66 . v2)(v67 . v3))) (or (not (P (I (I (N (I v0 v0)) v1) v2))) (P (I v3 v2))) NIL)
+(111 (instantiate 110 ((v1 . (I v0 v0))(v2 . (I v0 v0)))) (or (not (P (I (I (N (I v0 v0)) (I v0 v0)) (I v0 v0)))) (P (I v3 (I v0 v0)))) NIL)
+(112 (instantiate 9 ((v0 . (I v0 v0)))) (P (I (I (N (I v0 v0)) (I v0 v0)) (I v0 v0))) NIL)
+(113 (resolve 111 (1) 112 ()) (P (I v3 (I v0 v0))) NIL)
+(114 (instantiate 113 ((v0 . v1)(v3 . v0))) (P (I v0 (I v1 v1))) (370))
+(115 (instantiate 6 ((v0 . (I v64 (I v65 v66)))(v1 . (I (I v67 v65) (I v64 (I v67 v66)))))) (or (not (P (I (I v64 (I v65 v66)) (I (I v67 v65) (I v64 (I v67 v66)))))) (or (not (P (I v64 (I v65 v66)))) (P (I (I v67 v65) (I v64 (I v67 v66)))))) NIL)
+(116 (instantiate 42 ((v0 . v64)(v1 . v65)(v2 . v66)(v3 . v67))) (P (I (I v64 (I v65 v66)) (I (I v67 v65) (I v64 (I v67 v66))))) NIL)
+(117 (resolve 115 (1) 116 ()) (or (not (P (I v64 (I v65 v66)))) (P (I (I v67 v65) (I v64 (I v67 v66))))) NIL)
+(118 (instantiate 117 ((v64 . v0)(v65 . v1)(v66 . v2)(v67 . v3))) (or (not (P (I v0 (I v1 v2)))) (P (I (I v3 v1) (I v0 (I v3 v2))))) NIL)
+(119 (instantiate 118 ((v0 . v64)(v1 . v65)(v2 . v65))) (or (not (P (I v64 (I v65 v65)))) (P (I (I v3 v65) (I v64 (I v3 v65))))) NIL)
+(120 (instantiate 114 ((v0 . v64)(v1 . v65))) (P (I v64 (I v65 v65))) NIL)
+(121 (resolve 119 (1) 120 ()) (P (I (I v3 v65) (I v64 (I v3 v65)))) NIL)
+(122 (instantiate 121 ((v3 . v0)(v64 . v2)(v65 . v1))) (P (I (I v0 v1) (I v2 (I v0 v1)))) (412))
+(123 (instantiate 6 ((v0 . (I v64 v65))(v1 . (I v66 (I v64 v65))))) (or (not (P (I (I v64 v65) (I v66 (I v64 v65))))) (or (not (P (I v64 v65))) (P (I v66 (I v64 v65))))) NIL)
+(124 (instantiate 122 ((v0 . v64)(v1 . v65)(v2 . v66))) (P (I (I v64 v65) (I v66 (I v64 v65)))) NIL)
+(125 (resolve 123 (1) 124 ()) (or (not (P (I v64 v65))) (P (I v66 (I v64 v65)))) NIL)
+(126 (instantiate 125 ((v64 . v0)(v65 . v1)(v66 . v2))) (or (not (P (I v0 v1))) (P (I v2 (I v0 v1)))) NIL)
+(127 (instantiate 126 ((v0 . (I (N v64) v64))(v1 . v64))) (or (not (P (I (I (N v64) v64) v64))) (P (I v2 (I (I (N v64) v64) v64)))) NIL)
+(128 (instantiate 9 ((v0 . v64))) (P (I (I (N v64) v64) v64)) NIL)
+(129 (resolve 127 (1) 128 ()) (P (I v2 (I (I (N v64) v64) v64))) NIL)
+(130 (instantiate 129 ((v2 . v0)(v64 . v1))) (P (I v0 (I (I (N v1) v1) v1))) (456))
+(131 (instantiate 6 ((v0 . (I v64 (I v65 v66)))(v1 . (I (I v67 v65) (I v64 (I v67 v66)))))) (or (not (P (I (I v64 (I v65 v66)) (I (I v67 v65) (I v64 (I v67 v66)))))) (or (not (P (I v64 (I v65 v66)))) (P (I (I v67 v65) (I v64 (I v67 v66)))))) NIL)
+(132 (instantiate 42 ((v0 . v64)(v1 . v65)(v2 . v66)(v3 . v67))) (P (I (I v64 (I v65 v66)) (I (I v67 v65) (I v64 (I v67 v66))))) NIL)
+(133 (resolve 131 (1) 132 ()) (or (not (P (I v64 (I v65 v66)))) (P (I (I v67 v65) (I v64 (I v67 v66))))) NIL)
+(134 (instantiate 133 ((v64 . v0)(v65 . v1)(v66 . v2)(v67 . v3))) (or (not (P (I v0 (I v1 v2)))) (P (I (I v3 v1) (I v0 (I v3 v2))))) NIL)
+(135 (instantiate 134 ((v0 . v64)(v1 . (I (N v65) v65))(v2 . v65))) (or (not (P (I v64 (I (I (N v65) v65) v65)))) (P (I (I v3 (I (N v65) v65)) (I v64 (I v3 v65))))) NIL)
+(136 (instantiate 130 ((v0 . v64)(v1 . v65))) (P (I v64 (I (I (N v65) v65) v65))) NIL)
+(137 (resolve 135 (1) 136 ()) (P (I (I v3 (I (N v65) v65)) (I v64 (I v3 v65)))) NIL)
+(138 (instantiate 137 ((v3 . v0)(v64 . v2)(v65 . v1))) (P (I (I v0 (I (N v1) v1)) (I v2 (I v0 v1)))) (538))
+(139 (instantiate 6 ((v0 . (I (I v64 (I (N v65) v66)) v67))(v1 . (I v65 v67)))) (or (not (P (I (I (I v64 (I (N v65) v66)) v67) (I v65 v67)))) (or (not (P (I (I v64 (I (N v65) v66)) v67))) (P (I v65 v67)))) NIL)
+(140 (instantiate 98 ((v0 . v64)(v1 . v65)(v2 . v66)(v3 . v67))) (P (I (I (I v64 (I (N v65) v66)) v67) (I v65 v67))) NIL)
+(141 (resolve 139 (1) 140 ()) (or (not (P (I (I v64 (I (N v65) v66)) v67))) (P (I v65 v67))) NIL)
+(142 (instantiate 141 ((v64 . v0)(v65 . v1)(v66 . v2)(v67 . v3))) (or (not (P (I (I v0 (I (N v1) v2)) v3))) (P (I v1 v3))) NIL)
+(143 (instantiate 142 ((v0 . v64)(v1 . v65)(v2 . v65)(v3 . (I v66 (I v64 v65))))) (or (not (P (I (I v64 (I (N v65) v65)) (I v66 (I v64 v65))))) (P (I v65 (I v66 (I v64 v65))))) NIL)
+(144 (instantiate 138 ((v0 . v64)(v1 . v65)(v2 . v66))) (P (I (I v64 (I (N v65) v65)) (I v66 (I v64 v65)))) NIL)
+(145 (resolve 143 (1) 144 ()) (P (I v65 (I v66 (I v64 v65)))) NIL)
+(146 (instantiate 145 ((v64 . v2)(v65 . v0)(v66 . v1))) (P (I v0 (I v1 (I v2 v0)))) (1315))
+(147 (instantiate 6 ((v0 . (I v64 (I (N v65) v65)))(v1 . (I v66 (I v64 v65))))) (or (not (P (I (I v64 (I (N v65) v65)) (I v66 (I v64 v65))))) (or (not (P (I v64 (I (N v65) v65)))) (P (I v66 (I v64 v65))))) NIL)
+(148 (instantiate 138 ((v0 . v64)(v1 . v65)(v2 . v66))) (P (I (I v64 (I (N v65) v65)) (I v66 (I v64 v65)))) NIL)
+(149 (resolve 147 (1) 148 ()) (or (not (P (I v64 (I (N v65) v65)))) (P (I v66 (I v64 v65)))) NIL)
+(150 (instantiate 149 ((v64 . v0)(v65 . v1)(v66 . v2))) (or (not (P (I v0 (I (N v1) v1)))) (P (I v2 (I v0 v1)))) NIL)
+(151 (instantiate 150 ((v0 . v64)(v1 . (I v66 v64)))) (or (not (P (I v64 (I (N (I v66 v64)) (I v66 v64))))) (P (I v2 (I v64 (I v66 v64))))) NIL)
+(152 (instantiate 146 ((v0 . v64)(v1 . (N (I v66 v64)))(v2 . v66))) (P (I v64 (I (N (I v66 v64)) (I v66 v64)))) NIL)
+(153 (resolve 151 (1) 152 ()) (P (I v2 (I v64 (I v66 v64)))) NIL)
+(154 (instantiate 153 ((v2 . v0)(v64 . v1)(v66 . v2))) (P (I v0 (I v1 (I v2 v1)))) (1341))
+(155 (instantiate 6 ((v0 . (I (N (I v64 v65)) (I v64 v65)))(v1 . (I (I v65 v66) (I v64 v66))))) (or (not (P (I (I (N (I v64 v65)) (I v64 v65)) (I (I v65 v66) (I v64 v66))))) (or (not (P (I (N (I v64 v65)) (I v64 v65)))) (P (I (I v65 v66) (I v64 v66))))) NIL)
+(156 (instantiate 50 ((v0 . v64)(v1 . v65)(v2 . v66))) (P (I (I (N (I v64 v65)) (I v64 v65)) (I (I v65 v66) (I v64 v66)))) NIL)
+(157 (resolve 155 (1) 156 ()) (or (not (P (I (N (I v64 v65)) (I v64 v65)))) (P (I (I v65 v66) (I v64 v66)))) NIL)
+(158 (instantiate 157 ((v64 . v0)(v65 . v1)(v66 . v2))) (or (not (P (I (N (I v0 v1)) (I v0 v1)))) (P (I (I v1 v2) (I v0 v2)))) NIL)
+(159 (instantiate 158 ((v0 . v65)(v1 . (I v66 v65)))) (or (not (P (I (N (I v65 (I v66 v65))) (I v65 (I v66 v65))))) (P (I (I (I v66 v65) v2) (I v65 v2)))) NIL)
+(160 (instantiate 154 ((v0 . (N (I v65 (I v66 v65))))(v1 . v65)(v2 . v66))) (P (I (N (I v65 (I v66 v65))) (I v65 (I v66 v65)))) NIL)
+(161 (resolve 159 (1) 160 ()) (P (I (I (I v66 v65) v2) (I v65 v2))) NIL)
+(162 (instantiate 161 ((v65 . v1)(v66 . v0))) (P (I (I (I v0 v1) v2) (I v1 v2))) (1423))
+(163 (instantiate 162 ((v0 . (SK1))(v1 . (SK2))(v2 . (SK3)))) (P (I (I (I (SK1) (SK2)) (SK3)) (I (SK2) (SK3)))) NIL)
+(164 (resolve 7 () 163 ()) false (1424))
+
+Search stopped by max_proofs option.
+
+)
+;; END OF PROOF OBJECT
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 89
+clauses generated           4909
+clauses kept                1423
+clauses forward subsumed    3491
+clauses back subsumed         27
+Kbytes malloced             3906
+
+----------- times (seconds) -----------
+user CPU time          0.09          (0 hr, 0 min, 0 sec)
+system CPU time        0.01          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8560 finished Mon Aug  2 15:31:05 2004

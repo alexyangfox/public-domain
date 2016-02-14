@@ -1,0 +1,20 @@
+% benchmark parameters -N6 -p
+%
+% Find an invertable lattice that is not an ortholattice.
+%
+
+include("finite-lattice").
+
+list(usable).
+
+% Complement and Invertability
+
+c(x) v x = 1.
+c(x) ^ x = 0.
+c(c(x)) = x.
+
+% Denial of compatibility
+
+c(A ^ B) != c(A) v c(B).
+
+end_of_list.

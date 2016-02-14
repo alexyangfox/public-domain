@@ -1,0 +1,414 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:31:05 2004
+The command was "../../bin/otter".  The process ID is 8600.
+
+set(auto).
+   dependent: set(auto1).
+   dependent: set(process_input).
+   dependent: clear(print_kept).
+   dependent: clear(print_new_demod).
+   dependent: clear(print_back_demod).
+   dependent: clear(print_back_sub).
+   dependent: set(control_memory).
+   dependent: assign(max_mem, 12000).
+   dependent: assign(pick_given_ratio, 4).
+   dependent: assign(stats_level, 1).
+   dependent: assign(max_seconds, 10800).
+set(build_proof_object_2).
+   dependent: set(order_history).
+clear(sigint_interact).
+assign(max_seconds,10).
+
+initial_proof_object(junk).
+(
+(1 (input) (or (not (WOLF V1)) (ANIMAL V1)) NIL)
+(2 (input) (or (not (FOX V2)) (ANIMAL V2)) NIL)
+(3 (input) (or (not (BIRD V3)) (ANIMAL V3)) NIL)
+(4 (input) (or (not (SNAIL V4)) (ANIMAL V4)) NIL)
+(5 (input) (or (not (GRAIN V5)) (PLANT V5)) NIL)
+(6 (input) (WOLF (SK1)) NIL)
+(7 (input) (FOX (SK2)) NIL)
+(8 (input) (BIRD (SK3)) NIL)
+(9 (input) (SNAIL (SK4)) NIL)
+(10 (input) (GRAIN (SK5)) NIL)
+(11 (input) (or (not (SNAIL V11)) (or (not (BIRD V12)) (SMALLER V11 V12))) NIL)
+(12 (input) (or (not (BIRD V13)) (or (not (FOX V14)) (SMALLER V13 V14))) NIL)
+(13 (input) (or (not (FOX V15)) (or (not (WOLF V16)) (SMALLER V15 V16))) NIL)
+(14 (input) (or (not (SNAIL V17)) (PLANT (SK6 V17))) NIL)
+(15 (input) (or (not (SNAIL V17)) (EATS V17 (SK6 V17))) NIL)
+(16 (input) (or (not (WOLF V19)) (or (not (FOX V20)) (not (EATS V19 V20)))) NIL)
+(17 (input) (or (not (WOLF V21)) (or (not (GRAIN V22)) (not (EATS V21 V22)))) NIL)
+(18 (input) (or (not (BIRD V23)) (or (not (SNAIL V24)) (not (EATS V23 V24)))) NIL)
+(19 (input) (or (not (ANIMAL V25)) (or (not (PLANT V26)) (or (EATS V25 V26) (or (not (ANIMAL V27)) (or (not (SMALLER V27 V25)) (or (not (PLANT V28)) (or (not (EATS V27 V28)) (EATS V25 V27)))))))) NIL)
+(20 (input) (or (not (ANIMAL V29)) (or (not (ANIMAL V30)) (or (not (EATS V29 V30)) (GRAIN (SK7 V29 V30))))) NIL)
+(21 (input) (or (not (ANIMAL V29)) (or (not (ANIMAL V30)) (or (not (EATS V29 V30)) (not (EATS V30 (SK7 V29 V30)))))) NIL)
+)
+0 [] -WOLF(x)|ANIMAL(x).
+0 [] -FOX(x)|ANIMAL(x).
+0 [] -BIRD(x)|ANIMAL(x).
+0 [] -SNAIL(x)|ANIMAL(x).
+0 [] -GRAIN(x)|PLANT(x).
+0 [] WOLF(SK1).
+0 [] FOX(SK2).
+0 [] BIRD(SK3).
+0 [] SNAIL(SK4).
+0 [] GRAIN(SK5).
+0 [] -SNAIL(x)| -BIRD(y)|SMALLER(x,y).
+0 [] -BIRD(x)| -FOX(y)|SMALLER(x,y).
+0 [] -FOX(x)| -WOLF(y)|SMALLER(x,y).
+0 [] -SNAIL(x)|PLANT(SK6(x)).
+0 [] -SNAIL(x)|EATS(x,SK6(x)).
+0 [] -WOLF(x)| -FOX(y)| -EATS(x,y).
+0 [] -WOLF(x)| -GRAIN(y)| -EATS(x,y).
+0 [] -BIRD(x)| -SNAIL(y)| -EATS(x,y).
+0 [] -ANIMAL(x)| -PLANT(y)|EATS(x,y)| -ANIMAL(z)| -SMALLER(z,x)| -PLANT(u)| -EATS(z,u)|EATS(x,z).
+0 [] -ANIMAL(x)| -ANIMAL(y)| -EATS(x,y)|GRAIN(SK7(x,y)).
+0 [] -ANIMAL(x)| -ANIMAL(y)| -EATS(x,y)| -EATS(y,SK7(x,y)).
+end_of_list.
+
+SCAN INPUT: prop=0, horn=0, equality=0, symmetry=0, max_lits=8.
+
+This is a non-Horn set without equality.  The strategy will
+be ordered hyper_res, unit deletion, and factoring, with
+satellites in sos and with nuclei in usable.
+
+   dependent: set(hyper_res).
+   dependent: set(factor).
+   dependent: set(unit_deletion).
+
+------------> process usable:
+** KEPT (pick-wt=4): 1 [] -WOLF(x)|ANIMAL(x).
+** KEPT (pick-wt=4): 2 [] -FOX(x)|ANIMAL(x).
+** KEPT (pick-wt=4): 3 [] -BIRD(x)|ANIMAL(x).
+** KEPT (pick-wt=4): 4 [] -SNAIL(x)|ANIMAL(x).
+** KEPT (pick-wt=4): 5 [] -GRAIN(x)|PLANT(x).
+** KEPT (pick-wt=7): 6 [] -SNAIL(x)| -BIRD(y)|SMALLER(x,y).
+** KEPT (pick-wt=7): 7 [] -BIRD(x)| -FOX(y)|SMALLER(x,y).
+** KEPT (pick-wt=7): 8 [] -FOX(x)| -WOLF(y)|SMALLER(x,y).
+** KEPT (pick-wt=5): 9 [] -SNAIL(x)|PLANT(SK6(x)).
+** KEPT (pick-wt=6): 10 [] -SNAIL(x)|EATS(x,SK6(x)).
+** KEPT (pick-wt=7): 11 [] -WOLF(x)| -FOX(y)| -EATS(x,y).
+** KEPT (pick-wt=7): 12 [] -WOLF(x)| -GRAIN(y)| -EATS(x,y).
+** KEPT (pick-wt=7): 13 [] -BIRD(x)| -SNAIL(y)| -EATS(x,y).
+** KEPT (pick-wt=20): 14 [] -ANIMAL(x)| -PLANT(y)|EATS(x,y)| -ANIMAL(z)| -SMALLER(z,x)| -PLANT(u)| -EATS(z,u)|EATS(x,z).
+** KEPT (pick-wt=11): 15 [] -ANIMAL(x)| -ANIMAL(y)| -EATS(x,y)|GRAIN(SK7(x,y)).
+** KEPT (pick-wt=12): 16 [] -ANIMAL(x)| -ANIMAL(y)| -EATS(x,y)| -EATS(y,SK7(x,y)).
+
+------------> process sos:
+** KEPT (pick-wt=2): 24 [] WOLF(SK1).
+** KEPT (pick-wt=2): 25 [] FOX(SK2).
+** KEPT (pick-wt=2): 26 [] BIRD(SK3).
+** KEPT (pick-wt=2): 27 [] SNAIL(SK4).
+** KEPT (pick-wt=2): 28 [] GRAIN(SK5).
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=2) 24 [] WOLF(SK1).
+
+given clause #2: (wt=2) 25 [] FOX(SK2).
+
+given clause #3: (wt=2) 26 [] BIRD(SK3).
+
+given clause #4: (wt=2) 27 [] SNAIL(SK4).
+
+given clause #5: (wt=2) 28 [] GRAIN(SK5).
+
+given clause #6: (wt=2) 29 [hyper,1,24.1] ANIMAL(SK1).
+
+given clause #7: (wt=2) 31 [hyper,2,25.1] ANIMAL(SK2).
+
+given clause #8: (wt=2) 33 [hyper,3,26.1] ANIMAL(SK3).
+
+given clause #9: (wt=2) 37 [hyper,4,27.1] ANIMAL(SK4).
+
+given clause #10: (wt=2) 38 [hyper,5,28.1] PLANT(SK5).
+
+given clause #11: (wt=3) 30 [hyper,8,25.1,24.1] SMALLER(SK2,SK1).
+
+given clause #12: (wt=3) 32 [hyper,7,26.1,25.1] SMALLER(SK3,SK2).
+
+given clause #13: (wt=3) 35 [hyper,9,27.1] PLANT(SK6(SK4)).
+
+given clause #14: (wt=3) 36 [hyper,6,27.1,26.1] SMALLER(SK4,SK3).
+
+given clause #15: (wt=4) 34 [hyper,10,27.1] EATS(SK4,SK6(SK4)).
+
+given clause #16: (wt=7) 39 [hyper,18,33.1,35.1,37.1,36.1,34.1] EATS(SK3,SK6(SK4))|EATS(SK3,SK4).
+
+given clause #17: (wt=4) 44 [hyper,13,26.1,27.1,39.2] EATS(SK3,SK6(SK4)).
+
+given clause #18: (wt=6) 40 [hyper,14,33.1,38.1,37.1,36.1,35.1,34.1] EATS(SK3,SK5)|EATS(SK3,SK4).
+
+given clause #19: (wt=3) 48 [hyper,13,26.1,27.1,40.2] EATS(SK3,SK5).
+
+given clause #20: (wt=6) 46 [hyper,14,31.1,38.1,33.1,32.1,35.1,44.1] EATS(SK2,SK5)|EATS(SK2,SK3).
+
+given clause #21: (wt=7) 45 [hyper,18,31.1,35.1,33.1,32.1,44.1] EATS(SK2,SK6(SK4))|EATS(SK2,SK3).
+
+given clause #22: (wt=7) 51 [hyper,15,31.1,33.1,46.2] EATS(SK2,SK5)|GRAIN(SK7(SK2,SK3)).
+
+given clause #23: (wt=7) 53 [hyper,5,51.2] EATS(SK2,SK5)|PLANT(SK7(SK2,SK3)).
+
+given clause #24: (wt=8) 52 [hyper,15,31.1,33.1,45.2] EATS(SK2,SK6(SK4))|GRAIN(SK7(SK2,SK3)).
+
+given clause #25: (wt=8) 55 [hyper,5,52.2] EATS(SK2,SK6(SK4))|PLANT(SK7(SK2,SK3)).
+
+given clause #26: (wt=9) 49 [hyper,18,29.1,38.1,31.1,30.1,46.1] EATS(SK2,SK3)|EATS(SK1,SK5)|EATS(SK1,SK2).
+
+given clause #27: (wt=6) 58 [hyper,12,24.1,28.1,49.2] EATS(SK2,SK3)|EATS(SK1,SK2).
+
+given clause #28: (wt=3) 63 [hyper,11,24.1,25.1,58.2] EATS(SK2,SK3).
+
+given clause #29: (wt=4) 64 [hyper,15,31.1,33.1,63.1] GRAIN(SK7(SK2,SK3)).
+
+given clause #30: (wt=4) 65 [hyper,5,64.1] PLANT(SK7(SK2,SK3)).
+
+given clause #31: (wt=8) 66 [hyper,14,33.1,65.1,37.1,36.1,35.1,34.1] EATS(SK3,SK7(SK2,SK3))|EATS(SK3,SK4).
+
+given clause #32: (wt=3) 67 [hyper,16,31.1,33.1,63.1,66.1] EATS(SK3,SK4).
+
+-------- PROOF -------- 
+
+-----> EMPTY CLAUSE at   0.01 sec ----> 71 [hyper,13,26.1,27.1,67.1] $F.
+
+Length of proof is 21.  Level of proof is 11.
+
+---------------- PROOF ----------------
+
+1 [] -WOLF(x)|ANIMAL(x).
+2 [] -FOX(x)|ANIMAL(x).
+3 [] -BIRD(x)|ANIMAL(x).
+4 [] -SNAIL(x)|ANIMAL(x).
+5 [] -GRAIN(x)|PLANT(x).
+6 [] -SNAIL(x)| -BIRD(y)|SMALLER(x,y).
+7 [] -BIRD(x)| -FOX(y)|SMALLER(x,y).
+8 [] -FOX(x)| -WOLF(y)|SMALLER(x,y).
+9 [] -SNAIL(x)|PLANT(SK6(x)).
+10 [] -SNAIL(x)|EATS(x,SK6(x)).
+11 [] -WOLF(x)| -FOX(y)| -EATS(x,y).
+12 [] -WOLF(x)| -GRAIN(y)| -EATS(x,y).
+13 [] -BIRD(x)| -SNAIL(y)| -EATS(x,y).
+14 [] -ANIMAL(x)| -PLANT(y)|EATS(x,y)| -ANIMAL(z)| -SMALLER(z,x)| -PLANT(u)| -EATS(z,u)|EATS(x,z).
+15 [] -ANIMAL(x)| -ANIMAL(y)| -EATS(x,y)|GRAIN(SK7(x,y)).
+16 [] -ANIMAL(x)| -ANIMAL(y)| -EATS(x,y)| -EATS(y,SK7(x,y)).
+18 [factor,14.2.6] -ANIMAL(x)| -PLANT(y)|EATS(x,y)| -ANIMAL(z)| -SMALLER(z,x)| -EATS(z,y)|EATS(x,z).
+24 [] WOLF(SK1).
+25 [] FOX(SK2).
+26 [] BIRD(SK3).
+27 [] SNAIL(SK4).
+28 [] GRAIN(SK5).
+29 [hyper,1,24.1] ANIMAL(SK1).
+30 [hyper,8,25.1,24.1] SMALLER(SK2,SK1).
+31 [hyper,2,25.1] ANIMAL(SK2).
+32 [hyper,7,26.1,25.1] SMALLER(SK3,SK2).
+33 [hyper,3,26.1] ANIMAL(SK3).
+34 [hyper,10,27.1] EATS(SK4,SK6(SK4)).
+35 [hyper,9,27.1] PLANT(SK6(SK4)).
+36 [hyper,6,27.1,26.1] SMALLER(SK4,SK3).
+37 [hyper,4,27.1] ANIMAL(SK4).
+38 [hyper,5,28.1] PLANT(SK5).
+39 [hyper,18,33.1,35.1,37.1,36.1,34.1] EATS(SK3,SK6(SK4))|EATS(SK3,SK4).
+44 [hyper,13,26.1,27.1,39.2] EATS(SK3,SK6(SK4)).
+46 [hyper,14,31.1,38.1,33.1,32.1,35.1,44.1] EATS(SK2,SK5)|EATS(SK2,SK3).
+49 [hyper,18,29.1,38.1,31.1,30.1,46.1] EATS(SK2,SK3)|EATS(SK1,SK5)|EATS(SK1,SK2).
+58 [hyper,12,24.1,28.1,49.2] EATS(SK2,SK3)|EATS(SK1,SK2).
+63 [hyper,11,24.1,25.1,58.2] EATS(SK2,SK3).
+64 [hyper,15,31.1,33.1,63.1] GRAIN(SK7(SK2,SK3)).
+65 [hyper,5,64.1] PLANT(SK7(SK2,SK3)).
+66 [hyper,14,33.1,65.1,37.1,36.1,35.1,34.1] EATS(SK3,SK7(SK2,SK3))|EATS(SK3,SK4).
+67 [hyper,16,31.1,33.1,63.1,66.1] EATS(SK3,SK4).
+71 [hyper,13,26.1,27.1,67.1] $F.
+
+------------ end of proof -------------
+
+
+;; BEGINNING OF PROOF OBJECT
+(
+(1 (input) (or (not (WOLF V1)) (ANIMAL V1)) NIL)
+(2 (input) (or (not (FOX V2)) (ANIMAL V2)) NIL)
+(3 (input) (or (not (BIRD V3)) (ANIMAL V3)) NIL)
+(4 (input) (or (not (SNAIL V4)) (ANIMAL V4)) NIL)
+(5 (input) (or (not (GRAIN V5)) (PLANT V5)) NIL)
+(6 (input) (WOLF (SK1)) NIL)
+(7 (input) (FOX (SK2)) NIL)
+(8 (input) (BIRD (SK3)) NIL)
+(9 (input) (SNAIL (SK4)) NIL)
+(10 (input) (GRAIN (SK5)) NIL)
+(11 (input) (or (not (SNAIL V11)) (or (not (BIRD V12)) (SMALLER V11 V12))) NIL)
+(12 (input) (or (not (BIRD V13)) (or (not (FOX V14)) (SMALLER V13 V14))) NIL)
+(13 (input) (or (not (FOX V15)) (or (not (WOLF V16)) (SMALLER V15 V16))) NIL)
+(14 (input) (or (not (SNAIL V17)) (PLANT (SK6 V17))) NIL)
+(15 (input) (or (not (SNAIL V17)) (EATS V17 (SK6 V17))) NIL)
+(16 (input) (or (not (WOLF V19)) (or (not (FOX V20)) (not (EATS V19 V20)))) NIL)
+(17 (input) (or (not (WOLF V21)) (or (not (GRAIN V22)) (not (EATS V21 V22)))) NIL)
+(18 (input) (or (not (BIRD V23)) (or (not (SNAIL V24)) (not (EATS V23 V24)))) NIL)
+(19 (input) (or (not (ANIMAL V25)) (or (not (PLANT V26)) (or (EATS V25 V26) (or (not (ANIMAL V27)) (or (not (SMALLER V27 V25)) (or (not (PLANT V28)) (or (not (EATS V27 V28)) (EATS V25 V27)))))))) NIL)
+(20 (input) (or (not (ANIMAL V29)) (or (not (ANIMAL V30)) (or (not (EATS V29 V30)) (GRAIN (SK7 V29 V30))))) NIL)
+(21 (input) (or (not (ANIMAL V29)) (or (not (ANIMAL V30)) (or (not (EATS V29 V30)) (not (EATS V30 (SK7 V29 V30)))))) NIL)
+(22 (instantiate 1 ((V1 . v0))) (or (not (WOLF v0)) (ANIMAL v0)) (1))
+(23 (instantiate 2 ((V2 . v0))) (or (not (FOX v0)) (ANIMAL v0)) (2))
+(24 (instantiate 3 ((V3 . v0))) (or (not (BIRD v0)) (ANIMAL v0)) (3))
+(25 (instantiate 4 ((V4 . v0))) (or (not (SNAIL v0)) (ANIMAL v0)) (4))
+(26 (instantiate 5 ((V5 . v0))) (or (not (GRAIN v0)) (PLANT v0)) (5))
+(27 (instantiate 11 ((V11 . v0)(V12 . v1))) (or (not (SNAIL v0)) (or (not (BIRD v1)) (SMALLER v0 v1))) (6))
+(28 (instantiate 12 ((V13 . v0)(V14 . v1))) (or (not (BIRD v0)) (or (not (FOX v1)) (SMALLER v0 v1))) (7))
+(29 (instantiate 13 ((V15 . v0)(V16 . v1))) (or (not (FOX v0)) (or (not (WOLF v1)) (SMALLER v0 v1))) (8))
+(30 (instantiate 14 ((V17 . v0))) (or (not (SNAIL v0)) (PLANT (SK6 v0))) (9))
+(31 (instantiate 15 ((V17 . v0))) (or (not (SNAIL v0)) (EATS v0 (SK6 v0))) (10))
+(32 (instantiate 16 ((V19 . v0)(V20 . v1))) (or (not (WOLF v0)) (or (not (FOX v1)) (not (EATS v0 v1)))) (11))
+(33 (instantiate 17 ((V21 . v0)(V22 . v1))) (or (not (WOLF v0)) (or (not (GRAIN v1)) (not (EATS v0 v1)))) (12))
+(34 (instantiate 18 ((V23 . v0)(V24 . v1))) (or (not (BIRD v0)) (or (not (SNAIL v1)) (not (EATS v0 v1)))) (13))
+(35 (instantiate 19 ((V25 . v0)(V26 . v1)(V27 . v2)(V28 . v3))) (or (not (ANIMAL v0)) (or (not (PLANT v1)) (or (EATS v0 v1) (or (not (ANIMAL v2)) (or (not (SMALLER v2 v0)) (or (not (PLANT v3)) (or (not (EATS v2 v3)) (EATS v0 v2)))))))) (14))
+(36 (instantiate 20 ((V29 . v0)(V30 . v1))) (or (not (ANIMAL v0)) (or (not (ANIMAL v1)) (or (not (EATS v0 v1)) (GRAIN (SK7 v0 v1))))) (15))
+(37 (instantiate 21 ((V29 . v0)(V30 . v1))) (or (not (ANIMAL v0)) (or (not (ANIMAL v1)) (or (not (EATS v0 v1)) (not (EATS v1 (SK7 v0 v1)))))) (16))
+(38 (instantiate 35 ((v1 . v3))) (or (not (ANIMAL v0)) (or (not (PLANT v3)) (or (EATS v0 v3) (or (not (ANIMAL v2)) (or (not (SMALLER v2 v0)) (or (not (PLANT v3)) (or (not (EATS v2 v3)) (EATS v0 v2)))))))) NIL)
+(39 (propositional 38) (or (not (ANIMAL v0)) (or (not (PLANT v3)) (or (EATS v0 v3) (or (not (ANIMAL v2)) (or (not (SMALLER v2 v0)) (or (not (EATS v2 v3)) (EATS v0 v2))))))) NIL)
+(40 (instantiate 39 ((v3 . v1))) (or (not (ANIMAL v0)) (or (not (PLANT v1)) (or (EATS v0 v1) (or (not (ANIMAL v2)) (or (not (SMALLER v2 v0)) (or (not (EATS v2 v1)) (EATS v0 v2))))))) (18))
+(41 (instantiate 6 ()) (WOLF (SK1)) (24))
+(42 (instantiate 7 ()) (FOX (SK2)) (25))
+(43 (instantiate 8 ()) (BIRD (SK3)) (26))
+(44 (instantiate 9 ()) (SNAIL (SK4)) (27))
+(45 (instantiate 10 ()) (GRAIN (SK5)) (28))
+(46 (instantiate 22 ((v0 . (SK1)))) (or (not (WOLF (SK1))) (ANIMAL (SK1))) NIL)
+(47 (resolve 46 (1) 41 ()) (ANIMAL (SK1)) (29))
+(48 (instantiate 29 ((v0 . (SK2)))) (or (not (FOX (SK2))) (or (not (WOLF v1)) (SMALLER (SK2) v1))) NIL)
+(49 (resolve 48 (1) 42 ()) (or (not (WOLF v1)) (SMALLER (SK2) v1)) NIL)
+(50 (instantiate 49 ((v1 . v0))) (or (not (WOLF v0)) (SMALLER (SK2) v0)) NIL)
+(51 (instantiate 50 ((v0 . (SK1)))) (or (not (WOLF (SK1))) (SMALLER (SK2) (SK1))) NIL)
+(52 (resolve 51 (1) 41 ()) (SMALLER (SK2) (SK1)) (30))
+(53 (instantiate 23 ((v0 . (SK2)))) (or (not (FOX (SK2))) (ANIMAL (SK2))) NIL)
+(54 (resolve 53 (1) 42 ()) (ANIMAL (SK2)) (31))
+(55 (instantiate 28 ((v0 . (SK3)))) (or (not (BIRD (SK3))) (or (not (FOX v1)) (SMALLER (SK3) v1))) NIL)
+(56 (resolve 55 (1) 43 ()) (or (not (FOX v1)) (SMALLER (SK3) v1)) NIL)
+(57 (instantiate 56 ((v1 . v0))) (or (not (FOX v0)) (SMALLER (SK3) v0)) NIL)
+(58 (instantiate 57 ((v0 . (SK2)))) (or (not (FOX (SK2))) (SMALLER (SK3) (SK2))) NIL)
+(59 (resolve 58 (1) 42 ()) (SMALLER (SK3) (SK2)) (32))
+(60 (instantiate 24 ((v0 . (SK3)))) (or (not (BIRD (SK3))) (ANIMAL (SK3))) NIL)
+(61 (resolve 60 (1) 43 ()) (ANIMAL (SK3)) (33))
+(62 (instantiate 31 ((v0 . (SK4)))) (or (not (SNAIL (SK4))) (EATS (SK4) (SK6 (SK4)))) NIL)
+(63 (resolve 62 (1) 44 ()) (EATS (SK4) (SK6 (SK4))) (34))
+(64 (instantiate 30 ((v0 . (SK4)))) (or (not (SNAIL (SK4))) (PLANT (SK6 (SK4)))) NIL)
+(65 (resolve 64 (1) 44 ()) (PLANT (SK6 (SK4))) (35))
+(66 (instantiate 27 ((v0 . (SK4)))) (or (not (SNAIL (SK4))) (or (not (BIRD v1)) (SMALLER (SK4) v1))) NIL)
+(67 (resolve 66 (1) 44 ()) (or (not (BIRD v1)) (SMALLER (SK4) v1)) NIL)
+(68 (instantiate 67 ((v1 . v0))) (or (not (BIRD v0)) (SMALLER (SK4) v0)) NIL)
+(69 (instantiate 68 ((v0 . (SK3)))) (or (not (BIRD (SK3))) (SMALLER (SK4) (SK3))) NIL)
+(70 (resolve 69 (1) 43 ()) (SMALLER (SK4) (SK3)) (36))
+(71 (instantiate 25 ((v0 . (SK4)))) (or (not (SNAIL (SK4))) (ANIMAL (SK4))) NIL)
+(72 (resolve 71 (1) 44 ()) (ANIMAL (SK4)) (37))
+(73 (instantiate 26 ((v0 . (SK5)))) (or (not (GRAIN (SK5))) (PLANT (SK5))) NIL)
+(74 (resolve 73 (1) 45 ()) (PLANT (SK5)) (38))
+(75 (instantiate 40 ((v0 . (SK3)))) (or (not (ANIMAL (SK3))) (or (not (PLANT v1)) (or (EATS (SK3) v1) (or (not (ANIMAL v2)) (or (not (SMALLER v2 (SK3))) (or (not (EATS v2 v1)) (EATS (SK3) v2))))))) NIL)
+(76 (resolve 75 (1) 61 ()) (or (not (PLANT v1)) (or (EATS (SK3) v1) (or (not (ANIMAL v2)) (or (not (SMALLER v2 (SK3))) (or (not (EATS v2 v1)) (EATS (SK3) v2)))))) NIL)
+(77 (instantiate 76 ((v1 . v0)(v2 . v1))) (or (not (PLANT v0)) (or (EATS (SK3) v0) (or (not (ANIMAL v1)) (or (not (SMALLER v1 (SK3))) (or (not (EATS v1 v0)) (EATS (SK3) v1)))))) NIL)
+(78 (instantiate 77 ((v0 . (SK6 (SK4))))) (or (not (PLANT (SK6 (SK4)))) (or (EATS (SK3) (SK6 (SK4))) (or (not (ANIMAL v1)) (or (not (SMALLER v1 (SK3))) (or (not (EATS v1 (SK6 (SK4)))) (EATS (SK3) v1)))))) NIL)
+(79 (resolve 78 (1) 65 ()) (or (EATS (SK3) (SK6 (SK4))) (or (not (ANIMAL v1)) (or (not (SMALLER v1 (SK3))) (or (not (EATS v1 (SK6 (SK4)))) (EATS (SK3) v1))))) NIL)
+(80 (instantiate 79 ((v1 . v0))) (or (EATS (SK3) (SK6 (SK4))) (or (not (ANIMAL v0)) (or (not (SMALLER v0 (SK3))) (or (not (EATS v0 (SK6 (SK4)))) (EATS (SK3) v0))))) NIL)
+(81 (instantiate 80 ((v0 . (SK4)))) (or (EATS (SK3) (SK6 (SK4))) (or (not (ANIMAL (SK4))) (or (not (SMALLER (SK4) (SK3))) (or (not (EATS (SK4) (SK6 (SK4)))) (EATS (SK3) (SK4)))))) NIL)
+(82 (resolve 81 (2 1) 72 ()) (or (EATS (SK3) (SK6 (SK4))) (or (not (SMALLER (SK4) (SK3))) (or (not (EATS (SK4) (SK6 (SK4)))) (EATS (SK3) (SK4))))) NIL)
+(83 (resolve 82 (2 1) 70 ()) (or (EATS (SK3) (SK6 (SK4))) (or (not (EATS (SK4) (SK6 (SK4)))) (EATS (SK3) (SK4)))) NIL)
+(84 (resolve 83 (2 1) 63 ()) (or (EATS (SK3) (SK6 (SK4))) (EATS (SK3) (SK4))) (39))
+(85 (instantiate 34 ((v0 . (SK3)))) (or (not (BIRD (SK3))) (or (not (SNAIL v1)) (not (EATS (SK3) v1)))) NIL)
+(86 (resolve 85 (1) 43 ()) (or (not (SNAIL v1)) (not (EATS (SK3) v1))) NIL)
+(87 (instantiate 86 ((v1 . v0))) (or (not (SNAIL v0)) (not (EATS (SK3) v0))) NIL)
+(88 (instantiate 87 ((v0 . (SK4)))) (or (not (SNAIL (SK4))) (not (EATS (SK3) (SK4)))) NIL)
+(89 (resolve 88 (1) 44 ()) (not (EATS (SK3) (SK4))) NIL)
+(90 (resolve 89 () 84 (2)) (EATS (SK3) (SK6 (SK4))) (44))
+(91 (instantiate 35 ((v0 . (SK2)))) (or (not (ANIMAL (SK2))) (or (not (PLANT v1)) (or (EATS (SK2) v1) (or (not (ANIMAL v2)) (or (not (SMALLER v2 (SK2))) (or (not (PLANT v3)) (or (not (EATS v2 v3)) (EATS (SK2) v2)))))))) NIL)
+(92 (resolve 91 (1) 54 ()) (or (not (PLANT v1)) (or (EATS (SK2) v1) (or (not (ANIMAL v2)) (or (not (SMALLER v2 (SK2))) (or (not (PLANT v3)) (or (not (EATS v2 v3)) (EATS (SK2) v2))))))) NIL)
+(93 (instantiate 92 ((v1 . v0)(v2 . v1)(v3 . v2))) (or (not (PLANT v0)) (or (EATS (SK2) v0) (or (not (ANIMAL v1)) (or (not (SMALLER v1 (SK2))) (or (not (PLANT v2)) (or (not (EATS v1 v2)) (EATS (SK2) v1))))))) NIL)
+(94 (instantiate 93 ((v0 . (SK5)))) (or (not (PLANT (SK5))) (or (EATS (SK2) (SK5)) (or (not (ANIMAL v1)) (or (not (SMALLER v1 (SK2))) (or (not (PLANT v2)) (or (not (EATS v1 v2)) (EATS (SK2) v1))))))) NIL)
+(95 (resolve 94 (1) 74 ()) (or (EATS (SK2) (SK5)) (or (not (ANIMAL v1)) (or (not (SMALLER v1 (SK2))) (or (not (PLANT v2)) (or (not (EATS v1 v2)) (EATS (SK2) v1)))))) NIL)
+(96 (instantiate 95 ((v1 . v0)(v2 . v1))) (or (EATS (SK2) (SK5)) (or (not (ANIMAL v0)) (or (not (SMALLER v0 (SK2))) (or (not (PLANT v1)) (or (not (EATS v0 v1)) (EATS (SK2) v0)))))) NIL)
+(97 (instantiate 96 ((v0 . (SK3)))) (or (EATS (SK2) (SK5)) (or (not (ANIMAL (SK3))) (or (not (SMALLER (SK3) (SK2))) (or (not (PLANT v1)) (or (not (EATS (SK3) v1)) (EATS (SK2) (SK3))))))) NIL)
+(98 (resolve 97 (2 1) 61 ()) (or (EATS (SK2) (SK5)) (or (not (SMALLER (SK3) (SK2))) (or (not (PLANT v1)) (or (not (EATS (SK3) v1)) (EATS (SK2) (SK3)))))) NIL)
+(99 (instantiate 98 ((v1 . v0))) (or (EATS (SK2) (SK5)) (or (not (SMALLER (SK3) (SK2))) (or (not (PLANT v0)) (or (not (EATS (SK3) v0)) (EATS (SK2) (SK3)))))) NIL)
+(100 (resolve 99 (2 1) 59 ()) (or (EATS (SK2) (SK5)) (or (not (PLANT v0)) (or (not (EATS (SK3) v0)) (EATS (SK2) (SK3))))) NIL)
+(101 (instantiate 100 ((v0 . (SK6 (SK4))))) (or (EATS (SK2) (SK5)) (or (not (PLANT (SK6 (SK4)))) (or (not (EATS (SK3) (SK6 (SK4)))) (EATS (SK2) (SK3))))) NIL)
+(102 (resolve 101 (2 1) 65 ()) (or (EATS (SK2) (SK5)) (or (not (EATS (SK3) (SK6 (SK4)))) (EATS (SK2) (SK3)))) NIL)
+(103 (resolve 102 (2 1) 90 ()) (or (EATS (SK2) (SK5)) (EATS (SK2) (SK3))) (46))
+(104 (instantiate 40 ((v0 . (SK1)))) (or (not (ANIMAL (SK1))) (or (not (PLANT v1)) (or (EATS (SK1) v1) (or (not (ANIMAL v2)) (or (not (SMALLER v2 (SK1))) (or (not (EATS v2 v1)) (EATS (SK1) v2))))))) NIL)
+(105 (resolve 104 (1) 47 ()) (or (not (PLANT v1)) (or (EATS (SK1) v1) (or (not (ANIMAL v2)) (or (not (SMALLER v2 (SK1))) (or (not (EATS v2 v1)) (EATS (SK1) v2)))))) NIL)
+(106 (instantiate 105 ((v1 . v0)(v2 . v1))) (or (not (PLANT v0)) (or (EATS (SK1) v0) (or (not (ANIMAL v1)) (or (not (SMALLER v1 (SK1))) (or (not (EATS v1 v0)) (EATS (SK1) v1)))))) NIL)
+(107 (instantiate 106 ((v0 . (SK5)))) (or (not (PLANT (SK5))) (or (EATS (SK1) (SK5)) (or (not (ANIMAL v1)) (or (not (SMALLER v1 (SK1))) (or (not (EATS v1 (SK5))) (EATS (SK1) v1)))))) NIL)
+(108 (resolve 107 (1) 74 ()) (or (EATS (SK1) (SK5)) (or (not (ANIMAL v1)) (or (not (SMALLER v1 (SK1))) (or (not (EATS v1 (SK5))) (EATS (SK1) v1))))) NIL)
+(109 (instantiate 108 ((v1 . v0))) (or (EATS (SK1) (SK5)) (or (not (ANIMAL v0)) (or (not (SMALLER v0 (SK1))) (or (not (EATS v0 (SK5))) (EATS (SK1) v0))))) NIL)
+(110 (instantiate 109 ((v0 . (SK2)))) (or (EATS (SK1) (SK5)) (or (not (ANIMAL (SK2))) (or (not (SMALLER (SK2) (SK1))) (or (not (EATS (SK2) (SK5))) (EATS (SK1) (SK2)))))) NIL)
+(111 (resolve 110 (2 1) 54 ()) (or (EATS (SK1) (SK5)) (or (not (SMALLER (SK2) (SK1))) (or (not (EATS (SK2) (SK5))) (EATS (SK1) (SK2))))) NIL)
+(112 (resolve 111 (2 1) 52 ()) (or (EATS (SK1) (SK5)) (or (not (EATS (SK2) (SK5))) (EATS (SK1) (SK2)))) NIL)
+(113 (resolve 112 (2 1) 103 (1)) (or (EATS (SK1) (SK5)) (or (EATS (SK1) (SK2)) (EATS (SK2) (SK3)))) (49))
+(114 (instantiate 33 ((v0 . (SK1)))) (or (not (WOLF (SK1))) (or (not (GRAIN v1)) (not (EATS (SK1) v1)))) NIL)
+(115 (resolve 114 (1) 41 ()) (or (not (GRAIN v1)) (not (EATS (SK1) v1))) NIL)
+(116 (instantiate 115 ((v1 . v0))) (or (not (GRAIN v0)) (not (EATS (SK1) v0))) NIL)
+(117 (instantiate 116 ((v0 . (SK5)))) (or (not (GRAIN (SK5))) (not (EATS (SK1) (SK5)))) NIL)
+(118 (resolve 117 (1) 45 ()) (not (EATS (SK1) (SK5))) NIL)
+(119 (resolve 118 () 113 (1)) (or (EATS (SK1) (SK2)) (EATS (SK2) (SK3))) (58))
+(120 (instantiate 32 ((v0 . (SK1)))) (or (not (WOLF (SK1))) (or (not (FOX v1)) (not (EATS (SK1) v1)))) NIL)
+(121 (resolve 120 (1) 41 ()) (or (not (FOX v1)) (not (EATS (SK1) v1))) NIL)
+(122 (instantiate 121 ((v1 . v0))) (or (not (FOX v0)) (not (EATS (SK1) v0))) NIL)
+(123 (instantiate 122 ((v0 . (SK2)))) (or (not (FOX (SK2))) (not (EATS (SK1) (SK2)))) NIL)
+(124 (resolve 123 (1) 42 ()) (not (EATS (SK1) (SK2))) NIL)
+(125 (resolve 124 () 119 (1)) (EATS (SK2) (SK3)) (63))
+(126 (instantiate 36 ((v0 . (SK2)))) (or (not (ANIMAL (SK2))) (or (not (ANIMAL v1)) (or (not (EATS (SK2) v1)) (GRAIN (SK7 (SK2) v1))))) NIL)
+(127 (resolve 126 (1) 54 ()) (or (not (ANIMAL v1)) (or (not (EATS (SK2) v1)) (GRAIN (SK7 (SK2) v1)))) NIL)
+(128 (instantiate 127 ((v1 . v0))) (or (not (ANIMAL v0)) (or (not (EATS (SK2) v0)) (GRAIN (SK7 (SK2) v0)))) NIL)
+(129 (instantiate 128 ((v0 . (SK3)))) (or (not (ANIMAL (SK3))) (or (not (EATS (SK2) (SK3))) (GRAIN (SK7 (SK2) (SK3))))) NIL)
+(130 (resolve 129 (1) 61 ()) (or (not (EATS (SK2) (SK3))) (GRAIN (SK7 (SK2) (SK3)))) NIL)
+(131 (resolve 130 (1) 125 ()) (GRAIN (SK7 (SK2) (SK3))) (64))
+(132 (instantiate 26 ((v0 . (SK7 (SK2) (SK3))))) (or (not (GRAIN (SK7 (SK2) (SK3)))) (PLANT (SK7 (SK2) (SK3)))) NIL)
+(133 (resolve 132 (1) 131 ()) (PLANT (SK7 (SK2) (SK3))) (65))
+(134 (instantiate 35 ((v0 . (SK3)))) (or (not (ANIMAL (SK3))) (or (not (PLANT v1)) (or (EATS (SK3) v1) (or (not (ANIMAL v2)) (or (not (SMALLER v2 (SK3))) (or (not (PLANT v3)) (or (not (EATS v2 v3)) (EATS (SK3) v2)))))))) NIL)
+(135 (resolve 134 (1) 61 ()) (or (not (PLANT v1)) (or (EATS (SK3) v1) (or (not (ANIMAL v2)) (or (not (SMALLER v2 (SK3))) (or (not (PLANT v3)) (or (not (EATS v2 v3)) (EATS (SK3) v2))))))) NIL)
+(136 (instantiate 135 ((v1 . v0)(v2 . v1)(v3 . v2))) (or (not (PLANT v0)) (or (EATS (SK3) v0) (or (not (ANIMAL v1)) (or (not (SMALLER v1 (SK3))) (or (not (PLANT v2)) (or (not (EATS v1 v2)) (EATS (SK3) v1))))))) NIL)
+(137 (instantiate 136 ((v0 . (SK7 (SK2) (SK3))))) (or (not (PLANT (SK7 (SK2) (SK3)))) (or (EATS (SK3) (SK7 (SK2) (SK3))) (or (not (ANIMAL v1)) (or (not (SMALLER v1 (SK3))) (or (not (PLANT v2)) (or (not (EATS v1 v2)) (EATS (SK3) v1))))))) NIL)
+(138 (resolve 137 (1) 133 ()) (or (EATS (SK3) (SK7 (SK2) (SK3))) (or (not (ANIMAL v1)) (or (not (SMALLER v1 (SK3))) (or (not (PLANT v2)) (or (not (EATS v1 v2)) (EATS (SK3) v1)))))) NIL)
+(139 (instantiate 138 ((v1 . v0)(v2 . v1))) (or (EATS (SK3) (SK7 (SK2) (SK3))) (or (not (ANIMAL v0)) (or (not (SMALLER v0 (SK3))) (or (not (PLANT v1)) (or (not (EATS v0 v1)) (EATS (SK3) v0)))))) NIL)
+(140 (instantiate 139 ((v0 . (SK4)))) (or (EATS (SK3) (SK7 (SK2) (SK3))) (or (not (ANIMAL (SK4))) (or (not (SMALLER (SK4) (SK3))) (or (not (PLANT v1)) (or (not (EATS (SK4) v1)) (EATS (SK3) (SK4))))))) NIL)
+(141 (resolve 140 (2 1) 72 ()) (or (EATS (SK3) (SK7 (SK2) (SK3))) (or (not (SMALLER (SK4) (SK3))) (or (not (PLANT v1)) (or (not (EATS (SK4) v1)) (EATS (SK3) (SK4)))))) NIL)
+(142 (instantiate 141 ((v1 . v0))) (or (EATS (SK3) (SK7 (SK2) (SK3))) (or (not (SMALLER (SK4) (SK3))) (or (not (PLANT v0)) (or (not (EATS (SK4) v0)) (EATS (SK3) (SK4)))))) NIL)
+(143 (resolve 142 (2 1) 70 ()) (or (EATS (SK3) (SK7 (SK2) (SK3))) (or (not (PLANT v0)) (or (not (EATS (SK4) v0)) (EATS (SK3) (SK4))))) NIL)
+(144 (instantiate 143 ((v0 . (SK6 (SK4))))) (or (EATS (SK3) (SK7 (SK2) (SK3))) (or (not (PLANT (SK6 (SK4)))) (or (not (EATS (SK4) (SK6 (SK4)))) (EATS (SK3) (SK4))))) NIL)
+(145 (resolve 144 (2 1) 65 ()) (or (EATS (SK3) (SK7 (SK2) (SK3))) (or (not (EATS (SK4) (SK6 (SK4)))) (EATS (SK3) (SK4)))) NIL)
+(146 (resolve 145 (2 1) 63 ()) (or (EATS (SK3) (SK7 (SK2) (SK3))) (EATS (SK3) (SK4))) (66))
+(147 (instantiate 37 ((v0 . (SK2)))) (or (not (ANIMAL (SK2))) (or (not (ANIMAL v1)) (or (not (EATS (SK2) v1)) (not (EATS v1 (SK7 (SK2) v1)))))) NIL)
+(148 (resolve 147 (1) 54 ()) (or (not (ANIMAL v1)) (or (not (EATS (SK2) v1)) (not (EATS v1 (SK7 (SK2) v1))))) NIL)
+(149 (instantiate 148 ((v1 . v0))) (or (not (ANIMAL v0)) (or (not (EATS (SK2) v0)) (not (EATS v0 (SK7 (SK2) v0))))) NIL)
+(150 (instantiate 149 ((v0 . (SK3)))) (or (not (ANIMAL (SK3))) (or (not (EATS (SK2) (SK3))) (not (EATS (SK3) (SK7 (SK2) (SK3)))))) NIL)
+(151 (resolve 150 (1) 61 ()) (or (not (EATS (SK2) (SK3))) (not (EATS (SK3) (SK7 (SK2) (SK3))))) NIL)
+(152 (resolve 151 (1) 125 ()) (not (EATS (SK3) (SK7 (SK2) (SK3)))) NIL)
+(153 (resolve 152 () 146 (1)) (EATS (SK3) (SK4)) (67))
+(154 (instantiate 34 ((v0 . (SK3)))) (or (not (BIRD (SK3))) (or (not (SNAIL v1)) (not (EATS (SK3) v1)))) NIL)
+(155 (resolve 154 (1) 43 ()) (or (not (SNAIL v1)) (not (EATS (SK3) v1))) NIL)
+(156 (instantiate 155 ((v1 . v0))) (or (not (SNAIL v0)) (not (EATS (SK3) v0))) NIL)
+(157 (instantiate 156 ((v0 . (SK4)))) (or (not (SNAIL (SK4))) (not (EATS (SK3) (SK4)))) NIL)
+(158 (resolve 157 (1) 44 ()) (not (EATS (SK3) (SK4))) NIL)
+(159 (resolve 158 () 153 ()) false (71))
+
+Search stopped by max_proofs option.
+
+)
+;; END OF PROOF OBJECT
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 32
+clauses generated             83
+clauses kept                  70
+clauses forward subsumed      29
+clauses back subsumed         24
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8600 finished Mon Aug  2 15:31:05 2004

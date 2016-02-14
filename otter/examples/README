@@ -1,0 +1,35 @@
+The subdirectories contain some example input files for Otter 3.0.x
+Most of them run within a few seconds and require little memory.
+
+   auto - examples (mostly from earlier releases) that run in Otter's
+          autonomous mode.
+
+   misc - other examples (mostly from earlier releases).
+
+   kalman - some examples contributed by John Kalman (kalman@mat.aukuni.ac.nz).
+
+   program - some examples of "programming" otter.
+         WARNING: two_inv.in takes a few minutes.
+
+   wos - some examples contributed by Larry Wos (wos@mcs.anl.gov)
+
+   fringe - examples demonstrating some of the esoteric features.
+
+   split - examples demonstrating the new splitting rule in 3.0.5.
+
+   ivy - examples as used by the Ivy system (new in 3.0.6).
+
+The C shell script Run_group will run all of the examples in a
+subdirectory and compare the results to the results on my computer.
+Run it, for example, like this (a few seconds)
+
+   Run_group kalman
+
+Also, you can run all of the examples like this (a few minutes)
+
+   Run_all
+
+Of course, you can also run the examples individually, for example
+
+   cd program
+   ../../source/otter < two_inv.in > two_inv.out &

@@ -1,0 +1,10 @@
+% benchmark parameters -n11 -x -m1000
+
+list(usable).
+f(x,x) = x.
+f(f(x,y),y) = f(x,f(x,y)).
+end_of_list.
+
+list(mace_constraints).
+property(f(_,_), quasigroup).
+end_of_list.

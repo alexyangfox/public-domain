@@ -1,0 +1,13 @@
+Here are some problems that we used to test the new splitting rule.
+
+GEO010-2.in  from the TPTP                                                   
+GEO036-2.in  from the TPTP                                                   
+GRP025-1.in  from the TPTP                                                   
+group2.in    A group with at most 2 elements is commutative.                 
+pair.in	     Ordered pair theorem in naive set theory.                       
+pigeon5.in   Propositional pigeon hole problem (5 pigeons).                  
+power.in     Powerset-intersection theorem in naive set theory.              
+wang3.in     Wang-3 problem.                                                 
+zebra2.in    This is the zebra puzzle with Dale Myers' rep. (satisfiable).   
+zebra4.in    Like Z2, with a cleaner rep., but it takes longer (satisfiable).
+noncomm-group.in  Find a noncommutative group of order 6.

@@ -1,0 +1,168 @@
+%--------------------------------------------------------------------------
+% File     : GRP025-1 : TPTP v2.0.0. Bugfixed v1.2.1.
+% Domain   : Group Theory (Named groups)
+% Problem  : All groups of order 2 are isomorphic
+% Version  : [McCharen, et al., 1976] axioms.
+%            Theorem formulation : Does not prove full generality.
+% English  : If G1 has exactly two elements and G2 has exactly two 
+%            elements, then there exists an isomorphism [a one-to-one and 
+%            onto homomorphism] between them.
+
+% Refs     : McCharen J.D., Overbeek R.A., Wos L.A. (1976), Problems and 
+%            Experiments for and with Automated Theorem Proving Programs, 
+%            IEEE Transactions on Computers C-25(8), 773-782.
+% Source   : [ANL]
+% Names    : G8 [McCharen, et al., 1976]
+
+% Status   : unsatisfiable
+% Rating   : 0.50 v2.0.0
+% Syntax   : Number of clauses    :   33 (   2 non-Horn;  25 unit;  27 RR)
+%            Number of literals   :   50 (   8 equality)
+%            Maximal clause size  :    4 (   1 average)
+%            Number of predicates :    3 (   0 propositional; 2-4 arity)
+%            Number of functors   :   13 (   9 constant; 0-3 arity)
+%            Number of variables  :   39 (   0 singleton)
+%            Maximal term depth   :    2 (   1 average)
+
+% Comments : In order to prove the theorem, the group tables and 
+%            a particular homomorphism are specified, and the 
+%            contradiction comes from the fact that this is the actual 
+%            isomorphism. Not only is this formulation cheating, but also 
+%            it does not prove the theorem in full generality.
+%          : A substitution axiom, missing in the ANL presentation, 
+%            is included.
+%          : tptp2X: -fotter:hypothesis:[set(auto),set(tptp_eq)] -trm_equality:stfp GRP025-1.p 
+% Bugfixes : v1.2.1 - Bugfix in GRP006-0.ax.
+%--------------------------------------------------------------------------
+set(prolog_style_variables).
+set(auto2).
+set(tptp_eq).
+
+set(split_when_given).
+set(split_pos).
+
+list(usable).
+
+% reflexivity, axiom.
+ equal(A,A).
+
+% identity_in_group, axiom.
+ group_member(identity_for(A),A).
+
+% left_identity, axiom.
+ product(A,identity_for(A),B,B).
+
+% right_identity, axiom.
+ product(A,B,identity_for(A),B).
+
+% inverse_in_group, axiom.
+-group_member(A,B) |
+ group_member(inverse(B,A),B).
+
+% left_inverse, axiom.
+ product(A,inverse(A,B),B,identity_for(A)).
+
+% right_inverse, axiom.
+ product(A,B,inverse(A,B),identity_for(A)).
+
+% total_function1_1, axiom.
+-group_member(A,B) |
+-group_member(C,B) |
+ product(B,A,C,multiply(B,A,C)).
+
+% total_function1_2, axiom.
+-group_member(A,B) |
+-group_member(C,B) |
+ group_member(multiply(B,A,C),B).
+
+% total_function2, axiom.
+-product(A,B,C,D) |
+-product(A,B,C,E) |
+ equal(E,D).
+
+% associativity1, axiom.
+-product(A,B,C,D) |
+-product(A,C,E,F) |
+-product(A,D,E,G) |
+ product(A,B,F,G).
+
+% associativity2, axiom.
+-product(A,B,C,D) |
+-product(A,C,E,F) |
+-product(A,B,F,G) |
+ product(A,D,E,G).
+
+end_of_list.
+
+list(sos).
+
+% a_member_of_group1, hypothesis.
+ group_member(a,g1).
+
+% b_member_of_group1, hypothesis.
+ group_member(b,g1).
+
+% c_member_of_group2, hypothesis.
+ group_member(c,g2).
+
+% d_member_of_group2, hypothesis.
+ group_member(d,g2).
+
+% a_and_b_only_members_of_group1, hypothesis.
+-group_member(A,g1) |
+ equal(A,a) |
+ equal(A,b).
+
+% c_and_d_only_members_of_group2, hypothesis.
+-group_member(A,g2) |
+ equal(A,c) |
+ equal(A,d).
+
+% a_times_a_is_a, hypothesis.
+ product(g1,a,a,a).
+
+% a_times_b_is_b, hypothesis.
+ product(g1,a,b,b).
+
+% b_times_a_is_b, hypothesis.
+ product(g1,b,a,b).
+
+% b_times_b_is_a, hypothesis.
+ product(g1,b,b,a).
+
+% c_times_c_is_c, hypothesis.
+ product(g2,c,c,c).
+
+% c_times_d_is_d, hypothesis.
+ product(g2,c,d,d).
+
+% d_times_c_is_d, hypothesis.
+ product(g2,d,c,d).
+
+% d_times_d_is_c, hypothesis.
+ product(g2,d,d,c).
+
+% a_maps_to_c, hypothesis.
+ equal(an_isomorphism(a),c).
+
+% b_maps_to_d, hypothesis.
+ equal(an_isomorphism(b),d).
+
+% d1_member_of_group1, hypothesis.
+ group_member(d1,g1).
+
+% d2_member_of_group1, hypothesis.
+ group_member(d2,g1).
+
+% d3_member_of_group1, hypothesis.
+ group_member(d3,g1).
+
+% d1_times_d2_is_d3, hypothesis.
+ product(g1,d1,d2,d3).
+
+% prove_product_holds_in_group2, conjecture.
+-product(g2,an_isomorphism(d1),an_isomorphism(d2),an_isomorphism(d3)).
+
+end_of_list.
+
+%--------------------------------------------------------------------------

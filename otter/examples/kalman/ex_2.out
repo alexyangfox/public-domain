@@ -1,0 +1,159 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:38 2004
+The command was "../../bin/otter".  The process ID is 8444.
+
+set(knuth_bendix).
+   dependent: set(anl_eq).
+   dependent: set(para_from).
+   dependent: set(para_into).
+   dependent: clear(para_from_right).
+   dependent: clear(para_into_right).
+   dependent: set(para_from_vars).
+   dependent: set(eq_units_both_ways).
+   dependent: set(dynamic_demod_all).
+   dependent: set(dynamic_demod).
+   dependent: set(order_eq).
+   dependent: set(back_demod).
+   dependent: set(process_input).
+   dependent: set(lrpo).
+clear(print_kept).
+clear(print_new_demod).
+clear(print_back_demod).
+clear(print_back_sub).
+assign(pick_given_ratio,1).
+assign(max_mem,5000).
+assign(stats_level,1).
+
+lex([a,b,c,_+_,_*_]).
+
+list(usable).
+0 [] x=x.
+0 [] x+y=y+x.
+0 [] x*y=y*x.
+0 [] (x+y)+z=x+y+z.
+0 [] (x*y)*z=x*y*z.
+0 [] x+x*y=x.
+0 [] x* (x+y)=x.
+end_of_list.
+
+list(sos).
+0 [] x+y*z= (x+y)* (x+z).
+0 [] a* (b+c)!=a*b+a*c.
+end_of_list.
+
+------------> process usable:
+** KEPT (pick-wt=3): 1 [] x=x.
+** KEPT (pick-wt=7): 2 [] x+y=y+x.
+** KEPT (pick-wt=7): 3 [] x*y=y*x.
+** KEPT (pick-wt=11): 4 [] (x+y)+z=x+y+z.
+---> New Demodulator: 5 [new_demod,4] (x+y)+z=x+y+z.
+** KEPT (pick-wt=11): 6 [] (x*y)*z=x*y*z.
+---> New Demodulator: 7 [new_demod,6] (x*y)*z=x*y*z.
+** KEPT (pick-wt=7): 8 [] x+x*y=x.
+---> New Demodulator: 9 [new_demod,8] x+x*y=x.
+** KEPT (pick-wt=7): 10 [] x* (x+y)=x.
+---> New Demodulator: 11 [new_demod,10] x* (x+y)=x.
+  Following clause subsumed by 1 during input processing: 0 [copy,1,flip.1] x=x.
+  Following clause subsumed by 2 during input processing: 0 [copy,2,flip.1] x+y=y+x.
+  Following clause subsumed by 3 during input processing: 0 [copy,3,flip.1] x*y=y*x.
+>>>> Starting back demodulation with 5.
+>>>> Starting back demodulation with 7.
+>>>> Starting back demodulation with 9.
+>>>> Starting back demodulation with 11.
+
+------------> process sos:
+** KEPT (pick-wt=13): 13 [copy,12,flip.1] (x+y)* (x+z)=x+y*z.
+---> New Demodulator: 14 [new_demod,13] (x+y)* (x+z)=x+y*z.
+** KEPT (pick-wt=13): 15 [] a* (b+c)!=a*b+a*c.
+>>>> Starting back demodulation with 14.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=13) 13 [copy,12,flip.1] (x+y)* (x+z)=x+y*z.
+
+given clause #2: (wt=11) 21 [para_into,13.1.1,3.1.1,demod,14] x+y*z=x+z*y.
+
+given clause #3: (wt=13) 15 [] a* (b+c)!=a*b+a*c.
+
+given clause #4: (wt=7) 31 [para_into,21.1.1,8.1.1,flip.1] x+y*x=x.
+
+given clause #5: (wt=13) 16 [para_into,13.1.1.1,2.1.1] (x+y)* (y+z)=y+x*z.
+
+given clause #6: (wt=5) 55 [para_from,31.1.1,10.1.1.2] x*x=x.
+
+given clause #7: (wt=13) 19 [para_into,13.1.1.2,2.1.1] (x+y)* (z+x)=x+y*z.
+
+given clause #8: (wt=5) 79 [para_from,55.1.1,31.1.1.2] x+x=x.
+
+given clause #9: (wt=17) 25 [para_from,13.1.1,6.1.1.1] (x+y*z)*u= (x+y)* (x+z)*u.
+
+given clause #10: (wt=7) 49 [para_into,31.1.1,2.1.1] x*y+y=y.
+
+given clause #11: (wt=15) 27 [para_into,21.1.1.2,13.1.1,demod,14] x+y+z*u=x+y+u*z.
+
+given clause #12: (wt=7) 83 [para_into,19.1.1.1,31.1.1,demod,7,54] x* (y+x)=x.
+
+given clause #13: (wt=15) 30 [para_into,21.1.1.2,6.1.1] x+y*z*u=x+u*y*z.
+
+given clause #14: (wt=7) 146 [para_into,49.1.1.1,3.1.1] x*y+x=x.
+
+given clause #15: (wt=11) 33 [para_into,21.1.1,2.1.1] x*y+z=z+y*x.
+
+-------- PROOF -------- 
+
+----> UNIT CONFLICT at   0.01 sec ----> 280 [binary,279.1,194.1] $F.
+
+Length of proof is 13.  Level of proof is 7.
+
+---------------- PROOF ----------------
+
+2 [] x+y=y+x.
+3 [] x*y=y*x.
+6 [] (x*y)*z=x*y*z.
+8 [] x+x*y=x.
+12 [] x+y*z= (x+y)* (x+z).
+14,13 [copy,12,flip.1] (x+y)* (x+z)=x+y*z.
+15 [] a* (b+c)!=a*b+a*c.
+16 [para_into,13.1.1.1,2.1.1] (x+y)* (y+z)=y+x*z.
+21 [para_into,13.1.1,3.1.1,demod,14] x+y*z=x+z*y.
+26,25 [para_from,13.1.1,6.1.1.1] (x+y*z)*u= (x+y)* (x+z)*u.
+31 [para_into,21.1.1,8.1.1,flip.1] x+y*x=x.
+33 [para_into,21.1.1,2.1.1] x*y+z=z+y*x.
+40 [para_into,15.1.1,3.1.1] (b+c)*a!=a*b+a*c.
+46,45 [para_into,31.1.1.2,6.1.1] x+y*z*x=x.
+49 [para_into,31.1.1,2.1.1] x*y+y=y.
+68,67 [para_into,16.1.1.2,31.1.1,demod,46] (x+y)*y=y.
+153,152 [para_from,49.1.1,16.1.1.2,demod,26,68] (x+y)*z=y*z+x*z.
+194 [back_demod,40,demod,153] c*a+b*a!=a*b+a*c.
+279 [para_into,33.1.1,21.1.1] x*y+z*u=u*z+y*x.
+280 [binary,279.1,194.1] $F.
+
+------------ end of proof -------------
+
+
+Search stopped by max_proofs option.
+
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 15
+clauses generated            287
+clauses kept                 179
+clauses forward subsumed     267
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.01          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8444 finished Mon Aug  2 15:30:38 2004

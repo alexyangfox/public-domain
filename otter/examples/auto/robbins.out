@@ -1,0 +1,163 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:36 2004
+The command was "../../bin/otter".  The process ID is 8293.
+
+set(auto).
+   dependent: set(auto1).
+   dependent: set(process_input).
+   dependent: clear(print_kept).
+   dependent: clear(print_new_demod).
+   dependent: clear(print_back_demod).
+   dependent: clear(print_back_sub).
+   dependent: set(control_memory).
+   dependent: assign(max_mem, 12000).
+   dependent: assign(pick_given_ratio, 4).
+   dependent: assign(stats_level, 1).
+   dependent: assign(max_seconds, 10800).
+
+list(usable).
+0 [] x=x.
+0 [] x+y=y+x.
+0 [] (x+y)+z=x+y+z.
+0 [] n(n(x+y)+n(x+n(y)))=x.
+0 [] x+C=C.
+0 [] n(A+n(B))+n(n(A)+n(B))!=B.
+end_of_list.
+
+SCAN INPUT: prop=0, horn=1, equality=1, symmetry=0, max_lits=1.
+
+All clauses are units, and equality is present; the
+strategy will be Knuth-Bendix with positive clauses in sos.
+
+   dependent: set(knuth_bendix).
+   dependent: set(anl_eq).
+   dependent: set(para_from).
+   dependent: set(para_into).
+   dependent: clear(para_from_right).
+   dependent: clear(para_into_right).
+   dependent: set(para_from_vars).
+   dependent: set(eq_units_both_ways).
+   dependent: set(dynamic_demod_all).
+   dependent: set(dynamic_demod).
+   dependent: set(order_eq).
+   dependent: set(back_demod).
+   dependent: set(lrpo).
+
+------------> process usable:
+** KEPT (pick-wt=14): 1 [] n(A+n(B))+n(n(A)+n(B))!=B.
+
+------------> process sos:
+** KEPT (pick-wt=3): 2 [] x=x.
+** KEPT (pick-wt=7): 3 [] x+y=y+x.
+** KEPT (pick-wt=11): 4 [] (x+y)+z=x+y+z.
+---> New Demodulator: 5 [new_demod,4] (x+y)+z=x+y+z.
+** KEPT (pick-wt=13): 6 [] n(n(x+y)+n(x+n(y)))=x.
+---> New Demodulator: 7 [new_demod,6] n(n(x+y)+n(x+n(y)))=x.
+** KEPT (pick-wt=5): 8 [] x+C=C.
+---> New Demodulator: 9 [new_demod,8] x+C=C.
+  Following clause subsumed by 2 during input processing: 0 [copy,2,flip.1] x=x.
+  Following clause subsumed by 3 during input processing: 0 [copy,3,flip.1] x+y=y+x.
+>>>> Starting back demodulation with 5.
+>>>> Starting back demodulation with 7.
+>>>> Starting back demodulation with 9.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=3) 2 [] x=x.
+
+given clause #2: (wt=5) 8 [] x+C=C.
+
+given clause #3: (wt=7) 3 [] x+y=y+x.
+
+given clause #4: (wt=5) 10 [para_into,3.1.1,8.1.1,flip.1] C+x=C.
+
+given clause #5: (wt=11) 4 [] (x+y)+z=x+y+z.
+
+given clause #6: (wt=13) 6 [] n(n(x+y)+n(x+n(y)))=x.
+
+given clause #7: (wt=8) 18 [para_into,6.1.1.1.1.1,10.1.1,demod,11] n(n(C)+n(C))=C.
+
+given clause #8: (wt=11) 15 [para_into,4.1.1.1,3.1.1,demod,5] x+y+z=y+x+z.
+
+given clause #9: (wt=11) 16 [para_into,4.1.1,3.1.1] x+y+z=y+z+x.
+
+given clause #10: (wt=11) 17 [copy,16,flip.1] x+y+z=z+x+y.
+
+given clause #11: (wt=14) 12 [para_from,3.1.1,1.1.1] n(n(A)+n(B))+n(A+n(B))!=B.
+
+given clause #12: (wt=11) 20 [para_into,6.1.1.1.1.1,8.1.1] n(n(C)+n(x+n(C)))=x.
+
+given clause #13: (wt=11) 40 [para_into,15.1.1,3.1.1,demod,5] x+y+z=x+z+y.
+
+given clause #14: (wt=11) 46 [para_into,16.1.1.2,3.1.1] x+y+z=z+y+x.
+
+given clause #15: (wt=11) 62 [para_into,20.1.1.1.2.1,3.1.1] n(n(C)+n(n(C)+x))=x.
+
+given clause #16: (wt=14) 13 [para_from,3.1.1,1.1.1.2.1] n(A+n(B))+n(n(B)+n(A))!=B.
+
+given clause #17: (wt=11) 64 [para_into,20.1.1.1,3.1.1] n(n(x+n(C))+n(C))=x.
+
+given clause #18: (wt=5) 107 [back_demod,89,demod,106,102] n(n(x))=x.
+
+-------- PROOF -------- 
+
+----> UNIT CONFLICT at   0.01 sec ----> 122 [binary,121.1,2.1] $F.
+
+Length of proof is 17.  Level of proof is 8.
+
+---------------- PROOF ----------------
+
+1 [] n(A+n(B))+n(n(A)+n(B))!=B.
+2 [] x=x.
+3 [] x+y=y+x.
+4 [] (x+y)+z=x+y+z.
+6 [] n(n(x+y)+n(x+n(y)))=x.
+9,8 [] x+C=C.
+11,10 [para_into,3.1.1,8.1.1,flip.1] C+x=C.
+13 [para_from,3.1.1,1.1.1.2.1] n(A+n(B))+n(n(B)+n(A))!=B.
+18 [para_into,6.1.1.1.1.1,10.1.1,demod,11] n(n(C)+n(C))=C.
+20 [para_into,6.1.1.1.1.1,8.1.1] n(n(C)+n(x+n(C)))=x.
+36 [para_from,18.1.1,6.1.1.1.2.1.2,demod,9] n(n(x+n(C)+n(C))+n(C))=x.
+62 [para_into,20.1.1.1.2.1,3.1.1] n(n(C)+n(n(C)+x))=x.
+64 [para_into,20.1.1.1,3.1.1] n(n(x+n(C))+n(C))=x.
+88 [para_into,62.1.1.1.2,20.1.1] n(n(C)+x)=n(x+n(C)).
+89 [para_into,62.1.1.1,3.1.1] n(n(n(C)+x)+n(C))=x.
+91 [copy,88,flip.1] n(x+n(C))=n(n(C)+x).
+98 [para_into,13.1.1.1.1,3.1.1] n(n(B)+A)+n(n(B)+n(A))!=B.
+100,99 [para_into,64.1.1.1.1.1,4.1.1] n(n(x+y+n(C))+n(C))=x+y.
+102,101 [back_demod,36,demod,100] x+n(C)=x.
+106,105 [back_demod,91,demod,102,flip.1] n(n(C)+x)=n(x).
+108,107 [back_demod,89,demod,106,102] n(n(x))=x.
+120,119 [para_into,107.1.1.1,6.1.1,flip.1] n(x+y)+n(x+n(y))=n(x).
+121 [back_demod,98,demod,120,108] B!=B.
+122 [binary,121.1,2.1] $F.
+
+------------ end of proof -------------
+
+
+Search stopped by max_proofs option.
+
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 18
+clauses generated            213
+clauses kept                  81
+clauses forward subsumed     191
+clauses back subsumed          0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.01          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8293 finished Mon Aug  2 15:30:36 2004

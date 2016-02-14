@@ -1,0 +1,186 @@
+%  Input File for Rigorous Proof Checking the deducibility of various
+%  axiom systems of two-valued sentential calculus
+set(hyper_res).
+% clear(print_kept).
+% assign(report, 60).
+assign(max_mem, 8000).
+assign(max_weight, 80).
+assign(max_proofs, -1).
+set(input_sos_first).
+set(order_history).
+  
+weight_list(pick_and_purge).
+weight(P(rew($(0),$(0)),$(1)), 99).
+end_of_list.
+  
+list(usable).
+-P(u,i(x,y)) | -P(v,x) | P(rew(u,v),y).
+-P(x,i(q,i(p,q))) | -P(y,i(i(p,i(q,r)),i(i(p,q),i(p,r)))) | 
+-P(z,i(i(n(p),n(q)),i(q,p))) | $ANSWER(step_allBEH_Church_FL_18_35_49).
+-P(x,i(q,i(p,q))) | -P(y,i(i(p,i(q,r)),i(i(p,q),i(p,r)))) | 
+-P(z,i(n(n(p)),p)) | -P(u,i(p,n(n(p)))) | -P(v,i(i(p,q),i(n(q),n(p)))) | 
+-P(w,i(i(p,i(q,r)),i(q,i(p,r)))) | 
+$ANSWER(step_allFrege_18_35_39_40_46_21).  % 21 is dependent.
+-P(x,i(q,i(p,q))) | -P(y,i(i(p,i(q,r)),i(q,i(p,r)))) | 
+-P(z,i(i(q,r),i(i(p,q),i(p,r)))) | -P(u,i(p,i(n(p),q))) | 
+-P(v,i(i(p,q),i(i(n(p),q),q))) | -P(w,i(i(p,i(p,q)),i(p,q))) | 
+$ANSWER(step_allHilbert_18_21_22_3_54_30).  % 30 is dependent.
+-P(x,i(i(i(p,q),r),i(q,r))) | -P(y,i(i(i(p,q),r),i(n(p),r))) | 
+-P(z,i(i(n(p),r),i(i(q,r),i(i(p,q),r)))) | $ANSWER(step_allLuka_x_19_37_59).
+-P(x,i(i(i(p,q),r),i(q,r))) | -P(y,i(i(i(p,q),r),i(n(p),r))) | 
+-P(z,i(i(s,i(n(p),r)),i(s,i(i(q,r),i(i(p,q),r))))) | 
+$ANSWER(step_allWos_x_19_37_60).
+end_of_list.
+  
+list(sos).
+P(c1,i(i(x,y),i(i(y,z),i(x,z)))).
+P(c2,i(i(n(x),x),x)).
+P(c3,i(x,i(n(x),y))).
+end_of_list.
+  
+list(passive).
+% -P(x,i(i(i(i(q,r),i(p,r)),s),i(i(p,q),s))) | $ANS(neg_th_04).
+% -P(x,i(i(p,i(q,r)),i(i(s,q),i(p,i(s,r))))) | $ANS(neg_th_05).
+% -P(x,i(i(p,q),i(i(i(p,r),s),i(i(q,r),s)))) | $ANS(neg_th_06).
+% -P(x,i(i(t,i(i(p,r),s)),i(i(p,q),i(t,i(i(q,r),s))))) | $ANS(neg_th_07).
+% -P(x,i(i(q,r),i(i(p,q),i(i(r,s),i(p,s))))) | $ANS(neg_th_08).
+% -P(x,i(i(i(n(p),q),r),i(p,r))) | $ANS(neg_th_09).
+% -P(x,i(p,i(i(i(n(p),p),p),i(i(q,p),p)))) | $ANS(neg_th_10).
+% -P(x,i(i(q,i(i(n(p),p),p)),i(i(n(p),p),p))) | $ANS(neg_th_11).
+% -P(x,i(t,i(i(n(p),p),p))) | $ANS(neg_th_12).
+% -P(x,i(i(n(p),q),i(t,i(i(q,p),p)))) | $ANS(neg_th_13).
+% -P(x,i(i(i(t,i(i(q,p),p)),r),i(i(n(p),q),r))) | $ANS(neg_th_14).
+% -P(x,i(i(n(p),q),i(i(q,p),p))) | $ANS(neg_th_15).
+% -P(x,i(p,p)) | $ANS(neg_th_16).
+% -P(x,i(p,i(i(q,p),p))) | $ANS(neg_th_17).
+% -P(x,i(q,i(p,q))) | $ANS(neg_th_18).
+% -P(x,i(i(i(p,q),r),i(q,r))) | $ANS(neg_th_19).
+% -P(x,i(p,i(i(p,q),q))) | $ANS(neg_th_20).
+% -P(x,i(i(p,i(q,r)),i(q,i(p,r)))) | $ANS(neg_th_21).
+% -P(x,i(i(q,r),i(i(p,q),i(p,r)))) | $ANS(neg_th_22).
+% -P(x,i(i(i(q,i(p,r)),s),i(i(p,i(q,r)),s))) | $ANS(neg_th_23).
+% -P(x,i(i(i(p,q),p),p)) | $ANS(neg_th_24).
+% -P(x,i(i(i(p,r),s),i(i(p,q),i(i(q,r),s)))) | $ANS(neg_th_25).
+% -P(x,i(i(i(p,q),r),i(i(r,p),p))) | $ANS(neg_th_26).
+% -P(x,i(i(i(p,q),q),i(i(q,p),p))) | $ANS(neg_th_27).
+% -P(x,i(i(i(i(r,p),p),s),i(i(i(p,q),r),s))) | $ANS(neg_th_28).
+% -P(x,i(i(i(p,q),r),i(i(p,r),r))) | $ANS(neg_th_29).
+% -P(x,i(i(p,i(p,q)),i(p,q))) | $ANS(neg_th_30).
+% -P(x,i(i(p,s),i(i(i(p,q),r),i(i(s,r),r)))) | $ANS(neg_th_31).
+% -P(x,i(i(i(p,q),r),i(i(p,s),i(i(s,r),r)))) | $ANS(neg_th_32).
+% -P(x,i(i(p,s),i(i(s,i(q,i(p,r))),i(q,i(p,r))))) | $ANS(neg_th_33).
+% -P(x,i(i(s,i(q,i(p,r))),i(i(p,s),i(q,i(p,r))))) | $ANS(neg_th_34).
+% -P(x,i(i(p,i(q,r)),i(i(p,q),i(p,r)))) | $ANS(neg_th_35).
+% -P(x,i(n(p),i(p,q))) | $ANS(neg_th_36).
+% -P(x,i(i(i(p,q),r),i(n(p),r))) | $ANS(neg_th_37).
+% -P(x,i(i(p,n(p)),n(p))) | $ANS(neg_th_38).
+% -P(x,i(n(n(p)),p)) | $ANS(neg_th_39).
+% -P(x,i(p,n(n(p)))) | $ANS(neg_th_40).
+% -P(x,i(i(p,q),i(n(n(p)),q))) | $ANS(neg_th_41).
+% -P(x,i(i(i(n(n(p)),q),r),i(i(p,q),r))) | $ANS(neg_th_42).
+% -P(x,i(i(p,q),i(i(q,n(p)),n(p)))) | $ANS(neg_th_43).
+% -P(x,i(i(s,i(q,n(p))),i(i(p,q),i(s,n(p))))) | $ANS(neg_th_44).
+% -P(x,i(i(s,i(q,p)),i(i(n(p),q),i(s,p)))) | $ANS(neg_th_45).
+% -P(x,i(i(p,q),i(n(q),n(p)))) | $ANS(neg_th_46).
+% -P(x,i(i(p,n(q)),i(q,n(p)))) | $ANS(neg_th_47).
+% -P(x,i(i(n(p),q),i(n(q),p))) | $ANS(neg_th_48).
+% -P(x,i(i(n(p),n(q)),i(q,p))) | $ANS(neg_th_49).
+% -P(x,i(i(i(n(q),p),r),i(i(n(p),q),r))) | $ANS(neg_th_50).
+% -P(x,i(i(p,i(q,r)),i(p,i(n(r),n(q))))) | $ANS(neg_th_51).
+% -P(x,i(i(p,i(q,n(r))),i(p,i(r,n(q))))) | $ANS(neg_th_52).
+% -P(x,i(i(n(p),q),i(i(p,q),q))) | $ANS(neg_th_53).
+% -P(x,i(i(p,q),i(i(n(p),q),q))) | $ANS(neg_th_54).
+% -P(x,i(i(p,q),i(i(p,n(q)),n(p)))) | $ANS(neg_th_55).
+% -P(x,i(i(i(i(p,q),q),r),i(i(n(p),q),r))) | $ANS(neg_th_56).
+% -P(x,i(i(n(p),r),i(i(p,q),i(i(q,r),r)))) | $ANS(neg_th_57).
+% -P(x,i(i(i(i(p,q),i(i(q,r),r)),s),i(i(n(p),r),s))) | $ANS(neg_th_58).
+% -P(x,i(i(n(p),r),i(i(q,r),i(i(p,q),r)))) | $ANS(neg_th_59).
+% -P(x,i(i(s,i(n(p),r)),i(s,i(i(q,r),i(i(p,q),r))))) | $ANS(neg_th_60).
+% -P(x,i(i(p,r),i(i(q,r),i(i(n(p),q),r)))) | $ANS(neg_th_61).
+% -P(x,i(i(n(n(p)),q),i(p,q))) | $ANS(neg_th_62).
+% -P(x,i(q,i(p,p))) | $ANS(neg_th_63).
+% -P(x,i(n(i(p,p)),q)) | $ANS(neg_th_64).
+% -P(x,i(i(n(q),n(i(p,p))),q)) | $ANS(neg_th_65).
+% -P(x,i(n(i(p,q)),p)) | $ANS(neg_th_66).
+% -P(x,i(n(i(p,q)),n(q))) | $ANS(neg_th_67).
+% -P(x,i(n(i(p,n(q))),q)) | $ANS(neg_th_68).
+% -P(x,i(p,i(n(q),n(i(p,q))))) | $ANS(neg_th_69).
+% -P(x,i(p,i(q,n(i(p,n(q)))))) | $ANS(neg_th_70).
+% -P(x,n(i(i(p,p),n(i(q,q))))) | $ANS(neg_th_71).
+end_of_list.
+  
+list(demodulators).
+%  Following essentially mirrrors the Lukasiewicz proof with history.
+EQ(rew(c1,c1),c4).
+EQ(rew(c4,c4),c5).
+EQ(rew(c4,c1),c6).
+EQ(rew(c5,c6),c7).
+EQ(rew(c7,c1),c8).
+EQ(rew(c1,c3),c9).
+EQ(rew(c9,c6),c10).
+EQ(rew(c10,c2),c10a).
+EQ(rew(c10a,c2),c11).
+EQ(rew(c9,c11),c12).
+EQ(rew(c7,c12),c13).
+EQ(rew(c1,c13),c14).
+EQ(rew(c14,c2),c15).
+EQ(rew(c9,c2),c16).
+EQ(rew(c9,c15),c17).
+EQ(rew(c5,c17),c17a).
+EQ(rew(c17a,c3),c18).
+EQ(rew(c1,c18),c19).
+EQ(rew(c19,c15),c20).
+EQ(rew(c5,c20),c21).
+EQ(rew(c21,c1),c22).
+EQ(rew(c1,c21),c23).
+EQ(rew(c23,c15),c24a).
+EQ(rew(c24a,c3),c24).
+EQ(rew(c21,c6),c25).
+EQ(rew(c25,c24),c26).
+EQ(rew(c1,c26),c28).
+EQ(rew(c28,c26),c29).
+EQ(rew(c29,c16),c30).
+EQ(rew(c7,c29),c31).
+EQ(rew(c21,c31),c32).
+EQ(rew(c32,c18),c33).
+EQ(rew(c21,c33),c34).
+EQ(rew(c34,c22),c35).
+EQ(rew(c21,c3),c36).
+EQ(rew(c1,c36),c37).
+EQ(rew(c26,c2),c38).
+EQ(rew(c37,c2),c39).
+EQ(rew(c9,c38),c40).
+EQ(rew(c1,c39),c41).
+EQ(rew(c1,c41),c42).
+EQ(rew(c42,c15),c43).
+EQ(rew(c5,c43),c44).
+EQ(rew(c5,c15),c45).
+EQ(rew(c44,c36),c46).
+EQ(rew(c44,c3),c47).
+EQ(rew(c45,c36),c48).
+EQ(rew(c45,c3),c49).
+EQ(rew(c1,c48),c50).
+EQ(rew(c22,c46),c51).
+EQ(rew(c22,c47),c52).
+EQ(rew(c50,c15),c53).
+EQ(rew(c21,c53),c54).
+EQ(rew(c44,c47),c55).
+EQ(rew(c1,c53),c56).
+EQ(rew(c56,c32),c57).
+EQ(rew(c1,c57),c58).
+EQ(rew(c58,c21),c59).
+EQ(rew(c22,c59),c60).
+EQ(rew(c60,c41),c61).
+EQ(rew(c1,c40),c62).
+EQ(rew(c21,c18),c63).
+EQ(rew(c48,c63),c64).
+EQ(rew(c61,c16),c64a).
+EQ(rew(c64a,c64),c65).
+EQ(rew(c48,c36),c66).
+EQ(rew(c46,c18),c67).
+EQ(rew(c48,c18),c68).
+EQ(rew(c51,c20),c69).
+EQ(rew(c52,c20),c70).
+EQ(rew(c70,c16),c70a).
+EQ(rew(c70a,c16),c71).
+end_of_list.

@@ -1,0 +1,790 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:39 2004
+The command was "../../bin/otter".  The process ID is 8512.
+
+set(knuth_bendix).
+   dependent: set(anl_eq).
+   dependent: set(para_from).
+   dependent: set(para_into).
+   dependent: clear(para_from_right).
+   dependent: clear(para_into_right).
+   dependent: set(para_from_vars).
+   dependent: set(eq_units_both_ways).
+   dependent: set(dynamic_demod_all).
+   dependent: set(dynamic_demod).
+   dependent: set(order_eq).
+   dependent: set(back_demod).
+   dependent: set(process_input).
+   dependent: set(lrpo).
+clear(eq_units_both_ways).
+WARNING: set(process_input) flag already set.
+set(process_input).
+WARNING: set(index_for_back_demod) flag already set.
+set(index_for_back_demod).
+set(para_into_units_only).
+set(para_from_units_only).
+WARNING: set(lrpo) flag already set.
+set(lrpo).
+
+lex([e,a,b,f(x,x),g(x)]).
+assign(pick_given_ratio,3).
+assign(max_proofs,4).
+assign(demod_limit,500).
+assign(max_mem,24000).
+assign(max_weight,51).
+assign(change_limit_after,10).
+assign(new_max_weight,41).
+clear(print_kept).
+clear(print_new_demod).
+clear(print_back_demod).
+
+weight_list(pick_and_purge).
+weight(f(e,f(e,f(e,f(f(f(f(x,x),f(f(f(x,x),f(x,x)),f(y,z))),f(z,f(z,z))),e))))=f(x,f(f(x,y),e)),2).
+weight(f(e,f(e,f(e,f(f(f(x,x),f(f(x,e),e)),e))))=f(x,f(f(x,x),e)),2).
+weight(f(e,f(e,f(e,f(x,f(f(f(x,f(x,x)),e),e)))))=e,2).
+weight(f(e,f(e,f(f(e,f(x,f(y,f(y,y)))),y)))=x,2).
+weight(f(e,f(e,f(f(f(x,f(f(x,x),e)),e),f(f(f(x,f(f(x,x),e)),e),f(f(x,f(f(x,x),e)),e)))))=x,2).
+weight(f(e,f(e,f(y,f(f(f(y,f(y,y)),e),e))))=e,2).
+weight(f(e,f(f(e,f(e,f(f(x,e),e))),y))=f(x,f(e,y)),2).
+weight(f(e,f(f(e,f(e,f(f(x,x),f(f(f(x,x),f(x,x)),f(y,e))))),f(f(f(x,y),e),f(f(f(x,y),e),f(f(x,y),e)))))=x,2).
+weight(f(e,f(f(e,f(e,f(x,e))),e))=x,2).
+weight(f(e,f(f(e,f(e,f(x,y))),f(y,f(y,y))))=x,2).
+weight(f(e,f(f(e,f(f(f(x,f(f(x,x),e)),e),f(f(f(x,f(f(x,x),e)),e),f(f(x,f(f(x,x),e)),e)))),y))=f(x,f(e,y)),2).
+weight(f(e,f(f(f(x,f(e,f(e,y))),e),e))=f(f(e,f(f(x,e),e)),y),2).
+weight(f(e,f(y,f(f(f(y,f(y,y)),e),e)))=e,2).
+weight(f(f(e,f(x,f(e,y))),f(y,f(y,y)))=f(e,f(f(x,e),e)),2).
+weight(f(f(e,f(x,f(y,f(y,y)))),y)=f(e,f(f(x,e),e)),2).
+weight(f(f(e,x),e)=f(e,f(x,e)),2).
+weight(f(f(e,x),f(e,y))=f(e,f(x,y)),2).
+weight(f(f(e,x),y)=f(e,f(x,f(e,f(e,f(f(y,e),e))))),2).
+weight(f(f(f(x,f(x,x)),e),e)=f(f(f(x,e),e),f(f(f(x,e),e),f(f(x,e),e))),2).
+weight(f(f(f(x,x),e),f(f(f(x,e),f(f(f(x,e),e),e)),e))=e,2).
+weight(f(f(f(x,x),f(f(f(x,x),f(x,x)),f(x,e))),e)=f(f(x,x),f(f(x,e),e)),2).
+weight(f(f(f(x,x),f(f(x,x),f(x,x))),e)=f(x,f(f(x,e),e)),2).
+weight(f(f(x,e),f(f(f(x,e),f(f(x,f(f(x,e),e)),e)),e))=f(f(f(x,e),f(x,e)),f(f(x,e),f(x,e))),2).
+weight(f(f(x,e),f(f(x,x),f(f(x,e),e)))=e,2).
+weight(f(f(x,e),f(y,e))=f(f(x,y),e),2).
+weight(f(f(x,f(e,f(e,f(y,f(y,y))))),f(e,y))=f(f(x,e),e),2).
+weight(f(f(x,f(e,f(e,y))),f(y,f(y,y)))=f(f(x,e),e),2).
+weight(f(f(x,f(e,f(y,f(y,y)))),y)=f(f(x,e),e),2).
+weight(f(f(x,f(e,y)),e)=f(f(x,e),f(e,f(y,e))),2).
+weight(f(f(x,f(f(x,e),e)),e)=f(f(f(x,x),f(x,x)),f(f(f(x,x),e),e)),2).
+weight(f(f(x,f(f(x,x),e)),e)=f(f(x,x),f(f(x,e),e)),2).
+weight(f(f(x,f(x,x)),f(e,f(f(x,e),e)))=e,2).
+weight(f(f(x,f(x,x)),f(f(x,f(x,x)),f(x,f(x,x))))=f(e,x),2).
+weight(f(f(x,x),f(f(f(x,x),f(x,x)),e))=f(x,f(f(x,e),e)),2).
+weight(f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,e),e),y)))=f(x,f(f(x,f(f(x,e),e)),f(e,y))),2).
+weight(f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),f(y,u))),f(u,f(u,u))),z)))=f(x,f(y,f(e,z))),2).
+weight(f(f(x,x),f(f(f(x,x),f(x,x)),y))=f(x,f(f(x,e),y)),2).
+weight(f(f(x,x),f(f(x,f(f(x,e),e)),e))=e,2).
+weight(f(f(x,x),f(f(x,f(f(x,e),e)),f(e,f(f(y,e),e))))=y,2).
+weight(f(f(x,y),e)=f(f(x,e),f(y,e)),2).
+weight(f(f(x,y),z)=f(f(x,e),f(y,f(f(e,f(e,f(z,u))),f(u,f(u,u))))),2).
+weight(f(x,e)=x,2).
+weight(f(x,f(e,f(f(y,f(y,y)),f(f(y,f(y,y)),f(y,f(y,y))))))=f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),e)),e),y))),2).
+weight(f(x,f(f(f(x,x),f(f(f(x,x),f(x,x)),f(x,e))),e))=e,2).
+weight(f(x,f(f(x,f(f(x,x),e)),e))=e,2).
+weight(f(x,f(f(x,f(f(x,x),e)),f(f(f(f(y,f(y,y)),e),e),f(f(f(f(y,f(y,y)),e),e),f(f(f(y,f(y,y)),e),e)))))=y,2).
+weight(f(x,f(f(x,f(f(x,x),e)),f(f(f(y,f(f(y,y),e)),e),f(f(f(y,f(f(y,y),e)),e),f(f(y,f(f(y,y),e)),e)))))=y,2).
+weight(f(x,f(f(x,f(f(x,x),f(e,f(y,e)))),e))=f(e,y),2).
+weight(f(x,f(f(x,f(f(x,x),f(y,e))),e))=y,2).
+weight(f(x,f(f(x,f(f(x,x),f(y,f(z,f(z,z))))),f(e,z)))=y,2).
+weight(f(x,f(f(x,f(f(x,x),y)),e))=f(e,f(e,f(e,f(y,e)))),2).
+weight(f(x,f(f(x,f(x,f(f(x,e),e))),e))=f(f(x,x),f(x,x)),2).
+weight(f(x,f(f(x,y),e))=f(f(x,x),f(f(f(x,x),f(x,x)),f(y,e))),2).
+weight(f(x,f(f(x,y),f(f(z,f(z,z)),f(f(z,f(z,z)),f(z,f(z,z))))))=f(f(x,x),f(f(f(x,x),f(x,x)),f(y,z))),2).
+weight(f(y,f(f(f(y,f(y,y)),e),e))=e,2).
+weight(f(e,f(e,f(e,f(f(f(x,f(f(x,e),f(y,z))),f(z,f(z,z))),e))))=f(x,f(f(x,y),e)),2).
+weight(f(e,f(e,f(e,f(f(x,e),e))))=x,2).
+weight(f(e,f(e,f(e,x)))=x,2).
+weight(f(e,f(e,f(f(f(x,x),f(f(x,e),e)),f(f(f(x,x),f(f(x,e),e)),f(f(x,x),f(f(x,e),e))))))=x,2).
+weight(f(e,f(e,x))=x,2).
+weight(f(e,f(f(e,f(e,f(x,f(f(x,e),f(y,e))))),f(f(f(x,y),e),f(f(f(x,y),e),f(f(x,y),e)))))=x,2).
+weight(f(e,f(f(e,f(f(f(x,x),f(f(x,e),e)),f(f(f(x,x),f(f(x,e),e)),f(f(x,x),f(f(x,e),e))))),y))=f(x,f(e,y)),2).
+weight(f(e,f(f(f(x,e),e),f(e,f(e,f(f(y,e),e)))))=f(f(e,f(f(x,e),e)),y),2).
+weight(f(e,f(x,x))=f(x,x),2).
+weight(f(e,y)=y,2).
+weight(f(f(e,x),y)=f(e,f(x,f(e,f(e,y)))),2).
+weight(f(f(x,f(f(x,e),e)),f(e,y))=f(f(x,e),f(f(f(x,e),e),y)),2).
+weight(f(f(x,f(x,f(y,z))),f(z,f(z,z)))=f(x,f(x,y)),2).
+weight(f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),e)),e),y)))=f(x,f(e,f(e,y))),2).
+weight(f(f(x,x),f(f(x,e),f(f(f(x,e),e),f(f(y,e),e))))=y,2).
+weight(f(f(x,x),f(x,f(x,y)))=y,2).
+weight(f(f(x,x),f(x,x))=e,2).
+weight(f(f(x,y),f(e,z))=f(f(x,e),f(y,z)),2).
+weight(f(f(x,y),f(e,z))=f(x,f(y,z)),2).
+weight(f(f(x,y),z)=f(x,f(y,f(e,f(e,z)))),2).
+weight(f(f(x,y),z)=f(x,f(y,z)),2).
+weight(f(x,f(f(x,f(f(x,x),e)),f(e,f(f(y,e),e))))=y,2).
+weight(f(x,f(f(x,x),f(f(x,e),e)))=e,2).
+weight(f(x,f(f(x,y),f(e,z)))=f(f(x,x),f(f(f(x,x),f(x,x)),f(y,z))),2).
+weight(f(x,f(x,f(x,x)))=e,2).
+end_of_list.
+
+list(usable).
+0 [] x=x.
+end_of_list.
+
+list(sos).
+0 [] f(y,f(f(y,f(f(y,y),f(x,z))),f(z,f(z,z))))=x.
+0 [] f(e,e)=e.
+end_of_list.
+
+list(passive).
+1 [] f(f(a,b),c)!=f(a,f(b,c))|$ANS(assoc).
+2 [] f(a,f(a,f(a,a)))!=e|$ANS(exp4).
+3 [] f(e,a)!=a|$ANS(lid).
+4 [] f(a,e)!=a|$ANS(rid).
+end_of_list.
+
+list(demodulators).
+end_of_list.
+
+------------> process usable:
+** KEPT (pick-wt=3): 5 [] x=x.
+
+------------> process sos:
+** KEPT (pick-wt=19): 6 [] f(x,f(f(x,f(f(x,x),f(y,z))),f(z,f(z,z))))=y.
+---> New Demodulator: 7 [new_demod,6] f(x,f(f(x,f(f(x,x),f(y,z))),f(z,f(z,z))))=y.
+** KEPT (pick-wt=5): 8 [] f(e,e)=e.
+---> New Demodulator: 9 [new_demod,8] f(e,e)=e.
+>>>> Starting back demodulation with 7.
+>>>> Starting back demodulation with 9.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=19) 6 [] f(x,f(f(x,f(f(x,x),f(y,z))),f(z,f(z,z))))=y.
+
+given clause #2: (wt=2) 10 [para_into,6.1.1.2.1.2,6.1.1] f(x,f(f(x,y),f(f(z,f(z,z)),f(f(z,f(z,z)),f(z,f(z,z))))))=f(f(x,x),f(f(f(x,x),f(x,x)),f(y,z))).
+
+given clause #3: (wt=5) 8 [] f(e,e)=e.
+
+given clause #4: (wt=2) 16 [para_from,8.1.1,10.1.1.2.2.1.2,demod,9,9,9,9,9,9,9] f(x,f(f(x,y),e))=f(f(x,x),f(f(f(x,x),f(x,x)),f(y,e))).
+
+given clause #5: (wt=51) 11 [para_into,10.1.1.2.1,6.1.1] f(x,f(y,f(f(z,f(z,z)),f(f(z,f(z,z)),f(z,f(z,z))))))=f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),f(y,u))),f(u,f(u,u))),z))).
+
+given clause #6: (wt=2) 17 [para_from,8.1.1,6.1.1.2.2.2,demod,9] f(x,f(f(x,f(f(x,x),f(y,e))),e))=y.
+
+given clause #7: (wt=2) 19 [para_from,8.1.1,6.1.1.2.1.2.2,demod,9,9] f(x,f(f(x,f(f(x,x),e)),e))=e.
+
+given clause #8: (wt=2) 21 [para_from,8.1.1,6.1.1.2.1.2.1] f(e,f(f(e,f(e,f(x,y))),f(y,f(y,y))))=x.
+
+given clause #9: (wt=27) 12 [para_into,10.1.1,6.1.1,flip.1] f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,x),f(y,f(z,f(z,z)))),z)))=y.
+
+given clause #10: (wt=2) 41 [para_into,19.1.1.2.1,16.1.1] f(x,f(f(f(x,x),f(f(f(x,x),f(x,x)),f(x,e))),e))=e.
+
+reducing weight limit to 41.
+
+given clause #11: (wt=2) 45 [para_from,19.1.1,17.1.1.2.1.2,flip.1] f(f(x,x),f(f(f(x,x),f(x,x)),e))=f(x,f(f(x,e),e)).
+
+given clause #12: (wt=2) 49 [para_from,19.1.1,10.1.1.2.1] f(x,f(e,f(f(y,f(y,y)),f(f(y,f(y,y)),f(y,f(y,y))))))=f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),e)),e),y))).
+
+given clause #13: (wt=29) 14 [para_from,8.1.1,10.1.1.2.1,demod,9,9,9,9] f(e,f(e,f(f(x,f(x,x)),f(f(x,f(x,x)),f(x,f(x,x))))))=f(e,f(e,f(e,x))).
+
+given clause #14: (wt=2) 50 [para_from,19.1.1,6.1.1.2.1.2.2] f(x,f(f(x,f(f(x,x),e)),f(f(f(y,f(f(y,y),e)),e),f(f(f(y,f(f(y,y),e)),e),f(f(y,f(f(y,y),e)),e)))))=y.
+
+given clause #15: (wt=2) 54 [para_into,21.1.1.2.1.2.2,19.1.1,demod,9,9] f(e,f(e,f(f(f(x,f(f(x,x),e)),e),f(f(f(x,f(f(x,x),e)),e),f(f(x,f(f(x,x),e)),e)))))=x.
+
+given clause #16: (wt=2) 58 [para_into,21.1.1.2.1.2.2,16.1.1] f(e,f(f(e,f(e,f(f(x,x),f(f(f(x,x),f(x,x)),f(y,e))))),f(f(f(x,y),e),f(f(f(x,y),e),f(f(x,y),e)))))=x.
+
+given clause #17: (wt=39) 23 [para_into,16.1.1.2.1,16.1.1] f(x,f(f(f(x,x),f(f(f(x,x),f(x,x)),f(y,e))),e))=f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,y),e),e))).
+
+given clause #18: (wt=2) 66 [para_into,21.1.1.2.2.2,8.1.1,demod,9,63,63] f(e,f(e,f(e,f(f(x,e),e))))=x.
+
+given clause #19: (wt=2) 70 [para_into,21.1.1,10.1.1,demod,9,9,9,9] f(e,f(e,f(f(e,f(x,f(y,f(y,y)))),y)))=x.
+
+given clause #20: (wt=2) 79 [para_from,45.1.1,19.1.1.2.1] f(f(x,x),f(f(x,f(f(x,e),e)),e))=e.
+
+given clause #21: (wt=35) 24 [para_into,16.1.1.2.1,6.1.1,flip.1] f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),f(y,z))),f(z,f(z,z))),e)))=f(x,f(y,e)).
+
+given clause #22: (wt=2) 81 [para_from,45.1.1,17.1.1.2.1.2] f(x,f(f(x,f(x,f(f(x,e),e))),e))=f(f(x,x),f(x,x)).
+
+given clause #23: (wt=13) 94 [para_into,23.1.1.2.1.1,8.1.1,demod,9,9,9,63,63,67,9,9,9,9,flip.1] f(e,f(e,f(f(f(e,x),e),e)))=x.
+
+given clause #24: (wt=2) 132 [para_into,94.1.1.2.2.1.1,16.1.1,demod,9,9,9,9,130,130,67,flip.1] f(f(e,x),e)=f(e,f(x,e)).
+
+given clause #25: (wt=39) 26 [para_from,16.1.1,6.1.1.2.1.2,demod,9,9] f(x,f(f(x,f(f(f(x,x),f(x,x)),f(f(f(f(x,x),f(x,x)),f(f(x,x),f(x,x))),f(y,e)))),e))=f(f(x,x),y).
+
+given clause #26: (wt=2) 137 [back_demod,49,demod,128,flip.1] f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),e)),e),y)))=f(x,f(e,f(e,y))).
+
+given clause #27: (wt=2) 147 [para_from,132.1.1,17.1.1.2.1.2.2] f(x,f(f(x,f(f(x,x),f(e,f(y,e)))),e))=f(e,y).
+
+given clause #28: (wt=2) 157 [para_from,137.1.1,17.1.1.2.1,demod,9,9,flip.1] f(f(x,f(f(x,x),e)),e)=f(f(x,x),f(f(x,e),e)).
+
+given clause #29: (wt=43) 28 [para_from,16.1.1,6.1.1.2.1.2.2] f(x,f(f(x,f(f(x,x),f(f(y,y),f(f(f(y,y),f(y,y)),f(z,e))))),f(f(f(y,z),e),f(f(f(y,z),e),f(f(y,z),e)))))=y.
+
+given clause #30: (wt=2) 167 [back_demod,19,demod,158] f(x,f(f(x,x),f(f(x,e),e)))=e.
+
+given clause #31: (wt=2) 173 [para_into,147.1.1.2.1.2.2,23.1.1,demod,9,9,9,9,133,133,67,9,9,9,9] f(x,f(f(x,f(f(x,x),y)),e))=f(e,f(e,f(e,f(y,e)))).
+207 back subsumes 102.
+
+given clause #32: (wt=2) 177 [para_into,157.1.1.1,45.1.1] f(f(x,f(f(x,e),e)),e)=f(f(f(x,x),f(x,x)),f(f(f(x,x),e),e)).
+
+given clause #33: (wt=47) 30 [para_into,11.1.1,10.1.1,flip.1] f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),f(f(x,y),z))),f(z,f(z,z))),u)))=f(f(x,x),f(f(f(x,x),f(x,x)),f(y,u))).
+224 back subsumes 112.
+
+given clause #34: (wt=2) 178 [para_into,157.1.1.1,16.1.1] f(f(f(x,x),f(f(f(x,x),f(x,x)),f(x,e))),e)=f(f(x,x),f(f(x,e),e)).
+
+given clause #35: (wt=2) 182 [para_from,157.1.1,66.1.1.2.2.2.1] f(e,f(e,f(e,f(f(f(x,x),f(f(x,e),e)),e))))=f(x,f(f(x,x),e)).
+
+given clause #36: (wt=2) 193 [para_into,173.1.1.2.1.2,6.1.1,flip.1] f(e,f(e,f(e,f(f(f(f(x,x),f(f(f(x,x),f(x,x)),f(y,z))),f(z,f(z,z))),e))))=f(x,f(f(x,y),e)).
+
+given clause #37: (wt=47) 39 [para_from,17.1.1,6.1.1.2.1.2.2] f(x,f(f(x,f(f(x,x),y)),f(f(f(z,f(f(z,z),f(y,e))),e),f(f(f(z,f(f(z,z),f(y,e))),e),f(f(z,f(f(z,z),f(y,e))),e)))))=z.
+
+given clause #38: (wt=15) 231 [para_from,178.1.1,173.1.1.2,demod,67] f(f(x,x),f(f(x,x),f(f(x,e),e)))=x.
+
+given clause #39: (wt=19) 227 [para_from,30.1.1,6.1.1.2.1,demod,7,flip.1] f(f(x,f(f(x,x),f(f(x,y),z))),f(z,f(z,z)))=y.
+288 back subsumes 284.
+
+given clause #40: (wt=15) 269 [para_into,227.1.1.1.2.2.1,8.1.1,demod,9] f(f(e,f(e,f(e,x))),f(x,f(x,x)))=e.
+
+given clause #41: (wt=51) 52 [para_into,21.1.1.2.1.2.2,21.1.1] f(e,f(f(e,f(e,x)),f(f(f(e,f(e,f(x,y))),f(y,f(y,y))),f(f(f(e,f(e,f(x,y))),f(y,f(y,y))),f(f(e,f(e,f(x,y))),f(y,f(y,y)))))))=e.
+
+given clause #42: (wt=15) 282 [para_into,227.1.1.2.2,8.1.1,demod,9] f(f(x,f(f(x,x),f(f(x,y),e))),e)=y.
+
+given clause #43: (wt=15) 317 [back_demod,282,demod,312] f(f(x,x),f(f(x,f(f(x,y),e)),e))=y.
+
+given clause #44: (wt=17) 248 [para_into,227.1.1.1.2.1,8.1.1] f(f(e,f(e,f(f(e,x),y))),f(y,f(y,y)))=x.
+
+given clause #45: (wt=41) 74 [para_from,21.1.1,10.1.1.2.1,demod,9,9,9,9] f(e,f(x,f(f(y,f(y,y)),f(f(y,f(y,y)),f(y,f(y,y))))))=f(e,f(e,f(f(f(e,f(e,f(x,z))),f(z,f(z,z))),y))).
+
+given clause #46: (wt=19) 301 [para_from,269.1.1,6.1.1.2.1.2.2,demod,275] f(x,f(f(x,x),f(f(x,e),y)))=f(e,f(e,f(e,y))).
+
+given clause #47: (wt=19) 305 [back_demod,244,demod,300,300,67] f(f(x,e),f(f(x,e),f(x,e)))=f(x,f(f(x,x),e)).
+
+given clause #48: (wt=19) 311 [para_into,282.1.1.1.2.2,282.1.1] f(f(x,f(f(x,x),y)),e)=f(f(x,x),f(f(x,y),e)).
+415 back subsumes 238.
+
+given clause #49: (wt=37) 75 [para_from,41.1.1,17.1.1.2.1.2,flip.1] f(f(f(x,x),f(x,x)),f(f(f(f(x,x),f(x,x)),f(f(x,x),f(x,x))),f(f(x,x),e)))=f(x,f(f(x,e),e)).
+
+given clause #50: (wt=19) 387 [para_from,305.1.1,269.1.1.2] f(f(e,f(e,f(e,f(x,e)))),f(x,f(f(x,x),e)))=e.
+
+given clause #51: (wt=17) 416 [para_into,387.1.1.1,66.1.1] f(x,f(f(x,e),f(f(f(x,e),f(x,e)),e)))=e.
+
+given clause #52: (wt=21) 139 [para_into,132.1.1.1,21.1.1,flip.1] f(e,f(f(f(e,f(e,f(x,y))),f(y,f(y,y))),e))=f(x,e).
+
+given clause #53: (wt=37) 85 [para_from,14.1.1,16.1.1.2.1,demod,63,63,63,9,9,9,9,63,flip.1] f(e,f(e,f(e,f(f(f(x,f(x,x)),f(f(x,f(x,x)),f(x,f(x,x)))),e))))=f(e,f(e,f(e,f(e,f(x,e))))).
+
+given clause #54: (wt=21) 186 [para_into,167.1.1.2.2.1,132.1.1,demod,133] f(f(e,x),f(f(f(e,x),f(e,x)),f(e,f(f(x,e),e))))=e.
+
+given clause #55: (wt=21) 285 [para_from,227.1.1,21.1.1.2.1.2.2,demod,136] f(e,f(e,f(f(e,x),y)))=f(z,f(f(z,z),f(f(z,x),y))).
+
+given clause #56: (wt=21) 293 [para_into,269.1.1.1,66.1.1] f(x,f(f(f(x,e),e),f(f(f(x,e),e),f(f(x,e),e))))=e.
+
+given clause #57: (wt=37) 89 [para_into,54.1.1.2.2.1.1,45.1.1,demod,46,46] f(e,f(e,f(f(f(x,f(f(x,e),e)),e),f(f(f(x,f(f(x,e),e)),e),f(f(x,f(f(x,e),e)),e)))))=f(x,x).
+
+given clause #58: (wt=17) 500 [para_from,293.1.1,227.1.1.1.2.2,demod,275] f(f(x,x),f(f(x,e),f(f(f(x,y),e),e)))=y.
+
+given clause #59: (wt=17) 504 [back_demod,454,demod,503] f(f(e,x),f(e,f(f(x,x),f(f(x,e),e))))=e.
+
+given clause #60: (wt=21) 327 [back_demod,173,demod,312] f(x,f(f(x,x),f(f(x,y),e)))=f(e,f(e,f(e,f(y,e)))).
+
+given clause #61: (wt=31) 93 [para_from,58.1.1,21.1.1.2.1.2,demod,61] f(e,f(e,f(x,f(f(x,y),e))))=f(e,f(e,f(f(x,x),f(f(f(x,x),f(x,x)),f(y,e))))).
+
+given clause #62: (wt=21) 340 [para_into,317.1.1.2.1,45.1.1] f(f(f(x,x),f(x,x)),f(f(x,f(f(x,e),e)),e))=f(x,x).
+
+given clause #63: (wt=21) 353 [para_from,248.1.1,6.1.1.2.1.2.2,demod,275] f(x,f(f(x,x),f(f(x,y),z)))=f(e,f(e,f(f(e,y),z))).
+
+given clause #64: (wt=17) 634 [para_into,353.1.1.2,231.1.1,flip.1] f(e,f(e,f(f(e,x),f(f(x,e),e))))=f(x,x).
+
+given clause #65: (wt=41) 103 [para_from,66.1.1,6.1.1.2.1.2.2] f(x,f(f(x,f(f(x,x),y)),f(f(e,f(e,f(f(y,e),e))),f(f(e,f(e,f(f(y,e),e))),f(e,f(e,f(f(y,e),e)))))))=e.
+
+given clause #66: (wt=19) 671 [para_into,634.1.1,285.1.1] f(x,f(f(x,x),f(f(x,y),f(f(y,e),e))))=f(y,y).
+
+given clause #67: (wt=2) 703 [para_from,671.1.1,16.1.1.2.1,demod,328,flip.1] f(e,f(e,f(e,f(f(f(x,y),f(f(y,e),e)),e))))=f(x,f(f(y,y),e)).
+
+given clause #68: (wt=2) 718 [para_from,703.1.1,132.1.1.1,demod,133,133,67] f(f(x,f(f(y,y),e)),e)=f(f(x,y),f(f(y,e),e)).
+
+given clause #69: (wt=25) 107 [para_from,70.1.1,16.1.1.2.1,demod,9,9,9,9,63,flip.1] f(e,f(e,f(e,f(f(f(e,f(x,f(y,f(y,y)))),y),e))))=f(e,f(x,e)).
+
+given clause #70: (wt=19) 722 [para_into,718.1.1,132.1.1] f(e,f(f(f(x,x),e),e))=f(f(e,x),f(f(x,e),e)).
+
+given clause #71: (wt=21) 371 [back_demod,319,demod,366] f(f(x,x),f(f(x,e),f(y,e)))=f(f(x,x),f(f(x,y),e)).
+
+given clause #72: (wt=2) 793 [para_from,371.1.1,317.1.1.2.1.2.1,demod,318] f(f(x,y),e)=f(f(x,e),f(y,e)).
+907 back subsumes 371.
+
+given clause #73: (wt=27) 116 [para_from,24.1.1,17.1.1.2.1] f(f(x,x),f(f(x,f(y,e)),e))=f(f(x,f(f(x,x),f(y,z))),f(z,f(z,z))).
+
+given clause #74: (wt=2) 900 [para_from,793.1.1,703.1.1.2.2.2.1.1,demod,9,9,67,9,9] f(f(x,e),f(y,e))=f(f(x,y),e).
+
+given clause #75: (wt=2) 917 [back_demod,58,demod,899] f(e,f(f(e,f(e,f(x,f(f(x,e),f(y,e))))),f(f(f(x,y),e),f(f(f(x,y),e),f(f(x,y),e)))))=x.
+
+given clause #76: (wt=2) 965 [para_into,900.1.1.2,132.1.1,flip.1] f(f(x,f(e,y)),e)=f(f(x,e),f(e,f(y,e))).
+
+given clause #77: (wt=37) 119 [para_from,81.1.1,17.1.1.2.1.2] f(x,f(f(x,f(f(f(x,x),f(x,x)),f(f(x,x),f(x,x)))),e))=f(f(x,x),f(f(x,x),f(f(f(x,x),e),e))).
+
+given clause #78: (wt=2) 1033 [back_demod,190,demod,966,966,9,67,flip.1] f(f(x,x),f(f(f(x,x),f(x,x)),y))=f(x,f(f(x,e),y)).
+1216 back subsumes 177.
+
+given clause #79: (wt=2) 1076 [para_from,900.1.1,81.1.1.2.1.2] f(f(x,e),f(f(f(x,e),f(f(x,f(f(x,e),e)),e)),e))=f(f(f(x,e),f(x,e)),f(f(x,e),f(x,e))).
+
+given clause #80: (wt=2) 1130 [para_into,917.1.1.2.2.1.1,671.1.1,demod,834,1014,635,672,672] f(e,f(f(e,f(e,f(x,f(f(y,e),f(y,e))))),f(f(f(y,y),e),f(f(f(y,y),e),f(f(y,y),e)))))=x.
+
+-------- PROOF -------- 1244 [binary,1242.1,4.1] $ANS(rid).
+
+----> UNIT CONFLICT at   0.49 sec ----> 1244 [binary,1242.1,4.1] $ANS(rid).
+
+Length of proof is 57.  Level of proof is 18.
+
+---------------- PROOF ----------------
+
+4 [] f(a,e)!=a|$ANS(rid).
+7,6 [] f(x,f(f(x,f(f(x,x),f(y,z))),f(z,f(z,z))))=y.
+9,8 [] f(e,e)=e.
+10 [para_into,6.1.1.2.1.2,6.1.1] f(x,f(f(x,y),f(f(z,f(z,z)),f(f(z,f(z,z)),f(z,f(z,z))))))=f(f(x,x),f(f(f(x,x),f(x,x)),f(y,z))).
+11 [para_into,10.1.1.2.1,6.1.1] f(x,f(y,f(f(z,f(z,z)),f(f(z,f(z,z)),f(z,f(z,z))))))=f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),f(y,u))),f(u,f(u,u))),z))).
+16 [para_from,8.1.1,10.1.1.2.2.1.2,demod,9,9,9,9,9,9,9] f(x,f(f(x,y),e))=f(f(x,x),f(f(f(x,x),f(x,x)),f(y,e))).
+17 [para_from,8.1.1,6.1.1.2.2.2,demod,9] f(x,f(f(x,f(f(x,x),f(y,e))),e))=y.
+19 [para_from,8.1.1,6.1.1.2.1.2.2,demod,9,9] f(x,f(f(x,f(f(x,x),e)),e))=e.
+22,21 [para_from,8.1.1,6.1.1.2.1.2.1] f(e,f(f(e,f(e,f(x,y))),f(y,f(y,y))))=x.
+23 [para_into,16.1.1.2.1,16.1.1] f(x,f(f(f(x,x),f(f(f(x,x),f(x,x)),f(y,e))),e))=f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,y),e),e))).
+24 [para_into,16.1.1.2.1,6.1.1,flip.1] f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),f(y,z))),f(z,f(z,z))),e)))=f(x,f(y,e)).
+30 [para_into,11.1.1,10.1.1,flip.1] f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),f(f(x,y),z))),f(z,f(z,z))),u)))=f(f(x,x),f(f(f(x,x),f(x,x)),f(y,u))).
+49 [para_from,19.1.1,10.1.1.2.1] f(x,f(e,f(f(y,f(y,y)),f(f(y,f(y,y)),f(y,f(y,y))))))=f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),e)),e),y))).
+58 [para_into,21.1.1.2.1.2.2,16.1.1] f(e,f(f(e,f(e,f(f(x,x),f(f(f(x,x),f(x,x)),f(y,e))))),f(f(f(x,y),e),f(f(f(x,y),e),f(f(x,y),e)))))=x.
+63,62 [para_into,21.1.1.2.1.2,17.1.1,demod,9,9,9] f(e,f(f(e,x),e))=f(e,f(e,f(x,e))).
+67,66 [para_into,21.1.1.2.2.2,8.1.1,demod,9,63,63] f(e,f(e,f(e,f(f(x,e),e))))=x.
+94 [para_into,23.1.1.2.1.1,8.1.1,demod,9,9,9,63,63,67,9,9,9,9,flip.1] f(e,f(e,f(f(f(e,x),e),e)))=x.
+122,121 [para_into,94.1.1.2.2.1.1,94.1.1,flip.1] f(e,f(f(f(e,x),e),e))=f(e,f(e,f(f(x,e),e))).
+128,127 [para_into,94.1.1.2.2.1.1,49.1.1,demod,9,9,9,9,9,9,9,9,122,122,122,67,flip.1] f(e,f(f(x,f(x,x)),f(f(x,f(x,x)),f(x,f(x,x)))))=f(e,f(e,x)).
+130,129 [para_into,94.1.1.2.2.1.1,23.1.1,demod,9,9,9,9,122,67,9,9,9,9,flip.1] f(f(e,f(e,f(x,e))),e)=f(e,f(e,f(f(x,e),e))).
+133,132 [para_into,94.1.1.2.2.1.1,16.1.1,demod,9,9,9,9,130,130,67,flip.1] f(f(e,x),e)=f(e,f(x,e)).
+136,135 [para_into,94.1.1.2.2.1.1,10.1.1,demod,9,9,9,9,133,133,133,133,67,flip.1] f(f(e,x),f(f(y,f(y,y)),f(f(y,f(y,y)),f(y,f(y,y)))))=f(e,f(x,y)).
+137 [back_demod,49,demod,128,flip.1] f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),e)),e),y)))=f(x,f(e,f(e,y))).
+147 [para_from,132.1.1,17.1.1.2.1.2.2] f(x,f(f(x,f(f(x,x),f(e,f(y,e)))),e))=f(e,y).
+157 [para_from,137.1.1,17.1.1.2.1,demod,9,9,flip.1] f(f(x,f(f(x,x),e)),e)=f(f(x,x),f(f(x,e),e)).
+173 [para_into,147.1.1.2.1.2.2,23.1.1,demod,9,9,9,9,133,133,67,9,9,9,9] f(x,f(f(x,f(f(x,x),y)),e))=f(e,f(e,f(e,f(y,e)))).
+178 [para_into,157.1.1.1,16.1.1] f(f(f(x,x),f(f(f(x,x),f(x,x)),f(x,e))),e)=f(f(x,x),f(f(x,e),e)).
+200,199 [para_into,173.1.1,16.1.1] f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,x),y),e)))=f(e,f(e,f(e,f(y,e)))).
+227 [para_from,30.1.1,6.1.1.2.1,demod,7,flip.1] f(f(x,f(f(x,x),f(f(x,y),z))),f(z,f(z,z)))=y.
+231 [para_from,178.1.1,173.1.1.2,demod,67] f(f(x,x),f(f(x,x),f(f(x,e),e)))=x.
+244 [para_from,231.1.1,24.1.1.2.2.1.1.2,demod,200] f(e,f(e,f(e,f(f(f(f(x,e),e),f(f(f(x,e),e),f(f(x,e),e))),e))))=f(x,f(f(x,x),e)).
+248 [para_into,227.1.1.1.2.1,8.1.1] f(f(e,f(e,f(f(e,x),y))),f(y,f(y,y)))=x.
+254 [para_into,227.1.1.1.2.2.1,173.1.1] f(f(x,f(f(x,x),f(f(e,f(e,f(e,f(y,e)))),z))),f(z,f(z,z)))=f(f(x,f(f(x,x),y)),e).
+269 [para_into,227.1.1.1.2.2.1,8.1.1,demod,9] f(f(e,f(e,f(e,x))),f(x,f(x,x)))=e.
+275,274 [para_into,227.1.1.1.2.2,227.1.1] f(f(x,f(f(x,x),y)),f(f(z,f(z,z)),f(f(z,f(z,z)),f(z,f(z,z)))))=f(f(x,x),f(f(x,y),z)).
+282 [para_into,227.1.1.2.2,8.1.1,demod,9] f(f(x,f(f(x,x),f(f(x,y),e))),e)=y.
+285 [para_from,227.1.1,21.1.1.2.1.2.2,demod,136] f(e,f(e,f(f(e,x),y)))=f(z,f(f(z,z),f(f(z,x),y))).
+300,299 [para_from,269.1.1,24.1.1.2.2.1.1.2.2,demod,275,200,133,133,133] f(e,f(e,f(e,f(f(f(x,e),y),e))))=f(x,f(e,f(e,f(e,f(y,e))))).
+301 [para_from,269.1.1,6.1.1.2.1.2.2,demod,275] f(x,f(f(x,x),f(f(x,e),y)))=f(e,f(e,f(e,y))).
+305 [back_demod,244,demod,300,300,67] f(f(x,e),f(f(x,e),f(x,e)))=f(x,f(f(x,x),e)).
+312,311 [para_into,282.1.1.1.2.2,282.1.1] f(f(x,f(f(x,x),y)),e)=f(f(x,x),f(f(x,y),e)).
+318,317 [back_demod,282,demod,312] f(f(x,x),f(f(x,f(f(x,y),e)),e))=y.
+319 [back_demod,254,demod,312] f(f(x,f(f(x,x),f(f(e,f(e,f(e,f(y,e)))),z))),f(z,f(z,z)))=f(f(x,x),f(f(x,y),e)).
+328,327 [back_demod,173,demod,312] f(x,f(f(x,x),f(f(x,y),e)))=f(e,f(e,f(e,f(y,e)))).
+353 [para_from,248.1.1,6.1.1.2.1.2.2,demod,275] f(x,f(f(x,x),f(f(x,y),z)))=f(e,f(e,f(f(e,y),z))).
+366,365 [para_from,301.1.1,227.1.1.1.2.2.1] f(f(x,f(f(x,x),f(f(e,f(e,f(e,y))),z))),f(z,f(z,z)))=f(f(x,x),f(f(x,e),y)).
+371 [back_demod,319,demod,366] f(f(x,x),f(f(x,e),f(y,e)))=f(f(x,x),f(f(x,y),e)).
+487 [para_from,285.1.1,132.1.1.1,demod,312,133] f(f(x,x),f(f(x,f(f(x,y),z)),e))=f(e,f(e,f(f(f(e,y),z),e))).
+635,634 [para_into,353.1.1.2,231.1.1,flip.1] f(e,f(e,f(f(e,x),f(f(x,e),e))))=f(x,x).
+672,671 [para_into,634.1.1,285.1.1] f(x,f(f(x,x),f(f(x,y),f(f(y,e),e))))=f(y,y).
+703 [para_from,671.1.1,16.1.1.2.1,demod,328,flip.1] f(e,f(e,f(e,f(f(f(x,y),f(f(y,e),e)),e))))=f(x,f(f(y,y),e)).
+793 [para_from,371.1.1,317.1.1.2.1.2.1,demod,318] f(f(x,y),e)=f(f(x,e),f(y,e)).
+834,833 [para_into,793.1.1,311.1.1,flip.1] f(f(x,e),f(f(f(x,x),y),e))=f(f(x,x),f(f(x,y),e)).
+899,898 [para_from,793.1.1,16.1.1.2,flip.1] f(f(x,x),f(f(f(x,x),f(x,x)),f(y,e)))=f(x,f(f(x,e),f(y,e))).
+900 [para_from,793.1.1,703.1.1.2.2.2.1.1,demod,9,9,67,9,9] f(f(x,e),f(y,e))=f(f(x,y),e).
+917 [back_demod,58,demod,899] f(e,f(f(e,f(e,f(x,f(f(x,e),f(y,e))))),f(f(f(x,y),e),f(f(f(x,y),e),f(f(x,y),e)))))=x.
+958,957 [para_into,900.1.1.1,132.1.1,flip.1] f(f(f(e,x),y),e)=f(f(e,f(x,e)),f(y,e)).
+1014,1013 [back_demod,487,demod,958] f(f(x,x),f(f(x,f(f(x,y),z)),e))=f(e,f(e,f(f(e,f(y,e)),f(z,e)))).
+1130 [para_into,917.1.1.2.2.1.1,671.1.1,demod,834,1014,635,672,672] f(e,f(f(e,f(e,f(x,f(f(y,e),f(y,e))))),f(f(f(y,y),e),f(f(f(y,y),e),f(f(y,y),e)))))=x.
+1242 [para_into,1130.1.1.2.1.2.2,305.1.1,demod,22,flip.1] f(x,e)=x.
+1244 [binary,1242.1,4.1] $ANS(rid).
+
+------------ end of proof -------------
+
+-------- PROOF -------- 1405 [binary,1403.1,2.1] $ANS(exp4).
+
+----> UNIT CONFLICT at   0.52 sec ----> 1405 [binary,1403.1,2.1] $ANS(exp4).
+
+Length of proof is 61.  Level of proof is 20.
+
+---------------- PROOF ----------------
+
+2 [] f(a,f(a,f(a,a)))!=e|$ANS(exp4).
+7,6 [] f(x,f(f(x,f(f(x,x),f(y,z))),f(z,f(z,z))))=y.
+9,8 [] f(e,e)=e.
+10 [para_into,6.1.1.2.1.2,6.1.1] f(x,f(f(x,y),f(f(z,f(z,z)),f(f(z,f(z,z)),f(z,f(z,z))))))=f(f(x,x),f(f(f(x,x),f(x,x)),f(y,z))).
+11 [para_into,10.1.1.2.1,6.1.1] f(x,f(y,f(f(z,f(z,z)),f(f(z,f(z,z)),f(z,f(z,z))))))=f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),f(y,u))),f(u,f(u,u))),z))).
+16 [para_from,8.1.1,10.1.1.2.2.1.2,demod,9,9,9,9,9,9,9] f(x,f(f(x,y),e))=f(f(x,x),f(f(f(x,x),f(x,x)),f(y,e))).
+17 [para_from,8.1.1,6.1.1.2.2.2,demod,9] f(x,f(f(x,f(f(x,x),f(y,e))),e))=y.
+19 [para_from,8.1.1,6.1.1.2.1.2.2,demod,9,9] f(x,f(f(x,f(f(x,x),e)),e))=e.
+22,21 [para_from,8.1.1,6.1.1.2.1.2.1] f(e,f(f(e,f(e,f(x,y))),f(y,f(y,y))))=x.
+23 [para_into,16.1.1.2.1,16.1.1] f(x,f(f(f(x,x),f(f(f(x,x),f(x,x)),f(y,e))),e))=f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,y),e),e))).
+24 [para_into,16.1.1.2.1,6.1.1,flip.1] f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),f(y,z))),f(z,f(z,z))),e)))=f(x,f(y,e)).
+30 [para_into,11.1.1,10.1.1,flip.1] f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),f(f(x,y),z))),f(z,f(z,z))),u)))=f(f(x,x),f(f(f(x,x),f(x,x)),f(y,u))).
+49 [para_from,19.1.1,10.1.1.2.1] f(x,f(e,f(f(y,f(y,y)),f(f(y,f(y,y)),f(y,f(y,y))))))=f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),e)),e),y))).
+58 [para_into,21.1.1.2.1.2.2,16.1.1] f(e,f(f(e,f(e,f(f(x,x),f(f(f(x,x),f(x,x)),f(y,e))))),f(f(f(x,y),e),f(f(f(x,y),e),f(f(x,y),e)))))=x.
+63,62 [para_into,21.1.1.2.1.2,17.1.1,demod,9,9,9] f(e,f(f(e,x),e))=f(e,f(e,f(x,e))).
+67,66 [para_into,21.1.1.2.2.2,8.1.1,demod,9,63,63] f(e,f(e,f(e,f(f(x,e),e))))=x.
+94 [para_into,23.1.1.2.1.1,8.1.1,demod,9,9,9,63,63,67,9,9,9,9,flip.1] f(e,f(e,f(f(f(e,x),e),e)))=x.
+122,121 [para_into,94.1.1.2.2.1.1,94.1.1,flip.1] f(e,f(f(f(e,x),e),e))=f(e,f(e,f(f(x,e),e))).
+128,127 [para_into,94.1.1.2.2.1.1,49.1.1,demod,9,9,9,9,9,9,9,9,122,122,122,67,flip.1] f(e,f(f(x,f(x,x)),f(f(x,f(x,x)),f(x,f(x,x)))))=f(e,f(e,x)).
+130,129 [para_into,94.1.1.2.2.1.1,23.1.1,demod,9,9,9,9,122,67,9,9,9,9,flip.1] f(f(e,f(e,f(x,e))),e)=f(e,f(e,f(f(x,e),e))).
+133,132 [para_into,94.1.1.2.2.1.1,16.1.1,demod,9,9,9,9,130,130,67,flip.1] f(f(e,x),e)=f(e,f(x,e)).
+136,135 [para_into,94.1.1.2.2.1.1,10.1.1,demod,9,9,9,9,133,133,133,133,67,flip.1] f(f(e,x),f(f(y,f(y,y)),f(f(y,f(y,y)),f(y,f(y,y)))))=f(e,f(x,y)).
+137 [back_demod,49,demod,128,flip.1] f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),e)),e),y)))=f(x,f(e,f(e,y))).
+147 [para_from,132.1.1,17.1.1.2.1.2.2] f(x,f(f(x,f(f(x,x),f(e,f(y,e)))),e))=f(e,y).
+157 [para_from,137.1.1,17.1.1.2.1,demod,9,9,flip.1] f(f(x,f(f(x,x),e)),e)=f(f(x,x),f(f(x,e),e)).
+173 [para_into,147.1.1.2.1.2.2,23.1.1,demod,9,9,9,9,133,133,67,9,9,9,9] f(x,f(f(x,f(f(x,x),y)),e))=f(e,f(e,f(e,f(y,e)))).
+178 [para_into,157.1.1.1,16.1.1] f(f(f(x,x),f(f(f(x,x),f(x,x)),f(x,e))),e)=f(f(x,x),f(f(x,e),e)).
+200,199 [para_into,173.1.1,16.1.1] f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,x),y),e)))=f(e,f(e,f(e,f(y,e)))).
+227 [para_from,30.1.1,6.1.1.2.1,demod,7,flip.1] f(f(x,f(f(x,x),f(f(x,y),z))),f(z,f(z,z)))=y.
+231 [para_from,178.1.1,173.1.1.2,demod,67] f(f(x,x),f(f(x,x),f(f(x,e),e)))=x.
+244 [para_from,231.1.1,24.1.1.2.2.1.1.2,demod,200] f(e,f(e,f(e,f(f(f(f(x,e),e),f(f(f(x,e),e),f(f(x,e),e))),e))))=f(x,f(f(x,x),e)).
+248 [para_into,227.1.1.1.2.1,8.1.1] f(f(e,f(e,f(f(e,x),y))),f(y,f(y,y)))=x.
+254 [para_into,227.1.1.1.2.2.1,173.1.1] f(f(x,f(f(x,x),f(f(e,f(e,f(e,f(y,e)))),z))),f(z,f(z,z)))=f(f(x,f(f(x,x),y)),e).
+269 [para_into,227.1.1.1.2.2.1,8.1.1,demod,9] f(f(e,f(e,f(e,x))),f(x,f(x,x)))=e.
+275,274 [para_into,227.1.1.1.2.2,227.1.1] f(f(x,f(f(x,x),y)),f(f(z,f(z,z)),f(f(z,f(z,z)),f(z,f(z,z)))))=f(f(x,x),f(f(x,y),z)).
+282 [para_into,227.1.1.2.2,8.1.1,demod,9] f(f(x,f(f(x,x),f(f(x,y),e))),e)=y.
+285 [para_from,227.1.1,21.1.1.2.1.2.2,demod,136] f(e,f(e,f(f(e,x),y)))=f(z,f(f(z,z),f(f(z,x),y))).
+300,299 [para_from,269.1.1,24.1.1.2.2.1.1.2.2,demod,275,200,133,133,133] f(e,f(e,f(e,f(f(f(x,e),y),e))))=f(x,f(e,f(e,f(e,f(y,e))))).
+301 [para_from,269.1.1,6.1.1.2.1.2.2,demod,275] f(x,f(f(x,x),f(f(x,e),y)))=f(e,f(e,f(e,y))).
+305 [back_demod,244,demod,300,300,67] f(f(x,e),f(f(x,e),f(x,e)))=f(x,f(f(x,x),e)).
+312,311 [para_into,282.1.1.1.2.2,282.1.1] f(f(x,f(f(x,x),y)),e)=f(f(x,x),f(f(x,y),e)).
+318,317 [back_demod,282,demod,312] f(f(x,x),f(f(x,f(f(x,y),e)),e))=y.
+319 [back_demod,254,demod,312] f(f(x,f(f(x,x),f(f(e,f(e,f(e,f(y,e)))),z))),f(z,f(z,z)))=f(f(x,x),f(f(x,y),e)).
+328,327 [back_demod,173,demod,312] f(x,f(f(x,x),f(f(x,y),e)))=f(e,f(e,f(e,f(y,e)))).
+353 [para_from,248.1.1,6.1.1.2.1.2.2,demod,275] f(x,f(f(x,x),f(f(x,y),z)))=f(e,f(e,f(f(e,y),z))).
+366,365 [para_from,301.1.1,227.1.1.1.2.2.1] f(f(x,f(f(x,x),f(f(e,f(e,f(e,y))),z))),f(z,f(z,z)))=f(f(x,x),f(f(x,e),y)).
+371 [back_demod,319,demod,366] f(f(x,x),f(f(x,e),f(y,e)))=f(f(x,x),f(f(x,y),e)).
+387 [para_from,305.1.1,269.1.1.2] f(f(e,f(e,f(e,f(x,e)))),f(x,f(f(x,x),e)))=e.
+487 [para_from,285.1.1,132.1.1.1,demod,312,133] f(f(x,x),f(f(x,f(f(x,y),z)),e))=f(e,f(e,f(f(f(e,y),z),e))).
+635,634 [para_into,353.1.1.2,231.1.1,flip.1] f(e,f(e,f(f(e,x),f(f(x,e),e))))=f(x,x).
+672,671 [para_into,634.1.1,285.1.1] f(x,f(f(x,x),f(f(x,y),f(f(y,e),e))))=f(y,y).
+703 [para_from,671.1.1,16.1.1.2.1,demod,328,flip.1] f(e,f(e,f(e,f(f(f(x,y),f(f(y,e),e)),e))))=f(x,f(f(y,y),e)).
+793 [para_from,371.1.1,317.1.1.2.1.2.1,demod,318] f(f(x,y),e)=f(f(x,e),f(y,e)).
+834,833 [para_into,793.1.1,311.1.1,flip.1] f(f(x,e),f(f(f(x,x),y),e))=f(f(x,x),f(f(x,y),e)).
+881 [para_from,793.1.1,387.1.1.2.2] f(f(e,f(e,f(e,f(x,e)))),f(x,f(f(x,e),f(x,e))))=e.
+899,898 [para_from,793.1.1,16.1.1.2,flip.1] f(f(x,x),f(f(f(x,x),f(x,x)),f(y,e)))=f(x,f(f(x,e),f(y,e))).
+900 [para_from,793.1.1,703.1.1.2.2.2.1.1,demod,9,9,67,9,9] f(f(x,e),f(y,e))=f(f(x,y),e).
+917 [back_demod,58,demod,899] f(e,f(f(e,f(e,f(x,f(f(x,e),f(y,e))))),f(f(f(x,y),e),f(f(f(x,y),e),f(f(x,y),e)))))=x.
+958,957 [para_into,900.1.1.1,132.1.1,flip.1] f(f(f(e,x),y),e)=f(f(e,f(x,e)),f(y,e)).
+1014,1013 [back_demod,487,demod,958] f(f(x,x),f(f(x,f(f(x,y),z)),e))=f(e,f(e,f(f(e,f(y,e)),f(z,e)))).
+1130 [para_into,917.1.1.2.2.1.1,671.1.1,demod,834,1014,635,672,672] f(e,f(f(e,f(e,f(x,f(f(y,e),f(y,e))))),f(f(f(y,y),e),f(f(f(y,y),e),f(f(y,y),e)))))=x.
+1243,1242 [para_into,1130.1.1.2.1.2.2,305.1.1,demod,22,flip.1] f(x,e)=x.
+1250,1249 [para_into,1130.1.1.2.2.1.1,8.1.1,demod,1243,1243,1243,1243,1243,1243,1243,1243,1243,1243,1243,1243] f(e,f(e,f(e,x)))=x.
+1403 [back_demod,881,demod,1243,1250,1243,1243] f(x,f(x,f(x,x)))=e.
+1405 [binary,1403.1,2.1] $ANS(exp4).
+
+------------ end of proof -------------
+
+-------- PROOF -------- 1460 [binary,1458.1,3.1] $ANS(lid).
+
+----> UNIT CONFLICT at   0.53 sec ----> 1460 [binary,1458.1,3.1] $ANS(lid).
+
+Length of proof is 122.  Level of proof is 28.
+
+---------------- PROOF ----------------
+
+3 [] f(e,a)!=a|$ANS(lid).
+7,6 [] f(x,f(f(x,f(f(x,x),f(y,z))),f(z,f(z,z))))=y.
+9,8 [] f(e,e)=e.
+10 [para_into,6.1.1.2.1.2,6.1.1] f(x,f(f(x,y),f(f(z,f(z,z)),f(f(z,f(z,z)),f(z,f(z,z))))))=f(f(x,x),f(f(f(x,x),f(x,x)),f(y,z))).
+11 [para_into,10.1.1.2.1,6.1.1] f(x,f(y,f(f(z,f(z,z)),f(f(z,f(z,z)),f(z,f(z,z))))))=f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),f(y,u))),f(u,f(u,u))),z))).
+16 [para_from,8.1.1,10.1.1.2.2.1.2,demod,9,9,9,9,9,9,9] f(x,f(f(x,y),e))=f(f(x,x),f(f(f(x,x),f(x,x)),f(y,e))).
+17 [para_from,8.1.1,6.1.1.2.2.2,demod,9] f(x,f(f(x,f(f(x,x),f(y,e))),e))=y.
+19 [para_from,8.1.1,6.1.1.2.1.2.2,demod,9,9] f(x,f(f(x,f(f(x,x),e)),e))=e.
+22,21 [para_from,8.1.1,6.1.1.2.1.2.1] f(e,f(f(e,f(e,f(x,y))),f(y,f(y,y))))=x.
+23 [para_into,16.1.1.2.1,16.1.1] f(x,f(f(f(x,x),f(f(f(x,x),f(x,x)),f(y,e))),e))=f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,y),e),e))).
+24 [para_into,16.1.1.2.1,6.1.1,flip.1] f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),f(y,z))),f(z,f(z,z))),e)))=f(x,f(y,e)).
+30 [para_into,11.1.1,10.1.1,flip.1] f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),f(f(x,y),z))),f(z,f(z,z))),u)))=f(f(x,x),f(f(f(x,x),f(x,x)),f(y,u))).
+45 [para_from,19.1.1,17.1.1.2.1.2,flip.1] f(f(x,x),f(f(f(x,x),f(x,x)),e))=f(x,f(f(x,e),e)).
+49 [para_from,19.1.1,10.1.1.2.1] f(x,f(e,f(f(y,f(y,y)),f(f(y,f(y,y)),f(y,f(y,y))))))=f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),e)),e),y))).
+58 [para_into,21.1.1.2.1.2.2,16.1.1] f(e,f(f(e,f(e,f(f(x,x),f(f(f(x,x),f(x,x)),f(y,e))))),f(f(f(x,y),e),f(f(f(x,y),e),f(f(x,y),e)))))=x.
+61,60 [para_into,21.1.1.2.1.2,21.1.1] f(e,f(f(e,x),f(f(y,f(y,y)),f(f(y,f(y,y)),f(y,f(y,y))))))=f(e,f(e,f(x,y))).
+63,62 [para_into,21.1.1.2.1.2,17.1.1,demod,9,9,9] f(e,f(f(e,x),e))=f(e,f(e,f(x,e))).
+67,66 [para_into,21.1.1.2.2.2,8.1.1,demod,9,63,63] f(e,f(e,f(e,f(f(x,e),e))))=x.
+70 [para_into,21.1.1,10.1.1,demod,9,9,9,9] f(e,f(e,f(f(e,f(x,f(y,f(y,y)))),y)))=x.
+81 [para_from,45.1.1,17.1.1.2.1.2] f(x,f(f(x,f(x,f(f(x,e),e))),e))=f(f(x,x),f(x,x)).
+93 [para_from,58.1.1,21.1.1.2.1.2,demod,61] f(e,f(e,f(x,f(f(x,y),e))))=f(e,f(e,f(f(x,x),f(f(f(x,x),f(x,x)),f(y,e))))).
+94 [para_into,23.1.1.2.1.1,8.1.1,demod,9,9,9,63,63,67,9,9,9,9,flip.1] f(e,f(e,f(f(f(e,x),e),e)))=x.
+107 [para_from,70.1.1,16.1.1.2.1,demod,9,9,9,9,63,flip.1] f(e,f(e,f(e,f(f(f(e,f(x,f(y,f(y,y)))),y),e))))=f(e,f(x,e)).
+122,121 [para_into,94.1.1.2.2.1.1,94.1.1,flip.1] f(e,f(f(f(e,x),e),e))=f(e,f(e,f(f(x,e),e))).
+128,127 [para_into,94.1.1.2.2.1.1,49.1.1,demod,9,9,9,9,9,9,9,9,122,122,122,67,flip.1] f(e,f(f(x,f(x,x)),f(f(x,f(x,x)),f(x,f(x,x)))))=f(e,f(e,x)).
+130,129 [para_into,94.1.1.2.2.1.1,23.1.1,demod,9,9,9,9,122,67,9,9,9,9,flip.1] f(f(e,f(e,f(x,e))),e)=f(e,f(e,f(f(x,e),e))).
+133,132 [para_into,94.1.1.2.2.1.1,16.1.1,demod,9,9,9,9,130,130,67,flip.1] f(f(e,x),e)=f(e,f(x,e)).
+136,135 [para_into,94.1.1.2.2.1.1,10.1.1,demod,9,9,9,9,133,133,133,133,67,flip.1] f(f(e,x),f(f(y,f(y,y)),f(f(y,f(y,y)),f(y,f(y,y)))))=f(e,f(x,y)).
+137 [back_demod,49,demod,128,flip.1] f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),e)),e),y)))=f(x,f(e,f(e,y))).
+147 [para_from,132.1.1,17.1.1.2.1.2.2] f(x,f(f(x,f(f(x,x),f(e,f(y,e)))),e))=f(e,y).
+158,157 [para_from,137.1.1,17.1.1.2.1,demod,9,9,flip.1] f(f(x,f(f(x,x),e)),e)=f(f(x,x),f(f(x,e),e)).
+167 [back_demod,19,demod,158] f(x,f(f(x,x),f(f(x,e),e)))=e.
+173 [para_into,147.1.1.2.1.2.2,23.1.1,demod,9,9,9,9,133,133,67,9,9,9,9] f(x,f(f(x,f(f(x,x),y)),e))=f(e,f(e,f(e,f(y,e)))).
+178 [para_into,157.1.1.1,16.1.1] f(f(f(x,x),f(f(f(x,x),f(x,x)),f(x,e))),e)=f(f(x,x),f(f(x,e),e)).
+186 [para_into,167.1.1.2.2.1,132.1.1,demod,133] f(f(e,x),f(f(f(e,x),f(e,x)),f(e,f(f(x,e),e))))=e.
+190 [para_into,173.1.1.2.1.2,173.1.1,demod,67] f(x,f(f(x,f(e,f(e,f(e,f(y,e))))),e))=f(f(x,x),f(f(f(x,x),f(x,x)),y)).
+200,199 [para_into,173.1.1,16.1.1] f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,x),y),e)))=f(e,f(e,f(e,f(y,e)))).
+205 [para_from,173.1.1,10.1.1.2.1,demod,136,flip.1] f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),y)),e),z)))=f(x,f(e,f(f(e,f(e,f(y,e))),z))).
+227 [para_from,30.1.1,6.1.1.2.1,demod,7,flip.1] f(f(x,f(f(x,x),f(f(x,y),z))),f(z,f(z,z)))=y.
+231 [para_from,178.1.1,173.1.1.2,demod,67] f(f(x,x),f(f(x,x),f(f(x,e),e)))=x.
+244 [para_from,231.1.1,24.1.1.2.2.1.1.2,demod,200] f(e,f(e,f(e,f(f(f(f(x,e),e),f(f(f(x,e),e),f(f(x,e),e))),e))))=f(x,f(f(x,x),e)).
+248 [para_into,227.1.1.1.2.1,8.1.1] f(f(e,f(e,f(f(e,x),y))),f(y,f(y,y)))=x.
+254 [para_into,227.1.1.1.2.2.1,173.1.1] f(f(x,f(f(x,x),f(f(e,f(e,f(e,f(y,e)))),z))),f(z,f(z,z)))=f(f(x,f(f(x,x),y)),e).
+257,256 [para_into,227.1.1.1.2.2.1,167.1.1] f(f(x,f(f(x,x),f(e,y))),f(y,f(y,y)))=f(f(x,x),f(f(x,e),e)).
+269 [para_into,227.1.1.1.2.2.1,8.1.1,demod,9] f(f(e,f(e,f(e,x))),f(x,f(x,x)))=e.
+275,274 [para_into,227.1.1.1.2.2,227.1.1] f(f(x,f(f(x,x),y)),f(f(z,f(z,z)),f(f(z,f(z,z)),f(z,f(z,z)))))=f(f(x,x),f(f(x,y),z)).
+282 [para_into,227.1.1.2.2,8.1.1,demod,9] f(f(x,f(f(x,x),f(f(x,y),e))),e)=y.
+285 [para_from,227.1.1,21.1.1.2.1.2.2,demod,136] f(e,f(e,f(f(e,x),y)))=f(z,f(f(z,z),f(f(z,x),y))).
+293 [para_into,269.1.1.1,66.1.1] f(x,f(f(f(x,e),e),f(f(f(x,e),e),f(f(x,e),e))))=e.
+300,299 [para_from,269.1.1,24.1.1.2.2.1.1.2.2,demod,275,200,133,133,133] f(e,f(e,f(e,f(f(f(x,e),y),e))))=f(x,f(e,f(e,f(e,f(y,e))))).
+301 [para_from,269.1.1,6.1.1.2.1.2.2,demod,275] f(x,f(f(x,x),f(f(x,e),y)))=f(e,f(e,f(e,y))).
+305 [back_demod,244,demod,300,300,67] f(f(x,e),f(f(x,e),f(x,e)))=f(x,f(f(x,x),e)).
+312,311 [para_into,282.1.1.1.2.2,282.1.1] f(f(x,f(f(x,x),y)),e)=f(f(x,x),f(f(x,y),e)).
+318,317 [back_demod,282,demod,312] f(f(x,x),f(f(x,f(f(x,y),e)),e))=y.
+319 [back_demod,254,demod,312] f(f(x,f(f(x,x),f(f(e,f(e,f(e,f(y,e)))),z))),f(z,f(z,z)))=f(f(x,x),f(f(x,y),e)).
+321 [back_demod,205,demod,312] f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,x),f(f(x,y),e)),z)))=f(x,f(e,f(f(e,f(e,f(y,e))),z))).
+328,327 [back_demod,173,demod,312] f(x,f(f(x,x),f(f(x,y),e)))=f(e,f(e,f(e,f(y,e)))).
+340 [para_into,317.1.1.2.1,45.1.1] f(f(f(x,x),f(x,x)),f(f(x,f(f(x,e),e)),e))=f(x,x).
+353 [para_from,248.1.1,6.1.1.2.1.2.2,demod,275] f(x,f(f(x,x),f(f(x,y),z)))=f(e,f(e,f(f(e,y),z))).
+366,365 [para_from,301.1.1,227.1.1.1.2.2.1] f(f(x,f(f(x,x),f(f(e,f(e,f(e,y))),z))),f(z,f(z,z)))=f(f(x,x),f(f(x,e),y)).
+371 [back_demod,319,demod,366] f(f(x,x),f(f(x,e),f(y,e)))=f(f(x,x),f(f(x,y),e)).
+387 [para_from,305.1.1,269.1.1.2] f(f(e,f(e,f(e,f(x,e)))),f(x,f(f(x,x),e)))=e.
+454 [para_from,186.1.1,6.1.1.2.1] f(f(e,x),f(e,f(f(f(x,e),e),f(f(f(x,e),e),f(f(x,e),e)))))=e.
+487 [para_from,285.1.1,132.1.1.1,demod,312,133] f(f(x,x),f(f(x,f(f(x,y),z)),e))=f(e,f(e,f(f(f(e,y),z),e))).
+490 [para_from,285.1.1,317.1.1.2.1.2.1,demod,9,312,133] f(e,f(e,f(f(f(x,x),f(f(x,f(f(x,y),z)),e)),e)))=f(e,f(f(e,y),z)).
+503,502 [para_from,293.1.1,227.1.1.1.2.2.1,demod,257,flip.1] f(f(f(x,e),e),f(f(f(x,e),e),f(f(x,e),e)))=f(f(x,x),f(f(x,e),e)).
+504 [back_demod,454,demod,503] f(f(e,x),f(e,f(f(x,x),f(f(x,e),e))))=e.
+555 [para_from,504.1.1,248.1.1.1.2.2,demod,9,9] f(e,f(f(e,f(f(x,x),f(f(x,e),e))),f(f(e,f(f(x,x),f(f(x,e),e))),f(e,f(f(x,x),f(f(x,e),e))))))=x.
+577 [para_into,327.1.1.2.2.1,6.1.1,flip.1] f(e,f(e,f(e,f(f(f(x,f(f(x,x),f(y,z))),f(z,f(z,z))),e))))=f(x,f(f(x,x),f(y,e))).
+591 [para_from,93.1.1,16.1.1.2.1,demod,133,133,312,9,9,9,9,133] f(e,f(e,f(e,f(f(f(x,x),f(x,x)),f(f(f(x,x),f(y,e)),e)))))=f(e,f(e,f(e,f(f(x,f(f(x,y),e)),e)))).
+600,599 [para_into,353.1.1.2.2.1,327.1.1,flip.1] f(e,f(e,f(f(e,f(f(x,x),f(f(x,y),e))),z)))=f(x,f(f(x,x),f(f(e,f(e,f(e,f(y,e)))),z))).
+610,609 [para_into,353.1.1.2.2.1,231.1.1,demod,600,9,9,9,9] f(f(x,x),f(f(f(x,x),f(x,x)),f(x,y)))=f(x,f(f(x,x),f(e,y))).
+635,634 [para_into,353.1.1.2,231.1.1,flip.1] f(e,f(e,f(f(e,x),f(f(x,e),e))))=f(x,x).
+653 [para_from,353.1.1,16.1.1.2.1,demod,133,133,328] f(x,f(e,f(e,f(f(f(e,y),z),e))))=f(e,f(e,f(e,f(f(f(x,y),z),e)))).
+672,671 [para_into,634.1.1,285.1.1] f(x,f(f(x,x),f(f(x,y),f(f(y,e),e))))=f(y,y).
+687 [para_from,634.1.1,10.1.1.2.1,demod,9,9,9,9] f(e,f(f(x,x),f(f(y,f(y,y)),f(f(y,f(y,y)),f(y,f(y,y))))))=f(e,f(e,f(f(e,f(f(e,x),f(f(x,e),e))),y))).
+688 [para_into,671.1.1.2.2.1,231.1.1,demod,610] f(x,f(f(x,x),f(e,f(f(f(f(x,x),f(f(x,e),e)),e),e))))=f(f(f(x,x),f(f(x,e),e)),f(f(x,x),f(f(x,e),e))).
+703 [para_from,671.1.1,16.1.1.2.1,demod,328,flip.1] f(e,f(e,f(e,f(f(f(x,y),f(f(y,e),e)),e))))=f(x,f(f(y,y),e)).
+718 [para_from,703.1.1,132.1.1.1,demod,133,133,67] f(f(x,f(f(y,y),e)),e)=f(f(x,y),f(f(y,e),e)).
+722 [para_into,718.1.1,132.1.1] f(e,f(f(f(x,x),e),e))=f(f(e,x),f(f(x,e),e)).
+748 [para_into,107.1.1.2.2.2.1.1,58.1.1,demod,133,133,312] f(e,f(e,f(e,f(f(x,f(f(x,y),e)),e))))=f(e,f(e,f(e,f(f(f(x,x),f(x,x)),f(f(f(x,x),f(y,e)),e))))).
+763 [para_from,722.1.1,285.1.1.2.2.1,flip.1] f(x,f(f(x,x),f(f(x,f(f(f(y,y),e),e)),z)))=f(e,f(e,f(f(f(e,y),f(f(y,e),e)),z))).
+793 [para_from,371.1.1,317.1.1.2.1.2.1,demod,318] f(f(x,y),e)=f(f(x,e),f(y,e)).
+830 [para_into,793.1.1.1,6.1.1,flip.1] f(f(x,e),f(f(f(x,f(f(x,x),f(y,z))),f(z,f(z,z))),e))=f(y,e).
+834,833 [para_into,793.1.1,311.1.1,flip.1] f(f(x,e),f(f(f(x,x),y),e))=f(f(x,x),f(f(x,y),e)).
+842 [para_from,793.1.1,340.1.1.2] f(f(f(x,x),f(x,x)),f(f(x,e),f(f(f(x,e),e),e)))=f(x,x).
+881 [para_from,793.1.1,387.1.1.2.2] f(f(e,f(e,f(e,f(x,e)))),f(x,f(f(x,e),f(x,e))))=e.
+899,898 [para_from,793.1.1,16.1.1.2,flip.1] f(f(x,x),f(f(f(x,x),f(x,x)),f(y,e)))=f(x,f(f(x,e),f(y,e))).
+900 [para_from,793.1.1,703.1.1.2.2.2.1.1,demod,9,9,67,9,9] f(f(x,e),f(y,e))=f(f(x,y),e).
+917 [back_demod,58,demod,899] f(e,f(f(e,f(e,f(x,f(f(x,e),f(y,e))))),f(f(f(x,y),e),f(f(f(x,y),e),f(f(x,y),e)))))=x.
+955,954 [para_into,900.1.1.1,311.1.1,flip.1] f(f(f(x,f(f(x,x),y)),z),e)=f(f(f(x,x),f(f(x,y),e)),f(z,e)).
+958,957 [para_into,900.1.1.1,132.1.1,flip.1] f(f(f(e,x),y),e)=f(f(e,f(x,e)),f(y,e)).
+966,965 [para_into,900.1.1.2,132.1.1,flip.1] f(f(x,f(e,y)),e)=f(f(x,e),f(e,f(y,e))).
+974 [back_demod,830,demod,955] f(f(x,e),f(f(f(x,x),f(f(x,f(y,z)),e)),f(f(z,f(z,z)),e)))=f(y,e).
+978 [back_demod,577,demod,955] f(e,f(e,f(e,f(f(f(x,x),f(f(x,f(y,z)),e)),f(f(z,f(z,z)),e)))))=f(x,f(f(x,x),f(y,e))).
+997 [back_demod,653,demod,958,flip.1] f(e,f(e,f(e,f(f(f(x,y),z),e))))=f(x,f(e,f(e,f(f(e,f(y,e)),f(z,e))))).
+1014,1013 [back_demod,487,demod,958] f(f(x,x),f(f(x,f(f(x,y),z)),e))=f(e,f(e,f(f(e,f(y,e)),f(z,e)))).
+1034,1033 [back_demod,190,demod,966,966,9,67,flip.1] f(f(x,x),f(f(f(x,x),f(x,x)),y))=f(x,f(f(x,e),y)).
+1040 [back_demod,490,demod,1014,966,9,958] f(e,f(e,f(e,f(e,f(f(e,f(f(x,e),e)),f(f(y,e),e))))))=f(e,f(f(e,x),y)).
+1060 [back_demod,321,demod,1034] f(x,f(f(x,e),f(f(f(x,x),f(f(x,y),e)),z)))=f(x,f(e,f(f(e,f(e,f(y,e))),z))).
+1076 [para_from,900.1.1,81.1.1.2.1.2] f(f(x,e),f(f(f(x,e),f(f(x,f(f(x,e),e)),e)),e))=f(f(f(x,e),f(x,e)),f(f(x,e),f(x,e))).
+1081 [para_from,900.1.1,718.1.1.1.2.1] f(f(x,f(f(f(y,y),e),e)),e)=f(f(x,f(y,e)),f(f(f(y,e),e),e)).
+1109 [para_from,900.1.1,311.1.1.1.2.1] f(f(f(x,e),f(f(f(x,x),e),y)),e)=f(f(f(x,e),f(x,e)),f(f(f(x,e),y),e)).
+1130 [para_into,917.1.1.2.2.1.1,671.1.1,demod,834,1014,635,672,672] f(e,f(f(e,f(e,f(x,f(f(y,e),f(y,e))))),f(f(f(y,y),e),f(f(f(y,y),e),f(f(y,y),e)))))=x.
+1195,1194 [para_into,1033.1.1,353.1.1,flip.1] f(x,f(f(x,e),f(f(f(x,x),y),z)))=f(e,f(e,f(f(e,y),z))).
+1199,1198 [back_demod,1060,demod,1195] f(e,f(e,f(f(e,f(f(x,y),e)),z)))=f(x,f(e,f(f(e,f(e,f(y,e))),z))).
+1207 [back_demod,1040,demod,1199,9,9,9] f(e,f(e,f(x,f(e,f(e,f(f(y,e),e))))))=f(e,f(f(e,x),y)).
+1232 [para_into,1076.1.1.2,793.1.1] f(f(x,e),f(f(f(x,e),e),f(f(f(x,f(f(x,e),e)),e),e)))=f(f(f(x,e),f(x,e)),f(f(x,e),f(x,e))).
+1243,1242 [para_into,1130.1.1.2.1.2.2,305.1.1,demod,22,flip.1] f(x,e)=x.
+1250,1249 [para_into,1130.1.1.2.2.1.1,8.1.1,demod,1243,1243,1243,1243,1243,1243,1243,1243,1243,1243,1243,1243] f(e,f(e,f(e,x)))=x.
+1266,1265 [back_demod,1232,demod,1243,1243,1243,1243,1243,1243,1243,1243,1243,1243,1243,flip.1] f(f(x,x),f(x,x))=f(x,f(x,f(x,x))).
+1287,1286 [back_demod,1207,demod,1243,1243,flip.1] f(e,f(f(e,x),y))=f(e,f(e,f(x,f(e,f(e,y))))).
+1345,1344 [back_demod,1109,demod,1243,1243,1243,1243,1243,1243,1243,flip.1] f(f(x,x),f(x,y))=f(x,f(f(x,x),y)).
+1355,1354 [back_demod,1081,demod,1243,1243,1243,1243,1243,1243,1243,flip.1] f(f(x,y),y)=f(x,f(y,y)).
+1376,1375 [back_demod,997,demod,1243,1250,1243,1243,1287,1250] f(f(x,y),z)=f(x,f(y,f(e,f(e,z)))).
+1382,1381 [back_demod,978,demod,1243,1345,1376,1243,1376,1376,1250,1376,1250,1376,1376,1250,1376,1250,1250,1243,1376] f(x,f(x,f(x,f(e,f(e,f(y,f(z,f(z,f(z,z)))))))))=f(x,f(x,f(x,f(e,f(e,y))))).
+1384,1383 [back_demod,974,demod,1243,1243,1345,1376,1243,1376,1376,1250,1376,1250,1376,1376,1250,1376,1250,1382,1243] f(x,f(x,f(x,f(x,f(e,f(e,y))))))=y.
+1404,1403 [back_demod,881,demod,1243,1250,1243,1243] f(x,f(x,f(x,x)))=e.
+1419,1418 [back_demod,842,demod,1266,1404,1243,1243,1243,1243] f(e,f(x,x))=f(x,x).
+1426,1425 [back_demod,763,demod,1243,1243,1376,1376,1250,1345,1376,1384,1243,1243,1355,1419,1376,flip.1] f(e,f(e,f(x,f(x,f(e,f(e,y))))))=f(x,f(x,f(e,y))).
+1430,1429 [back_demod,748,demod,1243,1243,1250,1266,1404,1243,1376,1243,1426,flip.1] f(e,f(e,f(x,f(x,f(e,y)))))=f(x,f(x,y)).
+1440,1439 [back_demod,688,demod,1243,1243,1355,1243,1243,1376,1250,1404,1243,1243,1243,1355,1243,1243,1355,1376,1376,1250,flip.1] f(x,f(x,f(x,f(e,f(x,f(x,x))))))=f(x,x).
+1442,1441 [back_demod,687,demod,1376,1376,1250,1440,1355,1266,1404,1243,1376,1243,1243,1355,1419,1419,1376,1430] f(e,f(x,f(x,f(e,f(e,y)))))=f(x,f(x,f(e,y))).
+1453,1452 [back_demod,591,demod,1266,1404,1243,1376,1243,1442,1430,1243,1243,1250] f(e,f(x,f(x,y)))=f(x,f(x,y)).
+1458 [back_demod,555,demod,1243,1243,1355,1453,1243,1243,1355,1453,1243,1243,1355,1453,1376,1453,1453,1345,1266,1404,1243,1355,1266,1404,1243] f(e,x)=x.
+1460 [binary,1458.1,3.1] $ANS(lid).
+
+------------ end of proof -------------
+
+-------- PROOF -------- 1477 [binary,1475.1,1.1] $ANS(assoc).
+1420 back subsumes 1389.
+
+----> UNIT CONFLICT at   0.59 sec ----> 1477 [binary,1475.1,1.1] $ANS(assoc).
+
+Length of proof is 123.  Level of proof is 29.
+
+---------------- PROOF ----------------
+
+1 [] f(f(a,b),c)!=f(a,f(b,c))|$ANS(assoc).
+7,6 [] f(x,f(f(x,f(f(x,x),f(y,z))),f(z,f(z,z))))=y.
+9,8 [] f(e,e)=e.
+10 [para_into,6.1.1.2.1.2,6.1.1] f(x,f(f(x,y),f(f(z,f(z,z)),f(f(z,f(z,z)),f(z,f(z,z))))))=f(f(x,x),f(f(f(x,x),f(x,x)),f(y,z))).
+11 [para_into,10.1.1.2.1,6.1.1] f(x,f(y,f(f(z,f(z,z)),f(f(z,f(z,z)),f(z,f(z,z))))))=f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),f(y,u))),f(u,f(u,u))),z))).
+16 [para_from,8.1.1,10.1.1.2.2.1.2,demod,9,9,9,9,9,9,9] f(x,f(f(x,y),e))=f(f(x,x),f(f(f(x,x),f(x,x)),f(y,e))).
+17 [para_from,8.1.1,6.1.1.2.2.2,demod,9] f(x,f(f(x,f(f(x,x),f(y,e))),e))=y.
+19 [para_from,8.1.1,6.1.1.2.1.2.2,demod,9,9] f(x,f(f(x,f(f(x,x),e)),e))=e.
+22,21 [para_from,8.1.1,6.1.1.2.1.2.1] f(e,f(f(e,f(e,f(x,y))),f(y,f(y,y))))=x.
+23 [para_into,16.1.1.2.1,16.1.1] f(x,f(f(f(x,x),f(f(f(x,x),f(x,x)),f(y,e))),e))=f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,y),e),e))).
+24 [para_into,16.1.1.2.1,6.1.1,flip.1] f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),f(y,z))),f(z,f(z,z))),e)))=f(x,f(y,e)).
+30 [para_into,11.1.1,10.1.1,flip.1] f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),f(f(x,y),z))),f(z,f(z,z))),u)))=f(f(x,x),f(f(f(x,x),f(x,x)),f(y,u))).
+45 [para_from,19.1.1,17.1.1.2.1.2,flip.1] f(f(x,x),f(f(f(x,x),f(x,x)),e))=f(x,f(f(x,e),e)).
+49 [para_from,19.1.1,10.1.1.2.1] f(x,f(e,f(f(y,f(y,y)),f(f(y,f(y,y)),f(y,f(y,y))))))=f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),e)),e),y))).
+58 [para_into,21.1.1.2.1.2.2,16.1.1] f(e,f(f(e,f(e,f(f(x,x),f(f(f(x,x),f(x,x)),f(y,e))))),f(f(f(x,y),e),f(f(f(x,y),e),f(f(x,y),e)))))=x.
+61,60 [para_into,21.1.1.2.1.2,21.1.1] f(e,f(f(e,x),f(f(y,f(y,y)),f(f(y,f(y,y)),f(y,f(y,y))))))=f(e,f(e,f(x,y))).
+63,62 [para_into,21.1.1.2.1.2,17.1.1,demod,9,9,9] f(e,f(f(e,x),e))=f(e,f(e,f(x,e))).
+67,66 [para_into,21.1.1.2.2.2,8.1.1,demod,9,63,63] f(e,f(e,f(e,f(f(x,e),e))))=x.
+70 [para_into,21.1.1,10.1.1,demod,9,9,9,9] f(e,f(e,f(f(e,f(x,f(y,f(y,y)))),y)))=x.
+81 [para_from,45.1.1,17.1.1.2.1.2] f(x,f(f(x,f(x,f(f(x,e),e))),e))=f(f(x,x),f(x,x)).
+93 [para_from,58.1.1,21.1.1.2.1.2,demod,61] f(e,f(e,f(x,f(f(x,y),e))))=f(e,f(e,f(f(x,x),f(f(f(x,x),f(x,x)),f(y,e))))).
+94 [para_into,23.1.1.2.1.1,8.1.1,demod,9,9,9,63,63,67,9,9,9,9,flip.1] f(e,f(e,f(f(f(e,x),e),e)))=x.
+107 [para_from,70.1.1,16.1.1.2.1,demod,9,9,9,9,63,flip.1] f(e,f(e,f(e,f(f(f(e,f(x,f(y,f(y,y)))),y),e))))=f(e,f(x,e)).
+122,121 [para_into,94.1.1.2.2.1.1,94.1.1,flip.1] f(e,f(f(f(e,x),e),e))=f(e,f(e,f(f(x,e),e))).
+128,127 [para_into,94.1.1.2.2.1.1,49.1.1,demod,9,9,9,9,9,9,9,9,122,122,122,67,flip.1] f(e,f(f(x,f(x,x)),f(f(x,f(x,x)),f(x,f(x,x)))))=f(e,f(e,x)).
+130,129 [para_into,94.1.1.2.2.1.1,23.1.1,demod,9,9,9,9,122,67,9,9,9,9,flip.1] f(f(e,f(e,f(x,e))),e)=f(e,f(e,f(f(x,e),e))).
+133,132 [para_into,94.1.1.2.2.1.1,16.1.1,demod,9,9,9,9,130,130,67,flip.1] f(f(e,x),e)=f(e,f(x,e)).
+136,135 [para_into,94.1.1.2.2.1.1,10.1.1,demod,9,9,9,9,133,133,133,133,67,flip.1] f(f(e,x),f(f(y,f(y,y)),f(f(y,f(y,y)),f(y,f(y,y)))))=f(e,f(x,y)).
+137 [back_demod,49,demod,128,flip.1] f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),e)),e),y)))=f(x,f(e,f(e,y))).
+147 [para_from,132.1.1,17.1.1.2.1.2.2] f(x,f(f(x,f(f(x,x),f(e,f(y,e)))),e))=f(e,y).
+158,157 [para_from,137.1.1,17.1.1.2.1,demod,9,9,flip.1] f(f(x,f(f(x,x),e)),e)=f(f(x,x),f(f(x,e),e)).
+167 [back_demod,19,demod,158] f(x,f(f(x,x),f(f(x,e),e)))=e.
+173 [para_into,147.1.1.2.1.2.2,23.1.1,demod,9,9,9,9,133,133,67,9,9,9,9] f(x,f(f(x,f(f(x,x),y)),e))=f(e,f(e,f(e,f(y,e)))).
+178 [para_into,157.1.1.1,16.1.1] f(f(f(x,x),f(f(f(x,x),f(x,x)),f(x,e))),e)=f(f(x,x),f(f(x,e),e)).
+186 [para_into,167.1.1.2.2.1,132.1.1,demod,133] f(f(e,x),f(f(f(e,x),f(e,x)),f(e,f(f(x,e),e))))=e.
+190 [para_into,173.1.1.2.1.2,173.1.1,demod,67] f(x,f(f(x,f(e,f(e,f(e,f(y,e))))),e))=f(f(x,x),f(f(f(x,x),f(x,x)),y)).
+200,199 [para_into,173.1.1,16.1.1] f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,x),y),e)))=f(e,f(e,f(e,f(y,e)))).
+205 [para_from,173.1.1,10.1.1.2.1,demod,136,flip.1] f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,f(f(x,x),y)),e),z)))=f(x,f(e,f(f(e,f(e,f(y,e))),z))).
+227 [para_from,30.1.1,6.1.1.2.1,demod,7,flip.1] f(f(x,f(f(x,x),f(f(x,y),z))),f(z,f(z,z)))=y.
+231 [para_from,178.1.1,173.1.1.2,demod,67] f(f(x,x),f(f(x,x),f(f(x,e),e)))=x.
+244 [para_from,231.1.1,24.1.1.2.2.1.1.2,demod,200] f(e,f(e,f(e,f(f(f(f(x,e),e),f(f(f(x,e),e),f(f(x,e),e))),e))))=f(x,f(f(x,x),e)).
+248 [para_into,227.1.1.1.2.1,8.1.1] f(f(e,f(e,f(f(e,x),y))),f(y,f(y,y)))=x.
+254 [para_into,227.1.1.1.2.2.1,173.1.1] f(f(x,f(f(x,x),f(f(e,f(e,f(e,f(y,e)))),z))),f(z,f(z,z)))=f(f(x,f(f(x,x),y)),e).
+257,256 [para_into,227.1.1.1.2.2.1,167.1.1] f(f(x,f(f(x,x),f(e,y))),f(y,f(y,y)))=f(f(x,x),f(f(x,e),e)).
+269 [para_into,227.1.1.1.2.2.1,8.1.1,demod,9] f(f(e,f(e,f(e,x))),f(x,f(x,x)))=e.
+275,274 [para_into,227.1.1.1.2.2,227.1.1] f(f(x,f(f(x,x),y)),f(f(z,f(z,z)),f(f(z,f(z,z)),f(z,f(z,z)))))=f(f(x,x),f(f(x,y),z)).
+282 [para_into,227.1.1.2.2,8.1.1,demod,9] f(f(x,f(f(x,x),f(f(x,y),e))),e)=y.
+285 [para_from,227.1.1,21.1.1.2.1.2.2,demod,136] f(e,f(e,f(f(e,x),y)))=f(z,f(f(z,z),f(f(z,x),y))).
+293 [para_into,269.1.1.1,66.1.1] f(x,f(f(f(x,e),e),f(f(f(x,e),e),f(f(x,e),e))))=e.
+300,299 [para_from,269.1.1,24.1.1.2.2.1.1.2.2,demod,275,200,133,133,133] f(e,f(e,f(e,f(f(f(x,e),y),e))))=f(x,f(e,f(e,f(e,f(y,e))))).
+301 [para_from,269.1.1,6.1.1.2.1.2.2,demod,275] f(x,f(f(x,x),f(f(x,e),y)))=f(e,f(e,f(e,y))).
+305 [back_demod,244,demod,300,300,67] f(f(x,e),f(f(x,e),f(x,e)))=f(x,f(f(x,x),e)).
+312,311 [para_into,282.1.1.1.2.2,282.1.1] f(f(x,f(f(x,x),y)),e)=f(f(x,x),f(f(x,y),e)).
+318,317 [back_demod,282,demod,312] f(f(x,x),f(f(x,f(f(x,y),e)),e))=y.
+319 [back_demod,254,demod,312] f(f(x,f(f(x,x),f(f(e,f(e,f(e,f(y,e)))),z))),f(z,f(z,z)))=f(f(x,x),f(f(x,y),e)).
+321 [back_demod,205,demod,312] f(f(x,x),f(f(f(x,x),f(x,x)),f(f(f(x,x),f(f(x,y),e)),z)))=f(x,f(e,f(f(e,f(e,f(y,e))),z))).
+328,327 [back_demod,173,demod,312] f(x,f(f(x,x),f(f(x,y),e)))=f(e,f(e,f(e,f(y,e)))).
+340 [para_into,317.1.1.2.1,45.1.1] f(f(f(x,x),f(x,x)),f(f(x,f(f(x,e),e)),e))=f(x,x).
+353 [para_from,248.1.1,6.1.1.2.1.2.2,demod,275] f(x,f(f(x,x),f(f(x,y),z)))=f(e,f(e,f(f(e,y),z))).
+366,365 [para_from,301.1.1,227.1.1.1.2.2.1] f(f(x,f(f(x,x),f(f(e,f(e,f(e,y))),z))),f(z,f(z,z)))=f(f(x,x),f(f(x,e),y)).
+371 [back_demod,319,demod,366] f(f(x,x),f(f(x,e),f(y,e)))=f(f(x,x),f(f(x,y),e)).
+387 [para_from,305.1.1,269.1.1.2] f(f(e,f(e,f(e,f(x,e)))),f(x,f(f(x,x),e)))=e.
+454 [para_from,186.1.1,6.1.1.2.1] f(f(e,x),f(e,f(f(f(x,e),e),f(f(f(x,e),e),f(f(x,e),e)))))=e.
+487 [para_from,285.1.1,132.1.1.1,demod,312,133] f(f(x,x),f(f(x,f(f(x,y),z)),e))=f(e,f(e,f(f(f(e,y),z),e))).
+490 [para_from,285.1.1,317.1.1.2.1.2.1,demod,9,312,133] f(e,f(e,f(f(f(x,x),f(f(x,f(f(x,y),z)),e)),e)))=f(e,f(f(e,y),z)).
+503,502 [para_from,293.1.1,227.1.1.1.2.2.1,demod,257,flip.1] f(f(f(x,e),e),f(f(f(x,e),e),f(f(x,e),e)))=f(f(x,x),f(f(x,e),e)).
+504 [back_demod,454,demod,503] f(f(e,x),f(e,f(f(x,x),f(f(x,e),e))))=e.
+555 [para_from,504.1.1,248.1.1.1.2.2,demod,9,9] f(e,f(f(e,f(f(x,x),f(f(x,e),e))),f(f(e,f(f(x,x),f(f(x,e),e))),f(e,f(f(x,x),f(f(x,e),e))))))=x.
+577 [para_into,327.1.1.2.2.1,6.1.1,flip.1] f(e,f(e,f(e,f(f(f(x,f(f(x,x),f(y,z))),f(z,f(z,z))),e))))=f(x,f(f(x,x),f(y,e))).
+591 [para_from,93.1.1,16.1.1.2.1,demod,133,133,312,9,9,9,9,133] f(e,f(e,f(e,f(f(f(x,x),f(x,x)),f(f(f(x,x),f(y,e)),e)))))=f(e,f(e,f(e,f(f(x,f(f(x,y),e)),e)))).
+600,599 [para_into,353.1.1.2.2.1,327.1.1,flip.1] f(e,f(e,f(f(e,f(f(x,x),f(f(x,y),e))),z)))=f(x,f(f(x,x),f(f(e,f(e,f(e,f(y,e)))),z))).
+610,609 [para_into,353.1.1.2.2.1,231.1.1,demod,600,9,9,9,9] f(f(x,x),f(f(f(x,x),f(x,x)),f(x,y)))=f(x,f(f(x,x),f(e,y))).
+635,634 [para_into,353.1.1.2,231.1.1,flip.1] f(e,f(e,f(f(e,x),f(f(x,e),e))))=f(x,x).
+653 [para_from,353.1.1,16.1.1.2.1,demod,133,133,328] f(x,f(e,f(e,f(f(f(e,y),z),e))))=f(e,f(e,f(e,f(f(f(x,y),z),e)))).
+672,671 [para_into,634.1.1,285.1.1] f(x,f(f(x,x),f(f(x,y),f(f(y,e),e))))=f(y,y).
+687 [para_from,634.1.1,10.1.1.2.1,demod,9,9,9,9] f(e,f(f(x,x),f(f(y,f(y,y)),f(f(y,f(y,y)),f(y,f(y,y))))))=f(e,f(e,f(f(e,f(f(e,x),f(f(x,e),e))),y))).
+688 [para_into,671.1.1.2.2.1,231.1.1,demod,610] f(x,f(f(x,x),f(e,f(f(f(f(x,x),f(f(x,e),e)),e),e))))=f(f(f(x,x),f(f(x,e),e)),f(f(x,x),f(f(x,e),e))).
+703 [para_from,671.1.1,16.1.1.2.1,demod,328,flip.1] f(e,f(e,f(e,f(f(f(x,y),f(f(y,e),e)),e))))=f(x,f(f(y,y),e)).
+718 [para_from,703.1.1,132.1.1.1,demod,133,133,67] f(f(x,f(f(y,y),e)),e)=f(f(x,y),f(f(y,e),e)).
+722 [para_into,718.1.1,132.1.1] f(e,f(f(f(x,x),e),e))=f(f(e,x),f(f(x,e),e)).
+748 [para_into,107.1.1.2.2.2.1.1,58.1.1,demod,133,133,312] f(e,f(e,f(e,f(f(x,f(f(x,y),e)),e))))=f(e,f(e,f(e,f(f(f(x,x),f(x,x)),f(f(f(x,x),f(y,e)),e))))).
+763 [para_from,722.1.1,285.1.1.2.2.1,flip.1] f(x,f(f(x,x),f(f(x,f(f(f(y,y),e),e)),z)))=f(e,f(e,f(f(f(e,y),f(f(y,e),e)),z))).
+793 [para_from,371.1.1,317.1.1.2.1.2.1,demod,318] f(f(x,y),e)=f(f(x,e),f(y,e)).
+830 [para_into,793.1.1.1,6.1.1,flip.1] f(f(x,e),f(f(f(x,f(f(x,x),f(y,z))),f(z,f(z,z))),e))=f(y,e).
+834,833 [para_into,793.1.1,311.1.1,flip.1] f(f(x,e),f(f(f(x,x),y),e))=f(f(x,x),f(f(x,y),e)).
+842 [para_from,793.1.1,340.1.1.2] f(f(f(x,x),f(x,x)),f(f(x,e),f(f(f(x,e),e),e)))=f(x,x).
+881 [para_from,793.1.1,387.1.1.2.2] f(f(e,f(e,f(e,f(x,e)))),f(x,f(f(x,e),f(x,e))))=e.
+899,898 [para_from,793.1.1,16.1.1.2,flip.1] f(f(x,x),f(f(f(x,x),f(x,x)),f(y,e)))=f(x,f(f(x,e),f(y,e))).
+900 [para_from,793.1.1,703.1.1.2.2.2.1.1,demod,9,9,67,9,9] f(f(x,e),f(y,e))=f(f(x,y),e).
+917 [back_demod,58,demod,899] f(e,f(f(e,f(e,f(x,f(f(x,e),f(y,e))))),f(f(f(x,y),e),f(f(f(x,y),e),f(f(x,y),e)))))=x.
+955,954 [para_into,900.1.1.1,311.1.1,flip.1] f(f(f(x,f(f(x,x),y)),z),e)=f(f(f(x,x),f(f(x,y),e)),f(z,e)).
+958,957 [para_into,900.1.1.1,132.1.1,flip.1] f(f(f(e,x),y),e)=f(f(e,f(x,e)),f(y,e)).
+966,965 [para_into,900.1.1.2,132.1.1,flip.1] f(f(x,f(e,y)),e)=f(f(x,e),f(e,f(y,e))).
+974 [back_demod,830,demod,955] f(f(x,e),f(f(f(x,x),f(f(x,f(y,z)),e)),f(f(z,f(z,z)),e)))=f(y,e).
+978 [back_demod,577,demod,955] f(e,f(e,f(e,f(f(f(x,x),f(f(x,f(y,z)),e)),f(f(z,f(z,z)),e)))))=f(x,f(f(x,x),f(y,e))).
+997 [back_demod,653,demod,958,flip.1] f(e,f(e,f(e,f(f(f(x,y),z),e))))=f(x,f(e,f(e,f(f(e,f(y,e)),f(z,e))))).
+1014,1013 [back_demod,487,demod,958] f(f(x,x),f(f(x,f(f(x,y),z)),e))=f(e,f(e,f(f(e,f(y,e)),f(z,e)))).
+1034,1033 [back_demod,190,demod,966,966,9,67,flip.1] f(f(x,x),f(f(f(x,x),f(x,x)),y))=f(x,f(f(x,e),y)).
+1040 [back_demod,490,demod,1014,966,9,958] f(e,f(e,f(e,f(e,f(f(e,f(f(x,e),e)),f(f(y,e),e))))))=f(e,f(f(e,x),y)).
+1060 [back_demod,321,demod,1034] f(x,f(f(x,e),f(f(f(x,x),f(f(x,y),e)),z)))=f(x,f(e,f(f(e,f(e,f(y,e))),z))).
+1076 [para_from,900.1.1,81.1.1.2.1.2] f(f(x,e),f(f(f(x,e),f(f(x,f(f(x,e),e)),e)),e))=f(f(f(x,e),f(x,e)),f(f(x,e),f(x,e))).
+1081 [para_from,900.1.1,718.1.1.1.2.1] f(f(x,f(f(f(y,y),e),e)),e)=f(f(x,f(y,e)),f(f(f(y,e),e),e)).
+1109 [para_from,900.1.1,311.1.1.1.2.1] f(f(f(x,e),f(f(f(x,x),e),y)),e)=f(f(f(x,e),f(x,e)),f(f(f(x,e),y),e)).
+1130 [para_into,917.1.1.2.2.1.1,671.1.1,demod,834,1014,635,672,672] f(e,f(f(e,f(e,f(x,f(f(y,e),f(y,e))))),f(f(f(y,y),e),f(f(f(y,y),e),f(f(y,y),e)))))=x.
+1195,1194 [para_into,1033.1.1,353.1.1,flip.1] f(x,f(f(x,e),f(f(f(x,x),y),z)))=f(e,f(e,f(f(e,y),z))).
+1199,1198 [back_demod,1060,demod,1195] f(e,f(e,f(f(e,f(f(x,y),e)),z)))=f(x,f(e,f(f(e,f(e,f(y,e))),z))).
+1207 [back_demod,1040,demod,1199,9,9,9] f(e,f(e,f(x,f(e,f(e,f(f(y,e),e))))))=f(e,f(f(e,x),y)).
+1232 [para_into,1076.1.1.2,793.1.1] f(f(x,e),f(f(f(x,e),e),f(f(f(x,f(f(x,e),e)),e),e)))=f(f(f(x,e),f(x,e)),f(f(x,e),f(x,e))).
+1243,1242 [para_into,1130.1.1.2.1.2.2,305.1.1,demod,22,flip.1] f(x,e)=x.
+1250,1249 [para_into,1130.1.1.2.2.1.1,8.1.1,demod,1243,1243,1243,1243,1243,1243,1243,1243,1243,1243,1243,1243] f(e,f(e,f(e,x)))=x.
+1266,1265 [back_demod,1232,demod,1243,1243,1243,1243,1243,1243,1243,1243,1243,1243,1243,flip.1] f(f(x,x),f(x,x))=f(x,f(x,f(x,x))).
+1287,1286 [back_demod,1207,demod,1243,1243,flip.1] f(e,f(f(e,x),y))=f(e,f(e,f(x,f(e,f(e,y))))).
+1345,1344 [back_demod,1109,demod,1243,1243,1243,1243,1243,1243,1243,flip.1] f(f(x,x),f(x,y))=f(x,f(f(x,x),y)).
+1355,1354 [back_demod,1081,demod,1243,1243,1243,1243,1243,1243,1243,flip.1] f(f(x,y),y)=f(x,f(y,y)).
+1376,1375 [back_demod,997,demod,1243,1250,1243,1243,1287,1250] f(f(x,y),z)=f(x,f(y,f(e,f(e,z)))).
+1382,1381 [back_demod,978,demod,1243,1345,1376,1243,1376,1376,1250,1376,1250,1376,1376,1250,1376,1250,1250,1243,1376] f(x,f(x,f(x,f(e,f(e,f(y,f(z,f(z,f(z,z)))))))))=f(x,f(x,f(x,f(e,f(e,y))))).
+1384,1383 [back_demod,974,demod,1243,1243,1345,1376,1243,1376,1376,1250,1376,1250,1376,1376,1250,1376,1250,1382,1243] f(x,f(x,f(x,f(x,f(e,f(e,y))))))=y.
+1404,1403 [back_demod,881,demod,1243,1250,1243,1243] f(x,f(x,f(x,x)))=e.
+1419,1418 [back_demod,842,demod,1266,1404,1243,1243,1243,1243] f(e,f(x,x))=f(x,x).
+1426,1425 [back_demod,763,demod,1243,1243,1376,1376,1250,1345,1376,1384,1243,1243,1355,1419,1376,flip.1] f(e,f(e,f(x,f(x,f(e,f(e,y))))))=f(x,f(x,f(e,y))).
+1430,1429 [back_demod,748,demod,1243,1243,1250,1266,1404,1243,1376,1243,1426,flip.1] f(e,f(e,f(x,f(x,f(e,y)))))=f(x,f(x,y)).
+1440,1439 [back_demod,688,demod,1243,1243,1355,1243,1243,1376,1250,1404,1243,1243,1243,1355,1243,1243,1355,1376,1376,1250,flip.1] f(x,f(x,f(x,f(e,f(x,f(x,x))))))=f(x,x).
+1442,1441 [back_demod,687,demod,1376,1376,1250,1440,1355,1266,1404,1243,1376,1243,1243,1355,1419,1419,1376,1430] f(e,f(x,f(x,f(e,f(e,y)))))=f(x,f(x,f(e,y))).
+1453,1452 [back_demod,591,demod,1266,1404,1243,1376,1243,1442,1430,1243,1243,1250] f(e,f(x,f(x,y)))=f(x,f(x,y)).
+1459,1458 [back_demod,555,demod,1243,1243,1355,1453,1243,1243,1355,1453,1243,1243,1355,1453,1376,1453,1453,1345,1266,1404,1243,1355,1266,1404,1243] f(e,x)=x.
+1475 [back_demod,1375,demod,1459,1459] f(f(x,y),z)=f(x,f(y,z)).
+1477 [binary,1475.1,1.1] $ANS(assoc).
+
+------------ end of proof -------------
+
+
+Search stopped by max_proofs option.
+
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 80
+clauses generated           4577
+  para_from generated       2170
+  para_into generated       2407
+demod & eval rewrites      25809
+clauses wt,lit,sk delete    2041
+tautologies deleted            0
+clauses forward subsumed    2517
+  (subsumed by sos)          109
+unit deletions                 0
+factor simplifications         0
+clauses kept                 823
+new demodulators             646
+empty clauses                  4
+clauses back demodulated     801
+clauses back subsumed          7
+usable size                    1
+sos size                      14
+demodulators size             13
+passive size                   4
+hot size                       0
+Kbytes malloced             4882
+
+----------- times (seconds) -----------
+user CPU time          0.59          (0 hr, 0 min, 0 sec)
+system CPU time        0.01          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+That finishes the proof of the theorem.
+
+Process 8512 finished Mon Aug  2 15:30:40 2004

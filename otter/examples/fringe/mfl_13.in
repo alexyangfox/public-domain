@@ -1,0 +1,64 @@
+% The problem is
+%
+%     Loop, Moufang-1 -> Moufang-3
+%
+% where the proof does not go through Moufang-2.
+% The strategy involves the hot list and literal demodulation.
+%
+% This input file was contributed by Larry Wos (wos@mcs.anl.gov).
+
+op(400,xfx, *).  % make all association explicit
+
+set(para_into).
+set(para_from).
+set(order_eq).
+set(dynamic_demod).
+set(process_input).
+
+set(demod_out_in).
+set(lrpo).
+lex([$T,A,B,C,D,E,1,_*_,rs(_,_),ls(_,_),=(_,_)]).
+
+assign(max_weight,20).
+assign(pick_given_ratio,3).
+
+assign(max_proofs,2).
+assign(max_mem,20000).
+
+clear(print_kept).
+clear(print_new_demod).
+
+list(usable).
+x = x.
+x * rs(x,y) = y.   % right solvable
+rs(x,x * y) = y.   % right solution is unique (implies left cancellation)
+ls(x,y) * y = x.   % left solvable
+ls(x * y,y) = x.   % left solution is unique (implies right cancellation)
+
+1 * x = x.
+x * 1 = x.
+
+end_of_list.
+
+list(sos).
+(x * y) * (z * x)  = (x * (y * z)) * x.  % Moufang_1
+A * (B * (A * C))  !=  ((A * B) * A) * C | $ANS(Moufang_3).
+end_of_list.
+
+list(demodulators).
+%  Blocking use of Moufang 2.
+EQ(( ((x * y) * z) * y = x * (y * (z * y)) ), $T).
+EQ(( x * (y * (z * y)) = ((x * y) * z) * y ), $T).
+end_of_list.
+
+list(hot).
+(x * y) * (z * x)  = (x * (y * z)) * x.  % Moufang_1
+
+x * rs(x,y) = y.   % right solvable
+rs(x,x * y) = y.   % right solution is unique (implies left cancellation)
+ls(x,y) * y = x.   % left solvable
+ls(x * y,y) = x.   % left solution is unique (implies right cancellation)
+
+1 * x = x.
+x * 1 = x.
+end_of_list.

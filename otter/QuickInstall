@@ -1,0 +1,68 @@
+#!/bin/csh
+
+# This script tries to determine what operating system is in use,
+# then it copies pre-compiled binaries to the ./bin directory.
+# Then it does quick tests to see if the binaries seem to be ok.
+
+set OS=`uname -s`
+
+if (-e bin-$OS) then
+
+    /bin/rm -f bin/*
+
+    echo ""
+    echo "Copying bin-$OS/* to bin/"
+
+    /bin/cp -p bin-$OS/* bin/
+
+    echo ""
+    echo "Testing bin/otter ..."
+
+    bin/otter < /dev/null >& /dev/null
+    if ($status != 104) goto fail
+
+    echo "Otter seems to be ok."
+
+    echo ""
+    echo "Testing bin/mace2 ..."
+
+    bin/mace2 < /dev/null >& /dev/null
+    if ($status != 15) goto fail
+
+    echo "Mace2 seems to be ok."
+
+    if ($1 == 'no_make') then
+
+	echo ""
+	echo "*********************************************************"
+	echo "*  The initial tests on the binaries succeeded.         *"
+	echo "*  Now try './make-test-otter' and './make-test-mace2'. *"
+	echo "*********************************************************"
+	echo ""
+
+    else
+
+	echo ""
+	echo "******************************************************"
+	echo "*  The initial tests on the binaries succeeded.      *"
+	echo "*  Now try 'make test-otter' and 'make test-mace2'.  *"
+	echo "******************************************************"
+	echo ""
+
+    endif
+
+    exit 0
+
+endif
+
+fail:
+
+echo ""
+echo "***************************************************************"
+echo "*  It looks like you cannot use the pre-compiled binaries.    *"
+echo "*  Try compiling Otter and Mace2 with the command 'make all'  *"
+echo "*  If that fails, see the files README and README.make.       *"
+echo "***************************************************************"
+echo ""
+
+exit 1

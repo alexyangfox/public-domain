@@ -1,0 +1,228 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:37 2004
+The command was "../../bin/otter".  The process ID is 8406.
+
+set(para_into).
+clear(para_from_left).
+set(para_ones_rule).
+set(bird_print).
+clear(back_sub).
+clear(print_proofs).
+assign(max_proofs,-1).
+assign(max_given,30).
+
+list(usable).
+1 [] x=x.
+2 [] B x y z=x (y z).
+3 [] W x y=x y y.
+4 [] -FIXED(y g(y),g(y))|$Ans(y).
+end_of_list.
+
+list(sos).
+5 [] FIXED(W (B (B xf)) (W (B (B xf))) x,xf).
+end_of_list.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=19) 5 [] FIXED(W (B (B xf)) (W (B (B xf))) x,xf).
+** KEPT (pick-wt=21): 6 [para_into,5.1.1.1.1,2.1.2] FIXED(B W B (B x) (W (B (B x))) y,x).
+** KEPT (pick-wt=21): 7 [para_into,5.1.1.1,2.1.2] FIXED(B (W (B (B x))) W (B (B x)) y,x).
+** KEPT (pick-wt=19): 8 [para_into,5.1.1,3.1.2] FIXED(W (W (B (B x))) (W (B (B x))),x).
+** KEPT (pick-wt=23): 9 [para_into,5.1.1,2.1.2] FIXED(B (W (B (B x)) (W (B (B x)))) y z,x).
+
+given clause #2: (wt=19) 8 [para_into,5.1.1,3.1.2] FIXED(W (W (B (B x))) (W (B (B x))),x).
+** KEPT (pick-wt=21): 10 [para_into,8.1.1.1,2.1.2] FIXED(B W W (B (B x)) (W (B (B x))),x).
+** KEPT (pick-wt=13): 11 [para_into,8.1.1,3.1.2] FIXED(W W (W (B (B x))),x).
+** KEPT (pick-wt=21): 12 [para_into,8.1.1,2.1.2] FIXED(B (W (W (B (B x)))) W (B (B x)),x).
+
+given clause #3: (wt=13) 11 [para_into,8.1.1,3.1.2] FIXED(W W (W (B (B x))),x).
+** KEPT (pick-wt=15): 13 [para_into,11.1.1,2.1.2] FIXED(B (W W) W (B (B x)),x).
+
+given clause #4: (wt=15) 13 [para_into,11.1.1,2.1.2] FIXED(B (W W) W (B (B x)),x).
+** KEPT (pick-wt=17): 14 [para_into,13.1.1.1.1,2.1.2] FIXED(B B W W W (B (B x)),x).
+** KEPT (pick-wt=17): 15 [para_into,13.1.1,2.1.2] FIXED(B (B (W W) W) B (B x),x).
+
+given clause #5: (wt=17) 14 [para_into,13.1.1.1.1,2.1.2] FIXED(B B W W W (B (B x)),x).
+** KEPT (pick-wt=17): 16 [para_into,14.1.1.1.1,3.1.2] FIXED(W (B B) W W (B (B x)),x).
+** KEPT (pick-wt=17): 17 [para_into,14.1.1.1,3.1.2] FIXED(W (B B W) W (B (B x)),x).
+** KEPT (pick-wt=19): 18 [para_into,14.1.1,2.1.2] FIXED(B (B B W W W) B (B x),x).
+
+given clause #6: (wt=17) 15 [para_into,13.1.1,2.1.2] FIXED(B (B (W W) W) B (B x),x).
+** KEPT (pick-wt=19): 19 [para_into,15.1.1.1.1,2.1.2] FIXED(B B (B (W W)) W B (B x),x).
+** KEPT (pick-wt=19): 20 [para_into,15.1.1,2.1.2] FIXED(B (B (B (W W) W) B) B x,x).
+
+----> UNIT CONFLICT at   0.00 sec ----> 21 [binary,20.1,4.1] $Ans(B (B (B (W W) W) B) B).
+
+
+given clause #7: (wt=17) 16 [para_into,14.1.1.1.1,3.1.2] FIXED(W (B B) W W (B (B x)),x).
+** KEPT (pick-wt=19): 22 [para_into,16.1.1.1.1.1,2.1.2] FIXED(B W B B W W (B (B x)),x).
+** KEPT (pick-wt=17): 23 [para_into,16.1.1.1,3.1.2] FIXED(W (W (B B)) W (B (B x)),x).
+** KEPT (pick-wt=19): 24 [para_into,16.1.1,2.1.2] FIXED(B (W (B B) W W) B (B x),x).
+
+given clause #8: (wt=17) 17 [para_into,14.1.1.1,3.1.2] FIXED(W (B B W) W (B (B x)),x).
+** KEPT (pick-wt=19): 25 [para_into,17.1.1.1.1,2.1.2] FIXED(B W (B B) W W (B (B x)),x).
+** KEPT (pick-wt=19): 26 [para_into,17.1.1,2.1.2] FIXED(B (W (B B W) W) B (B x),x).
+
+given clause #9: (wt=17) 23 [para_into,16.1.1.1,3.1.2] FIXED(W (W (B B)) W (B (B x)),x).
+** KEPT (pick-wt=19): 27 [para_into,23.1.1.1.1,2.1.2] FIXED(B W W (B B) W (B (B x)),x).
+** KEPT (pick-wt=19): 28 [para_into,23.1.1,2.1.2] FIXED(B (W (W (B B)) W) B (B x),x).
+
+given clause #10: (wt=19) 18 [para_into,14.1.1,2.1.2] FIXED(B (B B W W W) B (B x),x).
+** KEPT (pick-wt=21): 29 [para_into,18.1.1.1.1,2.1.2] FIXED(B B (B B W W) W B (B x),x).
+** KEPT (pick-wt=21): 30 [para_into,18.1.1,2.1.2] FIXED(B (B (B B W W W) B) B x,x).
+
+----> UNIT CONFLICT at   0.00 sec ----> 31 [binary,30.1,4.1] $Ans(B (B (B B W W W) B) B).
+
+
+given clause #11: (wt=19) 19 [para_into,15.1.1.1.1,2.1.2] FIXED(B B (B (W W)) W B (B x),x).
+** KEPT (pick-wt=21): 32 [para_into,19.1.1.1.1.1,2.1.2] FIXED(B (B B) B (W W) W B (B x),x).
+** KEPT (pick-wt=21): 33 [para_into,19.1.1,2.1.2] FIXED(B (B B (B (W W)) W B) B x,x).
+
+----> UNIT CONFLICT at   0.00 sec ----> 34 [binary,33.1,4.1] $Ans(B (B B (B (W W)) W B) B).
+
+
+given clause #12: (wt=19) 20 [para_into,15.1.1,2.1.2] FIXED(B (B (B (W W) W) B) B x,x).
+** KEPT (pick-wt=21): 35 [para_into,20.1.1.1.1,2.1.2] FIXED(B B (B (B (W W) W)) B B x,x).
+
+----> UNIT CONFLICT at   0.00 sec ----> 36 [binary,35.1,4.1] $Ans(B B (B (B (W W) W)) B B).
+
+** KEPT (pick-wt=19): 37 [para_into,20.1.1,3.1.2] FIXED(W (B (B (B (W W) W) B)) B,B).
+** KEPT (pick-wt=25): 38 [para_into,20.1.1,2.1.2] FIXED(B (B (B (B (W W) W) B) B) x y,x y).
+
+given clause #13: (wt=19) 22 [para_into,16.1.1.1.1.1,2.1.2] FIXED(B W B B W W (B (B x)),x).
+** KEPT (pick-wt=19): 39 [para_into,22.1.1.1.1.1,3.1.2] FIXED(W (B W) B W W (B (B x)),x).
+** KEPT (pick-wt=19): 40 [para_into,22.1.1.1,3.1.2] FIXED(W (B W B B) W (B (B x)),x).
+** KEPT (pick-wt=21): 41 [para_into,22.1.1,2.1.2] FIXED(B (B W B B W W) B (B x),x).
+
+given clause #14: (wt=19) 24 [para_into,16.1.1,2.1.2] FIXED(B (W (B B) W W) B (B x),x).
+** KEPT (pick-wt=21): 42 [para_into,24.1.1.1.1,2.1.2] FIXED(B B (W (B B) W) W B (B x),x).
+** KEPT (pick-wt=21): 43 [para_into,24.1.1,2.1.2] FIXED(B (B (W (B B) W W) B) B x,x).
+
+----> UNIT CONFLICT at   0.00 sec ----> 44 [binary,43.1,4.1] $Ans(B (B (W (B B) W W) B) B).
+
+
+given clause #15: (wt=19) 25 [para_into,17.1.1.1.1,2.1.2] FIXED(B W (B B) W W (B (B x)),x).
+** KEPT (pick-wt=21): 45 [para_into,25.1.1.1.1.1,2.1.2] FIXED(B (B W) B B W W (B (B x)),x).
+** KEPT (pick-wt=19): 46 [para_into,25.1.1.1,3.1.2] FIXED(W (B W (B B)) W (B (B x)),x).
+** KEPT (pick-wt=21): 47 [para_into,25.1.1,2.1.2] FIXED(B (B W (B B) W W) B (B x),x).
+
+given clause #16: (wt=19) 26 [para_into,17.1.1,2.1.2] FIXED(B (W (B B W) W) B (B x),x).
+** KEPT (pick-wt=21): 48 [para_into,26.1.1.1.1,2.1.2] FIXED(B B (W (B B W)) W B (B x),x).
+** KEPT (pick-wt=21): 49 [para_into,26.1.1,2.1.2] FIXED(B (B (W (B B W) W) B) B x,x).
+
+----> UNIT CONFLICT at   0.00 sec ----> 50 [binary,49.1,4.1] $Ans(B (B (W (B B W) W) B) B).
+
+
+given clause #17: (wt=19) 27 [para_into,23.1.1.1.1,2.1.2] FIXED(B W W (B B) W (B (B x)),x).
+** KEPT (pick-wt=19): 51 [para_into,27.1.1.1.1.1,3.1.2] FIXED(W B W (B B) W (B (B x)),x).
+** KEPT (pick-wt=21): 52 [para_into,27.1.1.1.1,2.1.2] FIXED(B (B W W) B B W (B (B x)),x).
+** KEPT (pick-wt=21): 53 [para_into,27.1.1,2.1.2] FIXED(B (B W W (B B) W) B (B x),x).
+
+given clause #18: (wt=19) 28 [para_into,23.1.1,2.1.2] FIXED(B (W (W (B B)) W) B (B x),x).
+** KEPT (pick-wt=21): 54 [para_into,28.1.1.1.1,2.1.2] FIXED(B B (W (W (B B))) W B (B x),x).
+** KEPT (pick-wt=21): 55 [para_into,28.1.1,2.1.2] FIXED(B (B (W (W (B B)) W) B) B x,x).
+
+----> UNIT CONFLICT at   0.00 sec ----> 56 [binary,55.1,4.1] $Ans(B (B (W (W (B B)) W) B) B).
+
+
+given clause #19: (wt=19) 37 [para_into,20.1.1,3.1.2] FIXED(W (B (B (B (W W) W) B)) B,B).
+** KEPT (pick-wt=21): 57 [para_into,37.1.1.1,2.1.2] FIXED(B W B (B (B (W W) W) B) B,B).
+
+given clause #20: (wt=19) 39 [para_into,22.1.1.1.1.1,3.1.2] FIXED(W (B W) B W W (B (B x)),x).
+** KEPT (pick-wt=21): 58 [para_into,39.1.1.1.1.1.1,2.1.2] FIXED(B W B W B W W (B (B x)),x).
+** KEPT (pick-wt=19): 59 [para_into,39.1.1.1,3.1.2] FIXED(W (W (B W) B) W (B (B x)),x).
+** KEPT (pick-wt=21): 60 [para_into,39.1.1,2.1.2] FIXED(B (W (B W) B W W) B (B x),x).
+
+given clause #21: (wt=19) 40 [para_into,22.1.1.1,3.1.2] FIXED(W (B W B B) W (B (B x)),x).
+** KEPT (pick-wt=21): 61 [para_into,40.1.1.1.1,2.1.2] FIXED(B W (B W B) B W (B (B x)),x).
+** KEPT (pick-wt=21): 62 [para_into,40.1.1,2.1.2] FIXED(B (W (B W B B) W) B (B x),x).
+
+given clause #22: (wt=19) 46 [para_into,25.1.1.1,3.1.2] FIXED(W (B W (B B)) W (B (B x)),x).
+** KEPT (pick-wt=21): 63 [para_into,46.1.1.1.1,2.1.2] FIXED(B W (B W) (B B) W (B (B x)),x).
+** KEPT (pick-wt=21): 64 [para_into,46.1.1,2.1.2] FIXED(B (W (B W (B B)) W) B (B x),x).
+
+given clause #23: (wt=19) 51 [para_into,27.1.1.1.1.1,3.1.2] FIXED(W B W (B B) W (B (B x)),x).
+** KEPT (pick-wt=21): 65 [para_into,51.1.1.1.1,2.1.2] FIXED(B (W B W) B B W (B (B x)),x).
+** KEPT (pick-wt=21): 66 [para_into,51.1.1,2.1.2] FIXED(B (W B W (B B) W) B (B x),x).
+
+given clause #24: (wt=19) 59 [para_into,39.1.1.1,3.1.2] FIXED(W (W (B W) B) W (B (B x)),x).
+** KEPT (pick-wt=21): 67 [para_into,59.1.1.1.1,2.1.2] FIXED(B W (W (B W)) B W (B (B x)),x).
+** KEPT (pick-wt=21): 68 [para_into,59.1.1,2.1.2] FIXED(B (W (W (B W) B) W) B (B x),x).
+
+given clause #25: (wt=21) 6 [para_into,5.1.1.1.1,2.1.2] FIXED(B W B (B x) (W (B (B x))) y,x).
+** KEPT (pick-wt=23): 69 [para_into,6.1.1.1.1,2.1.2] FIXED(B (B W B) B x (W (B (B x))) y,x).
+** KEPT (pick-wt=23): 70 [para_into,6.1.1.1,2.1.2] FIXED(B (B W B (B x)) W (B (B x)) y,x).
+** KEPT (pick-wt=21): 71 [para_into,6.1.1,3.1.2] FIXED(W (B W B (B x)) (W (B (B x))),x).
+** KEPT (pick-wt=25): 72 [para_into,6.1.1,2.1.2] FIXED(B (B W B (B x) (W (B (B x)))) y z,x).
+
+given clause #26: (wt=21) 7 [para_into,5.1.1.1,2.1.2] FIXED(B (W (B (B x))) W (B (B x)) y,x).
+** KEPT (pick-wt=23): 73 [para_into,7.1.1.1.1.1,2.1.2] FIXED(B B W (B (B x)) W (B (B x)) y,x).
+** KEPT (pick-wt=23): 74 [para_into,7.1.1.1,2.1.2] FIXED(B (B (W (B (B x))) W) B (B x) y,x).
+** KEPT (pick-wt=21): 75 [para_into,7.1.1,3.1.2] FIXED(W (B (W (B (B x))) W) (B (B x)),x).
+** KEPT (pick-wt=25): 76 [para_into,7.1.1,2.1.2] FIXED(B (B (W (B (B x))) W (B (B x))) y z,x).
+
+given clause #27: (wt=21) 10 [para_into,8.1.1.1,2.1.2] FIXED(B W W (B (B x)) (W (B (B x))),x).
+** KEPT (pick-wt=21): 77 [para_into,10.1.1.1.1,3.1.2] FIXED(W B W (B (B x)) (W (B (B x))),x).
+** KEPT (pick-wt=23): 78 [para_into,10.1.1.1,2.1.2] FIXED(B (B W W) B (B x) (W (B (B x))),x).
+** KEPT (pick-wt=23): 79 [para_into,10.1.1,2.1.2] FIXED(B (B W W (B (B x))) W (B (B x)),x).
+
+given clause #28: (wt=21) 12 [para_into,8.1.1,2.1.2] FIXED(B (W (W (B (B x)))) W (B (B x)),x).
+** KEPT (pick-wt=23): 80 [para_into,12.1.1.1.1,2.1.2] FIXED(B B W (W (B (B x))) W (B (B x)),x).
+** KEPT (pick-wt=23): 81 [para_into,12.1.1,2.1.2] FIXED(B (B (W (W (B (B x)))) W) B (B x),x).
+
+given clause #29: (wt=21) 29 [para_into,18.1.1.1.1,2.1.2] FIXED(B B (B B W W) W B (B x),x).
+** KEPT (pick-wt=23): 82 [para_into,29.1.1.1.1.1,2.1.2] FIXED(B (B B) (B B W) W W B (B x),x).
+** KEPT (pick-wt=23): 83 [para_into,29.1.1,2.1.2] FIXED(B (B B (B B W W) W B) B x,x).
+
+----> UNIT CONFLICT at   0.00 sec ----> 84 [binary,83.1,4.1] $Ans(B (B B (B B W W) W B) B).
+
+
+given clause #30: (wt=21) 30 [para_into,18.1.1,2.1.2] FIXED(B (B (B B W W W) B) B x,x).
+
+Search stopped by max_given option.
+
+** KEPT (pick-wt=23): 85 [para_into,30.1.1.1.1,2.1.2] FIXED(B B (B (B B W W W)) B B x,x).
+
+----> UNIT CONFLICT at   0.00 sec ----> 86 [binary,85.1,4.1] $Ans(B B (B (B B W W W)) B B).
+
+** KEPT (pick-wt=21): 87 [para_into,30.1.1,3.1.2] FIXED(W (B (B (B B W W W) B)) B,B).
+** KEPT (pick-wt=27): 88 [para_into,30.1.1,2.1.2] FIXED(B (B (B (B B W W W) B) B) x y,x y).
+
+Search stopped by max_given option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 30
+clauses generated             74
+  para_into generated         74
+demod & eval rewrites          0
+clauses wt,lit,sk delete       0
+tautologies deleted            0
+clauses forward subsumed       0
+  (subsumed by sos)            0
+unit deletions                 0
+factor simplifications         0
+clauses kept                  74
+new demodulators               0
+empty clauses                  9
+clauses back demodulated       0
+clauses back subsumed          0
+usable size                   34
+sos size                      45
+demodulators size              0
+passive size                   0
+hot size                       0
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8406 finished Mon Aug  2 15:30:37 2004

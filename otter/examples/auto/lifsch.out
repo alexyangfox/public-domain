@@ -1,0 +1,167 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:30:35 2004
+The command was "../../bin/otter".  The process ID is 8273.
+
+set(auto).
+   dependent: set(auto1).
+   dependent: set(process_input).
+   dependent: clear(print_kept).
+   dependent: clear(print_new_demod).
+   dependent: clear(print_back_demod).
+   dependent: clear(print_back_sub).
+   dependent: set(control_memory).
+   dependent: assign(max_mem, 12000).
+   dependent: assign(pick_given_ratio, 4).
+   dependent: assign(stats_level, 1).
+   dependent: assign(max_seconds, 10800).
+
+formula_list(usable).
+-(exists x x1 all y exists z z1 ((-p(y,y)|p(x,x)| -s(z,x))& (s(x,y)| -s(y,z)|q(z1,z1))& (q(x1,y)| -q(y,z1)|s(x1,x1)))).
+end_of_list.
+
+-------> usable clausifies to:
+
+list(usable).
+0 [] p($f1(x,x1),$f1(x,x1))| -s(x,$f1(x,x1))| -q(x1,$f1(x,x1)).
+0 [] p($f1(x,x1),$f1(x,x1))| -s(x,$f1(x,x1))|q($f1(x,x1),z1).
+0 [] p($f1(x,x1),$f1(x,x1))| -s(x,$f1(x,x1))| -s(x1,x1).
+0 [] p($f1(x,x1),$f1(x,x1))|s($f1(x,x1),z)| -q(x1,$f1(x,x1)).
+0 [] p($f1(x,x1),$f1(x,x1))|s($f1(x,x1),z)|q($f1(x,x1),z1).
+0 [] p($f1(x,x1),$f1(x,x1))|s($f1(x,x1),z)| -s(x1,x1).
+0 [] p($f1(x,x1),$f1(x,x1))| -q(z1,z1)| -q(x1,$f1(x,x1)).
+0 [] p($f1(x,x1),$f1(x,x1))| -q(z1,z1)|q($f1(x,x1),z1).
+0 [] p($f1(x,x1),$f1(x,x1))| -q(z1,z1)| -s(x1,x1).
+0 [] -p(x,x)| -s(x,$f1(x,x1))| -q(x1,$f1(x,x1)).
+0 [] -p(x,x)| -s(x,$f1(x,x1))|q($f1(x,x1),z1).
+0 [] -p(x,x)| -s(x,$f1(x,x1))| -s(x1,x1).
+0 [] -p(x,x)|s($f1(x,x1),z)| -q(x1,$f1(x,x1)).
+0 [] -p(x,x)|s($f1(x,x1),z)|q($f1(x,x1),z1).
+0 [] -p(x,x)|s($f1(x,x1),z)| -s(x1,x1).
+0 [] -p(x,x)| -q(z1,z1)| -q(x1,$f1(x,x1)).
+0 [] -p(x,x)| -q(z1,z1)|q($f1(x,x1),z1).
+0 [] -p(x,x)| -q(z1,z1)| -s(x1,x1).
+0 [] s(z,x)| -s(x,$f1(x,x1))| -q(x1,$f1(x,x1)).
+0 [] s(z,x)| -s(x,$f1(x,x1))|q($f1(x,x1),z1).
+0 [] s(z,x)| -s(x,$f1(x,x1))| -s(x1,x1).
+0 [] s(z,x)|s($f1(x,x1),z)| -q(x1,$f1(x,x1)).
+0 [] s(z,x)|s($f1(x,x1),z)|q($f1(x,x1),z1).
+0 [] s(z,x)|s($f1(x,x1),z)| -s(x1,x1).
+0 [] s(z,x)| -q(z1,z1)| -q(x1,$f1(x,x1)).
+0 [] s(z,x)| -q(z1,z1)|q($f1(x,x1),z1).
+0 [] s(z,x)| -q(z1,z1)| -s(x1,x1).
+end_of_list.
+
+SCAN INPUT: prop=0, horn=0, equality=0, symmetry=0, max_lits=3.
+
+This is a non-Horn set without equality.  The strategy will
+be ordered hyper_res, unit deletion, and factoring, with
+satellites in sos and with nuclei in usable.
+
+   dependent: set(hyper_res).
+   dependent: set(factor).
+   dependent: set(unit_deletion).
+
+------------> process usable:
+** KEPT (pick-wt=17): 1 [] p($f1(x,y),$f1(x,y))| -s(x,$f1(x,y))| -q(y,$f1(x,y)).
+** KEPT (pick-wt=17): 2 [] p($f1(x,y),$f1(x,y))| -s(x,$f1(x,y))|q($f1(x,y),z).
+** KEPT (pick-wt=15): 3 [] p($f1(x,y),$f1(x,y))| -s(x,$f1(x,y))| -s(y,y).
+** KEPT (pick-wt=17): 4 [] p($f1(x,y),$f1(x,y))|s($f1(x,y),z)| -q(y,$f1(x,y)).
+** KEPT (pick-wt=15): 5 [] p($f1(x,y),$f1(x,y))|s($f1(x,y),z)| -s(y,y).
+** KEPT (pick-wt=15): 6 [] p($f1(x,y),$f1(x,y))| -q(z,z)| -q(y,$f1(x,y)).
+** KEPT (pick-wt=15): 7 [] p($f1(x,y),$f1(x,y))| -q(z,z)|q($f1(x,y),z).
+** KEPT (pick-wt=13): 8 [] p($f1(x,y),$f1(x,y))| -q(z,z)| -s(y,y).
+** KEPT (pick-wt=13): 9 [] -p(x,x)| -s(x,$f1(x,y))| -q(y,$f1(x,y)).
+** KEPT (pick-wt=13): 10 [] -p(x,x)| -s(x,$f1(x,y))|q($f1(x,y),z).
+** KEPT (pick-wt=11): 11 [] -p(x,x)| -s(x,$f1(x,y))| -s(y,y).
+** KEPT (pick-wt=13): 12 [] -p(x,x)|s($f1(x,y),z)| -q(y,$f1(x,y)).
+** KEPT (pick-wt=13): 13 [] -p(x,x)|s($f1(x,y),z)|q($f1(x,y),u).
+** KEPT (pick-wt=11): 14 [] -p(x,x)|s($f1(x,y),z)| -s(y,y).
+** KEPT (pick-wt=11): 15 [] -p(x,x)| -q(y,y)| -q(z,$f1(x,z)).
+** KEPT (pick-wt=11): 16 [] -p(x,x)| -q(y,y)|q($f1(x,z),y).
+** KEPT (pick-wt=9): 17 [] -p(x,x)| -q(y,y)| -s(z,z).
+** KEPT (pick-wt=13): 18 [] s(x,y)| -s(y,$f1(y,z))| -q(z,$f1(y,z)).
+** KEPT (pick-wt=13): 19 [] s(x,y)| -s(y,$f1(y,z))|q($f1(y,z),u).
+** KEPT (pick-wt=11): 20 [] s(x,y)| -s(y,$f1(y,z))| -s(z,z).
+** KEPT (pick-wt=13): 21 [] s(x,y)|s($f1(y,z),x)| -q(z,$f1(y,z)).
+** KEPT (pick-wt=11): 22 [] s(x,y)|s($f1(y,z),x)| -s(z,z).
+** KEPT (pick-wt=11): 23 [] s(x,y)| -q(z,z)| -q(u,$f1(y,u)).
+** KEPT (pick-wt=11): 24 [] s(x,y)| -q(z,z)|q($f1(y,u),z).
+** KEPT (pick-wt=9): 25 [] s(x,y)| -q(z,z)| -s(u,u).
+
+------------> process sos:
+** KEPT (pick-wt=17): 26 [] p($f1(x,y),$f1(x,y))|s($f1(x,y),z)|q($f1(x,y),u).
+** KEPT (pick-wt=13): 27 [] s(x,y)|s($f1(y,z),x)|q($f1(y,z),u).
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=17) 26 [] p($f1(x,y),$f1(x,y))|s($f1(x,y),z)|q($f1(x,y),u).
+
+given clause #2: (wt=13) 27 [] s(x,y)|s($f1(y,z),x)|q($f1(y,z),u).
+
+given clause #3: (wt=17) 29 [hyper,26,20,26,factor_simp,factor_simp] p($f1(x,y),$f1(x,y))|q($f1(x,y),z)|s(u,$f1(x,y)).
+
+given clause #4: (wt=12) 60 [hyper,29,2,factor_simp,factor_simp] p($f1(x,y),$f1(x,y))|q($f1(x,y),z).
+
+given clause #5: (wt=10) 63 [hyper,60,23,60,factor_simp] p($f1(x,y),$f1(x,y))|s(z,u).
+
+given clause #6: (wt=18) 34 [hyper,27,22] s($f1(x,y),x)|q($f1(x,y),z)|s(u,v)|s($f1(v,x),u).
+
+given clause #7: (wt=7) 65 [hyper,63,8,60,factor_simp,factor_simp] p($f1(x,y),$f1(x,y)).
+
+given clause #8: (wt=14) 111 [hyper,65,13] s($f1($f1(x,y),z),u)|q($f1($f1(x,y),z),v).
+
+given clause #9: (wt=7) 117 [hyper,111,11,65,111,factor_simp] q($f1($f1(x,y),z),u).
+
+-------- PROOF -------- 
+
+-----> EMPTY CLAUSE at   0.02 sec ----> 122 [hyper,117,15,65,117] $F.
+
+Length of proof is 6.  Level of proof is 6.
+
+---------------- PROOF ----------------
+
+2 [] p($f1(x,y),$f1(x,y))| -s(x,$f1(x,y))|q($f1(x,y),z).
+8 [] p($f1(x,y),$f1(x,y))| -q(z,z)| -s(y,y).
+11 [] -p(x,x)| -s(x,$f1(x,y))| -s(y,y).
+13 [] -p(x,x)|s($f1(x,y),z)|q($f1(x,y),u).
+15 [] -p(x,x)| -q(y,y)| -q(z,$f1(x,z)).
+20 [] s(x,y)| -s(y,$f1(y,z))| -s(z,z).
+23 [] s(x,y)| -q(z,z)| -q(u,$f1(y,u)).
+26 [] p($f1(x,y),$f1(x,y))|s($f1(x,y),z)|q($f1(x,y),u).
+29 [hyper,26,20,26,factor_simp,factor_simp] p($f1(x,y),$f1(x,y))|q($f1(x,y),z)|s(u,$f1(x,y)).
+60 [hyper,29,2,factor_simp,factor_simp] p($f1(x,y),$f1(x,y))|q($f1(x,y),z).
+63 [hyper,60,23,60,factor_simp] p($f1(x,y),$f1(x,y))|s(z,u).
+65 [hyper,63,8,60,factor_simp,factor_simp] p($f1(x,y),$f1(x,y)).
+111 [hyper,65,13] s($f1($f1(x,y),z),u)|q($f1($f1(x,y),z),v).
+117 [hyper,111,11,65,111,factor_simp] q($f1($f1(x,y),z),u).
+122 [hyper,117,15,65,117] $F.
+
+------------ end of proof -------------
+
+
+Search stopped by max_proofs option.
+
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                  9
+clauses generated            283
+clauses kept                 121
+clauses forward subsumed     188
+clauses back subsumed         83
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.02          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8273 finished Mon Aug  2 15:30:35 2004

@@ -1,0 +1,289 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:31:15 2004
+The command was "../../bin/otter".  The process ID is 8952.
+
+set(hyper_res).
+clear(order_hyper).
+set(para_into).
+set(para_from).
+WARNING: set(para_from_left) flag already set.
+set(para_from_left).
+clear(para_from_right).
+WARNING: set(para_into_left) flag already set.
+set(para_into_left).
+clear(para_into_right).
+set(order_eq).
+set(dynamic_demod).
+assign(dynamic_demod_depth,1).
+assign(dynamic_demod_rhs,5).
+set(back_demod).
+WARNING: clear(symbol_elim) flag already clear.
+clear(symbol_elim).
+set(lex_order_vars).
+assign(demod_limit,250).
+assign(max_weight,999).
+assign(max_literals,1).
+clear(print_kept).
+clear(print_back_sub).
+clear(print_new_demod).
+clear(print_back_demod).
+assign(age_factor,1).
+
+lex([A,B,E,MULT(x,x),INV(x),Coeff(x,x),ADD(x,x)]).
+
+special_unary([INV(x),Coeff(x,x)]).
+
+list(usable).
+1 [] EQ(ADD(x,y),ADD(y,x)).
+2 [] EQ(ADD(ADD(x,y),z),ADD(x,ADD(y,z))).
+3 [] EQ(MULT(MULT(x,y),z),MULT(x,MULT(y,z))).
+4 [] EQ(MULT(ADD(x,y),z),ADD(MULT(x,z),MULT(y,z))).
+5 [] EQ(MULT(x,ADD(y,z)),ADD(MULT(x,y),MULT(x,z))).
+6 [] EQ(ADD(x,E),x).
+7 [] EQ(ADD(E,x),x).
+8 [] EQ(ADD(INV(x),x),E).
+9 [] EQ(ADD(x,INV(x)),E).
+10 [] EQ(x,x).
+11 [] EQ(MULT(INV(x),y),INV(MULT(x,y))).
+12 [] EQ(MULT(x,INV(y)),INV(MULT(x,y))).
+13 [] EQ(INV(ADD(x,y)),ADD(INV(x),INV(y))).
+14 [] TID(ADD(x,v),x,v).
+15 [] TID(ADD(x1,ADD(x,v)),x,ADD(x1,v)).
+16 [] TID(ADD(x1,ADD(x2,ADD(x,v))),x,ADD(x1,ADD(x2,v))).
+17 [] TID(ADD(x1,ADD(x2,ADD(x3,ADD(x,v)))),x,ADD(x1,ADD(x2,ADD(x3,v)))).
+18 [] TID(ADD(x1,ADD(x2,ADD(x3,ADD(x4,ADD(x,v))))),x,ADD(x1,ADD(x2,ADD(x3,ADD(x4,v))))).
+19 [] TID(ADD(x1,ADD(x2,ADD(x3,ADD(x4,ADD(x5,ADD(x,v)))))),x,ADD(x1,ADD(x2,ADD(x3,ADD(x4,ADD(x5,v)))))).
+20 [] TID(ADD(x1,ADD(x2,ADD(x3,ADD(x4,ADD(x5,ADD(x6,ADD(x,v))))))),x,ADD(x1,ADD(x2,ADD(x3,ADD(x4,ADD(x5,ADD(x6,v))))))).
+21 [] TID(Coeff(x,z),x,Coeff(x,$DIFF(z,1)))|$NOT($INT(z)).
+22 [] TID(ADD(Coeff(x,z),v),x,ADD(Coeff(x,$DIFF(z,1)),v))|$NOT($INT(z)).
+23 [] TID(ADD(x1,ADD(Coeff(x,z),v)),x,ADD(x1,ADD(Coeff(x,$DIFF(z,1)),v)))|$NOT($INT(z)).
+24 [] TID(ADD(x1,ADD(x2,ADD(Coeff(x,z),v))),x,ADD(x1,ADD(x2,ADD(Coeff(x,$DIFF(z,1)),v))))|$NOT($INT(z)).
+25 [] TID(ADD(x1,ADD(x2,ADD(x3,ADD(Coeff(x,z),v)))),x,ADD(x1,ADD(x2,ADD(x3,ADD(Coeff(x,$DIFF(z,1)),v)))))|$NOT($INT(z)).
+26 [] TID(ADD(x1,ADD(x2,ADD(x3,ADD(x4,ADD(Coeff(x,z),v))))),x,ADD(x1,ADD(x2,ADD(x3,ADD(x4,ADD(Coeff(x,$DIFF(z,1)),v))))))|$NOT($INT(z)).
+27 [] TID(ADD(x1,ADD(x2,ADD(x3,ADD(x4,ADD(Coeff(x,z),v))))),x,ADD(x1,ADD(x2,ADD(x3,ADD(x4,ADD(Coeff(x,$DIFF(z,1)),v))))))|$NOT($INT(z)).
+28 [] IDENT(x,x).
+29 [] -EQ(w,v)| -TID(w,x1,w1)| -TID(v,x2,v1)| -$RENAME(x1,x2)| -IDENT(x1,x2)|EQ(ADD(INV(w1),v1),E).
+30 [] -EQ(w,E)| -EQ(v,E)| -TID(w,x1,w1)| -TID(v,x2,v1)| -$RENAME(x1,x2)| -IDENT(x1,x2)|EQ(ADD(INV(w1),v1),E).
+31 [] -EQ(Coeff(x,y),E)|EQ(IsCycle(x),y).
+end_of_list.
+
+list(sos).
+32 [] EQ(MULT(x,MULT(x,x)),x).
+33 [] -EQ(ADD(Coeff(MULT(A,B),3),Coeff(MULT(B,A),3)),E).
+end_of_list.
+
+list(demodulators).
+34 [] $GT(x,IsCycle(z))->EQ(Coeff(z,x),Coeff(z,$MOD(x,IsCycle(z)))).
+35 [] EQ(MULT(x,MULT(x,x)),x).
+36 [] EQ(ADD(x,y),ADD(y,x)).
+37 [] EQ(ADD(x,ADD(y,z)),ADD(y,ADD(x,z))).
+38 [] EQ(ADD(ADD(x,y),z),ADD(x,ADD(y,z))).
+39 [] EQ(MULT(MULT(x,y),z),MULT(x,MULT(y,z))).
+40 [] EQ(MULT(ADD(x,y),z),ADD(MULT(x,z),MULT(y,z))).
+41 [] EQ(MULT(x,ADD(y,z)),ADD(MULT(x,y),MULT(x,z))).
+42 [] EQ(ADD(x,E),x).
+43 [] EQ(ADD(E,x),x).
+44 [] EQ(MULT(E,x),E).
+45 [] EQ(MULT(x,E),E).
+46 [] EQ(INV(E),E).
+47 [] EQ(INV(INV(x)),x).
+48 [] EQ(MULT(x,INV(y)),INV(MULT(x,y))).
+49 [] EQ(MULT(INV(x),y),INV(MULT(x,y))).
+50 [] EQ(INV(ADD(x,y)),ADD(INV(x),INV(y))).
+51 [] EQ(INV(Coeff(x,y)),Coeff(INV(x),y)).
+52 [] EQ(ADD(x,INV(x)),E).
+53 [] EQ(ADD(x,ADD(INV(x),y)),y).
+54 [] EQ(ADD(x,x),Coeff(x,2)).
+55 [] $INT(y)->EQ(ADD(x,Coeff(x,y)),Coeff(x,$SUM(y,1))).
+56 [] $AND($INT(y),$INT(z))->EQ(ADD(Coeff(x,y),Coeff(x,z)),Coeff(x,$SUM(y,z))).
+57 [] EQ(ADD(x,ADD(x,y)),ADD(Coeff(x,2),y)).
+58 [] $INT(y)->EQ(ADD(x,ADD(Coeff(x,y),z)),ADD(Coeff(x,$SUM(y,1)),z)).
+59 [] $AND($INT(y),$INT(z))->EQ(ADD(Coeff(x,y),ADD(Coeff(x,z),v)),ADD(Coeff(x,$SUM(y,z)),v)).
+60 [] $AND($INT(y),$INT(z))->EQ(Coeff(Coeff(x,y),z),Coeff(x,$PROD(y,z))).
+61 [] EQ(Coeff(E,x),E).
+62 [] EQ(Coeff(x,0),E).
+63 [] EQ(Coeff(x,1),x).
+64 [] EQ(MULT(x,Coeff(y,z)),Coeff(MULT(x,y),z)).
+65 [] EQ(MULT(Coeff(x,z),y),Coeff(MULT(x,y),z)).
+66 [] EQ(Coeff(ADD(x,y),z),ADD(Coeff(x,z),Coeff(y,z))).
+67 [] $INT(y)->EQ(ADD(x,Coeff(INV(x),y)),Coeff(INV(x),$DIFF(y,1))).
+68 [] $INT(y)->EQ(ADD(INV(x),Coeff(x,y)),Coeff(x,$DIFF(y,1))).
+69 [] EQ(ADD(Coeff(x,y),Coeff(INV(x),y)),E).
+70 [] $AND($INT(y),$AND($INT(z),$GT(y,z)))->EQ(ADD(Coeff(x,y),Coeff(INV(x),z)),Coeff(x,$DIFF(y,z))).
+71 [] $AND($INT(y),$AND($INT(z),$GT(z,y)))->EQ(ADD(Coeff(x,y),Coeff(INV(x),z)),Coeff(INV(x),$DIFF(z,y))).
+72 [] $INT(y)->EQ(ADD(x,ADD(Coeff(INV(x),y),zzz)),ADD(Coeff(INV(x),$DIFF(y,1)),zzz)).
+73 [] $INT(y)->EQ(ADD(INV(x),ADD(Coeff(x,y),zzz)),ADD(Coeff(x,$DIFF(y,1)),zzz)).
+74 [] EQ(ADD(Coeff(x,y),ADD(Coeff(INV(x),y),zzz)),zzz).
+75 [] $AND($INT(y),$AND($INT(z),$GT(y,z)))->EQ(ADD(Coeff(x,y),ADD(Coeff(INV(x),z),zzz)),ADD(Coeff(x,$DIFF(y,z)),zzz)).
+76 [] $AND($INT(y),$AND($INT(z),$GT(z,y)))->EQ(ADD(Coeff(x,y),ADD(Coeff(INV(x),z),zzz)),ADD(Coeff(INV(x),$DIFF(z,y)),zzz)).
+77 [] EQ(EQ(ADD(x,y),ADD(u,v)),EQ(ADD(INV(ADD(u,v)),ADD(x,y)),E)).
+78 [] EQ(EQ(ADD(x,y),MULT(u,v)),EQ(ADD(INV(MULT(u,v)),ADD(x,y)),E)).
+79 [] EQ(EQ(ADD(x,y),INV(u)),EQ(ADD(u,ADD(x,y)),E)).
+80 [] EQ(EQ(ADD(x,y),Coeff(u,v)),EQ(ADD(INV(Coeff(u,v)),ADD(x,y)),E)).
+81 [] EQ(EQ(INV(x),E),EQ(x,E)).
+82 [] EQ(EQ(ADD(INV(x),y),E),EQ(ADD(x,INV(y)),E)).
+83 [] EQ(EQ(ADD(Coeff(INV(x),y),z),E),EQ(ADD(Coeff(x,y),INV(z)),E)).
+84 [] EQ(EQ(MULT(u,v),ADD(x,y)),EQ(ADD(INV(MULT(u,v)),ADD(x,y)),E)).
+85 [] EQ(EQ(INV(u),ADD(x,y)),EQ(ADD(u,ADD(x,y)),E)).
+86 [] EQ(EQ(Coeff(u,v),ADD(x,y)),EQ(ADD(INV(Coeff(u,v)),ADD(x,y)),E)).
+87 [] EQ(EQ(E,INV(x)),EQ(x,E)).
+88 [] EQ(EQ(E,ADD(INV(x),y)),EQ(ADD(x,INV(y)),E)).
+89 [] EQ(EQ(E,ADD(Coeff(INV(x),y),z)),EQ(ADD(Coeff(x,y),INV(z)),E)).
+end_of_list.
+
+weight_list(pick_given).
+weight(EQ(Coeff($(1),$(1)),E),-100).
+end_of_list.
+
+weight_list(purge_gen).
+weight(MULT($(1),MULT($(1),MULT($(1),MULT($(1),$(1))))),9999).
+weight(ADD($(1),ADD($(1),ADD($(1),ADD($(1),ADD($(1),ADD($(1),$(1))))))),9999).
+weight(Coeff(Coeff($(1),$(1)),$(1)),9999).
+weight(TID($(1),$(1),$(1)),9999).
+end_of_list.
+
+weight_list(terms).
+weight(ADD($(1),$(1)),+10).
+end_of_list.
+lex dependent demodulator: 36 [] EQ(ADD(x,y),ADD(y,x)).
+lex dependent demodulator: 37 [] EQ(ADD(x,ADD(y,z)),ADD(y,ADD(x,z))).
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=7) 32 [] EQ(MULT(x,MULT(x,x)),x).
+
+given clause #2: (wt=12) 92 [para_from,32.1.1,3.1.1.1,demod,39,flip.1] EQ(MULT(x,MULT(x,MULT(x,y))),MULT(x,y)).
+
+given clause #3: (wt=13) 33 [] -EQ(ADD(Coeff(MULT(A,B),3),Coeff(MULT(B,A),3)),E).
+
+given clause #4: (wt=38) 90 [para_into,32.1.1.2,5.1.1,demod,40,40,37,36,37,36,37,41,40,35,41,40,41,40,40,35,36,36,37,36,37,36,37,36,37,36,37,37,37,37,37,37,37,37,37,36,37,36,37,37,37,37,37,37,77,50,36,37,36,37,37,53,37,53] EQ(ADD(MULT(x,MULT(x,y)),ADD(MULT(x,MULT(y,x)),ADD(MULT(x,MULT(y,y)),ADD(MULT(y,MULT(x,x)),ADD(MULT(y,MULT(x,y)),MULT(y,MULT(y,x))))))),E).
+
+given clause #5: (wt=-94) 100 [para_into,90.1.1.1,32.1.1,demod,35,35,35,35,35,54,55,55,55,55] EQ(Coeff(x,6),E).
+
+given clause #6: (wt=9) 104 [hyper,100,31] EQ(IsCycle(x),6).
+
+given clause #7: (wt=15) 96 [para_into,90.1.1.1.2,32.1.1,demod,39,35,39,35,35,39,35,35,39,35,39,35,39,35,54,36,58,37,54,37,55] EQ(ADD(Coeff(x,3),Coeff(MULT(x,x),3)),E).
+
+given clause #8: (wt=19) 106 [hyper,96,30,100,21,22,eval,28,demod,51,37,76,83,51,propositional] EQ(ADD(Coeff(x,3),Coeff(INV(MULT(x,x)),3)),E).
+
+given clause #9: (wt=22) 112 [para_from,96.1.1,5.1.1.2,demod,45,64,64,flip.1] EQ(ADD(Coeff(MULT(x,y),3),Coeff(MULT(x,MULT(y,y)),3)),E).
+
+given clause #10: (wt=22) 114 [para_from,96.1.1,4.1.1.1,demod,44,65,65,39,flip.1] EQ(ADD(Coeff(MULT(x,y),3),Coeff(MULT(x,MULT(x,y)),3)),E).
+
+given clause #11: (wt=24) 110 [para_into,96.1.1.2.1,3.1.1] EQ(ADD(Coeff(MULT(x,y),3),Coeff(MULT(x,MULT(y,MULT(x,y))),3)),E).
+
+given clause #12: (wt=24) 120 [para_from,106.1.1,5.1.1.2,demod,45,64,64,48,flip.1] EQ(ADD(Coeff(MULT(x,y),3),Coeff(INV(MULT(x,MULT(y,y))),3)),E).
+
+given clause #13: (wt=24) 122 [para_from,106.1.1,4.1.1.1,demod,44,65,65,49,39,flip.1] EQ(ADD(Coeff(MULT(x,y),3),Coeff(INV(MULT(x,MULT(x,y))),3)),E).
+
+given clause #14: (wt=26) 118 [para_into,106.1.1.2.1.1,3.1.1] EQ(ADD(Coeff(MULT(x,y),3),Coeff(INV(MULT(x,MULT(y,MULT(x,y)))),3)),E).
+
+given clause #15: (wt=28) 126 [para_into,112.1.1.1.1,3.1.1,demod,39] EQ(ADD(Coeff(MULT(x,MULT(y,z)),3),Coeff(MULT(x,MULT(y,MULT(z,z))),3)),E).
+
+given clause #16: (wt=28) 128 [para_from,112.1.1,4.1.1.1,demod,44,65,39,65,39,39,flip.1] EQ(ADD(Coeff(MULT(x,MULT(y,z)),3),Coeff(MULT(x,MULT(y,MULT(y,z))),3)),E).
+
+given clause #17: (wt=28) 130 [hyper,114,30,112,22,22,eval,28,demod,50,51,51,36,37,36,37,36,37,74,propositional] EQ(ADD(Coeff(MULT(x,MULT(x,y)),3),Coeff(INV(MULT(x,MULT(y,y))),3)),E).
+
+given clause #18: (wt=29) 134 [para_from,114.1.1,4.1.1.1,demod,44,65,39,65,39,39,36,flip.1] EQ(ADD(Coeff(MULT(x,MULT(x,MULT(y,z))),3),Coeff(MULT(x,MULT(y,z)),3)),E).
+
+given clause #19: (wt=29) 144 [hyper,120,30,114,22,22,eval,28,demod,50,51,51,36,37,36,37,37,74,83,51,47,propositional] EQ(ADD(Coeff(MULT(x,MULT(x,y)),3),Coeff(MULT(x,MULT(y,y)),3)),E).
+
+given clause #20: (wt=30) 108 [para_into,96.1.1.2.1,5.1.1,demod,66,40,40,37,36,37,36,37,66,66,66,37,37,37,36,37,36,97,42,36,37,37] EQ(ADD(Coeff(x,3),ADD(Coeff(MULT(x,x),3),ADD(Coeff(MULT(x,y),3),Coeff(MULT(y,x),3)))),E).
+
+-------- PROOF -------- 
+
+----> UNIT CONFLICT at   0.13 sec ----> 194 [binary,192.1,33.1] $F.
+
+Length of proof is 7.  Level of proof is 5.
+
+---------------- PROOF ----------------
+
+4 [] EQ(MULT(ADD(x,y),z),ADD(MULT(x,z),MULT(y,z))).
+5 [] EQ(MULT(x,ADD(y,z)),ADD(MULT(x,y),MULT(x,z))).
+21 [] TID(Coeff(x,z),x,Coeff(x,$DIFF(z,1)))|$NOT($INT(z)).
+22 [] TID(ADD(Coeff(x,z),v),x,ADD(Coeff(x,$DIFF(z,1)),v))|$NOT($INT(z)).
+23 [] TID(ADD(x1,ADD(Coeff(x,z),v)),x,ADD(x1,ADD(Coeff(x,$DIFF(z,1)),v)))|$NOT($INT(z)).
+28 [] IDENT(x,x).
+30 [] -EQ(w,E)| -EQ(v,E)| -TID(w,x1,w1)| -TID(v,x2,v1)| -$RENAME(x1,x2)| -IDENT(x1,x2)|EQ(ADD(INV(w1),v1),E).
+32 [] EQ(MULT(x,MULT(x,x)),x).
+33 [] -EQ(ADD(Coeff(MULT(A,B),3),Coeff(MULT(B,A),3)),E).
+35 [] EQ(MULT(x,MULT(x,x)),x).
+36 [] EQ(ADD(x,y),ADD(y,x)).
+37 [] EQ(ADD(x,ADD(y,z)),ADD(y,ADD(x,z))).
+39 [] EQ(MULT(MULT(x,y),z),MULT(x,MULT(y,z))).
+40 [] EQ(MULT(ADD(x,y),z),ADD(MULT(x,z),MULT(y,z))).
+41 [] EQ(MULT(x,ADD(y,z)),ADD(MULT(x,y),MULT(x,z))).
+42 [] EQ(ADD(x,E),x).
+43 [] EQ(ADD(E,x),x).
+44 [] EQ(MULT(E,x),E).
+47 [] EQ(INV(INV(x)),x).
+49 [] EQ(MULT(INV(x),y),INV(MULT(x,y))).
+50 [] EQ(INV(ADD(x,y)),ADD(INV(x),INV(y))).
+51 [] EQ(INV(Coeff(x,y)),Coeff(INV(x),y)).
+53 [] EQ(ADD(x,ADD(INV(x),y)),y).
+54 [] EQ(ADD(x,x),Coeff(x,2)).
+55 [] $INT(y)->EQ(ADD(x,Coeff(x,y)),Coeff(x,$SUM(y,1))).
+57 [] EQ(ADD(x,ADD(x,y)),ADD(Coeff(x,2),y)).
+58 [] $INT(y)->EQ(ADD(x,ADD(Coeff(x,y),z)),ADD(Coeff(x,$SUM(y,1)),z)).
+60 [] $AND($INT(y),$INT(z))->EQ(Coeff(Coeff(x,y),z),Coeff(x,$PROD(y,z))).
+65 [] EQ(MULT(Coeff(x,z),y),Coeff(MULT(x,y),z)).
+66 [] EQ(Coeff(ADD(x,y),z),ADD(Coeff(x,z),Coeff(y,z))).
+74 [] EQ(ADD(Coeff(x,y),ADD(Coeff(INV(x),y),zzz)),zzz).
+76 [] $AND($INT(y),$AND($INT(z),$GT(z,y)))->EQ(ADD(Coeff(x,y),ADD(Coeff(INV(x),z),zzz)),ADD(Coeff(INV(x),$DIFF(z,y)),zzz)).
+77 [] EQ(EQ(ADD(x,y),ADD(u,v)),EQ(ADD(INV(ADD(u,v)),ADD(x,y)),E)).
+83 [] EQ(EQ(ADD(Coeff(INV(x),y),z),E),EQ(ADD(Coeff(x,y),INV(z)),E)).
+90 [para_into,32.1.1.2,5.1.1,demod,40,40,37,36,37,36,37,41,40,35,41,40,41,40,40,35,36,36,37,36,37,36,37,36,37,36,37,37,37,37,37,37,37,37,37,36,37,36,37,37,37,37,37,37,77,50,36,37,36,37,37,53,37,53] EQ(ADD(MULT(x,MULT(x,y)),ADD(MULT(x,MULT(y,x)),ADD(MULT(x,MULT(y,y)),ADD(MULT(y,MULT(x,x)),ADD(MULT(y,MULT(x,y)),MULT(y,MULT(y,x))))))),E).
+97,96 [para_into,90.1.1.1.2,32.1.1,demod,39,35,39,35,35,39,35,35,39,35,39,35,39,35,54,36,58,37,54,37,55] EQ(ADD(Coeff(x,3),Coeff(MULT(x,x),3)),E).
+101,100 [para_into,90.1.1.1,32.1.1,demod,35,35,35,35,35,54,55,55,55,55] EQ(Coeff(x,6),E).
+106 [hyper,96,30,100,21,22,eval,28,demod,51,37,76,83,51,propositional] EQ(ADD(Coeff(x,3),Coeff(INV(MULT(x,x)),3)),E).
+108 [para_into,96.1.1.2.1,5.1.1,demod,66,40,40,37,36,37,36,37,66,66,66,37,37,37,36,37,36,97,42,36,37,37] EQ(ADD(Coeff(x,3),ADD(Coeff(MULT(x,x),3),ADD(Coeff(MULT(x,y),3),Coeff(MULT(y,x),3)))),E).
+122 [para_from,106.1.1,4.1.1.1,demod,44,65,65,49,39,flip.1] EQ(ADD(Coeff(MULT(x,y),3),Coeff(INV(MULT(x,MULT(x,y))),3)),E).
+192 [hyper,108,30,122,22,23,eval,28,demod,35,36,50,51,47,51,37,37,37,36,37,36,37,37,37,74,57,60,101,43,propositional] EQ(ADD(Coeff(MULT(x,y),3),Coeff(MULT(y,x),3)),E).
+194 [binary,192.1,33.1] $F.
+
+------------ end of proof -------------
+
+
+Search stopped by max_proofs option.
+
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 20
+clauses generated           1097
+  hyper_res generated        317
+  para_from generated        402
+  para_into generated        378
+demod & eval rewrites      15496
+clauses wt,lit,sk delete     416
+tautologies deleted           36
+clauses forward subsumed     594
+  (subsumed by sos)            0
+unit deletions                 0
+factor simplifications         0
+clauses kept                  52
+new demodulators              52
+empty clauses                  1
+clauses back demodulated       1
+clauses back subsumed          0
+usable size                   50
+sos size                      34
+demodulators size            108
+passive size                   0
+hot size                       0
+Kbytes malloced             2929
+
+----------- times (seconds) -----------
+user CPU time          0.14          (0 hr, 0 min, 0 sec)
+system CPU time        0.01          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8952 finished Mon Aug  2 15:31:15 2004

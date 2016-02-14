@@ -1,0 +1,150 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:31:16 2004
+The command was "../../bin/otter".  The process ID is 8990.
+
+set(hyper_res).
+set(prolog_style_variables).
+op(900,xfx,||).
+op(900,xfx,&&).
+make_evaluable(_-_,$DIFF(_,_)).
+make_evaluable(_+_,$SUM(_,_)).
+make_evaluable(_<_,$LT(_,_)).
+make_evaluable(_<=_,$LE(_,_)).
+make_evaluable(_>_,$GT(_,_)).
+make_evaluable(_>=_,$GE(_,_)).
+make_evaluable(_==_,$EQ(_,_)).
+make_evaluable(_&&_,$AND(_,_)).
+make_evaluable(_||_,$OR(_,_)).
+
+list(usable).
+1 [] -state(MBS,CBS,BP)| -pick(M)| -pick(C)| -(M<=MBS)| -(C<=CBS)| -(M+C>0)| -(M+C<=2)| -(C>=M||C==0)| -(CBS-C>=MBS-M||CBS-C==0)| -((3-CBS)+C>= (3-MBS)+M|| (3-CBS)+C==0)|state((3-MBS)+M,(3-CBS)+C,otherside(BP)).
+2 [] pick(0).
+3 [] pick(1).
+4 [] pick(2).
+5 [] -state(3,3,east).
+end_of_list.
+
+list(sos).
+6 [] state(3,3,west).
+end_of_list.
+
+list(demodulators).
+7 [] otherside(west)=east.
+8 [] otherside(east)=west.
+end_of_list.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=4) 6 [] state(3,3,west).
+** KEPT (pick-wt=4): 9 [hyper,6,1,4,2,eval,eval,eval,eval,eval,eval,eval,demod,7] state(2,0,east).
+** KEPT (pick-wt=4): 10 [hyper,6,1,3,3,eval,eval,eval,eval,eval,eval,eval,demod,7] state(1,1,east).
+** KEPT (pick-wt=4): 11 [hyper,6,1,3,2,eval,eval,eval,eval,eval,eval,eval,demod,7] state(1,0,east).
+
+given clause #2: (wt=4) 9 [hyper,6,1,4,2,eval,eval,eval,eval,eval,eval,eval,demod,7] state(2,0,east).
+** KEPT (pick-wt=4): 12 [hyper,9,1,3,2,eval,eval,eval,eval,eval,eval,eval,demod,8] state(2,3,west).
+
+given clause #3: (wt=4) 10 [hyper,6,1,3,3,eval,eval,eval,eval,eval,eval,eval,demod,7] state(1,1,east).
+
+given clause #4: (wt=4) 11 [hyper,6,1,3,2,eval,eval,eval,eval,eval,eval,eval,demod,7] state(1,0,east).
+
+given clause #5: (wt=4) 12 [hyper,9,1,3,2,eval,eval,eval,eval,eval,eval,eval,demod,8] state(2,3,west).
+** KEPT (pick-wt=4): 13 [hyper,12,1,4,2,eval,eval,eval,eval,eval,eval,eval,demod,7] state(3,0,east).
+
+given clause #6: (wt=4) 13 [hyper,12,1,4,2,eval,eval,eval,eval,eval,eval,eval,demod,7] state(3,0,east).
+** KEPT (pick-wt=4): 14 [hyper,13,1,3,2,eval,eval,eval,eval,eval,eval,eval,demod,8] state(1,3,west).
+
+given clause #7: (wt=4) 14 [hyper,13,1,3,2,eval,eval,eval,eval,eval,eval,eval,demod,8] state(1,3,west).
+** KEPT (pick-wt=4): 15 [hyper,14,1,2,4,eval,eval,eval,eval,eval,eval,eval,demod,7] state(2,2,east).
+
+given clause #8: (wt=4) 15 [hyper,14,1,2,4,eval,eval,eval,eval,eval,eval,eval,demod,7] state(2,2,east).
+** KEPT (pick-wt=4): 16 [hyper,15,1,3,3,eval,eval,eval,eval,eval,eval,eval,demod,8] state(2,2,west).
+
+given clause #9: (wt=4) 16 [hyper,15,1,3,3,eval,eval,eval,eval,eval,eval,eval,demod,8] state(2,2,west).
+** KEPT (pick-wt=4): 17 [hyper,16,1,2,4,eval,eval,eval,eval,eval,eval,eval,demod,7] state(1,3,east).
+
+given clause #10: (wt=4) 17 [hyper,16,1,2,4,eval,eval,eval,eval,eval,eval,eval,demod,7] state(1,3,east).
+** KEPT (pick-wt=4): 18 [hyper,17,1,3,2,eval,eval,eval,eval,eval,eval,eval,demod,8] state(3,0,west).
+
+given clause #11: (wt=4) 18 [hyper,17,1,3,2,eval,eval,eval,eval,eval,eval,eval,demod,8] state(3,0,west).
+** KEPT (pick-wt=4): 19 [hyper,18,1,4,2,eval,eval,eval,eval,eval,eval,eval,demod,7] state(2,3,east).
+
+given clause #12: (wt=4) 19 [hyper,18,1,4,2,eval,eval,eval,eval,eval,eval,eval,demod,7] state(2,3,east).
+** KEPT (pick-wt=4): 20 [hyper,19,1,3,2,eval,eval,eval,eval,eval,eval,eval,demod,8] state(2,0,west).
+** KEPT (pick-wt=4): 21 [hyper,19,1,2,3,eval,eval,eval,eval,eval,eval,eval,demod,8] state(1,1,west).
+
+given clause #13: (wt=4) 20 [hyper,19,1,3,2,eval,eval,eval,eval,eval,eval,eval,demod,8] state(2,0,west).
+
+-------- PROOF -------- 
+** KEPT (pick-wt=4): 22 [hyper,20,1,4,2,eval,eval,eval,eval,eval,eval,eval,demod,7] state(3,3,east).
+
+----> UNIT CONFLICT at   0.00 sec ----> 23 [binary,22.1,5.1] $F.
+
+Length of proof is 11.  Level of proof is 11.
+
+---------------- PROOF ----------------
+
+1 [] -state(MBS,CBS,BP)| -pick(M)| -pick(C)| -(M<=MBS)| -(C<=CBS)| -(M+C>0)| -(M+C<=2)| -(C>=M||C==0)| -(CBS-C>=MBS-M||CBS-C==0)| -((3-CBS)+C>= (3-MBS)+M|| (3-CBS)+C==0)|state((3-MBS)+M,(3-CBS)+C,otherside(BP)).
+2 [] pick(0).
+3 [] pick(1).
+4 [] pick(2).
+5 [] -state(3,3,east).
+6 [] state(3,3,west).
+7 [] otherside(west)=east.
+8 [] otherside(east)=west.
+9 [hyper,6,1,4,2,eval,eval,eval,eval,eval,eval,eval,demod,7] state(2,0,east).
+12 [hyper,9,1,3,2,eval,eval,eval,eval,eval,eval,eval,demod,8] state(2,3,west).
+13 [hyper,12,1,4,2,eval,eval,eval,eval,eval,eval,eval,demod,7] state(3,0,east).
+14 [hyper,13,1,3,2,eval,eval,eval,eval,eval,eval,eval,demod,8] state(1,3,west).
+15 [hyper,14,1,2,4,eval,eval,eval,eval,eval,eval,eval,demod,7] state(2,2,east).
+16 [hyper,15,1,3,3,eval,eval,eval,eval,eval,eval,eval,demod,8] state(2,2,west).
+17 [hyper,16,1,2,4,eval,eval,eval,eval,eval,eval,eval,demod,7] state(1,3,east).
+18 [hyper,17,1,3,2,eval,eval,eval,eval,eval,eval,eval,demod,8] state(3,0,west).
+19 [hyper,18,1,4,2,eval,eval,eval,eval,eval,eval,eval,demod,7] state(2,3,east).
+20 [hyper,19,1,3,2,eval,eval,eval,eval,eval,eval,eval,demod,8] state(2,0,west).
+22 [hyper,20,1,4,2,eval,eval,eval,eval,eval,eval,eval,demod,7] state(3,3,east).
+23 [binary,22.1,5.1] $F.
+
+------------ end of proof -------------
+
+
+Search stopped by max_proofs option.
+
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 13
+clauses generated             27
+  hyper_res generated         27
+demod & eval rewrites        135
+clauses wt,lit,sk delete       0
+tautologies deleted            0
+clauses forward subsumed      13
+  (subsumed by sos)            1
+unit deletions                 0
+factor simplifications         0
+clauses kept                  14
+new demodulators               0
+empty clauses                  1
+clauses back demodulated       0
+clauses back subsumed          0
+usable size                   18
+sos size                       2
+demodulators size              2
+passive size                   0
+hot size                       0
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8990 finished Mon Aug  2 15:31:16 2004

@@ -1,0 +1,587 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:31:14 2004
+The command was "../../bin/otter".  The process ID is 8942.
+
+set(knuth_bendix).
+   dependent: set(anl_eq).
+   dependent: set(para_from).
+   dependent: set(para_into).
+   dependent: clear(para_from_right).
+   dependent: clear(para_into_right).
+   dependent: set(para_from_vars).
+   dependent: set(eq_units_both_ways).
+   dependent: set(dynamic_demod_all).
+   dependent: set(dynamic_demod).
+   dependent: set(order_eq).
+   dependent: set(back_demod).
+   dependent: set(process_input).
+   dependent: set(lrpo).
+set(back_unit_deletion).
+   dependent: set(unit_deletion).
+assign(max_weight,0).
+clear(print_kept).
+clear(print_new_demod).
+clear(print_back_demod).
+clear(print_back_sub).
+clear(sigint_interact).
+
+list(usable).
+0 [] x=x.
+end_of_list.
+
+list(sos).
+0 [] f(f(f(f(y,x),f(x,z)),u),f(x,f(f(x,f(f(y,y),y)),z)))=x.
+end_of_list.
+
+list(sos).
+0 [] f(f(X,X),f(X,Y))!=X|f(X,f(X,X))!=f(Y,f(Y,Y))|f(X,f(f(Y,Z),f(Y,Z)))!=f(Z,f(f(Y,X),f(Y,X))).
+end_of_list.
+assign(bsub_hint_add_wt,-1000).
+set(keep_hint_subsumers).
+set(degrade_hints2).
+
+list(hints2).
+1 [] f(f(f(f(x,y),f(y,z)),u),f(y,f(f(y,f(f(x,x),x)),z)))=y.
+2 [] f(f(X,X),f(X,Y))!=X|f(X,f(X,X))!=f(Y,f(Y,Y))|f(X,f(f(Y,Z),f(Y,Z)))!=f(Z,f(f(Y,X),f(Y,X))).
+3 [] f(f(X,X),f(X,Y))!=X|f(Y,f(Y,Y))!=f(X,f(X,X))|f(X,f(f(Y,Z),f(Y,Z)))!=f(Z,f(f(Y,X),f(Y,X))).
+4 [] f(f(x,y),f(x,f(f(x,f(f(f(f(z,x),f(x,u)),f(f(z,x),f(x,u))),f(f(z,x),f(x,u)))),f(f(x,f(f(z,z),z)),u))))=x.
+5 [] f(x,f(f(x,y),f(f(f(x,y),f(f(f(z,x),f(z,x)),f(z,x))),u)))=f(x,y).
+6 [] f(f(x,y),f(f(f(x,y),f(y,z)),y))=f(f(x,y),f(y,z)).
+7 [] f(x,f(f(x,y),f(f(f(z,x),f(z,x)),f(z,x))))=f(x,y).
+8 [] f(f(f(f(x,y),f(y,z)),y),f(y,y))=y.
+9 [] f(f(x,x),f(x,x))=x.
+10 [] f(x,f(f(x,f(f(x,x),y)),f(x,x)))=f(x,f(f(x,x),y)).
+11 [] f(x,f(f(x,y),f(x,f(x,x))))=f(x,y).
+12 [] f(f(f(f(x,y),f(y,f(y,f(y,y)))),z),f(y,f(f(x,x),x)))=y.
+13 [] f(x,f(f(x,y),f(x,y)))=f(x,y).
+14 [] f(f(x,y),f(x,x))=x.
+15 [] f(f(f(f(x,y),f(y,z)),u),f(y,y))=y.
+16 [] f(x,f(f(x,x),y))=f(x,x).
+17 [] f(f(f(x,x),y),x)=f(x,x).
+18 [] f(f(x,x),f(x,y))=x.
+19 [] f(f(f(x,y),f(y,z)),f(f(x,y),f(y,z)))=f(f(f(x,y),f(y,z)),y).
+20 [] f(Y,f(Y,Y))!=f(X,f(X,X))|f(X,f(f(Y,Z),f(Y,Z)))!=f(Z,f(f(Y,X),f(Y,X))).
+21 [] f(f(f(x,y),f(x,y)),x)=f(x,y).
+22 [] f(f(f(x,y),f(y,z)),y)=f(y,f(f(x,y),f(y,z))).
+23 [] f(f(f(x,y),f(y,z)),f(f(x,y),f(y,z)))=f(y,f(f(x,y),f(y,z))).
+24 [] f(f(f(f(x,y),f(x,z)),u),f(x,x))=x.
+25 [] f(f(f(x,f(f(x,y),z)),u),f(f(x,y),f(x,y)))=f(x,y).
+26 [] f(f(x,y),f(y,y))=y.
+27 [] f(x,f(f(y,x),f(y,x)))=f(y,x).
+28 [] f(f(x,x),f(y,x))=x.
+29 [] f(x,f(y,f(x,x)))=f(x,x).
+30 [] f(f(x,y),f(x,f(f(z,z),z)))=x.
+31 [] f(f(f(x,f(f(y,x),z)),u),f(f(y,x),f(y,x)))=f(y,x).
+32 [] f(f(x,f(f(y,z),f(z,u))),f(z,z))=z.
+33 [] f(f(f(f(x,y),f(z,y)),u),f(y,y))=y.
+34 [] f(x,f(f(x,y),f(f(z,z),z)))=f(x,y).
+35 [] f(x,x)=f(x,f(f(y,y),y)).
+36 [] f(x,f(f(y,y),y))=f(x,x).
+37 [] f(x,f(y,f(y,y)))=f(x,x).
+38 [] f(x,x)=f(x,f(y,f(y,y))).
+39 [] f(x,f(f(x,y),f(z,f(z,z))))=f(x,y).
+40 [] f(f(x,f(y,f(y,y))),f(z,x))=x.
+41 [] f(f(x,f(f(y,z),f(y,u))),f(y,y))=y.
+42 [] f(f(x,f(y,f(f(z,y),u))),f(f(z,y),f(z,y)))=f(z,y).
+43 [] f(f(f(f(x,y),f(z,y)),u),f(y,f(f(v,v),v)))=y.
+44 [] f(f(f(x,f(x,x)),f(y,f(y,y))),z)=f(x,f(x,x)).
+45 [] f(x,f(x,x))=f(y,f(y,y)).
+46 [] f(X,f(f(Y,Z),f(Y,Z)))!=f(Z,f(f(Y,X),f(Y,X))).
+47 [] f(f(f(x,y),z),f(f(x,f(f(y,u),f(y,v))),f(x,f(f(y,u),f(y,v)))))=f(x,f(f(y,u),f(y,v))).
+48 [] f(f(f(x,y),z),f(f(y,x),f(y,x)))=f(y,x).
+49 [] f(f(x,y),f(y,x))=f(f(y,x),f(y,x)).
+50 [] f(f(x,y),f(f(f(y,x),z),f(f(u,u),u)))=f(f(y,x),z).
+51 [] f(x,f(f(y,x),f(x,y)))=f(y,x).
+52 [] f(x,y)=f(y,x).
+53 [] f(f(f(x,y),z),f(f(y,x),f(x,y)))=f(y,x).
+54 [] f(f(f(x,y),z),f(f(x,y),f(y,x)))=f(y,x).
+55 [] f(f(x,f(y,z)),f(f(f(f(z,u),f(z,v)),y),f(f(f(z,u),f(z,v)),y)))=f(f(f(z,u),f(z,v)),y).
+56 [] f(f(x,y),z)=f(f(y,x),z).
+57 [] f(x,f(y,z))=f(f(z,y),x).
+58 [] f(f(x,y),z)=f(z,f(y,x)).
+59 [] f(x,f(f(y,z),u))=f(f(f(z,y),u),x).
+60 [] f(f(f(x,y),z),u)=f(u,f(f(y,x),z)).
+61 [] f(f(f(f(x,y),z),u),f(f(f(y,x),z),f(f(x,y),z)))=f(z,f(x,y)).
+62 [] f(f(x,y),f(z,u))=f(f(y,x),f(u,z)).
+63 [] f(f(f(x,y),f(z,u)),v)=f(v,f(f(u,z),f(y,x))).
+64 [] f(f(f(f(x,y),f(z,u)),v),f(f(f(y,x),f(u,z)),f(f(z,u),f(x,y))))=f(f(z,u),f(x,y)).
+65 [] f(f(f(f(x,f(y,f(f(z,y),u))),z),v),f(f(z,y),f(z,y)))=f(z,y).
+66 [] f(f(x,f(f(f(y,f(f(z,y),u)),v),z)),f(f(z,y),f(z,y)))=f(z,y).
+67 [] f(f(x,f(y,z)),f(f(f(f(z,u),f(z,v)),y),f(f(f(z,v),f(z,u)),y)))=f(f(f(z,v),f(z,u)),y).
+68 [] f(f(f(f(f(x,y),f(x,z)),u),f(f(f(x,z),f(x,y)),u)),f(f(u,x),v))=f(f(f(x,z),f(x,y)),u).
+69 [] f(f(f(x,f(f(y,x),z)),f(x,u)),y)=f(y,x).
+70 [] f(f(f(x,y),f(x,z)),f(f(u,y),f(v,y)))=f(f(f(u,y),f(v,y)),x).
+71 [] f(f(f(x,y),f(z,y)),f(f(u,v),f(u,y)))=f(f(f(x,y),f(z,y)),u).
+72 [] f(f(f(x,y),f(z,y)),f(f(u,y),f(u,v)))=f(f(f(x,y),f(z,y)),u).
+73 [] f(f(f(x,y),f(x,z)),f(f(u,y),f(v,y)))=f(x,f(f(u,y),f(v,y))).
+74 [] f(f(f(x,y),f(x,y)),z)=f(x,f(f(z,y),f(z,y))).
+75 [] f(x,f(f(y,z),f(y,z)))=f(z,f(f(x,y),f(x,y))).
+76 [] f(x,f(f(y,z),f(y,z)))=f(y,f(f(x,z),f(x,z))).
+77 [] f(x,f(f(y,z),f(y,z)))=f(z,f(f(y,x),f(y,x))).
+end_of_list.
+
+------------> process usable:
+** KEPT (pick-wt=3): 78 [] x=x.
+  Following clause subsumed by 78 during input processing: 0 [copy,78,flip.1] x=x.
+>>>> Starting back unit deletion with 78.
+
+------------> process sos:
++++ bsub adjust, cl 1, new wt -500
+** KEPT (pick-wt=-977): 79 [] f(f(f(f(x,y),f(y,z)),u),f(y,f(f(y,f(f(x,x),x)),z)))=y.
+---> New Demodulator: 80 [new_demod,79] f(f(f(f(x,y),f(y,z)),u),f(y,f(f(y,f(f(x,x),x)),z)))=y.
++++ bsub adjust, cl 3, new wt -500
+** KEPT (pick-wt=-961): 82 [copy,81,flip.2] f(f(X,X),f(X,Y))!=X|f(Y,f(Y,Y))!=f(X,f(X,X))|f(X,f(f(Y,Z),f(Y,Z)))!=f(Z,f(f(Y,X),f(Y,X))).
+>>>> Starting back demodulation with 80.
+    >> BACK DEMODULATING HINT 1 WITH 80.
+>>>> Starting back unit deletion with 79.
+
+======= end of input processing =======
+
+=========== start of search ===========
+
+given clause #1: (wt=-977) 79 [] f(f(f(f(x,y),f(y,z)),u),f(y,f(f(y,f(f(x,x),x)),z)))=y.
++++ bsub adjust, cl 4, new wt -500
++++ bsub adjust, cl 5, new wt -500
+    >> BACK DEMODULATING HINT 4 WITH 84.
+    >> BACK DEMODULATING HINT 5 WITH 86.
+
+given clause #2: (wt=-973) 85 [para_into,79.1.1.1,79.1.1] f(x,f(f(x,y),f(f(f(x,y),f(f(f(z,x),f(z,x)),f(z,x))),u)))=f(x,y).
++++ bsub adjust, cl 6, new wt -500
++++ bsub adjust, cl 7, new wt -500
+    >> BACK DEMODULATING HINT 6 WITH 88.
+    >> BACK DEMODULATING HINT 7 WITH 90.
+
+given clause #3: (wt=-979) 87 [para_into,85.1.1.2.2,79.1.1] f(f(x,y),f(f(f(x,y),f(y,z)),y))=f(f(x,y),f(y,z)).
++++ bsub adjust, cl 8, new wt -500
+    >> BACK DEMODULATING HINT 8 WITH 92.
+
+given clause #4: (wt=-985) 91 [para_into,87.1.1.2.1,79.1.1,demod,80] f(f(f(f(x,y),f(y,z)),y),f(y,y))=y.
++++ bsub adjust, cl 9, new wt -500
+    >> BACK DEMODULATING HINT 9 WITH 94.
++++ bsub adjust, cl 10, new wt -500
+    >> BACK DEMODULATING HINT 10 WITH 96.
+
+given clause #5: (wt=-991) 93 [para_into,91.1.1.1.1,91.1.1] f(f(x,x),f(x,x))=x.
+
+given clause #6: (wt=-979) 89 [para_into,85.1.1.2,85.1.1] f(x,f(f(x,y),f(f(f(z,x),f(z,x)),f(z,x))))=f(x,y).
++++ bsub adjust, cl 11, new wt -500
+    >> BACK DEMODULATING HINT 11 WITH 98.
+
+given clause #7: (wt=-985) 97 [para_into,89.1.1.2.2.1,93.1.1] f(x,f(f(x,y),f(x,f(x,x))))=f(x,y).
++++ bsub adjust, cl 12, new wt -500
+    >> BACK DEMODULATING HINT 12 WITH 100.
+
+given clause #8: (wt=-979) 95 [para_from,91.1.1,87.1.1.1,demod,92,92] f(x,f(f(x,f(f(x,x),y)),f(x,x)))=f(x,f(f(x,x),y)).
+
+given clause #9: (wt=-977) 99 [para_from,97.1.1,79.1.1.2] f(f(f(f(x,y),f(y,f(y,f(y,y)))),z),f(y,f(f(x,x),x)))=y.
+
+given clause #10: (wt=-961) 82 [copy,81,flip.2] f(f(X,X),f(X,Y))!=X|f(Y,f(Y,Y))!=f(X,f(X,X))|f(X,f(f(Y,Z),f(Y,Z)))!=f(Z,f(f(Y,X),f(Y,X))).
+
+given clause #11: (wt=-957) 83 [para_into,79.1.1.1.1,79.1.1] f(f(x,y),f(x,f(f(x,f(f(f(f(z,x),f(x,u)),f(f(z,x),f(x,u))),f(f(z,x),f(x,u)))),f(f(x,f(f(z,z),z)),u))))=x.
++++ bsub adjust, cl 13, new wt -500
+    >> BACK DEMODULATING HINT 13 WITH 102.
+
+given clause #12: (wt=-987) 101 [para_from,83.1.1,85.1.1.2.2] f(x,f(f(x,y),f(x,y)))=f(x,y).
++++ bsub adjust, cl 14, new wt -500
++++ bsub adjust, cl 15, new wt -500
++++ bsub adjust, cl 16, new wt -500
+    >> BACK DEMODULATING HINT 14 WITH 104.
+    >> BACK DEMODULATING HINT 10 WITH 104.
+    >> BACK DEMODULATING HINT 9 WITH 104.
+    >> BACK DEMODULATING HINT 15 WITH 106.
+    >> BACK DEMODULATING HINT 8 WITH 106.
+    >> BACK DEMODULATING HINT 16 WITH 108.
+    >> BACK DEMODULATING HINT 10 WITH 108.
+
+given clause #13: (wt=-991) 103 [para_into,101.1.1.2.1,83.1.1,demod,84,84] f(f(x,y),f(x,x))=x.
++++ bsub adjust, cl 17, new wt -500
+    >> BACK DEMODULATING HINT 17 WITH 110.
+
+given clause #14: (wt=-989) 107 [back_demod,95,demod,104,flip.1] f(x,f(f(x,x),y))=f(x,x).
++++ bsub adjust, cl 18, new wt -500
++++ bsub adjust, cl 19, new wt -500
++++ bsub adjust, cl 20, new wt -500
+    >> BACK DEMODULATING HINT 18 WITH 112.
+    >> BACK DEMODULATING HINT 9 WITH 112.
+    >> BACK DEMODULATING HINT 3 WITH 112.
+NEW HINT: 116 [bsub_wt=2147483647, bsub_add_wt=-500] X!=X|f(Y,f(Y,Y))!=f(X,f(X,X))|f(X,f(f(Y,Z),f(Y,Z)))!=f(Z,f(f(Y,X),f(Y,X))).
+    >> BACK DEMODULATING HINT 2 WITH 112.
+    >> BACK DEMODULATING HINT 23 WITH 114.
+    >> BACK DEMODULATING HINT 19 WITH 114.
+    >> BACK DEMODULATING HINT 4 WITH 114.
+NEW HINT: 117 [bsub_wt=2147483647, bsub_add_wt=-500] f(f(x,y),f(x,f(f(x,f(f(f(f(z,x),f(x,u)),x),f(f(z,x),f(x,u)))),f(f(x,f(f(z,z),z)),u))))=x.
+
+given clause #15: (wt=-991) 111 [para_into,107.1.1.2.1,103.1.1,demod,104] f(f(x,x),f(x,y))=x.
++++ bsub adjust, cl 21, new wt -500
+    >> BACK DEMODULATING HINT 21 WITH 119.
++++ bsub adjust, cl 10, new wt -250
+    >> BACK DEMODULATING HINT 10 WITH 121.
+
+given clause #16: (wt=-989) 109 [para_into,103.1.1.2,103.1.1] f(f(f(x,x),y),x)=f(x,x).
++++ bsub adjust, cl 22, new wt -500
++++ bsub adjust, cl 23, new wt -500
+    >> BACK DEMODULATING HINT 117 WITH 123.
+NEW HINT: 126 [bsub_wt=2147483647, bsub_add_wt=-500] f(f(x,y),f(x,f(f(x,f(f(x,f(f(z,x),f(x,u))),f(f(z,x),f(x,u)))),f(f(x,f(f(z,z),z)),u))))=x.
+    >> BACK DEMODULATING HINT 22 WITH 123.
+    >> BACK DEMODULATING HINT 19 WITH 123.
+    >> BACK DEMODULATING HINT 8 WITH 123.
+    >> BACK DEMODULATING HINT 6 WITH 123.
+NEW HINT: 127 [bsub_wt=2147483647, bsub_add_wt=-500] f(f(x,y),f(y,f(f(x,y),f(y,z))))=f(f(x,y),f(y,z)).
+    >> BACK DEMODULATING HINT 23 WITH 125.
+    >> BACK DEMODULATING HINT 19 WITH 125.
+    >> BACK DEMODULATING HINT 4 WITH 125.
+
+given clause #17: (wt=-987) 118 [para_into,111.1.1.2,103.1.1] f(f(f(x,y),f(x,y)),x)=f(x,y).
+
+given clause #18: (wt=-985) 105 [para_into,101.1.1.2.1,79.1.1,demod,80,80] f(f(f(f(x,y),f(y,z)),u),f(y,y))=y.
++++ bsub adjust, cl 24, new wt -500
++++ bsub adjust, cl 25, new wt -500
++++ bsub adjust, cl 26, new wt -500
+    >> BACK DEMODULATING HINT 24 WITH 129.
+    >> BACK DEMODULATING HINT 25 WITH 131.
+    >> BACK DEMODULATING HINT 26 WITH 133.
+    >> BACK DEMODULATING HINT 9 WITH 133.
+    >> BACK DEMODULATING HINT 8 WITH 133.
++++ bsub adjust, cl 127, new wt -250
+    >> BACK DEMODULATING HINT 127 WITH 135.
+
+given clause #19: (wt=-991) 132 [para_into,105.1.1.1,103.1.1] f(f(x,y),f(y,y))=y.
++++ bsub adjust, cl 27, new wt -500
++++ bsub adjust, cl 28, new wt -500
+    >> BACK DEMODULATING HINT 27 WITH 137.
+    >> BACK DEMODULATING HINT 28 WITH 139.
+    >> BACK DEMODULATING HINT 9 WITH 139.
+
+given clause #20: (wt=-991) 138 [para_from,132.1.1,118.1.1.1.2,demod,133,133] f(f(x,x),f(y,x))=x.
++++ bsub adjust, cl 29, new wt -500
++++ bsub adjust, cl 30, new wt -500
+    >> BACK DEMODULATING HINT 29 WITH 141.
+    >> BACK DEMODULATING HINT 12 WITH 141.
+    >> BACK DEMODULATING HINT 10 WITH 141.
+    >> BACK DEMODULATING HINT 30 WITH 143.
++++ bsub adjust, cl 31, new wt -500
+    >> BACK DEMODULATING HINT 31 WITH 145.
+
+given clause #21: (wt=-989) 140 [para_into,138.1.1.1,138.1.1] f(x,f(y,f(x,x)))=f(x,x).
+
+given clause #22: (wt=-987) 136 [para_from,132.1.1,103.1.1.1] f(x,f(f(y,x),f(y,x)))=f(y,x).
++++ bsub adjust, cl 32, new wt -500
++++ bsub adjust, cl 33, new wt -500
+    >> BACK DEMODULATING HINT 32 WITH 147.
+    >> BACK DEMODULATING HINT 33 WITH 149.
+
+given clause #23: (wt=-987) 142 [back_demod,99,demod,141,133] f(f(x,y),f(x,f(f(z,z),z)))=x.
++++ bsub adjust, cl 34, new wt -500
+    >> BACK DEMODULATING HINT 34 WITH 151.
+    >> BACK DEMODULATING HINT 7 WITH 151.
++++ bsub adjust, cl 35, new wt -500
++++ bsub adjust, cl 36, new wt -500
+
+given clause #24: (wt=-989) 152 [para_from,142.1.1,138.1.1.2,demod,143] f(x,x)=f(x,f(f(y,y),y)).
++++ bsub adjust, cl 12, new wt -250
+    >> BACK DEMODULATING HINT 12 WITH 155.
+
+given clause #25: (wt=-989) 153 [copy,152,flip.1] f(x,f(f(y,y),y))=f(x,x).
++++ bsub adjust, cl 37, new wt -500
++++ bsub adjust, cl 38, new wt -500
+
+given clause #26: (wt=-989) 156 [para_into,153.1.1.2.1,138.1.1] f(x,f(y,f(y,y)))=f(x,x).
+
+given clause #27: (wt=-989) 157 [copy,156,flip.1] f(x,x)=f(x,f(y,f(y,y))).
++++ bsub adjust, cl 39, new wt -500
++++ bsub adjust, cl 40, new wt -500
+    >> BACK DEMODULATING HINT 39 WITH 159.
+    >> BACK DEMODULATING HINT 11 WITH 159.
+    >> BACK DEMODULATING HINT 40 WITH 161.
+
+given clause #28: (wt=-987) 160 [para_from,157.1.1,138.1.1.1] f(f(x,f(y,f(y,y))),f(z,x))=x.
+
+given clause #29: (wt=-985) 128 [para_into,105.1.1.1.1.1,118.1.1] f(f(f(f(x,y),f(x,z)),u),f(x,x))=x.
++++ bsub adjust, cl 41, new wt -500
+    >> BACK DEMODULATING HINT 41 WITH 163.
+
+given clause #30: (wt=-985) 146 [para_from,136.1.1,105.1.1.1] f(f(x,f(f(y,z),f(z,u))),f(z,z))=z.
++++ bsub adjust, cl 42, new wt -500
+    >> BACK DEMODULATING HINT 42 WITH 165.
+
+given clause #31: (wt=-985) 148 [para_from,136.1.1,105.1.1.1.1.2] f(f(f(f(x,y),f(z,y)),u),f(y,y))=y.
++++ bsub adjust, cl 43, new wt -500
+    >> BACK DEMODULATING HINT 43 WITH 167.
+
+given clause #32: (wt=-985) 150 [para_into,142.1.1.1,142.1.1] f(x,f(f(x,y),f(f(z,z),z)))=f(x,y).
+
+given clause #33: (wt=-985) 158 [para_from,157.1.1,101.1.1.2] f(x,f(f(x,y),f(z,f(z,z))))=f(x,y).
++++ bsub adjust, cl 44, new wt -500
+    >> BACK DEMODULATING HINT 44 WITH 169.
+
+given clause #34: (wt=-985) 162 [para_into,128.1.1.1,136.1.1] f(f(x,f(f(y,z),f(y,u))),f(y,y))=y.
+
+given clause #35: (wt=-981) 122 [para_into,109.1.1.1,79.1.1,demod,114,flip.1] f(f(f(x,y),f(y,z)),y)=f(y,f(f(x,y),f(y,z))).
+
+given clause #36: (wt=-981) 166 [para_into,148.1.1.2,152.1.1] f(f(f(f(x,y),f(z,y)),u),f(y,f(f(v,v),v)))=y.
+
+given clause #37: (wt=-981) 168 [para_into,158.1.1,160.1.1,flip.1] f(f(f(x,f(x,x)),f(y,f(y,y))),z)=f(x,f(x,x)).
++++ bsub adjust, cl 45, new wt -500
++++ bsub adjust, cl 116, new wt -250
+
+given clause #38: (wt=-989) 170 [para_into,168.1.1,132.1.1] f(x,f(x,x))=f(y,f(y,y)).
+
+given clause #39: (wt=-979) 130 [para_into,105.1.1.1.1.1,111.1.1] f(f(f(x,f(f(x,y),z)),u),f(f(x,y),f(x,y)))=f(x,y).
++++ bsub adjust, cl 47, new wt -500
+    >> BACK DEMODULATING HINT 47 WITH 173.
+
+given clause #40: (wt=-979) 144 [para_from,138.1.1,105.1.1.1.1.1] f(f(f(x,f(f(y,x),z)),u),f(f(y,x),f(y,x)))=f(y,x).
++++ bsub adjust, cl 48, new wt -500
+    >> BACK DEMODULATING HINT 48 WITH 175.
++++ bsub adjust, cl 10, new wt -125
+    >> BACK DEMODULATING HINT 10 WITH 177.
+
+given clause #41: (wt=-983) 174 [para_into,144.1.1.1.1.2,142.1.1] f(f(f(x,y),z),f(f(y,x),f(y,x)))=f(y,x).
++++ bsub adjust, cl 49, new wt -500
++++ bsub adjust, cl 50, new wt -500
+    >> BACK DEMODULATING HINT 50 WITH 180.
+
+given clause #42: (wt=-985) 178 [para_from,174.1.1,109.1.1.1] f(f(x,y),f(y,x))=f(f(y,x),f(y,x)).
++++ bsub adjust, cl 51, new wt -500
++++ bsub adjust, cl 52, new wt -500
+    >> BACK DEMODULATING HINT 51 WITH 182.
+
+given clause #43: (wt=-993) 183 [para_into,178.1.1.2,178.1.1,demod,104,125,182] f(x,y)=f(y,x).
++++ bsub adjust, cl 53, new wt -500
++++ bsub adjust, cl 54, new wt -500
+    >> BACK DEMODULATING HINT 53 WITH 185.
+    >> BACK DEMODULATING HINT 54 WITH 187.
+
+given clause #44: (wt=-987) 181 [para_into,178.1.1.1,178.1.1,demod,112,125,flip.1] f(x,f(f(y,x),f(x,y)))=f(y,x).
+
+given clause #45: (wt=-983) 184 [para_from,183.1.1,174.1.1.2.2] f(f(f(x,y),z),f(f(y,x),f(x,y)))=f(y,x).
+
+given clause #46: (wt=-983) 186 [para_from,183.1.1,174.1.1.2.1] f(f(f(x,y),z),f(f(x,y),f(y,x)))=f(y,x).
+
+given clause #47: (wt=-979) 164 [para_into,146.1.1.1.2.1,160.1.1] f(f(x,f(y,f(f(z,y),u))),f(f(z,y),f(z,y)))=f(z,y).
++++ bsub adjust, cl 55, new wt -500
+    >> BACK DEMODULATING HINT 55 WITH 189.
+
+given clause #48: (wt=-979) 179 [para_from,174.1.1,142.1.1.1] f(f(x,y),f(f(f(y,x),z),f(f(u,u),u)))=f(f(y,x),z).
++++ bsub adjust, cl 56, new wt -500
+
+given clause #49: (wt=-989) 190 [para_into,179.1.1.2.1.1,183.1.1,demod,151] f(f(x,y),z)=f(f(y,x),z).
++++ bsub adjust, cl 57, new wt -500
++++ bsub adjust, cl 58, new wt -500
+
+given clause #50: (wt=-989) 191 [para_into,190.1.1,183.1.1] f(x,f(y,z))=f(f(z,y),x).
++++ bsub adjust, cl 59, new wt -500
++++ bsub adjust, cl 60, new wt -500
++++ bsub adjust, cl 61, new wt -500
+    >> BACK DEMODULATING HINT 61 WITH 196.
+
+given clause #51: (wt=-989) 192 [copy,191,flip.1] f(f(x,y),z)=f(z,f(y,x)).
++++ bsub adjust, cl 62, new wt -500
+
+given clause #52: (wt=-985) 193 [para_into,191.1.1.2,191.1.1] f(x,f(f(y,z),u))=f(f(f(z,y),u),x).
+
+given clause #53: (wt=-985) 194 [copy,193,flip.1] f(f(f(x,y),z),u)=f(u,f(f(y,x),z)).
++++ bsub adjust, cl 63, new wt -500
+
+given clause #54: (wt=-985) 197 [para_into,192.1.1,191.1.1] f(f(x,y),f(z,u))=f(f(y,x),f(u,z)).
++++ bsub adjust, cl 64, new wt -500
+    >> BACK DEMODULATING HINT 64 WITH 200.
+
+given clause #55: (wt=-981) 198 [para_into,194.1.1.1,191.1.1] f(f(f(x,y),f(z,u)),v)=f(v,f(f(u,z),f(y,x))).
+
+given clause #56: (wt=-975) 124 [back_demod,113,demod,123] f(f(f(x,y),f(y,z)),f(f(x,y),f(y,z)))=f(y,f(f(x,y),f(y,z))).
+
+given clause #57: (wt=-975) 195 [para_from,191.1.1,184.1.1.2.1] f(f(f(f(x,y),z),u),f(f(f(y,x),z),f(f(x,y),z)))=f(z,f(x,y)).
+
+given clause #58: (wt=-967) 199 [para_from,197.1.1,186.1.1.2.1] f(f(f(f(x,y),f(z,u)),v),f(f(f(y,x),f(u,z)),f(f(z,u),f(x,y))))=f(f(z,u),f(x,y)).
+
+given clause #59: (wt=-965) 172 [para_into,130.1.1.1.1.2,162.1.1] f(f(f(x,y),z),f(f(x,f(f(y,u),f(y,v))),f(x,f(f(y,u),f(y,v)))))=f(x,f(f(y,u),f(y,v))).
++++ bsub adjust, cl 65, new wt -500
+    >> BACK DEMODULATING HINT 65 WITH 202.
+
+given clause #60: (wt=-975) 201 [para_into,172.1.1.2.1,164.1.1,demod,165,165] f(f(f(f(x,f(y,f(f(z,y),u))),z),v),f(f(z,y),f(z,y)))=f(z,y).
++++ bsub adjust, cl 66, new wt -500
+    >> BACK DEMODULATING HINT 66 WITH 204.
+
+given clause #61: (wt=-975) 203 [para_into,201.1.1.1,194.1.1] f(f(x,f(f(f(y,f(f(z,y),u)),v),z)),f(f(z,y),f(z,y)))=f(z,y).
+
+given clause #62: (wt=-965) 188 [para_into,164.1.1.1.2.2,128.1.1] f(f(x,f(y,z)),f(f(f(f(z,u),f(z,v)),y),f(f(f(z,u),f(z,v)),y)))=f(f(f(z,u),f(z,v)),y).
++++ bsub adjust, cl 67, new wt -500
+    >> BACK DEMODULATING HINT 67 WITH 206.
+
+given clause #63: (wt=-965) 205 [para_into,188.1.1.2.1.1,183.1.1] f(f(x,f(y,z)),f(f(f(f(z,u),f(z,v)),y),f(f(f(z,v),f(z,u)),y)))=f(f(f(z,v),f(z,u)),y).
++++ bsub adjust, cl 68, new wt -500
+    >> BACK DEMODULATING HINT 68 WITH 208.
+
+given clause #64: (wt=-965) 207 [para_into,205.1.1,192.1.1] f(f(f(f(f(x,y),f(x,z)),u),f(f(f(x,z),f(x,y)),u)),f(f(u,x),v))=f(f(f(x,z),f(x,y)),u).
++++ bsub adjust, cl 69, new wt -500
+    >> BACK DEMODULATING HINT 69 WITH 210.
+
+given clause #65: (wt=-983) 209 [para_into,207.1.1,203.1.1,flip.1] f(f(f(x,f(f(y,x),z)),f(x,u)),y)=f(y,x).
++++ bsub adjust, cl 70, new wt -500
+
+given clause #66: (wt=-975) 211 [para_into,209.1.1.1.1.2,166.1.1] f(f(f(x,y),f(x,z)),f(f(u,y),f(v,y)))=f(f(f(u,y),f(v,y)),x).
++++ bsub adjust, cl 71, new wt -500
++++ bsub adjust, cl 72, new wt -500
++++ bsub adjust, cl 21, new wt -250
++++ bsub adjust, cl 21, new wt -125
+    >> BACK DEMODULATING HINT 71 WITH 213.
+    >> BACK DEMODULATING HINT 72 WITH 215.
+    >> BACK DEMODULATING HINT 21 WITH 217.
+    >> BACK DEMODULATING HINT 21 WITH 219.
++++ bsub adjust, cl 73, new wt -500
+    >> BACK DEMODULATING HINT 73 WITH 221.
+    >> BACK DEMODULATING HINT 70 WITH 221.
+
+given clause #67: (wt=-975) 212 [para_into,211.1.1,192.1.1] f(f(f(x,y),f(z,y)),f(f(u,v),f(u,y)))=f(f(f(x,y),f(z,y)),u).
+
+given clause #68: (wt=-975) 214 [para_into,211.1.1,183.1.1] f(f(f(x,y),f(z,y)),f(f(u,y),f(u,v)))=f(f(f(x,y),f(z,y)),u).
+
+given clause #69: (wt=-975) 220 [para_from,211.1.1,199.1.1.2.2,demod,215,213,196,flip.1] f(f(f(x,y),f(x,z)),f(f(u,y),f(v,y)))=f(x,f(f(u,y),f(v,y))).
++++ bsub adjust, cl 74, new wt -500
++++ bsub adjust, cl 13, new wt -250
++++ bsub adjust, cl 13, new wt -125
+    >> BACK DEMODULATING HINT 13 WITH 224.
+    >> BACK DEMODULATING HINT 13 WITH 226.
+
+given clause #70: (wt=-981) 222 [para_into,220.1.1,214.1.1] f(f(f(x,y),f(x,y)),z)=f(x,f(f(z,y),f(z,y))).
++++ bsub adjust, cl 75, new wt -500
++++ bsub adjust, cl 76, new wt -500
+
+given clause #71: (wt=-981) 227 [para_into,222.1.1,198.1.1] f(x,f(f(y,z),f(y,z)))=f(z,f(f(x,y),f(x,y))).
+
+given clause #72: (wt=-981) 228 [para_into,222.1.1,192.1.1] f(x,f(f(y,z),f(y,z)))=f(y,f(f(x,z),f(x,z))).
+
+-------- PROOF -------- 
++++ bsub adjust, cl 77, new wt -500
+
+----> UNIT CONFLICT at   0.77 sec ----> 230 [binary,229.1,171.1] $F.
+
+Length of proof is 75.  Level of proof is 26.
+
+---------------- PROOF ----------------
+
+78 [] x=x.
+80,79 [] f(f(f(f(x,y),f(y,z)),u),f(y,f(f(y,f(f(x,x),x)),z)))=y.
+81 [] f(f(X,X),f(X,Y))!=X|f(X,f(X,X))!=f(Y,f(Y,Y))|f(X,f(f(Y,Z),f(Y,Z)))!=f(Z,f(f(Y,X),f(Y,X))).
+82 [copy,81,flip.2] f(f(X,X),f(X,Y))!=X|f(Y,f(Y,Y))!=f(X,f(X,X))|f(X,f(f(Y,Z),f(Y,Z)))!=f(Z,f(f(Y,X),f(Y,X))).
+84,83 [para_into,79.1.1.1.1,79.1.1] f(f(x,y),f(x,f(f(x,f(f(f(f(z,x),f(x,u)),f(f(z,x),f(x,u))),f(f(z,x),f(x,u)))),f(f(x,f(f(z,z),z)),u))))=x.
+85 [para_into,79.1.1.1,79.1.1] f(x,f(f(x,y),f(f(f(x,y),f(f(f(z,x),f(z,x)),f(z,x))),u)))=f(x,y).
+87 [para_into,85.1.1.2.2,79.1.1] f(f(x,y),f(f(f(x,y),f(y,z)),y))=f(f(x,y),f(y,z)).
+89 [para_into,85.1.1.2,85.1.1] f(x,f(f(x,y),f(f(f(z,x),f(z,x)),f(z,x))))=f(x,y).
+92,91 [para_into,87.1.1.2.1,79.1.1,demod,80] f(f(f(f(x,y),f(y,z)),y),f(y,y))=y.
+93 [para_into,91.1.1.1.1,91.1.1] f(f(x,x),f(x,x))=x.
+95 [para_from,91.1.1,87.1.1.1,demod,92,92] f(x,f(f(x,f(f(x,x),y)),f(x,x)))=f(x,f(f(x,x),y)).
+97 [para_into,89.1.1.2.2.1,93.1.1] f(x,f(f(x,y),f(x,f(x,x))))=f(x,y).
+99 [para_from,97.1.1,79.1.1.2] f(f(f(f(x,y),f(y,f(y,f(y,y)))),z),f(y,f(f(x,x),x)))=y.
+101 [para_from,83.1.1,85.1.1.2.2] f(x,f(f(x,y),f(x,y)))=f(x,y).
+104,103 [para_into,101.1.1.2.1,83.1.1,demod,84,84] f(f(x,y),f(x,x))=x.
+105 [para_into,101.1.1.2.1,79.1.1,demod,80,80] f(f(f(f(x,y),f(y,z)),u),f(y,y))=y.
+107 [back_demod,95,demod,104,flip.1] f(x,f(f(x,x),y))=f(x,x).
+109 [para_into,103.1.1.2,103.1.1] f(f(f(x,x),y),x)=f(x,x).
+112,111 [para_into,107.1.1.2.1,103.1.1,demod,104] f(f(x,x),f(x,y))=x.
+114,113 [para_into,107.1.1.2,79.1.1,flip.1] f(f(f(x,y),f(y,z)),f(f(x,y),f(y,z)))=f(f(f(x,y),f(y,z)),y).
+115 [back_demod,82,demod,112,unit_del,78] f(Y,f(Y,Y))!=f(X,f(X,X))|f(X,f(f(Y,Z),f(Y,Z)))!=f(Z,f(f(Y,X),f(Y,X))).
+118 [para_into,111.1.1.2,103.1.1] f(f(f(x,y),f(x,y)),x)=f(x,y).
+123,122 [para_into,109.1.1.1,79.1.1,demod,114,flip.1] f(f(f(x,y),f(y,z)),y)=f(y,f(f(x,y),f(y,z))).
+125,124 [back_demod,113,demod,123] f(f(f(x,y),f(y,z)),f(f(x,y),f(y,z)))=f(y,f(f(x,y),f(y,z))).
+128 [para_into,105.1.1.1.1.1,118.1.1] f(f(f(f(x,y),f(x,z)),u),f(x,x))=x.
+130 [para_into,105.1.1.1.1.1,111.1.1] f(f(f(x,f(f(x,y),z)),u),f(f(x,y),f(x,y)))=f(x,y).
+133,132 [para_into,105.1.1.1,103.1.1] f(f(x,y),f(y,y))=y.
+136 [para_from,132.1.1,103.1.1.1] f(x,f(f(y,x),f(y,x)))=f(y,x).
+138 [para_from,132.1.1,118.1.1.1.2,demod,133,133] f(f(x,x),f(y,x))=x.
+141,140 [para_into,138.1.1.1,138.1.1] f(x,f(y,f(x,x)))=f(x,x).
+143,142 [back_demod,99,demod,141,133] f(f(x,y),f(x,f(f(z,z),z)))=x.
+144 [para_from,138.1.1,105.1.1.1.1.1] f(f(f(x,f(f(y,x),z)),u),f(f(y,x),f(y,x)))=f(y,x).
+146 [para_from,136.1.1,105.1.1.1] f(f(x,f(f(y,z),f(z,u))),f(z,z))=z.
+148 [para_from,136.1.1,105.1.1.1.1.2] f(f(f(f(x,y),f(z,y)),u),f(y,y))=y.
+151,150 [para_into,142.1.1.1,142.1.1] f(x,f(f(x,y),f(f(z,z),z)))=f(x,y).
+152 [para_from,142.1.1,138.1.1.2,demod,143] f(x,x)=f(x,f(f(y,y),y)).
+153 [copy,152,flip.1] f(x,f(f(y,y),y))=f(x,x).
+156 [para_into,153.1.1.2.1,138.1.1] f(x,f(y,f(y,y)))=f(x,x).
+157 [copy,156,flip.1] f(x,x)=f(x,f(y,f(y,y))).
+158 [para_from,157.1.1,101.1.1.2] f(x,f(f(x,y),f(z,f(z,z))))=f(x,y).
+160 [para_from,157.1.1,138.1.1.1] f(f(x,f(y,f(y,y))),f(z,x))=x.
+162 [para_into,128.1.1.1,136.1.1] f(f(x,f(f(y,z),f(y,u))),f(y,y))=y.
+165,164 [para_into,146.1.1.1.2.1,160.1.1] f(f(x,f(y,f(f(z,y),u))),f(f(z,y),f(z,y)))=f(z,y).
+166 [para_into,148.1.1.2,152.1.1] f(f(f(f(x,y),f(z,y)),u),f(y,f(f(v,v),v)))=y.
+168 [para_into,158.1.1,160.1.1,flip.1] f(f(f(x,f(x,x)),f(y,f(y,y))),z)=f(x,f(x,x)).
+170 [para_into,168.1.1,132.1.1] f(x,f(x,x))=f(y,f(y,y)).
+171 [back_unit_del,170.1,115.1] f(X,f(f(Y,Z),f(Y,Z)))!=f(Z,f(f(Y,X),f(Y,X))).
+172 [para_into,130.1.1.1.1.2,162.1.1] f(f(f(x,y),z),f(f(x,f(f(y,u),f(y,v))),f(x,f(f(y,u),f(y,v)))))=f(x,f(f(y,u),f(y,v))).
+174 [para_into,144.1.1.1.1.2,142.1.1] f(f(f(x,y),z),f(f(y,x),f(y,x)))=f(y,x).
+178 [para_from,174.1.1,109.1.1.1] f(f(x,y),f(y,x))=f(f(y,x),f(y,x)).
+179 [para_from,174.1.1,142.1.1.1] f(f(x,y),f(f(f(y,x),z),f(f(u,u),u)))=f(f(y,x),z).
+182,181 [para_into,178.1.1.1,178.1.1,demod,112,125,flip.1] f(x,f(f(y,x),f(x,y)))=f(y,x).
+183 [para_into,178.1.1.2,178.1.1,demod,104,125,182] f(x,y)=f(y,x).
+184 [para_from,183.1.1,174.1.1.2.2] f(f(f(x,y),z),f(f(y,x),f(x,y)))=f(y,x).
+186 [para_from,183.1.1,174.1.1.2.1] f(f(f(x,y),z),f(f(x,y),f(y,x)))=f(y,x).
+188 [para_into,164.1.1.1.2.2,128.1.1] f(f(x,f(y,z)),f(f(f(f(z,u),f(z,v)),y),f(f(f(z,u),f(z,v)),y)))=f(f(f(z,u),f(z,v)),y).
+190 [para_into,179.1.1.2.1.1,183.1.1,demod,151] f(f(x,y),z)=f(f(y,x),z).
+191 [para_into,190.1.1,183.1.1] f(x,f(y,z))=f(f(z,y),x).
+192 [copy,191,flip.1] f(f(x,y),z)=f(z,f(y,x)).
+193 [para_into,191.1.1.2,191.1.1] f(x,f(f(y,z),u))=f(f(f(z,y),u),x).
+194 [copy,193,flip.1] f(f(f(x,y),z),u)=f(u,f(f(y,x),z)).
+196,195 [para_from,191.1.1,184.1.1.2.1] f(f(f(f(x,y),z),u),f(f(f(y,x),z),f(f(x,y),z)))=f(z,f(x,y)).
+197 [para_into,192.1.1,191.1.1] f(f(x,y),f(z,u))=f(f(y,x),f(u,z)).
+198 [para_into,194.1.1.1,191.1.1] f(f(f(x,y),f(z,u)),v)=f(v,f(f(u,z),f(y,x))).
+199 [para_from,197.1.1,186.1.1.2.1] f(f(f(f(x,y),f(z,u)),v),f(f(f(y,x),f(u,z)),f(f(z,u),f(x,y))))=f(f(z,u),f(x,y)).
+201 [para_into,172.1.1.2.1,164.1.1,demod,165,165] f(f(f(f(x,f(y,f(f(z,y),u))),z),v),f(f(z,y),f(z,y)))=f(z,y).
+203 [para_into,201.1.1.1,194.1.1] f(f(x,f(f(f(y,f(f(z,y),u)),v),z)),f(f(z,y),f(z,y)))=f(z,y).
+205 [para_into,188.1.1.2.1.1,183.1.1] f(f(x,f(y,z)),f(f(f(f(z,u),f(z,v)),y),f(f(f(z,v),f(z,u)),y)))=f(f(f(z,v),f(z,u)),y).
+207 [para_into,205.1.1,192.1.1] f(f(f(f(f(x,y),f(x,z)),u),f(f(f(x,z),f(x,y)),u)),f(f(u,x),v))=f(f(f(x,z),f(x,y)),u).
+209 [para_into,207.1.1,203.1.1,flip.1] f(f(f(x,f(f(y,x),z)),f(x,u)),y)=f(y,x).
+211 [para_into,209.1.1.1.1.2,166.1.1] f(f(f(x,y),f(x,z)),f(f(u,y),f(v,y)))=f(f(f(u,y),f(v,y)),x).
+213,212 [para_into,211.1.1,192.1.1] f(f(f(x,y),f(z,y)),f(f(u,v),f(u,y)))=f(f(f(x,y),f(z,y)),u).
+215,214 [para_into,211.1.1,183.1.1] f(f(f(x,y),f(z,y)),f(f(u,y),f(u,v)))=f(f(f(x,y),f(z,y)),u).
+220 [para_from,211.1.1,199.1.1.2.2,demod,215,213,196,flip.1] f(f(f(x,y),f(x,z)),f(f(u,y),f(v,y)))=f(x,f(f(u,y),f(v,y))).
+222 [para_into,220.1.1,214.1.1] f(f(f(x,y),f(x,y)),z)=f(x,f(f(z,y),f(z,y))).
+227 [para_into,222.1.1,198.1.1] f(x,f(f(y,z),f(y,z)))=f(z,f(f(x,y),f(x,y))).
+228 [para_into,222.1.1,192.1.1] f(x,f(f(y,z),f(y,z)))=f(y,f(f(x,z),f(x,z))).
+229 [para_into,228.1.1,227.1.1] f(x,f(f(y,z),f(y,z)))=f(z,f(f(y,x),f(y,x))).
+230 [binary,229.1,171.1] $F.
+
+------------ end of proof -------------
+
+
+Search stopped by max_proofs option.
+
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                 72
+clauses generated          16883
+  para_from generated       7276
+  para_into generated       9606
+  back unit del. gen.          1
+demod & eval rewrites      18607
+clauses wt,lit,sk delete   16501
+tautologies deleted            0
+clauses forward subsumed     332
+  (subsumed by sos)           39
+unit deletions                 1
+factor simplifications         0
+clauses kept                  85
+new demodulators              62
+empty clauses                  1
+clauses back demodulated      13
+clauses back subsumed          3
+usable size                   59
+sos size                      10
+demodulators size             51
+passive size                   0
+hot size                       0
+Kbytes malloced             1953
+
+----------- times (seconds) -----------
+user CPU time          0.77          (0 hr, 0 min, 0 sec)
+system CPU time        0.01          (0 hr, 0 min, 0 sec)
+wall-clock time        1             (0 hr, 0 min, 1 sec)
+
+That finishes the proof of the theorem.
+
+Process 8942 finished Mon Aug  2 15:31:15 2004

@@ -1,0 +1,103 @@
+% benchmark parameters -n2 -N6 -p
+
+%--------------------------------------------------------------------------
+% File     : CAT019-5 : TPTP v2.3.0. Released v1.0.0.
+% Domain   : Category Theory
+% Problem  : Axiom of Indiscernibles
+% Version  : [Sco79] axioms : Reduced & Augmented > Complete.
+% English  : [all z (x=z <-> y=z)] -> x=y.
+
+% Refs     : [Sco79] Scott (1979), Identity and Existence in Intuitionist L
+% Source   : [ANL]
+% Names    : p15.ver3.no1.in [ANL]
+
+% Status   : satisfiable
+% Rating   : 0.67 v2.2.1, 0.75 v2.2.0, 0.67 v2.1.0, 1.00 v2.0.0
+% Syntax   : Number of clauses    :   16 (   0 non-Horn;   6 unit;  12 RR)
+%            Number of literals   :   30 (  13 equality)
+%            Maximal clause size  :    3 (   1 average)
+%            Number of predicates :    3 (   0 propositional; 1-2 arity)
+%            Number of functors   :    6 (   3 constant; 0-2 arity)
+%            Number of variables  :   22 (   2 singleton)
+%            Maximal term depth   :    3 (   1 average)
+
+% Comments : Axioms simplified by Art Quaife.
+%          : Assumes something exists.
+%          : tptp2X -f otter:hypothesis:[set(tptp_eq),set(auto),clear(print_given)] -t rm_equality:stfp CAT019-5.p 
+%--------------------------------------------------------------------------
+set(prolog_style_variables).
+set(tptp_eq).
+set(auto).
+clear(print_given).
+
+list(usable).
+
+% reflexivity, axiom.
+ equal(X, X).
+
+% equivalence_implies_existence1, axiom.
+-equivalent(X, Y) |
+ there_exists(X).
+
+% equivalence_implies_existence2, axiom.
+-equivalent(X, Y) |
+ equal(X, Y).
+
+% existence_and_equality_implies_equivalence1, axiom.
+-there_exists(X) |
+-equal(X, Y) |
+ equivalent(X, Y).
+
+% domain_has_elements, axiom.
+-there_exists(domain(X)) |
+ there_exists(X).
+
+% codomain_has_elements, axiom.
+-there_exists(codomain(X)) |
+ there_exists(X).
+
+% composition_implies_domain, axiom.
+-there_exists(compose(X, Y)) |
+ there_exists(domain(X)).
+
+% domain_codomain_composition1, axiom.
+-there_exists(compose(X, Y)) |
+ equal(domain(X), codomain(Y)).
+
+% domain_codomain_composition2, axiom.
+-there_exists(domain(X)) |
+-equal(domain(X), codomain(Y)) |
+ there_exists(compose(X, Y)).
+
+% associativity_of_compose, axiom.
+ equal(compose(X, compose(Y, Z)), compose(compose(X, Y), Z)).
+
+% compose_domain, axiom.
+ equal(compose(X, domain(X)), X).
+
+% compose_codomain, axiom.
+ equal(compose(codomain(X), X), X).
+
+end_of_list.
+
+list(sos).
+
+% assume_c_exists, hypothesis.
+ there_exists(c).
+
+% equality_of_a_and_b1, hypothesis.
+-there_exists(Z) |
+-equal(a, Z) |
+ equal(b, Z).
+
+% equality_of_a_and_b2, hypothesis.
+-there_exists(Z) |
+ equal(a, Z) |
+-equal(b, Z).
+
+% prove_a_equals_b, conjecture.
+-equal(a, b).
+
+end_of_list.
+
+%--------------------------------------------------------------------------

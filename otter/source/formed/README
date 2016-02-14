@@ -1,0 +1,47 @@
+FormEd 0.9
+
+NOTE (July 21, 2003): This compiles and runs in our Linux environment,
+RedHat 7.3.  I haven't tested it recently in other environments.
+
+FormEd is a formula editor for first-order logic formulas.  It's
+not connected to Otter, but it's lots of fun to play with.  The
+primary documentation is on-line with the "Help" button.
+
+It is described in ``FormEd: An X Window System Application for
+Managing First-Order Formulas'', by Tamara Henry and William McCune.
+That report is not available electronically, but I can send a hard
+copy if you like.
+
+To make FormEd, first make sure that ../libotter.a exists,
+then (in this directory)
+
+    % make formed
+
+If you get errors because .h files or libraries are not in the right
+place, see the Makefile or consult your local X Windows expert.
+
+To test FormEd, start it like this:
+
+    % formed -l formed.in
+
+FormEd 0.9 has an interesting experimental feature not in Otter 3.x:
+the ability to simplify quantified formulas by quantifier
+transformation.  Try the buttons "CNF simp" and "DNF simp".
+
+W. McCune
+MCS-221
+Argonne National Laboratory
+Argonne, IL  60439-4844
+U.S.A.
+
+otter@mcs.anl.gov
+
+===========================================
+
+Bugs observed while preparing the Otter 3.1 release.
+
+(1) Sometimes Formed pops up a message window.  If you
+close the message window, sometimes Formed will exit.
+
+(2) I got a segmentation error when testing "clausify"
+on a large formula.

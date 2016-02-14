@@ -1,0 +1,95 @@
+----- Otter 3.3f, August 2004 -----
+The process was started by mccune on gyro.thornwood,
+Mon Aug  2 15:31:05 2004
+The command was "../../bin/otter".  The process ID is 8590.
+
+set(auto).
+   dependent: set(auto1).
+   dependent: set(process_input).
+   dependent: clear(print_kept).
+   dependent: clear(print_new_demod).
+   dependent: clear(print_back_demod).
+   dependent: clear(print_back_sub).
+   dependent: set(control_memory).
+   dependent: assign(max_mem, 12000).
+   dependent: assign(pick_given_ratio, 4).
+   dependent: assign(stats_level, 1).
+   dependent: assign(max_seconds, 10800).
+set(build_proof_object_2).
+   dependent: set(order_history).
+clear(sigint_interact).
+assign(max_seconds,10).
+
+initial_proof_object(junk).
+(
+(1 (input) (P) NIL)
+(2 (input) (not (P)) NIL)
+
+-------- PROOF -------- 
+)
+0 [] P.
+0 [] -P.
+end_of_list.
+
+SCAN INPUT: prop=1, horn=1, equality=0, symmetry=0, max_lits=1.
+
+The clause set is propositional; the strategy will be
+ordered hyperresolution with the propositional
+optimizations, with satellites in sos and nuclei in usable.
+
+   dependent: set(hyper_res).
+   dependent: set(propositional).
+   dependent: set(sort_literals).
+
+------------> process usable:
+** KEPT (pick-wt=1): 1 [] -P.
+
+------------> process sos:
+** KEPT (pick-wt=1): 2 [] P.
+
+----> UNIT CONFLICT at   0.00 sec ----> 3 [binary,2.1,1.1] $F.
+
+Length of proof is 0.  Level of proof is 0.
+
+---------------- PROOF ----------------
+
+1 [] -P.
+2 [] P.
+3 [binary,2.1,1.1] $F.
+
+------------ end of proof -------------
+
+
+;; BEGINNING OF PROOF OBJECT
+(
+(1 (input) (P) NIL)
+(2 (input) (not (P)) NIL)
+(3 (instantiate 2 ()) (not (P)) (1))
+(4 (instantiate 1 ()) (P) (2))
+(5 (resolve 3 () 4 ()) false (3))
+
+Search stopped by max_proofs option.
+
+)
+;; END OF PROOF OBJECT
+
+Search stopped by max_proofs option.
+
+============ end of search ============
+
+-------------- statistics -------------
+clauses given                  0
+clauses generated              0
+clauses kept                   2
+clauses forward subsumed       0
+clauses back subsumed          0
+Kbytes malloced              976
+
+----------- times (seconds) -----------
+user CPU time          0.00          (0 hr, 0 min, 0 sec)
+system CPU time        0.00          (0 hr, 0 min, 0 sec)
+wall-clock time        0             (0 hr, 0 min, 0 sec)
+
+That finishes the proof of the theorem.
+
+Process 8590 finished Mon Aug  2 15:31:05 2004

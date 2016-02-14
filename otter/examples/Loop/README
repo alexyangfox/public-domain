@@ -1,0 +1,19 @@
+This directory contains a Perl program that runs
+a sequence of Otter jobs.  The part of the input
+that is fixed for all of the jobs is in a file
+(named "head" in this example).  A second file
+contains candidate clauses , one line for
+each Otter job (named Sheffer-mgi-without-mirrors
+in this example).
+
+Run it like this:
+
+  otter-ploop head < Sheffer-mgi-without-mirrors > Sheffer.out
+
+This example tries, for 10 seconds each, to prove
+commutativity from each of the candidates.
+
+(You might have to change the reference to the
+Otter binary in otter-ploop.)
+
+The output contains several lines for each job.
