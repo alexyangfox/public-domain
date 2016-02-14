@@ -1,0 +1,391 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                      T G A S A V E
+
+
+                        C-functions to save Truecolor Targa-files
+
+
+
+
+                                   Written 26/10/93 by
+
+                                    Sverre H. Huseby
+                                     Bjoelsengt. 17
+                                       N-0468 Oslo
+                                         Norway
+
+                                 Phone: +47 22 23 05 39
+
+                                   sverrehu@ifi.uio.no
+
+
+
+
+
+
+
+
+
+          TGASAVE reference                                       PAGE 2
+
+
+
+
+                                      INTRODUCTION
+                                      ============
+
+
+          The TGASAVE functions (hereafter called TGASAVE) make it possible 
+          to save TGA-images from your own graphic-producing C-programs.
+
+              TGA is a trademark of Truevision, Inc. TARGA is a registered 
+              trademark of Truevision, Inc. 
+
+          TGASAVE creates simple TGA-files following the TGA File Format 2.0 
+          standard.
+
+          TGASAVE is hereby dedicated to the Public Domain. Feel free to 
+          change the source code as you wish !!!
+
+          I would be very happy if you could mail me if you use this program. 
+          Nice to know where my work goes :-)
+
+
+
+
+
+                                       LIMITATIONS
+                                       ===========
+
+          TGASAVE contains no more than what is needed to create uncompressed 
+          true color (24 bits per pixel) files, with images stored with 
+          pixels starting in the upper left corner. Only a few of the 
+          Extension Area fields are supported, but the others can easily be 
+          added by changing the source code.
+
+          Uncompressed is not that bad when saving real life photographs, 
+          since the Run Length Encoding used in Targa-files doesn't do well 
+          on that kind of images.
+
+
+
+
+
+
+
+
+
+          TGASAVE reference                                       PAGE 3
+
+
+
+
+                                      USING TGASAVE
+                                      =============
+
+
+          TGASAVE consists of five functions, all decleared in TGASAVE.H:
+
+              TGA_SetImageID() sets up the Image ID field of the file. 
+
+              TGA_SetAuthor() lets you specify the person that comitted the 
+                  image. 
+
+              TGA_SetSoftwareID() sets the name of the program that produced 
+                  the image. 
+
+              TGA_SetAspect() makes it possible to specify the `shape' of the 
+                  pixels. 
+
+              TGA_Save() creates and stores TGA-files. It takes parameters 
+                  specifying the filename, image size, and a user defined 
+                  callback function that is supposed to fetch the pixel 
+                  values. 
+
+          Only the last one is needed to create a TGA-file.
+
+          To use these functions, you must create a callback function that 
+          will do what is needed to get the pixel values for each point in 
+          the image.
+
+
+
+
+
+                                       PORTABILITY
+                                       ===========
+
+
+          TGASAVE is written using streams only, and all word (16 bits) 
+          outputs are split into byte outputs to force the byte swapping 
+          required in TGA-files. This should make the functions rather 
+          portable.
+
+          File I/O is done through the functions Create(), Write(), 
+          WriteByte(), WriteWord(), WriteZeros(), GetFilePos() and Close(). 
+          If you want to rewrite TGASAVE to use other file I/O than streams, 
+          you need only change theese functions.
+
+
+
+
+
+
+
+
+
+
+          TGASAVE reference                                       PAGE 4
+
+
+
+
+                                      THE FUNCTIONS
+                                      =============
+
+
+          TGA_SetImageID() 
+
+                  Function  Sets the text of the Image Id -field in the 
+                            header of the TGA-file. 
+
+                    Syntax  void TGA_SetImageID(char *s); 
+
+                   Remarks  This textfield is optional. If you don't want any 
+                            Image ID, you need not call this function.
+
+                            The text can contain no more than 255 characters.
+
+                            Call this function with an empty string to clear 
+                            any previously set Image ID. 
+
+              Return value  None 
+
+
+
+
+
+
+
+
+
+
+          TGASAVE reference                                       PAGE 5
+
+
+
+
+          TGA_SetAuthor() 
+
+                  Function  Sets the name of the image author in the 
+                            Extension Area of the TGA-file. 
+
+                    Syntax  void TGA_SetAuthor(char *s); 
+
+                   Remarks  This textfield is optional. If you don't want any 
+                            author name, you need not call this function.
+
+                            The text can contain no more than 40 characters.
+
+                            Call this function with an empty string to clear 
+                            any previously set author.
+
+                            Note that if no part of the Extension Area is 
+                            specified, the Extension Area is not written to 
+                            the file. 
+
+              Return value  None 
+
+
+
+
+
+
+
+
+
+
+          TGASAVE reference                                       PAGE 6
+
+
+
+
+          TGA_SetSoftwareID() 
+
+                  Function  Sets the name of the program that created the 
+                            image in the Extension Area of the TGA-file. 
+
+                    Syntax  void TGA_SetSoftwareID(char *s); 
+
+                   Remarks  This textfield is optional. If you don't want any 
+                            program name, you need not call this function.
+
+                            The text can contain no more than 40 characters.
+
+                            Call this function with an empty string to clear 
+                            any previously set Software ID.
+
+                            Note that if no part of the Extension Area is 
+                            specified, the Extension Area is not written to 
+                            the file. 
+
+              Return value  None 
+
+
+
+
+
+
+
+
+
+
+          TGASAVE reference                                       PAGE 7
+
+
+
+
+          TGA_SetAspect() 
+
+                  Function  Sets the pixel aspect ratio in the Extension Area 
+                            of the TGA-file. 
+
+                    Syntax  void TGA_SetAspect(int width, int height); 
+
+                   Remarks  The aspect ratio specifies the relative width and 
+                            height of each pixel. Set width==height for 
+                            square pixels.
+
+                            This is optional. If pixel ratio is not 
+                            important, you need not call this function.
+
+                            Call this function with zeros to clear any 
+                            previously set aspect ratio.
+
+                            Note that if no part of the Extension Area is 
+                            specified, the Extension Area is not written to 
+                            the file. 
+
+              Return value  None 
+
+
+
+
+
+
+
+
+
+
+          TGASAVE reference                                       PAGE 8
+
+
+
+
+          TGA_Save() 
+
+                  Function  Creates a new TGA-file, storing required 
+                            information along with the image data itself. 
+
+                    Syntax  int TGA_Save(
+                                    char *filename,
+                                    int width, int height,
+                                    void (*getpixel)(int x, int y,
+                                                     TGA_Color *col)
+                                ); 
+
+                   Remarks  Creates a new (or overwrites an existing) 
+                            TGA-file with the given filename. No 
+                            .TGA-extension is added, so it should be part of 
+                            the string.
+
+                            The width- and height- parameters specify the 
+                            size of the image.
+
+                            TGA_Save() obtains the pixel values by calling a 
+                            user specified function. This function is passed 
+                            in the parameter getpixel. See "THE CALLBACK 
+                            FUNCTION" further down for a description of this 
+                            function. 
+
+              Return value  TGA_OK          OK
+                            TGA_ERRCREATE   Error creating file.
+                            TGA_ERRWRITE    Error writing to file.
+
+
+
+
+
+
+
+
+
+
+
+          TGASAVE reference                                       PAGE 9
+
+
+
+
+                                  THE CALLBACK FUNCTION
+                                  =====================
+
+
+          callback() 
+
+                  Function  Obtains pixel-values for the TGA_Save() 
+                            -function. 
+
+                    Syntax  void callback(int x, int y, TGA_Color *c); 
+
+                   Remarks  This function (or these functions) must be 
+                            written by the programmer using TGASAVE. It 
+                            should accept two integer parameters specifying a 
+                            point in the image, and a pointer to a 
+                            color-structure that must be filled in with the 
+                            correct color values (red, green and blue). The 
+                            structure has three integer fields, r, g and b.
+
+                            The ranges for these parameters are as follows:
+
+                                x     : [0, img_width - 1]
+                                y     : [0, img_height - 1]
+                                r,g,b : [0, 255]
+
+                            where img_width and img_height are the values 
+                            width and height passed to TGA_Save().
+
+                            Of course callback() need not get its values from 
+                            the screen. The values can be fetched from a 
+                            memory array, they can be calculated using some 
+                            entertaining mathematical function for each point 
+                            requested, etc.
+
+                            The function is passed as a parameter to 
+                            TGA_Save(), and can thus have any name, not only 
+                            callback(). 
+
+              Return value  Nothing directly, but col must be filled in with 
+                            color values. 
+
+
+
+
+
+
+
