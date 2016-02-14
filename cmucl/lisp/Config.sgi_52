@@ -1,0 +1,15 @@
+# To make the Depends file temporarily change Config to use gcc instead of cc.
+# For some reason mips-assem.S and mips-assem.s must be linked to the
+# mips-assem.S source file.
+CPPFLAGS = -I. -Dirix -DSVR4
+CC = cc # -Wall -Wstrict-prototypes -Wmissing-prototypes
+CPP = cpp
+CFLAGS = -Dirix -DSVR4 -D_BSD_SIGNALS -non_shared -g
+ASFLAGS = -g -Dirix -non_shared
+NM = irix-nm
+UNDEFSYMPATTERN=-Xlinker -u -Xlinker &
+ASSEM_SRC = mips-assem.S
+ARCH_SRC = mips-arch.c
+OS_SRC = irix-os.c os-common.c
+OS_LINK_FLAGS= -non_shared
+OS_LIBS=
