@@ -1,0 +1,38 @@
+
+
+KERNEL_OBJ += $(patsubst %.c,%.o, $(wildcard kernel/i386/dbg/*.c)) \
+			$(patsubst %.s,%.o, $(wildcard kernel/i386/dbg/*.s))
+
+
+# ----------------------------------------------------------------------------
+
+.PHONY : kernel/i386/dbg/depend
+kernel/i386/dbg/depend :
+	$(DEPEND) $(DFLAGS) -f kernel/i386/dbg/makefile.in \
+							$(wildcard kernel/i386/dbg/*.c)
+
+
+.PHONY : kernel/i386/dbg/clean
+kernel/i386/dbg/clean :
+	rm -f kernel/i386/dbg/*.o
+	rm -f kernel/i386/dbg/makefile.in.bak
+
+# ----------------------------------------------------------------------------
+
+# ASSEMBLY DEPENDENCIES	
+
+
+# ----------------------------------------------------------------------------
+
+
+# DO NOT DELETE
+
+kernel/i386/dbg/kprintf.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/i386/dbg/kprintf.o: ./h/kernel/types.h ./h/kernel/dbg.h
+kernel/i386/dbg/kprintf.o: ./h/kernel/utility.h ./h/kernel/proc.h
+kernel/i386/dbg/kprintf.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/i386/dbg/kprintf.o: ./h/kernel/timer.h ./h/kernel/vm.h
+kernel/i386/dbg/kprintf.o: ./h/kernel/arch.h ./h/kernel/i386/i386.h
+kernel/i386/dbg/kprintf.o: ./h/kernel/config.h ./h/kernel/fs.h
+kernel/i386/dbg/kprintf.o: ./h/kernel/termios.h ./h/kernel/msg.h
+kernel/i386/dbg/kprintf.o: ./h/kernel/usignal.h

@@ -1,0 +1,95 @@
+
+
+KERNEL_OBJ += $(patsubst %.c,%.o, $(wildcard kernel/vm/*.c)) \
+			$(patsubst %.s,%.o, $(wildcard kernel/vm/*.s))
+
+
+# ----------------------------------------------------------------------------
+
+.PHONY : kernel/vm/depend
+kernel/vm/depend :
+	$(DEPEND) $(DFLAGS) -f kernel/vm/makefile.in $(wildcard kernel/vm/*.c)
+
+
+.PHONY : kernel/vm/clean
+kernel/vm/clean :
+	rm -f kernel/vm/*.o
+	rm -f kernel/vm/makefile.in.bak
+
+# ----------------------------------------------------------------------------
+
+# ASSEMBLY DEPENDENCIES	
+
+
+# ----------------------------------------------------------------------------
+
+
+# DO NOT DELETE
+
+kernel/vm/addressspace.o: ./h/kernel/types.h ./h/kernel/lists.h
+kernel/vm/addressspace.o: ./h/kernel/vm.h ./h/kernel/sync.h
+kernel/vm/addressspace.o: ./h/kernel/timer.h ./h/kernel/arch.h
+kernel/vm/addressspace.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/vm/addressspace.o: ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/vm/addressspace.o: ./h/kernel/msg.h ./h/kernel/proc.h
+kernel/vm/addressspace.o: ./h/kernel/usignal.h ./h/kernel/utility.h
+kernel/vm/addressspace.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/vm/addressspace.o: ./h/kernel/dbg.h
+kernel/vm/copyinoutstr.o: ./h/kernel/types.h ./h/kernel/vm.h
+kernel/vm/copyinoutstr.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/vm/copyinoutstr.o: ./h/kernel/timer.h ./h/kernel/arch.h
+kernel/vm/copyinoutstr.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/vm/copyinoutstr.o: ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/vm/copyinoutstr.o: ./h/kernel/msg.h ./h/kernel/utility.h
+kernel/vm/copyinoutstr.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/vm/copyinoutstr.o: ./h/kernel/dbg.h ./h/kernel/proc.h
+kernel/vm/copyinoutstr.o: ./h/kernel/usignal.h ./h/kernel/error.h
+kernel/vm/kmalloc.o: ./h/kernel/types.h ./h/kernel/vm.h ./h/kernel/lists.h
+kernel/vm/kmalloc.o: ./h/kernel/sync.h ./h/kernel/timer.h ./h/kernel/arch.h
+kernel/vm/kmalloc.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/vm/kmalloc.o: ./h/kernel/fs.h ./h/kernel/termios.h ./h/kernel/msg.h
+kernel/vm/kmalloc.o: ./h/kernel/dbg.h
+kernel/vm/kmalloc.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/vm/kmalloc.o: ./h/kernel/kmalloc.h
+kernel/vm/kmap.o: ./h/kernel/types.h ./h/kernel/vm.h ./h/kernel/lists.h
+kernel/vm/kmap.o: ./h/kernel/sync.h ./h/kernel/timer.h ./h/kernel/arch.h
+kernel/vm/kmap.o: ./h/kernel/i386/i386.h ./h/kernel/config.h ./h/kernel/fs.h
+kernel/vm/kmap.o: ./h/kernel/termios.h ./h/kernel/msg.h ./h/kernel/dbg.h
+kernel/vm/kmap.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/vm/memregion.o: ./h/kernel/types.h ./h/kernel/vm.h ./h/kernel/lists.h
+kernel/vm/memregion.o: ./h/kernel/sync.h ./h/kernel/timer.h ./h/kernel/arch.h
+kernel/vm/memregion.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/vm/memregion.o: ./h/kernel/fs.h ./h/kernel/termios.h ./h/kernel/msg.h
+kernel/vm/memregion.o: ./h/kernel/dbg.h
+kernel/vm/memregion.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/vm/pagefault.o: ./h/kernel/types.h ./h/kernel/proc.h
+kernel/vm/pagefault.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/vm/pagefault.o: ./h/kernel/timer.h ./h/kernel/vm.h ./h/kernel/arch.h
+kernel/vm/pagefault.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/vm/pagefault.o: ./h/kernel/fs.h ./h/kernel/termios.h ./h/kernel/msg.h
+kernel/vm/pagefault.o: ./h/kernel/usignal.h ./h/kernel/dbg.h
+kernel/vm/pagefault.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/vm/pageframe.o: ./h/kernel/types.h ./h/kernel/lists.h ./h/kernel/vm.h
+kernel/vm/pageframe.o: ./h/kernel/sync.h ./h/kernel/timer.h ./h/kernel/arch.h
+kernel/vm/pageframe.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/vm/pageframe.o: ./h/kernel/fs.h ./h/kernel/termios.h ./h/kernel/msg.h
+kernel/vm/pageframe.o: ./h/kernel/dbg.h
+kernel/vm/pageframe.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/vm/pmap.o: ./h/kernel/types.h ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/vm/pmap.o: ./h/kernel/timer.h ./h/kernel/arch.h ./h/kernel/i386/i386.h
+kernel/vm/pmap.o: ./h/kernel/config.h ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/vm/pmap.o: ./h/kernel/msg.h ./h/kernel/vm.h ./h/kernel/proc.h
+kernel/vm/pmap.o: ./h/kernel/usignal.h ./h/kernel/utility.h
+kernel/vm/pmap.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/vm/pmap.o: ./h/kernel/dbg.h
+kernel/vm/umap.o: ./h/kernel/types.h ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/vm/umap.o: ./h/kernel/timer.h ./h/kernel/arch.h ./h/kernel/i386/i386.h
+kernel/vm/umap.o: ./h/kernel/config.h ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/vm/umap.o: ./h/kernel/msg.h ./h/kernel/vm.h ./h/kernel/proc.h
+kernel/vm/umap.o: ./h/kernel/usignal.h ./h/kernel/utility.h
+kernel/vm/umap.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/vm/umap.o: ./h/kernel/dbg.h
+kernel/vm/vars.o: ./h/kernel/types.h ./h/kernel/lists.h ./h/kernel/vm.h
+kernel/vm/vars.o: ./h/kernel/sync.h ./h/kernel/timer.h ./h/kernel/arch.h
+kernel/vm/vars.o: ./h/kernel/i386/i386.h ./h/kernel/config.h ./h/kernel/fs.h
+kernel/vm/vars.o: ./h/kernel/termios.h ./h/kernel/msg.h

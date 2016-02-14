@@ -1,0 +1,8 @@
+
+.PHONY : home/disk
+home/disk :
+	mcopy -o home/genesis.txt c:/home
+	mcopy -o home/test.sh c:/home
+	mcopy -o home/top100.txt c:/home
+	
+

@@ -1,0 +1,30 @@
+include kernel/i386/asm/makefile.in
+include kernel/i386/init/makefile.in
+include kernel/i386/dbg/makefile.in
+include kernel/i386/proc/makefile.in
+include kernel/i386/vars/makefile.in
+include kernel/i386/vm/makefile.in
+include kernel/i386/v86/makefile.in
+
+# ----------------------------------------------------------------------------
+
+.PHONY : kernel/i386/depend
+kernel/i386/depend :	kernel/i386/asm/depend \
+						kernel/i386/dbg/depend \
+						kernel/i386/init/depend \
+						kernel/i386/proc/depend \
+						kernel/i386/vars/depend \
+						kernel/i386/vm/depend \
+						kernel/i386/v86/depend
+
+.PHONY : kernel/i386/clean
+kernel/i386/clean : 	kernel/i386/asm/clean \
+						kernel/i386/dbg/clean \
+						kernel/i386/init/clean \
+						kernel/i386/proc/clean \
+						kernel/i386/vars/clean \
+						kernel/i386/vm/clean \
+						kernel/i386/v86/clean
+
+
+

@@ -1,0 +1,125 @@
+
+
+KERNEL_OBJ += $(patsubst %.c,%.o, $(wildcard kernel/i386/init/*.c)) \
+			$(patsubst %.S,%.o, $(wildcard kernel/i386/init/*.s))
+
+
+# ----------------------------------------------------------------------------
+
+.PHONY : kernel/i386/init/depend
+kernel/i386/init/depend :
+	$(DEPEND) $(DFLAGS) -f kernel/i386/init/makefile.in \
+							$(wildcard kernel/i386/init/*.c)
+
+
+.PHONY : kernel/i386/init/clean
+kernel/i386/init/clean :
+	rm -f kernel/i386/init/*.o
+	rm -f kernel/i386/init/makefile.in.bak
+
+# ----------------------------------------------------------------------------
+
+# ASSEMBLY DEPENDENCIES	
+
+
+# ----------------------------------------------------------------------------
+
+
+# DO NOT DELETE
+
+kernel/i386/init/acpi.o: ./h/kernel/types.h ./h/kernel/vm.h
+kernel/i386/init/acpi.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/i386/init/acpi.o: ./h/kernel/timer.h ./h/kernel/arch.h
+kernel/i386/init/acpi.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/i386/init/acpi.o: ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/i386/init/acpi.o: ./h/kernel/msg.h ./h/kernel/proc.h
+kernel/i386/init/acpi.o: ./h/kernel/usignal.h ./h/kernel/dbg.h
+kernel/i386/init/acpi.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/i386/init/acpi.o: ./h/kernel/i386/multiboot.h ./h/kernel/i386/init.h
+kernel/i386/init/acpi.o: ./h/kernel/utility.h ./h/kernel/i386/elf.h
+kernel/i386/init/acpi.o: ./h/acpi/acpi.h ./h/acpi/acnames.h
+kernel/i386/init/acpi.o: ./h/acpi/acconfig.h ./h/acpi/platform/acenv.h
+kernel/i386/init/acpi.o: ./h/acpi/platform/ackielder.h
+kernel/i386/init/acpi.o: ./h/acpi/platform/acgcc.h ./h/acpi/actypes.h
+kernel/i386/init/acpi.o: ./h/acpi/acexcep.h ./h/acpi/acmacros.h
+kernel/i386/init/acpi.o: ./h/acpi/actbl.h ./h/acpi/actbl1.h
+kernel/i386/init/acpi.o: ./h/acpi/aclocal.h ./h/acpi/acoutput.h
+kernel/i386/init/acpi.o: ./h/acpi/acpiosxf.h ./h/acpi/acpixf.h
+kernel/i386/init/acpi.o: ./h/acpi/acobject.h ./h/acpi/acstruct.h
+kernel/i386/init/acpi.o: ./h/acpi/acglobal.h ./h/acpi/achware.h
+kernel/i386/init/acpi.o: ./h/acpi/acutils.h
+kernel/i386/init/boottime.o: ./h/kernel/types.h ./h/kernel/proc.h
+kernel/i386/init/boottime.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/i386/init/boottime.o: ./h/kernel/timer.h ./h/kernel/vm.h
+kernel/i386/init/boottime.o: ./h/kernel/arch.h ./h/kernel/i386/i386.h
+kernel/i386/init/boottime.o: ./h/kernel/config.h ./h/kernel/fs.h
+kernel/i386/init/boottime.o: ./h/kernel/termios.h ./h/kernel/msg.h
+kernel/i386/init/boottime.o: ./h/kernel/usignal.h ./h/kernel/dbg.h
+kernel/i386/init/boottime.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/i386/init/boottime.o: ./h/kernel/i386/init.h
+kernel/i386/init/fs.o: ./h/kernel/types.h ./h/kernel/proc.h
+kernel/i386/init/fs.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/i386/init/fs.o: ./h/kernel/timer.h ./h/kernel/vm.h ./h/kernel/arch.h
+kernel/i386/init/fs.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/i386/init/fs.o: ./h/kernel/fs.h ./h/kernel/termios.h ./h/kernel/msg.h
+kernel/i386/init/fs.o: ./h/kernel/usignal.h ./h/kernel/dbg.h
+kernel/i386/init/fs.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/i386/init/fs.o: ./h/kernel/i386/init.h ./h/kernel/utility.h
+kernel/i386/init/i386.o: ./h/kernel/types.h ./h/kernel/proc.h
+kernel/i386/init/i386.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/i386/init/i386.o: ./h/kernel/timer.h ./h/kernel/vm.h ./h/kernel/arch.h
+kernel/i386/init/i386.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/i386/init/i386.o: ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/i386/init/i386.o: ./h/kernel/msg.h ./h/kernel/usignal.h
+kernel/i386/init/i386.o: ./h/kernel/utility.h
+kernel/i386/init/i386.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/i386/init/i386.o: ./h/kernel/i386/init.h
+kernel/i386/init/main.o: ./h/kernel/types.h ./h/kernel/vm.h
+kernel/i386/init/main.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/i386/init/main.o: ./h/kernel/timer.h ./h/kernel/arch.h
+kernel/i386/init/main.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/i386/init/main.o: ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/i386/init/main.o: ./h/kernel/msg.h ./h/kernel/proc.h
+kernel/i386/init/main.o: ./h/kernel/usignal.h ./h/kernel/dbg.h
+kernel/i386/init/main.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/i386/init/main.o: ./h/kernel/i386/multiboot.h ./h/kernel/i386/init.h
+kernel/i386/init/main.o: ./h/kernel/utility.h ./h/kernel/i386/elf.h
+kernel/i386/init/main.o: ./h/acpi/acpi.h ./h/acpi/acnames.h
+kernel/i386/init/main.o: ./h/acpi/acconfig.h ./h/acpi/platform/acenv.h
+kernel/i386/init/main.o: ./h/acpi/platform/ackielder.h
+kernel/i386/init/main.o: ./h/acpi/platform/acgcc.h ./h/acpi/actypes.h
+kernel/i386/init/main.o: ./h/acpi/acexcep.h ./h/acpi/acmacros.h
+kernel/i386/init/main.o: ./h/acpi/actbl.h ./h/acpi/actbl1.h
+kernel/i386/init/main.o: ./h/acpi/aclocal.h ./h/acpi/acoutput.h
+kernel/i386/init/main.o: ./h/acpi/acpiosxf.h ./h/acpi/acpixf.h
+kernel/i386/init/main.o: ./h/acpi/acobject.h ./h/acpi/acstruct.h
+kernel/i386/init/main.o: ./h/acpi/acglobal.h ./h/acpi/achware.h
+kernel/i386/init/main.o: ./h/acpi/acutils.h
+kernel/i386/init/options.o: ./h/kernel/types.h ./h/kernel/proc.h
+kernel/i386/init/options.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/i386/init/options.o: ./h/kernel/timer.h ./h/kernel/vm.h
+kernel/i386/init/options.o: ./h/kernel/arch.h ./h/kernel/i386/i386.h
+kernel/i386/init/options.o: ./h/kernel/config.h ./h/kernel/fs.h
+kernel/i386/init/options.o: ./h/kernel/termios.h ./h/kernel/msg.h
+kernel/i386/init/options.o: ./h/kernel/usignal.h ./h/kernel/utility.h
+kernel/i386/init/options.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/i386/init/options.o: ./h/kernel/i386/init.h
+kernel/i386/init/options.o: ./h/kernel/i386/multiboot.h ./h/kernel/dbg.h
+kernel/i386/init/proc.o: ./h/kernel/types.h ./h/kernel/proc.h
+kernel/i386/init/proc.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/i386/init/proc.o: ./h/kernel/timer.h ./h/kernel/vm.h ./h/kernel/arch.h
+kernel/i386/init/proc.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/i386/init/proc.o: ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/i386/init/proc.o: ./h/kernel/msg.h ./h/kernel/usignal.h
+kernel/i386/init/proc.o: ./h/kernel/dbg.h
+kernel/i386/init/proc.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/i386/init/proc.o: ./h/kernel/i386/init.h ./h/kernel/utility.h
+kernel/i386/init/vm.o: ./h/kernel/types.h ./h/kernel/vm.h ./h/kernel/lists.h
+kernel/i386/init/vm.o: ./h/kernel/sync.h ./h/kernel/timer.h ./h/kernel/arch.h
+kernel/i386/init/vm.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/i386/init/vm.o: ./h/kernel/fs.h ./h/kernel/termios.h ./h/kernel/msg.h
+kernel/i386/init/vm.o: ./h/kernel/proc.h ./h/kernel/usignal.h
+kernel/i386/init/vm.o: ./h/kernel/dbg.h
+kernel/i386/init/vm.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/i386/init/vm.o: ./h/kernel/kmalloc.h ./h/kernel/i386/multiboot.h
+kernel/i386/init/vm.o: ./h/kernel/i386/init.h

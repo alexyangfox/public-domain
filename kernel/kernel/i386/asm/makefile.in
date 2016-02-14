@@ -1,0 +1,24 @@
+
+KERNEL_OBJ += $(patsubst %.c,%.o, $(wildcard kernel/i386/asm/*.c)) \
+			$(patsubst %.s,%.o, $(wildcard kernel/i386/asm/*.s)) \
+			$(patsubst %.S,%.o, $(wildcard kernel/i386/asm/*.S))
+
+
+# ----------------------------------------------------------------------------
+
+.PHONY : kernel/i386/asm/depend
+kernel/i386/asm/depend :
+	$(DEPEND) $(DFLAGS) -f kernel/i386/asm/makefile.in \
+							$(wildcard kernel/i386/asm/*.c)
+
+.PHONY : kernel/i386/asm/clean
+kernel/i386/asm/clean :
+	rm -f kernel/i386/asm/*.o
+	rm -f kernel/i386/asm/makefile.in.bak
+
+
+# ----------------------------------------------------------------------------
+
+# ASSEMBLY DEPENDENCIES	
+
+# DO NOT DELETE

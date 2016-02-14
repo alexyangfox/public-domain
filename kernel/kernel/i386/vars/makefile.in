@@ -1,0 +1,38 @@
+
+
+KERNEL_OBJ += $(patsubst %.c,%.o, $(wildcard kernel/i386/vars/*.c)) \
+			$(patsubst %.s,%.o, $(wildcard kernel/i386/vars/*.s))
+
+
+# ----------------------------------------------------------------------------
+
+.PHONY : kernel/i386/vars/depend
+kernel/i386/vars/depend :
+	$(DEPEND) $(DFLAGS) -f kernel/i386/vars/makefile.in \
+							$(wildcard kernel/i386/vars/*.c)
+
+
+.PHONY : kernel/i386/vars/clean
+kernel/i386/vars/clean :
+	rm -f kernel/i386/vars/*.o
+	rm -f kernel/i386/vars/makefile.in.bak
+
+# ----------------------------------------------------------------------------
+
+# ASSEMBLY DEPENDENCIES	
+
+
+# ----------------------------------------------------------------------------
+
+
+# DO NOT DELETE
+
+kernel/i386/vars/vars.o: ./h/kernel/types.h ./h/kernel/config.h
+kernel/i386/vars/vars.o: ./h/kernel/lists.h ./h/kernel/proc.h
+kernel/i386/vars/vars.o: ./h/kernel/sync.h ./h/kernel/timer.h ./h/kernel/vm.h
+kernel/i386/vars/vars.o: ./h/kernel/arch.h ./h/kernel/i386/i386.h
+kernel/i386/vars/vars.o: ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/i386/vars/vars.o: ./h/kernel/msg.h ./h/kernel/usignal.h
+kernel/i386/vars/vars.o: ./h/kernel/i386/multiboot.h ./h/kernel/i386/module.h
+kernel/i386/vars/vars.o: ./h/kernel/i386/elf.h ./h/kernel/resident.h
+kernel/i386/vars/vars.o: ./h/kernel/reboot.h

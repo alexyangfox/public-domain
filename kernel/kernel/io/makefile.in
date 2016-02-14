@@ -1,0 +1,109 @@
+
+
+KERNEL_OBJ += $(patsubst %.c,%.o, $(wildcard kernel/io/*.c)) \
+			$(patsubst %.s,%.o, $(wildcard kernel/io/*.s))
+
+
+# ----------------------------------------------------------------------------
+
+.PHONY : kernel/io/depend
+kernel/io/depend :
+	$(DEPEND) $(DFLAGS) -f kernel/io/makefile.in $(wildcard kernel/io/*.c)
+
+
+.PHONY : kernel/io/clean
+kernel/io/clean :
+	rm -f kernel/io/*.o
+	rm -f kernel/io/makefile.in.bak
+
+
+# ----------------------------------------------------------------------------
+
+# ASSEMBLY DEPENDENCIES	
+
+
+# ----------------------------------------------------------------------------
+
+
+# DO NOT DELETE
+
+kernel/io/adddevice.o: ./h/kernel/types.h ./h/kernel/device.h
+kernel/io/adddevice.o: ./h/kernel/lists.h ./h/kernel/msg.h ./h/kernel/proc.h
+kernel/io/adddevice.o: ./h/kernel/sync.h ./h/kernel/timer.h ./h/kernel/vm.h
+kernel/io/adddevice.o: ./h/kernel/arch.h ./h/kernel/i386/i386.h
+kernel/io/adddevice.o: ./h/kernel/config.h ./h/kernel/fs.h
+kernel/io/adddevice.o: ./h/kernel/termios.h ./h/kernel/usignal.h
+kernel/io/adddevice.o: ./h/kernel/utility.h
+kernel/io/adddevice.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/io/adddevice.o: ./h/kernel/kmalloc.h ./h/kernel/dbg.h
+kernel/io/io.o: ./h/kernel/types.h ./h/kernel/device.h ./h/kernel/lists.h
+kernel/io/io.o: ./h/kernel/msg.h ./h/kernel/proc.h ./h/kernel/sync.h
+kernel/io/io.o: ./h/kernel/timer.h ./h/kernel/vm.h ./h/kernel/arch.h
+kernel/io/io.o: ./h/kernel/i386/i386.h ./h/kernel/config.h ./h/kernel/fs.h
+kernel/io/io.o: ./h/kernel/termios.h ./h/kernel/usignal.h
+kernel/io/io.o: ./h/kernel/utility.h
+kernel/io/io.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/io/io.o: ./h/kernel/kmalloc.h ./h/kernel/dbg.h kernel/io/io.h
+kernel/io/io.o: ./h/kernel/i386/elf.h
+kernel/io/ksyms.o: ./h/kernel/types.h ./h/kernel/proc.h ./h/kernel/lists.h
+kernel/io/ksyms.o: ./h/kernel/sync.h ./h/kernel/timer.h ./h/kernel/vm.h
+kernel/io/ksyms.o: ./h/kernel/arch.h ./h/kernel/i386/i386.h
+kernel/io/ksyms.o: ./h/kernel/config.h ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/io/ksyms.o: ./h/kernel/msg.h ./h/kernel/usignal.h ./h/kernel/dbg.h
+kernel/io/ksyms.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/io/ksyms.o: ./h/kernel/kmalloc.h ./h/kernel/utility.h
+kernel/io/ksyms.o: ./h/kernel/error.h ./h/kernel/symbol.h
+kernel/io/ksyms.o: ./h/kernel/buffers.h ./h/kernel/device.h
+kernel/io/ksyms.o: ./h/kernel/block.h ./h/kernel/callback.h ./h/kernel/iov.h
+kernel/io/loaddevice.o: ./h/kernel/types.h ./h/kernel/proc.h
+kernel/io/loaddevice.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/io/loaddevice.o: ./h/kernel/timer.h ./h/kernel/vm.h ./h/kernel/arch.h
+kernel/io/loaddevice.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/io/loaddevice.o: ./h/kernel/fs.h ./h/kernel/termios.h ./h/kernel/msg.h
+kernel/io/loaddevice.o: ./h/kernel/usignal.h ./h/kernel/dbg.h
+kernel/io/loaddevice.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/io/loaddevice.o: ./h/kernel/kmalloc.h ./h/kernel/i386/elf.h
+kernel/io/loaddevice.o: ./h/kernel/utility.h ./h/kernel/error.h
+kernel/io/loaddevice.o: ./h/kernel/symbol.h ./h/kernel/resident.h
+kernel/io/main.o: ./h/kernel/types.h ./h/kernel/fs.h ./h/kernel/lists.h
+kernel/io/main.o: ./h/kernel/sync.h ./h/kernel/timer.h ./h/kernel/termios.h
+kernel/io/main.o: ./h/kernel/msg.h ./h/kernel/config.h ./h/kernel/utility.h
+kernel/io/main.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/io/main.o: ./h/kernel/kmalloc.h ./h/kernel/vm.h ./h/kernel/arch.h
+kernel/io/main.o: ./h/kernel/i386/i386.h ./h/kernel/dbg.h ./h/kernel/proc.h
+kernel/io/main.o: ./h/kernel/usignal.h ./h/kernel/error.h ./h/kernel/device.h
+kernel/io/main.o: ./h/kernel/resident.h kernel/io/io.h ./h/kernel/i386/elf.h
+kernel/io/opendevice.o: ./h/kernel/types.h ./h/kernel/device.h
+kernel/io/opendevice.o: ./h/kernel/lists.h ./h/kernel/msg.h ./h/kernel/proc.h
+kernel/io/opendevice.o: ./h/kernel/sync.h ./h/kernel/timer.h ./h/kernel/vm.h
+kernel/io/opendevice.o: ./h/kernel/arch.h ./h/kernel/i386/i386.h
+kernel/io/opendevice.o: ./h/kernel/config.h ./h/kernel/fs.h
+kernel/io/opendevice.o: ./h/kernel/termios.h ./h/kernel/usignal.h
+kernel/io/opendevice.o: ./h/kernel/utility.h
+kernel/io/opendevice.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/io/opendevice.o: ./h/kernel/kmalloc.h ./h/kernel/dbg.h
+kernel/io/opendevice.o: ./h/kernel/resident.h kernel/io/io.h
+kernel/io/opendevice.o: ./h/kernel/i386/elf.h
+kernel/io/resident.o: ./h/kernel/types.h ./h/kernel/lists.h ./h/kernel/fs.h
+kernel/io/resident.o: ./h/kernel/sync.h ./h/kernel/timer.h
+kernel/io/resident.o: ./h/kernel/termios.h ./h/kernel/msg.h
+kernel/io/resident.o: ./h/kernel/config.h ./h/kernel/device.h
+kernel/io/resident.o: ./h/kernel/proc.h ./h/kernel/vm.h ./h/kernel/arch.h
+kernel/io/resident.o: ./h/kernel/i386/i386.h ./h/kernel/usignal.h
+kernel/io/resident.o: ./h/kernel/dbg.h
+kernel/io/resident.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/io/resident.o: ./h/kernel/resident.h ./h/kernel/i386/multiboot.h
+kernel/io/vars.o: ./h/kernel/types.h ./h/kernel/proc.h ./h/kernel/lists.h
+kernel/io/vars.o: ./h/kernel/sync.h ./h/kernel/timer.h ./h/kernel/vm.h
+kernel/io/vars.o: ./h/kernel/arch.h ./h/kernel/i386/i386.h
+kernel/io/vars.o: ./h/kernel/config.h ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/io/vars.o: ./h/kernel/msg.h ./h/kernel/usignal.h ./h/kernel/device.h
+kernel/io/wrapper.o: ./h/kernel/types.h ./h/kernel/device.h
+kernel/io/wrapper.o: ./h/kernel/lists.h ./h/kernel/msg.h ./h/kernel/proc.h
+kernel/io/wrapper.o: ./h/kernel/sync.h ./h/kernel/timer.h ./h/kernel/vm.h
+kernel/io/wrapper.o: ./h/kernel/arch.h ./h/kernel/i386/i386.h
+kernel/io/wrapper.o: ./h/kernel/config.h ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/io/wrapper.o: ./h/kernel/usignal.h ./h/kernel/utility.h
+kernel/io/wrapper.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/io/wrapper.o: ./h/kernel/kmalloc.h ./h/kernel/dbg.h kernel/io/io.h
+kernel/io/wrapper.o: ./h/kernel/i386/elf.h

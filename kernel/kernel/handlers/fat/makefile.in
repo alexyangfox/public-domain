@@ -1,0 +1,223 @@
+
+KERNEL_OBJ += $(patsubst %.c,%.o, $(wildcard kernel/handlers/fat/*.c)) \
+			$(patsubst %.s,%.o, $(wildcard kernel/handlers/fat/*.s))
+
+
+# ----------------------------------------------------------------------------
+
+.PHONY : kernel/handlers/fat/depend
+kernel/handlers/fat/depend :
+	$(DEPEND) $(DFLAGS) -f kernel/handlers/fat/makefile.in \
+							$(wildcard kernel/handlers/fat/*.c)
+
+
+.PHONY : kernel/handlers/fat/clean
+kernel/handlers/fat/clean :
+	rm -f kernel/handlers/fat/*.o
+	rm -f kernel/handlers/fat/makefile.in.bak
+
+# ----------------------------------------------------------------------------
+
+# ASSEMBLY DEPENDENCIES	
+
+
+# ----------------------------------------------------------------------------
+
+
+# DO NOT DELETE
+
+kernel/handlers/fat/cluster.o: ./h/kernel/types.h ./h/kernel/dbg.h
+kernel/handlers/fat/cluster.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/handlers/fat/cluster.o: ./h/kernel/kmalloc.h ./h/kernel/vm.h
+kernel/handlers/fat/cluster.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/handlers/fat/cluster.o: ./h/kernel/timer.h ./h/kernel/arch.h
+kernel/handlers/fat/cluster.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/handlers/fat/cluster.o: ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/handlers/fat/cluster.o: ./h/kernel/msg.h ./h/kernel/utility.h
+kernel/handlers/fat/cluster.o: ./h/kernel/buffers.h ./h/kernel/device.h
+kernel/handlers/fat/cluster.o: ./h/kernel/proc.h ./h/kernel/usignal.h
+kernel/handlers/fat/cluster.o: ./h/kernel/block.h ./h/kernel/callback.h
+kernel/handlers/fat/cluster.o: ./h/kernel/iov.h kernel/handlers/fat/fat.h
+kernel/handlers/fat/create.o: ./h/kernel/types.h ./h/kernel/dbg.h
+kernel/handlers/fat/create.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/handlers/fat/create.o: ./h/kernel/kmalloc.h ./h/kernel/vm.h
+kernel/handlers/fat/create.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/handlers/fat/create.o: ./h/kernel/timer.h ./h/kernel/arch.h
+kernel/handlers/fat/create.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/handlers/fat/create.o: ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/handlers/fat/create.o: ./h/kernel/msg.h ./h/kernel/utility.h
+kernel/handlers/fat/create.o: ./h/kernel/error.h kernel/handlers/fat/fat.h
+kernel/handlers/fat/create.o: ./h/kernel/device.h ./h/kernel/proc.h
+kernel/handlers/fat/create.o: ./h/kernel/usignal.h ./h/kernel/block.h
+kernel/handlers/fat/create.o: ./h/kernel/callback.h ./h/kernel/iov.h
+kernel/handlers/fat/delete.o: ./h/kernel/types.h ./h/kernel/dbg.h
+kernel/handlers/fat/delete.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/handlers/fat/delete.o: ./h/kernel/kmalloc.h ./h/kernel/vm.h
+kernel/handlers/fat/delete.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/handlers/fat/delete.o: ./h/kernel/timer.h ./h/kernel/arch.h
+kernel/handlers/fat/delete.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/handlers/fat/delete.o: ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/handlers/fat/delete.o: ./h/kernel/msg.h ./h/kernel/utility.h
+kernel/handlers/fat/delete.o: ./h/kernel/proc.h ./h/kernel/usignal.h
+kernel/handlers/fat/delete.o: ./h/kernel/error.h kernel/handlers/fat/fat.h
+kernel/handlers/fat/delete.o: ./h/kernel/device.h ./h/kernel/block.h
+kernel/handlers/fat/delete.o: ./h/kernel/callback.h ./h/kernel/iov.h
+kernel/handlers/fat/dir.o: ./h/kernel/types.h ./h/kernel/dbg.h
+kernel/handlers/fat/dir.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/handlers/fat/dir.o: ./h/kernel/kmalloc.h ./h/kernel/vm.h
+kernel/handlers/fat/dir.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/handlers/fat/dir.o: ./h/kernel/timer.h ./h/kernel/arch.h
+kernel/handlers/fat/dir.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/handlers/fat/dir.o: ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/handlers/fat/dir.o: ./h/kernel/msg.h ./h/kernel/utility.h
+kernel/handlers/fat/dir.o: ./h/kernel/error.h ./h/kernel/buffers.h
+kernel/handlers/fat/dir.o: ./h/kernel/device.h ./h/kernel/proc.h
+kernel/handlers/fat/dir.o: ./h/kernel/usignal.h ./h/kernel/block.h
+kernel/handlers/fat/dir.o: ./h/kernel/callback.h ./h/kernel/iov.h
+kernel/handlers/fat/dir.o: kernel/handlers/fat/fat.h
+kernel/handlers/fat/file.o: ./h/kernel/types.h ./h/kernel/dbg.h
+kernel/handlers/fat/file.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/handlers/fat/file.o: ./h/kernel/kmalloc.h ./h/kernel/vm.h
+kernel/handlers/fat/file.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/handlers/fat/file.o: ./h/kernel/timer.h ./h/kernel/arch.h
+kernel/handlers/fat/file.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/handlers/fat/file.o: ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/handlers/fat/file.o: ./h/kernel/msg.h ./h/kernel/utility.h
+kernel/handlers/fat/file.o: ./h/kernel/error.h ./h/kernel/buffers.h
+kernel/handlers/fat/file.o: ./h/kernel/device.h ./h/kernel/proc.h
+kernel/handlers/fat/file.o: ./h/kernel/usignal.h ./h/kernel/block.h
+kernel/handlers/fat/file.o: ./h/kernel/callback.h ./h/kernel/iov.h
+kernel/handlers/fat/file.o: kernel/handlers/fat/fat.h
+kernel/handlers/fat/format.o: ./h/kernel/types.h ./h/kernel/dbg.h
+kernel/handlers/fat/format.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/handlers/fat/format.o: ./h/kernel/kmalloc.h ./h/kernel/vm.h
+kernel/handlers/fat/format.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/handlers/fat/format.o: ./h/kernel/timer.h ./h/kernel/arch.h
+kernel/handlers/fat/format.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/handlers/fat/format.o: ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/handlers/fat/format.o: ./h/kernel/msg.h ./h/kernel/utility.h
+kernel/handlers/fat/format.o: ./h/kernel/error.h ./h/kernel/buffers.h
+kernel/handlers/fat/format.o: ./h/kernel/device.h ./h/kernel/proc.h
+kernel/handlers/fat/format.o: ./h/kernel/usignal.h ./h/kernel/block.h
+kernel/handlers/fat/format.o: ./h/kernel/callback.h ./h/kernel/iov.h
+kernel/handlers/fat/format.o: kernel/handlers/fat/fat.h
+kernel/handlers/fat/fsb.o: ./h/kernel/types.h ./h/kernel/utility.h
+kernel/handlers/fat/fsb.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/handlers/fat/fsb.o: ./h/kernel/dbg.h ./h/kernel/fs.h
+kernel/handlers/fat/fsb.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/handlers/fat/fsb.o: ./h/kernel/timer.h ./h/kernel/termios.h
+kernel/handlers/fat/fsb.o: ./h/kernel/msg.h ./h/kernel/config.h
+kernel/handlers/fat/fsb.o: ./h/kernel/proc.h ./h/kernel/vm.h
+kernel/handlers/fat/fsb.o: ./h/kernel/arch.h ./h/kernel/i386/i386.h
+kernel/handlers/fat/fsb.o: ./h/kernel/usignal.h ./h/kernel/device.h
+kernel/handlers/fat/fsb.o: ./h/kernel/error.h kernel/handlers/fat/fat.h
+kernel/handlers/fat/fsb.o: ./h/kernel/block.h ./h/kernel/callback.h
+kernel/handlers/fat/fsb.o: ./h/kernel/iov.h
+kernel/handlers/fat/lookup.o: ./h/kernel/types.h ./h/kernel/dbg.h
+kernel/handlers/fat/lookup.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/handlers/fat/lookup.o: ./h/kernel/kmalloc.h ./h/kernel/vm.h
+kernel/handlers/fat/lookup.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/handlers/fat/lookup.o: ./h/kernel/timer.h ./h/kernel/arch.h
+kernel/handlers/fat/lookup.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/handlers/fat/lookup.o: ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/handlers/fat/lookup.o: ./h/kernel/msg.h ./h/kernel/utility.h
+kernel/handlers/fat/lookup.o: ./h/kernel/proc.h ./h/kernel/usignal.h
+kernel/handlers/fat/lookup.o: ./h/kernel/error.h kernel/handlers/fat/fat.h
+kernel/handlers/fat/lookup.o: ./h/kernel/device.h ./h/kernel/block.h
+kernel/handlers/fat/lookup.o: ./h/kernel/callback.h ./h/kernel/iov.h
+kernel/handlers/fat/main.o: ./h/kernel/types.h ./h/kernel/i386/i386.h
+kernel/handlers/fat/main.o: ./h/kernel/config.h ./h/kernel/lists.h
+kernel/handlers/fat/main.o: ./h/kernel/fs.h ./h/kernel/sync.h
+kernel/handlers/fat/main.o: ./h/kernel/timer.h ./h/kernel/termios.h
+kernel/handlers/fat/main.o: ./h/kernel/msg.h ./h/kernel/device.h
+kernel/handlers/fat/main.o: ./h/kernel/proc.h ./h/kernel/vm.h
+kernel/handlers/fat/main.o: ./h/kernel/arch.h ./h/kernel/usignal.h
+kernel/handlers/fat/main.o: ./h/kernel/dbg.h
+kernel/handlers/fat/main.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/handlers/fat/main.o: ./h/kernel/error.h ./h/kernel/kmalloc.h
+kernel/handlers/fat/main.o: ./h/kernel/utility.h ./h/kernel/buffers.h
+kernel/handlers/fat/main.o: ./h/kernel/block.h ./h/kernel/callback.h
+kernel/handlers/fat/main.o: ./h/kernel/iov.h kernel/handlers/fat/fat.h
+kernel/handlers/fat/node.o: ./h/kernel/types.h ./h/kernel/dbg.h
+kernel/handlers/fat/node.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/handlers/fat/node.o: ./h/kernel/kmalloc.h ./h/kernel/vm.h
+kernel/handlers/fat/node.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/handlers/fat/node.o: ./h/kernel/timer.h ./h/kernel/arch.h
+kernel/handlers/fat/node.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/handlers/fat/node.o: ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/handlers/fat/node.o: ./h/kernel/msg.h ./h/kernel/utility.h
+kernel/handlers/fat/node.o: ./h/kernel/buffers.h ./h/kernel/device.h
+kernel/handlers/fat/node.o: ./h/kernel/proc.h ./h/kernel/usignal.h
+kernel/handlers/fat/node.o: ./h/kernel/block.h ./h/kernel/callback.h
+kernel/handlers/fat/node.o: ./h/kernel/iov.h kernel/handlers/fat/fat.h
+kernel/handlers/fat/revalidate.o: ./h/kernel/types.h ./h/kernel/utility.h
+kernel/handlers/fat/revalidate.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/handlers/fat/revalidate.o: ./h/kernel/dbg.h ./h/kernel/fs.h
+kernel/handlers/fat/revalidate.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/handlers/fat/revalidate.o: ./h/kernel/timer.h ./h/kernel/termios.h
+kernel/handlers/fat/revalidate.o: ./h/kernel/msg.h ./h/kernel/config.h
+kernel/handlers/fat/revalidate.o: ./h/kernel/proc.h ./h/kernel/vm.h
+kernel/handlers/fat/revalidate.o: ./h/kernel/arch.h ./h/kernel/i386/i386.h
+kernel/handlers/fat/revalidate.o: ./h/kernel/usignal.h ./h/kernel/device.h
+kernel/handlers/fat/revalidate.o: ./h/kernel/error.h ./h/kernel/buffers.h
+kernel/handlers/fat/revalidate.o: ./h/kernel/block.h ./h/kernel/callback.h
+kernel/handlers/fat/revalidate.o: ./h/kernel/iov.h kernel/handlers/fat/fat.h
+kernel/handlers/fat/sector.o: ./h/kernel/types.h ./h/kernel/utility.h
+kernel/handlers/fat/sector.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/handlers/fat/sector.o: ./h/kernel/device.h ./h/kernel/lists.h
+kernel/handlers/fat/sector.o: ./h/kernel/msg.h ./h/kernel/proc.h
+kernel/handlers/fat/sector.o: ./h/kernel/sync.h ./h/kernel/timer.h
+kernel/handlers/fat/sector.o: ./h/kernel/vm.h ./h/kernel/arch.h
+kernel/handlers/fat/sector.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/handlers/fat/sector.o: ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/handlers/fat/sector.o: ./h/kernel/usignal.h ./h/kernel/dbg.h
+kernel/handlers/fat/sector.o: ./h/kernel/kmalloc.h ./h/kernel/error.h
+kernel/handlers/fat/sector.o: ./h/kernel/buffers.h ./h/kernel/block.h
+kernel/handlers/fat/sector.o: ./h/kernel/callback.h ./h/kernel/iov.h
+kernel/handlers/fat/sector.o: kernel/handlers/fat/fat.h
+kernel/handlers/fat/timestamp.o: ./h/kernel/types.h ./h/kernel/dbg.h
+kernel/handlers/fat/timestamp.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/handlers/fat/timestamp.o: ./h/kernel/kmalloc.h ./h/kernel/vm.h
+kernel/handlers/fat/timestamp.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/handlers/fat/timestamp.o: ./h/kernel/timer.h ./h/kernel/arch.h
+kernel/handlers/fat/timestamp.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/handlers/fat/timestamp.o: ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/handlers/fat/timestamp.o: ./h/kernel/msg.h ./h/kernel/utility.h
+kernel/handlers/fat/timestamp.o: ./h/kernel/error.h kernel/handlers/fat/fat.h
+kernel/handlers/fat/timestamp.o: ./h/kernel/device.h ./h/kernel/proc.h
+kernel/handlers/fat/timestamp.o: ./h/kernel/usignal.h ./h/kernel/block.h
+kernel/handlers/fat/timestamp.o: ./h/kernel/callback.h ./h/kernel/iov.h
+kernel/handlers/fat/truncate.o: ./h/kernel/types.h ./h/kernel/dbg.h
+kernel/handlers/fat/truncate.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/handlers/fat/truncate.o: ./h/kernel/kmalloc.h ./h/kernel/vm.h
+kernel/handlers/fat/truncate.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/handlers/fat/truncate.o: ./h/kernel/timer.h ./h/kernel/arch.h
+kernel/handlers/fat/truncate.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/handlers/fat/truncate.o: ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/handlers/fat/truncate.o: ./h/kernel/msg.h ./h/kernel/utility.h
+kernel/handlers/fat/truncate.o: ./h/kernel/error.h kernel/handlers/fat/fat.h
+kernel/handlers/fat/truncate.o: ./h/kernel/device.h ./h/kernel/proc.h
+kernel/handlers/fat/truncate.o: ./h/kernel/usignal.h ./h/kernel/block.h
+kernel/handlers/fat/truncate.o: ./h/kernel/callback.h ./h/kernel/iov.h
+kernel/handlers/fat/vars.o: ./h/kernel/types.h ./h/kernel/msg.h
+kernel/handlers/fat/vars.o: ./h/kernel/lists.h ./h/kernel/proc.h
+kernel/handlers/fat/vars.o: ./h/kernel/sync.h ./h/kernel/timer.h
+kernel/handlers/fat/vars.o: ./h/kernel/vm.h ./h/kernel/arch.h
+kernel/handlers/fat/vars.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/handlers/fat/vars.o: ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/handlers/fat/vars.o: ./h/kernel/usignal.h kernel/handlers/fat/fat.h
+kernel/handlers/fat/vars.o: ./h/kernel/device.h ./h/kernel/block.h
+kernel/handlers/fat/vars.o: ./h/kernel/callback.h ./h/kernel/iov.h
+kernel/handlers/fat/wrapper.o: ./h/kernel/types.h ./h/kernel/device.h
+kernel/handlers/fat/wrapper.o: ./h/kernel/lists.h ./h/kernel/msg.h
+kernel/handlers/fat/wrapper.o: ./h/kernel/proc.h ./h/kernel/sync.h
+kernel/handlers/fat/wrapper.o: ./h/kernel/timer.h ./h/kernel/vm.h
+kernel/handlers/fat/wrapper.o: ./h/kernel/arch.h ./h/kernel/i386/i386.h
+kernel/handlers/fat/wrapper.o: ./h/kernel/config.h ./h/kernel/fs.h
+kernel/handlers/fat/wrapper.o: ./h/kernel/termios.h ./h/kernel/usignal.h
+kernel/handlers/fat/wrapper.o: ./h/kernel/kmalloc.h ./h/kernel/error.h
+kernel/handlers/fat/wrapper.o: ./h/kernel/dbg.h
+kernel/handlers/fat/wrapper.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/handlers/fat/wrapper.o: ./h/kernel/resident.h ./h/kernel/buffers.h
+kernel/handlers/fat/wrapper.o: ./h/kernel/block.h ./h/kernel/callback.h
+kernel/handlers/fat/wrapper.o: ./h/kernel/iov.h kernel/handlers/fat/fat.h

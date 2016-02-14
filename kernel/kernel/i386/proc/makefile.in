@@ -1,0 +1,82 @@
+
+
+KERNEL_OBJ += $(patsubst %.c,%.o, $(wildcard kernel/i386/proc/*.c)) \
+			$(patsubst %.s,%.o, $(wildcard kernel/i386/proc/*.s))
+
+
+# ----------------------------------------------------------------------------
+
+.PHONY : kernel/i386/proc/depend
+kernel/i386/proc/depend :
+	$(DEPEND) $(DFLAGS) -f kernel/i386/proc/makefile.in \
+							$(wildcard kernel/i386/proc/*.c)
+
+
+.PHONY : kernel/i386/proc/clean
+kernel/i386/proc/clean :
+	rm -f kernel/i386/proc/*.o
+	rm -f kernel/i386/proc/makefile.in.bak
+
+# ----------------------------------------------------------------------------
+
+# ASSEMBLY DEPENDENCIES	
+
+
+# ----------------------------------------------------------------------------
+
+
+# DO NOT DELETE
+
+kernel/i386/proc/exception.o: ./h/kernel/types.h ./h/kernel/proc.h
+kernel/i386/proc/exception.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/i386/proc/exception.o: ./h/kernel/timer.h ./h/kernel/vm.h
+kernel/i386/proc/exception.o: ./h/kernel/arch.h ./h/kernel/i386/i386.h
+kernel/i386/proc/exception.o: ./h/kernel/config.h ./h/kernel/fs.h
+kernel/i386/proc/exception.o: ./h/kernel/termios.h ./h/kernel/msg.h
+kernel/i386/proc/exception.o: ./h/kernel/usignal.h ./h/kernel/error.h
+kernel/i386/proc/exception.o: ./h/kernel/dbg.h
+kernel/i386/proc/exception.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/i386/proc/isr.o: ./h/kernel/types.h ./h/kernel/proc.h
+kernel/i386/proc/isr.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/i386/proc/isr.o: ./h/kernel/timer.h ./h/kernel/vm.h ./h/kernel/arch.h
+kernel/i386/proc/isr.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/i386/proc/isr.o: ./h/kernel/fs.h ./h/kernel/termios.h ./h/kernel/msg.h
+kernel/i386/proc/isr.o: ./h/kernel/usignal.h ./h/kernel/error.h
+kernel/i386/proc/isr.o: ./h/kernel/dbg.h
+kernel/i386/proc/isr.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/i386/proc/proc.o: ./h/kernel/types.h ./h/kernel/i386/i386.h
+kernel/i386/proc/proc.o: ./h/kernel/config.h ./h/kernel/lists.h
+kernel/i386/proc/proc.o: ./h/kernel/fs.h ./h/kernel/sync.h ./h/kernel/timer.h
+kernel/i386/proc/proc.o: ./h/kernel/termios.h ./h/kernel/msg.h
+kernel/i386/proc/proc.o: ./h/kernel/proc.h ./h/kernel/vm.h ./h/kernel/arch.h
+kernel/i386/proc/proc.o: ./h/kernel/usignal.h ./h/kernel/utility.h
+kernel/i386/proc/proc.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/i386/proc/proc.o: ./h/kernel/kmalloc.h ./h/kernel/dbg.h
+kernel/i386/proc/reboot.o: ./h/kernel/types.h ./h/kernel/i386/i386.h
+kernel/i386/proc/reboot.o: ./h/kernel/config.h ./h/kernel/lists.h
+kernel/i386/proc/reboot.o: ./h/kernel/fs.h ./h/kernel/sync.h
+kernel/i386/proc/reboot.o: ./h/kernel/timer.h ./h/kernel/termios.h
+kernel/i386/proc/reboot.o: ./h/kernel/msg.h ./h/kernel/proc.h ./h/kernel/vm.h
+kernel/i386/proc/reboot.o: ./h/kernel/arch.h ./h/kernel/usignal.h
+kernel/i386/proc/reboot.o: ./h/kernel/utility.h
+kernel/i386/proc/reboot.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/i386/proc/reboot.o: ./h/kernel/kmalloc.h ./h/kernel/dbg.h
+kernel/i386/proc/reboot.o: ./h/kernel/error.h ./h/kernel/reboot.h
+kernel/i386/proc/syscall.o: ./h/kernel/types.h ./h/kernel/proc.h
+kernel/i386/proc/syscall.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/i386/proc/syscall.o: ./h/kernel/timer.h ./h/kernel/vm.h
+kernel/i386/proc/syscall.o: ./h/kernel/arch.h ./h/kernel/i386/i386.h
+kernel/i386/proc/syscall.o: ./h/kernel/config.h ./h/kernel/fs.h
+kernel/i386/proc/syscall.o: ./h/kernel/termios.h ./h/kernel/msg.h
+kernel/i386/proc/syscall.o: ./h/kernel/usignal.h ./h/kernel/error.h
+kernel/i386/proc/syscall.o: ./h/kernel/dbg.h
+kernel/i386/proc/syscall.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/i386/proc/usignal.o: ./h/kernel/types.h ./h/kernel/i386/i386.h
+kernel/i386/proc/usignal.o: ./h/kernel/config.h ./h/kernel/lists.h
+kernel/i386/proc/usignal.o: ./h/kernel/fs.h ./h/kernel/sync.h
+kernel/i386/proc/usignal.o: ./h/kernel/timer.h ./h/kernel/termios.h
+kernel/i386/proc/usignal.o: ./h/kernel/msg.h ./h/kernel/i386/ucontext.h
+kernel/i386/proc/usignal.o: ./h/kernel/usignal.h ./h/kernel/proc.h
+kernel/i386/proc/usignal.o: ./h/kernel/vm.h ./h/kernel/arch.h
+kernel/i386/proc/usignal.o: ./h/kernel/dbg.h
+kernel/i386/proc/usignal.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h

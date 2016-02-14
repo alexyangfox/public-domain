@@ -1,0 +1,7 @@
+
+.PHONY : etc/disk
+etc/disk :
+	mcopy -o etc/profile c:/etc
+	mcopy -o etc/termcap c:/etc
+
+	

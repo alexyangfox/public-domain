@@ -1,0 +1,132 @@
+
+KERNEL_OBJ += $(patsubst %.c,%.o, $(wildcard kernel/handlers/iso9660/*.c)) \
+			$(patsubst %.s,%.o, $(wildcard kernel/handlers/iso9660/*.s))
+
+
+
+# ----------------------------------------------------------------------------
+
+.PHONY : kernel/handlers/iso9660/depend
+kernel/handlers/iso9660/depend :
+	$(DEPEND) $(DFLAGS) -f kernel/handlers/iso9660/makefile.in \
+							$(wildcard kernel/handlers/iso9660/*.c)
+
+
+.PHONY : kernel/handlers/iso9660/clean
+kernel/handlers/iso9660/clean :
+	rm -f kernel/handlers/iso9660/*.o
+	rm -f kernel/handlers/iso9660/makefile.in.bak
+
+# ----------------------------------------------------------------------------
+
+# ASSEMBLY DEPENDENCIES	
+
+
+# ----------------------------------------------------------------------------
+
+
+# DO NOT DELETE
+
+kernel/handlers/iso9660/dir.o: ./h/kernel/types.h ./h/kernel/dbg.h
+kernel/handlers/iso9660/dir.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/handlers/iso9660/dir.o: ./h/kernel/kmalloc.h ./h/kernel/vm.h
+kernel/handlers/iso9660/dir.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/handlers/iso9660/dir.o: ./h/kernel/timer.h ./h/kernel/arch.h
+kernel/handlers/iso9660/dir.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/handlers/iso9660/dir.o: ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/handlers/iso9660/dir.o: ./h/kernel/msg.h ./h/kernel/utility.h
+kernel/handlers/iso9660/dir.o: ./h/kernel/error.h ./h/kernel/buffers.h
+kernel/handlers/iso9660/dir.o: ./h/kernel/device.h ./h/kernel/proc.h
+kernel/handlers/iso9660/dir.o: ./h/kernel/usignal.h ./h/kernel/block.h
+kernel/handlers/iso9660/dir.o: ./h/kernel/callback.h ./h/kernel/iov.h
+kernel/handlers/iso9660/dir.o: kernel/handlers/iso9660/iso9660.h
+kernel/handlers/iso9660/file.o: ./h/kernel/types.h ./h/kernel/dbg.h
+kernel/handlers/iso9660/file.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/handlers/iso9660/file.o: ./h/kernel/kmalloc.h ./h/kernel/vm.h
+kernel/handlers/iso9660/file.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/handlers/iso9660/file.o: ./h/kernel/timer.h ./h/kernel/arch.h
+kernel/handlers/iso9660/file.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/handlers/iso9660/file.o: ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/handlers/iso9660/file.o: ./h/kernel/msg.h ./h/kernel/utility.h
+kernel/handlers/iso9660/file.o: ./h/kernel/error.h ./h/kernel/buffers.h
+kernel/handlers/iso9660/file.o: ./h/kernel/device.h ./h/kernel/proc.h
+kernel/handlers/iso9660/file.o: ./h/kernel/usignal.h ./h/kernel/block.h
+kernel/handlers/iso9660/file.o: ./h/kernel/callback.h ./h/kernel/iov.h
+kernel/handlers/iso9660/file.o: kernel/handlers/iso9660/iso9660.h
+kernel/handlers/iso9660/lookup.o: ./h/kernel/types.h ./h/kernel/dbg.h
+kernel/handlers/iso9660/lookup.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/handlers/iso9660/lookup.o: ./h/kernel/kmalloc.h ./h/kernel/vm.h
+kernel/handlers/iso9660/lookup.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/handlers/iso9660/lookup.o: ./h/kernel/timer.h ./h/kernel/arch.h
+kernel/handlers/iso9660/lookup.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/handlers/iso9660/lookup.o: ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/handlers/iso9660/lookup.o: ./h/kernel/msg.h ./h/kernel/utility.h
+kernel/handlers/iso9660/lookup.o: ./h/kernel/proc.h ./h/kernel/usignal.h
+kernel/handlers/iso9660/lookup.o: ./h/kernel/error.h
+kernel/handlers/iso9660/lookup.o: kernel/handlers/iso9660/iso9660.h
+kernel/handlers/iso9660/lookup.o: ./h/kernel/device.h ./h/kernel/callback.h
+kernel/handlers/iso9660/lookup.o: ./h/kernel/block.h ./h/kernel/iov.h
+kernel/handlers/iso9660/main.o: ./h/kernel/types.h ./h/kernel/i386/i386.h
+kernel/handlers/iso9660/main.o: ./h/kernel/config.h ./h/kernel/lists.h
+kernel/handlers/iso9660/main.o: ./h/kernel/fs.h ./h/kernel/sync.h
+kernel/handlers/iso9660/main.o: ./h/kernel/timer.h ./h/kernel/termios.h
+kernel/handlers/iso9660/main.o: ./h/kernel/msg.h ./h/kernel/device.h
+kernel/handlers/iso9660/main.o: ./h/kernel/proc.h ./h/kernel/vm.h
+kernel/handlers/iso9660/main.o: ./h/kernel/arch.h ./h/kernel/usignal.h
+kernel/handlers/iso9660/main.o: ./h/kernel/error.h ./h/kernel/kmalloc.h
+kernel/handlers/iso9660/main.o: ./h/kernel/dbg.h
+kernel/handlers/iso9660/main.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/handlers/iso9660/main.o: ./h/kernel/utility.h ./h/kernel/buffers.h
+kernel/handlers/iso9660/main.o: ./h/kernel/block.h ./h/kernel/callback.h
+kernel/handlers/iso9660/main.o: ./h/kernel/iov.h
+kernel/handlers/iso9660/main.o: kernel/handlers/iso9660/iso9660.h
+kernel/handlers/iso9660/node.o: ./h/kernel/types.h ./h/kernel/dbg.h
+kernel/handlers/iso9660/node.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/handlers/iso9660/node.o: ./h/kernel/kmalloc.h ./h/kernel/vm.h
+kernel/handlers/iso9660/node.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/handlers/iso9660/node.o: ./h/kernel/timer.h ./h/kernel/arch.h
+kernel/handlers/iso9660/node.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/handlers/iso9660/node.o: ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/handlers/iso9660/node.o: ./h/kernel/msg.h ./h/kernel/utility.h
+kernel/handlers/iso9660/node.o: ./h/kernel/buffers.h ./h/kernel/device.h
+kernel/handlers/iso9660/node.o: ./h/kernel/proc.h ./h/kernel/usignal.h
+kernel/handlers/iso9660/node.o: ./h/kernel/block.h ./h/kernel/callback.h
+kernel/handlers/iso9660/node.o: ./h/kernel/iov.h
+kernel/handlers/iso9660/node.o: kernel/handlers/iso9660/iso9660.h
+kernel/handlers/iso9660/revalidate.o: ./h/kernel/types.h ./h/kernel/utility.h
+kernel/handlers/iso9660/revalidate.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/handlers/iso9660/revalidate.o: ./h/kernel/dbg.h ./h/kernel/fs.h
+kernel/handlers/iso9660/revalidate.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/handlers/iso9660/revalidate.o: ./h/kernel/timer.h ./h/kernel/termios.h
+kernel/handlers/iso9660/revalidate.o: ./h/kernel/msg.h ./h/kernel/config.h
+kernel/handlers/iso9660/revalidate.o: ./h/kernel/proc.h ./h/kernel/vm.h
+kernel/handlers/iso9660/revalidate.o: ./h/kernel/arch.h
+kernel/handlers/iso9660/revalidate.o: ./h/kernel/i386/i386.h
+kernel/handlers/iso9660/revalidate.o: ./h/kernel/usignal.h
+kernel/handlers/iso9660/revalidate.o: ./h/kernel/device.h ./h/kernel/error.h
+kernel/handlers/iso9660/revalidate.o: ./h/kernel/buffers.h ./h/kernel/block.h
+kernel/handlers/iso9660/revalidate.o: ./h/kernel/callback.h ./h/kernel/iov.h
+kernel/handlers/iso9660/revalidate.o: kernel/handlers/iso9660/iso9660.h
+kernel/handlers/iso9660/vars.o: ./h/kernel/types.h ./h/kernel/msg.h
+kernel/handlers/iso9660/vars.o: ./h/kernel/lists.h ./h/kernel/proc.h
+kernel/handlers/iso9660/vars.o: ./h/kernel/sync.h ./h/kernel/timer.h
+kernel/handlers/iso9660/vars.o: ./h/kernel/vm.h ./h/kernel/arch.h
+kernel/handlers/iso9660/vars.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/handlers/iso9660/vars.o: ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/handlers/iso9660/vars.o: ./h/kernel/usignal.h
+kernel/handlers/iso9660/vars.o: kernel/handlers/iso9660/iso9660.h
+kernel/handlers/iso9660/vars.o: ./h/kernel/device.h ./h/kernel/callback.h
+kernel/handlers/iso9660/vars.o: ./h/kernel/block.h ./h/kernel/iov.h
+kernel/handlers/iso9660/wrapper.o: ./h/kernel/types.h ./h/kernel/device.h
+kernel/handlers/iso9660/wrapper.o: ./h/kernel/lists.h ./h/kernel/msg.h
+kernel/handlers/iso9660/wrapper.o: ./h/kernel/proc.h ./h/kernel/sync.h
+kernel/handlers/iso9660/wrapper.o: ./h/kernel/timer.h ./h/kernel/vm.h
+kernel/handlers/iso9660/wrapper.o: ./h/kernel/arch.h ./h/kernel/i386/i386.h
+kernel/handlers/iso9660/wrapper.o: ./h/kernel/config.h ./h/kernel/fs.h
+kernel/handlers/iso9660/wrapper.o: ./h/kernel/termios.h ./h/kernel/usignal.h
+kernel/handlers/iso9660/wrapper.o: ./h/kernel/kmalloc.h ./h/kernel/error.h
+kernel/handlers/iso9660/wrapper.o: ./h/kernel/dbg.h
+kernel/handlers/iso9660/wrapper.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/handlers/iso9660/wrapper.o: ./h/kernel/resident.h ./h/kernel/block.h
+kernel/handlers/iso9660/wrapper.o: ./h/kernel/callback.h ./h/kernel/iov.h
+kernel/handlers/iso9660/wrapper.o: kernel/handlers/iso9660/iso9660.h

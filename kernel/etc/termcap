@@ -1,0 +1,64 @@
+# Kielder Termcap
+#
+# Based on the Minix termcap.  Most settings should be identical,
+
+
+ka|kielder|Kielder console:\
+	:AL=\E[%dL:\
+	:DC=\E[%dP:\
+	:DL=\E[%dM:\
+	:DO=\E[%dB:\
+	:IC=\E[%d@:\
+	:K2=\E[G:\
+	:LE=\E[%dD:\
+	:RI=\E[%dC:\
+	:UP=\E[%dA:\
+	:al=\E[L:\
+	:am:\
+	:bl=^G:\
+	:bs:\
+	:cd=\E[J:\
+	:ce=\E[K:\
+	:cl=\E[H\E[J:\
+	:cm=\E[%i%d;%dH:\
+	:co#80:\
+	:cr=\r:\
+	:dc=\E[P:\
+	:dl=\E[M:\
+	:do=\E[B:\
+	:ic=\E[@:\
+	:is=\E[0m:\
+	:it#8:\
+	:ho=\E[H:\
+	:k0=\E[T:\
+	:k1=\E[S:\
+	:kD=\177:\
+	:kH=\E[Y:\
+	:kN=\E[U:\
+	:kP=\E[V:\
+	:kb=^H:\
+	:kd=\E[B:\
+	:kh=\E[H:\
+	:kl=\E[D:\
+	:km:\
+	:kr=\E[C:\
+	:ku=\E[A:\
+	:le=\E[A:\
+	:li#25:\
+	:nd=\E[C:\
+	:mb=\E[5m:\
+	:md=\E[1m:\
+	:me=\E[0m:\
+	:mr=\E[7m:\
+	:ms:\
+	:se=\E[0m:\
+	:so=\E[7m:\
+	:sr=\EM:\
+	:ta=\t:\
+	:te=\E[0m:\
+	:ti=\E[0m:\
+	:ue=\E[0m:\
+	:up=\E[A:\
+	:us=\E[4m:\
+	:@7=\E[8~:
+	

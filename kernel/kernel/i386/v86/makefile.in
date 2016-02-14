@@ -1,0 +1,64 @@
+
+KERNEL_OBJ += $(patsubst %.c,%.o, $(wildcard kernel/i386/v86/*.c)) \
+			$(patsubst %.s,%.o, $(wildcard kernel/i386/v86/*.s))
+
+
+# ----------------------------------------------------------------------------
+
+.PHONY : kernel/i386/v86/depend
+kernel/i386/v86/depend :
+	$(DEPEND) $(DFLAGS) -f kernel/i386/v86/makefile.in \
+							$(wildcard kernel/i386/v86/*.c)
+
+
+.PHONY : kernel/i386/v86/clean
+kernel/i386/v86/clean :
+	rm -f kernel/i386/v86/*.o
+	rm -f kernel/i386/v86/makefile.in.bak
+
+# ----------------------------------------------------------------------------
+
+# ASSEMBLY DEPENDENCIES	
+
+
+# ----------------------------------------------------------------------------
+
+
+# DO NOT DELETE
+
+kernel/i386/v86/test.o: ./h/kernel/types.h ./h/kernel/vm.h ./h/kernel/lists.h
+kernel/i386/v86/test.o: ./h/kernel/sync.h ./h/kernel/timer.h
+kernel/i386/v86/test.o: ./h/kernel/arch.h ./h/kernel/i386/i386.h
+kernel/i386/v86/test.o: ./h/kernel/config.h ./h/kernel/fs.h
+kernel/i386/v86/test.o: ./h/kernel/termios.h ./h/kernel/msg.h
+kernel/i386/v86/test.o: ./h/kernel/dbg.h
+kernel/i386/v86/test.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/i386/v86/test.o: ./h/kernel/utility.h ./h/kernel/proc.h
+kernel/i386/v86/test.o: ./h/kernel/usignal.h ./h/kernel/kmalloc.h
+kernel/i386/v86/test.o: kernel/i386/v86/v86.h
+kernel/i386/v86/v86.o: ./h/kernel/types.h ./h/kernel/vm.h ./h/kernel/lists.h
+kernel/i386/v86/v86.o: ./h/kernel/sync.h ./h/kernel/timer.h ./h/kernel/arch.h
+kernel/i386/v86/v86.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/i386/v86/v86.o: ./h/kernel/fs.h ./h/kernel/termios.h ./h/kernel/msg.h
+kernel/i386/v86/v86.o: ./h/kernel/dbg.h
+kernel/i386/v86/v86.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/i386/v86/v86.o: ./h/kernel/utility.h ./h/kernel/proc.h
+kernel/i386/v86/v86.o: ./h/kernel/usignal.h kernel/i386/v86/v86.h
+kernel/i386/v86/v86spawn.o: ./h/kernel/types.h ./h/kernel/vm.h
+kernel/i386/v86/v86spawn.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/i386/v86/v86spawn.o: ./h/kernel/timer.h ./h/kernel/arch.h
+kernel/i386/v86/v86spawn.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/i386/v86/v86spawn.o: ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/i386/v86/v86spawn.o: ./h/kernel/msg.h ./h/kernel/dbg.h
+kernel/i386/v86/v86spawn.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/i386/v86/v86spawn.o: ./h/kernel/utility.h ./h/kernel/proc.h
+kernel/i386/v86/v86spawn.o: ./h/kernel/usignal.h kernel/i386/v86/v86.h
+kernel/i386/v86/vars.o: ./h/kernel/types.h ./h/kernel/vm.h ./h/kernel/lists.h
+kernel/i386/v86/vars.o: ./h/kernel/sync.h ./h/kernel/timer.h
+kernel/i386/v86/vars.o: ./h/kernel/arch.h ./h/kernel/i386/i386.h
+kernel/i386/v86/vars.o: ./h/kernel/config.h ./h/kernel/fs.h
+kernel/i386/v86/vars.o: ./h/kernel/termios.h ./h/kernel/msg.h
+kernel/i386/v86/vars.o: ./h/kernel/dbg.h
+kernel/i386/v86/vars.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/i386/v86/vars.o: ./h/kernel/utility.h ./h/kernel/proc.h
+kernel/i386/v86/vars.o: ./h/kernel/usignal.h kernel/i386/v86/v86.h

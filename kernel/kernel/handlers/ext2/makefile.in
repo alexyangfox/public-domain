@@ -1,0 +1,27 @@
+
+KERNEL_OBJ += $(patsubst %.c,%.o, $(wildcard kernel/drivers/ext2/*.c)) \
+			$(patsubst %.s,%.o, $(wildcard kernel/drivers/ext2/*.s))
+
+
+# ----------------------------------------------------------------------------
+
+.PHONY : kernel/drivers/ext2/depend
+kernel/drivers/ext2/depend :
+	$(DEPEND) $(DFLAGS) -f kernel/drivers/ext2/makefile.in \
+							$(wildcard kernel/drivers/ext2/*.c)
+
+
+.PHONY : kernel/drivers/ext2/clean
+kernel/drivers/ext2/clean :
+	rm -f kernel/drivers/ext2/*.o
+	rm -f kernel/drivers/ext2/makefile.in.bak
+
+# ----------------------------------------------------------------------------
+
+# ASSEMBLY DEPENDENCIES	
+
+
+# ----------------------------------------------------------------------------
+
+
+# DO NOT DELETE

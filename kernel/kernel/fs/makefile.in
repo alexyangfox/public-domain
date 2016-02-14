@@ -1,0 +1,96 @@
+
+
+KERNEL_OBJ += $(patsubst %.c,%.o, $(wildcard kernel/fs/*.c)) \
+			$(patsubst %.s,%.o, $(wildcard kernel/fs/*.s))
+
+
+# ----------------------------------------------------------------------------
+
+.PHONY : kernel/fs/depend
+kernel/fs/depend :
+	$(DEPEND) $(DFLAGS) -f kernel/fs/makefile.in $(wildcard kernel/fs/*.c)
+
+
+.PHONY : kernel/fs/clean
+kernel/fs/clean :
+	rm -f kernel/fs/*.o
+	rm -f kernel/fs/makefile.in.bak
+
+
+# ----------------------------------------------------------------------------
+
+# ASSEMBLY DEPENDENCIES	
+
+
+# ----------------------------------------------------------------------------
+
+
+# DO NOT DELETE
+
+kernel/fs/buffers.o: ./h/kernel/types.h ./h/kernel/device.h
+kernel/fs/buffers.o: ./h/kernel/lists.h ./h/kernel/msg.h ./h/kernel/proc.h
+kernel/fs/buffers.o: ./h/kernel/sync.h ./h/kernel/timer.h ./h/kernel/vm.h
+kernel/fs/buffers.o: ./h/kernel/arch.h ./h/kernel/i386/i386.h
+kernel/fs/buffers.o: ./h/kernel/config.h ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/fs/buffers.o: ./h/kernel/usignal.h ./h/kernel/dbg.h
+kernel/fs/buffers.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/fs/buffers.o: ./h/kernel/error.h ./h/kernel/kmalloc.h
+kernel/fs/buffers.o: ./h/kernel/buffers.h ./h/kernel/block.h
+kernel/fs/buffers.o: ./h/kernel/callback.h ./h/kernel/iov.h
+kernel/fs/fd.o: ./h/kernel/types.h ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/fs/fd.o: ./h/kernel/timer.h ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/fs/fd.o: ./h/kernel/msg.h ./h/kernel/config.h ./h/kernel/device.h
+kernel/fs/fd.o: ./h/kernel/proc.h ./h/kernel/vm.h ./h/kernel/arch.h
+kernel/fs/fd.o: ./h/kernel/i386/i386.h ./h/kernel/usignal.h
+kernel/fs/fd.o: ./h/kernel/kmalloc.h ./h/kernel/utility.h
+kernel/fs/fd.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/fs/fd.o: ./h/kernel/error.h ./h/kernel/dbg.h
+kernel/fs/main.o: ./h/kernel/types.h ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/fs/main.o: ./h/kernel/timer.h ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/fs/main.o: ./h/kernel/msg.h ./h/kernel/config.h ./h/kernel/device.h
+kernel/fs/main.o: ./h/kernel/proc.h ./h/kernel/vm.h ./h/kernel/arch.h
+kernel/fs/main.o: ./h/kernel/i386/i386.h ./h/kernel/usignal.h
+kernel/fs/main.o: ./h/kernel/kmalloc.h ./h/kernel/utility.h
+kernel/fs/main.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/fs/main.o: ./h/kernel/error.h ./h/kernel/dbg.h
+kernel/fs/mount.o: ./h/kernel/types.h ./h/kernel/sync.h ./h/kernel/lists.h
+kernel/fs/mount.o: ./h/kernel/timer.h ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/fs/mount.o: ./h/kernel/msg.h ./h/kernel/config.h ./h/kernel/kmalloc.h
+kernel/fs/mount.o: ./h/kernel/vm.h ./h/kernel/arch.h ./h/kernel/i386/i386.h
+kernel/fs/mount.o: ./h/kernel/device.h ./h/kernel/proc.h ./h/kernel/usignal.h
+kernel/fs/mount.o: ./h/kernel/utility.h
+kernel/fs/mount.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/fs/mount.o: ./h/kernel/error.h ./h/kernel/dbg.h
+kernel/fs/pathname.o: ./h/kernel/types.h ./h/kernel/fs.h ./h/kernel/lists.h
+kernel/fs/pathname.o: ./h/kernel/sync.h ./h/kernel/timer.h
+kernel/fs/pathname.o: ./h/kernel/termios.h ./h/kernel/msg.h
+kernel/fs/pathname.o: ./h/kernel/config.h ./h/kernel/kmalloc.h
+kernel/fs/pathname.o: ./h/kernel/vm.h ./h/kernel/arch.h
+kernel/fs/pathname.o: ./h/kernel/i386/i386.h ./h/kernel/utility.h
+kernel/fs/pathname.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/fs/pathname.o: ./h/kernel/dbg.h ./h/kernel/proc.h ./h/kernel/usignal.h
+kernel/fs/pathname.o: ./h/kernel/error.h
+kernel/fs/proc.o: ./h/kernel/types.h ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/fs/proc.o: ./h/kernel/timer.h ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/fs/proc.o: ./h/kernel/msg.h ./h/kernel/config.h ./h/kernel/device.h
+kernel/fs/proc.o: ./h/kernel/proc.h ./h/kernel/vm.h ./h/kernel/arch.h
+kernel/fs/proc.o: ./h/kernel/i386/i386.h ./h/kernel/usignal.h
+kernel/fs/proc.o: ./h/kernel/kmalloc.h ./h/kernel/utility.h
+kernel/fs/proc.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/fs/proc.o: ./h/kernel/dbg.h
+kernel/fs/root_handler.o: ./h/kernel/types.h ./h/kernel/device.h
+kernel/fs/root_handler.o: ./h/kernel/lists.h ./h/kernel/msg.h
+kernel/fs/root_handler.o: ./h/kernel/proc.h ./h/kernel/sync.h
+kernel/fs/root_handler.o: ./h/kernel/timer.h ./h/kernel/vm.h
+kernel/fs/root_handler.o: ./h/kernel/arch.h ./h/kernel/i386/i386.h
+kernel/fs/root_handler.o: ./h/kernel/config.h ./h/kernel/fs.h
+kernel/fs/root_handler.o: ./h/kernel/termios.h ./h/kernel/usignal.h
+kernel/fs/root_handler.o: ./h/kernel/error.h ./h/kernel/kmalloc.h
+kernel/fs/root_handler.o: ./h/kernel/utility.h
+kernel/fs/root_handler.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/fs/root_handler.o: ./h/kernel/resident.h ./h/kernel/dbg.h
+kernel/fs/vars.o: ./h/kernel/device.h ./h/kernel/types.h ./h/kernel/lists.h
+kernel/fs/vars.o: ./h/kernel/msg.h ./h/kernel/proc.h ./h/kernel/sync.h
+kernel/fs/vars.o: ./h/kernel/timer.h ./h/kernel/vm.h ./h/kernel/arch.h
+kernel/fs/vars.o: ./h/kernel/i386/i386.h ./h/kernel/config.h ./h/kernel/fs.h
+kernel/fs/vars.o: ./h/kernel/termios.h ./h/kernel/usignal.h

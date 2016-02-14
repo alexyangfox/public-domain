@@ -1,0 +1,22 @@
+include kernel/handlers/console/makefile.in
+include kernel/handlers/fat/makefile.in
+include kernel/handlers/iso9660/makefile.in
+
+
+# ----------------------------------------------------------------------------
+
+.PHONY : kernel/handlers/depend
+kernel/handlers/depend : kernel/handlers/console/depend \
+						kernel/handlers/fat/depend \
+						kernel/handlers/iso9660/depend
+
+
+.PHONY : kernel/handlers/clean
+kernel/handlers/clean :	kernel/handlers/console/clean \
+						kernel/handlers/fat/clean \
+						kernel/handlers/iso9660/clean
+						
+
+# ----------------------------------------------------------------------------
+
+# DO NOT DELETE

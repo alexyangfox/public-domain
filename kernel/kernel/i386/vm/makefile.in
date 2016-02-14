@@ -1,0 +1,37 @@
+
+
+KERNEL_OBJ += $(patsubst %.c,%.o, $(wildcard kernel/i386/vm/*.c)) \
+			$(patsubst %.s,%.o, $(wildcard kernel/i386/vm/*.s))
+
+
+# ----------------------------------------------------------------------------
+
+.PHONY : kernel/i386/vm/depend
+kernel/i386/vm/depend :
+	$(DEPEND) $(DFLAGS) -f kernel/i386/vm/makefile.in \
+							$(wildcard kernel/i386/vm/*.c)
+
+
+.PHONY : kernel/i386/vm/clean
+kernel/i386/vm/clean :
+	rm -f kernel/i386/vm/*.o
+	rm -f kernel/i386/vm/makefile.in.bak
+
+# ----------------------------------------------------------------------------
+
+# ASSEMBLY DEPENDENCIES	
+
+
+# ----------------------------------------------------------------------------
+
+
+# DO NOT DELETE
+
+kernel/i386/vm/pmap.o: ./h/kernel/types.h ./h/kernel/vm.h ./h/kernel/lists.h
+kernel/i386/vm/pmap.o: ./h/kernel/sync.h ./h/kernel/timer.h ./h/kernel/arch.h
+kernel/i386/vm/pmap.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/i386/vm/pmap.o: ./h/kernel/fs.h ./h/kernel/termios.h ./h/kernel/msg.h
+kernel/i386/vm/pmap.o: ./h/kernel/dbg.h
+kernel/i386/vm/pmap.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/i386/vm/pmap.o: ./h/kernel/utility.h ./h/kernel/proc.h
+kernel/i386/vm/pmap.o: ./h/kernel/usignal.h

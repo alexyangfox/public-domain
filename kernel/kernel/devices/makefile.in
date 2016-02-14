@@ -1,0 +1,16 @@
+include kernel/devices/floppy/makefile.in
+include kernel/devices/ata/makefile.in
+
+# ----------------------------------------------------------------------------
+
+.PHONY : kernel/devices/depend
+kernel/devices/depend :	kernel/devices/floppy/depend \
+						kernel/devices/ata/depend
+						
+.PHONY : kernel/devices/clean
+kernel/devices/clean :	kernel/devices/floppy/clean \
+						kernel/devices/ata/clean 
+						
+# ----------------------------------------------------------------------------
+
+# DO NOT DELETE

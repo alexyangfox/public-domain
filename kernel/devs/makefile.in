@@ -1,0 +1,32 @@
+include devs/null/makefile.in
+include devs/pipe/makefile.in
+include devs/procfs/makefile.in
+
+
+        
+.PHONY:= devs
+devs : devs/null devs/pipe devs/procfs
+
+
+
+
+
+	
+# ----------------------------------------------------------------------------
+
+.PHONY : devs/clean
+devs/clean :	devs/null/clean \
+				devs/pipe/clean \
+				devs/procfs/clean
+
+	
+.PHONY : devs/depend
+devs/depend :	devs/null/depend \
+				devs/pipe/depend \
+				devs/procfs/depend
+
+
+
+
+# ----------------------------------------------------------------------------
+# DO NOT DELETE

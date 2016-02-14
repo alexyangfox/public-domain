@@ -1,0 +1,101 @@
+100  VW Beetle
+99   Mercedes Benz Patentwagen
+98   Corvette Stingray split window
+97   Porsche 911
+96   Lamborghini Countach
+95   Ferrari 360 Modena
+94   Alfa Romeo GTV6
+93   Nissan 300ZX
+92   Ford Cortina 1600
+91   VW Scirrocco MKI GLI
+90   Gilbern Invader
+89   Lancia Beta Monte-Carlo
+88   Alpine Renault A610
+87   Mitsubishi Colt Starion
+86   Aston Martin DB5
+85   AC Cobra
+84   Renault Grand Espace
+83   Triumph Dolomite Sprint
+82   Sunbeam Tiger
+81   Reliant Scimitar GTE
+80   Ford Escort RS2000
+79   Jaguar MKII
+78   Fiat Multipla
+77   Maserati Sebring
+76   Mazda RX7 FD3S
+75   Peugeot 504 Cabriolet
+74   Triumph TR5
+73   Honda Prelude
+72   Citroen DS
+71   Volvo P1800
+70   Lotus Esprit
+69   Mercedes Benz 600 Pullman
+68   Ford Capri MKIII
+67   VW Corrado VR6 SLC
+66   Ferrari 275 GTS
+65   Dodge Charger R/T
+64   BMW Z1
+63   Ford Mustang
+62   Viper GTS
+61   Peugeot 106 GTI
+60   Toyota 2000 GT
+59   Peugeot 504 Estate
+58   Lotus Elan
+57   Lancia Fulvia
+56   Fiat Strada Abarth
+55   Sunbeam Talbot Lotus
+54   Alfa Romeo Alfasud
+53   Jaguar XK150
+52   Jensen Interceptor/FF
+51   Maserati Ghilbi 
+50   Volvo V70 T5
+49   Alfa Romeo 166
+48   Ford Transit Van
+47   Rover SD1
+46   Mercedes Benz 500SL
+45   Monteverdi Hai Speed 375L
+44   Bentley Brooklands R Turbo
+43   BMW M1
+42   Lancia Stratos
+41   Mercedes Benz S600
+40   DeTomaso Pantera GTS
+39   TVR Cerbera
+38   BMW 3.0 CSL
+37   Audi A8
+36   Porsche 944 Turbo
+35   Ford RS200
+34   Jaguar XJ12
+33   Datsun 240Z
+32   Lamborghini LM002
+31   Lamborghini Miura
+30   Maserati Khamsin
+29   Alfa Romeo GTV
+28   Aston DB7
+27   Porsche 928
+26   Audi Quattro
+25   Ferrari 250 LM
+24   Toyota Land Cruiser
+23   Lotus Elise MKII
+22   Honda S2000
+21   Ford GT40
+20   Golf GTi MKI
+19   Lamborghini Diablo VT
+18   Ferrari 250 GTO
+17   Jaguar XJR
+16   Subaru Impreza STi 22b
+15   Mitsubishi Lancer Evolution VI
+14   Ferrari 550 Maranello
+13   Ferrari 250 GT Berlinetta
+12   Aston Martin Vanquish
+11   Ferrari F40
+10   BMW M5
+9    Rover Mini Cooper
+8    Nissan Skyline GT-R
+7    Ford Escort RS Cosworth
+6    Range Rover
+5    Ferrari 365 GTB/4
+4    Aston Martin Vantage
+3    Ferrari F355 GTS
+2    Porsche 911 Turbo
+1    Jaguar E-Type
+

@@ -1,0 +1,109 @@
+
+KERNEL_OBJ += $(patsubst %.c,%.o, $(wildcard kernel/handlers/console/*.c)) \
+			$(patsubst %.s,%.o, $(wildcard kernel/handlers/console/*.s))
+
+
+# ----------------------------------------------------------------------------
+
+.PHONY : kernel/handlers/console/depend
+kernel/handlers/console/depend :
+	$(DEPEND) $(DFLAGS) -f kernel/handlers/console/makefile.in \
+							$(wildcard kernel/handlers/console/*.c)
+
+
+.PHONY : kernel/handlers/console/clean
+kernel/handlers/console/clean :
+	rm -f kernel/handlers/console/*.o
+	rm -f kernel/handlers/console/makefile.in.bak
+
+# ----------------------------------------------------------------------------
+
+# ASSEMBLY DEPENDENCIES	
+
+
+# ----------------------------------------------------------------------------
+
+
+# DO NOT DELETE
+
+kernel/handlers/console/init.o: ./h/kernel/types.h ./h/kernel/i386/i386.h
+kernel/handlers/console/init.o: ./h/kernel/config.h ./h/kernel/lists.h
+kernel/handlers/console/init.o: ./h/kernel/fs.h ./h/kernel/sync.h
+kernel/handlers/console/init.o: ./h/kernel/timer.h ./h/kernel/termios.h
+kernel/handlers/console/init.o: ./h/kernel/msg.h ./h/kernel/device.h
+kernel/handlers/console/init.o: ./h/kernel/proc.h ./h/kernel/vm.h
+kernel/handlers/console/init.o: ./h/kernel/arch.h ./h/kernel/usignal.h
+kernel/handlers/console/init.o: ./h/kernel/dbg.h
+kernel/handlers/console/init.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/handlers/console/init.o: ./h/kernel/error.h ./h/kernel/kmalloc.h
+kernel/handlers/console/init.o: ./h/kernel/utility.h
+kernel/handlers/console/init.o: kernel/handlers/console/console.h
+kernel/handlers/console/init.o: kernel/handlers/console/keymap.h
+kernel/handlers/console/keyboard.o: ./h/kernel/types.h ./h/kernel/i386/i386.h
+kernel/handlers/console/keyboard.o: ./h/kernel/config.h ./h/kernel/lists.h
+kernel/handlers/console/keyboard.o: ./h/kernel/fs.h ./h/kernel/sync.h
+kernel/handlers/console/keyboard.o: ./h/kernel/timer.h ./h/kernel/termios.h
+kernel/handlers/console/keyboard.o: ./h/kernel/msg.h ./h/kernel/device.h
+kernel/handlers/console/keyboard.o: ./h/kernel/proc.h ./h/kernel/vm.h
+kernel/handlers/console/keyboard.o: ./h/kernel/arch.h ./h/kernel/usignal.h
+kernel/handlers/console/keyboard.o: ./h/kernel/dbg.h
+kernel/handlers/console/keyboard.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/handlers/console/keyboard.o: ./h/kernel/error.h ./h/kernel/kmalloc.h
+kernel/handlers/console/keyboard.o: ./h/kernel/utility.h
+kernel/handlers/console/keyboard.o: kernel/handlers/console/console.h
+kernel/handlers/console/keyboard.o: kernel/handlers/console/keymap.h
+kernel/handlers/console/keymap.o: ./h/kernel/types.h
+kernel/handlers/console/keymap.o: kernel/handlers/console/console.h
+kernel/handlers/console/keymap.o: ./h/kernel/device.h ./h/kernel/lists.h
+kernel/handlers/console/keymap.o: ./h/kernel/msg.h ./h/kernel/proc.h
+kernel/handlers/console/keymap.o: ./h/kernel/sync.h ./h/kernel/timer.h
+kernel/handlers/console/keymap.o: ./h/kernel/vm.h ./h/kernel/arch.h
+kernel/handlers/console/keymap.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/handlers/console/keymap.o: ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/handlers/console/keymap.o: ./h/kernel/usignal.h
+kernel/handlers/console/keymap.o: kernel/handlers/console/keymap.h
+kernel/handlers/console/main.o: ./h/kernel/types.h ./h/kernel/i386/i386.h
+kernel/handlers/console/main.o: ./h/kernel/config.h ./h/kernel/lists.h
+kernel/handlers/console/main.o: ./h/kernel/fs.h ./h/kernel/sync.h
+kernel/handlers/console/main.o: ./h/kernel/timer.h ./h/kernel/termios.h
+kernel/handlers/console/main.o: ./h/kernel/msg.h ./h/kernel/device.h
+kernel/handlers/console/main.o: ./h/kernel/proc.h ./h/kernel/vm.h
+kernel/handlers/console/main.o: ./h/kernel/arch.h ./h/kernel/usignal.h
+kernel/handlers/console/main.o: ./h/kernel/dbg.h
+kernel/handlers/console/main.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/handlers/console/main.o: ./h/kernel/error.h ./h/kernel/kmalloc.h
+kernel/handlers/console/main.o: ./h/kernel/utility.h
+kernel/handlers/console/main.o: kernel/handlers/console/console.h
+kernel/handlers/console/tty.o: ./h/kernel/types.h ./h/kernel/i386/i386.h
+kernel/handlers/console/tty.o: ./h/kernel/config.h ./h/kernel/lists.h
+kernel/handlers/console/tty.o: ./h/kernel/fs.h ./h/kernel/sync.h
+kernel/handlers/console/tty.o: ./h/kernel/timer.h ./h/kernel/termios.h
+kernel/handlers/console/tty.o: ./h/kernel/msg.h ./h/kernel/device.h
+kernel/handlers/console/tty.o: ./h/kernel/proc.h ./h/kernel/vm.h
+kernel/handlers/console/tty.o: ./h/kernel/arch.h ./h/kernel/usignal.h
+kernel/handlers/console/tty.o: ./h/kernel/dbg.h
+kernel/handlers/console/tty.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/handlers/console/tty.o: ./h/kernel/error.h ./h/kernel/kmalloc.h
+kernel/handlers/console/tty.o: kernel/handlers/console/console.h
+kernel/handlers/console/vars.o: ./h/kernel/types.h ./h/kernel/i386/i386.h
+kernel/handlers/console/vars.o: ./h/kernel/config.h ./h/kernel/lists.h
+kernel/handlers/console/vars.o: ./h/kernel/fs.h ./h/kernel/sync.h
+kernel/handlers/console/vars.o: ./h/kernel/timer.h ./h/kernel/termios.h
+kernel/handlers/console/vars.o: ./h/kernel/msg.h ./h/kernel/device.h
+kernel/handlers/console/vars.o: ./h/kernel/proc.h ./h/kernel/vm.h
+kernel/handlers/console/vars.o: ./h/kernel/arch.h ./h/kernel/usignal.h
+kernel/handlers/console/vars.o: ./h/kernel/dbg.h
+kernel/handlers/console/vars.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/handlers/console/vars.o: ./h/kernel/error.h
+kernel/handlers/console/vars.o: kernel/handlers/console/console.h
+kernel/handlers/console/wrapper.o: ./h/kernel/types.h ./h/kernel/error.h
+kernel/handlers/console/wrapper.o: ./h/kernel/fs.h ./h/kernel/lists.h
+kernel/handlers/console/wrapper.o: ./h/kernel/sync.h ./h/kernel/timer.h
+kernel/handlers/console/wrapper.o: ./h/kernel/termios.h ./h/kernel/msg.h
+kernel/handlers/console/wrapper.o: ./h/kernel/config.h ./h/kernel/proc.h
+kernel/handlers/console/wrapper.o: ./h/kernel/vm.h ./h/kernel/arch.h
+kernel/handlers/console/wrapper.o: ./h/kernel/i386/i386.h
+kernel/handlers/console/wrapper.o: ./h/kernel/usignal.h ./h/kernel/dbg.h
+kernel/handlers/console/wrapper.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/handlers/console/wrapper.o: kernel/handlers/console/console.h
+kernel/handlers/console/wrapper.o: ./h/kernel/device.h ./h/kernel/resident.h

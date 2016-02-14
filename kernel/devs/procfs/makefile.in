@@ -1,0 +1,38 @@
+DEVS_PROCFS_OBJ += $(patsubst %.c,%.o, $(wildcard devs/procfs/*.c)) \
+				$(patsubst %.s,%.o, $(wildcard devs/procfs/*.s))
+
+
+
+
+# ----------------------------------------------------------------------------
+.PHONY : devs/procfs
+devs/procfs : devs/procfs/procfs.ko
+
+devs/procfs/procfs.ko : $(DEVS_PROCFS_OBJ)
+	$(LINK) $(DEVS_PROCFS_OBJ) -r -o devs/procfs/procfs.ko
+
+
+
+.PHONY : devs/procfs/depend
+devs/procfs/depend :
+	$(DEPEND) $(DFLAGS) -f devs/procfs/makefile.in \
+							$(wildcard devs/procfs/*.c)
+
+
+.PHONY : devs/procfs/clean
+devs/procfs/clean :
+	rm -f devs/procfs/*.o
+	rm -f devs/procfs/makefile.in.bak
+	rm -f devs/procfs/*.ko
+	
+	
+
+# ----------------------------------------------------------------------------
+
+# ASSEMBLY DEPENDENCIES	
+
+
+# ----------------------------------------------------------------------------
+
+
+# DO NOT DELETE

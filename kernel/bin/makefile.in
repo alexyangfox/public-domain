@@ -1,0 +1,61 @@
+        
+.PHONY:= bin
+bin : bin/assign bin/format bin/setmap bin/dskchg bin/shutdown \
+		bin/relabel bin/unmount bin/mount
+
+bin/assign :  bin/assign.o
+	$(APPLINK) bin/assign.o $(APPLDFLAGS) -o bin/assign
+	i386-kielder-strip -s -R.comment bin/assign
+	
+bin/format :  bin/format.o
+	$(APPLINK) bin/format.o $(APPLDFLAGS) -o bin/format
+	i386-kielder-strip -s -R.comment bin/format
+
+bin/setmap :  bin/setmap.o
+	$(APPLINK) bin/setmap.o $(APPLDFLAGS) -o bin/setmap
+	i386-kielder-strip -s -R.comment bin/setmap
+
+bin/dskchg :  bin/dskchg.o
+	$(APPLINK) bin/dskchg.o $(APPLDFLAGS) -o bin/dskchg
+	i386-kielder-strip -s -R.comment bin/dskchg
+
+bin/shutdown :  bin/shutdown.o
+	$(APPLINK) bin/shutdown.o $(APPLDFLAGS) -o bin/shutdown
+	i386-kielder-strip -s -R.comment bin/shutdown
+
+bin/relabel :  bin/relabel.o
+	$(APPLINK) bin/relabel.o $(APPLDFLAGS) -o bin/relabel
+	i386-kielder-strip -s -R.comment bin/relabel
+
+bin/unmount :  bin/unmount.o
+	$(APPLINK) bin/unmount.o $(APPLDFLAGS) -o bin/unmount
+	i386-kielder-strip -s -R.comment bin/unmount
+
+bin/mount :  bin/mount.o
+	$(APPLINK) bin/mount.o $(APPLDFLAGS) -o bin/mount
+	i386-kielder-strip -s -R.comment bin/mount
+
+
+# ----------------------------------------------------------------------------
+
+.PHONY : bin/clean
+bin/clean :
+	rm -f bin/*.o bin/assign bin/format bin/setmap    \
+			bin/dskchg bin/shutdown bin/relabel bin/unmount bin/mount
+	rm -f bin/makefile.in.bak
+	
+.PHONY : bin/depend
+bin/depend :
+	$(DEPEND) $(DFLAGS) -f bin/makefile.in $(wildcard bin/*.c)
+
+.PHONY : bin/disk
+bin/disk :
+	mcopy -o bin/assign bin/format bin/setmap bin/dskchg bin/shutdown  \
+    		 bin/dskchg bin/shutdown bin/relabel bin/unmount bin\mount c:\bin
+
+	
+
+
+
+# ----------------------------------------------------------------------------
+# DO NOT DELETE

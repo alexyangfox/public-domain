@@ -1,0 +1,37 @@
+DEVS_PIPE_OBJ += $(patsubst %.c,%.o, $(wildcard devs/pipe/*.c)) \
+				$(patsubst %.s,%.o, $(wildcard devs/pipe/*.s))
+
+
+
+
+# ----------------------------------------------------------------------------
+.PHONY : devs/pipe
+devs/pipe : devs/pipe/pipe.ko
+
+devs/pipe/pipe.ko : $(DEVS_PIPE_OBJ)
+	$(LINK) $(DEVS_PIPE_OBJ) -r -o devs/pipe/pipe.ko
+
+
+
+.PHONY : devs/pipe/depend
+devs/pipe/depend :
+	$(DEPEND) $(DFLAGS) -f devs/pipe/makefile.in \
+							$(wildcard devs/pipe/*.c)
+
+
+.PHONY : devs/pipe/clean
+devs/pipe/clean :
+	rm -f devs/pipe/*.o
+	rm -f devs/pipe/makefile.in.bak
+	rm -f devs/pipe/*.ko
+	
+
+# ----------------------------------------------------------------------------
+
+# ASSEMBLY DEPENDENCIES	
+
+
+# ----------------------------------------------------------------------------
+
+
+# DO NOT DELETE

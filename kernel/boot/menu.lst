@@ -1,0 +1,5 @@
+# Entry 0:
+title   KielderOS
+root    (hd0,0)
+kernel  /boot/kernel -b hd0
+

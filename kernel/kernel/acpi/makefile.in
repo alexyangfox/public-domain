@@ -1,0 +1,128 @@
+ACPI_OBJ := $(patsubst %.c,%.o, \
+	kernel/acpi/events/evevent.c \
+	kernel/acpi/events/evgpeblk.c \
+	kernel/acpi/events/evgpe.c \
+	kernel/acpi/events/evmisc.c \
+	kernel/acpi/events/evregion.c \
+	kernel/acpi/events/evrgnini.c \
+	kernel/acpi/events/evsci.c \
+	kernel/acpi/events/evxface.c \
+	kernel/acpi/events/evxfevnt.c \
+	kernel/acpi/events/evxfregn.c \
+	kernel/acpi/hardware/hwacpi.c \
+	kernel/acpi/hardware/hwgpe.c \
+	kernel/acpi/hardware/hwregs.c \
+	kernel/acpi/hardware/hwsleep.c \
+	kernel/acpi/interpreter/dispatcher/dsfield.c \
+	kernel/acpi/interpreter/dispatcher/dsinit.c \
+	kernel/acpi/interpreter/dispatcher/dsmethod.c \
+	kernel/acpi/interpreter/dispatcher/dsmthdat.c \
+	kernel/acpi/interpreter/dispatcher/dsobject.c \
+	kernel/acpi/interpreter/dispatcher/dsopcode.c \
+	kernel/acpi/interpreter/dispatcher/dsutils.c \
+	kernel/acpi/interpreter/dispatcher/dswexec.c \
+	kernel/acpi/interpreter/dispatcher/dswload.c \
+	kernel/acpi/interpreter/dispatcher/dswscope.c \
+	kernel/acpi/interpreter/dispatcher/dswstate.c \
+	kernel/acpi/interpreter/executer/exconfig.c \
+	kernel/acpi/interpreter/executer/exconvrt.c \
+	kernel/acpi/interpreter/executer/excreate.c \
+	kernel/acpi/interpreter/executer/exdump.c \
+	kernel/acpi/interpreter/executer/exfield.c \
+	kernel/acpi/interpreter/executer/exfldio.c \
+	kernel/acpi/interpreter/executer/exmisc.c \
+	kernel/acpi/interpreter/executer/exmutex.c \
+	kernel/acpi/interpreter/executer/exnames.c \
+	kernel/acpi/interpreter/executer/exoparg1.c \
+	kernel/acpi/interpreter/executer/exoparg2.c \
+	kernel/acpi/interpreter/executer/exoparg3.c \
+	kernel/acpi/interpreter/executer/exoparg6.c \
+	kernel/acpi/interpreter/executer/exprep.c \
+	kernel/acpi/interpreter/executer/exregion.c \
+	kernel/acpi/interpreter/executer/exresnte.c \
+	kernel/acpi/interpreter/executer/exresolv.c \
+	kernel/acpi/interpreter/executer/exresop.c \
+	kernel/acpi/interpreter/executer/exstore.c \
+	kernel/acpi/interpreter/executer/exstoren.c \
+	kernel/acpi/interpreter/executer/exstorob.c \
+	kernel/acpi/interpreter/executer/exsystem.c \
+	kernel/acpi/interpreter/executer/exutils.c \
+	kernel/acpi/interpreter/parser/psargs.c \
+	kernel/acpi/interpreter/parser/psloop.c \
+	kernel/acpi/interpreter/parser/psopcode.c \
+	kernel/acpi/interpreter/parser/psparse.c \
+	kernel/acpi/interpreter/parser/psscope.c \
+	kernel/acpi/interpreter/parser/pstree.c \
+	kernel/acpi/interpreter/parser/psutils.c \
+	kernel/acpi/interpreter/parser/pswalk.c \
+	kernel/acpi/interpreter/parser/psxface.c \
+	kernel/acpi/namespace/nsaccess.c \
+	kernel/acpi/namespace/nsalloc.c \
+	kernel/acpi/namespace/nsdump.c \
+	kernel/acpi/namespace/nsdumpdv.c \
+	kernel/acpi/namespace/nseval.c \
+	kernel/acpi/namespace/nsinit.c \
+	kernel/acpi/namespace/nsload.c \
+	kernel/acpi/namespace/nsnames.c \
+	kernel/acpi/namespace/nsobject.c \
+	kernel/acpi/namespace/nsparse.c \
+	kernel/acpi/namespace/nssearch.c \
+	kernel/acpi/namespace/nsutils.c \
+	kernel/acpi/namespace/nswalk.c \
+	kernel/acpi/namespace/nsxfeval.c \
+	kernel/acpi/namespace/nsxfname.c \
+	kernel/acpi/namespace/nsxfobj.c \
+	kernel/acpi/resources/rsaddr.c \
+	kernel/acpi/resources/rscalc.c \
+	kernel/acpi/resources/rscreate.c \
+	kernel/acpi/resources/rsdump.c \
+	kernel/acpi/resources/rsio.c \
+	kernel/acpi/resources/rsinfo.c \
+	kernel/acpi/resources/rsirq.c \
+	kernel/acpi/resources/rslist.c \
+	kernel/acpi/resources/rsmemory.c \
+	kernel/acpi/resources/rsmisc.c \
+	kernel/acpi/resources/rsutils.c \
+	kernel/acpi/resources/rsxface.c \
+	kernel/acpi/tables/tbfadt.c \
+	kernel/acpi/tables/tbfind.c \
+	kernel/acpi/tables/tbinstal.c \
+	kernel/acpi/tables/tbutils.c \
+	kernel/acpi/tables/tbxface.c \
+	kernel/acpi/tables/tbxfroot.c \
+	kernel/acpi/utilities/utalloc.c \
+	kernel/acpi/utilities/utcache.c \
+	kernel/acpi/utilities/utcopy.c \
+	kernel/acpi/utilities/utclib.c \
+	kernel/acpi/utilities/utdebug.c \
+	kernel/acpi/utilities/utdelete.c \
+	kernel/acpi/utilities/uteval.c \
+	kernel/acpi/utilities/utglobal.c \
+	kernel/acpi/utilities/utinit.c \
+	kernel/acpi/utilities/utmath.c \
+	kernel/acpi/utilities/utmisc.c \
+	kernel/acpi/utilities/utmutex.c \
+	kernel/acpi/utilities/utobject.c \
+	kernel/acpi/utilities/utresrc.c \
+	kernel/acpi/utilities/utstate.c \
+	kernel/acpi/utilities/uttrack.c \
+	kernel/acpi/utilities/utxface.c \
+	kernel/acpi/kielder/oskielderxf.c \
+	)
+
+
+KERNEL_OBJ += $(ACPI_OBJ)
+
+# ----------------------------------------------------------------------------
+
+.PHONY : kernel/acpi/depend
+
+.PHONY : kernel/acpi/clean
+kernel/acpi/clean :
+	rm -f $(ACPI_OBJ)
+	
+	
+# ----------------------------------------------------------------------------
+
+# DO NOT DELETE
+

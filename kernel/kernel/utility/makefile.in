@@ -1,0 +1,45 @@
+
+
+KERNEL_OBJ += $(patsubst %.c,%.o, $(wildcard kernel/utility/*.c)) \
+			$(patsubst %.s,%.o, $(wildcard kernel/utility/*.s))
+
+
+# ----------------------------------------------------------------------------
+
+.PHONY : kernel/utility/depend
+kernel/utility/depend :
+	$(DEPEND) $(DFLAGS) -f kernel/utility/makefile.in $(wildcard kernel/utility/*.c)
+
+
+.PHONY : kernel/utility/clean
+kernel/utility/clean :
+	rm -f kernel/utility/*.o
+	rm -f kernel/utility/makefile.in.bak
+
+# ----------------------------------------------------------------------------
+
+# ASSEMBLY DEPENDENCIES	
+
+
+# ----------------------------------------------------------------------------
+
+# DO NOT DELETE
+
+kernel/utility/doprintf.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/utility/doprintf.o: ./h/kernel/types.h ./h/kernel/dbg.h
+kernel/utility/rand.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/utility/rand.o: ./h/kernel/types.h ./h/kernel/dbg.h
+kernel/utility/snprintf.o: ./h/kernel/utility.h ./h/kernel/types.h
+kernel/utility/snprintf.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/utility/string.o: ./h/kernel/types.h ./h/kernel/utility.h
+kernel/utility/string.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/utility/string.o: ./h/kernel/kmalloc.h ./h/kernel/vm.h
+kernel/utility/string.o: ./h/kernel/lists.h ./h/kernel/sync.h
+kernel/utility/string.o: ./h/kernel/timer.h ./h/kernel/arch.h
+kernel/utility/string.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/utility/string.o: ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/utility/string.o: ./h/kernel/msg.h
+kernel/utility/strlcat.o: ./h/kernel/types.h ./h/kernel/utility.h
+kernel/utility/strlcat.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/utility/strlcpy.o: ./h/kernel/types.h ./h/kernel/utility.h
+kernel/utility/strlcpy.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h

@@ -1,0 +1,72 @@
+KERNEL_OBJ:= 
+
+
+# ----------------------------------------------------------------------------
+
+include kernel/i386/makefile.in
+include kernel/vm/makefile.in
+include kernel/proc/makefile.in
+include kernel/utility/makefile.in
+include kernel/fs/makefile.in
+include kernel/io/makefile.in
+include kernel/devices/makefile.in
+include kernel/handlers/makefile.in
+include kernel/acpi/makefile.in
+
+# ----------------------------------------------------------------------------
+
+.PHONY:= kernel
+kernel : kernel/kernel
+
+
+kernel/kernel:  $(KERNEL_OBJ) kernel/i386/kernel.ls 
+	$(LINK) $(KERNEL_OBJ) /kielder/lib/gcc/i386-kielder/4.1.1/libgcc.a $(LFLAGS) -T kernel/i386/kernel.ls -o kernel/kernel
+#	i386-kielder-strip -s -R.comment kernel/kernel
+
+# ----------------------------------------------------------------------------
+
+
+.PHONY : kernel/depend
+kernel/depend : kernel/vm/depend \
+				kernel/proc/depend \
+				kernel/i386/depend \
+				kernel/utility/depend \
+				kernel/fs/depend \
+				kernel/io/depend \
+				kernel/devices/depend \
+				kernel/handlers/depend
+
+
+.PHONY : kernel/clean
+kernel/clean : 	kernel/vm/clean \
+				kernel/proc/clean \
+				kernel/i386/clean \
+				kernel/utility/clean \
+				kernel/fs/clean \
+				kernel/io/clean \
+				kernel/devices/clean \
+				kernel/handlers/clean \
+				kernel/acpi/clean
+				
+	rm -f kernel/kernel
+	rm -f kernel/dump.txt
+
+
+.PHONY : kernel/disk
+kernel/disk :
+	mcopy -o kernel/kernel c:/boot
+
+
+.PHONY : kernel/dump
+kernel/dump :
+	$(OBJDUMP) -xshDt kernel/kernel >kernel/dump.txt
+
+# ----------------------------------------------------------------------------
+
+# ASSEMBLY DEPENDENCIES	
+
+
+# ----------------------------------------------------------------------------
+
+
+# DO NOT DELETE

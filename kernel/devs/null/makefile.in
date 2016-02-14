@@ -1,0 +1,37 @@
+DEVS_NULL_OBJ += $(patsubst %.c,%.o, $(wildcard devs/null/*.c)) \
+				$(patsubst %.s,%.o, $(wildcard devs/null/*.s))
+
+
+
+
+# ----------------------------------------------------------------------------
+.PHONY : devs/null
+devs/null : devs/null/null.ko
+
+devs/null/null.ko : $(DEVS_NULL_OBJ)
+	$(LINK) $(DEVS_NULL_OBJ) -r -o devs/null/null.ko
+
+
+
+.PHONY : devs/null/depend
+devs/null/depend :
+	$(DEPEND) $(DFLAGS) -f devs/null/makefile.in \
+							$(wildcard devs/null/*.c)
+
+
+.PHONY : devs/null/clean
+devs/null/clean :
+	rm -f devs/null/*.o
+	rm -f devs/null/makefile.in.bak
+	rm -f devs/null/*.ko
+	
+
+# ----------------------------------------------------------------------------
+
+# ASSEMBLY DEPENDENCIES	
+
+
+# ----------------------------------------------------------------------------
+
+
+# DO NOT DELETE

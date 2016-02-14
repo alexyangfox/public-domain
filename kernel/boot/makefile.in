@@ -1,0 +1,52 @@
+        
+.PHONY:= boot
+boot : boot/init
+
+boot/init :  boot/init.o
+	$(APPLINK) boot/init.o $(APPLDFLAGS) -o boot/init
+	i386-kielder-strip -s -R.comment boot/init
+	
+# ----------------------------------------------------------------------------
+
+.PHONY : boot/clean
+boot/clean :
+	rm -f boot/*.o boot/init
+	rm -f boot/makefile.in.bak
+	
+.PHONY : boot/depend
+boot/depend :
+	$(DEPEND) $(DFLAGS) -f boot/makefile.in $(wildcard boot/*.c)
+
+.PHONY : boot/disk
+boot/disk :
+	mcopy -o boot/init c:\boot	
+
+
+
+# ----------------------------------------------------------------------------
+# DO NOT DELETE
+
+boot/init.o: /usr/include/sys/wait.h /usr/include/sys/types.h
+boot/init.o: /usr/include/_ansi.h /usr/include/newlib.h
+boot/init.o: /usr/include/sys/config.h /usr/include/machine/ieeefp.h
+boot/init.o: /usr/include/machine/_types.h /usr/include/limits.h
+boot/init.o: /usr/include/features.h /usr/include/sys/cdefs.h
+boot/init.o: /usr/include/sys/features.h /usr/include/sys/_types.h
+boot/init.o: /usr/include/sys/lock.h
+boot/init.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stddef.h
+boot/init.o: /usr/include/machine/types.h /usr/include/sys/resource.h
+boot/init.o: /usr/include/sys/time.h /usr/include/cygwin/wait.h
+boot/init.o: /usr/include/stdio.h
+boot/init.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+boot/init.o: /usr/include/sys/reent.h /usr/include/sys/stdio.h
+boot/init.o: /usr/include/unistd.h /usr/include/sys/unistd.h
+boot/init.o: /usr/include/fcntl.h /usr/include/sys/fcntl.h
+boot/init.o: /usr/include/sys/stat.h /usr/include/time.h
+boot/init.o: /usr/include/machine/time.h /usr/include/stdlib.h
+boot/init.o: /usr/include/machine/stdlib.h /usr/include/alloca.h
+boot/init.o: /usr/include/errno.h /usr/include/sys/errno.h
+boot/init.o: /usr/include/curses.h /usr/include/ncurses/ncurses_dll.h
+boot/init.o: /usr/include/ncurses/unctrl.h /usr/include/ncurses/curses.h
+boot/init.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdbool.h
+boot/init.o: /usr/include/string.h /usr/include/sys/string.h
+boot/init.o: /usr/include/signal.h /usr/include/sys/signal.h

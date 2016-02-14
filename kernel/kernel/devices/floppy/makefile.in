@@ -1,0 +1,88 @@
+
+KERNEL_OBJ += $(patsubst %.c,%.o, $(wildcard kernel/devices/floppy/*.c)) \
+			$(patsubst %.s,%.o, $(wildcard kernel/devices/floppy/*.s))
+
+
+# ----------------------------------------------------------------------------
+
+.PHONY : kernel/devices/floppy/depend
+kernel/devices/floppy/depend :
+	$(DEPEND) $(DFLAGS) -f kernel/devices/floppy/makefile.in \
+							$(wildcard kernel/devices/floppy/*.c)
+
+
+.PHONY : kernel/devices/floppy/clean
+kernel/devices/floppy/clean :
+	rm -f kernel/devices/floppy/*.o
+	rm -f kernel/devices/floppy/makefile.in.bak
+
+# ----------------------------------------------------------------------------
+
+# ASSEMBLY DEPENDENCIES	
+
+
+# ----------------------------------------------------------------------------
+
+
+# DO NOT DELETE
+
+kernel/devices/floppy/floppy.o: ./h/kernel/types.h ./h/kernel/i386/i386.h
+kernel/devices/floppy/floppy.o: ./h/kernel/config.h ./h/kernel/lists.h
+kernel/devices/floppy/floppy.o: ./h/kernel/fs.h ./h/kernel/sync.h
+kernel/devices/floppy/floppy.o: ./h/kernel/timer.h ./h/kernel/termios.h
+kernel/devices/floppy/floppy.o: ./h/kernel/msg.h ./h/kernel/device.h
+kernel/devices/floppy/floppy.o: ./h/kernel/proc.h ./h/kernel/vm.h
+kernel/devices/floppy/floppy.o: ./h/kernel/arch.h ./h/kernel/usignal.h
+kernel/devices/floppy/floppy.o: ./h/kernel/utility.h
+kernel/devices/floppy/floppy.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/devices/floppy/floppy.o: ./h/kernel/dbg.h
+kernel/devices/floppy/floppy.o: kernel/devices/floppy/floppy.h
+kernel/devices/floppy/floppy.o: ./h/kernel/block.h ./h/kernel/callback.h
+kernel/devices/floppy/floppy.o: ./h/kernel/iov.h
+kernel/devices/floppy/init.o: ./h/kernel/types.h ./h/kernel/i386/i386.h
+kernel/devices/floppy/init.o: ./h/kernel/config.h ./h/kernel/lists.h
+kernel/devices/floppy/init.o: ./h/kernel/fs.h ./h/kernel/sync.h
+kernel/devices/floppy/init.o: ./h/kernel/timer.h ./h/kernel/termios.h
+kernel/devices/floppy/init.o: ./h/kernel/msg.h ./h/kernel/device.h
+kernel/devices/floppy/init.o: ./h/kernel/proc.h ./h/kernel/vm.h
+kernel/devices/floppy/init.o: ./h/kernel/arch.h ./h/kernel/usignal.h
+kernel/devices/floppy/init.o: ./h/kernel/utility.h
+kernel/devices/floppy/init.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/devices/floppy/init.o: ./h/kernel/dbg.h kernel/devices/floppy/floppy.h
+kernel/devices/floppy/init.o: ./h/kernel/block.h ./h/kernel/callback.h
+kernel/devices/floppy/init.o: ./h/kernel/iov.h
+kernel/devices/floppy/main.o: ./h/kernel/types.h ./h/kernel/i386/i386.h
+kernel/devices/floppy/main.o: ./h/kernel/config.h ./h/kernel/lists.h
+kernel/devices/floppy/main.o: ./h/kernel/fs.h ./h/kernel/sync.h
+kernel/devices/floppy/main.o: ./h/kernel/timer.h ./h/kernel/termios.h
+kernel/devices/floppy/main.o: ./h/kernel/msg.h ./h/kernel/device.h
+kernel/devices/floppy/main.o: ./h/kernel/proc.h ./h/kernel/vm.h
+kernel/devices/floppy/main.o: ./h/kernel/arch.h ./h/kernel/usignal.h
+kernel/devices/floppy/main.o: ./h/kernel/utility.h
+kernel/devices/floppy/main.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/devices/floppy/main.o: ./h/kernel/dbg.h kernel/devices/floppy/floppy.h
+kernel/devices/floppy/main.o: ./h/kernel/block.h ./h/kernel/callback.h
+kernel/devices/floppy/main.o: ./h/kernel/iov.h
+kernel/devices/floppy/vars.o: ./h/kernel/types.h ./h/kernel/timer.h
+kernel/devices/floppy/vars.o: ./h/kernel/lists.h
+kernel/devices/floppy/vars.o: kernel/devices/floppy/floppy.h
+kernel/devices/floppy/vars.o: ./h/kernel/device.h ./h/kernel/msg.h
+kernel/devices/floppy/vars.o: ./h/kernel/proc.h ./h/kernel/sync.h
+kernel/devices/floppy/vars.o: ./h/kernel/vm.h ./h/kernel/arch.h
+kernel/devices/floppy/vars.o: ./h/kernel/i386/i386.h ./h/kernel/config.h
+kernel/devices/floppy/vars.o: ./h/kernel/fs.h ./h/kernel/termios.h
+kernel/devices/floppy/vars.o: ./h/kernel/usignal.h ./h/kernel/block.h
+kernel/devices/floppy/vars.o: ./h/kernel/callback.h ./h/kernel/iov.h
+kernel/devices/floppy/wrapper.o: ./h/kernel/types.h ./h/kernel/i386/i386.h
+kernel/devices/floppy/wrapper.o: ./h/kernel/config.h ./h/kernel/lists.h
+kernel/devices/floppy/wrapper.o: ./h/kernel/fs.h ./h/kernel/sync.h
+kernel/devices/floppy/wrapper.o: ./h/kernel/timer.h ./h/kernel/termios.h
+kernel/devices/floppy/wrapper.o: ./h/kernel/msg.h ./h/kernel/device.h
+kernel/devices/floppy/wrapper.o: ./h/kernel/proc.h ./h/kernel/vm.h
+kernel/devices/floppy/wrapper.o: ./h/kernel/arch.h ./h/kernel/usignal.h
+kernel/devices/floppy/wrapper.o: ./h/kernel/dbg.h
+kernel/devices/floppy/wrapper.o: /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/stdarg.h
+kernel/devices/floppy/wrapper.o: ./h/kernel/resident.h
+kernel/devices/floppy/wrapper.o: kernel/devices/floppy/floppy.h
+kernel/devices/floppy/wrapper.o: ./h/kernel/block.h ./h/kernel/callback.h
+kernel/devices/floppy/wrapper.o: ./h/kernel/iov.h
