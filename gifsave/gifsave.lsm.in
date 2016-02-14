@@ -1,0 +1,14 @@
+Begin3
+Title:		gifsave - C-code for writing GIF image files.
+Version:	VER
+Entered-date:	DATE
+Description:	Source code for writing GIF-files. Use this if you have an
+		image generating program, and you want it to create
+		GIF-files as output.
+Keywords:	GIF, image, programming
+Author: 	sverrehu@online.no (Sverre H. Huseby)
+Primary-site:	http://home.sol.no/~sverrehu/pub-unix/
+Alternate-site:	sunsite.unc.edu /pub/Linux/somewhere
+		gifsave-VER.tar.gz
+Copying-policy:	PD (Public Domain)
+End

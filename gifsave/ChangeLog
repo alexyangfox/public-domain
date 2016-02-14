@@ -1,0 +1,18 @@
+1998-07-05  Sverre H. Huseby  <sverrehu@online.no>
+
+	* Release 1.0.2
+
+	* Updated author address.
+
+Thu Oct 24 20:41:31 1996  Sverre H. Huseby  <sverrehu@ifi.uio.no>
+
+	* Version: 1.0.1
+
+	* Created a more `Unix-friendly' distribution: Removed all '\r'
+	from end of lines, renamed Borland (DOS/Windows compiler maker)
+	specific files, and made a new Makefile and example file.
+
+	* Small changes to comments and spacing to match the look I prefer
+	now. Note that I have not tested that the Borland specific
+	file still compile.
+

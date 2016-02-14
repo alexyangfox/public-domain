@@ -1,0 +1,9 @@
+# Makefile to compile the example program for Borland C-compilers.
+
+.AUTODEPEND
+
+EXAMPLE.EXE: EXAMPLE.OBJ GIFSAVE.OBJ
+    BCC -ms EXAMPLE.OBJ GIFSAVE.OBJ GRAPHICS.LIB
+
+.C.OBJ:
+    BCC -c -ms {$< }
