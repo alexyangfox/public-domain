@@ -1,0 +1,243 @@
+new kregs_t layout (including CS) doesn't work -- probably
+need to set kregs_t->cs in create_thread() if you do this
+
+>- [DONE; TEST IT]
+>  disable built-in memcpy() in VIDEO.C, check if you still get
+>  serial overrun errors; even though you're now enabling
+>  interrupts during syscall processing
+
+- put #if statements in all .h files that block out everything
+  except the #define statements if __ASM__ is defined
+  ...then get rid of the "Consistency between C and asm code"
+  issues, described below
+
+- rename _gcc.h to ...what?
+
+================================================================
+select() madness (AGAIN!)
+================================================================
+Change semantics of select() to allow waiting on multiple fd's
+i.e. change select() so it's more like POSIX select()
+
+If select() indicates that you can read from a file handle,
+then it's safe to read from the handle without blocking
+e.g. read(handle, buf, 4) will return 2 if only 2 bytes are
+available.
+
+Get rid of all read(handle, buf, 1). Single-byte reads are
+horribly inefficient.
+
+================================================================
+To do NOW
+================================================================
+Get EFLAGS out of jmp_buf. setjmp() and longjmp() currently
+work, but you can't change EFLAGS.IF while running at ring 3
+(no CPU exception, but POPF/IRET simply doesn't change EFLAGS.IF)
+
+Write APPS/MOUSE.C:
+- Serial device needs IOCTL to
+  - set bit rate (115200 for modem, 1200 for mouse)
+  - set number of data bits (8 for modem, 7 for mouse)
+
+APPS/TERMINAL.C:
+- Let user select COM port (don't show non-existent COM ports)
+- Decent UI: let user select COM port, enter phone number to dial,
+  hangup, etc.
+- Maybe get Alt+key working in kernel keyboard driver; use it for menus
+
+KRNL/SERIAL.C
+- Serial chip is sometimes identified as 8250 instead of 16550A
+
+Let kernel threads use RET to exit, instead of just _exit() --
+rewrite thread-creation code to support this. TETRIS.R is linked
+with USTART.S, which calls _exit() -- must rewrite USTART.S
+(temporarily) to test this.
+
+KRNL/SYSCALLS.C:
+- Allow arbitrary number after "/dev/ser" device name,
+  not just a single digit
+- Maybe "/dev/vcNN" (where NN=0...11) to open a specific virtual
+  console accessible from the keyboard
+
+KRNL/TASKS.C:
+- destroy_task() causes reboot when it calls close_con(),
+  and hence, destroy_vc(). I think this is caused by kprintf()
+  trying to write to a deleted VC, which causes a panic,
+  and panic also tries to write to the same VC...so you get
+  an infinite loop which overflows the stack or something.
+
+  This is an old error. From the Cosmos 10 README.TXT file:
+       - running buffy() thread makes OS crash. FIX.
+  Possible fixes:
+  - Change putch() to send chars to VC #0
+    (or send chars to VC #0 if current VC has been deleted)
+
+KRNL/KBD.C:
+- Maybe send raw keystrokes to app; let it translate them
+
+KRNL/CONDEV.C:
+- open_con() is a disgusting piece of sh-t
+
+- Begin thinking about device exclusion (preventing more than
+  one app at a time from opening a device)
+
+Paging!
+- Rewrite Cosmos 10 paging code for compatability with GRUB (ugh)
+- Map .text read-only (easy)
+- kbrk() should back out of failed allocations (easy?)
+- kbrk() should allow shrinking the heap
+- Get free_task_pages() working
+- Free page tables if they are empty
+
+Linked lists of tasks (LLOT). Allocate tasks dynamically,
+instead of from a fixed-size array.
+To wake up a task that times out, timer_irq() currently just
+changes the task status from TS_BLOCKED to TS_RUNNABLE. It should
+call wake_up(), instead. For this to work, timer_irq() must know
+_where_ all the wait queues are, so you probably need linked lists
+of wait queues, too.
+
+================================================================
+To do later
+================================================================
+port GCC/AS code in LIB/I386-ASM/OS/* to LIB/NASM/OS/*   */
+then build everything with Watcom C or Borland C++ 5.5;
+if possible. See if that's interesting or not.
+
+Add support for 32-bit .OBJ files to module loader (and to runreloc)
+
+In MM.C, replace bogo-malloc with simple malloc
+
+load_[coff|pe|elf]_reloc() allocates memory for the BSS,
+but these functions don't keep track of the memory handle
+returned by kmalloc(), so this memory can't be kfree()d
+(i.e. kernel modules can't be unloaded)
+
+Merge with existing OSD code base
+
+End-user could build a kernel that supports only one of
+these 6 file types:             DJGPP   Win32
+			ELF     COFF    PE COFF
+	executable      x       x       x
+	relocatable     x       x       x
+Separate COFF, PE, and ELF code that handles relocatable
+and executable files. Also, move get_coff_sym() out of COFF.C
+and into it's own file. Will expand 3 files to 7:
+	ELF.C	 -> ELF-R.C    ELF-X.C
+	COFF.C	 -> COFF-R.C   COFF-X.C   COFFSYM.C
+	PECOFF.C -> PECOFF-R.C PECOFF-X.C
+but make for smaller object code.
+
+Improve Space Invaders
+
+================================================================
+Consistency between C and asm code
+================================================================
+GDT layout in KRNL/KSTART.S must agree with selector
+values defined in KRNL/_KRNL.H
+
+to_user(), in KRNL/KSTART.S, must agree with layout of
+aspace_t struct, defined in KRNL/_KRNL.H
+
+switch_to(), in KRNL/KSTART.S, must agree with layout of
+kregs_t struct, defined in KRNL/_KRNL.H
+
+all_ints(), in KRNL/KSTART.S, must agree with layout of
+uregs_t struct, defined in KRNL/_KRNL.H
+
+Code that loads EBP register in KRNL/KRNL/KSTART.S must agree
+with value of EBP_MAGIC, defined in KRNL/_KRNL.H
+
+O_RDONLY and O_WRONLY values in APPS/USTART.S must agree
+with the same values defined in INC/OS.H
+
+================================================================
+Design decisions
+================================================================
+1. Support DOS and Windows
+
+   YES. DOS (including FreeDOS) is small, (re)boots quickly,
+   and has no protection, all of which makes it ideal for OS
+   development. Supporting DOS means you're halfway to
+   supporting Windows, and supporting MS operating systems lets
+   you reach a bigger audience than if you target Linux only.
+
+2. Use setjmp()/longjmp() for swapping kernel stacks?
+
+   No. Eventually, the kernel will be re-entrant, and (some)
+   kernel code will run with interrupts enabled. Interrupts
+   must then be disabled before swapping stacks and enabled
+   afterwards; which means the EFLAGS register must be saved.
+   setjmp() and longjmp() must work in user-mode (ring 3) code,
+   so they can't mess with EFLAGS.
+
+   Could disable and enable interrupts separately from setjmp()
+   and longjmp() I suppose...or have separate, kernel-only
+   versions of setjmp()/longjmp()...
+
+3. Allocate serial_t objects dynamically, like console_t's?
+
+   This is either impossible or very difficult, because
+   serial ports are tied to specific hardware interrupts
+   (serial_irq3() and serial_irq4()). It may be possible later,
+   when support for installable interrupt handlers is added.
+
+4. Use alternate calling convention?
+
+   NO. Register-based calling convention (gcc -mregparm=NNN ...)
+   probably won't make the code any smaller or faster, since
+   the x86 CPU is register-poor. The stdcall calling convention
+   (gcc -mrtd ...) would make the code a little smaller but
+   cause serious runtime errors if a function is called with
+   the wrong number of parameters, or if a variadic function
+   such as printf() is used without a prototype.
+
+================================================================
+maybe redo free memory detection code in init_mm()
+================================================================
+Memory ranges to avoid:
+
+CONVENTIONAL MEMORY USED BY SYSTEM:
+description		address			size
+-----------		---------------		-----------------
+IVT and BDA             0                       0x500
+page 0			0			0x1000
+
+EBDA			0x9FC00 (typical)	0x400 (typical)
+video RAM		0xA0000			0x20000
+video ROM		0xC0000			0x8000 (typical)
+unused			0xC8000 (typical)	0x28000 (typical)
+motherboard ROM		0xF0000 (typical)	0x10000 (typical)
+
+SUMMARY: use any of the following to get top of conventional
+memory (all values in K)
+- value returned by INT 12h
+- 16-bit value (Kbytes) at linear address 0x413
+- mboot_info_t->conv_mem
+Then avoid the bottom 4K.
+
+Then avoid...
+ADDITIONAL CONVENTIONAL MEMORY USED BY GRUB:
+description		address			size
+-----------		---------------		--------------------
+mboot_info_t		in EBX register		sizeof(mboot_info_t)
+kernel command line	mboot_info_t->cmd_line	(variable)
+module info		mboot_info_t->mods_adr	mboot_info_t->num_mods * sizeof(mboot_mod_t)
+module command lineS	  mboot_mod_t->cmd_line	  (variable)
+memory map		mboot_info_t->map_adr	mboot_info_t->map_size
+drive info		mboot_info_t->drives_adr  (variable)
+loader name		mboot_info_t->loader_name (variable)
+APM table		mboot_info_t->apm_table	?
+VBE table		mboot_info_t->?		?
+
+(If the GRUB people decide to create a succesor to GRUB, it would
+be nice if all these structures were packed together, and located
+on a page boundary...)
+
+>>>NEW APPROACH: Just avoid the Conventional Memory Ghetto entirely.
+
+USED EXTENDED MEMORY:
+description		address			size
+-----------		---------------		--------------------
+the kernel itself	g_code (virtual)	(g_end - g_code)
+moduleS			  mboot_mod_t->start_adr  mboot_mod_t->end_adr (?)
