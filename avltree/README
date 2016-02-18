@@ -1,0 +1,23 @@
+AVL Trees V1.0
+24-July-1987
+Paul Vixie
+
+This library and test program are useful for creating and using balanced
+binary trees (AVL trees).  The tree is held in memory, using malloc(3) to
+allocate storage.  A better version would allow file-based trees in 
+addition; once memory mapped files hit the UNIX(tm) community, this will
+be much easier to do.  In the meanwhile, these routines have been very
+useful to be for symbol tables and the like.  (Yes, I'm sure hashing is
+better in some way, but I've used this for symbol tables, just the same.)
+
+I cannot take credit for the algorithms.  See "Algorithms & Data Structures,"
+Niklaus Wirth, Prentice-Hall 1986, ISBN 0-13-022005-1.  This is an update of
+Wirth's previous book, titled "Algorythms + Data Structures = Programs,"
+which used Pascal as the language for examples.  This later book uses the
+newer Modula-2 for it's examples; this tree code was created using the
+Modula-2 examples as guidelines.  At the time I typed this stuff in (about
+a year ago, in July 1987), I understood how it all worked.  Today, well...
+
+This code is hereby placed in the public domain, unless restrictions apply
+from Prentice-Hall on the algorithms themselves.  If you use or redistribute
+this code, please leave my name (and Wirth's) in the comments.
