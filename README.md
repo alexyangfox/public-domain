@@ -1,3 +1,4 @@
+# COD5.org: Public Domain Software sources <img src="http://www.cod5.org/logo_scan.gif" /> #
 
 - <a href="#sound">sound</a>
 
@@ -368,6 +369,4 @@
 
 - [tu_testbed ](https://github.com/cod5/public-domain/blob/master/t/tu_testbed.md)   flash interpreter
 
-- [twok ](https://github.com/cod5/public-domain/blob/master/t/twok.md)   Mini programming language 
-
-- [zetac ](https://github.com/cod5/public-domain/blob/master/z
+- [twok ](https://github.com/cod5/public-domain/blob/master/t/twok.md)
