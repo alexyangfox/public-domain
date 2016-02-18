@@ -1,4 +1,4 @@
-# lice.zip #
+# lice #
 
 ### a C99 compiler. ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/lice
 
 Programming language: C
+
 Homepage: http://gmqcc.qc.to/cgit/cgit.cgi/LICE.git/tree/README.md
+
 Download date: 17-11-2014
+
 Downloaded from http://gmqcc.qc.to/cgit/cgit.cgi/LICE.git/plain/
 
 #### Status ####

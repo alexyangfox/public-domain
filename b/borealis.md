@@ -1,4 +1,4 @@
-# borealis.zip #
+# borealis #
 
 ### multi task OS and misc snippet ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/borealis
 
 Programming language: C, x86 assembler
+
 Homepage: http://my.execpc.com/~geezer/
+
 Download date: 26-06-2011
+
 Downloaded from http://geezer.osdevbrasil.net/
 
 #### Status ####

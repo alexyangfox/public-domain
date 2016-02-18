@@ -1,4 +1,4 @@
-# re2c.zip #
+# re2c #
 
 ### Scanner generator. ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/re2c
 
 Programming language: C
+
 Homepage: http://re2c.org/
+
 Download date: 26-01-2010
+
 Downloaded from http://downloads.sourceforge.net/project/re2c/re2c/0.13.5/re2c-0.13.5-src.zip?use_mirror=surfnet
 
 #### Status ####

@@ -1,4 +1,4 @@
-# glsfcave.zip #
+# glsfcave #
 
 ### SFcave for UNIX/OpenGL. ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/glsfcave
 
 Programming language: C
+
 Homepage: http://davy.nyacom.net/glsfcave/
+
 Download date: 30-01-2010
+
 Downloaded from http://davy.nyacom.net/glsfcave/glsfcave-1.1.tar.bz2
 
 #### Status ####

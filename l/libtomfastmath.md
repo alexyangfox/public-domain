@@ -1,4 +1,4 @@
-# libtomfastmath.zip #
+# libtomfastmath #
 
 ### optimized multiple-precision integer library  ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/libtomfastmath
 
 Programming language: C
+
 Homepage: http://www.libtom.org/
+
 Download date: 26-06-2011
+
 Downloaded from http://www.libtom.org/files/tfm-0.12.zip
 
 #### Status ####

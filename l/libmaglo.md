@@ -1,4 +1,4 @@
-# libmaglo.zip #
+# libmaglo #
 
 ### MAG image reader. ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/libmaglo
 
 Programming language: C
+
 Homepage: http://davy.nyacom.net/libmaglo/
+
 Download date: 30-01-2010
+
 Downloaded from http://davy.nyacom.net/libmaglo/libmaglo-0.99.tar.bz2
 
 #### Status ####

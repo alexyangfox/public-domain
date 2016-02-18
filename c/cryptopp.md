@@ -1,4 +1,4 @@
-# cryptopp552.zip #
+# cryptopp #
 
 ### cryptographic algorithms. ###
 
@@ -9,8 +9,11 @@ the Public Domain, but the collection is copyrighted.*
 https://github.com/cod5/public-domain/tree/cryptopp
 
 Programming language: C, C++
+
 Homepage: http://www.cryptopp.com/
+
 Download date: 27-02-2009
+
 Downloaded from http://www.cryptopp.com/cryptopp552.zip
 
 #### Status ####

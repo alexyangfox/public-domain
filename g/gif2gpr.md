@@ -1,4 +1,4 @@
-# gif2gpr.zip #
+# gif2gpr #
 
 ### GIF reader. ###
 
@@ -11,8 +11,11 @@ needed.*
 https://github.com/cod5/public-domain/tree/gif2gpr
 
 Programming language: C
+
 Homepage: ?
+
 Download date: 25-02-2009
+
 Downloaded from http://ftp.funet.fi/pub/unix/apollo/gif2gpr.c
 
 #### Status ####

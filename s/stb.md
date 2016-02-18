@@ -1,4 +1,4 @@
-# stb.zip #
+# stb #
 
 ### collection of highly valuable algorithms from nothings.org ###
 
@@ -9,8 +9,11 @@ image decoding. ZLIB decompression. Misc algorithms.*
 https://github.com/cod5/public-domain/tree/stb
 
 Programming language: C
+
 Homepage: http://nothings.org/
+
 Download date: 09-11-2009
+
 Downloaded from http://nothings.org/stb/stb_truetype.h
 http://nothings.org/stb_vorbis/stb_vorbis.c
 http://nothings.org/stb_image.c

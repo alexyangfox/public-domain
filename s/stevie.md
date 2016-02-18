@@ -1,4 +1,4 @@
-# stevie.zip #
+# stevie #
 
 ### text editor. ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/stevie
 
 Programming language: C
+
 Homepage: http://nosuch.com/tjt/stevie/
+
 Download date: 09-01-2010
+
 Downloaded from ftp://hobbes.nmsu.edu/pub/os2/apps/editors/stvi369g.zip
 
 #### Status ####

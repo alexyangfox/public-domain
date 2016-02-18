@@ -1,4 +1,4 @@
-# subc.zip #
+# subc #
 
 ### minimal C compiler. ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/subc
 
 Programming language: C, x86 assembler
+
 Homepage: http://www.t3x.org/subc/
+
 Download date: 16-03-2012
+
 Downloaded from http://www.t3x.org/files/subc.zip
 
 #### Status ####

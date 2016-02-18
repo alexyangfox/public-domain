@@ -1,4 +1,4 @@
-# losethos.zip #
+# losethos #
 
 ### 64bit VGA 16 color OS ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/losethos
 
 Programming language: C-, assembler
+
 Homepage: http://losethos.com/
+
 Download date: 06-06-2012
+
 Downloaded from http://www.losethos.com/LTVM.ISO
 
 #### Status ####

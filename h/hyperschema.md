@@ -1,4 +1,4 @@
-# hyperschema-3.0.zip #
+# hyperschema #
 
 ### HTML hypermaps from SQL database schema  ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/hyperschema
 
 Programming language: C,Python
+
 Homepage: http://hyperschema.sourceforge.net/
+
 Download date: 27-06-2010
+
 Downloaded from http://mesh.dl.sourceforge.net/project/hyperschema/hyperschema/3.0/hyperschema-3.0.zip
 
 #### Status ####

@@ -1,4 +1,4 @@
-# a_make.zip #
+# a_make #
 
 ### make utility ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/a_make
 
 Programming language: C
+
 Homepage: ?
+
 Download date: 19-03-2009
+
 Downloaded from http://www.os2site.com/sw/dev/util/pamake18.zip
 
 #### Status ####

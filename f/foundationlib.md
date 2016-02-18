@@ -1,4 +1,4 @@
-# foundationlib.zip #
+# foundationlib #
 
 ### cross-platform foundation library in C   ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/foundationlib
 
 Programming language: C
+
 Homepage: https://github.com/rampantpixels/foundation_lib
+
 Download date: 25-07-2013
+
 Downloaded from https://github.com/rampantpixels/foundation_lib
 
 #### Status ####

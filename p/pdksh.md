@@ -1,4 +1,4 @@
-# pdksh-5.2.14.zip #
+# pdksh #
 
 ### Unix shell. ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/pdksh
 
 Programming language: C
+
 Homepage: http://www.cs.mun.ca/~michael/pdksh/
+
 Download date: 02-03-2009
+
 Downloaded from ftp://ftp.cs.mun.ca/pub/pdksh/pdksh-5.2.14.tar.gz
 
 #### Status ####

@@ -1,4 +1,4 @@
-# mlc.zip #
+# mlc #
 
 ### supervised machine learning. ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/mlc
 
 Programming language: C, C++
+
 Homepage: http://www.sgi.com/tech/mlc/index.html
+
 Download date: 09-01-2010
+
 Downloaded from http://www.sgi.com/tech/mlc/alpha/MLC1.3.1-src.tar.Z
 
 #### Status ####

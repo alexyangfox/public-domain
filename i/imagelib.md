@@ -1,4 +1,4 @@
-# imagelib.zip #
+# imagelib #
 
 ### library for loading images of various formats ###
 
@@ -14,8 +14,11 @@
 https://github.com/cod5/public-domain/tree/imagelib
 
 Programming language: C
+
 Homepage: https://github.com/AgentD/imagelib
+
 Download date: 25-07-2013
+
 Downloaded from https://codeload.github.com/AgentD/imagelib/zip/master
 
 #### Status ####

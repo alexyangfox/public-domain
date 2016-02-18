@@ -1,4 +1,4 @@
-# easylzma.zip #
+# easylzma #
 
 ### compress and extract lzma files ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/easylzma
 
 Programming language: C
+
 Homepage: https://github.com/lloyd/easylzma
+
 Download date: 25-07-2013
+
 Downloaded from https://github.com/lloyd/easylzma/archive/master.zip
 
 #### Status ####

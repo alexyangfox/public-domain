@@ -1,4 +1,4 @@
-# ncbi_cxx.zip #
+# ncbi_cxx #
 
 ### a toolkit... ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/ncbi_cxx
 
 Programming language: C++
+
 Homepage: http://www.ncbi.nlm.nih.gov/bookshelf/br.fcgi?book=toolkit
+
 Download date: 30-01-2010
+
 Downloaded from ftp://ftp.ncbi.nih.gov/toolbox/ncbi_tools++/2009/May_15_2009/ncbi_cxx--May_15_2009.zip
 
 #### Status ####

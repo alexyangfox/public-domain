@@ -1,4 +1,4 @@
-# hapy.zip #
+# hapy #
 
 ### parser generator. ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/hapy
 
 Programming language: C++
+
 Homepage: http://hapy.sourceforge.net/
+
 Download date: 28-09-2009
+
 Downloaded from http://dfn.dl.sourceforge.net/sourceforge/hapy/Hapy-0.0.8.tar.gz
 
 #### Status ####

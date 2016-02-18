@@ -1,4 +1,4 @@
-# unzip.zip #
+# unzip #
 
 ### info-zip\ ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/unzip
 
 Programming language: C
+
 Homepage: http://www.info-zip.org
+
 Download date: 25-02-2009
+
 Downloaded from http://nssdcftp.gsfc.nasa.gov/staging/pds/rings/RPX_0002/SOFTWARE/UNZIP532/
 
 #### Status ####

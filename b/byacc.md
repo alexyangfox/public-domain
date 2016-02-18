@@ -1,4 +1,4 @@
-# byacc-20090221.zip #
+# byacc #
 
 ### Parser generator. ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/byacc
 
 Programming language: C
+
 Homepage: http://dickey.his.com/byacc/byacc.html
+
 Download date: 26-02-2009
+
 Downloaded from ftp://invisible-island.net/byacc/byacc.tar.gz
 
 #### Status ####

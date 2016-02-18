@@ -1,4 +1,4 @@
-# tz.zip #
+# tz #
 
 ### tools to manipulate timezone info. ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/tz
 
 Programming language: C
+
 Homepage: http://www.twinsun.com/tz/tz-link.htm
+
 Download date: 11-11-2009
+
 Downloaded from ftp://elsie.nci.nih.gov/pub/tzcode2009r.tar.gz
 
 #### Status ####

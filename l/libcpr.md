@@ -1,4 +1,4 @@
-# libcpr.zip #
+# libcpr #
 
 ### backport of the C++11 standard library  ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/libcpr
 
 Programming language: C, C++
+
 Homepage: http://libcpr.org/
+
 Download date: 14-11-2014
+
 Downloaded from https://github.com/dryproject/libcpr/archive/master.zip
 
 #### Status ####

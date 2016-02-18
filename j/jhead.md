@@ -1,4 +1,4 @@
-# jhead.zip #
+# jhead #
 
 ### read exif data from jpeg files. ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/jhead
 
 Programming language: C
+
 Homepage: http://www.sentex.net/~mwandel/jhead/
+
 Download date: 03-10-2009
+
 Downloaded from http://www.sentex.net/~mwandel/jhead/jhead-2.87.tar.gz
 
 #### Status ####

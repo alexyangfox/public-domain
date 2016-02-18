@@ -1,4 +1,4 @@
-# whefs.zip #
+# whefs #
 
 ### embedded/virtual filesystem. ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/whefs
 
 Programming language: C
+
 Homepage: http://code.google.com/p/whefs/
+
 Download date: 09-01-2010
+
 Downloaded from http://whefs.googlecode.com/files/libwhefs-20091218.tar.bz2
 
 #### Status ####

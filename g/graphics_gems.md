@@ -1,4 +1,4 @@
-# graphics_gems.zip #
+# graphics_gems #
 
 ### Graphics Gems ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/graphics_gems
 
 Programming language: C
+
 Homepage: http://tog.acm.org/resources/GraphicsGems/
+
 Download date: 21-07-2012
+
 Downloaded from http://tog.acm.org/resources/GraphicsGems/allgems.zip
 
 #### Status ####

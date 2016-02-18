@@ -1,4 +1,4 @@
-# atadrv.zip #
+# atadrv #
 
 ### ATA driver ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/atadrv
 
 Programming language: C
+
 Homepage: http://ata-atapi.com/atadrvr.html
+
 Download date: 28-09-2009
+
 Downloaded from http://ata-atapi.com/download/atadrvr.zip
 
 #### Status ####

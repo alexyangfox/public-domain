@@ -1,4 +1,4 @@
-# gddcalc.zip #
+# gddcalc #
 
 ### Growing Degree Days. ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/gddcalc
 
 Programming language: C
+
 Homepage: http://oregonviticulture.net/
+
 Download date: 09-01-2010
+
 Downloaded from http://oregonviticulture.net/downloads/gddcalc_0.81_src.zip
 
 #### Status ####

@@ -1,4 +1,4 @@
-# nifti.zip #
+# nifti #
 
 ### NIfTI data manipulation ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/nifti
 
 Programming language: C
+
 Homepage: http://niftilib.sourceforge.net/
+
 Download date: 03-06-2012
+
 Downloaded from http://niftilib.cvs.sourceforge.net/viewvc/niftilib/Clibs/?view=tar
 
 #### Status ####

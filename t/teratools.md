@@ -1,4 +1,4 @@
-# teratools.zip #
+# teratools #
 
 ### Some command line utilities. ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/teratools
 
 Programming language: C
+
 Homepage: https://github.com/sega01/teratools
+
 Download date: 07-06-2014
+
 Downloaded from https://github.com/sega01/teratools/archive/master.zip
 
 #### Status ####

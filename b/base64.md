@@ -1,4 +1,4 @@
-# base64.zip #
+# base64 #
 
 ### Base64 encoder decoder. ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/base64
 
 Programming language: C
+
 Homepage: http://www.fourmilab.ch/webtools/base64/
+
 Download date: 26-02-2009
+
 Downloaded from http://www.fourmilab.ch/webtools/base64/base64-1.5.tar.gz
 
 #### Status ####

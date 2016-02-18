@@ -1,4 +1,4 @@
-# mpkg.zip #
+# mpkg #
 
 ### package manager  ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/mpkg
 
 Programming language: C
+
 Homepage: http://charon.persephoneslair.org/~andrea/software/mpkg/
+
 Download date: 25-07-2013
+
 Downloaded from http://charon.persephoneslair.org/~andrea/software/mpkg/download/mpkg-0.1.tar.gz
 
 #### Status ####

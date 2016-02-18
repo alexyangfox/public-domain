@@ -1,4 +1,4 @@
-# crypto.zip #
+# crypto #
 
 ### misc. tools ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/crypto
 
 Programming language: C
+
 Homepage: http://cr.yp.to/
+
 Download date: 30-09-2009
+
 Downloaded from http://cr.yp.to/cdb/cdb-0.75.tar.gz
 http://cr.yp.to/daemontools/daemontools-0.76.tar.gz
 http://cr.yp.to/djbdns/djbdns-1.05.tar.gz

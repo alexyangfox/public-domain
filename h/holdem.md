@@ -1,4 +1,4 @@
-# holdem.zip #
+# holdem #
 
 ### poker ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/holdem
 
 Programming language: C
+
 Homepage: http://www.brecware.com/Software/software.html
+
 Download date: 03-06-2012
+
 Downloaded from http://www.brecware.com/Software/HES_downloads/HoldEm_Showdown_source.zip
 
 #### Status ####

@@ -1,4 +1,4 @@
-# ici.zip #
+# ici #
 
 ### script language. ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/ici
 
 Programming language: C
+
 Homepage: http://www.zeta.org.au/~atrn/ici/
+
 Download date: 03-04-2009
+
 Downloaded from http://switch.dl.sourceforge.net/sourceforge/ici/ici-4.1.0.tar.gz
 
 

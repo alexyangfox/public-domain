@@ -1,4 +1,4 @@
-# jdmcox.zip #
+# jdmcox #
 
 ### Twenty-six Windows programs  ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/jdmcox
 
 Programming language: C, C++
+
 Homepage: http://jdmcox.com/
+
 Download date: 03-06-2012
+
 Downloaded from http://jdmcox.com/
 
 #### Status ####

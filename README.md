@@ -1,9 +1,47 @@
 
-## sound ##
+- <a href="#sound">sound</a>
+
+- <a href="#fonts-pictures-icons">fonts-pictures-icons</a>
+
+- <a href="#operating system">operating system</a>
+
+- <a href="#compression">compression</a>
+
+- <a href="#cryptography">cryptography</a>
+
+- <a href="#database">database</a>
+
+- <a href="#web tool">web tool</a>
+
+- <a href="#development tool">development tool</a>
+
+- <a href="#application">application</a>
+
+- <a href="#game">game</a>
+
+- <a href="#text processor">text processor</a>
+
+- <a href="#soft core">soft core</a>
+
+- <a href="#programming library">programming library</a>
+
+- <a href="#graphic user interface">graphic user interface</a>
+
+- <a href="#date and time">date and time</a>
+
+- <a href="#image manipulation">image manipulation</a>
+
+- <a href="#console tool">console tool</a>
+
+- <a href="#scientific application">scientific application</a>
+
+- <a href="#programming language">programming language</a>
+
+## <a name="sound"/>sound ##
 - [jdmcox ](https://github.com/cod5/public-domain/blob/master/j/jdmcox.md)   Twenty-six Windows programs 
 
 
-## fonts-pictures-icons ##
+## <a name="fonts-pictures-icons"/>fonts-pictures-icons ##
 - [bradley_gratis ](https://github.com/cod5/public-domain/blob/master/b/bradley_gratis.md)   Bradley Gratis TTF font.
 
 - [fold ](https://github.com/cod5/public-domain/blob/master/f/fold.md)   Opentype font.
@@ -19,7 +57,7 @@
 - [tuffy ](https://github.com/cod5/public-domain/blob/master/t/tuffy.md)   Tuffy TTF font.
 
 
-## operating system ##
+## <a name="operating system"/>operating system ##
 - [atadrv ](https://github.com/cod5/public-domain/blob/master/a/atadrv.md)   ATA driver
 
 - [borealis ](https://github.com/cod5/public-domain/blob/master/b/borealis.md)   multi task OS and misc snippet
@@ -41,7 +79,7 @@
 - [plasma ](https://github.com/cod5/public-domain/blob/master/p/plasma.md)   CPU and Real time OS
 
 
-## compression ##
+## <a name="compression"/>compression ##
 - [balz ](https://github.com/cod5/public-domain/blob/master/b/balz.md)   file compressor.
 
 - [easylzma ](https://github.com/cod5/public-domain/blob/master/e/easylzma.md)   compress and extract lzma files
@@ -59,13 +97,13 @@
 - [zcrypt ](https://github.com/cod5/public-domain/blob/master/z/zcrypt.md)   Infozip crypt code.
 
 
-## cryptography ##
+## <a name="cryptography"/>cryptography ##
 - [cryptopp ](https://github.com/cod5/public-domain/blob/master/c/cryptopp.md)   cryptographic algorithms.
 
 - [libtomcrypt ](https://github.com/cod5/public-domain/blob/master/l/libtomcrypt.md)   modular and portable cryptographic toolkit
 
 
-## database ##
+## <a name="database"/>database ##
 - [crypto ](https://github.com/cod5/public-domain/blob/master/c/crypto.md)   misc. tools
 
 - [hyperschema ](https://github.com/cod5/public-domain/blob/master/h/hyperschema.md)   HTML hypermaps from SQL database schema 
@@ -75,7 +113,7 @@
 - [sqlite ](https://github.com/cod5/public-domain/blob/master/s/sqlite.md)   SQL database.
 
 
-## web tool ##
+## <a name="web tool"/>web tool ##
 - [base64 ](https://github.com/cod5/public-domain/blob/master/b/base64.md)   Base64 encoder decoder.
 
 - [crypto ](https://github.com/cod5/public-domain/blob/master/c/crypto.md)   misc. tools
@@ -89,7 +127,7 @@
 - [tcputils ](https://github.com/cod5/public-domain/blob/master/t/tcputils.md)   TCP programming in shell-scripts
 
 
-## development tool ##
+## <a name="development tool"/>development tool ##
 - [a_make ](https://github.com/cod5/public-domain/blob/master/a/a_make.md)   make utility
 
 - [bget ](https://github.com/cod5/public-domain/blob/master/b/bget.md)   a comprehensive memory allocation package.
@@ -109,7 +147,7 @@
 - [re2c ](https://github.com/cod5/public-domain/blob/master/r/re2c.md)   Scanner generator.
 
 
-## application ##
+## <a name="application"/>application ##
 - [clock24 ](https://github.com/cod5/public-domain/blob/master/c/clock24.md)   X-Window clock.
 
 - [gddcalc ](https://github.com/cod5/public-domain/blob/master/g/gddcalc.md)   Growing Degree Days.
@@ -121,7 +159,7 @@
 - [sc ](https://github.com/cod5/public-domain/blob/master/s/sc.md)   Spread sheet.
 
 
-## game ##
+## <a name="game"/>game ##
 - [glsfcave ](https://github.com/cod5/public-domain/blob/master/g/glsfcave.md)   SFcave for UNIX/OpenGL.
 
 - [holdem ](https://github.com/cod5/public-domain/blob/master/h/holdem.md)   poker
@@ -133,7 +171,7 @@
 - [tu_testbed ](https://github.com/cod5/public-domain/blob/master/t/tu_testbed.md)   flash interpreter
 
 
-## text processor ##
+## <a name="text processor"/>text processor ##
 - [ersatz-emacs ](https://github.com/cod5/public-domain/blob/master/e/ersatz-emacs.md)   text editor.
 
 - [glob ](https://github.com/cod5/public-domain/blob/master/g/glob.md)   robust glob pattern matcher.
@@ -153,7 +191,7 @@
 - [xlate ](https://github.com/cod5/public-domain/blob/master/x/xlate.md)   Troff to RTF converter.
 
 
-## soft core ##
+## <a name="soft core"/>soft core ##
 - [1664 ](https://github.com/cod5/public-domain/blob/master/1/1664.md)   16,32,64 microprocessor simulator
 
 - [cpu8080 ](https://github.com/cod5/public-domain/blob/master/c/cpu8080.md)   This is an 8080 core created as a project to get to know Verilog
@@ -161,7 +199,7 @@
 - [plasma ](https://github.com/cod5/public-domain/blob/master/p/plasma.md)   CPU and Real time OS
 
 
-## programming library ##
+## <a name="programming library"/>programming library ##
 - [atlast ](https://github.com/cod5/public-domain/blob/master/a/atlast.md)   a toolkit that makes applications programmable.
 
 - [avltree ](https://github.com/cod5/public-domain/blob/master/a/avltree.md)   AVL tree.
@@ -235,17 +273,17 @@
 - [whefs ](https://github.com/cod5/public-domain/blob/master/w/whefs.md)   embedded/virtual filesystem.
 
 
-## graphic user interface ##
+## <a name="graphic user interface"/>graphic user interface ##
 - [tinywm ](https://github.com/cod5/public-domain/blob/master/t/tinywm.md)   windows manager.
 
 
-## date and time ##
+## <a name="date and time"/>date and time ##
 - [jdmcox ](https://github.com/cod5/public-domain/blob/master/j/jdmcox.md)   Twenty-six Windows programs 
 
 - [tz ](https://github.com/cod5/public-domain/blob/master/t/tz.md)   tools to manipulate timezone info.
 
 
-## image manipulation ##
+## <a name="image manipulation"/>image manipulation ##
 - [gif2gpr ](https://github.com/cod5/public-domain/blob/master/g/gif2gpr.md)   GIF reader.
 
 - [gifsave ](https://github.com/cod5/public-domain/blob/master/g/gifsave.md)   GIF writer.
@@ -267,7 +305,7 @@
 - [tgasave ](https://github.com/cod5/public-domain/blob/master/t/tgasave.md)   TGA writer.
 
 
-## console tool ##
+## <a name="console tool"/>console tool ##
 - [date ](https://github.com/cod5/public-domain/blob/master/d/date.md)   Posix date
 
 - [es ](https://github.com/cod5/public-domain/blob/master/e/es.md)   an extensible shell.
@@ -287,7 +325,7 @@
 - [yabbawhap ](https://github.com/cod5/public-domain/blob/master/y/yabbawhap.md)   Compression utility
 
 
-## scientific application ##
+## <a name="scientific application"/>scientific application ##
 - [libtomfastmath ](https://github.com/cod5/public-domain/blob/master/l/libtomfastmath.md)   optimized multiple-precision integer library 
 
 - [libtomfloat ](https://github.com/cod5/public-domain/blob/master/l/libtomfloat.md)   floating point operations
@@ -299,7 +337,7 @@
 - [otter ](https://github.com/cod5/public-domain/blob/master/o/otter.md)   resolution-style theorem prover.
 
 
-## programming language ##
+## <a name="programming language"/>programming language ##
 - [atlast ](https://github.com/cod5/public-domain/blob/master/a/atlast.md)   a toolkit that makes applications programmable.
 
 - [cmucl ](https://github.com/cod5/public-domain/blob/master/c/cmucl.md)   Common Lisp.
@@ -320,4 +358,16 @@
 
 - [minilisp ](https://github.com/cod5/public-domain/blob/master/m/minilisp.md)   lisp interpreter.
 
-- [s9fes ](https://github.com/cod5/
+- [s9fes ](https://github.com/cod5/public-domain/blob/master/s/s9fes.md)   Scheme interpreter.
+
+- [salmon ](https://github.com/cod5/public-domain/blob/master/s/salmon.md)   Salmon Programming Language.
+
+- [stb ](https://github.com/cod5/public-domain/blob/master/s/stb.md)   collection of highly valuable algorithms from nothings.org
+
+- [subc ](https://github.com/cod5/public-domain/blob/master/s/subc.md)   minimal C compiler.
+
+- [tu_testbed ](https://github.com/cod5/public-domain/blob/master/t/tu_testbed.md)   flash interpreter
+
+- [twok ](https://github.com/cod5/public-domain/blob/master/t/twok.md)   Mini programming language 
+
+- [zetac ](https://github.com/cod5/public-domain/blob/master/z

@@ -1,4 +1,4 @@
-# httpproxy.zip #
+# httpproxy #
 
 ### connects to a host as a tunnel ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/httpproxy
 
 Programming language: C
+
 Homepage: http://freshmeat.net/projects/httpproxy
+
 Download date: 27-06-2010
+
 Downloaded from ftp://ftp.stacken.kth.se/pub/httpproxy/httpproxy-0.2.tar.gz
 
 #### Status ####

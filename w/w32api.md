@@ -1,4 +1,4 @@
-# w32api-3.13-mingw32.zip #
+# w32api #
 
 ### MinGW Windows API. ###
 
@@ -8,8 +8,11 @@
 https://github.com/cod5/public-domain/tree/w32api
 
 Programming language: C
+
 Homepage: http://www.mingw.org/
+
 Download date: 02-03-2009
+
 Downloaded from http://internap.dl.sourceforge.net/sourceforge/mingw/w32api-3.13-mingw32-src.tar.gz
 
 #### Status ####

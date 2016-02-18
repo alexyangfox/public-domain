@@ -1,4 +1,4 @@
-# pegc.zip #
+# pegc #
 
 ### PEG parser generation library. ###
 
@@ -10,8 +10,11 @@ toolkits like Boost.Spirit, PEGTL, and parsepp.*
 https://github.com/cod5/public-domain/tree/pegc
 
 Programming language: C
+
 Homepage: http://fossil.wanderinghorse.net/repos/pegc/index.cgi/home
+
 Download date: 07-06-2014
+
 Downloaded from http://fossil.wanderinghorse.net/repos/pegc/index.cgi/zip/pegc-705c7a70ba293fd6.zip?uuid=705c7a70ba293fd637f9081875893f22e4ba9bb4
 
 #### Status ####
