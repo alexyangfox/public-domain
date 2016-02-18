@@ -369,4 +369,7 @@
 
 - [tu_testbed ](https://github.com/cod5/public-domain/blob/master/t/tu_testbed.md)   flash interpreter
 
-- [twok ](https://gith
+- [twok ](https://github.com/cod5/public-domain/blob/master/t/twok.md)   Mini programming language 
+
+- [zetac ](https://github.com/cod5/public-domain/blob/master/z/zetac.md)   C interpreter in Lisp.
+
