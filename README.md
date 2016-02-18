@@ -1,5 +1,6 @@
 <a href="http://cod5.org"><img src="http://www.cod5.org/logo_scan.gif" /></a>
-# [COD5.org](http://cod5.org): Public Domain Software code sources #### Other lists of public domain software ###
+# [COD5.org](http://cod5.org): Public Domain Software code sources #
+### Other lists of public domain software ###
 - [unlicense.org](http://unlicense.org)
 
 - [stb nothings](https://github.com/nothings/stb/blob/master/docs/other_libs.md)
@@ -371,4 +372,4 @@
 
 - [salmon ](https://github.com/cod5/public-domain/blob/master/s/salmon.md)   Salmon Programming Language.
 
-- [stb ](https://github.com/cod5/public-domain/blob/master/s/stb.md)   collection of highly valuable alg
+- [stb ](https://github.com/cod5/public-domain/blob/master/s/stb.md)   collection of highly valuable al
