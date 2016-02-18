@@ -371,13 +371,4 @@
 
 - [salmon ](https://github.com/cod5/public-domain/blob/master/s/salmon.md)   Salmon Programming Language.
 
-- [stb ](https://github.com/cod5/public-domain/blob/master/s/stb.md)   collection of highly valuable algorithms from nothings.org
-
-- [subc ](https://github.com/cod5/public-domain/blob/master/s/subc.md)   minimal C compiler.
-
-- [tu_testbed ](https://github.com/cod5/public-domain/blob/master/t/tu_testbed.md)   flash interpreter
-
-- [twok ](https://github.com/cod5/public-domain/blob/master/t/twok.md)   Mini programming language 
-
-- [zetac ](https://github.com/cod5/public-domain/blob/master/z/zetac.md)   C interpreter in Lisp.
-
+- [stb ](https://github.com/cod5/public-domain/blob/master/s/stb.md)   collection of highly valuable alg
