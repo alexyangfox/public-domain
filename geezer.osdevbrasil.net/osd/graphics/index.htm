@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<TITLE>OSD: Graphics</TITLE>
+
+<A HREF="../index.htm">OSD Home</A>
+
+<!--
+From Message-ID: <3FD3EFB6.6DB558CF@sympatico.ca>
+
+Video boards that are not quite compatible with VGA:
+- Geforce               - Matrox
+- S3 Virge 3D?          - Trident?
+- Voodoo		- "weird 3D cards"
+-->
+
+<UL>
+<LI><A HREF="index.htm#modeset"># - Graphics in pmode</A>
+<LI><A HREF="index.htm#timing"># - Video timing</A>
+<LI><A HREF="index.htm#vga"># - VGA</A>
+<LI><A HREF="index.htm#svga"># - Super VGA (SVGA)</A>
+
+<LI><A HREF="index.htm#snippets"># - Code snippets</A>
+<LI><A HREF="index.htm#links"># - Links</A>
+<LI><A HREF="../index.htm#contact"><B>REPORT BUGS OR ERRORS IN THIS DOCUMENT</B></A>
+</UL>
+
+<A NAME="modeset"></A>
+<H2>Graphics in pmode</H2>
+
+'How do I enable graphics from protected mode?'
+
+<OL>
+<LI><B>You don't</B>. Graphics programming is fun, but graphics are
+ hardly essential for an OS. <B>Don't get side-tracked</B>.
+<LI>Call the BIOS mode-set interrupt <B>in the 16-bit boot code</B>,
+ before the pmode kernel starts.
+<LI>Use protected-mode code to <B>program the VGA directly</B>, without
+ using the BIOS. This works only with VGA-compatible video boards
+ and VGA-compatible video modes.
+<LI>Add a <B>virtual 8086 mode monitor (VMM)</B> to your OS. Call the
+ BIOS mode-set interrupt in virtual 8086 mode.
+<LI>Switch from pmode to real mode, call the BIOS mode-set interrupt in
+ real mode, then return to pmode.
+<LI><B>Write a protected-mode driver</B> specifically for the SVGA chip
+ used in your video board. Someone else who wants to use your OS must have
+ the same video board (or they must write a new driver for their own video
+ board).
+<LI>Call VBE 3.x BIOS functions in 16-bit protected mode. Few video cards
+ support VBE 3.x</B>.
+</OL>
+
+<A NAME="timing"></A>
+<H2>Video timing</H2>
+
+<UL>
+<LI> Dot clock (pixel clock)
+<LI>Character clock = dot clock divided by 8 or 9
+<LI>Horizontal sync (retrace) frequency = character clock / horizontal total
+<LI>Horizontal total / horizontal displayed ~ 1.2 (20% overscan)
+<LI>Vertical sync (retrace) frequency = horizontal sync frequency / vertical total
+<LI>Vertical total / vertical displayed ~ 1.1 (10% overscan)
+</UL>
+
+<A NAME="vga"></A>
+<H2>VGA</H2>
+
+<UL>
+<LI>INT 10h VGA BIOS interrupts which work in <B>real or virtual-8086
+ mode only</B>, to set mode, change font, etc.
+<LI>Dot clock is one of: 28.35, 25.2, 14.175, or 12.6 MHz
+<LI>Character clock is dot clock divided by 8 or 9
+<LI>Horizontal sync frequency for very old VGA monitors is <B>always
+ 31.5 kHz</B>. Other frequencies can be produced by the VGA board and
+ are supported by newer SVGA monitors.
+<LI>Vertical sync frequency for very old VGA monitors is <B>always 60 or
+ 70 Hz</B>. Other frequencies can be produced by the VGA board and are
+ supported by newer SVGA monitors.
+<LI>No interlace. No video memory 'banks'. No color depth > 8.
+  Only 256K usable video memory max.
+<LI>Four memory <I>planes</I>, 64K each: P1, P2, P4, and P8
+<LI><B>Text:</B> characters occupy even bytes in plane P1, attributes
+ occupy odd bytes in plane P2, fonts are in plane P4. Text mode uses
+ <I>Even/Odd</I> addressing: <A HREF="../cons/index.htm#nobios">bit b0 of
+ address selects between planes P1 and P2</A>, so you need not change
+ planes to set the attributes.
+<LI><B>4-color (CGA) graphics</B>: 4 pixels per byte; uses planes P1 and P2.
+ As with text, Even/Odd addressing eliminates the need to switch planes.
+<LI><B>16-color graphics</B>: four monochrome planes: blue, green, red,
+ and intense (the 16- and 256-color palettes can be re-defined to give
+ you any 16 colors you want). Highest graphics resolution available with
+ plain VGA, but very difficult to write software for this mode.
+<LI><B>256-color graphics</B>: one byte per pixel. Simple software, but low
+ resolution with plain VGA. All four planes are used with <I>Chain-4</I>
+ addressing: bits b0 and b1 of the address select the plane so you need not
+ worry about it. <I><B>Mode-X</B></I> is unchained 256-color mode:
+ difficult to program, but it lets you use up to 256K video memory for
+ 256-color modes up to 360x480 resolution.
+</UL>
+
+<A NAME="svga"></A>
+<H2>Super VGA (SVGA)</H2>
+
+<UL>
+<LI>INT 10h AH=4Fh BIOS interrupts (VESA BIOS extensions; VBE). VBE 1.x
+ runs in <B>real or virtual-8086 mode only</B>. VBE 2.x has a few
+ not-too-useful pmode functions. For VBE 3.x, most functions (including
+ mode-set) are carefully written to work in <B>real mode or 16-bit
+ protected mode</B>.
+<LI>More than 256K video memory
+<LI>SVGA boards support many dot clock frequencies. SVGA monitors
+ support many sync frequencies.
+<LI>16-bit SVGA, VBE 1.x BIOS: video memory accessible one 64K 'bank' at
+ a time. <B>Paging can be used to simulate a linear framebuffer</B>, but
+ there are some 'gotchas' with this method (see links below)
+<LI>32-bit SVGA, VBE 2.x or 3.x BIOS: <B><I>Linear framebuffer</I></B> for
+ video memory -- no banks or planes, but video memory is no longer at A000:0000
+</UL>
+
+<A NAME="snippets"></A>
+<H2>Code snippets</H2>
+
+<A HREF="grdemo.c">VGA graphics demo</A>. Pixels, rectangular fill,
+ horizontal and vertical lines, and text blitting in 5 different
+ graphics modes.
+<P>
+<A HREF="modes.c">Set text or graphics video modes</A> (including text font)
+ <B>without using the BIOS</B>
+<P>
+<A HREF="../pmode/index.htm#snippets">Simple V86 mode monitor</A>;
+ calls 16-bit video BIOS from 32-bit pmode.
+
+<A NAME="links"></A>
+<H2>Links</H2>
+
+Tauron VGA utilities:
+ <A HREF="http://alexfru.narod.ru/miscdocs/ega_vga/tauron30.zip">
+ http://alexfru.narod.ru/miscdocs/ega_vga/tauron30.zip</A>
+<P>
+Finn Thøgersen's VGADOC: <A HREF="http://home.worldonline.dk/finth/">
+ http://home.worldonline.dk/finth/</A>
+<P>
+Simulated linear framebuffer:
+<UL>
+<LI>Alexei Frounze's LFBemu: <A HREF="http://alexfru.narod.ru/miscdocs/pmode/lfbemu22.zip">
+ http://alexfru.narod.ru/miscdocs/pmode/lfbemu22.zip</A>
+<LI>Chris Giese's simulated linear framebuffer:
+ <A HREF="http://my.execpc.com/~geezer/os/slfb.asm">
+ http://my.execpc.com/~geezer/os/slfb.asm</A>
+<LI>Potential problems with simulated linear framebuffers:
+ <A HREF="http://marc.theaimsgroup.com/?m=88102879813311&w=2">
+ http://marc.theaimsgroup.com/?m=88102879813311&w=2</A>
+</UL>
+
+<A NAME="todo"></A>
+<H2>TO DO</H2>
+
+<PRE>(S)VGA functional units:
+- Miscellaneous register
+- Sequencer (SEQ)
+        - In unchained modes, SEQ register 2 selects one
+          (or more!) planes to write
+- CRT Controller (CRTC)
+- Graphics Controller (GC)
+        - In unchained modes, GC register 4 selects a plane to read
+- Attribute Controller (AC)
+        - 16-color palette in first 16 registers of AC
+- 256-color palette (DAC)
+
+Gotchas:
+- 'Lock' bits in CRTC registers 3 and 17
+- Screwy CGA addressing (disabled by bit b0 in CRTC register 23)
+- Palette is not compact, i.e. for the 16-color palette
+        entry[i] != i</PRE>
+
+<A NAME="errors"></A>
+<H2><A HREF="../index.htm#contact"><B>REPORT BUGS OR ERRORS IN THIS DOCUMENT</B></A></H2>
+

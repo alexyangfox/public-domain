@@ -1,0 +1,35 @@
+<html><body>
+
+<B>Normal segment-based address translation does not apply to the GDT
+ address in the pseudo-descriptor.</B> You must perform the equivalent
+ address translation yourself, by adding DS * 16 to the GDT address in
+ the pseudo-descriptor:
+
+<TABLE WIDTH="820"><TR><TD>
+<IMG SRC="bad-gdt.gif" WIDTH="400" HEIGHT="480">
+<IMG SRC="good-gdt.gif" WIDTH="400" HEIGHT="480">
+</TD></TR></TABLE>
+
+<B>The same 'fixup' process must be done for the IDT pseudo-descriptor
+ before using the LIDT instruction</B> to load the IDT register (IDTR)
+ in the CPU. The fixup code shown in the image above is typical.
+ Here is another approach:
+
+<PRE>        xor eax,eax
+	mov ax,ds
+	shl eax,16
+	add [gdt_ptr + 2],eax</PRE>
+
+Though shorter, there are three potential problems with this fragment:
+<UL>
+<LI>Requires a 32-bit CPU
+<LI>The 32-bit value at [gdt_ptr + 2] must be initialized to 'gdt'
+<LI>This code fragment will not work correctly if called more than once
+</UL>
+The first of these problems is not serious (who uses 16-bit pmode?).
+ The other two can be addressed with yet another code fragment:
+<PRE>        xor esi,esi
+        mov si,ds
+        shl esi,4
+        lea eax,[esi + gdt]
+        mov [gdt_ptr + 2],eax</PRE>

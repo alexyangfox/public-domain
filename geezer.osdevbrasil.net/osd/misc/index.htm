@@ -1,0 +1,199 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<TITLE>OSD: Miscellaneous</TITLE>
+
+<A HREF="../index.htm">OSD Home</A>
+<P>
+
+<!--
+do something with these files:
+RTC.C  8253.TXT  8259.TXT
+-->
+
+<A NAME="8253"></A>
+Reprogram the 8253 timer chip to generate interrupts at frequency HZ:
+
+<PRE>        #define HZ      100
+
+	static const unsigned short foo = 1193182L / HZ;
+
+	outportb(0x43, 0x36);	/* channel 0, LSB/MSB, mode 3, binary */
+	outportb(0x40, foo &amp; 0xFF);	/* LSB */
+	outportb(0x40, foo >> 8);       /* MSB */</PRE>
+
+<HR>
+
+<A NAME="energy"></A>
+<TABLE WIDTH="100%"><TR><TD>
+  Conserving energy:
+  <UL>
+  <LI>OS should execute the <TT>HLT</TT> instruction when it has
+      nothing else to do (be sure to turn on interrupts first).
+  <LI><A HREF="vesa.c">Power-down an Energy Star monitor</A>
+  <LI><A HREF="ata-idle.c">Spin down an IDE hard disk</A>
+  <LI>APM? ACPI?
+  </UL>
+</TD><TD ALIGN="RIGHT">
+  <IMG SRC="energyst.gif" WIDTH="172" HEIGHT="79" ALT="energy star">
+</TD></TR></TABLE>
+
+<HR>
+
+<A NAME="discard"></A>
+Discarding run-once (initialization) kernel code and data, using GNU C.
+  This requires paging, and is a 4-step process.
+
+<H3>1. Define macros</H3>
+
+Discardable code goes into section <TT>.dtext</TT> of the .o files, instead
+of <TT>.text</TT><BR>
+Discardable data goes into section <TT>.ddata</TT> of the .o files, instead
+of <TT>.data</TT>
+
+<PRE>        #define DISCARDABLE_CODE(X)                             \
+		X __attribute__((section (".dtext")));		\
+								\
+		X
+
+	#define	DISCARDABLE_DATA(X)				\
+		extern X __attribute__((section (".ddata")));	\
+								\
+                X</PRE>
+
+<!--
+Using MS Visual C. Ask Tim Robinson about this, or try here:
+http://msdn.microsoft.com/library/devprods/vs6/visualc/vccore/_langref_allocate.htm
+
+	#pragma data_seg(".ddata")
+	module_info_t __declspec(allocate(".ddata")) _info;
+	#pragma data_seg()
+
+per news:<avspaj$19il$6@gavrilo.mtu.ru>:
+The section flags are defined in linker command line.
+
+-->
+
+<H3>2. Use macros</H3>
+
+<PRE>        #define HZ      100
+
+	DISCARDABLE_CODE(static void init_8253(void))
+	{       static const unsigned short foo = (3579545L / 3) / HZ;
+
+		outportb(0x43, 0x36);   /* channel 0, LSB/MSB, mode 3, binary */
+		outportb(0x40, foo &amp; 0xFF);     /* LSB */
+		outportb(0x40, foo >> 8); }     /* MSB */
+
+	DISCARDABLE_DATA(unsigned char g_boot_logo[]) =
+	{
+		0xFF, 0xFF, 0xFF /* ... */
+        };</PRE>
+
+<H3>3. Write linker script</H3>
+
+The contents of the <TT>.dtext</TT> and <TT>.text</TT> sections are merged at link
+time, but separated by page (4K) boundaries; same for <TT>.ddata</TT> and
+<TT>.data</TT>. This separation lets the virtual memory system isolate the
+discardable code and data and free its memory after it's been used.
+
+<PRE>        ENTRY(entry)
+        LS_Phys = 0x100000; /* 1 meg = load (physical) address */
+        LS_Virt = 0xC0000000; /* 3 gig = virtual address */
+        SECTIONS
+        {   .text LS_Virt : AT(LS_Phys)
+            {   code = .; _code = .;
+                *(.text)                /* kernel code at 3 gig */
+                *(.rodata*)             /* read-only data */
+                . = ALIGN(4096);
+                d_code = .; _d_code = .;
+                *(.dtext)               /* discardable kernel code */
+                . = ALIGN(4096); }
+            .data : AT(LS_Phys + (LS_Data - LS_Code))
+            {   data = .; _data = .;
+                *(.data)                /* kernel data */
+                . = ALIGN(4096);
+                d_data = .; _d_data = .;
+                *(.ddata)               /* discardable kernel data */
+                . = ALIGN(4096); }
+            .bss : AT(LS_Phys + (LS_Bss - LS_Code))
+            {   bss = .; _bss = .;
+                *(.bss)                 /* kernel BSS */
+                *(COMMON)               /* 'common' vars */
+                . = ALIGN(4096); }
+            end = .; _end = .; }</PRE>
+
+<H3>4. Free the discardable kernel memory after init</H3>
+
+<PRE>        extern char d_code[], data[], d_data[], bss[];
+
+        /* unmap (data - d_code) bytes at virtual address d_code */
+        unmap_mem(d_code, data - d_code);
+	unmap_mem(d_data, bss - d_data);</PRE>
+
+<HR>
+
+<A NAME="screensize"></A>
+Read text-mode screen size from the VGA registers:
+
+<PRE>        unsigned char _vc_width, _vc_height;
+
+                unsigned short crtc_base_adr, v_disp;
+                unsigned char temp, char_ht;
+
+		if((inportb(0x3CC) &amp; 0x01) != 0)
+                        crtc_base_adr = 0x3D4; /* color */
+                else
+                        crtc_base_adr = 0x3B4; /* mono */
+        /* vertical scan lines displayed */
+                outportb(crtc_base_adr, 0x12);
+                v_disp = inportb(crtc_base_adr + 1);
+        /* pull in bits b8 and b9 from the dread overflow register */
+                outportb(crtc_base_adr, 0x07);
+                temp = inportb(crtc_base_adr + 1);
+		if((temp &amp; 0x02) != 0)
+                        v_disp |= 0x100;
+		if((temp &amp; 0x40) != 0)
+                        v_disp |= 0x200;
+		v_disp++;
+        /* scan lines/char */
+                outportb(crtc_base_adr, 0x09);
+		char_ht = (inportb(crtc_base_adr + 1) &amp; 0x1F) + 1;
+        /* vertical resolution in characters is the quotient */
+                _vc_height = v_disp / char_ht;
+        /* horizontal resolution in characters */
+                outportb(crtc_base_adr, 0x01);
+                _vc_width = inportb(crtc_base_adr + 1) + 1;
+                printf("Screen resolution is %u x %u\n",
+                        _vc_width, _vc_height);</PRE>
+
+<HR>
+
+<A NAME="loopback"></A>
+File-as-disk using Linux loopback device (or, You Don't Need Mtools):
+
+<PRE>#!/bin/sh
+BLOCKS=1440
+FILE=diskette.img
+# create zeroed file
+dd if=/dev/zero bs=1k count=$BLOCKS of=$FILE
+# make Linux treat it as a disk device
+losetup /dev/loop0 $FILE
+# create FAT12 (DOS) -OR- ext2 (Linux) filesystem
+mkdosfs /dev/loop0 $BLOCKS
+# mke2fs /dev/loop0 $BLOCKS
+# mount the disk-as-file
+# mkdir mnt
+mount /dev/loop0 mnt
+
+# create directories on mnt, copy/delete/edit files, etc.
+
+# done with the simulated disk
+umount mnt
+# done with loopback device:
+losetup -d /dev/loop0
+# configure bochs to use $FILE (diskette.img)
+bochs</PRE>
+
+<HR>
+
+<A NAME="errors"></A>
+<H2><A HREF="../index.htm#contact"><B>REPORT BUGS OR ERRORS IN THIS DOCUMENT</B></A></H2>

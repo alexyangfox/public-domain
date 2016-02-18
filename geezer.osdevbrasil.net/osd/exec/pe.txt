@@ -1,0 +1,478 @@
+x86 Win32 PE COFF files
+All multi-byte values are LITTLE ENDIAN
+
+xxx - to do
+- finish description of a.out file header
+- PE file exports
+- resources
+- demo code for fixups and dynamic linking
+
+offset	size	description
+------	----	-----------
+0	4	PE header
+4	20	COFF header
+  4	  2	COFF file magic (=0x014C)
+  6	  2	number of sections
+  8	  4	time/date stamp
+  12	  4	file offset of symbol table
+  16	  4	number of symbol table entries
+  20	  2	a.out header size
+  22	  2	COFF file flags
+24	120+	aout header
+  24	  2	aout magic (=0x010B)
+  26	  2	aout version
+  28	  4	.text size
+  32	  4	.data size
+  36	  4	.bss size
+  40	  4	entry point (initial EIP)
+  44	  4	file offset of .text
+  48	  4	file offset of .data
+
+  52	  4	image base
+  56	  4	section alignment
+  60	  4	file alignment
+  64	  2	major OS version
+  66	  2	minor OS version
+  68	  2	major image version
+  70	  2	minor image version
+  72	  2	major subsystem version
+  74	  2	minor subsystem version
+  76	  4	reserved (=0)
+  80	  4	size of image
+  84	  4	size of headers
+  88	  4	checksum
+  92	  2	subsystem
+  94	  2	DLL characteristics
+  96	  4	size of stack reserve
+  100	  4	size of stack commit
+  104	  4	size of heap reserve
+  108	  4	size of heap commit
+  112	  4	loader flags
+
+  116	  4	number of entries in data directory
+  120	  4     export table RVA	(0th data directory entry)
+  124	  4	export table size
+  128	  4	import table RVA	(1st data directory entry)
+  132	  4	import table size
+  136	  4	resource table RVA	(2nd data directory entry)
+  140	  4	resource table size
+  144	  4	? RVA			(3rd data directory entry)
+  148	  4	? size
+  152	  4	? RVA			(4th data directory entry)
+  156	  4	? size
+  160	  4	base relocations RVA	(5th data directory entry)
+  164	  4	base relocations size
+  168
+
+
+================================================================
+DOS .EXE FILE HEADER (MUST BE 64 BYTES OR MORE)
+================================================================
+Only fields relevant to Win32 PE COFF are shown. The DOS .EXE
+file header is not present for Win32 PE COFF relocatable files.
+
+file
+offset
+       -------------------------------------------------------
+   0  |       EXE file magic      |                           |
+       -------------------------------------------------------
+   4  |                           |                           |
+       -------------------------------------------------------
+   8  |        header size        |                           |
+       .......................................................
+  3Ch |             offset of new executable header           |
+       -------------------------------------------------------
+  40h
+
+EXE file magic
+	=5A4Dh ("MZ")
+header size
+        =size of .EXE file header and fixups, in 16-byte
+	paragraphs. This value is the file offset of the
+	"load module" (combined code and data segments).
+	Some OSes and/or programs may fail if the header is
+	not a multiple of 512 bytes.
+offset of new executable header
+	=0 for normal DOS .EXE
+	This field is not valid unless header size >= 4
+
+================================================================
+WIN32 PE COFF FILE HEADER (24 BYTES)
+================================================================
+offset into
+new executable
+       -------------------------------------------------------
+   0  |               new executable file magic               |
+       -------------------------------------------------------
+   4  |      COFF file magic      |    number of sections     |
+       -------------------------------------------------------
+   8  |                    time/date stamp                    |
+       -------------------------------------------------------
+  0Ch |              file offset of symbol table              |
+       -------------------------------------------------------
+  10h |              number of symbol table entries           |
+       -------------------------------------------------------
+  14h |      aout header size     |     COFF file flags       |
+       -------------------------------------------------------
+  18h
+
+new executable file magic
+	=45500000h ("PE\x00\x00")
+        This field is not present for relocatable files.
+COFF file magic
+	=014Ch
+number of sections
+        (self-explanatory)
+time/date stamp
+	=number of seconds since Dec 31, 1969, 4:00 PM (?)
+file offset of symbol table
+        (self-explanatory)
+number of symbol table entries
+        (self-explanatory)
+aout header size
+        =00E0h for Win32 PE COFF executable, 0 for relocatable
+COFF file flags
+          01h=relocation info stripped from file
+          02h=executable file (no unresolved externals)
+          04h=line numbers stripped from file
+          08h=local symbols stripped from file
+         200h=debug info stripped from file
+        1000h="system" file
+        2000h=file is a DLL
+
+================================================================
+WIN32 PE COFF A.OUT FILE HEADER (224 BYTES)
+================================================================
+The a.out header is not present for relocatable files.
+
+offset into
+new executable
+       -------------------------------------------------------
+  18h |         aout magic        |       aout version        |
+       -------------------------------------------------------
+  1Ch |                       code size                       |
+       -------------------------------------------------------
+  20h |                       data size                       |
+       -------------------------------------------------------
+  24h |                        bss size                       |
+       -------------------------------------------------------
+  28h |               entry point (initial EIP)               |
+       -------------------------------------------------------
+  2Ch |             file offset of .text section              |
+       -------------------------------------------------------
+  30h |             file offset of .data section              |
+       -------------------------------------------------------
+  34h |                      image base                       |
+       .......................................................
+      :                                                       :
+       .......................................................
+  74h |             number of data directory entries          |
+       -------------------------------------------------------
+  78h |    DD entry #0:   export table RVA                    |
+       -------------------------------------------------------
+  7Ch |                   export table size                   |
+       -------------------------------------------------------
+  80h |    DD entry #1    import table RVA                    |
+       -------------------------------------------------------
+  84h |                   import table size                   |
+       -------------------------------------------------------
+  88h |    DD entry #2   resource table RVA                   |
+       -------------------------------------------------------
+  8Ch |                  resource table size                  |
+       -------------------------------------------------------
+  90h |    DD entry #3   exception table RVA  (?)             |
+       -------------------------------------------------------
+  94h |                  exception table size (?)             |
+       -------------------------------------------------------
+  98h |    DD entry #4   security table RVA   (?)             |
+       -------------------------------------------------------
+  9Ch |                  security table size  (?)             |
+       -------------------------------------------------------
+  A0h |    DD entry #5  base relocations RVA                  |
+       -------------------------------------------------------
+  A4h |                 base relocations size                 |
+       -------------------------------------------------------
+  A8h |    DD entry #6         debug RVA                      |
+       -------------------------------------------------------
+  ACh |                       debug size                      |
+       -------------------------------------------------------
+  B0h |    DD entry #7       copyright RVA                    |
+       -------------------------------------------------------
+  B4h |                      copyright size                   |
+       -------------------------------------------------------
+  B8h |    DD entry #8       globalptr RVA    (?)             |
+       -------------------------------------------------------
+  BCh |                      globalptr size   (?)             |
+       -------------------------------------------------------
+  C0h |    DD entry #9           TLS RVA                      |
+       -------------------------------------------------------
+  C4h |                         TLS size                      |
+       -------------------------------------------------------
+  C8h |    DD entry #10     load config RVA   (?)             |
+       -------------------------------------------------------
+  CCh |                     load config size  (?)             |
+       -------------------------------------------------------
+  D0h |    DD entry #11    bound import RVA   (?)             |
+       -------------------------------------------------------
+  D4h |                    bound import size  (?)             |
+       -------------------------------------------------------
+  D8h |    DD entry #12          IAT RVA      (?)             |
+       -------------------------------------------------------
+  DCh |                         IAT size      (?)             |
+       -------------------------------------------------------
+  E0h
+       .......................................................
+       .......................................................
+  F8h
+
+
+aout magic
+	=010Bh
+aout version
+	=linker version; MSB=major, LSB=minor (e.g. 2.23)
+code size
+	=combined and rounded-up size of all code sections
+data size
+	=combined and rounded-up size of all data sections
+bss size
+	=combined and rounded-up size of all bss sections
+entry point (initial EIP)
+	(self-explanatory)
+file offset of .text section
+        (self-explanatory)
+file offset of .data section
+        (self-explanatory)
+image base
+        ?
+import table RVA
+        relative virtual address of import table --
+        "relative" because you must add the image base value
+        to get the true VMA
+import table size
+        number of entries in import table
+fixup table RVA
+        relative virtual address of fixups
+fixup table size
+        number of fixups
+
+xxx - finish
+
+================================================================
+WIN32 PE COFF SECTION HEADER (40 BYTES)
+================================================================
+offset into
+new executable
+for first
+section header
+       -------------------------------------------------------
+  F8h |                        section                        |
+      |                         name                          |
+      |                                                       |
+       -------------------------------------------------------
+ 100h |          virtual section size (size-in-memory)        |
+       -------------------------------------------------------
+ 104h |                      section RVA                      |
+       -------------------------------------------------------
+ 108h |               raw data size (size-on-disk)            |
+       -------------------------------------------------------
+ 10Ch |                 file offset of section                |
+       -------------------------------------------------------
+ 110h |                file offset of relocations             |
+       -------------------------------------------------------
+ 114h |            file offset of line number info            |
+       -------------------------------------------------------
+ 118h |       num. relocations    |     num. line numbers     |
+       -------------------------------------------------------
+ 11Ch |                     section flags                     |
+       -------------------------------------------------------
+ 120h
+
+section name
+	=.text  .data   .bss    .stab   .stabstr
+	or user-defined section name
+	(xxx - long section names?)
+virtual section size (size-in-memory)
+	size of section in memory. If greater than size-on-disk,
+	this section contains a BSS, and the difference should
+	be zeroed.
+section RVA
+        relative virtual address of section -- "relative" because
+        you must add the image base value (from the a.out header)
+        to get the true VMA
+raw data size (size-on-disk)
+	size of section on disk
+file offset of section
+	(self-explanatory)
+file offset of relocations
+	(self-explanatory)
+file offset of line number info
+	(self-explanatory)
+number of relocations
+	(self-explanatory)
+number of line number entries
+	(self-explanatory)
+section flags
+              20h=.text (code) section
+              40h=.data section
+              80h=.bss section
+             200h=informational section (e.g. comments)
+             800h=do not put this section in final .EXE file
+         2000000h=discardable section (e.g. .reloc)
+        10000000h=shareable section (used by DLLs)
+        20000000h=executable section
+        40000000h=readable section
+        80000000h=writable section
+
+================================================================
+COFF LINE NUMBER RECORDS (6 BYTES)
+================================================================
+record
+offset
+       -------------------------------------------------------
+   0  |          physical address or symbol table index       |
+       -------------------------------------------------------
+   4  |         line number       |
+       ---------------------------
+   6
+
+physical address or symbol table index
+	=(line number != 0) physical address of line, or
+	 (line number == 0) symbol table index of line label
+
+================================================================
+COFF RELOCATION RECORDS (10 BYTES)
+================================================================
+record
+offset
+       -------------------------------------------------------
+   0  |                    virtual address                    |
+       -------------------------------------------------------
+   4  |                   symbol table index                  |
+       -------------------------------------------------------
+   8  |       relocation type     |
+       ---------------------------
+  0Ah
+
+relocation type
+	=0006h  for 32-bit absolute address
+	=0014h  for 32-bit EIP-relative address
+
+Demo code for performing Win32 PE COFF relocations:
+http://my.execpc.com/~geezer/osd/exec/runreloc.zip
+
+================================================================
+COFF SYMBOL TABLE RECORDS (18 BYTES)
+================================================================
+record
+offset
+       -------------------------------------------------------
+   0  |                  8-char symbol name                   |
+      |          or 32-bit zeroes followed by 32-bit          |
+      |                 index into string table               |
+       -------------------------------------------------------
+   8  |                     symbol value                      |
+       -------------------------------------------------------
+  0Ch |       section number      |         symbol type       |
+       -------------------------------------------------------
+  10h |  sym class  |   num aux   |
+       ---------------------------
+  12h
+
+xxx - finish
+
+================================================================
+COFF STRING TABLE
+================================================================
+If end of symbol table < end of COFF file, the remainder of the
+COFF file is the string table. This table is used to store
+symbol names that are too long (9 characters or more) to fit
+into the symbol table entries.
+
+The first 4 bytes of the string table are the size of the string
+table itself. These 4 bytes should be zeroed after the size
+value has been read. Offsets into the string table are from the
+start of these 4 bytes. An offset of 0 is legal, and will result
+in a NULL string because of these 4 zeroes.
+
+Strings in the string table are normal, C-style (0-terminated)
+strings.
+
+================================================================
+WIN32 PE COFF FIXUPS (BASE RELOCATIONS)
+================================================================
+These relocations allow the executable file or DLL to load at
+any virtual address (similar to DOS .EXE fixups). They are
+sometimes (not always) stored in the ".reloc" section of the
+Win32 PE COFF executable or DLL.
+
+The fixup section is divided into "chunks".
+Each chunk contains the fixups for one 4K memory page:
+
+offset
+into chunk
+       -------------------------------------------------------
+   0  |                       page RVA                        |
+       -------------------------------------------------------
+   4  |                      chunk size                       |
+       -------------------------------------------------------
+   8  |           fixup #0        |           fixup #1        |
+       -------------------------------------------------------
+  0Ch |           fixup #2        |                           .
+       ----------------------------...........................
+
+page RVA
+        relative virtual address of 4K memory page to which
+        the fixups in this chunk will be applied
+chunk size
+        total size of this fixup chunk, including page RVA
+        and chunk size
+fixup
+        16-bit fixup records. Top 4 bits are fixup type,
+        bottom 12 bits are offset of fixup within 4K page.
+
+Each fixup applies to a 32-bit memory locations (a dword).
+The complete virtual address of the relocation is:
+        image_base + page_RVA + (fixup & 0xFFF);
+
+The top four bits specify the fixup type:
+        0=ABSOLUTE=dummy, padding, do nothing
+        1=relocate high 16 bits of dword
+        2=relocate low 16 bits of dword
+        3=HIGHLOW=relocate full 32 bits of dword
+
+There are other fixup types, but they aren't used for x86.
+
+================================================================
+WIN32 PE COFF IMPORTS
+================================================================
+The import and export tables are used for dynamic linking.
+The import table is sometimes (not always) stored in the
+".idata" section of the Win32 PE COFF executable or DLL.
+
+record
+offset
+       -------------------------------------------------------
+   0  |                    characteristics                    |
+       -------------------------------------------------------
+   4  |                    time/date stamp                    |
+       -------------------------------------------------------
+   8  |                    forwarder chain                    |
+       -------------------------------------------------------
+  0Ch |                       DLL name                        |
+       -------------------------------------------------------
+  10h |                      first thunk                      |
+       -------------------------------------------------------
+
+characteristics
+        ?
+time/date stamp
+        ?
+forwarder chain
+        ?
+DLL name
+        ?
+first thunk
+        ?
+
+Demo code for performing Win32 PE COFF fixups and dynamic
+linking: xxx - to do

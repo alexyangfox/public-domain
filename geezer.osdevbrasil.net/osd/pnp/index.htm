@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<TITLE>OSD: PnP and PCI</TITLE>
+
+<A HREF="../index.htm">OSD Home</A>
+
+<UL>
+<LI><A HREF="index.htm#snippets"># - Code snippets</A>
+<LI><A HREF="index.htm#links"># - Links</A>
+<LI><A HREF="../index.htm#contact"><B>REPORT BUGS OR ERRORS IN THIS DOCUMENT</B></A>
+</UL>
+
+<A NAME="snippets"></A>
+<H2>Code snippets</H2>
+
+Detect PnP and PCI devices:
+
+<TABLE BORDER="1" WIDTH="100%"><TR>
+ <TH></TH>
+ <TH ALIGN="CENTER">16-bit code (Turbo C, 16-bit Watcom C)</TH>
+ <TH ALIGN="CENTER">32-bit code (DJGPP, 32-bit Watcom C)</TH>
+</TR><TR>
+ <TD>PCI; using 16- or 32-bit PCI BIOS</TD>
+ <TD><A HREF="pcibio16.zip">pcibio16.zip</A></TD>
+ <TD><A HREF="pcibio32.zip">pcibio32.zip</A></TD>
+</TR><TR>
+ <TD>PCI; using I/O ports to access configuration mechanism 1</TD>
+ <TD COLSPAN="2"><A HREF="pci.c">pci.c</A></TD>
+</TR><TR>
+ <TD>PnP; using 16-bit PnP BIOS</TD>
+ <TD><A HREF="pnpbio16.c">pnpbio16.c</A></TD>
+ <TD><A HREF="pnpbio32.c">pnpbio32.c</A> (thunking)</TD>
+</TR><TR>
+ <TD>PnP; using I/O ports (no BIOS)</TD>
+ <TD COLSPAN="2">(incomplete)</TD>
+</TR></TABLE>
+<P>
+
+<!--
+rewrite PnP code that does not use the BIOS
+
+[1] To print peripheral names in human-readable format, the PnP code
+ needs Craig Hart's file <A HREF="pnpid.txt">pnpid.txt</A>
+<P>
+[2] Legacy devices such as the 8254 timer chip or 8259 interrupt controller
+ do not contain PnP circuitry, and can only be detected using the PnP BIOS.
+-->
+
+<A NAME="links"></A>
+<H2>Links</H2>
+
+Craig Hart's PnP pages: <A HREF="http://members.datafast.net.au/dft0802/">
+http://members.datafast.net.au/dft0802/</A>. Pascal PnP code and a list
+of PnP IDs.
+<P>
+PCICODE list: <A HREF="http://www.yourvote.com/pci">
+http://www.yourvote.com/pci</A>
+<P>
+PnP documents:
+<UL>
+<LI>From Microsoft, in RTF format:
+ <A HREF="http://www.microsoft.com/whdc/system/pnppwr/pnp/default.mspx">
+ http://www.microsoft.com/whdc/system/pnppwr/pnp/default.mspx</A>
+<LI>In Word and PostScript formats:
+ <A HREF="http://www.lysator.liu.se/~svedja/linux/pnp/docs.html">
+ http://www.lysator.liu.se/~svedja/linux/pnp/docs.html</a>
+</UL>
+<P>
+BIOS32 specification:
+ <A HREF="http://members.datafast.net.au/dft0802/specs/bios32.pdf">
+ http://members.datafast.net.au/dft0802/specs/bios32.pdf</A>
+<P>
+The specification for PCI BIOS, which is a 'client' of BIOS32, is
+ freely available only to members of the PCI SIG. However, you
+ can find <I>samizdat</I> copies on the web by searching for
+ the phrase &quot;PCI BIOS Specification&quot;
+<p>
+The PCI specification is also not freely available, but can be found
+ by searching for &quot;PCI Local Bus Specification&quot;
+ Avoid incomplete documents with similar titles (e.g.
+ &quot;PCI Local Bus Specification Revision 2.1 vs. 2.0&quot;)
+ Only Chapter 6 (Configuration Space) of this document deals with the
+ software aspects of PCI. Some of the material in this chapter is
+ summarized in Ralf Brown's Interrupt List.
+
+<A NAME="todo"></A>
+<H2>TO DO</H2>
+
+<PRE>
+- PnP code: lookup device code in PNPID.TXT and display description
+- PnP code: get supported resources and list all possible combinations
+- set hardware resources as well as reading them
+</PRE>
+
+<A NAME="errors"></A>
+<H2><A HREF="../index.htm#contact"><B>REPORT BUGS OR ERRORS IN THIS DOCUMENT</B></A></H2>
+

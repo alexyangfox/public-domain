@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<TITLE>OSD: Multitasking</TITLE>
+
+<A HREF="../index.htm">OSD Home</A>
+
+<!--
+An _extremely_ subtle glitch in Round Robin scheduling:
+http://www.Surreal-Time.com/RoundRobin.html
+
+here's how Linux 2.4 does kernel stack-swapping:
+http://lxr.linux.no/source/include/asm-i386/system.h
+it's inline code (a C macro) -- so no need to load EIP register?
+-- so no need to use slow IRET? xxx - study it some more
+
+RET vs. RETF vs. IRET for various CPUs
+to same privilege level in pmode (no task switch or stack-swap):
+instruction	286	386	486	Pentium
+-----------	---	---	---	-------
+RET		11	10+	5
+RETF		25	32+	18
+IRET		31	38	15
+-->
+
+<UL>
+<LI><A HREF="index.htm#types"># - Types of multitasking</A>
+<LI>Task-switching:
+ <UL>
+ <LI><A HREF="index.htm#tss"># - TSS-based task-switching</A>
+ <LI><A HREF="index.htm#setjmp"># - Using <tt>setjmp()</tt> and
+        <tt>longjmp()</tt> for task-switching</A>
+ <LI><A HREF="index.htm#stack"># - Stack-swapping</A>
+ </UL>
+<LI><A HREF="index.htm#snippets"># - Code snippets</A>
+<LI><A HREF="index.htm#links"># - Links</A>
+<LI><A HREF="../index.htm#contact"><B>REPORT BUGS OR ERRORS IN THIS DOCUMENT</B></A>
+</UL>
+
+<A NAME="types"></A>
+<H2>Types of multitasking</H2>
+
+<I><B>Cooperative</B></I> multitasking. When a task or thread has nothing
+ to do, it <i>yields</i> by calling the scheduler function 'voluntarily'.
+ Examples: Win16, old MacOS, simple kernels for embedded systems.
+<p>
+<I><B>Preemptive</B></I> multitasking. Task-switching is driven mainly by
+ asynchronous interrupts from keyboard, timer, disk, serial port, etc.
+ Examples: server OSes, most modern desktop OSes, realtime kernels.
+
+<A NAME="tss"></A>
+<H2>TSS-based task-switching</H2>
+
+xxx - reasons not to use it:
+<ul>
+<LI>works only with x86 CPUs
+<li>TSS mechanism is not being improved as the x86 CPU evolves, so it gets
+ slower compared to other task-switching methods in advanced x86 CPUs
+<li>less flexible that stack-swapping in terms of which registers
+ get reloaded (especially CR3; the page table register)
+</ul>
+
+<A NAME="setjmp"></A>
+<H2>Using <tt>setjmp()</tt> and <tt>longjmp()</tt> for task-switching</H2>
+
+<tt>setjmp()</tt> stores the CPU state (i.e. the registers, including
+ ESP) in a <tt>jmp_buf</tt> data structure. <tt>longjmp()</tt>
+ loads the CPU registers from a <tt>jmp_buf</tt>.
+<p>
+In general, the <tt>jmp_buf</tt> struct does not contain the entire
+ CPU state. glibc2, for example, saves only ESP, EIP, and the
+ <A HREF="../libc/index.htm#registers">callee-save registers</A>. This
+ is enough state, however, that <tt>setjmp()</tt> and <tt>longjmp()</tt>
+ can be used for <i>coroutines</i> (cooperatively-scheduled threads).
+ See <A HREF="index.htm#snippets">the code snippet below</A> for an example.
+<p>
+It's possible to use these functions for preemptive multitasking if
+<ol>
+<li>EFLAGS is made part of the <tt>jmp_buf</tt>. This is needed to maintain
+ the state of the interrupt enable bit for each thread, and it's a
+ prerequisite for:
+<li><tt>longjmp()</tt> must end with IRET. For an explanation of why this
+ is necessary, <A HREF="index.htm#iret">see below</A>. The use of IRET
+ implies that:
+<li>The code to be run is ring 0 (kernel privilege) code
+<li><b>The other general-purpose registers (EAX, ECX, EDX) must be saved</b>
+ in the <tt>jmp_buf</tt>. It may or may not be necessary to save the
+ remaining CPU registers. There is no need to save the floating-point
+ registers if floating-point is not used, nor any need to save the
+ segment registers if they are not modified.
+</OL>
+
+None of these conditions is guaranteed by the C library specification. If
+ you want to use <tt>setjmp()</tt> and <tt>longjmp()</tt> for preemptive
+ multitasking, you should write your own versions of these functions.
+
+<A NAME="stack"></A>
+<H2>Stack-swapping</H2>
+
+Task-switching by swapping stacks stores the CPU registers on the stack,
+ instead of in a data structure. There are two stack-swaps to consider:
+ the switch between user stack and kernel stack when the kernel is entered
+ or exited, and switching between different kernel stacks.
+<p>
+<b>User-kernel stack-swapping</b> (only for OSes with protection):
+<UL>
+<LI>User-to-kernel stack-swap is done automatically by x86 interrupt
+ mechanism: kernel SS and ESP are loaded from the current TSS,
+ then user SS, user ESP, EFLAGS, CS, and EIP are pushed.
+<LI>Kernel-to-user stack-swap is partially automatic:
+ <A HREF="../gotchas/index.htm#esp0">current kernel SS and ESP must be
+ stored in TSS before IRET to user mode</A>.
+<LI>Kernel entry is caused by an interrupt, trap, or exception; kernel
+ exit is done by IRET. <b>Interrupts are asynchronous (preemptive), so all
+ registers must be saved</b>.
+</ul>
+
+The use of IRET and the need to save all registers constrains the layout
+ of registers on the stack. One possible layout:
+
+<pre>    typedef struct {
+	uint32_t edi, esi, ebp, esp, ebx, edx, ecx, eax;/* pushed by common handler (PUSHA) */
+	uint32_t ds, es, fs, gs;                        /* pushed by common handler */
+	uint32_t which_int;                             /* pushed by stub */
+	uint32_t error_code;                            /* pushed by interrupt or stub */
+	uint32_t eip, cs, eflags, user_esp, user_ss;    /* pushed by interrupt */
+    } uregs_t;</pre>
+
+<b>Swapping of kernel stacks</b>:
+<UL>
+<LI>EIP must be saved.
+<LI>In a re-entrant kernel, the stack-swap function may be entered with
+ interrupts enabled or disabled. Interrupts must be disabled while ESP
+ is being altered, however, so EFLAGS must be saved.
+<LI>For a kernel written in C, the callee-save registers must be saved.
+<LI>As with kernel exit, the routine that swaps kernel stacks must also
+ end with IRET
+</UL>
+
+<A NAME="iret"></A>
+Interrupts may be enabled upon leaving the kernel stack-swap routine.
+ Enabling interrupts (loading the EFLAGS register) must be simultaneous
+ with jumping to the new thread (loading the EIP register). <b>The only
+ instruction that can load both registers at the same time is IRET</b>.
+<p>
+Example layout of registers on the stack:
+
+<pre>    typedef struct {
+	uint32_t ebx, esi, edi, ebp;    /* callee-save */
+	uint32_t eip, eflags;           /* CALL/IRET */
+    } kregs_t;</pre>
+
+<p>
+<B>The same register frame can be used for both types of stack-swapping</B>,
+ i.e. use <tt>uregs_t</tt> where you would use <tt>kregs_t</tt>. This may
+ simplify the kernel code somewhat, but is slower.
+
+<A NAME="snippets"></A>
+<H2>Code snippets</H2>
+
+<A HREF="setjmp.c">Cooperative multitasking with <TT>setjmp()</TT> and
+<TT>longjmp()</TT></A>
+
+<A NAME="links"></A>
+<H2>Links</H2>
+
+'An Introduction to Programming with Threads':
+<A HREF="http://guir.cs.berkeley.edu/projects/osprelims/papers/threads.ps.gz">
+http://guir.cs.berkeley.edu/projects/osprelims/papers/threads.ps.gz</A>.
+Starts out with description of threads and reasons to use them, then
+continues with mutexes, condition variables, and other synchronization stuff.
+<P>
+<A HREF="http://www.tru64unix.compaq.com/docs/base_doc/DOCUMENTATION/V51A_PDF/ARH9RBTE.PDF">
+Tru64 UNIX: Guide to the Posix Threads Library</A>
+<P>
+<A HREF="http://www-919.ibm.com/developer/threads/uguide/document.htm">
+IBM's AS/400 Posix Threads documentation</A> (not as detailed as the
+Tru64 Unix doc)
+<P>
+<A HREF="http://greenteapress.com/semaphores/">The Little Book of
+Semaphores</A>
+
+<A NAME="todo"></A>
+<H2>TO DO</H2>
+
+<PRE>
+- scheduling algorithms: run-until-completion (FIFO/batch), simple round
+  robin, round robin with priorities, STCF (optimal?), priority queues
+- fork(): duplicate current task (new address space; same executable)
+- exec(): reload existing address space (same address space; new executable)
+- run()/spawn(): create and run new task (new address space; new executable)
+</PRE>
+
+<A NAME="errors"></A>
+<H2><A HREF="../index.htm#contact"><B>REPORT BUGS OR ERRORS IN THIS DOCUMENT</B></A></H2>
+
+</BODY></HTML>

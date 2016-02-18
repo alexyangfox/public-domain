@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML><HEAD><TITLE>OSD: ANSI escape sequences</TITLE>
+</HEAD><BODY>
+
+Escape sequences consist of
+<OL>
+<LI>Escape character; an ASCII control character with the value 0x1B
+ (decimal 27)
+<LI>Left square bracket
+<LI>Zero, one, or more numeric arguments. Multiple numeric arguments
+ are separated by semicolons
+<LI>A one-letter, <B>case-sensitive</B> code specifying the action to take:
+ move cursor, change text color, clear screen, etc.
+</OL>
+
+In the table below, <IMG SRC="esc.gif" WIDTH="10" HEIGHT="11" ALT="ESC">
+ denotes the Escape character.
+
+<TABLE BORDER>
+<TR>
+ <TH ROWSPAN="2">Escape sequence
+ <TH ROWSPAN="2">Action
+ <TH COLSPAN="2">Environments where supported
+<TR>
+ <TH>DOS ANSI.SYS
+ <TH>Linux console
+<TR>
+ <TD><IMG SRC="esc.gif" WIDTH="10" HEIGHT="11" ALT="ESC">[<I>n</I>A
+ <TD>Moves cursor up <I>n</I> rows
+ <TD>X
+ <TD>X
+<TR>
+ <TD><IMG SRC="esc.gif" WIDTH="10" HEIGHT="11" ALT="ESC">[<I>n</I>B
+ <TD>Moves cursor down <I>n</I> rows
+ <TD>X
+ <TD>X
+<TR>
+ <TD><IMG SRC="esc.gif" WIDTH="10" HEIGHT="11" ALT="ESC">[<I>n</I>C
+ <TD>Moves cursor right <I>n</I> columns
+ <TD>X
+ <TD>X
+<TR>
+ <TD><IMG SRC="esc.gif" WIDTH="10" HEIGHT="11" ALT="ESC">[<I>n</I>D
+ <TD>Moves cursor left <I>n</I> columns
+ <TD>X
+ <TD>X
+<TR>
+ <TD><IMG SRC="esc.gif" WIDTH="10" HEIGHT="11" ALT="ESC">[<I>y</I>;<I>x</I>H
+ <TD>Moves cursor to position (<I>x</I>, <I>y</I>). The upper left
+	corner of the screen is (1,1)
+ <TD>X
+ <TD>X
+<TR>
+ <TD><IMG SRC="esc.gif" WIDTH="10" HEIGHT="11" ALT="ESC">[2J
+ <TD>Clears screen and moves cursor to home position (1,1)
+ <TD>X
+ <TD>X
+<TR>
+ <TD><IMG SRC="esc.gif" WIDTH="10" HEIGHT="11" ALT="ESC">[K
+ <TD>Erases line; from cursor position (including character under cursor)
+	to end of line
+ <TD>X
+ <TD>X
+
+<TR>
+ <TD><IMG SRC="esc.gif" WIDTH="10" HEIGHT="11" ALT="ESC">[<I>y</I>;<I>x</I>f
+ <TD>Same as <IMG SRC="esc.gif" WIDTH="10" HEIGHT="11" ALT="ESC">[<I>y</I>;<I>x</I>H
+ <TD>X
+ <TD>X
+<TR>
+ <TD><IMG SRC="esc.gif" WIDTH="10" HEIGHT="11" ALT="ESC">[s
+ <TD>Pushes current cursor position on an internal stack
+ <TD>X
+ <TD>X
+<TR>
+ <TD><IMG SRC="esc.gif" WIDTH="10" HEIGHT="11" ALT="ESC">[u
+ <TD>Pops last cursor position saved by
+	<IMG SRC="esc.gif" WIDTH="10" HEIGHT="11" ALT="ESC">[s
+	and moves cursor to that position
+ <TD>X
+ <TD>X
+<TR>
+ <TD><IMG SRC="esc.gif" WIDTH="10" HEIGHT="11" ALT="ESC">[<I>i</I>m<BR>
+	<IMG SRC="esc.gif" WIDTH="10" HEIGHT="11" ALT="ESC">[<I>i</I>;<I>j</I>m<BR>
+	<IMG SRC="esc.gif" WIDTH="10" HEIGHT="11" ALT="ESC">[<I>i</I>;<I>j</I>;<I>k</I>m
+ <TD>Sets text attributes. <I>i</I>, <I>j</I>, and <I>k</I> may have
+	any of the following values:
+<!-- this is a nested table, so use closing TD and TH tags for Netscape 3 -->
+	<TABLE BORDER>
+	<TR>
+	 <TH><I>i</I>, <I>j</I>, <I>k</I></TH>
+	 <TH>Attribute</TH>
+	 <TH><I>i</I>, <I>j</I>, <I>k</I></TH>
+	 <TH>Attribute</TH>
+	<TR>
+	 <TD>0</TD>
+	 <TD>All attributes off</TD>
+	 <TD>1</TD>
+	 <TD>Bold</TD>
+	<TR>
+	 <TD>4</TD>
+	 <TD>Underscore (not supported on all displays)</TD>
+	 <TD>5</TD>
+	 <TD>Blink</TD>
+	<TR>
+	 <TD>7</TD>
+	 <TD>Reverse video</TD>
+	 <TD>8</TD>
+	 <TD>Concealed video on</TD>
+	<TR>
+	 <TD>30</TD>
+	 <TD>Foreground color: black</TD>
+	 <TD>31</TD>
+	 <TD>Foreground color: red</TD>
+	<TR>
+	 <TD>32</TD>
+	 <TD>Foreground color: green</TD>
+	 <TD>33</TD>
+	 <TD>Foreground color: yellow</TD>
+	<TR>
+	 <TD>34</TD>
+	 <TD>Foreground color: blue</TD>
+	 <TD>35</TD>
+	 <TD>Foreground color: magenta</TD>
+	<TR>
+	 <TD>36</TD>
+	 <TD>Foreground color: cyan</TD>
+	 <TD>37</TD>
+	 <TD>Foreground color: white</TD>
+	<TR>
+	 <TD>40</TD>
+	 <TD>Background color: black</TD>
+	 <TD>41</TD>
+	 <TD>Background color: red</TD>
+	<TR>
+	 <TD>42</TD>
+	 <TD>Background color: green</TD>
+	 <TD>43</TD>
+	 <TD>Background color: yellow</TD>
+	<TR>
+	 <TD>44</TD>
+	 <TD>Background color: blue</TD>
+	 <TD>45</TD>
+	 <TD>Background color: magenta</TD>
+	<TR>
+	 <TD>46</TD>
+	 <TD>Background color: cyan</TD>
+	 <TD>47</TD>
+	 <TD>Background color: white</TD>
+	</TABLE>
+ <TD>X
+ <TD>X
+</TABLE>
+

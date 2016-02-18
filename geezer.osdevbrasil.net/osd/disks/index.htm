@@ -1,0 +1,203 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<TITLE>OSD: Block devices (disks)</TITLE>
+
+<A HREF="../index.htm">OSD Home</A>
+
+<!--
+Detailed list of partition types, and partition table info:
+http://www.win.tue.nl/~aeb/partitions/
+
+Register and command set for the <A HREF="floppy.txt">8272A/NEC uPD765
+ floppy disk controller</A> (FDC)
+<P>
+
+
+These are from the Gospel according to Saint Peter:
+raster[AT]indirect.com
+
+- 3.5" floppies:
+	capacity	K	sectors	CHS	density		media ID
+	========	====	=======	=======	============	========
+	2.88 M          2880    5760    80:2:36 "extra high"    ? [*]
+	1.68 M		1680	3360	80:2:21	"quadruple"	F0h
+	1.44 M		1440	2880	80:2:18	"quadruple"	F0h
+	720 K		 720	1440	80:2:9	"double"	F9h
+
+    [*] 5760 sectors is too many for FAT12, unless you use 2 sectors/cluster
+
+5.25" floppies:
+	capacity	K	sectors	CHS	density		media ID
+	========	====	=======	=======	============	========
+	1.2 M		1200	2400	80:2:15	"quadruple"	F9h
+	360 K		 360	 720	40:2:9	"double"	FDh
+	320 K		 320	 640	40:2:8	"double"	FFh
+	180 K		 180	 360	40:1:9	"double"	FCh
+	160 K		 160	 320	40:1:8	"double"	FEh
+
+
+ATA modes:
+- legacy mode: PIO data xfer only, any I/O and IRQ
+- compatability mode (PC only): I/O and IRQs as below
+	ATA interface	I/O		IRQ	alternate IRQ
+	=============	===		===	=============
+	primary		1F0-1F7, 3F6*	14	none
+	secondary	170-177, 376*	15	none
+	tertiary	1E8-1EF, 3EE	11	12 or 9
+	quaternary	168-16F, 36E	10	12 or 9
+		* 3F7 and 377 were used by old ATA but no longer.
+		These registers were shared with the floppy drive.
+- PCI native mode: I/O and IRQ set by PCI Base Address Register (BAR)
+- ADMA mode: normal ATA register file is not accessable;
+	in-memory data structures are used instead
+-->
+
+<UL>
+<LI><A HREF="index.htm#asm"># - Assembly-language disk functions using the BIOS</A>
+<LI><A HREF="index.htm#cbios"># - C-language disk functions using the BIOS</A>
+<!-- including non-BIOS driver code: -->
+<LI><A HREF="index.htm#floppy"># - PC floppy drives</A>
+<LI><A HREF="index.htm#ata"># - ATA (IDE) hard drives</A>
+<LI><A HREF="index.htm#atapi"># - ATAPI (IDE) CD-ROM drives</A>
+<LI><A HREF="index.htm#snippets"># - Code snippets</A>
+<LI><A HREF="index.htm#links"># - Links</A>
+</UL>
+
+<A NAME="asm"></A>
+<H2>Assembly-language disk functions using the BIOS</H2>
+
+For information on using BIOS disk functions, see INT 13h
+ in Ralf Brown's interrupt list:
+ <A HREF="http://www.cs.cmu.edu/afs/cs/user/ralf/pub/WWW/files.html">
+ http://www.cs.cmu.edu/afs/cs/user/ralf/pub/WWW/files.html</A>
+
+<A NAME="cbios"></A>
+<H2>C-language disk functions using the BIOS</H2>
+
+With both DJGPP (32-bit code) and Turbo C (16-bit code), you may use
+ <TT>int86()</TT> to access BIOS INT 13h. <A HREF="../cons/index.htm#vmm">
+ As with text output,</A> 32-bit code requires a V86 mode monitor (VMM) to
+ call 16-bit BIOS routines.
+
+<A NAME="floppy"></A>
+<H2>PC floppy drives</H2>
+
+xxx - to do
+
+<A NAME="ata"></A>
+<H2>ATA (IDE) hard drives</H2>
+
+The '500-megabyte limit':
+<TABLE BORDER="1">
+  <TR>
+    <TH>
+    <TH>Cylinders
+    <TH>Heads
+    <TH>Sectors
+    <TH>Total sectors
+    <TH>Megabytes (assuming 512 bytes/sector)
+  <TR>
+    <TD>Limits of ATA hardware interface
+    <TD>65536
+    <TD>16
+    <TD>255
+    <TD>~2<SUP>28</SUP>
+    <TD>130560 (127.5 Gbytes)
+  <TR>
+    <TD>Limits of INT 13h AH=02h/03h
+    <TD>1024
+    <TD>256
+    <TD>63
+    <TD>~2<SUP>24</SUP>
+    <TD>8064 (7.8 Gbytes)
+  <TR>
+    <TD>Combined limits
+    <TD>1024
+    <TD>16
+    <TD>63
+    <TD>~2<SUP>20</SUP>
+    <TD>504
+</TR>
+</TABLE>
+<P>
+xxx - more
+
+<A NAME="atapi"></A>
+<H2>ATAPI (IDE) CD-ROM drives</H2>
+
+xxx - to do
+
+<A NAME="snippets"></A>
+<H2>Code snippets</H2>
+
+Direct probing of floppy disk sectors-per-track value:
+ see <A HREF="../boot/index.htm#snippets">bootstrap code snippets</A>
+<!--
+<P>
+Fabian Nunez' floppy driver (DJGPP code):
+<A HREF="http://www.0xfi.com/oslib/archive/fdc.zip">
+ http://www.0xfi.com/oslib/archive/fdc.zip</A>  -->
+<P>
+Code for <A HREF="diskio.zip">sector-level disk I/O</A> under different
+ OSes.
+<P>
+Get number of drives known to the BIOS:
+<PRE>	unsigned num_hds, num_fds;
+
+	num_hds = peekb(0x40, 0x75); /* byte at linear address 0x475 */
+	num_fds = peekw(0x40, 0x10); /* 16-bit word at linear address 0x410 */
+	if(num_fds &amp; 0x0001)
+		num_fds = ((num_fds / 64) &amp; 3) + 1;
+	else
+		num_fds = 0;</PRE>
+<P>
+<A HREF="ata-id.c">Detect ATA drives without using the BIOS</A>
+
+<A NAME="links"></A>
+<H2>Links</H2>
+
+<UL>
+<LI>Specs for ATA 1-7: <A HREF="http://www.mp3projects.com/data.htm#ide">
+ http://www.mp3projects.com/data.htm#ide</A>
+<LI><A HREF="http://www.nondot.org/sabre/os/articles/DiskandDiscDrives/">
+ http://www.nondot.org/sabre/os/articles/DiskandDiscDrives/</A>
+<LI>Hale Landis' site: <A HREF="http://www.ata-atapi.com">
+  http://www.ata-atapi.com</A>
+<LI>Docs; asm code using BIOS:
+  <A HREF="http://home.no.net/tkos/info/hd.html">
+  http://home.no.net/tkos/info/hd.html</A>
+<LI><A HREF="http://www.repairfaq.org/filipg/LINK/F_IDE-tech.html">
+  http://www.repairfaq.org/filipg/LINK/F_IDE-tech.html</A>
+<LI>Official ATA and ATAPI standards in Word and PDF format:
+  <A HREF="http://www.t13.org">http://www.t13.org</A>
+<LI>Autotyping ATA Disk Drives:
+ <A HREF="http://www.phoenix.com/resources/wp-autohdd.pdf">
+ http://www.phoenix.com/resources/wp-autohdd.pdf</A>
+<LI>Guide to ATA/ATAPI documentation:
+ <A HREF="http://www.stanford.edu/~csapuntz/ide.html">
+ http://www.stanford.edu/~csapuntz/ide.html</A>
+<LI>Black magic in ATA/ATAPI:
+ <A HREF="http://www.stanford.edu/~csapuntz/blackmagic.html">
+ http://www.stanford.edu/~csapuntz/blackmagic.html</A>. '...facts so
+ disappointing and ugly that they could never appear in any standards
+ document.'
+</UL>
+
+<A NAME="todo"></A>
+<H2>TO DO</H2>
+
+<PRE>floppy:
+Spec sheets for controller chips (e.g. Intel 8272, 82077),
+registers, commands, error recovery, INT 13h BIOS calls, other...?
+
+ATA:
+Registers, commands, error recovery, CHS vs. LBA,
+CHS translation for drives >512M, INT 13h BIOS calls,
+partitions, other...?
+
+ATAPI:
+ATAPI packet layout, commands, error recovery, audio vs. data CDs, other...?
+
+SCSI ??</PRE>
+
+<A NAME="errors"></A>
+<H2><A HREF="../index.htm#contact"><B>REPORT BUGS OR ERRORS IN THIS DOCUMENT</B></A></H2>

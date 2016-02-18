@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML><HEAD>
+<TITLE>CORDIC tutorial</TITLE>
+</HEAD><BODY>
+
+CORDIC (COordinate Rotation DIgital Calculation) finds the sine or cosine
+ of an angle iteratively, using only simple math operations such as add,
+ subtract, compare, shift, and table lookup.
+
+<H3>Other pages on CORDIC</H3>
+
+Implementing Sine on the PIC:
+ <A HREF="http://www.brouhaha.com/~eric/pic/sine.html">
+http://www.brouhaha.com/~eric/pic/sine.html</A>
+<P>
+CORDIC tutorial by Ingo Cyliax:
+ <A HREF="http://www.ezcomm.com/~cyliax/Articles/RobNav/sidebar.html">
+http://www.ezcomm.com/~cyliax/Articles/RobNav/sidebar.html</A>
+<P>
+CORDIC bibliography:
+ <A HREF="http://www.taygeta.com/cordic_refs.html">
+http://www.taygeta.com/cordic_refs.html</A>
+
+<H3>HTML notes</H3>
+
+The last word in this sentence should appear in <SUP>superscript</SUP>.<BR>
+The last word in this sentence should appear in <SUB>subscript</SUB>.<BR>
+This line should end with the degree symbol �<BR>
+I belive � is actually a Danish vowel, but it's the closest I can get to
+ 'theta' or 'phi' in the Latin character set.
+
+<H3>Vector rotation</H3>
+
+<IMG SRC="cordic.gif" WIDTH="256" HEIGHT="256"><BR>
+The diagonal blue line is angle �<SUB>1</SUB> above the horizontal. The
+ diagonal red line is the blue line rotated counter-clockwise by angle �.
+ The new X and Y values are related to the old X and Y values as follows:
+
+<PRE>X<SUB>2</SUB> = X<SUB>1</SUB> * cos(�) - Y<SUB>1</SUB> * sin(�)
+Y<SUB>2</SUB> = X<SUB>1</SUB> * sin(�) + Y<SUB>1</SUB> * cos(�)</PRE>
+
+<H3>Iterative rotation</H3>
+
+For CORDIC, the final angle �<SUB>2</SUB> is the angle of interest; the
+ angle whose sine or cosine we want to calculate. The initial angle
+ �<SUB>1</SUB> is set to a convenient value such as 0. Rather than
+ rotating from �<SUB>1</SUB> to �<SUB>2</SUB> in one fell swoop, we
+ move in steps. With careful choice of step values, the only math
+ used is shifts and adds.
+<P>
+The equations above can be re-written as:
+
+<PRE>X<SUB>2</SUB> = cos(�) * [ X<SUB>1</SUB> - Y<SUB>1</SUB> * tan(�) ]
+Y<SUB>2</SUB> = cos(�) * [ X<SUB>1</SUB> * tan(�) + Y<SUB>1</SUB> ]</PRE>
+
+Values for � are chosen such that tan(�) is a fractional power of 2:
+<PRE>tan(�<SUB>21</SUB>) = 1/1		�<SUB>21</SUB> = 45�		cos(�<SUB>21</SUB>) = 0.707107
+tan(�<SUB>32</SUB>) = 1/2		�<SUB>32</SUB> = 26.5650�		cos(�<SUB>32</SUB>) = 0.894427
+tan(�<SUB>43</SUB>) = 1/4		�<SUB>43</SUB> = 14.0362�		cos(�<SUB>43</SUB>) = 0.970142
+tan(�<SUB>54</SUB>) = 1/8		�<SUB>54</SUB> =  7.12502�		cos(�<SUB>54</SUB>) = 0.992278
+tan(�<SUB>65</SUB>) = 1/16		�<SUB>65</SUB> =  3.57633�		cos(�<SUB>65</SUB>) = 0.998053
+tan(�<SUB>76</SUB>) = 1/32		�<SUB>76</SUB> =  1.78991�		cos(�<SUB>76</SUB>) = 0.999512
+tan(�<SUB>87</SUB>) = 1/64		�<SUB>87</SUB> =  0.895174�	cos(�<SUB>87</SUB>) = 0.999878
+tan(�<SUB>98</SUB>) = 1/128	�<SUB>98</SUB> =  0.447614�	cos(�<SUB>98</SUB>) = 0.999969</PRE>
+
+This lets us replace the multiplication by tan(�) with a simple, fast
+ right-shift operation. But what about the cos(�) factors?
+<P>
+First iteration (from X1, Y1 to X2, Y2): rotate by angle �<SUB>21</SUB>
+
+<PRE>X<SUB>2</SUB> = cos(�<SUB>21</SUB>) * [ X<SUB>1</SUB> - Y<SUB>1</SUB> * tan(�<SUB>21</SUB>) ]
+Y<SUB>2</SUB> = cos(�<SUB>21</SUB>) * [ X<SUB>1</SUB> * tan(�<SUB>21</SUB>) + Y<SUB>1</SUB> ]</PRE>
+
+Second iteration (from X2, Y2 to X3, Y3): rotate by angle �<SUB>32</SUB>
+
+<PRE>X<SUB>3</SUB> = cos(�<SUB>32</SUB>) * { X<SUB>2</SUB> - Y<SUB>2</SUB> * tan(�<SUB>32</SUB>) }
+Y<SUB>3</SUB> = cos(�<SUB>32</SUB>) * { X<SUB>2</SUB> * tan(�<SUB>32</SUB>) + Y<SUB>2</SUB> }</PRE>
+
+Plug in the values of X2 and Y2 from the first iteration:
+
+<PRE>X<SUB>3</SUB> = cos(�<SUB>32</SUB>) * { cos(�<SUB>21</SUB>) * [ X<SUB>1</SUB> - Y<SUB>1</SUB> * tan(�<SUB>21</SUB>) ] - cos(�<SUB>21</SUB>) * [ X<SUB>1</SUB> * tan(�<SUB>21</SUB>) + Y<SUB>1</SUB> ] * tan(�<SUB>32</SUB>) }
+   = cos(�<SUB>32</SUB>) * cos(�<SUB>21</SUB>) * { [ X<SUB>1</SUB> - Y<SUB>1</SUB> * tan(�<SUB>21</SUB>) ] - [ X<SUB>1</SUB> * tan(�<SUB>21</SUB>) + Y<SUB>1</SUB> ] * tan(�<SUB>32</SUB>) }</PRE>
+
+The cosine factors fall out, to form an iterative product, i.e.
+
+<PRE>cos(�<SUB>21</SUB>) * cos(�<SUB>32</SUB>) * cos(�<SUB>43</SUB>) ... * cos(�<SUB>nn</SUB>)</PRE>
+
+Expressing the � values in terms of inverse tangents gives the equivalent
+ product series<BR>
+<IMG SRC="ag_const.gif" WIDTH="256" HEIGHT="64"><BR>
+The value to which it converges, 0.607253, is the <I>aggregate constant</I>.
+ We can ignore the cos(�) terms and simply multiply by the aggregate
+ constant before or after the iteration.
+
+<H3>Example</H3>
+
+C source code for this example:
+ <A HREF="cordic.c">cordic.c</A>
+<P>
+Find the sine of 28.027�
+
+<PRE>� = 0�
+cos(�) = 1	X = 1
+sin(�) = 0	Y = 0</PRE>
+
+Rotate from 0� to 45� (�<SUB>21</SUB> = 45�)
+
+<PRE>X' = X - Y / 1		= 1 - 0 / 1			= 1
+Y' = X / 1 + Y		= 1 / 1 + 0			= 1</PRE>
+
+Rotate from 45� to 18.435� (�<SUB>32</SUB> = -26.565�). Because this is
+ a negative angle, and because the tangent function is odd, we change the
+ sign of the numbers that get shifted:
+
+<PRE>X' = X + Y / 2		= 1 + 1 / 2			= 1.5
+Y' = -X / 2 + Y		= -1 / 2 + 1			= 0.5</PRE>
+
+The aggregate constant is not affected because it is a product of cosines,
+ and the cosine function is even.
+<P>
+Rotate from 18.435� to 32.471� (�<SUB>43</SUB> = 14.036�)
+
+<PRE>X' = X - Y / 4		= 1.5 - 0.5 / 4			= 1.375
+Y' = X / 4 + Y		= 1.5 / 4 + 0.5			= 0.875</PRE>
+
+Rotate from 32.471� to 25.346� (�<SUB>54</SUB> = -7.125�)
+
+<PRE>X' = X + Y / 8		= 1.375 + 0.875 / 8		= 1.484375
+Y' = -X / 8 + Y		= -1.375 / 8 + 0.875		= 0.703125</PRE>
+
+Rotate from 25.346� to 28.922� (�<SUB>65</SUB> = 3.576�)
+
+<PRE>X' = X - Y / 16		= 1.484375 - 0.703125 / 16	= 1.440429
+Y' = X / 16 + Y		= 1.484375 / 16 + 0.703125	= 0.795898</PRE>
+
+Rotate from 28.922� to 27.132� (�<SUB>76</SUB> = -1.790�)
+
+<PRE>X' = X + Y / 32		= 1.440429 + 0.795898 / 32	= 1.465300
+Y' = -X / 32 + Y	= -1.440429 / 32 + 0.795898	= 0.750884</PRE>
+
+Rotate from 27.132� to 28.027� (�<SUB>87</SUB> = 0.895�)
+
+<PRE>X' = X - Y / 64		= 1.465300 - 0.750884 / 64	= 1.453567
+Y' = X / 64 + Y		= 1.465300 / 64 + 0.750884	= 0.773779</PRE>
+
+Almost done; just have to multiply by the aggregate constant:
+
+<PRE>sin(28.027�) = 0.607253 * Y = 0.46988
+cos(28.027�) = 0.607253 * X = 0.88268</PRE>
+
+To avoid these multiplies, the initial value of X can be set to 0.607253
+ instead of 1. Doing this means rotating a vector of length 0.607253
+ (instead of length 1) back and forth between the X and Y axes.
+<P>
+At each iteration above, a decision is made whether to add or subtract
+ the next value of �. This is made by comparing � with the target angle.
+ To implement this in software, a table of � values is needed, similar
+ to the one above.
